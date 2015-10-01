@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.nk.printmaster.entities.Printer" table="printer">
+		<id name="id" column="id">
+			<generator class="native"/>
+		</id>
+		<property name="partNumber" column="part_number" type="string"/>
+		<property name="name" column="name" type="string"/>
+		<property name="prise" column="prise" type="int"/>
+		<property name="isNew" column="is_new" type="yes_no"/>
+		<property name="weightPrintMM" column="weight_print_mm" type="int"/>
+		<property name="typePrint" column="type_print" type="string"/>
+		<property name="feed" column="feed" type="string"/>
+		<property name="chromaticity" column="chromaticity" type="string"/>
+		<property name="manufacturerPrinthead" column="manufacturer_printhead" type="string"/>
+		<property name="typeOfPrinthead" column="type_of_printhead" type="string"/>
+		<property name="compatibleInk" column="compatible_ink" type="string"/>
+		<property name="typeDrops" column="type_drops" type="string"/>
+		<property name="sizeDrops" column="size_drops" type="int"/>
+		<property name="speedPrint" column="speed_print" type="int"/>
+		<property name="printResolution" column="print_resolution" type="string"/>
+		<property name="equipmentManufacturer" column="equipment_manufacturer" type="string"/>
+		<property name="equipmentModel" column="equipment_model" type="string"/>
+		<property name="interfaceConnection" column="interface_connection" type="string"/>
+		<property name="maximumMediaThickness" column="maximum_media_thickness" type="int"/>
+		<property name="maximumWeightOfVehicle" column="maximum_weight_of_vehicle" type="int"/>
+		<property name="rip" column="rip" type="string"/>
+		<property name="maxPowerConsumption" column="max_power_consumption" type="int"/>
+		<property name="weight" column="weight" type="int"/>
+		<property name="width" column="width" type="int"/>
+		<property name="heigth" column="heigth" type="int"/>
+		<property name="depth" column="depth" type="int"/>
+		<property name="description" column="description" type="string"/>
+	</class>
+</hibernate-mapping>
