@@ -1,5 +1,6 @@
+<%@ page contentType="text/html; charset=UTF-8"%>
 <html>
 <body>
-	<h1> message : ${message} </h1>
+	<h1> Привет, ${message} !</h1>
 </body>
 </html>
