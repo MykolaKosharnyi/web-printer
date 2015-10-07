@@ -6,7 +6,7 @@
         }
 
              #reklam .slide-item {
-                height: 20%;
+                height: 100%;
                 width: inherit;
                 float: left;
                 margin: 0 0px 5px;
@@ -14,7 +14,7 @@
             }
 
                  #reklam .slide-item img{
-                    height: 85%;
+                    height: 200px;
                     width: 100%;
                 }
 
@@ -55,14 +55,14 @@
     }
 
 /*--- first part of product page ---*/
-    #foto_and_descriptions{
+    #pictures_and_descriptions{
         position: relative;
         width: 100%;
         box-sizing: padding-box;
         height: auto;
     }
 
-        #foto{
+        #pictures{
             position: relative;
             width: 50%;
             height:auto;
@@ -77,7 +77,7 @@
                 margin: 0 auto;
                 box-sizing: content-box;
             }
-                #foto img{
+                #pictures img{
                     position: relative;
                     height: inherit;
                     width: inherit;
@@ -101,6 +101,12 @@
                     float: left;
                     display: block;
                     background: blue;
+                }
+               .small_pictures > div img{
+                    position: relative;
+                    height: inherit;
+                    width: inherit;
+                    margin:0px;
                 }
 
         #descriptions{

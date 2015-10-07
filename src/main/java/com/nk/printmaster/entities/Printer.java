@@ -3,469 +3,418 @@ package com.nk.printmaster.entities;
 import java.io.Serializable;
 
 public class Printer implements Serializable{
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = -7914406547800809890L;
 	
-	private int id;
-	private String partNumber;// партийный номер
-	private String name;// название
-	private int prise;// цена товара в долларах
-	private boolean isNew;// новый или Б/У
-	private int weightPrintMM;// ширина печати в миллиметрах
-	private String typePrint;// тип печати
-	private String feed; // подача материала
-	private String chromaticity;// цветность
-	private String manufacturerPrinthead;// производитель печатающей головки
-	private String typeOfPrinthead;// тип печатающей головки
-	private String compatibleInk;// совместимые чернила
-	private String typeDrops;// тип капли
-	private int sizeDrops;// размер капли
-	private int speedPrint;// скорость печати
-	private String printResolution;// разрешение печати
-	private String equipmentManufacturer;// производитель оборудования
-	private String equipmentModel;// модель оборудования
-	private String interfaceConnection;// интерфейс подключения
-	private int maximumMediaThickness;// максимальная толщина носителя
-	private int maximumWeightOfVehicle;// максимальный вес носителя
-	private String rip;// программное обеспечение RIP
-	private int maxPowerConsumption;// максимальная потребляемая мощность
-	private int weight;// вес
-	private int width;// ширина
-	private int heigth;// высота
-	private int depth;// глубина
-	private String description;// описание
+//	private int id;
+	private String printerName;//
+	private String printerPartNumber;// 
+	private int printerPrise;// 
+	private boolean printerIsNew;// 
+	private int printerWeightPrintMM;//
+	private String printerTypePrint;//
+	private String printerFeed; // 
+	private String printerChromaticity;//
+	private String printerManufacturerPrinthead;//
+	private String printerTypeOfPrinthead;// 
+	private String printerCompatibleInk;// 
+	private String printerTypeDrops;//
+	private int printerSizeDrops;// 
+	private int printerSpeedPrint;//
+	private String printerPrintResolution;// 
+	private String printerEquipmentManufacturer;//
+	private String printerEquipmentModel;// 
+	private String printerInterfaceConnection;//
+	private int printerMaximumMediaThickness;// 
+	private int printerMaximumWeightOfVehicle;// 
+	private String printerRip;// 
+	private int printerMaxPowerConsumption;//
+	private int printerWeight;//
+	private int printerWidth;//
+	private int printerHeigth;//
+	private int printerDepth;//
+	private String printerDescription;// 
 
 	public Printer() {
 	}
 
-	public Printer(int id, String partNumber, String name, int prise, boolean isNew, int weightPrintMM,
-			String typePrint, String feed, String chromaticity, String manufacturerPrinthead, String typeOfPrinthead,
-			String compatibleInk, String typeDrops, int sizeDrops, int speedPrint, String printResolution,
-			String equipmentManufacturer, String equipmentModel, String interfaceConnection, int maximumMediaThickness,
-			int maximumWeightOfVehicle, String rip, int maxPowerConsumption, int weight, int width, int heigth,
-			int depth, String description) {
-		this.id = id;
-		this.partNumber = partNumber;
-		this.name = name;
-		this.prise = prise;
-		this.isNew = isNew;
-		this.weightPrintMM = weightPrintMM;
-		this.typePrint = typePrint;
-		this.feed = feed;
-		this.chromaticity = chromaticity;
-		this.manufacturerPrinthead = manufacturerPrinthead;
-		this.typeOfPrinthead = typeOfPrinthead;
-		this.compatibleInk = compatibleInk;
-		this.typeDrops = typeDrops;
-		this.sizeDrops = sizeDrops;
-		this.speedPrint = speedPrint;
-		this.printResolution = printResolution;
-		this.equipmentManufacturer = equipmentManufacturer;
-		this.equipmentModel = equipmentModel;
-		this.interfaceConnection = interfaceConnection;
-		this.maximumMediaThickness = maximumMediaThickness;
-		this.maximumWeightOfVehicle = maximumWeightOfVehicle;
-		this.rip = rip;
-		this.maxPowerConsumption = maxPowerConsumption;
-		this.weight = weight;
-		this.width = width;
-		this.heigth = heigth;
-		this.depth = depth;
-		this.description = description;
+	/**
+	 * @return the printerPartNumber
+	 */
+	public String getPrinterPartNumber() {
+		return printerPartNumber;
 	}
 
 	/**
-	 * @return the id
+	 * @param printerPartNumber the printerPartNumber to set
 	 */
-	public int getId() {
-		return id;
+	public void setPrinterPartNumber(String printerPartNumber) {
+		this.printerPartNumber = printerPartNumber;
 	}
 
 	/**
-	 * @param id the id to set
+	 * @return the printerName
 	 */
-	public void setId(int id) {
-		this.id = id;
+	public String getPrinterName() {
+		return printerName;
 	}
 
 	/**
-	 * @return the partNumber
+	 * @param printerName the printerName to set
 	 */
-	public String getPartNumber() {
-		return partNumber;
+	public void setPrinterName(String printerName) {
+		this.printerName = printerName;
 	}
 
 	/**
-	 * @param partNumber the partNumber to set
+	 * @return the printerPrise
 	 */
-	public void setPartNumber(String partNumber) {
-		this.partNumber = partNumber;
+	public int getPrinterPrise() {
+		return printerPrise;
 	}
 
 	/**
-	 * @return the name
+	 * @param printerPrise the printerPrise to set
 	 */
-	public String getName() {
-		return name;
+	public void setPrinterPrise(int printerPrise) {
+		this.printerPrise = printerPrise;
 	}
 
 	/**
-	 * @param name the name to set
+	 * @return the printerIsNew
 	 */
-	public void setName(String name) {
-		this.name = name;
+	public boolean isPrinterIsNew() {
+		return printerIsNew;
 	}
 
 	/**
-	 * @return the prise
+	 * @param printerIsNew the printerIsNew to set
 	 */
-	public int getPrise() {
-		return prise;
+	public void setPrinterIsNew(boolean printerIsNew) {
+		this.printerIsNew = printerIsNew;
 	}
 
 	/**
-	 * @param prise the prise to set
+	 * @return the printerWeightPrintMM
 	 */
-	public void setPrise(int prise) {
-		this.prise = prise;
+	public int getPrinterWeightPrintMM() {
+		return printerWeightPrintMM;
 	}
 
 	/**
-	 * @return the isNew
+	 * @param printerWeightPrintMM the printerWeightPrintMM to set
 	 */
-	public boolean isNew() {
-		return isNew;
+	public void setPrinterWeightPrintMM(int printerWeightPrintMM) {
+		this.printerWeightPrintMM = printerWeightPrintMM;
 	}
 
 	/**
-	 * @param isNew the isNew to set
+	 * @return the printerTypePrint
 	 */
-	public void setNew(boolean isNew) {
-		this.isNew = isNew;
+	public String getPrinterTypePrint() {
+		return printerTypePrint;
 	}
 
 	/**
-	 * @return the weightPrintMM
+	 * @param printerTypePrint the printerTypePrint to set
 	 */
-	public int getWeightPrintMM() {
-		return weightPrintMM;
+	public void setPrinterTypePrint(String printerTypePrint) {
+		this.printerTypePrint = printerTypePrint;
 	}
 
 	/**
-	 * @param weightPrintMM the weightPrintMM to set
+	 * @return the printerFeed
 	 */
-	public void setWeightPrintMM(int weightPrintMM) {
-		this.weightPrintMM = weightPrintMM;
+	public String getPrinterFeed() {
+		return printerFeed;
 	}
 
 	/**
-	 * @return the typePrint
+	 * @param printerFeed the printerFeed to set
 	 */
-	public String getTypePrint() {
-		return typePrint;
+	public void setPrinterFeed(String printerFeed) {
+		this.printerFeed = printerFeed;
 	}
 
 	/**
-	 * @param typePrint the typePrint to set
+	 * @return the printerChromaticity
 	 */
-	public void setTypePrint(String typePrint) {
-		this.typePrint = typePrint;
+	public String getPrinterChromaticity() {
+		return printerChromaticity;
 	}
 
 	/**
-	 * @return the feed
+	 * @param printerChromaticity the printerChromaticity to set
 	 */
-	public String getFeed() {
-		return feed;
+	public void setPrinterChromaticity(String printerChromaticity) {
+		this.printerChromaticity = printerChromaticity;
 	}
 
 	/**
-	 * @param feed the feed to set
+	 * @return the printerManufacturerPrinthead
 	 */
-	public void setFeed(String feed) {
-		this.feed = feed;
+	public String getPrinterManufacturerPrinthead() {
+		return printerManufacturerPrinthead;
 	}
 
 	/**
-	 * @return the chromaticity
+	 * @param printerManufacturerPrinthead the printerManufacturerPrinthead to set
 	 */
-	public String getChromaticity() {
-		return chromaticity;
+	public void setPrinterManufacturerPrinthead(String printerManufacturerPrinthead) {
+		this.printerManufacturerPrinthead = printerManufacturerPrinthead;
 	}
 
 	/**
-	 * @param chromaticity the chromaticity to set
+	 * @return the printerTypeOfPrinthead
 	 */
-	public void setChromaticity(String chromaticity) {
-		this.chromaticity = chromaticity;
+	public String getPrinterTypeOfPrinthead() {
+		return printerTypeOfPrinthead;
 	}
 
 	/**
-	 * @return the manufacturerPrinthead
+	 * @param printerTypeOfPrinthead the printerTypeOfPrinthead to set
 	 */
-	public String getManufacturerPrinthead() {
-		return manufacturerPrinthead;
+	public void setPrinterTypeOfPrinthead(String printerTypeOfPrinthead) {
+		this.printerTypeOfPrinthead = printerTypeOfPrinthead;
 	}
 
 	/**
-	 * @param manufacturerPrinthead the manufacturerPrinthead to set
+	 * @return the printerCompatibleInk
 	 */
-	public void setManufacturerPrinthead(String manufacturerPrinthead) {
-		this.manufacturerPrinthead = manufacturerPrinthead;
+	public String getPrinterCompatibleInk() {
+		return printerCompatibleInk;
 	}
 
 	/**
-	 * @return the typeOfPrinthead
+	 * @param printerCompatibleInk the printerCompatibleInk to set
 	 */
-	public String getTypeOfPrinthead() {
-		return typeOfPrinthead;
+	public void setPrinterCompatibleInk(String printerCompatibleInk) {
+		this.printerCompatibleInk = printerCompatibleInk;
 	}
 
 	/**
-	 * @param typeOfPrinthead the typeOfPrinthead to set
+	 * @return the printerTypeDrops
 	 */
-	public void setTypeOfPrinthead(String typeOfPrinthead) {
-		this.typeOfPrinthead = typeOfPrinthead;
+	public String getPrinterTypeDrops() {
+		return printerTypeDrops;
 	}
 
 	/**
-	 * @return the compatibleInk
+	 * @param printerTypeDrops the printerTypeDrops to set
 	 */
-	public String getCompatibleInk() {
-		return compatibleInk;
+	public void setPrinterTypeDrops(String printerTypeDrops) {
+		this.printerTypeDrops = printerTypeDrops;
 	}
 
 	/**
-	 * @param compatibleInk the compatibleInk to set
+	 * @return the printerSizeDrops
 	 */
-	public void setCompatibleInk(String compatibleInk) {
-		this.compatibleInk = compatibleInk;
+	public int getPrinterSizeDrops() {
+		return printerSizeDrops;
 	}
 
 	/**
-	 * @return the typeDrops
+	 * @param printerSizeDrops the printerSizeDrops to set
 	 */
-	public String getTypeDrops() {
-		return typeDrops;
+	public void setPrinterSizeDrops(int printerSizeDrops) {
+		this.printerSizeDrops = printerSizeDrops;
 	}
 
 	/**
-	 * @param typeDrops the typeDrops to set
+	 * @return the printerSpeedPrint
 	 */
-	public void setTypeDrops(String typeDrops) {
-		this.typeDrops = typeDrops;
+	public int getPrinterSpeedPrint() {
+		return printerSpeedPrint;
 	}
 
 	/**
-	 * @return the sizeDrops
+	 * @param printerSpeedPrint the printerSpeedPrint to set
 	 */
-	public int getSizeDrops() {
-		return sizeDrops;
+	public void setPrinterSpeedPrint(int printerSpeedPrint) {
+		this.printerSpeedPrint = printerSpeedPrint;
 	}
 
 	/**
-	 * @param sizeDrops the sizeDrops to set
+	 * @return the printerPrintResolution
 	 */
-	public void setSizeDrops(int sizeDrops) {
-		this.sizeDrops = sizeDrops;
+	public String getPrinterPrintResolution() {
+		return printerPrintResolution;
 	}
 
 	/**
-	 * @return the speedPrint
+	 * @param printerPrintResolution the printerPrintResolution to set
 	 */
-	public int getSpeedPrint() {
-		return speedPrint;
+	public void setPrinterPrintResolution(String printerPrintResolution) {
+		this.printerPrintResolution = printerPrintResolution;
 	}
 
 	/**
-	 * @param speedPrint the speedPrint to set
+	 * @return the printerEquipmentManufacturer
 	 */
-	public void setSpeedPrint(int speedPrint) {
-		this.speedPrint = speedPrint;
+	public String getPrinterEquipmentManufacturer() {
+		return printerEquipmentManufacturer;
 	}
 
 	/**
-	 * @return the printResolution
+	 * @param printerEquipmentManufacturer the printerEquipmentManufacturer to set
 	 */
-	public String getPrintResolution() {
-		return printResolution;
+	public void setPrinterEquipmentManufacturer(String printerEquipmentManufacturer) {
+		this.printerEquipmentManufacturer = printerEquipmentManufacturer;
 	}
 
 	/**
-	 * @param printResolution the printResolution to set
+	 * @return the printerEquipmentModel
 	 */
-	public void setPrintResolution(String printResolution) {
-		this.printResolution = printResolution;
+	public String getPrinterEquipmentModel() {
+		return printerEquipmentModel;
 	}
 
 	/**
-	 * @return the equipmentManufacturer
+	 * @param printerEquipmentModel the printerEquipmentModel to set
 	 */
-	public String getEquipmentManufacturer() {
-		return equipmentManufacturer;
+	public void setPrinterEquipmentModel(String printerEquipmentModel) {
+		this.printerEquipmentModel = printerEquipmentModel;
 	}
 
 	/**
-	 * @param equipmentManufacturer the equipmentManufacturer to set
+	 * @return the printerInterfaceConnection
 	 */
-	public void setEquipmentManufacturer(String equipmentManufacturer) {
-		this.equipmentManufacturer = equipmentManufacturer;
+	public String getPrinterInterfaceConnection() {
+		return printerInterfaceConnection;
 	}
 
 	/**
-	 * @return the equipmentModel
+	 * @param printerInterfaceConnection the printerInterfaceConnection to set
 	 */
-	public String getEquipmentModel() {
-		return equipmentModel;
+	public void setPrinterInterfaceConnection(String printerInterfaceConnection) {
+		this.printerInterfaceConnection = printerInterfaceConnection;
 	}
 
 	/**
-	 * @param equipmentModel the equipmentModel to set
+	 * @return the printerMaximumMediaThickness
 	 */
-	public void setEquipmentModel(String equipmentModel) {
-		this.equipmentModel = equipmentModel;
+	public int getPrinterMaximumMediaThickness() {
+		return printerMaximumMediaThickness;
 	}
 
 	/**
-	 * @return the interfaceConnection
+	 * @param printerMaximumMediaThickness the printerMaximumMediaThickness to set
 	 */
-	public String getInterfaceConnection() {
-		return interfaceConnection;
+	public void setPrinterMaximumMediaThickness(int printerMaximumMediaThickness) {
+		this.printerMaximumMediaThickness = printerMaximumMediaThickness;
 	}
 
 	/**
-	 * @param interfaceConnection the interfaceConnection to set
+	 * @return the printerMaximumWeightOfVehicle
 	 */
-	public void setInterfaceConnection(String interfaceConnection) {
-		this.interfaceConnection = interfaceConnection;
+	public int getPrinterMaximumWeightOfVehicle() {
+		return printerMaximumWeightOfVehicle;
 	}
 
 	/**
-	 * @return the maximumMediaThickness
+	 * @param printerMaximumWeightOfVehicle the printerMaximumWeightOfVehicle to set
 	 */
-	public int getMaximumMediaThickness() {
-		return maximumMediaThickness;
+	public void setPrinterMaximumWeightOfVehicle(int printerMaximumWeightOfVehicle) {
+		this.printerMaximumWeightOfVehicle = printerMaximumWeightOfVehicle;
 	}
 
 	/**
-	 * @param maximumMediaThickness the maximumMediaThickness to set
+	 * @return the printerRip
 	 */
-	public void setMaximumMediaThickness(int maximumMediaThickness) {
-		this.maximumMediaThickness = maximumMediaThickness;
+	public String getPrinterRip() {
+		return printerRip;
 	}
 
 	/**
-	 * @return the maximumWeightOfVehicle
+	 * @param printerRip the printerRip to set
 	 */
-	public int getMaximumWeightOfVehicle() {
-		return maximumWeightOfVehicle;
+	public void setPrinterRip(String printerRip) {
+		this.printerRip = printerRip;
 	}
 
 	/**
-	 * @param maximumWeightOfVehicle the maximumWeightOfVehicle to set
+	 * @return the printerMaxPowerConsumption
 	 */
-	public void setMaximumWeightOfVehicle(int maximumWeightOfVehicle) {
-		this.maximumWeightOfVehicle = maximumWeightOfVehicle;
+	public int getPrinterMaxPowerConsumption() {
+		return printerMaxPowerConsumption;
 	}
 
 	/**
-	 * @return the rip
+	 * @param printerMaxPowerConsumption the printerMaxPowerConsumption to set
 	 */
-	public String getRip() {
-		return rip;
+	public void setPrinterMaxPowerConsumption(int printerMaxPowerConsumption) {
+		this.printerMaxPowerConsumption = printerMaxPowerConsumption;
 	}
 
 	/**
-	 * @param rip the rip to set
+	 * @return the printerWeight
 	 */
-	public void setRip(String rip) {
-		this.rip = rip;
+	public int getPrinterWeight() {
+		return printerWeight;
 	}
 
 	/**
-	 * @return the maxPowerConsumption
+	 * @param printerWeight the printerWeight to set
 	 */
-	public int getMaxPowerConsumption() {
-		return maxPowerConsumption;
+	public void setPrinterWeight(int printerWeight) {
+		this.printerWeight = printerWeight;
 	}
 
 	/**
-	 * @param maxPowerConsumption the maxPowerConsumption to set
+	 * @return the printerWidth
 	 */
-	public void setMaxPowerConsumption(int maxPowerConsumption) {
-		this.maxPowerConsumption = maxPowerConsumption;
+	public int getPrinterWidth() {
+		return printerWidth;
 	}
 
 	/**
-	 * @return the weight
+	 * @param printerWidth the printerWidth to set
 	 */
-	public int getWeight() {
-		return weight;
+	public void setPrinterWidth(int printerWidth) {
+		this.printerWidth = printerWidth;
 	}
 
 	/**
-	 * @param weight the weight to set
+	 * @return the printerHeigth
 	 */
-	public void setWeight(int weight) {
-		this.weight = weight;
+	public int getPrinterHeigth() {
+		return printerHeigth;
 	}
 
 	/**
-	 * @return the width
+	 * @param printerHeigth the printerHeigth to set
 	 */
-	public int getWidth() {
-		return width;
+	public void setPrinterHeigth(int printerHeigth) {
+		this.printerHeigth = printerHeigth;
 	}
 
 	/**
-	 * @param width the width to set
+	 * @return the printerDepth
 	 */
-	public void setWidth(int width) {
-		this.width = width;
+	public int getPrinterDepth() {
+		return printerDepth;
 	}
 
 	/**
-	 * @return the heigth
+	 * @param printerDepth the printerDepth to set
 	 */
-	public int getHeigth() {
-		return heigth;
+	public void setPrinterDepth(int printerDepth) {
+		this.printerDepth = printerDepth;
 	}
 
 	/**
-	 * @param heigth the heigth to set
+	 * @return the printerDescription
 	 */
-	public void setHeigth(int heigth) {
-		this.heigth = heigth;
+	public String getPrinterDescription() {
+		return printerDescription;
 	}
 
 	/**
-	 * @return the depth
+	 * @param printerDescription the printerDescription to set
 	 */
-	public int getDepth() {
-		return depth;
+	public void setPrinterDescription(String printerDescription) {
+		this.printerDescription = printerDescription;
 	}
 
-	/**
-	 * @param depth the depth to set
-	 */
-	public void setDepth(int depth) {
-		this.depth = depth;
-	}
-
-	/**
-	 * @return the description
-	 */
-	public String getDescription() {
-		return description;
-	}
-
-	/**
-	 * @param description the description to set
-	 */
-	public void setDescription(String description) {
-		this.description = description;
-	}
 
 }

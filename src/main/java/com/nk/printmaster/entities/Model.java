@@ -11,9 +11,6 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 public abstract class Model implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 3031695775597440046L;
 	
 	@Id
@@ -22,7 +19,6 @@ public abstract class Model implements Serializable{
 	private int id;
 	
 	public Model(){
-		
 	}
 	
 	public Model(int id){

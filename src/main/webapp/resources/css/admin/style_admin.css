@@ -1,0 +1,369 @@
+*{
+    box-sizing:border-box;
+}
+
+body { 
+    width: 100%;
+    font: 1em/1.4em sans-serif;
+    padding: 0;
+    margin: 0;
+}
+
+a{
+    text-decoration: none;
+    display: block;
+    background: #006080;
+    color: white;
+    font: 2.4em Arial, Helvetica, sans-serif;
+    width: 500px;
+    height: auto;
+    text-align: center;
+    float: left;
+    padding: 60px;
+    margin: 10px;
+    border-radius: 20px;
+    transition: 1s;
+}
+
+a:hover{
+    color: black;
+    background: rgba(7, 209, 209, 0.93);
+    transform: scale(1.05);
+}
+        
+ /* ------ product page ------ */
+#add_new_photo{ 
+	display:block;
+	background: #006080;
+	color: white;
+	margin: 0;
+	width: 200px;
+	padding: 10px;
+}
+
+form {
+	width: inherit;
+	margin: 10px;
+	padding: 0;
+}
+p{
+	margin: 0px;
+	padding: 0px;
+}
+
+form > p{
+	margin: 10px;
+}
+
+.load_photos{
+	display: block;
+	position: relative;
+	width: inherit;
+	height: auto;
+	padding-bottom: 10px;
+}
+.load_photos div{
+	position: relative;
+	width: inherit;
+	padding-bottom: 10px;
+	hight: auto;
+}
+.load_photos div input{
+	position: relative;
+	width: 85%;
+	float:left;
+}
+.load_photos div p{
+	position: relative;
+	width: 10%;
+	padding-left: 10px;
+	float:left;
+}
+
+.load_photos div p:hover{
+	background: black;
+	color: white;
+}
+#head_of_page{
+	font: 26px Arial;
+	padding-left: 250px;
+	padding-top: 10px;
+	display: block;
+	position: relative;
+	margin: 0 auto;
+	color: blue;
+} 
+#product{
+	width: 1340px;
+    margin: 0 auto;
+    position: relative;
+    height: auto;
+    padding: 0px;
+}
+
+        #pictures{
+            position: relative;
+            width: 250px;
+            height:auto;
+            float: left;
+        }
+
+            .image_container{
+                position: relative;
+                height: 450px;
+                width: 450px;
+                border: 1px #006080 solid;
+                margin: 0 auto;
+                box-sizing: content-box;
+            }
+                #pictures img{
+                    position: relative;
+                    height: inherit;
+                    width: inherit;
+                }
+
+            .small_pictures{
+                position: relative;
+                height: 20px;
+                width: 80%;
+                margin: 10px auto;
+                display: block;
+                box-sizing: content-box;
+            }
+
+                .small_pictures > div{
+                    position: relative;
+                    height: 20px;
+                    width: 20px;
+                    margin: 0px 5px 0px 0px;
+                    border: 1px blue solid;
+                    float: left;
+                    display: block;
+                    background: blue;
+                }
+                
+              	.small_pictures > div img{
+                    position: relative;
+                    height: inherit;
+                    width: inherit;
+                    margin:0px;
+                }
+
+#search_printer{
+    position: relative;
+    height: auto;
+    width: auto;
+    float: left;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left:5px;
+    background: #f5f5f5;
+}
+    .search_criteria{
+        border-bottom: 1px solid rgb(219, 219, 219);
+        color: rgb(51, 51, 51);
+        display: block;
+        font: 12px Arial;
+        height: auto;
+        line-height: 16px;
+        padding: 0px 0px 3px 0px;
+        width: 250px;
+    }
+
+        .block_title{
+            color: rgb(51, 51, 51);
+            cursor: pointer;
+            display: block;
+            font: 12px Arial;
+            font-weight: bold;
+            height: auto;
+            line-height: auto;
+            margin: 5px 0px 5px 0px;
+            position: relative;
+            width: inherit;
+            z-index: 1;
+        }
+
+            .block_title i.opened{ /* Opened state of point. */
+                background-clip: border-box;
+                background-color: inherit;
+                background-image: none;
+                background-origin: padding-box;
+                background-size: auto;
+                border: 4px rgb(144, 144, 144) solid; 
+                border-bottom-width: 0px;
+                border-left-color: rgba(0, 0, 0, 0);
+                border-right-color: rgba(0, 0, 0, 0);
+                color: rgb(51, 51, 51);
+                cursor: pointer;
+                display: block;
+                font-family: Arial;
+                font: 12px italic;
+                font-weight: bold;
+                height: 0px;
+                left: 0px;
+                line-height: 16px;
+                margin: 3px 10px 0px 0px;
+                position: absolute;
+                top: 3px;
+                width: 0px;
+                z-index: 1;
+            }
+            
+             .block_title i{/* Normal state of point - closed */
+                background-clip: border-box;
+                background-color: inherit;
+                background-image: none;
+                background-origin: padding-box;
+                background-size: auto;
+                border: 4px rgb(144, 144, 144) solid; 
+                border-right-width: 0px;
+                border-top-color: rgba(0, 0, 0, 0);
+                border-bottom-color: rgba(0, 0, 0, 0);
+                color: rgb(51, 51, 51);
+                cursor: pointer;
+                display: block;
+                font: 12px Arial;
+                font-weight: bold;
+                height: 0px;
+                left: 0px;
+                line-height: 16px;
+                margin: 3px 10px 0px 0px;
+                position: absolute;
+                top:0px;
+                width: 0px;
+                z-index: 1;
+            }
+
+             .block_title p{
+                color: black;
+                cursor: pointer;
+                display: block;
+                font: 12px Arial;
+                font-weight: bold;
+                height: auto;
+                left: 10px;
+                line-height: 16px;
+                margin: 0px 10px 0px 0px;
+                position: relative;
+                top:0px;
+                z-index: 1;
+            }
+
+        .check_boxes{
+            color: rgb(51, 51, 51);
+            display: none;
+            font: 12px Arial;
+            height: auto;
+            line-height: 16px;
+            list-style-image: none;
+            list-style-position: outside;
+            list-style-type: none;
+            margin: 0px;
+            padding: 0px;
+            padding-bottom: 5px;
+        }
+
+            .text_output{
+                width: inherit;
+                height: 20px;
+            }
+
+            .text_output p{
+                float: left;
+                width: auto;
+                float: left;
+                padding: 0;
+                margin: 0;
+                border:0;
+                color:#006080;
+                background: inherit;
+                font-weight:bold;
+            }
+
+            .text_output input{  
+                float: left;
+                border:0;
+                color:#006080;
+                background: inherit; 
+                font-weight:bold;
+            }
+
+            input{
+                padding: 0;
+                margin: 0;
+            }
+
+            .amount-prise{
+                width: 42px;
+            }
+
+            .amount-speed-print{
+                width: 21px;
+            }
+
+            .amount-maximum_media_thickness{
+                width: 21px;
+            }
+
+            .amount-maximum_weight_of_vehicle{
+                width: 21px;
+            }
+
+            .amount-max_power_consumption{
+                width: 25px;
+            }
+
+            .amount-weight{
+                width: 30px;
+            }
+
+            .amount-width,
+            .amount-heigth,
+            .amount-depth{
+                width:19px;
+            }
+
+            .slider{
+                margin-top: 0px;
+            }
+
+    #tabs{
+        position: relative;
+        width: 100%;
+        height: auto;
+        display:inline-block;
+    }
+        #tabs > div{
+            padding-top:10px;
+            max-width: 300px;
+        }
+
+        #tabs ul{
+            margin:0px;
+            padding:0px;
+        }
+        #tabs ul:after{
+            content:"";
+            display:block;
+            clear:both;
+            height:3px;
+            background:#006080;
+        }
+        #tabs ul li{
+            margin:0px;
+            padding:0px;
+            cursor:pointer;
+            display:block;
+            float:left;
+            padding:5px 5px;
+            background:#e9eaeb;
+            color:#707070;
+        }
+        #tabs ul li.active, #tabs ul li.active:hover{
+            background:#006080;
+            color:#fff;
+        }
+        #tabs ul li:hover{
+            background:#d6d6d7;
+        }

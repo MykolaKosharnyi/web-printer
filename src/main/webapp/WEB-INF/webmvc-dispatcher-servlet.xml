@@ -12,6 +12,9 @@
 	 <mvc:resources mapping="/resources/**" location="/resources/"/>
  	 <mvc:annotation-driven />
  	 <mvc:view-controller path="/" view-name="home"/>
+ 	 
+ 	 <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+ 	 
 	<bean 
 	
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
