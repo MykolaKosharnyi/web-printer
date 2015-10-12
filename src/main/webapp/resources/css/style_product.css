@@ -130,14 +130,27 @@
                 font: 1.2em sans-serif;
             }
 
-            #descriptions td{
+            #descriptions tr{
                 height: auto;
-                width: 190px;
-                text-align: left;
+                width: auto;
                 top: 0;
                 margin-bottom: 10px;
             }
-        
+            
+            #descriptions td{
+            	padding-left: 10px;
+            	padding-top: 5px;
+            	padding-bottom: 5px;
+                height: auto;
+                width: 190px;
+                text-align: top;
+                top: 0;
+                border: 1px #006080 solid;
+            }
+            
+            #descriptions td:first-child{
+				font-weight: bold;
+            }
 /*---- second part of product page ----*/
     #tabs{
         position: relative;

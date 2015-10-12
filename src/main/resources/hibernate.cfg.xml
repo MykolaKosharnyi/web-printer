@@ -9,9 +9,11 @@
     <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
     <property name="show_sql">true</property>
     <property name="hbm2ddl.auto">update</property>
+	<property name="format_sql">true</property>
+	<property name="use_sql_comments">true</property>
     
-    <mapping resource="printer.cfg.xml"/>
-    <mapping resource="order_printer.cfg.xml"/>
-    <mapping resource="user.cfg.xml"/>
+    <mapping class="com.nk.printmaster.entities.Printer"/>
+    <mapping class="com.nk.printmaster.entities.User"/>
+    <mapping class="com.nk.printmaster.entities.OrderPrinter"/>
   </session-factory>
 </hibernate-configuration>

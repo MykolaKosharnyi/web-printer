@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>  
 <!DOCTYPE>
 <html>
 <head>
@@ -16,6 +17,14 @@
 	<div id="head_of_page">Добавление нового принтера</div>
 
 	<div id="product">
+		<form:form method="POST" commandName="printer" action="/maven-web/product" enctype="multipart/form-data">
+ 			<div id="pictures">
+ 				File to upload: <input type="file" name="file"><br /> 
+        		Name: <input type="text" name="namePicture"><br /> <br />
+			<!-- 	<input type="file" id="files" name="files[]" multiple />
+				<output id="list"></output>-->
+			</div>
+		<!-- 			 
 		<form method="POST" action="/maven-web/product"
 			enctype="multipart/form-data">
 
@@ -27,10 +36,40 @@
 					<div><input type="file" name="file" value="Выбрать фотографию" /><p>&times;</p></div>
 				</div>
 
+				 <div class="image_container"></div> 
+			</div>-->
+<script>
+  function handleFileSelect(evt) {
+    var files = evt.target.files; // FileList object
 
+    // Loop through the FileList and render image files as thumbnails.
+    for (var i = 0, f; f = files[i]; i++) {
 
-				<!-- <div class="image_container"></div> -->
-			</div>
+      // Only process image files.
+      if (!f.type.match('image.*')) {
+        continue;
+      }
+
+      var reader = new FileReader();
+
+      // Closure to capture the file information.
+      reader.onload = (function(theFile) {
+        return function(e) {
+          // Render thumbnail.
+          var span = document.createElement('span');
+          span.innerHTML = ['<img class="thumb" src="', e.target.result,
+                            '" title="', escape(theFile.name), '"/>'].join('');
+          document.getElementById('list').insertBefore(span, null);
+        };
+      })(f);
+
+      // Read in the image file as a data URL.
+      reader.readAsDataURL(f);
+    }
+  }
+
+  document.getElementById('files').addEventListener('change', handleFileSelect, false);
+</script>
 
 			<div id="search_printer">
 				<div class="search_criteria">
@@ -39,7 +78,8 @@
 						<p>Название принтера</p>
 					</div>
 					<div class="check_boxes">
-						<input type="text" name="name" />
+						<form:input path="name" />
+						<form:errors path="name" cssclass="error"></form:errors>
 					</div>
 				</div>
 				<div class="search_criteria">
@@ -48,7 +88,8 @@
 						<p>Партийный номер принтера</p>
 					</div>
 					<div class="check_boxes">
-						<input type="text" name="partNumber" />
+						<form:input path="partNumber" />
+						<form:errors path="partNumber" cssclass="error"></form:errors>
 					</div>
 				</div>
 				<div class="search_criteria">
@@ -57,62 +98,26 @@
 						<p>Модель</p>
 					</div>
 					<div class="check_boxes">
-						<input type="text" name="model" />
+						<form:input path="equipmentModel" />
+						<form:errors path="equipmentModel" cssclass="error"></form:errors>
 					</div>
 				</div>
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Ширина печати</p>
+						<p>Ширина печати в миллиметрах</p>
 					</div>
 					<ul class="check_boxes">
-						<div id="tabs">
-							<ul>
-								<li>миллиметр</li>
-								<li>дюйм</li>
-								<li>формат</li>
-							</ul>
-							<div>
-								<div>
-									<li><input type="checkbox" name="radio_weight_print_sm"
-										checked>600</input></li>
-									<li><input type="checkbox" name="radio_weight_print_sm">900</input></li>
-									<li><input type="checkbox" name="radio_weight_print_sm">1070</input></li>
-									<li><input type="checkbox" name="radio_weight_print_sm">1300</input></li>
-									<li><input type="checkbox" name="radio_weight_print_sm">1600</input></li>
-									<li><input type="checkbox" name="radio_weight_print_sm">1800</input></li>
-									<li><input type="checkbox" name="radio_weight_print_sm">2500</input></li>
-									<li><input type="checkbox" name="radio_weight_print_sm">2600</input></li>
-									<li><input type="checkbox" name="radio_weight_print_sm">32000</input></li>
-									<li><input type="checkbox" name="radio_weight_print_sm">50000</input></li>
-								</div>
-								<div>
-									<li><input type="checkbox" name="radio_weight_print_inch"
-										checked>24</input></li>
-									<li><input type="checkbox" name="radio_weight_print_inch">36</input></li>
-									<li><input type="checkbox" name="radio_weight_print_inch">42</input></li>
-									<li><input type="checkbox" name="radio_weight_print_inch">60</input></li>
-									<li><input type="checkbox" name="radio_weight_print_inch">70</input></li>
-									<li><input type="checkbox" name="radio_weight_print_inch">100</input></li>
-								</div>
-								<div>
-									<li><input type="checkbox"
-										name="radio_weight_print_format" checked>A0</input></li>
-									<li><input type="checkbox"
-										name="radio_weight_print_format">A1</input></li>
-									<li><input type="checkbox"
-										name="radio_weight_print_format">A2</input></li>
-									<li><input type="checkbox"
-										name="radio_weight_print_format">A3</input></li>
-									<li><input type="checkbox"
-										name="radio_weight_print_format">A3+</input></li>
-									<li><input type="checkbox"
-										name="radio_weight_print_format">B0</input></li>
-									<li><input type="checkbox"
-										name="radio_weight_print_format">B1</input></li>
-								</div>
-							</div>
-						</div>
+						<li><form:radiobutton path="weightPrintMM" value="600"/>600</li>
+						<li><form:radiobutton path="weightPrintMM" value="900"/>900</li>
+						<li><form:radiobutton path="weightPrintMM" value="1070"/>1070</li>
+						<li><form:radiobutton path="weightPrintMM" value="1300"/>1300</li>
+						<li><form:radiobutton path="weightPrintMM" value="1600"/>1600</li>
+						<li><form:radiobutton path="weightPrintMM" value="1800"/>1800</li>
+						<li><form:radiobutton path="weightPrintMM" value="2500"/>2500</li>
+						<li><form:radiobutton path="weightPrintMM" value="2600"/>2600</li>
+						<li><form:radiobutton path="weightPrintMM" value="32000"/>32000</li>
+						<li><form:radiobutton path="weightPrintMM" value="50000"/>50000</li>
 					</ul>
 				</div>
 				<div class="search_criteria">
@@ -123,9 +128,8 @@
 					<ul class="check_boxes">
 						<div class="text_output">
 							<p>$</p>
-							<input type="text" class="amount-prise">
+							<input type="text" name="prise" class="amount-prise">
 						</div>
-
 						<div class="slider">
 							<div class="slider-range-prise"></div>
 						</div>
@@ -137,10 +141,7 @@
 						<p>Б/У оборудование</p>
 					</div>
 					<ul class="check_boxes">
-						<li><input type="checkbox"
-							name="checkbox_former_use_equipment">новое</input></li>
-						<li><input type="checkbox"
-							name="checkbox_former_use_equipment">Б/У</input></li>
+						<li><form:checkbox path="previouslyUsed"></form:checkbox>&nbsp;Бывшего употребления</li>
 					</ul>
 				</div>
 				<div class="search_criteria">
@@ -149,8 +150,8 @@
 						<p>Тип печати</p>
 					</div>
 					<ul class="check_boxes">
-						<li><input type="checkbox" name="checkbox_type_print">Термо-струйная</input></li>
-						<li><input type="checkbox" name="checkbox_type_print">Пьезо-струйная</input></li>
+						<li><form:checkbox path="typePrint" value="Термо-струйная"></form:checkbox>&nbsp;Термо-струйная</li>
+						<li><form:checkbox path="typePrint" value="Пьезо-струйная"></form:checkbox>&nbsp;Пьезо-струйная</li>
 					</ul>
 				</div>
 				<div class="search_criteria">
@@ -159,9 +160,7 @@
 						<p>Подача метериала</p>
 					</div>
 					<ul class="check_boxes">
-						<li><input type="checkbox" name="checkbox_feed">Рулонный</input></li>
-						<li><input type="checkbox" name="checkbox_feed">Плоскопечатный</input></li>
-						<li><input type="checkbox" name="checkbox_feed">Гибридный</input></li>
+						<form:checkboxes items="${feeds}" path="feed" />
 					</ul>
 				</div>
 				<div class="search_criteria">
@@ -170,11 +169,10 @@
 						<p>Цветность</p>
 					</div>
 					<ul class="check_boxes">
-						<li><input type="checkbox" name="checkbox_chromaticity">CMYK</input></li>
-						<li><input type="checkbox" name="checkbox_chromaticity">CMYK
-							X 2</input></li>
-						<li><input type="checkbox" name="checkbox_chromaticity">CMYKLcLm</input></li>
-						<li><input type="checkbox" name="checkbox_chromaticity">CMYKLcLmOG</input></li>
+						<li><form:checkbox path="chromaticity" value="CMYK"></form:checkbox>&nbsp;CMYK</li>
+						<li><form:checkbox path="chromaticity" value="CMYKX 2"></form:checkbox>&nbsp;CMYKX 2</li>
+						<li><form:checkbox path="chromaticity" value="CMYKLcLm"></form:checkbox>&nbsp;CMYKLcLm</li>
+						<li><form:checkbox path="chromaticity" value="CMYKLcLmOG"></form:checkbox>&nbsp;CMYKLcLmOG</li>
 					</ul>
 				</div>
 				<div class="search_criteria">
@@ -183,22 +181,14 @@
 						<p>Производитель печатающей головки</p>
 					</div>
 					<ul class="check_boxes">
-						<li><input type="checkbox"
-							name="checkbox_manufacturer_printhead">Spectra</input></li>
-						<li><input type="checkbox"
-							name="checkbox_manufacturer_printhead">XAAR</input></li>
-						<li><input type="checkbox"
-							name="checkbox_manufacturer_printhead">SPT</input></li>
-						<li><input type="checkbox"
-							name="checkbox_manufacturer_printhead">Konika-Minolta</input></li>
-						<li><input type="checkbox"
-							name="checkbox_manufacturer_printhead">Toshiba</input></li>
-						<li><input type="checkbox"
-							name="checkbox_manufacturer_printhead">Ricoh</input></li>
-						<li><input type="checkbox"
-							name="checkbox_manufacturer_printhead">Epson</input></li>
-						<li><input type="checkbox"
-							name="checkbox_manufacturer_printhead">Lexmark</input></li>
+						<li><form:radiobutton path="manufacturerPrinthead" value="Spectra"/>Spectra</li>
+						<li><form:radiobutton path="manufacturerPrinthead" value="XAAR"/>XAAR</li>
+						<li><form:radiobutton path="manufacturerPrinthead" value="SPT"/>SPT</li>
+						<li><form:radiobutton path="manufacturerPrinthead" value="Konika-Minolta"/>Konika-Minolta</li>
+						<li><form:radiobutton path="manufacturerPrinthead" value="Toshiba"/>Toshiba</li>
+						<li><form:radiobutton path="manufacturerPrinthead" value="Ricoh"/>Ricoh</li>
+						<li><form:radiobutton path="manufacturerPrinthead" value="Epson"/>Epson</li>
+						<li><form:radiobutton path="manufacturerPrinthead" value="Lexmark"/>Lexmark</li>
 					</ul>
 				</div>
 				<div class="search_criteria">
@@ -207,34 +197,31 @@
 						<p>Тип печатающей головки</p>
 					</div>
 					<ul class="check_boxes">
-						<li><input type="checkbox" name="checkbox_type_printhead">Nova
-							256</input></li>
-						<li><input type="checkbox" name="checkbox_type_printhead">Galaxy
-							256</input></li>
-						<li><input type="checkbox" name="checkbox_type_printhead">Polyaris
-							512</input></li>
-						<li><input type="checkbox" name="checkbox_type_printhead">126/50</input></li>
-						<li><input type="checkbox" name="checkbox_type_printhead">126/80</input></li>
-						<li><input type="checkbox" name="checkbox_type_printhead">128/40</input></li>
-						<li><input type="checkbox" name="checkbox_type_printhead">128/80</input></li>
-						<li><input type="checkbox" name="checkbox_type_printhead">255</input></li>
-						<li><input type="checkbox" name="checkbox_type_printhead">256</input></li>
-						<li><input type="checkbox" name="checkbox_type_printhead">500</input></li>
-						<li><input type="checkbox" name="checkbox_type_printhead">510</input></li>
-						<li><input type="checkbox" name="checkbox_type_printhead">512</input></li>
-						<li><input type="checkbox" name="checkbox_type_printhead">512KN</input></li>
-						<li><input type="checkbox" name="checkbox_type_printhead">1020</input></li>
-						<li><input type="checkbox" name="checkbox_type_printhead">1024</input></li>
-						<li><input type="checkbox" name="checkbox_type_printhead">1024I</input></li>
-						<li><input type="checkbox" name="checkbox_type_printhead">CA3</input></li>
-						<li><input type="checkbox" name="checkbox_type_printhead">CA4</input></li>
-						<li><input type="checkbox" name="checkbox_type_printhead">Gen4</input></li>
-						<li><input type="checkbox" name="checkbox_type_printhead">Gen5</input></li>
-						<li><input type="checkbox" name="checkbox_type_printhead">DX2</input></li>
-						<li><input type="checkbox" name="checkbox_type_printhead">DX4</input></li>
-						<li><input type="checkbox" name="checkbox_type_printhead">DX5</input></li>
-						<li><input type="checkbox" name="checkbox_type_printhead">DX6</input></li>
-						<li><input type="checkbox" name="checkbox_type_printhead">DX7</input></li>
+						<li><form:radiobutton path="typeOfPrinthead" value="Nova256"/>Nova256</li>
+						<li><form:radiobutton path="typeOfPrinthead" value="Galaxy256"/>Galaxy256</li>
+						<li><form:radiobutton path="typeOfPrinthead" value="Polyaris512"/>Polyaris512</li>
+						<li><form:radiobutton path="typeOfPrinthead" value="126/50"/>126/50</li>
+						<li><form:radiobutton path="typeOfPrinthead" value="126/80"/>126/80</li>
+						<li><form:radiobutton path="typeOfPrinthead" value="128/40"/>128/40</li>
+						<li><form:radiobutton path="typeOfPrinthead" value="128/80"/>128/80</li>
+						<li><form:radiobutton path="typeOfPrinthead" value="255"/>255</li>
+						<li><form:radiobutton path="typeOfPrinthead" value="256"/>256</li>
+						<li><form:radiobutton path="typeOfPrinthead" value="500"/>500</li>
+						<li><form:radiobutton path="typeOfPrinthead" value="510"/>510</li>
+						<li><form:radiobutton path="typeOfPrinthead" value="512"/>512</li>
+						<li><form:radiobutton path="typeOfPrinthead" value="512KN"/>512KN</li>
+						<li><form:radiobutton path="typeOfPrinthead" value="1020"/>1020</li>
+						<li><form:radiobutton path="typeOfPrinthead" value="1024"/>1024</li>
+						<li><form:radiobutton path="typeOfPrinthead" value="1024I"/>1024I</li>
+						<li><form:radiobutton path="typeOfPrinthead" value="CA3"/>CA3</li>
+						<li><form:radiobutton path="typeOfPrinthead" value="CA4"/>CA4</li>
+						<li><form:radiobutton path="typeOfPrinthead" value="Gen4"/>Gen4</li>
+						<li><form:radiobutton path="typeOfPrinthead" value="Gen5"/>Gen5</li>
+						<li><form:radiobutton path="typeOfPrinthead" value="DX2"/>DX2</li>
+						<li><form:radiobutton path="typeOfPrinthead" value="DX4"/>DX4</li>
+						<li><form:radiobutton path="typeOfPrinthead" value="DX5"/>DX5</li>
+						<li><form:radiobutton path="typeOfPrinthead" value="DX6"/>DX6</li>
+						<li><form:radiobutton path="typeOfPrinthead" value="DX7"/>DX7</li>
 					</ul>
 				</div>
 				<div class="search_criteria">
@@ -243,13 +230,12 @@
 						<p>Совместимые чернила</p>
 					</div>
 					<ul class="check_boxes">
-						<li><input type="checkbox" name="checkbox_compatible_ink">Водные</input></li>
-						<li><input type="checkbox" name="checkbox_compatible_ink">Пигментные</input></li>
-						<li><input type="checkbox" name="checkbox_compatible_ink">Сублимационные
-							</input></li>
-						<li><input type="checkbox" name="checkbox_compatible_ink">Экосольвентные</input></li>
-						<li><input type="checkbox" name="checkbox_compatible_ink">Сольвентные</input></li>
-						<li><input type="checkbox" name="checkbox_compatible_ink">UV-чернила</input></li>
+						<li><form:checkbox path="compatibleInk" value="Водные"></form:checkbox>&nbsp;Водные</li>
+						<li><form:checkbox path="compatibleInk" value="Пигментные"></form:checkbox>&nbsp;Пигментные</li>
+						<li><form:checkbox path="compatibleInk" value="Сублимационные"></form:checkbox>&nbsp;Сублимационные</li>
+						<li><form:checkbox path="compatibleInk" value="Экосольвентные"></form:checkbox>&nbsp;Экосольвентные</li>
+						<li><form:checkbox path="compatibleInk" value="Сольвентные"></form:checkbox>&nbsp;Сольвентные</li>
+						<li><form:checkbox path="compatibleInk" value="UV-чернила"></form:checkbox>&nbsp;UV-чернила</li>
 					</ul>
 				</div>
 				<div class="search_criteria">
@@ -258,8 +244,8 @@
 						<p>Тип капли</p>
 					</div>
 					<ul class="check_boxes">
-						<li><input type="checkbox" name="checkbox_type_drops">Постоянная</input></li>
-						<li><input type="checkbox" name="checkbox_type_drops">Переменная</input></li>
+						<li><form:checkbox path="typeDrops" value="Постоянная"></form:checkbox>&nbsp;Постоянная</li>
+						<li><form:checkbox path="typeDrops" value="Переменная"></form:checkbox>&nbsp;Переменная</li>
 					</ul>
 				</div>
 				<div class="search_criteria">
@@ -268,17 +254,17 @@
 						<p>Размер капли</p>
 					</div>
 					<ul class="check_boxes">
-						<li><input type="checkbox" name="checkbox_size_drops">1,5</input></li>
-						<li><input type="checkbox" name="checkbox_size_drops">2</input></li>
-						<li><input type="checkbox" name="checkbox_size_drops">4</input></li>
-						<li><input type="checkbox" name="checkbox_size_drops">8</input></li>
-						<li><input type="checkbox" name="checkbox_size_drops">12</input></li>
-						<li><input type="checkbox" name="checkbox_size_drops">15</input></li>
-						<li><input type="checkbox" name="checkbox_size_drops">20</input></li>
-						<li><input type="checkbox" name="checkbox_size_drops">30</input></li>
-						<li><input type="checkbox" name="checkbox_size_drops">35</input></li>
-						<li><input type="checkbox" name="checkbox_size_drops">40</input></li>
-						<li><input type="checkbox" name="checkbox_size_drops">80</input></li>
+						<li><form:checkbox path="sizeDrops" value="1,5"></form:checkbox>&nbsp;1,5</li>
+						<li><form:checkbox path="sizeDrops" value="2"></form:checkbox>&nbsp;2</li>
+						<li><form:checkbox path="sizeDrops" value="4"></form:checkbox>&nbsp;4</li>
+						<li><form:checkbox path="sizeDrops" value="8"></form:checkbox>&nbsp;8</li>
+						<li><form:checkbox path="sizeDrops" value="12"></form:checkbox>&nbsp;12</li>
+						<li><form:checkbox path="sizeDrops" value="15"></form:checkbox>&nbsp;15</li>
+						<li><form:checkbox path="sizeDrops" value="20"></form:checkbox>&nbsp;20</li>
+						<li><form:checkbox path="sizeDrops" value="30"></form:checkbox>&nbsp;30</li>
+						<li><form:checkbox path="sizeDrops" value="35"></form:checkbox>&nbsp;35</li>
+						<li><form:checkbox path="sizeDrops" value="40"></form:checkbox>&nbsp;40</li>
+						<li><form:checkbox path="sizeDrops" value="80"></form:checkbox>&nbsp;80</li>
 					</ul>
 				</div>
 			</div>
@@ -291,7 +277,7 @@
 					</div>
 					<ul class="check_boxes">
 						<div class="text_output">
-							<input type="text" class="amount-speed-print">
+							<input type="text" name="speedPrint" class="amount-speed-print">
 							<p>&nbsp;м.кв./ч.</p>
 						</div>
 
@@ -306,12 +292,12 @@
 						<p>Разрешение печати</p>
 					</div>
 					<ul class="check_boxes">
-						<li><input type="checkbox" name="checkbox_print_resolution">360dpi</input></li>
-						<li><input type="checkbox" name="checkbox_print_resolution">600dpi</input></li>
-						<li><input type="checkbox" name="checkbox_print_resolution">720dpi</input></li>
-						<li><input type="checkbox" name="checkbox_print_resolution">1200dpi</input></li>
-						<li><input type="checkbox" name="checkbox_print_resolution">1440dpi</input></li>
-						<li><input type="checkbox" name="checkbox_print_resolution">2880dpi</input></li>
+						<li><form:checkbox path="printResolution" value="360dpi"></form:checkbox>&nbsp;360dpi</li>
+						<li><form:checkbox path="printResolution" value="600dpi"></form:checkbox>&nbsp;600dpi</li>
+						<li><form:checkbox path="printResolution" value="720dpi"></form:checkbox>&nbsp;720dpi</li>
+						<li><form:checkbox path="printResolution" value="1200dpi"></form:checkbox>&nbsp;1200dpi</li>
+						<li><form:checkbox path="printResolution" value="1440dpi"></form:checkbox>&nbsp;1440dpi</li>
+						<li><form:checkbox path="printResolution" value="2880dpi"></form:checkbox>&nbsp;2880dpi</li>
 					</ul>
 				</div>
 				<div class="search_criteria">
@@ -320,26 +306,15 @@
 						<p>Производитель оборудования</p>
 					</div>
 					<ul class="check_boxes">
-						<li><input type="checkbox"
-							name="checkbox_equipment_manufacturer">Mimaki</input></li>
-						<li><input type="checkbox"
-							name="checkbox_equipment_manufacturer">Roland</input></li>
-						<li><input type="checkbox"
-							name="checkbox_equipment_manufacturer">Mutoh</input></li>
-						<li><input type="checkbox"
-							name="checkbox_equipment_manufacturer">HP</input></li>
-						<li><input type="checkbox"
-							name="checkbox_equipment_manufacturer">OCE</input></li>
-						<li><input type="checkbox"
-							name="checkbox_equipment_manufacturer">Agfa</input></li>
-						<li><input type="checkbox"
-							name="checkbox_equipment_manufacturer">LIYU</input></li>
-						<li><input type="checkbox"
-							name="checkbox_equipment_manufacturer">Infinity</input></li>
-						<li><input type="checkbox"
-							name="checkbox_equipment_manufacturer">Gonzeng</input></li>
-						<li><input type="checkbox"
-							name="checkbox_equipment_manufacturer">Jong Ye</input></li>
+						<li><form:radiobutton path="equipmentManufacturer" value="Mimaki"/>Mimaki</li>
+						<li><form:radiobutton path="equipmentManufacturer" value="Roland"/>Roland</li>
+						<li><form:radiobutton path="equipmentManufacturer" value="HP"/>HP</li>
+						<li><form:radiobutton path="equipmentManufacturer" value="OCE"/>OCE</li>
+						<li><form:radiobutton path="equipmentManufacturer" value="Agfa"/>Agfa</li>
+						<li><form:radiobutton path="equipmentManufacturer" value="LIYU"/>LIYU</li>
+						<li><form:radiobutton path="equipmentManufacturer" value="Infinity"/>Infinity</li>
+						<li><form:radiobutton path="equipmentManufacturer" value="Gonzeng"/>Gonzeng</li>
+						<li><form:radiobutton path="equipmentManufacturer" value="Jong Ye"/>Jong Ye</li>
 					</ul>
 				</div>
 				<div class="search_criteria">
@@ -348,14 +323,10 @@
 						<p>Интерфейс подключения</p>
 					</div>
 					<ul class="check_boxes">
-						<li><input type="checkbox"
-							name="checkbox_interface_connection">SCSI</input></li>
-						<li><input type="checkbox"
-							name="checkbox_interface_connection">PCI Adapter</input></li>
-						<li><input type="checkbox"
-							name="checkbox_interface_connection">USB</input></li>
-						<li><input type="checkbox"
-							name="checkbox_interface_connection">Fire-Wire</input></li>
+						<li><form:checkbox path="interfaceConnection" value="SCSI"></form:checkbox>&nbsp;SCSI</li>
+						<li><form:checkbox path="interfaceConnection" value="PCI Adapter"></form:checkbox>&nbsp;PCI Adapter</li>
+						<li><form:checkbox path="interfaceConnection" value="USB"></form:checkbox>&nbsp;USB</li>
+						<li><form:checkbox path="interfaceConnection" value="Fire-Wire"></form:checkbox>&nbsp;Fire-Wire</li>
 					</ul>
 				</div>
 				<div class="search_criteria">
@@ -365,7 +336,7 @@
 					</div>
 					<ul class="check_boxes">
 						<div class="text_output">
-							<input type="text" class="amount-maximum_media_thickness">
+							<input type="text" name="maximumMediaThickness" class="amount-maximum_media_thickness">
 							<p>&nbsp;мм</p>
 						</div>
 						<div class="slider">
@@ -381,7 +352,7 @@
 					</div>
 					<ul class="check_boxes">
 						<div class="text_output">
-							<input type="text" class="amount-maximum_weight_of_vehicle">
+							<input type="text" name="maximumWeightOfVehicle" class="amount-maximum_weight_of_vehicle">
 							<p>&nbsp;кг</p>
 						</div>
 						<div class="slider">
@@ -395,15 +366,11 @@
 						<p>П/О RIP</p>
 					</div>
 					<ul class="check_boxes">
-						<li><input type="checkbox" name="checkbox_RIP">ONYX
-							Graphics</input></li>
-						<li><input type="checkbox" name="checkbox_RIP">SA
-							International/PhotoPRINT™ Family</input></li>
-						<li><input type="checkbox" name="checkbox_RIP">Wasatch SOFTRIP</input></li>
-						<li><input type="checkbox" name="checkbox_RIP">ColorGATE
-							Productionserver</input></li>
-						<li><input type="checkbox" name="checkbox_RIP">Poster
-							Print</input></li>
+						<li><form:checkbox path="rip" value="ONYX Graphics"></form:checkbox>&nbsp;ONYX Graphics</li>
+						<li><form:checkbox path="rip" value="SA International/PhotoPRINT™ Family"></form:checkbox>&nbsp;SA International/PhotoPRINT™ Family</li>
+						<li><form:checkbox path="rip" value="Wasatch SOFTRIP"></form:checkbox>&nbsp;Wasatch SOFTRIP</li>
+						<li><form:checkbox path="rip" value="ColorGATE Productionserver"></form:checkbox>&nbsp;ColorGATE Productionserver</li>
+						<li><form:checkbox path="rip" value="Poster Print"></form:checkbox>&nbsp;Poster Print</li>
 					</ul>
 				</div>
 				<div class="search_criteria">
@@ -413,7 +380,7 @@
 					</div>
 					<ul class="check_boxes">
 						<div class="text_output">
-							<input type="text" class="amount-max_power_consumption">
+							<input type="text" name="maxPowerConsumption" class="amount-max_power_consumption">
 							<p>&nbsp;кВт</p>
 						</div>
 						<div class="slider">
@@ -428,7 +395,7 @@
 					</div>
 					<ul class="check_boxes">
 						<div class="text_output">
-							<input type="text" class="amount-weight">
+							<input type="text" name="weight" class="amount-weight">
 							<p>&nbsp;кг</p>
 						</div>
 						<div class="slider">
@@ -443,7 +410,7 @@
 					</div>
 					<ul class="check_boxes">
 						<div class="text_output">
-							<input type="text" class="amount-width">
+							<input type="text" name="width" class="amount-width">
 							<p>&nbsp;м</p>
 						</div>
 						<div class="slider">
@@ -458,7 +425,7 @@
 					</div>
 					<ul class="check_boxes">
 						<div class="text_output">
-							<input type="text" class="amount-heigth">
+							<input type="text" name="heigth" class="amount-heigth">
 							<p>&nbsp;м</p>
 						</div>
 						<div class="slider">
@@ -473,7 +440,7 @@
 					</div>
 					<ul class="check_boxes">
 						<div class="text_output">
-							<input type="text" class="amount-depth">
+							<input type="text" name="depth" class="amount-depth">
 							<p>&nbsp;м</p>
 						</div>
 						<div class="slider">
@@ -488,13 +455,12 @@
 					</div>
 					<ul class="check_boxes">
 						<textarea rows="4" cols="29" name="description"></textarea>
-
 					</ul>
 				</div>
 			</div>
 			
 			<input type="submit" value="загрузить" />
-		</form>
+		</form:form>
 	</div>
 
 </body>

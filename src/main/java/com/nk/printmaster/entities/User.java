@@ -1,7 +1,11 @@
 package com.nk.printmaster.entities;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -28,12 +32,29 @@ public class User extends Model{
 	@Column(name="email")
 	private String email;
 	
+	@OneToMany(mappedBy="user")
+	private Set<OrderPrinter> orderPrinters = new HashSet<OrderPrinter>();
+	
 	public User(){
 		super();
 	}
 
 	public User(int id) {
 		super(id);
+	}
+
+	/**
+	 * @return the orderPrinters
+	 */
+	public Set<OrderPrinter> getOrderPrinters() {
+		return orderPrinters;
+	}
+
+	/**
+	 * @param orderPrinters the orderPrinters to set
+	 */
+	public void setOrderPrinters(Set<OrderPrinter> orderPrinters) {
+		this.orderPrinters = orderPrinters;
 	}
 
 	/**

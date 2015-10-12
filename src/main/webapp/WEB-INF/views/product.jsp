@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE>
 <html lang="ru">
 <head>
@@ -306,8 +307,8 @@
 				        </div>
            </div>
         </div>
-                <div id="product">
-           <p>Широкоформатный принтер Mimaki</p>
+         <div id="product">
+           <p>${printer.name}</p>
             <div id="pictures_and_descriptions">
 			<div id="pictures">
 				<div class="image_container">
@@ -329,23 +330,74 @@
 			</div>
                 <div id="descriptions">
                     <table>
-                       <caption></caption>
-                       <tr><td>Цена:</td><td>значение</td></tr>
-                       <tr><td>Характеристика:</td><td>значение</td></tr>
-                       <tr><td>Характеристика:</td><td>значение</td></tr>
-                       <tr><td>Характеристика:</td><td>значение</td></tr>
-                       <tr><td>Характеристика:</td><td>значение</td></tr>
-                       <tr><td>Характеристика:</td><td>значение</td></tr>
-                       <tr><td>Характеристика:</td><td>значение</td></tr>
-                       <tr><td>Характеристика:</td><td>значение</td></tr>
-                       <tr><td>Характеристика:</td><td>значение</td></tr>
-                       <tr><td>Характеристика:</td><td>значение</td></tr>
-                       <tr><td>Характеристика:</td><td>значение</td></tr>
-                       <tr><td>Характеристика:</td><td>значение</td></tr>
-                       <tr><td>Характеристика:</td><td>значение</td></tr>
-                       <tr><td>Характеристика:</td><td>значение</td></tr>
-                       <tr><td>Характеристика:</td><td>значение</td></tr>
-                       <tr><td>Характеристика:</td><td>значение</td></tr>
+                       <caption></caption> 
+                       <tr><td>Цена:</td><td>$ ${printer.prise}.</td></tr>
+                       <tr><td>Партный номер принтера:</td><td>${printer.partNumber}</td></tr>
+                       <tr><td>Модель:</td><td>${printer.equipmentModel}</td></tr>
+                       <tr><td>Ширина печати в миллиметрах:</td><td>${printer.weightPrintMM} mm</td></tr>
+                       <tr><td>Б/У оборудование:</td><td>
+                       <c:choose>  
+							<c:when test="${printer.previouslyUsed == true}">да</c:when>  
+        					<c:otherwise>нет</c:otherwise>  
+    				   </c:choose>   
+                       </td></tr>
+                       <tr><td>Тип печати:</td><td>
+	                   		<c:forEach var="tp" items="${printer.typePrint}">  
+	    						${tp}<br>  
+							</c:forEach>
+                       </td></tr>
+                       <tr><td>Подача материала:</td><td>
+	                   		<c:forEach var="tp" items="${printer.feed}">  
+	    						${tp}<br>  
+							</c:forEach>
+                       </td></tr>
+                       <tr><td>Цветность:</td><td>
+	                   		<c:forEach var="tp" items="${printer.chromaticity}">  
+	    						${tp}<br>  
+							</c:forEach>                       
+                       </td></tr>
+                       <tr><td>Производитель печатающей головки:</td><td>${printer.manufacturerPrinthead}</td></tr>
+                       <tr><td>Тип печатающей головки:</td><td>${printer.typeOfPrinthead}</td></tr>
+                       <tr><td>Совместимые чернила:</td><td>
+	                   		<c:forEach var="tp" items="${printer.compatibleInk}">  
+	    						${tp}<br>  
+							</c:forEach>                       
+                       </td></tr>
+                       <tr><td>Тип капли:</td><td>
+	                   		<c:forEach var="tp" items="${printer.typeDrops}">  
+	    						${tp}<br>  
+							</c:forEach>                        
+                       </td></tr>
+                       <tr><td>Размер капли:</td><td>
+	                   		<c:forEach var="tp" items="${printer.sizeDrops}">  
+	    						${tp} мм<br>  
+							</c:forEach>                        
+                       </td></tr>
+                       <tr><td>Скорость печати:</td><td>${printer.speedPrint} м.кв./ч.</td></tr>
+                       <tr><td>Разрешение печати:</td><td>
+	                   		<c:forEach var="tp" items="${printer.printResolution}">  
+	    						${tp}<br>  
+							</c:forEach>                        
+                       </td></tr>
+                       <tr><td>Производитель оборудования:</td><td>${printer.equipmentManufacturer}</td></tr>
+                       <tr><td>Интерфейс подключения:</td><td>
+	                   		<c:forEach var="tp" items="${printer.interfaceConnection}">  
+	    						${tp}<br>  
+							</c:forEach>                       
+                       </td></tr>
+                       <tr><td>Максимальная толщина носителя:</td><td>${printer.maximumMediaThickness} мм</td></tr>
+                       <tr><td>Максимальный вес носителя:</td><td>${printer.maximumWeightOfVehicle} кг</td></tr>
+                       <tr><td>П/О RIP:</td><td>
+	                   		<c:forEach var="tp" items="${printer.rip}">  
+	    						${tp}<br>  
+							</c:forEach>                        
+                       </td></tr>
+                       <tr><td>Максимальная потребляемая мощность:</td><td>${printer.maxPowerConsumption} кВт</td></tr>
+                       <tr><td>Вес:</td><td>${printer.weight} кг</td></tr>
+                       <tr><td>Ширина:</td><td>${printer.width} м</td></tr>
+                       <tr><td>Высота:</td><td>${printer.heigth} м</td></tr>
+                       <tr><td>Глубина:</td><td>${printer.depth} м</td></tr>
+                       <tr><td>Описание:</td><td>${printer.description}</td></tr>
                   </table>
                 </div>
             </div>

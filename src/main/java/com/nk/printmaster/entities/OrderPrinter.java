@@ -1,37 +1,42 @@
 package com.nk.printmaster.entities;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public class OrderPrinter implements Serializable{
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="order_printer")
+public class OrderPrinter extends Model{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -7410894288329287520L;
 	
-	private int id;
+	@ManyToOne
+	@JoinColumn(name="user_id")
 	private User user;
+	
+	@ManyToOne
+	@JoinColumn(name="printer_id")
 	private Printer printer;
+	
+	@Column(name="time_order")
 	private Date timeOrder;
+	
+	@Column(name="amount")
 	private int amount;
 	
 	public OrderPrinter() {
+		super();
 	}
 
-	/**
-	 * @return the id
-	 */
-	public int getId() {
-		return id;
+	public OrderPrinter(int id) {
+		super(id);
 	}
-
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(int id) {
-		this.id = id;
-	}
-
 	/**
 	 * @return the user
 	 */

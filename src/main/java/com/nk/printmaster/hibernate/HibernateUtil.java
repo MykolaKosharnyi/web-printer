@@ -9,10 +9,17 @@ public class HibernateUtil {
 	private static SessionFactory sessionFactory = null;
 	
 	static {
-		Configuration cfg = new Configuration().configure();
-		StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(cfg.getProperties());
-		
-		sessionFactory = cfg.buildSessionFactory(builder.build());
+		 try { 
+			 
+				Configuration cfg = new Configuration().configure();
+				StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(cfg.getProperties());
+				
+				sessionFactory = cfg.buildSessionFactory(builder.build());
+			 
+			  } catch (Throwable t) {
+				  System.err.println("Initial SessionFactory creation failed." + t);
+				  t.printStackTrace();
+			  } 
 	}
 	
 	public static SessionFactory getSessionFactory() {
