@@ -25,11 +25,11 @@ import org.springframework.web.context.ContextLoader;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.nk.printmaster.entities.Printer;
 import com.nk.printmaster.hibernate.HibernateUtil;
+import com.nk.printmaster.model.Printer;
 
 @Controller
-//@RequestMapping("/hello")
+@RequestMapping("/hello")
 public class BaseController{
 	
 	private String saveDirectory = "C:/Users/Николай/Desktop/workspaceLinux/maven-web/src/main/webapp/resources/images/printers";
