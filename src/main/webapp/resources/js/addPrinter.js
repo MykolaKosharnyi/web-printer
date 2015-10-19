@@ -4,7 +4,6 @@
               range: "min",
               min: 1,
               max: 100000,
-              value: 10000,
               slide: function( event, ui ) {
                 $( ".amount-prise" ).val(ui.value);
               }
@@ -206,7 +205,7 @@
 /*--- реализация выпадающих подпунктов ---*/
         $( function(){
             $(".block_title").click(function(){
-                var check = $(this).parent('.search_criteria').find(".check_boxes");
+                var check = $(this).parent('.characteristic').find(".check_boxes");
                 var check_point = $(this).find("i");
                 if (check.css('display') == 'none') {
                     check.slideDown();
@@ -220,14 +219,16 @@
             });
         } ); 
 /*--- реализация еще одного поля добавления фотографии ---*/
-        $( function(){
+       /* $( function(){
             $("#add_new_photo").click(function(){
             	$(".load_photos").append("<div><input type=\"file\" name=\"file\" value=\"Выбрать фотографию\"/><p>&times;</p></div>");
             });
-        } ); 
-/*--- для удаления поля добавления фотографии ---*/
+        } ); */
+/*--- для удаления поля добавления фотографии 
         $( function(){
             $(".load_photos > div p").click(function(){
             	$(this).parent("div").remove();
             });
-        } ); 
+        } ); ---*/
+/*--- для добаления фотографий ---*/
+       

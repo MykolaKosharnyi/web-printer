@@ -1,45 +1,14 @@
-*{
-    box-sizing:border-box;
-}
-
-body { 
-    width: 100%;
-    font: 1em/1.4em sans-serif;
-    padding: 0;
-    margin: 0;
-}
-
-a{
-    text-decoration: none;
-    display: block;
-    background: #006080;
-    color: white;
-    font: 2.4em Arial, Helvetica, sans-serif;
-    width: 500px;
-    height: auto;
-    text-align: center;
-    float: left;
-    padding: 60px;
-    margin: 10px;
-    border-radius: 20px;
-    transition: 1s;
-}
-
-a:hover{
-    color: black;
-    background: rgba(7, 209, 209, 0.93);
-    transform: scale(1.05);
-}
-        
- /* ------ product page ------ */
-#add_new_photo{ 
-	display:block;
-	background: #006080;
-	color: white;
-	margin: 0;
-	width: 200px;
-	padding: 10px;
-}
+#head_of_page{
+	font: 26px Arial;
+	padding-left: 350px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	display: block;
+	position: relative;
+	margin: 0 auto;
+	color: blue;
+} 
+/* ------ product page ------ */
 
 form {
 	width: inherit;
@@ -55,105 +24,48 @@ form > p{
 	margin: 10px;
 }
 
-.load_photos div{
-	position: relative;
-	width: inherit;
-	padding-bottom: 10px;
-	hight: auto;
-}
-.load_photos div input{
-	position: relative;
-	width: 85%;
-	float:left;
-}
-.load_photos div p{
-	position: relative;
-	width: 10%;
-	padding-left: 10px;
-	float:left;
-}
-
-.load_photos div p:hover{
-	background: black;
-	color: white;
-}
-#head_of_page{
-	font: 26px Arial;
-	padding-left: 500px;
-	padding-top: 10px;
-	display: block;
-	position: relative;
-	margin: 0 auto;
-	color: blue;
-} 
 #product{
-	width: 900px;
+	width: 1100px;
 	height: auto;
     margin: 0 auto;
     position: relative;
     padding: 0px;
 }
 
-        #pictures{
-            position: relative;
-            width: 250px;
-            height:auto;
-            float: left;
-        }
+		#pictures {
+			position: relative;
+			width: 450px;
+			height: auto;
+			float: left;
+		}
 
-        output#list{
-            position: relative;
-            width: inherit;
-            height:auto;
-        }
-        
-			output#list .thumb {
-			    height: 75px;
-			    border: 1px solid #000;
-			    margin: 10px 5px 0 0;
-			  }
-            .image_container{
-                position: relative;
-                height: 450px;
-                width: 450px;
-                border: 1px #006080 solid;
-                margin: 0 auto;
-                box-sizing: content-box;
-            }
-                #pictures img{
-                    position: relative;
-                    height: inherit;
-                    width: inherit;
-                }
+			#file-list {
+				position: relative;
+				width: inherit;
+				height: auto;
+			}
 
-            .small_pictures{
-                position: relative;
-                height: 20px;
-                width: 80%;
-                margin: 10px auto;
-                display: block;
-                box-sizing: content-box;
-            }
+				#file-list div {
+					position: relative;
+					width: inherit;
+					height: auto;
+				}
 
-                .small_pictures > div{
-                    position: relative;
-                    height: 20px;
-                    width: 20px;
-                    margin: 0px 5px 0px 0px;
-                    border: 1px blue solid;
-                    float: left;
-                    display: block;
-                    background: blue;
-                }
-                
-              	.small_pictures > div img{
-                    position: relative;
-                    height: inherit;
-                    width: inherit;
-                    margin:0px;
-                }
-
-#search_printer{
+					#file-list img{
+						position: relative;
+						width: 400px;
+						height: 300px;
+					}
+					.delete_img {
+						cursor: pointer;
+						color: red;
+						/*text-decoration:underline;*/
+						width: 70px;
+					}
+					.delete_img:hover {
+						color: blue;
+					}
+#printer_characteristic{
     position: relative;
     height: auto;
     width: auto;
@@ -163,7 +75,7 @@ form > p{
     margin-left:5px;
     background: #f5f5f5;
 }
-    .search_criteria{
+    .characteristic{
         border-bottom: 1px solid rgb(219, 219, 219);
         color: rgb(51, 51, 51);
         display: block;
@@ -266,11 +178,6 @@ form > p{
             margin: 0px;
             padding: 0px;
             padding-bottom: 5px;
-        }
-        
-       span{
-			width: 200px;
-			float:none;
         }
 
             .text_output{
