@@ -6,9 +6,12 @@ $(function () {
             $("tr:has(td)").remove();
             $.each(data.result, function (index, file) {
  
+            	/*var data1 = jQuery.get('http://localhost:8080/nk/controller/loadpicture/' + index);*/
+            	
                 $("#uploaded-files").append(
                         $('<tr/>')
-                        .append($('<td/>').html("<div id=\"result\" load=uploadFormData(index)></div>"))
+                        .append($('<td/>').html("<p>" + (index+1) + "</p>"))
+                        .append($('<td/>').html("<img src=\"data:image/jpeg;base64, " + file.bytes + "\"/>"))
                         .append($('<td/>').text(file.fileName))
                         .append($('<td/>').text(file.fileSize))
                         .append($('<td/>').text(file.fileType))
@@ -32,14 +35,9 @@ $(function () {
 //using FormData() object
 function uploadFormData(id){
 	var result = $(this).html('');
-    
- 
-  var oMyForm = new FormData();
-  oMyForm.append("file", file2.files[0]);
  
   $.ajax({
-    url: 'http://localhost:8080/nk/controller/loadpicture/' + id,
-    data: oMyForm,
+    url: '/nk/controller/loadpicture/' + id,
     dataType: 'text',
     processData: false,
     contentType: false,
@@ -48,4 +46,15 @@ function uploadFormData(id){
     	result.html(data);
     }
   });
+  
+  jQuery(document).on('load', '.result', function(index){
+	  $.ajax({
+		    url: '/nk/printer/upload_pictures/' + index,
+		    type: 'GET',
+		    success: function(data){
+		    	$(this).append($(data));
+		    }
+		  });
+	});
+
 }

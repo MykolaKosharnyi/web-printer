@@ -24,6 +24,7 @@
 	border-color: #ccc;
 	color: #333;
 	background-color: #fff;
+	text-align:center;
 }
 
 .tg th {
@@ -52,17 +53,17 @@
 	<c:if test="${!empty listPrinters}">
 		<table class="tg">
 			<tr>
-				<th width="80">Printer ID</th>
-				<th width="120">Printer Name</th>
-				<th width="120">Printer Prise</th>
-				<th width="60">Edit</th>
-				<th width="60">Delete</th>
+				<th width="40">ID</th>
+				<th width="120">Имя принтера</th>
+				<th width="80">Цена</th>
+				<th width="60">Редактировать</th>
+				<th width="60">Удалить</th>
 			</tr>
 			<c:forEach items="${listPrinters}" var="printer">
 				<tr>
 					<td>${printer.id}</td>
 					<td>${printer.name}</td>
-					<td>${printer.prise}</td>
+					<td>${printer.prise} $</td>
 					<td><a href="<c:url value='printer/edit/${printer.id}' />">Изменить</a></td>
 					<td><a href="<c:url value='printer/remove/${printer.id}' />">Удалить</a></td>
 				</tr>

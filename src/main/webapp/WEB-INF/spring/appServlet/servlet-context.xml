@@ -29,7 +29,7 @@
         destroy-method="close">
         <beans:property name="driverClassName" value="com.mysql.jdbc.Driver" />
         <beans:property name="url"
-            value="jdbc:mysql://localhost:3306/pmdatabase" />
+            value="jdbc:mysql://localhost:3306/pmdatabase?useUnicode=yes&amp;characterEncoding=UTF-8" />
         <beans:property name="username" value="root" />
         <beans:property name="password" value="" />
     </beans:bean>
@@ -44,14 +44,17 @@
                 <beans:value>com.printmaster.nk.model.Printer</beans:value>
                 <beans:value>com.printmaster.nk.model.User</beans:value>
                 <beans:value>com.printmaster.nk.model.OrderPrinter</beans:value>
+                <beans:value>com.printmaster.nk.model.Picture</beans:value>
             </beans:list>
         </beans:property>
         <beans:property name="hibernateProperties">
             <beans:props>
-                <beans:prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect
-                </beans:prop>
+                <beans:prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</beans:prop>
                 <beans:prop key="hibernate.show_sql">true</beans:prop>
-                <beans:prop key="hibernate.hbm2ddl.auto">update</beans:prop>
+                <beans:prop key="hibernate.connection.Charset">UTF-8</beans:prop>
+  				<beans:prop key="hibernate.connection.CharacterEncoding">UTF-8</beans:prop>
+  				<beans:prop key="hibernate.connection.Useunicode">true</beans:prop>
+  				<beans:prop key="hibernate.hbm2ddl.auto">update</beans:prop>
             </beans:props>
         </beans:property>
     </beans:bean>
@@ -69,6 +72,14 @@
     <beans:bean id="printerService" class="com.printmaster.nk.service.PrinterServiceImpl">
         <beans:property name="printerDAO" ref="printerDAO"></beans:property>
     </beans:bean>
+    
+    <beans:bean id="pictureDAO" class="com.printmaster.nk.dao.PictureDAOImpl">
+        <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+    </beans:bean>
+    <beans:bean id="pictureService" class="com.printmaster.nk.service.PictureServiceImpl">
+        <beans:property name="pictureDAO" ref="pictureDAO"></beans:property>
+    </beans:bean>
+    
     <context:component-scan base-package="com.printmaster.nk" />
      
     <tx:annotation-driven transaction-manager="transactionManager"/>

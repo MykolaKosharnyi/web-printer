@@ -34,14 +34,13 @@ function uploadJqueryForm(){
    }).submit();
 }
 
-
 </script>
 </head>
  
 <body>
 <h1>Spring MVC - jQuery File Upload</h1>
-		<c:url var="addAction" value="/controller/upload" ></c:url>
-		<form:form id="form2" method="POST"  action="${addAction}" enctype="multipart/form-data">
+		<c:url var="addAction1" value="/controller/upload" ></c:url>
+		<form:form id="form2" method="POST"  action="${addAction1}" enctype="multipart/form-data">
 	<div style="width:500px;padding:20px">
  
     <input id="fileupload" type="file" name="files[]">
@@ -54,6 +53,7 @@ function uploadJqueryForm(){
  
     <table id="uploaded-files" style="border: 1px red solid;">
         <tr>
+        	<th>Index</th>
         	<th>Picture</th>
             <th>File Name</th>
             <th>File Size</th>

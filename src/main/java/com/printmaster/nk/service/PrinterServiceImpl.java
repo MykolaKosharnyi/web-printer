@@ -19,8 +19,8 @@ public class PrinterServiceImpl implements PrinterService {
  
     @Override
     @Transactional
-    public void addPrinter(Printer p) {
-        this.printerDAO.addPrinter(p);
+    public int addPrinter(Printer p) {
+        return this.printerDAO.addPrinter(p);
     }
  
     @Override

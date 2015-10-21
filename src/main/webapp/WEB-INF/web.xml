@@ -29,12 +29,10 @@
         <servlet-name>appServlet</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
-    
- 	 <filter>
-        <filter-name>encoding-filter</filter-name>
-        <filter-class>
-            org.springframework.web.filter.CharacterEncodingFilter
-        </filter-class>
+  
+	<filter>
+        <filter-name>characterEncodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
         <init-param>
             <param-name>encoding</param-name>
             <param-value>UTF-8</param-value>
@@ -46,7 +44,13 @@
     </filter>
 
     <filter-mapping>
-        <filter-name>encoding-filter</filter-name>
+        <filter-name>characterEncodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
-    </filter-mapping>
+    </filter-mapping>  
+    
+    <context-param>
+    	<param-name>javax.servlet.jsp.jstl.fmt.request.charset</param-name>
+    	<param-value>UTF-8</param-value>
+	</context-param>
+	
 </web-app>

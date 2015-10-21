@@ -21,6 +21,9 @@ public class Printer extends Model{
 	@Column(name="name")
 	private String name;
 	
+	@Column(name="type_printer")//тип принтера
+	private String typePrinter;
+	
 	@Column(name="equipment_model")
 	private String equipmentModel;
 	
@@ -28,7 +31,7 @@ public class Printer extends Model{
 	private int prise; 
 	
 	@Column(name="previously_used")
-	private boolean previouslyUsed;
+	private String previouslyUsed;
 	
 	@Column(name="weight_print_mm")
 	private int weightPrintMM;
@@ -107,6 +110,14 @@ public class Printer extends Model{
 		super(id);
 	}
 
+	public String getTypePrinter() {
+		return typePrinter;
+	}
+
+	public void setTypePrinter(String typePrinter) {
+		this.typePrinter = typePrinter;
+	}
+
 	/**
 	 * @return the orderPrinters
 	 */
@@ -124,14 +135,14 @@ public class Printer extends Model{
 	/**
 	 * @return the previouslyUsed
 	 */
-	public boolean isPreviouslyUsed() {
+	public String getPreviouslyUsed() {
 		return previouslyUsed;
 	}
 
 	/**
 	 * @param previouslyUsed the previouslyUsed to set
 	 */
-	public void setPreviouslyUsed(boolean previouslyUsed) {
+	public void setPreviouslyUsed(String previouslyUsed) {
 		this.previouslyUsed = previouslyUsed;
 	}
 

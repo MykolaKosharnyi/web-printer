@@ -99,7 +99,7 @@ public class FileController {
 
 	  @RequestMapping(value = "/loadpicture/{value}", method = RequestMethod.GET)
 	  public String getPicture(HttpServletResponse response,@PathVariable String value){
-	        return "<img src='http://localhost:8080/nk/cont/get1/"+value+"' />";
+	        return "<img src='http://localhost:8080/nk/controller/get1/"+value+"' />";
 	  }
 	  
 	  @RequestMapping(value = "/get1/{value}", method = RequestMethod.GET)

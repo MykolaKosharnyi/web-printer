@@ -8,12 +8,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
-import com.printmaster.nk.model.Printer;
+import com.printmaster.nk.model.Picture;
 
 @Repository
-public class PrinterDAOImpl implements PrinterDAO {
+public class PictureDAOImpl implements PictureDAO {
      
-    private static final Logger logger = LoggerFactory.getLogger(PrinterDAOImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(PictureDAOImpl.class);
  
     private SessionFactory sessionFactory;
      
@@ -22,47 +22,47 @@ public class PrinterDAOImpl implements PrinterDAO {
     }
  
     @Override
-    public int addPrinter(Printer p) {
+    public int addPicture(Picture p) {
         Session session = this.sessionFactory.getCurrentSession();
        int id = (Integer) session.save(p);
-        logger.info("Printer saved successfully, Printer Details="+p);
+        logger.info("Picture saved successfully, Picture Details="+p);
         return id;
     }
  
     @Override
-    public void updatePrinter(Printer p) {
+    public void updatePicture(Picture p) {
         Session session = this.sessionFactory.getCurrentSession();
         session.update(p);
-        logger.info("Printer updated successfully, Printer Details="+p);
+        logger.info("Picture updated successfully, Picture Details="+p);
     }
  
     @SuppressWarnings("unchecked")
     @Override
-    public List<Printer> listPrinters() {
+    public List<Picture> listPictures() {
         Session session = this.sessionFactory.getCurrentSession();
-        List<Printer> printerList = session.createQuery("from Printer").list();
-        for(Printer p : printerList){
-            logger.info("Printer List::"+p);
+        List<Picture> pictureList = session.createQuery("from Picture").list();
+        for(Picture p : pictureList){
+            logger.info("Picture List::"+p);
         }
-        return printerList;
+        return pictureList;
     }
  
     @Override
-    public Printer getPrinterById(int id) {
+    public Picture getPictureById(int id) {
         Session session = this.sessionFactory.getCurrentSession();      
-        Printer p = (Printer) session.load(Printer.class, new Integer(id));
-        logger.info("Printer loaded successfully, Printer details="+p);
+        Picture p = (Picture) session.load(Picture.class, new Integer(id));
+        logger.info("Picture loaded successfully, Picture details="+p);
         return p;
     }
  
     @Override
-    public void removePrinter(int id) {
+    public void removePicture(int id) {
         Session session = this.sessionFactory.getCurrentSession();
-        Printer p = (Printer) session.load(Printer.class, new Integer(id));
+        Picture p = (Picture) session.load(Picture.class, new Integer(id));
         if(null != p){
             session.delete(p);
         }
-        logger.info("Printer deleted successfully, printer details="+p);
+        logger.info("Picture deleted successfully, picture details="+p);
     }
  
 }

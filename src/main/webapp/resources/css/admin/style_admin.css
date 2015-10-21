@@ -38,7 +38,15 @@ form > p{
 			height: auto;
 			float: left;
 		}
-
+			
+			p#drop-area{
+				border: 2px green dashed;
+				border-radius: 5px;
+				padding: 20px;
+				margin: 10px 0;
+				width: 300px;
+			}
+			
 			#file-list {
 				position: relative;
 				width: inherit;
@@ -49,6 +57,9 @@ form > p{
 					position: relative;
 					width: inherit;
 					height: auto;
+				}
+				#file-list li {
+					margin-bottom: 10px;
 				}
 
 					#file-list img{
