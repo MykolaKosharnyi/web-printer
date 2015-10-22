@@ -3,11 +3,15 @@ package com.printmaster.nk.controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
+//import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +37,10 @@ import com.printmaster.nk.service.PrinterService;
 
 @Controller
 public class PrinterController {
-     
+	
+//	@Autowired
+//	ServletContext servletContext; 
+	
     private PrinterService printerService;
     private PictureService pictureService;
     private Picture picture;
@@ -46,6 +53,11 @@ public class PrinterController {
         this.printerService = ps;
     }
     
+    @Autowired(required=true)
+    @Qualifier(value="pictureService")
+    public void setPictureService(PictureService ps){
+        this.pictureService = ps;
+    }
 	@ModelAttribute("typePrinter")
 	public Map<String, String> typePrinter(){
 		Map<String, String> m = new LinkedHashMap<String, String>();
@@ -152,29 +164,31 @@ public class PrinterController {
      
 	@RequestMapping(value = "/printer/added", method = RequestMethod.POST) 
 	public @ResponseBody ModelAndView handleFormUpload(
-			@RequestParam("files") MultipartFile[] request, @ModelAttribute Printer printer) throws IOException{
+			@RequestParam("files") MultipartFile[] request, @ModelAttribute Printer printer, HttpServletRequest request1) throws IOException{
 		
         if(printer.getId() == 0){
-        	System.out.println("not exist!");
             //new printer, add it
             int id = this.printerService.addPrinter(printer);
-            System.out.println(printer.getName());
             
-            System.out.println("Id: " + id);
-            if(new File("C:\\Users\\Николай\\Desktop\\f\\" + id).mkdir()){
-            	
+//            String phyPath = servletContext.getRealPath("/");
+//            System.out.println("phyPath: " + phyPath);
+//            new File(phyPath + File.separator + "resources/images/printers" + File.separator + id).mkdir();
+            String myPath = "C:/Users/Николай/Desktop/work/print-master/src/main/webapp/resources/images/printers";
+            if(new File(myPath + File.separator + id).mkdir()){
+            	System.out.println("Создано новую директорию!" + id);
+            } else {
+            	System.out.println("Не создано новую директорию :(");
             }
             if(request!=null){
             for(MultipartFile mf: request){
             	try {
             		picture = new Picture();
             		// copy file to local disk (make sure the path "e.g. D:/temp/files" exists)
-            		int id_picture = this.pictureService.addPicture(new Picture());
+            		int id_picture = pictureService.addPicture(picture);
             		picture.setId(id_picture);
-            		System.out.println(mf.getOriginalFilename());
             		String fileExtension = mf.getOriginalFilename().substring(mf.getOriginalFilename().lastIndexOf("."));
             		
-	                 FileCopyUtils.copy(mf.getBytes(), new FileOutputStream("C:/Users/Николай/Desktop/f/" + id 
+	                 FileCopyUtils.copy(mf.getBytes(), new FileOutputStream(myPath + File.separator + id 
 	                		 + File.separator + id_picture + "" + fileExtension));
 	                 
 	                 picture.setTableAndId("printer_" + id);
@@ -212,9 +226,17 @@ public class PrinterController {
         return "admin/printer";
     }
     
-    @RequestMapping("/product/printer/{id}")
+    @RequestMapping("/printer/{id}")
     public String showPrinter(@PathVariable("id") int id, Model model){
         model.addAttribute("printer", this.printerService.getPrinterById(id));
+        
+        ArrayList<String> pathPictures = new ArrayList<String>();
+        for(Picture p: pictureService.listPictures()){
+        	if(p.getTableAndId().equals("printer_"+id)){
+        		pathPictures.add(p.getPathPicture());
+        	}
+        }
+        model.addAttribute("pathPictures", pathPictures);
         return "product_printer";
     }
     

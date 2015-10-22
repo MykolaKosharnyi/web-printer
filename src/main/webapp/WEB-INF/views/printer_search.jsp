@@ -699,8 +699,8 @@
 
         <div id="out_result_of_search">
             <c:forEach items="${listPrinters}" var="printer">
-            	<a href="<c:url value='/product/printer/${printer.id}' />" class="printer">
-				    <div class="printer_image"><img src="<%=request.getContextPath()%>/resources/img/1.png" alt="" /></div>
+            	<a href="<c:url value='/printer/${printer.id}' />" class="printer">
+				    <div class="printer_image"><img src="<%=request.getContextPath()%>/resources/images/printers/${printer.id}/${printer.get(0)}" alt=""></div>
 				    <p class="printer_title">${printer.name}</p>
                     <p class="printer_price">${printer.prise} $</p>
                     <div class="printer_buy"><img src="<%=request.getContextPath()%>/resources/images/button_buy.jpg" alt="" /></div>

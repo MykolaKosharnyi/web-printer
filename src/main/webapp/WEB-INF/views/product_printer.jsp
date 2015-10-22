@@ -16,8 +16,8 @@
             <a id="second_row_logo" href="index.html"><img class="second_row_image" src="<%=request.getContextPath()%>/resources/images/head/Logo_Print_Master.jpg" alt=""></a>
             <a id="second_row_contact" href=""><img class="second_row_image" src="<%=request.getContextPath()%>/resources/images/head/Contact.png" alt=""></a>
             <div class="phone_numbers">
-                <p>тел.: (044) 274 22 99, </p>
-                <p>(044) 405 96 11, </p>
+                <p>тел.: (044) 274 22 99 </p>
+                <p>(044) 405 96 11 </p>
                 <p>(044) 405 96 88</p>
             </div>
             <div id="second_row_search">
@@ -307,29 +307,51 @@
 				        </div>
            </div>
         </div>
-         <div id="product">
+         <div class="product">
            <p>${printer.name}</p>
             <div id="pictures_and_descriptions">
-			<div id="pictures">
+				<div id="pictures">
 				<div class="image_container">
-					<img src="<%=request.getContextPath()%>/resources/images/head/progo1.jpg" alt="">
+					<img src="<%=request.getContextPath()%>/resources/images/printers/${printer.id}/${pathPictures.get(0)}" alt="">
 				</div>
-				<div class="small_pictures">
-					<div><img src="<%=request.getContextPath()%>/resources/images/head/progo1.jpg" alt=""></div>
-					<div><img src="<%=request.getContextPath()%>/resources/images/head/progo1.jpg" alt=""></div>
-					<div><img src="<%=request.getContextPath()%>/resources/images/head/progo1.jpg" alt=""></div>
-					<div></div>
-					<div></div>
-					<div></div>
-					<div></div>
-					<div></div>
-					<div></div>
-					<div></div>
-					<div></div>
+					<div class="small_pictures">
+						<c:forEach items="${pathPictures}" var="pathPicture">
+							<div>
+								<img src="<%=request.getContextPath()%>/resources/images/printers/${printer.id}/${pathPicture}" alt="">
+							</div>
+						</c:forEach>
+					</div>
 				</div>
-			</div>
-                <div id="descriptions">
+                <div class="descriptions">
+                	<!--  <div><p class="key">Цена:</p> <p class="value">$ ${printer.prise}</p></div>
+                	<div><p class="key">Тип принтера:</p> <p class="value">${printer.typePrinter}</p></div>
+                	<div><p class="key">Партный номер принтера:</p> <p class="value">${printer.partNumber}</p></div>
+                	<div><p class="key">Модель:</p> <p class="value">${printer.equipmentModel}</p></div>
+                	<div><p class="key">Ширина печати в миллиметрах:</p> <p class="value">${printer.weightPrintMM} mm</p></div>
+                	<div><p class="key">Предыдущее использование:</p> <p class="value">${printer.previouslyUsed}</p></div>-->
                     <table>
+                       <caption></caption> 
+                       <tr><td>Цена:</td><td>$ ${printer.prise}.</td></tr>
+                       <tr><td>Тип принтера:</td><td>${printer.typePrinter}</td></tr>
+                       <tr><td>Партный номер принтера:</td><td>${printer.partNumber}</td></tr>
+                       <tr><td>Модель:</td><td>${printer.equipmentModel}</td></tr>
+                       <tr><td>Ширина печати в миллиметрах:</td><td>${printer.weightPrintMM} mm</td></tr>
+                       <tr><td>Предыдущее использование:</td><td>${printer.previouslyUsed}</td></tr>
+                  </table>
+                </div>
+            </div>
+            <div id="tabs">
+                <ul>
+                    <li>Описание</li>
+                    <li>Технические характеристики</li>
+                    <li>Отзывы</li>
+                    <li>Используется с другими товарами</li>
+                </ul>
+                <div>
+                    <div>${printer.description}</div>
+                    <div>
+                    <div class="descriptions">
+					<table>
                        <caption></caption> 
                        <tr><td>Цена:</td><td>$ ${printer.prise}.</td></tr>
                        <tr><td>Тип принтера:</td><td>${printer.typePrinter}</td></tr>
@@ -393,39 +415,8 @@
                        <tr><td>Ширина:</td><td>${printer.width} м</td></tr>
                        <tr><td>Высота:</td><td>${printer.heigth} м</td></tr>
                        <tr><td>Глубина:</td><td>${printer.depth} м</td></tr>
-                       <tr><td>Описание:</td><td>${printer.description}</td></tr>
                   </table>
-                </div>
-            </div>
-            <div id="tabs">
-                <ul>
-                    <li>Описание</li>
-                    <li>Технические характеристики</li>
-                    <li>Отзывы</li>
-                    <li>Используется с другими товарами</li>
-                </ul>
-                <div>
-                    <div>Первое содержимое</div>
-                    <div>
-                        <table>
-                           <caption>Характеристики:</caption>
-                           <tr><td>Характеристика:</td><td>значение</td></tr>
-                           <tr><td>Характеристика:</td><td>значение</td></tr>
-                           <tr><td>Характеристика:</td><td>значение</td></tr>
-                           <tr><td>Характеристика:</td><td>значение</td></tr>
-                           <tr><td>Характеристика:</td><td>значение</td></tr>
-                           <tr><td>Характеристика:</td><td>значение</td></tr>
-                           <tr><td>Характеристика:</td><td>значение</td></tr>
-                           <tr><td>Характеристика:</td><td>значение</td></tr>
-                           <tr><td>Характеристика:</td><td>значение</td></tr>
-                           <tr><td>Характеристика:</td><td>значение</td></tr>
-                           <tr><td>Характеристика:</td><td>значение</td></tr>
-                           <tr><td>Характеристика:</td><td>значение</td></tr>
-                           <tr><td>Характеристика:</td><td>значение</td></tr>
-                           <tr><td>Характеристика:</td><td>значение</td></tr>
-                           <tr><td>Характеристика:</td><td>значение</td></tr>
-                           <tr><td>Характеристика:</td><td>значение</td></tr>
-                        </table>
+                  </div>
                     </div>
                     <div>Третье содержимое</div>
                     <div>Четвертое содержимое</div>
@@ -479,5 +470,17 @@ $(document).ready(function(){
     $("#tabs").lightTabs();
 });
     </script>
+	<script>
+		$('.small_pictures div').on('click', function(e) {
+
+			var currImg = $(this).find('img').attr('src');
+			$('.image_container img').attr('src', currImg);
+
+		});
+		$(".small_pictures div").hover(function() {
+			var currImg = $(this).find('img').attr('src');
+			$('.image_container img').attr('src', currImg);
+		});
+	</script>
 </body>
 </html>

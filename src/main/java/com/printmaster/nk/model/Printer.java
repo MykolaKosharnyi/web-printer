@@ -1,11 +1,15 @@
 package com.printmaster.nk.model;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -101,6 +105,10 @@ public class Printer extends Model{
 	
 	@OneToMany(mappedBy="printer")
 	private Set<OrderPrinter> orderPrinters = new HashSet<OrderPrinter>();
+	
+	@ElementCollection
+	@Column(name="path_pictures")
+	private List<String> pathPictures = new ArrayList<String>();
 
 	public Printer() {
 		super();
@@ -108,6 +116,14 @@ public class Printer extends Model{
 
 	public Printer(int id) {
 		super(id);
+	}
+
+	public List<String> getPathPictures() {
+		return pathPictures;
+	}
+
+	public void setPathPictures(List<String> pathPictures) {
+		this.pathPictures = pathPictures;
 	}
 
 	public String getTypePrinter() {

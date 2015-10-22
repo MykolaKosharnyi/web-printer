@@ -11,10 +11,10 @@ public class Picture extends Model{
 	private static final long serialVersionUID = -7914406547800809890L;
 	
 	@Column(name="table_and_id")
-	private String tableAndId = "";
+	private String tableAndId;
 	
 	@Column(name="path_picture")
-	private String pathPicture = "";
+	private String pathPicture;
 
 	public Picture() {
 		super();
