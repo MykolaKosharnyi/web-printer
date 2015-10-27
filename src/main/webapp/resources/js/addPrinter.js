@@ -4,6 +4,9 @@
               range: "min",
               min: 1,
               max: 100000,
+              create: function () {
+            	    $(this).slider( "option", "value", $(this).closest('.check_boxes').find('.text_output').find('.amount-prise').val() );
+            	},
               slide: function( event, ui ) {
                 $( ".amount-prise" ).val(ui.value);
               }
@@ -12,8 +15,8 @@
             $( ".amount-prise" ).val( $( ".slider-range-prise" ).slider("value"));             
                 
             $( ".amount-prise" ).change(function() {
-            $(".slider-range-prise").slider('value',this.value);
-                });
+            	$(".slider-range-prise").slider('value',this.value);
+            });
 
           });
 /*---- диапазон для скорости печати----*/ 
@@ -22,7 +25,9 @@
               range: "min",
               min: 1,
               max: 300,
-              value: 150,
+              create: function () {
+          	    $(this).slider( "option", "value", $(this).closest('.check_boxes').find('.text_output').find('.amount-speed-print').val() );
+          	},
               slide: function( event, ui ) {
                 $( ".amount-speed-print" ).val( ui.value);
               }
@@ -42,7 +47,9 @@
               range: "min",
               min: 1,
               max: 500,
-              value: 300,
+              create: function () {
+            	    $(this).slider( "option", "value", $(this).closest('.check_boxes').find('.text_output').find('.amount-maximum_media_thickness').val() );
+            	},
               slide: function( event, ui ) {
                 $( ".amount-maximum_media_thickness" ).val( ui.value);
               }
@@ -62,7 +69,9 @@
               range: "min",
               min: 5,
               max: 500,
-              value: 300,
+              create: function () {
+          	    $(this).slider( "option", "value", $(this).closest('.check_boxes').find('.text_output').find('.amount-maximum_weight_of_vehicle').val() );
+          	},
               slide: function( event, ui ) {
                 $( ".amount-maximum_weight_of_vehicle" ).val( ui.value);
               }
@@ -81,7 +90,9 @@
               range: "min",
               min: 1,
               max: 100,
-              value: 50,
+              create: function () {
+            	    $(this).slider( "option", "value", $(this).closest('.check_boxes').find('.text_output').find('.amount-max_power_consumption').val() );
+            	},
               slide: function( event, ui ) {
                 $( ".amount-max_power_consumption" ).val( ui.value);
               }
@@ -100,7 +111,9 @@
               range: "min",
               min: 50,
               max: 5000,
-              value: 4000,
+              create: function () {
+          	    $(this).slider( "option", "value", $(this).closest('.check_boxes').find('.text_output').find('.amount-weight').val() );
+          	},
               slide: function( event, ui ) {
                 $( ".amount-weight" ).val( ui.value);
               }
@@ -119,7 +132,9 @@
               range: "min",
               min: 1,
               max: 10,
-              value: 7,
+              create: function () {
+            	    $(this).slider( "option", "value", $(this).closest('.check_boxes').find('.text_output').find('.amount-width').val() );
+            	},
               slide: function( event, ui ) {
                 $( ".amount-width" ).val( ui.value);
               }
@@ -138,7 +153,9 @@
               range: "min",
               min: 1,
               max: 10,
-              value: 7,
+              create: function () {
+          	    $(this).slider( "option", "value", $(this).closest('.check_boxes').find('.text_output').find('.amount-heigth').val() );
+          	},
               slide: function( event, ui ) {
                 $( ".amount-heigth" ).val( ui.value);
               }
@@ -157,7 +174,9 @@
               range: "min",
               min: 1,
               max: 10,
-              value: 7,
+              create: function () {
+            	    $(this).slider( "option", "value", $(this).closest('.check_boxes').find('.text_output').find('.amount-depth').val() );
+            	},
               slide: function( event, ui ) {
                 $( ".amount-depth" ).val( ui.value);
               }

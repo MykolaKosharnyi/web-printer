@@ -106,7 +106,7 @@ public class Printer extends Model{
 	@OneToMany(mappedBy="printer")
 	private Set<OrderPrinter> orderPrinters = new HashSet<OrderPrinter>();
 	
-	@ElementCollection
+	@ElementCollection(fetch = FetchType.EAGER)
 	@Column(name="path_pictures")
 	private List<String> pathPictures = new ArrayList<String>();
 

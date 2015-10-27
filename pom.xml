@@ -179,6 +179,13 @@
 			<artifactId>jackson-core-asl</artifactId>
 			<version>1.9.12</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-extras</artifactId>
+			<version>3.0.5</version>
+		</dependency>
+
     </dependencies>
     <build>
         <plugins>

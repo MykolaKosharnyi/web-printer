@@ -3,11 +3,9 @@ package com.printmaster.nk.controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 
 //import javax.servlet.ServletContext;
@@ -30,9 +28,8 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.printmaster.nk.model.FileMeta;
-import com.printmaster.nk.model.Picture;
 import com.printmaster.nk.model.Printer;
-import com.printmaster.nk.service.PictureService;
+import com.printmaster.nk.model.SearchPrinters;
 import com.printmaster.nk.service.PrinterService;
 
 @Controller
@@ -42,8 +39,7 @@ public class PrinterController {
 //	ServletContext servletContext; 
 	
     private PrinterService printerService;
-    private PictureService pictureService;
-    private Picture picture;
+
     LinkedList<FileMeta> files = new LinkedList<FileMeta>();
     FileMeta fileMeta = null;
     
@@ -53,11 +49,6 @@ public class PrinterController {
         this.printerService = ps;
     }
     
-    @Autowired(required=true)
-    @Qualifier(value="pictureService")
-    public void setPictureService(PictureService ps){
-        this.pictureService = ps;
-    }
 	@ModelAttribute("typePrinter")
 	public Map<String, String> typePrinter(){
 		Map<String, String> m = new LinkedHashMap<String, String>();
@@ -152,11 +143,135 @@ public class PrinterController {
 		return m;
 	}
 	
+	@ModelAttribute("compatibleInk")
+	public Map<String, String> compatibleInk(){
+		Map<String, String> m = new LinkedHashMap<String, String>();
+		m.put("Водные", "Водные");
+		m.put("Пигментные", "Пигментные");
+		m.put("Сублимационные", "Сублимационные");
+		m.put("Экосольвентные", "Экосольвентные");
+		m.put("Сольвентные", "Сольвентные");
+		m.put("UV-чернила", "UV-чернила");
+		return m;
+	}
+	
+	@ModelAttribute("typeDrops")
+	public Map<String, String> typeDrops(){
+		Map<String, String> m = new LinkedHashMap<String, String>();
+		m.put("Постоянная", "Постоянная");
+		m.put("Переменная", "Переменная");
+		return m;
+	}
+	
+	@ModelAttribute("printResolution")
+	public Map<String, String> printResolution(){
+		Map<String, String> m = new LinkedHashMap<String, String>();
+		m.put("360dpi", "360dpi");
+		m.put("600dpi", "600dpi");
+		m.put("720dpi", "720dpi");
+		m.put("1200dpi", "1200dpi");
+		m.put("1440dpi", "1440dpi");
+		m.put("2880dpi", "2880dpi");
+		return m;
+	}
+	
+	@ModelAttribute("equipmentManufacturer")
+	public Map<String, String> equipmentManufacturer(){
+		Map<String, String> m = new LinkedHashMap<String, String>();
+		m.put("Mimaki", "Mimaki");
+		m.put("Roland", "Roland");
+		m.put("HP", "HP");
+		m.put("OCE", "OCE");
+		m.put("Agfa", "Agfa");
+		m.put("LIYU", "LIYU");
+		m.put("Infinity", "Infinity");
+		m.put("Gonzeng", "Gonzeng");
+		m.put("Jong Ye", "Jong Ye");
+		return m;
+	}
+	
+	@ModelAttribute("interfaceConnection")
+	public Map<String, String> interfaceConnection(){
+		Map<String, String> m = new LinkedHashMap<String, String>();
+		m.put("SCSI", "SCSI");
+		m.put("PCI Adapter", "PCI Adapter");
+		m.put("USB", "USB");
+		m.put("Fire-Wire", "Fire-Wire");
+		return m;
+	}
+	
+	@ModelAttribute("rip")
+	public Map<String, String> rip(){
+		Map<String, String> m = new LinkedHashMap<String, String>();
+		m.put("ONYX Graphics", "ONYX Graphics");
+		m.put("SA International/PhotoPRINT™ Family", "SA International/PhotoPRINT™ Family");
+		m.put("Wasatch SOFTRIP", "Wasatch SOFTRIP");
+		m.put("ColorGATE Productionserver", "ColorGATE Productionserver");
+		m.put("Poster Print", "Poster Print");
+		return m;
+	}
+	
+	@ModelAttribute("typeOfPrinthead")
+	public Map<String, String> typeOfPrinthead(){
+		Map<String, String> m = new LinkedHashMap<String, String>();
+		m.put("Nova 256", "Nova 256");
+		m.put("Galaxy 256", "Galaxy 256");
+		m.put("Polyaris 512", "Polyaris 512");
+		m.put("126/50", "126/50");
+		m.put("126/80", "126/80");
+		m.put("128/40", "128/40");
+		m.put("128/80", "128/80");
+		m.put("255", "255");
+		m.put("256", "256");
+		m.put("500", "500");
+		m.put("510", "510");
+		m.put("512", "512");
+		m.put("512KN", "512KN");
+		m.put("1020", "1020");
+		m.put("1024", "1024");
+		m.put("1024I", "1024I");
+		m.put("CA3", "CA3");
+		m.put("CA4", "CA4");
+		m.put("Gen4", "Gen4");
+		m.put("Gen5", "Gen5");
+		m.put("DX2", "DX2");
+		m.put("DX4", "DX4");
+		m.put("DX5", "DX5");
+		m.put("DX6", "DX6");
+		m.put("DX7", "DX7");
+		return m;
+	}
+	
+	@RequestMapping(value = "/printers/search", method = RequestMethod.GET)	
+    public String searchPrinters(Model model) {
+        model.addAttribute("listPrinters", this.printerService.listPrinters());
+        SearchPrinters sp = new SearchPrinters();
+        sp.setPrise1(50000);
+        model.addAttribute("searchPrintersCriteria", sp);
+        return "printers";
+    }
+	
+	@RequestMapping(value = "/printers/searching", method = RequestMethod.POST)	
+    public String searchingPrinters(Model model, @ModelAttribute("searchPrintersCriteria") SearchPrinters searchPrintersCriteria) {
+		System.out.println(searchPrintersCriteria.toString());
+        model.addAttribute("listPrinters", this.printerService.listSearchPrinters(searchPrintersCriteria));
+        model.addAttribute("searchPrintersCriteria", searchPrintersCriteria);
+        
+        return "printers";
+    }
+	
+    @RequestMapping("/printer/{id}")
+    public String showPrinter(@PathVariable("id") int id, Model model){
+        model.addAttribute("printer", this.printerService.getPrinterById(id));
+        return "printer";
+    }
+    
 	@RequestMapping(value = "/printers", method = RequestMethod.GET)	
     public String listPrinters(Model model) {
         model.addAttribute("listPrinters", this.printerService.listPrinters());
         return "admin/printers";
     }
+	
 	@RequestMapping(value = "/printer/new", method = RequestMethod.GET)
 	public ModelAndView addNewPrinter() {
 	    return new ModelAndView("admin/printer", "printer", new Printer());
@@ -170,6 +285,7 @@ public class PrinterController {
             //new printer, add it
             int id = this.printerService.addPrinter(printer);
             
+            int id_picture = 0;
 //            String phyPath = servletContext.getRealPath("/");
 //            System.out.println("phyPath: " + phyPath);
 //            new File(phyPath + File.separator + "resources/images/printers" + File.separator + id).mkdir();
@@ -182,23 +298,20 @@ public class PrinterController {
             if(request!=null){
             for(MultipartFile mf: request){
             	try {
-            		picture = new Picture();
             		// copy file to local disk (make sure the path "e.g. D:/temp/files" exists)
-            		int id_picture = pictureService.addPicture(picture);
-            		picture.setId(id_picture);
             		String fileExtension = mf.getOriginalFilename().substring(mf.getOriginalFilename().lastIndexOf("."));
             		
+            		String fileName = (++id_picture) + "" + fileExtension;
+            		
 	                 FileCopyUtils.copy(mf.getBytes(), new FileOutputStream(myPath + File.separator + id 
-	                		 + File.separator + id_picture + "" + fileExtension));
-	                 
-	                 picture.setTableAndId("printer_" + id);
-	                 picture.setPathPicture(id_picture + "" + fileExtension);
-	                 this.pictureService.updatePicture(picture);
+	                		 + File.separator + fileName));
+	                 printer.getPathPictures().add(fileName);
             	} catch (IOException e) {
 	                e.printStackTrace();
 	            }
             }
            }
+            this.printerService.updatePrinter(printer);
             files = new LinkedList<FileMeta>();
         }else{
         	System.out.println("update!!!!!");
@@ -226,21 +339,7 @@ public class PrinterController {
         return "admin/printer";
     }
     
-    @RequestMapping("/printer/{id}")
-    public String showPrinter(@PathVariable("id") int id, Model model){
-        model.addAttribute("printer", this.printerService.getPrinterById(id));
-        
-        ArrayList<String> pathPictures = new ArrayList<String>();
-        for(Picture p: pictureService.listPictures()){
-        	if(p.getTableAndId().equals("printer_"+id)){
-        		pathPictures.add(p.getPathPicture());
-        	}
-        }
-        model.addAttribute("pathPictures", pathPictures);
-        return "product_printer";
-    }
-    
-	 @RequestMapping(value="printer/upload_pictures", method = RequestMethod.POST)
+    @RequestMapping(value="printer/upload_pictures", method = RequestMethod.POST)
 	    public @ResponseBody void upload(MultipartHttpServletRequest request, HttpServletResponse response) {
 	 
 	        //1. build an iterator
@@ -270,9 +369,9 @@ public class PrinterController {
 	             files.add(fileMeta);
 	         }  
 	    }
-		@RequestMapping(value = "/printers/search", method = RequestMethod.GET)	
-	    public String searchPrinters(Model model) {
-	        model.addAttribute("listPrinters", this.printerService.listPrinters());
-	        return "printer_search";
-	    }
+    @RequestMapping("/test")
+    public String test(Model model){
+    	model.addAttribute("searchPrintersCriteria", new SearchPrinters());
+        return "test";
+    }
 }

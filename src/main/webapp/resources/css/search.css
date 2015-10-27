@@ -1,0 +1,412 @@
+*{
+    box-sizing:border-box;
+}
+
+body { 
+    width: 100%;
+    font: 1em/1.4em sans-serif;
+    padding: 0;
+    margin: 0;
+}
+
+a{
+    text-decoration: none;
+}
+
+ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+/*---- Button change display on search block ----*/
+#display_search{
+    position: relative;
+    width: auto;
+    background: #f5f5f5;
+}
+    #display_search p{
+        display:block;
+        position: relative;
+        width: auto;
+        height: auto;
+        padding: 5px 0px;
+        margin: 0;
+        font-weight: bold;
+        color: black;
+    }
+
+    #display_search i.opened{
+        background-clip: border-box;
+        background-color: inherit;
+        background-image: none;
+        background-origin: padding-box;
+        background-size: auto;
+        border: 5px black solid; 
+        border-bottom-width: 0px;
+        border-left-color: rgba(0, 0, 0, 0);
+        border-right-color: rgba(0, 0, 0, 0);
+        color: black;
+        cursor: pointer;
+        display: block;
+        font-family: Arial;
+        font: 12px italic;
+        font-weight: bold;
+        height: 0px;
+        left: 0px;
+        line-height: 16px;
+        margin: 3px 10px 0px 0px;
+        position: relative;
+        float: left;
+        top: 8px;
+        width: 0px;
+        z-index: 1;
+    }
+
+    #display_search i{
+        background-clip: border-box;
+        background-color: inherit;
+        background-image: none;
+        background-origin: padding-box;
+        background-size: auto;
+        border: 5px black solid; 
+        border-right-width: 0px;
+        border-top-color: rgba(0, 0, 0, 0);
+        border-bottom-color: rgba(0, 0, 0, 0);
+        color: black;
+        cursor: pointer;
+        display: block;
+        font-family: Arial;
+        font: 12px italic;
+        font-weight: bold;
+        height: 0px;
+        left: 0px;
+        line-height: 16px;
+        margin: 3px 10px 0px 0px;
+        position: relative;
+        float: left;
+        top: 6px;
+        width: 0px;
+        z-index: 1;
+    }
+
+/* ------ product page ------ */
+#search_printer{
+    position: relative;
+    height: auto;
+    width: auto;
+    float: left;
+    padding-left: 10px;
+    padding-right: 10px;
+    background: #f5f5f5;
+}
+    .search_criteria{
+        border-bottom: 1px solid rgb(219, 219, 219);
+        color: rgb(51, 51, 51);
+        display: block;
+        font: 12px Arial;
+        height: auto;
+        line-height: 16px;
+        padding: 0px 0px 3px 0px;
+        width: 180px;
+    }
+
+        .block_title{
+            color: rgb(51, 51, 51);
+            cursor: pointer;
+            display: block;
+            font: 12px Arial;
+            font-weight: bold;
+            height: auto;
+            line-height: auto;
+            margin: 5px 0px 5px 0px;
+            position: relative;
+            width: inherit;
+            z-index: 1;
+        }
+
+            .block_title i.opened{ /* Opened state of point. */
+                background-clip: border-box;
+                background-color: inherit;
+                background-image: none;
+                background-origin: padding-box;
+                background-size: auto;
+                border: 4px rgb(144, 144, 144) solid; 
+                border-bottom-width: 0px;
+                border-left-color: rgba(0, 0, 0, 0);
+                border-right-color: rgba(0, 0, 0, 0);
+                color: rgb(51, 51, 51);
+                cursor: pointer;
+                display: block;
+                font-family: Arial;
+                font: 12px italic;
+                font-weight: bold;
+                height: 0px;
+                left: 0px;
+                line-height: 16px;
+                margin: 3px 10px 0px 0px;
+                position: absolute;
+                top: 3px;
+                width: 0px;
+                z-index: 1;
+            }
+            
+             .block_title i{/* Normal state of point - closed */
+                background-clip: border-box;
+                background-color: inherit;
+                background-image: none;
+                background-origin: padding-box;
+                background-size: auto;
+                border: 4px rgb(144, 144, 144) solid; 
+                border-right-width: 0px;
+                border-top-color: rgba(0, 0, 0, 0);
+                border-bottom-color: rgba(0, 0, 0, 0);
+                color: rgb(51, 51, 51);
+                cursor: pointer;
+                display: block;
+                font: 12px Arial;
+                font-weight: bold;
+                height: 0px;
+                left: 0px;
+                line-height: 16px;
+                margin: 3px 10px 0px 0px;
+                position: absolute;
+                top:0px;
+                width: 0px;
+                z-index: 1;
+            }
+
+             .block_title p{
+                color: black;
+                cursor: pointer;
+                display: block;
+                font: 12px Arial;
+                font-weight: bold;
+                height: auto;
+                left: 10px;
+                line-height: 16px;
+                margin: 0px 10px 0px 0px;
+                position: relative;
+                top:0px;
+                z-index: 1;
+            }
+
+        .check_boxes{
+            color: rgb(51, 51, 51);
+            display: none;
+            font: 12px Arial;
+            height: auto;
+            line-height: 16px;
+            list-style-image: none;
+            list-style-position: outside;
+            list-style-type: none;
+            margin: 0px;
+            padding: 0px;
+            padding-bottom: 5px;
+        }
+
+            .text_output{
+                width: inherit;
+                height: 20px;
+            }
+
+            .text_output p{
+                float: left;
+                width: auto;
+                float: left;
+                padding: 0;
+                margin: 0;
+                border:0;
+                color:#006080;
+                background: inherit;
+                font-weight:bold;
+            }
+
+            .text_output input{  
+                float: left;
+                border:0;
+                color:#006080;
+                background: inherit; 
+                font-weight:bold;
+            }
+
+            input{
+                padding: 0;
+                margin: 0;
+            }
+
+            .amount-prise0,
+            .amount-prise1{
+                width: 42px;
+            }
+
+            .amount-speed-print0,
+            .amount-speed-print1{
+                width: 21px;
+            }
+
+            .amount-maximum_media_thickness60_0,
+            .amount-maximum_media_thickness60_1{
+                width: 15px;
+            }
+
+            .amount-maximum_media_thickness500_0,
+            .amount-maximum_media_thickness500_1{
+                width: 21px;
+            }
+
+            .amount-maximum_weight_of_vehicle0,
+            .amount-maximum_weight_of_vehicle1{
+                width: 21px;
+            }
+
+            .amount-max_power_consumption0,
+            .amount-max_power_consumption1{
+                width: 25px;
+            }
+
+            .amount-weight0,
+            .amount-weight1{
+                width: 30px;
+            }
+
+            .amount-width0,
+            .amount-width1{
+                width:23px;
+            }
+
+            .amount-heigth0,
+            .amount-heigth1{
+                width: 25px;
+            }
+
+            .amount-depth0,
+            .amount-depth1{
+                width: 25px;
+            }
+
+            .slider{
+                margin-top: 0px;
+            }
+
+        .search_criteria fieldset{
+            position: relative;
+            margin: 0;
+            padding-top: 5px;
+            padding-left: 5px;
+            border: 1px #006080 solid;
+        }
+    #tabs{
+        position: relative;
+        width: 100%;
+        height: auto;
+        display:inline-block;
+    }
+        #tabs > div{
+            padding-top:10px;
+            max-width: 300px;
+        }
+
+        #tabs ul{
+            margin:0px;
+            padding:0px;
+        }
+        #tabs ul:after{
+            content:"";
+            display:block;
+            clear:both;
+            height:3px;
+            background:#006080;
+        }
+        #tabs ul li{
+            margin:0px;
+            padding:0px;
+            cursor:pointer;
+            display:block;
+            float:left;
+            padding:5px 5px;
+            background:#e9eaeb;
+            color:#707070;
+        }
+        #tabs ul li.active, #tabs ul li.active:hover{
+            background:#006080;
+            color:#fff;
+        }
+        #tabs ul li:hover{
+            background:#d6d6d7;
+        }
+        
+/*      RESULT          */
+#out_result_of_search{
+    position: relative;
+    height: auto;
+    width: 84%;
+    float: left;
+    margin-left: 5px;
+    background: #f5f5f5;
+    /*border: 2px green solid;*/
+}
+
+	.product{
+		position: relative;
+		width: 32%;
+		height: auto;
+		border: 2px blue solid;
+		float: left;
+		margin: 7px;
+		border-radius: 5px;
+		display:block;
+	}
+		.product_image{
+			position: relative;
+			top: 0px;
+			height:300px;
+			width: 100%;
+			float: left;
+			border-bottom: 1px blue solid;
+		}
+		
+			.product_image img{
+				position: relative;
+				height:inherit;
+				width: inherit;
+				float: left;
+			}
+		
+		.product_title, .product_price{
+			position: relative;
+			height: 50px;
+			width: auto;
+			max-width: 140px;
+			float: left;
+			margin:0;
+			padding: 10px;
+			font-weight: bold;
+			text-align: center;
+			/*border: 1px red solid;*/
+			color: black;
+		}
+		.product_price{
+			width: 80px;
+			color: blue;
+		}
+		
+			.product_buy{
+				position: relative;
+				height:auto;
+				width: auto;
+				float: right;
+				padding: 0;
+				margin: 5px;
+				back-ground: inherit;
+				transition: 1s;
+			}
+			
+			.product_buy:hover{
+				transform: scale(1.1);
+			}
+		
+				.product_buy img{
+					position: relative;
+					height:50px;
+					width: 50px;
+				}

@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.printmaster.nk.dao.PrinterDAO;
 import com.printmaster.nk.model.Printer;
+import com.printmaster.nk.model.SearchPrinters;
 
 @Service
 public class PrinterServiceImpl implements PrinterService {
@@ -46,5 +47,11 @@ public class PrinterServiceImpl implements PrinterService {
     public void removePrinter(int id) {
         this.printerDAO.removePrinter(id);
     }
+
+	@Override
+	@Transactional
+	public List<Printer> listSearchPrinters(SearchPrinters searchPrinters) {
+		return this.printerDAO.listSearchPrinters(searchPrinters);
+	}
  
 }

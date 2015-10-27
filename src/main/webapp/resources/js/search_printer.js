@@ -4,7 +4,6 @@
               range: true,
               min: 0,
               max: 100000,
-              values: [ 0, 100000 ],
               slide: function( event, ui ) {
                 $( ".amount-prise0" ).val(ui.values[ 0 ]);
                 $( ".amount-prise1" ).val(ui.values[ 1 ]);
@@ -28,7 +27,6 @@
               range: true,
               min: 1,
               max: 300,
-              values: [ 50, 150 ],
               slide: function( event, ui ) {
                 $( ".amount-speed-print0" ).val( ui.values[ 0 ]);
                 $( ".amount-speed-print1" ).val( ui.values[ 1 ]);
@@ -54,7 +52,6 @@
               range: true,
               min: 1,
               max: 60,
-              values: [ 1, 60 ],
               slide: function( event, ui ) {
                 $( ".amount-maximum_media_thickness60_0" ).val( ui.values[ 0 ] );
                 $( ".amount-maximum_media_thickness60_1" ).val( ui.values[ 1 ] );
@@ -78,7 +75,6 @@
               range: true,
               min: 60,
               max: 500,
-              values: [ 60, 500 ],
               slide: function( event, ui ) {
                 $( ".amount-maximum_media_thickness500_0" ).val( ui.values[ 0 ] );
                 $( ".amount-maximum_media_thickness500_1" ).val( ui.values[ 1 ] );
@@ -102,7 +98,6 @@
               range: true,
               min: 5,
               max: 500,
-              values: [ 150, 300 ],
               slide: function( event, ui ) {
                 $( ".amount-maximum_weight_of_vehicle0" ).val( ui.values[ 0 ] );
                 $( ".amount-maximum_weight_of_vehicle1" ).val( ui.values[ 1 ] );
@@ -127,7 +122,6 @@
               range: true,
               min: 0.1,
               max: 100.1,
-              values: [ 20, 50 ],
               slide: function( event, ui ) {
                 $( ".amount-max_power_consumption0" ).val( ui.values[ 0 ] );
                 $( ".amount-max_power_consumption1" ).val( ui.values[ 1 ] );
@@ -152,7 +146,6 @@
               range: true,
               min: 50,
               max: 5000,
-              values: [ 1000, 4000 ],
               slide: function( event, ui ) {
                 $( ".amount-weight0" ).val( ui.values[ 0 ] );
                 $( ".amount-weight1" ).val( ui.values[ 1 ] );
@@ -177,7 +170,6 @@
               range: true,
               min: 0.1,
               max: 10.1,
-              values: [ 3, 7 ],
               slide: function( event, ui ) {
                 $( ".amount-width0" ).val( ui.values[ 0 ] );
                 $( ".amount-width1" ).val( ui.values[ 1 ] );
@@ -202,7 +194,6 @@
               range: true,
               min: 0.1,
               max: 10.1,
-              values: [ 3, 7 ],
               slide: function( event, ui ) {
                 $( ".amount-heigth0" ).val( ui.values[ 0 ] );
                 $( ".amount-heigth1" ).val( ui.values[ 1 ] );
@@ -227,7 +218,6 @@
               range: true,
               min: 0.1,
               max: 10.1,
-              values: [ 3, 7 ],
               slide: function( event, ui ) {
                 $( ".amount-depth0" ).val( ui.values[ 0 ] );
                 $( ".amount-depth1" ).val( ui.values[ 1 ] );

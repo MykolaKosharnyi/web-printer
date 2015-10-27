@@ -19,8 +19,7 @@
  
     <!-- Resolves views selected for rendering by @Controllers to .jsp resources 
         in the /WEB-INF/views directory -->
-    <beans:bean
-        class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <beans:property name="prefix" value="/WEB-INF/views/" />
         <beans:property name="suffix" value=".jsp" />
     </beans:bean>
@@ -87,8 +86,18 @@
     <beans:bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
     </beans:bean>
- 
+ 	
+ 	<beans:bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+ 		<beans:property name="definitions" value="/WEB-INF/tiles.xml" />
+    </beans:bean>
+    
+    <beans:bean id="tilesViewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+    	<beans:property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView" />
+    	<beans:property name="order" value="0" />
+	</beans:bean>
+    
   	 <beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 	 	 <beans:property name="maxUploadSize" value="500000000" />
 	</beans:bean>
+	
 </beans:beans>
