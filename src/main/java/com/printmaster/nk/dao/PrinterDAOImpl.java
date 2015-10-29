@@ -1,6 +1,8 @@
 package com.printmaster.nk.dao;
 
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -69,8 +71,10 @@ public class PrinterDAOImpl implements PrinterDAO {
         logger.info("Printer deleted successfully, printer details="+p);
     }
 
+//	@SuppressWarnings("unchecked")
+	@SuppressWarnings("unchecked")
 	@Override
-	public List<Printer> listSearchPrinters(SearchPrinters searchPrinters) {
+	public Set<Printer> listSearchPrinters(SearchPrinters searchPrinters) {
 		Session session = this.sessionFactory.getCurrentSession();
 		Criteria cr = session.createCriteria(Printer.class);
 		
@@ -80,24 +84,24 @@ public class PrinterDAOImpl implements PrinterDAO {
 		
 		if(searchPrinters.getTypePrinter()!= null){
 		Junction typePrinterGroup = Restrictions.disjunction();
-		for(String typePrinter : searchPrinters.getTypePrinter()){
-			typePrinterGroup.add(Restrictions.idEq(typePrinter));
+		for(String tp : searchPrinters.getTypePrinter()){
+			typePrinterGroup.add(Restrictions.eq("typePrinter",tp));
 		}
 		cr.add(typePrinterGroup);
 		}
 		
 		if(searchPrinters.getWeightPrintMM()!= null){
 		Junction weightPrintMMGroup = Restrictions.disjunction();
-		for(String weightPrintMM : searchPrinters.getWeightPrintMM()){
-			weightPrintMMGroup.add(Restrictions.idEq(weightPrintMM));
+		for(String wp : searchPrinters.getWeightPrintMM()){
+			weightPrintMMGroup.add(Restrictions.eq("weightPrintMM",Integer.parseInt(wp)));
 		}
 		cr.add(weightPrintMMGroup);
 		}
 		
 		if(searchPrinters.getPreviouslyUsed()!= null){
 		Junction previouslyUsedGroup = Restrictions.disjunction();
-		for(String previouslyUsed : searchPrinters.getPreviouslyUsed()){
-			previouslyUsedGroup.add(Restrictions.idEq(previouslyUsed));
+		for(String pu : searchPrinters.getPreviouslyUsed()){
+			previouslyUsedGroup.add(Restrictions.eq("previouslyUsed",pu));
 		}
 		cr.add(previouslyUsedGroup);
 		}
@@ -105,7 +109,7 @@ public class PrinterDAOImpl implements PrinterDAO {
 		if(searchPrinters.getTypePrint()!= null){
 		Junction typePrintGroup = Restrictions.disjunction();
 		for(String typePrint : searchPrinters.getTypePrint()){
-			typePrintGroup.add(Restrictions.idEq(typePrint));
+			typePrintGroup.add(Restrictions.eq("typePrint",typePrint));
 		}
 		cr.add(typePrintGroup);
 		}
@@ -113,7 +117,7 @@ public class PrinterDAOImpl implements PrinterDAO {
 		if(searchPrinters.getFeed()!= null){
 		Junction feedGroup = Restrictions.disjunction();
 		for(String feed : searchPrinters.getFeed()){
-			feedGroup.add(Restrictions.idEq(feed));
+			feedGroup.add(Restrictions.eq("feed",feed));
 		}
 		cr.add(feedGroup);
 		}
@@ -121,7 +125,7 @@ public class PrinterDAOImpl implements PrinterDAO {
 		if(searchPrinters.getChromaticity()!= null){
 		Junction chromaticityGroup = Restrictions.disjunction();
 		for(String chromaticity : searchPrinters.getChromaticity()){
-			chromaticityGroup.add(Restrictions.idEq(chromaticity));
+			chromaticityGroup.add(Restrictions.eq("chromaticity",chromaticity));
 		}
 		cr.add(chromaticityGroup);
 		}
@@ -129,7 +133,7 @@ public class PrinterDAOImpl implements PrinterDAO {
 		if(searchPrinters.getManufacturerPrinthead()!= null){
 		Junction manufacturerPrintheadGroup = Restrictions.disjunction();
 		for(String manufacturerPrinthead : searchPrinters.getManufacturerPrinthead()){
-			manufacturerPrintheadGroup.add(Restrictions.idEq(manufacturerPrinthead));
+			manufacturerPrintheadGroup.add(Restrictions.eq("manufacturerPrinthead",manufacturerPrinthead));
 		}
 		cr.add(manufacturerPrintheadGroup);
 		}
@@ -137,7 +141,7 @@ public class PrinterDAOImpl implements PrinterDAO {
 		if(searchPrinters.getTypeOfPrinthead()!= null){
 		Junction typeOfPrintheadGroup = Restrictions.disjunction();
 		for(String typeOfPrinthead : searchPrinters.getTypeOfPrinthead()){
-			typeOfPrintheadGroup.add(Restrictions.idEq(typeOfPrinthead));
+			typeOfPrintheadGroup.add(Restrictions.eq("typeOfPrinthead",typeOfPrinthead));
 		}
 		cr.add(typeOfPrintheadGroup);
 		}
@@ -145,7 +149,7 @@ public class PrinterDAOImpl implements PrinterDAO {
 		if(searchPrinters.getCompatibleInk()!= null){
 		Junction compatibleInkGroup = Restrictions.disjunction();
 		for(String compatibleInk : searchPrinters.getCompatibleInk()){
-			compatibleInkGroup.add(Restrictions.idEq(compatibleInk));
+			compatibleInkGroup.add(Restrictions.eq("compatibleInk",compatibleInk));
 		}
 		cr.add(compatibleInkGroup);
 		}
@@ -153,7 +157,7 @@ public class PrinterDAOImpl implements PrinterDAO {
 		if(searchPrinters.getTypeDrops()!= null){
 		Junction typeDropsGroup = Restrictions.disjunction();
 		for(String typeDrops : searchPrinters.getTypeDrops()){
-			typeDropsGroup.add(Restrictions.idEq(typeDrops));
+			typeDropsGroup.add(Restrictions.eq("typeDrops",typeDrops));
 		}
 		cr.add(typeDropsGroup);
 		}
@@ -161,15 +165,7 @@ public class PrinterDAOImpl implements PrinterDAO {
 		if(searchPrinters.getSizeDrops()!= null){
 		Junction sizeDropsGroup = Restrictions.disjunction();
 		for(String sizeDrops : searchPrinters.getSizeDrops()){
-			sizeDropsGroup.add(Restrictions.idEq(sizeDrops));
-		}
-		cr.add(sizeDropsGroup);
-		}
-		
-		if(searchPrinters.getSizeDrops()!= null){
-		Junction sizeDropsGroup = Restrictions.disjunction();
-		for(String sizeDrops : searchPrinters.getSizeDrops()){
-			sizeDropsGroup.add(Restrictions.idEq(sizeDrops));
+			sizeDropsGroup.add(Restrictions.eq("sizeDrops",sizeDrops));
 		}
 		cr.add(sizeDropsGroup);
 		}
@@ -181,7 +177,7 @@ public class PrinterDAOImpl implements PrinterDAO {
 		if(searchPrinters.getPrintResolution()!= null){
 		Junction printResolutionGroup = Restrictions.disjunction();
 		for(String printResolution : searchPrinters.getPrintResolution()){
-			printResolutionGroup.add(Restrictions.idEq(printResolution));
+			printResolutionGroup.add(Restrictions.eq("printResolution",printResolution));
 		}
 		cr.add(printResolutionGroup);
 		}
@@ -189,7 +185,7 @@ public class PrinterDAOImpl implements PrinterDAO {
 		if(searchPrinters.getEquipmentManufacturer()!= null){
 		Junction equipmentManufacturerGroup = Restrictions.disjunction();
 		for(String equipmentManufacturer : searchPrinters.getEquipmentManufacturer()){
-			equipmentManufacturerGroup.add(Restrictions.idEq(equipmentManufacturer));
+			equipmentManufacturerGroup.add(Restrictions.eq("equipmentManufacturer",equipmentManufacturer));
 		}
 		cr.add(equipmentManufacturerGroup);
 		}
@@ -197,7 +193,7 @@ public class PrinterDAOImpl implements PrinterDAO {
 		if(searchPrinters.getInterfaceConnection()!= null){
 		Junction interfaceConnectionGroup = Restrictions.disjunction();
 		for(String interfaceConnection : searchPrinters.getInterfaceConnection()){
-			interfaceConnectionGroup.add(Restrictions.idEq(interfaceConnection));
+			interfaceConnectionGroup.add(Restrictions.eq("interfaceConnection",interfaceConnection));
 		}
 		cr.add(interfaceConnectionGroup);
 		}
@@ -217,7 +213,7 @@ public class PrinterDAOImpl implements PrinterDAO {
 		if(searchPrinters.getRip()!= null){
 		Junction ripGroup = Restrictions.disjunction();
 		for(String rip : searchPrinters.getRip()){
-			ripGroup.add(Restrictions.idEq(rip));
+			ripGroup.add(Restrictions.eq("rip",rip));
 		}
 		cr.add(ripGroup);
 		}
@@ -241,11 +237,15 @@ public class PrinterDAOImpl implements PrinterDAO {
 		if(searchPrinters.getDepth0()!=searchPrinters.getDepth1()){
 			cr.add(Restrictions.between("depth", searchPrinters.getDepth0(), searchPrinters.getDepth1()));
 		}
-        List<Printer> printerList = cr.list();
-        for(Printer p : printerList){
-            logger.info("Printer List with searching::" + p);
-        }
-        return printerList;
+        //List<Printer> printerList = cr.list();
+
+//		List<Printer> printerList = Collections.checkedList(cr.list(), Printer.class);
+//		Set<Printer> result = new LinkedHashSet<Printer>(cr.list());
+//		System.out.println("Size of array!!! -----   " + printerList.size());
+//        for(Printer p : printerList){
+//            logger.info("Printer List with searching::" + p);
+//        }
+        return new LinkedHashSet<Printer>(cr.list());
 	}
  
 }

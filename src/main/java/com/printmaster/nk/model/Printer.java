@@ -103,7 +103,7 @@ public class Printer extends Model{
 	@Column(name="description")
 	private String description;
 	
-	@OneToMany(mappedBy="printer")
+	@OneToMany(mappedBy="printer", fetch = FetchType.EAGER)
 	private Set<OrderPrinter> orderPrinters = new HashSet<OrderPrinter>();
 	
 	@ElementCollection(fetch = FetchType.EAGER)

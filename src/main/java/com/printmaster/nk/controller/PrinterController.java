@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.Set;
 
 //import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +18,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -246,23 +248,51 @@ public class PrinterController {
     public String searchPrinters(Model model) {
         model.addAttribute("listPrinters", this.printerService.listPrinters());
         SearchPrinters sp = new SearchPrinters();
+        sp.setPrise0(0);
         sp.setPrise1(50000);
-        model.addAttribute("searchPrintersCriteria", sp);
+        model.addAttribute("search", sp);
         return "printers";
     }
 	
-	@RequestMapping(value = "/printers/searching", method = RequestMethod.POST)	
-    public String searchingPrinters(Model model, @ModelAttribute("searchPrintersCriteria") SearchPrinters searchPrintersCriteria) {
-		System.out.println(searchPrintersCriteria.toString());
-        model.addAttribute("listPrinters", this.printerService.listSearchPrinters(searchPrintersCriteria));
-        model.addAttribute("searchPrintersCriteria", searchPrintersCriteria);
-        
-        return "printers";
+//	@RequestMapping(value = "/printers/search", method = RequestMethod.POST)	
+//    public ModelAndView searchingPrinters(Model model, @ModelAttribute("search") SearchPrinters searchPrintersCriteria) {
+//		System.out.println(searchPrintersCriteria.toString());
+//		System.out.println(searchPrintersCriteria.getPrise1());
+//        //model.addAttribute("listPrinters", this.printerService.listSearchPrinters(searchPrintersCriteria));
+//        //model.addAttribute("searchPrintersCriteria", searchPrintersCriteria);
+//		ModelAndView mav = new ModelAndView("printers"); 
+//		mav.addObject("listPrinters", this.printerService.listSearchPrinters(searchPrintersCriteria));
+////		mav.addObject("listPrinters", this.printerService.listPrinters());
+//		mav.addObject("search", searchPrintersCriteria);
+//        return mav;
+//    }
+
+    @RequestMapping(value="/printers/search",method=RequestMethod.POST, produces = "application/json; charset=utf-8")
+    public @ResponseBody Set<Printer> addUser(@ModelAttribute(value="search") SearchPrinters search, BindingResult result ){
+        String returnText;
+        if(!result.hasErrors()){
+            returnText = "  Запрос виконано успішно!!! ";
+            System.out.println(search.toString());
+        }else{
+            returnText = "Sorry, an error has occur. User has not been added to list.";
+        }
+        return printerService.listSearchPrinters(search);
     }
+	
+	
+//	@RequestMapping(value = "/printers/search", method = RequestMethod.POST)	
+//    public @ResponseBody Set<Printer> searchingPrinters(@RequestParam("prise0") String prise0,
+//    		@RequestParam("prise1") String prise1) {
+//		SearchPrinters searchPrintersCriteria = new SearchPrinters();
+//		searchPrintersCriteria.setPrise0(Integer.parseInt(prise0));
+//		searchPrintersCriteria.setPrise1(Integer.parseInt(prise1));
+//        return null;
+//    }
 	
     @RequestMapping("/printer/{id}")
     public String showPrinter(@PathVariable("id") int id, Model model){
-        model.addAttribute("printer", this.printerService.getPrinterById(id));
+    	System.out.println("Id: " + id);
+        model.addAttribute("printer", printerService.getPrinterById(id));
         return "printer";
     }
     

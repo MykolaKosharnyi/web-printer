@@ -43,6 +43,54 @@ public class SearchPrinters implements Serializable{
 	private int depth0;
 	private int depth1;
 	
+	public SearchPrinters() {}
+	
+	public SearchPrinters(int prise0, int prise1, String[] typePrinter, String[] weightPrintMM, String[] previouslyUsed,
+			String[] typePrint, String[] feed, String[] chromaticity, String[] manufacturerPrinthead,
+			String[] typeOfPrinthead, String[] compatibleInk, String[] typeDrops, String[] sizeDrops, int speedPrint0,
+			int speedPrint1, String[] printResolution, String[] equipmentManufacturer, String[] interfaceConnection,
+			int maximumMediaThickness60_0, int maximumMediaThickness60_1, int maximumMediaThickness500_0,
+			int maximumMediaThickness500_1, int maximumWeightOfVehicle0, int maximumWeightOfVehicle1, String[] rip,
+			int maxPowerConsumption0, int maxPowerConsumption1, int weight0, int weight1, int width0, int width1,
+			int heigth0, int heigth1, int depth0, int depth1) {
+		super();
+		this.prise0 = prise0;
+		this.prise1 = prise1;
+		this.typePrinter = typePrinter;
+		this.weightPrintMM = weightPrintMM;
+		this.previouslyUsed = previouslyUsed;
+		this.typePrint = typePrint;
+		this.feed = feed;
+		this.chromaticity = chromaticity;
+		this.manufacturerPrinthead = manufacturerPrinthead;
+		this.typeOfPrinthead = typeOfPrinthead;
+		this.compatibleInk = compatibleInk;
+		this.typeDrops = typeDrops;
+		this.sizeDrops = sizeDrops;
+		this.speedPrint0 = speedPrint0;
+		this.speedPrint1 = speedPrint1;
+		this.printResolution = printResolution;
+		this.equipmentManufacturer = equipmentManufacturer;
+		this.interfaceConnection = interfaceConnection;
+		this.maximumMediaThickness60_0 = maximumMediaThickness60_0;
+		this.maximumMediaThickness60_1 = maximumMediaThickness60_1;
+		this.maximumMediaThickness500_0 = maximumMediaThickness500_0;
+		this.maximumMediaThickness500_1 = maximumMediaThickness500_1;
+		this.maximumWeightOfVehicle0 = maximumWeightOfVehicle0;
+		this.maximumWeightOfVehicle1 = maximumWeightOfVehicle1;
+		this.rip = rip;
+		this.maxPowerConsumption0 = maxPowerConsumption0;
+		this.maxPowerConsumption1 = maxPowerConsumption1;
+		this.weight0 = weight0;
+		this.weight1 = weight1;
+		this.width0 = width0;
+		this.width1 = width1;
+		this.heigth0 = heigth0;
+		this.heigth1 = heigth1;
+		this.depth0 = depth0;
+		this.depth1 = depth1;
+	}
+
 	@Override
 	public String toString() {
 		return "SearchPrinters [prise0=" + prise0 + ", prise1=" + prise1 + ", typePrinter="

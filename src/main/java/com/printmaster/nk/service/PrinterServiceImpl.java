@@ -1,6 +1,7 @@
 package com.printmaster.nk.service;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -50,7 +51,7 @@ public class PrinterServiceImpl implements PrinterService {
 
 	@Override
 	@Transactional
-	public List<Printer> listSearchPrinters(SearchPrinters searchPrinters) {
+	public Set<Printer> listSearchPrinters(SearchPrinters searchPrinters) {
 		return this.printerDAO.listSearchPrinters(searchPrinters);
 	}
  

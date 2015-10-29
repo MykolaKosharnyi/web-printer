@@ -346,7 +346,7 @@ ul{
     /*border: 2px green solid;*/
 }
 
-	.product{
+	.products{
 		position: relative;
 		width: 32%;
 		height: auto;
@@ -356,7 +356,7 @@ ul{
 		border-radius: 5px;
 		display:block;
 	}
-		.product_image{
+		.products_image{
 			position: relative;
 			top: 0px;
 			height:300px;
@@ -365,14 +365,14 @@ ul{
 			border-bottom: 1px blue solid;
 		}
 		
-			.product_image img{
+			.products_image img{
 				position: relative;
 				height:inherit;
 				width: inherit;
 				float: left;
 			}
 		
-		.product_title, .product_price{
+		.products_title, .products_price{
 			position: relative;
 			height: 50px;
 			width: auto;
@@ -385,12 +385,12 @@ ul{
 			/*border: 1px red solid;*/
 			color: black;
 		}
-		.product_price{
+		.products_price{
 			width: 80px;
 			color: blue;
 		}
 		
-			.product_buy{
+			.products_buy{
 				position: relative;
 				height:auto;
 				width: auto;
@@ -401,11 +401,11 @@ ul{
 				transition: 1s;
 			}
 			
-			.product_buy:hover{
+			.products_buy:hover{
 				transform: scale(1.1);
 			}
 		
-				.product_buy img{
+				.products_buy img{
 					position: relative;
 					height:50px;
 					width: 50px;
