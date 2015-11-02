@@ -30,7 +30,7 @@
 
 	<div id="product">
 	
-	<c:url var="addAction" value="/printer/added" ></c:url>
+	<c:url var="addAction" value="/printer/add" ></c:url>
 	<form:form method="POST" commandName="printer" action="${addAction}" enctype="multipart/form-data">
 			<c:if test="${empty printer.name}">
 					<form:label path="id" id="head_of_page"><spring:message text="Добавление нового принтера" /></form:label>
@@ -373,10 +373,14 @@
 			.getElementById("file-list");
 
 	function uploadFile(file) {
-		var li = document.createElement("li"), div = document
-				.createElement("div"), img, progressBarContainer = document
-				.createElement("div"), progressBar = document
-				.createElement("div"), reader, xhr, fileInfo="";
+		var li = document.createElement("li"),
+			div = document.createElement("div"),
+			img,
+			progressBarContainer = document.createElement("div"),
+			progressBar = document.createElement("div"),
+			reader,
+			xhr,
+			fileInfo="";
 
 		li.appendChild(div);
 
@@ -466,17 +470,20 @@
 		if (target && target === dropArea) {
 			this.className = "";
 		}
+		jQuery(".no-items").remove();
 		evt.preventDefault();
 		evt.stopPropagation();
 	}, false);
 
 	dropArea.addEventListener("dragenter", function(evt) {
 		this.className = "over";
+		jQuery(".no-items").remove();
 		evt.preventDefault();
 		evt.stopPropagation();
 	}, false);
 
 	dropArea.addEventListener("dragover", function(evt) {
+		jQuery(".no-items").remove();
 		evt.preventDefault();
 		evt.stopPropagation();
 	}, false);
@@ -484,6 +491,7 @@
 	dropArea.addEventListener("drop", function(evt) {
 		traverseFiles(evt.dataTransfer.files);
 		this.className = "";
+		jQuery(".no-items").remove();
 		evt.preventDefault();
 		evt.stopPropagation();
 	}, false);

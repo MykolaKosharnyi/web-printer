@@ -296,18 +296,18 @@ public class PrinterController {
         return "printer";
     }
     
-	@RequestMapping(value = "/printers", method = RequestMethod.GET)	
+	@RequestMapping(value = "/admin/printers", method = RequestMethod.GET)	
     public String listPrinters(Model model) {
         model.addAttribute("listPrinters", this.printerService.listPrinters());
         return "admin/printers";
     }
 	
-	@RequestMapping(value = "/printer/new", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/printer/new", method = RequestMethod.GET)
 	public ModelAndView addNewPrinter() {
 	    return new ModelAndView("admin/printer", "printer", new Printer());
 	}
      
-	@RequestMapping(value = "/printer/added", method = RequestMethod.POST) 
+	@RequestMapping(value = "/printer/add", method = RequestMethod.POST) 
 	public @ResponseBody ModelAndView handleFormUpload(
 			@RequestParam("files") MultipartFile[] request, @ModelAttribute Printer printer, HttpServletRequest request1) throws IOException{
 		
@@ -345,7 +345,7 @@ public class PrinterController {
             files = new LinkedList<FileMeta>();
         }else{
         	System.out.println("update!!!!!");
-        	 System.out.println(printer.getName());
+        	System.out.println(printer.getId());
             //existing printer, call update
             this.printerService.updatePrinter(printer);
         }
@@ -356,13 +356,13 @@ public class PrinterController {
 	   return mav;
 	}
 	
-    @RequestMapping("/printer/remove/{id}")
+    @RequestMapping("/admin/printer/remove/{id}")
     public String removePrinter(@PathVariable("id") int id){
         this.printerService.removePrinter(id);
         return "redirect:/printers";
     }
   
-    @RequestMapping("/printer/edit/{id}")
+    @RequestMapping("/admin/printer/edit/{id}")
     public String editPrinter(@PathVariable("id") int id, Model model){
         model.addAttribute("printer", this.printerService.getPrinterById(id));
         model.addAttribute("listPrinters", this.printerService.listPrinters());
@@ -370,7 +370,7 @@ public class PrinterController {
     }
     
     @RequestMapping(value="printer/upload_pictures", method = RequestMethod.POST)
-	    public @ResponseBody void upload(MultipartHttpServletRequest request, HttpServletResponse response) {
+	    public @ResponseBody void upload(MultipartHttpServletRequest request) {
 	 
 	        //1. build an iterator
 	         Iterator<String> itr =  request.getFileNames();
@@ -381,7 +381,7 @@ public class PrinterController {
 	 
 	             //2.1 get next MultipartFile
 	             mpf = request.getFile(itr.next()); 
-	             System.out.println(mpf.getOriginalFilename() +" uploaded! "+files.size());
+	             System.out.println(mpf.getOriginalFilename() +" uploaded! " + files.size());
 	 
 	             //2.3 create new fileMeta
 	             fileMeta = new FileMeta();

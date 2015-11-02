@@ -1,5 +1,6 @@
 package com.printmaster.nk.dao;
 
+import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -71,7 +72,6 @@ public class PrinterDAOImpl implements PrinterDAO {
         logger.info("Printer deleted successfully, printer details="+p);
     }
 
-//	@SuppressWarnings("unchecked")
 	@SuppressWarnings("unchecked")
 	@Override
 	public Set<Printer> listSearchPrinters(SearchPrinters searchPrinters) {
@@ -106,29 +106,32 @@ public class PrinterDAOImpl implements PrinterDAO {
 		cr.add(previouslyUsedGroup);
 		}
 		
-		if(searchPrinters.getTypePrint()!= null){
-		Junction typePrintGroup = Restrictions.disjunction();
-		for(String typePrint : searchPrinters.getTypePrint()){
-			typePrintGroup.add(Restrictions.eq("typePrint",typePrint));
-		}
-		cr.add(typePrintGroup);
-		}
+//		if(searchPrinters.getTypePrint()!= null){
+//		Junction typePrintGroup = Restrictions.disjunction();
+//	//	cr.createAlias("typePrint", "typeP");
+//		for(String tp : searchPrinters.getTypePrint()){
+//		//	Criteria crt = cr.createAlias("typePrint", "typeP").add(Restrictions.like("typeP",tp));
+//	//		
+//			typePrintGroup.add(Restrictions.ilike("typePrint",tp, MatchMode.ANYWHERE));
+//		}
+//		cr.add(typePrintGroup);	
+//		}
 		
-		if(searchPrinters.getFeed()!= null){
-		Junction feedGroup = Restrictions.disjunction();
-		for(String feed : searchPrinters.getFeed()){
-			feedGroup.add(Restrictions.eq("feed",feed));
-		}
-		cr.add(feedGroup);
-		}
+//		if(searchPrinters.getFeed()!= null){
+//		Junction feedGroup = Restrictions.disjunction();
+//		for(String feed : searchPrinters.getFeed()){
+//			feedGroup.add(Restrictions.eq("feed",feed));
+//		}
+//		cr.add(feedGroup);
+//		}
 		
-		if(searchPrinters.getChromaticity()!= null){
-		Junction chromaticityGroup = Restrictions.disjunction();
-		for(String chromaticity : searchPrinters.getChromaticity()){
-			chromaticityGroup.add(Restrictions.eq("chromaticity",chromaticity));
-		}
-		cr.add(chromaticityGroup);
-		}
+//		if(searchPrinters.getChromaticity()!= null){
+//		Junction chromaticityGroup = Restrictions.disjunction();
+//		for(String chromaticity : searchPrinters.getChromaticity()){
+//			chromaticityGroup.add(Restrictions.eq("chromaticity",chromaticity));
+//		}
+//		cr.add(chromaticityGroup);
+//		}
 		
 		if(searchPrinters.getManufacturerPrinthead()!= null){
 		Junction manufacturerPrintheadGroup = Restrictions.disjunction();
@@ -146,41 +149,41 @@ public class PrinterDAOImpl implements PrinterDAO {
 		cr.add(typeOfPrintheadGroup);
 		}
 		
-		if(searchPrinters.getCompatibleInk()!= null){
-		Junction compatibleInkGroup = Restrictions.disjunction();
-		for(String compatibleInk : searchPrinters.getCompatibleInk()){
-			compatibleInkGroup.add(Restrictions.eq("compatibleInk",compatibleInk));
-		}
-		cr.add(compatibleInkGroup);
-		}
+//		if(searchPrinters.getCompatibleInk()!= null){
+//		Junction compatibleInkGroup = Restrictions.disjunction();
+//		for(String compatibleInk : searchPrinters.getCompatibleInk()){
+//			compatibleInkGroup.add(Restrictions.eq("compatibleInk",compatibleInk));
+//		}
+//		cr.add(compatibleInkGroup);
+//		}
 		
-		if(searchPrinters.getTypeDrops()!= null){
-		Junction typeDropsGroup = Restrictions.disjunction();
-		for(String typeDrops : searchPrinters.getTypeDrops()){
-			typeDropsGroup.add(Restrictions.eq("typeDrops",typeDrops));
-		}
-		cr.add(typeDropsGroup);
-		}
+//		if(searchPrinters.getTypeDrops()!= null){
+//		Junction typeDropsGroup = Restrictions.disjunction();
+//		for(String typeDrops : searchPrinters.getTypeDrops()){
+//			typeDropsGroup.add(Restrictions.eq("typeDrops",typeDrops));
+//		}
+//		cr.add(typeDropsGroup);
+//		}
 		
-		if(searchPrinters.getSizeDrops()!= null){
-		Junction sizeDropsGroup = Restrictions.disjunction();
-		for(String sizeDrops : searchPrinters.getSizeDrops()){
-			sizeDropsGroup.add(Restrictions.eq("sizeDrops",sizeDrops));
-		}
-		cr.add(sizeDropsGroup);
-		}
+//		if(searchPrinters.getSizeDrops()!= null){
+//		Junction sizeDropsGroup = Restrictions.disjunction();
+//		for(String sizeDrops : searchPrinters.getSizeDrops()){
+//			sizeDropsGroup.add(Restrictions.eq("sizeDrops",sizeDrops));
+//		}
+//		cr.add(sizeDropsGroup);
+//		}
 		
 		if(searchPrinters.getSpeedPrint0()!=searchPrinters.getSpeedPrint1()){
 			cr.add(Restrictions.between("speedPrint", searchPrinters.getSpeedPrint0(), searchPrinters.getSpeedPrint1()));
 		}
 		
-		if(searchPrinters.getPrintResolution()!= null){
-		Junction printResolutionGroup = Restrictions.disjunction();
-		for(String printResolution : searchPrinters.getPrintResolution()){
-			printResolutionGroup.add(Restrictions.eq("printResolution",printResolution));
-		}
-		cr.add(printResolutionGroup);
-		}
+//		if(searchPrinters.getPrintResolution()!= null){
+//		Junction printResolutionGroup = Restrictions.disjunction();
+//		for(String printResolution : searchPrinters.getPrintResolution()){
+//			printResolutionGroup.add(Restrictions.eq("printResolution",printResolution));
+//		}
+//		cr.add(printResolutionGroup);
+//		}
 		
 		if(searchPrinters.getEquipmentManufacturer()!= null){
 		Junction equipmentManufacturerGroup = Restrictions.disjunction();
@@ -210,13 +213,13 @@ public class PrinterDAOImpl implements PrinterDAO {
 			cr.add(Restrictions.between("maximumWeightOfVehicle", searchPrinters.getMaximumWeightOfVehicle0(), searchPrinters.getMaximumWeightOfVehicle1()));
 		}
 		
-		if(searchPrinters.getRip()!= null){
-		Junction ripGroup = Restrictions.disjunction();
-		for(String rip : searchPrinters.getRip()){
-			ripGroup.add(Restrictions.eq("rip",rip));
-		}
-		cr.add(ripGroup);
-		}
+//		if(searchPrinters.getRip()!= null){
+//		Junction ripGroup = Restrictions.disjunction();
+//		for(String rip : searchPrinters.getRip()){
+//			ripGroup.add(Restrictions.eq("rip",rip));
+//		}
+//		cr.add(ripGroup);
+//		}
 		
 		if(searchPrinters.getMaxPowerConsumption0()!=searchPrinters.getMaxPowerConsumption1()){
 			cr.add(Restrictions.between("maxPowerConsumption", searchPrinters.getMaxPowerConsumption0(), searchPrinters.getMaxPowerConsumption1()));
@@ -245,7 +248,187 @@ public class PrinterDAOImpl implements PrinterDAO {
 //        for(Printer p : printerList){
 //            logger.info("Printer List with searching::" + p);
 //        }
-        return new LinkedHashSet<Printer>(cr.list());
+		
+		LinkedHashSet<Printer> result = new LinkedHashSet<Printer>(cr.list());
+		
+		Iterator<Printer> itPrinters = result.iterator();
+		
+		while(itPrinters.hasNext()){
+			Printer currentPrinter = itPrinters.next();
+			
+			if (searchPrinters.getTypePrint().length > 0 ) {
+				System.out.println("Эсть выбранные типы принтеров");
+				boolean isPrinterWeNeed = false;
+				int n = 0;
+				print:
+				for (String currentPrinterPropertyValue : currentPrinter.getTypePrint()) {
+					for (String searchedPrinterPropertyValue : searchPrinters.getTypePrint()) {
+						if (currentPrinterPropertyValue.equals(searchedPrinterPropertyValue)) {
+							isPrinterWeNeed = true;
+							System.out.println("Найдено: " + (++n) + " раз.");
+							break print;
+						}
+					}
+				}
+				if(!isPrinterWeNeed){
+					itPrinters.remove();
+					if(itPrinters.hasNext()){
+						currentPrinter = itPrinters.next();
+					}
+				}
+			} else {
+				System.out.println("Нету выбранных типов принтеров:(");
+			}
+			
+			if (searchPrinters.getFeed().length > 0) {
+				if(itPrinters.hasNext()){
+					boolean isPrinterWeNeed = false;
+					print:
+					for (String currentPrinterPropertyValue : currentPrinter.getFeed()) {
+						for (String searchedPrinterPropertyValue : searchPrinters.getFeed()) {
+							if (currentPrinterPropertyValue.equals(searchedPrinterPropertyValue)) {
+								isPrinterWeNeed = true;
+								break print;
+							}
+						}
+					}
+					if(!isPrinterWeNeed){
+						itPrinters.remove();
+						if(itPrinters.hasNext()){
+							currentPrinter = itPrinters.next();
+						}
+					}
+				}
+			}	
+			
+			if (searchPrinters.getChromaticity().length > 0) {
+				if(itPrinters.hasNext()){
+					boolean isPrinterWeNeed = false;
+					print:
+					for (String currentPrinterPropertyValue : currentPrinter.getChromaticity()) {
+						for (String searchedPrinterPropertyValue : searchPrinters.getChromaticity()) {
+							if (currentPrinterPropertyValue.equals(searchedPrinterPropertyValue)) {
+								isPrinterWeNeed = true;
+								break print;
+							}
+						}
+					}
+					if(!isPrinterWeNeed){
+						itPrinters.remove();
+						if(itPrinters.hasNext()){
+							currentPrinter = itPrinters.next();
+						}
+					}
+				}
+			}		
+			
+			if (searchPrinters.getCompatibleInk().length > 0) {
+				if(itPrinters.hasNext()){
+					boolean isPrinterWeNeed = false;
+					print:
+					for (String currentPrinterPropertyValue : currentPrinter.getCompatibleInk()) {
+						for (String searchedPrinterPropertyValue : searchPrinters.getCompatibleInk()) {
+							if (currentPrinterPropertyValue.equals(searchedPrinterPropertyValue)) {
+								isPrinterWeNeed = true;
+								break print;
+							}
+						}
+					}
+					if(!isPrinterWeNeed){
+						itPrinters.remove();
+						if(itPrinters.hasNext()){
+							currentPrinter = itPrinters.next();
+						}
+					}
+				}
+			}	
+			
+			if (searchPrinters.getTypeDrops().length > 0) {
+				if(itPrinters.hasNext()){
+					boolean isPrinterWeNeed = false;
+					print:
+					for (String currentPrinterPropertyValue : currentPrinter.getTypeDrops()) {
+						for (String searchedPrinterPropertyValue : searchPrinters.getTypeDrops()) {
+							if (currentPrinterPropertyValue.equals(searchedPrinterPropertyValue)) {
+								isPrinterWeNeed = true;
+								break print;
+							}
+						}
+					}
+					if(!isPrinterWeNeed){
+						itPrinters.remove();
+						if(itPrinters.hasNext()){
+							currentPrinter = itPrinters.next();
+						}
+					}
+				}
+			}
+			
+			if (searchPrinters.getSizeDrops().length > 0) {
+				if(itPrinters.hasNext()){
+					boolean isPrinterWeNeed = false;
+					print:
+					for (String currentPrinterPropertyValue : currentPrinter.getSizeDrops()) {
+						for (String searchedPrinterPropertyValue : searchPrinters.getSizeDrops()) {
+							if (currentPrinterPropertyValue.equals(searchedPrinterPropertyValue)) {
+								isPrinterWeNeed = true;
+								break print;
+							}
+						}
+					}
+					if(!isPrinterWeNeed){
+						itPrinters.remove();
+						if(itPrinters.hasNext()){
+							currentPrinter = itPrinters.next();
+						}
+					}
+				}
+			}
+			
+			if (searchPrinters.getPrintResolution().length > 0) {
+				if(itPrinters.hasNext()){
+					boolean isPrinterWeNeed = false;
+					print:
+					for (String currentPrinterPropertyValue : currentPrinter.getPrintResolution()) {
+						for (String searchedPrinterPropertyValue : searchPrinters.getPrintResolution()) {
+							if (currentPrinterPropertyValue.equals(searchedPrinterPropertyValue)) {
+								isPrinterWeNeed = true;
+								break print;
+							}
+						}
+					}
+					if(!isPrinterWeNeed){
+						itPrinters.remove();
+						if(itPrinters.hasNext()){
+							currentPrinter = itPrinters.next();
+						}
+					}
+				}
+			}
+			
+			if (searchPrinters.getRip().length > 0) {
+				if(itPrinters.hasNext()){
+					boolean isPrinterWeNeed = false;
+					print:
+					for (String currentPrinterPropertyValue : currentPrinter.getRip()) {
+						for (String searchedPrinterPropertyValue : searchPrinters.getRip()) {
+							if (currentPrinterPropertyValue.equals(searchedPrinterPropertyValue)) {
+								isPrinterWeNeed = true;
+								break print;
+							}
+						}
+					}
+					if(!isPrinterWeNeed){
+						itPrinters.remove();
+						if(itPrinters.hasNext()){
+							currentPrinter = itPrinters.next();
+						}
+					}
+				}
+			}
+		}
+		
+        return result;
 	}
  
 }

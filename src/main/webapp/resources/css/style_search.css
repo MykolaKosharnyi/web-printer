@@ -1,24 +1,3 @@
-*{
-    box-sizing:border-box;
-}
-
-body { 
-    width: 100%;
-    font: 1em/1.4em sans-serif;
-    padding: 0;
-    margin: 0;
-}
-
-a{
-    text-decoration: none;
-}
-
-ul{
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
 #out_result_of_search{
     position: relative;
     height: auto;

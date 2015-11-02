@@ -47,7 +47,7 @@
 </style>
 </head>
 <body>
-	<a href="<c:url value='/printer/new' />">Добавить принтер</a>
+	<a href="<c:url value='/admin/printer/new' />">Добавить принтер</a>
 	<br>
 	<h3>Список загруженных принтеров</h3>
 	<c:if test="${!empty listPrinters}">
@@ -64,8 +64,8 @@
 					<td>${printer.id}</td>
 					<td>${printer.name}</td>
 					<td>${printer.prise} $</td>
-					<td><a href="<c:url value='printer/edit/${printer.id}' />">Изменить</a></td>
-					<td><a href="<c:url value='printer/remove/${printer.id}' />">Удалить</a></td>
+					<td><a href="<c:url value='/admin/printer/edit/${printer.id}' />">Изменить</a></td>
+					<td><a href="<c:url value='/admin/printer/remove/${printer.id}' />">Удалить</a></td>
 				</tr>
 			</c:forEach>
 		</table>

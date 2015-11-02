@@ -13,14 +13,14 @@
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/css/jquery-ui.css">
 <title><tiles:insertAttribute name="title" ignore="true" /></title>
 
-<script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/jquery-ui.js"></script>
+<script src="<%=request.getContextPath()%>/resources/js/jquery-ui.js"></script>
 <script src="<%=request.getContextPath()%>/resources/js/jquery-1.9.1.js"></script>
 -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 	
 	<script src="http://malsup.github.com/jquery.form.js"></script>
-	<script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/search_printer.js"></script>
+	<script src="<%=request.getContextPath()%>/resources/js/search_printer.js"></script>
 </head>
 <body>
 		<c:url var="search-printer" value="/printers/search" ></c:url>
@@ -37,7 +37,7 @@
 		
 		<tiles:insertAttribute name="footer" />
 
-    <script type="text/javascript">
+    <script>
         $( function() {
            $("#full_menu").click(function(){
                if ( $(".menu").css('display') == 'none' ) {

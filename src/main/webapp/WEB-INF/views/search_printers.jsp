@@ -328,84 +328,22 @@
 			
 			$('#search').ajaxForm( {
 				type: 'post',
-				success: function(response) { 
+				success: function(products) { 
 					$("#out_result_of_search").empty();
-
-					var respContent = "";
-		             
-		            respContent += "<span class='success'>" + response + "</span>";
-		             
-		            $("#out_result_of_search").html(respContent);
+					
+	                $(products).each(function(i, product) {
+	                	$("#out_result_of_search").append(
+	                			$('<a/>').addClass("products")
+	                				.append($('<div/>').addClass("products_image").append($('<img/>')
+	                						.attr("src", "/nk/resources/images/printers/" + product.id + "/" + product.pathPictures[0])))
+	                				.append($('<p/>').addClass("products_title").text(product.name))
+	                				.append($('<p/>').addClass("products_price").text(product.prise))
+	                                .append($('<div/>').addClass("products_buy").append($('<img/>')
+	                                		.attr("src", "/nk/resources/images/button_buy.jpg")))		
+	                            )//end $("#out_result_of_search").append()
+	                });
 				}
 				
 				}); 
 		});
-		/*	 function getTypePrinter(){ return $('#typePrinter').prop("checked").val(); }
-			 function getWeightPrintMM(){ return $('#weightPrintMM').prop("checked").val();}
-			 
-			$('#search').submit(function(event) {
-					var prise0 = $('#prise0').val();
-					var prise1 = $('#prise1').val();*/
-					/*var typePrinter = $('#typePrinter').prop("checked").val();
-					var weightPrintMM = $('#weightPrintMM').prop("checked").val();*/
-					/*typePrinter = $('#typePrinter').val();*/
-					/*$('#typePrinter').is(":checked").each(function() {
-						typePrinter.push($(this).val());
-					});*/
-					
-					
-				/*	$.ajax({
-					    url: $("#search").attr('action'),
-					    //data : "prise0=" + prise0 + "&prise1=" + prise1 + "&typePrinter=" + typePrinter + "&weightPrintMM=" + weightPrintMM,
-					    data : "prise0=" + prise0 + "&prise1=" + prise1,
-					    type: 'POST',
-				        
-				        success: function(response) {
-				        	$("#out_result_of_search").empty();
-
-							var respContent = "";
-				             
-				            respContent += "<span class='success'>" + response + " ще щось " + "</span>";
-				             
-				            $("#out_result_of_search").html(respContent);
-				        }
-					});
-					 return false;
-				});*/
-			
-			/*----------------------------------------------------*/ 
-
-			/*function getTypePrinter() {
-				return $('#typePrinter').prop("checked").val();
-			}
-			function getWeightPrintMM() {
-				return $('#weightPrintMM').prop("checked").val();
-			}
-
-			$(document)
-					.ready(
-							function() {
-								var prise0 = $('#prise0').val();
-								var prise1 = $('#prise1').val();
-								var typePrinter = getTypePrinter();
-								var weightPrintMM = getWeightPrintMM();
-								$('#search').submit(
-												function() {$.post({
-																url : $("#search").attr('action'),
-																data : {
-																	'prise0' : prise0,
-																	'prise1' : prise1,
-																	'typePrinter' : typePrinter,
-																	'weightPrintMM' : weightPrintMM
-																},
-																success : function(response) {
-																	$("#out_result_of_search").empty();
-																	var respContent = "";
-																	respContent += "<span class='success'>"+ response+ "</span>";
-																	$("#out_result_of_search").html(respContent);
-																}
-															});
-													return false;
-												});
-							});*/
 		</script> 
