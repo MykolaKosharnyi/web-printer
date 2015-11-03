@@ -34,7 +34,7 @@ form > p{
 
 		#pictures {
 			position: relative;
-			width: 450px;
+			width: 425px;
 			height: auto;
 			float: left;
 		}
@@ -51,27 +51,46 @@ form > p{
 				position: relative;
 				width: inherit;
 				height: auto;
+				/*border: 1px red solid;
+				border-radius: 5px;*/
+				list-style-type: none;
+				margin: 0;
+				padding: 0;
 			}
 
 				#file-list div {
 					position: relative;
-					width: inherit;
+					width: 400px;
 					height: auto;
 				}
 				#file-list li {
-					margin-bottom: 10px;
+					padding: 10px;
+					margin-bottom:5px;
+					border-radius: 5px;
 				}
 
+				#file-list .no-items{
+					 font: 13px Arial;
+					 font-weight: bold;
+				}
+				
 					#file-list img{
 						position: relative;
 						width: 400px;
 						height: 300px;
 					}
+					
+					 /* #file-list {    width: 100%; }
+  #file-list li { margin: 0 3px 3px 3px; padding: 0; padding-left: 0; font-size: 1.4em; height: 18px; }
+  #file-list li span { position: absolute; margin-left: -1.3em; }*/
+  
 					.delete_img {
 						cursor: pointer;
 						color: red;
-						/*text-decoration:underline;*/
+						text-decoration:underline;
 						width: 70px;
+						padding-left: 10px;
+						padding-bottom:5px;
 					}
 					.delete_img:hover {
 						color: blue;

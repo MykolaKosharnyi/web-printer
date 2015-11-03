@@ -3,15 +3,19 @@ package com.printmaster.nk.controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-//import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+
+//import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -21,9 +25,10 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -42,7 +47,7 @@ public class PrinterController {
 	
     private PrinterService printerService;
 
-    LinkedList<FileMeta> files = new LinkedList<FileMeta>();
+    LinkedHashMap<String, FileMeta> files = new LinkedHashMap<String, FileMeta>();
     FileMeta fileMeta = null;
     
     @Autowired(required=true)
@@ -304,45 +309,39 @@ public class PrinterController {
 	
 	@RequestMapping(value = "/admin/printer/new", method = RequestMethod.GET)
 	public ModelAndView addNewPrinter() {
+		files.clear();
 	    return new ModelAndView("admin/printer", "printer", new Printer());
 	}
      
 	@RequestMapping(value = "/printer/add", method = RequestMethod.POST) 
-	public @ResponseBody ModelAndView handleFormUpload(
-			@RequestParam("files") MultipartFile[] request, @ModelAttribute Printer printer, HttpServletRequest request1) throws IOException{
+	public @ResponseBody ModelAndView handleFormUpload(/*
+			@RequestParam("files") MultipartFile[] request, */@ModelAttribute Printer printer) throws IOException{
 		
         if(printer.getId() == 0){
-            //new printer, add it
             int id = this.printerService.addPrinter(printer);
-            
-            int id_picture = 0;
+  
 //            String phyPath = servletContext.getRealPath("/");
-//            System.out.println("phyPath: " + phyPath);
-//            new File(phyPath + File.separator + "resources/images/printers" + File.separator + id).mkdir();
+
             String myPath = "C:/Users/Николай/Desktop/work/print-master/src/main/webapp/resources/images/printers";
             if(new File(myPath + File.separator + id).mkdir()){
             	System.out.println("Создано новую директорию!" + id);
             } else {
             	System.out.println("Не создано новую директорию :(");
             }
-            if(request!=null){
-            for(MultipartFile mf: request){
-            	try {
-            		// copy file to local disk (make sure the path "e.g. D:/temp/files" exists)
-            		String fileExtension = mf.getOriginalFilename().substring(mf.getOriginalFilename().lastIndexOf("."));
-            		
-            		String fileName = (++id_picture) + "" + fileExtension;
-            		
-	                 FileCopyUtils.copy(mf.getBytes(), new FileOutputStream(myPath + File.separator + id 
-	                		 + File.separator + fileName));
-	                 printer.getPathPictures().add(fileName);
-            	} catch (IOException e) {
-	                e.printStackTrace();
-	            }
-            }
-           }
+            
+			if (files != null) {
+				for (final Map.Entry<String, FileMeta> entry : files.entrySet()) {
+					try {
+						FileCopyUtils.copy(entry.getValue().getBytes(), new FileOutputStream(
+								myPath + File.separator + id + File.separator + entry.getValue().getFileName()));
+						printer.getPathPictures().add(entry.getKey());
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+			}
             this.printerService.updatePrinter(printer);
-            files = new LinkedList<FileMeta>();
+            files.clear();
         }else{
         	System.out.println("update!!!!!");
         	System.out.println(printer.getId());
@@ -350,12 +349,59 @@ public class PrinterController {
             this.printerService.updatePrinter(printer);
         }
 		
-		ModelAndView mav = new ModelAndView("redirect:/printers"); 
+		ModelAndView mav = new ModelAndView("redirect:/admin/printers"); 
 		  mav.addObject("listPrinters", this.printerService.listPrinters());
 		  mav.addObject("printer", printer);
 	   return mav;
 	}
 	
+    @RequestMapping(value="/admin/printer/upload_pictures", method = RequestMethod.POST)
+    public @ResponseBody String uploadPictures(MultipartHttpServletRequest request) {
+ 
+        //1. build an iterator
+         Iterator<String> itr =  request.getFileNames();
+         MultipartFile mpf = null;
+         String fileName = null;
+         
+         //2. get each file
+         while(itr.hasNext()){
+ 
+             //2.1 get next MultipartFile
+             mpf = request.getFile(itr.next()); 
+             System.out.println(mpf.getOriginalFilename() +" uploaded! " + files.size());
+ 
+             //2.3 create new fileMeta
+             fileMeta = new FileMeta();
+     		
+     		 fileName = (1 + files.size()) + "" + mpf.getOriginalFilename().substring(mpf.getOriginalFilename().lastIndexOf("."))/*second part is file extension*/; 
+             fileMeta.setFileName(fileName);
+             
+             fileMeta.setFileSize(mpf.getSize()/1024+" Kb");
+             fileMeta.setLength((int) (mpf.getSize()/1024));
+             fileMeta.setFileType(mpf.getContentType());
+ 
+             try {
+                fileMeta.setBytes(mpf.getBytes());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+             //2.4 add to files
+             System.out.println("Добавлено: " + fileMeta.getFileName());
+             files.put(fileMeta.getFileName(),fileMeta);
+         }  
+         return fileName;
+    }
+    @RequestMapping(value="/admin/printer/change_order_pictures", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
+    public @ResponseBody void changeOrderPictures(@RequestBody List<String> selectedIds) {
+    //	for(String s : selectedIds){
+    	for(int i=0; i < selectedIds.size(); i++){
+    		//System.out.println("Значение: " + s);
+    		Collections.swap(files, i, files.);
+    	}
+    	System.out.println("-----------------");
+    	
+    }
+    
     @RequestMapping("/admin/printer/remove/{id}")
     public String removePrinter(@PathVariable("id") int id){
         this.printerService.removePrinter(id);
@@ -364,41 +410,12 @@ public class PrinterController {
   
     @RequestMapping("/admin/printer/edit/{id}")
     public String editPrinter(@PathVariable("id") int id, Model model){
+    	files.clear();
         model.addAttribute("printer", this.printerService.getPrinterById(id));
         model.addAttribute("listPrinters", this.printerService.listPrinters());
         return "admin/printer";
     }
     
-    @RequestMapping(value="printer/upload_pictures", method = RequestMethod.POST)
-	    public @ResponseBody void upload(MultipartHttpServletRequest request) {
-	 
-	        //1. build an iterator
-	         Iterator<String> itr =  request.getFileNames();
-	         MultipartFile mpf = null;
-	 
-	         //2. get each file
-	         while(itr.hasNext()){
-	 
-	             //2.1 get next MultipartFile
-	             mpf = request.getFile(itr.next()); 
-	             System.out.println(mpf.getOriginalFilename() +" uploaded! " + files.size());
-	 
-	             //2.3 create new fileMeta
-	             fileMeta = new FileMeta();
-	             fileMeta.setFileName(mpf.getOriginalFilename());
-	             fileMeta.setFileSize(mpf.getSize()/1024+" Kb");
-	             fileMeta.setLength((int) (mpf.getSize()/1024));
-	             fileMeta.setFileType(mpf.getContentType());
-	 
-	             try {
-	                fileMeta.setBytes(mpf.getBytes());
-	            } catch (IOException e) {
-	                e.printStackTrace();
-	            }
-	             //2.4 add to files
-	             files.add(fileMeta);
-	         }  
-	    }
     @RequestMapping("/test")
     public String test(Model model){
     	model.addAttribute("searchPrintersCriteria", new SearchPrinters());

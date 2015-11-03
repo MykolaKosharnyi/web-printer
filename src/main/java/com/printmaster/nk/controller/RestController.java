@@ -46,7 +46,7 @@ public class RestController {
   }
  
    @RequestMapping(value = "/upload", method = RequestMethod.POST)
-   public @ResponseBody String upload(MultipartHttpServletRequest request, HttpServletResponse response) {                 
+   public @ResponseBody String upload(MultipartHttpServletRequest request) {                 
  
      //0. notice, we have used MultipartHttpServletRequest
  

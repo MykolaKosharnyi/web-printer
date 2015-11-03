@@ -10,10 +10,10 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/admin/style_admin.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/jquery-ui.css">
     
-    <script src="<%=request.getContextPath()%>/resources/js/jquery-1.9.1.js"></script>
-    <script src="<%=request.getContextPath()%>/resources/js/jquery-ui.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <script src="http://malsup.github.com/jquery.form.js"></script>
     <script src="<%=request.getContextPath()%>/resources/js/addPrinter.js"></script>
-
 
 <c:if test="${empty printer.name}">
 	<title>
@@ -25,38 +25,49 @@
 		<spring:message text="Изменение" />
 	</title>
 </c:if>
+  <script>
+  $(function() {
+    $( "#file-list" ).sortable({
+    	axis: "y",
+    	cursor: "move",
+    	opacity: 1
+    });
+    $( "#file-list" ).disableSelection();
+  });
+  </script>
 </head>
 <body>
-
+	<c:url var="addAction" value="/printer/add" ></c:url>
+	<c:url var="addPictures" value="/admin/printer/upload_pictures" ></c:url>
+	
 	<div id="product">
 	
-	<c:url var="addAction" value="/printer/add" ></c:url>
-	<form:form method="POST" commandName="printer" action="${addAction}" enctype="multipart/form-data">
 			<c:if test="${empty printer.name}">
-					<form:label path="id" id="head_of_page"><spring:message text="Добавление нового принтера" /></form:label>
+					<label id="head_of_page"><spring:message text="Добавление нового принтера" /></label>
 			</c:if>
 			
 			<c:if test="${!empty printer.name}">
-					<form:label path="id" id="head_of_page"><spring:message text="Изменение ${printer.name} " /></form:label>
+					<label id="head_of_page"><spring:message text="Изменение ${printer.name} " /></label>
 					<input type="hidden" name="id" value="${printer.id}">
 			</c:if>
-
+			
 			<div id="pictures">
 				<h3>Выберите файл(ы) для загрузки</h3>
-
-				<p>
-					<input id="files-upload" type="file" id="files" name="files" accept="image/*" multiple>
-				</p>
-
+				
+		<form:form method="POST" commandName="add_picture" action="${addPictures}" enctype="multipart/form-data">
+				<p><input id="files-upload" type="file" id="files" name="files" accept="image/*" multiple></p>
+		
 				<p id="drop-area">
 					<span class="drop-instructions">или перетащите файлы сюда!</span>
 					<span class="drop-over"></span>
 				</p>
-
+		</form:form>
 				<ul id="file-list">
 					<li class="no-items">(ни одного файла еще не загружено)</li>
 				</ul>
 			</div>
+
+	<form:form method="POST" commandName="printer" action="${addAction}">
 
 			<div id="printer_characteristic">
 				<div class="characteristic">
@@ -367,10 +378,10 @@
 		</form:form>
 	</div>
 <script>
-(function() {
-	var filesUpload = document.getElementById("files-upload"), dropArea = document
-			.getElementById("drop-area"), fileList = document
-			.getElementById("file-list");
+$(document).ready(function() {
+	var filesUpload = document.getElementById("files-upload"),
+		dropArea = document.getElementById("drop-area"),
+		fileList = document.getElementById("file-list");
 
 	function uploadFile(file) {
 		var li = document.createElement("li"),
@@ -379,10 +390,11 @@
 			progressBarContainer = document.createElement("div"),
 			progressBar = document.createElement("div"),
 			reader,
-			xhr,
+			idLI,
 			fileInfo="";
 
 		li.appendChild(div);
+		li.setAttribute("class", "ui-state-default");
 
 		progressBarContainer.className = "progress-bar-container";
 		progressBar.className = "progress-bar";
@@ -406,7 +418,16 @@
 			reader.readAsDataURL(file);
 		}
 
-		// Uploading - for Firefox, Google Chrome and Safari
+		$('#add_picture').ajaxForm( {
+			type: 'post',
+			success: function(result){
+				li.id = result;
+			}
+			}).submit(); 
+		
+		
+		
+	/*	// Uploading - for Firefox, Google Chrome and Safari
 		xhr = new XMLHttpRequest();
 
 		// Update progress bar
@@ -423,7 +444,7 @@
 		xhr.addEventListener("load", function() {
 			progressBarContainer.className += " uploaded";
 			progressBar.innerHTML = "Uploaded!";
-		}, false);
+		}, false);*/
 
 	/*	xhr.open("post", "http://localhost:8080/nk/printer/upload_pictures", true);
 
@@ -453,6 +474,9 @@
 		if (typeof files !== "undefined") {
 			for (var i = 0, l = files.length; i < l; i++) {
 				uploadFile(files[i]);
+				/*if(i==files.length){
+					resetFormElement(filesUpload);
+				}*/
 			}
 		} else {
 			fileList.innerHTML = "No support for the File API in this web browser";
@@ -495,7 +519,33 @@
 		evt.preventDefault();
 		evt.stopPropagation();
 	}, false);
-})();
+	
+/*	function resetFormElement(e) {
+		  e.wrap('<form>').closest('form').get(0).reset();
+		  e.unwrap();
+
+		  // Prevent form submission
+		  e.stopPropagation();
+		  e.preventDefault();
+		}*/
+});
+
+$(document).ready(function(){
+	$('#file-list').sortable({
+		update: function(event, ui) {
+			var pictureOrder = $(this).sortable('toArray');
+			var data = JSON.stringify(pictureOrder);
+			$.ajax({
+				  type: 'POST',
+				  url: "/nk/admin/printer/change_order_pictures",
+				  data: data,
+				  contentType: "application/json; charset=utf-8",
+		          dataType: "json"
+				  });
+			/*$.post('/nk/admin/printer/change_order_pictures', JSON.stringify(data), function() {}, 'json');*/
+		}
+	});
+});
 
 jQuery(document).on('click', '.delete_img', function(){
 	  jQuery(this).closest('li').remove();
