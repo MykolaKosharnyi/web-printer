@@ -79,10 +79,6 @@ form > p{
 						width: 400px;
 						height: 300px;
 					}
-					
-					 /* #file-list {    width: 100%; }
-  #file-list li { margin: 0 3px 3px 3px; padding: 0; padding-left: 0; font-size: 1.4em; height: 18px; }
-  #file-list li span { position: absolute; margin-left: -1.3em; }*/
   
 					.delete_img {
 						cursor: pointer;

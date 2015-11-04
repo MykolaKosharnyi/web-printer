@@ -55,7 +55,7 @@
 				<h3>Выберите файл(ы) для загрузки</h3>
 				
 		<form:form method="POST" commandName="add_picture" action="${addPictures}" enctype="multipart/form-data">
-				<p><input id="files-upload" type="file" id="files" name="files" accept="image/*" multiple></p>
+				<p><input id="files-upload" type="file" id="files" name="files" accept="image/*" ></p>
 		
 				<p id="drop-area">
 					<span class="drop-instructions">или перетащите файлы сюда!</span>
@@ -548,7 +548,17 @@ $(document).ready(function(){
 });
 
 jQuery(document).on('click', '.delete_img', function(){
-	  jQuery(this).closest('li').remove();
+	var li = $(this).closest('li');
+	var id = li.attr('id').replace(".", ":");
+	
+	$.ajax({
+		  type: 'POST',
+		  url: "/nk/admin/printer/remove_picture/" + $(this).closest('li').attr('id').replace(".", ":"),
+		  contentType: "application/json; charset=utf-8",
+          dataType: "json"
+		  });	
+	
+	  li.remove();
 	});
 </script>
 </body>

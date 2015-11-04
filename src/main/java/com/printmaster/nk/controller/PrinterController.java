@@ -47,8 +47,9 @@ public class PrinterController {
 	
     private PrinterService printerService;
 
-    LinkedHashMap<String, FileMeta> files = new LinkedHashMap<String, FileMeta>();
+    LinkedList<FileMeta> files = new LinkedList<FileMeta>();
     FileMeta fileMeta = null;
+    private String directory = "C:/Users/Николай/Desktop/work/print-master/src/main/webapp/resources/images/printers";
     
     @Autowired(required=true)
     @Qualifier(value="printerService")
@@ -322,19 +323,28 @@ public class PrinterController {
   
 //            String phyPath = servletContext.getRealPath("/");
 
-            String myPath = "C:/Users/Николай/Desktop/work/print-master/src/main/webapp/resources/images/printers";
-            if(new File(myPath + File.separator + id).mkdir()){
+  //          String myPath = "C:/Users/Николай/Desktop/work/print-master/src/main/webapp/resources/images/printers";
+            if(new File(directory + File.separator + id).mkdir()){
             	System.out.println("Создано новую директорию!" + id);
             } else {
             	System.out.println("Не создано новую директорию :(");
             }
             
 			if (files != null) {
-				for (final Map.Entry<String, FileMeta> entry : files.entrySet()) {
+//				for (final Map.Entry<String, FileMeta> entry : files.entrySet()) {
+//					try {
+//						FileCopyUtils.copy(entry.getValue().getBytes(), new FileOutputStream(
+//								myPath + File.separator + id + File.separator + entry.getValue().getFileName()));
+//						printer.getPathPictures().add(entry.getKey());
+//					} catch (IOException e) {
+//						e.printStackTrace();
+//					}
+//				}
+				for (FileMeta fm : files) {
 					try {
-						FileCopyUtils.copy(entry.getValue().getBytes(), new FileOutputStream(
-								myPath + File.separator + id + File.separator + entry.getValue().getFileName()));
-						printer.getPathPictures().add(entry.getKey());
+						FileCopyUtils.copy(fm.getBytes(), new FileOutputStream(
+								directory + File.separator + id + File.separator + fm.getFileName()));
+						printer.getPathPictures().add(fm.getFileName());
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
@@ -387,25 +397,69 @@ public class PrinterController {
             }
              //2.4 add to files
              System.out.println("Добавлено: " + fileMeta.getFileName());
-             files.put(fileMeta.getFileName(),fileMeta);
+             //files.put(fileMeta.getFileName(),fileMeta);
+             files.add(fileMeta);
          }  
          return fileName;
     }
     @RequestMapping(value="/admin/printer/change_order_pictures", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void changeOrderPictures(@RequestBody List<String> selectedIds) {
-    //	for(String s : selectedIds){
-    	for(int i=0; i < selectedIds.size(); i++){
-    		//System.out.println("Значение: " + s);
-    		Collections.swap(files, i, files.);
+    	System.out.println("------------------------");
+    	System.out.println("Получение нового порядка");
+    	for(String s : selectedIds){
+    		System.out.println(s);
     	}
-    	System.out.println("-----------------");
+    	for(int i = 0; i < selectedIds.size(); i++){
+    		for(int k = 0; k < files.size() ; k++){
+        		if(files.get(k).getFileName().equals(selectedIds.get(i))){
+        			Collections.swap(files, i, k);
+        			break;
+        		}
+        	}
+    	}
+    	System.out.println("------------------------");
+    	System.out.println("After sorting: ");
+    	for(FileMeta s : files){
+    		System.out.println(s.getFileName());
+    	}
+    	
+    }
+    
+    @RequestMapping(value="/admin/printer/remove_picture/{name_picture}", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
+    public @ResponseBody void removePicture(@PathVariable("name_picture") String namePicture) {
+    	String name = namePicture.replace(":", ".");
+    	System.out.println("------------------------");
+    	System.out.println("ID: " + name);
+    	System.out.println("Before removing");
+    	for(FileMeta s : files){
+    		System.out.println(s.getFileName());
+    	}
+    		Iterator<FileMeta> fmi = files.iterator();
+    		while(fmi.hasNext()){
+        		if(fmi.next().getFileName().equals(name)){
+        			fmi.remove();
+        			break;
+        		}
+        	}
+    	System.out.println("------------------------");
+    	System.out.println("After removing: ");
+    	for(FileMeta s : files){
+    		System.out.println(s.getFileName());
+    	}
     	
     }
     
     @RequestMapping("/admin/printer/remove/{id}")
     public String removePrinter(@PathVariable("id") int id){
+    	try{
+     	   
+            delete(new File(directory + File.separator + id));
+     	
+        }catch(IOException e){
+            e.printStackTrace();
+        }
         this.printerService.removePrinter(id);
-        return "redirect:/printers";
+        return "redirect:/admin/printers";
     }
   
     @RequestMapping("/admin/printer/edit/{id}")
@@ -421,4 +475,43 @@ public class PrinterController {
     	model.addAttribute("searchPrintersCriteria", new SearchPrinters());
         return "test";
     }
+    
+    public void delete(File file) throws IOException{
+     
+        	if(file.isDirectory()){
+     
+        		//directory is empty, then delete it
+        		if(file.list().length==0){
+        			
+        		   file.delete();
+        		   System.out.println("Directory is deleted : " 
+                                                     + file.getAbsolutePath());
+        			
+        		}else{
+        			
+        		   //list all the directory contents
+            	   String files[] = file.list();
+         
+            	   for (String temp : files) {
+            	      //construct the file structure
+            	      File fileDelete = new File(file, temp);
+            		 
+            	      //recursive delete
+            	     delete(fileDelete);
+            	   }
+            		
+            	   //check the directory again, if empty then delete it
+            	   if(file.list().length==0){
+               	     file.delete();
+            	     System.out.println("Directory is deleted : " 
+                                                      + file.getAbsolutePath());
+            	   }
+        		}
+        		
+        	}else{
+        		//if file, then delete it
+        		file.delete();
+        		System.out.println("File is deleted : " + file.getAbsolutePath());
+        	}
+        }
 }
