@@ -7,27 +7,7 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 public class FileMeta {
 
 	private String fileName;
-	private int length;
-	private String fileSize;
-	private String fileType;
-
 	private byte[] bytes;
-
-	public String getFileSize() {
-		return fileSize;
-	}
-
-	public void setFileSize(String fileSize) {
-		this.fileSize = fileSize;
-	}
-
-	public int getLength() {
-		return length;
-	}
-
-	public void setLength(int length) {
-		this.length = length;
-	}
 
 	public String getFileName() {
 		return fileName;
@@ -35,14 +15,6 @@ public class FileMeta {
 
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
-	}
-
-	public String getFileType() {
-		return fileType;
-	}
-
-	public void setFileType(String fileType) {
-		this.fileType = fileType;
 	}
 
 	public byte[] getBytes() {

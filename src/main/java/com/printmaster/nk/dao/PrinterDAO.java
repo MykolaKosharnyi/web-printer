@@ -12,7 +12,7 @@ public interface PrinterDAO {
     public void updatePrinter(Printer p);
     public List<Printer> listPrinters();
     public Set<Printer> listSearchPrinters(SearchPrinters searchPrinters);
-    public Printer getPrinterById(int id);
-    public void removePrinter(int id);
+    public Printer getPrinterById(long id);
+    public void removePrinter(long id);
      
 }

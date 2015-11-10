@@ -2,7 +2,7 @@
 #display_search{
     position: relative;
     width: auto;
-    background: #f5f5f5;
+    background: #E8F2FE;
     cursor: pointer;
 }
     #display_search p{
@@ -78,7 +78,7 @@
     float: left;
     padding-left: 10px;
     padding-right: 10px;
-    background: #f5f5f5;
+    background: #E8F2FE;
 }
     .search_criteria{
         border-bottom: 1px solid rgb(219, 219, 219);
@@ -214,7 +214,7 @@
                 padding: 0;
                 margin: 0;
             }
-
+			
             .amount-prise0,
             .amount-prise1{
                 width: 42px;
@@ -323,7 +323,7 @@
     width: 84%;
     float: left;
     margin-left: 5px;
-    background: #f5f5f5;
+    /*background: #f5f5f5;*/
     /*border: 2px green solid;*/
 }
 

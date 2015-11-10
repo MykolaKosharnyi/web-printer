@@ -3,8 +3,9 @@
        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"  
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">  
 <tiles-definitions>  
-    <definition name="base" template="/WEB-INF/views/layout.jsp">   
-        <put-attribute name="header" value="/WEB-INF/views/title/header.jsp" />  
+    <definition name="base" template="/WEB-INF/views/title/layout.jsp">  
+        <put-attribute name="header" value="/WEB-INF/views/title/header.jsp" />
+        <put-attribute name="path" value="" />   
         <put-attribute name="left-menu" value="/WEB-INF/views/title/left-menu.jsp" />
         <put-attribute name="search" value="" />   
         <put-attribute name="reklam" value="/WEB-INF/views/title/reklam.jsp" /> 
@@ -16,13 +17,36 @@
         <put-attribute name="body" value="/WEB-INF/views/home.jsp" />  
     </definition>  
   
-    <definition name="printers" extends="base">  
-        <put-attribute name="search" value="/WEB-INF/views/search_printers.jsp" /> 
-        <put-attribute name="body" value="/WEB-INF/views/printers.jsp" />  
-    </definition>  
+    <definition name="printers" extends="base"> 
+    	<put-attribute name="path" value="/WEB-INF/views/printer/path_user_printers.jsp" />  
+        <put-attribute name="search" value="/WEB-INF/views/printer/search_printers.jsp" /> 
+        <put-attribute name="body" value="/WEB-INF/views/printer/printers.jsp" />  
+    </definition> 
     
-    <definition name="printer" extends="base">    
-        <put-attribute name="body" value="/WEB-INF/views/printer.jsp" />  
+    <definition name="printers/*" extends="printers"> 
+    	<put-attribute name="path" value="/WEB-INF/views/printer/path_user_printers_with_type.jsp" />  
+        <put-attribute name="search" value="/WEB-INF/views/printer/search_printer_concrete_type.jsp" /> 
+    </definition>   
+    
+    <definition name="printer" extends="base">
+    	<put-attribute name="path" value="/WEB-INF/views/printer/path_user_printer.jsp" />    
+        <put-attribute name="body" value="/WEB-INF/views/printer/printer.jsp" />  
+    </definition>
+    
+    <definition name="printers_3d" extends="base"> 
+    	<put-attribute name="path" value="/WEB-INF/views/printer3d/path_user_printers_3d.jsp" />  
+        <put-attribute name="search" value="/WEB-INF/views/printer3d/search_printers_3d.jsp" /> 
+        <put-attribute name="body" value="/WEB-INF/views/printer3d/printers_3d.jsp" />  
+    </definition> 
+    
+    <definition name="printers_3d/*" extends="printers_3d"> 
+    	<put-attribute name="path" value="/WEB-INF/views/printer3d/path_user_printers_with_type_3d.jsp" />  
+        <put-attribute name="search" value="/WEB-INF/views/printer3d/search_printer_concrete_type_3d.jsp" /> 
+    </definition>   
+    
+    <definition name="printer_3d" extends="base">
+    	<put-attribute name="path" value="/WEB-INF/views/printer3d/path_user_printer_3d.jsp" />    
+        <put-attribute name="body" value="/WEB-INF/views/printer3d/printer_3d.jsp" />  
     </definition>
   
 </tiles-definitions>  

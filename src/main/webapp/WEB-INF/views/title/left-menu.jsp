@@ -1,49 +1,45 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
             <ul class="menu">
-                <li class="menu_list"><a href="<c:url value='/printers/search' />">Принтеры</a>
+                <li class="menu_list"><a href="<c:url value='/printers' />">Принтеры</a>
                     <ul class="menu_drop">
-                        <li class="menu_list_list"><a href="<c:url value='/printers/search' />">Сольвентные принтеры</a>
+                        <li class="menu_list_list"><a href="<c:url value='/printers/dissolving' />">Сольвентные принтеры</a>
                             <ul class="menu_drop_drop">
                                 <li><a href="#">Оборудование Anhui LIYU</a></li>
                                 <li><a href="#">Оборудование Infinity Digital Printers</a></li>
                                 <li><a href="#">Оборудование Fei Yeung Union</a></li>
                                 <li><a href="#">Оборудование Zhongye Technology</a></li>
-                                <li><a href="#">Оборудование Flora Digital Printing</a></li>
-                                <li><a href="#">Оборудование Teckwin</a></li>
-                                <li><a href="#">Оборудование Hewllet-Pacard/Scitex Vision</a></li>
-                                <li><a href="#">Оборудование VUTEk</a></li>
-                                <li><a href="#">Оборудование Mimaki</a></li>
-                                <li><a href="#">Оборудование Roland</a></li>
-                                <li><a href="#">Оборудование Mutoh</a></li>
-                                <li><a href="#">Оборудование OCE</a></li>
-                                <li><a href="#">Оборудование SKY JET</a></li>
-                                <li><a href="#">Оборудование Kodak-Encad</a></li>
-                                <li><a href="#">Оборудование JHF</a></li>
                              </ul>
                         </li>
-                        <li><a href="<c:url value='/printers/search' />">Экосольвентные принтеры</a></li>
-                        <li><a href="<c:url value='/printers/search' />">UV рулонные принтеры</a></li>
-                        <li><a href="<c:url value='/printers/search' />">UV плоскопечатные принтеры</a></li>
-                        <li><a href="<c:url value='/printers/search' />">Сублимационные принтеры</a></li>
-                        <li><a href="<c:url value='/printers/search' />">Текстильные принтеры</a></li>
+                        <li class="menu_list_list"><a href="<c:url value='/printers/ecosolvent' />">Экосольвентные принтеры</a>
+							<ul class="menu_drop_drop">
+								<c:forEach items="${links}" var="link">
+									<li><a href="#">${link}</a></li>
+								</c:forEach>
+							</ul>
+						</li>
+                        <li><a href="<c:url value='/printers/UV_roll' />">UV рулонные принтеры</a></li>
+                        <li><a href="<c:url value='/printers/UV_flatbed' />">UV плоскопечатные принтеры</a></li>
+                        <li><a href="<c:url value='/printers/sublimation' />">Сублимационные принтеры</a></li>
+                        <li><a href="<c:url value='/printers/textile' />">Текстильные принтеры</a></li>
+                        <li><a href="<c:url value='/printers/water_pigment' />">Водные/пигментные принтеры</a></li>
                     </ul>
                 </li>
-                <li class="menu_list"><a href="#">3D Принтеры</a>
+                <li class="menu_list"><a href="<c:url value='/printers_3d' />">3D Принтеры</a>
                     <ul class="menu_drop">
-                        <li class="menu_list_list"><a href="#">Экструдные FDM (fused deposition modeling)</a>
+                        <li class="menu_list_list"><a href="<c:url value='/printers_3d/FDM-extruder' />">Экструдные FDM (fused deposition modeling)</a>
                             <ul class="menu_drop_drop">
                             <li><a href="#">Wasatch SoftRIP</a></li>
                             <li><a href="#">Roland VersaWorks</a></li>
                             <li><a href="#">RIP Ergosoft</a></li>
                         </ul>
                         </li>
-                        <li><a href="#">Фото печать Polyjet</a></li>
-                        <li><a href="#">Лазерного спекания LENS (LASER ENGINEERED NET SHAPING)</a></li>
-                        <li><a href="#">Ламинация LOM (laminated object manufacturing)</a></li>
-                        <li><a href="#">Стереолитография SL (Stereolithography)</a></li>
-                        <li><a href="#">Лазерное спекание LS (laser sintering)</a></li>
-                        <li><a href="#">Порошкового склеивания 3DP (three dimensional printing)</a></li>
+                        <li><a href="<c:url value='/printers_3d/photo_printing_polyjet' />">Фото печать Polyjet</a></li>
+                        <li><a href="<c:url value='/printers_3d/laser_sintering_LENS' />">Лазерного спекания LENS (LASER ENGINEERED NET SHAPING)</a></li>
+                        <li><a href="<c:url value='/printers_3d/lamination_LOM' />">Ламинация LOM (laminated object manufacturing)</a></li>
+                        <li><a href="<c:url value='/printers_3d/stereolithography_SL' />">Стереолитография SL (Stereolithography)</a></li>
+                        <li><a href="<c:url value='/printers_3d/laser_sintering_LS' />">Лазерное спекание LS (laser sintering)</a></li>
+                        <li><a href="<c:url value='/printers_3d/powder_bonding_3DP' />">Порошкового склеивания 3DP (three dimensional printing)</a></li>
                     </ul>
                 </li>
                 <li class="menu_list"><a href="#">Ламинаторы</a>

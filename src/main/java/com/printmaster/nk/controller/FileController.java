@@ -57,8 +57,8 @@ public class FileController {
              //2.3 create new fileMeta
              fileMeta = new FileMeta();
              fileMeta.setFileName(mpf.getOriginalFilename());
-             fileMeta.setFileSize(mpf.getSize()/1024+" Kb");
-             fileMeta.setFileType(mpf.getContentType());
+             /*fileMeta.setFileSize(mpf.getSize()/1024+" Kb");
+             fileMeta.setFileType(mpf.getContentType());*/
  
              try {
                 fileMeta.setBytes(mpf.getBytes());
@@ -88,7 +88,7 @@ public class FileController {
      public void get(HttpServletResponse response,@PathVariable String value){
          FileMeta getFile = files.get(Integer.parseInt(value));
          try {      
-                response.setContentType(getFile.getFileType());
+                /*response.setContentType(getFile.getFileType());*/
                 response.setHeader("Content-disposition", "attachment; filename=\""+getFile.getFileName()+"\"");
                 FileCopyUtils.copy(getFile.getBytes(), response.getOutputStream());
          }catch (IOException e) {
@@ -107,8 +107,8 @@ public class FileController {
 	        try {
 	        	FileMeta fileMeta = files.get(Integer.parseInt(value));
 	        	
-	            response.setContentType(fileMeta.getFileType());
-	            response.setContentLength(fileMeta.getLength());
+	           /* response.setContentType(fileMeta.getFileType());
+	            response.setContentLength(fileMeta.getLength());*/
 	            FileCopyUtils.copy(fileMeta.getBytes(), response.getOutputStream());
 	 
 	        } catch (IOException e) {

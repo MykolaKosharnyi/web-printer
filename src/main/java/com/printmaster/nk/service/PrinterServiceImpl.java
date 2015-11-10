@@ -39,13 +39,13 @@ public class PrinterServiceImpl implements PrinterService {
  
     @Override
     @Transactional
-    public Printer getPrinterById(int id) {
+    public Printer getPrinterById(long id) {
         return this.printerDAO.getPrinterById(id);
     }
  
     @Override
     @Transactional
-    public void removePrinter(int id) {
+    public void removePrinter(long id) {
         this.printerDAO.removePrinter(id);
     }
 

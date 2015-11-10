@@ -13,7 +13,30 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
     <script src="http://malsup.github.com/jquery.form.js"></script>
-    <script src="<%=request.getContextPath()%>/resources/js/addPrinter.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/tiny_mce/tinymce.min.js"></script>
+	<script type="text/javascript">
+		tinymce.init({
+					selector : "textarea",
+					theme : "modern",
+					language : "ru",
+					plugins : [
+							"advlist autolink lists link image charmap print preview hr anchor pagebreak",
+							"searchreplace wordcount visualblocks visualchars code fullscreen",
+							"insertdatetime media nonbreaking save table contextmenu directionality",
+							"emoticons template paste textcolor colorpicker textpattern imagetools" ],
+					toolbar1 : "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+					toolbar2 : "preview media | forecolor backcolor emoticons",
+					image_advtab : true,
+					templates : [ {
+						title : 'Test template 1',
+						content : 'Test 1'
+					}, {
+						title : 'Test template 2',
+						content : 'Test 2'
+					} ]
+				});
+	</script>
+<script src="<%=request.getContextPath()%>/resources/js/addPrinter.js"></script>
 
 <c:if test="${empty printer.name}">
 	<title>
@@ -37,18 +60,18 @@
   </script>
 </head>
 <body>
-	<c:url var="addAction" value="/printer/add" ></c:url>
 	<c:url var="addPictures" value="/admin/printer/upload_pictures" ></c:url>
 	
 	<div id="product">
 	
 			<c:if test="${empty printer.name}">
 					<label id="head_of_page"><spring:message text="Добавление нового принтера" /></label>
+					<c:url var="addAction" value="/admin/printer/add" ></c:url>
 			</c:if>
 			
 			<c:if test="${!empty printer.name}">
 					<label id="head_of_page"><spring:message text="Изменение ${printer.name} " /></label>
-					<input type="hidden" name="id" value="${printer.id}">
+					<c:url var="addAction" value="/admin/printer/update" ></c:url>
 			</c:if>
 			
 			<div id="pictures">
@@ -63,13 +86,29 @@
 				</p>
 		</form:form>
 				<ul id="file-list">
-					<li class="no-items">(ни одного файла еще не загружено)</li>
+					<c:if test="${empty printer.name}">
+						<li class="no-items">(ни одного файла еще не загружено)</li>
+					</c:if>
+					<c:if test="${!empty printer.name}">
+						<c:forEach items="${printer.pathPictures}" var="pathPicture">
+							<li class="ui-state-default" id="${pathPicture}">
+								<div>
+									<p class="delete_img">Удалить</p>
+								</div>
+								<img src="<%=request.getContextPath()%>/resources/images/printers/${printer.id}/${pathPicture}" alt="">
+							</li>
+						</c:forEach>
+					</c:if>
 				</ul>
 			</div>
 
 	<form:form method="POST" commandName="printer" action="${addAction}">
-
-			<div id="printer_characteristic">
+			
+			<c:if test="${!empty printer.name}">
+					<input type="hidden" name="id" value="${printer.id}">
+			</c:if>
+			
+			<div class="printer_characteristic">
 				<div class="characteristic">
 					<div class="block_title">
 						<i></i>
@@ -203,6 +242,9 @@
 						<form:checkboxes items="${typeDrops}" path="typeDrops" element="li"/>
 					</ul>
 				</div>
+			</div>
+
+			<div class="printer_characteristic">
 				<div class="characteristic">
 					<div class="block_title">
 						<i></i>
@@ -212,9 +254,6 @@
 						<form:checkboxes items="${sizeDrops}" path="sizeDrops" element="li"/>
 					</ul>
 				</div>
-			</div>
-
-			<div id="printer_characteristic">
 				<div class="characteristic">
 					<div class="block_title">
 						<i></i>
@@ -253,7 +292,7 @@
 						<p>Интерфейс подключения</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${interfaceConnection}" path="interfaceConnection" element="li"/>
+						<form:checkboxes items="${interfaceConnection}" path="interfaceConnection" element="li"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -363,7 +402,7 @@
 						<div class="slider-range-depth"></div>
 					</ul>
 				</div>
-				<div class="characteristic">
+		<!--  		<div class="characteristic">
 					<div class="block_title">
 						<i></i>
 						<p>Описание</p>
@@ -371,10 +410,33 @@
 					<ul class="check_boxes">
 						<form:textarea rows="4" cols="29" path="description" value="${printer.depth}"></form:textarea>
 					</ul>
+				</div>-->
+			</div>
+				<input type="submit" value="загрузить" />
+			
+		  	<div class="textarea_description">
+			<div class="characteristic">
+					<div class="block_title">
+						<i></i>
+						<p>Описание</p>
+					</div>
+					<ul class="check_boxes">
+						<form:textarea name="content" path="description" value="${printer.depth}"></form:textarea>
+					</ul>
 				</div>
 			</div>
 			
-			<input type="submit" value="загрузить" />
+			<div class="textarea_description">
+			<div class="characteristic">
+					<div class="block_title">
+						<i></i>
+						<p>Description(отображение при выборе английского языка на сайте)</p>
+					</div>
+					<ul class="check_boxes">
+						<form:textarea name="content" path="descriptionEng" value="${printer.depth}"></form:textarea>
+					</ul>
+				</div>
+			</div>
 		</form:form>
 	</div>
 <script>

@@ -1,20 +1,31 @@
 package com.printmaster.nk.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="order_printer")
-public class OrderPrinter extends Model{
+public class OrderPrinter  implements Serializable{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -7410894288329287520L;
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="id")
+	private int id;
 	
 	@ManyToOne
 	@JoinColumn(name="user_id")
@@ -25,6 +36,7 @@ public class OrderPrinter extends Model{
 	private Printer printer;
 	
 	@Column(name="time_order")
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date timeOrder;
 	
 	@Column(name="amount")
@@ -34,9 +46,17 @@ public class OrderPrinter extends Model{
 		super();
 	}
 
-	public OrderPrinter(int id) {
-		super(id);
+
+	public int getId() {
+		return id;
 	}
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
 	/**
 	 * @return the user
 	 */

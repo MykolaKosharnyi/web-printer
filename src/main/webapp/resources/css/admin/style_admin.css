@@ -10,10 +10,14 @@
 } 
 /* ------ product page ------ */
 
-form {
-	width: inherit;
+form#printer {
+	float:left;
 	margin: 10px;
 	padding: 0;
+	position: relative;
+	height: auto;
+	width: 650px;
+	
 }
 p{
 	margin: 0px;
@@ -91,7 +95,15 @@ form > p{
 					.delete_img:hover {
 						color: blue;
 					}
-#printer_characteristic{
+					
+#box_printer_characteristic{
+	position: relative;
+	float:left;
+	height: auto;
+	widht: 600px;
+}
+					
+.printer_characteristic{
     position: relative;
     height: auto;
     width: auto;
@@ -99,8 +111,22 @@ form > p{
     padding-left: 10px;
     padding-right: 10px;
     margin-left:5px;
-    background: #f5f5f5;
+    background: #E8F2FE;
 }
+
+.textarea_description{
+	position: relative;
+	float:left;
+	height: auto;
+    width: 650px;
+    /*border: 1px #006080 solid;*/
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: 5px;
+   /* margin-top: 15px;*/
+   /* background: #D1E0EF;*/
+}
+
     .characteristic{
         border-bottom: 1px solid rgb(219, 219, 219);
         color: rgb(51, 51, 51);
@@ -112,6 +138,16 @@ form > p{
         width: 250px;
     }
 
+	.textarea_description  .characteristic{
+		border-bottom: 1px solid rgb(219, 219, 219);
+	        color: rgb(51, 51, 51);
+	        display: block;
+	        font: 12px Arial;
+	        height: auto;
+	        line-height: 16px;
+	        padding: 0px 0px 3px 0px;
+	        width: inherit;
+	}
         .block_title{
             color: rgb(51, 51, 51);
             cursor: pointer;

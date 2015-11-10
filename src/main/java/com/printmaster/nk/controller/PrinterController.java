@@ -3,20 +3,19 @@ package com.printmaster.nk.controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.nio.file.Files;
 import java.util.Collections;
-import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.ServletContext;
 
-//import javax.servlet.ServletContext;
-
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -42,8 +41,8 @@ import com.printmaster.nk.service.PrinterService;
 @Controller
 public class PrinterController {
 	
-//	@Autowired
-//	ServletContext servletContext; 
+	@Autowired
+	ServletContext servletContext; 
 	
     private PrinterService printerService;
 
@@ -250,50 +249,52 @@ public class PrinterController {
 		return m;
 	}
 	
-	@RequestMapping(value = "/printers/search", method = RequestMethod.GET)	
-    public String searchPrinters(Model model) {
+	@RequestMapping(value = "/printers", method = RequestMethod.GET)	
+    public String allPrinters(Model model) {
         model.addAttribute("listPrinters", this.printerService.listPrinters());
-        SearchPrinters sp = new SearchPrinters();
-        sp.setPrise0(0);
-        sp.setPrise1(50000);
-        model.addAttribute("search", sp);
+        SearchPrinters search = new SearchPrinters();
+        search.setPrise0(0);
+        search.setPrise1(100000);
+        model.addAttribute("search", search);
         return "printers";
     }
 	
-//	@RequestMapping(value = "/printers/search", method = RequestMethod.POST)	
-//    public ModelAndView searchingPrinters(Model model, @ModelAttribute("search") SearchPrinters searchPrintersCriteria) {
-//		System.out.println(searchPrintersCriteria.toString());
-//		System.out.println(searchPrintersCriteria.getPrise1());
-//        //model.addAttribute("listPrinters", this.printerService.listSearchPrinters(searchPrintersCriteria));
-//        //model.addAttribute("searchPrintersCriteria", searchPrintersCriteria);
-//		ModelAndView mav = new ModelAndView("printers"); 
-//		mav.addObject("listPrinters", this.printerService.listSearchPrinters(searchPrintersCriteria));
-////		mav.addObject("listPrinters", this.printerService.listPrinters());
-//		mav.addObject("search", searchPrintersCriteria);
-//        return mav;
-//    }
+	@RequestMapping(value = "/printers/{type}", method = RequestMethod.GET)	
+    public String typePrinters(@PathVariable("type") String type, Model model) {
+        SearchPrinters search = new SearchPrinters();
+        String currentType = null;
+
+        	if(type.equals("dissolving")){
+        		currentType = "Сольвентный";
+        	} else if(type.equals("ecosolvent")){
+        		currentType = "Экосольвентный";
+        	} else if(type.equals("UV_roll")){
+        		currentType = "UV рулонный";
+        	} else if(type.equals("UV_flatbed")){
+        		currentType = "UV плоскопечатный";
+        	} else if(type.equals("sublimation")){
+        		currentType = "Сублимационный";
+        	} else if(type.equals("textile")){
+        		currentType = "Текстильный";
+        	} else if(type.equals("water_pigment")){
+        		currentType = "Водный/Пигментный";
+        	} else {
+        		return "redirect:/";
+        	}
+        
+        String[] a = {currentType};
+        search.setTypePrinter(a);
+        search.setPrise0(0);
+        search.setPrise1(100000);
+        model.addAttribute("search", search);
+        model.addAttribute("listPrinters", printerService.listSearchPrinters(search));
+        return "printers/" + type ;
+    }
 
     @RequestMapping(value="/printers/search",method=RequestMethod.POST, produces = "application/json; charset=utf-8")
     public @ResponseBody Set<Printer> addUser(@ModelAttribute(value="search") SearchPrinters search, BindingResult result ){
-        String returnText;
-        if(!result.hasErrors()){
-            returnText = "  Запрос виконано успішно!!! ";
-            System.out.println(search.toString());
-        }else{
-            returnText = "Sorry, an error has occur. User has not been added to list.";
-        }
         return printerService.listSearchPrinters(search);
     }
-	
-	
-//	@RequestMapping(value = "/printers/search", method = RequestMethod.POST)	
-//    public @ResponseBody Set<Printer> searchingPrinters(@RequestParam("prise0") String prise0,
-//    		@RequestParam("prise1") String prise1) {
-//		SearchPrinters searchPrintersCriteria = new SearchPrinters();
-//		searchPrintersCriteria.setPrise0(Integer.parseInt(prise0));
-//		searchPrintersCriteria.setPrise1(Integer.parseInt(prise1));
-//        return null;
-//    }
 	
     @RequestMapping("/printer/{id}")
     public String showPrinter(@PathVariable("id") int id, Model model){
@@ -314,11 +315,10 @@ public class PrinterController {
 	    return new ModelAndView("admin/printer", "printer", new Printer());
 	}
      
-	@RequestMapping(value = "/printer/add", method = RequestMethod.POST) 
+	@RequestMapping(value = "/admin/printer/add", method = RequestMethod.POST) 
 	public @ResponseBody ModelAndView handleFormUpload(/*
 			@RequestParam("files") MultipartFile[] request, */@ModelAttribute Printer printer) throws IOException{
-		
-        if(printer.getId() == 0){
+
             int id = this.printerService.addPrinter(printer);
   
 //            String phyPath = servletContext.getRealPath("/");
@@ -331,15 +331,6 @@ public class PrinterController {
             }
             
 			if (files != null) {
-//				for (final Map.Entry<String, FileMeta> entry : files.entrySet()) {
-//					try {
-//						FileCopyUtils.copy(entry.getValue().getBytes(), new FileOutputStream(
-//								myPath + File.separator + id + File.separator + entry.getValue().getFileName()));
-//						printer.getPathPictures().add(entry.getKey());
-//					} catch (IOException e) {
-//						e.printStackTrace();
-//					}
-//				}
 				for (FileMeta fm : files) {
 					try {
 						FileCopyUtils.copy(fm.getBytes(), new FileOutputStream(
@@ -352,16 +343,59 @@ public class PrinterController {
 			}
             this.printerService.updatePrinter(printer);
             files.clear();
-        }else{
-        	System.out.println("update!!!!!");
-        	System.out.println(printer.getId());
-            //existing printer, call update
-            this.printerService.updatePrinter(printer);
-        }
+		
+          ModelAndView mav = new ModelAndView("redirect:/admin/printers"); 
+		  mav.addObject("listPrinters", this.printerService.listPrinters());
+		  mav.addObject("printer", printer);
+	   return mav;
+	}
+	
+    @RequestMapping("/admin/printer/edit/{id}")
+    public String editPrinter(@PathVariable("id") int id, Model model){
+    	files.clear();
+    	Printer undatePrinter = this.printerService.getPrinterById(id);
+    	
+    	FileMeta fm = null;
+    	for(String path : undatePrinter.getPathPictures()){
+    		fm = new FileMeta();
+    		fm.setFileName(path);
+    		
+    		try {
+    			File fi = new File(directory + File.separator + id + File.separator + path);
+    			fm.setBytes(Files.readAllBytes(fi.toPath()));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+    		files.add(fm);
+    	}
+        model.addAttribute("printer", undatePrinter);
+    //    model.addAttribute("listPrinters", this.printerService.listPrinters());
+        return "admin/printer";
+    }
+	
+	@RequestMapping(value = "/admin/printer/update", method = RequestMethod.POST) 
+	public @ResponseBody ModelAndView updatePrinter(@ModelAttribute Printer printer) throws IOException{
+		FileUtils.cleanDirectory(new File(directory + File.separator + printer.getId()));
+		
+		for (FileMeta fm : files) {
+			try {
+				FileCopyUtils.copy(fm.getBytes(), new FileOutputStream(
+						directory + File.separator + printer.getId() + File.separator + fm.getFileName()));
+				printer.getPathPictures().add(fm.getFileName());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+        System.out.println("update!!!!!");
+        System.out.println(printer.getId());
+        //existing printer, call update
+        this.printerService.updatePrinter(printer);
 		
 		ModelAndView mav = new ModelAndView("redirect:/admin/printers"); 
 		  mav.addObject("listPrinters", this.printerService.listPrinters());
 		  mav.addObject("printer", printer);
+		  files.clear();
 	   return mav;
 	}
 	
@@ -383,13 +417,9 @@ public class PrinterController {
              //2.3 create new fileMeta
              fileMeta = new FileMeta();
      		
-     		 fileName = (1 + files.size()) + "" + mpf.getOriginalFilename().substring(mpf.getOriginalFilename().lastIndexOf("."))/*second part is file extension*/; 
+     		 fileName = files.size() + new Random().nextInt(1000) + "" + mpf.getOriginalFilename().substring(mpf.getOriginalFilename().lastIndexOf("."))/*last part is file extension*/; 
              fileMeta.setFileName(fileName);
-             
-             fileMeta.setFileSize(mpf.getSize()/1024+" Kb");
-             fileMeta.setLength((int) (mpf.getSize()/1024));
-             fileMeta.setFileType(mpf.getContentType());
- 
+
              try {
                 fileMeta.setBytes(mpf.getBytes());
             } catch (IOException e) {
@@ -397,11 +427,11 @@ public class PrinterController {
             }
              //2.4 add to files
              System.out.println("Добавлено: " + fileMeta.getFileName());
-             //files.put(fileMeta.getFileName(),fileMeta);
              files.add(fileMeta);
          }  
          return fileName;
     }
+    
     @RequestMapping(value="/admin/printer/change_order_pictures", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void changeOrderPictures(@RequestBody List<String> selectedIds) {
     	System.out.println("------------------------");
@@ -422,7 +452,7 @@ public class PrinterController {
     	for(FileMeta s : files){
     		System.out.println(s.getFileName());
     	}
-    	
+    	  	
     }
     
     @RequestMapping(value="/admin/printer/remove_picture/{name_picture}", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
@@ -445,29 +475,20 @@ public class PrinterController {
     	System.out.println("After removing: ");
     	for(FileMeta s : files){
     		System.out.println(s.getFileName());
-    	}
-    	
+    	}	
     }
     
     @RequestMapping("/admin/printer/remove/{id}")
     public String removePrinter(@PathVariable("id") int id){
-    	try{
-     	   
-            delete(new File(directory + File.separator + id));
+    	
+    		try {
+				FileUtils.deleteDirectory(new File(directory + File.separator + id));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
      	
-        }catch(IOException e){
-            e.printStackTrace();
-        }
         this.printerService.removePrinter(id);
         return "redirect:/admin/printers";
-    }
-  
-    @RequestMapping("/admin/printer/edit/{id}")
-    public String editPrinter(@PathVariable("id") int id, Model model){
-    	files.clear();
-        model.addAttribute("printer", this.printerService.getPrinterById(id));
-        model.addAttribute("listPrinters", this.printerService.listPrinters());
-        return "admin/printer";
     }
     
     @RequestMapping("/test")
@@ -475,43 +496,4 @@ public class PrinterController {
     	model.addAttribute("searchPrintersCriteria", new SearchPrinters());
         return "test";
     }
-    
-    public void delete(File file) throws IOException{
-     
-        	if(file.isDirectory()){
-     
-        		//directory is empty, then delete it
-        		if(file.list().length==0){
-        			
-        		   file.delete();
-        		   System.out.println("Directory is deleted : " 
-                                                     + file.getAbsolutePath());
-        			
-        		}else{
-        			
-        		   //list all the directory contents
-            	   String files[] = file.list();
-         
-            	   for (String temp : files) {
-            	      //construct the file structure
-            	      File fileDelete = new File(file, temp);
-            		 
-            	      //recursive delete
-            	     delete(fileDelete);
-            	   }
-            		
-            	   //check the directory again, if empty then delete it
-            	   if(file.list().length==0){
-               	     file.delete();
-            	     System.out.println("Directory is deleted : " 
-                                                      + file.getAbsolutePath());
-            	   }
-        		}
-        		
-        	}else{
-        		//if file, then delete it
-        		file.delete();
-        		System.out.println("File is deleted : " + file.getAbsolutePath());
-        	}
-        }
 }

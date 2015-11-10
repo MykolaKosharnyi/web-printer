@@ -27,6 +27,10 @@
 	text-align:center;
 }
 
+.tg td img{
+	hight: 200px;
+	width: 200px;
+}
 .tg th {
 	font-family: Arial, sans-serif;
 	font-size: 14px;
@@ -55,7 +59,11 @@
 			<tr>
 				<th width="40">ID</th>
 				<th width="120">Имя принтера</th>
+				<th width="200">Изображение</th>
 				<th width="80">Цена</th>
+				<th width="80">Ярлык слева</th>
+				<th width="80">Ярлык справа</th>
+				<th width="80">Таймер</th>
 				<th width="60">Редактировать</th>
 				<th width="60">Удалить</th>
 			</tr>
@@ -63,7 +71,11 @@
 				<tr>
 					<td>${printer.id}</td>
 					<td>${printer.name}</td>
+					<td><img src="<%=request.getContextPath()%>/resources/images/printers/${printer.id}/${printer.pathPictures.get(0)}" alt=""></td>
 					<td>${printer.prise} $</td>
+					<td>. </td>
+					<td>. </td>
+					<td>. </td>
 					<td><a href="<c:url value='/admin/printer/edit/${printer.id}' />">Изменить</a></td>
 					<td><a href="<c:url value='/admin/printer/remove/${printer.id}' />">Удалить</a></td>
 				</tr>

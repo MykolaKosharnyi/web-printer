@@ -471,6 +471,7 @@ header{
     width: 1340px;
     height: 28px;
     margin: 0 auto;
+    top: 150px;
     margin-bottom: 5px;
     border-top: 1px solid rgb(219, 219, 219);
     border-bottom: 1px solid rgb(219, 219, 219);
@@ -552,12 +553,13 @@ header{
 
             /* Всплывающие меню */
 
-            .menu_list{
+            .menu_list,
+            .menu_list_list{
                 position: relative;
             }
 
             .menu_drop,
-            .menu_drop_drop{
+            .menu_list_list .menu_drop_drop{
                 position: absolute;
                 width: 100%;
                 left: 100%;
@@ -590,6 +592,7 @@ header{
             .menu_list_list:hover::after{
                 transform: scale(-1);
             }
+            
 /*-------------- LEFT FIELD ------------------*/
         #reklam{
             position: relative;

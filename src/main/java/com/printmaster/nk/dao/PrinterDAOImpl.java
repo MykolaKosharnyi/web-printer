@@ -55,17 +55,17 @@ public class PrinterDAOImpl implements PrinterDAO {
     }
  
     @Override
-    public Printer getPrinterById(int id) {
+    public Printer getPrinterById(long id) {
         Session session = this.sessionFactory.getCurrentSession();      
-        Printer p = (Printer) session.load(Printer.class, new Integer(id));
+        Printer p = (Printer) session.load(Printer.class, new Long(id));
         logger.info("Printer loaded successfully, Printer details="+p);
         return p;
     }
  
     @Override
-    public void removePrinter(int id) {
+    public void removePrinter(long id) {
         Session session = this.sessionFactory.getCurrentSession();
-        Printer p = (Printer) session.load(Printer.class, new Integer(id));
+        Printer p = (Printer) session.load(Printer.class, new Long(id));
         if(null != p){
             session.delete(p);
         }
@@ -106,33 +106,6 @@ public class PrinterDAOImpl implements PrinterDAO {
 		cr.add(previouslyUsedGroup);
 		}
 		
-//		if(searchPrinters.getTypePrint()!= null){
-//		Junction typePrintGroup = Restrictions.disjunction();
-//	//	cr.createAlias("typePrint", "typeP");
-//		for(String tp : searchPrinters.getTypePrint()){
-//		//	Criteria crt = cr.createAlias("typePrint", "typeP").add(Restrictions.like("typeP",tp));
-//	//		
-//			typePrintGroup.add(Restrictions.ilike("typePrint",tp, MatchMode.ANYWHERE));
-//		}
-//		cr.add(typePrintGroup);	
-//		}
-		
-//		if(searchPrinters.getFeed()!= null){
-//		Junction feedGroup = Restrictions.disjunction();
-//		for(String feed : searchPrinters.getFeed()){
-//			feedGroup.add(Restrictions.eq("feed",feed));
-//		}
-//		cr.add(feedGroup);
-//		}
-		
-//		if(searchPrinters.getChromaticity()!= null){
-//		Junction chromaticityGroup = Restrictions.disjunction();
-//		for(String chromaticity : searchPrinters.getChromaticity()){
-//			chromaticityGroup.add(Restrictions.eq("chromaticity",chromaticity));
-//		}
-//		cr.add(chromaticityGroup);
-//		}
-		
 		if(searchPrinters.getManufacturerPrinthead()!= null){
 		Junction manufacturerPrintheadGroup = Restrictions.disjunction();
 		for(String manufacturerPrinthead : searchPrinters.getManufacturerPrinthead()){
@@ -149,41 +122,9 @@ public class PrinterDAOImpl implements PrinterDAO {
 		cr.add(typeOfPrintheadGroup);
 		}
 		
-//		if(searchPrinters.getCompatibleInk()!= null){
-//		Junction compatibleInkGroup = Restrictions.disjunction();
-//		for(String compatibleInk : searchPrinters.getCompatibleInk()){
-//			compatibleInkGroup.add(Restrictions.eq("compatibleInk",compatibleInk));
-//		}
-//		cr.add(compatibleInkGroup);
-//		}
-		
-//		if(searchPrinters.getTypeDrops()!= null){
-//		Junction typeDropsGroup = Restrictions.disjunction();
-//		for(String typeDrops : searchPrinters.getTypeDrops()){
-//			typeDropsGroup.add(Restrictions.eq("typeDrops",typeDrops));
-//		}
-//		cr.add(typeDropsGroup);
-//		}
-		
-//		if(searchPrinters.getSizeDrops()!= null){
-//		Junction sizeDropsGroup = Restrictions.disjunction();
-//		for(String sizeDrops : searchPrinters.getSizeDrops()){
-//			sizeDropsGroup.add(Restrictions.eq("sizeDrops",sizeDrops));
-//		}
-//		cr.add(sizeDropsGroup);
-//		}
-		
 		if(searchPrinters.getSpeedPrint0()!=searchPrinters.getSpeedPrint1()){
 			cr.add(Restrictions.between("speedPrint", searchPrinters.getSpeedPrint0(), searchPrinters.getSpeedPrint1()));
 		}
-		
-//		if(searchPrinters.getPrintResolution()!= null){
-//		Junction printResolutionGroup = Restrictions.disjunction();
-//		for(String printResolution : searchPrinters.getPrintResolution()){
-//			printResolutionGroup.add(Restrictions.eq("printResolution",printResolution));
-//		}
-//		cr.add(printResolutionGroup);
-//		}
 		
 		if(searchPrinters.getEquipmentManufacturer()!= null){
 		Junction equipmentManufacturerGroup = Restrictions.disjunction();
@@ -193,33 +134,17 @@ public class PrinterDAOImpl implements PrinterDAO {
 		cr.add(equipmentManufacturerGroup);
 		}
 		
-		if(searchPrinters.getInterfaceConnection()!= null){
-		Junction interfaceConnectionGroup = Restrictions.disjunction();
-		for(String interfaceConnection : searchPrinters.getInterfaceConnection()){
-			interfaceConnectionGroup.add(Restrictions.eq("interfaceConnection",interfaceConnection));
-		}
-		cr.add(interfaceConnectionGroup);
-		}
-		
-		if(searchPrinters.getMaximumMediaThickness60_0()!=searchPrinters.getMaximumMediaThickness60_1()){
-			cr.add(Restrictions.between("maximumMediaThickness", searchPrinters.getMaximumMediaThickness60_0(), searchPrinters.getMaximumMediaThickness60_1()));
-		}
-		
-		if(searchPrinters.getMaximumMediaThickness500_0()!=searchPrinters.getMaximumMediaThickness500_1()){
-			cr.add(Restrictions.between("maximumMediaThickness", searchPrinters.getMaximumMediaThickness500_0(), searchPrinters.getMaximumMediaThickness500_1()));
-		}
+		if(searchPrinters.getMaximumMediaThickness60_0()!=searchPrinters.getMaximumMediaThickness60_1() ||
+		   searchPrinters.getMaximumMediaThickness500_0()!=searchPrinters.getMaximumMediaThickness500_1()){
+			Junction maximumMediaThicknessGroup = Restrictions.disjunction();
+				maximumMediaThicknessGroup.add(Restrictions.between("maximumMediaThickness", searchPrinters.getMaximumMediaThickness60_0(), searchPrinters.getMaximumMediaThickness60_1()));
+				maximumMediaThicknessGroup.add(Restrictions.between("maximumMediaThickness", searchPrinters.getMaximumMediaThickness500_0(), searchPrinters.getMaximumMediaThickness500_1()));
+			cr.add(maximumMediaThicknessGroup);
+			}
 		
 		if(searchPrinters.getMaximumWeightOfVehicle0()!=searchPrinters.getMaximumWeightOfVehicle1()){
 			cr.add(Restrictions.between("maximumWeightOfVehicle", searchPrinters.getMaximumWeightOfVehicle0(), searchPrinters.getMaximumWeightOfVehicle1()));
 		}
-		
-//		if(searchPrinters.getRip()!= null){
-//		Junction ripGroup = Restrictions.disjunction();
-//		for(String rip : searchPrinters.getRip()){
-//			ripGroup.add(Restrictions.eq("rip",rip));
-//		}
-//		cr.add(ripGroup);
-//		}
 		
 		if(searchPrinters.getMaxPowerConsumption0()!=searchPrinters.getMaxPowerConsumption1()){
 			cr.add(Restrictions.between("maxPowerConsumption", searchPrinters.getMaxPowerConsumption0(), searchPrinters.getMaxPowerConsumption1()));
@@ -241,13 +166,6 @@ public class PrinterDAOImpl implements PrinterDAO {
 			cr.add(Restrictions.between("depth", searchPrinters.getDepth0(), searchPrinters.getDepth1()));
 		}
         //List<Printer> printerList = cr.list();
-
-//		List<Printer> printerList = Collections.checkedList(cr.list(), Printer.class);
-//		Set<Printer> result = new LinkedHashSet<Printer>(cr.list());
-//		System.out.println("Size of array!!! -----   " + printerList.size());
-//        for(Printer p : printerList){
-//            logger.info("Printer List with searching::" + p);
-//        }
 		
 		LinkedHashSet<Printer> result = new LinkedHashSet<Printer>(cr.list());
 		
@@ -256,16 +174,14 @@ public class PrinterDAOImpl implements PrinterDAO {
 		while(itPrinters.hasNext()){
 			Printer currentPrinter = itPrinters.next();
 			
+			if (searchPrinters.getTypePrint()!=null)
 			if (searchPrinters.getTypePrint().length > 0 ) {
-				System.out.println("Эсть выбранные типы принтеров");
 				boolean isPrinterWeNeed = false;
-				int n = 0;
 				print:
 				for (String currentPrinterPropertyValue : currentPrinter.getTypePrint()) {
 					for (String searchedPrinterPropertyValue : searchPrinters.getTypePrint()) {
 						if (currentPrinterPropertyValue.equals(searchedPrinterPropertyValue)) {
 							isPrinterWeNeed = true;
-							System.out.println("Найдено: " + (++n) + " раз.");
 							break print;
 						}
 					}
@@ -276,10 +192,9 @@ public class PrinterDAOImpl implements PrinterDAO {
 						currentPrinter = itPrinters.next();
 					}
 				}
-			} else {
-				System.out.println("Нету выбранных типов принтеров:(");
-			}
+			} 
 			
+			if (searchPrinters.getFeed()!=null)
 			if (searchPrinters.getFeed().length > 0) {
 				if(itPrinters.hasNext()){
 					boolean isPrinterWeNeed = false;
@@ -301,6 +216,7 @@ public class PrinterDAOImpl implements PrinterDAO {
 				}
 			}	
 			
+			if(searchPrinters.getChromaticity()!=null)
 			if (searchPrinters.getChromaticity().length > 0) {
 				if(itPrinters.hasNext()){
 					boolean isPrinterWeNeed = false;
@@ -322,6 +238,7 @@ public class PrinterDAOImpl implements PrinterDAO {
 				}
 			}		
 			
+			if (searchPrinters.getCompatibleInk()!=null)
 			if (searchPrinters.getCompatibleInk().length > 0) {
 				if(itPrinters.hasNext()){
 					boolean isPrinterWeNeed = false;
@@ -343,6 +260,7 @@ public class PrinterDAOImpl implements PrinterDAO {
 				}
 			}	
 			
+			if (searchPrinters.getTypeDrops()!=null)
 			if (searchPrinters.getTypeDrops().length > 0) {
 				if(itPrinters.hasNext()){
 					boolean isPrinterWeNeed = false;
@@ -364,6 +282,7 @@ public class PrinterDAOImpl implements PrinterDAO {
 				}
 			}
 			
+			if (searchPrinters.getSizeDrops()!=null)
 			if (searchPrinters.getSizeDrops().length > 0) {
 				if(itPrinters.hasNext()){
 					boolean isPrinterWeNeed = false;
@@ -385,6 +304,7 @@ public class PrinterDAOImpl implements PrinterDAO {
 				}
 			}
 			
+			if (searchPrinters.getPrintResolution()!=null)
 			if (searchPrinters.getPrintResolution().length > 0) {
 				if(itPrinters.hasNext()){
 					boolean isPrinterWeNeed = false;
@@ -406,6 +326,29 @@ public class PrinterDAOImpl implements PrinterDAO {
 				}
 			}
 			
+			if (searchPrinters.getInterfaceConnection()!=null)
+			if (searchPrinters.getInterfaceConnection().length > 0) {
+				if(itPrinters.hasNext()){
+					boolean isPrinterWeNeed = false;
+					print:
+					for (String currentPrinterPropertyValue : currentPrinter.getInterfaceConnection()) {
+						for (String searchedPrinterPropertyValue : searchPrinters.getInterfaceConnection()) {
+							if (currentPrinterPropertyValue.equals(searchedPrinterPropertyValue)) {
+								isPrinterWeNeed = true;
+								break print;
+							}
+						}
+					}
+					if(!isPrinterWeNeed){
+						itPrinters.remove();
+						if(itPrinters.hasNext()){
+							currentPrinter = itPrinters.next();
+						}
+					}
+				}
+			}
+			
+			if (searchPrinters.getRip()!=null)
 			if (searchPrinters.getRip().length > 0) {
 				if(itPrinters.hasNext()){
 					boolean isPrinterWeNeed = false;
