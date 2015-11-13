@@ -3,12 +3,14 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/search.css">
+
 	<div id="display_search">
 		<i class="opened"></i>
 		<p>Критерии поиска</p>
 	</div>
 
-	<div id="search_printer">
+	<div id="search_product">
 	<form:form method="POST" commandName="search" action="/nk/printers/search">
 			<input type="submit" value="показать" />
 		<div class="search_criteria">

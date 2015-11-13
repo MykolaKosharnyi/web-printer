@@ -1,0 +1,28 @@
+			.amount-prise{
+                width: 42px;
+            }
+
+    		.amount-sizePrintableAreaX,
+			.amount-sizePrintableAreaY,
+			.amount-sizePrintableAreaZ,
+            .amount-speedPrint{
+                width: 30px;
+            }
+            
+            .amount-meltingPointOfThePrintingMaterial,
+            .amount-sizeExtruder,
+            .amount-thicknessOfThePrintingLayer,
+            .amount-maximumWeightOfThePrintedModel,
+            .amount-maxPowerConsumption{
+            	width: 25px;
+            }
+
+            .amount-weight{
+                width: 30px;
+            }
+
+            .amount-width,
+            .amount-heigth,
+            .amount-depth{
+                width:19px;
+            }

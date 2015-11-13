@@ -8,7 +8,7 @@ import com.printmaster.nk.model.SearchPrinters;
 
 public interface PrinterService {
 	 
-    public int addPrinter(Printer p);
+    public long addPrinter(Printer p);
     public void updatePrinter(Printer p);
     public List<Printer> listPrinters();
     public Set<Printer> listSearchPrinters(SearchPrinters searchPrinters);

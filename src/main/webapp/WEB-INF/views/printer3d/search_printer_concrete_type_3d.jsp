@@ -3,6 +3,8 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/search.css">
+
 	<style>
 			.amount-sizePrintableAreaX0,
 			.amount-sizePrintableAreaY0,
@@ -35,7 +37,7 @@
 		<p>Критерии поиска</p>
 	</div>
 
-	<div id="search_printer">
+	<div id="search_product">
 	<form:form method="POST" commandName="search" action="/nk/printers_3d/search">
 			<input type="submit" value="показать" />
 		<div class="search_criteria">
@@ -60,6 +62,15 @@
 			</div>
 			<ul class="check_boxes">
 				<form:checkboxes items="${typePrinter3D}" path="typePrinter3D" element="li" />
+			</ul>
+		</div>
+		<div class="search_criteria">
+			<div class="block_title">
+				<i></i>
+				<p>Б/У оборудование</p>
+			</div>
+			<ul class="check_boxes">
+				<form:checkboxes items="${previouslyUsed}" path="previouslyUsed" element="li" />
 			</ul>
 		</div>
 		<div class="search_criteria">

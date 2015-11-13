@@ -5,9 +5,9 @@
             <a id="second_row_logo" href="<c:url value='/' />"><img class="second_row_image" src="<%=request.getContextPath()%>/resources/images/head/Logo_Print_Master.jpg" alt=""></a>
             <a id="second_row_contact" href=""><img class="second_row_image" src="<%=request.getContextPath()%>/resources/images/head/Contact.png" alt=""></a>
             <div class="phone_numbers">
-                <p>тел.: (044) 274 22 99 </p>
-                <p>(044) 405 96 11 </p>
-                <p>(044) 405 96 88</p>
+                <p>тел.: (044)-274-22-99 </p>
+                <p>(044)-405-96-11 </p>
+                <p>(044)-405-96-88</p>
             </div>
             <div id="second_row_search">
                 <input id="second_row_search_field" placeholder="Введите слово или фразу..." size="50" type="search">

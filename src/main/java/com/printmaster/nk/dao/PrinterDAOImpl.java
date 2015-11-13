@@ -18,7 +18,7 @@ import com.printmaster.nk.model.Printer;
 import com.printmaster.nk.model.SearchPrinters;
 
 @Repository
-public class PrinterDAOImpl implements PrinterDAO {
+public class PrinterDAOImpl implements ProductDAO<Printer, SearchPrinters> {
      
     private static final Logger logger = LoggerFactory.getLogger(PrinterDAOImpl.class);
  
@@ -29,15 +29,15 @@ public class PrinterDAOImpl implements PrinterDAO {
     }
  
     @Override
-    public int addPrinter(Printer p) {
+    public long addProduct(Printer p) {
         Session session = this.sessionFactory.getCurrentSession();
-       int id = (Integer) session.save(p);
+       long id = (Long) session.save(p);
         logger.info("Printer saved successfully, Printer Details="+p);
         return id;
     }
  
     @Override
-    public void updatePrinter(Printer p) {
+    public void updateProduct(Printer p) {
         Session session = this.sessionFactory.getCurrentSession();
         session.update(p);
         logger.info("Printer updated successfully, Printer Details="+p);
@@ -45,7 +45,7 @@ public class PrinterDAOImpl implements PrinterDAO {
  
     @SuppressWarnings("unchecked")
     @Override
-    public List<Printer> listPrinters() {
+    public List<Printer> listProducts() {
         Session session = this.sessionFactory.getCurrentSession();
         List<Printer> printerList = session.createQuery("from Printer").list();
         for(Printer p : printerList){
@@ -55,7 +55,7 @@ public class PrinterDAOImpl implements PrinterDAO {
     }
  
     @Override
-    public Printer getPrinterById(long id) {
+    public Printer getProductById(long id) {
         Session session = this.sessionFactory.getCurrentSession();      
         Printer p = (Printer) session.load(Printer.class, new Long(id));
         logger.info("Printer loaded successfully, Printer details="+p);
@@ -63,7 +63,7 @@ public class PrinterDAOImpl implements PrinterDAO {
     }
  
     @Override
-    public void removePrinter(long id) {
+    public void removeProduct(long id) {
         Session session = this.sessionFactory.getCurrentSession();
         Printer p = (Printer) session.load(Printer.class, new Long(id));
         if(null != p){
@@ -74,7 +74,7 @@ public class PrinterDAOImpl implements PrinterDAO {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public Set<Printer> listSearchPrinters(SearchPrinters searchPrinters) {
+	public Set<Printer> listSearchProducts(SearchPrinters searchPrinters) {
 		Session session = this.sessionFactory.getCurrentSession();
 		Criteria cr = session.createCriteria(Printer.class);
 		

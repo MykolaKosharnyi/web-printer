@@ -44,7 +44,7 @@ public class Printer3DController {
 	@Autowired
 	ServletContext servletContext; 
 	
-    private Printer3DService printerService;
+    private Printer3DService productService;
 
     LinkedList<FileMeta> files = new LinkedList<FileMeta>();
     FileMeta fileMeta = null;
@@ -52,8 +52,8 @@ public class Printer3DController {
     
     @Autowired(required=true)
     @Qualifier(value="printer3DService")
-    public void setPrinter3DService(Printer3DService ps){
-        this.printerService = ps;
+    public void setPrinter3DService(Printer3DService productService){
+        this.productService = productService;
     }
     
 	@ModelAttribute("typePrinter3D")
@@ -75,6 +75,15 @@ public class Printer3DController {
 		m.put("FDM", "FDM");
 		m.put("RepRap", "RepRap");
 		m.put("MJM (Multi Jet Modeling)", "MJM (Multi Jet Modeling)");
+		return m;
+	}
+	
+	@ModelAttribute("previouslyUsed")
+	public Map<String, String> previouslyUsed(){
+		Map<String, String> m = new LinkedHashMap<String, String>();
+		m.put("новое оборудование", "новое оборудование");
+		m.put("демозальное оборудование", "демозальное оборудование");
+		m.put("б/у", "б/у");
 		return m;
 	}
 	
@@ -156,7 +165,7 @@ public class Printer3DController {
 	
 	@RequestMapping(value = "/printers_3d", method = RequestMethod.GET)	
     public String allPrinters(Model model) {
-       // model.addAttribute("listPrinters", this.printerService.listPrinters());
+        model.addAttribute("listProducts", productService.listPrinters3D());
         SearchPrinters3D search = new SearchPrinters3D();
         search.setPrise0(0);
         search.setPrise1(100000);
@@ -192,42 +201,40 @@ public class Printer3DController {
 		search.setPrise0(0);
 		search.setPrise1(100000);
 		model.addAttribute("search", search);
-		model.addAttribute("listPrinters", printerService.listSearchPrinters(search));
+		model.addAttribute("listProducts", productService.listSearchPrinters3D(search));
 		return "printers_3d/" + type;
 	}
 
     @RequestMapping(value="/printers_3d/search",method=RequestMethod.POST, produces = "application/json; charset=utf-8")
     public @ResponseBody Set<Printer3D> addUser(@ModelAttribute(value="search") SearchPrinters3D search, BindingResult result ){
-        return printerService.listSearchPrinters(search);
+        return productService.listSearchPrinters3D(search);
     }
 	
     @RequestMapping("/printer_3d/{id}")
-    public String showPrinter(@PathVariable("id") int id, Model model){
-    	System.out.println("Id: " + id);
-        model.addAttribute("printer", printerService.getPrinterById(id));
+    public String showPrinter(@PathVariable("id") long id, Model model){
+        model.addAttribute("product", productService.getPrinter3DById(id));
         return "printer_3d";
     }
     
 	@RequestMapping(value = "/admin/printers_3d", method = RequestMethod.GET)	
     public String listPrinters(Model model) {
-        model.addAttribute("listPrinters", this.printerService.listPrinters());
+        model.addAttribute("listProducts", productService.listPrinters3D());
         return "admin/printers_3d";
     }
 	
 	@RequestMapping(value = "/admin/printer_3d/new", method = RequestMethod.GET)
 	public ModelAndView addNewPrinter() {
 		files.clear();
-	    return new ModelAndView("admin/printer_3d", "printer", new Printer3D());
+	    return new ModelAndView("admin/printer_3d", "product", new Printer3D());
 	}
      
 	@RequestMapping(value = "/admin/printer_3d/add", method = RequestMethod.POST) 
-	public @ResponseBody ModelAndView handleFormUpload(/*
-			@RequestParam("files") MultipartFile[] request, */@ModelAttribute Printer3D printer) throws IOException{
+	public @ResponseBody ModelAndView handleFormUpload(@ModelAttribute Printer3D product) throws IOException{
 
-            int id = this.printerService.addPrinter(printer);
+            long id = productService.addPrinter3D(product);
   
             if(new File(directory + File.separator + id).mkdir()){
-            	System.out.println("Создано новую директорию!" + id);
+            	System.out.println("Создано новую директорию! для 3D принтера" + id);
             } else {
             	System.out.println("Не создано новую директорию :(");
             }
@@ -237,28 +244,28 @@ public class Printer3DController {
 					try {
 						FileCopyUtils.copy(fm.getBytes(), new FileOutputStream(
 								directory + File.separator + id + File.separator + fm.getFileName()));
-						printer.getPathPictures().add(fm.getFileName());
+						product.getPathPictures().add(fm.getFileName());
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
 				}
 			}
-            this.printerService.updatePrinter(printer);
+            productService.updatePrinter3D(product);
             files.clear();
 		
           ModelAndView mav = new ModelAndView("redirect:/admin/printers_3d"); 
-		  mav.addObject("listPrinters", this.printerService.listPrinters());
-		  mav.addObject("printer", printer);
+		  mav.addObject("listProducts", productService.listPrinters3D());
+		/*mav.addObject("printer", printer3d);*/
 	   return mav;
 	}
 	
     @RequestMapping("/admin/printer_3d/edit/{id}")
-    public String editPrinter(@PathVariable("id") int id, Model model){
+    public String editPrinter(@PathVariable("id") long id, Model model){
     	files.clear();
-    	Printer3D undatePrinter = this.printerService.getPrinterById(id);
+    	Printer3D undatePrinter3D = productService.getPrinter3DById(id);
     	
     	FileMeta fm = null;
-    	for(String path : undatePrinter.getPathPictures()){
+    	for(String path : undatePrinter3D.getPathPictures()){
     		fm = new FileMeta();
     		fm.setFileName(path);
     		
@@ -270,53 +277,43 @@ public class Printer3DController {
 			}
     		files.add(fm);
     	}
-        model.addAttribute("printer", undatePrinter);
-    //    model.addAttribute("listPrinters", this.printerService.listPrinters());
+        model.addAttribute("product", undatePrinter3D);
         return "admin/printer_3d";
     }
 	
 	@RequestMapping(value = "/admin/printer_3d/update", method = RequestMethod.POST) 
-	public @ResponseBody ModelAndView updatePrinter(@ModelAttribute Printer3D printer) throws IOException{
-		FileUtils.cleanDirectory(new File(directory + File.separator + printer.getId()));
+	public @ResponseBody ModelAndView updatePrinter(@ModelAttribute Printer3D product) throws IOException{
+		FileUtils.cleanDirectory(new File(directory + File.separator + product.getId()));
 		
 		for (FileMeta fm : files) {
 			try {
 				FileCopyUtils.copy(fm.getBytes(), new FileOutputStream(
-						directory + File.separator + printer.getId() + File.separator + fm.getFileName()));
-				printer.getPathPictures().add(fm.getFileName());
+						directory + File.separator + product.getId() + File.separator + fm.getFileName()));
+				product.getPathPictures().add(fm.getFileName());
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
-		
-        System.out.println("update!!!!!");
-        System.out.println(printer.getId());
-        //existing printer, call update
-        this.printerService.updatePrinter(printer);
+	
+        productService.updatePrinter3D(product);
 		
 		ModelAndView mav = new ModelAndView("redirect:/admin/printers_3d"); 
-		  mav.addObject("listPrinters", this.printerService.listPrinters());
-		  mav.addObject("printer", printer);
+		  mav.addObject("listProducts", productService.listPrinters3D());
 		  files.clear();
 	   return mav;
 	}
 	
     @RequestMapping(value="/admin/printer_3d/upload_pictures", method = RequestMethod.POST)
     public @ResponseBody String uploadPictures(MultipartHttpServletRequest request) {
- 
-        //1. build an iterator
+
          Iterator<String> itr =  request.getFileNames();
          MultipartFile mpf = null;
          String fileName = null;
-         
-         //2. get each file
+
          while(itr.hasNext()){
- 
-             //2.1 get next MultipartFile
+
              mpf = request.getFile(itr.next()); 
-             System.out.println(mpf.getOriginalFilename() +" uploaded! " + files.size());
- 
-             //2.3 create new fileMeta
+
              fileMeta = new FileMeta();
      		
      		 fileName = files.size() + new Random().nextInt(1000) + "" + mpf.getOriginalFilename().substring(mpf.getOriginalFilename().lastIndexOf("."))/*last part is file extension*/; 
@@ -327,8 +324,7 @@ public class Printer3DController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-             //2.4 add to files
-             System.out.println("Добавлено: " + fileMeta.getFileName());
+             
              files.add(fileMeta);
          }  
          return fileName;
@@ -336,11 +332,6 @@ public class Printer3DController {
     
     @RequestMapping(value="/admin/printer_3d/change_order_pictures", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void changeOrderPictures(@RequestBody List<String> selectedIds) {
-    	System.out.println("------------------------");
-    	System.out.println("Получение нового порядка");
-    	for(String s : selectedIds){
-    		System.out.println(s);
-    	}
     	for(int i = 0; i < selectedIds.size(); i++){
     		for(int k = 0; k < files.size() ; k++){
         		if(files.get(k).getFileName().equals(selectedIds.get(i))){
@@ -349,39 +340,22 @@ public class Printer3DController {
         		}
         	}
     	}
-    	System.out.println("------------------------");
-    	System.out.println("After sorting: ");
-    	for(FileMeta s : files){
-    		System.out.println(s.getFileName());
-    	}
-    	  	
     }
     
     @RequestMapping(value="/admin/printer_3d/remove_picture/{name_picture}", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void removePicture(@PathVariable("name_picture") String namePicture) {
     	String name = namePicture.replace(":", ".");
-    	System.out.println("------------------------");
-    	System.out.println("ID: " + name);
-    	System.out.println("Before removing");
-    	for(FileMeta s : files){
-    		System.out.println(s.getFileName());
-    	}
     		Iterator<FileMeta> fmi = files.iterator();
     		while(fmi.hasNext()){
         		if(fmi.next().getFileName().equals(name)){
         			fmi.remove();
         			break;
         		}
-        	}
-    	System.out.println("------------------------");
-    	System.out.println("After removing: ");
-    	for(FileMeta s : files){
-    		System.out.println(s.getFileName());
-    	}	
+        	}	
     }
     
     @RequestMapping("/admin/printer_3d/remove/{id}")
-    public String removePrinter(@PathVariable("id") int id){
+    public String removePrinter(@PathVariable("id") long id){
     	
     		try {
 				FileUtils.deleteDirectory(new File(directory + File.separator + id));
@@ -389,7 +363,7 @@ public class Printer3DController {
 				e.printStackTrace();
 			}
      	
-        this.printerService.removePrinter(id);
+        productService.removePrinter3D(id);
         return "redirect:/admin/printers_3d";
     }
 }

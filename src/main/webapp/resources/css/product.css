@@ -6,15 +6,6 @@
     float: left;
     padding-left: 5px;
 }
-/*--- Name of product ---*/
-
-    .product p{
-        position: relative;
-        height: auto;
-        width: 40%;
-        margin: 15px auto;
-        font: 1.5em sans-serif;
-    }
 
 /*--- first part of product page ---*/
     #pictures_and_descriptions{
@@ -79,6 +70,15 @@
                .small_pictures div img:hover{
 					border: 2px /*#C3F9BD*/black solid;
                 }
+/*--- Name of product ---*/
+
+    #name_product_head_description{
+        position: relative;
+        height: auto;
+        width: 70%;
+        margin: 15px auto;
+        font: 1.5em sans-serif;
+    }
 
         .descriptions{
             position: relative;
@@ -90,11 +90,12 @@
             #table_in_head{
                 position: relative;
                 height: auto;
-                width: auto;
+                width: 100%;
                 font: 1em sans-serif;
                 top: 0;
                 float: left;
                 border: none;
+                margin-bottom: 15px;
             }
 
             .descriptions caption{
@@ -114,36 +115,31 @@
             	padding-top: 5px;
             	padding-bottom: 5px;
                 height: auto;
-                width: 190px;
+                width: auto;
                 text-align: top;
                 top: 0;
-                border: 1px #006080 solid;
+                border: 1px #E7EAED solid;
             }
             
             .descriptions td:first-child{
 				font-weight: bold;
             }
             
-            .descriptions div{
-            	float: none;
-            }
+            /*----  Common information  -----*/
+			div#commom_information{
+				float:none;
+				position: relative; 
+				display:block !important; 
+				width: 500px; 
+				padding: 10px;
+				font-style: italic;
+			}
+			
+			#commom_information:first-word{
+				font: 2em sans-serif;
+			}
 				
-				p.key {
-					margin: 0;
-					font-weight: bold;
-					width: auto;
-					text-align: none;
-					float: left;
-					font: 1em sans-serif;
-				}
-				
-				p.value {
-					margin: 0;
-					width: auto;
-					text-align: none;
-					font: 1em sans-serif;
-				}
-				/*---- second part of product page ----*/
+/*---- second part of product page ----*/
 	#tabs_product{
         position: relative;
         width: 100%;
@@ -154,7 +150,6 @@
     	
         .product #tabs_product div{
         	position: relative;
-            padding-top:10px;
             width: inherit;
         }
 
@@ -169,6 +164,7 @@
                 font: 1em sans-serif;
                 top: 0;
                 float: left;
+                margin: 0 auto;
             }
 
            #tabs_product > div caption{
@@ -178,7 +174,7 @@
 
             #tabs_product > div td{
                 height: auto;
-                width: 190px;
+                width: auto;
                 text-align: left;
                 top: 0;
                 margin-bottom: 10px;
@@ -213,7 +209,7 @@
             background:#d6d6d7;
         }
         
-        #output_description, #tabs_product div #output_description p,  #output_description span{
+        #output_description > *{
         	margin: 0;
         	padding: 0;
         	font: 1em sans-serif;

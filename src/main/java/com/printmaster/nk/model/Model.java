@@ -60,6 +60,12 @@ public abstract class Model implements Serializable{
 	
 	@Column(name="description_eng", columnDefinition="TEXT")
 	protected String descriptionEng;
+
+	@ElementCollection(fetch = FetchType.EAGER)
+	@Column(name="path_pictures")
+	private List<String> pathPictures = new ArrayList<String>();
+	
+	public Model(){}
 	
 	public String getDescription() {
 		return description;
@@ -76,14 +82,7 @@ public abstract class Model implements Serializable{
 	public void setDescriptionEng(String descriptionEng) {
 		this.descriptionEng = descriptionEng;
 	}
-
-	@ElementCollection(fetch = FetchType.EAGER)
-	@Column(name="path_pictures")
-	private List<String> pathPictures = new ArrayList<String>();
 	
-	public Model(){
-	}
-
 	public Long getId() {
 		return id;
 	}

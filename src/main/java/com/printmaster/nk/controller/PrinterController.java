@@ -251,7 +251,7 @@ public class PrinterController {
 	
 	@RequestMapping(value = "/printers", method = RequestMethod.GET)	
     public String allPrinters(Model model) {
-        model.addAttribute("listPrinters", this.printerService.listPrinters());
+        model.addAttribute("listProducts", this.printerService.listPrinters());
         SearchPrinters search = new SearchPrinters();
         search.setPrise0(0);
         search.setPrise1(100000);
@@ -287,7 +287,7 @@ public class PrinterController {
         search.setPrise0(0);
         search.setPrise1(100000);
         model.addAttribute("search", search);
-        model.addAttribute("listPrinters", printerService.listSearchPrinters(search));
+        model.addAttribute("listProducts", printerService.listSearchPrinters(search));
         return "printers/" + type ;
     }
 
@@ -297,29 +297,29 @@ public class PrinterController {
     }
 	
     @RequestMapping("/printer/{id}")
-    public String showPrinter(@PathVariable("id") int id, Model model){
+    public String showPrinter(@PathVariable("id") long id, Model model){
     	System.out.println("Id: " + id);
-        model.addAttribute("printer", printerService.getPrinterById(id));
+        model.addAttribute("product", printerService.getPrinterById(id));
         return "printer";
     }
     
 	@RequestMapping(value = "/admin/printers", method = RequestMethod.GET)	
     public String listPrinters(Model model) {
-        model.addAttribute("listPrinters", this.printerService.listPrinters());
+        model.addAttribute("listProducts", printerService.listPrinters());
         return "admin/printers";
     }
 	
 	@RequestMapping(value = "/admin/printer/new", method = RequestMethod.GET)
 	public ModelAndView addNewPrinter() {
 		files.clear();
-	    return new ModelAndView("admin/printer", "printer", new Printer());
+	    return new ModelAndView("admin/printer", "product", new Printer());
 	}
      
 	@RequestMapping(value = "/admin/printer/add", method = RequestMethod.POST) 
 	public @ResponseBody ModelAndView handleFormUpload(/*
-			@RequestParam("files") MultipartFile[] request, */@ModelAttribute Printer printer) throws IOException{
+			@RequestParam("files") MultipartFile[] request, */@ModelAttribute Printer product) throws IOException{
 
-            int id = this.printerService.addPrinter(printer);
+            long id = printerService.addPrinter(product);
   
 //            String phyPath = servletContext.getRealPath("/");
 
@@ -335,25 +335,25 @@ public class PrinterController {
 					try {
 						FileCopyUtils.copy(fm.getBytes(), new FileOutputStream(
 								directory + File.separator + id + File.separator + fm.getFileName()));
-						printer.getPathPictures().add(fm.getFileName());
+						product.getPathPictures().add(fm.getFileName());
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
 				}
 			}
-            this.printerService.updatePrinter(printer);
+            this.printerService.updatePrinter(product);
             files.clear();
 		
           ModelAndView mav = new ModelAndView("redirect:/admin/printers"); 
-		  mav.addObject("listPrinters", this.printerService.listPrinters());
-		  mav.addObject("printer", printer);
+		  mav.addObject("listProducts", printerService.listPrinters());
+		 /* mav.addObject("product", product);*/
 	   return mav;
 	}
 	
     @RequestMapping("/admin/printer/edit/{id}")
-    public String editPrinter(@PathVariable("id") int id, Model model){
+    public String editPrinter(@PathVariable("id") long id, Model model){
     	files.clear();
-    	Printer undatePrinter = this.printerService.getPrinterById(id);
+    	Printer undatePrinter = printerService.getPrinterById(id);
     	
     	FileMeta fm = null;
     	for(String path : undatePrinter.getPathPictures()){
@@ -368,33 +368,33 @@ public class PrinterController {
 			}
     		files.add(fm);
     	}
-        model.addAttribute("printer", undatePrinter);
+        model.addAttribute("product", undatePrinter);
     //    model.addAttribute("listPrinters", this.printerService.listPrinters());
         return "admin/printer";
     }
 	
 	@RequestMapping(value = "/admin/printer/update", method = RequestMethod.POST) 
-	public @ResponseBody ModelAndView updatePrinter(@ModelAttribute Printer printer) throws IOException{
-		FileUtils.cleanDirectory(new File(directory + File.separator + printer.getId()));
+	public @ResponseBody ModelAndView updatePrinter(@ModelAttribute Printer product) throws IOException{
+		FileUtils.cleanDirectory(new File(directory + File.separator + product.getId()));
 		
 		for (FileMeta fm : files) {
 			try {
 				FileCopyUtils.copy(fm.getBytes(), new FileOutputStream(
-						directory + File.separator + printer.getId() + File.separator + fm.getFileName()));
-				printer.getPathPictures().add(fm.getFileName());
+						directory + File.separator + product.getId() + File.separator + fm.getFileName()));
+				product.getPathPictures().add(fm.getFileName());
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
 		
         System.out.println("update!!!!!");
-        System.out.println(printer.getId());
+        System.out.println(product.getId());
         //existing printer, call update
-        this.printerService.updatePrinter(printer);
+        printerService.updatePrinter(product);
 		
 		ModelAndView mav = new ModelAndView("redirect:/admin/printers"); 
-		  mav.addObject("listPrinters", this.printerService.listPrinters());
-		  mav.addObject("printer", printer);
+		  mav.addObject("listProducts", printerService.listPrinters());
+		 /* mav.addObject("product", product);*/
 		  files.clear();
 	   return mav;
 	}
@@ -479,7 +479,7 @@ public class PrinterController {
     }
     
     @RequestMapping("/admin/printer/remove/{id}")
-    public String removePrinter(@PathVariable("id") int id){
+    public String removePrinter(@PathVariable("id") long id){
     	
     		try {
 				FileUtils.deleteDirectory(new File(directory + File.separator + id));
@@ -487,13 +487,8 @@ public class PrinterController {
 				e.printStackTrace();
 			}
      	
-        this.printerService.removePrinter(id);
+        printerService.removePrinter(id);
         return "redirect:/admin/printers";
     }
     
-    @RequestMapping("/test")
-    public String test(Model model){
-    	model.addAttribute("searchPrintersCriteria", new SearchPrinters());
-        return "test";
-    }
 }

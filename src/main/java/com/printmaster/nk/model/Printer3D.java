@@ -26,7 +26,7 @@ public class Printer3D extends Model{
 	private String printTechnology;//Технология печати
 	
 	@Column(name="chromaticity")
-	private String chromaticity;
+	private String[] chromaticity;
 	
 	@Column(name="type_of_printhead")
 	private String typeOfPrinthead;
@@ -59,6 +59,14 @@ public class Printer3D extends Model{
 	private int maximumWeightOfThePrintedModel;//Максимальная масса распечатываемой модели 
 
 	public Printer3D() {}
+
+	public String[] getChromaticity() {
+		return chromaticity;
+	}
+
+	public void setChromaticity(String[] chromaticity) {
+		this.chromaticity = chromaticity;
+	}
 
 	public double getSizeExtruder() {
 		return sizeExtruder;
@@ -106,14 +114,6 @@ public class Printer3D extends Model{
 
 	public void setPrintTechnology(String printTechnology) {
 		this.printTechnology = printTechnology;
-	}
-
-	public String getChromaticity() {
-		return chromaticity;
-	}
-
-	public void setChromaticity(String chromaticity) {
-		this.chromaticity = chromaticity;
 	}
 
 	public String getTypeOfPrinthead() {

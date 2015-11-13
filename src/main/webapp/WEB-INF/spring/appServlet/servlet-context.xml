@@ -60,14 +60,14 @@
         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
     </beans:bean>
     <beans:bean id="printerService" class="com.printmaster.nk.service.PrinterServiceImpl">
-        <beans:property name="printerDAO" ref="printerDAO"></beans:property>
+        <beans:property name="productDAO" ref="printerDAO"></beans:property>
     </beans:bean>
     
     <beans:bean id="printer3dDAO" class="com.printmaster.nk.dao.Printer3dDAOImpl">
         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
     </beans:bean>
     <beans:bean id="printer3DService" class="com.printmaster.nk.service.Printer3DServiceImpl">
-        <beans:property name="printer3dDAO" ref="printer3dDAO"></beans:property>
+        <beans:property name="productDAO" ref="printer3dDAO"></beans:property>
     </beans:bean>
     
     <context:component-scan base-package="com.printmaster.nk" />

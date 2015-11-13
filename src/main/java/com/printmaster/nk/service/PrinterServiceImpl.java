@@ -6,53 +6,53 @@ import java.util.Set;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.printmaster.nk.dao.PrinterDAO;
+import com.printmaster.nk.dao.ProductDAO;
 import com.printmaster.nk.model.Printer;
 import com.printmaster.nk.model.SearchPrinters;
 
 @Service
 public class PrinterServiceImpl implements PrinterService {
      
-    private PrinterDAO printerDAO;
- 
-    public void setPrinterDAO(PrinterDAO printerDAO) {
-        this.printerDAO = printerDAO;
+    private ProductDAO<Printer, SearchPrinters> productDAO;
+    
+    public void setProductDAO(ProductDAO<Printer,SearchPrinters> productDAO) {
+        this.productDAO = productDAO;
     }
  
     @Override
     @Transactional
-    public int addPrinter(Printer p) {
-        return this.printerDAO.addPrinter(p);
+    public long addPrinter(Printer p) {
+        return this.productDAO.addProduct(p);
     }
  
     @Override
     @Transactional
     public void updatePrinter(Printer p) {
-        this.printerDAO.updatePrinter(p);
+        this.productDAO.updateProduct(p);
     }
  
     @Override
     @Transactional
     public List<Printer> listPrinters() {
-        return this.printerDAO.listPrinters();
+        return this.productDAO.listProducts();
     }
  
     @Override
     @Transactional
     public Printer getPrinterById(long id) {
-        return this.printerDAO.getPrinterById(id);
+        return this.productDAO.getProductById(id);
     }
  
     @Override
     @Transactional
     public void removePrinter(long id) {
-        this.printerDAO.removePrinter(id);
+        this.productDAO.removeProduct(id);
     }
 
 	@Override
 	@Transactional
 	public Set<Printer> listSearchPrinters(SearchPrinters searchPrinters) {
-		return this.printerDAO.listSearchPrinters(searchPrinters);
+		return this.productDAO.listSearchProducts(searchPrinters);
 	}
  
 }

@@ -5,7 +5,7 @@
 <%@ page session="false"%>
 <html lang="ru">
 <head>
-<title>Принтеры</title>
+<title>3D принтеры</title>
 <style type="text/css">
 .tg {
 	border-collapse: collapse;
@@ -51,7 +51,7 @@
 </style>
 </head>
 <body>
-	<a href="<c:url value='/admin/printer/new' />">Добавить принтер</a>
+	<a href="<c:url value='/admin/printer_3d/new' />">Добавить принтер</a>
 	<br>
 	<h3>Список загруженных принтеров</h3>
 	<c:if test="${!empty listProducts}">
@@ -71,13 +71,13 @@
 				<tr>
 					<td>${product.id}</td>
 					<td>${product.name}</td>
-					<td><img src="<%=request.getContextPath()%>/resources/images/printers/${product.id}/${product.pathPictures.get(0)}" alt=""></td>
+					<td><img src="<%=request.getContextPath()%>/resources/images/printers3d/${product.id}/${product.pathPictures.get(0)}" alt=""></td>
 					<td>${product.prise} $</td>
 					<td>. </td>
 					<td>. </td>
 					<td>. </td>
-					<td><a href="<c:url value='/admin/printer/edit/${product.id}' />">Изменить</a></td>
-					<td><a href="<c:url value='/admin/printer/remove/${product.id}' />">Удалить</a></td>
+					<td><a href="<c:url value='/admin/printer_3d/edit/${product.id}' />">Изменить</a></td>
+					<td><a href="<c:url value='/admin/printer_3d/remove/${product.id}' />">Удалить</a></td>
 				</tr>
 			</c:forEach>
 		</table>

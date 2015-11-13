@@ -15,7 +15,7 @@ import com.printmaster.nk.model.Printer3D;
 import com.printmaster.nk.model.SearchPrinters3D;
 
 @Repository
-public class Printer3dDAOImpl implements Printer3dDAO {
+public class Printer3dDAOImpl implements ProductDAO<Printer3D, SearchPrinters3D> {
      
     private static final Logger logger = LoggerFactory.getLogger(Printer3dDAOImpl.class);
  
@@ -26,15 +26,15 @@ public class Printer3dDAOImpl implements Printer3dDAO {
     }
  
     @Override
-    public int addPrinter(Printer3D p) {
+    public long addProduct(Printer3D p) {
         Session session = this.sessionFactory.getCurrentSession();
-       int id = (Integer) session.save(p);
+       long id = (Long) session.save(p);
         logger.info("Printer3D saved successfully, Printer Details="+p);
         return id;
     }
  
     @Override
-    public void updatePrinter(Printer3D p) {
+    public void updateProduct(Printer3D p) {
         Session session = this.sessionFactory.getCurrentSession();
         session.update(p);
         logger.info("Printer3D updated successfully, Printer Details="+p);
@@ -42,7 +42,7 @@ public class Printer3dDAOImpl implements Printer3dDAO {
  
     @SuppressWarnings("unchecked")
     @Override
-    public List<Printer3D> listPrinters() {
+    public List<Printer3D> listProducts() {
         Session session = this.sessionFactory.getCurrentSession();
         List<Printer3D> printerList = session.createQuery("from Printer3D").list();
         for(Printer3D p : printerList){
@@ -52,7 +52,7 @@ public class Printer3dDAOImpl implements Printer3dDAO {
     }
  
     @Override
-    public Printer3D getPrinterById(long id) {
+    public Printer3D getProductById(long id) {
         Session session = this.sessionFactory.getCurrentSession();      
         Printer3D p = (Printer3D) session.load(Printer3D.class, new Long(id));
         logger.info("Printer3D loaded successfully, Printer3D details="+p);
@@ -60,7 +60,7 @@ public class Printer3dDAOImpl implements Printer3dDAO {
     }
  
     @Override
-    public void removePrinter(long id) {
+    public void removeProduct(long id) {
         Session session = this.sessionFactory.getCurrentSession();
         Printer3D p = (Printer3D) session.load(Printer3D.class, new Long(id));
         if(null != p){
@@ -71,7 +71,7 @@ public class Printer3dDAOImpl implements Printer3dDAO {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public Set<Printer3D> listSearchPrinters(SearchPrinters3D searchPrinters) {
+	public Set<Printer3D> listSearchProducts(SearchPrinters3D searchPrinters) {
 		Session session = this.sessionFactory.getCurrentSession();
 		Criteria cr = session.createCriteria(Printer3D.class);
 		

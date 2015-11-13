@@ -8,40 +8,40 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/admin/common.css">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/admin/add_change_printer.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/jquery-ui.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/admin/add_change_3d_printer.css">
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
     <script src="http://malsup.github.com/jquery.form.js"></script>
-    <script  src="<%=request.getContextPath()%>/resources/js/tiny_mce/tinymce.min.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/tiny_mce/tinymce.min.js"></script>
 	<script src="<%=request.getContextPath()%>/resources/js/admin/common.js"></script>
-	<script src="<%=request.getContextPath()%>/resources/js/admin/add_change_printer.js"></script>
+	<script src="<%=request.getContextPath()%>/resources/js/admin/add_change_3d_printer.js"></script>
 
 <c:if test="${empty product.name}">
 	<title>
-		<spring:message text="Добавление нового принтера" />
+		<spring:message text="Добавление нового 3D принтера" />
 	</title>
 </c:if>
 <c:if test="${!empty product.name}">
 	<title>
-		<spring:message text="Изменение" />
+		<spring:message text="Изменение 3D принтера" />
 	</title>
 </c:if>
 </head>
 <body>
-	<c:url var="addPictures" value="/admin/printer/upload_pictures" ></c:url>
+	<c:url var="addPictures" value="/admin/printer_3d/upload_pictures" ></c:url>
 	
 	<div id="product">
 	
 			<c:if test="${empty product.name}">
-					<label id="head_of_page"><spring:message text="Добавление нового принтера" /></label>
-					<c:url var="addAction" value="/admin/printer/add" ></c:url>
+					<label id="head_of_page"><spring:message text="Добавление нового 3D принтера" /></label>
+					<c:url var="addAction" value="/admin/printer_3d/add" ></c:url>
 			</c:if>
 			
 			<c:if test="${!empty product.name}">
 					<label id="head_of_page"><spring:message text="Изменение ${product.name}, партномер: ${product.partNumber} " /></label>
-					<c:url var="addAction" value="/admin/printer/update" ></c:url>
+					<c:url var="addAction" value="/admin/printer_3d/update" ></c:url>
 			</c:if>
 			
 			<div id="pictures">
@@ -60,12 +60,12 @@
 						<li class="no-items">(ни одного файла еще не загружено)</li>
 					</c:if>
 					<c:if test="${!empty product.name}">
-						<c:forEach items="${printer.pathPictures}" var="pathPicture">
+						<c:forEach items="${product.pathPictures}" var="pathPicture">
 							<li class="ui-state-default" id="${pathPicture}">
 								<div>
 									<p class="delete_img">Удалить</p>
 								</div>
-								<img src="<%=request.getContextPath()%>/resources/images/printers/${product.id}/${pathPicture}" alt="">
+								<img src="<%=request.getContextPath()%>/resources/images/printers3d/${product.id}/${pathPicture}" alt="">
 							</li>
 						</c:forEach>
 					</c:if>
@@ -106,10 +106,11 @@
 					</div>
 					<ul class="check_boxes">
 						<div class="text_output">
-							<p>$</p><form:input path="prise" class="amount-prise" value="${product.prise}"/>
-							<form:errors path="prise" cssclass="error"></form:errors>
+							<p>$</p>
+							<form:input path="prise" class="amount-prise" value="${product.prise}" />
+							<p>&nbsp;$</p>
 						</div>
-							<div class="slider-range-prise"></div>
+						<div class="slider-range-prise"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -118,26 +119,44 @@
 						<p>Тип принтера</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${typePrinter}" path="typePrinter" element="li"/>
+						<form:radiobuttons items="${typePrinter3D}" path="typePrinter3D" element="li" value="${product.typePrinter3D}"/>
 					</ul>
 				</div>
 				<div class="characteristic">
 					<div class="block_title">
 						<i></i>
-						<p>Модель</p>
+						<p>Размер запечатываемой области</p>
 					</div>
-					<div class="check_boxes">
-						<form:input path="equipmentModel" />
-						<form:errors path="equipmentModel" cssclass="error"></form:errors>
-					</div>
+					<ul class="check_boxes">
+						<p style="float: none; margin: 10px auto 0px;"> По оси Х:</p>
+						<div class="text_output">
+							<form:input path="sizePrintableAreaX" class="amount-sizePrintableAreaX" value="${product.sizePrintableAreaX}"/>
+							<p >&nbsp;мм</p>
+						</div>
+							<div class="slider-range-sizePrintableAreaX"></div>
+		
+						<p style="float: none; margin: 10px auto 0px;"> По оси Y:</p>
+						<div class="text_output">
+							<form:input path="sizePrintableAreaY" class="amount-sizePrintableAreaY" value="${product.sizePrintableAreaY}" />
+							<p>&nbsp;мм</p>
+						</div>
+							<div class="slider-range-sizePrintableAreaY"></div>
+		
+						<p style="float: none; margin: 10px auto 0px;"> По оси Z:</p>
+						<div class="text_output">
+							<form:input path="sizePrintableAreaZ" class="amount-sizePrintableAreaZ" value="${product.sizePrintableAreaZ}" />
+							<p>&nbsp;мм</p>
+						</div>
+							<div class="slider-range-sizePrintableAreaZ"></div>
+					</ul>
 				</div>
 				<div class="characteristic">
 					<div class="block_title">
 						<i></i>
-						<p>Ширина печати в миллиметрах</p>
+						<p>Технология печати</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${weightPrintMM}" path="weightPrintMM" element="li"/>
+						<form:radiobuttons items="${printTechnology}" path="printTechnology" element="li" value="${product.printTechnology}"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -146,25 +165,7 @@
 						<p>Предыдущее использование</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${previouslyUsed}" path="previouslyUsed" element="li"/>
-					</ul>
-				</div>
-				<div class="characteristic">
-					<div class="block_title">
-						<i></i>
-						<p>Тип печати</p>
-					</div>
-					<ul class="check_boxes">
-						<form:checkboxes items="${typePrint}" path="typePrint" element="li"/>
-					</ul>
-				</div>
-				<div class="characteristic">
-					<div class="block_title">
-						<i></i>
-						<p>Подача метериала</p>
-					</div>
-					<ul class="check_boxes">
-						<form:checkboxes items="${feeds}" path="feed" element="li"/>
+						<form:radiobuttons items="${previouslyUsed}" path="previouslyUsed" element="li" value="${product.previouslyUsed}"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -173,16 +174,7 @@
 						<p>Цветность</p>
 					</div>
 					<ul class="check_boxes">
-						<form:checkboxes items="${chromaticity}" path="chromaticity" element="li"/>
-					</ul>
-				</div>
-				<div class="characteristic">
-					<div class="block_title">
-						<i></i>
-						<p>Производитель печатающей головки</p>
-					</div>
-					<ul class="check_boxes">
-						<form:radiobuttons items="${manufacturerPrinthead}" path="manufacturerPrinthead" element="li"/>
+						<form:checkboxes items="${chromaticity}" path="chromaticity" element="li" value="${product.chromaticity}"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -191,39 +183,47 @@
 						<p>Тип печатающей головки</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${typeOfPrinthead}" path="typeOfPrinthead" element="li"/>
+						<form:radiobuttons items="${typeOfPrinthead}" path="typeOfPrinthead" element="li" value="${product.typeOfPrinthead}"/>
 					</ul>
 				</div>
 				<div class="characteristic">
 					<div class="block_title">
 						<i></i>
-						<p>Совместимые чернила</p>
+						<p>Температура плавления печатного материала</p>
 					</div>
 					<ul class="check_boxes">
-						<form:checkboxes items="${compatibleInk}" path="compatibleInk" element="li"/>
+						<div class="text_output">
+							<form:input path="meltingPointOfThePrintingMaterial" class="amount-meltingPointOfThePrintingMaterial" value="${product.meltingPointOfThePrintingMaterial}" />
+							<p>&nbsp;С</p>
+						</div>
+							<div class="slider-range-meltingPointOfThePrintingMaterial"></div>
 					</ul>
 				</div>
 				<div class="characteristic">
 					<div class="block_title">
 						<i></i>
-						<p>Тип капли</p>
+						<p>Материал для печати</p>
 					</div>
 					<ul class="check_boxes">
-						<form:checkboxes items="${typeDrops}" path="typeDrops" element="li"/>
+						<form:checkboxes items="${media}" path="media" element="li" value="${product.media}"/>
 					</ul>
-				</div>
+				</div> 
+				<div class="characteristic">
+					<div class="block_title">
+						<i></i>
+						<p>Размер эктрудера</p>
+					</div>
+					<ul class="check_boxes">
+						<div class="text_output">
+							<form:input path="sizeExtruder" class="amount-sizeExtruder" value="${product.sizeExtruder}" />
+							<p>&nbsp;мм</p>
+						</div>
+							<div class="slider-range-sizeExtruder"></div>
+					</ul>
+				</div>			
 			</div>
-
+			
 			<div class="product_characteristic">
-				<div class="characteristic">
-					<div class="block_title">
-						<i></i>
-						<p>Размер капли</p>
-					</div>
-					<ul class="check_boxes">
-						<form:checkboxes items="${sizeDrops}" path="sizeDrops" element="li"/>
-					</ul>
-				</div>
 				<div class="characteristic">
 					<div class="block_title">
 						<i></i>
@@ -231,29 +231,23 @@
 					</div>
 					<ul class="check_boxes">
 						<div class="text_output">
-							<form:input path="speedPrint" class="amount-speed-print" value="${product.speedPrint}"/>
-							<p>&nbsp;м.кв./ч.</p>
-							<form:errors path="speedPrint" cssclass="error"></form:errors>
+							<form:input path="speedPrint" class="amount-speedPrint" value="${product.speedPrint}" />
+							<p>&nbsp;мм/с</p>
 						</div>
-						<div class="slider-range-speed-print"></div>
+							<div class="slider-range-speedPrint"></div>
 					</ul>
 				</div>
 				<div class="characteristic">
 					<div class="block_title">
 						<i></i>
-						<p>Разрешение печати</p>
+						<p>Толщина слоя печати</p>
 					</div>
 					<ul class="check_boxes">
-						<form:checkboxes items="${printResolution}" path="printResolution" element="li"/>
-					</ul>
-				</div>
-				<div class="characteristic">
-					<div class="block_title">
-						<i></i>
-						<p>Производитель оборудования</p>
-					</div>
-					<ul class="check_boxes">
-						<form:radiobuttons items="${equipmentManufacturer}" path="equipmentManufacturer" element="li"/>
+						<div class="text_output">
+							<form:input path="thicknessOfThePrintingLayer" class="amount-thicknessOfThePrintingLayer" value="${product.thicknessOfThePrintingLayer}" />
+							<p>&nbsp;микрон</p>
+						</div>
+							<div class="slider-range-thicknessOfThePrintingLayer"></div>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -262,46 +256,49 @@
 						<p>Интерфейс подключения</p>
 					</div>
 					<ul class="check_boxes">
-						<form:checkboxes items="${interfaceConnection}" path="interfaceConnection" element="li"/>
+						<form:checkboxes items="${interfaceConnection}" path="interfaceConnection" element="li" value="${product.interfaceConnection}"/>
 					</ul>
-				</div>
+				</div> 		
 				<div class="characteristic">
 					<div class="block_title">
 						<i></i>
-						<p>Максимальная толщина носителя</p>
+						<p>Тыпы файлов</p>
 					</div>
 					<ul class="check_boxes">
-						<div class="text_output">
-							<form:input path="maximumMediaThickness" class="amount-maximum_media_thickness" value="${product.maximumMediaThickness}"/>
-							<p>&nbsp;мм</p>
-							<form:errors path="maximumMediaThickness" cssclass="error"></form:errors>
-						</div>
-						<div class="slider-range-maximum_media_thickness"></div>
+						<form:checkboxes items="${typesOfFiles}" path="typesOfFiles" element="li" value="${product.typesOfFiles}"/>
 					</ul>
-				</div>
+				</div> 		
 				<div class="characteristic">
 					<div class="block_title">
 						<i></i>
-						<p>Максимальный вес носителя</p>
+						<p>П/О</p>
+					</div>
+					<ul class="check_boxes">
+						<form:checkboxes items="${rip}" path="rip" element="li" value="${product.rip}"/>
+					</ul>
+				</div> 		
+				<div class="characteristic">
+					<div class="block_title">
+						<i></i>
+						<p>Максимальная масса распечатываемой модели</p>
 					</div>
 					<ul class="check_boxes">
 						<div class="text_output">
-							<form:input path="maximumWeightOfVehicle" class="amount-maximum_weight_of_vehicle" value="${product.maximumWeightOfVehicle}"/>
+							<form:input path="maximumWeightOfThePrintedModel" class="amount-maximumWeightOfThePrintedModel" value="${product.maximumWeightOfThePrintedModel}" />
 							<p>&nbsp;кг</p>
-							<form:errors path="maximumWeightOfVehicle" cssclass="error"></form:errors>
 						</div>
-						<div class="slider-range-maximum_weight_of_vehicle"></div>
+							<div class="slider-range-maximumWeightOfThePrintedModel"></div>
 					</ul>
-				</div>
+				</div>		
 				<div class="characteristic">
 					<div class="block_title">
 						<i></i>
-						<p>П/О RIP</p>
+						<p>Производитель оборудования</p>
 					</div>
 					<ul class="check_boxes">
-						<form:checkboxes items="${rip}" path="rip" element="li"/>
+						<form:radiobuttons items="${equipmentManufacturer}" path="equipmentManufacturer" element="li" value="${product.equipmentManufacturer}"/>
 					</ul>
-				</div>
+				</div>		
 				<div class="characteristic">
 					<div class="block_title">
 						<i></i>
@@ -309,13 +306,12 @@
 					</div>
 					<ul class="check_boxes">
 						<div class="text_output">
-							<form:input path="maxPowerConsumption" class="amount-max_power_consumption" value="${product.maxPowerConsumption}"/>
+							<form:input path="maxPowerConsumption" class="amount-maxPowerConsumption" value="${product.maxPowerConsumption}" />
 							<p>&nbsp;кВт</p>
-							<form:errors path="maxPowerConsumption" cssclass="error"></form:errors>
 						</div>
-						<div class="slider-range-max_power_consumption"></div>
+							<div class="slider-range-maxPowerConsumption"></div>
 					</ul>
-				</div>
+				</div>		
 				<div class="characteristic">
 					<div class="block_title">
 						<i></i>
@@ -323,11 +319,10 @@
 					</div>
 					<ul class="check_boxes">
 						<div class="text_output">
-							<form:input path="weight" class="amount-weight" value="${product.weight}"/>
+							<form:input path="weight" class="amount-weight" value="${product.weight}" />
 							<p>&nbsp;кг</p>
-							<form:errors path="weight" cssclass="error"></form:errors>
 						</div>
-						<div class="slider-range-weight"></div>
+							<div class="slider-range-weight"></div>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -337,9 +332,8 @@
 					</div>
 					<ul class="check_boxes">
 						<div class="text_output">
-							<form:input path="width" class="amount-width" value="${product.width}"/>
+							<form:input path="width" class="amount-width" value="${product.width}" />
 							<p>&nbsp;м</p>
-							<form:errors path="width" cssclass="error"></form:errors>
 						</div>
 						<div class="slider-range-width"></div>
 					</ul>
@@ -351,11 +345,10 @@
 					</div>
 					<ul class="check_boxes">
 						<div class="text_output">
-							<form:input path="heigth" class="amount-heigth" value="${product.heigth}"/>
+							<form:input path="heigth" class="amount-heigth" value="${product.heigth}" />
 							<p>&nbsp;м</p>
-							<form:errors path="heigth" cssclass="error"></form:errors>
 						</div>
-						<div class="slider-range-heigth"></div>
+							<div class="slider-range-heigth"></div>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -365,13 +358,12 @@
 					</div>
 					<ul class="check_boxes">
 						<div class="text_output">
-							<form:input path="depth" class="amount-depth" value="${product.depth}"/>
+							<form:input path="depth" class="amount-depth" value="${product.depth}" />
 							<p>&nbsp;м</p>
-							<form:errors path="depth" cssclass="error"></form:errors>
 						</div>
-						<div class="slider-range-depth"></div>
+							<div class="slider-range-depth"></div>
 					</ul>
-				</div>
+				</div>	
 			</div>
 
 		  	<div class="textarea_description">

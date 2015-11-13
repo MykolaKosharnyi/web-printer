@@ -4,33 +4,35 @@
 
 	 <a href="<c:url value='/' />">Главная</a>
 	 <span> > </span>
-	 <a href="<c:url value='/printers' />">Принтеры</a>
+	 <a href="<c:url value='/printers_3d' />">3D Принтеры</a>
 	 <span> > </span>
-	<c:forEach items="${printer.typePrinter}" var="tp">
+	 
+	 <c:forEach items="${product.typePrinter3D}" var="tp">
 		<c:choose>
-			<c:when test="${printer.typePrinter.equals('Сольвентный')}">
-				<a href="<c:url value='/printers/dissolving' />">Сольвентные принтера</a>
+			<c:when test="${tp.equals('Экструдные FDM')}">
+				<a href="<c:url value='/printers_3d/FDM-extruder' />">Экструдные FDM (fused deposition modeling) 3D принтера</a>
 			</c:when>
-			<c:when test="${printer.typePrinter.equals('Экосольвентный')}">
-				<a href="<c:url value='/printers/ecosolvent' />">Экосольвентные принтера</a>
+			<c:when test="${tp.equals('Фото печать Polyjet')}">
+				<a href="<c:url value='/printers_3d/photo_printing_polyjet' />">Фото печать Polyjet</a>
 			</c:when>
-			<c:when test="${printer.typePrinter.equals('UV рулонный')}">
-				<a href="<c:url value='/printers/UV_roll' />">UV рулонные принтера</a>
+			<c:when test="${tp.equals('Лазерного спекания LENS')}">
+				<a href="<c:url value='/printers_3d/laser_sintering_LENS' />">3D принтеры лазерного спекания LENS (LASER ENGINEERED NET SHAPING)</a>
 			</c:when>
-			<c:when test="${printer.typePrinter.equals('UV плоскопечатный')}">
-				<a href="<c:url value='/printers/UV_flatbed' />">UV плоскопечатные принтера</a>
+			<c:when test="${tp.equals('Ламинация LOM')}">
+				<a href="<c:url value='/printers_3d/lamination_LOM' />">Ламинация LOM (laminated object manufacturing)</a>
 			</c:when>
-			<c:when test="${printer.typePrinter.equals('Сублимационный')}">
-				<a href="<c:url value='/printers/sublimation' />">Сублимационные принтера</a>
+			<c:when test="${tp.equals('Стереолитография SL')}">
+				<a href="<c:url value='/printers_3d/stereolithography_SL' />">Стереолитография SL (Stereolithography)</a>
 			</c:when>
-			<c:when test="${printer.typePrinter.equals('Текстильный')}">
-				<a href="<c:url value='/printers/textile' />">Текстильные принтера</a>
+			<c:when test="${tp.equals('Лазерное спекание LS')}">
+				<a href="<c:url value='/printers_3d/laser_sintering_LS' />">Лазерное спекание LS (laser sintering)</a>
 			</c:when>
-			<c:when test="${printer.typePrinter.equals('Водный/Пигментный')}">
-				<a href="<c:url value='/printers/water_pigment' />">Водные/пигментные принтера</a>
+			<c:when test="${tp.equals('Порошкового склеивания 3DP')}">
+				<a href="<c:url value='/printers_3d/powder_bonding_3DP' />">Порошкового склеивания 3DP (three dimensional printing)</a>
 			</c:when>
 		</c:choose>
 	</c:forEach>
+	
 	<span> > </span>
-	<p>${printer.name}</p>
+	<p>${product.name}</p>
 </div>

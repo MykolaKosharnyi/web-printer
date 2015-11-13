@@ -16,6 +16,7 @@ public class SearchPrinters3D implements Serializable {
 	private int sizePrintableAreaZ0;
 	private int sizePrintableAreaZ1;
 	private String[] printTechnology;
+	private String[] previouslyUsed;
 	private String[] chromaticity;
 	private String[] typeOfPrinthead;
 	private int meltingPointOfThePrintingMaterial0;
@@ -45,6 +46,14 @@ public class SearchPrinters3D implements Serializable {
 	private int depth1;
 	
 	public SearchPrinters3D() {}
+
+	public String[] getPreviouslyUsed() {
+		return previouslyUsed;
+	}
+
+	public void setPreviouslyUsed(String[] previouslyUsed) {
+		this.previouslyUsed = previouslyUsed;
+	}
 
 	public double getSizeExtruder0() {
 		return sizeExtruder0;
