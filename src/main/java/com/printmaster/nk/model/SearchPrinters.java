@@ -7,8 +7,8 @@ public class SearchPrinters implements Serializable{
 
 	private static final long serialVersionUID = 6702501013538481082L;
 	
-	private int prise0;
-	private int prise1;
+	private double prise0;
+	private double prise1;
 	private String[] typePrinter;
 	private String[] weightPrintMM;
 	private String[] previouslyUsed;
@@ -19,6 +19,8 @@ public class SearchPrinters implements Serializable{
 	private String[] typeOfPrinthead;
 	private String[] compatibleInk; 
 	private String[] typeDrops;
+	private double sizeDropRangeFrom;
+	private double sizeDropRangeUntil;
 	private String[] sizeDrops;
 	private int speedPrint0;
 	private int speedPrint1;
@@ -32,10 +34,12 @@ public class SearchPrinters implements Serializable{
 	private int maximumWeightOfVehicle0;
 	private int maximumWeightOfVehicle1;
 	private String[] rip;
+	private int averagePowerConsumption0;
+	private int averagePowerConsumption1;
 	private int maxPowerConsumption0;
 	private int maxPowerConsumption1;
-	private int weight0;
-	private int weight1;
+	private double weight0;
+	private double weight1;
 	private int width0;
 	private int width1;
 	private int heigth0;
@@ -65,24 +69,62 @@ public class SearchPrinters implements Serializable{
 				+ ", weight0=" + weight0 + ", weight1=" + weight1 + ", width0=" + width0 + ", width1=" + width1
 				+ ", heigth0=" + heigth0 + ", heigth1=" + heigth1 + ", depth0=" + depth0 + ", depth1=" + depth1 + "]";
 	}
+	
+	public int getAveragePowerConsumption0() {
+		return averagePowerConsumption0;
+	}
+
+	public void setAveragePowerConsumption0(int averagePowerConsumption0) {
+		this.averagePowerConsumption0 = averagePowerConsumption0;
+	}
+
+	public int getAveragePowerConsumption1() {
+		return averagePowerConsumption1;
+	}
+
+	public void setAveragePowerConsumption1(int averagePowerConsumption1) {
+		this.averagePowerConsumption1 = averagePowerConsumption1;
+	}
+
+	public double getSizeDropRangeFrom() {
+		return sizeDropRangeFrom;
+	}
+
+	public void setSizeDropRangeFrom(double sizeDropRangeFrom) {
+		this.sizeDropRangeFrom = sizeDropRangeFrom;
+	}
+
+	public double getSizeDropRangeUntil() {
+		return sizeDropRangeUntil;
+	}
+
+	public void setSizeDropRangeUntil(double sizeDropRangeUntil) {
+		this.sizeDropRangeUntil = sizeDropRangeUntil;
+	}
+
 	public String[] getWeightPrintMM() {
 		return weightPrintMM;
 	}
 	public void setWeightPrintMM(String[] weightPrintMM) {
 		this.weightPrintMM = weightPrintMM;
 	}
-	public int getPrise0() {
+
+	public double getPrise0() {
 		return prise0;
 	}
-	public void setPrise0(int prise0) {
+
+	public void setPrise0(double prise0) {
 		this.prise0 = prise0;
 	}
-	public int getPrise1() {
+
+	public double getPrise1() {
 		return prise1;
 	}
-	public void setPrise1(int prise1) {
+
+	public void setPrise1(double prise1) {
 		this.prise1 = prise1;
 	}
+	
 	public String[] getTypePrinter() {
 		return typePrinter;
 	}
@@ -227,16 +269,16 @@ public class SearchPrinters implements Serializable{
 	public void setMaxPowerConsumption1(int maxPowerConsumption1) {
 		this.maxPowerConsumption1 = maxPowerConsumption1;
 	}
-	public int getWeight0() {
+	public double getWeight0() {
 		return weight0;
 	}
-	public void setWeight0(int weight0) {
+	public void setWeight0(double weight0) {
 		this.weight0 = weight0;
 	}
-	public int getWeight1() {
+	public double getWeight1() {
 		return weight1;
 	}
-	public void setWeight1(int weight1) {
+	public void setWeight1(double weight1) {
 		this.weight1 = weight1;
 	}
 	public int getWidth0() {

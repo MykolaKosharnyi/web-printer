@@ -1,440 +1,744 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE>
 <html lang="ru">
 <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/home.css"/>
-    
-	<title>Print Master</title>
-	
-	<script src="<%=request.getContextPath()%>/resources/js/jquery.cycle.lite.js"></script>
-	<script src="<%=request.getContextPath()%>/resources/js/animation.js"></script>
-    <script src="<%=request.getContextPath()%>/resources/js/slider.js"></script>
-    
-    <!-- for reklam_anamation -->
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/font-awesome.min.css"/>
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/jgallery.min.css?v=1.5.0"/>
-
-    <script src="<%=request.getContextPath()%>/resources/js/jgallery.min.js?v=1.5.0"></script>
-    <script src="<%=request.getContextPath()%>/resources/js/touchswipe.min.js"></script>
+<meta charset="utf-8">
+	<title><spring:message code="home.title"/></title>
 </head>
 <body>
-        <div class="reklam_animation">
-               <div id="gallery">   
-                    <img src="<%=request.getContextPath()%>/resources/images/reklam_animation/Slide_1.jpg" alt="First image" />
-                    <img src="<%=request.getContextPath()%>/resources/images/reklam_animation/Slide_2.jpg" alt="First image" />
-                    <img src="<%=request.getContextPath()%>/resources/images/reklam_animation/Slide_4.jpg" alt="First image" />
-                    <img src="<%=request.getContextPath()%>/resources/images/reklam_animation/Slide_5.jpg" alt="First image" />
-                    <img src="<%=request.getContextPath()%>/resources/images/reklam_animation/Slide_6.jpg" alt="First image" />
-                    <img src="<%=request.getContextPath()%>/resources/images/reklam_animation/Slide_7.jpg" alt="First image" />
-                    <img src="<%=request.getContextPath()%>/resources/images/reklam_animation/Slide_8.png" alt="First image" />
-                    <img src="<%=request.getContextPath()%>/resources/images/reklam_animation/Slide_9.png" alt="First image" />
-                    <img src="<%=request.getContextPath()%>/resources/images/reklam_animation/Slide_10.jpg" alt="First image" />
-                </div>
-            </div>
-        <div id="rigt_of_reklam_animation">
-            <div class="rigt_of_reklam_animation_position">
-                <a href=""><div class="for_right_reklam_image"><img src="<%=request.getContextPath()%>/resources/images/head/Edit1/Laser_Print_Master_46.jpg" alt="" /></div><p>Надпись</p></a>
-            </div>
-            <div class="rigt_of_reklam_animation_position">
-                <a href=""><div class="for_right_reklam_image"><img src="<%=request.getContextPath()%>/resources/images/head/Edit1/Laser_Print_Master_46.jpg" alt="" /></div><p>Надпись</p></a>
-            </div>
-        </div>
-        <div id="goods">   
+			<div class="reklam_animation">
+				<div class="col-md-10">
+					<div class="row">
+            <div class="sider_container">
+			         <div class="next_button"><i class="fa fa-angle-right"></i></div>
+			         <div class="prev_button"><i class="fa fa-angle-left"></i></div>
+			         <div class="carousel">
+				          <c:forEach items="${homeJSON.listPicturesOfCentralReklam}" var="picture">
+                    <div class="slide_item"><a class="fancybox" data-fancybox-group="group" href="/images/home/big_reklam/${picture}"><img src="/images/home/big_reklam/${picture}" alt="alt" /></a></div>
+
+				          </c:forEach>
+			         </div>
+		        </div>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="row">
+              <div class="rigt_of_reklam_animation">
+            
+                <div><img src="/images/home/right_of_reklam/1/${homeJSON.listPicturesRightOfReklam1.fileNameArray.get(0)}" alt="Надпись" />
+                <c:if test="${homeJSON.listPicturesRightOfReklam1.description!='1'}"><p>${homeJSON.listPicturesRightOfReklam1.description}</p></c:if></div>
+         
+                <div><img src="/images/home/right_of_reklam/2/${homeJSON.listPicturesRightOfReklam2.fileNameArray.get(0)}" alt="Надпись" />
+                <c:if test="${homeJSON.listPicturesRightOfReklam2.description!='1'}"><p>${homeJSON.listPicturesRightOfReklam2.description}</p></c:if></div>
+	    
+                <div><img src="/images/home/right_of_reklam/3/${homeJSON.listPicturesRightOfReklam3.fileNameArray.get(0)}" alt="Надпись" />
+                <c:if test="${homeJSON.listPicturesRightOfReklam3.description!='1'}"><p>${homeJSON.listPicturesRightOfReklam3.description}</p></c:if></div>
+
+              </div>
+					</div>
+				</div>
+
+			</div>
+        
+
+
+
+        <div class="goods">   
             <div class="advertising">
-                <div class="advertising_image"><a href="#"><img src="<%=request.getContextPath()%>/resources/images/head/Edit1/Laser_Print_Master_20.jpg" alt="" ></a></div>
-                <div class="advertising_image"><a href="#"><img src="<%=request.getContextPath()%>/resources/images/head/Edit1/Laser_Print_Master_32.jpg" alt="" ></a></div>
-                <div class="advertising_image"><a href="#"><img src="<%=request.getContextPath()%>/resources/images/head/Edit1/Laser_Print_Master_40.jpg" alt="" ></a></div>
-            </div>
-            <div class="advertising_second_variant">
-                <div class="advertising_image"><a href="#"><img src="<%=request.getContextPath()%>/resources/images/head/Edit1/Laser_Print_Master_13.jpg" alt="" ></a></div>
-                <div class="advertising_image"><a href="#"><img src="<%=request.getContextPath()%>/resources/images/head/Edit1/Laser_Print_Master_54.jpg" alt="" ></a></div>
-            </div>
-            <div class="categories_of_goods">
-                <div class="description_slider">
-                        <label> Принтеры </label>
-                    <div class="body_description">
-                        <ul>
-                            <li><a href="">Сольвентные</a></li>
-                            <li><a href="">Экосольвентные</a></li>
-                            <li><a href="">UV рулонные</a></li>
-                            <li><a href="">UV плоскопечатные</a></li>
-                            <li><a href="">Сублимационные</a></li>
-                            <li><a href="">Текстильные</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="slider1">
-                     <div class="slide-list1">
-                         <div class="slide-wrap1">
-                            <div class="slide-item1">
-                                <div class="slider_image"><img src="<%=request.getContextPath()%>/resources/img/1.png" alt="" /></div>
-                                <div class="slide-title1">Name of product: </div>
-                                <div class="slide-price1">Prise: </div>
-                                <input class="slide-buy1" type="button" value="Добавить в корзину" >
-                            </div>
-                            <div class="slide-item1">
-                                <div class="slider_image"><img src="<%=request.getContextPath()%>/resources/img/2.png" alt="" /></div>
-                                <div class="slide-title1">Name of product: </div>
-                                <div class="slide-price1">Prise: </div>
-                                <input class="slide-buy1" type="button" value="Добавить в корзину" >
-                             </div>
-                             <div class="slide-item1">
-                                <div class="slider_image"><img src="<%=request.getContextPath()%>/resources/img/3.png" alt="" /></div>
-                                <div class="slide-title1">Name of product: </div>
-                                <div class="slide-price1">Prise: </div>
-                                <input class="slide-buy1" type="button" value="Добавить в корзину" >
-                             </div>
-                             <div class="slide-item1">
-                                <div class="slider_image"><img src="<%=request.getContextPath()%>/resources/img/img-2.jpg" alt="" /></div>
-                                <div class="slide-title1">Name of product: </div>
-                                <div class="slide-price1">Prise: </div>
-                                <input class="slide-buy1" type="button" value="Добавить в корзину" >
-                             </div>
-                             <div class="slide-item1">
-                                <div class="slider_image"><img src="<%=request.getContextPath()%>/resources/img/img-4.jpg" alt="" /></div>
-                                <div class="slide-title1">Name of product: </div>
-                                <div class="slide-price1">Prise: </div>
-                                <input class="slide-buy1" type="button" value="Добавить в корзину" >
-                             </div>
-                             <div class="slide-item1">
-                                <div class="slider_image"><img src="<%=request.getContextPath()%>/resources/img/img-5.jpg" alt="" /></div>
-                                <div class="slide-title1">Name of product: </div>
-                                <div class="slide-price1">Prise: </div>
-                                <input class="slide-buy1" type="button" value="Добавить в корзину" >
-                             </div>
-                          </div>
-                          <div class="clear1"></div>
-                      </div>
-                      <div class="bottom_of_slider">
-                          <div class="navy1 prev-slide1"></div>
-                          <div class="auto1 play1"></div>
-                          <div class="navy1 next-slide1"></div>
-                      </div>
-                </div>
-                <div class="reklam_right_of_slider1"><img src="<%=request.getContextPath()%>/resources/images/head/Edit1/Laser_Print_Master_48.jpg" alt="" /></div>
-            </div>
-            <div class="advertising_third_variant">
-                <div class="advertising_image"><a href="#"><img src="<%=request.getContextPath()%>/resources/images/head/Edit1/Laser_Print_Master_58.jpg" alt="" ></a></div>
-                <div class="advertising_image"><a href="#"><img src="<%=request.getContextPath()%>/resources/images/head/Edit1/Laser_Print_Master_57.jpg" alt="" ></a></div>
-                <div class="advertising_image"><a href="#"><img src="<%=request.getContextPath()%>/resources/images/head/Edit1/Laser_Print_Master_55.jpg" alt="" ></a></div>
-            </div>
-            <div class="categories_of_goods">
-                 <div class="description_slider">
-                        <label> 3D Принтеры </label>
-                    <div class="body_description">
-                        <ul>
-                            <li><a href="">Экструдные FDM</a></li>
-                            <li><a href="">Фото печать Polyjet</a></li>
-                            <li><a href="">Лазерного спекания LENS</a></li>
-                            <li><a href="">Ламинация LOM</a></li>
-                            <li><a href="">Стереолитография SL</a></li>
-                            <li><a href="">Лазерное спекание LS</a></li>
-                            <li><a href="">Порошкового склеивания 3DP</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="slider2">
-                     <div class="slide-list2">
-                         <div class="slide-wrap2">
-                            <div class="slide-item2">
-                                <div class="slider_image"><img src="<%=request.getContextPath()%>/resources/img/1.png" alt="" /></div>
-                                <div class="slide-title2">Name of product: </div>
-                                <div class="slide-price2">Prise: </div>
-                                <input class="slide-buy2" type="button" value="Добавить в корзину" >
-                            </div>
-                           <div class="slide-item2">
-                                <div class="slider_image"><img src="<%=request.getContextPath()%>/resources/img/2.png" alt="" /></div>
-                                <div class="slide-title2">Name of product: </div>
-                                <div class="slide-price2">Prise: </div>
-                                <input class="slide-buy2" type="button" value="Добавить в корзину" >
-                            </div>
-                            <div class="slide-item2">
-                                <div class="slider_image"><img src="<%=request.getContextPath()%>/resources/img/3.png" alt="" /></div>
-                                <div class="slide-title2">Name of product: </div>
-                                <div class="slide-price2">Prise: </div>
-                                <input class="slide-buy2" type="button" value="Добавить в корзину" >
-                            </div>
-                            <div class="slide-item2">
-                                <div class="slider_image"><img src="<%=request.getContextPath()%>/resources/img/3.png" alt="" /></div>
-                                <div class="slide-title2">Name of product: </div>
-                                <div class="slide-price2">Prise: </div>
-                                <input class="slide-buy2" type="button" value="Добавить в корзину" >
-                            </div>
-                          </div>
-                          <div class="clear2"></div>
-                      </div>
-                      <div class="bottom_of_slider">
-                          <div class="navy2 prev-slide2"></div>
-                          <div class="auto2 play2"></div>
-                          <div class="navy2 next-slide2"></div>
-                      </div>
-                </div>
-                <div class="reklam_right_of_slider2"><img src="<%=request.getContextPath()%>/resources/images/head/Edit1/Laser_Print_Master_18.jpg" alt="" /></div>
-            </div>
-            <div class="advertising_fourth_variant">
-                <div class="advertising_image"><a href="#"><img src="<%=request.getContextPath()%>/resources/images/head/Edit1/Laser_Print_Master_58.jpg" alt="" ></a></div>
-                <div class="advertising_image"><a href="#"><img src="<%=request.getContextPath()%>/resources/images/head/Edit1/Laser_Print_Master_57.jpg" alt="" ></a></div>
-                <div class="advertising_image"><a href="#"><img src="<%=request.getContextPath()%>/resources/images/head/Edit1/Laser_Print_Master_55.jpg" alt="" ></a></div>
-            </div>
-            <div class="advertising_second_variant">
-                <div class="advertising_image"><a href="#"><img src="<%=request.getContextPath()%>/resources/images/head/Edit1/Laser_Print_Master_13.jpg" alt="" ></a></div>
-                <div class="advertising_image"><a href="#"><img src="<%=request.getContextPath()%>/resources/images/head/Edit1/Laser_Print_Master_54.jpg" alt="" ></a></div>
-            </div>           
-            <div class="categories_of_goods">
-                <div class="description_slider">
-                        <label> Ламинаторы </label>
-                    <div class="body_description">
-                        <ul>
-                            <li><a href="">Горячего ламинирования</a></li>
-                            <li><a href="">Холодного ламинирования</a></li>
-                            <li><a href="">Жидкостные</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="slider3">
-                     <div class="slide-list3">
-                         <div class="slide-wrap3">
-                            <div class="slide-item3">
-                                <div class="slider_image"><img src="<%=request.getContextPath()%>/resources/img/1.png" alt="" /></div>
-                                <div class="slide-title3">Name of product: </div>
-                                <div class="slide-price3">Prise: </div>
-                                <input class="slide-buy3" type="button" value="Добавить в корзину" >
-                            </div>
-                           <div class="slide-item3">
-                                <div class="slider_image"><img src="<%=request.getContextPath()%>/resources/img/2.png" alt="" /></div>
-                                <div class="slide-title3">Name of product: </div>
-                                <div class="slide-price3">Prise: </div>
-                                <input class="slide-buy3" type="button" value="Добавить в корзину" >
-                            </div>
+		<div class="col-md-4">
+			<div class="row">
+				<a href="<c:if test="${homeJSON.list_printer_top1.href!='1'}">${homeJSON.list_printer_top1.href}</c:if>">
+                			<img src="/images/home/three_big_pictures/printer_top/1/${homeJSON.list_printer_top1.fileNameArray.get(0)}" alt="" ></a>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="row">
+				<a href="<c:if test="${homeJSON.list_printer_top2.href!='1'}">${homeJSON.list_printer_top2.href}</c:if>">
+                			<img src="/images/home/three_big_pictures/printer_top/2/${homeJSON.list_printer_top2.fileNameArray.get(0)}" alt="" ></a>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="row">
+				<a href="<c:if test="${homeJSON.list_printer_top3.href!='1'}">${homeJSON.list_printer_top3.href}</c:if>">
+                			<img src="/images/home/three_big_pictures/printer_top/3/${homeJSON.list_printer_top3.fileNameArray.get(0)}" alt="" ></a>
+			</div>
+		</div>
 
-                            <div class="slide-item3">
-                                <div class="slider_image"><img src="<%=request.getContextPath()%>/resources/img/3.png" alt="" /></div>
-                                <div class="slide-title3">Name of product: </div>
-                                <div class="slide-price3">Prise: </div>
-                                <input class="slide-buy3" type="button" value="Добавить в корзину" >
-                            </div>
-                          </div>
-                          <div class="clear3"></div>
-                      </div>
-                      <div class="bottom_of_slider">
-                          <div class="navy3 prev-slide3"></div>
-                          <div class="auto3 play3"></div>
-                          <div class="navy3 next-slide3"></div>
-                      </div>
-                </div>
-                <div class="reklam_right_of_slider3"><img src="<%=request.getContextPath()%>/resources/images/head/Edit1/Laser_Print_Master_33.jpg" alt="" /></div>
             </div>
-            <div class="advertising_second_variant">
-                <div class="advertising_image"><a href="#"><img src="<%=request.getContextPath()%>/resources/images/head/Edit1/Laser_Print_Master_13.jpg" alt="" ></a></div>
-                <div class="advertising_image"><a href="#"><img src="<%=request.getContextPath()%>/resources/images/head/Edit1/Laser_Print_Master_54.jpg" alt="" ></a></div>
-            </div>
-            <div class="categories_of_goods">
-                <div class="description_slider">
-                        <label> Лазерно-гравировальное </label>
-                    <div class="body_description">
-                        <ul>
-                            <li><a href="">Газовые лазеры СО2</a></li>
-                            <li><a href="">Твердотельные лазеры</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="slider4">
-                     <div class="slide-list4">
-                         <div class="slide-wrap4">
-                            <div class="slide-item4">
-                                <div class="slider_image"><img src="<%=request.getContextPath()%>/resources/img/1.png" alt="" /></div>
-                                <div class="slide-title4">Name of product: </div>
-                                <div class="slide-price4">Prise: </div>
-                                <input class="slide-buy4" type="button" value="Добавить в корзину" >
-                            </div>
-                           <div class="slide-item4">
-                                <div class="slider_image"><img src="<%=request.getContextPath()%>/resources/img/2.png" alt="" /></div>
-                                <div class="slide-title4">Name of product: </div>
-                                <div class="slide-price4">Prise: </div>
-                                <input class="slide-buy4" type="button" value="Добавить в корзину" >
-                            </div>
 
-                            <div class="slide-item4">
-                                <div class="slider_image"><img src="<%=request.getContextPath()%>/resources/img/3.png" alt="" /></div>
-                                <div class="slide-title4">Name of product: </div>
-                                <div class="slide-price4">Prise: </div>
-                                <input class="slide-buy4" type="button" value="Добавить в корзину" >
-                            </div>
-                          </div>
-                          <div class="clear4"></div>
-                      </div>
-                      <div class="bottom_of_slider">
-                          <div class="navy4 prev-slide4"></div>
-                          <div class="auto4 play4"></div>
-                          <div class="navy4 next-slide4"></div>
-                      </div>
-                </div>
-                <div class="reklam_right_of_slider4"><img src="<%=request.getContextPath()%>/resources/images/head/Edit1/Laser_Print_Master_57.jpg" alt="" /></div>
-            </div>
-            <div class="advertising_second_variant">
-                <div class="advertising_image"><a href="#"><img src="<%=request.getContextPath()%>/resources/images/head/Edit1/Laser_Print_Master_13.jpg" alt="" ></a></div>
-                <div class="advertising_image"><a href="#"><img src="<%=request.getContextPath()%>/resources/images/head/Edit1/Laser_Print_Master_54.jpg" alt="" ></a></div>
-            </div>
-            <div class="categories_of_goods">
-                <div class="description_slider">
-                        <label>Фрезеры</label>
-                    <div class="body_description">
-                        <ul>
-                            <li><a href="">Для обробки дерева</a></li>
-                            <li><a href="">Для обробки металла</a></li>
-                            <li><a href="">Для обробки камня</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="slider5">
-                     <div class="slide-list5">
-                         <div class="slide-wrap5">
-                            <div class="slide-item5">
-                                <div class="slider_image"><img src="<%=request.getContextPath()%>/resources/img/1.png" alt="" /></div>
-                                <div class="slide-title5">Name of product: </div>
-                                <div class="slide-price5">Prise: </div>
-                                <input class="slide-buy5" type="button" value="Добавить в корзину" >
-                            </div>
-                           <div class="slide-item5">
-                                <div class="slider_image"><img src="<%=request.getContextPath()%>/resources/img/2.png" alt="" /></div>
-                                <div class="slide-title5">Name of product: </div>
-                                <div class="slide-price5">Prise: </div>
-                                <input class="slide-buy5" type="button" value="Добавить в корзину" >
-                            </div>
 
-                            <div class="slide-item5">
-                                <div class="slider_image"><img src="<%=request.getContextPath()%>/resources/img/3.png" alt="" /></div>
-                                <div class="slide-title5">Name of product: </div>
-                                <div class="slide-price5">Prise: </div>
-                                <input class="slide-buy5" type="button" value="Добавить в корзину" >
-                            </div>
-                          </div>
-                          <div class="clear5"></div>
-                      </div>
-                      <div class="bottom_of_slider">
-                          <div class="navy5 prev-slide5"></div>
-                          <div class="auto5 play5"></div>
-                          <div class="navy5 next-slide5"></div>
-                      </div>
+
+
+
+
+<div class="categories_of_goods">
+<div class="row">
+
+                <div class="col-md-3 col-lg-3" style="padding: 0px;">
+                  <div class="list-group">
+                    <a href="<c:url value='/printers' />" class="list-group-item active">
+                      <spring:message code="head.printer"/>
+                    </a>
+                    <a href="<c:url value='/printers/dissolving' />" class="list-group-item"><spring:message code="head.printer.dissolving"/></a>
+
+                            <a href="<c:url value='/printers/ecosolvent' />" class="list-group-item"><spring:message code="head.printer.ecosolvent"/></a>
+
+                            <a href="<c:url value='/printers/UV_roll' />" class="list-group-item"><spring:message code="head.printer.uv_roll"/></a>
+
+                            <a href="<c:url value='/printers/UV_flatbed' />" class="list-group-item"><spring:message code="head.printer.flatbed"/></a>
+
+                            <a href="<c:url value='/printers/sublimation' />" class="list-group-item"><spring:message code="head.printer.sublimation"/></a>
+
+                            <a href="<c:url value='/printers/textile' />" class="list-group-item"><spring:message code="head.printer.textile"/></a>
+                            
+                            <a href="<c:url value='/printers/water_pigment' />" class="list-group-item"><spring:message code="head.printer.water_pigment"/></a>
+                            
+                            <a href="<c:url value='/printers/SAPR-GIS' />" class="list-group-item"><spring:message code="head.printer.SAPR-GIS"/></a>
+                  </div>
                 </div>
-                <div class="reklam_right_of_slider5"><img src="<%=request.getContextPath()%>/resources/images/head/Edit1/Laser_Print_Master_39.jpg" alt="" /></div>
+
+              <div class="col-md-9 col-lg-9">
+                <div class="row">
+                  <div class="sider_container">
+                     <div class="next_button_printer"><i class="fa fa-angle-right"></i></div>
+                     <div class="prev_button_printer"><i class="fa fa-angle-left"></i></div>
+                     <div class="carousel_printer">
+                        <c:forEach items="${printers}" var="printer">
+                              <div class="slide-item1">
+                                  <a class="slider_image" href="<c:url value='/printer/${printer.id}' />"><div class="outer_a_img"><img src="/images/printers/${printer.id}/${printer.pathPictures.get(0)}" alt="" /></div></a>
+                                  <a class="slide-buy1" href="javascript:void(0)" onclick="addToCart('printer', ${printer.id});">
+                                    <img src="/images/button_buy.png" alt="" />
+                                  </a>
+                                  <a href="<c:url value='/printer/${printer.id}' />" class="slide-title1">${printer.name}</a>
+                                  <div class="slide-price1">Цена: 
+                                    <c:if test="${printer.prise < 0.1}"> уточняйте</c:if>
+                    <c:if test="${!(printer.prise < 0.1)}">         
+                        $<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${printer.prise}" />
+                    </c:if>
+                                  </div>
+                              </div>
+                            </c:forEach>
+                     </div>
+                  </div>
+                </div>
+              </div>
+
             </div>
+</div>
+
+
+
+
             <div class="advertising_second_variant">
-                <div class="advertising_image"><a href="#"><img src="<%=request.getContextPath()%>/resources/images/head/Edit1/Laser_Print_Master_13.jpg" alt="" ></a></div>
-                <div class="advertising_image"><a href="#"><img src="<%=request.getContextPath()%>/resources/images/head/Edit1/Laser_Print_Master_54.jpg" alt="" ></a></div>
+
+		<div class="col-md-6">
+			<div class="row">
+			<a href="${homeJSON.list_3d_printer_top1.href}">
+                <img src="/images/home/two_narrow_pictures/3d_printer_top/1/${homeJSON.list_3d_printer_top1.fileNameArray.get(0)}" alt="" ></a>
+			</div>
+		</div>
+
+		<div class="col-md-6">
+			<div class="row">
+			<a href="${homeJSON.list_3d_printer_top2.href}">
+                <img src="/images/home/two_narrow_pictures/3d_printer_top/2/${homeJSON.list_3d_printer_top2.fileNameArray.get(0)}" alt="" ></a>
+			</div>
+		</div>
+
             </div>
+
+
+
+
+
+
+
             <div class="categories_of_goods">
-                    <div class="description_slider">
-                            <label> Сканеры </label>
-                        <div class="body_description">
-                            <ul>
-                                <li><a href="">Широкоформатные сканеры</a></li>
-                            </ul>
+<div class="row">
+
+                <div class="col-md-3" style="padding: 0px;">
+                  <div class="list-group">
+
+                    <a href="<c:url value='/3d_printers' />" class="list-group-item active">
+                      <spring:message code="head.3dprinter"/>
+                    </a>
+                            <a href="<c:url value='/3d_printers/FDM-extruder' />" class="list-group-item"><spring:message code="head.3dprinter.FDM-extruder"/></a>
+
+                            <a href="<c:url value='/3d_printers/photo_printing_polyjet' />" class="list-group-item"><spring:message code="head.3dprinter.photo_printing_polyjet"/></a>
+
+                            <a href="<c:url value='/3d_printers/laser_sintering_LENS' />" class="list-group-item"><spring:message code="head.3dprinter.laser_sintering_LENS"/></a>
+
+                            <a href="<c:url value='/3d_printers/lamination_LOM' />" class="list-group-item"><spring:message code="head.3dprinter.lamination_LOM"/></a>
+
+                            <a href="<c:url value='/3d_printers/stereolithography_SL' />" class="list-group-item"><spring:message code="head.3dprinter.stereolithography_SL"/></a>
+
+                            <a href="<c:url value='/3d_printers/laser_sintering_LS' />" class="list-group-item"><spring:message code="head.3dprinter.laser_sintering_LS"/></a>
+                            
+                            <a href="<c:url value='/3d_printers/powder_bonding_3DP' />" class="list-group-item"><spring:message code="head.3dprinter.powder_bonding_3DP"/></a>
+                  </div>
+                </div>
+
+              <div class="col-md-9 col-lg-9">
+                <div class="row">
+                  <div class="sider_container">
+                     <div class="next_button_printer_3d"><i class="fa fa-angle-right"></i></div>
+                     <div class="prev_button_printer_3d"><i class="fa fa-angle-left"></i></div>
+                     <div class="carousel_printer_3d">
+                        <c:forEach items="${printers3D}" var="printer3D">
+                              <div class="slide-item2">
+                                  <a class="slider_image" href="<c:url value='/3d_printer/${printer3D.id}' />">
+                                  <div class="outer_a_img"><img src="/images/3d_printers/${printer3D.id}/${printer3D.pathPictures.get(0)}" alt="" /></div></a>
+                                  <a class="slide-buy2" href="javascript:void(0)" onclick="addToCart('3d_printer', ${printer3D.id});">
+                                    <img src="/images/button_buy.png" alt="" />
+                                  </a>
+                                  <a href="<c:url value='/3d_printer/${printer3D.id}' />" class="slide-title2">${printer3D.name}</a>
+                                  <div class="slide-price2">Цена:
+                                    <c:if test="${printer3D.prise < 0.1}"> уточняйте</c:if>
+                    <c:if test="${!(printer3D.prise < 0.1)}">         
+                        $<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${printer3D.prise}" />
+                    </c:if>
                         </div>
-                    </div>
-                    <div class="slider6">
-                     <div class="slide-list6">
-                         <div class="slide-wrap6">
-                            <div class="slide-item6">
-                                <div class="slider_image"><img src="<%=request.getContextPath()%>/resources/img/1.png" alt="" /></div>
-                                <div class="slide-title6">Name of product: </div>
-                                <div class="slide-price6">Prise: </div>
-                                <input class="slide-buy6" type="button" value="Добавить в корзину" >
-                            </div>
-                           <div class="slide-item6">
-                                <div class="slider_image"><img src="<%=request.getContextPath()%>/resources/img/2.png" alt="" /></div>
-                                <div class="slide-title6">Name of product: </div>
-                                <div class="slide-price6">Prise: </div>
-                                <input class="slide-buy6" type="button" value="Добавить в корзину" >
-                            </div>
-
-                            <div class="slide-item6">
-                                <div class="slider_image"><img src="<%=request.getContextPath()%>/resources/img/3.png" alt="" /></div>
-                                <div class="slide-title6">Name of product: </div>
-                                <div class="slide-price6">Prise: </div>
-                                <input class="slide-buy6" type="button" value="Добавить в корзину" >
-                            </div>
-                          </div>
-                          <div class="clear6"></div>
-                      </div>
-                      <div class="bottom_of_slider">
-                          <div class="navy6 prev-slide6"></div>
-                          <div class="auto6 play6"></div>
-                          <div class="navy6 next-slide6"></div>
-                      </div>
+                              </div>
+                          </c:forEach>
+                     </div>
+                  </div>
                 </div>
-                <div class="reklam_right_of_slider6"><img src="<%=request.getContextPath()%>/resources/images/head/Edit1/Laser_Print_Master_51.jpg" alt="" /></div>
+              </div>
+
             </div>
-            <div class="advertising_second_variant">
-                <div class="advertising_image"><a href="#"><img src="<%=request.getContextPath()%>/resources/images/head/Edit1/Laser_Print_Master_13.jpg" alt="" ></a></div>
-                <div class="advertising_image"><a href="#"><img src="<%=request.getContextPath()%>/resources/images/head/Edit1/Laser_Print_Master_54.jpg" alt="" ></a></div>
+</div>
+
+
+
+
+<div class="advertising">
+		<div class="col-md-4">
+			<div class="row">
+				<a href="${homeJSON.list_digital_printer_top1.href}">
+                			<img src="/images/home/three_big_pictures/digital_printer_top/1/${homeJSON.list_digital_printer_top1.fileNameArray.get(0)}" alt="" ></a>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="row">
+				<a href="${homeJSON.list_digital_printer_top2.href}">
+                			<img src="/images/home/three_big_pictures/digital_printer_top/2/${homeJSON.list_digital_printer_top2.fileNameArray.get(0)}" alt="" ></a>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="row">
+				<a href="${homeJSON.list_digital_printer_top3.href}">
+                			<img src="/images/home/three_big_pictures/digital_printer_top/3/${homeJSON.list_digital_printer_top3.fileNameArray.get(0)}" alt="" ></a>
+			</div>
+		</div>
+
             </div>
-            <div class="categories_of_goods">
-                    <div class="description_slider">
-                            <label> Программное обеспечение </label>
-                        <div class="body_description">
-                            <ul>
-                                <li><a href="">RIP системы</a></li>
-                            </ul>
+            
+
+
+
+
+
+
+
+
+           <div class="categories_of_goods">
+<div class="row">
+
+                <div class="col-md-3" style="padding: 0px;">
+                  <div class="list-group">
+
+                     <a href="<c:url value='/digital_printers' />" class="list-group-item active"><spring:message code="head.digital_printer"/></a>
+
+                            <a href="<c:url value='/digital_printers/full_color_laser_printers' />" class="list-group-item"><spring:message code="head.digital_printer.full_color_laser_printers"/></a>
+
+
+                            <a href="<c:url value='/digital_printers/monochrome_laser_printers' />" class="list-group-item"><spring:message code="head.digital_printer.monochrome_laser_printers"/></a>
+
+                            <a href="<c:url value='/digital_printers/full-color_inkjet_printers' />" class="list-group-item"><spring:message code="head.digital_printer.full_color_inkjet_printers"/></a>
+                  </div>
+                </div>
+
+              <div class="col-md-9 col-lg-9">
+                <div class="row">
+                  <div class="sider_container">
+                     <div class="next_button_printer_d"><i class="fa fa-angle-right"></i></div>
+                     <div class="prev_button_printer_d"><i class="fa fa-angle-left"></i></div>
+                     <div class="carousel_printer_d">
+                        <c:forEach items="${digitalPrinters}" var="printer">
+                              <div class="slide-item2">
+                                  <a class="slider_image" href="<c:url value='/digital_printer/${printer.id}' />"><div class="outer_a_img"><img src="/images/digital_printers/${printer.id}/${printer.pathPictures.get(0)}" alt="" /></div></a>
+                                  <a class="slide-buy2" href="javascript:void(0)" onclick="addToCart('digital_printer', ${printer.id});">
+                                    <img src="/images/button_buy.png" alt="" />
+                                  </a>
+                                  <a href="<c:url value='/digital_printer/${printer.id}' />" class="slide-title2">${printer.name}</a>
+                                  <div class="slide-price2">Цена:
+                                    <c:if test="${printer.prise < 0.1}"> уточняйте</c:if>
+                    <c:if test="${!(printer.prise < 0.1)}">         
+                        $<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${printer.prise}" />
+                    </c:if>
                         </div>
-                    </div>
-                    <div class="slider7">
-                     <div class="slide-list7">
-                         <div class="slide-wrap7">
-                            <div class="slide-item7">
-                                <div class="slider_image"><img src="<%=request.getContextPath()%>/resources/img/1.png" alt="" /></div>
-                                <div class="slide-title7">Name of product: </div>
-                                <div class="slide-price7">Prise: </div>
-                                <input class="slide-buy7" type="button" value="Добавить в корзину" >
-                            </div>
-                           <div class="slide-item7">
-                                <div class="slider_image"><img src="<%=request.getContextPath()%>/resources/img/2.png" alt="" /></div>
-                                <div class="slide-title7">Name of product: </div>
-                                <div class="slide-price7">Prise: </div>
-                                <input class="slide-buy7" type="button" value="Добавить в корзину" >
-                            </div>
-
-                            <div class="slide-item7">
-                                <div class="slider_image"><img src="<%=request.getContextPath()%>/resources/img/3.png" alt="" /></div>
-                                <div class="slide-title7">Name of product: </div>
-                                <div class="slide-price7">Prise: </div>
-                                <input class="slide-buy7" type="button" value="Добавить в корзину" >
-                            </div>
-                          </div>
-                          <div class="clear7"></div>
-                      </div>
-                      <div class="bottom_of_slider">
-                          <div class="navy7 prev-slide7"></div>
-                          <div class="auto7 play7"></div>
-                          <div class="navy7 next-slide7"></div>
-                      </div>
+                              </div>
+                          </c:forEach>
+                     </div>
+                  </div>
                 </div>
-                <div class="reklam_right_of_slider7"><img src="<%=request.getContextPath()%>/resources/images/head/Edit1/Laser_Print_Master_44.jpg" alt="" /></div>
-        </div>
-            <div class="advertising_second_variant">
-                <div class="advertising_image"><a href="#"><img src="<%=request.getContextPath()%>/resources/images/head/Edit1/Laser_Print_Master_13.jpg" alt="" ></a></div>
-                <div class="advertising_image"><a href="#"><img src="<%=request.getContextPath()%>/resources/images/head/Edit1/Laser_Print_Master_54.jpg" alt="" ></a></div>
+              </div>
+
             </div>
+</div>
+
+
+
+	<div class="advertising_second_variant">
+
+		<div class="col-md-6">
+			<div class="row">
+			<a href="${homeJSON.list_laminator_top1.href}">
+                <img src="/images/home/two_narrow_pictures/laminator_top/1/${homeJSON.list_laminator_top1.fileNameArray.get(0)}" alt="" ></a>
+			</div>
+		</div>
+
+		<div class="col-md-6">
+			<div class="row">
+			<a href="${homeJSON.list_laminator_top2.href}">
+                <img src="/images/home/two_narrow_pictures/laminator_top/2/${homeJSON.list_laminator_top2.fileNameArray.get(0)}" alt="" ></a>
+			</div>
+		</div>
+
+            </div>        
+
+
+
+
+
+            <div class="categories_of_goods">
+<div class="row">
+
+                <div class="col-md-3" style="padding: 0px;">
+                  <div class="list-group">
+
+                     <a href="<c:url value='/laminators' />" class="list-group-item active"><spring:message code="head.laminator"/></a>
+
+                            <a href="<c:url value='/laminators/hot_lamination' />" class="list-group-item"><spring:message code="head.laminator.hot_lamination"/></a>
+
+                            <a href="<c:url value='/laminators/cold_laminating' />" class="list-group-item"><spring:message code="head.laminator.cold_laminating"/></a>
+
+                            <a href="<c:url value='/laminators/liquid' />" class="list-group-item"><spring:message code="head.laminator.liquid"/></a>
+                            
+                            <a href="<c:url value='/laminators/flatbed_laminating_machine' />" class="list-group-item"><spring:message code="head.laminator.flatbed_laminating_machine"/></a>
+                  </div>
+                </div>
+
+              <div class="col-md-9 col-lg-9">
+                <div class="row">
+                  <div class="sider_container">
+                     <div class="next_button_laminator"><i class="fa fa-angle-right"></i></div>
+                     <div class="prev_button_laminator"><i class="fa fa-angle-left"></i></div>
+                     <div class="carousel_laminator">
+                         <c:forEach items="${laminators}" var="product">
+                              <div class="slide-item2">
+                                  <a class="slider_image" href="<c:url value='/laminator/${product.id}' />"><div class="outer_a_img"><img src="/images/laminators/${product.id}/${product.pathPictures.get(0)}" alt="" /></div></a>
+                                  <a class="slide-buy2" href="javascript:void(0)" onclick="addToCart('laminator', ${product.id});">
+                                    <img src="/images/button_buy.png" alt="" />
+                                  </a>
+                                  <a href="<c:url value='/laminator/${product.id}' />" class="slide-title2">${product.name}</a>
+                                  <div class="slide-price2">Цена:
+                                    <c:if test="${product.prise < 0.1}"> уточняйте</c:if>
+                    				<c:if test="${!(product.prise < 0.1)}">         
+                        				$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${product.prise}" />
+                    				</c:if>
+                        		</div>
+                              </div>
+                          </c:forEach>
+
+
+                     </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+</div>
+
+
+
+
+
+
+<div class="advertising">
+		<div class="col-md-4">
+			<div class="row">
+				<a href="${homeJSON.list_laser_top1.href}">
+                			<img src="/images/home/three_big_pictures/laser_top/1/${homeJSON.list_laser_top1.fileNameArray.get(0)}" alt="" ></a>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="row">
+				<a href="${homeJSON.list_laser_top2.href}">
+                			<img src="/images/home/three_big_pictures/laser_top/2/${homeJSON.list_laser_top2.fileNameArray.get(0)}" alt="" ></a>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="row">
+				<a href="${homeJSON.list_laser_top3.href}">
+                			<img src="/images/home/three_big_pictures/laser_top/3/${homeJSON.list_laser_top3.fileNameArray.get(0)}" alt="" ></a>
+			</div>
+		</div>
+
+</div>
+
+
+
+
+
+
+
+
+ 
+            <div class="categories_of_goods">
+<div class="row">
+
+                <div class="col-md-3" style="padding: 0px;">
+                  <div class="list-group">
+
+                     <a href="<c:url value='/lasers' />" class="list-group-item active"><spring:message code="head.laser"/></a>
+
+                            <a href="<c:url value='/lasers/CO2_gas_lasers' />" class="list-group-item"><spring:message code="head.laser.CO2_gas_lasers"/></a>
+
+                            <a href="<c:url value='/lasers/solid_state_lasers' />" class="list-group-item"><spring:message code="head.laser.solid_state_lasers"/></a>
+
+                            <a href="<c:url value='/lasers/for_the_treatment_of_metal' />" class="list-group-item"><spring:message code="head.laser.for_the_treatment_of_metal"/></a>
+
+                            <a href="<c:url value='/lasers/diode_pumped' />" class="list-group-item"><spring:message code="head.laser.diode_pumped"/></a>
+                            
+                            <a href="<c:url value='/lasers/fiber_lasers' />" class="list-group-item"><spring:message code="head.laser.fiber_lasers"/></a>
+                            
+                            <a href="<c:url value='/lasers/plasma_lasers' />" class="list-group-item"><spring:message code="head.laser.plasma_lasers"/></a>
+                  </div>
+                </div>
+
+              <div class="col-md-9 col-lg-9">
+                <div class="row">
+                  <div class="sider_container">
+                     <div class="next_button_laser"><i class="fa fa-angle-right"></i></div>
+                     <div class="prev_button_laser"><i class="fa fa-angle-left"></i></div>
+                     <div class="carousel_laser">
+                        <c:forEach items="${lasers}" var="laser">
+                              <div class="slide-item2">
+                                  <a class="slider_image" href="<c:url value='/laser/${laser.id}' />"><div class="outer_a_img"><img src="/images/lasers/${laser.id}/${laser.pathPictures.get(0)}" alt="" /></div></a>
+                                  <a class="slide-buy2" href="javascript:void(0)" onclick="addToCart('laser', ${laser.id});">
+                                    <img src="/images/button_buy.png" alt="" />
+                                  </a>
+                                  <a href="<c:url value='/laser/${laser.id}' />" class="slide-title2">${laser.name}</a>
+                                  <div class="slide-price2">Цена:
+                                    <c:if test="${laser.prise < 0.1}"> уточняйте</c:if>
+                    <c:if test="${!(laser.prise < 0.1)}">         
+                        $<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${laser.prise}" />
+                    </c:if>
+                        </div>
+                              </div>
+                          </c:forEach>
+
+                     </div>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+</div>
+
+
+
+
+<div class="advertising_second_variant">
+
+		<div class="col-md-6">
+			<div class="row">
+			<a href="${homeJSON.list_cutter_top1.href}">
+                	<img src="/images/home/two_narrow_pictures/cutter_top/1/${homeJSON.list_cutter_top1.fileNameArray.get(0)}" alt="" ></a>
+			</div>
+		</div>
+
+		<div class="col-md-6">
+			<div class="row">
+			<a href="${homeJSON.list_cutter_top2.href}">
+                	<img src="/images/home/two_narrow_pictures/cutter_top/2/${homeJSON.list_cutter_top2.fileNameArray.get(0)}" alt="" ></a>
+			</div>
+		</div>
+
+            </div>
+
+
+
+
+
+
+            <div class="categories_of_goods">
+<div class="row">
+
+                <div class="col-md-3" style="padding: 0px;">
+                  <div class="list-group">
+
+                     <a href="<c:url value='/cutters' />" class="list-group-item active"><spring:message code="head.cutter"/></a>
+
+                            <a href="<c:url value='/cutters/for_wood' />" class="list-group-item"><spring:message code="head.cutter.for_wood"/></a>
+
+                            <a href="<c:url value='/cutters/for_the_treatment_of_metal' />" class="list-group-item"><spring:message code="head.cutter.for_the_treatment_of_metal"/></a>
+
+                            <a href="<c:url value='/cutters/stone_processing' />" class="list-group-item"><spring:message code="head.cutter.stone_processing"/></a>
+                  </div>
+                </div>
+
+              <div class="col-md-9 col-lg-9">
+                <div class="row">
+                  <div class="sider_container">
+                     <div class="next_button_cutter"><i class="fa fa-angle-right"></i></div>
+                     <div class="prev_button_cutter"><i class="fa fa-angle-left"></i></div>
+                     <div class="carousel_cutter">
+                        <c:forEach items="${cutters}" var="cutter">
+                              <div class="slide-item2">
+                                  <a class="slider_image" href="<c:url value='/cutter/${cutter.id}' />"><div class="outer_a_img"><img src="/images/cutters/${cutter.id}/${cutter.pathPictures.get(0)}" alt="" /></div></a>
+                                  <a class="slide-buy2" href="javascript:void(0)" onclick="addToCart('cutter', ${cutter.id});">
+                                    <img src="/images/button_buy.png" alt="" />
+                                  </a>
+                                  <a href="<c:url value='/cutter/${cutter.id}' />" class="slide-title2">${cutter.name}</a>
+                                  <div class="slide-price2">Цена:
+                                    <c:if test="${cutter.prise < 0.1}"> уточняйте</c:if>
+                    <c:if test="${!(cutter.prise < 0.1)}">         
+                        $<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${cutter.prise}" />
+                    </c:if>
+                        </div>
+                              </div>
+                          </c:forEach>
+
+
+                     </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+</div>
+
+
+
+
+
+
+<div class="advertising">
+		<div class="col-md-4">
+			<div class="row">
+				<a href="${homeJSON.list_scaner_top1.href}">
+                			<img src="/images/home/three_big_pictures/scaner_top/1/${homeJSON.list_scaner_top1.fileNameArray.get(0)}" alt="" ></a>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="row">
+				<a href="${homeJSON.list_scaner_top2.href}">
+                			<img src="/images/home/three_big_pictures/scaner_top/2/${homeJSON.list_scaner_top2.fileNameArray.get(0)}" alt="" ></a>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="row">
+				<a href="${homeJSON.list_scaner_top3.href}">
+                			<img src="/images/home/three_big_pictures/scaner_top/3/${homeJSON.list_scaner_top3.fileNameArray.get(0)}" alt="" ></a>
+			</div>
+		</div>
+
+            </div>
+
+
+
+
+
+
+
+
+            <div class="categories_of_goods">
+<div class="row">
+
+                <div class="col-md-3" style="padding: 0px;">
+                  <div class="list-group">
+
+                     <a href="<c:url value='/scanners' />" class="list-group-item active"><spring:message code="head.scanner"/></a>
+
+                            <a href="<c:url value='/scanners/large_format_scanners' />" class="list-group-item">
+                            <spring:message code="head.scanner.large_format_scanners"/></a>
+                            
+                            <a href="<c:url value='/scanners/3d_scanners' />" class="list-group-item">
+                            <spring:message code="head.scanner.3d_scanners"/></a>
+
+                  </div>
+                </div>
+
+              <div class="col-md-9 col-lg-9">
+                <div class="row">
+                  <div class="sider_container">
+                     <div class="next_button_scaner"><i class="fa fa-angle-right"></i></div>
+                     <div class="prev_button_scaner"><i class="fa fa-angle-left"></i></div>
+                     <div class="carousel_scaner">
+                        <c:forEach items="${scanners}" var="scanner">
+                              <div class="slide-item2">
+                                  <a class="slider_image" href="<c:url value='/scanner/${cutter.id}' />"><div class="outer_a_img"><img src="/images/scanners/${scanner.id}/${scanner.pathPictures.get(0)}" alt="" /></div></a>
+                                  <a class="slide-buy2" href="javascript:void(0)" onclick="addToCart('scanner', ${scanner.id});">
+                                    <img src="/images/button_buy.png" alt="" />
+                                  </a>
+                                  <a href="<c:url value='/scanner/${scanner.id}' />" class="slide-title2">${scanner.name}</a>
+                                  <div class="slide-price2">Цена:
+                                    <c:if test="${scanner.prise < 0.1}"> уточняйте</c:if>
+					                <c:if test="${!(scanner.prise < 0.1)}">         
+					                	$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${scanner.prise}" />
+					                </c:if>
+                        		</div>
+                              </div>
+                          </c:forEach>
+
+                     </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+</div>
+
+
+
+
+<div class="advertising_second_variant">
+
+		<div class="col-md-6">
+			<div class="row">
+			<a href="${homeJSON.list_previously_used_top1.href}">
+      <img src="/images/home/two_narrow_pictures/previously_used_top/1/${homeJSON.list_previously_used_top1.fileNameArray.get(0)}" alt="" ></a>
+			</div>
+		</div>
+
+		<div class="col-md-6">
+			<div class="row">
+			<a href="${homeJSON.list_previously_used_top2.href}">
+      <img src="/images/home/two_narrow_pictures/previously_used_top/2/${homeJSON.list_previously_used_top2.fileNameArray.get(0)}" alt="" ></a>
+			</div>
+		</div>
+
+            </div>
+
+
+
+
+
+
+
+            <div class="categories_of_goods">
+<div class="row">
+
+                <div class="col-md-3" style="padding: 0px;">
+                  <div class="list-group">
+
+                     <a href="<c:url value='/previous_use_equipments' />" class="list-group-item active"><spring:message code="head.previouslyUsed"/></a>
+
+                        <!--     <a href="#" class="list-group-item"><spring:message code="head.previouslyUsed.solvent_equipment"/></a>
+
+                            <a href="#" class="list-group-item"><spring:message code="head.previouslyUsed.ecosolvent_oborudovnie"/></a> --> 
+
+                  </div>
+                </div>
+
+              <div class="col-md-9 col-lg-9">
+                <div class="row">
+                  <div class="sider_container">
+                     <div class="next_button_previously_used"><i class="fa fa-angle-right"></i></div>
+                     <div class="prev_button_previously_used"><i class="fa fa-angle-left"></i></div>
+                     <div class="carousel_previously_used">
+                        <c:forEach items="${pue}" var="product">
+                              <div class="slide-item2">
+                                  <a class="slider_image" href="<c:url value='/${product.type}/${product.id}' />"><div class="outer_a_img"><img src="/images/${product.type}s/${product.id}/${product.pathPictures.get(0)}" alt="" /></div></a>
+                                  <a class="slide-buy2" href="javascript:void(0)" onclick="addToCart(${product.type}, ${product.id});">
+                                    <img src="/images/button_buy.png" alt="" />
+                                  </a>
+                                  <a href="<c:url value='/${product.type}/${product.id}' />" class="slide-title2">${product.name}</a>
+                                  <div class="slide-price2">Цена:
+                                    <c:if test="${product.prise < 0.1}"> уточняйте</c:if>
+					                <c:if test="${!(product.prise < 0.1)}">         
+					                	$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${product.prise}" />
+					                </c:if>
+                        		</div>
+                              </div>
+                          </c:forEach>
+
+                     </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+</div>
+
+
+
+
+
+
+<div class="advertising">
+		<div class="col-md-4">
+			<div class="row">
+				<a href="${homeJSON.list_rip_top1.href}">
+                			<img src="/images/home/three_big_pictures/rip_top/1/${homeJSON.list_rip_top1.fileNameArray.get(0)}" alt="" ></a>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="row">
+				<a href="${homeJSON.list_rip_top2.href}">
+                			<img src="/images/home/three_big_pictures/rip_top/2/${homeJSON.list_rip_top2.fileNameArray.get(0)}" alt="" ></a>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="row">
+				<a href="${homeJSON.list_rip_top3.href}">
+                			<img src="/images/home/three_big_pictures/rip_top/3/${homeJSON.list_rip_top3.fileNameArray.get(0)}" alt="" ></a>
+			</div>
+		</div>
+
+            </div>
+
+
+
+
+
+
+
+            <div class="categories_of_goods">
+<div class="row">
+
+                <div class="col-md-3" style="padding: 0px;">
+                  <div class="list-group">
+
+                     <a href="<c:url value='/rip' />" class="list-group-item active"><spring:message code="head.rip"/></a>
+
+                          <!--  <a href="#" class="list-group-item"><spring:message code="head.rip.RIP_system"/></a> --> 
+
+                  </div>
+                </div>
+
+              <div class="col-md-9 col-lg-9">
+                <div class="row">
+                  <div class="sider_container">
+                     <div class="next_button_rip"><i class="fa fa-angle-right"></i></div>
+                     <div class="prev_button_rip"><i class="fa fa-angle-left"></i></div>
+                     <div class="carousel_rip">
+                        
+
+
+                     </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+</div>
+
     </div>
-	<script type="text/javascript">
-		$(function() {
-			$('#gallery').jGallery({
-				mode : 'slider',
-				utostart : true,
-				width : '100%',
-				height : '100%',
-				transitionBackward : 'auto',
-				transition : 'rotateFoldTop_moveFromBottomFade',
-				transitionCols : '6',
-				transitionRows : '1',
-				thumbnailsPosition : 'bottom',
-				thumbType : 'square',
-				backgroundColor : 'FFFFFF',
-			});
-		});
-	</script>
 </body>
 </html>

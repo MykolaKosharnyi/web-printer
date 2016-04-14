@@ -2,7 +2,7 @@
             $(function() {
             $( ".slider-range-prise" ).slider({
               range: "min",
-              min: 1,
+              min: 0,
               max: 100000,
               create: function () {
             	    $(this).slider( "option", "value", $(this).closest('.check_boxes').find('.text_output').find('.amount-prise').val() );
@@ -19,77 +19,13 @@
             });
 
           });
-/*---- диапазон для скорости печати----*/ 
-          $(function() {
-            $( ".slider-range-speed-print" ).slider({
-              range: "min",
-              min: 1,
-              max: 300,
-              create: function () {
-          	    $(this).slider( "option", "value", $(this).closest('.check_boxes').find('.text_output').find('.amount-speed-print').val() );
-          	},
-              slide: function( event, ui ) {
-                $( ".amount-speed-print" ).val( ui.value);
-              }
-            });
-              
-            $( ".amount-speed-print" ).val($( ".slider-range-speed-print" ).slider( "value"));
-              
-              
-            $( ".amount-speed-print" ).change(function() {
-            $(".slider-range-speed-print").slider('value', this.value);
-                });
-                
-          });
-/*---- диапазон для максимальной толщины носителя ----*/
-          $(function() {
-            $( ".slider-range-maximum_media_thickness" ).slider({
-              range: "min",
-              min: 1,
-              max: 500,
-              create: function () {
-            	    $(this).slider( "option", "value", $(this).closest('.check_boxes').find('.text_output').find('.amount-maximum_media_thickness').val() );
-            	},
-              slide: function( event, ui ) {
-                $( ".amount-maximum_media_thickness" ).val( ui.value);
-              }
-            });
-              
-            $( ".amount-maximum_media_thickness" ).val( $( ".slider-range-maximum_media_thickness" ).slider( "value"));    
-            
-            $( ".amount-maximum_media_thickness" ).change(function() {
-            $(".slider-range-maximum_media_thickness").slider('value',this.value);
-                });
- 
-          });
 
-/*--- для максимального веса носителя ---*/
-          $(function() {
-            $( ".slider-range-maximum_weight_of_vehicle" ).slider({
-              range: "min",
-              min: 5,
-              max: 500,
-              create: function () {
-          	    $(this).slider( "option", "value", $(this).closest('.check_boxes').find('.text_output').find('.amount-maximum_weight_of_vehicle').val() );
-          	},
-              slide: function( event, ui ) {
-                $( ".amount-maximum_weight_of_vehicle" ).val( ui.value);
-              }
-            });
-              
-            $( ".amount-maximum_weight_of_vehicle" ).val($( ".slider-range-maximum_weight_of_vehicle" ).slider( "value")); 
-              
-            $( ".amount-maximum_weight_of_vehicle" ).change(function() {
-            $(".slider-range-maximum_weight_of_vehicle").slider('value',this.value);
-                });
-              
-          });
 /*--- для максимальной потребляемой мощности ----*/
           $(function() {
             $( ".slider-range-max_power_consumption" ).slider({
               range: "min",
-              min: 1,
-              max: 100,
+              min: 0,
+              max: 2500,
               create: function () {
             	    $(this).slider( "option", "value", $(this).closest('.check_boxes').find('.text_output').find('.amount-max_power_consumption').val() );
             	},
@@ -105,11 +41,11 @@
                 });
             
           });
-/*--- для веса ----*/
+/*--- для веса ----
           $(function() {
             $( ".slider-range-weight" ).slider({
               range: "min",
-              min: 50,
+              min: 0,
               max: 5000,
               create: function () {
           	    $(this).slider( "option", "value", $(this).closest('.check_boxes').find('.text_output').find('.amount-weight').val() );
@@ -125,13 +61,13 @@
             $(".slider-range-weight").slider('value', this.value);
                 });
               
-          });
+          });*/
 /*--- для ширины ---*/
           $(function() {
             $( ".slider-range-width" ).slider({
               range: "min",
-              min: 1,
-              max: 10,
+              min: 0,
+              max: 10000,
               create: function () {
             	    $(this).slider( "option", "value", $(this).closest('.check_boxes').find('.text_output').find('.amount-width').val() );
             	},
@@ -151,8 +87,8 @@
           $(function() {
             $( ".slider-range-heigth" ).slider({
               range: "min",
-              min: 1,
-              max: 10,
+              min: 0,
+              max: 10000,
               create: function () {
           	    $(this).slider( "option", "value", $(this).closest('.check_boxes').find('.text_output').find('.amount-heigth').val() );
           	},
@@ -172,8 +108,8 @@
           $(function() {
             $( ".slider-range-depth" ).slider({
               range: "min",
-              min: 1,
-              max: 10,
+              min: 0,
+              max: 10000,
               create: function () {
             	    $(this).slider( "option", "value", $(this).closest('.check_boxes').find('.text_output').find('.amount-depth').val() );
             	},
@@ -190,39 +126,9 @@
               
           });
 
-/*-- реализация подпунктов ширины в виде вкладок --*/
-        (function($){				
-            jQuery.fn.lightTabs = function(options){
-                var createTabs = function(){
-                    tabs = this;
-                    i = 0;
-
-                    showPage = function(i){
-                        $(tabs).children("div").children("div").hide();
-                        $(tabs).children("div").children("div").eq(i).show();
-                        $(tabs).children("ul").children("li").removeClass("active");
-                        $(tabs).children("ul").children("li").eq(i).addClass("active");
-                    }
-
-                    showPage(0);				
-
-                    $(tabs).children("ul").children("li").each(function(index, element){
-                        $(element).attr("data-page", i);
-                        i++;                        
-                    });
-
-                    $(tabs).children("ul").children("li").click(function(){
-                        showPage(parseInt($(this).attr("data-page")));
-                    });				
-                };		
-                return this.each(createTabs);
-            };	
-        })(jQuery);
-        $(document).ready(function(){
-            $("#tabs").lightTabs();
-        });
 /*-*/
-        $(document).ready(function() {
+          $(function() {
+
         	var filesUpload = document.getElementById("files-upload"),
         		dropArea = document.getElementById("drop-area"),
         		fileList = document.getElementById("file-list");
@@ -245,6 +151,13 @@
         		progressBarContainer.appendChild(progressBar);
         		li.appendChild(progressBarContainer);
 
+        		$('#add_picture').ajaxForm( {
+        			type: 'post',
+        			success: function(result){
+        				li.id = result;
+        			}
+        			}).submit();
+        		
         		/*
         		If the file is an image and the web browser supports FileReader,
         		present a preview in the file list
@@ -260,54 +173,8 @@
         				};
         			}(img));
         			reader.readAsDataURL(file);
-        		}
+        		} 
 
-        		$('#add_picture').ajaxForm( {
-        			type: 'post',
-        			success: function(result){
-        				li.id = result;
-        			}
-        			}).submit(); 
-        		
-        		
-        		
-        	/*	// Uploading - for Firefox, Google Chrome and Safari
-        		xhr = new XMLHttpRequest();
-
-        		// Update progress bar
-        		xhr.upload.addEventListener("progress", function(evt) {
-        			if (evt.lengthComputable) {
-        				progressBar.style.width = (evt.loaded / evt.total)
-        						* 100 + "%";
-        			} else {
-        				// No data to calculate on
-        			}
-        		}, false);
-
-        		// File uploaded
-        		xhr.addEventListener("load", function() {
-        			progressBarContainer.className += " uploaded";
-        			progressBar.innerHTML = "Uploaded!";
-        		}, false);*/
-
-        	/*	xhr.open("post", "http://localhost:8080/nk/printer/upload_pictures", true);
-
-        		// Set appropriate headers
-        		xhr.setRequestHeader("Content-Type", "multipart/form-data");
-        		xhr.setRequestHeader("X-File-Name", file.name);
-        		xhr.setRequestHeader("X-File-Size", file.size);
-        		xhr.setRequestHeader("X-File-Type", file.type);
-
-        		// Send the file (doh)
-        		xhr.send(file);*/
-
-        		// Present file info and append it to the list of files
-        	/*	fileInfo = "<div><strong>Name:</strong> " + file.name
-        				+ "</div>";
-        		fileInfo += "<div><strong>Size:</strong> "
-        				+ parseInt(file.size / 1024, 10) + " kb</div>";
-        		fileInfo += "<div><strong>Type:</strong> " + file.type
-        				+ "</div>";*/
         		fileInfo += "<p class=\"delete_img\">Удалить</p>";
         		div.innerHTML = fileInfo;
 
@@ -318,9 +185,6 @@
         		if (typeof files !== "undefined") {
         			for (var i = 0, l = files.length; i < l; i++) {
         				uploadFile(files[i]);
-        				/*if(i==files.length){
-        					resetFormElement(filesUpload);
-        				}*/
         			}
         		} else {
         			fileList.innerHTML = "No support for the File API in this web browser";
@@ -363,25 +227,16 @@
         		evt.preventDefault();
         		evt.stopPropagation();
         	}, false);
-        	
-        /*	function resetFormElement(e) {
-        		  e.wrap('<form>').closest('form').get(0).reset();
-        		  e.unwrap();
-
-        		  // Prevent form submission
-        		  e.stopPropagation();
-        		  e.preventDefault();
-        		}*/
         });
 
-        $(document).ready(function(){
+          $(function() {
         	$('#file-list').sortable({
         		update: function(event, ui) {
         			var pictureOrder = $(this).sortable('toArray');
         			var data = JSON.stringify(pictureOrder);
         			$.ajax({
         				  type: 'POST',
-        				  url: "/nk/admin/printer/change_order_pictures",
+        				  url: "/admin/printer/change_order_pictures",
         				  data: data,
         				  contentType: "application/json; charset=utf-8",
         		          dataType: "json"
@@ -391,13 +246,13 @@
         	});
         });
 
-        jQuery(document).on('click', '.delete_img', function(){
+        $(document).on('click', '.delete_img', function(){
         	var li = $(this).closest('li');
         	var id = li.attr('id').replace(".", ":");
         	
         	$.ajax({
         		  type: 'POST',
-        		  url: "/nk/admin/printer/remove_picture/" + $(this).closest('li').attr('id').replace(".", ":"),
+        		  url: "/admin/printer/remove_picture/" + $(this).closest('li').attr('id').replace(".", ":"),
         		  contentType: "application/json; charset=utf-8",
                   dataType: "json"
         		  });	

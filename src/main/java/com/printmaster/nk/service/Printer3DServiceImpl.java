@@ -54,6 +54,18 @@ public class Printer3DServiceImpl implements Printer3DService {
 	public Set<Printer3D> listSearchPrinters3D(SearchPrinters3D searchPrinters) {
 		return this.productDAO.listSearchProducts(searchPrinters);
 	}
+
+	@Override
+	@Transactional
+	public Set<Printer3D> listShowOnSite() {
+		return this.productDAO.listShowOnSite();
+	}
+
+	@Override
+	@Transactional
+	public Set<Printer3D> listShowOnHomePage() {
+		return this.productDAO.listShowOnHomePage();
+	}
  
 }
 

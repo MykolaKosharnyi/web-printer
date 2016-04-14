@@ -3,7 +3,7 @@
 <div id="navigation">
 	<a href="<c:url value='/' />">Главная</a>
 	<span> > </span>
-	<a href="<c:url value='/printers_3d' />">3D Принтеры</a>
+	<a href="<c:url value='/3d_printers' />">3D Принтеры</a>
 	<span> > </span>
 	
 	<c:forEach items="${search.typePrinter3D}" var="tp">

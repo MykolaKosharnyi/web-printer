@@ -15,7 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.printmaster.nk.model.FileMeta;
+import com.printmaster.nk.beans.FileMeta;
  
 @Controller
 @RequestMapping("/controller")

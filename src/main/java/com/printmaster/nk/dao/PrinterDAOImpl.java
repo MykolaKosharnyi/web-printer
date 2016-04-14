@@ -1,17 +1,16 @@
 package com.printmaster.nk.dao;
 
+import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Junction;
 import org.hibernate.criterion.Restrictions;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.printmaster.nk.model.Printer;
@@ -20,7 +19,7 @@ import com.printmaster.nk.model.SearchPrinters;
 @Repository
 public class PrinterDAOImpl implements ProductDAO<Printer, SearchPrinters> {
      
-    private static final Logger logger = LoggerFactory.getLogger(PrinterDAOImpl.class);
+    private Logger logger = Logger.getLogger(PrinterDAOImpl.class);
  
     private SessionFactory sessionFactory;
      
@@ -31,7 +30,7 @@ public class PrinterDAOImpl implements ProductDAO<Printer, SearchPrinters> {
     @Override
     public long addProduct(Printer p) {
         Session session = this.sessionFactory.getCurrentSession();
-       long id = (Long) session.save(p);
+        long id = (Long) session.save(p);
         logger.info("Printer saved successfully, Printer Details="+p);
         return id;
     }
@@ -40,7 +39,7 @@ public class PrinterDAOImpl implements ProductDAO<Printer, SearchPrinters> {
     public void updateProduct(Printer p) {
         Session session = this.sessionFactory.getCurrentSession();
         session.update(p);
-        logger.info("Printer updated successfully, Printer Details="+p);
+        logger.info("Printer updated successfully, Printer Details=" + p);
     }
  
     @SuppressWarnings("unchecked")
@@ -49,7 +48,7 @@ public class PrinterDAOImpl implements ProductDAO<Printer, SearchPrinters> {
         Session session = this.sessionFactory.getCurrentSession();
         List<Printer> printerList = session.createQuery("from Printer").list();
         for(Printer p : printerList){
-            logger.info("Printer List::"+p);
+            logger.info("Printer List::" + p);
         }
         return printerList;
     }
@@ -121,9 +120,42 @@ public class PrinterDAOImpl implements ProductDAO<Printer, SearchPrinters> {
 		}
 		cr.add(typeOfPrintheadGroup);
 		}
+
+		if(searchPrinters.getTypePrint()!= null){
+			Junction typePrintGroup = Restrictions.disjunction();
+			for(String typePrint : searchPrinters.getTypePrint()){
+				typePrintGroup.add(Restrictions.eq("typePrint",typePrint));
+			}
+			cr.add(typePrintGroup);
+			}
+		
+		if((searchPrinters.getSizeDropRangeFrom() > 0.01) && (searchPrinters.getSizeDropRangeUntil() > 0.1) 
+				&& (searchPrinters.getSizeDropRangeFrom() < searchPrinters.getSizeDropRangeUntil())){
+			Junction sizeDropGroup = Restrictions.disjunction();
+			sizeDropGroup.add(Restrictions.le("sizeDropRangeFrom", searchPrinters.getSizeDropRangeFrom()));
+			sizeDropGroup.add(Restrictions.between("sizeDropRangeFrom", searchPrinters.getSizeDropRangeFrom(), searchPrinters.getSizeDropRangeUntil()));
+			sizeDropGroup.add(Restrictions.between("sizeDropRangeUntil", searchPrinters.getSizeDropRangeFrom(), searchPrinters.getSizeDropRangeUntil()));
+			sizeDropGroup.add(Restrictions.between("sizeDropStatic", searchPrinters.getSizeDropRangeFrom(), searchPrinters.getSizeDropRangeUntil()));
+			sizeDropGroup.add(Restrictions.between("valueOfNewTypeDrop", searchPrinters.getSizeDropRangeFrom(), searchPrinters.getSizeDropRangeUntil()));
+			sizeDropGroup.add(Restrictions.ge("sizeDropRangeUntil", searchPrinters.getSizeDropRangeUntil()));
+			
+			cr.add(sizeDropGroup);
+		}
 		
 		if(searchPrinters.getSpeedPrint0()!=searchPrinters.getSpeedPrint1()){
-			cr.add(Restrictions.between("speedPrint", searchPrinters.getSpeedPrint0(), searchPrinters.getSpeedPrint1()));
+			Junction speedPrintGroup = Restrictions.disjunction();
+			speedPrintGroup.add(Restrictions.between("speedPrintDraft", searchPrinters.getSpeedPrint0(), searchPrinters.getSpeedPrint1()));
+			speedPrintGroup.add(Restrictions.between("speedPrintFast", searchPrinters.getSpeedPrint0(), searchPrinters.getSpeedPrint1()));
+			speedPrintGroup.add(Restrictions.between("speedPrintNormal", searchPrinters.getSpeedPrint0(), searchPrinters.getSpeedPrint1()));
+			speedPrintGroup.add(Restrictions.between("speedPrintQuality", searchPrinters.getSpeedPrint0(), searchPrinters.getSpeedPrint1()));
+			speedPrintGroup.add(Restrictions.between("speedPrintHiQual", searchPrinters.getSpeedPrint0(), searchPrinters.getSpeedPrint1()));
+			speedPrintGroup.add(Restrictions.between("speedPrint1", searchPrinters.getSpeedPrint0(), searchPrinters.getSpeedPrint1()));
+			speedPrintGroup.add(Restrictions.between("speedPrint2", searchPrinters.getSpeedPrint0(), searchPrinters.getSpeedPrint1()));
+			speedPrintGroup.add(Restrictions.between("speedPrint3", searchPrinters.getSpeedPrint0(), searchPrinters.getSpeedPrint1()));
+			speedPrintGroup.add(Restrictions.between("speedPrint4", searchPrinters.getSpeedPrint0(), searchPrinters.getSpeedPrint1()));
+			speedPrintGroup.add(Restrictions.between("speedPrint5", searchPrinters.getSpeedPrint0(), searchPrinters.getSpeedPrint1()));
+			
+			cr.add(speedPrintGroup);
 		}
 		
 		if(searchPrinters.getEquipmentManufacturer()!= null){
@@ -146,11 +178,15 @@ public class PrinterDAOImpl implements ProductDAO<Printer, SearchPrinters> {
 			cr.add(Restrictions.between("maximumWeightOfVehicle", searchPrinters.getMaximumWeightOfVehicle0(), searchPrinters.getMaximumWeightOfVehicle1()));
 		}
 		
+		if(searchPrinters.getAveragePowerConsumption0()!=searchPrinters.getAveragePowerConsumption1()){
+			cr.add(Restrictions.between("averagePowerConsumption", searchPrinters.getAveragePowerConsumption0(), searchPrinters.getAveragePowerConsumption1()));
+		}
+		
 		if(searchPrinters.getMaxPowerConsumption0()!=searchPrinters.getMaxPowerConsumption1()){
 			cr.add(Restrictions.between("maxPowerConsumption", searchPrinters.getMaxPowerConsumption0(), searchPrinters.getMaxPowerConsumption1()));
 		}
 		
-		if(searchPrinters.getWeight0()!=searchPrinters.getWeight1()){
+		if(!new Double(searchPrinters.getWeight0()).equals(searchPrinters.getWeight1())){
 			cr.add(Restrictions.between("weight", searchPrinters.getWeight0(), searchPrinters.getWeight1()));
 		}
 		
@@ -166,38 +202,19 @@ public class PrinterDAOImpl implements ProductDAO<Printer, SearchPrinters> {
 			cr.add(Restrictions.between("depth", searchPrinters.getDepth0(), searchPrinters.getDepth1()));
 		}
         //List<Printer> printerList = cr.list();
+		cr.add(Restrictions.eq("showOnSite", true));
 		
-		LinkedHashSet<Printer> result = new LinkedHashSet<Printer>(cr.list());
+		HashSet<Printer> result = new HashSet<Printer>(cr.list());
 		
 		Iterator<Printer> itPrinters = result.iterator();
 		
 		while(itPrinters.hasNext()){
 			Printer currentPrinter = itPrinters.next();
-			
-			if (searchPrinters.getTypePrint()!=null)
-			if (searchPrinters.getTypePrint().length > 0 ) {
-				boolean isPrinterWeNeed = false;
-				print:
-				for (String currentPrinterPropertyValue : currentPrinter.getTypePrint()) {
-					for (String searchedPrinterPropertyValue : searchPrinters.getTypePrint()) {
-						if (currentPrinterPropertyValue.equals(searchedPrinterPropertyValue)) {
-							isPrinterWeNeed = true;
-							break print;
-						}
-					}
-				}
-				if(!isPrinterWeNeed){
-					itPrinters.remove();
-					if(itPrinters.hasNext()){
-						currentPrinter = itPrinters.next();
-					}
-				}
-			} 
+			boolean isPrinterWeNeed = false;
 			
 			if (searchPrinters.getFeed()!=null)
 			if (searchPrinters.getFeed().length > 0) {
 				if(itPrinters.hasNext()){
-					boolean isPrinterWeNeed = false;
 					print:
 					for (String currentPrinterPropertyValue : currentPrinter.getFeed()) {
 						for (String searchedPrinterPropertyValue : searchPrinters.getFeed()) {
@@ -207,19 +224,13 @@ public class PrinterDAOImpl implements ProductDAO<Printer, SearchPrinters> {
 							}
 						}
 					}
-					if(!isPrinterWeNeed){
-						itPrinters.remove();
-						if(itPrinters.hasNext()){
-							currentPrinter = itPrinters.next();
-						}
-					}
 				}
 			}	
 			
+			if(!isPrinterWeNeed)
 			if(searchPrinters.getChromaticity()!=null)
-			if (searchPrinters.getChromaticity().length > 0) {
+			if (searchPrinters.getChromaticity().length > 0 ) {
 				if(itPrinters.hasNext()){
-					boolean isPrinterWeNeed = false;
 					print:
 					for (String currentPrinterPropertyValue : currentPrinter.getChromaticity()) {
 						for (String searchedPrinterPropertyValue : searchPrinters.getChromaticity()) {
@@ -229,19 +240,13 @@ public class PrinterDAOImpl implements ProductDAO<Printer, SearchPrinters> {
 							}
 						}
 					}
-					if(!isPrinterWeNeed){
-						itPrinters.remove();
-						if(itPrinters.hasNext()){
-							currentPrinter = itPrinters.next();
-						}
-					}
 				}
 			}		
 			
+			if(!isPrinterWeNeed)
 			if (searchPrinters.getCompatibleInk()!=null)
 			if (searchPrinters.getCompatibleInk().length > 0) {
 				if(itPrinters.hasNext()){
-					boolean isPrinterWeNeed = false;
 					print:
 					for (String currentPrinterPropertyValue : currentPrinter.getCompatibleInk()) {
 						for (String searchedPrinterPropertyValue : searchPrinters.getCompatibleInk()) {
@@ -251,19 +256,13 @@ public class PrinterDAOImpl implements ProductDAO<Printer, SearchPrinters> {
 							}
 						}
 					}
-					if(!isPrinterWeNeed){
-						itPrinters.remove();
-						if(itPrinters.hasNext()){
-							currentPrinter = itPrinters.next();
-						}
-					}
 				}
 			}	
 			
+			if(!isPrinterWeNeed)
 			if (searchPrinters.getTypeDrops()!=null)
 			if (searchPrinters.getTypeDrops().length > 0) {
 				if(itPrinters.hasNext()){
-					boolean isPrinterWeNeed = false;
 					print:
 					for (String currentPrinterPropertyValue : currentPrinter.getTypeDrops()) {
 						for (String searchedPrinterPropertyValue : searchPrinters.getTypeDrops()) {
@@ -273,19 +272,15 @@ public class PrinterDAOImpl implements ProductDAO<Printer, SearchPrinters> {
 							}
 						}
 					}
-					if(!isPrinterWeNeed){
-						itPrinters.remove();
-						if(itPrinters.hasNext()){
-							currentPrinter = itPrinters.next();
-						}
-					}
 				}
 			}
 			
-			if (searchPrinters.getSizeDrops()!=null)
+			if(!isPrinterWeNeed)
+			if((searchPrinters.getSizeDropRangeFrom() < 0.01) || (searchPrinters.getSizeDropRangeUntil() < 0.01) 
+					|| (searchPrinters.getSizeDropRangeFrom() > searchPrinters.getSizeDropRangeUntil()))
+			if (searchPrinters.getSizeDrops()!=null){
 			if (searchPrinters.getSizeDrops().length > 0) {
 				if(itPrinters.hasNext()){
-					boolean isPrinterWeNeed = false;
 					print:
 					for (String currentPrinterPropertyValue : currentPrinter.getSizeDrops()) {
 						for (String searchedPrinterPropertyValue : searchPrinters.getSizeDrops()) {
@@ -295,19 +290,14 @@ public class PrinterDAOImpl implements ProductDAO<Printer, SearchPrinters> {
 							}
 						}
 					}
-					if(!isPrinterWeNeed){
-						itPrinters.remove();
-						if(itPrinters.hasNext()){
-							currentPrinter = itPrinters.next();
-						}
-					}
 				}
 			}
+		}
 			
+			if(!isPrinterWeNeed)
 			if (searchPrinters.getPrintResolution()!=null)
 			if (searchPrinters.getPrintResolution().length > 0) {
 				if(itPrinters.hasNext()){
-					boolean isPrinterWeNeed = false;
 					print:
 					for (String currentPrinterPropertyValue : currentPrinter.getPrintResolution()) {
 						for (String searchedPrinterPropertyValue : searchPrinters.getPrintResolution()) {
@@ -317,19 +307,13 @@ public class PrinterDAOImpl implements ProductDAO<Printer, SearchPrinters> {
 							}
 						}
 					}
-					if(!isPrinterWeNeed){
-						itPrinters.remove();
-						if(itPrinters.hasNext()){
-							currentPrinter = itPrinters.next();
-						}
-					}
 				}
 			}
 			
+			if(!isPrinterWeNeed)
 			if (searchPrinters.getInterfaceConnection()!=null)
 			if (searchPrinters.getInterfaceConnection().length > 0) {
 				if(itPrinters.hasNext()){
-					boolean isPrinterWeNeed = false;
 					print:
 					for (String currentPrinterPropertyValue : currentPrinter.getInterfaceConnection()) {
 						for (String searchedPrinterPropertyValue : searchPrinters.getInterfaceConnection()) {
@@ -339,19 +323,13 @@ public class PrinterDAOImpl implements ProductDAO<Printer, SearchPrinters> {
 							}
 						}
 					}
-					if(!isPrinterWeNeed){
-						itPrinters.remove();
-						if(itPrinters.hasNext()){
-							currentPrinter = itPrinters.next();
-						}
-					}
 				}
 			}
 			
+			if(!isPrinterWeNeed)
 			if (searchPrinters.getRip()!=null)
 			if (searchPrinters.getRip().length > 0) {
 				if(itPrinters.hasNext()){
-					boolean isPrinterWeNeed = false;
 					print:
 					for (String currentPrinterPropertyValue : currentPrinter.getRip()) {
 						for (String searchedPrinterPropertyValue : searchPrinters.getRip()) {
@@ -361,16 +339,50 @@ public class PrinterDAOImpl implements ProductDAO<Printer, SearchPrinters> {
 							}
 						}
 					}
-					if(!isPrinterWeNeed){
-						itPrinters.remove();
-						if(itPrinters.hasNext()){
-							currentPrinter = itPrinters.next();
-						}
-					}
 				}
 			}
+			
+			if((!isPrinterWeNeed) && ((searchPrinters.getRip()!=null && searchPrinters.getRip().length > 0) ||
+					(searchPrinters.getInterfaceConnection()!=null && searchPrinters.getInterfaceConnection().length > 0) ||
+					(searchPrinters.getPrintResolution()!=null && searchPrinters.getPrintResolution().length > 0) || 
+					(searchPrinters.getTypeDrops()!=null && searchPrinters.getTypeDrops().length > 0) ||
+					(searchPrinters.getCompatibleInk()!=null && searchPrinters.getCompatibleInk().length > 0) ||
+					(searchPrinters.getChromaticity()!=null &&searchPrinters.getChromaticity().length > 0) ||
+					(searchPrinters.getFeed()!=null && searchPrinters.getFeed().length > 0) ||  
+					(searchPrinters.getSizeDrops()!=null && searchPrinters.getSizeDrops().length > 0)))
+				itPrinters.remove();
 		}
 		
+        return result;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Set<Printer> listShowOnSite() {
+		Session session = this.sessionFactory.getCurrentSession();
+		Criteria cr = session.createCriteria(Printer.class);
+		cr.add(Restrictions.eq("showOnSite", true));
+		
+		HashSet<Printer> result = new HashSet<Printer>(cr.list());
+        for(Printer p : result){
+            logger.info("Printer List::"+p);
+        }
+        
+        return result;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Set<Printer> listShowOnHomePage() {
+		Session session = this.sessionFactory.getCurrentSession();
+		Criteria cr = session.createCriteria(Printer.class);
+		cr.add(Restrictions.eq("showOnSite", true));
+		cr.add(Restrictions.eq("showOnHomePage", true));
+		
+		HashSet<Printer> result = new HashSet<Printer>(cr.list());
+        for(Printer p : result){
+            logger.info("Printer List::"+p);
+        }
         return result;
 	}
  

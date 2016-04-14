@@ -1,15 +1,20 @@
 package com.printmaster.nk.model;
 
+import java.util.Arrays;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 @Entity
 @Table(name="printer3d")
-public class Printer3D extends Model{
+public class Printer3D extends Product{
 
 	private static final long serialVersionUID = -3145839526222670744L;
 
+	@NotEmpty(message = "Please enter type of product.")
 	@Column(name="type_printer")//тип принтера
 	private String typePrinter3D;
 	
@@ -186,6 +191,19 @@ public class Printer3D extends Model{
 
 	public void setMaximumWeightOfThePrintedModel(int maximumWeightOfThePrintedModel) {
 		this.maximumWeightOfThePrintedModel = maximumWeightOfThePrintedModel;
+	}
+
+	@Override
+	public String toString() {
+		return "Printer3D: typePrinter3D=" + typePrinter3D + ", sizePrintableAreaX=" + sizePrintableAreaX
+				+ ", sizePrintableAreaY=" + sizePrintableAreaY + ", sizePrintableAreaZ=" + sizePrintableAreaZ
+				+ ", printTechnology=" + printTechnology + ", chromaticity=" + Arrays.toString(chromaticity)
+				+ ", typeOfPrinthead=" + typeOfPrinthead + ", meltingPointOfThePrintingMaterial="
+				+ meltingPointOfThePrintingMaterial + ", media=" + Arrays.toString(media) + ", sizeExtruder="
+				+ sizeExtruder + ", speedPrint=" + speedPrint + ", thicknessOfThePrintingLayer="
+				+ thicknessOfThePrintingLayer + ", interfaceConnection=" + Arrays.toString(interfaceConnection)
+				+ ", typesOfFiles=" + Arrays.toString(typesOfFiles) + ", rip=" + Arrays.toString(rip)
+				+ ", maximumWeightOfThePrintedModel=" + maximumWeightOfThePrintedModel + super.toString();
 	}
 	
 }

@@ -27,18 +27,21 @@
     };	
 	
 })(jQuery);
+
 $(document).ready(function(){
     $("#tabs_product").lightTabs();
     
-    $('.small_pictures div').on('click', function(e) {
+    $('.small_pictures a').on('click', function(e) {
 
 		var currImg = $(this).find('img').attr('src');
-		$('.image_container img').attr('src', currImg);
+		$('.bigImage img').attr('src', currImg);
+		$('.bigImage a').attr('href', currImg);
 
 	});
     
-	$(".small_pictures div").hover(function() {
+	$(".small_pictures a").hover(function() {
 		var currImg = $(this).find('img').attr('src');
-		$('.image_container img').attr('src', currImg);
+		$('.bigImage img').attr('src', currImg);
+		$('.bigImage a').attr('href', currImg);
 	});
 });

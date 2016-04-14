@@ -6,8 +6,8 @@ public class SearchPrinters3D implements Serializable {
 	
 	private static final long serialVersionUID = 6702501013538481082L;
 	
-	private int prise0;
-	private int prise1;
+	private double prise0;
+	private double prise1;
 	private String[] typePrinter3D;
 	private int sizePrintableAreaX0;
 	private int sizePrintableAreaX1;
@@ -34,10 +34,12 @@ public class SearchPrinters3D implements Serializable {
 	private int maximumWeightOfThePrintedModel0;
 	private int maximumWeightOfThePrintedModel1;
 	private String[] equipmentManufacturer;
+	private int averagePowerConsumption0;
+	private int averagePowerConsumption1;
 	private int maxPowerConsumption0;
 	private int maxPowerConsumption1;
-	private int weight0;
-	private int weight1;
+	private double weight0;
+	private double weight1;
 	private int width0;
 	private int width1;
 	private int heigth0;
@@ -77,6 +79,22 @@ public class SearchPrinters3D implements Serializable {
 
 	public void setMeltingPointOfThePrintingMaterial0(int meltingPointOfThePrintingMaterial0) {
 		this.meltingPointOfThePrintingMaterial0 = meltingPointOfThePrintingMaterial0;
+	}
+
+	public int getAveragePowerConsumption0() {
+		return averagePowerConsumption0;
+	}
+
+	public void setAveragePowerConsumption0(int averagePowerConsumption0) {
+		this.averagePowerConsumption0 = averagePowerConsumption0;
+	}
+
+	public int getAveragePowerConsumption1() {
+		return averagePowerConsumption1;
+	}
+
+	public void setAveragePowerConsumption1(int averagePowerConsumption1) {
+		this.averagePowerConsumption1 = averagePowerConsumption1;
 	}
 
 	public int getMeltingPointOfThePrintingMaterial1() {
@@ -127,19 +145,19 @@ public class SearchPrinters3D implements Serializable {
 		this.typePrinter3D = typePrinter3D;
 	}
 
-	public int getPrise0() {
+	public double getPrise0() {
 		return prise0;
 	}
 
-	public void setPrise0(int prise0) {
+	public void setPrise0(double prise0) {
 		this.prise0 = prise0;
 	}
 
-	public int getPrise1() {
+	public double getPrise1() {
 		return prise1;
 	}
 
-	public void setPrise1(int prise1) {
+	public void setPrise1(double prise1) {
 		this.prise1 = prise1;
 	}
 
@@ -287,19 +305,19 @@ public class SearchPrinters3D implements Serializable {
 		this.maxPowerConsumption1 = maxPowerConsumption1;
 	}
 
-	public int getWeight0() {
+	public double getWeight0() {
 		return weight0;
 	}
 
-	public void setWeight0(int weight0) {
+	public void setWeight0(double weight0) {
 		this.weight0 = weight0;
 	}
 
-	public int getWeight1() {
+	public double getWeight1() {
 		return weight1;
 	}
 
-	public void setWeight1(int weight1) {
+	public void setWeight1(double weight1) {
 		this.weight1 = weight1;
 	}
 

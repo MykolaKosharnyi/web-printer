@@ -173,7 +173,7 @@ jQuery(document).ready(function(){
 
 		/* wrapper slider */
 		var slideWrap3 = jQuery('.slide-wrap3');
-		/* ñhrefs for previous and next slide */
+		/* ï¿½hrefs for previous and next slide */
 		var nextLink3 = jQuery('.next-slide3');
 		var prevLink3 = jQuery('.prev-slide3');
 
@@ -577,4 +577,168 @@ jQuery(document).ready(function(){
 
 	/* initial function of slider 7 */
 	htmSlider7();
+	/*--------------------------------------- for eiths block -----------------------------------------------------------*/
+	function htmSlider8(){
+	/* next shift */
+
+	/* wrapper slider */
+	var slideWrap8 = jQuery('.slide-wrap8');
+	/* hrefs for previous and next slide */
+	var nextLink8 = jQuery('.next-slide8');
+	var prevLink8 = jQuery('.prev-slide8');
+
+	var playLink8 = jQuery('.auto8');
+	
+	var is_animate8 = false;
+	
+	/* weight slide with indent */
+	var slideWidth8 = jQuery('.slide-item8').outerWidth();
+	
+	/* shift slider */
+	var newLeftPos8 = slideWrap8.position().left - slideWidth8;
+	
+	/* Click for href on next slide */
+	nextLink8.click(function(){
+		if(!slideWrap8.is(':animated')) {
+
+			slideWrap8.animate({left: newLeftPos8}, 200, function(){
+				slideWrap8
+					.find('.slide-item8:first')
+					.appendTo(slideWrap8)
+					.parent()
+					.css({'left': 0});
+			});
+
+		}
+	});
+
+	/* Click for href on next slide */
+	prevLink8.click(function(){
+		if(!slideWrap8.is(':animated')) {
+		
+			slideWrap8
+				.css({'left': newLeftPos8})
+				.find('.slide-item8:last')
+				.prependTo(slideWrap8)
+				.parent()
+				.animate({left: 0}, 200);
+
+		}
+	});
+	
+	
+	/* Function automatic scroll slider */
+	function autoplay(){
+		if(!is_animate8){
+			is_animate8 = true;
+			slideWrap8.animate({left: newLeftPos8}, 2000, function(){
+				slideWrap8
+					.find('.slide-item8:first')
+					.appendTo(slideWrap8)
+					.parent()
+					.css({'left': 0});
+				is_animate8 = false;
+			});
+		}
+	}
+	
+	/* Click on href start/pause */
+	playLink8.click(function(){
+		if(playLink8.hasClass('play8')){
+			playLink8.removeClass('play8').addClass('pause8');
+			jQuery('.navy8').addClass('disable8');
+			timer = setInterval(autoplay, 0);
+		} else {
+			playLink8.removeClass('pause8').addClass('play8');
+			jQuery('.navy8').removeClass('disable8');
+			clearInterval(timer);
+		}
+	});
+
+}
+
+/* initial function of slider 8 */
+htmSlider8();
+/*--------------------------------------- for nines block -----------------------------------------------------------*/
+function htmSlider9(){
+/* next shift */
+
+/* wrapper slider */
+var slideWrap9 = jQuery('.slide-wrap9');
+/* hrefs for previous and next slide */
+var nextLink9 = jQuery('.next-slide9');
+var prevLink9 = jQuery('.prev-slide9');
+
+var playLink9 = jQuery('.auto9');
+
+var is_animate9 = false;
+
+/* weight slide with indent */
+var slideWidth9 = jQuery('.slide-item9').outerWidth();
+
+/* shift slider */
+var newLeftPos9 = slideWrap9.position().left - slideWidth9;
+
+/* Click for href on next slide */
+nextLink9.click(function(){
+	if(!slideWrap9.is(':animated')) {
+
+		slideWrap9.animate({left: newLeftPos9}, 200, function(){
+			slideWrap9
+				.find('.slide-item9:first')
+				.appendTo(slideWrap9)
+				.parent()
+				.css({'left': 0});
+		});
+
+	}
+});
+
+/* Click for href on next slide */
+prevLink9.click(function(){
+	if(!slideWrap9.is(':animated')) {
+	
+		slideWrap9
+			.css({'left': newLeftPos9})
+			.find('.slide-item9:last')
+			.prependTo(slideWrap9)
+			.parent()
+			.animate({left: 0}, 200);
+
+	}
+});
+
+
+/* Function automatic scroll slider */
+function autoplay(){
+	if(!is_animate9){
+		is_animate9 = true;
+		slideWrap9.animate({left: newLeftPos9}, 2000, function(){
+			slideWrap9
+				.find('.slide-item9:first')
+				.appendTo(slideWrap9)
+				.parent()
+				.css({'left': 0});
+			is_animate9 = false;
+		});
+	}
+}
+
+/* Click on href start/pause */
+playLink9.click(function(){
+	if(playLink9.hasClass('play9')){
+		playLink9.removeClass('play9').addClass('pause9');
+		jQuery('.navy9').addClass('disable9');
+		timer = setInterval(autoplay, 0);
+	} else {
+		playLink9.removeClass('pause9').addClass('play9');
+		jQuery('.navy9').removeClass('disable9');
+		clearInterval(timer);
+	}
+});
+
+}
+
+/* initial function of slider 9 */
+htmSlider9();
 });

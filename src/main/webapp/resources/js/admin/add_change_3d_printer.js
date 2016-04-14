@@ -23,7 +23,7 @@
 $(function() {
     $( ".slider-range-sizePrintableAreaX" ).slider({
       range: "min",
-      min: 1,
+      min: 0,
       max: 1000,
       create: function () {
     	    $(this).slider( "option", "value", $(this).closest('.check_boxes').find('.text_output').find('.amount-sizePrintableAreaX').val() );
@@ -45,7 +45,7 @@ $(function() {
 $(function() {
     $( ".slider-range-sizePrintableAreaY" ).slider({
       range: "min",
-      min: 1,
+      min: 0,
       max: 1000,
       create: function () {
     	    $(this).slider( "option", "value", $(this).closest('.check_boxes').find('.text_output').find('.amount-sizePrintableAreaY').val() );
@@ -66,7 +66,7 @@ $(function() {
 $(function() {
     $( ".slider-range-sizePrintableAreaZ" ).slider({
       range: "min",
-      min: 1,
+      min: 0,
       max: 1000,
       create: function () {
     	    $(this).slider( "option", "value", $(this).closest('.check_boxes').find('.text_output').find('.amount-sizePrintableAreaZ').val() );
@@ -87,7 +87,7 @@ $(function() {
 $(function() {
     $( ".slider-range-meltingPointOfThePrintingMaterial" ).slider({
       range: "min",
-      min: 1,
+      min: 0,
       max: 500,
       create: function () {
     	    $(this).slider( "option", "value", $(this).closest('.check_boxes').find('.text_output').find('.amount-meltingPointOfThePrintingMaterial').val() );
@@ -129,7 +129,7 @@ $(function() {
 $(function() {
     $( ".slider-range-speedPrint" ).slider({
       range: "min",
-      min: 1,
+      min: 0,
       max: 1000,
       create: function () {
     	    $(this).slider( "option", "value", $(this).closest('.check_boxes').find('.text_output').find('.amount-speedPrint').val() );
@@ -150,7 +150,7 @@ $(function() {
 $(function() {
     $( ".slider-range-thicknessOfThePrintingLayer" ).slider({
       range: "min",
-      min: 1,
+      min: 0,
       max: 500,
       create: function () {
     	    $(this).slider( "option", "value", $(this).closest('.check_boxes').find('.text_output').find('.amount-thicknessOfThePrintingLayer').val() );
@@ -193,7 +193,7 @@ $(function() {
     $( ".slider-range-maxPowerConsumption" ).slider({
       range: "min",
       min: 0,
-      max: 100,
+      max: 1000,
       create: function () {
     	    $(this).slider( "option", "value", $(this).closest('.check_boxes').find('.text_output').find('.amount-maxPowerConsumption').val() );
     	},
@@ -210,11 +210,11 @@ $(function() {
 
   });
 
-/*--- для веса ----*/
+/*--- для веса ----
 $(function() {
   $( ".slider-range-weight" ).slider({
     range: "min",
-    min: 50,
+    min: 0,
     max: 5000,
     create: function () {
 	    $(this).slider( "option", "value", $(this).closest('.check_boxes').find('.text_output').find('.amount-weight').val() );
@@ -230,13 +230,13 @@ $(function() {
   $(".slider-range-weight").slider('value', this.value);
       }); 
     
-});
+});*/
 /*--- для ширины ---*/
 $(function() {
   $( ".slider-range-width" ).slider({
     range: "min",
-    min: 1,
-    max: 10,
+    min: 0,
+    max: 10000,
     create: function () {
   	    $(this).slider( "option", "value", $(this).closest('.check_boxes').find('.text_output').find('.amount-width').val() );
   	},
@@ -256,8 +256,8 @@ $(function() {
 $(function() {
   $( ".slider-range-heigth" ).slider({
     range: "min",
-    min: 1,
-    max: 10,
+    min: 0,
+    max: 10000,
     create: function () {
 	    $(this).slider( "option", "value", $(this).closest('.check_boxes').find('.text_output').find('.amount-heigth').val() );
 	},
@@ -278,7 +278,7 @@ $(function() {
   $( ".slider-range-depth" ).slider({
     range: "min",
     min: 0,
-    max: 10,
+    max: 10000,
     create: function () {
   	    $(this).slider( "option", "value", $(this).closest('.check_boxes').find('.text_output').find('.amount-depth').val() );
   	},
@@ -319,8 +319,8 @@ $(document).ready(function() {
 		li.appendChild(progressBarContainer);
 
 		/*
-		If the file is an image and the web browser supports FileReader,
-		present a preview in the file list
+			If the file is an image and the web browser supports FileReader,
+			present a preview in the file list
 		 */
 		if (typeof FileReader !== "undefined"
 				&& (/image/i).test(file.type)) {
@@ -454,7 +454,7 @@ $(document).ready(function(){
 			var data = JSON.stringify(pictureOrder);
 			$.ajax({
 				  type: 'POST',
-				  url: "/nk/admin/printer_3d/change_order_pictures",
+				  url: "/admin/3d_printer/change_order_pictures",
 				  data: data,
 				  contentType: "application/json; charset=utf-8",
 		          dataType: "json"
@@ -470,7 +470,7 @@ jQuery(document).on('click', '.delete_img', function(){
 	
 	$.ajax({
 		  type: 'POST',
-		  url: "/nk/admin/printer_3d/remove_picture/" + $(this).closest('li').attr('id').replace(".", ":"),
+		  url: "/admin/3d_printer/remove_picture/" + $(this).closest('li').attr('id').replace(".", ":"),
 		  contentType: "application/json; charset=utf-8",
           dataType: "json"
 		  });	

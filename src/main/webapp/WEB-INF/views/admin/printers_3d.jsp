@@ -1,69 +1,28 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ page session="false"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@page session="true"%>
 <html lang="ru">
 <head>
-<title>3D принтеры</title>
-<style type="text/css">
-.tg {
-	border-collapse: collapse;
-	border-spacing: 0;
-	border-color: #ccc;
-}
-
-.tg td {
-	font-family: Arial, sans-serif;
-	font-size: 14px;
-	padding: 10px 5px;
-	border-style: solid;
-	border-width: 1px;
-	overflow: hidden;
-	word-break: normal;
-	border-color: #ccc;
-	color: #333;
-	background-color: #fff;
-	text-align:center;
-}
-
-.tg td img{
-	hight: 200px;
-	width: 200px;
-}
-.tg th {
-	font-family: Arial, sans-serif;
-	font-size: 14px;
-	font-weight: normal;
-	padding: 10px 5px;
-	border-style: solid;
-	border-width: 1px;
-	overflow: hidden;
-	word-break: normal;
-	border-color: #ccc;
-	color: #333;
-	background-color: #f0f0f0;
-}
-
-.tg .tg-4eph {
-	background-color: #f9f9f9
-}
-</style>
+	<title>3D принтеры</title>
+	<meta name="_csrf" content="${_csrf.token}"/>
+    <meta name="_csrf_header" content="${_csrf.headerName}"/>
 </head>
 <body>
-	<a href="<c:url value='/admin/printer_3d/new' />">Добавить принтер</a>
+	<div id="product">
+	<a href="<c:url value='/admin/3d_printer/new' />">Добавить 3D принтер</a>
 	<br>
-	<h3>Список загруженных принтеров</h3>
+	<h3>${titleOfTable}</h3>
 	<c:if test="${!empty listProducts}">
 		<table class="tg">
 			<tr>
 				<th width="40">ID</th>
 				<th width="120">Имя принтера</th>
 				<th width="200">Изображение</th>
-				<th width="80">Цена</th>
-				<th width="80">Ярлык слева</th>
-				<th width="80">Ярлык справа</th>
-				<th width="80">Таймер</th>
+				<th width="120">Цена</th>
+				<th width="60">Показ. на сайте</th>
+				<th width="60">Показ. на гл. меню</th>
+				<th width="60">Показ. в левом блоке</th>
 				<th width="60">Редактировать</th>
 				<th width="60">Удалить</th>
 			</tr>
@@ -71,16 +30,58 @@
 				<tr>
 					<td>${product.id}</td>
 					<td>${product.name}</td>
-					<td><img src="<%=request.getContextPath()%>/resources/images/printers3d/${product.id}/${product.pathPictures.get(0)}" alt=""></td>
-					<td>${product.prise} $</td>
-					<td>. </td>
-					<td>. </td>
-					<td>. </td>
-					<td><a href="<c:url value='/admin/printer_3d/edit/${product.id}' />">Изменить</a></td>
-					<td><a href="<c:url value='/admin/printer_3d/remove/${product.id}' />">Удалить</a></td>
+					<td><img src="/images/3d_printers/${product.id}/${product.pathPictures.get(0)}" alt=""></td>
+					<td>$<fmt:formatNumber type="number" 
+           				maxFractionDigits="2" minFractionDigits="2" value="${product.prise}" /></td>
+           				
+           			<td><input type="checkbox" name="showOnSite" <c:if test="${product.showOnSite}">checked</c:if> 
+						onclick="setShowOnSite(${product.id}, this);"/></td>
+						
+					<td><input type="checkbox" name="showOnHomePage" <c:if test="${product.showOnHomePage}">checked</c:if>
+						onclick="setShowOnHomePage(${product.id}, this);"/></td>
+						
+					<td><input type="checkbox" name="showOnLeftSide" <c:if test="${product.showOnLeftSide}">checked</c:if>
+						onclick="setShowOnLeftSide(${product.id}, this);"/></td>
+						
+					<td><a href="<c:url value='/admin/3d_printer/edit/${product.id}' />">Изменить</a></td>
+					<td><a href="<c:url value='/admin/3d_printer/remove/${product.id}' />">Удалить</a></td>
 				</tr>
 			</c:forEach>
 		</table>
 	</c:if>
+	</div>
+	
+	<script type="text/javascript">
+	function setShowOnSite(id, element){
+		$.ajax({
+			  type: 'post',
+			  url: "/admin/3d_printer/showOnSite/" + id,
+			  data: JSON.stringify(element.checked),
+			  contentType: "application/json; charset=utf-8",
+              dataType: "json"
+			  });	
+		}
+	
+	function setShowOnHomePage(id, element){
+		$.ajax({
+			  type: 'post',
+			  url: "/admin/3d_printer/showOnHomePage/" + id,
+			  data: JSON.stringify(element.checked),
+			  contentType: "application/json; charset=utf-8",
+              dataType: "json"
+			  });	
+		}
+	
+function setShowOnLeftSide(id, element){
+		$.ajax({
+			  type: 'post',
+			  url: "/admin/3d_printer/showOnLeftSide/" + id,
+			  data: JSON.stringify(element.checked),
+			  contentType: "application/json; charset=utf-8",
+              dataType: "json"
+			  });	
+		}
+	</script>
+	
 </body>
 </html>

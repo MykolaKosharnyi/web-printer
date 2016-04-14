@@ -11,6 +11,8 @@ public interface PrinterService {
     public long addPrinter(Printer p);
     public void updatePrinter(Printer p);
     public List<Printer> listPrinters();
+    public Set<Printer> listShowOnSite();
+    public Set<Printer> listShowOnHomePage();
     public Set<Printer> listSearchPrinters(SearchPrinters searchPrinters);
     public Printer getPrinterById(long id);
     public void removePrinter(long id);

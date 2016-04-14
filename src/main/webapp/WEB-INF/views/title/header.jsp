@@ -1,158 +1,403 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-    <header>
-        <div id="second_row">
-            <a id="second_row_logo" href="<c:url value='/' />"><img class="second_row_image" src="<%=request.getContextPath()%>/resources/images/head/Logo_Print_Master.jpg" alt=""></a>
-            <a id="second_row_contact" href=""><img class="second_row_image" src="<%=request.getContextPath()%>/resources/images/head/Contact.png" alt=""></a>
-            <div class="phone_numbers">
-                <p>тел.: (044)-274-22-99 </p>
-                <p>(044)-405-96-11 </p>
-                <p>(044)-405-96-88</p>
-            </div>
-            <div id="second_row_search">
-                <input id="second_row_search_field" placeholder="Введите слово или фразу..." size="50" type="search">
-                <a id="second_row_search_button" href="" ><img src="<%=request.getContextPath()%>/resources/images/head/Search.jpg" alt=""></a>
-            </div>
-            <a id="second_row_basket" href=""><img class="second_row_image" src="<%=request.getContextPath()%>/resources/images/head/Basket_full.png" alt=""></a>
-            <a id="second_row_price_equality" href=""><img class="second_row_image" src="<%=request.getContextPath()%>/resources/images/head/$.jpg" alt=""></a>
-            <a id="second_row_language" href=""><img class="second_row_image" src="<%=request.getContextPath()%>/resources/images/head/Langiuge_1.jpg" alt=""></a>
-            <a id="second_row_user" href=""><img class="second_row_image" src="<%=request.getContextPath()%>/resources/images/head/User.jpg" alt=""></a> 
-        </div>
-        <div id="head_memu_background">
-                    <div id="mainmenu">
-                       <div id="full_menu">
-                         <div class="toggle-menu">
-						<!--   <span class="menu-text hide-on-med-and-down">Меню</span>   -->
-							<span class="icon-bar skew-clock"></span>
-							<span class="icon-bar hide-closed"></span>
-							<span class="icon-bar skew-counter"></span>
-						</div>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<header class="top_header">
+		<div class="header_topline">
+			<div class="container">
+				<div class="col-md-12">
+					<div class="row">
+						<div class="top_information"><i class="fa fa-phone"></i> (044)-274-22-99</div>
+						<div class="top_information"><i class="fa fa-phone"></i> (044)-405-96-11</div>
+						<div class="top_information"><i class="fa fa-phone"></i> (044)-405-96-88</div>
+						<div class="top_information"><i class="fa fa-map-marker"></i> г. Киев, ул. Картвелишвили, д. 7/2</div>
+						<div class="top_information"><i class="fa fa-envelope-o"></i> office@forprint.net.ua</div>
+						<a href="#" class="top_information"><i class="fa fa-vk"></i></a>
+						<a href="#" class="top_information"><i class="fa fa-facebook-square"></i></a>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="header_secondline">
+			<div class="container">
+				<div class="col-md-4 col-sm-4 col-xs-4">
+					<div class="row">
+						<a href="<c:url value='/' />" class="logo">for Print</a>
+						
+
+		<div class="btn-group">
+  			<button type="button" class="btn btn-primary" style="margin-left:15px;">Стоимость в:</button>
+  							<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" 													aria-haspopup="true" aria-expanded="false">
+    								<span class="caret"></span>
+    								<span class="sr-only">Toggle Dropdown</span>
+  							</button>
+  							<ul class="dropdown-menu">
+    								<li><a href="#"><i class="fa fa-usd"></i></a></li>
+    								<li><a href="#"><i class="fa fa-eur"></i></a></li>
+    								<li><a href="#">UA <i class="fa fa-money"></i></a></li>
+    							</ul>
+    						</div>
+					</div>
+				</div>
+				
+
+
+		<div class="col-md-4  col-sm-4 col-xs-4">
+					<div class="row">
+						<div class="input-group">
+  <input type="text" class="form-control" aria-label="..." placeholder="<spring:message code="head.search.pleaceholder"/>">
+  <div class="input-group-btn">
+    <div class="btn-group">
+  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Поиск <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu">
+    <li><a href="#">Принтеры</a></li>
+    <li><a href="#">3Д принтеры</a></li>
+    <li><a href="#">Цыфровые принтеры</a></li>
+    <li role="separator" class="divider"></li>
+    <li><a href="#">По всех разделах</a></li>
+  </ul>
+</div>
+  </div>
+</div>
+					</div>
+				</div>
+
+
+
+
+				<div class="col-md-3  col-sm-3 col-xs-3 col-md-offset-1">
+					<div class="row">
+<div class="btn-group">
+  						<button type="button" class="btn btn-info"><i class="fa fa-globe"></i></button>
+  							<button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    								<span class="caret"></span>
+    								<span class="sr-only">Toggle Dropdown</span>
+  							</button>
+  							<ul class="dropdown-menu">
+    								<li><a href="?lang=en">English</a></li>
+    								<li><a href="?lang=ru">Русский</a></li>
+    							</ul>
+    						</div>
+
+
+						<div class="btn-group">
+  						<button type="button" class="btn btn-success"><i class="fa fa-user"></i></button>
+  							<button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    								<span class="caret"></span>
+    								<span class="sr-only">Toggle Dropdown</span>
+  							</button>
+  							<ul class="dropdown-menu">
+
+
+
+
+						<c:url value="/logout" var="logoutUrl" />
+							<!-- csrt for log out-->
+						<form action="${logoutUrl}" method="post" id="logoutForm" style="display: none;">
+							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+						</form>
+				
+						<script>
+							function formSubmit() {
+								document.getElementById("logoutForm").submit();
+							}
+						</script>
+			
+							<c:if test="${pageContext.request.userPrincipal.name != null}">
+							<li><a href="#">Вы вошли как: ${pageContext.request.userPrincipal.name}</a></li>
+								<li><a href="javascript:formSubmit()">Выход</a></li>
+							</c:if>
+							<c:if test="${pageContext.request.userPrincipal.name == null}">
+								<li><a href="<c:url value='/login' />">Войти</a></li>
+    								<li><a href="#">Зарегестрироваться</a></li>
+							</c:if>
+    								<li role="separator" class="divider"></li>
+    								<li><a href="#">Еще что-то</a></li>
+    							</ul>
+    						</div>
+
+
+<div class="btn-group">
+  					<button type="button" class="btn btn-warning"><i class="fa fa-shopping-cart"></i></button>
+  							<button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    								<span class="caret"></span>
+    								<span class="sr-only">Toggle Dropdown</span>
+  							</button>
+  							<ul class="dropdown-menu">
+    								<li><a href="<c:url value='/cart' />">Ваша корзина</a></li>
+    								<li><a href="#">Вы просматривали</a></li>
+    								<li role="separator" class="divider"></li>
+    								<li><a href="#">Очистить корзину</a></li>
+    							</ul>
+    						</div>
+					</div>
+				</div>
+
+
+
+
+			</div>
+		</div>
+
+
+		<div class="header_menu">
+			<div class="container">
+				<div class="col-md-12">
+					<div class="row">
+						<div id="mainmenu">
+        						<div id="full_menu">
+            							<div class="toggle-menu">
+								<!--   <span class="menu-text hide-on-med-and-down">Меню</span>   -->
+									<span class="icon-bar skew-clock"></span>
+									<span class="icon-bar hide-closed"></span>
+									<span class="icon-bar skew-counter"></span>
+								</div>
+            						</div>
+            <ul>
+            
+            <!-- PRINTERS -->
+            	<li><a href="<c:url value='/printers' />"><spring:message code="head.printer"/></a>
+                	<div class="head_menu_point_1">
+                    	<div class="head_menu_point_element">
+                        	<a href="<c:url value='/printers/dissolving' />">
+                            <img src="/images/menu/printers/${picturesInHeadMenu.printersJSON.listPicturesDissolvingPrinters[0]}" alt="" >
+                            <p><spring:message code="head.printer.dissolving"/></p></a>
                         </div>
-                                <ul>
-                                <!-- Пункт меню 1 -->
-                                <li><a href="<c:url value='/printers' />">Принтеры</a>
-                                  <div class="head_menu_point_1">
-                                      <div class="head_menu_point_element">
-                                          <a href="<c:url value='/printers/dissolving' />"><img src="<%=request.getContextPath()%>/resources/images/head/progo1.jpg" alt="" ><p>Сольвентные принтеры</p></a>
-                                      </div>
-                                      <div class="head_menu_point_element">
-                                          <a href="<c:url value='/printers/ecosolvent' />"><img src="<%=request.getContextPath()%>/resources/images/head/progo1.jpg" alt=""><p>Экосольвентные принтеры</p></a>
-                                      </div>
-                                      <div class="head_menu_point_element">
-                                          <a href="<c:url value='/printers/UV_roll' />"><img src="<%=request.getContextPath()%>/resources/images/head/progo1.jpg" alt="" ><p>UV рулонные принтеры</p></a>
-                                      </div>                                       
-                                      <div class="head_menu_point_element">
-                                          <a href="<c:url value='/printers/UV_flatbed' />"><img src="<%=request.getContextPath()%>/resources/images/head/progo1.jpg" alt="" ><p>UV плоскопечатные принтеры</p></a>
-                                      </div>
-                                      <div class="head_menu_point_element">
-                                          <a href="<c:url value='/printers/sublimation' />"><img src="<%=request.getContextPath()%>/resources/images/head/progo1.jpg" alt="" ><p>Сублимационные принтеры</p></a>
-                                      </div>
-                                      <div class="head_menu_point_element">
-                                          <a href="<c:url value='/printers/textile' />"><img src="<%=request.getContextPath()%>/resources/images/head/progo1.jpg" alt="" ><p>Текстильные принтеры</p></a>
-                                      </div>
-                                  </div>
+                        <div class="head_menu_point_element">
+                        	<a href="<c:url value='/printers/ecosolvent' />">
+                        	<img src="/images/menu/printers/${picturesInHeadMenu.printersJSON.listPicturesEcosolventPrinters[0]}" alt="">
+                        	<p><spring:message code="head.printer.ecosolvent"/></p></a>
+                        </div>
+                        <div class="head_menu_point_element">
+                        	<a href="<c:url value='/printers/UV_roll' />">
+                        	<img src="/images/menu/printers/${picturesInHeadMenu.printersJSON.listPicturesUvRollPrinters[0]}" alt="" >
+                        	<p><spring:message code="head.printer.uv_roll"/></p></a>
+                        </div>                                       
+                        <div class="head_menu_point_element">
+                            <a href="<c:url value='/printers/UV_flatbed' />">
+                            <img src="/images/menu/printers/${picturesInHeadMenu.printersJSON.listPicturesUvFlatbedPrinters[0]}" alt="" >
+                            <p><spring:message code="head.printer.flatbed"/></p></a>
+                        </div>
+                        <div class="head_menu_point_element">
+                            <a href="<c:url value='/printers/sublimation' />">
+                            <img src="/images/menu/printers/${picturesInHeadMenu.printersJSON.listPicturesSublimationPrinters[0]}" src="" alt="" >
+                            <p><spring:message code="head.printer.sublimation"/></p></a>
+                        </div>
+                        <div class="head_menu_point_element">
+                            <a href="<c:url value='/printers/textile' />">
+                            <img src="/images/menu/printers/${picturesInHeadMenu.printersJSON.listPicturesTextilePrinters[0]}" alt="" >
+                            <p><spring:message code="head.printer.textile"/></p></a>
+                        </div>
+                        <div class="head_menu_point_element">
+                            <a href="<c:url value='/printers/water_pigment' />">
+                            <img src="/images/menu/printers/${picturesInHeadMenu.printersJSON.listPicturesWaterPigmentPrinters[0]}" alt="" >
+                            <p><spring:message code="head.printer.water_pigment"/></p></a>
+                        </div>
+                        <div class="head_menu_point_element">
+                            <a href="<c:url value='/printers/SAPR-GIS' />">
+                            <img src="/images/menu/printers/${picturesInHeadMenu.printersJSON.listPictures_SAPR_GIS_Printers[0]}" alt="" >
+                            <p><spring:message code="head.printer.SAPR-GIS"/></p></a>
+                        </div>
+					</div>
+				</li>
+				
+            <!-- 3D PRINTERS -->
+                <li><a href="<c:url value='/3d_printers' />"><spring:message code="head.3dprinter"/></a>
+                	<div class="head_menu_point_2">
+                    	<div class="head_menu_point_element">
+                    	<a href="<c:url value='/3d_printers/FDM-extruder' />">
+                    	<img src="/images/menu/printers3d/${picturesInHeadMenu.printers3dJSON.list_3dPrintersFDM_Extruder[0]}" alt="" >
+                    	<p><spring:message code="head.3dprinter.FDM-extruder"/></p></a>
+                	</div>
+                	<div class="head_menu_point_element">
+                		<a href="<c:url value='/3d_printers/photo_printing_polyjet' />">
+                		<img src="/images/menu/printers3d/${picturesInHeadMenu.printers3dJSON.list_3d_printers_photo_printing_polyjet[0]}" alt="" >
+                		<p><spring:message code="head.3dprinter.photo_printing_polyjet"/></p></a>
+                	</div>
+                	<div class="head_menu_point_element">
+                		<a href="<c:url value='/3d_printers/laser_sintering_LENS' />">
+                    	<img src="/images/menu/printers3d/${picturesInHeadMenu.printers3dJSON.list_3d_printers_laser_sintering_LENS[0]}" alt="" >
+                    	<p><spring:message code="head.3dprinter.laser_sintering_LENS"/></p></a>
+                	</div>
+                	<div class="head_menu_point_element">
+                		<a href="<c:url value='/3d_printers/lamination_LOM' />">
+                		<img src="/images/menu/printers3d/${picturesInHeadMenu.printers3dJSON.list_3d_printers_lamination_LOM[0]}" alt="" >
+                		<p><spring:message code="head.3dprinter.lamination_LOM"/></p></a>
+                	</div>
+                	<div class="head_menu_point_element">
+                		<a href="<c:url value='/3d_printers/stereolithography_SL' />">
+                		<img src="/images/menu/printers3d/${picturesInHeadMenu.printers3dJSON.list_3d_printers_stereolithography_SL[0]}" alt="" >
+                		<p><spring:message code="head.3dprinter.stereolithography_SL"/></p></a>
+                	</div>
+                	<div class="head_menu_point_element">
+                		<a href="<c:url value='/3d_printers/laser_sintering_LS' />">
+                		<img src="/images/menu/printers3d/${picturesInHeadMenu.printers3dJSON.list_3d_printers_laser_sintering_LS[0]}" alt="" >
+                		<p><spring:message code="head.3dprinter.laser_sintering_LS"/></p></a>
+                	</div>
+                	<div class="head_menu_point_element">
+                		<a href="<c:url value='/3d_printers/powder_bonding_3DP' />">
+                		<img src="/images/menu/printers3d/${picturesInHeadMenu.printers3dJSON.list_3d_printers_powder_bonding_3DP[0]}" alt="" >
+                    	<p><spring:message code="head.3dprinter.powder_bonding_3DP"/></p></a>
+                	</div>                                      
+            	</div>
+			</li>
+			
+			<!-- Пункт меню 3 цыфровые принтера-->
+            <li><a href="<c:url value='/digital_printers' />"><spring:message code="head.digital_printer"/></a>
+            	<div class="head_menu_point_3">
+                	<div class="head_menu_point_element">
+                    	<a href="<c:url value='/digital_printers/full_color_laser_printers' />">
+                        	<img src="/images/menu/digital_printers/${picturesInHeadMenu.digital_printersJSON.list_full_color_laser_printers[0]}" alt="" >
+                        	<p><spring:message code="head.digital_printer.full_color_laser_printers"/></p>
+                        </a>
+                   	</div>
+                    <div class="head_menu_point_element">
+                    	<a href="<c:url value='/digital_printers/monochrome_laser_printers' />">
+                    		<img src="/images/menu/digital_printers/${picturesInHeadMenu.digital_printersJSON.list_monochrome_laser_printers[0]}" alt="" >
+                    		<p><spring:message code="head.digital_printer.monochrome_laser_printers"/></p>
+                    	</a>
+                    </div>
+                    <div class="head_menu_point_element">
+                    	<a href="<c:url value='/digital_printers/full-color_inkjet_printers' />">
+                    		<img src="/images/menu/digital_printers/${picturesInHeadMenu.digital_printersJSON.list_full_color_inkjet_printers[0]}" alt="" >
+                    		<p><spring:message code="head.digital_printer.full_color_inkjet_printers"/></p>
+                    	</a>
+                    </div>                                                                            
+				</div>
+			</li>
+			
+		<!-- Пункт меню 4 Ламинирование-->
+            <li><a href="<c:url value='/laminators' />"><spring:message code="head.laminator"/></a>
+            	<div class="head_menu_point_34">
+                	<div class="head_menu_point_element">
+                    	<a href="<c:url value='/laminators/hot_lamination' />">
+                        <img src="/images/menu/laminator/${picturesInHeadMenu.laminatorJSON.list_hot_lamination[0]}" alt="" >
+                        <p><spring:message code="head.laminator.hot_lamination"/></p></a>
+                   	</div>
+                    <div class="head_menu_point_element">
+                    	<a href="<c:url value='/laminators/cold_laminating' />">
+                    	<img src="/images/menu/laminator/${picturesInHeadMenu.laminatorJSON.list_cold_laminating[0]}" alt="" >
+                    	<p><spring:message code="head.laminator.cold_laminating"/></p></a>
+                    </div>
+                    <div class="head_menu_point_element">
+                    	<a href="<c:url value='/laminators/liquid' />">
+                    	<img src="/images/menu/laminator/${picturesInHeadMenu.laminatorJSON.list_liquid[0]}" alt="" >
+                    	<p><spring:message code="head.laminator.liquid"/></p></a>
+                    </div>     
+                    <div class="head_menu_point_element">
+                    	<a href="<c:url value='/laminators/flatbed_laminating_machine' />">
+                    	<img src="/images/menu/laminator/${picturesInHeadMenu.laminatorJSON.list_flatbed_laminating_machine[0]}" alt="" >
+                    	<p><spring:message code="head.laminator.flatbed_laminating_machine"/></p></a>
+                    </div>                                                                       
+				</div>
+			</li>
+			
+		<!-- Пункт меню 5 Лазеры-->
+            <li><a href="<c:url value='/lasers' />"><spring:message code="head.laser"/></a>
+            	<div class="head_menu_point_4">
+            		<div class="head_menu_point_element">
+                    	<a href="<c:url value='/lasers/CO2_gas_lasers' />">
+                    	<img src="/images/menu/laser/${picturesInHeadMenu.laserJSON.list_CO2_gas_lasers[0]}" alt="" >
+                    	<p><spring:message code="head.laser.CO2_gas_lasers"/></p></a>
+                	</div>
+                	<div class="head_menu_point_element">
+                		<a href="<c:url value='/lasers/solid_state_lasers' />">
+                    	<img src="/images/menu/laser/${picturesInHeadMenu.laserJSON.list_solid_state_lasers[0]}" alt="" >
+                    	<p><spring:message code="head.laser.solid_state_lasers"/></p></a>
+                	</div>     
+                	<div class="head_menu_point_element">
+                		<a href="<c:url value='/lasers/for_the_treatment_of_metal' />">
+                    	<img src="/images/menu/laser/${picturesInHeadMenu.laserJSON.list_for_the_treatment_of_metal[0]}" alt="" >
+                    	<p><spring:message code="head.laser.for_the_treatment_of_metal"/></p></a>
+                	</div>
+                	<div class="head_menu_point_element">
+                		<a href="<c:url value='/lasers/diode_pumped' />">
+                    	<img src="/images/menu/laser/${picturesInHeadMenu.laserJSON.list_diode_pumped[0]}" alt="" >
+                    	<p><spring:message code="head.laser.diode_pumped"/></p></a>
+                	</div>  
+                	<div class="head_menu_point_element">
+                		<a href="<c:url value='/lasers/fiber_lasers' />">
+                    	<img src="/images/menu/laser/${picturesInHeadMenu.laserJSON.list_fiber_lasers[0]}" alt="" >
+                    	<p><spring:message code="head.laser.fiber_lasers"/></p></a>
+                	</div>
+                	<div class="head_menu_point_element">
+                		<a href="<c:url value='/lasers/plasma_lasers' />">
+                    	<img src="/images/menu/laser/${picturesInHeadMenu.laserJSON.list_plasma_lasers[0]}" alt="" >
+                    	<p><spring:message code="head.laser.plasma_lasers"/></p></a>
+                	</div>                               
+               </div>
+			</li>
+			
+		<!-- Пункт меню 6 Фрезеры -->
+        	<li><a href="<c:url value='/cutters' />"><spring:message code="head.cutter"/></a>
+            	<div class="head_menu_point_5">
+                	<div class="head_menu_point_element">
+                    	<a href="<c:url value='/cutters/for_wood' />">
+                        	<img src="/images/menu/cutter/${picturesInHeadMenu.cutterJSON.list_for_wood[0]}" alt="" >
+                        <p><spring:message code="head.cutter.for_wood"/></p></a>
+                    </div>
+                    <div class="head_menu_point_element">
+                    	<a href="<c:url value='/cutters/for_the_treatment_of_metal' />">
+                    		<img src="/images/menu/cutter/${picturesInHeadMenu.cutterJSON.list_for_the_treatment_of_metal[0]}" alt="" >
+                    	<p><spring:message code="head.cutter.for_the_treatment_of_metal"/></p></a>
+                    </div>
+                    <div class="head_menu_point_element">
+                    	<a href="<c:url value='/cutters/stone_processing' />">
+                        	<img src="/images/menu/cutter/${picturesInHeadMenu.cutterJSON.list_stone_processing[0]}" alt="" >
+                        <p><spring:message code="head.cutter.stone_processing"/></p></a>
+                    </div>                                                                            
+                    </div>
+			</li>
+				
+			<!-- Пункт меню 7 Сканеры-->
+                <li><a href="<c:url value='/scanners' />"><spring:message code="head.scanner"/></a>
+                	<div class="head_menu_point_6">
+                    	<div class="head_menu_point_element">
+                        	<a href="<c:url value='/scanners/large_format_scanners' />">
+                        	<img src="/images/menu/scanner/${picturesInHeadMenu.scannerJSON.list_large_format_scanners[0]}" alt="" >
+                            <p><spring:message code="head.scanner.large_format_scanners"/></p></a>
+                        </div>
+                        <div class="head_menu_point_element">
+                        	<a href="<c:url value='/scanners/3d_scanners' />">
+                        	<img src="/images/menu/scanner/${picturesInHeadMenu.scannerJSON.list_3d_scanners[0]}" alt="" >
+                            <p><spring:message code="head.scanner.3d_scanners"/></p></a>
+                        </div>
+                    </div>
+				</li>
+				
+			<!-- Пункт меню 8 Бывшего употребления-->
+				<li><a href="<c:url value='/previous_use_equipments' />"><spring:message code="head.previouslyUsed"/></a>
+					<!--  <div class="head_menu_point_7">
+                    	<div class="head_menu_point_element">
+                        	<a href="#">
+                            <img src="/images/menu/previouslyUsed/${picturesInHeadMenu.previouslyUsedJSON.list_solvent_equipment[0]}" alt="" >
+                            <p><spring:message code="head.previouslyUsed.solvent_equipment"/></p></a>
+                        </div>
+                    	<div class="head_menu_point_element">
+                        	<a href="#">
+                            <img src="/images/menu/previouslyUsed/${picturesInHeadMenu.previouslyUsedJSON.list_ecosolvent_oborudovnie[0]}" alt="" >
+                            <p><spring:message code="head.previouslyUsed.ecosolvent_oborudovnie"/></p></a>
+                        </div>                                                                           
+					</div>	-->
+				</li>
+				
+			<!-- Пункт меню 9 ПО rip-->
+                <li><a href="<c:url value='/rip' />"><spring:message code="head.rip"/></a>
+                	<!-- <div class="head_menu_point_8">
+                    	<div class="head_menu_point_element">
+                        	<a href="#">
+                            <img src="/images/menu/rip/${picturesInHeadMenu.ripJSON.list_RIP_system[0]}" alt="" >
+                            <p><spring:message code="head.rip.RIP_system"/></p></a>
+                        </div>
+                    </div> -->
+                </li>
 
-                                </li>
-                                <!-- Пункт меню 2 -->
-                                <li><a href="<c:url value='/printers_3d' />">3D Принтеры</a>
-                                  <div class="head_menu_point_2">
-                                      <div class="head_menu_point_element">
-                                          <a href="<c:url value='/printers_3d/FDM-extruder' />"><img src="<%=request.getContextPath()%>/resources/images/head/Edit/3D_Print_Master_Slide_1.jpg" alt="" ><p>Экструдные FDM</p></a>
-                                      </div>
-                                      <div class="head_menu_point_element">
-                                          <a href="<c:url value='/printers_3d/photo_printing_polyjet' />"><img src="<%=request.getContextPath()%>/resources/images/head/Edit/3D_Print_Master_Slide_10.jpg" alt="" ><p>Фото печать Polyjet</p></a>
-                                      </div>
-                                      <div class="head_menu_point_element">
-                                          <a href="<c:url value='/printers_3d/laser_sintering_LENS' />"><img src="<%=request.getContextPath()%>/resources/images/head/Edit/3D_Print_Master_Slide_11.jpg" alt="" ><p>Лазерного спекания LENS</p></a>
-                                      </div>
-                                      <div class="head_menu_point_element">
-                                          <a href="<c:url value='/printers_3d/lamination_LOM' />"><img src="<%=request.getContextPath()%>/resources/images/head/Edit/3D_Print_Master_Slide_12.jpg" alt="" ><p>Ламинация LOM</p></a>
-                                      </div>
-                                      <div class="head_menu_point_element">
-                                          <a href="<c:url value='/printers_3d/stereolithography_SL' />"><img src="<%=request.getContextPath()%>/resources/images/head/Edit/3D_Print_Master_Slide_13.jpg" alt="" ><p>Стереолитография SL</p></a>
-                                      </div>
-                                      <div class="head_menu_point_element">
-                                          <a href="<c:url value='/printers_3d/laser_sintering_LS' />"><img src="<%=request.getContextPath()%>/resources/images/head/Edit/3D_Print_Master_Slide_14.jpg" alt="" ><p>Лазерное спекание LS</p></a>
-                                      </div>
-                                      <div class="head_menu_point_element">
-                                          <a href="<c:url value='/printers_3d/powder_bonding_3DP' />"><img src="<%=request.getContextPath()%>/resources/images/head/Edit/3D_Print_Master_Slide_15.jpg" alt="" ><p>Порошкового склеивания 3DP</p></a>
-                                      </div>                                      
-                                  </div>
-                                </li>
-                                <!-- Пункт меню 3 -->
-                                <li><a href="#">Ламинаторы</a>
-                                    <div class="head_menu_point_3">
-                                      <div class="head_menu_point_element">
-                                          <a href="#"><img src="<%=request.getContextPath()%>/resources/images/head/lam1.bmp" alt="" ><p>Горячего ламинирования</p></a>
-                                      </div>
-                                      <div class="head_menu_point_element">
-                                          <a href="#"><img src="<%=request.getContextPath()%>/resources/images/head/lam1.bmp" alt="" ><p>Холодного ламинирования</p></a>
-                                      </div>
-                                      <div class="head_menu_point_element">
-                                          <a href="#"><img src="<%=request.getContextPath()%>/resources/images/head/lam1.bmp" alt="" ><p>Жидкостные</p></a>
-                                      </div>                                                                            
-                                  </div>
-                                </li>
-                                <!-- Пункт меню 4 -->
-                                <li><a href="#">Лазеры</a>
-                                    <div class="head_menu_point_4">
-                                      <div class="head_menu_point_element">
-                                          <a href="#"><img src="<%=request.getContextPath()%>/resources/images/head/hqdefault.jpg" alt="" ><p>Газовые лазеры СО2</p></a>
-                                      </div>
-                                       <div class="head_menu_point_element">
-                                          <a href="#"><img src="<%=request.getContextPath()%>/resources/images/head/hqdefault.jpg" alt="" ><p>Твердотельные лазеры</p></a>
-                                      </div>     
-                                      <div class="head_menu_point_element">
-                                          <a href="#"><img src="<%=request.getContextPath()%>/resources/images/head/hqdefault.jpg" alt="" ><p>Для обработки метала</p></a>
-                                      </div>
-                                       <div class="head_menu_point_element">
-                                          <a href="#"><img src="<%=request.getContextPath()%>/resources/images/head/hqdefault.jpg" alt="" ><p>С диодной накачкой</p></a>
-                                      </div>                                 
-                                  </div>
-                                </li>
-                                <!-- Пункт меню 5 -->
-                                <li><a href="#">Фрезеры</a>
-                                    <div class="head_menu_point_5">
-                                      <div class="head_menu_point_element">
-                                          <a href="#"><img src="<%=request.getContextPath()%>/resources/images/head/maxresdefault.jpg" alt="" ><p>Для обработки дерева</p></a>
-                                      </div>
-                                      <div class="head_menu_point_element">
-                                          <a href="#"><img src="<%=request.getContextPath()%>/resources/images/head/maxresdefault.jpg" alt="" ><p>Для обработки метала</p></a>
-                                      </div>
-                                      <div class="head_menu_point_element">
-                                          <a href="#"><img src="<%=request.getContextPath()%>/resources/images/head/maxresdefault.jpg" alt="" ><p>Для обработки камня</p></a>
-                                      </div>                                                                            
-                                  </div>
-                                </li>
-                                <!-- Пункт меню 6 -->
-                                <li><a href="#">Сканеры</a>
-                                   <div class="head_menu_point_6">
-                                      <div class="head_menu_point_element">
-                                          <a href="#"><img src="<%=request.getContextPath()%>/resources/images/head/SD_series.png" alt="" ><p>Широкоформатные сканеры</p></a>
-                                      </div>
-                                  </div>
-                                </li>
-                                <!-- Пункт меню 7 -->
-                                <li><a href="#">Б/У Оборудование</a>
-                                    <div class="head_menu_point_7">
-                                      <div class="head_menu_point_element">
-                                          <a href="#"><img src="<%=request.getContextPath()%>/resources/images/head/maxresdefault.jpg" alt="" ><p>Сольвентное оборудование</p></a>
-                                      </div>
-                                      <div class="head_menu_point_element">
-                                          <a href="#"><img src="<%=request.getContextPath()%>/resources/images/head/maxresdefault.jpg" alt="" ><p>Экосольвентное оборудовние</p></a>
-                                      </div>                                                                           
-                                  </div>
-                                </li>
-                                <!-- Пункт меню 8 -->
-                                <li><a href="#">ПО</a>
-                                    <div class="head_menu_point_8">
-                                      <div class="head_menu_point_element">
-                                          <a href="#"><img src="<%=request.getContextPath()%>/resources/images/head/progo1.jpg" alt="" ><p>RIP системы</p></a>
-                                      </div>
-                                    </div>
-                                </li>
-
-                                </ul><!-- Конец списка -->
-                        </div><!-- Конец блока #mainmenu -->
-        </div>    
- </header>
+			</ul><!-- Конец списка -->
+		</div><!-- Конец блока #mainmenu -->
+					</div>
+				</div>
+			</div>
+		</div>
+</header>

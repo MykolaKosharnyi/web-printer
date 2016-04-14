@@ -17,6 +17,16 @@
         <put-attribute name="body" value="/WEB-INF/views/home.jsp" />  
     </definition>  
   
+    <definition name="login" extends="base"> 
+    	<put-attribute name="path" value="/WEB-INF/views/login/path_login.jsp" />  
+        <put-attribute name="body" value="/WEB-INF/views/login/login.jsp" />  
+    </definition>   
+  
+    <definition name="cart" extends="base"> 
+    	<put-attribute name="path" value="/WEB-INF/views/cart/path_cart.jsp" />  
+        <put-attribute name="body" value="/WEB-INF/views/cart/cart.jsp" />  
+    </definition>   
+  
     <definition name="printers" extends="base"> 
     	<put-attribute name="path" value="/WEB-INF/views/printer/path_user_printers.jsp" />  
         <put-attribute name="search" value="/WEB-INF/views/printer/search_printers.jsp" /> 
@@ -33,20 +43,221 @@
         <put-attribute name="body" value="/WEB-INF/views/printer/printer.jsp" />  
     </definition>
     
-    <definition name="printers_3d" extends="base"> 
+    <definition name="3d_printers" extends="base"> 
     	<put-attribute name="path" value="/WEB-INF/views/printer3d/path_user_printers_3d.jsp" />  
         <put-attribute name="search" value="/WEB-INF/views/printer3d/search_printers_3d.jsp" /> 
         <put-attribute name="body" value="/WEB-INF/views/printer3d/printers_3d.jsp" />  
     </definition> 
     
-    <definition name="printers_3d/*" extends="printers_3d"> 
+    <definition name="3d_printers/*" extends="3d_printers"> 
     	<put-attribute name="path" value="/WEB-INF/views/printer3d/path_user_printers_with_type_3d.jsp" />  
         <put-attribute name="search" value="/WEB-INF/views/printer3d/search_printer_concrete_type_3d.jsp" /> 
     </definition>   
     
-    <definition name="printer_3d" extends="base">
+    <definition name="3d_printer" extends="base">
     	<put-attribute name="path" value="/WEB-INF/views/printer3d/path_user_printer_3d.jsp" />    
         <put-attribute name="body" value="/WEB-INF/views/printer3d/printer_3d.jsp" />  
     </definition>
-  
+    
+    <definition name="digital_printers" extends="base"> 
+    	<put-attribute name="path" value="/WEB-INF/views/digital_printer/path_user_digital_printers.jsp" />  
+        <put-attribute name="search" value="/WEB-INF/views/digital_printer/search_digital_printers.jsp" /> 
+        <put-attribute name="body" value="/WEB-INF/views/digital_printer/digital_printers.jsp" />  
+    </definition> 
+    
+    <definition name="digital_printers/*" extends="digital_printers"> 
+    	<put-attribute name="path" value="/WEB-INF/views/digital_printer/path_user_digital_printers_with_type.jsp" />  
+        <put-attribute name="search" value="/WEB-INF/views/digital_printer/search_digital_printer_concrete_type.jsp" /> 
+    </definition>   
+    
+    <definition name="digital_printer" extends="base">
+    	<put-attribute name="path" value="/WEB-INF/views/digital_printer/path_user_digital_printer.jsp" />    
+        <put-attribute name="body" value="/WEB-INF/views/digital_printer/digital_printer.jsp" />  
+    </definition>
+    
+    <definition name="lasers" extends="base"> 
+    	<put-attribute name="path" value="/WEB-INF/views/laser/path_user_lasers.jsp" />  
+        <put-attribute name="search" value="/WEB-INF/views/laser/search_lasers.jsp" /> 
+        <put-attribute name="body" value="/WEB-INF/views/laser/lasers.jsp" />  
+    </definition> 
+    
+    <definition name="lasers/*" extends="lasers"> 
+    	<put-attribute name="path" value="/WEB-INF/views/laser/path_user_lasers_with_type.jsp" />  
+        <put-attribute name="search" value="/WEB-INF/views/laser/search_laser_concrete_type.jsp" /> 
+    </definition>   
+    
+    <definition name="laser" extends="base">
+    	<put-attribute name="path" value="/WEB-INF/views/laser/path_user_laser.jsp" />    
+        <put-attribute name="body" value="/WEB-INF/views/laser/laser.jsp" />  
+    </definition>
+    
+    <definition name="cutters" extends="base"> 
+    	<put-attribute name="path" value="/WEB-INF/views/cutter/path_user_cutters.jsp" />  
+        <put-attribute name="search" value="/WEB-INF/views/cutter/search_cutters.jsp" /> 
+        <put-attribute name="body" value="/WEB-INF/views/cutter/cutters.jsp" />  
+    </definition> 
+    
+    <definition name="cutters/*" extends="cutters"> 
+    	<put-attribute name="path" value="/WEB-INF/views/cutter/path_user_cutters_with_type.jsp" />  
+        <put-attribute name="search" value="/WEB-INF/views/cutter/search_cutters_concrete_type.jsp" /> 
+    </definition>   
+    
+    <definition name="cutter" extends="base">
+    	<put-attribute name="path" value="/WEB-INF/views/cutter/path_user_cutter.jsp" />    
+        <put-attribute name="body" value="/WEB-INF/views/cutter/cutter.jsp" />  
+    </definition>
+    
+    <definition name="laminators" extends="base"> 
+    	<put-attribute name="path" value="/WEB-INF/views/laminator/path_user_laminators.jsp" />  
+        <put-attribute name="search" value="/WEB-INF/views/laminator/search_laminators.jsp" /> 
+        <put-attribute name="body" value="/WEB-INF/views/laminator/laminators.jsp" />  
+    </definition> 
+    
+    <definition name="laminators/*" extends="laminators"> 
+    	<put-attribute name="path" value="/WEB-INF/views/laminator/path_user_laminators_with_type.jsp" />  
+        <put-attribute name="search" value="/WEB-INF/views/laminator/search_laminator_concrete_type.jsp" /> 
+    </definition>   
+    
+    <definition name="laminator" extends="base">
+    	<put-attribute name="path" value="/WEB-INF/views/laminator/path_user_laminator.jsp" />    
+        <put-attribute name="body" value="/WEB-INF/views/laminator/laminator.jsp" />  
+    </definition>
+    
+    <definition name="scanners" extends="base"> 
+    	<put-attribute name="path" value="/WEB-INF/views/scanner/path_user_scanners.jsp" />  
+        <put-attribute name="search" value="/WEB-INF/views/scanner/search_scanners.jsp" /> 
+        <put-attribute name="body" value="/WEB-INF/views/scanner/scanners.jsp" />  
+    </definition> 
+    
+    <definition name="scanners/*" extends="scanners"> 
+    	<put-attribute name="path" value="/WEB-INF/views/scanner/path_user_scanners_with_type.jsp" />  
+        <put-attribute name="search" value="/WEB-INF/views/scanner/search_scanner_concrete_type.jsp" /> 
+    </definition>   
+    
+    <definition name="scanner" extends="base">
+    	<put-attribute name="path" value="/WEB-INF/views/scanner/path_user_scanner.jsp" />    
+        <put-attribute name="body" value="/WEB-INF/views/scanner/scanner.jsp" />  
+    </definition>
+    
+    <definition name="previous_use_equipments" extends="base"> 
+    	<put-attribute name="path" value="/WEB-INF/views/pue/path_user_previous_use_equipments.jsp" />  
+        <put-attribute name="search" value="/WEB-INF/views/pue/search_previous_use_equipments.jsp" /> 
+        <put-attribute name="body" value="/WEB-INF/views/pue/previous_use_equipments.jsp" />  
+    </definition> 
+    
+    <definition name="rips" extends="base"> 
+    	<put-attribute name="path" value="/WEB-INF/views/rip/path_user_rips.jsp" />  
+        <put-attribute name="search" value="/WEB-INF/views/rip/search_rips.jsp" /> 
+        <put-attribute name="body" value="/WEB-INF/views/rip/rips.jsp" />  
+    </definition>   
+    
+    <definition name="rip" extends="base">
+    	<put-attribute name="path" value="/WEB-INF/views/rip/path_user_rip.jsp" />    
+        <put-attribute name="body" value="/WEB-INF/views/rip/rip.jsp" />  
+    </definition>
+    
+    <definition name="admin_base" template="/WEB-INF/views/admin/layout_admin.jsp">  
+        <put-attribute name="header" value="/WEB-INF/views/admin/admin_login_in_out.jsp" />
+        <put-attribute name="tree" value="/WEB-INF/views/admin/tree_admin.jsp" />   
+        <put-attribute name="body" value="" />  
+    </definition>
+    
+    <definition name="admin/printer" extends="admin_base">    
+        <put-attribute name="body" value="/WEB-INF/views/admin/printer.jsp" />  
+    </definition>
+    
+    <definition name="admin/products" extends="admin_base">    
+        <put-attribute name="body" value="/WEB-INF/views/admin/products.jsp" />  
+    </definition>
+    
+    <definition name="admin/3d_printer" extends="admin_base">    
+        <put-attribute name="body" value="/WEB-INF/views/admin/printer_3d.jsp" />  
+    </definition>
+
+    <definition name="admin/3d_printers" extends="admin_base">    
+        <put-attribute name="body" value="/WEB-INF/views/admin/printers_3d.jsp" />  
+    </definition>
+    
+    <definition name="admin/digital_printer" extends="admin_base">    
+        <put-attribute name="body" value="/WEB-INF/views/admin/digital_printer.jsp" />  
+    </definition>
+    
+    <definition name="admin/digital_printers" extends="admin_base">    
+        <put-attribute name="body" value="/WEB-INF/views/admin/digital_printers.jsp" />  
+    </definition>
+    
+    <definition name="admin/laser" extends="admin_base">    
+        <put-attribute name="body" value="/WEB-INF/views/admin/laser.jsp" />  
+    </definition>
+    
+    <definition name="admin/lasers" extends="admin_base">    
+        <put-attribute name="body" value="/WEB-INF/views/admin/lasers.jsp" />  
+    </definition>
+    
+    <definition name="admin/cutter" extends="admin_base">    
+        <put-attribute name="body" value="/WEB-INF/views/admin/cutter.jsp" />  
+    </definition>
+    
+    <definition name="admin/cutters" extends="admin_base">    
+        <put-attribute name="body" value="/WEB-INF/views/admin/cutters.jsp" />  
+    </definition>
+    
+    <definition name="admin/laminator" extends="admin_base">    
+        <put-attribute name="body" value="/WEB-INF/views/admin/laminator.jsp" />  
+    </definition>
+    
+    <definition name="admin/laminators" extends="admin_base">    
+        <put-attribute name="body" value="/WEB-INF/views/admin/products.jsp" />  
+    </definition>
+    
+    <definition name="admin/scanner" extends="admin_base">    
+        <put-attribute name="body" value="/WEB-INF/views/admin/scanner.jsp" />  
+    </definition>
+    
+    <definition name="admin/scanners" extends="admin_base">    
+        <put-attribute name="body" value="/WEB-INF/views/admin/products.jsp" />  
+    </definition>
+    
+    <definition name="admin/previous_use_equipments" extends="admin_base">    
+        <put-attribute name="body" value="/WEB-INF/views/admin/previous_use_equipments.jsp" />  
+    </definition>
+    
+    <definition name="admin/rip" extends="admin_base">    
+        <put-attribute name="body" value="/WEB-INF/views/admin/rip.jsp" />  
+    </definition>
+    
+    <definition name="admin/rips" extends="admin_base">    
+        <put-attribute name="body" value="/WEB-INF/views/admin/products.jsp" />  
+    </definition>
+    
+    <definition name="admin/pictures" extends="admin_base">
+    	<put-attribute name="body" value="/WEB-INF/views/admin/pictures.jsp" />  
+    </definition>
+
+	<!-- CHANGE PICTURES IN MENU -->    
+	<definition name="admin/pictures/menu/*/*" extends="admin_base">    
+        <put-attribute name="body" value="/WEB-INF/views/admin/pictures/menu_picture.jsp" />  
+    </definition>
+    
+    <!-- CHANGE PICTURES IN HOME PAGE -->    
+     <definition name="admin/pictures/big_animation_reklam" extends="admin_base">    
+        <put-attribute name="body" value="/WEB-INF/views/admin/pictures/big_animation_reklam.jsp" />  
+    </definition>
+    
+	<definition name="admin/pictures/right_of_reklam" extends="admin_base">    
+        <put-attribute name="body" value="/WEB-INF/views/admin/pictures/right_of_reklam.jsp" />  
+    </definition>
+    
+    <definition name="admin/pictures/right_in_product_block" extends="admin_base">    
+        <put-attribute name="body" value="/WEB-INF/views/admin/pictures/right_in_product_block.jsp" />  
+    </definition>
+    
+    <definition name="admin/pictures/three_big_pictures" extends="admin_base">    
+        <put-attribute name="body" value="/WEB-INF/views/admin/pictures/three_big_pictures.jsp" />  
+    </definition>
+    
+    <definition name="admin/pictures/two_narrow_pictures" extends="admin_base">    
+        <put-attribute name="body" value="/WEB-INF/views/admin/pictures/two_narrow_pictures.jsp" />  
+    </definition>
+    
 </tiles-definitions>  

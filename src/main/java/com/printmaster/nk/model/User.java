@@ -1,39 +1,37 @@
 package com.printmaster.nk.model;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="user")
 public class User implements Serializable{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -357378939455722167L;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="id")
-	private int id;
+	private long id;
 	
-	@Column(name="first_name")
+	@Column(name="firstname")
 	private String firstName;
 	
-	@Column(name="second_name")
-	private String secondName;
+	@Column(name="LASTNAME")
+	private String lastname;
 	
-	@Column(name="phone_number")
-	private int phoneNumber;
+	@Column(name="password")
+	private String password;
+	
+	@Column(name="telephone")
+	private int telephone;
 	
 	@Column(name="company")
 	private String company;
@@ -41,102 +39,92 @@ public class User implements Serializable{
 	@Column(name="email")
 	private String email;
 	
-	@OneToMany(mappedBy="user")
-	private Set<OrderPrinter> orderPrinters = new HashSet<OrderPrinter>();
+	@Column(name="date_of_birth_bay")
+	private Date dateOfBirthDay;
+	
+	@Column(name="time_registration")
+	private Date timeRegistration;
 	
 	public User(){
-		super();
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
-	/**
-	 * @return the orderPrinters
-	 */
-	public Set<OrderPrinter> getOrderPrinters() {
-		return orderPrinters;
+	public String getPassword() {
+		return password;
 	}
 
-	/**
-	 * @param orderPrinters the orderPrinters to set
-	 */
-	public void setOrderPrinters(Set<OrderPrinter> orderPrinters) {
-		this.orderPrinters = orderPrinters;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
-	/**
-	 * @return the firstName
-	 */
+	public Date getDateOfBirthDay() {
+		return dateOfBirthDay;
+	}
+
+	public void setDateOfBirthDay(Date dateOfBirthDay) {
+		this.dateOfBirthDay = dateOfBirthDay;
+	}
+
+	public Date getTimeRegistration() {
+		return timeRegistration;
+	}
+
+	public void setTimeRegistration(Date timeRegistration) {
+		this.timeRegistration = timeRegistration;
+	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+
+	public int getTelephone() {
+		return telephone;
+	}
+
+	public void setTelephone(int telephone) {
+		this.telephone = telephone;
+	}
+
 	public String getFirstName() {
 		return firstName;
 	}
 
-	/**
-	 * @param firstName the firstName to set
-	 */
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
 
-	/**
-	 * @return the secondName
-	 */
-	public String getSecondName() {
-		return secondName;
-	}
-
-	/**
-	 * @param secondName the secondName to set
-	 */
-	public void setSecondName(String secondName) {
-		this.secondName = secondName;
-	}
-
-	/**
-	 * @return the phoneNumber
-	 */
-	public int getPhoneNumber() {
-		return phoneNumber;
-	}
-
-	/**
-	 * @param phoneNumber the phoneNumber to set
-	 */
-	public void setPhoneNumber(int phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
-
-	/**
-	 * @return the email
-	 */
 	public String getEmail() {
 		return email;
 	}
 
-	/**
-	 * @param email the email to set
-	 */
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
-	/**
-	 * @return the company
-	 */
 	public String getCompany() {
 		return company;
 	}
 
-	/**
-	 * @param company the company to set
-	 */
 	public void setCompany(String company) {
 		this.company = company;
 	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", firstName=" + firstName + ", lastname=" + lastname + ", telephone=" + telephone
+				+ ", company=" + company + ", email=" + email + ", dateOfBirthDay=" + dateOfBirthDay
+				+ ", timeRegistration=" + timeRegistration + "]";
+	}
+
 }
