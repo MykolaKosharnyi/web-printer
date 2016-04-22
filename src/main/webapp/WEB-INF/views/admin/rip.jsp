@@ -154,39 +154,21 @@
 						value = "<fmt:formatDate value="${product.timeShares}" pattern="dd.MM.yyyy" />"/>
 					</div>
 				</div>
-				<div class="characteristic">
-					<div class="block_title">
-						<i></i>
-						<p>Тип оборудования</p>
-					</div>
-					<div class="check_boxes">
-  						 <c:forEach items="${rip}" var="p">		
-	  						<li>
-	  							<input type="radio" name="typeEquipment" value="${p['type_equipment']}"
-	  								<c:if test="${product.typeEquipment==p['type_equipment']}">checked</c:if>
-	  						 		id="${p['type_equipment']}_12"><label for="${p['type_equipment']}_12">${p['type_equipment']}</label>
-	  						 	</input>
-	  						 </li>
-						</c:forEach>
-					</div>
-				</div>
-				
-				
-	
-				
 				
 			</div>
 
 
 			<div class="product_characteristic">
-			
+				<div class="characteristic">
 					<fieldset>
 						   <legend>Тип оборудования</legend>
+						   
+						   <form:errors path="typeEquipment" cssClass="error"></form:errors>
 						 <c:forEach items="${rip}" var="p">		
 	  						
 	  							<input type="radio" name="typeEquipment" value="${p['type_equipment']}"
 	  								<c:if test="${product.typeEquipment==p['type_equipment']}">checked</c:if>
-	  								onclick="setSoftwareMaker('${p['type_equipment']}', '${product.typeEquipment}');"
+	  								onclick="setSoftwareMaker('${p['type_equipment']}', '${product.typeEquipment}', '${product.softwareClass}');"
 	  						 		id="${p['type_equipment']}_11"><label for="${p['type_equipment']}_11">${p['type_equipment']}</label>
 	  						 	</input>
 								</br>
@@ -197,21 +179,59 @@
 				
 					<fieldset id="software_maker">
 						   <legend>Производитель ПО</legend>
-						 <c:forEach items="${rip}" var="p">		
+						   
+						   <form:errors path="softwareMaker" cssClass="error"></form:errors>
+						   <c:forEach items="${rip}" var="p">		
 	  						
-	  							<input type="radio" name="typeEquipment" value="${p['type_equipment']}"
-	  								<c:if test="${product.typeEquipment==p['type_equipment']}">checked</c:if>
-	  								onclick="setSoftwareMaker(\'${p['software_maker']}\', \'${product.softwareMaker}\');"
-	  						 		id="${p['type_equipment']}_11"><label for="${p['type_equipment']}_11">${p['type_equipment']}</label>
-	  						 	</input>
-								</br>
-	  						 
-						</c:forEach>
+	  							<c:if test="${p['type_equipment']==product.typeEquipment}">
+	  								<c:forEach items="${p.software_maker}" var="soft_marker">	
+	  								
+	  									<input type="radio" name="softwareMaker" value="${soft_marker.name}"
+	  										<c:if test="${product.softwareMaker==soft_marker.name}">checked</c:if>
+	  										onclick="setSoftwareClassFirstLoading('${product.typeEquipment}', '${soft_marker.name}', '${product.softwareClass}');"
+	  						 				id="${soft_marker.name}_12"><label for="${soft_marker.name}_12">${soft_marker.name}</label>
+	  						 			</input>
+										</br>
+	  									
+	  								</c:forEach>
+								</c:if>
+
+							</c:forEach>
 					</fieldset>
 					
-				
+					<fieldset id="software_class">
+						   <legend>Класс ПО</legend>
+						   
+						   <form:errors path="softwareClass" cssClass="error"></form:errors>
+						   <c:forEach items="${rip}" var="p">		
+	  						
+	  							<c:if test="${p['type_equipment']==product.typeEquipment}">
+	  								<c:forEach items="${p.software_maker}" var="soft_marker">	
+	  								
+	  									<c:if test="${soft_marker['name']==product.softwareMaker}">
+	  										<c:forEach items="${soft_marker.software_class}" var="soft_class">
+	  										
+	  										<input type="radio" name="softwareClass" value="${soft_class}"
+	  											<c:if test="${product.softwareClass==soft_class}">checked</c:if>
+	  						 					id="${soft_class}_13"><label for="${soft_class}_13">${soft_class}</label>
+	  						 				</input>
+											</br>
+	  										
+	  										</c:forEach>
+	  									</c:if>
+	
+	  								</c:forEach>
+								</c:if>
 
+							</c:forEach>
+					</fieldset>
 
+					<fieldset>
+						<legend>Версия ПО</legend>
+							<form:input path="softwareVersion" />
+							<form:errors path="softwareVersion" cssClass="error"></form:errors>
+					</fieldset>
+				</div>
 			</div>
 
 
@@ -266,31 +286,102 @@
 	</div>
 	<script type="text/javascript">
 
-	function setSoftwareMaker(typeEquipment, m){
+	function setSoftwareMaker(typeEquipment, m, soft_class){
 		var softvare_maker = $("#software_maker").html('').append($('<legend/>').text('Производитель ПО'));
 		
-		var mydata = JSON.parse("/var/www/localhost/rip.json");
-		
-			$(mydata).each(function(i, maker) {
-				
+		$.getJSON( "/images/rip.json", function( data ) {
+  			
+		$(data).each(function(i, maker) {
+
 				if(maker.type_equipment==typeEquipment){
 					
 					$(maker.software_maker).each(function(k, column) {
-						var element = $('<input/>').attr("type", "radio").attr("name", "softwareMaker").attr("value", column.name).attr("id", column.name + k)
-						.appednd($('<label/>').attr("for", column.name + k).text(column.name));
+						var inputRadio = $('<input/>').attr("type", "radio").attr("name", "softwareMaker")
+							.attr("value", column.name).attr("id", column.name + k)
+							.click(function() {
+								setSoftwareClass(column.software_class, soft_class);
+							});
 
 						if(column.name==m){
-	    	        		element.checked(true);
+	    	        		inputRadio.attr( "checked" );
 	    				}
-						softvare_maker.append(element).append('<br/>');
+
+						var inputLabel =$('<label/>').attr("for", column.name + k).text(column.name).click(function() {
+  							setSoftwareClass(column.software_class, soft_class);
+						});
+
+						softvare_maker.append(inputRadio).append(inputLabel).append('<br/>');
 					});
 
-					break;
+					 $("#software_class").html('').append($('<legend/>').text('Класс ПО'));
+					return;
 				}
+			
+			});
+		});
+			
+		}
+
+function setSoftwareClass(software_class, m){
+		var softvare_cl = $("#software_class").html('').append($('<legend/>').text('Класс ПО'));
+				
+		$(software_class).each(function(i, soft_cl) {
+					
+						var inputRadio = $('<input/>').attr("type", "radio").attr("name", "softwareClass")
+							.attr("value", soft_cl).attr("id", soft_cl + i);
+
+						if(soft_cl==m){
+	    	        		inputRadio.attr( "checked" );
+	    				}
+
+						var inputLabel =$('<label/>').attr("for", soft_cl + i).text(soft_cl);
+
+						softvare_cl.append(inputRadio).append(inputLabel).append('<br/>');
+
 			
 			});
 			
 		}
+		
+function setSoftwareClassFirstLoading(typeEquipment, software_class_name, m){
+	var softvare_cl = $("#software_class").html('').append($('<legend/>').text('Класс ПО'));
+	
+	$.getJSON( "/images/rip.json", function( data ) {
+			
+	$(data).each(function(i, maker) {
+
+			if(maker.type_equipment==typeEquipment){
+
+				$(maker.software_maker).each(function(k, column) {
+					
+					if(column.name==software_class_name){
+					
+						$(column.software_class).each(function(i, soft_cl) {
+							
+							var inputRadio = $('<input/>').attr("type", "radio").attr("name", "softwareClass")
+								.attr("value", soft_cl).attr("id", soft_cl + i);
+	
+							if(soft_cl==m){
+		    	        		inputRadio.attr( "checked" );
+		    				}
+	
+							var inputLabel =$('<label/>').attr("for", soft_cl + i).text(soft_cl);
+	
+							softvare_cl.append(inputRadio).append(inputLabel).append('<br/>');
+	
+				
+						});
+					
+						return;
+					}
+					
+				});
+			}
+		
+		});
+	});
+		
+}
 
 	</script>
 </body>

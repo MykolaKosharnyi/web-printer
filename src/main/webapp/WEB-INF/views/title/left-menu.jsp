@@ -275,7 +275,7 @@
                     </ul>-->
                 </li>
 <!---------------------------------------------------------------------------------------------------------------------------------> 
-                <li><a href="<c:url value='/rip' />"><spring:message code="head.rip"/></a>
+                <li><a href="<c:url value='/rips' />"><spring:message code="head.rip"/></a>
                     <!--  <ul class="menu_drop">
                         <li><a href="#"><spring:message code="head.rip.RIP_system"/></a></li>
                     </ul>-->

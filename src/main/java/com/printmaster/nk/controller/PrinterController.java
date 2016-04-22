@@ -245,6 +245,7 @@ public class PrinterController {
 		m.put("Yueda", "Yueda");
 		m.put("AZON", "AZON");
 		m.put("Big Color", "Big Color");
+		m.put("ATEXCO", "ATEXCO");
 		return m;
 	}
 	

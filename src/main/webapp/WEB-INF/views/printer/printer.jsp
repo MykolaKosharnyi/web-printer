@@ -124,18 +124,18 @@
    								<c:if test="${(product.lengthWaveUVlamp > 0) || (product.powerUVlamp > 0)}">
    									UV лампа:
    									<br/>
-   									<c:if test="${product.lengthWaveUVlamp > 0}">- длинна волны ${product.lengthWaveUVlamp} нм;</c:if>
+   									<c:if test="${product.lengthWaveUVlamp > 0}">длинна волны ${product.lengthWaveUVlamp} нм;</c:if>
    									<br/>
-   									<c:if test="${product.powerUVlamp > 0}">- мощность UV излучения ${product.powerUVlamp} Вт;</c:if>
+   									<c:if test="${product.powerUVlamp > 0}">мощность UV излучения ${product.powerUVlamp} Вт;</c:if>
    									<br/>
 								</c:if>
 								
 								<c:if test="${(product.lengthWaveLEDmodule > 0) || (product.powerLEDmodule > 0)}">
    									LED модуль:
    									<br/>
-   									<c:if test="${product.lengthWaveLEDmodule > 0}">- длинна волны ${product.lengthWaveLEDmodule} нм;</c:if>
+   									<c:if test="${product.lengthWaveLEDmodule > 0}">длинна волны ${product.lengthWaveLEDmodule} нм;</c:if>
    									<br/>
-   									<c:if test="${product.powerLEDmodule > 0}">- мощность UV излучения ${product.powerLEDmodule} Вт;</c:if>
+   									<c:if test="${product.powerLEDmodule > 0}">мощность UV излучения ${product.powerLEDmodule} Вт;</c:if>
 								</c:if>
    							
    								</td>

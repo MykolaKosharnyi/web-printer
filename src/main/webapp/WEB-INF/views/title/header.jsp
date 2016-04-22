@@ -384,7 +384,7 @@
 				</li>
 				
 			<!-- Пункт меню 9 ПО rip-->
-                <li><a href="<c:url value='/rip' />"><spring:message code="head.rip"/></a>
+                <li><a href="<c:url value='/rips' />"><spring:message code="head.rip"/></a>
                 	<!-- <div class="head_menu_point_8">
                     	<div class="head_menu_point_element">
                         	<a href="#">

@@ -190,7 +190,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Импульс лазера, KHz</p>
+				<p>Импульс лазера, Hz</p>
 			</div>
 			<ul class="check_boxes">
 				<div class="text_output">

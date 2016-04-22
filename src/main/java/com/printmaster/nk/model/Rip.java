@@ -40,12 +40,15 @@ private static final long serialVersionUID = 3031695775597440046L;
 	@Column(name="prise")
 	private double prise; 
 
+	@NotEmpty
 	@Column(name="typeEquipment")
 	private String typeEquipment;//Тип оборудования
 	
+	@NotEmpty
 	@Column(name="softwareMaker")
 	private String softwareMaker;//Производитель ПО
 	
+	@NotEmpty
 	@Column(name="softwareClass")
 	private String softwareClass;//Класс ПО
 	

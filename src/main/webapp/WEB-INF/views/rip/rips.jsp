@@ -4,13 +4,13 @@
 <div id="out_result_of_search">
 	<c:forEach items="${listProducts}" var="product">
 		<div class="products">
-			<a id="/images/printers/${product.id}/${product.pathPictures.get(1)}" onmouseover="" class="link" href="<c:url value='/printer/${product.id}' />">	
-					<div class="outer_a_img"><img src="/images/printers/${product.id}/${product.pathPictures.get(0)}" alt=""></div>
+			<a id="/images/rips/${product.id}/${product.pathPictures.get(1)}" onmouseover="" class="link" href="<c:url value='/rip/${product.id}' />">	
+					<div class="outer_a_img"><img src="/images/rips/${product.id}/${product.pathPictures.get(0)}" alt=""></div>
 			</a>
-			<a href="javascript:void(0)" onclick="addToCart('printer', ${product.id});" class="products_buy">
+			<a href="javascript:void(0)" onclick="addToCart('rip', ${product.id});" class="products_buy">
 				<img src="/images/button_buy.png" alt="" />
 			</a>
-			<a href="<c:url value='/printer/${product.id}' />" class="products_title">${product.name}</a>
+			<a href="<c:url value='/rip/${product.id}' />" class="products_title">${product.name}</a>
 			<p class="products_price">Цена: 
            		<c:if test="${product.prise < 0.1}"> уточняйте</c:if>
 				<c:if test="${!(product.prise < 0.1)}">					

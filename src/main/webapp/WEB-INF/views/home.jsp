@@ -715,7 +715,7 @@
                 <div class="col-md-3" style="padding: 0px;">
                   <div class="list-group">
 
-                     <a href="<c:url value='/rip' />" class="list-group-item active"><spring:message code="head.rip"/></a>
+                     <a href="<c:url value='/rips' />" class="list-group-item active"><spring:message code="head.rip"/></a>
 
                           <!--  <a href="#" class="list-group-item"><spring:message code="head.rip.RIP_system"/></a> --> 
 

@@ -905,6 +905,20 @@
     </ul>
   </li>
 
+<li class="Node IsRoot ExpandClosed">
+    <div class="Expand"></div>
+    <div class="Content"><a href="<c:url value='/admin/rips' />">ПО</a></div>
+    <ul class="Container">
+    
+    <!-- Пошли подпункты ПО -->
+     
+      
+    
+   
+      
+    </ul>
+  </li>
+
 <li class="Node IsRoot ExpandClosed IsLast">
     <div class="Expand"></div>
     <div class="Content">Изображения</a></div>

@@ -380,7 +380,7 @@
 				<div class="characteristic">
 					<div class="block_title">
 						<i></i>
-						<p>Импульс лазера, KHz</p>
+						<p>Импульс лазера, Hz</p>
 						<form:errors path="laserPulse0" cssClass="error"></form:errors>
 						<form:errors path="laserPulse1" cssClass="error"></form:errors>
 					</div>

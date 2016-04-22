@@ -72,13 +72,16 @@ public class RipController {
     }
     
 	@RequestMapping(value = "/rips", method = RequestMethod.GET)	
-    public String allRips(Model model) {
+    public String allRips(Model model) throws UnsupportedEncodingException, FileNotFoundException, IOException, ParseException {
 		
         model.addAttribute("listProducts", componets.showSimplestArrayOfRip(this.ripService.listShowOnSite()));
         SearchRips search = new SearchRips();
         search.setPrise0(0);
         search.setPrise1(100000);
    
+        logger.info("All characteristic of RIP.");
+		model.addAttribute("rip", (JSONArray)new JSONParser().parse(new InputStreamReader(new FileInputStream("/var/www/localhost/images/rip.json"), "UTF-8")));
+        
         model.addAttribute("search", search);
         logger.info("On '../rips' page.");
         return "rips";
@@ -116,7 +119,7 @@ public class RipController {
 		model.addAttribute("product", new Rip());
 		
 		logger.info("All characteristic of RIP.");
-		model.addAttribute("rip", (JSONArray)new JSONParser().parse(new InputStreamReader(new FileInputStream("/var/www/localhost/rip.json"), "UTF-8")));
+		model.addAttribute("rip", (JSONArray)new JSONParser().parse(new InputStreamReader(new FileInputStream("/var/www/localhost/images/rip.json"), "UTF-8")));
 	    return "admin/rip";
 	}
      
@@ -239,7 +242,7 @@ public class RipController {
 	}
 	
     @RequestMapping("/admin/rip/edit/{id}")
-    public String editRip(@PathVariable("id") long id, Model model){
+    public String editRip(@PathVariable("id") long id, Model model) throws UnsupportedEncodingException, FileNotFoundException, IOException, ParseException {
     	logger.info("Begin editing rip with id=" + id);
     	files.clear();
     	Rip undateRip = ripService.getRipById(id);
@@ -260,6 +263,9 @@ public class RipController {
     		files.add(fm);
     	}
         model.addAttribute("product", undateRip);
+        
+        logger.info("All characteristic of RIP.");
+		model.addAttribute("rip", (JSONArray)new JSONParser().parse(new InputStreamReader(new FileInputStream("/var/www/localhost/images/rip.json"), "UTF-8")));
         return "admin/rip";
     }
 	

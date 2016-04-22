@@ -21,7 +21,7 @@
 	    <a href="<c:url value='/admin/cutters' />">Фрезеры</a>
 	    <a href="<c:url value='/admin/scanners' />">Сканеры</a>
 	    <a href="<c:url value='/admin/previous_use_equipments' />">Б/У Оборудование</a>
-	    <a href="">ПО</a>
+	    <a href="<c:url value='/admin/rips' />">ПО</a>
 	    <a href="<c:url value='/admin/pictures' />">Изменение изображений главного меню/домашней страницы</a>
     </div>
 </body>

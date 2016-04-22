@@ -168,7 +168,7 @@
 						</c:if>
 						
 						<c:if test="${product.laserPulse0 > 0 && product.laserPulse1 > 0}">
-   							<tr><td>Импульс лазера:</td><td>${product.laserPulse0}-${product.laserPulse1} KHz</td></tr>
+   							<tr><td>Импульс лазера:</td><td>${product.laserPulse0}-${product.laserPulse1} Hz</td></tr>
 						</c:if>
 						
 						<c:if test="${product.theDiameterOfTheLaser > 0}">
