@@ -304,6 +304,7 @@ public class PrinterController {
         search.setPrise1(100000);
    
         model.addAttribute("search", search);
+        model.addAttribute("type", "printer");
         logger.info("On '../printers' page.");
         return "printers";
     }
@@ -355,6 +356,7 @@ public class PrinterController {
         search.setPrise1(100000);
         model.addAttribute("search", search);        
         model.addAttribute("listProducts", componets.showSimplestArrayOfPrinter(printerService.listSearchPrinters(search)));
+        model.addAttribute("type", "printer");
         return "printers/" + type ;
     }
 

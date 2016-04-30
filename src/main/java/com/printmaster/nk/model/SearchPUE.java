@@ -8,6 +8,7 @@ private static final long serialVersionUID = 6702501013538481082L;
 
 private double prise0;
 private double prise1;
+private String[] type;
 private String[] typePrinter;
 private String[] printerEquipment;
 private String[] type3dPrinter;
@@ -37,6 +38,15 @@ public double getPrise1() {
 public void setPrise1(double prise1) {
 	this.prise1 = prise1;
 }
+
+public String[] getType() {
+	return type;
+}
+
+public void setType(String[] type) {
+	this.type = type;
+}
+
 public String[] getTypePrinter() {
 	return typePrinter;
 }

@@ -39,8 +39,10 @@
 
 		<div class="block_search_criteria">
 			<div class="block_block_title">
-				<i></i>
-				<p>Принтер</p>
+				
+						<input class="input_pue" type="checkbox" name="type" value="printer" id="printer_98">
+							<p class="p_pue" for="printer_98">Принтер</p>
+						</input>
 			</div>
 			<ul class="block_check_boxes">
 				<div class="search_criteria">
@@ -66,8 +68,9 @@
 		
 		<div class="block_search_criteria">
 			<div class="block_block_title">
-				<i></i>
-				<p>3D Принтер</p>
+				<input class="input_pue" type="checkbox" name="type" value="3d_printer" id="3d_printer_98">
+					<p class="p_pue" for="3d_printer_98">3D Принтер</p>
+				</input>
 			</div>
 			<ul class="block_check_boxes">
 				<div class="search_criteria">
@@ -93,8 +96,9 @@
 
 		<div class="block_search_criteria">
 			<div class="block_block_title">
-				<i></i>
-				<p>Цыфровое оборудование</p>
+				<input class="input_pue" type="checkbox" name="type" value="digital_printer" id="digital_printer_98">
+					<p class="p_pue" for="digital_printer_98">Цыфровое оборудование</p>
+				</input>
 			</div>
 			<ul class="block_check_boxes">
 				<div class="search_criteria">
@@ -120,8 +124,9 @@
 
 		<div class="block_search_criteria">
 			<div class="block_block_title">
-				<i></i>
-				<p>Ламинатор</p>
+				<input class="input_pue" type="checkbox" name="type" value="laminator" id="laminator_98">
+					<p class="p_pue" for="laminator_98">Ламинатор</p>
+				</input>
 			</div>
 			<ul class="block_check_boxes">
 				<div class="search_criteria">
@@ -147,8 +152,9 @@
 		
 		<div class="block_search_criteria">
 			<div class="block_block_title">
-				<i></i>
-				<p>Лазер</p>
+				<input class="input_pue" type="checkbox" name="type" value="laser" id="laser_98">
+					<p class="p_pue" for="laser_98">Лазер</p>
+				</input>
 			</div>
 			<ul class="block_check_boxes">
 				<div class="search_criteria">
@@ -174,8 +180,9 @@
 		
 		<div class="block_search_criteria">
 			<div class="block_block_title">
-				<i></i>
-				<p>Фрезер/Гравер</p>
+				<input class="input_pue" type="checkbox" name="type" value="cutter" id="cutter_98">
+					<p class="p_pue" for="cutter_98">Фрезер/Гравер</p>
+				</input>
 			</div>
 			<ul class="block_check_boxes">
 				<div class="search_criteria">
@@ -201,8 +208,9 @@
 		
 		<div class="block_search_criteria">
 			<div class="block_block_title">
-				<i></i>
-				<p>Сканера</p>
+				<input class="input_pue" type="checkbox" name="type" value="scanner" id="scanner_98">
+					<p class="p_pue" for="scanner_98">Сканер</p>
+				</input>
 			</div>
 			<ul class="block_check_boxes">
 				<div class="search_criteria">

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/admin/common.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/admin/add_change_printer.css">
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/jquery-ui.css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/libs/fancybox/jquery.fancybox.css" />
 	
 <!--  	
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
@@ -16,13 +17,16 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 	<script src="http://malsup.github.com/jquery.form.js"></script>
+	<script src="<%=request.getContextPath()%>/resources/libs/fancybox/jquery.fancybox.pack.js"></script>
 	
     <script src="<%=request.getContextPath()%>/resources/js/tiny_mce/tinymce.min.js"></script>
 	<script src="<%=request.getContextPath()%>/resources/js/admin/common.js"></script>
 </head>
 <body>
-	<tiles:insertAttribute name="header" />
-	<tiles:insertAttribute name="tree" />
-	<tiles:insertAttribute name="body" />	
+	<div style="width: 1200px; margin: 0 auto;">
+		<tiles:insertAttribute name="header" />
+		<tiles:insertAttribute name="tree" />
+		<tiles:insertAttribute name="body" />	
+	</div>
 </body>
 </html>

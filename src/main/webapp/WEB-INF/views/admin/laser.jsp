@@ -73,13 +73,13 @@
 			<c:if test="${empty product.id}">
 				<c:url value="/admin/laser/save_add" var="saveLoad" />
 				<input id="submit" type="submit" formaction="${saveLoad}" value="сохранить" style="background: gold; color: black;"/>
-				<input id="submit" type="submit" value="загрузить" style="background: green;"/>
+				<input id="submit" type="submit" value="загрузить" style="background: green; color: azure;"/>
 			</c:if>
 			
 			<c:if test="${!empty product.id}">
 				<c:url value="/admin/laser/save_update" var="saveUpdate" />
 				<input id="submit" type="submit" formaction="${saveUpdate}" value="сохранить" style="background: gold; color: black;"/>
-				<input id="submit" type="submit" value="изменить" style="background:blue;"/>
+				<input id="submit" type="submit" value="изменить" style="background:blue; color: azure;"/>
 			</c:if>
 			
 			<c:if test="${!empty product.id}">
@@ -664,11 +664,11 @@
 		</div>
 		
 			<c:if test="${empty product.id}">
-				<input id="submit" type="submit" value="загрузить" style="background:green;"/>
+				<input id="submit" type="submit" value="загрузить" style="background:green; color: azure;"/>
 			</c:if>
 			
 			<c:if test="${!empty product.id}">
-				<input id="submit" type="submit" value="изменить" style="background:blue;"/>
+				<input id="submit" type="submit" value="изменить" style="background:blue; color: azure;"/>
 			</c:if>
 
 		</form:form>

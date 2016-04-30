@@ -171,6 +171,7 @@ public class CutterController {
         search.setPrise1(100000);
    
         model.addAttribute("search", search);
+        model.addAttribute("type", "cutter");
         logger.info("On '../cutters' page.");
         return "cutters";
     }
@@ -202,6 +203,7 @@ public class CutterController {
         search.setPrise1(100000);
         model.addAttribute("search", search);
         model.addAttribute("listProducts", componets.showSimplestArrayOfCutter(cutterService.listSearchCutters(search)));
+        model.addAttribute("type", "cutter");
         return "cutters/" + type ;
     }
 

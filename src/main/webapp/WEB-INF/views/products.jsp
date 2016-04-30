@@ -1,16 +1,29 @@
 <%@ page language="java" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <div id="out_result_of_search">
 	<c:forEach items="${listProducts}" var="product">
 		<div class="products">
-			<a id="/images/cutters/${product.id}/${product.pathPictures.get(1)}" class="link" href="<c:url value='/cutter/${product.id}' />">	
-					<div class="outer_a_img"><img src="/images/cutters/${product.id}/${product.pathPictures.get(0)}" alt=""></div>
+			<a id="
+			
+			<c:choose>
+   		 		<c:when test="${fn:length(product.pathPictures) > 1}">
+					/images/${type}s/${product.id}/${product.pathPictures.get(1)}
+    			</c:when>    
+    			<c:otherwise>
+					/images/${type}s/${product.id}/${product.pathPictures.get(0)}
+    			</c:otherwise>
+			</c:choose>
+
+			
+			" onmouseover="" class="link" href="<c:url value='/${type}/${product.id}' />">	
+					<div class="outer_a_img"><img src="/images/${type}s/${product.id}/${product.pathPictures.get(0)}" alt=""></div>
 			</a>
-			<a href="javascript:void(0)" onclick="addToCart('cutter', ${product.id});" class="products_buy">
+			<a href="javascript:void(0)" onclick="addToCart('${type}', ${product.id});" class="products_buy">
 				<img src="/images/button_buy.png" alt="" />
 			</a>
-			<a href="<c:url value='/cutter/${product.id}' />" class="products_title">${product.name}</a>
+			<a href="<c:url value='/${type}/${product.id}' />" class="products_title">${product.name}</a>
 			<p class="products_price">Цена: 
            		<c:if test="${product.prise < 0.1}"> уточняйте</c:if>
 				<c:if test="${!(product.prise < 0.1)}">					

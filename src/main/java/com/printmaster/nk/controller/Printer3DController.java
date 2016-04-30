@@ -209,6 +209,7 @@ public class Printer3DController {
         search.setPrise0(0);
         search.setPrise1(100000);
         model.addAttribute("search", search);
+        model.addAttribute("type", "3d_printer");
         return "3d_printers";
     }
 	
@@ -241,6 +242,7 @@ public class Printer3DController {
 		search.setPrise1(100000);
 		model.addAttribute("search", search);
 		model.addAttribute("listProducts", componets.showSimplestArrayOfPrinter3D(productService.listSearchPrinters3D(search)));
+		model.addAttribute("type", "3d_printer");
 		return "3d_printers/" + type;
 	}
 

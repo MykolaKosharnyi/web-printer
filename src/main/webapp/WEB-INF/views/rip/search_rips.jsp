@@ -42,54 +42,49 @@
 		
 	  		<div class="block_search_check">
 
-				<input class="input_check" type="checkbox" name="typeEquipment" value="${software.type_equipment}"></input>
+				<input class="input_check" type="checkbox" name="typeEquipment" value="${software.type_equipment}" id="${software.type_equipment}_98">
+					<label class="head_title_rip" for="${software.type_equipment}_98">${software.type_equipment}</label>
+				</input>
 
-			<div class="block_title_check">
-				<p>${software.type_equipment}</p>
+			<div class="block_title_check" style="display: none;">
+				<i></i><p>Производитель ПО:</p>
 			</div>
 				
 				<ul class="block_check_boxes">
-				
+					
 				<c:forEach items="${software.software_maker}" var="soft_marker">	
-	  			
-					<input class="input_check_block" type="checkbox" name="softwareMaker" value="${soft_marker.name}"></input>
-				
+	  				<div class="sub_rip_section">
+					<input class="input_check_block" type="checkbox" name="softwareMaker" value="${soft_marker.name}" id="${software.type_equipment}_${soft_marker.name}_99">
+						<label class="head_body_rip" for="${software.type_equipment}_${soft_marker.name}_99">${soft_marker.name}</label>
+					</input>
+
 				<div class="search_criteria_check">
-					<div class="block_title_check_check">
-						<p>${soft_marker.name}</p>
+					<div class="block_title_check_check" style="display: none;">
+						<i></i><p>Класс ПО:</p>
 					</div>
 						
 					<ul class="check_boxes">
 					
 						<c:forEach items="${soft_marker.software_class}" var="soft_class">
 	  						<li>
-	  							<input type="checkbox" name="softwareClass" value="${soft_class}" id="${soft_class}_17">
-									<label for="${soft_class}_17">${soft_class}</label>
+	  							<input type="checkbox" name="softwareClass" value="${soft_class}" id="${software.type_equipment}_${soft_marker.name}_${soft_class}_17">
+									<label for="${software.type_equipment}_${soft_marker.name}_${soft_class}_17">${soft_class}</label>
 								</input>
 							</li>	
 	  					</c:forEach>
 
 					</ul>
-				</div>
-	
+				  </div>
+				 </div>
 	  			</c:forEach>
 		
-
 			</ul>
+			
 
 		</div>
 
 
 		</c:forEach>
-
-
-		
-	
-
-
-
-
-
 
 
 

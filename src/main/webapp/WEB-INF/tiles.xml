@@ -30,7 +30,7 @@
     <definition name="printers" extends="base"> 
     	<put-attribute name="path" value="/WEB-INF/views/printer/path_user_printers.jsp" />  
         <put-attribute name="search" value="/WEB-INF/views/printer/search_printers.jsp" /> 
-        <put-attribute name="body" value="/WEB-INF/views/printer/printers.jsp" />  
+        <put-attribute name="body" value="/WEB-INF/views/products.jsp" />  
     </definition> 
     
     <definition name="printers/*" extends="printers"> 
@@ -46,7 +46,7 @@
     <definition name="3d_printers" extends="base"> 
     	<put-attribute name="path" value="/WEB-INF/views/printer3d/path_user_printers_3d.jsp" />  
         <put-attribute name="search" value="/WEB-INF/views/printer3d/search_printers_3d.jsp" /> 
-        <put-attribute name="body" value="/WEB-INF/views/printer3d/printers_3d.jsp" />  
+        <put-attribute name="body" value="/WEB-INF/views/products.jsp" />  
     </definition> 
     
     <definition name="3d_printers/*" extends="3d_printers"> 
@@ -62,7 +62,7 @@
     <definition name="digital_printers" extends="base"> 
     	<put-attribute name="path" value="/WEB-INF/views/digital_printer/path_user_digital_printers.jsp" />  
         <put-attribute name="search" value="/WEB-INF/views/digital_printer/search_digital_printers.jsp" /> 
-        <put-attribute name="body" value="/WEB-INF/views/digital_printer/digital_printers.jsp" />  
+        <put-attribute name="body" value="/WEB-INF/views/products.jsp" />  
     </definition> 
     
     <definition name="digital_printers/*" extends="digital_printers"> 
@@ -78,7 +78,7 @@
     <definition name="lasers" extends="base"> 
     	<put-attribute name="path" value="/WEB-INF/views/laser/path_user_lasers.jsp" />  
         <put-attribute name="search" value="/WEB-INF/views/laser/search_lasers.jsp" /> 
-        <put-attribute name="body" value="/WEB-INF/views/laser/lasers.jsp" />  
+        <put-attribute name="body" value="/WEB-INF/views/products.jsp" />  
     </definition> 
     
     <definition name="lasers/*" extends="lasers"> 
@@ -94,7 +94,7 @@
     <definition name="cutters" extends="base"> 
     	<put-attribute name="path" value="/WEB-INF/views/cutter/path_user_cutters.jsp" />  
         <put-attribute name="search" value="/WEB-INF/views/cutter/search_cutters.jsp" /> 
-        <put-attribute name="body" value="/WEB-INF/views/cutter/cutters.jsp" />  
+        <put-attribute name="body" value="/WEB-INF/views/products.jsp" />  
     </definition> 
     
     <definition name="cutters/*" extends="cutters"> 
@@ -110,7 +110,7 @@
     <definition name="laminators" extends="base"> 
     	<put-attribute name="path" value="/WEB-INF/views/laminator/path_user_laminators.jsp" />  
         <put-attribute name="search" value="/WEB-INF/views/laminator/search_laminators.jsp" /> 
-        <put-attribute name="body" value="/WEB-INF/views/laminator/laminators.jsp" />  
+        <put-attribute name="body" value="/WEB-INF/views/products.jsp" />  
     </definition> 
     
     <definition name="laminators/*" extends="laminators"> 
@@ -126,7 +126,7 @@
     <definition name="scanners" extends="base"> 
     	<put-attribute name="path" value="/WEB-INF/views/scanner/path_user_scanners.jsp" />  
         <put-attribute name="search" value="/WEB-INF/views/scanner/search_scanners.jsp" /> 
-        <put-attribute name="body" value="/WEB-INF/views/scanner/scanners.jsp" />  
+        <put-attribute name="body" value="/WEB-INF/views/products.jsp" />  
     </definition> 
     
     <definition name="scanners/*" extends="scanners"> 

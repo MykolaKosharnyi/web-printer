@@ -214,6 +214,7 @@ public class ScannerController {
         search.setPrise1(100000);
    
         model.addAttribute("search", search);
+        model.addAttribute("type", "scanner");
         logger.info("On '../scanners' page.");
         return "scanners";
     }
@@ -240,6 +241,7 @@ public class ScannerController {
         search.setPrise1(100000);
         model.addAttribute("search", search);
         model.addAttribute("listProducts", componets.showSimplestArrayOfScanner(scannerService.listSearchScanners(search)));
+        model.addAttribute("type", "scanner");
         return "scanners/" + type ;
     }
 

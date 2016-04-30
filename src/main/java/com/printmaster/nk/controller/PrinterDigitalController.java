@@ -253,6 +253,7 @@ public class PrinterDigitalController {
         search.setPrise0(0);
         search.setPrise1(30000);
         model.addAttribute("search", search);
+        model.addAttribute("type", "digital_printer");
         return "digital_printers";
     }
 	
@@ -277,6 +278,7 @@ public class PrinterDigitalController {
 		search.setPrise1(30000);
 		model.addAttribute("search", search);
 		model.addAttribute("listProducts", componets.showSimplestArrayOfDigitalPrinter(productService.listSearchDigitalPrinters(search)));
+		model.addAttribute("type", "digital_printer");
 		return "digital_printers/" + type;
 	}
 

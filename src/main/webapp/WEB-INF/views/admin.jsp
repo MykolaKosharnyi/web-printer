@@ -9,8 +9,8 @@
 		<title>Admin</title>
 	</head>
 <body>
-
-<jsp:include page="admin/admin_login_in_out.jsp" />
+<div style="width: 1200px; margin: 0 auto;">
+	<jsp:include page="admin/admin_login_in_out.jsp" />
 
 	<div id="content">
 	    <a href="<c:url value='/admin/printers' />">Принтеры</a>
@@ -24,5 +24,6 @@
 	    <a href="<c:url value='/admin/rips' />">ПО</a>
 	    <a href="<c:url value='/admin/pictures' />">Изменение изображений главного меню/домашней страницы</a>
     </div>
+</div>
 </body>
 </html>

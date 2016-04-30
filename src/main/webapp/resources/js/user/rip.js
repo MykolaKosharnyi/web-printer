@@ -118,15 +118,47 @@
                     $(".block_search_check .block_title_check").click(function(){
                         var check = $(this).parent('.block_search_check').find(".block_check_boxes");
                         var check_point = $(this).find("i").first();
-        		var description = $(this).find("p").first();
+        				var description = $(this).find("p").first();
                         if (check.css('display') == 'none') {
                             check.slideDown();
-        		    description.css('color', '#006080');
+        		    		/*description.css('color', '#006080');*/
                             check_point.addClass('opened');
                         }else{
                             check.slideUp();
-                            description.css('color', 'rgb(144, 144, 144)');
+                            /*description.css('color', 'rgb(144, 144, 144)');*/
                             check_point.removeClass('opened');
+                        }
+                    });
+                } ); 
+
+            /* for head in rip */
+        	$( function(){
+                    $(".block_search_check .input_check").click(function(){
+                        var checkTitle = $(this).parent('.block_search_check').find(".block_title_check");
+						var checkBody = $(this).parent('.block_search_check').find(".block_check_boxes");
+                        if ($(this).prop( "checked" )) {
+                            checkTitle.slideDown();
+                        }else{
+                            checkTitle.slideUp();
+							checkTitle.find("p").css('color', 'rgb(144, 144, 144)');
+							checkBody.slideUp();
+							checkTitle.find("i").first().removeClass('opened');
+                        }
+                    });
+                } ); 
+
+			/* for body in rip */
+        	$( function(){
+                    $(".sub_rip_section .input_check_block").click(function(){
+                        var checkTitle = $(this).parent('.sub_rip_section').find(".block_title_check_check");
+						var checkBody = $(this).parent('.sub_rip_section').find(".check_boxes");
+                        if ($(this).prop( "checked" )) {
+                            checkTitle.slideDown();
+                        }else{
+                            checkTitle.slideUp();
+							checkTitle.find("p").css('color', 'rgb(144, 144, 144)');
+							checkBody.slideUp();
+							checkTitle.find("i").first().removeClass('opened');
                         }
                     });
                 } ); 

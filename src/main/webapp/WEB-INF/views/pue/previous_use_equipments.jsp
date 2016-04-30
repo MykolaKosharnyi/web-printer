@@ -1,10 +1,23 @@
 <%@ page language="java" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <div id="out_result_of_search">
 	<c:forEach items="${listProducts}" var="product">
 		<div class="products">
-			<a id="/images/${product.type}s/${product.id}/${product.pathPictures.get(1)}" class="link" href="<c:url value='/${product.type}/${product.id}' />">	
+			<a id="
+			
+			<c:choose>
+   		 		<c:when test="${fn:length(product.pathPictures) > 1}">
+					/images/${type}s/${product.id}/${product.pathPictures.get(1)}
+    			</c:when>    
+    			<c:otherwise>
+					/images/${type}s/${product.id}/${product.pathPictures.get(0)}
+    			</c:otherwise>
+			</c:choose>
+
+			
+			" class="link" href="<c:url value='/${product.type}/${product.id}' />">	
 					<div class="outer_a_img"><img src="/images/${product.type}s/${product.id}/${product.pathPictures.get(0)}" alt=""></div>
 			</a>
 			<a href="javascript:void(0)" onclick="addToCart(${product.type}, ${product.id});" class="products_buy">

@@ -208,6 +208,7 @@ public class LaserController {
         search.setPrise1(100000);
    
         model.addAttribute("search", search);
+        model.addAttribute("type", "laser");
         logger.info("On '../lasers' page.");
         return "lasers";
     }
@@ -251,6 +252,7 @@ public class LaserController {
         search.setPrise1(100000);
         model.addAttribute("search", search);
         model.addAttribute("listProducts", componets.showSimplestArrayOfLaser(laserService.listSearchLasers(search)));
+        model.addAttribute("type", "laser");
         return "lasers/" + type ;
     }
 

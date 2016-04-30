@@ -74,7 +74,7 @@
 			  });	
 		}
 	
-function setShowOnLeftSide(id, element){
+	function setShowOnLeftSide(id, element){
 		$.ajax({
 			  type: 'post',
 			  url: "/admin/cutter/showOnLeftSide/" + id,

@@ -158,6 +158,18 @@
             });
         } );
 
+/*------------*/
+	$( function(){
+        $("p.p_pue").click(function(){
+            var check = $(this).parent('.block_block_title').find(".input_pue");
+            if (check.prop("checked")) {
+                check.prop("checked", false );
+            }else{
+                check.prop("checked", true );
+            }
+        });
+    } );
+
 /*---- Button change display on search block ----*/
         $( function() {
            $("#display_search").click(function(){ 

@@ -152,6 +152,7 @@ public class LaminatorController {
         search.setPrise1(100000);
    
         model.addAttribute("search", search);
+        model.addAttribute("type", "laminator");
         logger.info("On '../laminators' page.");
         return "laminators";
     }
@@ -187,6 +188,7 @@ public class LaminatorController {
         search.setPrise1(100000);
         model.addAttribute("search", search);
         model.addAttribute("listProducts", componets.showSimplestArrayOfLaminator(laminatorService.listSearchLaminators(search)));
+        model.addAttribute("type", "laminator");
         return "laminators/" + type ;
     }
 

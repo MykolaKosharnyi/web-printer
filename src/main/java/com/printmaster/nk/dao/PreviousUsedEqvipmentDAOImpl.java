@@ -78,49 +78,82 @@ public class PreviousUsedEqvipmentDAOImpl {
 		Session session = this.sessionFactory.getCurrentSession();
 		Criteria cr = null;
 		
-		if(searchProduct.getTypePrinter()!=null || searchProduct.getPrinterEquipment()!=null){
+		if ((searchProduct.getType() != null) && (searchProduct.getType().length > 0)) {
+			for (String type : searchProduct.getType()) {
+
+				if (type.equals("printer")) {
+					cr = session.createCriteria(Printer.class);
+					searchProduct(searchProduct, cr, "typePrinter", searchProduct.getTypePrinter(),searchProduct.getPrinterEquipment());
+					result.addAll(componets.showSimplestArray(new HashSet<Printer>(cr.list()), "printer"));
+				}
+
+				if (type.equals("3d_printer")) {
+					cr = session.createCriteria(Printer3D.class);
+					searchProduct(searchProduct, cr, "typePrinter3D", searchProduct.getType3dPrinter(),searchProduct.getD3PrinterEquipment());
+					result.addAll(componets.showSimplestArray(new HashSet<Printer3D>(cr.list()), "3d_printer"));
+				}
+
+				if (type.equals("digital_printer")) {
+					cr = session.createCriteria(DigitalPrinter.class);
+					searchProduct(searchProduct, cr, "typePrinter", searchProduct.getTypeDigitalPrinter(),searchProduct.getDigitalPrinterEquipment());
+					result.addAll(componets.showSimplestArray(new HashSet<DigitalPrinter>(cr.list()), "digital_printer"));
+				}
+
+				if (type.equals("laminator")) {
+					cr = session.createCriteria(Laminator.class);
+					searchProduct(searchProduct, cr, "typeProduct", searchProduct.getTypeLaminator(),searchProduct.getLaminatorEquipment());
+					result.addAll(componets.showSimplestArray(new HashSet<Laminator>(cr.list()), "laminator"));
+				}
+
+				if (type.equals("laser")) {
+					cr = session.createCriteria(Laser.class);
+					searchProduct(searchProduct, cr, "typeLaser", searchProduct.getTypeLaser(),searchProduct.getLaserEquipment());
+					result.addAll(componets.showSimplestArray(new HashSet<Laser>(cr.list()), "laser"));
+				}
+
+				if (type.equals("cutter")) {
+					cr = session.createCriteria(Cutter.class);
+					searchProduct(searchProduct, cr, "typeCutter", searchProduct.getTypeCutter(),searchProduct.getCutterEquipment());
+					result.addAll(componets.showSimplestArray(new HashSet<Cutter>(cr.list()), "cutter"));
+				}
+
+				if (type.equals("scanner")) {
+					cr = session.createCriteria(Scanner.class);
+					searchProduct(searchProduct, cr, "typeProduct", searchProduct.getTypeScanner(),searchProduct.getScannerEquipment());
+					result.addAll(componets.showSimplestArray(new HashSet<Scanner>(cr.list()), "scanner"));
+				}
+
+			}
+		} else {
+
 			cr = session.createCriteria(Printer.class);
-			searchProduct(searchProduct, cr, "typePrinter", searchProduct.getTypePrinter(), searchProduct.getPrinterEquipment());
+			searchProduct(searchProduct, cr, "typePrinter", searchProduct.getTypePrinter(),searchProduct.getPrinterEquipment());
 			result.addAll(componets.showSimplestArray(new HashSet<Printer>(cr.list()), "printer"));
-		}
-		
-		if(searchProduct.getType3dPrinter()!=null || searchProduct.getD3PrinterEquipment()!=null){
+
 			cr = session.createCriteria(Printer3D.class);
-			searchProduct(searchProduct, cr, "typePrinter3D", searchProduct.getType3dPrinter(), searchProduct.getD3PrinterEquipment());
+			searchProduct(searchProduct, cr, "typePrinter3D", searchProduct.getType3dPrinter(),searchProduct.getD3PrinterEquipment());
 			result.addAll(componets.showSimplestArray(new HashSet<Printer3D>(cr.list()), "3d_printer"));
-		}
-		
-		if(searchProduct.getTypeDigitalPrinter()!=null || searchProduct.getDigitalPrinterEquipment()!=null){
+
 			cr = session.createCriteria(DigitalPrinter.class);
-			searchProduct(searchProduct, cr, "typePrinter", searchProduct.getTypeDigitalPrinter(), searchProduct.getDigitalPrinterEquipment());
+			searchProduct(searchProduct, cr, "typePrinter", searchProduct.getTypeDigitalPrinter(),searchProduct.getDigitalPrinterEquipment());
 			result.addAll(componets.showSimplestArray(new HashSet<DigitalPrinter>(cr.list()), "digital_printer"));
-		}
-		
-		if(searchProduct.getTypeLaminator()!=null || searchProduct.getLaminatorEquipment()!=null){
+
 			cr = session.createCriteria(Laminator.class);
-			searchProduct(searchProduct, cr, "typeProduct", searchProduct.getTypeLaminator(), searchProduct.getLaminatorEquipment());
+			searchProduct(searchProduct, cr, "typeProduct", searchProduct.getTypeLaminator(),searchProduct.getLaminatorEquipment());
 			result.addAll(componets.showSimplestArray(new HashSet<Laminator>(cr.list()), "laminator"));
-		}
-		
-		if(searchProduct.getTypeLaser()!=null || searchProduct.getLaserEquipment()!=null){
+
 			cr = session.createCriteria(Laser.class);
-			searchProduct(searchProduct, cr, "typeLaser", searchProduct.getTypeLaser(), searchProduct.getLaserEquipment());
+			searchProduct(searchProduct, cr, "typeLaser", searchProduct.getTypeLaser(),searchProduct.getLaserEquipment());
 			result.addAll(componets.showSimplestArray(new HashSet<Laser>(cr.list()), "laser"));
-		}
-		
-		if(searchProduct.getTypeCutter()!=null || searchProduct.getCutterEquipment()!=null){
+
 			cr = session.createCriteria(Cutter.class);
-			searchProduct(searchProduct, cr, "typeCutter", searchProduct.getTypeCutter(), searchProduct.getCutterEquipment());
+			searchProduct(searchProduct, cr, "typeCutter", searchProduct.getTypeCutter(),searchProduct.getCutterEquipment());
 			result.addAll(componets.showSimplestArray(new HashSet<Cutter>(cr.list()), "cutter"));
-		}
-		
-		if(searchProduct.getTypeScanner()!=null || searchProduct.getScannerEquipment()!=null){
+
 			cr = session.createCriteria(Scanner.class);
-			searchProduct(searchProduct, cr, "typeProduct", searchProduct.getTypeScanner(), searchProduct.getScannerEquipment());
+			searchProduct(searchProduct, cr, "typeProduct", searchProduct.getTypeScanner(),searchProduct.getScannerEquipment());
 			result.addAll(componets.showSimplestArray(new HashSet<Scanner>(cr.list()), "scanner"));
 		}
-		
-		
         return result;
 	}
 
@@ -206,7 +239,7 @@ public class PreviousUsedEqvipmentDAOImpl {
 			cr.add(Restrictions.between("prise", searchProduct.getPrise0(), searchProduct.getPrise1()));
 		}
 		
-		if(types!= null){
+		if((types!= null) && (types.length > 0)){
 		Junction typePrinterGroup = Restrictions.disjunction();
 		for(String type : types){
 			typePrinterGroup.add(Restrictions.eq(typeProduct, type));
@@ -214,7 +247,7 @@ public class PreviousUsedEqvipmentDAOImpl {
 		cr.add(typePrinterGroup);
 		}		
 		
-		if(equipments!= null){
+		if((equipments!= null) && (equipments.length > 0)){
 		Junction equipmentGroup = Restrictions.disjunction();
 		for(String equipmentManufacturer : equipments){
 			equipmentGroup.add(Restrictions.eq("equipmentManufacturer",equipmentManufacturer));
