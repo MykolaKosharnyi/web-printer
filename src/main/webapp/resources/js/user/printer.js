@@ -522,7 +522,24 @@
                 });
             } );     
         
-        
+    	
+        /* for type print head */
+    	$( function(){
+                $(".block_search_criteria .block_check_boxes .outer_type_print_head .print_series").click(function(){
+                    var check = $(this).parent('.outer_type_print_head').find(".inner_block_print_head");
+					var check_input = $(this).parent('.outer_type_print_head').find(".check_print_head");
+    		
+                    if (check.css('display') == 'none') {
+                        check.slideDown();
+						check_input.prop("checked", false );
+                    }else{
+                        check.slideUp();
+						check_input.prop("checked", true );
+                    }
+                });
+            } );
+    	
+    	
 /*---- Button change display on search block ----*/
         $( function() {
            $("#display_search").click(function(){ 

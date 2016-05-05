@@ -67,7 +67,11 @@
 				<p>Тип принтера</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${typePrinter}" path="typePrinter" element="li" />
+				<c:forEach items="${printer.type_printer}" var="type">
+					<li>
+						<input type="checkbox" name="typePrinter" value="${type}" id="${type}_type"><label for="${type}_type">${type}</label></input>
+					</li>
+	  			</c:forEach>
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -80,12 +84,17 @@
 					<ul>
 						<li>миллиметр</li>
 						<li>дюйм</li>
-						<li>формат</li>
+						<!--<li>формат</li>-->
 					</ul>
 					<div>
 						<div>
-							<form:checkboxes items="${weightPrintMM}" path="weightPrintMM"
-								element="li" />
+						<c:forEach items="${printer.weight_print_mm}" var="item">
+							<li>
+								<input type="checkbox" name="weightPrintMM" value="${item}"
+								 id="${item}_weight_print"><label for="${item}_weight_print">${item}</label></input>
+							</li>
+	  					</c:forEach>
+
 						</div>
 					    <div>
 							<li><input type="checkbox" name="weightPrintMM" value="305" id="weightPrintMM_12"><label for="weightPrintMM_12">12"</label></input></li>
@@ -124,7 +133,11 @@
 				<p>Б/У оборудование</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${previouslyUsed}" path="previouslyUsed" element="li" />
+				<c:forEach items="${printer.previously_used}" var="item">
+					<li>
+						<input type="checkbox" name="previouslyUsed" value="${item}" id="${item}_previously_used"><label for="${item}_previously_used">${item}</label></input>
+					</li>
+	  			</c:forEach>
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -133,7 +146,11 @@
 				<p>Тип печати</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${typePrint}" path="typePrint" element="li" />
+				<c:forEach items="${printer.type_print}" var="item">
+					<li>
+						<input type="checkbox" name="typePrint" value="${item}" id="${item}_type_print"><label for="${item}_type_print">${item}</label></input>
+					</li>
+	  			</c:forEach>			
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -142,7 +159,11 @@
 				<p>Подача метериала</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${feeds}" path="feed" element="li" />
+				<c:forEach items="${printer.feeds}" var="item">
+					<li>
+						<input type="checkbox" name="feed" value="${item}" id="${item}_feeds"><label for="${item}_feeds">${item}</label></input>
+					</li>
+	  			</c:forEach>			
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -151,7 +172,11 @@
 				<p>Цветность</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${chromaticity}" path="chromaticity" element="li" />
+				<c:forEach items="${printer.chromaticity}" var="item">
+					<li>
+						<input type="checkbox" name="chromaticity" value="${item}" id="${item}_chromaticity"><label for="${item}_chromaticity">${item}</label></input>
+					</li>
+	  			</c:forEach>			
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -160,9 +185,14 @@
 				<p>Производитель печатающей головки</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${manufacturerPrinthead}" path="manufacturerPrinthead" element="li" />
+				<c:forEach items="${printer.manufacturer_printhead}" var="item">
+					<li>
+						<input type="checkbox" name="manufacturerPrinthead" value="${item}" id="${item}_manufacturer_printhead"><label for="${item}_manufacturer_printhead">${item}</label></input>
+					</li>
+	  			</c:forEach>
 			</ul>
 		</div> 
+
 		<div class="block_search_criteria">
 			<div class="block_block_title">
 				<i></i>
@@ -170,117 +200,65 @@
 			</div>
 			<ul class="block_check_boxes">
 		
-		<div class="search_criteria">
-			<div class="block_title">
-				<i></i>
-				<p>Dimatix Spectra</p>
-			</div>
-			<ul class="check_boxes">
-				<li><input type="checkbox" name="typeOfPrinthead" value="Spectra Nova 256" id="typeOfPrinthead_1"><label for="typeOfPrinthead_1">Spectra Nova 256</label></input></li>
-				<li><input type="checkbox" name="typeOfPrinthead" value="Spectra Galaxy 256" id="typeOfPrinthead_2"><label for="typeOfPrinthead_2">Spectra Galaxy 256</label></input></li>
-				<li><input type="checkbox" name="typeOfPrinthead" value="Spectra Polyaris 512" id="typeOfPrinthead_3"><label for="typeOfPrinthead_3">Spectra Polyaris 512</label></input></li>
+				<c:forEach items="${printer.type_of_printhead}" var="item">
+				
+					<div class="search_criteria">
+						<div class="block_title">
+							<i></i>
+							<p>${item.name}</p>
+						</div>
+						<ul class="check_boxes">
+						
+							<c:forEach items="${item.values}" var="value">
+								<c:if test="${value.getClass().simpleName != 'String'}">
+									<div class="outer_type_print_head">
+										
+										<input class="check_print_head" type="checkbox" name="typeOfPrinthead" value="${value.series}"
+										 id="${value.series}_${item.name}">
+										<label class="print_series" for="${value.series}_${item.name}">${value.series}</label></input>
+										
+										
+									<div class="inner_block_print_head" style="display: none; left:10px; position: relative;">
+					
+										<c:forEach items="${value.values}" var="value">
+	  										<li>
+												<input type="checkbox" name="typeOfPrinthead" value="${value}"
+											 	id="${value}_${item.name}"><label for="${value}_${item.name}">${value}</label></input>
+											</li>
+	  									</c:forEach>
+
+									</div>
+									
+									</div>
+								</c:if>
+								
+								<c:if test="${value.getClass().simpleName == 'String'}">
+									<li>
+										<input type="checkbox" name="typeOfPrinthead" value="${value}"
+										 id="${value}_${item.name}"><label for="${value}_${item.name}">${value}</label></input>
+									</li>
+								</c:if>
+	  						</c:forEach>
+	  						
+						</ul>
+					</div>				
+				
+	  			</c:forEach>
+		
 			</ul>
 		</div>
-		<div class="search_criteria">
-			<div class="block_title">
-				<i></i>
-				<p>XAAR</p>
-			</div>
-			<ul class="check_boxes">
-				<li><input type="checkbox" name="typeOfPrinthead" value="XAAR 126/50" id="typeOfPrinthead_4"><label for="typeOfPrinthead_4">XAAR 126/50</label></input></li>
-				<li><input type="checkbox" name="typeOfPrinthead" value="XAAR 126/80" id="typeOfPrinthead_5"><label for="typeOfPrinthead_5">XAAR 126/80</label></input></li>
-				<li><input type="checkbox" name="typeOfPrinthead" value="XAAR 128/40" id="typeOfPrinthead_6"><label for="typeOfPrinthead_6">XAAR 128/40</label></input></li>
-				<li><input type="checkbox" name="typeOfPrinthead" value="XAAR 128/80" id="typeOfPrinthead_7"><label for="typeOfPrinthead_7">XAAR 128/80</label></input></li>
-				<li><input type="checkbox" name="typeOfPrinthead" value="XAAR 500" id="typeOfPrinthead_8"><label for="typeOfPrinthead_8">XAAR 500</label></input></li>
-				<li><input type="checkbox" name="typeOfPrinthead" value="XAAR 318 CA4W" id="typeOfPrinthead_9"><label for="typeOfPrinthead_9">XAAR 318 CA4W</label></input></li>
-				<li><input type="checkbox" name="typeOfPrinthead" value="XAAR Proton 382/35" id="typeOfPrinthead_10"><label for="typeOfPrinthead_10">XAAR Proton 382/35</label></input></li>
-				<li><input type="checkbox" name="typeOfPrinthead" value="XAAR Proton 382/60" id="typeOfPrinthead_11"><label for="typeOfPrinthead_11">XAAR Proton 382/60</label></input></li>
-			</ul>
-		</div>
-		<div class="search_criteria">
-			<div class="block_title">
-				<i></i>
-				<p>Seiko SPT</p>
-			</div>
-			<ul class="check_boxes">
-				<li><input type="checkbox" name="typeOfPrinthead" value="SPT 255" id="typeOfPrinthead_12"><label for="typeOfPrinthead_12">SPT 255</label></input></li>
-				<li><input type="checkbox" name="typeOfPrinthead" value="SPT 508 GS" id="typeOfPrinthead_13"><label for="typeOfPrinthead_13">SPT 508 GS</label></input></li>
-				<li><input type="checkbox" name="typeOfPrinthead" value="SPT 510" id="typeOfPrinthead_14"><label for="typeOfPrinthead_14">SPT 510</label></input></li>
-				<li><input type="checkbox" name="typeOfPrinthead" value="SPT 1020" id="typeOfPrinthead_15"><label for="typeOfPrinthead_15">SPT 1020</label></input></li>
-			</ul>
-		</div>
-		<div class="search_criteria">
-			<div class="block_title">
-				<i></i>
-				<p>Konica Minolta</p>
-			</div>
-			<ul class="check_boxes">
-				<li><input type="checkbox" name="typeOfPrinthead" value="KM 256" id="typeOfPrinthead_16"><label for="typeOfPrinthead_16">KM 256</label></input></li>
-				<li><input type="checkbox" name="typeOfPrinthead" value="KM 256 LN" id="typeOfPrinthead_17"><label for="typeOfPrinthead_17">KM 256 LN</label></input></li>
-				<li><input type="checkbox" name="typeOfPrinthead" value="KM 256 MN" id="typeOfPrinthead_18"><label for="typeOfPrinthead_18">KM 256 MN</label></input></li>
-				<li><input type="checkbox" name="typeOfPrinthead" value="KM 512" id="typeOfPrinthead_19"><label for="typeOfPrinthead_19">KM 512</label></input></li>
-				<li><input type="checkbox" name="typeOfPrinthead" value="KM 512 LN" id="typeOfPrinthead_20"><label for="typeOfPrinthead_20">KM 512 LN</label></input></li>
-				<li><input type="checkbox" name="typeOfPrinthead" value="KM 512 LNX" id="typeOfPrinthead_21"><label for="typeOfPrinthead_21">KM 512 LNX</label></input></li>
-				<li><input type="checkbox" name="typeOfPrinthead" value="KM 512 MN" id="typeOfPrinthead_22"><label  for="typeOfPrinthead_22">KM 512 MN</label></input></li>
-				<li><input type="checkbox" name="typeOfPrinthead" value="KM 512 MH" id="typeOfPrinthead_23"><label for="typeOfPrinthead_23">KM 512 MH</label></input></li>
-				<li><input type="checkbox" name="typeOfPrinthead" value="KM 512 LH" id="typeOfPrinthead_24"><label for="typeOfPrinthead_24">KM 512 LH</label></input></li>
-				<li><input type="checkbox" name="typeOfPrinthead" value="KM 1024" id="typeOfPrinthead_25"><label for="typeOfPrinthead_25">KM 1024</label></input></li>
-				<li><input type="checkbox" name="typeOfPrinthead" value="KM 1024 LH" id="typeOfPrinthead_26"><label for="typeOfPrinthead_26">KM 1024 LH</label></input></li>
-				<li><input type="checkbox" name="typeOfPrinthead" value="KM 1024 LN" id="typeOfPrinthead_27"><label for="typeOfPrinthead_27">KM 1024 LN</label></input></li>
-				<li><input type="checkbox" name="typeOfPrinthead" value="KM 1024 MB" id="typeOfPrinthead_28"><label for="typeOfPrinthead_28">KM 1024 MB</label></input></li>
-				<li><input type="checkbox" name="typeOfPrinthead" value="KM 1024 MN" id="typeOfPrinthead_29"><label for="typeOfPrinthead_29">KM 1024 MN</label></input></li>
-				<li><input type="checkbox" name="typeOfPrinthead" value="KM 1024 SHB" id="typeOfPrinthead_30"><label for="typeOfPrinthead_30">KM 1024 SHB</label></input></li>
-				<li><input type="checkbox" name="typeOfPrinthead" value="KM 1024i" id="typeOfPrinthead_31"><label for="typeOfPrinthead_31">KM 1024i</label></input></li>
-				<li><input type="checkbox" name="typeOfPrinthead" value="KM 1024i MHE" id="typeOfPrinthead_32"><label for="typeOfPrinthead_32">KM 1024i MHE</label></input></li>
-			</ul>
-		</div>
-		<div class="search_criteria">
-			<div class="block_title">
-				<i></i>
-				<p>Toshiba</p>
-			</div>
-			<ul class="check_boxes">
-				<li><input type="checkbox" name="typeOfPrinthead" value="CA3W" id="typeOfPrinthead_33"><label for="typeOfPrinthead_33">CA3W</label></input></li>
-				<li><input type="checkbox" name="typeOfPrinthead" value="CA4W" id="typeOfPrinthead_34"><label for="typeOfPrinthead_34">CA4W</label></input></li>
-			</ul>
-		</div>
-		<div class="search_criteria">
-			<div class="block_title">
-				<i></i>
-				<p>RICOH</p>
-			</div>
-			<ul class="check_boxes">
-				<li><input type="checkbox" name="typeOfPrinthead" value="Gen4" id="typeOfPrinthead_35"><label for="typeOfPrinthead_35">Gen4</label></input></li>
-				<li><input type="checkbox" name="typeOfPrinthead" value="Gen5" id="typeOfPrinthead_36"><label for="typeOfPrinthead_36">Gen5</label></input></li>
-			</ul>
-		</div>
-		<div class="search_criteria">
-			<div class="block_title">
-				<i></i>
-				<p>Epson</p>
-			</div>
-			<ul class="check_boxes">
-				<li><input type="checkbox" name="typeOfPrinthead" value="Epson DX2 Series" id="typeOfPrinthead_37"><label for="typeOfPrinthead_37">Epson DX2 Series</label></input></li>
-				<li><input type="checkbox" name="typeOfPrinthead" value="Epson DX4 Series" id="typeOfPrinthead_38"><label for="typeOfPrinthead_38">Epson DX4 Series</label></input></li>
-				<li><input type="checkbox" name="typeOfPrinthead" value="Epson DX5 Series" id="typeOfPrinthead_39"><label for="typeOfPrinthead_39">Epson DX5 Series</label></input></li>
-				<li><input type="checkbox" name="typeOfPrinthead" value="Epson DX6 Series" id="typeOfPrinthead_40"><label for="typeOfPrinthead_40">Epson DX6 Series</label></input></li>
-				<li><input type="checkbox" name="typeOfPrinthead" value="Epson DX7 Series" id="typeOfPrinthead_41"><label for="typeOfPrinthead_41">Epson DX7 Series</label></input></li>
-				<li><input type="checkbox" name="typeOfPrinthead" value="Epson DX8 Series" id="typeOfPrinthead_42"><label for="typeOfPrinthead_42">Epson DX8 Series</label></input></li>
-				<li><input type="checkbox" name="typeOfPrinthead" value="Epson DX9 Series" id="typeOfPrinthead_43"><label for="typeOfPrinthead_43">Epson DX9 Series</label></input></li>
-				<li><input type="checkbox" name="typeOfPrinthead" value="Epson DX10 Series" id="typeOfPrinthead_44"><label for="typeOfPrinthead_44">Epson DX10 Series</label></input></li>
-				<li><input type="checkbox" name="typeOfPrinthead" value="Epson Sure Color Series" id="typeOfPrinthead_45"><label for="typeOfPrinthead_45">Epson Sure Color Series</label></input></li>
-				<li><input type="checkbox" name="typeOfPrinthead" value="Epson Stylus Series" id="typeOfPrinthead_46"><label for="typeOfPrinthead_46">Epson Stylus Series</label></input></li>
-			</ul>
-		</div>
-			</ul>
-		</div>
+	
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
 				<p>Совместимые чернила</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${compatibleInk}" path="compatibleInk" element="li" />
+				<c:forEach items="${printer.compatible_ink}" var="item">
+					<li>
+						<input type="checkbox" name="compatibleInk" value="${item}" id="${item}_compatible_ink"><label for="${item}_compatible_ink">${item}</label></input>
+					</li>
+	  			</c:forEach>
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -289,7 +267,11 @@
 				<p>Тип капли</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${typeDrops}" path="typeDrops" element="li" />
+				<c:forEach items="${printer.type_drops}" var="item">
+					<li>
+						<input type="checkbox" name="typeDrops" value="${item}" id="${item}_type_drops"><label for="${item}_type_drops">${item}</label></input>
+					</li>
+	  			</c:forEach>
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -329,8 +311,11 @@
 				<p>Разрешение печати</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${printResolution}" path="printResolution"
-					element="li" />
+				<c:forEach items="${printer.print_resolution}" var="item">
+					<li>
+						<input type="checkbox" name="printResolution" value="${item}" id="${item}_print_resolution"><label for="${item}_print_resolution">${item}</label></input>
+					</li>
+	  			</c:forEach>
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -339,7 +324,11 @@
 				<p>Производитель оборудования</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${equipmentManufacturer}" path="equipmentManufacturer" element="li" />
+				<c:forEach items="${printer.equipment_manufacturer}" var="item">
+					<li>
+						<input type="checkbox" name="equipmentManufacturer" value="${item}" id="${item}_equipment_manufacturer"><label for="${item}_equipment_manufacturer">${item}</label></input>
+					</li>
+	  			</c:forEach>
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -348,8 +337,11 @@
 				<p>Интерфейс подключения</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${interfaceConnection}"
-					path="interfaceConnection" element="li" />
+				<c:forEach items="${printer.interface_connection}" var="item">
+					<li>
+						<input type="checkbox" name="interfaceConnection" value="${item}" id="${item}_interface_connection"><label for="${item}_interface_connection">${item}</label></input>
+					</li>
+	  			</c:forEach>
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -396,7 +388,11 @@
 				<p>П/О RIP</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${rip}" path="rip" element="li" />
+				<c:forEach items="${printer.rip}" var="item">
+					<li>
+						<input type="checkbox" name="rip" value="${item}" id="${item}_rip"><label for="${item}_rip">${item}</label></input>
+					</li>
+	  			</c:forEach>
 			</ul>
 		</div>
 		<div class="search_criteria">

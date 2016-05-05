@@ -44,7 +44,14 @@
 				<p>Тип принтера</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${typePrinter}" path="typePrinter" element="li" />
+				
+				<c:forEach items="${printer.type_printer}" var="type">
+					<li>
+						<input type="checkbox" name="typePrinter" value="${type}" id="${type}_type"><label for="${type}_type">${type}</label></input>
+					</li>
+	  			</c:forEach>
+				
+				<!--<form:checkboxes items="${typePrinter}" path="typePrinter" element="li" />-->
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -61,7 +68,14 @@
 					</ul>
 					<div>
 						<div>
-							<form:checkboxes items="${weightPrintMM}" path="weightPrintMM" element="li" />
+						<c:forEach items="${printer.weight_print_mm}" var="item">
+							<li>
+								<input type="checkbox" name="weightPrintMM" value="${item}"
+								 id="${item}_weight_print"><label for="${item}_weight_print">${item}</label></input>
+							</li>
+	  					</c:forEach>
+						
+							<!--<form:checkboxes items="${weightPrintMM}" path="weightPrintMM" element="li" />-->
 						</div>
 					    <div>
 							<li><input type="checkbox" name="weightPrintMM" value="305" id="weightPrintMM_12"><label for="weightPrintMM_12">12"</label></input></li>
@@ -100,7 +114,12 @@
 				<p>Б/У оборудование</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${previouslyUsed}" path="previouslyUsed" element="li" />
+				<c:forEach items="${printer.previously_used}" var="item">
+					<li>
+						<input type="checkbox" name="previouslyUsed" value="${item}" id="${item}_previously_used"><label for="${item}_previously_used">${item}</label></input>
+					</li>
+	  			</c:forEach>
+				<!--<form:checkboxes items="${previouslyUsed}" path="previouslyUsed" element="li" />-->
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -109,7 +128,12 @@
 				<p>Тип печати</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${typePrint}" path="typePrint" element="li" />
+				<c:forEach items="${printer.type_print}" var="item">
+					<li>
+						<input type="checkbox" name="typePrint" value="${item}" id="${item}_type_print"><label for="${item}_type_print">${item}</label></input>
+					</li>
+	  			</c:forEach>			
+				<!--<form:checkboxes items="${typePrint}" path="typePrint" element="li" />-->
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -118,7 +142,12 @@
 				<p>Подача метериала</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${feeds}" path="feed" element="li" />
+				<c:forEach items="${printer.feeds}" var="item">
+					<li>
+						<input type="checkbox" name="feed" value="${item}" id="${item}_feeds"><label for="${item}_feeds">${item}</label></input>
+					</li>
+	  			</c:forEach>			
+				<!--<form:checkboxes items="${feeds}" path="feed" element="li" />-->
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -127,7 +156,12 @@
 				<p>Цветность</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${chromaticity}" path="chromaticity" element="li" />
+				<c:forEach items="${printer.chromaticity}" var="item">
+					<li>
+						<input type="checkbox" name="chromaticity" value="${item}" id="${item}_chromaticity"><label for="${item}_chromaticity">${item}</label></input>
+					</li>
+	  			</c:forEach>			
+				<!--<form:checkboxes items="${chromaticity}" path="chromaticity" element="li" />-->
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -136,7 +170,12 @@
 				<p>Производитель печатающей головки</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${manufacturerPrinthead}" path="manufacturerPrinthead" element="li" />
+				<c:forEach items="${printer.manufacturer_printhead}" var="item">
+					<li>
+						<input type="checkbox" name="manufacturerPrinthead" value="${item}" id="${item}_manufacturer_printhead"><label for="${item}_manufacturer_printhead">${item}</label></input>
+					</li>
+	  			</c:forEach>
+				<!--<form:checkboxes items="${manufacturerPrinthead}" path="manufacturerPrinthead" element="li" />-->
 			</ul>
 		</div> 
 
@@ -147,6 +186,54 @@
 			</div>
 			<ul class="block_check_boxes">
 		
+				<c:forEach items="${printer.type_of_printhead}" var="item">
+				
+					<div class="search_criteria">
+						<div class="block_title">
+							<i></i>
+							<p>${item.name}</p>
+						</div>
+						<ul class="check_boxes">
+						
+							<c:forEach items="${item.values}" var="value">
+								<c:if test="${value.getClass().simpleName != 'String'}">
+									<div class="outer_type_print_head">
+										
+										<input class="check_print_head" type="checkbox" name="typeOfPrinthead" value="${value.series}"
+										 id="${value.series}_${item.name}">
+										<label class="print_series" for="${value.series}_${item.name}">${value.series}</label></input>
+										
+										
+									<div class="inner_block_print_head" style="display: none; left:10px; position: relative;">
+					
+										<c:forEach items="${value.values}" var="value">
+	  										<li>
+												<input type="checkbox" name="typeOfPrinthead" value="${value}"
+											 	id="${value}_${item.name}"><label for="${value}_${item.name}">${value}</label></input>
+											</li>
+	  									</c:forEach>
+
+									</div>
+									
+									</div>
+								</c:if>
+								
+								<c:if test="${value.getClass().simpleName == 'String'}">
+									<li>
+										<input type="checkbox" name="typeOfPrinthead" value="${value}"
+										 id="${value}_${item.name}"><label for="${value}_${item.name}">${value}</label></input>
+									</li>
+								</c:if>
+	  						</c:forEach>
+	  						
+						</ul>
+					</div>				
+				
+	  			</c:forEach>
+		
+		
+		
+<!--  		
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
@@ -249,6 +336,7 @@
 				<li><input type="checkbox" name="typeOfPrinthead" value="Epson Stylus Series" id="typeOfPrinthead_46"><label for="typeOfPrinthead_46">Epson Stylus Series</label></input></li>
 			</ul>
 		</div>
+		-->
 			</ul>
 		</div>
 	
@@ -258,7 +346,12 @@
 				<p>Совместимые чернила</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${compatibleInk}" path="compatibleInk" element="li" />
+				<c:forEach items="${printer.compatible_ink}" var="item">
+					<li>
+						<input type="checkbox" name="compatibleInk" value="${item}" id="${item}_compatible_ink"><label for="${item}_compatible_ink">${item}</label></input>
+					</li>
+	  			</c:forEach>
+				<!--<form:checkboxes items="${compatibleInk}" path="compatibleInk" element="li" />-->
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -267,7 +360,12 @@
 				<p>Тип капли</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${typeDrops}" path="typeDrops" element="li" />
+				<c:forEach items="${printer.type_drops}" var="item">
+					<li>
+						<input type="checkbox" name="typeDrops" value="${item}" id="${item}_type_drops"><label for="${item}_type_drops">${item}</label></input>
+					</li>
+	  			</c:forEach>
+				<!--<form:checkboxes items="${typeDrops}" path="typeDrops" element="li" />-->
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -307,8 +405,12 @@
 				<p>Разрешение печати</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${printResolution}" path="printResolution"
-					element="li" />
+				<c:forEach items="${printer.print_resolution}" var="item">
+					<li>
+						<input type="checkbox" name="printResolution" value="${item}" id="${item}_print_resolution"><label for="${item}_print_resolution">${item}</label></input>
+					</li>
+	  			</c:forEach>
+				<!--<form:checkboxes items="${printResolution}" path="printResolution" element="li" />-->
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -317,7 +419,12 @@
 				<p>Производитель оборудования</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${equipmentManufacturer}" path="equipmentManufacturer" element="li" />
+				<c:forEach items="${printer.equipment_manufacturer}" var="item">
+					<li>
+						<input type="checkbox" name="equipmentManufacturer" value="${item}" id="${item}_equipment_manufacturer"><label for="${item}_equipment_manufacturer">${item}</label></input>
+					</li>
+	  			</c:forEach>
+				<!--<form:checkboxes items="${equipmentManufacturer}" path="equipmentManufacturer" element="li" />-->
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -326,8 +433,12 @@
 				<p>Интерфейс подключения</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${interfaceConnection}"
-					path="interfaceConnection" element="li" />
+				<c:forEach items="${printer.interface_connection}" var="item">
+					<li>
+						<input type="checkbox" name="interfaceConnection" value="${item}" id="${item}_interface_connection"><label for="${item}_interface_connection">${item}</label></input>
+					</li>
+	  			</c:forEach>
+				<!--<form:checkboxes items="${interfaceConnection}" path="interfaceConnection" element="li" />-->
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -374,7 +485,12 @@
 				<p>П/О RIP</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${rip}" path="rip" element="li" />
+				<c:forEach items="${printer.rip}" var="item">
+					<li>
+						<input type="checkbox" name="rip" value="${item}" id="${item}_rip"><label for="${item}_rip">${item}</label></input>
+					</li>
+	  			</c:forEach>
+				<!--<form:checkboxes items="${rip}" path="rip" element="li" />-->
 			</ul>
 		</div>
 		<div class="search_criteria">
