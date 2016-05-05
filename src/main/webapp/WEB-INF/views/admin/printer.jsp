@@ -130,13 +130,6 @@
 						<form:errors path="typePrinter" cssClass="error"></form:errors>
 					</div>
 					<ul class="check_boxes">
-						<!--<c:forEach items="${printer.type_printer}" var="type">
-							<li>
-								<input type="radio" name="typePrinter" value="${type}" id="${type}_type"
-								 <c:if test="${product.typePrinter==type}">checked</c:if>>
-								 <label for="${type}_type">${type}</label></input>
-							</li>
-	  					</c:forEach>-->
 						<form:radiobuttons items="${printer.type_printer}" path="typePrinter" element="li"/>
 					</ul>
 				</div>
@@ -206,14 +199,7 @@
 						<p>Ширина печати в миллиметрах</p>
 					</div>
 					<ul class="check_boxes">
-						<c:forEach items="${printer.weight_print_mm}" var="type">
-							<li>
-								<input type="radio" name="weightPrintMM" value="${type}" id="${type}_weight_print_mm"
-								 <c:if test="${product.weightPrintMM==type}">checked</c:if>>
-								 <label for="${type}_weight_print_mm">${type}</label></input>
-							</li>
-	  					</c:forEach>
-						<!--<form:radiobuttons items="${weightPrintMM}" path="weightPrintMM" element="li"/>-->
+						<form:radiobuttons items="${printer.weight_print_mm}" path="weightPrintMM" element="li"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -221,15 +207,8 @@
 						<i></i>
 						<p>Состояние оборудования</p>
 					</div>
-					<ul class="check_boxes">
-						<c:forEach items="${printer.previously_used}" var="type">
-							<li>
-								<input type="radio" name="previouslyUsed" value="${type}" id="${type}_previously_used"
-								 <c:if test="${product.previouslyUsed==type}">checked</c:if>>
-								 <label for="${type}_previously_used">${type}</label></input>
-							</li>
-	  					</c:forEach>					
-						<!--<form:radiobuttons items="${previouslyUsed}" path="previouslyUsed" element="li"/>-->
+					<ul class="check_boxes">					
+						<form:radiobuttons items="${printer.previously_used}" path="previouslyUsed" element="li"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -238,14 +217,7 @@
 						<p>Тип печати</p>
 					</div>
 					<ul class="check_boxes">
-						<c:forEach items="${printer.type_print}" var="type">
-							<li>
-								<input type="radio" name="typePrint" value="${type}" id="${type}_type_print"
-								 <c:if test="${product.typePrint==type}">checked</c:if>>
-								 <label for="${type}_type_print">${type}</label></input>
-							</li>
-	  					</c:forEach>
-						<!--<form:radiobuttons items="${typePrint}" path="typePrint" element="li"/>-->
+						<form:radiobuttons items="${printer.type_print}" path="typePrint" element="li"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -288,15 +260,8 @@
 						<i></i>
 						<p>Подача метериала</p>
 					</div>
-					<ul class="check_boxes">
-						<c:forEach items="${printer.feeds}" var="type">
-							<li>
-								<input type="checkbox" name="feed" value="${type}" id="${type}_feeds"
-								<c:forEach items="${product.feed}" var="tp"><c:if test="${tp==type}">checked</c:if></c:forEach>>
-								<label for="${type}_feeds">${type}</label></input>
-							</li>
-	  					</c:forEach>					
-						<!--<form:checkboxes items="${feeds}" path="feed" element="li"/>-->
+					<ul class="check_boxes">					
+						<form:checkboxes items="${printer.feeds}" path="feed" element="li"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -325,7 +290,6 @@
 						<c:forEach items="${product.chromaticity}" var="tp"><c:if test="${tp=='CMYKLcLmOG'}">checked</c:if></c:forEach>>
 						<label for="chromaticity4">CMYKLcLmOG + </label><form:input style="width: 28px;" path="chromaticityCMYKLcLmOG" /></input></li>
 						
-						<!-- <form:checkboxes items="${chromaticity}" path="chromaticity" element="li"/>-->
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -333,15 +297,8 @@
 						<i></i>
 						<p>Производитель печатающей головки</p>
 					</div>
-					<ul class="check_boxes">
-						<c:forEach items="${printer.manufacturer_printhead}" var="type">
-							<li>
-								<input type="radio" name="manufacturerPrinthead" value="${type}" id="${type}_manufacturer_printhead"
-								 <c:if test="${product.manufacturerPrinthead==type}">checked</c:if>>
-								 <label for="${type}_manufacturer_printhead">${type}</label></input>
-							</li>
-	  					</c:forEach>					
-						<!--<form:radiobuttons items="${manufacturerPrinthead}" path="manufacturerPrinthead" element="li"/>-->
+					<ul class="check_boxes">					
+						<form:radiobuttons items="${printer.manufacturer_printhead}" path="manufacturerPrinthead" element="li"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -355,19 +312,10 @@
 						
 							<fieldset>
 							   <legend>${item.name}</legend>
-							   
-							   
+							   						   
 							   <c:forEach items="${item.values}" var="value">
 									<c:if test="${value.getClass().simpleName != 'String'}">
-								
-										<c:forEach items="${value.values}" var="value">
-				  							<li>
-												<input type="radio" name="typeOfPrinthead" value="${value}" id="${value}_type_of_printhead"
-									 			<c:if test="${product.typeOfPrinthead==value}">checked</c:if>>
-												 <label for="${value}_type_of_printhead">${value}</label></input>
-											</li>
-				  						</c:forEach>
-												
+										<form:radiobuttons items="${value.values}" path="typeOfPrinthead" element="li"/>							
 									</c:if>
 											
 									<c:if test="${value.getClass().simpleName == 'String'}">
@@ -383,83 +331,6 @@
 									
 			  			</c:forEach>
 						
-						
-						
-					<!-- 	
-						  <fieldset>
-						   <legend>Dimatix Spectra</legend>
-						 <label><input type="radio" name="typeOfPrinthead" value="Spectra Nova 256" <c:if test="${product.typeOfPrinthead=='Spectra Nova 256'}">checked</c:if>/>Spectra Nova 256</label>
-						 <label><input type="radio" name="typeOfPrinthead" value="Spectra Galaxy 256" <c:if test="${product.typeOfPrinthead=='Spectra Galaxy 256'}">checked</c:if>/>Spectra Galaxy 256</label>
-						 <label><input type="radio" name="typeOfPrinthead" value="Spectra Polyaris 512" <c:if test="${product.typeOfPrinthead=='Spectra Polyaris 512'}">checked</c:if>/>Spectra Polyaris 512</label>
-						  </fieldset>
-						  
-						  <fieldset>
-						   <legend>XAAR</legend>
-						 <label><input type="radio" name="typeOfPrinthead" value="XAAR 126/50" <c:if test="${product.typeOfPrinthead=='XAAR 126/50'}">checked</c:if>/>XAAR 126/50</label>
-						 <label><input type="radio" name="typeOfPrinthead" value="XAAR 126/80" <c:if test="${product.typeOfPrinthead=='XAAR 126/80'}">checked</c:if>/>XAAR 126/80</label>
-						 <label><input type="radio" name="typeOfPrinthead" value="XAAR 128/40" <c:if test="${product.typeOfPrinthead=='XAAR 128/40'}">checked</c:if>/>XAAR 128/40</label>
-						 <label><input type="radio" name="typeOfPrinthead" value="XAAR 128/80" <c:if test="${product.typeOfPrinthead=='XAAR 128/80'}">checked</c:if>/>XAAR 128/80</label>
-						 <label><input type="radio" name="typeOfPrinthead" value="XAAR 500" <c:if test="${product.typeOfPrinthead=='XAAR 500'}">checked</c:if>/>XAAR 500</label>
-						 <label><input type="radio" name="typeOfPrinthead" value="XAAR 318 CA4W" <c:if test="${product.typeOfPrinthead=='XAAR 318 CA4W'}">checked</c:if>/>XAAR 318 CA4W</label>
-						 <label><input type="radio" name="typeOfPrinthead" value="XAAR Proton 382/35" <c:if test="${product.typeOfPrinthead=='XAAR Proton 382/35'}">checked</c:if>/>XAAR Proton 382/35</label>
-						 <label><input type="radio" name="typeOfPrinthead" value="XAAR Proton 382/60" <c:if test="${product.typeOfPrinthead=='XAAR Proton 382/60'}">checked</c:if>/>XAAR Proton 382/60</label>
-						  </fieldset>
-						  
-						  <fieldset>
-						   <legend>Seiko SPT</legend>
-						 <label><input type="radio" name="typeOfPrinthead" value="SPT 255" <c:if test="${product.typeOfPrinthead=='SPT 255'}">checked</c:if>/>SPT 255</label>
-						 <label><input type="radio" name="typeOfPrinthead" value="SPT 508 GS" <c:if test="${product.typeOfPrinthead=='SPT 508 GS'}">checked</c:if>/>SPT 508 GS</label>
-						 <label><input type="radio" name="typeOfPrinthead" value="SPT 510" <c:if test="${product.typeOfPrinthead=='SPT 510'}">checked</c:if>/>SPT 510</label>
-						 <label><input type="radio" name="typeOfPrinthead" value="SPT 1020" <c:if test="${product.typeOfPrinthead=='SPT 1020'}">checked</c:if>/>SPT 1020</label>
-						  </fieldset>
-						  
-						   <fieldset>
-						   <legend>Konica Minolta</legend>
-						 <label><input type="radio" name="typeOfPrinthead" value="KM 256" <c:if test="${product.typeOfPrinthead=='KM 256'}">checked</c:if>/>KM 256</label>
-						 <label><input type="radio" name="typeOfPrinthead" value="KM 256 LN" <c:if test="${product.typeOfPrinthead=='KM 256 LN'}">checked</c:if>/>KM 256 LN</label>
-						 <label><input type="radio" name="typeOfPrinthead" value="KM 256 MN" <c:if test="${product.typeOfPrinthead=='KM 256 MN'}">checked</c:if>/>KM 256 MN</label>
-						 <label><input type="radio" name="typeOfPrinthead" value="KM 512" <c:if test="${product.typeOfPrinthead=='KM 512'}">checked</c:if>/>KM 512</label>
-						 <label><input type="radio" name="typeOfPrinthead" value="KM 512 LN" <c:if test="${product.typeOfPrinthead=='KM 512 LN'}">checked</c:if>/>KM 512 LN</label>
-						 <label><input type="radio" name="typeOfPrinthead" value="KM 512 LNX" <c:if test="${product.typeOfPrinthead=='KM 512 LNX'}">checked</c:if>/>KM 512 LNX</label>
-						 <label><input type="radio" name="typeOfPrinthead" value="KM 512 MN" <c:if test="${product.typeOfPrinthead=='KM 512 MN'}">checked</c:if>/>KM 512 MN</label>
-						 <label><input type="radio" name="typeOfPrinthead" value="KM 512 MH" <c:if test="${product.typeOfPrinthead=='KM 512 MH'}">checked</c:if>/>KM 512 MH</label>
-						 <label><input type="radio" name="typeOfPrinthead" value="KM 512 LH" <c:if test="${product.typeOfPrinthead=='KM 512 LH'}">checked</c:if>/>KM 512 LH</label>
-						 <label><input type="radio" name="typeOfPrinthead" value="KM 1024" <c:if test="${product.typeOfPrinthead=='KM 1024'}">checked</c:if>/>KM 1024</label>
-						 <label><input type="radio" name="typeOfPrinthead" value="KM 1024 LH" <c:if test="${product.typeOfPrinthead=='KM 1024 LH'}">checked</c:if>/>KM 1024 LH</label>
-						 <label><input type="radio" name="typeOfPrinthead" value="KM 1024 LN" <c:if test="${product.typeOfPrinthead=='KM 1024 LN'}">checked</c:if>/>KM 1024 LN</label>
-						 <label><input type="radio" name="typeOfPrinthead" value="KM 1024 MB" <c:if test="${product.typeOfPrinthead=='KM 1024 MB'}">checked</c:if>/>KM 1024 MB</label>
-						 <label><input type="radio" name="typeOfPrinthead" value="KM 1024 MN" <c:if test="${product.typeOfPrinthead=='KM 1024 MN'}">checked</c:if>/>KM 1024 MN</label>
-						 <label><input type="radio" name="typeOfPrinthead" value="KM 1024 SHB" <c:if test="${product.typeOfPrinthead=='KM 1024 SHB'}">checked</c:if>/>KM 1024 SHB</label>
-						 <label><input type="radio" name="typeOfPrinthead" value="KM 1024i" <c:if test="${product.typeOfPrinthead=='KM 1024i'}">checked</c:if>/>KM 1024i</label>
-						 <label><input type="radio" name="typeOfPrinthead" value="KM 1024i MHE" <c:if test="${product.typeOfPrinthead=='KM 1024i MHE'}">checked</c:if>/>KM 1024i MHE</label>
-						  </fieldset>
-						  
-						  <fieldset>
-						   <legend>Toshiba</legend>
-						 <label><input type="radio" name="typeOfPrinthead" value="CA3W" <c:if test="${product.typeOfPrinthead=='CA3W'}">checked</c:if>/>CA3W</label>
-						 <label><input type="radio" name="typeOfPrinthead" value="CA4W" <c:if test="${product.typeOfPrinthead=='CA4W'}">checked</c:if>/>CA4W</label>
-						  </fieldset>
-						  
-						  <fieldset>
-						   <legend>RICOH</legend>
-						 <label><input type="radio" name="typeOfPrinthead" value="Gen4" <c:if test="${product.typeOfPrinthead=='Gen4'}">checked</c:if>/>Gen4</label>
-						 <label><input type="radio" name="typeOfPrinthead" value="Gen5" <c:if test="${product.typeOfPrinthead=='Gen5'}">checked</c:if>/>Gen5</label>
-						  </fieldset>
-						  
-						  <fieldset>
-						   <legend>Epson</legend>
-						 <label><input type="radio" name="typeOfPrinthead" value="Epson DX2 Series" <c:if test="${product.typeOfPrinthead=='Epson DX2 Series'}">checked</c:if>/>Epson DX2 Series</label>
-						 <label><input type="radio" name="typeOfPrinthead" value="Epson DX4 Series" <c:if test="${product.typeOfPrinthead=='Epson DX4 Series'}">checked</c:if>/>Epson DX4 Series</label>
-						 <label><input type="radio" name="typeOfPrinthead" value="Epson DX5 Series" <c:if test="${product.typeOfPrinthead=='Epson DX5 Series'}">checked</c:if>/>Epson DX5 Series</label>
-						 <label><input type="radio" name="typeOfPrinthead" value="Epson DX6 Series" <c:if test="${product.typeOfPrinthead=='Epson DX6 Series'}">checked</c:if>/>Epson DX6 Series</label>
-						 <label><input type="radio" name="typeOfPrinthead" value="Epson DX7 Series" <c:if test="${product.typeOfPrinthead=='Epson DX7 Series'}">checked</c:if>/>Epson DX7 Series</label>
-						 <label><input type="radio" name="typeOfPrinthead" value="Epson DX8 Series" <c:if test="${product.typeOfPrinthead=='Epson DX8 Series'}">checked</c:if>/>Epson DX8 Series</label>
-						 <label><input type="radio" name="typeOfPrinthead" value="Epson DX9 Series" <c:if test="${product.typeOfPrinthead=='Epson DX9 Series'}">checked</c:if>/>Epson DX9 Series</label>
-						 <label><input type="radio" name="typeOfPrinthead" value="Epson DX10 Series" <c:if test="${product.typeOfPrinthead=='Epson DX10 Series'}">checked</c:if>/>Epson DX10 Series</label>
-						 <label><input type="radio" name="typeOfPrinthead" value="Epson Sure Color Series" <c:if test="${product.typeOfPrinthead=='Epson Sure Color Series'}">checked</c:if>/>Epson Sure Color Series</label>
-						 <label><input type="radio" name="typeOfPrinthead" value="Epson Stylus Series" <c:if test="${product.typeOfPrinthead=='Epson Stylus Series'}">checked</c:if>/>Epson Stylus Series</label>
-						  </fieldset>
-			 -->
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -544,14 +415,7 @@
 						<p>Совместимые чернила</p>
 					</div>
 					<ul class="check_boxes">
-						<c:forEach items="${printer.compatible_ink}" var="type">
-							<li>
-								<input type="checkbox" name="compatibleInk" value="${type}" id="${type}_compatible_ink"
-								 <c:forEach items="${product.compatibleInk}" var="tp"><c:if test="${tp==type}">checked</c:if></c:forEach>>
-								 <label for="${type}_compatible_ink">${type}</label></input>
-							</li>
-	  					</c:forEach>
-						<!--<form:checkboxes items="${compatibleInk}" path="compatibleInk" element="li"/>-->
+						<form:checkboxes items="${printer.compatible_ink}" path="compatibleInk" element="li"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -559,15 +423,8 @@
 						<i></i>
 						<p>Тип капли</p>
 					</div>
-					<ul class="check_boxes">
-						<c:forEach items="${printer.type_drops}" var="type">
-							<li>
-								<input type="checkbox" name="typeDrops" value="${type}" id="${type}_type_drops"
-								 <c:forEach items="${product.typeDrops}" var="tp"><c:if test="${tp==type}">checked</c:if></c:forEach>>
-								 <label for="${type}_type_drops">${type}</label></input>
-							</li>
-	  					</c:forEach>					
-						<!--<form:checkboxes items="${typeDrops}" path="typeDrops" element="li"/>-->
+					<ul class="check_boxes">				
+						<form:checkboxes items="${printer.type_drops}" path="typeDrops" element="li"/>
 					</ul>
 				</div>
 			</div>
@@ -622,14 +479,7 @@
 						<p>Размер капли (для выбора с уже имеющихся)</p>
 					</div>
 					<ul class="check_boxes">
-						<c:forEach items="${printer.size_drops}" var="type">
-							<li>
-								<input type="checkbox" name="sizeDrops" value="${type}" id="${type}_size_drops"
-								 <c:forEach items="${product.sizeDrops}" var="tp"><c:if test="${tp==type}">checked</c:if></c:forEach>>
-								<label for="${type}_size_drops">${type}</label></input>
-							</li>
-	  					</c:forEach>
-						<!--<form:checkboxes items="${sizeDrops}" path="sizeDrops" element="li"/>-->
+						<form:checkboxes items="${printer.size_drops}" path="sizeDrops" element="li"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -758,14 +608,7 @@
 						<p>Разрешение печати</p>
 					</div>
 					<ul class="check_boxes">
-						<c:forEach items="${printer.print_resolution}" var="type">
-							<li>
-								<input type="checkbox" name="printResolution" value="${type}" id="${type}_print_resolution"
-								 <c:forEach items="${product.printResolution}" var="tp"><c:if test="${tp==type}">checked</c:if></c:forEach>>
-								<label for="${type}_print_resolution">${type}</label></input>
-							</li>
-	  					</c:forEach>
-						<!--<form:checkboxes items="${printResolution}" path="printResolution" element="li"/>-->
+						<form:checkboxes items="${printer.print_resolution}" path="printResolution" element="li"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -773,15 +616,8 @@
 						<i></i>
 						<p>Производитель оборудования</p>
 					</div>
-					<ul class="check_boxes">
-						<c:forEach items="${printer.equipment_manufacturer}" var="type">
-							<li>
-								<input type="radio" name="equipmentManufacturer" value="${type}" id="${type}_equipment_manufacturer"
-								 <c:if test="${product.equipmentManufacturer==type}">checked</c:if>>
-								<label for="${type}_equipment_manufacturer">${type}</label></input>
-							</li>
-	  					</c:forEach>					
-						<!--<form:radiobuttons items="${equipmentManufacturer}" path="equipmentManufacturer" element="li"/>-->
+					<ul class="check_boxes">					
+						<form:radiobuttons items="${printer.equipment_manufacturer}" path="equipmentManufacturer" element="li"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -790,14 +626,7 @@
 						<p>Интерфейс подключения</p>
 					</div>
 					<ul class="check_boxes">
-						<c:forEach items="${printer.interface_connection}" var="type">
-							<li>
-								<input type="checkbox" name="interfaceConnection" value="${type}" id="${type}_interface_connection"
-								 <c:forEach items="${product.interfaceConnection}" var="tp"><c:if test="${tp==type}">checked</c:if></c:forEach>>
-								<label for="${type}_interface_connection">${type}</label></input>
-							</li>
-	  					</c:forEach>
-						<!--<form:checkboxes items="${interfaceConnection}" path="interfaceConnection" element="li"/>-->
+						<form:checkboxes items="${printer.interface_connection}" path="interfaceConnection" element="li"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -830,14 +659,7 @@
 						<p>Программное обеспечение</p>
 					</div>
 					<ul class="check_boxes">
-						<c:forEach items="${printer.rip}" var="type">
-							<li>
-								<input type="checkbox" name="rip" value="${type}" id="${type}_rip"
-								 <c:forEach items="${product.rip}" var="tp"><c:if test="${tp==type}">checked</c:if></c:forEach>>
-								<label for="${type}_rip">${type}</label></input>
-							</li>
-	  					</c:forEach>
-						<!--<form:checkboxes items="${rip}" path="rip" element="li"/>-->
+						<form:checkboxes items="${printer.rip}" path="rip" element="li"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -926,14 +748,7 @@
 						<p>Доставка</p>
 					</div>
 					<ul class="check_boxes">
-						<c:forEach items="${printer.delivery}" var="type">
-							<li>
-								<input type="radio" name="delivery" value="${type}" id="${type}_delivery"
-								 <c:if test="${product.delivery==type}">checked</c:if>>
-								<label for="${type}_delivery">${type}</label></input>
-							</li>
-	  					</c:forEach>
-						<!--<form:radiobuttons items="${delivery}" path="delivery" element="li"/>-->
+						<form:radiobuttons items="${printer.delivery}" path="delivery" element="li"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -952,14 +767,7 @@
 						<p>Наличие (информация для пользователя)</p>
 					</div>
 					<ul class="check_boxes">
-						<c:forEach items="${printer.availability}" var="type">
-							<li>
-								<input type="radio" name="availability" value="${type}" id="${type}_availability"
-								 <c:if test="${product.availability==type}">checked</c:if>>
-								<label for="${type}_availability">${type}</label></input>
-							</li>
-	  					</c:forEach>
-						<!--<form:radiobuttons items="${availability}" path="availability" element="li"/>-->
+						<form:radiobuttons items="${printer.availability}" path="availability" element="li"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -968,13 +776,7 @@
 						<p>Опции</p>
 					</div>
 					<ul class="check_boxes">
-						<c:forEach items="${printer.availability}" var="type">
-							<li>
-								<input type="checkbox" name="availability" value="${type}" id="${type}_availability"
-								 <c:forEach items="${product.availability}" var="tp"><c:if test="${tp==type}">checked</c:if></c:forEach>>
-								<label for="${type}_availability">${type}</label></input>
-							</li>
-	  					</c:forEach>
+	  					<form:checkboxes items="${printer.availability}" path="availability" element="li"/>
 					</ul>
 				</div>
 			</div>
