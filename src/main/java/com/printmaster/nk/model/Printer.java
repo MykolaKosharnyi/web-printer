@@ -142,29 +142,44 @@ public class Printer extends Product{
 	@Column(name="speed_print_draft_resolution")
 	private String speedPrintDraftResolution;
 	
+	@Column(name="speedPrintDraftPass")//pass
+	private int speedPrintDraftPass;
+	
 	@Column(name="speed_print_fast")
 	private double speedPrintFast = 0;
 	
 	@Column(name="speed_print_fast_resolution")
 	private String speedPrintFastResolution;
 	
+	@Column(name="speedPrintFastPass")//pass
+	private int speedPrintFastPass;
+	
 	@Column(name="speed_print_normal")
 	private double speedPrintNormal = 0;
 	
 	@Column(name="speed_print_normal_resolution")
 	private String speedPrintNormalResolution;
+		
+	@Column(name="speedPrintNormalPass")//pass
+	private int speedPrintNormalPass;
 	
 	@Column(name="speed_print_quality")
 	private double speedPrintQuality = 0;
 	
 	@Column(name="speed_print_quality_resolution")
 	private String speedPrintQualityResolution;
+		
+	@Column(name="speedPrintQualityPass")//pass
+	private int speedPrintQualityPass;
 	
 	@Column(name="speed_print_hiqual")
 	private double speedPrintHiQual = 0;
 	
 	@Column(name="speed_print_hiqual_resolution")
 	private String speedPrintHiqualResolution;
+	
+	@Column(name="speedPrintHiqualPass")//pass
+	private int speedPrintHiqualPass;
 	
 	// 5 характеристик для указания скорости и их площади без указания конкретного типа скорости
 	@Column(name="speedPrint1")
@@ -173,11 +188,17 @@ public class Printer extends Product{
 	@Column(name="speedPrintResolution1")
 	private String speedPrintResolution1;
 	
+	@Column(name="speedPrintPass1")//pass
+	private int speedPrintPass1;
+	
 	@Column(name="speedPrint2")
 	private double speedPrint2 = 0;
 	
 	@Column(name="speedPrintResolution2")
 	private String speedPrintResolution2;
+	
+	@Column(name="speedPrintPass2")//pass
+	private int speedPrintPass2;
 	
 	@Column(name="speedPrint3")
 	private double speedPrint3 = 0;
@@ -185,17 +206,26 @@ public class Printer extends Product{
 	@Column(name="speedPrintResolution3")
 	private String speedPrintResolution3;
 	
+	@Column(name="speedPrintPass3")//pass
+	private int speedPrintPass3;
+	
 	@Column(name="speedPrint4")
 	private double speedPrint4 = 0;
 	
 	@Column(name="speedPrintResolution4")
 	private String speedPrintResolution4;
 	
+	@Column(name="speedPrintPass4")//pass
+	private int speedPrintPass4;
+	
 	@Column(name="speedPrint5")
 	private double speedPrint5 = 0;
 	
 	@Column(name="speedPrintResolution5")
 	private String speedPrintResolution5;
+	
+	@Column(name="speedPrintPass5")//pass
+	private int speedPrintPass5;
 	
 	@Column(name="print_resolution")
 	private String[] printResolution;
@@ -239,6 +269,86 @@ public class Printer extends Product{
 
 	public Printer() {
 		super();
+	}
+
+	public int getSpeedPrintDraftPass() {
+		return speedPrintDraftPass;
+	}
+
+	public void setSpeedPrintDraftPass(int speedPrintDraftPass) {
+		this.speedPrintDraftPass = speedPrintDraftPass;
+	}
+
+	public int getSpeedPrintFastPass() {
+		return speedPrintFastPass;
+	}
+
+	public void setSpeedPrintFastPass(int speedPrintFastPass) {
+		this.speedPrintFastPass = speedPrintFastPass;
+	}
+
+	public int getSpeedPrintNormalPass() {
+		return speedPrintNormalPass;
+	}
+
+	public void setSpeedPrintNormalPass(int speedPrintNormalPass) {
+		this.speedPrintNormalPass = speedPrintNormalPass;
+	}
+
+	public int getSpeedPrintQualityPass() {
+		return speedPrintQualityPass;
+	}
+
+	public void setSpeedPrintQualityPass(int speedPrintQualityPass) {
+		this.speedPrintQualityPass = speedPrintQualityPass;
+	}
+
+	public int getSpeedPrintHiqualPass() {
+		return speedPrintHiqualPass;
+	}
+
+	public void setSpeedPrintHiqualPass(int speedPrintHiqualPass) {
+		this.speedPrintHiqualPass = speedPrintHiqualPass;
+	}
+
+	public int getSpeedPrintPass1() {
+		return speedPrintPass1;
+	}
+
+	public void setSpeedPrintPass1(int speedPrintPass1) {
+		this.speedPrintPass1 = speedPrintPass1;
+	}
+
+	public int getSpeedPrintPass2() {
+		return speedPrintPass2;
+	}
+
+	public void setSpeedPrintPass2(int speedPrintPass2) {
+		this.speedPrintPass2 = speedPrintPass2;
+	}
+
+	public int getSpeedPrintPass3() {
+		return speedPrintPass3;
+	}
+
+	public void setSpeedPrintPass3(int speedPrintPass3) {
+		this.speedPrintPass3 = speedPrintPass3;
+	}
+
+	public int getSpeedPrintPass4() {
+		return speedPrintPass4;
+	}
+
+	public void setSpeedPrintPass4(int speedPrintPass4) {
+		this.speedPrintPass4 = speedPrintPass4;
+	}
+
+	public int getSpeedPrintPass5() {
+		return speedPrintPass5;
+	}
+
+	public void setSpeedPrintPass5(int speedPrintPass5) {
+		this.speedPrintPass5 = speedPrintPass5;
 	}
 
 	public int getLengthWaveUVlamp() {

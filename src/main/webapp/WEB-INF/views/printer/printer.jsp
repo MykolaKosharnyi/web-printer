@@ -295,52 +295,52 @@
    								<td>
    								
    								<c:if test="${product.speedPrintDraft > 0.001}">
-   									Draft Speed: <c:if test="${product.speedPrintDraftResolution!='None'}">${product.speedPrintDraftResolution} dpi - </c:if>${product.speedPrintDraft} м.кв./ч.
+   									Draft Speed:<c:if test="${product.speedPrintDraftPass > 0}"> ${product.speedPrintDraftPass} pass</c:if> <c:if test="${product.speedPrintDraftResolution!='None'}">${product.speedPrintDraftResolution} dpi -</c:if> ${product.speedPrintDraft} м.кв./ч.
    									<br/>
 								</c:if>
    							
    								<c:if test="${product.speedPrintFast > 0.001}">
-   									Fast Speed: <c:if test="${product.speedPrintFastResolution!='None'}">${product.speedPrintFastResolution} dpi - </c:if>${product.speedPrintFast} м.кв./ч.
+   									Fast Speed:<c:if test="${product.speedPrintFastPass > 0}"> ${product.speedPrintFastPass} pass</c:if> <c:if test="${product.speedPrintFastResolution!='None'}">${product.speedPrintFastResolution} dpi -</c:if> ${product.speedPrintFast} м.кв./ч.
    									<br/>
 								</c:if>
 								
 								<c:if test="${product.speedPrintNormal > 0.001}">
-   									Normal Speed: <c:if test="${product.speedPrintNormalResolution!='None'}">${product.speedPrintNormalResolution} dpi - </c:if>${product.speedPrintNormal} м.кв./ч.
+   									Normal Speed:<c:if test="${product.speedPrintNormalPass > 0}"> ${product.speedPrintNormalPass} pass</c:if> <c:if test="${product.speedPrintNormalResolution!='None'}">${product.speedPrintNormalResolution} dpi -</c:if> ${product.speedPrintNormal} м.кв./ч.
    									<br/>
 								</c:if>
 								
 								<c:if test="${product.speedPrintQuality > 0.001}">
-   									Quality Speed: <c:if test="${product.speedPrintQualityResolution!='None'}">${product.speedPrintQualityResolution} dpi - </c:if>${product.speedPrintQuality} м.кв./ч.
+   									Quality Speed:<c:if test="${product.speedPrintQualityPass > 0}"> ${product.speedPrintQualityPass} pass</c:if> <c:if test="${product.speedPrintQualityResolution!='None'}">${product.speedPrintQualityResolution} dpi -</c:if> ${product.speedPrintQuality} м.кв./ч.
    									<br/>
 								</c:if>
 								
 								<c:if test="${product.speedPrintHiQual > 0.001}">
-   									Hi-Quality Speed: <c:if test="${product.speedPrintHiqualResolution!='None'}">${product.speedPrintHiqualResolution} dpi - </c:if>${product.speedPrintHiQual} м.кв./ч.
+   									Hi-Quality Speed:<c:if test="${product.speedPrintHiqualPass > 0}"> ${product.speedPrintHiqualPass} pass</c:if> <c:if test="${product.speedPrintHiqualResolution!='None'}">${product.speedPrintHiqualResolution} dpi -</c:if> ${product.speedPrintHiQual} м.кв./ч.
 									<br/>
 								</c:if>
 								
 								<c:if test="${product.speedPrint1 > 0.001}">
-   									${product.speedPrintResolution1} dpi - ${product.speedPrint1} м.кв./ч.
+   									<c:if test="${product.speedPrintPass1 > 0}">${product.speedPrintPass1} pass </c:if>${product.speedPrintResolution1} dpi - ${product.speedPrint1} м.кв./ч.
 									<br/>
 								</c:if>
 								
 								<c:if test="${product.speedPrint2 > 0.001}">
-   									${product.speedPrintResolution2} dpi - ${product.speedPrint2} м.кв./ч.
+   									<c:if test="${product.speedPrintPass2 > 0}">${product.speedPrintPass2} pass </c:if>${product.speedPrintResolution2} dpi - ${product.speedPrint2} м.кв./ч.
 									<br/>
 								</c:if>
 								
 								<c:if test="${product.speedPrint3 > 0.001}">
-   									${product.speedPrintResolution3} dpi - ${product.speedPrint3} м.кв./ч.
+   									<c:if test="${product.speedPrintPass3 > 0}">${product.speedPrintPass3} pass </c:if>${product.speedPrintResolution3} dpi - ${product.speedPrint3} м.кв./ч.
 									<br/>
 								</c:if>
 								
 								<c:if test="${product.speedPrint4 > 0.001}">
-   									${product.speedPrintResolution4} dpi - ${product.speedPrint4} м.кв./ч.
+   									<c:if test="${product.speedPrintPass4 > 0}">${product.speedPrintPass4} pass </c:if>${product.speedPrintResolution4} dpi - ${product.speedPrint4} м.кв./ч.
 									<br/>
 								</c:if>
 								
 								<c:if test="${product.speedPrint5 > 0.001}">
-   									${product.speedPrintResolution5} dpi - ${product.speedPrint5} м.кв./ч.
+   									<c:if test="${product.speedPrintPass5 > 0}">${product.speedPrintPass5} pass </c:if>${product.speedPrintResolution5} dpi - ${product.speedPrint5} м.кв./ч.
 								</c:if>
    								</td>
    							</tr>

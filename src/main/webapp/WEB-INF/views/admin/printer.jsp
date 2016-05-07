@@ -289,7 +289,7 @@
 						<li><input type="checkbox" name="chromaticity" value="CMYKLcLmOG" id="chromaticity4" 
 						<c:forEach items="${product.chromaticity}" var="tp"><c:if test="${tp=='CMYKLcLmOG'}">checked</c:if></c:forEach>>
 						<label for="chromaticity4">CMYKLcLmOG + </label><form:input style="width: 28px;" path="chromaticityCMYKLcLmOG" /></input></li>
-						
+
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -496,92 +496,132 @@
 						<form:errors path="speedPrint3" cssClass="error"></form:errors>
 						<form:errors path="speedPrint4" cssClass="error"></form:errors>
 						<form:errors path="speedPrint5" cssClass="error"></form:errors>
+						<form:errors path="speedPrintDraftPass" cssClass="error"></form:errors>
+						<form:errors path="speedPrintFastPass" cssClass="error"></form:errors>
+						<form:errors path="speedPrintNormalPass" cssClass="error"></form:errors>
+						<form:errors path="speedPrintQualityPass" cssClass="error"></form:errors>
+						<form:errors path="speedPrintHiqualPass" cssClass="error"></form:errors>
+						<form:errors path="speedPrintPass1" cssClass="error"></form:errors>
+						<form:errors path="speedPrintPass2" cssClass="error"></form:errors>
+						<form:errors path="speedPrintPass3" cssClass="error"></form:errors>
+						<form:errors path="speedPrintPass4" cssClass="error"></form:errors>
+						<form:errors path="speedPrintPass5" cssClass="error"></form:errors>
 					</div>
 					<ul class="check_boxes">
 						<div class="text_output">
-							<p>Draft Speed</p>
+							<p>Draft Speed&nbsp;</p>
+							<form:input path="speedPrintDraftPass" class="speed_print_pass"/>
+							<p>&nbsp;pass</p>
 							<form:select style="float: left; margin: 0px 5px;" path="speedPrintDraftResolution">
     							<form:options items="${printer.resolution}"></form:options>
   							</form:select>
 							
 							<form:input path="speedPrintDraft" class="amount-speed-print"/>
 							<form:errors path="speedPrintDraft" cssClass="error"></form:errors>
+							<form:errors path="speedPrintDraftPass" cssClass="error"></form:errors>
 						</div>
 
 						<div class="text_output">
-							<p>Fast Speed</p>
+							<p>Fast Speed&nbsp;</p>
+							<form:input path="speedPrintFastPass" class="speed_print_pass"/>
+							<p>&nbsp;pass</p>
 							<form:select style="float: left; margin: 0px 5px;" path="speedPrintFastResolution">
     							<form:options items="${printer.resolution}"></form:options>
   							</form:select>
 							<form:input path="speedPrintFast" class="amount-speed-print"/>
 							<form:errors path="speedPrintFast" cssClass="error"></form:errors>
+							<form:errors path="speedPrintFastPass" cssClass="error"></form:errors>
 						</div>
 
 						<div class="text_output">
-							<p>Normal Speed</p>
+							<p>Normal Sp.&nbsp;</p>
+							<form:input path="speedPrintNormalPass" class="speed_print_pass"/>
+							<p>&nbsp;pass</p>
 							<form:select style="float: left; margin: 0px 5px;" path="speedPrintNormalResolution">
     							<form:options items="${printer.resolution}"></form:options>
   							</form:select>
 							<form:input path="speedPrintNormal" class="amount-speed-print"/>
 							<form:errors path="speedPrintNormal" cssClass="error"></form:errors>
+							<form:errors path="speedPrintNormalPass" cssClass="error"></form:errors>
 						</div>
 
 						<div class="text_output">
-							<p>Quality Speed</p>
+							<p>Quality Sp.&nbsp;</p>
+							<form:input path="speedPrintQualityPass" class="speed_print_pass"/>
+							<p>&nbsp;pass</p>
 							<form:select style="float: left; margin: 0px 5px;" path="speedPrintQualityResolution">
     							<form:options items="${printer.resolution}"></form:options>
   							</form:select>
 							<form:input path="speedPrintQuality" class="amount-speed-print"/>
 							<form:errors path="speedPrintQuality" cssClass="error"></form:errors>
+							<form:errors path="speedPrintQualityPass" cssClass="error"></form:errors>
 						</div>
 
 						<div class="text_output">
-							<p>Hi-Quality Speed</p>
+							<p>Hi-Quality Sp.&nbsp;</p>
+							<form:input path="speedPrintHiqualPass" class="speed_print_pass"/>
+							<p>&nbsp;pass</p>
 							<form:select style="float: left; margin: 0px 5px;" path="speedPrintHiqualResolution">
     							<form:options items="${printer.resolution}"></form:options>
   							</form:select>
 							<form:input path="speedPrintHiQual" class="amount-speed-print"/>
 							<form:errors path="speedPrintHiQual" cssClass="error"></form:errors>
+							<form:errors path="speedPrintHiqualPass" cssClass="error"></form:errors>
 						</div>
 						
 						<div class="text_output">
+							<form:input path="speedPrintPass1" class="speed_print_pass"/>
+							<p>&nbsp;pass</p>
 							<form:select style="float: left; margin: 0px 5px;" path="speedPrintResolution1">
     							<form:options items="${printer.resolution}"></form:options>
   							</form:select>
 							<form:input path="speedPrint1" class="amount-speed-print"/>
 							<form:errors path="speedPrint1" cssClass="error"></form:errors>
+							<form:errors path="speedPrintPass1" cssClass="error"></form:errors>
 						</div>
 						
 						<div class="text_output">
+							<form:input path="speedPrintPass2" class="speed_print_pass"/>
+							<p>&nbsp;pass</p>
 							<form:select style="float: left; margin: 0px 5px;" path="speedPrintResolution2">
     							<form:options items="${printer.resolution}"></form:options>
   							</form:select>
 							<form:input path="speedPrint2" class="amount-speed-print"/>
 							<form:errors path="speedPrint2" cssClass="error"></form:errors>
+							<form:errors path="speedPrintPass2" cssClass="error"></form:errors>
 						</div>
 						
 						<div class="text_output">
+							<form:input path="speedPrintPass3" class="speed_print_pass"/>
+							<p>&nbsp;pass</p>
 							<form:select style="float: left; margin: 0px 5px;" path="speedPrintResolution3">
     							<form:options items="${printer.resolution}"></form:options>
   							</form:select>
 							<form:input path="speedPrint3" class="amount-speed-print"/>
 							<form:errors path="speedPrint3" cssClass="error"></form:errors>
+							<form:errors path="speedPrintPass3" cssClass="error"></form:errors>
 						</div>
 						
 						<div class="text_output">
+							<form:input path="speedPrintPass4" class="speed_print_pass"/>
+							<p>&nbsp;pass</p>
 							<form:select style="float: left; margin: 0px 5px;" path="speedPrintResolution4">
     							<form:options items="${printer.resolution}"></form:options>
   							</form:select>
 							<form:input path="speedPrint4" class="amount-speed-print"/>
 							<form:errors path="speedPrint4" cssClass="error"></form:errors>
+							<form:errors path="speedPrintPass4" cssClass="error"></form:errors>
 						</div>
 						
 						<div class="text_output">
+							<form:input path="speedPrintPass5" class="speed_print_pass"/>
+							<p>&nbsp;pass</p>
 							<form:select style="float: left; margin: 0px 5px;" path="speedPrintResolution5">
     							<form:options items="${printer.resolution}"></form:options>
   							</form:select>
 							<form:input path="speedPrint5" class="amount-speed-print"/>
 							<form:errors path="speedPrint5" cssClass="error"></form:errors>
+							<form:errors path="speedPrintPass5" cssClass="error"></form:errors>
 						</div>
 					</ul>
 				</div>

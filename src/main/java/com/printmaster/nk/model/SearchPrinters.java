@@ -17,6 +17,7 @@ public class SearchPrinters implements Serializable{
 	private String[] chromaticity;
 	private String[] manufacturerPrinthead;
 	private String[] typeOfPrinthead;
+	private String[] typeOfPrintheadSeries;
 	private String[] compatibleInk; 
 	private String[] typeDrops;
 	private double sizeDropRangeFrom;
@@ -70,6 +71,14 @@ public class SearchPrinters implements Serializable{
 				+ ", heigth0=" + heigth0 + ", heigth1=" + heigth1 + ", depth0=" + depth0 + ", depth1=" + depth1 + "]";
 	}
 	
+	public String[] getTypeOfPrintheadSeries() {
+		return typeOfPrintheadSeries;
+	}
+
+	public void setTypeOfPrintheadSeries(String[] typeOfPrintheadSeries) {
+		this.typeOfPrintheadSeries = typeOfPrintheadSeries;
+	}
+
 	public int getAveragePowerConsumption0() {
 		return averagePowerConsumption0;
 	}

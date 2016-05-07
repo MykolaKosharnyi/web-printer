@@ -183,7 +183,7 @@
 								<c:if test="${value.getClass().simpleName != 'String'}">
 									<div class="outer_type_print_head">
 										
-										<input class="check_print_head" type="checkbox" name="typeOfPrinthead" value="${value.series}"
+										<input class="check_print_head" type="checkbox" name="typeOfPrintheadSeries" value="${value.series}"
 										 id="${value.series}_${item.name}">
 										<label class="print_series" for="${value.series}_${item.name}">${value.series}</label></input>
 										

@@ -1,5 +1,10 @@
 package com.printmaster.nk.dao;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -11,6 +16,10 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Junction;
 import org.hibernate.criterion.Restrictions;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Repository;
 
 import com.printmaster.nk.model.Printer;
@@ -113,14 +122,15 @@ public class PrinterDAOImpl implements ProductDAO<Printer, SearchPrinters> {
 		cr.add(manufacturerPrintheadGroup);
 		}
 		
-		if(searchPrinters.getTypeOfPrinthead()!= null){
+		ArrayList<String> arrayTypeOfPrintHead = checkTypeOfPringheadUsingSeries(searchPrinters.getTypeOfPrinthead(), searchPrinters.getTypeOfPrintheadSeries());
+		if(arrayTypeOfPrintHead!= null){
 		Junction typeOfPrintheadGroup = Restrictions.disjunction();
-		for(String typeOfPrinthead : searchPrinters.getTypeOfPrinthead()){
-			typeOfPrintheadGroup.add(Restrictions.eq("typeOfPrinthead",typeOfPrinthead));
+		for(String typeOfPrinthead : arrayTypeOfPrintHead){
+			typeOfPrintheadGroup.add(Restrictions.eq("typeOfPrinthead",typeOfPrinthead));	
 		}
 		cr.add(typeOfPrintheadGroup);
 		}
-
+		
 		if(searchPrinters.getTypePrint()!= null){
 			Junction typePrintGroup = Restrictions.disjunction();
 			for(String typePrint : searchPrinters.getTypePrint()){
@@ -354,6 +364,64 @@ public class PrinterDAOImpl implements ProductDAO<Printer, SearchPrinters> {
 		}
 		
         return result;
+	}
+	
+	@SuppressWarnings("unchecked")
+	private ArrayList<String> checkTypeOfPringheadUsingSeries(String[] printHead, String[] printHeadSeries){
+		
+		ArrayList<String> printHeadArray = new ArrayList<String>();
+		ArrayList<String> printHeadSeriesArray = new ArrayList<String>();
+		
+		if(printHead != null)
+		printHeadArray = new ArrayList<String>(Arrays.asList(printHead));
+		
+		if(printHeadSeries != null)
+		printHeadSeriesArray = new ArrayList<String>(Arrays.asList(printHeadSeries));
+
+		JSONObject usedDate = null;
+		try {
+			usedDate = (JSONObject) new JSONParser()
+					.parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/printer.json"), "UTF-8"));
+		} catch (IOException | ParseException e) {
+			e.printStackTrace();
+		}
+				
+		JSONArray listPrintHeads = (JSONArray) usedDate.get("type_of_printhead");		
+		Iterator<JSONObject> listEquipmentTypeHead = listPrintHeads.iterator();
+				
+		while(listEquipmentTypeHead.hasNext()){
+			JSONArray heads =  (JSONArray) listEquipmentTypeHead.next().get("values");
+			Iterator<JSONObject> arrayOfHeads = heads.iterator();
+					
+			while(arrayOfHeads.hasNext()){
+				Object series = arrayOfHeads.next();
+				if(!series.getClass().equals(String.class)){
+					
+					JSONObject headsWithSeries = (JSONObject) series;
+					JSONArray finalArrayOfHead = (JSONArray) headsWithSeries.get("values");
+					Iterator<String> arrayOfConcreatHeads = finalArrayOfHead.iterator();
+					int countHeadsNotInArray = 0;
+					
+					while(arrayOfConcreatHeads.hasNext()){
+						String concreatValue = arrayOfConcreatHeads.next();
+						if(printHeadArray.contains(concreatValue)){
+							if(printHeadSeriesArray.contains(headsWithSeries.get("series"))){} else {printHeadArray.remove(concreatValue);}
+						} else {
+							if(printHeadSeriesArray.contains(headsWithSeries.get("series"))){countHeadsNotInArray++;}
+						}
+					}
+					
+					if(countHeadsNotInArray == finalArrayOfHead.size()){
+						printHeadArray.addAll(finalArrayOfHead);
+					}
+							
+				}	
+			}
+		}
+
+			
+		
+		return printHeadArray;
 	}
 
 	@SuppressWarnings("unchecked")
