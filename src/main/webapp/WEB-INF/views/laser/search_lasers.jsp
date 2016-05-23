@@ -415,21 +415,6 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Высота</p>
-			</div>
-			<ul class="check_boxes">
-				<div class="text_output">
-					<form:input path="heigth0" class="amount-heigth0" value="${search.heigth0}" />
-					<p>&nbsp;мм -&nbsp;</p>
-					<form:input path="heigth1" class="amount-heigth1" value="${search.heigth1}" />
-					<p>&nbsp;мм</p>
-				</div>
-					<div class="slider-range-heigth"></div>
-			</ul>
-		</div>
-		<div class="search_criteria">
-			<div class="block_title">
-				<i></i>
 				<p>Глубина</p>
 			</div>
 			<ul class="check_boxes">
@@ -440,6 +425,21 @@
 					<p>&nbsp;мм</p>
 				</div>
 					<div class="slider-range-depth"></div>
+			</ul>
+		</div>
+		<div class="search_criteria">
+			<div class="block_title">
+				<i></i>
+				<p>Высота</p>
+			</div>
+			<ul class="check_boxes">
+				<div class="text_output">
+					<form:input path="heigth0" class="amount-heigth0" value="${search.heigth0}" />
+					<p>&nbsp;мм -&nbsp;</p>
+					<form:input path="heigth1" class="amount-heigth1" value="${search.heigth1}" />
+					<p>&nbsp;мм</p>
+				</div>
+					<div class="slider-range-heigth"></div>
 			</ul>
 		</div>
 		

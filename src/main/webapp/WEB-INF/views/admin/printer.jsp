@@ -41,7 +41,7 @@
 		</c:if>
 		
 		<div id="pictures">
-			<h3>Выберите файл(ы) для загрузки</h3>
+			<h3>Выберите файл(ы) для загрузки (800х600pdi)</h3>
 				
 			<form:form method="POST" commandName="add_picture" action="${addPictures}" enctype="multipart/form-data">
 				<p><input id="files-upload" type="file" id="files" name="files" accept="image/*" ></p>
@@ -308,7 +308,15 @@
 						<p>Производитель печатающей головки</p>
 					</div>
 					<ul class="check_boxes">					
-						<form:radiobuttons items="${printer.manufacturer_printhead}" path="manufacturerPrinthead" element="li"/>
+						<c:forEach items="${printer.manufacturer_printhead}" var="item">
+							<li>
+								<input type="radio" name="manufacturerPrinthead" value="${item}"
+		  							<c:if test="${product.manufacturerPrinthead==item}">checked</c:if>
+		  								onclick="setTypeOfPrinthead('${item}', '${product.typeOfPrinthead}');"
+		  						 		id="${item}_12"><label for="${item}_12">${item}</label>
+		  						 </input>
+	  						 </li>
+						</c:forEach>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -316,12 +324,12 @@
 						<i></i>
 						<p>Тип печатающей головки</p>
 					</div>
-					<ul class="check_boxes">
+					<ul class="check_boxes" id="type_of_printhead">
 					
 						<c:forEach items="${printer.type_of_printhead}" var="item">
 						
-							<fieldset>
-							   <legend>${item.name}</legend>
+							   						   
+							   <c:if test="${item.name == product.manufacturerPrinthead}">						
 							   						   
 							   <c:forEach items="${item.values}" var="value">
 									<c:if test="${value.getClass().simpleName != 'String'}">
@@ -336,8 +344,8 @@
 										</li>
 									</c:if>
 				  				</c:forEach>
-							   
-							</fieldset>
+							   </c:if>
+
 									
 			  			</c:forEach>
 						
@@ -767,20 +775,6 @@
 				<div class="characteristic">
 					<div class="block_title">
 						<i></i>
-						<p>Высота</p>
-						<form:errors path="heigth" cssClass="error"></form:errors>
-					</div>
-					<ul class="check_boxes">
-						<div class="text_output">
-							<form:input path="heigth" class="amount-heigth" value="${product.heigth}"/>
-							<p>&nbsp;мм</p>
-						</div>
-						<div class="slider-range-heigth"></div>
-					</ul>
-				</div>
-				<div class="characteristic">
-					<div class="block_title">
-						<i></i>
 						<p>Глубина</p>
 						<form:errors path="depth" cssClass="error"></form:errors>
 					</div>
@@ -790,6 +784,20 @@
 							<p>&nbsp;мм</p>
 						</div>
 						<div class="slider-range-depth"></div>
+					</ul>
+				</div>
+				<div class="characteristic">
+					<div class="block_title">
+						<i></i>
+						<p>Высота</p>
+						<form:errors path="heigth" cssClass="error"></form:errors>
+					</div>
+					<ul class="check_boxes">
+						<div class="text_output">
+							<form:input path="heigth" class="amount-heigth" value="${product.heigth}"/>
+							<p>&nbsp;мм</p>
+						</div>
+						<div class="slider-range-heigth"></div>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -843,5 +851,48 @@
 
 		</form:form>
 	</div>
+	<script type="text/javascript">
+	function setTypeOfPrinthead(name_manufacturer, type_printhead){
+		var output = $("#type_of_printhead").html('');
+		
+		$.getJSON( "/products/printer.json", function( data ) {
+  			
+		$(data.type_of_printhead).each(function(i, maker) {
+
+				if(maker.name==name_manufacturer){
+					
+					$(maker.values).each(function(k, value) {
+						if(typeof value == 'object'){
+							$(value.values).each(function(t, t_value) {
+								var inputRadio = $('<input/>').attr("type", "radio").attr("name", "typeOfPrinthead")
+								.attr("value", t_value).attr("id", t_value + t);
+
+								if(t_value==type_printhead){
+			    	        		inputRadio.attr( "checked" );
+			    				}
+							
+								var inputLabel = $('<label/>').attr("for", t_value + t).text(t_value);
+		
+								output.append(inputRadio).append(inputLabel).append('<br/>');
+							});
+						} else {
+							var inputRadio = $('<input/>').attr("type", "radio").attr("name", "typeOfPrinthead")
+							.attr("value", value).attr("id", value + k);
+
+							if(value==type_printhead){
+		    	        		inputRadio.attr( "checked" );
+		    				}
+					
+							var inputLabel = $('<label/>').attr("for", value + k).text(value);
+	
+							output.append(inputRadio).append(inputLabel).append('<br/>');
+						}
+					});
+				}
+			});
+		});
+			
+		}
+	</script>
 </body>
 </html>

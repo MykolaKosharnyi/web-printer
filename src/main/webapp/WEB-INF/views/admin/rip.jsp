@@ -41,7 +41,7 @@
 		</c:if>
 		
 		<div id="pictures">
-			<h3>Выберите файл(ы) для загрузки</h3>
+			<h3>Выберите файл(ы) для загрузки (800х600pdi)</h3>
 				
 			<form:form method="POST" commandName="add_picture" action="${addPictures}" enctype="multipart/form-data">
 				<p><input id="files-upload" type="file" id="files" name="files" accept="image/*" ></p>
@@ -285,7 +285,7 @@
 	function setSoftwareMaker(typeEquipment, m, soft_class){
 		var softvare_maker = $("#software_maker").html('').append($('<legend/>').text('Производитель ПО'));
 		
-		$.getJSON( "/images/rip.json", function( data ) {
+		$.getJSON( "/products/rip.json", function( data ) {
   			
 		$(data).each(function(i, maker) {
 
@@ -342,7 +342,7 @@ function setSoftwareClass(software_class, m){
 function setSoftwareClassFirstLoading(typeEquipment, software_class_name, m){
 	var softvare_cl = $("#software_class").html('').append($('<legend/>').text('Класс ПО'));
 	
-	$.getJSON( "/images/rip.json", function( data ) {
+	$.getJSON( "/products/rip.json", function( data ) {
 			
 	$(data).each(function(i, maker) {
 

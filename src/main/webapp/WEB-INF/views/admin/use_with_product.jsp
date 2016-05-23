@@ -41,7 +41,7 @@
 		</c:if>
 		
 		<div id="pictures">
-			<h3>Выберите файл(ы) для загрузки</h3>
+			<h3>Выберите файл(ы) для загрузки (800х600pdi)</h3>
 				
 		<form:form method="POST" commandName="add_picture" action="${addPictures}" enctype="multipart/form-data">
 			<p><input id="files-upload" type="file" id="files" name="files" accept="image/*" ></p>

@@ -206,13 +206,14 @@
    							<tr><td>Ширина:</td><td>${product.width} мм</td></tr>
 						</c:if>
                        
+                        <c:if test="${product.depth > 0}">
+   							<tr><td>Глубина:</td><td>${product.depth} мм</td></tr>
+						</c:if>
+                       
                        <c:if test="${product.heigth > 0}">
    							<tr><td>Высота:</td><td>${product.heigth} мм</td></tr>
 						</c:if>
-                       
-                        <c:if test="${product.depth > 0}">
-   							<tr><td>Глубина:</td><td>${product.depth} мм</td></tr>
-						</c:if>   					
+                          					
                   </table>
                   </div>
                     <div>Третье содержимое</div>

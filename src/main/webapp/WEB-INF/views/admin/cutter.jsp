@@ -41,7 +41,7 @@
 		</c:if>
 		
 		<div id="pictures">
-			<h3>Выберите файл(ы) для загрузки</h3>
+			<h3>Выберите файл(ы) для загрузки (800х600pdi)</h3>
 				
 		<form:form method="POST" commandName="add_picture" action="${addPictures}" enctype="multipart/form-data">
 			<p><input id="files-upload" type="file" id="files" name="files" accept="image/*" ></p>
@@ -403,20 +403,6 @@
 				<div class="characteristic">
 					<div class="block_title">
 						<i></i>
-						<p>Высота</p>
-						<form:errors path="heigth" cssClass="error"></form:errors>
-					</div>
-					<ul class="check_boxes">
-						<div class="text_output">
-							<form:input path="heigth" class="amount-heigth" value="${product.heigth}"/>
-							<p>&nbsp;мм</p>
-						</div>
-						<div class="slider-range-heigth"></div>
-					</ul>
-				</div>
-				<div class="characteristic">
-					<div class="block_title">
-						<i></i>
 						<p>Глубина</p>
 						<form:errors path="depth" cssClass="error"></form:errors>
 					</div>
@@ -426,6 +412,20 @@
 							<p>&nbsp;мм</p>
 						</div>
 						<div class="slider-range-depth"></div>
+					</ul>
+				</div>
+				<div class="characteristic">
+					<div class="block_title">
+						<i></i>
+						<p>Высота</p>
+						<form:errors path="heigth" cssClass="error"></form:errors>
+					</div>
+					<ul class="check_boxes">
+						<div class="text_output">
+							<form:input path="heigth" class="amount-heigth" value="${product.heigth}"/>
+							<p>&nbsp;мм</p>
+						</div>
+						<div class="slider-range-heigth"></div>
 					</ul>
 				</div>
 				<div class="characteristic">
