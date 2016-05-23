@@ -57,7 +57,7 @@
 				<p>Тип лазерa</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${typeLaser}" path="typeLaser" element="li" />
+				<form:checkboxes items="${laser.type_laser}" path="typeLaser" element="li" />
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -66,7 +66,7 @@
 				<p>Б/У оборудование</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${previouslyUsed}" path="previouslyUsed" element="li" />
+				<form:checkboxes items="${laser.previously_used}" path="previouslyUsed" element="li" />
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -109,7 +109,7 @@
 				<p>Тип охлаждения</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${typeOfCooling}" path="typeOfCooling" element="li" />
+				<form:checkboxes items="${laser.type_of_cooling}" path="typeOfCooling" element="li" />
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -118,7 +118,7 @@
 				<p>Цветоделение</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${colorSeparation}" path="colorSeparation" element="li" />
+				<form:checkboxes items="${laser.color_separation}" path="colorSeparation" element="li" />
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -127,7 +127,7 @@
 				<p>Тип выводимого изображения</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${typeTheDisplayedImage}" path="typeTheDisplayedImage" element="li" />
+				<form:checkboxes items="${laser.type_the_displayed_image}" path="typeTheDisplayedImage" element="li" />
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -249,7 +249,7 @@
 				<p>Целевое назначение</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${specialPurpose}" path="specialPurpose" element="li" />
+				<form:checkboxes items="${laser.special_purpose}" path="specialPurpose" element="li" />
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -258,7 +258,7 @@
 				<p>Тип двигателей</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${typeEngine}" path="typeEngine" element="li" />
+				<form:checkboxes items="${laser.type_engine}" path="typeEngine" element="li" />
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -337,7 +337,7 @@
 				<p>Интерфейс подключения</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${connectionInterface}" path="connectionInterface" element="li" />
+				<form:checkboxes items="${laser.connection_interface}" path="connectionInterface" element="li" />
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -346,7 +346,7 @@
 				<p>Типы файлов</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${fileTypes}" path="fileTypes" element="li" />
+				<form:checkboxes items="${laser.file_types}" path="fileTypes" element="li" />
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -355,7 +355,7 @@
 				<p>Програмное обеспечение</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${software}" path="software" element="li" />
+				<form:checkboxes items="${laser.software}" path="software" element="li" />
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -364,7 +364,7 @@
 				<p>Производитель оборудования</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${equipmentManufacturer}" path="equipmentManufacturer" element="li" />
+				<form:checkboxes items="${laser.equipment_manufacturer}" path="equipmentManufacturer" element="li" />
 			</ul>
 		</div>
 		<div class="search_criteria">

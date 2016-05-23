@@ -254,12 +254,18 @@ public class Printer extends Product{
 	@Column(name="powerUVlamp")//мощность UV излучения
 	private int powerUVlamp;
 	
+	@Column(name="quantityUVlamp")//Количество
+	private int quantityUVlamp;
+	
 	//LED модуль
 	@Column(name="lengthWaveLEDmodule")//длинна волны
 	private int lengthWaveLEDmodule;
 	
 	@Column(name="powerLEDmodule")//мощность UV излучения
 	private int powerLEDmodule;
+	
+	@Column(name="quantityLEDmodule")//Количество
+	private int quantityLEDmodule;
 	
 	@Column(name="rip")
 	private String[] rip;
@@ -269,6 +275,22 @@ public class Printer extends Product{
 
 	public Printer() {
 		super();
+	}
+
+	public int getQuantityUVlamp() {
+		return quantityUVlamp;
+	}
+
+	public void setQuantityUVlamp(int quantityUVlamp) {
+		this.quantityUVlamp = quantityUVlamp;
+	}
+
+	public int getQuantityLEDmodule() {
+		return quantityLEDmodule;
+	}
+
+	public void setQuantityLEDmodule(int quantityLEDmodule) {
+		this.quantityLEDmodule = quantityLEDmodule;
 	}
 
 	public int getSpeedPrintDraftPass() {

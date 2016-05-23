@@ -69,7 +69,7 @@
 		</div>
 
 	<form:form method="POST" commandName="product" action="${addAction}">
-			
+		<div class="save_button_keeper">	
 			<c:if test="${empty product.id}">
 				<c:url value="/admin/scanner/save_add" var="saveLoad" />
 				<input id="submit" type="submit" formaction="${saveLoad}" value="сохранить" style="background: gold; color: black;"/>
@@ -85,7 +85,7 @@
 			<c:if test="${!empty product.id}">
 					<input type="hidden" name="id" value="${product.id}">
 			</c:if>
-
+		</div>
 			<div class="product_characteristic">
 				<div class="characteristic">
 					<div class="block_title">
@@ -127,7 +127,7 @@
 						<form:errors path="typeProduct" cssClass="error"></form:errors>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${typeProduct}" path="typeProduct" element="li"/>
+						<form:radiobuttons items="${scanner.type_product}" path="typeProduct" element="li"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -179,7 +179,7 @@
 						<p>Состояние оборудования</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${previouslyUsed}" path="previouslyUsed" element="li"/>
+						<form:radiobuttons items="${scanner.previously_used}" path="previouslyUsed" element="li"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -205,7 +205,7 @@
 						<p>Ширина сканирования</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${scanningWidth}" path="scanningWidth" element="li"/>
+						<form:radiobuttons items="${scanner.scanning_width}" path="scanningWidth" element="li"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -214,7 +214,7 @@
 						<p>Подача</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${innings}" path="innings" element="li"/>
+						<form:radiobuttons items="${scanner.innings}" path="innings" element="li"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -223,7 +223,7 @@
 						<p>Цветность</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${chromaticity}" path="chromaticity" element="li"/>
+						<form:radiobuttons items="${scanner.chromaticity}" path="chromaticity" element="li"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -232,7 +232,7 @@
 						<p>Сканирующий элемент</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${scanningElement}" path="scanningElement" element="li"/>
+						<form:radiobuttons items="${scanner.scanning_element}" path="scanningElement" element="li"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -241,7 +241,7 @@
 						<p>Источник света</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${lightSource}" path="lightSource" element="li"/>
+						<form:radiobuttons items="${scanner.light_source}" path="lightSource" element="li"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -250,7 +250,7 @@
 						<p>Разрядность цветного сканирования</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${bitColorScanning}" path="bitColorScanning" element="li"/>
+						<form:radiobuttons items="${scanner.bit_color_scanning}" path="bitColorScanning" element="li"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -259,7 +259,7 @@
 						<p>Разрядность сканирования с оттенками серого</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${bitScanningGrayscale}" path="bitScanningGrayscale" element="li"/>
+						<form:radiobuttons items="${scanner.bit_scanning_grayscale}" path="bitScanningGrayscale" element="li"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -294,7 +294,7 @@
 						<p>Оптическое разрешение</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${opticalResolution}" path="opticalResolution" element="li"/>
+						<form:radiobuttons items="${scanner.optical_resolution}" path="opticalResolution" element="li"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -303,7 +303,7 @@
 						<p>Интерфейс подключения</p>
 					</div>
 					<ul class="check_boxes">
-						<form:checkboxes items="${connectionInterface}" path="connectionInterface" element="li"/>
+						<form:checkboxes items="${scanner.connection_interface}" path="connectionInterface" element="li"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -322,7 +322,7 @@
 						<p>П/О</p>
 					</div>
 					<ul class="check_boxes">
-						<form:checkboxes items="${software}" path="software" element="li"/>
+						<form:checkboxes items="${scanner.software}" path="software" element="li"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -331,7 +331,7 @@
 						<p>Производитель оборудования</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${equipmentManufacturer}" path="equipmentManufacturer" element="li"/>
+						<form:radiobuttons items="${scanner.equipment_manufacturer}" path="equipmentManufacturer" element="li"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -420,7 +420,7 @@
 						<p>Доставка</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${delivery}" path="delivery" element="li"/>
+						<form:radiobuttons items="${scanner.delivery}" path="delivery" element="li"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -439,7 +439,7 @@
 						<p>Наличие (информация для пользователя)</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${availability}" path="availability" element="li"/>
+						<form:radiobuttons items="${scanner.availability}" path="availability" element="li"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -448,46 +448,12 @@
 						<p>Опции</p>
 					</div>
 					<ul class="check_boxes">
-						<form:checkboxes items="${availability}" path="availability" element="li"/>
+						<form:checkboxes items="${scanner.availability}" path="availability" element="li"/>
 					</ul>
 				</div>
 			</div>
 
-		<div class="textarea_description">
-			<div class="characteristic">
-				<div class="block_title">
-					<i></i>
-					<p>Служебная информация</p>
-				</div>
-				<ul class="box_text_area">
-					<form:textarea name="content" path="serviceInformation" value="${product.serviceInformation}"></form:textarea>
-				</ul>
-			</div>
-		</div>
-
-		<div class="textarea_description">
-			<div class="characteristic">
-				<div class="block_title">
-					<i class="opened"></i>
-					<p>Описание</p>
-				</div>
-				<ul class="box_text_area" style="display: block;">
-					<form:textarea name="content" path="description" value="${product.description}"></form:textarea>
-				</ul>
-			</div>
-		</div>
-			
-		<div class="textarea_description">
-			<div class="characteristic">
-				<div class="block_title">
-					<i class="opened"></i>
-					<p>Description(отображение при выборе английского языка на сайте)</p>
-				</div>
-				<ul class="box_text_area" style="display: block;">
-					<form:textarea name="content" path="descriptionEng" value="${product.descriptionEng}"></form:textarea>
-				</ul>
-			</div>
-		</div>
+			<jsp:include page="product/textarea_descriptions.jsp" />
 		
 			<c:if test="${empty product.id}">
 				<input id="submit" type="submit" value="загрузить" style="background:green; color: azure;"/>

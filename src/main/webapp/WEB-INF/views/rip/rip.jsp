@@ -66,7 +66,6 @@
                     <li>Описание</li>
                     <li>Технические характеристики</li>
                     <li>Отзывы</li>
-                    <li>С этим товаром используется</li>
                 </ul>
                 <div>
                     <div id="output_description">${product.description}</div>
@@ -97,7 +96,6 @@
                   </div>
                     
                     <div>Третье содержимое</div>
-                    <div>Четвертое содержимое</div>
                 </div>            
             </div> 
         </div>

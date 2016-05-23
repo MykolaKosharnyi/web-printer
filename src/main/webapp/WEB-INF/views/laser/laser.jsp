@@ -274,7 +274,8 @@
                   </div>
                     
                     <div>Третье содержимое</div>
-                    <div>Четвертое содержимое</div>
+                    
+                    <jsp:include page="../product_use_with.jsp" />
                 </div>            
             </div> 
         </div>

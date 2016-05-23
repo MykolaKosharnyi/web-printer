@@ -156,6 +156,22 @@
         <put-attribute name="body" value="/WEB-INF/views/rip/rip.jsp" />  
     </definition>
     
+    <definition name="use_with_products" extends="base"> 
+    	<put-attribute name="path" value="/WEB-INF/views/use_with_product/path_user_use_with_products.jsp" />  
+        <put-attribute name="search" value="/WEB-INF/views/use_with_product/search_use_with_products.jsp" /> 
+        <put-attribute name="body" value="/WEB-INF/views/products.jsp" />  
+    </definition> 
+    
+    <definition name="use_with_products/*" extends="use_with_products"> 
+    	<put-attribute name="path" value="/WEB-INF/views/use_with_product/path_user_use_with_products_with_type.jsp" />  
+        <put-attribute name="search" value="/WEB-INF/views/use_with_product/search_use_with_products_concrete_type.jsp" /> 
+    </definition>   
+    
+    <definition name="use_with_product" extends="base">
+    	<put-attribute name="path" value="/WEB-INF/views/use_with_product/path_user_use_with_product.jsp" />    
+        <put-attribute name="body" value="/WEB-INF/views/use_with_product/use_with_product.jsp" />  
+    </definition>
+    
     <definition name="admin_base" template="/WEB-INF/views/admin/layout_admin.jsp">  
         <put-attribute name="header" value="/WEB-INF/views/admin/admin_login_in_out.jsp" />
         <put-attribute name="tree" value="/WEB-INF/views/admin/tree_admin.jsp" />   
@@ -173,49 +189,25 @@
     <definition name="admin/3d_printer" extends="admin_base">    
         <put-attribute name="body" value="/WEB-INF/views/admin/printer_3d.jsp" />  
     </definition>
-
-    <definition name="admin/3d_printers" extends="admin_base">    
-        <put-attribute name="body" value="/WEB-INF/views/admin/printers_3d.jsp" />  
-    </definition>
     
     <definition name="admin/digital_printer" extends="admin_base">    
         <put-attribute name="body" value="/WEB-INF/views/admin/digital_printer.jsp" />  
-    </definition>
-    
-    <definition name="admin/digital_printers" extends="admin_base">    
-        <put-attribute name="body" value="/WEB-INF/views/admin/digital_printers.jsp" />  
     </definition>
     
     <definition name="admin/laser" extends="admin_base">    
         <put-attribute name="body" value="/WEB-INF/views/admin/laser.jsp" />  
     </definition>
     
-    <definition name="admin/lasers" extends="admin_base">    
-        <put-attribute name="body" value="/WEB-INF/views/admin/lasers.jsp" />  
-    </definition>
-    
     <definition name="admin/cutter" extends="admin_base">    
         <put-attribute name="body" value="/WEB-INF/views/admin/cutter.jsp" />  
-    </definition>
-    
-    <definition name="admin/cutters" extends="admin_base">    
-        <put-attribute name="body" value="/WEB-INF/views/admin/cutters.jsp" />  
     </definition>
     
     <definition name="admin/laminator" extends="admin_base">    
         <put-attribute name="body" value="/WEB-INF/views/admin/laminator.jsp" />  
     </definition>
     
-    <definition name="admin/laminators" extends="admin_base">    
-        <put-attribute name="body" value="/WEB-INF/views/admin/products.jsp" />  
-    </definition>
-    
     <definition name="admin/scanner" extends="admin_base">    
         <put-attribute name="body" value="/WEB-INF/views/admin/scanner.jsp" />  
-    </definition>
-    
-    <definition name="admin/scanners" extends="admin_base">    
-        <put-attribute name="body" value="/WEB-INF/views/admin/products.jsp" />  
     </definition>
     
     <definition name="admin/previous_use_equipments" extends="admin_base">    
@@ -226,7 +218,11 @@
         <put-attribute name="body" value="/WEB-INF/views/admin/rip.jsp" />  
     </definition>
     
-    <definition name="admin/rips" extends="admin_base">    
+    <definition name="admin/use_with_product" extends="admin_base">    
+        <put-attribute name="body" value="/WEB-INF/views/admin/use_with_product.jsp" />  
+    </definition>
+    
+    <definition name="admin/use_with_products" extends="admin_base">    
         <put-attribute name="body" value="/WEB-INF/views/admin/products.jsp" />  
     </definition>
     

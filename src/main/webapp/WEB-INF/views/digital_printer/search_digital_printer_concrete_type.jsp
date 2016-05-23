@@ -50,7 +50,7 @@
 				<p>Тип принтера</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${typePrinter}" path="typePrinter" element="li" />
+				<form:checkboxes items="${digital_printer.type_printer}" path="typePrinter" element="li" />
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -59,7 +59,7 @@
 				<p>Б/У оборудование</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${previouslyUsed}" path="previouslyUsed" element="li" />
+				<form:checkboxes items="${digital_printer.previously_used}" path="previouslyUsed" element="li" />
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -68,7 +68,7 @@
 				<p>Устройство</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${device}" path="device" element="li" />
+				<form:checkboxes items="${digital_printer.device}" path="device" element="li" />
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -77,7 +77,7 @@
 				<p>Тип печати</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${typeOfPrinting}" path="typeOfPrinting" element="li" />
+				<form:checkboxes items="${digital_printer.type_of_printing}" path="typeOfPrinting" element="li" />
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -86,7 +86,7 @@
 				<p>Технология печати</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${printTechnology}" path="printTechnology" element="li" />
+				<form:checkboxes items="${digital_printer.print_technology}" path="printTechnology" element="li" />
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -95,7 +95,7 @@
 				<p>Размещение</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${accommodation}" path="accommodation" element="li" />
+				<form:checkboxes items="${digital_printer.accommodation}" path="accommodation" element="li" />
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -104,7 +104,7 @@
 				<p>Область применения</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${applicationArea}" path="applicationArea" element="li" />
+				<form:checkboxes items="${digital_printer.application_area}" path="applicationArea" element="li" />
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -127,7 +127,7 @@
 				<p>Максимальный формат</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${maximumFormat}" path="maximumFormat" element="li" />
+				<form:checkboxes items="${digital_printer.maximum_format}" path="maximumFormat" element="li" />
 			</ul>
 		</div>
 		
@@ -144,7 +144,7 @@
 				<p>Автоматическая двусторонняя печать</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${yn}" path="automaticTwoSidedPrinting" element="li" />
+				<form:checkboxes items="${digital_printer.yn}" path="automaticTwoSidedPrinting" element="li" />
 			</ul>
 		</div>
 		
@@ -264,7 +264,7 @@
 				<p>Тип сканера</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${scannerType}" path="scannerType" element="li" />
+				<form:checkboxes items="${digital_printer.scanner_type}" path="scannerType" element="li" />
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -273,7 +273,7 @@
 				<p>Максимальный формат оригинала</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${maximumFormat}" path="theMaximumSizeOfTheOriginal" element="li" />
+				<form:checkboxes items="${digital_printer.maximum_format}" path="theMaximumSizeOfTheOriginal" element="li" />
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -282,7 +282,7 @@
 				<p>Разрешение сканера</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${scannerResolution}" path="scannerResolution" element="li" />
+				<form:checkboxes items="${digital_printer.scanner_resolution}" path="scannerResolution" element="li" />
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -319,7 +319,7 @@
 				<p>Отправка изображения по e-mail</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${yn}" path="sendingImagesByEmail" element="li" />
+				<form:checkboxes items="${digital_printer.yn}" path="sendingImagesByEmail" element="li" />
 			</ul>
 		</div>
 			</ul>
@@ -338,7 +338,7 @@
 				<p>Максимальное разрешение копира (ч/б)</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${maximumResolutionCopierBW}" path="maximumResolutionCopierBW" element="li" />
+				<form:checkboxes items="${digital_printer.maximum_resolution_copier_bw}" path="maximumResolutionCopierBW" element="li" />
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -485,7 +485,7 @@
 				<p>Электронная сортировка</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${yn}" path="electronicSorting" element="li" />
+				<form:checkboxes items="${digital_printer.yn}" path="electronicSorting" element="li" />
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -494,7 +494,7 @@
 				<p>Степлер</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${yn}" path="stapler" element="li" />
+				<form:checkboxes items="${digital_printer.yn}" path="stapler" element="li" />
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -587,7 +587,7 @@
 				<p>Печать на</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${printingOn}" path="printingOn" element="li" />
+				<form:checkboxes items="${digital_printer.printing_on}" path="printingOn" element="li" />
 			</ul>
 		</div>
 		
@@ -597,7 +597,7 @@
 				<p>Интерфейсы</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${interfaces}" path="interfaces" element="li" />
+				<form:checkboxes items="${digital_printer.interfaces}" path="interfaces" element="li" />
 			</ul>
 		</div>
 
@@ -613,7 +613,7 @@
 				<p>Поддержка ОС</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${oSSupport}" path="oSSupport" element="li" />
+				<form:checkboxes items="${digital_printer.os_support}" path="oSSupport" element="li" />
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -622,7 +622,7 @@
 				<p>Прямая печать</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${yn}" path="directPrinting" element="li" />
+				<form:checkboxes items="${digital_printer.yn}" path="directPrinting" element="li" />
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -631,7 +631,7 @@
 				<p>Веб-интерфейс</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${yn}" path="webInterface" element="li" />
+				<form:checkboxes items="${digital_printer.yn}" path="webInterface" element="li" />
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -640,7 +640,7 @@
 				<p>Поддержка PostScript</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${yn}" path="supportPostScript" element="li" />
+				<form:checkboxes items="${digital_printer.yn}" path="supportPostScript" element="li" />
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -649,7 +649,7 @@
 				<p>Поддержка</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${support}" path="support" element="li" />
+				<form:checkboxes items="${digital_printer.support}" path="support" element="li" />
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -724,7 +724,7 @@
 				<p>Отображение информации</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${displayInformation}" path="displayInformation" element="li" />
+				<form:checkboxes items="${digital_printer.display_information}" path="displayInformation" element="li" />
 			</ul>
 		</div>
 		<div class="search_criteria">

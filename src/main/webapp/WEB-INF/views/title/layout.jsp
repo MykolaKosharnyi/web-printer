@@ -78,14 +78,6 @@
 	
 	<tiles:insertAttribute name="footer" />
 
-	<div class="hidden">
-		<form id="callback" class="pop_form">
-			<h3>Заказать разработку</h3>
-			<input type="text" name="name" placeholder="Ваше имя..." required />
-			<input type="text" name="phone" placeholder="Ваше телефон..." required />
-			<button class="button" type="submit">Заказать</button>
-		</form>
-	</div>
 
 <!--[if lt IE 9]>
 	<script src="libs/html5shiv/es5-shim.min.js"></script>

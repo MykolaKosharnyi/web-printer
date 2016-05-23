@@ -1,15 +1,15 @@
 package com.printmaster.nk.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 import javax.validation.Valid;
@@ -17,6 +17,8 @@ import javax.validation.Valid;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -31,7 +33,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.printmaster.nk.beans.ComponetsForController;
 import com.printmaster.nk.beans.FileMeta;
@@ -40,6 +41,7 @@ import com.printmaster.nk.beans.PicturesContainer;
 import com.printmaster.nk.model.Scanner;
 import com.printmaster.nk.model.SearchScanners;
 import com.printmaster.nk.service.ScannerService;
+import com.printmaster.nk.service.UseWithProductService;
 
 @Controller
 public class ScannerController {
@@ -67,145 +69,14 @@ public class ScannerController {
         this.scannerService = ps;
     }
     
-	@ModelAttribute("delivery")
-	public Map<String, String> delivery(){
-		Map<String, String> m = new LinkedHashMap<String, String>();
-		m.put("Первый способ", "Первый способ");
-		m.put("Второй способ", "Второй способ");
-		m.put("Третий способ", "Третий способ");
-		return m;
-	}
+    private UseWithProductService useWithProductService;
 	
-	@ModelAttribute("availability")
-	public Map<String, String> availability(){
-		Map<String, String> m = new LinkedHashMap<String, String>();
-		m.put("есть", "есть");
-		m.put("нету", "нету");
-		m.put("заканчивается", "заканчивается");
-		m.put("под заказ", "под заказ");
-		return m;
-	}
-	
-	@ModelAttribute("typeProduct")
-	public Map<String, String> typeLaser(){
-		Map<String, String> m = new LinkedHashMap<String, String>();
-		m.put("Широкоформатные сканеры", "Широкоформатные сканеры");
-		m.put("3D Сканеры", "3D Сканеры");
-		return m;
-	}
-	
-	@ModelAttribute("previouslyUsed")
-	public Map<String, String> previouslyUsed(){
-		Map<String, String> m = new LinkedHashMap<String, String>();
-		m.put("новое оборудование", "новое оборудование");
-		m.put("демозальное оборудование", "демозальное оборудование");
-		m.put("б/у", "б/у");
-		return m;
-	}
-	
-	@ModelAttribute("scanningWidth")
-	public Map<String, String> scanningWidth(){
-		Map<String, String> m = new LinkedHashMap<String, String>();
-		m.put("305", "305");
-		m.put("457", "457");
-		m.put("610", "610");
-		m.put("914", "914");
-		m.put("1070", "1070");
-		m.put("1524", "1524");
-		m.put("1550", "1550");
-		m.put("1600", "1600");
-		m.put("1800", "1800");
-		m.put("2500", "2500");
-		m.put("2540", "2540");
-		m.put("2600", "2600");
-		m.put("3200", "3200");
-		m.put("3300", "3300");
-		return m;
-	}
-	
-	@ModelAttribute("innings")
-	public Map<String, String> typeEngine(){
-		Map<String, String> m = new LinkedHashMap<String, String>();
-		m.put("Рулонный", "Рулонный");
-		m.put("Плоскопечатный", "Плоскопечатный");
-		m.put("Гибридный", "Гибридный");
-		return m;
-	}
-	
-	@ModelAttribute("chromaticity")
-	public Map<String, String> chromaticity(){
-		Map<String, String> m = new LinkedHashMap<String, String>();
-		m.put("Цветной", "Цветной");
-		m.put("Монохромный", "Монохромный");
-		return m;
-	}
-	
-	@ModelAttribute("scanningElement")
-	public Map<String, String> scanningElement(){
-		Map<String, String> m = new LinkedHashMap<String, String>();
-		m.put("CIS", "CIS");
-		return m;
-	}
-	
-	@ModelAttribute("lightSource")
-	public Map<String, String> lightSource(){
-		Map<String, String> m = new LinkedHashMap<String, String>();
-		m.put("3-цветные (RGB) светодиоды", "3-цветные (RGB) светодиоды");
-		return m;
-	}
-	
-	@ModelAttribute("bitColorScanning")
-	public Map<String, String> bitColorScanning(){
-		Map<String, String> m = new LinkedHashMap<String, String>();
-		m.put("48 бит на входе, 48 бита на выходе", "48 бит на входе, 48 бита на выходе");
-		m.put("48 бит на входе, 24 бита на выходе", "48 бит на входе, 24 бита на выходе");
-		return m;
-	}
-	
-	@ModelAttribute("bitScanningGrayscale")
-	public Map<String, String> bitScanningGrayscale(){
-		Map<String, String> m = new LinkedHashMap<String, String>();
-		m.put("16 бит на входе, 8 бит на выходе", "16 бит на входе, 8 бит на выходе");
-		return m;
-	}
-	
-	@ModelAttribute("opticalResolution")
-	public Map<String, String> opticalResolution(){
-		Map<String, String> m = new LinkedHashMap<String, String>();
-		m.put("300dpi", "300dpi");
-		m.put("600dpi", "600dpi");
-		m.put("1200dpi", "1200dpi");
-		m.put("1440dpi", "1440dpi");
-		m.put("2880dpi", "2880dpi");
-		m.put("4880dpi", "4880dpi");
-		return m;
-	}
-	
-	@ModelAttribute("equipmentManufacturer")
-	public Map<String, String> equipmentManufacturer(){
-		Map<String, String> m = new LinkedHashMap<String, String>();
-		m.put("Contex", "Contex");
-		m.put("Vidar", "Vidar");
-		return m;
-	}
-	
-	@ModelAttribute("connectionInterface")
-	public Map<String, String> connectionInterface(){
-		Map<String, String> m = new LinkedHashMap<String, String>();
-		m.put("SCSI", "SCSI");
-		m.put("PCI Adapter", "PCI Adapter");
-		m.put("USB", "USB");
-		m.put("Fire-Wire", "Fire-Wire");
-		return m;
-	}
-	
-	@ModelAttribute("software")
-	public Map<String, String> software(){
-		Map<String, String> m = new LinkedHashMap<String, String>();
-		m.put(" ", " ");
-		return m;
-	}
-	
+	@Autowired(required=true)
+    @Qualifier(value="useWithProductService")
+    public void setUseWithProductService(UseWithProductService ps){
+        this.useWithProductService = ps;
+    }
+
 	@RequestMapping(value = "/scanners", method = RequestMethod.GET)	
     public String allScanners(Model model) {
         model.addAttribute("listProducts", componets.showSimplestArrayOfScanner(this.scannerService.listShowOnSite()));
@@ -216,6 +87,11 @@ public class ScannerController {
         model.addAttribute("search", search);
         model.addAttribute("type", "scanner");
         logger.info("On '../scanners' page.");
+        
+        try {
+			model.addAttribute("scanner", (JSONObject)new JSONParser().
+					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/scanner.json"), "UTF-8")));
+		} catch (IOException | ParseException e) {}
         return "scanners";
     }
 	
@@ -242,6 +118,11 @@ public class ScannerController {
         model.addAttribute("search", search);
         model.addAttribute("listProducts", componets.showSimplestArrayOfScanner(scannerService.listSearchScanners(search)));
         model.addAttribute("type", "scanner");
+        
+        try {
+			model.addAttribute("scanner", (JSONObject)new JSONParser().
+					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/scanner.json"), "UTF-8")));
+		} catch (IOException | ParseException e) {}
         return "scanners/" + type ;
     }
 
@@ -254,28 +135,35 @@ public class ScannerController {
     @RequestMapping("/scanner/{id}")
     public String showScanner(@PathVariable("id") long id, Model model){
     	logger.info("/scanner/" + id + " page.");
-        model.addAttribute("product", scannerService.getScannerById(id));
+    	Scanner product = scannerService.getScannerById(id);
+        model.addAttribute("product", product);
+        if(product.getIdUseWithProduct()!=null){
+        	model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(useWithProductService.getUseWithProductsByIds(product.getIdUseWithProduct())));
+        } else {
+        	model.addAttribute("uwp", null);
+        }
+        
         return "scanner";
     }
     
 	@RequestMapping(value = "/admin/scanners", method = RequestMethod.GET)	
     public String listScanners(Model model) {
-		model.addAttribute("productType", "scanner");
-		model.addAttribute("nameProduct", "Имя сканера");
 		model.addAttribute("titleOfTable", "Список загруженных сканеров");
         model.addAttribute("listProducts", scannerService.listScanners());
+
+        model.addAttribute("productType", "scanner");
+        model.addAttribute("nameProduct", "Имя сканера");
         model.addAttribute("title", "Сканеры");
         model.addAttribute("addProduct", "Добавить сканер");
         logger.info("/admin/scanners page.");
-        return "admin/scanners";
+        return "admin/products";
     }
 	
 	@RequestMapping(value = "/admin/scanners/{type}", method = RequestMethod.GET)	
     public String listConcreteTypeScanners(@PathVariable("type") String type, Model model) {
 
+		List<Scanner> list = new ArrayList<Scanner>();
         if(type.equals("large_format_scanners")){
-        	List<Scanner> list = new ArrayList<Scanner>();
-        	
         	for(Scanner scanner : scannerService.listScanners()){
         		if(scanner.getTypeProduct().equals("Широкоформатные сканеры")){
         			list.add(scanner);
@@ -284,18 +172,9 @@ public class ScannerController {
         	
         	model.addAttribute("titleOfTable", "Список загруженных широкоформатных сканеров");
             model.addAttribute("listProducts", list);
-         
-    		model.addAttribute("productType", "scanner");
-    		model.addAttribute("nameProduct", "Имя сканера");
-            model.addAttribute("title", "Сканеры");
-            model.addAttribute("addProduct", "Добавить сканер");
             logger.info("On /admin/scanners/large_format_scanners page.");
-            
-            return "admin/scanners";
     		
     	} else if(type.equals("3d_scanners")){
-        	List<Scanner> list = new ArrayList<Scanner>();
-        	
         	for(Scanner scanner : scannerService.listScanners()){
         		if(scanner.getTypeProduct().equals("3D Сканеры")){
         			list.add(scanner);
@@ -304,40 +183,45 @@ public class ScannerController {
         	
         	model.addAttribute("titleOfTable", "Список загруженных 3D сканеров");
             model.addAttribute("listProducts", list);
-         
-    		model.addAttribute("productType", "scanner");
-    		model.addAttribute("nameProduct", "Имя сканера");
-            model.addAttribute("title", "Сканеры");
-            model.addAttribute("addProduct", "Добавить сканер");
             logger.info("On /admin/scanners/3d_scanners page.");
             
-            return "admin/scanners";
-    		
     	} else {
-    		model.addAttribute("productType", "scanner");
-    		model.addAttribute("nameProduct", "Имя сканера");
     		model.addAttribute("titleOfTable", "Список загруженных сканеров");
             model.addAttribute("listProducts", scannerService.listScanners());
-            model.addAttribute("title", "Сканеры");
-            model.addAttribute("addProduct", "Добавить сканер");
             logger.info("/admin/scanners page.");
-            return "admin/scanners";
     	}
+        model.addAttribute("productType", "scanner");
+        model.addAttribute("nameProduct", "Имя сканера");
+        model.addAttribute("title", "Сканеры");
+        model.addAttribute("addProduct", "Добавить сканер");
+        return "admin/products";
     }
 	
 	@RequestMapping(value = "/admin/scanner/new", method = RequestMethod.GET)
-	public ModelAndView addNewScanner() {
+	public String addNewScanner(Model model) {
 		files.clear();
 		logger.info("/admin/scanner/new page.");
-	    return new ModelAndView("admin/scanner", "product", new Scanner());
+		model.addAttribute("product", new Scanner());
+		model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+		try {
+			model.addAttribute("scanner", (JSONObject)new JSONParser().
+					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/scanner.json"), "UTF-8")));
+		} catch (IOException | ParseException e) {}
+	    return "admin/scanner";
 	}
      
 	@RequestMapping(value = "/admin/scanner/add", method = RequestMethod.POST) 
-	public @ResponseBody ModelAndView handleFormUpload(@ModelAttribute("product") @Valid  Scanner product,
-			BindingResult result) throws IOException{
+	public String handleFormUpload(@ModelAttribute("product") @Valid  Scanner product,
+			BindingResult result, Model model) throws IOException{
 			
 			if (result.hasErrors()) {
-	            return new ModelAndView("admin/scanner", "product", product);
+				model.addAttribute("product", product);
+				model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+				try {
+					model.addAttribute("scanner", (JSONObject)new JSONParser().
+							parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/scanner.json"), "UTF-8")));
+				} catch (IOException | ParseException e) {}
+	            return "admin/scanner";
 	        }
 
             long id = scannerService.addScanner(product);
@@ -379,9 +263,6 @@ public class ScannerController {
             this.scannerService.updateScanner(product);
             
             files.clear();
-		
-          ModelAndView mav = new ModelAndView("redirect:/admin/scanners"); 
-		  mav.addObject("listProducts", scannerService.listScanners());
 		  
 		  links.createLinksForScanners(scannerService.listShowOnSite());
 		  
@@ -389,15 +270,21 @@ public class ScannerController {
 			  componets.updateInLeftField(product, true, "scanner");
 	    	
 		  logger.info("Update links to the products in left menu!");
-	   return mav;
+	   return "redirect:/admin/scanners";
 	}
 	
 	@RequestMapping(value = "/admin/scanner/save_add", method = RequestMethod.POST) 
-	public @ResponseBody ModelAndView handleFormUploadSave(@ModelAttribute("product") @Valid Scanner product,
-			BindingResult result) throws IOException{
+	public String handleFormUploadSave(@ModelAttribute("product") @Valid Scanner product,
+			BindingResult result, Model model) throws IOException{
 
 			if (result.hasErrors()) {
-	            return new ModelAndView("admin/scanner", "product", product);
+				model.addAttribute("product", product);
+				model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+				try {
+					model.addAttribute("scanner", (JSONObject)new JSONParser().
+							parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/scanner.json"), "UTF-8")));
+				} catch (IOException | ParseException e) {}
+	            return "admin/scanner";
 	        }
 		
             long id = scannerService.addScanner(product);
@@ -445,7 +332,7 @@ public class ScannerController {
 			  componets.updateInLeftField(product, true, "scanner");
 	    	
 		  logger.info("Update links to the products in left menu!");
-	   return new ModelAndView("redirect:/admin/scanner/edit/" + id);
+	   return "redirect:/admin/scanner/edit/" + id;
 	}
 	
     @RequestMapping("/admin/scanner/edit/{id}")
@@ -470,15 +357,26 @@ public class ScannerController {
     		files.add(fm);
     	}
         model.addAttribute("product", undateScanner);
+        model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+        try {
+			model.addAttribute("scanner", (JSONObject)new JSONParser().
+					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/scanner.json"), "UTF-8")));
+		} catch (IOException | ParseException e) {}
         return "admin/scanner";
     }
 	
 	@RequestMapping(value = "/admin/scanner/save_update", method = RequestMethod.POST) 
-	public @ResponseBody ModelAndView updateSaveScanner(@ModelAttribute("product") @Valid Scanner product,
-			BindingResult result) throws IOException{
+	public String updateSaveScanner(@ModelAttribute("product") @Valid Scanner product,
+			BindingResult result, Model model) throws IOException{
 		
 		if (result.hasErrors()) {
-            return new ModelAndView("admin/scanner", "product", product);
+			model.addAttribute("product", product);
+			model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+			try {
+				model.addAttribute("scanner", (JSONObject)new JSONParser().
+						parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/scanner.json"), "UTF-8")));
+			} catch (IOException | ParseException e) {}
+            return "admin/scanner";
         }
 		
 		logger.info("scanner UPDATE with save, id=" + product.getId());
@@ -523,16 +421,21 @@ public class ScannerController {
 			componets.updateInLeftField(product, true, "scanner");
 		  
 		logger.info("Update links to the products in left menu!");
-		ModelAndView mav = new ModelAndView("redirect:/admin/scanner/edit/" + product.getId());
-		return mav;
+		return "redirect:/admin/scanner/edit/" + product.getId();
 	}
 	
 	@RequestMapping(value = "/admin/scanner/update", method = RequestMethod.POST) 
-	public @ResponseBody ModelAndView updateScanner(@ModelAttribute("product") @Valid Scanner product,
-			BindingResult result) throws IOException{
+	public String updateScanner(@ModelAttribute("product") @Valid Scanner product,
+			BindingResult result, Model model) throws IOException{
 		
 		if (result.hasErrors()) {
-            return new ModelAndView("admin/scanner", "product", product);
+			model.addAttribute("product", product);
+			model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+			try {
+				model.addAttribute("scanner", (JSONObject)new JSONParser().
+						parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/scanner.json"), "UTF-8")));
+			} catch (IOException | ParseException e) {}
+            return "admin/scanner";
         }
 		
 		logger.info("scanner UPDATE id=" + product.getId());
@@ -571,8 +474,6 @@ public class ScannerController {
 		scannerService.updateScanner(product);
         logger.info("scanner with id=" + product.getId() + " was UDPATED!");
         
-		ModelAndView mav = new ModelAndView("redirect:/admin/scanners"); 
-		  mav.addObject("listProducts", scannerService.listScanners());
 		  files.clear();
 		  
 		  links.createLinksForScanners(scannerService.listShowOnSite());
@@ -581,7 +482,7 @@ public class ScannerController {
 			  componets.updateInLeftField(product, true, "scanner");
 		  
 		  logger.info("Update links to the products in left menu!");
-	   return mav;
+	   return "redirect:/admin/scanners";
 	}
 	
     @RequestMapping(value="/admin/scanner/upload_pictures", method = RequestMethod.POST)

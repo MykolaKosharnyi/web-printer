@@ -46,6 +46,7 @@
                 <beans:value>com.printmaster.nk.model.Laminator</beans:value>
                 <beans:value>com.printmaster.nk.model.Scanner</beans:value>
                 <beans:value>com.printmaster.nk.model.Rip</beans:value>
+                <beans:value>com.printmaster.nk.model.UseWithProduct</beans:value>
                 <beans:value>com.printmaster.nk.model.User</beans:value>
                 <beans:value>com.printmaster.nk.model.OrderPrinter</beans:value>
             </beans:list>
@@ -132,6 +133,13 @@
         <beans:property name="productDAO" ref="ripDAO"></beans:property>
     </beans:bean>
     
+    <beans:bean id="uwpDAO" class="com.printmaster.nk.dao.UseWithProductDAOImpl">
+        <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+    </beans:bean>
+    <beans:bean id="useWithProductService" class="com.printmaster.nk.service.UseWithProductServiceImpl">
+        <beans:property name="productDAO" ref="uwpDAO"></beans:property>
+    </beans:bean>
+    
     <context:component-scan base-package="com.printmaster.nk" />
      
     <tx:annotation-driven transaction-manager="transactionManager"/>
@@ -168,4 +176,23 @@
         </beans:bean>
     </interceptors>
 
+<!-- Production implementation of the JavaMailSender interface, supporting 
+		both JavaMail MimeMessages and Spring SimpleMailMessages -->
+	<beans:bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<beans:property name="host" value="smtp.gmail.com" />
+		<beans:property name="port" value="587" />
+		<beans:property name="username" value="email" />
+		<beans:property name="password" value="password" />
+ 
+		<!-- The name of the property, following JavaBean naming conventions -->
+		<beans:property name="javaMailProperties">
+			<beans:props>
+				<beans:prop key="mail.transport.protocol">smtp</beans:prop>
+				<beans:prop key="mail.smtp.auth">true</beans:prop>
+				<beans:prop key="mail.smtp.starttls.enable">true</beans:prop>
+				<beans:prop key="mail.debug">true</beans:prop>
+			</beans:props>
+		</beans:property>
+	</beans:bean>
+	
 </beans:beans>

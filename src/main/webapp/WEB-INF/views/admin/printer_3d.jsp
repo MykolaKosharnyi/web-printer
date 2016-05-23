@@ -70,7 +70,7 @@
 			</div>
 
 	<form:form method="POST" commandName="product" action="${addAction}">
-			
+		<div class="save_button_keeper">	
 			<c:if test="${empty product.id}">
 				<c:url value="/admin/3d_printer/save_add" var="saveLoad" />
 				<input id="submit" type="submit" formaction="${saveLoad}" onclick="return false;" value="сохранить" style="background: gold; color: black;"/>
@@ -86,7 +86,7 @@
 			<c:if test="${!empty product.id}">
 					<input type="hidden" name="id" value="${product.id}">
 			</c:if>
-			
+		</div>	
 			<div class="product_characteristic">
 				<div class="characteristic">
 					<div class="block_title">
@@ -130,7 +130,7 @@
 						<form:errors path="typePrinter3D" cssClass="error"></form:errors>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${typePrinter3D}" path="typePrinter3D" element="li"/>
+						<form:radiobuttons items="${printer.type_printer_3d}" path="typePrinter3D" element="li"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -216,7 +216,7 @@
 						<p>Технология печати</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${printTechnology}" path="printTechnology" element="li" />
+						<form:radiobuttons items="${printer.print_technology}" path="printTechnology" element="li" />
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -225,7 +225,7 @@
 						<p>Состояние оборудования</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${previouslyUsed}" path="previouslyUsed" element="li" />
+						<form:radiobuttons items="${printer.previously_used}" path="previouslyUsed" element="li" />
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -234,7 +234,7 @@
 						<p>Цветовая схема</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${chromaticity}" path="chromaticity" element="li" />
+						<form:radiobuttons items="${printer.chromaticity}" path="chromaticity" element="li" />
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -243,7 +243,7 @@
 						<p>Тип печатающей головки</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${typeOfPrinthead}" path="typeOfPrinthead" element="li" />
+						<form:radiobuttons items="${printer.type_of_printhead}" path="typeOfPrinthead" element="li" />
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -266,7 +266,7 @@
 						<p>Материал для печати</p>
 					</div>
 					<ul class="check_boxes">
-						<form:checkboxes items="${media}" path="media" element="li"/>
+						<form:checkboxes items="${printer.media}" path="media" element="li"/>
 					</ul>
 				</div> 
 				<div class="characteristic">
@@ -320,7 +320,7 @@
 						<p>Интерфейс подключения</p>
 					</div>
 					<ul class="check_boxes">
-						<form:checkboxes items="${interfaceConnection}" path="interfaceConnection" element="li" />
+						<form:checkboxes items="${printer.interface_connection}" path="interfaceConnection" element="li" />
 					</ul>
 				</div> 		
 				<div class="characteristic">
@@ -329,7 +329,7 @@
 						<p>Тыпы файлов</p>
 					</div>
 					<ul class="check_boxes">
-						<form:checkboxes items="${typesOfFiles}" path="typesOfFiles" element="li" />
+						<form:checkboxes items="${printer.types_of_files}" path="typesOfFiles" element="li" />
 					</ul>
 				</div> 		
 				<div class="characteristic">
@@ -338,7 +338,7 @@
 						<p>Программное обеспечение</p>
 					</div>
 					<ul class="check_boxes">
-						<form:checkboxes items="${rip}" path="rip" element="li" />
+						<form:checkboxes items="${printer.rip}" path="rip" element="li" />
 					</ul>
 				</div> 		
 				<div class="characteristic">
@@ -361,7 +361,7 @@
 						<p>Производитель оборудования</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${equipmentManufacturer}" path="equipmentManufacturer" element="li" />
+						<form:radiobuttons items="${printer.equipment_manufacturer}" path="equipmentManufacturer" element="li" />
 					</ul>
 				</div>	
 				<div class="characteristic">
@@ -450,7 +450,7 @@
 						<p>Доставка</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${delivery}" path="delivery" element="li"/>
+						<form:radiobuttons items="${printer.delivery}" path="delivery" element="li"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -469,46 +469,12 @@
 						<p>Наличие (информация для пользователя)</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${availability}" path="availability" element="li"/>
+						<form:radiobuttons items="${printer.availability}" path="availability" element="li"/>
 					</ul>
 				</div>
 			</div>
 
-			<div class="textarea_description">
-				<div class="characteristic">
-					<div class="block_title">
-						<i></i>
-						<p>Служебная информация</p>
-					</div>
-					<ul class="box_text_area">
-						<form:textarea path="serviceInformation" value="${product.serviceInformation}"></form:textarea>
-					</ul>
-				</div>
-			</div>
-
-		  	<div class="textarea_description">
-			<div class="characteristic">
-					<div class="block_title">
-						<i class="opened"></i>
-						<p>Описание</p>
-					</div>
-					<ul class="box_text_area" style="display: block;">
-						<form:textarea path="description" value="${product.description}"></form:textarea>
-					</ul>
-				</div>
-			</div>
-			
-			<div class="textarea_description">
-			<div class="characteristic">
-					<div class="block_title">
-						<i class="opened"></i>
-						<p>Description(отображение при выборе английского языка на сайте)</p>
-					</div>
-					<ul class="box_text_area" style="display: block;">
-						<form:textarea path="descriptionEng" value="${product.descriptionEng}"></form:textarea>
-					</ul>
-				</div>
-			</div>
+			<jsp:include page="product/textarea_descriptions.jsp" />
 			
 			<c:if test="${empty product.id}">
 				<input id="submit" type="submit" value="загрузить" style="background:green; color: azure;"/>

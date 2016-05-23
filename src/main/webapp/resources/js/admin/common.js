@@ -57,7 +57,6 @@
 /*-- для перетаскивания картинок(изменения порядка показа) --*/
         $(function() {
             $( "#file-list" ).sortable({
-            	axis: "y",
             	cursor: "move",
             	opacity: 1
             });
@@ -100,7 +99,7 @@ $( function() {
       	  });
       	});
         
-/* Для розкрытия заполненных полей */       
+/* Для розкрытия заполненных полей и придания им цвета */       
         $(function() {
         	$( '.check_boxes' ).each(function() {
         		  $( this ).has(':checked').length ? changeFillStyle($( this )) : changeEmptyStyle($( this )) ;
@@ -122,4 +121,48 @@ $( function() {
         		element.parent('.characteristic').css( "background", "#f00" );
         		element.parent('.characteristic').find("i").removeClass("opened");
         	}
+		
+		$( '.use_with_product' ).each(function() {
+			var input = $(this).find(".input_uwp"); 
+        	var background = $(this);
+        	
+        	if (input.prop( "checked" )) {
+        		background.css('background', '#5E9AF3');
+            }else{
+            	background.css('background', '#eee');
+            }
+  		});
+		
         });
+        
+/* Для продукта используемого с товаром */
+        $( function() {
+            $(".use_with_product div,.use_with_product img").click(function(){
+            	var input = $(this).parent('.use_with_product').find(".input_uwp"); 
+            	var background = $(this).parent('.use_with_product');
+            	
+            	if (input.prop( "checked" )) {
+            		input.prop("checked", false );
+            		background.css('background', '#eee');
+                }else{
+                	input.prop("checked", true );
+                	background.css('background', '#5E9AF3');
+                }
+
+               });
+            
+            $(".use_with_product .input_uwp").click(function(){
+            	var input = $(this).parent('.use_with_product').find(".input_uwp");
+            	var background = $(this).parent('.use_with_product');
+            	
+            	if (input.prop( "checked" )) {
+            		input.prop("checked", false );
+            		background.css('background', '#eee');
+                }else{
+                	input.prop("checked", true );
+                	background.css('background', '#5E9AF3');
+                }
+
+               });
+            
+         } ); 

@@ -23,6 +23,7 @@ import com.printmaster.nk.model.Laser;
 import com.printmaster.nk.model.Printer;
 import com.printmaster.nk.model.Printer3D;
 import com.printmaster.nk.model.Scanner;
+import com.printmaster.nk.model.UseWithProduct;
 
 @Component
 public class LinksForProducts {
@@ -528,6 +529,80 @@ public class LinksForProducts {
 				scannersJSON.put("list_3d_scanners", list_3d_scanners);
 				
 				obj.put("scannersJSON", scannersJSON);
+				
+				Writer out = new PrintWriter(path, "UTF-8");
+				out.write(obj.toJSONString());
+				out.flush();
+				out.close();
+				
+			} catch (FileNotFoundException e1) {
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			} catch (ParseException e1) {
+				e1.printStackTrace();
+			}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void createLinksForUseWithProducts(Set<UseWithProduct> useWithProducts){
+		JSONParser parser = new JSONParser();
+			try {
+				obj = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream(path), "UTF-8"));
+				
+				if( obj.get("useWithProductsJSON") != null )
+					obj.remove("useWithProductsJSON");
+				
+				JSONObject variable = null;
+				JSONObject useWithProductsJSON = new JSONObject();
+				
+				JSONArray list_ink_for_inkjet = new JSONArray();
+				JSONArray list_consumables_for_digital_equipment = new JSONArray();
+				JSONArray list_consumables_for_3D_equipment = new JSONArray();
+				JSONArray list_products_for_maintenance = new JSONArray();
+				JSONArray list_parts_and_accessories = new JSONArray();
+				
+				Iterator<UseWithProduct> it = useWithProducts.iterator();
+				
+				while(it.hasNext()){				
+					UseWithProduct currentProduct = it.next();
+					String type = currentProduct.getTypeProduct();
+					
+					if(type.equals("Чернила для струйной печати")){
+						variable = new JSONObject();
+						variable.put("name", currentProduct.getName());
+						variable.put("id", currentProduct.getId());
+						list_ink_for_inkjet.add(variable);
+		        	} else if(type.equals("Расходные материалы для цифрового оборудования")){
+		        		variable = new JSONObject();
+						variable.put("name", currentProduct.getName());
+						variable.put("id", currentProduct.getId());
+						list_consumables_for_digital_equipment.add(variable);
+		        	} else if(type.equals("Расходные материалы для 3D оборудования")){
+		        		variable = new JSONObject();
+						variable.put("name", currentProduct.getName());
+						variable.put("id", currentProduct.getId());
+						list_consumables_for_3D_equipment.add(variable);
+		        	} else if(type.equals("Товары для обслуживания")){
+		        		variable = new JSONObject();
+						variable.put("name", currentProduct.getName());
+						variable.put("id", currentProduct.getId());
+						list_products_for_maintenance.add(variable);
+		        	} else if(type.equals("Запчасти и комплектующие")){
+		        		variable = new JSONObject();
+						variable.put("name", currentProduct.getName());
+						variable.put("id", currentProduct.getId());
+						list_parts_and_accessories.add(variable);
+		        	}
+			}
+				
+				useWithProductsJSON.put("list_ink_for_inkjet", list_ink_for_inkjet);
+				useWithProductsJSON.put("list_consumables_for_digital_equipment", list_consumables_for_digital_equipment);
+				useWithProductsJSON.put("list_consumables_for_3D_equipment", list_consumables_for_3D_equipment);
+				useWithProductsJSON.put("list_products_for_maintenance", list_products_for_maintenance);
+				useWithProductsJSON.put("list_parts_and_accessories", list_parts_and_accessories);
+				
+				obj.put("useWithProductsJSON", useWithProductsJSON);
 				
 				Writer out = new PrintWriter(path, "UTF-8");
 				out.write(obj.toJSONString());

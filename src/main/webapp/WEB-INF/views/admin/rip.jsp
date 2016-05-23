@@ -70,7 +70,7 @@
 		</div>
 
 	<form:form method="POST" commandName="product" action="${addAction}">
-			
+		<div class="save_button_keeper">	
 			<c:if test="${empty product.id}">
 				<c:url value="/admin/rip/save_add" var="saveLoad" />
 				<input id="submit" type="submit" formaction="${saveLoad}" value="сохранить" style="background: gold; color: black;"/>
@@ -86,7 +86,7 @@
 			<c:if test="${!empty product.id}">
 					<input type="hidden" name="id" value="${product.id}">
 			</c:if>
-
+		</div>
 			<div class="product_characteristic">
 				<div class="characteristic">
 					<div class="block_title">
@@ -233,10 +233,6 @@
 					</fieldset>
 				</div>
 			</div>
-
-
-
-
 
 		<div class="textarea_description">
 			<div class="characteristic">

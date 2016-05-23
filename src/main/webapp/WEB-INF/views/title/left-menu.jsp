@@ -280,4 +280,49 @@
                         <li><a href="#"><spring:message code="head.rip.RIP_system"/></a></li>
                     </ul>-->
                </li>
+<!--------------------------------------------------------------------------------------------------------------------------------->               
+               <li class="menu_list"><a href="<c:url value='/use_with_products' />"><spring:message code="head.useWithProduct"/></a>
+                    <ul class="menu_drop">
+                        <li id="list_use_with_product_ink_for_inkjet"><a href="<c:url value='/use_with_products/ink_for_inkjet' />"><spring:message code="head.useWithProduct.ink_for_inkjet"/></a>
+                        	<ul class="menu_drop_drop">
+								<c:forEach items="${listLeftLinks.useWithProductsJSON.list_ink_for_inkjet}" var="link">
+									<li><a href="<c:url value='/use_with_product/${link.id}' />">${link.name}</a></li>
+								</c:forEach>
+							</ul>
+                        </li>
+                       <li id="list_use_with_product_consumables_for_digital_equipment">
+                       		<a href="<c:url value='/use_with_products/consumables_for_digital_equipment' />"><spring:message code="head.useWithProduct.consumables_for_digital_equipment"/></a>
+                        	<ul class="menu_drop_drop">
+								<c:forEach items="${listLeftLinks.useWithProductsJSON.list_consumables_for_digital_equipment}" var="link">
+									<li><a href="<c:url value='/use_with_product/${link.id}' />">${link.name}</a></li>
+								</c:forEach>
+							</ul>
+                        </li>
+                        <li id="list_use_with_product_consumables_for_3D_equipment">
+                        	<a href="<c:url value='/use_with_products/consumables_for_3D_equipment' />"><spring:message code="head.useWithProduct.consumables_for_3D_equipment"/></a>
+                        	<ul class="menu_drop_drop">
+								<c:forEach items="${listLeftLinks.useWithProductsJSON.list_consumables_for_3D_equipment}" var="link">
+									<li><a href="<c:url value='/use_with_product/${link.id}' />">${link.name}</a></li>
+								</c:forEach>
+							</ul>
+                        </li>
+                        <li id="list_use_with_product_products_for_maintenance">
+                        	<a href="<c:url value='/use_with_products/products_for_maintenance' />"><spring:message code="head.useWithProduct.products_for_maintenance"/></a>
+                        	<ul class="menu_drop_drop">
+								<c:forEach items="${listLeftLinks.useWithProductsJSON.list_products_for_maintenance}" var="link">
+									<li><a href="<c:url value='/use_with_product/${link.id}' />">${link.name}</a></li>
+								</c:forEach>
+							</ul>
+                        </li>
+                        <li id="list_use_with_product_parts_and_accessories">
+                        	<a href="<c:url value='/use_with_products/parts_and_accessories' />"><spring:message code="head.useWithProduct.parts_and_accessories"/></a>
+                        	<ul class="menu_drop_drop">
+								<c:forEach items="${listLeftLinks.useWithProductsJSON.list_parts_and_accessories}" var="link">
+									<li><a href="<c:url value='/use_with_product/${link.id}' />">${link.name}</a></li>
+								</c:forEach>
+							</ul>
+                        </li>
+                    </ul>
+               </li>
+               
            </ul>

@@ -47,10 +47,10 @@
                                           
    							<tr>
    								<td>Цена:</td>
-   								<td><c:if test="${product.prise < 0.1}"> уточняйте</c:if>
-										<c:if test="${!(product.prise < 0.1)}">					
-   											$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${product.prise}" />
-										</c:if>
+   								<td><c:if test="${product.prise < 0.1}"><a href="#callback" class="fancybox">уточняйте</a></c:if>
+									<c:if test="${!(product.prise < 0.1)}">					
+   										$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${product.prise}" />
+									</c:if>
            						</td>
            					</tr>
 					   
@@ -128,6 +128,8 @@
    									<br/>
    									<c:if test="${product.powerUVlamp > 0}">мощность UV излучения ${product.powerUVlamp} Вт;</c:if>
    									<br/>
+   									<c:if test="${product.quantityUVlamp > 0}">количество ${product.quantityUVlamp} шт;</c:if>
+   									<br/>
 								</c:if>
 								
 								<c:if test="${(product.lengthWaveLEDmodule > 0) || (product.powerLEDmodule > 0)}">
@@ -136,6 +138,8 @@
    									<c:if test="${product.lengthWaveLEDmodule > 0}">длинна волны ${product.lengthWaveLEDmodule} нм;</c:if>
    									<br/>
    									<c:if test="${product.powerLEDmodule > 0}">мощность UV излучения ${product.powerLEDmodule} Вт;</c:if>
+   									<br/>
+   									<c:if test="${product.quantityLEDmodule > 0}">количество ${product.quantityLEDmodule} шт;</c:if>
 								</c:if>
    							
    								</td>
@@ -295,52 +299,52 @@
    								<td>
    								
    								<c:if test="${product.speedPrintDraft > 0.001}">
-   									Draft Speed:<c:if test="${product.speedPrintDraftPass > 0}"> ${product.speedPrintDraftPass} pass</c:if> <c:if test="${product.speedPrintDraftResolution!='None'}">${product.speedPrintDraftResolution} dpi -</c:if> ${product.speedPrintDraft} м.кв./ч.
+   									Draft Speed:<c:if test="${product.speedPrintDraftPass > 0}"> ${product.speedPrintDraftPass} pass</c:if><c:if test="${product.speedPrintDraftResolution!='None'}"> ${product.speedPrintDraftResolution} dpi -</c:if> ${product.speedPrintDraft} м.кв./ч.
    									<br/>
 								</c:if>
    							
    								<c:if test="${product.speedPrintFast > 0.001}">
-   									Fast Speed:<c:if test="${product.speedPrintFastPass > 0}"> ${product.speedPrintFastPass} pass</c:if> <c:if test="${product.speedPrintFastResolution!='None'}">${product.speedPrintFastResolution} dpi -</c:if> ${product.speedPrintFast} м.кв./ч.
+   									Fast Speed:<c:if test="${product.speedPrintFastPass > 0}"> ${product.speedPrintFastPass} pass</c:if><c:if test="${product.speedPrintFastResolution!='None'}"> ${product.speedPrintFastResolution} dpi -</c:if> ${product.speedPrintFast} м.кв./ч.
    									<br/>
 								</c:if>
 								
 								<c:if test="${product.speedPrintNormal > 0.001}">
-   									Normal Speed:<c:if test="${product.speedPrintNormalPass > 0}"> ${product.speedPrintNormalPass} pass</c:if> <c:if test="${product.speedPrintNormalResolution!='None'}">${product.speedPrintNormalResolution} dpi -</c:if> ${product.speedPrintNormal} м.кв./ч.
+   									Normal Speed:<c:if test="${product.speedPrintNormalPass > 0}"> ${product.speedPrintNormalPass} pass</c:if><c:if test="${product.speedPrintNormalResolution!='None'}"> ${product.speedPrintNormalResolution} dpi -</c:if> ${product.speedPrintNormal} м.кв./ч.
    									<br/>
 								</c:if>
 								
 								<c:if test="${product.speedPrintQuality > 0.001}">
-   									Quality Speed:<c:if test="${product.speedPrintQualityPass > 0}"> ${product.speedPrintQualityPass} pass</c:if> <c:if test="${product.speedPrintQualityResolution!='None'}">${product.speedPrintQualityResolution} dpi -</c:if> ${product.speedPrintQuality} м.кв./ч.
+   									Quality Speed:<c:if test="${product.speedPrintQualityPass > 0}"> ${product.speedPrintQualityPass} pass</c:if><c:if test="${product.speedPrintQualityResolution!='None'}"> ${product.speedPrintQualityResolution} dpi -</c:if> ${product.speedPrintQuality} м.кв./ч.
    									<br/>
 								</c:if>
 								
 								<c:if test="${product.speedPrintHiQual > 0.001}">
-   									Hi-Quality Speed:<c:if test="${product.speedPrintHiqualPass > 0}"> ${product.speedPrintHiqualPass} pass</c:if> <c:if test="${product.speedPrintHiqualResolution!='None'}">${product.speedPrintHiqualResolution} dpi -</c:if> ${product.speedPrintHiQual} м.кв./ч.
+   									Hi-Quality Speed:<c:if test="${product.speedPrintHiqualPass > 0}"> ${product.speedPrintHiqualPass} pass</c:if><c:if test="${product.speedPrintHiqualResolution!='None'}"> ${product.speedPrintHiqualResolution} dpi -</c:if> ${product.speedPrintHiQual} м.кв./ч.
 									<br/>
 								</c:if>
 								
 								<c:if test="${product.speedPrint1 > 0.001}">
-   									<c:if test="${product.speedPrintPass1 > 0}">${product.speedPrintPass1} pass </c:if>${product.speedPrintResolution1} dpi - ${product.speedPrint1} м.кв./ч.
+   									<c:if test="${product.speedPrintPass1 > 0}">${product.speedPrintPass1} pass </c:if><c:if test="${product.speedPrintResolution1!='None'}"> ${product.speedPrintResolution1} dpi -</c:if> ${product.speedPrint1} м.кв./ч.
 									<br/>
 								</c:if>
 								
 								<c:if test="${product.speedPrint2 > 0.001}">
-   									<c:if test="${product.speedPrintPass2 > 0}">${product.speedPrintPass2} pass </c:if>${product.speedPrintResolution2} dpi - ${product.speedPrint2} м.кв./ч.
+   									<c:if test="${product.speedPrintPass2 > 0}">${product.speedPrintPass2} pass </c:if><c:if test="${product.speedPrintResolution2!='None'}"> ${product.speedPrintResolution2} dpi -</c:if> ${product.speedPrint2} м.кв./ч.
 									<br/>
 								</c:if>
 								
 								<c:if test="${product.speedPrint3 > 0.001}">
-   									<c:if test="${product.speedPrintPass3 > 0}">${product.speedPrintPass3} pass </c:if>${product.speedPrintResolution3} dpi - ${product.speedPrint3} м.кв./ч.
+   									<c:if test="${product.speedPrintPass3 > 0}">${product.speedPrintPass3} pass </c:if><c:if test="${product.speedPrintResolution3!='None'}"> ${product.speedPrintResolution3} dpi -</c:if> ${product.speedPrint3} м.кв./ч.
 									<br/>
 								</c:if>
 								
 								<c:if test="${product.speedPrint4 > 0.001}">
-   									<c:if test="${product.speedPrintPass4 > 0}">${product.speedPrintPass4} pass </c:if>${product.speedPrintResolution4} dpi - ${product.speedPrint4} м.кв./ч.
+   									<c:if test="${product.speedPrintPass4 > 0}">${product.speedPrintPass4} pass </c:if><c:if test="${product.speedPrintResolution4!='None'}"> ${product.speedPrintResolution4} dpi -</c:if> ${product.speedPrint4} м.кв./ч.
 									<br/>
 								</c:if>
 								
 								<c:if test="${product.speedPrint5 > 0.001}">
-   									<c:if test="${product.speedPrintPass5 > 0}">${product.speedPrintPass5} pass </c:if>${product.speedPrintResolution5} dpi - ${product.speedPrint5} м.кв./ч.
+   									<c:if test="${product.speedPrintPass5 > 0}">${product.speedPrintPass5} pass </c:if><c:if test="${product.speedPrintResolution5!='None'}"> ${product.speedPrintResolution5} dpi -</c:if> ${product.speedPrint5} м.кв./ч.
 								</c:if>
    								</td>
    							</tr>
@@ -413,10 +417,22 @@
                   </div>
                     
                     <div>Третье содержимое</div>
-                    <div>Четвертое содержимое</div>
+                    
+                    <jsp:include page="../product_use_with.jsp" />
                 </div>            
             </div> 
         </div>
+        
+        <div class="hidden">
+		<form id="callback" class="pop_form">
+			<h5 style="max-width: 300px;">Пожалуйста оставьте координаты, через некоторое время мы с вами свяжемся</h5>
+			<input type="hidden" name="id" value="${product.id}">
+			<input type="hidden" name="typeProduct" value="printer">
+			<input type="text" name="name" placeholder="Ваше имя..." required />
+			<input type="text" name="phone" placeholder="Ваше телефон..." required />
+			<button class="button" type="submit">Уточнить</button>
+		</form>
+	</div>
 	<script type="text/javascript">
 		var current = new Date();
 		var toDate = new Date(${product.timeShares.getTime()});

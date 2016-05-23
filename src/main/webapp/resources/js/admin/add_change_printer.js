@@ -1,3 +1,12 @@
+/* For used with product */
+  $(function() {
+    $( "ul.droptrue" ).sortable({
+      connectWith: "ul"
+    });
+ 
+    $( "#sortable1, #sortable2" ).disableSelection();
+  });
+
 /*---- диапазон для цены ----*/          
             $(function() {
             $( ".slider-range-prise" ).slider({
@@ -245,7 +254,24 @@
         		}
         	});
         });
-
+          
+/*          $(function() {
+          	$('#sortable2').sortable({
+          		update: function(event, ui) {
+          			var UseWithProductOrder = $(this).sortable('toArray');
+          			var data = JSON.stringify(UseWithProductOrder);
+          			var idProduct = $(this).parent('.box_text_area').find('#idProduct').val();
+          			$.ajax({
+          				  type: 'POST',
+          				  url: "/admin/printer/change_use_with_product/" + idProduct,
+          				  data: data,
+          				  contentType: "application/json; charset=utf-8",
+          		          dataType: "json"
+          				  });
+          		}
+          	});
+          });
+*/
         $(document).on('click', '.delete_img', function(){
         	var li = $(this).closest('li');
         	var id = li.attr('id').replace(".", ":");

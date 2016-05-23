@@ -37,7 +37,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.printmaster.nk.beans.ComponetsForController;
 import com.printmaster.nk.beans.FileMeta;
@@ -124,11 +123,15 @@ public class RipController {
 	}
      
 	@RequestMapping(value = "/admin/rip/add", method = RequestMethod.POST) 
-	public @ResponseBody ModelAndView handleFormUpload(@ModelAttribute("product") @Valid Rip product,
-			BindingResult result) throws IOException{
+	public String handleFormUpload(@ModelAttribute("product") @Valid Rip product,
+			BindingResult result, Model model) throws IOException{
 
 			if (result.hasErrors()) {
-	            return new ModelAndView("admin/rip", "product", product);
+				model.addAttribute("product", product);
+				try {
+					model.addAttribute("rip", (JSONArray)new JSONParser().parse(new InputStreamReader(new FileInputStream("/var/www/localhost/images/rip.json"), "UTF-8")));
+				} catch (ParseException e) {}
+	            return "admin/rip";
 	        }
 		
             long id = ripService.addRip(product);
@@ -171,24 +174,25 @@ public class RipController {
             
             files.clear();
 		
-          ModelAndView mav = new ModelAndView("redirect:/admin/rips"); 
-		  mav.addObject("listProducts", ripService.listRips());
-		  
 		  //links.createLinksForRips(ripService.listShowOnSite());
 		  
 		  if (product.isShowOnSite() && product.isShowOnLeftSide())
 			  componets.updateInLeftField(product, true);
 	    	
 		  logger.info("Update links to the products in left menu!");
-	   return mav;
+	   return "redirect:/admin/rips";
 	}
 	
 	@RequestMapping(value = "/admin/rip/save_add", method = RequestMethod.POST) 
-	public @ResponseBody ModelAndView handleFormUploadSave(@ModelAttribute("product") @Valid Rip product,
-			BindingResult result) throws IOException{
+	public String handleFormUploadSave(@ModelAttribute("product") @Valid Rip product,
+			BindingResult result, Model model) throws IOException{
 
 			if (result.hasErrors()) {
-	            return new ModelAndView("admin/rip", "product", product);
+				model.addAttribute("product", product);
+				try {
+					model.addAttribute("rip", (JSONArray)new JSONParser().parse(new InputStreamReader(new FileInputStream("/var/www/localhost/images/rip.json"), "UTF-8")));
+				} catch (ParseException e) {}
+	            return "admin/rip";
 	        }
 		
             long id = ripService.addRip(product);
@@ -230,15 +234,13 @@ public class RipController {
             this.ripService.updateRip(product);
             
             files.clear();
-		
-          ModelAndView mav = new ModelAndView("redirect:/admin/rip/edit/" + id); 
 		  
 		  //links.createLinksForRips(ripService.listShowOnSite());	
 		  if (product.isShowOnSite() && product.isShowOnLeftSide()){
 			  componets.updateInLeftField(product, true);
 	    	}
 		  logger.info("Update links to the products in left menu!");
-	   return mav;
+	   return "redirect:/admin/rip/edit/" + id;
 	}
 	
     @RequestMapping("/admin/rip/edit/{id}")
@@ -270,11 +272,15 @@ public class RipController {
     }
 	
 	@RequestMapping(value = "/admin/rip/save_update", method = RequestMethod.POST) 
-	public @ResponseBody ModelAndView updateSaveRip(@ModelAttribute("product") @Valid Rip product,
-			BindingResult result) throws IOException{
+	public String updateSaveRip(@ModelAttribute("product") @Valid Rip product,
+			BindingResult result, Model model) throws IOException{
 		
 		if (result.hasErrors()) {
-            return new ModelAndView("admin/rip", "product", product);
+			model.addAttribute("product", product);
+			try {
+				model.addAttribute("rip", (JSONArray)new JSONParser().parse(new InputStreamReader(new FileInputStream("/var/www/localhost/images/rip.json"), "UTF-8")));
+			} catch (ParseException e) {}
+            return "admin/rip";
         }
 		
 		logger.info("RIP UPDATE with save, id=" + product.getId());
@@ -320,16 +326,20 @@ public class RipController {
 	    }
 		  
 		logger.info("Update links to the products in left menu!");
-		ModelAndView mav = new ModelAndView("redirect:/admin/rip/edit/" + product.getId());
-		return mav;
+
+		return "redirect:/admin/rip/edit/" + product.getId();
 	}
 	
 	@RequestMapping(value = "/admin/rip/update", method = RequestMethod.POST) 
-	public @ResponseBody ModelAndView updateRip(@ModelAttribute("product") @Valid Rip product,
-			BindingResult result) throws IOException{
+	public String updateRip(@ModelAttribute("product") @Valid Rip product,
+			BindingResult result, Model model) throws IOException{
 		
 		if (result.hasErrors()) {
-            return new ModelAndView("admin/rip", "product", product);
+			model.addAttribute("product", product);
+			try {
+				model.addAttribute("rip", (JSONArray)new JSONParser().parse(new InputStreamReader(new FileInputStream("/var/www/localhost/images/rip.json"), "UTF-8")));
+			} catch (ParseException e) {}
+            return "admin/rip";
         }
 		
 		logger.info("RIP UPDATE id=" + product.getId());
@@ -368,8 +378,6 @@ public class RipController {
         ripService.updateRip(product);
         logger.info("rip with id=" + product.getId() + " was UDPATED!");
         
-		ModelAndView mav = new ModelAndView("redirect:/admin/rips"); 
-		  mav.addObject("listProducts", ripService.listRips());
 		  files.clear();
 		  
 		  //links.createLinksForRips(ripService.listShowOnSite());
@@ -379,7 +387,7 @@ public class RipController {
 	    	}
 		  
 		  logger.info("Update links to the products in left menu!");
-	   return mav;
+	   return "redirect:/admin/rips";
 	}
 	
     @RequestMapping(value="/admin/rip/upload_pictures", method = RequestMethod.POST)

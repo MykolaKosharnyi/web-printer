@@ -69,7 +69,7 @@
 		</div>
 
 	<form:form method="POST" commandName="product" action="${addAction}">
-			
+		<div class="save_button_keeper">	
 			<c:if test="${empty product.id}">
 				<c:url value="/admin/laminator/save_add" var="saveLoad" />
 				<input id="submit" type="submit" formaction="${saveLoad}" value="сохранить" style="background: gold; color: black;"/>
@@ -83,9 +83,9 @@
 			</c:if>
 			
 			<c:if test="${!empty product.id}">
-					<input type="hidden" name="id" value="${product.id}">
+				<input type="hidden" name="id" value="${product.id}">
 			</c:if>
-
+		</div>
 			<div class="product_characteristic">
 				<div class="characteristic">
 					<div class="block_title">
@@ -127,7 +127,7 @@
 						<form:errors path="typeProduct" cssClass="error"></form:errors>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${typeProduct}" path="typeProduct" element="li"/>
+						<form:radiobuttons items="${laminator.type_product}" path="typeProduct" element="li"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -197,7 +197,7 @@
 						<form:errors path="laminatingWidth" cssClass="error"></form:errors>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${laminatingWidth}" path="laminatingWidth" element="li"/>
+						<form:radiobuttons items="${laminator.laminating_width}" path="laminatingWidth" element="li"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -206,7 +206,7 @@
 						<p>Состояние оборудования</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${previouslyUsed}" path="previouslyUsed" element="li"/>
+						<form:radiobuttons items="${laminator.previously_used}" path="previouslyUsed" element="li"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -215,7 +215,7 @@
 						<p>Подача</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${innings}" path="innings" element="li"/>
+						<form:radiobuttons items="${laminator.innings}" path="innings" element="li"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -287,7 +287,7 @@
 						<p>Производитель оборудования</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${equipmentManufacturer}" path="equipmentManufacturer" element="li"/>
+						<form:radiobuttons items="${laminator.equipment_manufacturer}" path="equipmentManufacturer" element="li"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -376,7 +376,7 @@
 						<p>Доставка</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${delivery}" path="delivery" element="li"/>
+						<form:radiobuttons items="${laminator.delivery}" path="delivery" element="li"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -395,7 +395,7 @@
 						<p>Наличие (информация для пользователя)</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${availability}" path="availability" element="li"/>
+						<form:radiobuttons items="${laminator.availability}" path="availability" element="li"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -404,46 +404,12 @@
 						<p>Опции</p>
 					</div>
 					<ul class="check_boxes">
-						<form:checkboxes items="${availability}" path="availability" element="li"/>
+						<form:checkboxes items="${laminator.availability}" path="availability" element="li"/>
 					</ul>
 				</div>
 			</div>
 
-		<div class="textarea_description">
-			<div class="characteristic">
-				<div class="block_title">
-					<i></i>
-					<p>Служебная информация</p>
-				</div>
-				<ul class="box_text_area">
-					<form:textarea name="content" path="serviceInformation" value="${product.serviceInformation}"></form:textarea>
-				</ul>
-			</div>
-		</div>
-
-		<div class="textarea_description">
-			<div class="characteristic">
-				<div class="block_title">
-					<i class="opened"></i>
-					<p>Описание</p>
-				</div>
-				<ul class="box_text_area" style="display: block;">
-					<form:textarea name="content" path="description" value="${product.description}"></form:textarea>
-				</ul>
-			</div>
-		</div>
-			
-		<div class="textarea_description">
-			<div class="characteristic">
-				<div class="block_title">
-					<i class="opened"></i>
-					<p>Description(отображение при выборе английского языка на сайте)</p>
-				</div>
-				<ul class="box_text_area" style="display: block;">
-					<form:textarea name="content" path="descriptionEng" value="${product.descriptionEng}"></form:textarea>
-				</ul>
-			</div>
-		</div>
+			<jsp:include page="product/textarea_descriptions.jsp" />
 		
 			<c:if test="${empty product.id}">
 				<input id="submit" type="submit" value="загрузить" style="background:green; color: azure;"/>

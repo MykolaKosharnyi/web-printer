@@ -1,15 +1,15 @@
 package com.printmaster.nk.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 import javax.validation.Valid;
@@ -17,6 +17,8 @@ import javax.validation.Valid;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -32,7 +34,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.printmaster.nk.beans.ComponetsForController;
 import com.printmaster.nk.beans.FileMeta;
@@ -41,6 +42,7 @@ import com.printmaster.nk.beans.PicturesContainer;
 import com.printmaster.nk.model.Printer3D;
 import com.printmaster.nk.model.SearchPrinters3D;
 import com.printmaster.nk.service.Printer3DService;
+import com.printmaster.nk.service.UseWithProductService;
 
 @Controller
 public class Printer3DController {
@@ -66,142 +68,15 @@ public class Printer3DController {
     public void setPrinter3DService(Printer3DService productService){
         this.productService = productService;
     }
+    
+    private UseWithProductService useWithProductService;
+	
+	@Autowired(required=true)
+    @Qualifier(value="useWithProductService")
+    public void setUseWithProductService(UseWithProductService ps){
+        this.useWithProductService = ps;
+    }
 
-	@ModelAttribute("delivery")
-	public Map<String, String> delivery(){
-		Map<String, String> m = new LinkedHashMap<String, String>();
-		m.put("Первый способ", "Первый способ");
-		m.put("Второй способ", "Второй способ");
-		m.put("Третий способ", "Третий способ");
-		return m;
-	}
-	
-	@ModelAttribute("availability")
-	public Map<String, String> availability(){
-		Map<String, String> m = new LinkedHashMap<String, String>();
-		m.put("есть", "есть");
-		m.put("нету", "нету");
-		m.put("заканчивается", "заканчивается");
-		m.put("под заказ", "под заказ");
-		return m;
-	}
-    
-	@ModelAttribute("typePrinter3D")
-	public Map<String, String> typePrinter3D(){
-		Map<String, String> m = new LinkedHashMap<String, String>();
-		m.put("Экструдные FDM", "Экструдные FDM");
-		m.put("Фото печать Polyjet", "Фото печать Polyjet");
-		m.put("Лазерного спекания LENS", "Лазерного спекания LENS");
-		m.put("Ламинация LOM", "Ламинация LOM");
-		m.put("Стереолитография SL", "Стереолитография SL");
-		m.put("Лазерное спекание LS", "Лазерное спекание LS");
-		m.put("Порошкового склеивания 3DP", "Порошкового склеивания 3DP");
-		return m;
-	}
-    
-	@ModelAttribute("printTechnology")
-	public Map<String, String> printTechnology(){
-		Map<String, String> m = new LinkedHashMap<String, String>();
-		m.put("FDM", "FDM");
-		m.put("RepRap", "RepRap");
-		m.put("MJM (Multi Jet Modeling)", "MJM (Multi Jet Modeling)");
-		return m;
-	}
-	
-	@ModelAttribute("previouslyUsed")
-	public Map<String, String> previouslyUsed(){
-		Map<String, String> m = new LinkedHashMap<String, String>();
-		m.put("новое оборудование", "новое оборудование");
-		m.put("демозальное оборудование", "демозальное оборудование");
-		m.put("б/у", "б/у");
-		return m;
-	}
-	
-	@ModelAttribute("chromaticity")
-	public Map<String, String> chromaticity(){
-		Map<String, String> m = new LinkedHashMap<String, String>();
-		m.put("Монохромный", "Монохромный");
-		m.put("2 цветный", "2 цветный");
-		m.put("3 цветный", "3 цветный");
-		m.put("4 цветный", "4 цветный");
-		m.put("5 цветный", "5 цветный");
-		m.put("6 цветный", "6 цветный");
-		m.put("7 цветный", "7 цветный");
-		m.put("8 цветный", "8 цветный");
-		m.put("9 цветный", "9 цветный");
-		m.put("10 цветный", "10 цветный");
-		return m;
-	}
-	
-	@ModelAttribute("typeOfPrinthead")
-	public Map<String, String> typeOfPrinthead(){
-		Map<String, String> m = new LinkedHashMap<String, String>();
-		m.put("Первая", "Первая");
-		m.put("Вторая", "Вторая");
-		return m;
-	}
-	
-	@ModelAttribute("media")
-	public Map<String, String> media(){
-		Map<String, String> m = new LinkedHashMap<String, String>();
-		m.put("PLA  (полилактид)", "PLA  (полилактид)");
-		m.put("ABS (акрилонитрилбутадиенстирол)", "ABS (акрилонитрилбутадиенстирол)");
-		m.put("ПВС (поливиниловый спирт)", "ПВС (поливиниловый спирт)");
-		m.put("FTI - акриловый фотополимерный пластик", "FTI - акриловый фотополимерный пластик");
-		m.put("HIPS", "HIPS");
-		m.put("PA (нейлон)", "PA (нейлон)");
-		m.put("PET / PETG", "PET / PETG");
-		m.put("POM", "POM");
-		m.put("PVA", "PVA");
-		return m;
-	}
-	
-	@ModelAttribute("equipmentManufacturer")
-	public Map<String, String> equipmentManufacturer(){
-		Map<String, String> m = new LinkedHashMap<String, String>();
-		m.put("MakerBot", "MakerBot");
-		m.put("3D Systems", "3D Systems");
-		m.put("XYZ printing", "XYZ printing");
-		m.put("PrintBox3D", "PrintBox3D");
-		m.put("ProJet Accelerator Software", "ProJet Accelerator Software");
-		m.put("3DTouch", "3DTouch");
-		return m;
-	}
-	
-	@ModelAttribute("interfaceConnection")
-	public Map<String, String> interfaceConnection(){
-		Map<String, String> m = new LinkedHashMap<String, String>();
-		m.put("SCSI", "SCSI");
-		m.put("PCI Adapter", "PCI Adapter");
-		m.put("USB", "USB");
-		m.put("Fire-Wire", "Fire-Wire");
-		return m;
-	}
-	
-	@ModelAttribute("typesOfFiles")
-	public Map<String, String> typesOfFiles(){
-		Map<String, String> m = new LinkedHashMap<String, String>();
-		m.put(".stl", ".stl");
-		m.put(".gcode", ".gcode");
-		m.put("STL", "STL");
-		m.put("SLC", "SLC");
-		m.put("CTL", "CTL");
-		return m;
-	}
-	
-	@ModelAttribute("rip")
-	public Map<String, String> rip(){
-		Map<String, String> m = new LinkedHashMap<String, String>();
-		m.put("Cura", "Cura");
-		m.put("ReplicatorG", "ReplicatorG");
-		m.put("Pronterface", "Pronterface");
-		m.put("Repetier", "Repetier");
-		m.put("3DPrint Controller Software", "3DPrint Controller Software");
-		m.put("Cube Software", "Cube Software");
-		m.put("MakerBot MakerWare", "MakerBot MakerWare");
-		return m;
-	}
-	
 	@RequestMapping(value = "/3d_printers", method = RequestMethod.GET)	
     public String allPrinters(Model model) {
         model.addAttribute("listProducts", componets.showSimplestArrayOfPrinter3D(productService.listShowOnSite()));
@@ -210,6 +85,12 @@ public class Printer3DController {
         search.setPrise1(100000);
         model.addAttribute("search", search);
         model.addAttribute("type", "3d_printer");
+        
+        logger.info("All characteristic of 3d printer.");
+		try {
+			model.addAttribute("printer", (JSONObject)new JSONParser().
+					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/3d_printer.json"), "UTF-8")));
+		} catch (IOException | ParseException e) {}
         return "3d_printers";
     }
 	
@@ -243,6 +124,12 @@ public class Printer3DController {
 		model.addAttribute("search", search);
 		model.addAttribute("listProducts", componets.showSimplestArrayOfPrinter3D(productService.listSearchPrinters3D(search)));
 		model.addAttribute("type", "3d_printer");
+		
+		logger.info("All characteristic of 3d printer.");
+		try {
+			model.addAttribute("printer", (JSONObject)new JSONParser().
+					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/3d_printer.json"), "UTF-8")));
+		} catch (IOException | ParseException e) {}
 		return "3d_printers/" + type;
 	}
 
@@ -253,7 +140,14 @@ public class Printer3DController {
 	
     @RequestMapping("/3d_printer/{id}")
     public String showPrinter(@PathVariable("id") long id, Model model){
-        model.addAttribute("product", productService.getPrinter3DById(id));
+        
+        Printer3D product = productService.getPrinter3DById(id);
+        model.addAttribute("product", product);
+        if(product.getIdUseWithProduct()!=null){
+        	model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(useWithProductService.getUseWithProductsByIds(product.getIdUseWithProduct())));
+        } else {
+        	model.addAttribute("uwp", null);
+        }
         return "3d_printer";
     }
     
@@ -261,16 +155,20 @@ public class Printer3DController {
     public String listPrinters(Model model) {
 		model.addAttribute("titleOfTable", "Список загруженных 3D принтеров");
         model.addAttribute("listProducts", productService.listPrinters3D());
+        
+        model.addAttribute("productType", "3d_printer");
+		model.addAttribute("nameProduct", "Имя 3D принтера");
+        model.addAttribute("title", "3D Принтеры");
+        model.addAttribute("addProduct", "Добавить 3D принтер");
         logger.info("/admin/3d_printers page.");
-        return "admin/3d_printers";
+        return "admin/products";
     }
 	
 	@RequestMapping(value = "/admin/3d_printers/{type}", method = RequestMethod.GET)	
     public String listConcreteType3DPrinters(@PathVariable("type") String type, Model model) {
         
+		List<Printer3D> list = new ArrayList<Printer3D>();
         if(type.equals("FDM-extruder")){
-        	List<Printer3D> list = new ArrayList<Printer3D>();
-        	
         	for(Printer3D printer3d : productService.listPrinters3D()){
         		if(printer3d.getTypePrinter3D().equals("Экструдные FDM")){
         			list.add(printer3d);
@@ -280,12 +178,8 @@ public class Printer3DController {
         	model.addAttribute("titleOfTable", "Список загруженных экструдных FDM принтеров");
             model.addAttribute("listProducts", list);
             logger.info("On /admin/3d_printers/FDM-extruder page.");
-            
-            return "admin/3d_printers";
-    		
+
     	} else if(type.equals("photo_printing_polyjet")){
-    		List<Printer3D> list = new ArrayList<Printer3D>();
-        	
         	for(Printer3D printer3d : productService.listPrinters3D()){
         		if(printer3d.getTypePrinter3D().equals("Фото печать Polyjet")){
         			list.add(printer3d);
@@ -295,12 +189,8 @@ public class Printer3DController {
         	model.addAttribute("titleOfTable", "Фото печать Polyjet, список загруженных 3D принтеров");
             model.addAttribute("listProducts", list);
             logger.info("On /admin/3d_printers/photo_printing_polyjet page.");
-            
-            return "admin/3d_printers";
-            
+ 
     	} else if(type.equals("laser_sintering_LENS")){
-    		List<Printer3D> list = new ArrayList<Printer3D>();
-        	
         	for(Printer3D printer3d : productService.listPrinters3D()){
         		if(printer3d.getTypePrinter3D().equals("Лазерного спекания LENS")){
         			list.add(printer3d);
@@ -310,12 +200,8 @@ public class Printer3DController {
         	model.addAttribute("titleOfTable", "Лазерного спекания LENS, список загруженных 3D принтеров");
             model.addAttribute("listProducts", list);
             logger.info("On /admin/3d_printers/laser_sintering_LENS page.");
-            
-            return "admin/3d_printers";
-             		
+		
     	} else if(type.equals("lamination_LOM")){	
-    		List<Printer3D> list = new ArrayList<Printer3D>();
-        	
         	for(Printer3D printer3d : productService.listPrinters3D()){
         		if(printer3d.getTypePrinter3D().equals("Ламинация LOM")){
         			list.add(printer3d);
@@ -325,12 +211,8 @@ public class Printer3DController {
         	model.addAttribute("titleOfTable", "Ламинация LOM, список загруженных 3D принтеров");
             model.addAttribute("listProducts", list);
             logger.info("On /admin/3d_printers/lamination_LOM page.");
-            
-            return "admin/3d_printers";
-    		
+
     	} else if(type.equals("stereolithography_SL")){		
-    		List<Printer3D> list = new ArrayList<Printer3D>();
-        	
         	for(Printer3D printer3d : productService.listPrinters3D()){
         		if(printer3d.getTypePrinter3D().equals("Стереолитография SL")){
         			list.add(printer3d);
@@ -340,12 +222,8 @@ public class Printer3DController {
         	model.addAttribute("titleOfTable", "Стереолитография SL, список загруженных 3D принтеров");
             model.addAttribute("listProducts", list);
             logger.info("On /admin/3d_printers/stereolithography_SL page.");
-            
-            return "admin/3d_printers";
-    		
+
     	} else if(type.equals("laser_sintering_LS")){    		
-    		List<Printer3D> list = new ArrayList<Printer3D>();
-        	
         	for(Printer3D printer3d : productService.listPrinters3D()){
         		if(printer3d.getTypePrinter3D().equals("Лазерное спекание LS")){
         			list.add(printer3d);
@@ -355,12 +233,8 @@ public class Printer3DController {
         	model.addAttribute("titleOfTable", "Лазерное спекание LS, список загруженных 3D принтеров");
             model.addAttribute("listProducts", list);
             logger.info("On /admin/3d_printers/laser_sintering_LS page.");
-            
-            return "admin/3d_printers";
-    		
+
     	} else if(type.equals("powder_bonding_3DP")){  		
-    		List<Printer3D> list = new ArrayList<Printer3D>();
-        	
         	for(Printer3D printer3d : productService.listPrinters3D()){
         		if(printer3d.getTypePrinter3D().equals("Порошкового склеивания 3DP")){
         			list.add(printer3d);
@@ -370,29 +244,45 @@ public class Printer3DController {
         	model.addAttribute("titleOfTable", "Порошкового склеивания 3DP, список загруженных 3D принтеров");
             model.addAttribute("listProducts", list);
             logger.info("On /admin/3d_printers/powder_bonding_3DP page.");
-            
-            return "admin/3d_printers";
     		
     	} else {
     		model.addAttribute("titleOfTable", "Список загруженных 3D принтеров");
             model.addAttribute("listProducts", productService.listPrinters3D());
             logger.info("/admin/3d_printers page.");
-            return "admin/3d_printers";
     	}
+        model.addAttribute("productType", "3d_printer");
+		model.addAttribute("nameProduct", "Имя 3D принтера");
+        model.addAttribute("title", "3D Принтеры");
+        model.addAttribute("addProduct", "Добавить 3D принтер");
+        return "admin/products";
     }
 	
 	@RequestMapping(value = "/admin/3d_printer/new", method = RequestMethod.GET)
-	public ModelAndView addNewPrinter() {
+	public String addNewPrinter(Model model) {
 		files.clear();
-	    return new ModelAndView("admin/3d_printer", "product", new Printer3D());
+		
+		model.addAttribute("product", new Printer3D());
+		logger.info("All characteristic of 3d printer.");
+		model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+		try {
+			model.addAttribute("printer", (JSONObject)new JSONParser().
+					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/3d_printer.json"), "UTF-8")));
+		} catch (IOException | ParseException e) {}
+	    return "admin/3d_printer";
 	}
      
 	@RequestMapping(value = "/admin/3d_printer/add", method = RequestMethod.POST) 
-	public @ResponseBody ModelAndView handleFormUpload(@ModelAttribute("product") @Valid Printer3D product,
-			BindingResult result) throws IOException{
+	public String handleFormUpload(@ModelAttribute("product") @Valid Printer3D product,
+			BindingResult result, Model model) throws IOException{
 		
 			if (result.hasErrors()) {
-	            return new ModelAndView("admin/3d_printer", "product", product);
+				model.addAttribute("product", product);
+				model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+				try {
+					model.addAttribute("printer", (JSONObject)new JSONParser().
+							parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/3d_printer.json"), "UTF-8")));
+				} catch (IOException | ParseException e) {}
+	            return "admin/3d_printer";
 	        }
 
             long id = productService.addPrinter3D(product);
@@ -423,22 +313,25 @@ public class Printer3DController {
             productService.updatePrinter3D(product);
             files.clear();
 		
-          ModelAndView mav = new ModelAndView("redirect:/admin/3d_printers"); 
-		  mav.addObject("listProducts", productService.listPrinters3D());
-		
 		  links.createLinksFor3DPrinters(productService.listShowOnSite());	
 		  if (product.isShowOnSite() && product.isShowOnLeftSide()){
 			  componets.updateInLeftField(product, true, "3d_printer");
 	    	}
-	   return mav;
+	   return "redirect:/admin/3d_printers";
 	}
 	
 	@RequestMapping(value = "/admin/3d_printer/save_add", method = RequestMethod.POST) 
-	public @ResponseBody ModelAndView handleFormUploadSave(@ModelAttribute("product") @Valid Printer3D product,
-			BindingResult result) throws IOException{
+	public String handleFormUploadSave(@ModelAttribute("product") @Valid Printer3D product,
+			BindingResult result, Model model) throws IOException{
 			
 			if (result.hasErrors()) {
-	            return new ModelAndView("admin/3d_printer", "product", product);
+				model.addAttribute("product", product);
+				model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+				try {
+					model.addAttribute("printer", (JSONObject)new JSONParser().
+							parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/3d_printer.json"), "UTF-8")));
+				} catch (IOException | ParseException e) {}
+	            return "admin/3d_printer";
 	        }
 
             long id = productService.addPrinter3D(product);
@@ -469,13 +362,11 @@ public class Printer3DController {
             productService.updatePrinter3D(product);
             files.clear();
 		
-          ModelAndView mav = new ModelAndView("redirect:/admin/3d_printer/edit/" + id); 
-		
 		  links.createLinksFor3DPrinters(productService.listShowOnSite());	
 		  if (product.isShowOnSite() && product.isShowOnLeftSide()){
 			  componets.updateInLeftField(product, true, "3d_printer");
 	    	}
-	   return mav;
+	   return "redirect:/admin/3d_printer/edit/" + id;
 	}
 	
     @RequestMapping("/admin/3d_printer/edit/{id}")
@@ -498,15 +389,27 @@ public class Printer3DController {
     		files.add(fm);
     	}
         model.addAttribute("product", undatePrinter3D);
+        model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+        logger.info("All characteristic of 3d printer.");
+		try {
+			model.addAttribute("printer", (JSONObject)new JSONParser().
+					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/3d_printer.json"), "UTF-8")));
+		} catch (IOException | ParseException e) {}
         return "admin/3d_printer";
     }
 	
 	@RequestMapping(value = "/admin/3d_printer/update", method = RequestMethod.POST) 
-	public @ResponseBody ModelAndView updatePrinter(@ModelAttribute("product") @Valid Printer3D product,
-			BindingResult result) throws IOException{
+	public String updatePrinter(@ModelAttribute("product") @Valid Printer3D product,
+			BindingResult result, Model model) throws IOException{
 		
 		if (result.hasErrors()) {
-            return new ModelAndView("admin/3d_printer", "product", product);
+			model.addAttribute("product", product);
+			model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+			try {
+				model.addAttribute("printer", (JSONObject)new JSONParser().
+						parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/3d_printer.json"), "UTF-8")));
+			} catch (IOException | ParseException e) {}
+            return "admin/3d_printer";
         }
 		
 		FileUtils.cleanDirectory(new File(directory + File.separator + 
@@ -536,24 +439,28 @@ public class Printer3DController {
 		}
 
         productService.updatePrinter3D(product);
-		
-		ModelAndView mav = new ModelAndView("redirect:/admin/3d_printers"); 
-		  mav.addObject("listProducts", productService.listPrinters3D());
+
 		  files.clear();
 
 		  links.createLinksFor3DPrinters(productService.listShowOnSite());	
 		  if (product.isShowOnSite() && product.isShowOnLeftSide()){
 			  componets.updateInLeftField(product, true, "3d_printer");
 	    	}
-	   return mav;
+	   return "redirect:/admin/3d_printers";
 	}
 	
 	@RequestMapping(value = "/admin/3d_printer/save_update", method = RequestMethod.POST) 
-	public @ResponseBody ModelAndView updateSavePrinter(@ModelAttribute("product") @Valid Printer3D product,
-			BindingResult result) throws IOException{
+	public String updateSavePrinter(@ModelAttribute("product") @Valid Printer3D product,
+			BindingResult result, Model model) throws IOException{
 		
 		if (result.hasErrors()) {
-            return new ModelAndView("admin/3d_printer", "product", product);
+			model.addAttribute("product", product);
+			model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+			try {
+				model.addAttribute("printer", (JSONObject)new JSONParser().
+						parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/3d_printer.json"), "UTF-8")));
+			} catch (IOException | ParseException e) {}
+            return "admin/3d_printer";
         }
 		
 		FileUtils.cleanDirectory(new File(directory + File.separator + 
@@ -590,8 +497,7 @@ public class Printer3DController {
 			  componets.updateInLeftField(product, true, "3d_printer");
 	    	}
 		  
-		ModelAndView mav = new ModelAndView("redirect:/admin/3d_printer/edit/" + product.getId());
-  		return mav;
+  		return "redirect:/admin/3d_printer/edit/" + product.getId();
 	}
 	
     @RequestMapping(value="/admin/3d_printer/upload_pictures", method = RequestMethod.POST)

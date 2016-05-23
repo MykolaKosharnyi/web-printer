@@ -48,7 +48,7 @@
 				<p>Тип ламинатора</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${typeProduct}" path="typeProduct" element="li" />
+				<form:checkboxes items="${laminator.type_product}" path="typeProduct" element="li" />
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -65,7 +65,7 @@
 					</ul>
 					<div>
 						<div>
-							<form:checkboxes items="${laminatingWidth}" path="laminatingWidth" element="li" />
+							<form:checkboxes items="${laminator.laminating_width}" path="laminatingWidth" element="li" />
 						</div>
 						<div>
 							<li><input type="checkbox" name="weightPrintMM" value="305" id="weightPrintMM_12"><label for="weightPrintMM_12">12"</label></input></li>
@@ -103,7 +103,7 @@
 				<p>Б/У оборудование</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${previouslyUsed}" path="previouslyUsed" element="li" />
+				<form:checkboxes items="${laminator.previously_used}" path="previouslyUsed" element="li" />
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -112,7 +112,7 @@
 				<p>Подача</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${innings}" path="innings" element="li" />
+				<form:checkboxes items="${laminator.innings}" path="innings" element="li" />
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -205,7 +205,7 @@
 				<p>Производитель оборудования</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${equipmentManufacturer}" path="equipmentManufacturer" element="li" />
+				<form:checkboxes items="${laminator.equipment_manufacturer}" path="equipmentManufacturer" element="li" />
 			</ul>
 		</div>
 		<div class="search_criteria">

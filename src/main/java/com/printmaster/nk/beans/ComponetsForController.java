@@ -17,6 +17,7 @@ import com.printmaster.nk.model.Printer3D;
 import com.printmaster.nk.model.Product;
 import com.printmaster.nk.model.Rip;
 import com.printmaster.nk.model.Scanner;
+import com.printmaster.nk.model.UseWithProduct;
 
 @Component
 public class ComponetsForController {
@@ -143,6 +144,25 @@ public class ComponetsForController {
 	}
 	
 	@SuppressWarnings("unchecked")
+	public ArrayList<JSONObject> showSimplestArrayOfUseWithProduct(Set<UseWithProduct> set){
+		
+		ArrayList<JSONObject> arrayResult = new ArrayList<JSONObject>();
+		for(UseWithProduct currentProduct : set){
+			JSONObject curObj = new JSONObject();
+			
+			curObj.put("id", currentProduct.getId());
+			curObj.put("partNumber", currentProduct.getPartNumber());
+			curObj.put("prise", currentProduct.getPrise());
+			curObj.put("name", currentProduct.getName());
+			curObj.put("pathPictures", currentProduct.getPathPictures());
+			curObj.put("typeProduct", currentProduct.getTypeProduct());
+
+			arrayResult.add(curObj);
+		}
+		return arrayResult;
+	}
+	
+	@SuppressWarnings("unchecked")
 	public ArrayList<JSONObject> showSimplestArray(Set<? extends Product> set, String type){
 		
 		ArrayList<JSONObject> arrayResult = new ArrayList<JSONObject>();
@@ -237,6 +257,26 @@ public class ComponetsForController {
         reklamProduct.setRightSharesLinkColorFone(product.getRightSharesLinkColorFone());
         
         reklamProduct.setPathToPicture(File.separator + "images" + File.separator + "rips" +
+        		File.separator  + product.getId() + File.separator  + product.getPathPictures().get(0));
+        reklamProduct.setNameProduct(product.getName());
+        reklamProduct.setPriceProduct(product.getPrise());       
+ 	
+        if(isShow){
+        	reklam.addReklam(reklamProduct); 
+        } else {
+        	reklam.deleteReklam(reklamProduct);
+        }
+             
+    }
+    
+    public void updateInLeftField(UseWithProduct product, boolean isShow){
+		
+    	ReklamProduct reklamProduct = new ReklamProduct();
+        reklamProduct.setType("use_with_product");
+        reklamProduct.setId(product.getId());
+        reklamProduct.setPartNumber(product.getPartNumber());
+        
+        reklamProduct.setPathToPicture(File.separator + "images" + File.separator + "use_with_products" +
         		File.separator  + product.getId() + File.separator  + product.getPathPictures().get(0));
         reklamProduct.setNameProduct(product.getName());
         reklamProduct.setPriceProduct(product.getPrise());       

@@ -41,7 +41,7 @@
 				<p>Тип принтера</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${typePrinter3D}" path="typePrinter3D" element="li" />
+				<form:checkboxes items="${printer.type_printer_3d}" path="typePrinter3D" element="li" />
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -50,7 +50,7 @@
 				<p>Б/У оборудование</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${previouslyUsed}" path="previouslyUsed" element="li" />
+				<form:checkboxes items="${printer.previously_used}" path="previouslyUsed" element="li" />
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -93,7 +93,7 @@
 				<p>Технология печати</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${printTechnology}" path="printTechnology" element="li" />
+				<form:checkboxes items="${printer.print_technology}" path="printTechnology" element="li" />
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -102,7 +102,7 @@
 				<p>Цветность</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${chromaticity}" path="chromaticity" element="li" />
+				<form:checkboxes items="${printer.chromaticity}" path="chromaticity" element="li" />
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -111,7 +111,7 @@
 				<p>Тип печатающей головки</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${typeOfPrinthead}" path="typeOfPrinthead" element="li" />
+				<form:checkboxes items="${printer.type_of_printhead}" path="typeOfPrinthead" element="li" />
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -135,7 +135,7 @@
 				<p>Материал для печати</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${media}" path="media" element="li" />
+				<form:checkboxes items="${printer.media}" path="media" element="li" />
 			</ul>
 		</div> 
 		<div class="search_criteria">
@@ -189,7 +189,7 @@
 				<p>Интерфейс подключения</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${interfaceConnection}" path="interfaceConnection" element="li" />
+				<form:checkboxes items="${printer.interface_connection}" path="interfaceConnection" element="li" />
 			</ul>
 		</div> 		
 		<div class="search_criteria">
@@ -198,7 +198,7 @@
 				<p>Тыпы файлов</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${typesOfFiles}" path="typesOfFiles" element="li" />
+				<form:checkboxes items="${printer.types_of_files}" path="typesOfFiles" element="li" />
 			</ul>
 		</div> 		
 		<div class="search_criteria">
@@ -207,7 +207,7 @@
 				<p>П/О</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${rip}" path="rip" element="li" />
+				<form:checkboxes items="${printer.rip}" path="rip" element="li" />
 			</ul>
 		</div> 		
 		<div class="search_criteria">
@@ -231,7 +231,7 @@
 				<p>Производитель оборудования</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${equipmentManufacturer}" path="equipmentManufacturer" element="li" />
+				<form:checkboxes items="${printer.equipment_manufacturer}" path="equipmentManufacturer" element="li" />
 			</ul>
 		</div>	
 		<div class="search_criteria">

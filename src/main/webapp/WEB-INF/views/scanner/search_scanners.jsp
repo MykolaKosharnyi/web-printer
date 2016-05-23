@@ -42,7 +42,7 @@
 				<p>Тип сканера</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${typeProduct}" path="typeProduct" element="li" />
+				<form:checkboxes items="${scanner.type_product}" path="typeProduct" element="li" />
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -59,7 +59,7 @@
 					</ul>
 					<div>
 						<div>
-							<form:checkboxes items="${scanningWidth}" path="scanningWidth" element="li" />
+							<form:checkboxes items="${scanner.scanning_width}" path="scanningWidth" element="li" />
 						</div>
 					    <div>
 							<li><input type="checkbox" name="weightPrintMM" value="305" id="weightPrintMM_12"><label for="weightPrintMM_12">12"</label></input></li>
@@ -97,7 +97,7 @@
 				<p>Б/У оборудование</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${previouslyUsed}" path="previouslyUsed" element="li" />
+				<form:checkboxes items="${scanner.previously_used}" path="previouslyUsed" element="li" />
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -106,7 +106,7 @@
 				<p>Подача</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${innings}" path="innings" element="li" />
+				<form:checkboxes items="${scanner.innings}" path="innings" element="li" />
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -115,7 +115,7 @@
 				<p>Цветность</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${chromaticity}" path="chromaticity" element="li" />
+				<form:checkboxes items="${scanner.chromaticity}" path="chromaticity" element="li" />
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -124,7 +124,7 @@
 				<p>Сканирующий элемент</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${scanningElement}" path="scanningElement" element="li" />
+				<form:checkboxes items="${scanner.scanning_element}" path="scanningElement" element="li" />
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -133,7 +133,7 @@
 				<p>Источник света</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${lightSource}" path="lightSource" element="li" />
+				<form:checkboxes items="${scanner.light_source}" path="lightSource" element="li" />
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -142,7 +142,7 @@
 				<p>Разрядность цветного сканирования</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${bitColorScanning}" path="bitColorScanning" element="li" />
+				<form:checkboxes items="${scanner.bit_color_scanning}" path="bitColorScanning" element="li" />
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -151,7 +151,7 @@
 				<p>Разрядность сканирования с оттенками серого</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${bitScanningGrayscale}" path="bitScanningGrayscale" element="li" />
+				<form:checkboxes items="${scanner.bit_scanning_grayscale}" path="bitScanningGrayscale" element="li" />
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -188,7 +188,7 @@
 				<p>Оптическое разрешение</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${opticalResolution}" path="opticalResolution" element="li" />
+				<form:checkboxes items="${scanner.optical_resolution}" path="opticalResolution" element="li" />
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -197,7 +197,7 @@
 				<p>Интерфейс подключения</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${connectionInterface}" path="connectionInterface" element="li" />
+				<form:checkboxes items="${scanner.connection_interface}" path="connectionInterface" element="li" />
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -220,7 +220,7 @@
 				<p>П/О</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${software}" path="software" element="li" />
+				<form:checkboxes items="${scanner.software}" path="software" element="li" />
 			</ul>
 		</div>			
 		<div class="search_criteria">
@@ -229,7 +229,7 @@
 				<p>Производитель оборудования</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${equipmentManufacturer}" path="equipmentManufacturer" element="li" />
+				<form:checkboxes items="${scanner.equipment_manufacturer}" path="equipmentManufacturer" element="li" />
 			</ul>
 		</div>
 		<div class="search_criteria">

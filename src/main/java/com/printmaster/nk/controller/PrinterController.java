@@ -34,7 +34,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.printmaster.nk.beans.ComponetsForController;
 import com.printmaster.nk.beans.FileMeta;
@@ -43,6 +42,7 @@ import com.printmaster.nk.beans.PicturesContainer;
 import com.printmaster.nk.model.Printer;
 import com.printmaster.nk.model.SearchPrinters;
 import com.printmaster.nk.service.PrinterService;
+import com.printmaster.nk.service.UseWithProductService;
 
 @Controller
 public class PrinterController {
@@ -67,6 +67,14 @@ public class PrinterController {
     @Qualifier(value="printerService")
     public void setPrinterService(PrinterService ps){
         this.printerService = ps;
+    }
+    
+    private UseWithProductService useWithProductService;
+	
+	@Autowired(required=true)
+    @Qualifier(value="useWithProductService")
+    public void setUseWithProductService(UseWithProductService ps){
+        this.useWithProductService = ps;
     }
 	
 	@RequestMapping(value = "/printers", method = RequestMethod.GET)	
@@ -155,18 +163,28 @@ public class PrinterController {
     @RequestMapping("/printer/{id}")
     public String showPrinter(@PathVariable("id") long id, Model model){
     	logger.info("/printer/" + id + " page.");
-        model.addAttribute("product", printerService.getPrinterById(id));
+        
+        Printer product = printerService.getPrinterById(id);
+        model.addAttribute("product", product);
+        if(product.getIdUseWithProduct()!=null){
+        	model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(useWithProductService.getUseWithProductsByIds(product.getIdUseWithProduct())));
+        } else {
+        	model.addAttribute("uwp", null);
+        }
         return "printer";
     }
     
 	@RequestMapping(value = "/admin/printers", method = RequestMethod.GET)	
     public String listPrinters(Model model) {
-		model.addAttribute("productType", "printer");
-		model.addAttribute("nameProduct", "Имя принтера");
+
 		model.addAttribute("titleOfTable", "Список загруженных принтеров");
         model.addAttribute("listProducts", printerService.listPrinters());
+        
+		model.addAttribute("productType", "printer");
+		model.addAttribute("nameProduct", "Имя принтера");
         model.addAttribute("title", "Принтеры");
         model.addAttribute("addProduct", "Добавить принтер");
+        
         logger.info("/admin/printers page.");
         return "admin/products";
     }
@@ -174,9 +192,9 @@ public class PrinterController {
 	@RequestMapping(value = "/admin/printers/{type}", method = RequestMethod.GET)	
     public String listConcreteTypePrinters(@PathVariable("type") String type, Model model) {
         
+		List<Printer> list = new ArrayList<Printer>();
         if(type.equals("dissolving")){
-        	List<Printer> list = new ArrayList<Printer>();
-        	
+
         	for(Printer printer : printerService.listPrinters()){
         		if(printer.getTypePrinter().equals("Сольвентный")){
         			list.add(printer);
@@ -186,16 +204,9 @@ public class PrinterController {
         	model.addAttribute("titleOfTable", "Список загруженных сольвентных принтеров");
             model.addAttribute("listProducts", list);
             
-            model.addAttribute("productType", "printer");
-    		model.addAttribute("nameProduct", "Имя принтера");
-            model.addAttribute("title", "Принтеры");
-            model.addAttribute("addProduct", "Добавить принтер");
             logger.info("On /admin/printers/dissolving page.");
-            
-            return "admin/products";
     		
     	} else if(type.equals("ecosolvent")){
-    		List<Printer> list = new ArrayList<Printer>();
         	
         	for(Printer printer : printerService.listPrinters()){
         		if(printer.getTypePrinter().equals("Экосольвентный")){
@@ -206,16 +217,9 @@ public class PrinterController {
         	model.addAttribute("titleOfTable", "Список загруженных экосольвентных принтеров");
             model.addAttribute("listProducts", list);
             
-            model.addAttribute("productType", "printer");
-    		model.addAttribute("nameProduct", "Имя принтера");
-            model.addAttribute("title", "Принтеры");
-            model.addAttribute("addProduct", "Добавить принтер");
             logger.info("On /admin/printers/ecosolvent page.");
             
-            return "admin/products";
-            
     	} else if(type.equals("UV_roll")){
-    		List<Printer> list = new ArrayList<Printer>();
         	
         	for(Printer printer : printerService.listPrinters()){
         		if(printer.getTypePrinter().equals("UV рулонный")){
@@ -226,16 +230,9 @@ public class PrinterController {
         	model.addAttribute("titleOfTable", "Список загруженных UV рулонных принтеров");
             model.addAttribute("listProducts", list);
             
-            model.addAttribute("productType", "printer");
-    		model.addAttribute("nameProduct", "Имя принтера");
-            model.addAttribute("title", "Принтеры");
-            model.addAttribute("addProduct", "Добавить принтер");
             logger.info("On /admin/printers/UV_roll page.");
-            
-            return "admin/products";
              		
     	} else if(type.equals("UV_flatbed")){	
-    		List<Printer> list = new ArrayList<Printer>();
         	
         	for(Printer printer : printerService.listPrinters()){
         		if(printer.getTypePrinter().equals("UV плоскопечатный")){
@@ -246,16 +243,9 @@ public class PrinterController {
         	model.addAttribute("titleOfTable", "Список загруженных UV плоскопечатных принтеров");
             model.addAttribute("listProducts", list);
             
-            model.addAttribute("productType", "printer");
-    		model.addAttribute("nameProduct", "Имя принтера");
-            model.addAttribute("title", "Принтеры");
-            model.addAttribute("addProduct", "Добавить принтер");
             logger.info("On /admin/printers/UV_flatbed page.");
-            
-            return "admin/products";
     		
     	} else if(type.equals("sublimation")){		
-    		List<Printer> list = new ArrayList<Printer>();
         	
         	for(Printer printer : printerService.listPrinters()){
         		if(printer.getTypePrinter().equals("Сублимационный")){
@@ -266,16 +256,9 @@ public class PrinterController {
         	model.addAttribute("titleOfTable", "Список загруженных сублимационных принтеров");
             model.addAttribute("listProducts", list);
             
-            model.addAttribute("productType", "printer");
-    		model.addAttribute("nameProduct", "Имя принтера");
-            model.addAttribute("title", "Принтеры");
-            model.addAttribute("addProduct", "Добавить принтер");
             logger.info("On /admin/printers/sublimation page.");
-            
-            return "admin/products";
     		
     	} else if(type.equals("textile")){    		
-    		List<Printer> list = new ArrayList<Printer>();
         	
         	for(Printer printer : printerService.listPrinters()){
         		if(printer.getTypePrinter().equals("Текстильный")){
@@ -285,17 +268,10 @@ public class PrinterController {
         	
         	model.addAttribute("titleOfTable", "Список загруженных текстильных принтеров");
             model.addAttribute("listProducts", list);
-            
-            model.addAttribute("productType", "printer");
-    		model.addAttribute("nameProduct", "Имя принтера");
-            model.addAttribute("title", "Принтеры");
-            model.addAttribute("addProduct", "Добавить принтер");
+
             logger.info("On /admin/printers/textile page.");
-            
-            return "admin/products";
     		
     	} else if(type.equals("water_pigment")){  		
-    		List<Printer> list = new ArrayList<Printer>();
         	
         	for(Printer printer : printerService.listPrinters()){
         		if(printer.getTypePrinter().equals("Водный/Пигментный")){
@@ -305,17 +281,10 @@ public class PrinterController {
         	
         	model.addAttribute("titleOfTable", "Список загруженных водных/пигментных принтеров");
             model.addAttribute("listProducts", list);
-            
-            model.addAttribute("productType", "printer");
-    		model.addAttribute("nameProduct", "Имя принтера");
-            model.addAttribute("title", "Принтеры");
-            model.addAttribute("addProduct", "Добавить принтер");
+
             logger.info("On /admin/printers/water_pigment page.");
-            
-            return "admin/products";
     		
     	} else if(type.equals("SAPR-GIS")){
-    		List<Printer> list = new ArrayList<Printer>();
         	
         	for(Printer printer : printerService.listPrinters()){
         		if(printer.getTypePrinter().equals("САПР/ГИС")){
@@ -326,24 +295,20 @@ public class PrinterController {
         	model.addAttribute("titleOfTable", "Список загруженных САПР/ГИС принтеров");
             model.addAttribute("listProducts", list);
             
-            model.addAttribute("productType", "printer");
-    		model.addAttribute("nameProduct", "Имя принтера");
-            model.addAttribute("title", "Принтеры");
-            model.addAttribute("addProduct", "Добавить принтер");
             logger.info("On /admin/printers/SAPR-GIS page.");
-            
-            return "admin/products";
     		
     	} else {
-    		model.addAttribute("productType", "printer");
-    		model.addAttribute("nameProduct", "Имя принтера");
     		model.addAttribute("titleOfTable", "Список загруженных принтеров");
             model.addAttribute("listProducts", printerService.listPrinters());
-            model.addAttribute("title", "Принтеры");
-            model.addAttribute("addProduct", "Добавить принтер");
             logger.info("/admin/printers page.");
-            return "admin/products";
     	}
+        
+        model.addAttribute("productType", "printer");
+		model.addAttribute("nameProduct", "Имя принтера");
+        model.addAttribute("title", "Принтеры");
+        model.addAttribute("addProduct", "Добавить принтер");
+        
+        return "admin/products";
     }
 	
 	@RequestMapping(value = "/admin/printer/new", method = RequestMethod.GET)
@@ -353,21 +318,28 @@ public class PrinterController {
 		
 		 logger.info("All characteristic of printer.");
 		 model.addAttribute("product", new Printer());
+		 model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
 		 
-			try {
-				model.addAttribute("printer", (JSONObject)new JSONParser().
-						parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/printer.json"), "UTF-8")));
-			} catch (IOException | ParseException e) {}
+		try {
+			model.addAttribute("printer", (JSONObject)new JSONParser().
+					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/printer.json"), "UTF-8")));
+		} catch (IOException | ParseException e) {}
 	    return "admin/printer";
 	}
      
 	@RequestMapping(value = "/admin/printer/add", method = RequestMethod.POST) 
-	public @ResponseBody ModelAndView handleFormUpload(/*
+	public String handleFormUpload(/*
 			@RequestParam("files") MultipartFile[] request, */@ModelAttribute("product") @Valid Printer product,
-			BindingResult result) throws IOException{
+			BindingResult result, Model model) throws IOException{
 
 			if (result.hasErrors()) {
-	            return new ModelAndView("admin/printer", "product", product);
+				model.addAttribute("product", product);
+				model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+				try {
+					model.addAttribute("printer", (JSONObject)new JSONParser().
+							parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/printer.json"), "UTF-8")));
+				} catch (IOException | ParseException e) {}
+	            return "admin/printer";
 	        }
 		
             long id = printerService.addPrinter(product);
@@ -412,8 +384,8 @@ public class PrinterController {
             
             files.clear();
 		
-          ModelAndView mav = new ModelAndView("redirect:/admin/printers"); 
-		  mav.addObject("listProducts", printerService.listPrinters());
+   //       ModelAndView mav = new ModelAndView("redirect:/admin/printers"); 
+	//	  mav.addObject("listProducts", printerService.listPrinters());
 		  
 		  links.createLinksForPrinters(printerService.listShowOnSite());
 		  
@@ -421,15 +393,21 @@ public class PrinterController {
 			  componets.updateInLeftField(product, true, "printer");
 	    	
 		  logger.info("Update links to the products in left menu!");
-	   return mav;
+	   return "redirect:/admin/printers";
 	}
 	
 	@RequestMapping(value = "/admin/printer/save_add", method = RequestMethod.POST) 
-	public @ResponseBody ModelAndView handleFormUploadSave(@ModelAttribute("product") @Valid Printer product,
-			BindingResult result) throws IOException{
+	public String handleFormUploadSave(@ModelAttribute("product") @Valid Printer product,
+			BindingResult result, Model model) throws IOException{
 
 			if (result.hasErrors()) {
-	            return new ModelAndView("admin/printer", "product", product);
+				model.addAttribute("product", product);
+				model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+				try {
+					model.addAttribute("printer", (JSONObject)new JSONParser().
+							parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/printer.json"), "UTF-8")));
+				} catch (IOException | ParseException e) {}
+	            return "admin/printer";
 	        }
 		
             long id = printerService.addPrinter(product);
@@ -472,14 +450,14 @@ public class PrinterController {
             
             files.clear();
 		
-          ModelAndView mav = new ModelAndView("redirect:/admin/printer/edit/" + id); 
+   //       ModelAndView mav = new ModelAndView("redirect:/admin/printer/edit/" + id); 
 		  
 		  links.createLinksForPrinters(printerService.listShowOnSite());	
 		  if (product.isShowOnSite() && product.isShowOnLeftSide()){
 			  componets.updateInLeftField(product, true, "printer");
 	    	}
 		  logger.info("Update links to the products in left menu!");
-	   return mav;
+	   return "redirect:/admin/printer/edit/" + id;
 	}
 	
     @RequestMapping("/admin/printer/edit/{id}")
@@ -510,15 +488,22 @@ public class PrinterController {
 			model.addAttribute("printer", (JSONObject)new JSONParser().
 					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/printer.json"), "UTF-8")));
 		} catch (IOException | ParseException e) {}
+        model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
         return "admin/printer";
     }
 	
 	@RequestMapping(value = "/admin/printer/save_update", method = RequestMethod.POST) 
-	public @ResponseBody ModelAndView updateSavePrinter(@ModelAttribute("product") @Valid Printer product,
-			BindingResult result) throws IOException{
+	public String updateSavePrinter(@ModelAttribute("product") @Valid Printer product,
+			BindingResult result, Model model) throws IOException{
 		
 		if (result.hasErrors()) {
-            return new ModelAndView("admin/printer", "product", product);
+			model.addAttribute("product", product);
+			model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+			try {
+				model.addAttribute("printer", (JSONObject)new JSONParser().
+						parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/printer.json"), "UTF-8")));
+			} catch (IOException | ParseException e) {}
+            return "admin/printer";
         }
 		
 		logger.info("PRINTER UPDATE with save, id=" + product.getId());
@@ -564,16 +549,22 @@ public class PrinterController {
 	    }
 		  
 		logger.info("Update links to the products in left menu!");
-		ModelAndView mav = new ModelAndView("redirect:/admin/printer/edit/" + product.getId());
-		return mav;
+	//	ModelAndView mav = new ModelAndView("redirect:/admin/printer/edit/" + product.getId());
+		return "redirect:/admin/printer/edit/" + product.getId();
 	}
 	
 	@RequestMapping(value = "/admin/printer/update", method = RequestMethod.POST) 
-	public @ResponseBody ModelAndView updatePrinter(@ModelAttribute("product") @Valid Printer product,
-			BindingResult result) throws IOException{
+	public String updatePrinter(@ModelAttribute("product") @Valid Printer product,
+			BindingResult result, Model model) throws IOException{
 		
 		if (result.hasErrors()) {
-            return new ModelAndView("admin/printer", "product", product);
+			model.addAttribute("product", product);
+			model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+			try {
+				model.addAttribute("printer", (JSONObject)new JSONParser().
+						parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/printer.json"), "UTF-8")));
+			} catch (IOException | ParseException e) {}
+            return "admin/printer";
         }
 		
 		logger.info("PRINTER UPDATE id=" + product.getId());
@@ -612,8 +603,8 @@ public class PrinterController {
         printerService.updatePrinter(product);
         logger.info("printer with id=" + product.getId() + " was UDPATED!");
         
-		ModelAndView mav = new ModelAndView("redirect:/admin/printers"); 
-		  mav.addObject("listProducts", printerService.listPrinters());
+//		ModelAndView mav = new ModelAndView("redirect:/admin/printers"); 
+//		  mav.addObject("listProducts", printerService.listPrinters());
 		  files.clear();
 		  
 		  links.createLinksForPrinters(printerService.listShowOnSite());
@@ -623,7 +614,7 @@ public class PrinterController {
 	    	}
 		  
 		  logger.info("Update links to the products in left menu!");
-	   return mav;
+	   return "redirect:/admin/printers";
 	}
 	
     @RequestMapping(value="/admin/printer/upload_pictures", method = RequestMethod.POST)

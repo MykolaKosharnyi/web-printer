@@ -12,7 +12,7 @@
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="/css/admin/add_change_printer.css">
-	<script src="<%=request.getContextPath()%>/resources/js/admin/add_change_printer.js"></script>
+	<script src="<%=request.getContextPath()%>/resources/js/admin/add_change_cutter.js"></script>
 
 <c:if test="${empty product.id}">
 	<title>
@@ -69,7 +69,7 @@
 		</div>
 
 	<form:form method="POST" commandName="product" action="${addAction}">
-			
+		<div class="save_button_keeper">	
 			<c:if test="${empty product.id}">
 				<c:url value="/admin/cutter/save_add" var="saveLoad" />
 				<input id="submit" type="submit" formaction="${saveLoad}" value="сохранить" style="background: gold; color: black;"/>
@@ -85,7 +85,7 @@
 			<c:if test="${!empty product.id}">
 					<input type="hidden" name="id" value="${product.id}">
 			</c:if>
-
+		</div>
 			<div class="product_characteristic">
 				<div class="characteristic">
 					<div class="block_title">
@@ -127,7 +127,7 @@
 						<form:errors path="typeCutter" cssClass="error"></form:errors>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${typeCutter}" path="typeCutter" element="li"/>
+						<form:radiobuttons items="${cutter.type_cutter}" path="typeCutter" element="li"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -146,7 +146,7 @@
 						<p>Состояние оборудования</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${previouslyUsed}" path="previouslyUsed" element="li"/>
+						<form:radiobuttons items="${cutter.previously_used}" path="previouslyUsed" element="li"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -217,7 +217,7 @@
 						<p>Тип гравировки</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${engravingStyle}" path="engravingStyle" element="li"/>
+						<form:radiobuttons items="${cutter.engraving_style}" path="engravingStyle" element="li"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -226,7 +226,7 @@
 						<p>Тип охлаждения</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${typeOfCooling}" path="typeOfCooling" element="li"/>
+						<form:radiobuttons items="${cutter.type_of_cooling}" path="typeOfCooling" element="li"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -255,7 +255,7 @@
 						<p>Тип двигателей</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${typeEngine}" path="typeEngine" element="li"/>
+						<form:radiobuttons items="${cutter.type_engine}" path="typeEngine" element="li"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -318,7 +318,7 @@
 						<p>Крепление инструмента</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${mountingTool}" path="mountingTool" element="li"/>
+						<form:radiobuttons items="${cutter.mounting_tool}" path="mountingTool" element="li"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -327,7 +327,7 @@
 						<p>Интерфейс подключения</p>
 					</div>
 					<ul class="check_boxes">
-						<form:checkboxes items="${connectionInterface}" path="connectionInterface" element="li"/>
+						<form:checkboxes items="${cutter.connection_interface}" path="connectionInterface" element="li"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -336,7 +336,7 @@
 						<p>Програмное обеспечение</p>
 					</div>
 					<ul class="check_boxes">
-						<form:checkboxes items="${software}" path="software" element="li"/>
+						<form:checkboxes items="${cutter.software}" path="software" element="li"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -345,7 +345,7 @@
 						<p>Производитель оборудования</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${equipmentManufacturer}" path="equipmentManufacturer" element="li"/>
+						<form:radiobuttons items="${cutter.equipment_manufacturer}" path="equipmentManufacturer" element="li"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -434,7 +434,7 @@
 						<p>Доставка</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${delivery}" path="delivery" element="li"/>
+						<form:radiobuttons items="${cutter.delivery}" path="delivery" element="li"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -453,7 +453,7 @@
 						<p>Наличие (информация для пользователя)</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${availability}" path="availability" element="li"/>
+						<form:radiobuttons items="${cutter.availability}" path="availability" element="li"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -462,46 +462,12 @@
 						<p>Опции</p>
 					</div>
 					<ul class="check_boxes">
-						<form:checkboxes items="${availability}" path="availability" element="li"/>
+						<form:checkboxes items="${cutter.availability}" path="availability" element="li"/>
 					</ul>
 				</div>
 			</div>
 
-		<div class="textarea_description">
-			<div class="characteristic">
-				<div class="block_title">
-					<i></i>
-					<p>Служебная информация</p>
-				</div>
-				<ul class="box_text_area">
-					<form:textarea name="content" path="serviceInformation" value="${product.serviceInformation}"></form:textarea>
-				</ul>
-			</div>
-		</div>
-
-		<div class="textarea_description">
-			<div class="characteristic">
-				<div class="block_title">
-					<i class="opened"></i>
-					<p>Описание</p>
-				</div>
-				<ul class="box_text_area" style="display: block;">
-					<form:textarea name="content" path="description" value="${product.description}"></form:textarea>
-				</ul>
-			</div>
-		</div>
-			
-		<div class="textarea_description">
-			<div class="characteristic">
-				<div class="block_title">
-					<i class="opened"></i>
-					<p>Description(отображение при выборе английского языка на сайте)</p>
-				</div>
-				<ul class="box_text_area" style="display: block;">
-					<form:textarea name="content" path="descriptionEng" value="${product.descriptionEng}"></form:textarea>
-				</ul>
-			</div>
-		</div>
+			<jsp:include page="product/textarea_descriptions.jsp" />
 		
 			<c:if test="${empty product.id}">
 				<input id="submit" type="submit" value="загрузить" style="background:green; color: azure;"/>

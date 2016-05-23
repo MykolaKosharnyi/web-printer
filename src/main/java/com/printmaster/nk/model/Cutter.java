@@ -66,6 +66,13 @@ public class Cutter extends Product{
 	@Column(name="positioningSpeed")
 	private int positioningSpeed = 0;//Скорость позиционирования
 
+//	@ManyToMany(fetch = FetchType.EAGER)
+//	@Fetch(value = FetchMode.SUBSELECT)
+//	@JoinTable(name = "cutter_use_with_product", 
+//			joinColumns = { @JoinColumn(name = "CUTTER_ID") }, 
+//			inverseJoinColumns = { @JoinColumn(name = "USE_WITH_PRODUCT_ID") })
+//	private Set<UseWithProduct> useWithProduct = new HashSet<UseWithProduct>(0);
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -75,6 +82,8 @@ public class Cutter extends Product{
 		result = prime * result + frequencySpindle;
 		result = prime * result + mechanicalResolution;
 		result = prime * result + ((mountingTool == null) ? 0 : mountingTool.hashCode());
+		result = prime * result + numberOfSpindles;
+		result = prime * result + positioningSpeed;
 		result = prime * result + processingSpeedXY;
 		result = prime * result + processingSpeedZ;
 		result = prime * result + sizeWorkAreaX;
@@ -84,6 +93,7 @@ public class Cutter extends Product{
 		result = prime * result + softwareResolution;
 		result = prime * result + ((typeCutter == null) ? 0 : typeCutter.hashCode());
 		result = prime * result + ((typeEngine == null) ? 0 : typeEngine.hashCode());
+		result = prime * result + ((typeOfCooling == null) ? 0 : typeOfCooling.hashCode());;
 		return result;
 	}
 
@@ -112,6 +122,10 @@ public class Cutter extends Product{
 				return false;
 		} else if (!mountingTool.equals(other.mountingTool))
 			return false;
+		if (numberOfSpindles != other.numberOfSpindles)
+			return false;
+		if (positioningSpeed != other.positioningSpeed)
+			return false;
 		if (processingSpeedXY != other.processingSpeedXY)
 			return false;
 		if (processingSpeedZ != other.processingSpeedZ)
@@ -135,6 +149,11 @@ public class Cutter extends Product{
 			if (other.typeEngine != null)
 				return false;
 		} else if (!typeEngine.equals(other.typeEngine))
+			return false;
+		if (typeOfCooling == null) {
+			if (other.typeOfCooling != null)
+				return false;
+		} else if (!typeOfCooling.equals(other.typeOfCooling))
 			return false;
 		return true;
 	}

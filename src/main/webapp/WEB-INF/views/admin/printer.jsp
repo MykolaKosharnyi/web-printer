@@ -62,7 +62,7 @@
 							<div>
 								<p class="delete_img">Удалить</p>
 							</div>
-							<a class="fancybox" data-fancybox-group="group" href="/images/printers/${product.id}/${pathPicture}">
+							<a class="fancybox" href="/images/printers/${product.id}/${pathPicture}">
 								<img src="/images/printers/${product.id}/${pathPicture}" alt="alt">
 							</a>
 						</li>
@@ -72,7 +72,7 @@
 		</div>
 
 	<form:form method="POST" commandName="product" action="${addAction}">
-			
+		<div class="save_button_keeper">	
 			<c:if test="${empty product.id}">
 				<c:url value="/admin/printer/save_add" var="saveLoad" />
 				<input id="submit" type="submit" formaction="${saveLoad}" value="сохранить" style="background: gold; color: black;"/>
@@ -86,9 +86,9 @@
 			</c:if>
 			
 			<c:if test="${!empty product.id}">
-					<input type="hidden" name="id" value="${product.id}">
+				<input type="hidden" name="id" value="${product.id}">
 			</c:if>
-
+		</div>
 			<div class="product_characteristic">
 				<div class="characteristic">
 					<div class="block_title">
@@ -228,6 +228,8 @@
 						<form:errors path="powerUVlamp" cssClass="error"></form:errors>	
 						<form:errors path="lengthWaveLEDmodule" cssClass="error"></form:errors>
 						<form:errors path="powerLEDmodule" cssClass="error"></form:errors>
+						<form:errors path="quantityUVlamp" cssClass="error"></form:errors>
+						<form:errors path="quantityLEDmodule" cssClass="error"></form:errors>
 					</div>
 					<ul class="check_boxes">
 						<div class="text_output">
@@ -241,6 +243,10 @@
 							<p>мощность UV излучения:&nbsp;</p><form:input style="width: 35px;" path="powerUVlamp" /><p>&nbsp;Вт</p>
 							<form:errors path="powerUVlamp" cssClass="error"></form:errors>	 
 						</div>
+						<div class="text_output">
+							<p>количество:&nbsp;</p><form:input style="width: 35px;" path="quantityUVlamp" /><p>&nbsp;шт</p>
+							<form:errors path="quantityUVlamp" cssClass="error"></form:errors>	 
+						</div>
 						<br/>
 						<div class="text_output">
 							<p>LED модуль:</p>	 
@@ -252,6 +258,10 @@
 						<div class="text_output">
 							<p>мощность UV излучения:&nbsp;</p><form:input style="width: 35px;" path="powerLEDmodule" /><p>&nbsp;Вт</p>
 							<form:errors path="powerLEDmodule" cssClass="error"></form:errors>	 
+						</div>
+						<div class="text_output">
+							<p>количество:&nbsp;</p><form:input style="width: 35px;" path="quantityLEDmodule" /><p>&nbsp;шт</p>
+							<form:errors path="quantityLEDmodule" cssClass="error"></form:errors>	 
 						</div>
 					</ul>
 				</div>
@@ -389,7 +399,7 @@
 							<form:errors path="averageConsumptionOfCMYKink" cssClass="error"></form:errors>	 
 						</div>
 						<div class="text_output">
-							<p>Средний расход белых чернил:&nbsp;</p><form:input style="width: 35px;" path="averageConsumptionOfWhiteInk" /><p>&nbsp;мл./м.кв.</p>
+							<p>Средний расход белых черн.:&nbsp;</p><form:input style="width: 35px;" path="averageConsumptionOfWhiteInk" /><p>&nbsp;мл./м.кв.</p>
 							<form:errors path="averageConsumptionOfWhiteInk" cssClass="error"></form:errors>	 
 						</div>
 						<div class="text_output">
@@ -821,41 +831,7 @@
 				</div>
 			</div>
 
-		<div class="textarea_description">
-			<div class="characteristic">
-				<div class="block_title">
-					<i></i>
-					<p>Служебная информация</p>
-				</div>
-				<ul class="box_text_area">
-					<form:textarea name="content" path="serviceInformation" value="${product.serviceInformation}"></form:textarea>
-				</ul>
-			</div>
-		</div>
-
-		<div class="textarea_description">
-			<div class="characteristic">
-				<div class="block_title">
-					<i class="opened"></i>
-					<p>Описание</p>
-				</div>
-				<ul class="box_text_area" style="display: block;">
-					<form:textarea name="content" path="description" value="${product.description}"></form:textarea>
-				</ul>
-			</div>
-		</div>
-			
-		<div class="textarea_description">
-			<div class="characteristic">
-				<div class="block_title">
-					<i class="opened"></i>
-					<p>Description(отображение при выборе английского языка на сайте)</p>
-				</div>
-				<ul class="box_text_area" style="display: block;">
-					<form:textarea name="content" path="descriptionEng" value="${product.descriptionEng}"></form:textarea>
-				</ul>
-			</div>
-		</div>
+			<jsp:include page="product/textarea_descriptions.jsp" />
 		
 			<c:if test="${empty product.id}">
 				<input id="submit" type="submit" value="загрузить" style="background:green; color: azure;"/>

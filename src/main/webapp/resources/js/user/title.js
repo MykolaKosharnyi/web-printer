@@ -75,7 +75,15 @@ jQuery(document).ready(function($) {
 		$( "li#list_laminators_liquid ul.menu_drop_drop" ).has( "li" ).length ? $( 'li#list_laminators_liquid').addClass( "menu_list_list" ) : "" ;
 		$( "li#list_laminators_flatbed_laminating_machine ul.menu_drop_drop" ).has( "li" ).length ? $( 'li#list_laminators_flatbed_laminating_machine').addClass( "menu_list_list" ) : "" ;
 		
-		/* For laminators */
+		/* For scanners */
 		$( "li#list_scanner_large_format_scanners ul.menu_drop_drop" ).has( "li" ).length ? $( 'li#list_scanner_large_format_scanners').addClass( "menu_list_list" ) : "" ;
 		$( "li#list_scanner_3d_scanners ul.menu_drop_drop" ).has( "li" ).length ? $( 'li#list_scanner_3d_scanners').addClass( "menu_list_list" ) : "" ;
+		
+		/* For used with product */
+		$( "li#list_use_with_product_ink_for_inkjet ul.menu_drop_drop" ).has( "li" ).length ? $( 'li#list_use_with_product_ink_for_inkjet').addClass( "menu_list_list" ) : "" ;
+		$( "li#list_use_with_product_consumables_for_digital_equipment ul.menu_drop_drop" ).has( "li" ).length ? $( 'li#list_use_with_product_consumables_for_digital_equipment').addClass( "menu_list_list" ) : "" ;
+		$( "li#list_use_with_product_consumables_for_3D_equipment ul.menu_drop_drop" ).has( "li" ).length ? $( 'li#list_use_with_product_consumables_for_3D_equipment').addClass( "menu_list_list" ) : "" ;
+		$( "li#list_use_with_product_products_for_maintenance ul.menu_drop_drop" ).has( "li" ).length ? $( 'li#list_use_with_product_products_for_maintenance').addClass( "menu_list_list" ) : "" ;
+		$( "li#list_use_with_product_parts_and_accessories ul.menu_drop_drop" ).has( "li" ).length ? $( 'li#list_use_with_product_parts_and_accessories').addClass( "menu_list_list" ) : "" ;
+		
 }); // ready()

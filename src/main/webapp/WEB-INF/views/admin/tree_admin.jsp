@@ -860,6 +860,135 @@
       
     </ul>
   </li>
+  
+  <li class="Node IsRoot ExpandClosed">
+    <div class="Expand"></div>
+    <div class="Content"><a href="<c:url value='/admin/use_with_products' />">Сопутствующие товары</a></div>
+    <ul class="Container">
+    
+    <!-- Пошли подпункты сопутствующих товаров -->
+      <li class="Node ExpandClosed">
+        <div class="Expand"></div>
+        <div class="Content"><a href="<c:url value='/admin/use_with_products/ink_for_inkjet' />">Чернила для струйной печати</a></div>
+        <ul class="Container">
+        
+			<c:forEach items="${listLeftLinks.useWithProductsJSON.list_ink_for_inkjet}" var="link" varStatus="status">
+				<c:if test="${ ! status.last}" >
+          			<li class="Node ExpandLeaf">
+            			<div class="Expand"></div>
+            			<div class="Content"><a href="<c:url value='/admin/use_with_product/edit/${link.id}' />">${link.name}</a></div>
+          			</li>				
+				</c:if>
+				
+				<c:if test="${ status.last}" >
+          			<li class="Node ExpandLeaf IsLast">
+            			<div class="Expand"></div>
+            			<div class="Content"><a href="<c:url value='/admin/use_with_product/edit/${link.id}' />">${link.name}</a></div>
+          			</li>				
+				</c:if>
+			</c:forEach>    
+			    
+        </ul>
+      </li>
+      
+      <li class="Node ExpandClosed">
+        <div class="Expand"></div>
+        <div class="Content"><a href="<c:url value='/admin/use_with_products/consumables_for_digital_equipment' />">Расходные материалы для цифрового оборудования</a></div>
+        <ul class="Container">
+        
+			<c:forEach items="${listLeftLinks.useWithProductsJSON.list_consumables_for_digital_equipment}" var="link" varStatus="status">
+				<c:if test="${ ! status.last}" >
+          			<li class="Node ExpandLeaf">
+            			<div class="Expand"></div>
+            			<div class="Content"><a href="<c:url value='/admin/use_with_product/edit/${link.id}' />">${link.name}</a></div>
+          			</li>				
+				</c:if>
+				
+				<c:if test="${ status.last}" >
+          			<li class="Node ExpandLeaf IsLast">
+            			<div class="Expand"></div>
+            			<div class="Content"><a href="<c:url value='/admin/use_with_product/edit/${link.id}' />">${link.name}</a></div>
+          			</li>				
+				</c:if>
+			</c:forEach>    
+			    
+        </ul>
+      </li>
+      
+      <li class="Node ExpandClosed">
+        <div class="Expand"></div>
+        <div class="Content"><a href="<c:url value='/admin/use_with_products/consumables_for_3D_equipment' />">Расходные материалы для 3D оборудования</a></div>
+        <ul class="Container">
+        
+			<c:forEach items="${listLeftLinks.useWithProductsJSON.list_consumables_for_3D_equipment}" var="link" varStatus="status">
+				<c:if test="${ ! status.last}" >
+          			<li class="Node ExpandLeaf">
+            			<div class="Expand"></div>
+            			<div class="Content"><a href="<c:url value='/admin/use_with_product/edit/${link.id}' />">${link.name}</a></div>
+          			</li>				
+				</c:if>
+				
+				<c:if test="${ status.last}" >
+          			<li class="Node ExpandLeaf IsLast">
+            			<div class="Expand"></div>
+            			<div class="Content"><a href="<c:url value='/admin/use_with_product/edit/${link.id}' />">${link.name}</a></div>
+          			</li>				
+				</c:if>
+			</c:forEach>    
+			    
+        </ul>
+      </li>
+      
+      <li class="Node ExpandClosed">
+        <div class="Expand"></div>
+        <div class="Content"><a href="<c:url value='/admin/use_with_products/products_for_maintenance' />">Товары для обслуживания</a></div>
+        <ul class="Container">
+        
+			<c:forEach items="${listLeftLinks.useWithProductsJSON.list_products_for_maintenance}" var="link" varStatus="status">
+				<c:if test="${ ! status.last}" >
+          			<li class="Node ExpandLeaf">
+            			<div class="Expand"></div>
+            			<div class="Content"><a href="<c:url value='/admin/use_with_product/edit/${link.id}' />">${link.name}</a></div>
+          			</li>				
+				</c:if>
+				
+				<c:if test="${ status.last}" >
+          			<li class="Node ExpandLeaf IsLast">
+            			<div class="Expand"></div>
+            			<div class="Content"><a href="<c:url value='/admin/use_with_product/edit/${link.id}' />">${link.name}</a></div>
+          			</li>				
+				</c:if>
+			</c:forEach>    
+			    
+        </ul>
+      </li>
+      
+      <li class="Node ExpandClosed IsLast">
+        <div class="Expand"></div>
+        <div class="Content"><a href="<c:url value='/admin/use_with_products/parts_and_accessories' />">Запчасти и комплектующие</a></div>
+        <ul class="Container">
+			
+			<c:forEach items="${listLeftLinks.useWithProductsJSON.list_parts_and_accessories}" var="link" varStatus="status">
+				<c:if test="${ ! status.last}" >
+          			<li class="Node ExpandLeaf">
+            			<div class="Expand"></div>
+            			<div class="Content"><a href="<c:url value='/admin/use_with_product/edit/${link.id}' />">${link.name}</a></div>
+          			</li>				
+				</c:if>
+				
+				<c:if test="${ status.last}" >
+          			<li class="Node ExpandLeaf IsLast">
+            			<div class="Expand"></div>
+            			<div class="Content"><a href="<c:url value='/admin/use_with_product/edit/${link.id}' />">${link.name}</a></div>
+          			</li>				
+				</c:if>
+			</c:forEach> 
+			
+        </ul>
+      </li> 
+      
+    </ul>
+  </li>
 
    <li class="Node IsRoot ExpandClosed">
     <div class="Expand"></div>

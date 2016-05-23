@@ -1,15 +1,15 @@
 package com.printmaster.nk.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 import javax.validation.Valid;
@@ -17,6 +17,8 @@ import javax.validation.Valid;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -31,7 +33,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.printmaster.nk.beans.ComponetsForController;
 import com.printmaster.nk.beans.FileMeta;
@@ -40,6 +41,7 @@ import com.printmaster.nk.beans.PicturesContainer;
 import com.printmaster.nk.model.Laminator;
 import com.printmaster.nk.model.SearchLaminators;
 import com.printmaster.nk.service.LaminatorService;
+import com.printmaster.nk.service.UseWithProductService;
 
 @Controller
 public class LaminatorController {
@@ -67,83 +69,14 @@ public class LaminatorController {
         this.laminatorService = ps;
     }
     
-	@ModelAttribute("delivery")
-	public Map<String, String> delivery(){
-		Map<String, String> m = new LinkedHashMap<String, String>();
-		m.put("Первый способ", "Первый способ");
-		m.put("Второй способ", "Второй способ");
-		m.put("Третий способ", "Третий способ");
-		return m;
-	}
+    private UseWithProductService useWithProductService;
 	
-	@ModelAttribute("availability")
-	public Map<String, String> availability(){
-		Map<String, String> m = new LinkedHashMap<String, String>();
-		m.put("есть", "есть");
-		m.put("нету", "нету");
-		m.put("заканчивается", "заканчивается");
-		m.put("под заказ", "под заказ");
-		return m;
-	}
-	
-	@ModelAttribute("typeProduct")
-	public Map<String, String> typeLaser(){
-		Map<String, String> m = new LinkedHashMap<String, String>();
-		m.put("Горячего ламинирования", "Горячего ламинирования");
-		m.put("Холодного ламинирования", "Холодного ламинирования");
-		m.put("Жидкостные", "Жидкостные");
-		m.put("Планшетный ламинатор", "Планшетный ламинатор");
-		return m;
-	}
-	
-	@ModelAttribute("previouslyUsed")
-	public Map<String, String> previouslyUsed(){
-		Map<String, String> m = new LinkedHashMap<String, String>();
-		m.put("новое оборудование", "новое оборудование");
-		m.put("демозальное оборудование", "демозальное оборудование");
-		m.put("б/у", "б/у");
-		return m;
-	}
-	
-	@ModelAttribute("innings")
-	public Map<String, String> typeEngine(){
-		Map<String, String> m = new LinkedHashMap<String, String>();
-		m.put("Рулонный", "Рулонный");
-		m.put("Плоскопечатный", "Плоскопечатный");
-		m.put("Гибридный", "Гибридный");
-		return m;
-	}
-	
-	@ModelAttribute("laminatingWidth")
-	public Map<String, String> laminatingWidth(){
-		Map<String, String> m = new LinkedHashMap<String, String>();
-		m.put("305", "305");
-		m.put("457", "457");
-		m.put("610", "610");
-		m.put("914", "914");
-		m.put("1070", "1070");
-		m.put("1118", "1118");
-		m.put("1524", "1524");
-		m.put("1550", "1550");
-		m.put("1600", "1600");
-		return m;
-	}
-	
-	@ModelAttribute("equipmentManufacturer")
-	public Map<String, String> equipmentManufacturer(){
-		Map<String, String> m = new LinkedHashMap<String, String>();
-		m.put("Kala", "Kala");
-		m.put("Royal Sovereign", "Royal Sovereign");
-		m.put("GMP", "GMP");
-		m.put("Champion", "Champion");
-		m.put("Aurora", "Aurora");
-		m.put("GBC", "GBC");
-		m.put("HF FGK", "HF FGK");
-		m.put("Yingkai", "Yingkai");
-		return m;
-	}
+	@Autowired(required=true)
+    @Qualifier(value="useWithProductService")
+    public void setUseWithProductService(UseWithProductService ps){
+        this.useWithProductService = ps;
+    }
 
-	
 	@RequestMapping(value = "/laminators", method = RequestMethod.GET)	
     public String allLaminators(Model model) {
         model.addAttribute("listProducts", componets.showSimplestArrayOfLaminator(this.laminatorService.listShowOnSite()));
@@ -154,6 +87,11 @@ public class LaminatorController {
         model.addAttribute("search", search);
         model.addAttribute("type", "laminator");
         logger.info("On '../laminators' page.");
+        
+        try {
+			model.addAttribute("laminator", (JSONObject)new JSONParser().
+					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/laminator.json"), "UTF-8")));
+		} catch (IOException | ParseException e) {}
         return "laminators";
     }
 	
@@ -189,6 +127,11 @@ public class LaminatorController {
         model.addAttribute("search", search);
         model.addAttribute("listProducts", componets.showSimplestArrayOfLaminator(laminatorService.listSearchLaminators(search)));
         model.addAttribute("type", "laminator");
+        
+        try {
+			model.addAttribute("laminator", (JSONObject)new JSONParser().
+					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/laminator.json"), "UTF-8")));
+		} catch (IOException | ParseException e) {}
         return "laminators/" + type ;
     }
 
@@ -201,7 +144,13 @@ public class LaminatorController {
     @RequestMapping("/laminator/{id}")
     public String showLaminator(@PathVariable("id") long id, Model model){
     	logger.info("/laminator/" + id + " page.");
-        model.addAttribute("product", laminatorService.getLaminatorById(id));
+        Laminator product = laminatorService.getLaminatorById(id);
+        model.addAttribute("product", product);
+        if(product.getIdUseWithProduct()!=null){
+        	model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(useWithProductService.getUseWithProductsByIds(product.getIdUseWithProduct())));
+        } else {
+        	model.addAttribute("uwp", null);
+        }
         return "laminator";
     }
     
@@ -214,15 +163,15 @@ public class LaminatorController {
         model.addAttribute("title", "Ламинаторы");
         model.addAttribute("addProduct", "Добавить ламинатор");
         logger.info("/admin/laminators page.");
-        return "admin/laminators";
+        return "admin/products";
     }
 	
 	@RequestMapping(value = "/admin/laminators/{type}", method = RequestMethod.GET)	
     public String listConcreteTypeLaminators(@PathVariable("type") String type, Model model) {
 		
+		List<Laminator> list = new ArrayList<Laminator>();
         if(type.equals("hot_lamination")){
-        	List<Laminator> list = new ArrayList<Laminator>();
-        	
+
         	for(Laminator laminator : laminatorService.listLaminators()){
         		if(laminator.getTypeProduct().equals("Горячего ламинирования")){
         			list.add(laminator);
@@ -232,16 +181,9 @@ public class LaminatorController {
         	model.addAttribute("titleOfTable", "Список загруженных ламинаторов горячего ламинирования");
             model.addAttribute("listProducts", list);
          
-    		model.addAttribute("productType", "laminator");
-    		model.addAttribute("nameProduct", "Имя ламинатора");
-            model.addAttribute("title", "Ламинаторы");
-            model.addAttribute("addProduct", "Добавить ламинатор");
             logger.info("On /admin/laminators/hot_lamination page.");
-            
-            return "admin/laminators";
-    		
+
     	} else if(type.equals("cold_laminating")){
-    		List<Laminator> list = new ArrayList<Laminator>();
         	
         	for(Laminator laminator : laminatorService.listLaminators()){
         		if(laminator.getTypeProduct().equals("Холодного ламинирования")){
@@ -252,16 +194,9 @@ public class LaminatorController {
         	model.addAttribute("titleOfTable", "Список загруженных ламинаторов холодного ламинирования");
             model.addAttribute("listProducts", list);
             
-            model.addAttribute("productType", "laminator");
-    		model.addAttribute("nameProduct", "Имя ламинатора");
-            model.addAttribute("title", "Ламинаторы");
-            model.addAttribute("addProduct", "Добавить ламинатор");
             logger.info("On /admin/laminators/cold_laminating page.");
             
-            return "admin/laminators";
-            
     	} else if(type.equals("liquid")){
-    		List<Laminator> list = new ArrayList<Laminator>();
         	
         	for(Laminator laminator : laminatorService.listLaminators()){
         		if(laminator.getTypeProduct().equals("Жидкостные")){
@@ -271,17 +206,10 @@ public class LaminatorController {
         	
         	model.addAttribute("titleOfTable", "Список загруженных жидкостных ламинаторов");
             model.addAttribute("listProducts", list);
-            
-            model.addAttribute("productType", "laminator");
-    		model.addAttribute("nameProduct", "Имя ламинатора");
-            model.addAttribute("title", "Ламинаторы");
-            model.addAttribute("addProduct", "Добавить ламинатор");
+
             logger.info("On /admin/laminators/liquid.");
-            
-            return "admin/laminators";
-             		
+
     	} else if(type.equals("flatbed_laminating_machine")){
-    		List<Laminator> list = new ArrayList<Laminator>();
         	
         	for(Laminator laminator : laminatorService.listLaminators()){
         		if(laminator.getTypeProduct().equals("Планшетный ламинатор")){
@@ -292,39 +220,47 @@ public class LaminatorController {
         	model.addAttribute("titleOfTable", "Список загруженных планшетных ламинаторов");
             model.addAttribute("listProducts", list);
             
-            model.addAttribute("productType", "laminator");
-    		model.addAttribute("nameProduct", "Имя ламинатора");
-            model.addAttribute("title", "Ламинаторы");
-            model.addAttribute("addProduct", "Добавить ламинатор");
             logger.info("On /admin/laminators/flatbed_laminating_machine.");
-            
-            return "admin/laminators";
     		
     	} else {
-    		model.addAttribute("productType", "laminator");
-    		model.addAttribute("nameProduct", "Имя ламинатора");
     		model.addAttribute("titleOfTable", "Список загруженных ламинаторов");
             model.addAttribute("listProducts", laminatorService.listLaminators());
-            model.addAttribute("title", "Ламинаторы");
-            model.addAttribute("addProduct", "Добавить ламинатор");
-            logger.info("/admin/laminators page.");
-            return "admin/laminators";
     	}
+        
+		model.addAttribute("productType", "laminator");
+		model.addAttribute("nameProduct", "Имя ламинатора");
+        model.addAttribute("title", "Ламинаторы");
+        model.addAttribute("addProduct", "Добавить ламинатор");
+        
+        return "admin/products";
     }
 	
 	@RequestMapping(value = "/admin/laminator/new", method = RequestMethod.GET)
-	public ModelAndView addNewLaminator() {
+	public String addNewLaminator(Model model) {
 		files.clear();
 		logger.info("/admin/laminator/new page.");
-	    return new ModelAndView("admin/laminator", "product", new Laminator());
+		model.addAttribute("product", new Laminator());
+		model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+		
+		try {
+			model.addAttribute("laminator", (JSONObject)new JSONParser().
+					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/laminator.json"), "UTF-8")));
+		} catch (IOException | ParseException e) {}
+	    return "admin/laminator";
 	}
      
 	@RequestMapping(value = "/admin/laminator/add", method = RequestMethod.POST) 
-	public @ResponseBody ModelAndView handleFormUpload(@ModelAttribute("product") @Valid  Laminator product,
-			BindingResult result) throws IOException{
+	public String handleFormUpload(@ModelAttribute("product") @Valid  Laminator product,
+			BindingResult result, Model model) throws IOException{
 			
 			if (result.hasErrors()) {
-	            return new ModelAndView("admin/laminator", "product", product);
+				model.addAttribute("product", product);
+				model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+				try {
+					model.addAttribute("laminator", (JSONObject)new JSONParser().
+							parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/laminator.json"), "UTF-8")));
+				} catch (IOException | ParseException e) {}
+	            return "admin/laminator";
 	        }
 
             long id = laminatorService.addLaminator(product);
@@ -366,9 +302,6 @@ public class LaminatorController {
             this.laminatorService.updateLaminator(product);
             
             files.clear();
-		
-          ModelAndView mav = new ModelAndView("redirect:/admin/laminators"); 
-		  mav.addObject("listProducts", laminatorService.listLaminators());
 		  
 		  links.createLinksForLaminators(laminatorService.listShowOnSite());	
 		  
@@ -376,15 +309,21 @@ public class LaminatorController {
 			  componets.updateInLeftField(product, true, "laminator");
 
 		  logger.info("Update links to the products in left menu!");
-	   return mav;
+	   return "redirect:/admin/laminators";
 	}
 	
 	@RequestMapping(value = "/admin/laminator/save_add", method = RequestMethod.POST) 
-	public @ResponseBody ModelAndView handleFormUploadSave(@ModelAttribute("product") @Valid Laminator product,
-			BindingResult result) throws IOException{
+	public String handleFormUploadSave(@ModelAttribute("product") @Valid Laminator product,
+			BindingResult result, Model model) throws IOException{
 
 			if (result.hasErrors()) {
-	            return new ModelAndView("admin/laminator", "product", product);
+				model.addAttribute("product", product);
+				model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+				try {
+					model.addAttribute("laminator", (JSONObject)new JSONParser().
+							parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/laminator.json"), "UTF-8")));
+				} catch (IOException | ParseException e) {}
+	            return "admin/laminator";
 	        }
 		
             long id = laminatorService.addLaminator(product);
@@ -432,7 +371,7 @@ public class LaminatorController {
 			  componets.updateInLeftField(product, true, "laminator");
 	    	
 		  logger.info("Update links to the products in left menu!");
-	   return new ModelAndView("redirect:/admin/laminator/edit/" + id);
+	   return "redirect:/admin/laminator/edit/" + id;
 	}
 	
     @RequestMapping("/admin/laminator/edit/{id}")
@@ -457,15 +396,27 @@ public class LaminatorController {
     		files.add(fm);
     	}
         model.addAttribute("product", undateLaminator);
+        model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+        
+        try {
+			model.addAttribute("laminator", (JSONObject)new JSONParser().
+					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/laminator.json"), "UTF-8")));
+		} catch (IOException | ParseException e) {}
         return "admin/laminator";
     }
 	
 	@RequestMapping(value = "/admin/laminator/save_update", method = RequestMethod.POST) 
-	public @ResponseBody ModelAndView updateSaveLaminator(@ModelAttribute("product") @Valid Laminator product,
-			BindingResult result) throws IOException{
+	public String updateSaveLaminator(@ModelAttribute("product") @Valid Laminator product,
+			BindingResult result, Model model) throws IOException{
 		
 		if (result.hasErrors()) {
-            return new ModelAndView("admin/laminator", "product", product);
+			model.addAttribute("product", product);
+			model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+			try {
+				model.addAttribute("laminator", (JSONObject)new JSONParser().
+						parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/laminator.json"), "UTF-8")));
+			} catch (IOException | ParseException e) {}
+            return "admin/laminator";
         }
 		
 		logger.info("Laminator UPDATE with save, id=" + product.getId());
@@ -510,16 +461,21 @@ public class LaminatorController {
 			componets.updateInLeftField(product, true, "laminator");
 		  
 		logger.info("Update links to the products in left menu!");
-		ModelAndView mav = new ModelAndView("redirect:/admin/laminator/edit/" + product.getId());
-		return mav;
+		return "redirect:/admin/laminator/edit/" + product.getId();
 	}
 	
 	@RequestMapping(value = "/admin/laminator/update", method = RequestMethod.POST) 
-	public @ResponseBody ModelAndView updateLaminator(@ModelAttribute("product") @Valid Laminator product,
-			BindingResult result) throws IOException{
+	public String updateLaminator(@ModelAttribute("product") @Valid Laminator product,
+			BindingResult result, Model model) throws IOException{
 		
 		if (result.hasErrors()) {
-            return new ModelAndView("admin/laminator", "product", product);
+			model.addAttribute("product", product);
+			model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+			try {
+				model.addAttribute("laminator", (JSONObject)new JSONParser().
+						parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/laminator.json"), "UTF-8")));
+			} catch (IOException | ParseException e) {}
+            return "admin/laminator";
         }
 		
 		logger.info("Laminator UPDATE id=" + product.getId());
@@ -558,8 +514,6 @@ public class LaminatorController {
 		laminatorService.updateLaminator(product);
         logger.info("laminator with id=" + product.getId() + " was UDPATED!");
         
-		ModelAndView mav = new ModelAndView("redirect:/admin/laminators"); 
-		  mav.addObject("listProducts", laminatorService.listLaminators());
 		  files.clear();
 		  
 		  links.createLinksForLaminators(laminatorService.listShowOnSite());
@@ -568,7 +522,7 @@ public class LaminatorController {
 			  componets.updateInLeftField(product, true, "laminator");
 		  
 		  logger.info("Update links to the products in left menu!");
-	   return mav;
+	   return "redirect:/admin/laminators";
 	}
 	
     @RequestMapping(value="/admin/laminator/upload_pictures", method = RequestMethod.POST)

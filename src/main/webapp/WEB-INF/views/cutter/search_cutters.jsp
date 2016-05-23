@@ -42,7 +42,7 @@
 				<p>Тип гравера/фрезера</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${typeCutter}" path="typeCutter" element="li" />
+				<form:checkboxes items="${cutter.type_cutter}" path="typeCutter" element="li" />
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -51,7 +51,7 @@
 				<p>Б/У оборудование</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${previouslyUsed}" path="previouslyUsed" element="li" />
+				<form:checkboxes items="${cutter.previously_used}" path="previouslyUsed" element="li" />
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -94,7 +94,7 @@
 				<p>Тип двигателей</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${typeEngine}" path="typeEngine" element="li" />
+				<form:checkboxes items="${cutter.type_engine}" path="typeEngine" element="li" />
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -103,7 +103,7 @@
 				<p>Тип гравировки</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${engravingStyle}" path="engravingStyle" element="li" />
+				<form:checkboxes items="${cutter.engraving_style}" path="engravingStyle" element="li" />
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -112,7 +112,7 @@
 				<p>Тип охлаждения</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${typeOfCooling}" path="typeOfCooling" element="li" />
+				<form:checkboxes items="${cutter.type_of_cooling}" path="typeOfCooling" element="li" />
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -191,7 +191,7 @@
 				<p>Крепление инструмента</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${mountingTool}" path="mountingTool" element="li" />
+				<form:checkboxes items="${cutter.mounting_tool}" path="mountingTool" element="li" />
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -200,7 +200,7 @@
 				<p>Интерфейс подключения</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${connectionInterface}" path="connectionInterface" element="li" />
+				<form:checkboxes items="${cutter.connection_interface}" path="connectionInterface" element="li" />
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -209,7 +209,7 @@
 				<p>Програмное обеспечение</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${software}" path="software" element="li" />
+				<form:checkboxes items="${cutter.software}" path="software" element="li" />
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -218,7 +218,7 @@
 				<p>Производитель оборудования</p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${equipmentManufacturer}" path="equipmentManufacturer" element="li" />
+				<form:checkboxes items="${cutter.equipment_manufacturer}" path="equipmentManufacturer" element="li" />
 			</ul>
 		</div>
 		<div class="search_criteria">

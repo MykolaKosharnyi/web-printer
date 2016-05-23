@@ -69,7 +69,7 @@
 		</div>
 
 	<form:form method="POST" commandName="product" action="${addAction}">
-			
+		<div class="save_button_keeper">	
 			<c:if test="${empty product.id}">
 				<c:url value="/admin/laser/save_add" var="saveLoad" />
 				<input id="submit" type="submit" formaction="${saveLoad}" value="сохранить" style="background: gold; color: black;"/>
@@ -83,9 +83,9 @@
 			</c:if>
 			
 			<c:if test="${!empty product.id}">
-					<input type="hidden" name="id" value="${product.id}">
+				<input type="hidden" name="id" value="${product.id}">
 			</c:if>
-
+		</div>
 			<div class="product_characteristic">
 				<div class="characteristic">
 					<div class="block_title">
@@ -127,7 +127,7 @@
 						<form:errors path="typeLaser" cssClass="error"></form:errors>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${typeLaser}" path="typeLaser" element="li"/>
+						<form:radiobuttons items="${laser.type_laser}" path="typeLaser" element="li"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -146,7 +146,7 @@
 						<p>Состояние оборудования</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${previouslyUsed}" path="previouslyUsed" element="li"/>
+						<form:radiobuttons items="${laser.previously_used}" path="previouslyUsed" element="li"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -227,7 +227,7 @@
 						<p>Тип охлаждения</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${typeOfCooling}" path="typeOfCooling" element="li"/>
+						<form:radiobuttons items="${laser.type_of_cooling}" path="typeOfCooling" element="li"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -256,7 +256,7 @@
 						<p>Цветоделение</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${colorSeparation}" path="colorSeparation" element="li"/>
+						<form:radiobuttons items="${laser.color_separation}" path="colorSeparation" element="li"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -265,7 +265,7 @@
 						<p>Тип выводимого изображения</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${typeTheDisplayedImage}" path="typeTheDisplayedImage" element="li"/>
+						<form:radiobuttons items="${laser.type_the_displayed_image}" path="typeTheDisplayedImage" element="li"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -348,7 +348,7 @@
 						<p>Целевое назначение (для выбора с уже заданных)</p>
 					</div>
 					<ul class="check_boxes">
-						<form:checkboxes items="${specialPurpose}" path="specialPurpose" element="li"/>
+						<form:checkboxes items="${laser.special_purpose}" path="specialPurpose" element="li"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -419,7 +419,7 @@
 						<p>Тип двигателей</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${typeEngine}" path="typeEngine" element="li"/>
+						<form:radiobuttons items="${laser.type_engine}" path="typeEngine" element="li"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -478,7 +478,7 @@
 						<p>Интерфейс подключения</p>
 					</div>
 					<ul class="check_boxes">
-						<form:checkboxes items="${connectionInterface}" path="connectionInterface" element="li"/>
+						<form:checkboxes items="${laser.connection_interface}" path="connectionInterface" element="li"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -487,7 +487,7 @@
 						<p>Типы файлов</p>
 					</div>
 					<ul class="check_boxes">
-						<form:checkboxes items="${fileTypes}" path="fileTypes" element="li"/>
+						<form:checkboxes items="${laser.file_types}" path="fileTypes" element="li"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -496,7 +496,7 @@
 						<p>Програмное обеспечение</p>
 					</div>
 					<ul class="check_boxes">
-						<form:checkboxes items="${software}" path="software" element="li"/>
+						<form:checkboxes items="${laser.software}" path="software" element="li"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -505,7 +505,7 @@
 						<p>Производитель оборудования</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${equipmentManufacturer}" path="equipmentManufacturer" element="li"/>
+						<form:radiobuttons items="${laser.equipment_manufacturer}" path="equipmentManufacturer" element="li"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -594,7 +594,7 @@
 						<p>Доставка</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${delivery}" path="delivery" element="li"/>
+						<form:radiobuttons items="${laser.delivery}" path="delivery" element="li"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -613,7 +613,7 @@
 						<p>Наличие (информация для пользователя)</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${availability}" path="availability" element="li"/>
+						<form:radiobuttons items="${laser.availability}" path="availability" element="li"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -622,46 +622,12 @@
 						<p>Опции</p>
 					</div>
 					<ul class="check_boxes">
-						<form:checkboxes items="${availability}" path="availability" element="li"/>
+						<form:checkboxes items="${laser.availability}" path="availability" element="li"/>
 					</ul>
 				</div>
 			</div>
 
-		<div class="textarea_description">
-			<div class="characteristic">
-				<div class="block_title">
-					<i></i>
-					<p>Служебная информация</p>
-				</div>
-				<ul class="box_text_area">
-					<form:textarea name="content" path="serviceInformation" value="${product.serviceInformation}"></form:textarea>
-				</ul>
-			</div>
-		</div>
-
-		<div class="textarea_description">
-			<div class="characteristic">
-				<div class="block_title">
-					<i class="opened"></i>
-					<p>Описание</p>
-				</div>
-				<ul class="box_text_area" style="display: block;">
-					<form:textarea name="content" path="description" value="${product.description}"></form:textarea>
-				</ul>
-			</div>
-		</div>
-			
-		<div class="textarea_description">
-			<div class="characteristic">
-				<div class="block_title">
-					<i class="opened"></i>
-					<p>Description(отображение при выборе английского языка на сайте)</p>
-				</div>
-				<ul class="box_text_area" style="display: block;">
-					<form:textarea name="content" path="descriptionEng" value="${product.descriptionEng}"></form:textarea>
-				</ul>
-			</div>
-		</div>
+			<jsp:include page="product/textarea_descriptions.jsp" />
 		
 			<c:if test="${empty product.id}">
 				<input id="submit" type="submit" value="загрузить" style="background:green; color: azure;"/>

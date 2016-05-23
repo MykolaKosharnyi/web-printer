@@ -1,15 +1,15 @@
 package com.printmaster.nk.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 import javax.validation.Valid;
@@ -17,6 +17,8 @@ import javax.validation.Valid;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -31,7 +33,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.printmaster.nk.beans.ComponetsForController;
 import com.printmaster.nk.beans.FileMeta;
@@ -40,6 +41,7 @@ import com.printmaster.nk.beans.PicturesContainer;
 import com.printmaster.nk.model.Laser;
 import com.printmaster.nk.model.SearchLasers;
 import com.printmaster.nk.service.LaserService;
+import com.printmaster.nk.service.UseWithProductService;
 
 @Controller
 public class LaserController {
@@ -67,139 +69,14 @@ public class LaserController {
         this.laserService = ps;
     }
     
-	@ModelAttribute("delivery")
-	public Map<String, String> delivery(){
-		Map<String, String> m = new LinkedHashMap<String, String>();
-		m.put("Первый способ", "Первый способ");
-		m.put("Второй способ", "Второй способ");
-		m.put("Третий способ", "Третий способ");
-		return m;
-	}
+    private UseWithProductService useWithProductService;
 	
-	@ModelAttribute("typeOfCooling")
-	public Map<String, String> typeOfCooling(){
-		Map<String, String> m = new LinkedHashMap<String, String>();
-		m.put("Воздушное", "Воздушное");
-		m.put("Водяное", "Водяное");
-		return m;
-	}
-	
-	@ModelAttribute("availability")
-	public Map<String, String> availability(){
-		Map<String, String> m = new LinkedHashMap<String, String>();
-		m.put("есть", "есть");
-		m.put("нету", "нету");
-		m.put("заканчивается", "заканчивается");
-		m.put("под заказ", "под заказ");
-		return m;
-	}
-	
-	@ModelAttribute("typeEngine")
-	public Map<String, String> typeEngine(){
-		Map<String, String> m = new LinkedHashMap<String, String>();
-		m.put("Серво двигатель", "Серво двигатель");
-		m.put("Шаговый двигатель", "Шаговый двигатель");
-		return m;
-	}
-    
-	@ModelAttribute("typeLaser")
-	public Map<String, String> typeLaser(){
-		Map<String, String> m = new LinkedHashMap<String, String>();
-		m.put("Газовые лазеры СО2", "Газовые лазеры СО2");
-		m.put("Твердотельные лазеры", "Твердотельные лазеры");
-		m.put("Для обработки метала", "Для обработки метала");
-		m.put("С диодной накачкой", "С диодной накачкой");
-		m.put("Оптоволоконные лазеры", "Оптоволоконные лазеры");
-		m.put("Плазменные лазеры", "Плазменные лазеры");
-		return m;
-	}
-	
-	@ModelAttribute("previouslyUsed")
-	public Map<String, String> previouslyUsed(){
-		Map<String, String> m = new LinkedHashMap<String, String>();
-		m.put("новое оборудование", "новое оборудование");
-		m.put("демозальное оборудование", "демозальное оборудование");
-		m.put("б/у", "б/у");
-		return m;
-	}
-	
-	@ModelAttribute("equipmentManufacturer")
-	public Map<String, String> equipmentManufacturer(){
-		Map<String, String> m = new LinkedHashMap<String, String>();
-		m.put("Tander Jet", "Tander Jet");
-		m.put("JHF", "JHF");
-		m.put("Bodor", "Bodor");
-		m.put("Chanxan", "Chanxan");
-		return m;
-	}
-	
-	@ModelAttribute("colorSeparation")
-	public Map<String, String> colorSeparation(){
-		Map<String, String> m = new LinkedHashMap<String, String>();
-		m.put("Да", "Да");
-		m.put("Нет", "Нет");
-		return m;
-	}
-	
-	@ModelAttribute("specialPurpose")
-	public Map<String, String> specialPurpose(){
-		Map<String, String> m = new LinkedHashMap<String, String>();
-		m.put("Для маркирования поверхностей", "Для маркирования поверхностей");
-		m.put("Для резки черных металлов", "Для резки черных металлов");
-		m.put("Для резки цветных металлов", "Для резки цветных металлов");
-		m.put("Для резки изделий из дерева", "Для резки изделий из дерева");
-		m.put("Для резки изделий из стекла", "Для резки изделий из стекла");
-		return m;
-	}
-	
-	@ModelAttribute("typeTheDisplayedImage")
-	public Map<String, String> typeTheDisplayedImage(){
-		Map<String, String> m = new LinkedHashMap<String, String>();
-		m.put("Контур", "Контур");
-		m.put("Текст", "Текст");
-		m.put("Штрих-код", "Штрих-код");
-		m.put("Растровые изображения", "Растровые изображения");
-		return m;
-	}
-	
-	@ModelAttribute("connectionInterface")
-	public Map<String, String> connectionInterface(){
-		Map<String, String> m = new LinkedHashMap<String, String>();
-		m.put("SCSI", "SCSI");
-		m.put("PCI Adapter", "PCI Adapter");
-		m.put("USB", "USB");
-		m.put("Fire-Wire", "Fire-Wire");
-		return m;
-	}
-	
-	@ModelAttribute("fileTypes")
-	public Map<String, String> fileTypes(){
-		Map<String, String> m = new LinkedHashMap<String, String>();
-		m.put("AI", "AI");
-		m.put("DST", "DST");
-		m.put("DXF", "DXF");
-		m.put("PLT", "PLT");
-		m.put("BMP", "BMP");
-		m.put("DWG", "DWG");
-		m.put("LAS", "LAS");
-		m.put("JPG", "JPG");
-		m.put("GIF", "GIF");
-		m.put("TGA", "TGA");
-		m.put("PNG", "PNG");
-		m.put("TIF", "TIF");
-		return m;
-	}
-	
-	@ModelAttribute("software")
-	public Map<String, String> software(){
-		Map<String, String> m = new LinkedHashMap<String, String>();
-		m.put("Corel Draw", "Corel Draw");
-		m.put("Photoshop", "Photoshop");
-		m.put("Auto CAD", "Auto CAD");
-		m.put("TAJIMA", "TAJIMA");
-		return m;
-	}
-	
+	@Autowired(required=true)
+    @Qualifier(value="useWithProductService")
+    public void setUseWithProductService(UseWithProductService ps){
+        this.useWithProductService = ps;
+    }
+
 	@RequestMapping(value = "/lasers", method = RequestMethod.GET)	
     public String allLasers(Model model) {
         model.addAttribute("listProducts", componets.showSimplestArrayOfLaser(this.laserService.listShowOnSite()));
@@ -210,6 +87,11 @@ public class LaserController {
         model.addAttribute("search", search);
         model.addAttribute("type", "laser");
         logger.info("On '../lasers' page.");
+        
+        try {
+			model.addAttribute("laser", (JSONObject)new JSONParser().
+					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/laser.json"), "UTF-8")));
+		} catch (IOException | ParseException e) {}
         return "lasers";
     }
 	
@@ -253,6 +135,11 @@ public class LaserController {
         model.addAttribute("search", search);
         model.addAttribute("listProducts", componets.showSimplestArrayOfLaser(laserService.listSearchLasers(search)));
         model.addAttribute("type", "laser");
+        
+        try {
+			model.addAttribute("laser", (JSONObject)new JSONParser().
+					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/laser.json"), "UTF-8")));
+		} catch (IOException | ParseException e) {}
         return "lasers/" + type ;
     }
 
@@ -265,7 +152,14 @@ public class LaserController {
     @RequestMapping("/laser/{id}")
     public String showLaser(@PathVariable("id") long id, Model model){
     	logger.info("/laser/" + id + " page.");
-        model.addAttribute("product", laserService.getLaserById(id));
+        
+        Laser product = laserService.getLaserById(id);
+        model.addAttribute("product", product);
+        if(product.getIdUseWithProduct()!=null){
+        	model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(useWithProductService.getUseWithProductsByIds(product.getIdUseWithProduct())));
+        } else {
+        	model.addAttribute("uwp", null);
+        }
         return "laser";
     }
     
@@ -273,16 +167,20 @@ public class LaserController {
     public String listLasers(Model model) {
 		model.addAttribute("titleOfTable", "Список загруженных лазеров");
         model.addAttribute("listProducts", laserService.listLasers());
+        
+        model.addAttribute("productType", "laser");
+		model.addAttribute("nameProduct", "Имя лазера");
+        model.addAttribute("title", "Лазера");
+        model.addAttribute("addProduct", "Добавить лазер");
         logger.info("/admin/lasers page.");
-        return "admin/lasers";
+        return "admin/products";
     }
 	
 	@RequestMapping(value = "/admin/lasers/{type}", method = RequestMethod.GET)	
     public String listConcreteTypeLasers(@PathVariable("type") String type, Model model) {
 		
+		List<Laser> list = new ArrayList<Laser>();
         if(type.equals("CO2_gas_lasers")){
-        	List<Laser> list = new ArrayList<Laser>();
-        	
         	for(Laser laser : laserService.listLasers()){
         		if(laser.getTypeLaser().equals("Газовые лазеры СО2")){
         			list.add(laser);
@@ -292,12 +190,8 @@ public class LaserController {
         	model.addAttribute("titleOfTable", "Список загруженных 'Газовые лазеры СО2'");
             model.addAttribute("listProducts", list);
             logger.info("On /admin/lasers/CO2_gas_lasers page.");
-            
-            return "admin/lasers";
-    		
+
     	} else if(type.equals("solid_state_lasers")){
-    		List<Laser> list = new ArrayList<Laser>();
-        	
         	for(Laser laser : laserService.listLasers()){
         		if(laser.getTypeLaser().equals("Твердотельные лазеры")){
         			list.add(laser);
@@ -307,12 +201,8 @@ public class LaserController {
         	model.addAttribute("titleOfTable", "Список загруженных лазеров 'Твердотельные лазеры'");
             model.addAttribute("listProducts", list);
             logger.info("On /admin/lasers/solid_state_lasers page.");
-            
-            return "admin/lasers";
-            
+
     	} else if(type.equals("for_the_treatment_of_metal")){
-    		List<Laser> list = new ArrayList<Laser>();
-        	
         	for(Laser laser : laserService.listLasers()){
         		if(laser.getTypeLaser().equals("Для обработки метала")){
         			list.add(laser);
@@ -322,12 +212,8 @@ public class LaserController {
         	model.addAttribute("titleOfTable", "Список загруженных лазеров 'Для обработки метала'");
             model.addAttribute("listProducts", list);
             logger.info("On /admin/lasers/for_the_treatment_of_metal.");
-            
-            return "admin/lasers";
-             		
+  		
     	} else if(type.equals("diode_pumped")){	
-    		List<Laser> list = new ArrayList<Laser>();
-        	
         	for(Laser laser : laserService.listLasers()){
         		if(laser.getTypeLaser().equals("С диодной накачкой")){
         			list.add(laser);
@@ -337,12 +223,8 @@ public class LaserController {
         	model.addAttribute("titleOfTable", "Список загруженных лазеров с диодной накачкой");
             model.addAttribute("listProducts", list);
             logger.info("On /admin/lasers/diode_pumped page.");
-            
-            return "admin/lasers";
-    		
+
     	} else if(type.equals("fiber_lasers")){	
-    		List<Laser> list = new ArrayList<Laser>();
-        	
         	for(Laser laser : laserService.listLasers()){
         		if(laser.getTypeLaser().equals("Оптоволоконные лазеры")){
         			list.add(laser);
@@ -352,12 +234,8 @@ public class LaserController {
         	model.addAttribute("titleOfTable", "Список загруженных оптоволоконных лазеров");
             model.addAttribute("listProducts", list);
             logger.info("On /admin/lasers/fiber_lasers page.");
-            
-            return "admin/lasers";
-    		
+
     	} else if(type.equals("plasma_lasers")){	
-    		List<Laser> list = new ArrayList<Laser>();
-        	
         	for(Laser laser : laserService.listLasers()){
         		if(laser.getTypeLaser().equals("Плазменные лазеры")){
         			list.add(laser);
@@ -367,30 +245,45 @@ public class LaserController {
         	model.addAttribute("titleOfTable", "Список загруженных плазменных лазеров");
             model.addAttribute("listProducts", list);
             logger.info("On /admin/lasers/plasma_lasers page.");
-            
-            return "admin/lasers";
-    		
+
     	} else {
     		model.addAttribute("titleOfTable", "Список загруженных лазеров");
             model.addAttribute("listProducts", laserService.listLasers());
             logger.info("/admin/lasers page.");
-            return "admin/lasers";
     	}
+        model.addAttribute("productType", "laser");
+		model.addAttribute("nameProduct", "Имя лазера");
+        model.addAttribute("title", "Лазера");
+        model.addAttribute("addProduct", "Добавить лазер");
+        return "admin/products";
     }
 	
 	@RequestMapping(value = "/admin/laser/new", method = RequestMethod.GET)
-	public ModelAndView addNewLaser() {
+	public String addNewLaser(Model model) {
 		files.clear();
 		logger.info("/admin/laser/new page.");
-	    return new ModelAndView("admin/laser", "product", new Laser());
+		model.addAttribute("product", new Laser());
+		model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+		
+		 try {
+				model.addAttribute("laser", (JSONObject)new JSONParser().
+						parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/laser.json"), "UTF-8")));
+			} catch (IOException | ParseException e) {}
+	    return "admin/laser";
 	}
      
 	@RequestMapping(value = "/admin/laser/add", method = RequestMethod.POST) 
-	public @ResponseBody ModelAndView handleFormUpload(@ModelAttribute("product") @Valid  Laser product,
-			BindingResult result) throws IOException{
+	public String handleFormUpload(@ModelAttribute("product") @Valid  Laser product,
+			BindingResult result, Model model) throws IOException{
 			
 			if (result.hasErrors()) {
-	            return new ModelAndView("admin/laser", "product", product);
+				model.addAttribute("product", product);
+				model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+				try {
+					model.addAttribute("laser", (JSONObject)new JSONParser().
+							parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/laser.json"), "UTF-8")));
+				} catch (IOException | ParseException e) {}
+	            return "admin/laser";
 	        }
 
             long id = laserService.addLaser(product);
@@ -432,9 +325,6 @@ public class LaserController {
             this.laserService.updateLaser(product);
             
             files.clear();
-		
-          ModelAndView mav = new ModelAndView("redirect:/admin/lasers"); 
-		  mav.addObject("listProducts", laserService.listLasers());
 		  
 		  links.createLinksForLasers(laserService.listShowOnSite());	
 		  
@@ -442,15 +332,20 @@ public class LaserController {
 			  componets.updateInLeftField(product, true, "laser");
 	    	
 		  logger.info("Update links to the products in left menu!");
-	   return mav;
+	   return "redirect:/admin/lasers";
 	}
 	
 	@RequestMapping(value = "/admin/laser/save_add", method = RequestMethod.POST) 
-	public @ResponseBody ModelAndView handleFormUploadSave(@ModelAttribute("product") @Valid Laser product,
-			BindingResult result) throws IOException{
+	public String handleFormUploadSave(@ModelAttribute("product") @Valid Laser product, BindingResult result, Model model) throws IOException{
 
 			if (result.hasErrors()) {
-	            return new ModelAndView("admin/laser", "product", product);
+				model.addAttribute("product", product);
+				model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+				try {
+					model.addAttribute("laser", (JSONObject)new JSONParser().
+							parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/laser.json"), "UTF-8")));
+				} catch (IOException | ParseException e) {}
+	            return "admin/laser";
 	        }
 		
             long id = laserService.addLaser(product);
@@ -498,7 +393,7 @@ public class LaserController {
 	    		componets.updateInLeftField(product, true, "laser");
 	    	
 		  logger.info("Update links to the products in left menu!");
-	   return new ModelAndView("redirect:/admin/laser/edit/" + id);
+	   return "redirect:/admin/laser/edit/" + id;
 	}
 	
     @RequestMapping("/admin/laser/edit/{id}")
@@ -523,15 +418,27 @@ public class LaserController {
     		files.add(fm);
     	}
         model.addAttribute("product", undateLaser);
+        model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+        
+        try {
+			model.addAttribute("laser", (JSONObject)new JSONParser().
+					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/laser.json"), "UTF-8")));
+		} catch (IOException | ParseException e) {}
         return "admin/laser";
     }
 	
 	@RequestMapping(value = "/admin/laser/save_update", method = RequestMethod.POST) 
-	public @ResponseBody ModelAndView updateSaveLaser(@ModelAttribute("product") @Valid Laser product,
-			BindingResult result) throws IOException{
+	public String updateSaveLaser(@ModelAttribute("product") @Valid Laser product,
+			BindingResult result, Model model) throws IOException{
 		
 		if (result.hasErrors()) {
-            return new ModelAndView("admin/laser", "product", product);
+			model.addAttribute("product", product);
+			model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+			try {
+				model.addAttribute("laser", (JSONObject)new JSONParser().
+						parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/laser.json"), "UTF-8")));
+			} catch (IOException | ParseException e) {}
+            return "admin/laser";
         }
 		
 		logger.info("LASER UPDATE with save, id=" + product.getId());
@@ -576,16 +483,21 @@ public class LaserController {
 	    	componets.updateInLeftField(product, true, "laser");
 		  
 		logger.info("Update links to the products in left menu!");
-		ModelAndView mav = new ModelAndView("redirect:/admin/laser/edit/" + product.getId());
-		return mav;
+		return "redirect:/admin/laser/edit/" + product.getId();
 	}
 	
 	@RequestMapping(value = "/admin/laser/update", method = RequestMethod.POST) 
-	public @ResponseBody ModelAndView updateLaser(@ModelAttribute("product") @Valid Laser product,
-			BindingResult result) throws IOException{
+	public String updateLaser(@ModelAttribute("product") @Valid Laser product,
+			BindingResult result, Model model) throws IOException{
 		
 		if (result.hasErrors()) {
-            return new ModelAndView("admin/laser", "product", product);
+			model.addAttribute("product", product);
+			model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+			try {
+				model.addAttribute("laser", (JSONObject)new JSONParser().
+						parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/laser.json"), "UTF-8")));
+			} catch (IOException | ParseException e) {}
+            return "admin/laser";
         }
 		
 		logger.info("LASER UPDATE id=" + product.getId());
@@ -623,9 +535,7 @@ public class LaserController {
         
         laserService.updateLaser(product);
         logger.info("laser with id=" + product.getId() + " was UDPATED!");
-        
-		ModelAndView mav = new ModelAndView("redirect:/admin/lasers"); 
-		  mav.addObject("listProducts", laserService.listLasers());
+
 		  files.clear();
 		  
 		  links.createLinksForLasers(laserService.listShowOnSite());
@@ -634,7 +544,7 @@ public class LaserController {
 			  componets.updateInLeftField(product, true, "laser");
 		  
 		  logger.info("Update links to the products in left menu!");
-	   return mav;
+	   return "redirect:/admin/lasers";
 	}
 	
     @RequestMapping(value="/admin/laser/upload_pictures", method = RequestMethod.POST)

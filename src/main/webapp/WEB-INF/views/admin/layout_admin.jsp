@@ -5,6 +5,7 @@
 <html lang="ru">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link rel="shortcut icon" href="/images/logo.jpg" />
     
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/admin/common.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/admin/add_change_printer.css">

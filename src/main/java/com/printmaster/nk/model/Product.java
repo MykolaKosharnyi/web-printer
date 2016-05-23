@@ -11,8 +11,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-/*import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;*/
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -78,6 +76,9 @@ public abstract class Product implements Serializable{
 	@Column(name="path_pictures")
 	private List<String> pathPictures = new ArrayList<String>();
 	
+	@Column(name="idUseWithProduct")
+	private long[] idUseWithProduct;
+	
 	@Column(name="left_shares_link")
 	protected String leftSharesLink;
 	
@@ -127,6 +128,14 @@ public abstract class Product implements Serializable{
 //	protected Map<String,String> option = new HashMap<String,String>();
 	
 	public Product(){}
+
+	public long[] getIdUseWithProduct() {
+		return idUseWithProduct;
+	}
+
+	public void setIdUseWithProduct(long[] idUseWithProduct) {
+		this.idUseWithProduct = idUseWithProduct;
+	}
 
 	public int getAveragePowerConsumption() {
 		return averagePowerConsumption;
