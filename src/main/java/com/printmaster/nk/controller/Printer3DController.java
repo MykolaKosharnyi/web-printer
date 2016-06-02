@@ -154,12 +154,13 @@ public class Printer3DController {
 	@RequestMapping(value = "/admin/3d_printers", method = RequestMethod.GET)	
     public String listPrinters(Model model) {
 		model.addAttribute("titleOfTable", "Список загруженных 3D принтеров");
-        model.addAttribute("listProducts", productService.listPrinters3D());
+        model.addAttribute("listProducts", productService.listPrinters3D("id"));
         
         model.addAttribute("productType", "3d_printer");
 		model.addAttribute("nameProduct", "Имя 3D принтера");
         model.addAttribute("title", "3D Принтеры");
         model.addAttribute("addProduct", "Добавить 3D принтер");
+        model.addAttribute("productSubType", "none");
         logger.info("/admin/3d_printers page.");
         return "admin/products";
     }
@@ -169,85 +170,86 @@ public class Printer3DController {
         
 		List<Printer3D> list = new ArrayList<Printer3D>();
         if(type.equals("FDM-extruder")){
-        	for(Printer3D printer3d : productService.listPrinters3D()){
+        	for(Printer3D printer3d : productService.listPrinters3D("id")){
         		if(printer3d.getTypePrinter3D().equals("Экструдные FDM")){
         			list.add(printer3d);
         		}
         	}
-        	
+        	model.addAttribute("productSubType", "FDM-extruder");
         	model.addAttribute("titleOfTable", "Список загруженных экструдных FDM принтеров");
             model.addAttribute("listProducts", list);
             logger.info("On /admin/3d_printers/FDM-extruder page.");
 
     	} else if(type.equals("photo_printing_polyjet")){
-        	for(Printer3D printer3d : productService.listPrinters3D()){
+        	for(Printer3D printer3d : productService.listPrinters3D("id")){
         		if(printer3d.getTypePrinter3D().equals("Фото печать Polyjet")){
         			list.add(printer3d);
         		}
         	}
-        	
+        	model.addAttribute("productSubType", "photo_printing_polyjet");
         	model.addAttribute("titleOfTable", "Фото печать Polyjet, список загруженных 3D принтеров");
             model.addAttribute("listProducts", list);
             logger.info("On /admin/3d_printers/photo_printing_polyjet page.");
  
     	} else if(type.equals("laser_sintering_LENS")){
-        	for(Printer3D printer3d : productService.listPrinters3D()){
+        	for(Printer3D printer3d : productService.listPrinters3D("id")){
         		if(printer3d.getTypePrinter3D().equals("Лазерного спекания LENS")){
         			list.add(printer3d);
         		}
         	}
-        	
+        	model.addAttribute("productSubType", "laser_sintering_LENS");
         	model.addAttribute("titleOfTable", "Лазерного спекания LENS, список загруженных 3D принтеров");
             model.addAttribute("listProducts", list);
             logger.info("On /admin/3d_printers/laser_sintering_LENS page.");
 		
     	} else if(type.equals("lamination_LOM")){	
-        	for(Printer3D printer3d : productService.listPrinters3D()){
+        	for(Printer3D printer3d : productService.listPrinters3D("id")){
         		if(printer3d.getTypePrinter3D().equals("Ламинация LOM")){
         			list.add(printer3d);
         		}
         	}
-        	
+        	model.addAttribute("productSubType", "lamination_LOM");
         	model.addAttribute("titleOfTable", "Ламинация LOM, список загруженных 3D принтеров");
             model.addAttribute("listProducts", list);
             logger.info("On /admin/3d_printers/lamination_LOM page.");
 
     	} else if(type.equals("stereolithography_SL")){		
-        	for(Printer3D printer3d : productService.listPrinters3D()){
+        	for(Printer3D printer3d : productService.listPrinters3D("id")){
         		if(printer3d.getTypePrinter3D().equals("Стереолитография SL")){
         			list.add(printer3d);
         		}
         	}
-        	
+        	model.addAttribute("productSubType", "stereolithography_SL");
         	model.addAttribute("titleOfTable", "Стереолитография SL, список загруженных 3D принтеров");
             model.addAttribute("listProducts", list);
             logger.info("On /admin/3d_printers/stereolithography_SL page.");
 
     	} else if(type.equals("laser_sintering_LS")){    		
-        	for(Printer3D printer3d : productService.listPrinters3D()){
+        	for(Printer3D printer3d : productService.listPrinters3D("id")){
         		if(printer3d.getTypePrinter3D().equals("Лазерное спекание LS")){
         			list.add(printer3d);
         		}
         	}
-        	
+        	model.addAttribute("productSubType", "laser_sintering_LS");
         	model.addAttribute("titleOfTable", "Лазерное спекание LS, список загруженных 3D принтеров");
             model.addAttribute("listProducts", list);
             logger.info("On /admin/3d_printers/laser_sintering_LS page.");
 
     	} else if(type.equals("powder_bonding_3DP")){  		
-        	for(Printer3D printer3d : productService.listPrinters3D()){
+        	for(Printer3D printer3d : productService.listPrinters3D("id")){
         		if(printer3d.getTypePrinter3D().equals("Порошкового склеивания 3DP")){
         			list.add(printer3d);
         		}
         	}
-        	
+        	model.addAttribute("productSubType", "powder_bonding_3DP");
         	model.addAttribute("titleOfTable", "Порошкового склеивания 3DP, список загруженных 3D принтеров");
             model.addAttribute("listProducts", list);
             logger.info("On /admin/3d_printers/powder_bonding_3DP page.");
     		
     	} else {
+    		model.addAttribute("productSubType", "none");
     		model.addAttribute("titleOfTable", "Список загруженных 3D принтеров");
-            model.addAttribute("listProducts", productService.listPrinters3D());
+            model.addAttribute("listProducts", productService.listPrinters3D("id"));
             logger.info("/admin/3d_printers page.");
     	}
         model.addAttribute("productType", "3d_printer");
@@ -257,6 +259,60 @@ public class Printer3DController {
         return "admin/products";
     }
 	
+	@RequestMapping(value="/admin/3d_printer/{type}/sorting/{value}", method = RequestMethod.POST,consumes="application/json",
+    		headers = "content-type=application/x-www-form-urlencoded")
+    public @ResponseBody List<Printer3D> sortingProductsInAdmin(@PathVariable("type") String type,@PathVariable("value") String value) {
+		
+		List<Printer3D> list = new ArrayList<Printer3D>();
+        if(type.equals("FDM-extruder")){
+        	for(Printer3D printer3d : productService.listPrinters3D(value)){
+        		if(printer3d.getTypePrinter3D().equals("Экструдные FDM")){
+        			list.add(printer3d);
+        		}
+        	}
+    	} else if(type.equals("photo_printing_polyjet")){
+        	for(Printer3D printer3d : productService.listPrinters3D(value)){
+        		if(printer3d.getTypePrinter3D().equals("Фото печать Polyjet")){
+        			list.add(printer3d);
+        		}
+        	}
+    	} else if(type.equals("laser_sintering_LENS")){
+        	for(Printer3D printer3d : productService.listPrinters3D(value)){
+        		if(printer3d.getTypePrinter3D().equals("Лазерного спекания LENS")){
+        			list.add(printer3d);
+        		}
+        	}
+    	} else if(type.equals("lamination_LOM")){	
+        	for(Printer3D printer3d : productService.listPrinters3D(value)){
+        		if(printer3d.getTypePrinter3D().equals("Ламинация LOM")){
+        			list.add(printer3d);
+        		}
+        	}
+    	} else if(type.equals("stereolithography_SL")){		
+        	for(Printer3D printer3d : productService.listPrinters3D(value)){
+        		if(printer3d.getTypePrinter3D().equals("Стереолитография SL")){
+        			list.add(printer3d);
+        		}
+        	}
+    	} else if(type.equals("laser_sintering_LS")){    		
+        	for(Printer3D printer3d : productService.listPrinters3D(value)){
+        		if(printer3d.getTypePrinter3D().equals("Лазерное спекание LS")){
+        			list.add(printer3d);
+        		}
+        	}
+    	} else if(type.equals("powder_bonding_3DP")){  		
+        	for(Printer3D printer3d : productService.listPrinters3D(value)){
+        		if(printer3d.getTypePrinter3D().equals("Порошкового склеивания 3DP")){
+        			list.add(printer3d);
+        		}
+        	}
+    	} else {
+    		list.addAll(productService.listPrinters3D(value));
+    	}
+
+		return list;
+    }
+	
 	@RequestMapping(value = "/admin/3d_printer/new", method = RequestMethod.GET)
 	public String addNewPrinter(Model model) {
 		files.clear();
@@ -264,6 +320,7 @@ public class Printer3DController {
 		model.addAttribute("product", new Printer3D());
 		logger.info("All characteristic of 3d printer.");
 		model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+		model.addAttribute("type", "3d_printer");
 		try {
 			model.addAttribute("printer", (JSONObject)new JSONParser().
 					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/3d_printer.json"), "UTF-8")));
@@ -278,6 +335,7 @@ public class Printer3DController {
 			if (result.hasErrors()) {
 				model.addAttribute("product", product);
 				model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+				model.addAttribute("type", "3d_printer");
 				try {
 					model.addAttribute("printer", (JSONObject)new JSONParser().
 							parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/3d_printer.json"), "UTF-8")));
@@ -327,6 +385,7 @@ public class Printer3DController {
 			if (result.hasErrors()) {
 				model.addAttribute("product", product);
 				model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+				model.addAttribute("type", "3d_printer");
 				try {
 					model.addAttribute("printer", (JSONObject)new JSONParser().
 							parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/3d_printer.json"), "UTF-8")));
@@ -374,22 +433,9 @@ public class Printer3DController {
     	files.clear();
     	Printer3D undatePrinter3D = productService.getPrinter3DById(id);
     	
-    	FileMeta fm = null;
-    	for(String path : undatePrinter3D.getPathPictures()){
-    		fm = new FileMeta();
-    		fm.setFileName(path);
-    		
-    		try {
-    			File fi = new File(directory + File.separator + 
-    					concreteFolder + File.separator + id + File.separator + path);
-    			fm.setBytes(Files.readAllBytes(fi.toPath()));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-    		files.add(fm);
-    	}
         model.addAttribute("product", undatePrinter3D);
         model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+        model.addAttribute("type", "3d_printer");
         logger.info("All characteristic of 3d printer.");
 		try {
 			model.addAttribute("printer", (JSONObject)new JSONParser().
@@ -405,6 +451,7 @@ public class Printer3DController {
 		if (result.hasErrors()) {
 			model.addAttribute("product", product);
 			model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+			model.addAttribute("type", "3d_printer");
 			try {
 				model.addAttribute("printer", (JSONObject)new JSONParser().
 						parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/3d_printer.json"), "UTF-8")));
@@ -412,31 +459,8 @@ public class Printer3DController {
             return "admin/3d_printer";
         }
 		
-		FileUtils.cleanDirectory(new File(directory + File.separator + 
-				concreteFolder + File.separator + product.getId()));
-		
-		if (files != null && files.size()!=0) {
-			for (FileMeta fm : files.getFiles()) {
-				try {
-					FileCopyUtils.copy(fm.getBytes(), new FileOutputStream(
-							directory + File.separator + 
-        					concreteFolder + File.separator + product.getId() + File.separator + fm.getFileName()));
-					product.getPathPictures().add(fm.getFileName());
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		} else {
-    		try {
-    			File fi = new File(directory + File.separator + "default.jpg");
-    			FileCopyUtils.copy(Files.readAllBytes(fi.toPath()), new FileOutputStream(
-						directory + File.separator + 
-    					concreteFolder + File.separator + product.getId() + File.separator + "default.jpg"));
-    			product.getPathPictures().add("default.jpg");
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
+		List<String> pathPictures = productService.getPrinter3DById(product.getId()).getPathPictures();
+		product.setPathPictures(pathPictures);
 
         productService.updatePrinter3D(product);
 
@@ -456,6 +480,7 @@ public class Printer3DController {
 		if (result.hasErrors()) {
 			model.addAttribute("product", product);
 			model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+			model.addAttribute("type", "3d_printer");
 			try {
 				model.addAttribute("printer", (JSONObject)new JSONParser().
 						parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/3d_printer.json"), "UTF-8")));
@@ -463,32 +488,8 @@ public class Printer3DController {
             return "admin/3d_printer";
         }
 		
-		FileUtils.cleanDirectory(new File(directory + File.separator + 
-				concreteFolder + File.separator + product.getId()));
-		
-		if (files != null && files.size()!=0) {
-			for (FileMeta fm : files.getFiles()) {
-				try {
-					FileCopyUtils.copy(fm.getBytes(), new FileOutputStream(
-							directory + File.separator + 
-        					concreteFolder + File.separator + product.getId() + File.separator + fm.getFileName()));
-					product.getPathPictures().add(fm.getFileName());
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		} else {
-    		try {
-    			File fi = new File(directory + File.separator + "default.jpg");
-    			FileCopyUtils.copy(Files.readAllBytes(fi.toPath()), new FileOutputStream(
-						directory + File.separator + 
-    					concreteFolder + File.separator + product.getId() + File.separator + "default.jpg"));
-    			product.getPathPictures().add("default.jpg");
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-    		
-		}
+		List<String> pathPictures = productService.getPrinter3DById(product.getId()).getPathPictures();
+		product.setPathPictures(pathPictures);
 
         productService.updatePrinter3D(product);
 
@@ -549,6 +550,72 @@ public class Printer3DController {
         			break;
         		}
         	}	
+    }
+    
+    @RequestMapping(value="/admin/3d_printer/upload_pictures_update/{id}", method = RequestMethod.POST)
+    public @ResponseBody String uploadPicturesUpdate(MultipartHttpServletRequest request, @PathVariable("id") long id) {
+    	logger.info("upload new picture");
+        
+         Iterator<String> itr =  request.getFileNames();
+         MultipartFile mpf = null;
+         String fileName = null;
+
+         while(itr.hasNext()){
+        	mpf = request.getFile(itr.next()); 
+     		fileName = new Random().nextInt(10000000) + "" + mpf.getOriginalFilename().substring(mpf.getOriginalFilename().lastIndexOf("."))/*last part is file extension*/; 
+
+ 			try {
+ 				FileCopyUtils.copy(mpf.getBytes(), new FileOutputStream(directory + File.separator + concreteFolder
+	    				+ File.separator + id + File.separator + fileName));
+ 			} catch (IOException e) {
+ 				logger.error("Don't write picture to the folder", e);
+ 			} 
+        	 
+ 			Printer3D product = productService.getPrinter3DById(id);
+ 			product.getPathPictures().add(fileName);
+ 			productService.updatePrinter3D(product);
+         }  
+         return fileName;
+    }
+    
+    @RequestMapping(value="/admin/3d_printer/change_order_pictures_update/{id}", method = RequestMethod.POST,consumes="application/json",
+    		headers = "content-type=application/x-www-form-urlencoded")
+    public @ResponseBody void changeOrderPicturesUpdate(@RequestBody List<String> selectedIds, @PathVariable("id") long id) {
+    	logger.info("change order of pictures in changed 3d_printer product");
+    	
+    	Printer3D product = productService.getPrinter3DById(id);
+    	product.getPathPictures().clear();
+    	product.getPathPictures().addAll(selectedIds);
+    	productService.updatePrinter3D(product);
+    }
+    
+    @RequestMapping(value="/admin/3d_printer/remove_picture_update/{name_picture}/{id}", method = RequestMethod.POST,consumes="application/json",
+    		headers = "content-type=application/x-www-form-urlencoded")
+    public @ResponseBody void removePicture(@PathVariable("name_picture") String namePicture, @PathVariable("id") long id) {
+    	String name = namePicture.replace(":", ".");
+    	Printer3D product = productService.getPrinter3DById(id);
+    	product.getPathPictures().remove(name);
+    	
+    	try {
+    		FileUtils.forceDelete(new File(directory + File.separator + concreteFolder+ File.separator + id + File.separator + name));
+		} catch (IOException e) {
+			logger.error("Can't delete picture from the folder", e);
+		} 
+    	
+    	if(product.getPathPictures().size()==0){
+    		File fi = new File(directory + File.separator + "default.jpg");
+			try {
+				FileCopyUtils.copy(Files.readAllBytes(fi.toPath()), new FileOutputStream(
+						directory + File.separator + concreteFolder + File.separator + product.getId() + File.separator + "default.jpg"));
+			} catch (IOException e) {
+				logger.error("Can't update path of the default picture to printer 3d with id=" + product.getId(), e);
+			}
+			product.getPathPictures().add("default.jpg");
+    	}
+    	
+    	productService.updatePrinter3D(product);
+    	
+    	logger.info("Remove pictore with name = " + name + " from changed printer 3d product");
     }
     
     @RequestMapping("/admin/3d_printer/remove/{id}")

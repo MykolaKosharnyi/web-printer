@@ -11,6 +11,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Junction;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
@@ -50,11 +51,13 @@ public class UseWithProductDAOImpl  implements UseWithProductDAO{
 	        logger.info("UseWithProduct updated successfully, UseWithProduct Details=" + c);
 	    }
 	 
-	    @SuppressWarnings("unchecked")
+	    @SuppressWarnings({ "unchecked", "rawtypes" })
 	    @Override
-	    public List<UseWithProduct> listProducts() {
+	    public Set<UseWithProduct> listProducts(String sortCriteria) {
 	        Session session = this.sessionFactory.getCurrentSession();
-	        List<UseWithProduct> useWithProductList = session.createQuery("from UseWithProduct").list();
+	        Criteria cr = session.createCriteria(UseWithProduct.class);
+			cr.addOrder( Order.desc(sortCriteria));
+			Set<UseWithProduct> useWithProductList = new LinkedHashSet(cr.list());
 	        for(UseWithProduct c : useWithProductList){
 	            logger.info("UseWithProduct List::" + c);
 	        }

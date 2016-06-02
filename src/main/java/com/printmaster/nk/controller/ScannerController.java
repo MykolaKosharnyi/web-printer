@@ -149,12 +149,13 @@ public class ScannerController {
 	@RequestMapping(value = "/admin/scanners", method = RequestMethod.GET)	
     public String listScanners(Model model) {
 		model.addAttribute("titleOfTable", "Список загруженных сканеров");
-        model.addAttribute("listProducts", scannerService.listScanners());
+        model.addAttribute("listProducts", scannerService.listScanners("id"));
 
         model.addAttribute("productType", "scanner");
         model.addAttribute("nameProduct", "Имя сканера");
         model.addAttribute("title", "Сканеры");
         model.addAttribute("addProduct", "Добавить сканер");
+        model.addAttribute("productSubType", "none");
         logger.info("/admin/scanners page.");
         return "admin/products";
     }
@@ -164,30 +165,31 @@ public class ScannerController {
 
 		List<Scanner> list = new ArrayList<Scanner>();
         if(type.equals("large_format_scanners")){
-        	for(Scanner scanner : scannerService.listScanners()){
+        	for(Scanner scanner : scannerService.listScanners("id")){
         		if(scanner.getTypeProduct().equals("Широкоформатные сканеры")){
         			list.add(scanner);
         		}
         	}
-        	
+        	model.addAttribute("productSubType", "large_format_scanners");
         	model.addAttribute("titleOfTable", "Список загруженных широкоформатных сканеров");
             model.addAttribute("listProducts", list);
             logger.info("On /admin/scanners/large_format_scanners page.");
     		
     	} else if(type.equals("3d_scanners")){
-        	for(Scanner scanner : scannerService.listScanners()){
+        	for(Scanner scanner : scannerService.listScanners("id")){
         		if(scanner.getTypeProduct().equals("3D Сканеры")){
         			list.add(scanner);
         		}
         	}
-        	
+        	model.addAttribute("productSubType", "3d_scanners");
         	model.addAttribute("titleOfTable", "Список загруженных 3D сканеров");
             model.addAttribute("listProducts", list);
             logger.info("On /admin/scanners/3d_scanners page.");
             
     	} else {
+    		model.addAttribute("productSubType", "none");
     		model.addAttribute("titleOfTable", "Список загруженных сканеров");
-            model.addAttribute("listProducts", scannerService.listScanners());
+            model.addAttribute("listProducts", scannerService.listScanners("id"));
             logger.info("/admin/scanners page.");
     	}
         model.addAttribute("productType", "scanner");
@@ -197,12 +199,39 @@ public class ScannerController {
         return "admin/products";
     }
 	
+	@RequestMapping(value="/admin/scanner/{type}/sorting/{value}", method = RequestMethod.POST,consumes="application/json",
+    		headers = "content-type=application/x-www-form-urlencoded")
+    public @ResponseBody List<Scanner> sortingProductsInAdmin(@PathVariable("type") String type,@PathVariable("value") String value) {
+		
+		List<Scanner> list = new ArrayList<Scanner>();
+        if(type.equals("large_format_scanners")){
+        	for(Scanner scanner : scannerService.listScanners(value)){
+        		if(scanner.getTypeProduct().equals("Широкоформатные сканеры")){
+        			list.add(scanner);
+        		}
+        	}
+    		
+    	} else if(type.equals("3d_scanners")){
+        	for(Scanner scanner : scannerService.listScanners(value)){
+        		if(scanner.getTypeProduct().equals("3D Сканеры")){
+        			list.add(scanner);
+        		}
+        	}
+            
+    	} else {
+    		list.addAll(scannerService.listScanners(value));
+    	}
+
+		return list;
+    }
+	
 	@RequestMapping(value = "/admin/scanner/new", method = RequestMethod.GET)
 	public String addNewScanner(Model model) {
 		files.clear();
 		logger.info("/admin/scanner/new page.");
 		model.addAttribute("product", new Scanner());
 		model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+		model.addAttribute("type", "scanner");
 		try {
 			model.addAttribute("scanner", (JSONObject)new JSONParser().
 					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/scanner.json"), "UTF-8")));
@@ -217,6 +246,7 @@ public class ScannerController {
 			if (result.hasErrors()) {
 				model.addAttribute("product", product);
 				model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+				model.addAttribute("type", "scanner");
 				try {
 					model.addAttribute("scanner", (JSONObject)new JSONParser().
 							parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/scanner.json"), "UTF-8")));
@@ -227,13 +257,9 @@ public class ScannerController {
             long id = scannerService.addScanner(product);
             logger.info("Create new scanner! With id=" + id);
   
-            if(new File(directory + File.separator + 
-            		concreteFolder + File.separator + id).mkdir()){
-            	System.out.println("Создано новую директорию!" + id);
+            if(new File(directory + File.separator + concreteFolder + File.separator + id).mkdir()){
             	logger.info("Create new scanner directory! With id=" + id);
-            } else {
-            	logger.error("Don't create new scanner directory!");
-            }
+            } else { logger.error("Don't create new scanner directory!"); }
             
 			if (files != null && files.size()!=0) {
 				for (FileMeta fm : files.getFiles()) {
@@ -280,6 +306,7 @@ public class ScannerController {
 			if (result.hasErrors()) {
 				model.addAttribute("product", product);
 				model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+				model.addAttribute("type", "scanner");
 				try {
 					model.addAttribute("scanner", (JSONObject)new JSONParser().
 							parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/scanner.json"), "UTF-8")));
@@ -338,26 +365,11 @@ public class ScannerController {
     @RequestMapping("/admin/scanner/edit/{id}")
     public String editScanner(@PathVariable("id") long id, Model model){
     	logger.info("Begin editing scanner with id=" + id);
-    	files.clear();
     	Scanner undateScanner = scannerService.getScannerById(id);
     	
-    	FileMeta fm = null;
-    	for(String path : undateScanner.getPathPictures()){
-    		fm = new FileMeta();
-    		fm.setFileName(path);
-    		
-    		try {
-    			File fi = new File(directory + File.separator + 
-    					concreteFolder + File.separator + id + File.separator + path);
-    			fm.setBytes(Files.readAllBytes(fi.toPath()));
-    			logger.info("Load pictures from folder to the FILEMETA.");
-			} catch (IOException e) {
-				logger.error("Can't load pistures to the FILEMETA", e);
-			}
-    		files.add(fm);
-    	}
         model.addAttribute("product", undateScanner);
         model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+        model.addAttribute("type", "scanner");
         try {
 			model.addAttribute("scanner", (JSONObject)new JSONParser().
 					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/scanner.json"), "UTF-8")));
@@ -372,6 +384,7 @@ public class ScannerController {
 		if (result.hasErrors()) {
 			model.addAttribute("product", product);
 			model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+			model.addAttribute("type", "scanner");
 			try {
 				model.addAttribute("scanner", (JSONObject)new JSONParser().
 						parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/scanner.json"), "UTF-8")));
@@ -380,38 +393,10 @@ public class ScannerController {
         }
 		
 		logger.info("scanner UPDATE with save, id=" + product.getId());
-		
-		FileUtils.cleanDirectory(new File(directory + File.separator + 
-				concreteFolder + File.separator + product.getId()));
-		logger.info("Clear directory with old pictures.");
-		
-		if (files != null && files.size()!=0) {
-			for (FileMeta fm : files.getFiles()) {
-				try {
-					FileCopyUtils.copy(fm.getBytes(), new FileOutputStream(
-							directory + File.separator + 
-        					concreteFolder + File.separator + product.getId() + File.separator + fm.getFileName()));
-					product.getPathPictures().add(fm.getFileName());
-					logger.info("Updatepath of the pictures to scanner with id=" + product.getId());
-				} catch (IOException e) {
-					logger.error("Can't UDDATE paths of the pictures to scanner with id=" + product.getId(), e);
-				}
-			}
-		} else {
-    		try {
-    			File fi = new File(directory + File.separator + "default.jpg");
-    			FileCopyUtils.copy(Files.readAllBytes(fi.toPath()), new FileOutputStream(
-						directory + File.separator + 
-    					concreteFolder + File.separator + product.getId() + File.separator + "default.jpg"));
-    			product.getPathPictures().add("default.jpg");
-    			logger.error("User didn't UPDATE any picture to the scanner with id=" + product.getId() + ", so picture of the"
-    					+ "product will has name 'default.jpg' ");
-			} catch (IOException e) {
-				logger.error("Can't update path of the default picture to scanner with id=" + product.getId(), e);
-			}
-		}
-		logger.info("UPDATE pictures was done susseccful!");
         
+		List<String> pathPictures = scannerService.getScannerById(product.getId()).getPathPictures();
+		product.setPathPictures(pathPictures);
+		
 		scannerService.updateScanner(product);
         logger.info("scanner with id=" + product.getId() + " was UDPATED!");
 		  
@@ -431,6 +416,7 @@ public class ScannerController {
 		if (result.hasErrors()) {
 			model.addAttribute("product", product);
 			model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+			model.addAttribute("type", "scanner");
 			try {
 				model.addAttribute("scanner", (JSONObject)new JSONParser().
 						parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/scanner.json"), "UTF-8")));
@@ -438,50 +424,20 @@ public class ScannerController {
             return "admin/scanner";
         }
 		
-		logger.info("scanner UPDATE id=" + product.getId());
-		
-		FileUtils.cleanDirectory(new File(directory + File.separator + 
-				concreteFolder + File.separator + product.getId()));
-		logger.info("Clear directory with old pictures.");
-		
-		if (files != null && files.size()!=0) {
-			for (FileMeta fm : files.getFiles()) {
-				try {
-					FileCopyUtils.copy(fm.getBytes(), new FileOutputStream(
-							directory + File.separator + 
-        					concreteFolder + File.separator + product.getId() + File.separator + fm.getFileName()));
-					product.getPathPictures().add(fm.getFileName());
-					logger.info("Updatepath of the pictures to scanner with id=" + product.getId());
-				} catch (IOException e) {
-					logger.error("Can't UDDATE paths of the pictures to scanner with id = " + product.getId(), e);
-				}
-			}
-		} else {
-    		try {
-    			File fi = new File(directory + File.separator + "default.jpg");
-    			FileCopyUtils.copy(Files.readAllBytes(fi.toPath()), new FileOutputStream(
-						directory + File.separator + 
-    					concreteFolder + File.separator + product.getId() + File.separator + "default.jpg"));
-    			product.getPathPictures().add("default.jpg");
-    			logger.error("User didn't UPDATE any picture to the scanner with id=" + product.getId() + ", so picture of the"
-    					+ "product will has name 'default.jpg' ");
-			} catch (IOException e) {
-				logger.error("Can't update path of the default picture to scanner with id=" + product.getId(), e);
-			}
-		}
-		logger.info("UPDATE pictures was done susseccful!");
+			logger.info("scanner UPDATE id=" + product.getId());
         
-		scannerService.updateScanner(product);
-        logger.info("scanner with id=" + product.getId() + " was UDPATED!");
-        
-		  files.clear();
+			List<String> pathPictures = scannerService.getScannerById(product.getId()).getPathPictures();
+			product.setPathPictures(pathPictures);
+			
+			scannerService.updateScanner(product);
+			logger.info("scanner with id=" + product.getId() + " was UDPATED!");
 		  
-		  links.createLinksForScanners(scannerService.listShowOnSite());
+			links.createLinksForScanners(scannerService.listShowOnSite());
 	
-		  if (product.isShowOnSite() && product.isShowOnLeftSide())
-			  componets.updateInLeftField(product, true, "scanner");
+			if (product.isShowOnSite() && product.isShowOnLeftSide())
+				componets.updateInLeftField(product, true, "scanner");
 		  
-		  logger.info("Update links to the products in left menu!");
+			logger.info("Update links to the products in left menu!");
 	   return "redirect:/admin/scanners";
 	}
 	
@@ -498,7 +454,7 @@ public class ScannerController {
              
              FileMeta fileMeta = new FileMeta();
      		
-     		 fileName = files.size() + new Random().nextInt(1000) + "" + mpf.getOriginalFilename().substring(mpf.getOriginalFilename().lastIndexOf("."))/*last part is file extension*/; 
+     		 fileName = files.size() + new Random().nextInt(10000000) + "" + mpf.getOriginalFilename().substring(mpf.getOriginalFilename().lastIndexOf("."))/*last part is file extension*/; 
              fileMeta.setFileName(fileName);
 
              try {
@@ -514,7 +470,8 @@ public class ScannerController {
          return fileName;
     }
     
-    @RequestMapping(value="/admin/scanner/change_order_pictures", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
+    @RequestMapping(value="/admin/scanner/change_order_pictures", method = RequestMethod.POST,consumes="application/json",
+    		headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void changeOrderPictures(@RequestBody List<String> selectedIds) {
     	logger.info("change order of pictures in FILEMETA");
     	for(int i = 0; i < selectedIds.size(); i++){
@@ -527,7 +484,8 @@ public class ScannerController {
     	}   	  	
     }
     
-    @RequestMapping(value="/admin/scanner/remove_picture/{name_picture}", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
+    @RequestMapping(value="/admin/scanner/remove_picture/{name_picture}", method = RequestMethod.POST,consumes="application/json",
+    		headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void removePicture(@PathVariable("name_picture") String namePicture) {
     	String name = namePicture.replace(":", ".");
     		Iterator<FileMeta> fmi = files.getFiles().iterator();
@@ -538,6 +496,72 @@ public class ScannerController {
         		}
         	}
     	logger.info("Remove pictore with name = " + namePicture + " from FILEMETA");
+    }
+    
+    @RequestMapping(value="/admin/scanner/upload_pictures_update/{id}", method = RequestMethod.POST)
+    public @ResponseBody String uploadPicturesUpdate(MultipartHttpServletRequest request, @PathVariable("id") long id) {
+    	logger.info("upload new picture");
+        
+         Iterator<String> itr =  request.getFileNames();
+         MultipartFile mpf = null;
+         String fileName = null;
+
+         while(itr.hasNext()){
+        	mpf = request.getFile(itr.next()); 
+     		fileName = new Random().nextInt(10000000) + "" + mpf.getOriginalFilename().substring(mpf.getOriginalFilename().lastIndexOf("."))/*last part is file extension*/; 
+
+ 			try {
+ 				FileCopyUtils.copy(mpf.getBytes(), new FileOutputStream(directory + File.separator + concreteFolder
+	    				+ File.separator + id + File.separator + fileName));
+ 			} catch (IOException e) {
+ 				logger.error("Don't write picture to the folder", e);
+ 			} 
+        	 
+ 			Scanner product = scannerService.getScannerById(id);
+ 			product.getPathPictures().add(fileName);
+ 			scannerService.updateScanner(product);
+         }  
+         return fileName;
+    }
+    
+    @RequestMapping(value="/admin/scanner/change_order_pictures_update/{id}", method = RequestMethod.POST,consumes="application/json",
+    		headers = "content-type=application/x-www-form-urlencoded")
+    public @ResponseBody void changeOrderPicturesUpdate(@RequestBody List<String> selectedIds, @PathVariable("id") long id) {
+    	logger.info("change order of pictures in changed scanner product");
+    	
+    	Scanner product = scannerService.getScannerById(id);
+    	product.getPathPictures().clear();
+    	product.getPathPictures().addAll(selectedIds);
+    	scannerService.updateScanner(product);
+    }
+    
+    @RequestMapping(value="/admin/scanner/remove_picture_update/{name_picture}/{id}", method = RequestMethod.POST,consumes="application/json",
+    		headers = "content-type=application/x-www-form-urlencoded")
+    public @ResponseBody void removePicture(@PathVariable("name_picture") String namePicture, @PathVariable("id") long id) {
+    	String name = namePicture.replace(":", ".");
+    	Scanner product = scannerService.getScannerById(id);
+    	product.getPathPictures().remove(name);
+    	
+    	try {
+    		FileUtils.forceDelete(new File(directory + File.separator + concreteFolder+ File.separator + id + File.separator + name));
+		} catch (IOException e) {
+			logger.error("Can't delete picture from the folder", e);
+		} 
+    	
+    	if(product.getPathPictures().size()==0){
+    		File fi = new File(directory + File.separator + "default.jpg");
+			try {
+				FileCopyUtils.copy(Files.readAllBytes(fi.toPath()), new FileOutputStream(
+						directory + File.separator + concreteFolder + File.separator + product.getId() + File.separator + "default.jpg"));
+			} catch (IOException e) {
+				logger.error("Can't update path of the default picture to scannanner with id=" + product.getId(), e);
+			}
+			product.getPathPictures().add("default.jpg");
+    	}
+    	
+    	scannerService.updateScanner(product);
+    	
+    	logger.info("Remove pictore with name = " + name + " from changed scanner product");
     }
     
     @RequestMapping("/admin/scanner/remove/{id}")

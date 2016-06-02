@@ -26,58 +26,31 @@
 </c:if>
 </head>
 <body>
-	<c:url var="addPictures" value="/admin/use_with_product/upload_pictures" ></c:url>
 	
 	<div id="product">
 	
 		<c:if test="${empty product.id}">
 			<label id="head_of_page"><spring:message text="Добавление нового товара" /></label>
-			<c:url var="addAction" value="/admin/use_with_product/add" ></c:url>
+			<c:url var="addAction" value="/admin/${type}/add" ></c:url>
 		</c:if>
 			
 		<c:if test="${!empty product.id}">
 			<label id="head_of_page"><spring:message text="Изменение ${product.name}, код товара: ${product.partNumber} " /></label>
-			<c:url var="addAction" value="/admin/use_with_product/update" ></c:url>
+			<c:url var="addAction" value="/admin/${type}/update" ></c:url>
 		</c:if>
 		
-		<div id="pictures">
-			<h3>Выберите файл(ы) для загрузки (800х600pdi)</h3>
-				
-		<form:form method="POST" commandName="add_picture" action="${addPictures}" enctype="multipart/form-data">
-			<p><input id="files-upload" type="file" id="files" name="files" accept="image/*" ></p>
-		
-			<p id="drop-area">
-				<span class="drop-instructions">или перетащите файлы сюда!</span>
-				<span class="drop-over"></span>
-			</p>
-		</form:form>
-			<ul id="file-list">
-				<c:if test="${empty product.id}">
-					<li class="no-items">(ни одного файла еще не загружено)</li>
-				</c:if>
-				<c:if test="${!empty product.id}">
-					<c:forEach items="${product.pathPictures}" var="pathPicture">
-						<li class="ui-state-default" id="${pathPicture}">
-							<div>
-								<p class="delete_img">Удалить</p>
-							</div>
-							<img src="/images/use_with_products/${product.id}/${pathPicture}" alt="">
-						</li>
-					</c:forEach>
-				</c:if>
-			</ul>
-		</div>
+		<jsp:include page="product/pictures.jsp" />
 
 	<form:form method="POST" commandName="product" action="${addAction}">
 		<div class="save_button_keeper">	
 			<c:if test="${empty product.id}">
-				<c:url value="/admin/use_with_product/save_add" var="saveLoad" />
+				<c:url value="/admin/${type}/save_add" var="saveLoad" />
 				<input id="submit" type="submit" formaction="${saveLoad}" value="сохранить" style="background: gold; color: black;"/>
 				<input id="submit" type="submit" value="загрузить" style="background: green; color: azure;"/>
 			</c:if>
 			
 			<c:if test="${!empty product.id}">
-				<c:url value="/admin/use_with_product/save_update" var="saveUpdate" />
+				<c:url value="/admin/${type}/save_update" var="saveUpdate" />
 				<input id="submit" type="submit" formaction="${saveUpdate}" value="сохранить" style="background: gold; color: black;"/>
 				<input id="submit" type="submit" value="изменить" style="background:blue; color: azure;"/>
 			</c:if>
@@ -178,5 +151,8 @@
 
 		</form:form>
 	</div>
+	
+	<jsp:include page="product/js_code.jsp" />
+	
 </body>
 </html>

@@ -120,7 +120,11 @@
 						</c:if>
 						
 						<c:if test="${!empty product.typeTheDisplayedImage}">
-   							<tr><td>Тип выводимого изображения:</td><td>${product.typeTheDisplayedImage}</td></tr>
+   							<tr><td>Тип выводимого изображения:</td><td>
+		                   		<c:forEach var="tp" items="${product.typeTheDisplayedImage}" varStatus="status">  
+		    						${tp}<c:if test="${ ! status.last}" >, </c:if>  
+								</c:forEach>
+                       		</td></tr>
 						</c:if>
 						
 						<c:if test="${product.firstPartTheMinimumCharacterSize > 0 && product.secondPartTheMinimumCharacterSize > 0}">

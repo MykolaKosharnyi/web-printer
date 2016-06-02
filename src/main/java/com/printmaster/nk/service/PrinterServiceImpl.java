@@ -1,6 +1,5 @@
 package com.printmaster.nk.service;
 
-import java.util.List;
 import java.util.Set;
 
 import org.springframework.stereotype.Service;
@@ -33,8 +32,8 @@ public class PrinterServiceImpl implements PrinterService {
  
     @Override
     @Transactional
-    public List<Printer> listPrinters() {
-        return this.productDAO.listProducts();
+    public Set<Printer> listPrinters(String sortCriteria) {
+        return this.productDAO.listProducts(sortCriteria);
     }
  
     @Override

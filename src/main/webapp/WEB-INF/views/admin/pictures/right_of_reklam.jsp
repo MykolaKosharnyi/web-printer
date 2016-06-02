@@ -98,8 +98,7 @@
     		If the file is an image and the web browser supports FileReader,
     		present a preview in the file list
     		 */
-    		if (typeof FileReader !== "undefined"
-    				&& (/image/i).test(file.type)) {
+    		if (typeof FileReader !== "undefined" && (/image/i).test(file.type)) {
     			img = document.createElement("img");
     			li.appendChild(img);
     			reader = new FileReader();

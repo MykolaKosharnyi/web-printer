@@ -2,7 +2,7 @@ package com.printmaster.nk.dao;
 
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
@@ -10,6 +10,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Junction;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import com.printmaster.nk.model.DigitalPrinter;
@@ -41,9 +42,12 @@ public class DigitalPrinterDAOImpl implements ProductDAO<DigitalPrinter, SearchD
  
     @SuppressWarnings("unchecked")
     @Override
-    public List<DigitalPrinter> listProducts() {
+    public Set<DigitalPrinter> listProducts(String sortCriteria) {
         Session session = this.sessionFactory.getCurrentSession();
-        List<DigitalPrinter> printerList = session.createQuery("from DigitalPrinter").list();
+		Criteria cr = session.createCriteria(DigitalPrinter.class);
+		cr.addOrder( Order.desc(sortCriteria));
+        @SuppressWarnings("rawtypes")
+		Set<DigitalPrinter> printerList = new LinkedHashSet(cr.list());
         for(DigitalPrinter p : printerList){
             logger.info("Printer List::"+p);
         }

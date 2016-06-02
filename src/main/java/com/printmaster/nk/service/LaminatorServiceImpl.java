@@ -1,6 +1,5 @@
 package com.printmaster.nk.service;
 
-import java.util.List;
 import java.util.Set;
 
 import org.springframework.transaction.annotation.Transactional;
@@ -30,8 +29,8 @@ public class LaminatorServiceImpl implements LaminatorService {
  
     @Override
     @Transactional
-    public List<Laminator> listLaminators() {
-        return this.productDAO.listProducts();
+    public Set<Laminator> listLaminators(String sortCriteria) {
+        return this.productDAO.listProducts(sortCriteria);
     }
  
     @Override

@@ -33,7 +33,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.printmaster.nk.beans.ComponetsForController;
 import com.printmaster.nk.beans.FileMeta;
@@ -151,9 +150,10 @@ public class UseWithProductController {
 		model.addAttribute("productType", "use_with_product");
 		model.addAttribute("nameProduct", "Имя товара");
 		model.addAttribute("titleOfTable", "Список загруженного товара");
-        model.addAttribute("listProducts", useWithProductService.listUseWithProducts());
+        model.addAttribute("listProducts", useWithProductService.listUseWithProducts("id"));
         model.addAttribute("title", "Используется с товаром");
         model.addAttribute("addProduct", "Добавить товар");
+        model.addAttribute("productSubType", "none");
         logger.info("/admin/use_with_products page.");
         return "admin/products";
     }
@@ -165,62 +165,63 @@ public class UseWithProductController {
 		
         if(type.equals("ink_for_inkjet")){
         	
-        	for(UseWithProduct useWithProduct : useWithProductService.listUseWithProducts()){
+        	for(UseWithProduct useWithProduct : useWithProductService.listUseWithProducts("id")){
         		if(useWithProduct.getTypeProduct().equals("Чернила для струйной печати")){
         			list.add(useWithProduct);
         		}
         	}
-        	
+        	model.addAttribute("productSubType", "ink_for_inkjet");
         	model.addAttribute("titleOfTable", "Чернила для струйной печати");
             model.addAttribute("listProducts", list);
     		
     	} else if(type.equals("consumables_for_digital_equipment")){
         	
-        	for(UseWithProduct useWithProduct : useWithProductService.listUseWithProducts()){
+        	for(UseWithProduct useWithProduct : useWithProductService.listUseWithProducts("id")){
         		if(useWithProduct.getTypeProduct().equals("Расходные материалы для цифрового оборудования")){
         			list.add(useWithProduct);
         		}
         	}
-        	
+        	model.addAttribute("productSubType", "consumables_for_digital_equipment");
         	model.addAttribute("titleOfTable", "Расходные материалы для цифрового оборудования");
         	model.addAttribute("listProducts", list);
              
     	} else if(type.equals("consumables_for_3D_equipment")){
         	
-        	for(UseWithProduct useWithProduct : useWithProductService.listUseWithProducts()){
+        	for(UseWithProduct useWithProduct : useWithProductService.listUseWithProducts("id")){
         		if(useWithProduct.getTypeProduct().equals("Расходные материалы для 3D оборудования")){
         			list.add(useWithProduct);
         		}
         	}
-        	
+        	model.addAttribute("productSubType", "consumables_for_3D_equipment");
         	model.addAttribute("titleOfTable", "Расходные материалы для 3D оборудования");
         	model.addAttribute("listProducts", list);
  		
     	} else if(type.equals("products_for_maintenance")){	
         	
-        	for(UseWithProduct useWithProduct : useWithProductService.listUseWithProducts()){
+        	for(UseWithProduct useWithProduct : useWithProductService.listUseWithProducts("id")){
         		if(useWithProduct.getTypeProduct().equals("Товары для обслуживания")){
         			list.add(useWithProduct);
         		}
         	}
-        	
+        	model.addAttribute("productSubType", "products_for_maintenance");
         	model.addAttribute("titleOfTable", "Товары для обслуживания");
         	model.addAttribute("listProducts", list);
 
     	} else if(type.equals("parts_and_accessories")){		
         	
-        	for(UseWithProduct useWithProduct : useWithProductService.listUseWithProducts()){
+        	for(UseWithProduct useWithProduct : useWithProductService.listUseWithProducts("id")){
         		if(useWithProduct.getTypeProduct().equals("Запчасти и комплектующие")){
         			list.add(useWithProduct);
         		}
         	}
-        	
+        	model.addAttribute("productSubType", "parts_and_accessories");
         	model.addAttribute("titleOfTable", "Запчасти и комплектующие");
         	model.addAttribute("listProducts", list);
 
     	} else {
+    		model.addAttribute("productSubType", "none");
     		model.addAttribute("titleOfTable", "Список загруженного товара");
-            model.addAttribute("listProducts", useWithProductService.listUseWithProducts());
+            model.addAttribute("listProducts", useWithProductService.listUseWithProducts("id"));
     	}
         
         model.addAttribute("productType", "use_with_product");
@@ -231,6 +232,53 @@ public class UseWithProductController {
         return "admin/products";
     }
 	
+	@RequestMapping(value="/admin/use_with_product/{type}/sorting/{value}", method = RequestMethod.POST,consumes="application/json",
+    		headers = "content-type=application/x-www-form-urlencoded")
+    public @ResponseBody List<UseWithProduct> sortingProductsInAdmin(@PathVariable("type") String type,@PathVariable("value") String value) {
+		
+		List<UseWithProduct> list = new ArrayList<UseWithProduct>();
+        if(type.equals("ink_for_inkjet")){
+        	
+        	for(UseWithProduct useWithProduct : useWithProductService.listUseWithProducts(value)){
+        		if(useWithProduct.getTypeProduct().equals("Чернила для струйной печати")){
+        			list.add(useWithProduct);
+        		}
+        	}
+    	} else if(type.equals("consumables_for_digital_equipment")){
+        	
+        	for(UseWithProduct useWithProduct : useWithProductService.listUseWithProducts(value)){
+        		if(useWithProduct.getTypeProduct().equals("Расходные материалы для цифрового оборудования")){
+        			list.add(useWithProduct);
+        		}
+        	}
+    	} else if(type.equals("consumables_for_3D_equipment")){
+        	
+        	for(UseWithProduct useWithProduct : useWithProductService.listUseWithProducts(value)){
+        		if(useWithProduct.getTypeProduct().equals("Расходные материалы для 3D оборудования")){
+        			list.add(useWithProduct);
+        		}
+        	}
+    	} else if(type.equals("products_for_maintenance")){	
+        	
+        	for(UseWithProduct useWithProduct : useWithProductService.listUseWithProducts(value)){
+        		if(useWithProduct.getTypeProduct().equals("Товары для обслуживания")){
+        			list.add(useWithProduct);
+        		}
+        	}
+    	} else if(type.equals("parts_and_accessories")){		
+        	
+        	for(UseWithProduct useWithProduct : useWithProductService.listUseWithProducts(value)){
+        		if(useWithProduct.getTypeProduct().equals("Запчасти и комплектующие")){
+        			list.add(useWithProduct);
+        		}
+        	}
+    	} else {
+    		list.addAll(useWithProductService.listUseWithProducts(value));
+    	}
+
+		return list;
+    }
+	
 	@RequestMapping(value = "/admin/use_with_product/new", method = RequestMethod.GET)
 	public String addNewUWP(Model model) {
 		files.clear();
@@ -238,20 +286,28 @@ public class UseWithProductController {
 		
 		 logger.info("All characteristic of use_with_product.");
 		 model.addAttribute("product", new UseWithProduct());
+		 model.addAttribute("type", "use_with_product");
 		 
 		 try {
-				model.addAttribute("use_with_product", (JSONObject)new JSONParser()
-						.parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/use_with_product.json"), "UTF-8")));
+			model.addAttribute("use_with_product", (JSONObject)new JSONParser()
+					.parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/use_with_product.json"), "UTF-8")));
 			} catch (IOException | ParseException e) {}
 	    return "admin/use_with_product";
 	}
      
 	@RequestMapping(value = "/admin/use_with_product/add", method = RequestMethod.POST) 
-	public @ResponseBody ModelAndView handleFormUpload(@ModelAttribute("product") @Valid UseWithProduct product,
-			BindingResult result) throws IOException{
+	public String handleFormUpload(@ModelAttribute("product") @Valid UseWithProduct product,
+			BindingResult result, Model model) throws IOException{
 
 			if (result.hasErrors()) {
-	            return new ModelAndView("admin/use_with_product", "product", product);
+				model.addAttribute("product", product);
+				model.addAttribute("type", "use_with_product");
+				try {
+					model.addAttribute("use_with_product", (JSONObject)new JSONParser()
+							.parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/use_with_product.json"), "UTF-8")));
+				} catch (IOException | ParseException e) {}
+				
+	            return "admin/use_with_product";
 	        }
 		
             long id = useWithProductService.addUseWithProduct(product);
@@ -293,9 +349,6 @@ public class UseWithProductController {
             this.useWithProductService.updateUseWithProduct(product);
             
             files.clear();
-		
-          ModelAndView mav = new ModelAndView("redirect:/admin/use_with_products"); 
-		  mav.addObject("listProducts", useWithProductService.listUseWithProducts());
 		  
 		  links.createLinksForUseWithProducts(useWithProductService.listShowOnSite());
 		  
@@ -303,15 +356,22 @@ public class UseWithProductController {
 			  componets.updateInLeftField(product, true);
 	    	
 		  logger.info("Update links to the products in left menu!");
-	   return mav;
+	   return "redirect:/admin/use_with_products";
 	}
 	
 	@RequestMapping(value = "/admin/use_with_product/save_add", method = RequestMethod.POST) 
-	public @ResponseBody ModelAndView handleFormUploadSave(@ModelAttribute("product") @Valid UseWithProduct product,
-			BindingResult result) throws IOException{
+	public String handleFormUploadSave(@ModelAttribute("product") @Valid UseWithProduct product,
+			BindingResult result, Model model) throws IOException{
 
 			if (result.hasErrors()) {
-	            return new ModelAndView("admin/use_with_product", "product", product);
+				model.addAttribute("product", product);
+				model.addAttribute("type", "use_with_product");
+				try {
+					model.addAttribute("use_with_product", (JSONObject)new JSONParser()
+							.parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/use_with_product.json"), "UTF-8")));
+				} catch (IOException | ParseException e) {}
+				
+	            return "admin/use_with_product";
 	        }
 		
             long id = useWithProductService.addUseWithProduct(product);
@@ -353,39 +413,22 @@ public class UseWithProductController {
             this.useWithProductService.updateUseWithProduct(product);
             
             files.clear();
-		
-          ModelAndView mav = new ModelAndView("redirect:/admin/use_with_product/edit/" + id); 
 		  
 		  links.createLinksForUseWithProducts(useWithProductService.listShowOnSite());	
 		  if (product.isShowOnSite() && product.isShowOnLeftSide()){
 			  componets.updateInLeftField(product, true);
 	    	}
 		  logger.info("Update links to the products in left menu!");
-	   return mav;
+	   return "redirect:/admin/use_with_product/edit/" + id;
 	}
 	
     @RequestMapping("/admin/use_with_product/edit/{id}")
     public String editUWP(@PathVariable("id") long id, Model model){
     	logger.info("Begin editing use_with_product with id=" + id);
-    	files.clear();
     	UseWithProduct undateUWP = useWithProductService.getUseWithProductById(id);
     	
-    	FileMeta fm = null;
-    	for(String path : undateUWP.getPathPictures()){
-    		fm = new FileMeta();
-    		fm.setFileName(path);
-    		
-    		try {
-    			File fi = new File(directory + File.separator + 
-    					concreteFolder + File.separator + id + File.separator + path);
-    			fm.setBytes(Files.readAllBytes(fi.toPath()));
-    			logger.info("Load pictures from folder to the FILEMETA.");
-			} catch (IOException e) {
-				logger.error("Can't load pistures to the FILEMETA", e);
-			}
-    		files.add(fm);
-    	}
         model.addAttribute("product", undateUWP);
+        model.addAttribute("type", "use_with_product");
         
         try {
 			model.addAttribute("use_with_product", (JSONObject)new JSONParser()
@@ -395,45 +438,24 @@ public class UseWithProductController {
     }
 	
 	@RequestMapping(value = "/admin/use_with_product/save_update", method = RequestMethod.POST) 
-	public @ResponseBody ModelAndView updateSavePrUWP(@ModelAttribute("product") @Valid UseWithProduct product,
-			BindingResult result) throws IOException{
+	public String updateSavePrUWP(@ModelAttribute("product") @Valid UseWithProduct product,
+			BindingResult result, Model model) throws IOException{
 		
 		if (result.hasErrors()) {
-            return new ModelAndView("admin/use_with_product", "product", product);
+			model.addAttribute("product", product);
+			model.addAttribute("type", "use_with_product");
+			try {
+				model.addAttribute("use_with_product", (JSONObject)new JSONParser()
+						.parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/use_with_product.json"), "UTF-8")));
+			} catch (IOException | ParseException e) {}
+			
+            return "admin/use_with_product";
         }
 		
 		logger.info("use_with_product UPDATE with save, id=" + product.getId());
 		
-		FileUtils.cleanDirectory(new File(directory + File.separator + 
-				concreteFolder + File.separator + product.getId()));
-		logger.info("Clear directory with old pictures.");
-		
-		if (files != null && files.size()!=0) {
-			for (FileMeta fm : files.getFiles()) {
-				try {
-					FileCopyUtils.copy(fm.getBytes(), new FileOutputStream(
-							directory + File.separator + 
-        					concreteFolder + File.separator + product.getId() + File.separator + fm.getFileName()));
-					product.getPathPictures().add(fm.getFileName());
-					logger.info("Updatepath of the pictures to use_with_product with id=" + product.getId());
-				} catch (IOException e) {
-					logger.error("Can't UDDATE paths of the pictures to use_with_product with id=" + product.getId(), e);
-				}
-			}
-		} else {
-    		try {
-    			File fi = new File(directory + File.separator + "default.jpg");
-    			FileCopyUtils.copy(Files.readAllBytes(fi.toPath()), new FileOutputStream(
-						directory + File.separator + 
-    					concreteFolder + File.separator + product.getId() + File.separator + "default.jpg"));
-    			product.getPathPictures().add("default.jpg");
-    			logger.error("User didn't UPDATE any picture to the use_with_product with id=" + product.getId() + ", so picture of the"
-    					+ "product will has name 'default.jpg' ");
-			} catch (IOException e) {
-				logger.error("Can't update path of the default picture to use_with_product with id=" + product.getId(), e);
-			}
-		}
-		logger.info("UPDATE pictures was done susseccful!");
+		List<String> pathPictures = useWithProductService.getUseWithProductById(product.getId()).getPathPictures();
+		product.setPathPictures(pathPictures);
         
         useWithProductService.updateUseWithProduct(product);
         logger.info("use_with_product with id=" + product.getId() + " was UDPATED!");
@@ -445,56 +467,32 @@ public class UseWithProductController {
 	    }
 		  
 		logger.info("Update links to the products in left menu!");
-		ModelAndView mav = new ModelAndView("redirect:/admin/use_with_product/edit/" + product.getId());
-		return mav;
+		return "redirect:/admin/use_with_product/edit/" + product.getId();
 	}
 	
 	@RequestMapping(value = "/admin/use_with_product/update", method = RequestMethod.POST) 
-	public @ResponseBody ModelAndView updateUseWithProduct(@ModelAttribute("product") @Valid UseWithProduct product,
-			BindingResult result) throws IOException{
+	public String updateUseWithProduct(@ModelAttribute("product") @Valid UseWithProduct product,
+			BindingResult result, Model model) throws IOException{
 		
 		if (result.hasErrors()) {
-            return new ModelAndView("admin/use_with_product", "product", product);
+			model.addAttribute("product", product);
+			model.addAttribute("type", "use_with_product");
+			try {
+				model.addAttribute("use_with_product", (JSONObject)new JSONParser()
+						.parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/use_with_product.json"), "UTF-8")));
+			} catch (IOException | ParseException e) {}
+			
+            return "admin/use_with_product";
         }
 		
 		logger.info("use_with_product UPDATE id=" + product.getId());
 		
-		FileUtils.cleanDirectory(new File(directory + File.separator + 
-				concreteFolder + File.separator + product.getId()));
-		logger.info("Clear directory with old pictures.");
-		
-		if (files != null && files.size()!=0) {
-			for (FileMeta fm : files.getFiles()) {
-				try {
-					FileCopyUtils.copy(fm.getBytes(), new FileOutputStream(
-							directory + File.separator + 
-        					concreteFolder + File.separator + product.getId() + File.separator + fm.getFileName()));
-					product.getPathPictures().add(fm.getFileName());
-					logger.info("Updatepath of the pictures to use_with_product with id=" + product.getId());
-				} catch (IOException e) {
-					logger.error("Can't UDDATE paths of the pictures to use_with_product with id=" + product.getId(), e);
-				}
-			}
-		} else {
-    		try {
-    			File fi = new File(directory + File.separator + "default.jpg");
-    			FileCopyUtils.copy(Files.readAllBytes(fi.toPath()), new FileOutputStream(
-						directory + File.separator + 
-    					concreteFolder + File.separator + product.getId() + File.separator + "default.jpg"));
-    			product.getPathPictures().add("default.jpg");
-    			logger.error("User didn't UPDATE any picture to the use_with_product with id=" + product.getId() + ", so picture of the"
-    					+ "product will has name 'default.jpg' ");
-			} catch (IOException e) {
-				logger.error("Can't update path of the default picture to use_with_product with id=" + product.getId(), e);
-			}
-		}
-		logger.info("UPDATE pictures was done susseccful!");
+		List<String> pathPictures = useWithProductService.getUseWithProductById(product.getId()).getPathPictures();
+		product.setPathPictures(pathPictures);
         
         useWithProductService.updateUseWithProduct(product);
         logger.info("use_with_product with id=" + product.getId() + " was UDPATED!");
         
-		ModelAndView mav = new ModelAndView("redirect:/admin/use_with_products"); 
-		  mav.addObject("listProducts", useWithProductService.listUseWithProducts());
 		  files.clear();
 		  
 		  links.createLinksForUseWithProducts(useWithProductService.listShowOnSite());
@@ -504,7 +502,7 @@ public class UseWithProductController {
 	    	}
 		  
 		  logger.info("Update links to the products in left menu!");
-	   return mav;
+	   return "redirect:/admin/use_with_products";
 	}
 	
     @RequestMapping(value="/admin/use_with_product/upload_pictures", method = RequestMethod.POST)
@@ -559,6 +557,72 @@ public class UseWithProductController {
         		}
         	}
     	logger.info("Remove pictore with name=" + namePicture + "from FILEMETA");	
+    }
+    
+    @RequestMapping(value="/admin/use_with_product/upload_pictures_update/{id}", method = RequestMethod.POST)
+    public @ResponseBody String uploadPicturesUpdate(MultipartHttpServletRequest request, @PathVariable("id") long id) {
+    	logger.info("upload new picture");
+        
+         Iterator<String> itr =  request.getFileNames();
+         MultipartFile mpf = null;
+         String fileName = null;
+
+         while(itr.hasNext()){
+        	mpf = request.getFile(itr.next()); 
+     		fileName = new Random().nextInt(10000000) + "" + mpf.getOriginalFilename().substring(mpf.getOriginalFilename().lastIndexOf("."))/*last part is file extension*/; 
+
+ 			try {
+ 				FileCopyUtils.copy(mpf.getBytes(), new FileOutputStream(directory + File.separator + concreteFolder
+	    				+ File.separator + id + File.separator + fileName));
+ 			} catch (IOException e) {
+ 				logger.error("Don't write picture to the folder", e);
+ 			} 
+        	 
+ 			UseWithProduct product = useWithProductService.getUseWithProductById(id);
+ 			product.getPathPictures().add(fileName);
+ 			useWithProductService.updateUseWithProduct(product);
+         }  
+         return fileName;
+    }
+    
+    @RequestMapping(value="/admin/use_with_product/change_order_pictures_update/{id}", method = RequestMethod.POST,consumes="application/json",
+    		headers = "content-type=application/x-www-form-urlencoded")
+    public @ResponseBody void changeOrderPicturesUpdate(@RequestBody List<String> selectedIds, @PathVariable("id") long id) {
+    	logger.info("change order of pictures in changed use_with_product product");
+    	
+    	UseWithProduct product = useWithProductService.getUseWithProductById(id);
+    	product.getPathPictures().clear();
+    	product.getPathPictures().addAll(selectedIds);
+    	useWithProductService.updateUseWithProduct(product);
+    }
+    
+    @RequestMapping(value="/admin/use_with_product/remove_picture_update/{name_picture}/{id}", method = RequestMethod.POST,consumes="application/json",
+    		headers = "content-type=application/x-www-form-urlencoded")
+    public @ResponseBody void removePicture(@PathVariable("name_picture") String namePicture, @PathVariable("id") long id) {
+    	String name = namePicture.replace(":", ".");
+    	UseWithProduct product = useWithProductService.getUseWithProductById(id);
+    	product.getPathPictures().remove(name);
+    	
+    	try {
+    		FileUtils.forceDelete(new File(directory + File.separator + concreteFolder+ File.separator + id + File.separator + name));
+		} catch (IOException e) {
+			logger.error("Can't delete picture from the folder", e);
+		} 
+    	
+    	if(product.getPathPictures().size()==0){
+    		File fi = new File(directory + File.separator + "default.jpg");
+			try {
+				FileCopyUtils.copy(Files.readAllBytes(fi.toPath()), new FileOutputStream(
+						directory + File.separator + concreteFolder + File.separator + product.getId() + File.separator + "default.jpg"));
+			} catch (IOException e) {
+				logger.error("Can't update path of the default picture to useWithProduct with id=" + product.getId(), e);
+			}
+			product.getPathPictures().add("default.jpg");
+    	}
+    	
+    	useWithProductService.updateUseWithProduct(product);
+    	
+    	logger.info("Remove pictore with name = " + name + " from changed useWithProduct product");
     }
     
     @RequestMapping("/admin/use_with_product/remove/{id}")

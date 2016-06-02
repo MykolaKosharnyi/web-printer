@@ -1,55 +1,37 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <div id="navigation">
-	<a href="<c:url value='/' />">Главная</a>
+	<a href="<c:url value='/' />"><spring:message code="path.head_page"/></a>
 	<span> > </span>
-
+	<a href="<c:url value='/printers' />"><spring:message code="head.printer"/></a>
+	<span> > </span>
+	
 	<c:forEach items="${search.typePrinter}" var="tp">
 		<c:choose>
 			<c:when test="${tp.equals('Сольвентный')}">
-				<a href="<c:url value='/printers' />">Принтеры</a>
-				<span> > </span>
-				<p>Сольвентные принтеры</p>
+				<p><spring:message code="head.printer.dissolving"/></p>
 			</c:when>
 			<c:when test="${tp.equals('Экосольвентный')}">
-				<a href="<c:url value='/printers' />">Принтеры</a>
-				<span> > </span>
-				<p>Экосольвентные принтеры</p>
+				<p><spring:message code="head.printer.ecosolvent"/></p>
 			</c:when>
 			<c:when test="${tp.equals('UV рулонный')}">
-				<a href="<c:url value='/printers' />">Принтеры</a>
-				<span> > </span>
-				<p>UV рулонные принтеры</p>
+				<p><spring:message code="head.printer.uv_roll"/></p>
 			</c:when>
 			<c:when test="${tp.equals('UV плоскопечатный')}">
-				<a href="<c:url value='/printers' />">Принтеры</a>
-				<span> > </span>
-				<p>UV плоскопечатные принтеры</p>
+				<p><spring:message code="head.printer.flatbed"/></p>
 			</c:when>
 			<c:when test="${tp.equals('Сублимационный')}">
-				<a href="<c:url value='/printers' />">Принтеры</a>
-				<span> > </span>
-				<p>Сублимационные принтеры</p>
+				<p><spring:message code="head.printer.sublimation"/></p>
 			</c:when>
 			<c:when test="${tp.equals('Текстильный')}">
-				<a href="<c:url value='/printers' />">Принтеры</a>
-				<span> > </span>
-				<p>Текстильные принтеры</p>
+				<p><spring:message code="head.printer.textile"/></p>
 			</c:when>
 			<c:when test="${tp.equals('Водный/Пигментный')}">
-				<a href="<c:url value='/printers' />">Принтеры</a>
-				<span> > </span>
-				<p>Водные/пигментные принтеры</p>
-			</c:when>
-			<c:when test="${tp.equals('Цифровый')}">
-				<a href="<c:url value='/printers' />">Принтеры</a>
-				<span> > </span>
-				<p>Цифровые принтеры</p>
+				<p><spring:message code="head.printer.water_pigment"/></p>
 			</c:when>
 			<c:when test="${tp.equals('САПР/ГИС')}">
-				<a href="<c:url value='/printers' />">Принтеры</a>
-				<span> > </span>
-				<p>САПР/ГИС принтеры</p>
+				<p><spring:message code="head.printer.SAPR-GIS"/></p>
 			</c:when>
 		</c:choose>
 	</c:forEach>

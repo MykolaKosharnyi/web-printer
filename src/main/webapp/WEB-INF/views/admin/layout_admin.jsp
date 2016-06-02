@@ -1,6 +1,7 @@
 <%@ page language="java" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://ckeditor.com" prefix="ckeditor" %>
 <!DOCTYPE>
 <html lang="ru">
 <head>
@@ -20,7 +21,9 @@
 	<script src="http://malsup.github.com/jquery.form.js"></script>
 	<script src="<%=request.getContextPath()%>/resources/libs/fancybox/jquery.fancybox.pack.js"></script>
 	
-    <script src="<%=request.getContextPath()%>/resources/js/tiny_mce/tinymce.min.js"></script>
+	<script src="<%=request.getContextPath()%>/resources/js/ckeditor/ckeditor.js"></script>
+   <!--  <script src="<%=request.getContextPath()%>/resources/js/tiny_mce/tiny_mce.js"></script>
+    <script src="tinyfck/tiny_mce.js"></script> -->
 	<script src="<%=request.getContextPath()%>/resources/js/admin/common.js"></script>
 </head>
 <body>
@@ -29,5 +32,6 @@
 		<tiles:insertAttribute name="tree" />
 		<tiles:insertAttribute name="body" />	
 	</div>
+	<ckeditor:replaceAll basePath="/ckeditor/" />
 </body>
 </html>

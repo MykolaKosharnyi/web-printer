@@ -70,7 +70,7 @@ public class Laser extends Product{
 	private String colorSeparation;//Цветоделение
 	
 	@Column(name="typeTheDisplayedImage")
-	private String typeTheDisplayedImage;//Тип выводимого изображения
+	private String[] typeTheDisplayedImage;//Тип выводимого изображения
 
 	//Минимальный размер символа (two values)
 	@Column(name="firstPartTheMinimumCharacterSize")
@@ -256,11 +256,11 @@ public class Laser extends Product{
 		this.secondPartTheMinimumCharacterSize = secondPartTheMinimumCharacterSize;
 	}
 
-	public String getTypeTheDisplayedImage() {
+	public String[] getTypeTheDisplayedImage() {
 		return typeTheDisplayedImage;
 	}
 
-	public void setTypeTheDisplayedImage(String typeTheDisplayedImage) {
+	public void setTypeTheDisplayedImage(String[] typeTheDisplayedImage) {
 		this.typeTheDisplayedImage = typeTheDisplayedImage;
 	}
 

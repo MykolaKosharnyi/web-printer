@@ -5,13 +5,14 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -48,11 +49,13 @@ public class RipDAOImpl implements ProductDAO<Rip, SearchRips> {
 		logger.info("Rip updated successfully, Rip Details=" + c);
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	public List<Rip> listProducts() {
+	public Set<Rip> listProducts(String sortCriteria) {
 		Session session = this.sessionFactory.getCurrentSession();
-		List<Rip> ripList = session.createQuery("from Rip").list();
+		Criteria cr = session.createCriteria(Rip.class);
+		cr.addOrder( Order.desc(sortCriteria));
+		Set<Rip> ripList = new LinkedHashSet(cr.list());
 		for (Rip c : ripList) {
 			logger.info("Rip List::" + c);
 		}

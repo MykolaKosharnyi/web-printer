@@ -159,9 +159,10 @@ public class LaminatorController {
 		model.addAttribute("productType", "laminator");
 		model.addAttribute("nameProduct", "Имя ламинатора");
 		model.addAttribute("titleOfTable", "Список загруженных ламинаторов");
-        model.addAttribute("listProducts", laminatorService.listLaminators());
+        model.addAttribute("listProducts", laminatorService.listLaminators("id"));
         model.addAttribute("title", "Ламинаторы");
         model.addAttribute("addProduct", "Добавить ламинатор");
+        model.addAttribute("productSubType", "none");
         logger.info("/admin/laminators page.");
         return "admin/products";
     }
@@ -172,12 +173,12 @@ public class LaminatorController {
 		List<Laminator> list = new ArrayList<Laminator>();
         if(type.equals("hot_lamination")){
 
-        	for(Laminator laminator : laminatorService.listLaminators()){
+        	for(Laminator laminator : laminatorService.listLaminators("id")){
         		if(laminator.getTypeProduct().equals("Горячего ламинирования")){
         			list.add(laminator);
         		}
         	}
-        	
+        	model.addAttribute("productSubType", "hot_lamination");
         	model.addAttribute("titleOfTable", "Список загруженных ламинаторов горячего ламинирования");
             model.addAttribute("listProducts", list);
          
@@ -185,12 +186,12 @@ public class LaminatorController {
 
     	} else if(type.equals("cold_laminating")){
         	
-        	for(Laminator laminator : laminatorService.listLaminators()){
+        	for(Laminator laminator : laminatorService.listLaminators("id")){
         		if(laminator.getTypeProduct().equals("Холодного ламинирования")){
         			list.add(laminator);
         		}
         	}
-        	
+        	model.addAttribute("productSubType", "cold_laminating");
         	model.addAttribute("titleOfTable", "Список загруженных ламинаторов холодного ламинирования");
             model.addAttribute("listProducts", list);
             
@@ -198,12 +199,12 @@ public class LaminatorController {
             
     	} else if(type.equals("liquid")){
         	
-        	for(Laminator laminator : laminatorService.listLaminators()){
+        	for(Laminator laminator : laminatorService.listLaminators("id")){
         		if(laminator.getTypeProduct().equals("Жидкостные")){
         			list.add(laminator);
         		}
         	}
-        	
+        	model.addAttribute("productSubType", "liquid");
         	model.addAttribute("titleOfTable", "Список загруженных жидкостных ламинаторов");
             model.addAttribute("listProducts", list);
 
@@ -211,20 +212,21 @@ public class LaminatorController {
 
     	} else if(type.equals("flatbed_laminating_machine")){
         	
-        	for(Laminator laminator : laminatorService.listLaminators()){
+        	for(Laminator laminator : laminatorService.listLaminators("id")){
         		if(laminator.getTypeProduct().equals("Планшетный ламинатор")){
         			list.add(laminator);
         		}
         	}
-        	
+        	model.addAttribute("productSubType", "flatbed_laminating_machine");
         	model.addAttribute("titleOfTable", "Список загруженных планшетных ламинаторов");
             model.addAttribute("listProducts", list);
             
             logger.info("On /admin/laminators/flatbed_laminating_machine.");
     		
     	} else {
+    		model.addAttribute("productSubType", "none");
     		model.addAttribute("titleOfTable", "Список загруженных ламинаторов");
-            model.addAttribute("listProducts", laminatorService.listLaminators());
+            model.addAttribute("listProducts", laminatorService.listLaminators("id"));
     	}
         
 		model.addAttribute("productType", "laminator");
@@ -235,13 +237,53 @@ public class LaminatorController {
         return "admin/products";
     }
 	
+	@RequestMapping(value="/admin/laminator/{type}/sorting/{value}", method = RequestMethod.POST,consumes="application/json",
+    		headers = "content-type=application/x-www-form-urlencoded")
+    public @ResponseBody List<Laminator> sortingProductsInAdmin(@PathVariable("type") String type,@PathVariable("value") String value) {
+		
+		List<Laminator> list = new ArrayList<Laminator>();
+        if(type.equals("hot_lamination")){
+
+        	for(Laminator laminator : laminatorService.listLaminators(value)){
+        		if(laminator.getTypeProduct().equals("Горячего ламинирования")){
+        			list.add(laminator);
+        		}
+        	}
+    	} else if(type.equals("cold_laminating")){
+        	
+        	for(Laminator laminator : laminatorService.listLaminators(value)){
+        		if(laminator.getTypeProduct().equals("Холодного ламинирования")){
+        			list.add(laminator);
+        		}
+        	}
+    	} else if(type.equals("liquid")){
+        	
+        	for(Laminator laminator : laminatorService.listLaminators(value)){
+        		if(laminator.getTypeProduct().equals("Жидкостные")){
+        			list.add(laminator);
+        		}
+        	}
+    	} else if(type.equals("flatbed_laminating_machine")){
+        	
+        	for(Laminator laminator : laminatorService.listLaminators(value)){
+        		if(laminator.getTypeProduct().equals("Планшетный ламинатор")){
+        			list.add(laminator);
+        		}
+        	}
+    	} else {
+    		list.addAll(laminatorService.listLaminators(value));
+    	}
+
+		return list;
+    }
+	
 	@RequestMapping(value = "/admin/laminator/new", method = RequestMethod.GET)
 	public String addNewLaminator(Model model) {
 		files.clear();
 		logger.info("/admin/laminator/new page.");
 		model.addAttribute("product", new Laminator());
 		model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
-		
+		model.addAttribute("type", "laminator");
 		try {
 			model.addAttribute("laminator", (JSONObject)new JSONParser().
 					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/laminator.json"), "UTF-8")));
@@ -256,6 +298,7 @@ public class LaminatorController {
 			if (result.hasErrors()) {
 				model.addAttribute("product", product);
 				model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+				model.addAttribute("type", "laminator");
 				try {
 					model.addAttribute("laminator", (JSONObject)new JSONParser().
 							parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/laminator.json"), "UTF-8")));
@@ -319,6 +362,7 @@ public class LaminatorController {
 			if (result.hasErrors()) {
 				model.addAttribute("product", product);
 				model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+				model.addAttribute("type", "laminator");
 				try {
 					model.addAttribute("laminator", (JSONObject)new JSONParser().
 							parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/laminator.json"), "UTF-8")));
@@ -380,24 +424,9 @@ public class LaminatorController {
     	files.clear();
     	Laminator undateLaminator = laminatorService.getLaminatorById(id);
     	
-    	FileMeta fm = null;
-    	for(String path : undateLaminator.getPathPictures()){
-    		fm = new FileMeta();
-    		fm.setFileName(path);
-    		
-    		try {
-    			File fi = new File(directory + File.separator + 
-    					concreteFolder + File.separator + id + File.separator + path);
-    			fm.setBytes(Files.readAllBytes(fi.toPath()));
-    			logger.info("Load pictures from folder to the FILEMETA.");
-			} catch (IOException e) {
-				logger.error("Can't load pistures to the FILEMETA", e);
-			}
-    		files.add(fm);
-    	}
         model.addAttribute("product", undateLaminator);
         model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
-        
+        model.addAttribute("type", "laminator");
         try {
 			model.addAttribute("laminator", (JSONObject)new JSONParser().
 					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/laminator.json"), "UTF-8")));
@@ -412,6 +441,7 @@ public class LaminatorController {
 		if (result.hasErrors()) {
 			model.addAttribute("product", product);
 			model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+			model.addAttribute("type", "laminator");
 			try {
 				model.addAttribute("laminator", (JSONObject)new JSONParser().
 						parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/laminator.json"), "UTF-8")));
@@ -421,36 +451,8 @@ public class LaminatorController {
 		
 		logger.info("Laminator UPDATE with save, id=" + product.getId());
 		
-		FileUtils.cleanDirectory(new File(directory + File.separator + 
-				concreteFolder + File.separator + product.getId()));
-		logger.info("Clear directory with old pictures.");
-		
-		if (files != null && files.size()!=0) {
-			for (FileMeta fm : files.getFiles()) {
-				try {
-					FileCopyUtils.copy(fm.getBytes(), new FileOutputStream(
-							directory + File.separator + 
-        					concreteFolder + File.separator + product.getId() + File.separator + fm.getFileName()));
-					product.getPathPictures().add(fm.getFileName());
-					logger.info("Updatepath of the pictures to laminator with id=" + product.getId());
-				} catch (IOException e) {
-					logger.error("Can't UDDATE paths of the pictures to laminator with id=" + product.getId(), e);
-				}
-			}
-		} else {
-    		try {
-    			File fi = new File(directory + File.separator + "default.jpg");
-    			FileCopyUtils.copy(Files.readAllBytes(fi.toPath()), new FileOutputStream(
-						directory + File.separator + 
-    					concreteFolder + File.separator + product.getId() + File.separator + "default.jpg"));
-    			product.getPathPictures().add("default.jpg");
-    			logger.error("User didn't UPDATE any picture to the laminator with id=" + product.getId() + ", so picture of the"
-    					+ "product will has name 'default.jpg' ");
-			} catch (IOException e) {
-				logger.error("Can't update path of the default picture to laminator with id=" + product.getId(), e);
-			}
-		}
-		logger.info("UPDATE pictures was done susseccful!");
+		List<String> pathPictures = laminatorService.getLaminatorById(product.getId()).getPathPictures();
+		product.setPathPictures(pathPictures);
         
 		laminatorService.updateLaminator(product);
         logger.info("laminator with id=" + product.getId() + " was UDPATED!");
@@ -471,6 +473,7 @@ public class LaminatorController {
 		if (result.hasErrors()) {
 			model.addAttribute("product", product);
 			model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+			model.addAttribute("type", "laminator");
 			try {
 				model.addAttribute("laminator", (JSONObject)new JSONParser().
 						parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/laminator.json"), "UTF-8")));
@@ -480,36 +483,8 @@ public class LaminatorController {
 		
 		logger.info("Laminator UPDATE id=" + product.getId());
 		
-		FileUtils.cleanDirectory(new File(directory + File.separator + 
-				concreteFolder + File.separator + product.getId()));
-		logger.info("Clear directory with old pictures.");
-		
-		if (files != null && files.size()!=0) {
-			for (FileMeta fm : files.getFiles()) {
-				try {
-					FileCopyUtils.copy(fm.getBytes(), new FileOutputStream(
-							directory + File.separator + 
-        					concreteFolder + File.separator + product.getId() + File.separator + fm.getFileName()));
-					product.getPathPictures().add(fm.getFileName());
-					logger.info("Updatepath of the pictures to laminator with id=" + product.getId());
-				} catch (IOException e) {
-					logger.error("Can't UDDATE paths of the pictures to laminator with id = " + product.getId(), e);
-				}
-			}
-		} else {
-    		try {
-    			File fi = new File(directory + File.separator + "default.jpg");
-    			FileCopyUtils.copy(Files.readAllBytes(fi.toPath()), new FileOutputStream(
-						directory + File.separator + 
-    					concreteFolder + File.separator + product.getId() + File.separator + "default.jpg"));
-    			product.getPathPictures().add("default.jpg");
-    			logger.error("User didn't UPDATE any picture to the laminator with id=" + product.getId() + ", so picture of the"
-    					+ "product will has name 'default.jpg' ");
-			} catch (IOException e) {
-				logger.error("Can't update path of the default picture to laminator with id=" + product.getId(), e);
-			}
-		}
-		logger.info("UPDATE pictures was done susseccful!");
+		List<String> pathPictures = laminatorService.getLaminatorById(product.getId()).getPathPictures();
+		product.setPathPictures(pathPictures);
         
 		laminatorService.updateLaminator(product);
         logger.info("laminator with id=" + product.getId() + " was UDPATED!");
@@ -578,6 +553,72 @@ public class LaminatorController {
         		}
         	}
     	logger.info("Remove pictore with name = " + namePicture + " from FILEMETA");
+    }
+    
+    @RequestMapping(value="/admin/laminator/upload_pictures_update/{id}", method = RequestMethod.POST)
+    public @ResponseBody String uploadPicturesUpdate(MultipartHttpServletRequest request, @PathVariable("id") long id) {
+    	logger.info("upload new picture");
+        
+         Iterator<String> itr =  request.getFileNames();
+         MultipartFile mpf = null;
+         String fileName = null;
+
+         while(itr.hasNext()){
+        	mpf = request.getFile(itr.next()); 
+     		fileName = new Random().nextInt(10000000) + "" + mpf.getOriginalFilename().substring(mpf.getOriginalFilename().lastIndexOf("."))/*last part is file extension*/; 
+
+ 			try {
+ 				FileCopyUtils.copy(mpf.getBytes(), new FileOutputStream(directory + File.separator + concreteFolder
+	    				+ File.separator + id + File.separator + fileName));
+ 			} catch (IOException e) {
+ 				logger.error("Don't write picture to the folder", e);
+ 			} 
+        	 
+ 			Laminator product = laminatorService.getLaminatorById(id);
+ 			product.getPathPictures().add(fileName);
+ 			laminatorService.updateLaminator(product);
+         }  
+         return fileName;
+    }
+    
+    @RequestMapping(value="/admin/laminator/change_order_pictures_update/{id}", method = RequestMethod.POST,consumes="application/json",
+    		headers = "content-type=application/x-www-form-urlencoded")
+    public @ResponseBody void changeOrderPicturesUpdate(@RequestBody List<String> selectedIds, @PathVariable("id") long id) {
+    	logger.info("change order of pictures in changed laminator product");
+    	
+    	Laminator product = laminatorService.getLaminatorById(id);
+    	product.getPathPictures().clear();
+    	product.getPathPictures().addAll(selectedIds);
+    	laminatorService.updateLaminator(product);
+    }
+    
+    @RequestMapping(value="/admin/laminator/remove_picture_update/{name_picture}/{id}", method = RequestMethod.POST,consumes="application/json",
+    		headers = "content-type=application/x-www-form-urlencoded")
+    public @ResponseBody void removePicture(@PathVariable("name_picture") String namePicture, @PathVariable("id") long id) {
+    	String name = namePicture.replace(":", ".");
+    	Laminator product = laminatorService.getLaminatorById(id);
+    	product.getPathPictures().remove(name);
+    	
+    	try {
+    		FileUtils.forceDelete(new File(directory + File.separator + concreteFolder+ File.separator + id + File.separator + name));
+		} catch (IOException e) {
+			logger.error("Can't delete picture from the folder", e);
+		} 
+    	
+    	if(product.getPathPictures().size()==0){
+    		File fi = new File(directory + File.separator + "default.jpg");
+			try {
+				FileCopyUtils.copy(Files.readAllBytes(fi.toPath()), new FileOutputStream(
+						directory + File.separator + concreteFolder + File.separator + product.getId() + File.separator + "default.jpg"));
+			} catch (IOException e) {
+				logger.error("Can't update path of the default picture to laminator with id=" + product.getId(), e);
+			}
+			product.getPathPictures().add("default.jpg");
+    	}
+    	
+    	laminatorService.updateLaminator(product);
+    	
+    	logger.info("Remove pictore with name = " + name + " from changed laminator product");
     }
     
     @RequestMapping("/admin/laminator/remove/{id}")

@@ -1,7 +1,7 @@
 package com.printmaster.nk.dao;
 
 import java.util.HashSet;
-import java.util.List;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
@@ -9,6 +9,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Junction;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
@@ -43,9 +44,12 @@ public class LaminatorDAOImpl implements ProductDAO<Laminator, SearchLaminators>
 	 
 	    @SuppressWarnings("unchecked")
 	    @Override
-	    public List<Laminator> listProducts() {
+	    public Set<Laminator> listProducts(String sortCriteria) {
 	        Session session = this.sessionFactory.getCurrentSession();
-	        List<Laminator> laminatorList = session.createQuery("from Laminator").list();
+			Criteria cr = session.createCriteria(Laminator.class);
+			cr.addOrder( Order.desc(sortCriteria));
+	        @SuppressWarnings("rawtypes")
+			Set<Laminator> laminatorList = new LinkedHashSet(cr.list());
 	        for(Laminator l : laminatorList){
 	            logger.info("Laminator List::" + l);
 	        }

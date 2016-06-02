@@ -15,7 +15,7 @@
 
 				<div class="infrotamaton_about_uwp">
 					<a href="<c:url value='/use_with_product/${uwProduct.id}' />">${uwProduct.name}</a>
-					<p><span>Предназначение:</span> ${uwProduct.typeProduct}</p>
+					<p><span>Целевое назначение:</span> ${uwProduct.typeProduct}</p>
 					<p><span>Цена:</span>
 						
 						<c:if test="${uwProduct.prise < 0.1}"> уточняйте</c:if>
@@ -31,5 +31,5 @@
 		</c:forEach>
 	 </c:if>
 	 
-	 <c:if test="${empty uwp}">С этим продуктом нету используемых товаров.</c:if>	
+	<!--  <c:if test="${empty uwp}">С этим продуктом нету используемых товаров.</c:if>	 -->
 </div>

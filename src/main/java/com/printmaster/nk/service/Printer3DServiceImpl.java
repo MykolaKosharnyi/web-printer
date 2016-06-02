@@ -1,6 +1,5 @@
 package com.printmaster.nk.service;
 
-import java.util.List;
 import java.util.Set;
 
 import org.springframework.stereotype.Service;
@@ -33,8 +32,8 @@ public class Printer3DServiceImpl implements Printer3DService {
  
     @Override
     @Transactional
-    public List<Printer3D> listPrinters3D() {
-    	 return this.productDAO.listProducts();
+    public Set<Printer3D> listPrinters3D(String sortCriteria) {
+    	 return this.productDAO.listProducts(sortCriteria);
     }
  
     @Override

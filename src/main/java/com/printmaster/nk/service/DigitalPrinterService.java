@@ -1,6 +1,5 @@
 package com.printmaster.nk.service;
 
-import java.util.List;
 import java.util.Set;
 
 import com.printmaster.nk.model.DigitalPrinter;
@@ -10,7 +9,7 @@ public interface DigitalPrinterService {
 	 
     public long addPrinter(DigitalPrinter p);
     public void updatePrinter(DigitalPrinter p);
-    public List<DigitalPrinter> listPrinters();
+    public Set<DigitalPrinter> listPrinters(String sortCriteria);
     public Set<DigitalPrinter> listShowOnSite();
     public Set<DigitalPrinter> listShowOnHomePage();
     public Set<DigitalPrinter> listSearchDigitalPrinters(SearchDigitalPrinters searchPrinters);

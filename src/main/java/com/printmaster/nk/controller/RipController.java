@@ -79,6 +79,7 @@ public class RipController {
         search.setPrise1(100000);
    
         logger.info("All characteristic of RIP.");
+        model.addAttribute("type", "rip");
 		model.addAttribute("rip", (JSONArray)new JSONParser().parse(new InputStreamReader(new FileInputStream("/var/www/localhost/images/rip.json"), "UTF-8")));
         
         model.addAttribute("search", search);
@@ -104,11 +105,26 @@ public class RipController {
 		model.addAttribute("productType", "rip");
 		model.addAttribute("nameProduct", "Наименование ПО");
 		model.addAttribute("titleOfTable", "Список загруженного ПО");
-        model.addAttribute("listProducts", ripService.listRips());
+        model.addAttribute("listProducts", ripService.listRips("id"));
         model.addAttribute("title", "ПО");
         model.addAttribute("addProduct", "Добавить новое ПО");
+        model.addAttribute("productSubType", "none");
         logger.info("/admin/rips page.");
         return "admin/products";
+    }
+	
+	@RequestMapping(value="/admin/rip/{type}/sorting/{value}", method = RequestMethod.POST,consumes="application/json",
+    		headers = "content-type=application/x-www-form-urlencoded")
+    public @ResponseBody List<Rip> sortingProductsInAdmin(@PathVariable("type") String type,@PathVariable("value") String value) {
+		
+		List<Rip> list = new ArrayList<Rip>();
+        if(type.equals("none")){
+        	list.addAll(ripService.listRips(value));
+    	} else {
+    		list.addAll(ripService.listRips(value));
+    	}
+
+		return list;
     }
 	
 	@RequestMapping(value = "/admin/rip/new", method = RequestMethod.GET)
@@ -116,6 +132,7 @@ public class RipController {
 		files.clear();
 		logger.info("/admin/rip/new page.");
 		model.addAttribute("product", new Rip());
+		model.addAttribute("type", "rip");
 		
 		logger.info("All characteristic of RIP.");
 		model.addAttribute("rip", (JSONArray)new JSONParser().parse(new InputStreamReader(new FileInputStream("/var/www/localhost/images/rip.json"), "UTF-8")));
@@ -125,8 +142,10 @@ public class RipController {
 	@RequestMapping(value = "/admin/rip/add", method = RequestMethod.POST) 
 	public String handleFormUpload(@ModelAttribute("product") @Valid Rip product,
 			BindingResult result, Model model) throws IOException{
-
+		
+			
 			if (result.hasErrors()) {
+				model.addAttribute("type", "rip");
 				model.addAttribute("product", product);
 				try {
 					model.addAttribute("rip", (JSONArray)new JSONParser().parse(new InputStreamReader(new FileInputStream("/var/www/localhost/images/rip.json"), "UTF-8")));
@@ -189,6 +208,7 @@ public class RipController {
 
 			if (result.hasErrors()) {
 				model.addAttribute("product", product);
+				model.addAttribute("type", "rip");
 				try {
 					model.addAttribute("rip", (JSONArray)new JSONParser().parse(new InputStreamReader(new FileInputStream("/var/www/localhost/images/rip.json"), "UTF-8")));
 				} catch (ParseException e) {}
@@ -246,24 +266,8 @@ public class RipController {
     @RequestMapping("/admin/rip/edit/{id}")
     public String editRip(@PathVariable("id") long id, Model model) throws UnsupportedEncodingException, FileNotFoundException, IOException, ParseException {
     	logger.info("Begin editing rip with id=" + id);
-    	files.clear();
     	Rip undateRip = ripService.getRipById(id);
-    	
-    	FileMeta fm = null;
-    	for(String path : undateRip.getPathPictures()){
-    		fm = new FileMeta();
-    		fm.setFileName(path);
-    		
-    		try {
-    			File fi = new File(directory + File.separator + 
-    					concreteFolder + File.separator + id + File.separator + path);
-    			fm.setBytes(Files.readAllBytes(fi.toPath()));
-    			logger.info("Load pictures from folder to the FILEMETA.");
-			} catch (IOException e) {
-				logger.error("Can't load pistures to the FILEMETA", e);
-			}
-    		files.add(fm);
-    	}
+    	model.addAttribute("type", "rip");
         model.addAttribute("product", undateRip);
         
         logger.info("All characteristic of RIP.");
@@ -277,6 +281,7 @@ public class RipController {
 		
 		if (result.hasErrors()) {
 			model.addAttribute("product", product);
+			model.addAttribute("type", "rip");
 			try {
 				model.addAttribute("rip", (JSONArray)new JSONParser().parse(new InputStreamReader(new FileInputStream("/var/www/localhost/images/rip.json"), "UTF-8")));
 			} catch (ParseException e) {}
@@ -285,36 +290,8 @@ public class RipController {
 		
 		logger.info("RIP UPDATE with save, id=" + product.getId());
 		
-		FileUtils.cleanDirectory(new File(directory + File.separator + 
-				concreteFolder + File.separator + product.getId()));
-		logger.info("Clear directory with old pictures.");
-		
-		if (files != null && files.size()!=0) {
-			for (FileMeta fm : files.getFiles()) {
-				try {
-					FileCopyUtils.copy(fm.getBytes(), new FileOutputStream(
-							directory + File.separator + 
-        					concreteFolder + File.separator + product.getId() + File.separator + fm.getFileName()));
-					product.getPathPictures().add(fm.getFileName());
-					logger.info("Updatepath of the pictures to rip with id=" + product.getId());
-				} catch (IOException e) {
-					logger.error("Can't UDDATE paths of the pictures to rip with id=" + product.getId(), e);
-				}
-			}
-		} else {
-    		try {
-    			File fi = new File(directory + File.separator + "default.jpg");
-    			FileCopyUtils.copy(Files.readAllBytes(fi.toPath()), new FileOutputStream(
-						directory + File.separator + 
-    					concreteFolder + File.separator + product.getId() + File.separator + "default.jpg"));
-    			product.getPathPictures().add("default.jpg");
-    			logger.error("User didn't UPDATE any picture to the rip with id=" + product.getId() + ", so picture of the"
-    					+ "product will has name 'default.jpg' ");
-			} catch (IOException e) {
-				logger.error("Can't update path of the default picture to rip with id=" + product.getId(), e);
-			}
-		}
-		logger.info("UPDATE pictures was done susseccful!");
+		List<String> pathPictures = ripService.getRipById(product.getId()).getPathPictures();
+		product.setPathPictures(pathPictures);
         
         ripService.updateRip(product);
         logger.info("rip with id=" + product.getId() + " was UDPATED!");
@@ -336,6 +313,7 @@ public class RipController {
 		
 		if (result.hasErrors()) {
 			model.addAttribute("product", product);
+			model.addAttribute("type", "rip");
 			try {
 				model.addAttribute("rip", (JSONArray)new JSONParser().parse(new InputStreamReader(new FileInputStream("/var/www/localhost/images/rip.json"), "UTF-8")));
 			} catch (ParseException e) {}
@@ -344,36 +322,8 @@ public class RipController {
 		
 		logger.info("RIP UPDATE id=" + product.getId());
 		
-		FileUtils.cleanDirectory(new File(directory + File.separator + 
-				concreteFolder + File.separator + product.getId()));
-		logger.info("Clear directory with old pictures.");
-		
-		if (files != null && files.size()!=0) {
-			for (FileMeta fm : files.getFiles()) {
-				try {
-					FileCopyUtils.copy(fm.getBytes(), new FileOutputStream(
-							directory + File.separator + 
-        					concreteFolder + File.separator + product.getId() + File.separator + fm.getFileName()));
-					product.getPathPictures().add(fm.getFileName());
-					logger.info("Updatepath of the pictures to rip with id=" + product.getId());
-				} catch (IOException e) {
-					logger.error("Can't UDDATE paths of the pictures to rip with id=" + product.getId(), e);
-				}
-			}
-		} else {
-    		try {
-    			File fi = new File(directory + File.separator + "default.jpg");
-    			FileCopyUtils.copy(Files.readAllBytes(fi.toPath()), new FileOutputStream(
-						directory + File.separator + 
-    					concreteFolder + File.separator + product.getId() + File.separator + "default.jpg"));
-    			product.getPathPictures().add("default.jpg");
-    			logger.error("User didn't UPDATE any picture to the rip with id=" + product.getId() + ", so picture of the"
-    					+ "product will has name 'default.jpg' ");
-			} catch (IOException e) {
-				logger.error("Can't update path of the default picture to rip with id=" + product.getId(), e);
-			}
-		}
-		logger.info("UPDATE pictures was done susseccful!");
+		List<String> pathPictures = ripService.getRipById(product.getId()).getPathPictures();
+		product.setPathPictures(pathPictures);
         
         ripService.updateRip(product);
         logger.info("rip with id=" + product.getId() + " was UDPATED!");
@@ -444,6 +394,72 @@ public class RipController {
         		}
         	}
     		logger.info("Remove pictore with name=" + namePicture + "from FILEMETA");
+    }
+    
+    @RequestMapping(value="/admin/rip/upload_pictures_update/{id}", method = RequestMethod.POST)
+    public @ResponseBody String uploadPicturesUpdate(MultipartHttpServletRequest request, @PathVariable("id") long id) {
+    	logger.info("upload new picture");
+        
+         Iterator<String> itr =  request.getFileNames();
+         MultipartFile mpf = null;
+         String fileName = null;
+
+         while(itr.hasNext()){
+        	mpf = request.getFile(itr.next()); 
+     		fileName = new Random().nextInt(10000000) + "" + mpf.getOriginalFilename().substring(mpf.getOriginalFilename().lastIndexOf("."))/*last part is file extension*/; 
+
+ 			try {
+ 				FileCopyUtils.copy(mpf.getBytes(), new FileOutputStream(directory + File.separator + concreteFolder
+	    				+ File.separator + id + File.separator + fileName));
+ 			} catch (IOException e) {
+ 				logger.error("Don't write picture to the folder", e);
+ 			} 
+        	 
+ 			Rip product = ripService.getRipById(id);
+ 			product.getPathPictures().add(fileName);
+ 			ripService.updateRip(product);
+         }  
+         return fileName;
+    }
+    
+    @RequestMapping(value="/admin/rip/change_order_pictures_update/{id}", method = RequestMethod.POST,consumes="application/json",
+    		headers = "content-type=application/x-www-form-urlencoded")
+    public @ResponseBody void changeOrderPicturesUpdate(@RequestBody List<String> selectedIds, @PathVariable("id") long id) {
+    	logger.info("change order of pictures in changed rip product");
+    	
+    	Rip product = ripService.getRipById(id);
+    	product.getPathPictures().clear();
+    	product.getPathPictures().addAll(selectedIds);
+    	ripService.updateRip(product);
+    }
+    
+    @RequestMapping(value="/admin/rip/remove_picture_update/{name_picture}/{id}", method = RequestMethod.POST,consumes="application/json",
+    		headers = "content-type=application/x-www-form-urlencoded")
+    public @ResponseBody void removePicture(@PathVariable("name_picture") String namePicture, @PathVariable("id") long id) {
+    	String name = namePicture.replace(":", ".");
+    	Rip product = ripService.getRipById(id);
+    	product.getPathPictures().remove(name);
+    	
+    	try {
+    		FileUtils.forceDelete(new File(directory + File.separator + concreteFolder+ File.separator + id + File.separator + name));
+		} catch (IOException e) {
+			logger.error("Can't delete picture from the folder", e);
+		} 
+    	
+    	if(product.getPathPictures().size()==0){
+    		File fi = new File(directory + File.separator + "default.jpg");
+			try {
+				FileCopyUtils.copy(Files.readAllBytes(fi.toPath()), new FileOutputStream(
+						directory + File.separator + concreteFolder + File.separator + product.getId() + File.separator + "default.jpg"));
+			} catch (IOException e) {
+				logger.error("Can't update path of the default picture to rip with id=" + product.getId(), e);
+			}
+			product.getPathPictures().add("default.jpg");
+    	}
+    	
+    	ripService.updateRip(product);
+    	
+    	logger.info("Remove pictore with name = " + name + " from changed rip product");
     }
     
     @RequestMapping("/admin/rip/remove/{id}")

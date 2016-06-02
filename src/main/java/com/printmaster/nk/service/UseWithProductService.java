@@ -1,6 +1,5 @@
 package com.printmaster.nk.service;
 
-import java.util.List;
 import java.util.Set;
 
 import com.printmaster.nk.model.UseWithProduct;
@@ -10,7 +9,7 @@ public interface UseWithProductService {
 
 	public long addUseWithProduct(UseWithProduct p);
     public void updateUseWithProduct(UseWithProduct p);
-    public List<UseWithProduct> listUseWithProducts();
+    public Set<UseWithProduct> listUseWithProducts(String sortCriteria);
     public Set<UseWithProduct> listShowOnSite();
     public Set<UseWithProduct> listShowOnHomePage();
     public Set<UseWithProduct> listSearchUseWithProducts(SearchUseWithProducts searchUseWithProducts);

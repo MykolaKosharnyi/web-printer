@@ -166,12 +166,13 @@ public class LaserController {
 	@RequestMapping(value = "/admin/lasers", method = RequestMethod.GET)	
     public String listLasers(Model model) {
 		model.addAttribute("titleOfTable", "Список загруженных лазеров");
-        model.addAttribute("listProducts", laserService.listLasers());
+        model.addAttribute("listProducts", laserService.listLasers("id"));
         
         model.addAttribute("productType", "laser");
 		model.addAttribute("nameProduct", "Имя лазера");
         model.addAttribute("title", "Лазера");
         model.addAttribute("addProduct", "Добавить лазер");
+        model.addAttribute("productSubType", "none");
         logger.info("/admin/lasers page.");
         return "admin/products";
     }
@@ -181,74 +182,75 @@ public class LaserController {
 		
 		List<Laser> list = new ArrayList<Laser>();
         if(type.equals("CO2_gas_lasers")){
-        	for(Laser laser : laserService.listLasers()){
+        	for(Laser laser : laserService.listLasers("id")){
         		if(laser.getTypeLaser().equals("Газовые лазеры СО2")){
         			list.add(laser);
         		}
         	}
-        	
+        	model.addAttribute("productSubType", "CO2_gas_lasers");
         	model.addAttribute("titleOfTable", "Список загруженных 'Газовые лазеры СО2'");
             model.addAttribute("listProducts", list);
             logger.info("On /admin/lasers/CO2_gas_lasers page.");
 
     	} else if(type.equals("solid_state_lasers")){
-        	for(Laser laser : laserService.listLasers()){
+        	for(Laser laser : laserService.listLasers("id")){
         		if(laser.getTypeLaser().equals("Твердотельные лазеры")){
         			list.add(laser);
         		}
         	}
-        	
+        	model.addAttribute("productSubType", "solid_state_lasers");
         	model.addAttribute("titleOfTable", "Список загруженных лазеров 'Твердотельные лазеры'");
             model.addAttribute("listProducts", list);
             logger.info("On /admin/lasers/solid_state_lasers page.");
 
     	} else if(type.equals("for_the_treatment_of_metal")){
-        	for(Laser laser : laserService.listLasers()){
+        	for(Laser laser : laserService.listLasers("id")){
         		if(laser.getTypeLaser().equals("Для обработки метала")){
         			list.add(laser);
         		}
         	}
-        	
+        	model.addAttribute("productSubType", "for_the_treatment_of_metal");
         	model.addAttribute("titleOfTable", "Список загруженных лазеров 'Для обработки метала'");
             model.addAttribute("listProducts", list);
             logger.info("On /admin/lasers/for_the_treatment_of_metal.");
   		
     	} else if(type.equals("diode_pumped")){	
-        	for(Laser laser : laserService.listLasers()){
+        	for(Laser laser : laserService.listLasers("id")){
         		if(laser.getTypeLaser().equals("С диодной накачкой")){
         			list.add(laser);
         		}
         	}
-        	
+        	model.addAttribute("productSubType", "diode_pumped");
         	model.addAttribute("titleOfTable", "Список загруженных лазеров с диодной накачкой");
             model.addAttribute("listProducts", list);
             logger.info("On /admin/lasers/diode_pumped page.");
 
     	} else if(type.equals("fiber_lasers")){	
-        	for(Laser laser : laserService.listLasers()){
+        	for(Laser laser : laserService.listLasers("id")){
         		if(laser.getTypeLaser().equals("Оптоволоконные лазеры")){
         			list.add(laser);
         		}
         	}
-        	
+        	model.addAttribute("productSubType", "fiber_lasers");
         	model.addAttribute("titleOfTable", "Список загруженных оптоволоконных лазеров");
             model.addAttribute("listProducts", list);
             logger.info("On /admin/lasers/fiber_lasers page.");
 
     	} else if(type.equals("plasma_lasers")){	
-        	for(Laser laser : laserService.listLasers()){
+        	for(Laser laser : laserService.listLasers("id")){
         		if(laser.getTypeLaser().equals("Плазменные лазеры")){
         			list.add(laser);
         		}
         	}
-        	
+        	model.addAttribute("productSubType", "plasma_lasers");
         	model.addAttribute("titleOfTable", "Список загруженных плазменных лазеров");
             model.addAttribute("listProducts", list);
             logger.info("On /admin/lasers/plasma_lasers page.");
 
     	} else {
+    		model.addAttribute("productSubType", "none");
     		model.addAttribute("titleOfTable", "Список загруженных лазеров");
-            model.addAttribute("listProducts", laserService.listLasers());
+            model.addAttribute("listProducts", laserService.listLasers("id"));
             logger.info("/admin/lasers page.");
     	}
         model.addAttribute("productType", "laser");
@@ -258,13 +260,61 @@ public class LaserController {
         return "admin/products";
     }
 	
+	@RequestMapping(value="/admin/laser/{type}/sorting/{value}", method = RequestMethod.POST,consumes="application/json",
+    		headers = "content-type=application/x-www-form-urlencoded")
+    public @ResponseBody List<Laser> sortingProductsInAdmin(@PathVariable("type") String type,@PathVariable("value") String value) {
+		
+		List<Laser> list = new ArrayList<Laser>();
+        if(type.equals("CO2_gas_lasers")){
+        	for(Laser laser : laserService.listLasers(value)){
+        		if(laser.getTypeLaser().equals("Газовые лазеры СО2")){
+        			list.add(laser);
+        		}
+        	}
+    	} else if(type.equals("solid_state_lasers")){
+        	for(Laser laser : laserService.listLasers(value)){
+        		if(laser.getTypeLaser().equals("Твердотельные лазеры")){
+        			list.add(laser);
+        		}
+        	}
+    	} else if(type.equals("for_the_treatment_of_metal")){
+        	for(Laser laser : laserService.listLasers(value)){
+        		if(laser.getTypeLaser().equals("Для обработки метала")){
+        			list.add(laser);
+        		}
+        	}
+    	} else if(type.equals("diode_pumped")){	
+        	for(Laser laser : laserService.listLasers(value)){
+        		if(laser.getTypeLaser().equals("С диодной накачкой")){
+        			list.add(laser);
+        		}
+        	}
+    	} else if(type.equals("fiber_lasers")){	
+        	for(Laser laser : laserService.listLasers(value)){
+        		if(laser.getTypeLaser().equals("Оптоволоконные лазеры")){
+        			list.add(laser);
+        		}
+        	}
+    	} else if(type.equals("plasma_lasers")){	
+        	for(Laser laser : laserService.listLasers(value)){
+        		if(laser.getTypeLaser().equals("Плазменные лазеры")){
+        			list.add(laser);
+        		}
+        	}
+    	} else {
+    		list.addAll(laserService.listLasers(value));
+    	}
+
+		return list;
+    }
+	
 	@RequestMapping(value = "/admin/laser/new", method = RequestMethod.GET)
 	public String addNewLaser(Model model) {
 		files.clear();
 		logger.info("/admin/laser/new page.");
 		model.addAttribute("product", new Laser());
 		model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
-		
+		model.addAttribute("type", "laser");
 		 try {
 				model.addAttribute("laser", (JSONObject)new JSONParser().
 						parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/laser.json"), "UTF-8")));
@@ -279,6 +329,7 @@ public class LaserController {
 			if (result.hasErrors()) {
 				model.addAttribute("product", product);
 				model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+				model.addAttribute("type", "laser");
 				try {
 					model.addAttribute("laser", (JSONObject)new JSONParser().
 							parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/laser.json"), "UTF-8")));
@@ -341,6 +392,7 @@ public class LaserController {
 			if (result.hasErrors()) {
 				model.addAttribute("product", product);
 				model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+				model.addAttribute("type", "laser");
 				try {
 					model.addAttribute("laser", (JSONObject)new JSONParser().
 							parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/laser.json"), "UTF-8")));
@@ -402,24 +454,9 @@ public class LaserController {
     	files.clear();
     	Laser undateLaser = laserService.getLaserById(id);
     	
-    	FileMeta fm = null;
-    	for(String path : undateLaser.getPathPictures()){
-    		fm = new FileMeta();
-    		fm.setFileName(path);
-    		
-    		try {
-    			File fi = new File(directory + File.separator + 
-    					concreteFolder + File.separator + id + File.separator + path);
-    			fm.setBytes(Files.readAllBytes(fi.toPath()));
-    			logger.info("Load pictures from folder to the FILEMETA.");
-			} catch (IOException e) {
-				logger.error("Can't load pistures to the FILEMETA", e);
-			}
-    		files.add(fm);
-    	}
         model.addAttribute("product", undateLaser);
         model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
-        
+        model.addAttribute("type", "laser");
         try {
 			model.addAttribute("laser", (JSONObject)new JSONParser().
 					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/laser.json"), "UTF-8")));
@@ -434,6 +471,7 @@ public class LaserController {
 		if (result.hasErrors()) {
 			model.addAttribute("product", product);
 			model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+			model.addAttribute("type", "laser");
 			try {
 				model.addAttribute("laser", (JSONObject)new JSONParser().
 						parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/laser.json"), "UTF-8")));
@@ -443,36 +481,8 @@ public class LaserController {
 		
 		logger.info("LASER UPDATE with save, id=" + product.getId());
 		
-		FileUtils.cleanDirectory(new File(directory + File.separator + 
-				concreteFolder + File.separator + product.getId()));
-		logger.info("Clear directory with old pictures.");
-		
-		if (files != null && files.size()!=0) {
-			for (FileMeta fm : files.getFiles()) {
-				try {
-					FileCopyUtils.copy(fm.getBytes(), new FileOutputStream(
-							directory + File.separator + 
-        					concreteFolder + File.separator + product.getId() + File.separator + fm.getFileName()));
-					product.getPathPictures().add(fm.getFileName());
-					logger.info("Updatepath of the pictures to laser with id=" + product.getId());
-				} catch (IOException e) {
-					logger.error("Can't UDDATE paths of the pictures to laser with id=" + product.getId(), e);
-				}
-			}
-		} else {
-    		try {
-    			File fi = new File(directory + File.separator + "default.jpg");
-    			FileCopyUtils.copy(Files.readAllBytes(fi.toPath()), new FileOutputStream(
-						directory + File.separator + 
-    					concreteFolder + File.separator + product.getId() + File.separator + "default.jpg"));
-    			product.getPathPictures().add("default.jpg");
-    			logger.error("User didn't UPDATE any picture to the laser with id=" + product.getId() + ", so picture of the"
-    					+ "product will has name 'default.jpg' ");
-			} catch (IOException e) {
-				logger.error("Can't update path of the default picture to laser with id=" + product.getId(), e);
-			}
-		}
-		logger.info("UPDATE pictures was done susseccful!");
+		List<String> pathPictures = laserService.getLaserById(product.getId()).getPathPictures();
+		product.setPathPictures(pathPictures);
         
         laserService.updateLaser(product);
         logger.info("laser with id=" + product.getId() + " was UDPATED!");
@@ -493,6 +503,7 @@ public class LaserController {
 		if (result.hasErrors()) {
 			model.addAttribute("product", product);
 			model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+			model.addAttribute("type", "laser");
 			try {
 				model.addAttribute("laser", (JSONObject)new JSONParser().
 						parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/laser.json"), "UTF-8")));
@@ -502,36 +513,8 @@ public class LaserController {
 		
 		logger.info("LASER UPDATE id=" + product.getId());
 		
-		FileUtils.cleanDirectory(new File(directory + File.separator + 
-				concreteFolder + File.separator + product.getId()));
-		logger.info("Clear directory with old pictures.");
-		
-		if (files != null && files.size()!=0) {
-			for (FileMeta fm : files.getFiles()) {
-				try {
-					FileCopyUtils.copy(fm.getBytes(), new FileOutputStream(
-							directory + File.separator + 
-        					concreteFolder + File.separator + product.getId() + File.separator + fm.getFileName()));
-					product.getPathPictures().add(fm.getFileName());
-					logger.info("Updatepath of the pictures to laser with id=" + product.getId());
-				} catch (IOException e) {
-					logger.error("Can't UDDATE paths of the pictures to laser with id = " + product.getId(), e);
-				}
-			}
-		} else {
-    		try {
-    			File fi = new File(directory + File.separator + "default.jpg");
-    			FileCopyUtils.copy(Files.readAllBytes(fi.toPath()), new FileOutputStream(
-						directory + File.separator + 
-    					concreteFolder + File.separator + product.getId() + File.separator + "default.jpg"));
-    			product.getPathPictures().add("default.jpg");
-    			logger.error("User didn't UPDATE any picture to the laser with id=" + product.getId() + ", so picture of the"
-    					+ "product will has name 'default.jpg' ");
-			} catch (IOException e) {
-				logger.error("Can't update path of the default picture to laser with id=" + product.getId(), e);
-			}
-		}
-		logger.info("UPDATE pictures was done susseccful!");
+		List<String> pathPictures = laserService.getLaserById(product.getId()).getPathPictures();
+		product.setPathPictures(pathPictures);
         
         laserService.updateLaser(product);
         logger.info("laser with id=" + product.getId() + " was UDPATED!");
@@ -600,6 +583,72 @@ public class LaserController {
         		}
         	}
     	logger.info("Remove pictore with name = " + namePicture + " from FILEMETA");
+    }
+    
+    @RequestMapping(value="/admin/laser/upload_pictures_update/{id}", method = RequestMethod.POST)
+    public @ResponseBody String uploadPicturesUpdate(MultipartHttpServletRequest request, @PathVariable("id") long id) {
+    	logger.info("upload new picture");
+        
+         Iterator<String> itr =  request.getFileNames();
+         MultipartFile mpf = null;
+         String fileName = null;
+
+         while(itr.hasNext()){
+        	mpf = request.getFile(itr.next()); 
+     		fileName = new Random().nextInt(10000000) + "" + mpf.getOriginalFilename().substring(mpf.getOriginalFilename().lastIndexOf("."))/*last part is file extension*/; 
+
+ 			try {
+ 				FileCopyUtils.copy(mpf.getBytes(), new FileOutputStream(directory + File.separator + concreteFolder
+	    				+ File.separator + id + File.separator + fileName));
+ 			} catch (IOException e) {
+ 				logger.error("Don't write picture to the folder", e);
+ 			} 
+        	 
+ 			Laser product = laserService.getLaserById(id);
+ 			product.getPathPictures().add(fileName);
+ 			laserService.updateLaser(product);
+         }  
+         return fileName;
+    }
+    
+    @RequestMapping(value="/admin/laser/change_order_pictures_update/{id}", method = RequestMethod.POST,consumes="application/json",
+    		headers = "content-type=application/x-www-form-urlencoded")
+    public @ResponseBody void changeOrderPicturesUpdate(@RequestBody List<String> selectedIds, @PathVariable("id") long id) {
+    	logger.info("change order of pictures in changed laser product");
+    	
+    	Laser product = laserService.getLaserById(id);
+    	product.getPathPictures().clear();
+    	product.getPathPictures().addAll(selectedIds);
+    	laserService.updateLaser(product);
+    }
+    
+    @RequestMapping(value="/admin/laser/remove_picture_update/{name_picture}/{id}", method = RequestMethod.POST,consumes="application/json",
+    		headers = "content-type=application/x-www-form-urlencoded")
+    public @ResponseBody void removePicture(@PathVariable("name_picture") String namePicture, @PathVariable("id") long id) {
+    	String name = namePicture.replace(":", ".");
+    	Laser product = laserService.getLaserById(id);
+    	product.getPathPictures().remove(name);
+    	
+    	try {
+    		FileUtils.forceDelete(new File(directory + File.separator + concreteFolder+ File.separator + id + File.separator + name));
+		} catch (IOException e) {
+			logger.error("Can't delete picture from the folder", e);
+		} 
+    	
+    	if(product.getPathPictures().size()==0){
+    		File fi = new File(directory + File.separator + "default.jpg");
+			try {
+				FileCopyUtils.copy(Files.readAllBytes(fi.toPath()), new FileOutputStream(
+						directory + File.separator + concreteFolder + File.separator + product.getId() + File.separator + "default.jpg"));
+			} catch (IOException e) {
+				logger.error("Can't update path of the default picture to laser with id=" + product.getId(), e);
+			}
+			product.getPathPictures().add("default.jpg");
+    	}
+    	
+    	laserService.updateLaser(product);
+    	
+    	logger.info("Remove pictore with name = " + name + " from changed laser product");
     }
     
     @RequestMapping("/admin/laser/remove/{id}")

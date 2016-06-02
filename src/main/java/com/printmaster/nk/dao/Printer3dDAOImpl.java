@@ -2,7 +2,7 @@ package com.printmaster.nk.dao;
 
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
@@ -10,6 +10,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Junction;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
@@ -44,9 +45,12 @@ public class Printer3dDAOImpl implements ProductDAO<Printer3D, SearchPrinters3D>
  
     @SuppressWarnings("unchecked")
     @Override
-    public List<Printer3D> listProducts() {
+    public Set<Printer3D> listProducts(String sortCriteria) {
         Session session = this.sessionFactory.getCurrentSession();
-        List<Printer3D> printerList = session.createQuery("from Printer3D").list();
+		Criteria cr = session.createCriteria(Printer3D.class);
+		cr.addOrder( Order.desc(sortCriteria));
+        @SuppressWarnings("rawtypes")
+		Set<Printer3D> printerList = new LinkedHashSet(cr.list());
         for(Printer3D p : printerList){
             logger.info("Printer3D List::"+p);
         }

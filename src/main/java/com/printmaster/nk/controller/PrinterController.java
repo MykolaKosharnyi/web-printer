@@ -178,13 +178,13 @@ public class PrinterController {
     public String listPrinters(Model model) {
 
 		model.addAttribute("titleOfTable", "Список загруженных принтеров");
-        model.addAttribute("listProducts", printerService.listPrinters());
+        model.addAttribute("listProducts", printerService.listPrinters("id"));
         
 		model.addAttribute("productType", "printer");
 		model.addAttribute("nameProduct", "Имя принтера");
         model.addAttribute("title", "Принтеры");
         model.addAttribute("addProduct", "Добавить принтер");
-        
+        model.addAttribute("productSubType", "none");
         logger.info("/admin/printers page.");
         return "admin/products";
     }
@@ -195,12 +195,12 @@ public class PrinterController {
 		List<Printer> list = new ArrayList<Printer>();
         if(type.equals("dissolving")){
 
-        	for(Printer printer : printerService.listPrinters()){
+        	for(Printer printer : printerService.listPrinters("id")){
         		if(printer.getTypePrinter().equals("Сольвентный")){
         			list.add(printer);
         		}
         	}
-        	
+        	model.addAttribute("productSubType", "dissolving");
         	model.addAttribute("titleOfTable", "Список загруженных сольвентных принтеров");
             model.addAttribute("listProducts", list);
             
@@ -208,12 +208,12 @@ public class PrinterController {
     		
     	} else if(type.equals("ecosolvent")){
         	
-        	for(Printer printer : printerService.listPrinters()){
+        	for(Printer printer : printerService.listPrinters("id")){
         		if(printer.getTypePrinter().equals("Экосольвентный")){
         			list.add(printer);
         		}
         	}
-        	
+        	model.addAttribute("productSubType", "ecosolvent");
         	model.addAttribute("titleOfTable", "Список загруженных экосольвентных принтеров");
             model.addAttribute("listProducts", list);
             
@@ -221,12 +221,12 @@ public class PrinterController {
             
     	} else if(type.equals("UV_roll")){
         	
-        	for(Printer printer : printerService.listPrinters()){
+        	for(Printer printer : printerService.listPrinters("id")){
         		if(printer.getTypePrinter().equals("UV рулонный")){
         			list.add(printer);
         		}
         	}
-        	
+        	model.addAttribute("productSubType", "UV_roll");
         	model.addAttribute("titleOfTable", "Список загруженных UV рулонных принтеров");
             model.addAttribute("listProducts", list);
             
@@ -234,12 +234,12 @@ public class PrinterController {
              		
     	} else if(type.equals("UV_flatbed")){	
         	
-        	for(Printer printer : printerService.listPrinters()){
+        	for(Printer printer : printerService.listPrinters("id")){
         		if(printer.getTypePrinter().equals("UV плоскопечатный")){
         			list.add(printer);
         		}
         	}
-        	
+        	model.addAttribute("productSubType", "UV_flatbed");
         	model.addAttribute("titleOfTable", "Список загруженных UV плоскопечатных принтеров");
             model.addAttribute("listProducts", list);
             
@@ -247,12 +247,12 @@ public class PrinterController {
     		
     	} else if(type.equals("sublimation")){		
         	
-        	for(Printer printer : printerService.listPrinters()){
+        	for(Printer printer : printerService.listPrinters("id")){
         		if(printer.getTypePrinter().equals("Сублимационный")){
         			list.add(printer);
         		}
         	}
-        	
+        	model.addAttribute("productSubType", "sublimation");
         	model.addAttribute("titleOfTable", "Список загруженных сублимационных принтеров");
             model.addAttribute("listProducts", list);
             
@@ -260,12 +260,12 @@ public class PrinterController {
     		
     	} else if(type.equals("textile")){    		
         	
-        	for(Printer printer : printerService.listPrinters()){
+        	for(Printer printer : printerService.listPrinters("id")){
         		if(printer.getTypePrinter().equals("Текстильный")){
         			list.add(printer);
         		}
         	}
-        	
+        	model.addAttribute("productSubType", "textile");
         	model.addAttribute("titleOfTable", "Список загруженных текстильных принтеров");
             model.addAttribute("listProducts", list);
 
@@ -273,12 +273,12 @@ public class PrinterController {
     		
     	} else if(type.equals("water_pigment")){  		
         	
-        	for(Printer printer : printerService.listPrinters()){
+        	for(Printer printer : printerService.listPrinters("id")){
         		if(printer.getTypePrinter().equals("Водный/Пигментный")){
         			list.add(printer);
         		}
         	}
-        	
+        	model.addAttribute("productSubType", "water_pigment");
         	model.addAttribute("titleOfTable", "Список загруженных водных/пигментных принтеров");
             model.addAttribute("listProducts", list);
 
@@ -286,20 +286,21 @@ public class PrinterController {
     		
     	} else if(type.equals("SAPR-GIS")){
         	
-        	for(Printer printer : printerService.listPrinters()){
+        	for(Printer printer : printerService.listPrinters("id")){
         		if(printer.getTypePrinter().equals("САПР/ГИС")){
         			list.add(printer);
         		}
         	}
-        	
+        	model.addAttribute("productSubType", "SAPR-GIS");
         	model.addAttribute("titleOfTable", "Список загруженных САПР/ГИС принтеров");
             model.addAttribute("listProducts", list);
             
             logger.info("On /admin/printers/SAPR-GIS page.");
     		
     	} else {
+    		model.addAttribute("productSubType", "none");
     		model.addAttribute("titleOfTable", "Список загруженных принтеров");
-            model.addAttribute("listProducts", printerService.listPrinters());
+            model.addAttribute("listProducts", printerService.listPrinters("id"));
             logger.info("/admin/printers page.");
     	}
         
@@ -311,6 +312,74 @@ public class PrinterController {
         return "admin/products";
     }
 	
+	@RequestMapping(value="/admin/printer/{type}/sorting/{value}", method = RequestMethod.POST,consumes="application/json",
+    		headers = "content-type=application/x-www-form-urlencoded")
+    public @ResponseBody List<Printer> sortingProductsInAdmin(@PathVariable("type") String type,@PathVariable("value") String value) {
+		
+		List<Printer> list = new ArrayList<Printer>();
+        if(type.equals("dissolving")){
+
+        	for(Printer printer : printerService.listPrinters(value)){
+        		if(printer.getTypePrinter().equals("Сольвентный")){
+        			list.add(printer);
+        		}
+        	}
+    	} else if(type.equals("ecosolvent")){
+        	
+        	for(Printer printer : printerService.listPrinters(value)){
+        		if(printer.getTypePrinter().equals("Экосольвентный")){
+        			list.add(printer);
+        		}
+        	}
+    	} else if(type.equals("UV_roll")){
+        	
+        	for(Printer printer : printerService.listPrinters(value)){
+        		if(printer.getTypePrinter().equals("UV рулонный")){
+        			list.add(printer);
+        		}
+        	} 		
+    	} else if(type.equals("UV_flatbed")){	
+        	
+        	for(Printer printer : printerService.listPrinters(value)){
+        		if(printer.getTypePrinter().equals("UV плоскопечатный")){
+        			list.add(printer);
+        		}
+        	}
+    	} else if(type.equals("sublimation")){		
+        	
+        	for(Printer printer : printerService.listPrinters(value)){
+        		if(printer.getTypePrinter().equals("Сублимационный")){
+        			list.add(printer);
+        		}
+        	}
+    	} else if(type.equals("textile")){    		
+        	
+        	for(Printer printer : printerService.listPrinters(value)){
+        		if(printer.getTypePrinter().equals("Текстильный")){
+        			list.add(printer);
+        		}
+        	}
+    	} else if(type.equals("water_pigment")){  		
+        	
+        	for(Printer printer : printerService.listPrinters(value)){
+        		if(printer.getTypePrinter().equals("Водный/Пигментный")){
+        			list.add(printer);
+        		}
+        	}
+    	} else if(type.equals("SAPR-GIS")){
+        	
+        	for(Printer printer : printerService.listPrinters(value)){
+        		if(printer.getTypePrinter().equals("САПР/ГИС")){
+        			list.add(printer);
+        		}
+        	}
+    	} else {
+    		list.addAll(printerService.listPrinters(value));
+    	}
+
+		return list;
+    }
+	
 	@RequestMapping(value = "/admin/printer/new", method = RequestMethod.GET)
 	public String addNewPrinter(Model model) {
 		files.clear();
@@ -319,6 +388,7 @@ public class PrinterController {
 		 logger.info("All characteristic of printer.");
 		 model.addAttribute("product", new Printer());
 		 model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+		 model.addAttribute("type", "printer");
 		 
 		try {
 			model.addAttribute("printer", (JSONObject)new JSONParser().
@@ -335,6 +405,7 @@ public class PrinterController {
 			if (result.hasErrors()) {
 				model.addAttribute("product", product);
 				model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+				model.addAttribute("type", "printer");
 				try {
 					model.addAttribute("printer", (JSONObject)new JSONParser().
 							parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/printer.json"), "UTF-8")));
@@ -344,8 +415,6 @@ public class PrinterController {
 		
             long id = printerService.addPrinter(product);
             logger.info("Create new printer! With id=" + id);
-  
-  //          String phyPath = servletContext.getRealPath("/");
 
             if(new File(directory + File.separator + 
             		concreteFolder + File.separator + id).mkdir()){
@@ -383,9 +452,6 @@ public class PrinterController {
             this.printerService.updatePrinter(product);
             
             files.clear();
-		
-   //       ModelAndView mav = new ModelAndView("redirect:/admin/printers"); 
-	//	  mav.addObject("listProducts", printerService.listPrinters());
 		  
 		  links.createLinksForPrinters(printerService.listShowOnSite());
 		  
@@ -403,6 +469,7 @@ public class PrinterController {
 			if (result.hasErrors()) {
 				model.addAttribute("product", product);
 				model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+				model.addAttribute("type", "printer");
 				try {
 					model.addAttribute("printer", (JSONObject)new JSONParser().
 							parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/printer.json"), "UTF-8")));
@@ -449,8 +516,6 @@ public class PrinterController {
             this.printerService.updatePrinter(product);
             
             files.clear();
-		
-   //       ModelAndView mav = new ModelAndView("redirect:/admin/printer/edit/" + id); 
 		  
 		  links.createLinksForPrinters(printerService.listShowOnSite());	
 		  if (product.isShowOnSite() && product.isShowOnLeftSide()){
@@ -463,32 +528,16 @@ public class PrinterController {
     @RequestMapping("/admin/printer/edit/{id}")
     public String editPrinter(@PathVariable("id") long id, Model model){
     	logger.info("Begin editing printer with id=" + id);
-    	files.clear();
     	Printer undatePrinter = printerService.getPrinterById(id);
     	
-    	FileMeta fm = null;
-    	for(String path : undatePrinter.getPathPictures()){
-    		fm = new FileMeta();
-    		fm.setFileName(path);
-    		
-    		try {
-    			File fi = new File(directory + File.separator + 
-    					concreteFolder + File.separator + id + File.separator + path);
-    			fm.setBytes(Files.readAllBytes(fi.toPath()));
-    			logger.info("Load pictures from folder to the FILEMETA.");
-			} catch (IOException e) {
-				logger.error("Can't load pistures to the FILEMETA", e);
-			}
-    		files.add(fm);
-    	}
         model.addAttribute("product", undatePrinter);
-    //    model.addAttribute("listPrinters", this.printerService.listPrinters());
+        model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+        model.addAttribute("type", "printer");
         
         try {
 			model.addAttribute("printer", (JSONObject)new JSONParser().
 					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/printer.json"), "UTF-8")));
 		} catch (IOException | ParseException e) {}
-        model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
         return "admin/printer";
     }
 	
@@ -499,6 +548,7 @@ public class PrinterController {
 		if (result.hasErrors()) {
 			model.addAttribute("product", product);
 			model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+			model.addAttribute("type", "printer");
 			try {
 				model.addAttribute("printer", (JSONObject)new JSONParser().
 						parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/printer.json"), "UTF-8")));
@@ -508,36 +558,8 @@ public class PrinterController {
 		
 		logger.info("PRINTER UPDATE with save, id=" + product.getId());
 		
-		FileUtils.cleanDirectory(new File(directory + File.separator + 
-				concreteFolder + File.separator + product.getId()));
-		logger.info("Clear directory with old pictures.");
-		
-		if (files != null && files.size()!=0) {
-			for (FileMeta fm : files.getFiles()) {
-				try {
-					FileCopyUtils.copy(fm.getBytes(), new FileOutputStream(
-							directory + File.separator + 
-        					concreteFolder + File.separator + product.getId() + File.separator + fm.getFileName()));
-					product.getPathPictures().add(fm.getFileName());
-					logger.info("Updatepath of the pictures to printer with id=" + product.getId());
-				} catch (IOException e) {
-					logger.error("Can't UDDATE paths of the pictures to printer with id=" + product.getId(), e);
-				}
-			}
-		} else {
-    		try {
-    			File fi = new File(directory + File.separator + "default.jpg");
-    			FileCopyUtils.copy(Files.readAllBytes(fi.toPath()), new FileOutputStream(
-						directory + File.separator + 
-    					concreteFolder + File.separator + product.getId() + File.separator + "default.jpg"));
-    			product.getPathPictures().add("default.jpg");
-    			logger.error("User didn't UPDATE any picture to the printer with id=" + product.getId() + ", so picture of the"
-    					+ "product will has name 'default.jpg' ");
-			} catch (IOException e) {
-				logger.error("Can't update path of the default picture to printer with id=" + product.getId(), e);
-			}
-		}
-		logger.info("UPDATE pictures was done susseccful!");
+		List<String> pathPictures = printerService.getPrinterById(product.getId()).getPathPictures();
+		product.setPathPictures(pathPictures);
         
         printerService.updatePrinter(product);
         logger.info("printer with id=" + product.getId() + " was UDPATED!");
@@ -549,7 +571,6 @@ public class PrinterController {
 	    }
 		  
 		logger.info("Update links to the products in left menu!");
-	//	ModelAndView mav = new ModelAndView("redirect:/admin/printer/edit/" + product.getId());
 		return "redirect:/admin/printer/edit/" + product.getId();
 	}
 	
@@ -560,6 +581,7 @@ public class PrinterController {
 		if (result.hasErrors()) {
 			model.addAttribute("product", product);
 			model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+			model.addAttribute("type", "printer");
 			try {
 				model.addAttribute("printer", (JSONObject)new JSONParser().
 						parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/printer.json"), "UTF-8")));
@@ -568,43 +590,13 @@ public class PrinterController {
         }
 		
 		logger.info("PRINTER UPDATE id=" + product.getId());
-		
-		FileUtils.cleanDirectory(new File(directory + File.separator + 
-				concreteFolder + File.separator + product.getId()));
-		logger.info("Clear directory with old pictures.");
-		
-		if (files != null && files.size()!=0) {
-			for (FileMeta fm : files.getFiles()) {
-				try {
-					FileCopyUtils.copy(fm.getBytes(), new FileOutputStream(
-							directory + File.separator + 
-        					concreteFolder + File.separator + product.getId() + File.separator + fm.getFileName()));
-					product.getPathPictures().add(fm.getFileName());
-					logger.info("Updatepath of the pictures to printer with id=" + product.getId());
-				} catch (IOException e) {
-					logger.error("Can't UDDATE paths of the pictures to printer with id=" + product.getId(), e);
-				}
-			}
-		} else {
-    		try {
-    			File fi = new File(directory + File.separator + "default.jpg");
-    			FileCopyUtils.copy(Files.readAllBytes(fi.toPath()), new FileOutputStream(
-						directory + File.separator + 
-    					concreteFolder + File.separator + product.getId() + File.separator + "default.jpg"));
-    			product.getPathPictures().add("default.jpg");
-    			logger.error("User didn't UPDATE any picture to the printer with id=" + product.getId() + ", so picture of the"
-    					+ "product will has name 'default.jpg' ");
-			} catch (IOException e) {
-				logger.error("Can't update path of the default picture to printer with id=" + product.getId(), e);
-			}
-		}
-		logger.info("UPDATE pictures was done susseccful!");
+
+		List<String> pathPictures = printerService.getPrinterById(product.getId()).getPathPictures();
+		product.setPathPictures(pathPictures);
         
         printerService.updatePrinter(product);
         logger.info("printer with id=" + product.getId() + " was UDPATED!");
         
-//		ModelAndView mav = new ModelAndView("redirect:/admin/printers"); 
-//		  mav.addObject("listProducts", printerService.listPrinters());
 		  files.clear();
 		  
 		  links.createLinksForPrinters(printerService.listShowOnSite());
@@ -692,6 +684,72 @@ public class PrinterController {
     	for(FileMeta s : files.getFiles()){
     		System.out.println(s.getFileName());
     	}	
+    }
+    
+    @RequestMapping(value="/admin/printer/upload_pictures_update/{id}", method = RequestMethod.POST)
+    public @ResponseBody String uploadPicturesUpdate(MultipartHttpServletRequest request, @PathVariable("id") long id) {
+    	logger.info("upload new picture");
+        
+         Iterator<String> itr =  request.getFileNames();
+         MultipartFile mpf = null;
+         String fileName = null;
+
+         while(itr.hasNext()){
+        	mpf = request.getFile(itr.next()); 
+     		fileName = new Random().nextInt(10000000) + "" + mpf.getOriginalFilename().substring(mpf.getOriginalFilename().lastIndexOf("."))/*last part is file extension*/; 
+
+ 			try {
+ 				FileCopyUtils.copy(mpf.getBytes(), new FileOutputStream(directory + File.separator + concreteFolder
+	    				+ File.separator + id + File.separator + fileName));
+ 			} catch (IOException e) {
+ 				logger.error("Don't write picture to the folder", e);
+ 			} 
+        	 
+ 			Printer product = printerService.getPrinterById(id);
+ 			product.getPathPictures().add(fileName);
+ 			printerService.updatePrinter(product);
+         }  
+         return fileName;
+    }
+    
+    @RequestMapping(value="/admin/printer/change_order_pictures_update/{id}", method = RequestMethod.POST,consumes="application/json",
+    		headers = "content-type=application/x-www-form-urlencoded")
+    public @ResponseBody void changeOrderPicturesUpdate(@RequestBody List<String> selectedIds, @PathVariable("id") long id) {
+    	logger.info("change order of pictures in changed printer product");
+    	
+    	Printer product = printerService.getPrinterById(id);
+    	product.getPathPictures().clear();
+    	product.getPathPictures().addAll(selectedIds);
+    	printerService.updatePrinter(product);
+    }
+    
+    @RequestMapping(value="/admin/printer/remove_picture_update/{name_picture}/{id}", method = RequestMethod.POST,consumes="application/json",
+    		headers = "content-type=application/x-www-form-urlencoded")
+    public @ResponseBody void removePicture(@PathVariable("name_picture") String namePicture, @PathVariable("id") long id) {
+    	String name = namePicture.replace(":", ".");
+    	Printer product = printerService.getPrinterById(id);
+    	product.getPathPictures().remove(name);
+    	
+    	try {
+    		FileUtils.forceDelete(new File(directory + File.separator + concreteFolder+ File.separator + id + File.separator + name));
+		} catch (IOException e) {
+			logger.error("Can't delete picture from the folder", e);
+		} 
+    	
+    	if(product.getPathPictures().size()==0){
+    		File fi = new File(directory + File.separator + "default.jpg");
+			try {
+				FileCopyUtils.copy(Files.readAllBytes(fi.toPath()), new FileOutputStream(
+						directory + File.separator + concreteFolder + File.separator + product.getId() + File.separator + "default.jpg"));
+			} catch (IOException e) {
+				logger.error("Can't update path of the default picture to printer with id=" + product.getId(), e);
+			}
+			product.getPathPictures().add("default.jpg");
+    	}
+    	
+    	printerService.updatePrinter(product);
+    	
+    	logger.info("Remove pictore with name = " + name + " from changed printer product");
     }
     
     @RequestMapping("/admin/printer/remove/{id}")

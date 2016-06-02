@@ -2,7 +2,7 @@ package com.printmaster.nk.dao;
 
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
@@ -10,6 +10,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Junction;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
@@ -42,11 +43,15 @@ public class ScannerDAOImpl implements ProductDAO<Scanner, SearchScanners>{
 	        logger.info("Scanner updated successfully, Scanner Details="+s);
 	    }
 	 
-	    @SuppressWarnings("unchecked")
+	    @SuppressWarnings({ "unchecked", "rawtypes" })
 	    @Override
-	    public List<Scanner> listProducts() {
+	    public Set<Scanner> listProducts(String sortCriteria) {
 	        Session session = this.sessionFactory.getCurrentSession();
-	        List<Scanner> scannerList = session.createQuery("from Scanner").list();
+	        
+			Criteria cr = session.createCriteria(Scanner.class);
+			cr.addOrder( Order.desc(sortCriteria));
+	        Set<Scanner> scannerList = new LinkedHashSet(cr.list());
+	        
 	        for(Scanner s : scannerList){
 	            logger.info("Scanner List::" + s);
 	        }

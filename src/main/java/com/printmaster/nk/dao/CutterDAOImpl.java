@@ -2,7 +2,7 @@ package com.printmaster.nk.dao;
 
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
@@ -10,6 +10,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Junction;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
@@ -42,11 +43,13 @@ public class CutterDAOImpl implements ProductDAO<Cutter, SearchCutters>{
 	        logger.info("Cutter updated successfully, Cutter Details="+c);
 	    }
 	 
-	    @SuppressWarnings("unchecked")
+	    @SuppressWarnings({ "unchecked", "rawtypes" })
 	    @Override
-	    public List<Cutter> listProducts() {
+	    public Set<Cutter> listProducts(String sortCriteria) {
 	        Session session = this.sessionFactory.getCurrentSession();
-	        List<Cutter> cutterList = session.createQuery("from Cutter").list();
+			Criteria cr = session.createCriteria(Cutter.class);
+			cr.addOrder( Order.desc(sortCriteria));
+			Set<Cutter> cutterList = new LinkedHashSet(cr.list());
 	        for(Cutter c : cutterList){
 	            logger.info("Cutter List::" + c);
 	        }

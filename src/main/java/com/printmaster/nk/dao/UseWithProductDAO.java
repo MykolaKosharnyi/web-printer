@@ -1,6 +1,5 @@
 package com.printmaster.nk.dao;
 
-import java.util.List;
 import java.util.Set;
 
 import com.printmaster.nk.model.SearchUseWithProducts;
@@ -10,7 +9,7 @@ public interface UseWithProductDAO {
 
 	public long addProduct(UseWithProduct p);
     public void updateProduct(UseWithProduct p);
-    public List<UseWithProduct> listProducts();
+    public Set<UseWithProduct> listProducts(String sortCriteria);
     public Set<UseWithProduct> listShowOnSite();
     public Set<UseWithProduct> listShowOnHomePage();
     public Set<UseWithProduct> listSearchProducts(SearchUseWithProducts searchProductCriteria);

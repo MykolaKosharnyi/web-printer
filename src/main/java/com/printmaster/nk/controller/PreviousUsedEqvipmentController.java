@@ -72,7 +72,7 @@ public class PreviousUsedEqvipmentController {
         			list.add(product);
         		}
         	}
-        	
+        	model.addAttribute("productSubType", "none");
         	model.addAttribute("titleOfTable", "Список загруженных б/у принтеров");
             model.addAttribute("listProducts", list);
             
@@ -92,7 +92,7 @@ public class PreviousUsedEqvipmentController {
         			list.add(product);
         		}
         	}
-        	
+        	model.addAttribute("productSubType", "none");
         	model.addAttribute("titleOfTable", "Список загруженных б/у 3D принтеров");
             model.addAttribute("listProducts", list);
             
@@ -112,7 +112,7 @@ public class PreviousUsedEqvipmentController {
         			list.add(product);
         		}
         	}
-        	
+        	model.addAttribute("productSubType", "none");
         	model.addAttribute("titleOfTable", "Список загруженных б/у цыфрового оборудования");
             model.addAttribute("listProducts", list);
             
@@ -132,7 +132,7 @@ public class PreviousUsedEqvipmentController {
         			list.add(product);
         		}
         	}
-        	
+        	model.addAttribute("productSubType", "none");
         	model.addAttribute("titleOfTable", "Список загруженных б/у ламинаторов");
             model.addAttribute("listProducts", list);
             
@@ -152,7 +152,7 @@ public class PreviousUsedEqvipmentController {
         			list.add(product);
         		}
         	}
-        	
+        	model.addAttribute("productSubType", "none");
         	model.addAttribute("titleOfTable", "Список загруженных б/у лазеров");
             model.addAttribute("listProducts", list);
             
@@ -172,7 +172,7 @@ public class PreviousUsedEqvipmentController {
         			list.add(product);
         		}
         	}
-        	
+        	model.addAttribute("productSubType", "none");
         	model.addAttribute("titleOfTable", "Список загруженных б/у граверов/фрезеров");
             model.addAttribute("listProducts", list);
             
@@ -192,7 +192,7 @@ public class PreviousUsedEqvipmentController {
         			list.add(product);
         		}
         	}
-        	
+        	model.addAttribute("productSubType", "none");
         	model.addAttribute("titleOfTable", "Список загруженных б/у сканеров");
             model.addAttribute("listProducts", list);
             

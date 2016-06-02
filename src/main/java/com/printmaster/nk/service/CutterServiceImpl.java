@@ -1,6 +1,5 @@
 package com.printmaster.nk.service;
 
-import java.util.List;
 import java.util.Set;
 
 import org.springframework.transaction.annotation.Transactional;
@@ -30,8 +29,8 @@ public class CutterServiceImpl implements CutterService {
  
     @Override
     @Transactional
-    public List<Cutter> listCutters() {
-        return this.productDAO.listProducts();
+    public Set<Cutter> listCutters(String sortCriteria) {
+        return this.productDAO.listProducts(sortCriteria);
     }
  
     @Override

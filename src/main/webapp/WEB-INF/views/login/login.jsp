@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<title>Login Page</title>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<title><spring:message code="login.title"/></title>
 <style>
 .error {
 	width: 100%;
@@ -41,7 +42,7 @@
 <body onload='document.loginForm.userId.focus();'>
 	<div id="login-box">
 		
-		<h2>Login with Username and Password</h2>
+		<h3><spring:message code="login.head"/></h3>
 
 		<c:if test="${not empty loginError}">
 			<div class="error">${loginError}</div>
@@ -57,16 +58,16 @@
 
 		  <table>
 			<tr>
-				<td>Логин:</td>
+				<td><spring:message code="login.login"/>:</td>
 				<td><input type='text' id="username" name='username' placeholder="user name"></td>
 			</tr>
 			<tr>
-				<td>Пароль:</td>
+				<td><spring:message code="login.password"/>:</td>
 				<td><input type='password' id="password" name='password' placeholder="password" /></td>
 			</tr>
 			<tr>
 				<td colspan='2'><input name="submit" type="submit"
-					value="войти" /></td>
+					value="<spring:message code="login.log_in"/>" /></td>
 			</tr>
 		  </table>
 

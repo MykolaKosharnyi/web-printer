@@ -1,6 +1,5 @@
 package com.printmaster.nk.service;
 
-import java.util.List;
 import java.util.Set;
 
 import org.springframework.transaction.annotation.Transactional;
@@ -30,8 +29,8 @@ public class DigitalPrinterServiceImpl implements DigitalPrinterService {
  
     @Override
     @Transactional
-    public List<DigitalPrinter> listPrinters() {
-        return this.productDAO.listProducts();
+    public Set<DigitalPrinter> listPrinters(String sortCriteria) {
+        return this.productDAO.listProducts(sortCriteria);
     }
  
     @Override

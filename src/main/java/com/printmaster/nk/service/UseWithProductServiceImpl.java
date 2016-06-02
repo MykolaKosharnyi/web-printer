@@ -1,6 +1,5 @@
 package com.printmaster.nk.service;
 
-import java.util.List;
 import java.util.Set;
 
 import org.springframework.transaction.annotation.Transactional;
@@ -30,8 +29,8 @@ public class UseWithProductServiceImpl implements UseWithProductService {
  
     @Override
     @Transactional
-    public List<UseWithProduct> listUseWithProducts() {
-        return this.productDAO.listProducts();
+    public Set<UseWithProduct> listUseWithProducts(String sortCriteria) {
+        return this.productDAO.listProducts(sortCriteria);
     }
  
     @Override

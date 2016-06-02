@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
@@ -15,6 +15,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Junction;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -53,9 +54,14 @@ public class PrinterDAOImpl implements ProductDAO<Printer, SearchPrinters> {
  
     @SuppressWarnings("unchecked")
     @Override
-    public List<Printer> listProducts() {
-        Session session = this.sessionFactory.getCurrentSession();
-        List<Printer> printerList = session.createQuery("from Printer").list();
+    public Set<Printer> listProducts(String sortCriteria) {
+    	Session session = this.sessionFactory.getCurrentSession();
+    	
+		Criteria cr = session.createCriteria(Printer.class);
+		cr.addOrder( Order.desc(sortCriteria));
+        @SuppressWarnings("rawtypes")
+		Set<Printer> printerList = new LinkedHashSet(cr.list());
+        
         for(Printer p : printerList){
             logger.info("Printer List::" + p);
         }

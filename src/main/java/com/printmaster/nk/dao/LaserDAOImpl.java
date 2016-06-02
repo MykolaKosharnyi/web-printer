@@ -2,7 +2,7 @@ package com.printmaster.nk.dao;
 
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
@@ -10,6 +10,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Junction;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
@@ -44,9 +45,12 @@ public class LaserDAOImpl implements ProductDAO<Laser, SearchLasers>{
 	 
 	    @SuppressWarnings("unchecked")
 	    @Override
-	    public List<Laser> listProducts() {
+	    public Set<Laser> listProducts(String sortCriteria) {
 	        Session session = this.sessionFactory.getCurrentSession();
-	        List<Laser> laserList = session.createQuery("from Laser").list();
+			Criteria cr = session.createCriteria(Laser.class);
+			cr.addOrder( Order.desc(sortCriteria));
+	        @SuppressWarnings("rawtypes")
+			Set<Laser> laserList = new LinkedHashSet(cr.list());
 	        for(Laser l : laserList){
 	            logger.info("Laser List::" + l);
 	        }
@@ -104,15 +108,7 @@ public class LaserDAOImpl implements ProductDAO<Laser, SearchLasers>{
 				}
 				cr.add(colorSeparationGroup);
 				}
-			
-			if(searchLasers.getTypeTheDisplayedImage()!= null){
-				Junction typeTheDisplayedImageGroup = Restrictions.disjunction();
-				for(String typeTheDisplayedImage : searchLasers.getTypeTheDisplayedImage()){
-					typeTheDisplayedImageGroup.add(Restrictions.eq("typeTheDisplayedImage",typeTheDisplayedImage));
-				}
-				cr.add(typeTheDisplayedImageGroup);
-				}
-			
+
 			if(searchLasers.getMaximumResolution0()!=searchLasers.getMaximumResolution1()){
 				cr.add(Restrictions.between("maximumResolution", searchLasers.getMaximumResolution0(), searchLasers.getMaximumResolution1()));
 			}
@@ -310,9 +306,28 @@ public class LaserDAOImpl implements ProductDAO<Laser, SearchLasers>{
 						}
 					}
 				
+				if(!isLaserWeNeed)
+					if(searchLasers.getTypeTheDisplayedImage()!=null)
+					if (searchLasers.getTypeTheDisplayedImage().length > 0 ) {
+						if(itLasers.hasNext()){
+							print:
+							for (String currentLaserPropertyValue : currentLaser.getTypeTheDisplayedImage()) {
+								for (String searchedLaserPropertyValue : searchLasers.getTypeTheDisplayedImage()) {
+									if (currentLaserPropertyValue.equals(searchedLaserPropertyValue)) {
+										isLaserWeNeed = true;
+										break print;
+									}
+								}
+							}
+						}
+					}
+				
+				
+				
 				if((!isLaserWeNeed) && ((searchLasers.getConnectionInterface()!=null && searchLasers.getConnectionInterface().length > 0) ||
 						(searchLasers.getFileTypes()!=null && searchLasers.getFileTypes().length > 0) ||
 						(searchLasers.getSoftware()!=null && searchLasers.getSoftware().length > 0) || 
+						(searchLasers.getTypeTheDisplayedImage()!=null && searchLasers.getTypeTheDisplayedImage().length > 0) || 
 						(searchLasers.getSpecialPurpose()!=null && searchLasers.getSpecialPurpose().length > 0)))
 					itLasers.remove();
 			}

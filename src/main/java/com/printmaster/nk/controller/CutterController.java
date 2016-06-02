@@ -154,13 +154,14 @@ public class CutterController {
 	@RequestMapping(value = "/admin/cutters", method = RequestMethod.GET)	
     public String listCutters(Model model) {
 		model.addAttribute("titleOfTable", "Список загруженных граверов/фрезеров");
-        model.addAttribute("listProducts", cutterService.listCutters());
+        model.addAttribute("listProducts", cutterService.listCutters("id"));
         logger.info("/admin/cutters page.");
         
         model.addAttribute("productType", "cutter");
 		model.addAttribute("nameProduct", "Имя гравера/фрезера");
         model.addAttribute("title", "Гравера/фрезера");
         model.addAttribute("addProduct", "Добавить гравер/фрезер");
+        model.addAttribute("productSubType", "none");
         return "admin/products";
     }
 	
@@ -170,43 +171,44 @@ public class CutterController {
 		List<Cutter> list = new ArrayList<Cutter>();
         if(type.equals("for_wood")){
 
-        	for(Cutter cutter : cutterService.listCutters()){
+        	for(Cutter cutter : cutterService.listCutters("id")){
         		if(cutter.getTypeCutter().equals("Для обработки дерева")){
         			list.add(cutter);
         		}
         	}
-        	
+        	model.addAttribute("productSubType", "for_wood");
         	model.addAttribute("titleOfTable", "Список загруженных граверов/фрезеров для обработки дерева");
             model.addAttribute("listProducts", list);
             logger.info("On /admin/cutters/for_wood page.");
     		
     	} else if(type.equals("for_the_treatment_of_metal")){
         	
-        	for(Cutter cutter : cutterService.listCutters()){
+        	for(Cutter cutter : cutterService.listCutters("id")){
         		if(cutter.getTypeCutter().equals("Для обработки металла")){
         			list.add(cutter);
         		}
         	}
-        	
+        	model.addAttribute("productSubType", "for_the_treatment_of_metal");
         	model.addAttribute("titleOfTable", "Список загруженных граверов/фрезеров для обработки металла");
             model.addAttribute("listProducts", list);
             logger.info("On /admin/cutters/for_the_treatment_of_metal page.");
             
     	} else if(type.equals("stone_processing")){
         	
-        	for(Cutter cutter : cutterService.listCutters()){
+        	for(Cutter cutter : cutterService.listCutters("id")){
         		if(cutter.getTypeCutter().equals("Для обработки камня")){
         			list.add(cutter);
         		}
         	}
-        	
+        	model.addAttribute("productSubType", "stone_processing");
         	model.addAttribute("titleOfTable", "Список загруженных граверов/фрезеров для обработки камня");
             model.addAttribute("listProducts", list);
             logger.info("On /admin/cutters/stone_processing"); 
              		
     	} else {
+    		model.addAttribute("productSubType", "none");
     		model.addAttribute("titleOfTable", "Список загруженных граверов/фрезеров");
-            model.addAttribute("listProducts", cutterService.listCutters());
+            model.addAttribute("listProducts", cutterService.listCutters("id"));
             logger.info("/admin/cutters page.");
     	}
         
@@ -216,6 +218,39 @@ public class CutterController {
         model.addAttribute("addProduct", "Добавить гравер/фрезер");
         
         return "admin/products";
+    }
+	
+	@RequestMapping(value="/admin/cutter/{type}/sorting/{value}", method = RequestMethod.POST,consumes="application/json",
+    		headers = "content-type=application/x-www-form-urlencoded")
+    public @ResponseBody List<Cutter> sortingProductsInAdmin(@PathVariable("type") String type,@PathVariable("value") String value) {
+		
+		List<Cutter> list = new ArrayList<Cutter>();
+        if(type.equals("for_wood")){
+
+        	for(Cutter cutter : cutterService.listCutters(value)){
+        		if(cutter.getTypeCutter().equals("Для обработки дерева")){
+        			list.add(cutter);
+        		}
+        	}	
+    	} else if(type.equals("for_the_treatment_of_metal")){
+        	
+        	for(Cutter cutter : cutterService.listCutters(value)){
+        		if(cutter.getTypeCutter().equals("Для обработки металла")){
+        			list.add(cutter);
+        		}
+        	}
+    	} else if(type.equals("stone_processing")){
+        	
+        	for(Cutter cutter : cutterService.listCutters(value)){
+        		if(cutter.getTypeCutter().equals("Для обработки камня")){
+        			list.add(cutter);
+        		}
+        	}	
+    	} else {
+    		list.addAll(cutterService.listCutters(value));
+    	}
+		
+		return list;
     }
 	
 	@RequestMapping(value = "/admin/cutter/new", method = RequestMethod.GET)
@@ -230,6 +265,7 @@ public class CutterController {
 			} catch (IOException | ParseException e) {}
 		
 		model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+		model.addAttribute("type", "cutter");
 	    return "admin/cutter";
 	}
      
@@ -240,6 +276,7 @@ public class CutterController {
 			if (result.hasErrors()) {
 				model.addAttribute("product", product);
 				model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+				model.addAttribute("type", "cutter");
 				try {
 					model.addAttribute("cutter", (JSONObject)new JSONParser().
 							parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/cutter.json"), "UTF-8")));
@@ -275,6 +312,7 @@ public class CutterController {
 			if (result.hasErrors()) {
 				model.addAttribute("product", product);
 				model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+				model.addAttribute("type", "cutter");
 				try {
 					model.addAttribute("cutter", (JSONObject)new JSONParser().
 							parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/cutter.json"), "UTF-8")));
@@ -339,32 +377,17 @@ public class CutterController {
     @RequestMapping("/admin/cutter/edit/{id}")
     public String editCutter(@PathVariable("id") long id, Model model){
     	logger.info("Begin editing cutter with id=" + id);
-    	files.clear();
     	Cutter undateCutter = cutterService.getCutterById(id);
     	
-    	FileMeta fm = null;
-    	for(String path : undateCutter.getPathPictures()){
-    		fm = new FileMeta();
-    		fm.setFileName(path);
-    		
-    		try {
-    			File fi = new File(directory + File.separator + 
-    					concreteFolder + File.separator + id + File.separator + path);
-    			fm.setBytes(Files.readAllBytes(fi.toPath()));
-    			logger.info("Load pictures from folder to the FILEMETA.");
-			} catch (IOException e) {
-				logger.error("Can't load pistures to the FILEMETA", e);
-			}
-    		files.add(fm);
-    	}
         model.addAttribute("product", undateCutter);
-        
+        model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(useWithProductService.listShowOnSite()));
+        model.addAttribute("type", "cutter");
         try {
 			model.addAttribute("cutter", (JSONObject)new JSONParser().
 						parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/cutter.json"), "UTF-8")));
 			} catch (IOException | ParseException e) {}
         
-        model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(useWithProductService.listShowOnSite()));
+       
   
         return "admin/cutter";
     }
@@ -376,6 +399,7 @@ public class CutterController {
 		if (result.hasErrors()) {
 			model.addAttribute("product", product);
 			model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+			model.addAttribute("type", "cutter");
 			try {
 				model.addAttribute("cutter", (JSONObject)new JSONParser().
 						parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/cutter.json"), "UTF-8")));
@@ -385,36 +409,8 @@ public class CutterController {
 		
 		logger.info("cutter UPDATE with save, id=" + product.getId());
 		
-		FileUtils.cleanDirectory(new File(directory + File.separator + 
-				concreteFolder + File.separator + product.getId()));
-		logger.info("Clear directory with old pictures.");
-		
-		if (files != null && files.size()!=0) {
-			for (FileMeta fm : files.getFiles()) {
-				try {
-					FileCopyUtils.copy(fm.getBytes(), new FileOutputStream(
-							directory + File.separator + 
-        					concreteFolder + File.separator + product.getId() + File.separator + fm.getFileName()));
-					product.getPathPictures().add(fm.getFileName());
-					logger.info("Updatepath of the pictures to cutter with id=" + product.getId());
-				} catch (IOException e) {
-					logger.error("Can't UDDATE paths of the pictures to cutter with id=" + product.getId(), e);
-				}
-			}
-		} else {
-    		try {
-    			File fi = new File(directory + File.separator + "default.jpg");
-    			FileCopyUtils.copy(Files.readAllBytes(fi.toPath()), new FileOutputStream(
-						directory + File.separator + 
-    					concreteFolder + File.separator + product.getId() + File.separator + "default.jpg"));
-    			product.getPathPictures().add("default.jpg");
-    			logger.error("User didn't UPDATE any picture to the cutter with id=" + product.getId() + ", so picture of the"
-    					+ "product will has name 'default.jpg' ");
-			} catch (IOException e) {
-				logger.error("Can't update path of the default picture to cutter with id=" + product.getId(), e);
-			}
-		}
-		logger.info("UPDATE pictures was done susseccful!");
+		List<String> pathPictures = cutterService.getCutterById(product.getId()).getPathPictures();
+		product.setPathPictures(pathPictures);
         
 		cutterService.updateCutter(product);
         logger.info("cutter with id=" + product.getId() + " was UDPATED!");
@@ -425,7 +421,6 @@ public class CutterController {
 	    	componets.updateInLeftField(product, true, "cutter");
 		  
 		logger.info("Update links to the products in left menu!");
-		//ModelAndView mav = new ModelAndView("redirect:/admin/cutter/edit/" + product.getId());
 		return "redirect:/admin/cutter/edit/" + product.getId();
 	}
 	
@@ -436,6 +431,7 @@ public class CutterController {
 		if (result.hasErrors()) {
 			model.addAttribute("product", product);
 			model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+			model.addAttribute("type", "cutter");
 			try {
 				model.addAttribute("cutter", (JSONObject)new JSONParser().
 						parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/cutter.json"), "UTF-8")));
@@ -444,43 +440,12 @@ public class CutterController {
         }
 		
 		logger.info("cutter UPDATE id=" + product.getId());
-		
-		FileUtils.cleanDirectory(new File(directory + File.separator + 
-				concreteFolder + File.separator + product.getId()));
-		logger.info("Clear directory with old pictures.");
-		
-		if (files != null && files.size()!=0) {
-			for (FileMeta fm : files.getFiles()) {
-				try {
-					FileCopyUtils.copy(fm.getBytes(), new FileOutputStream(
-							directory + File.separator + 
-        					concreteFolder + File.separator + product.getId() + File.separator + fm.getFileName()));
-					product.getPathPictures().add(fm.getFileName());
-					logger.info("Updatepath of the pictures to cutter with id=" + product.getId());
-				} catch (IOException e) {
-					logger.error("Can't UDDATE paths of the pictures to cutter with id = " + product.getId(), e);
-				}
-			}
-		} else {
-    		try {
-    			File fi = new File(directory + File.separator + "default.jpg");
-    			FileCopyUtils.copy(Files.readAllBytes(fi.toPath()), new FileOutputStream(
-						directory + File.separator + 
-    					concreteFolder + File.separator + product.getId() + File.separator + "default.jpg"));
-    			product.getPathPictures().add("default.jpg");
-    			logger.error("User didn't UPDATE any picture to the cutter with id=" + product.getId() + ", so picture of the"
-    					+ "product will has name 'default.jpg' ");
-			} catch (IOException e) {
-				logger.error("Can't update path of the default picture to cutter with id=" + product.getId(), e);
-			}
-		}
-		logger.info("UPDATE pictures was done susseccful!");
+		List<String> pathPictures = cutterService.getCutterById(product.getId()).getPathPictures();
+		product.setPathPictures(pathPictures);
         
 		cutterService.updateCutter(product);
         logger.info("cutter with id=" + product.getId() + " was UDPATED!");
         
-		//ModelAndView mav = new ModelAndView("redirect:/admin/cutters"); 
-		//  mav.addObject("listProducts", cutterService.listCutters());
 		  files.clear();
 		  
 		  links.createLinksForCutters(cutterService.listShowOnSite());
@@ -534,25 +499,6 @@ public class CutterController {
     	}   	  	
     }
     
-//    @RequestMapping(value="/admin/cutter/change_use_with_product/{id_product}", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
-//    public @ResponseBody void changeUseWithProduct(@PathVariable("id_product") long idProduct, @RequestBody List<Integer> selectedIds) {
-//    	logger.info("change products used in this cutter");
-//    	
-//    	//get Cutter for wich we change product with him use
-//    	Cutter updateCutter = cutterService.getCutterById(idProduct);
-//    	
-//    	updateCutter.getUseWithProduct().clear();
-//    	
-//    	//create new set of UseWithProduct for this cutter from page
-//    	Set<UseWithProduct> listUseWithProduct =  new HashSet<UseWithProduct>();
-//    	for(int i : selectedIds ){
-//    		listUseWithProduct.add(useWithProductService.getUseWithProductById(i));
-//    	}  
-//    	updateCutter.getUseWithProduct().addAll(listUseWithProduct);
-//    	
-//    	cutterService.updateCutter(updateCutter);
-//    }
-    
     @RequestMapping(value="/admin/cutter/remove_picture/{name_picture}", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void removePicture(@PathVariable("name_picture") String namePicture) {
     	String name = namePicture.replace(":", ".");
@@ -564,6 +510,72 @@ public class CutterController {
         		}
         	}
     	logger.info("Remove pictore with name = " + namePicture + " from FILEMETA");
+    }
+    
+    @RequestMapping(value="/admin/cutter/upload_pictures_update/{id}", method = RequestMethod.POST)
+    public @ResponseBody String uploadPicturesUpdate(MultipartHttpServletRequest request, @PathVariable("id") long id) {
+    	logger.info("upload new picture");
+        
+         Iterator<String> itr =  request.getFileNames();
+         MultipartFile mpf = null;
+         String fileName = null;
+
+         while(itr.hasNext()){
+        	mpf = request.getFile(itr.next()); 
+     		fileName = new Random().nextInt(10000000) + "" + mpf.getOriginalFilename().substring(mpf.getOriginalFilename().lastIndexOf("."))/*last part is file extension*/; 
+
+ 			try {
+ 				FileCopyUtils.copy(mpf.getBytes(), new FileOutputStream(directory + File.separator + concreteFolder
+	    				+ File.separator + id + File.separator + fileName));
+ 			} catch (IOException e) {
+ 				logger.error("Don't write picture to the folder", e);
+ 			} 
+        	 
+ 			Cutter product = cutterService.getCutterById(id);
+ 			product.getPathPictures().add(fileName);
+ 			cutterService.updateCutter(product);
+         }  
+         return fileName;
+    }
+    
+    @RequestMapping(value="/admin/cutter/change_order_pictures_update/{id}", method = RequestMethod.POST,consumes="application/json",
+    		headers = "content-type=application/x-www-form-urlencoded")
+    public @ResponseBody void changeOrderPicturesUpdate(@RequestBody List<String> selectedIds, @PathVariable("id") long id) {
+    	logger.info("change order of pictures in changed cutter product");
+    	
+    	Cutter product = cutterService.getCutterById(id);
+    	product.getPathPictures().clear();
+    	product.getPathPictures().addAll(selectedIds);
+    	cutterService.updateCutter(product);
+    }
+    
+    @RequestMapping(value="/admin/cutter/remove_picture_update/{name_picture}/{id}", method = RequestMethod.POST,consumes="application/json",
+    		headers = "content-type=application/x-www-form-urlencoded")
+    public @ResponseBody void removePicture(@PathVariable("name_picture") String namePicture, @PathVariable("id") long id) {
+    	String name = namePicture.replace(":", ".");
+    	Cutter product = cutterService.getCutterById(id);
+    	product.getPathPictures().remove(name);
+    	
+    	try {
+    		FileUtils.forceDelete(new File(directory + File.separator + concreteFolder+ File.separator + id + File.separator + name));
+		} catch (IOException e) {
+			logger.error("Can't delete picture from the folder", e);
+		} 
+    	
+    	if(product.getPathPictures().size()==0){
+    		File fi = new File(directory + File.separator + "default.jpg");
+			try {
+				FileCopyUtils.copy(Files.readAllBytes(fi.toPath()), new FileOutputStream(
+						directory + File.separator + concreteFolder + File.separator + product.getId() + File.separator + "default.jpg"));
+			} catch (IOException e) {
+				logger.error("Can't update path of the default picture to cutter with id=" + product.getId(), e);
+			}
+			product.getPathPictures().add("default.jpg");
+    	}
+    	
+    	cutterService.updateCutter(product);
+    	
+    	logger.info("Remove pictore with name = " + name + " from changed cutter product");
     }
     
     @RequestMapping("/admin/cutter/remove/{id}")

@@ -1,6 +1,5 @@
 package com.printmaster.nk.service;
 
-import java.util.List;
 import java.util.Set;
 
 import org.springframework.transaction.annotation.Transactional;
@@ -30,8 +29,8 @@ public class ScannerServiceImpl implements ScannerService {
  
     @Override
     @Transactional
-    public List<Scanner> listScanners() {
-        return this.productDAO.listProducts();
+    public Set<Scanner> listScanners(String sortCriteria) {
+        return this.productDAO.listProducts(sortCriteria);
     }
  
     @Override
