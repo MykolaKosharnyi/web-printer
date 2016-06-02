@@ -146,6 +146,7 @@ public class LaminatorController {
     	logger.info("/laminator/" + id + " page.");
         Laminator product = laminatorService.getLaminatorById(id);
         model.addAttribute("product", product);
+        model.addAttribute("type", "laminator");
         if(product.getIdUseWithProduct()!=null){
         	model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(useWithProductService.getUseWithProductsByIds(product.getIdUseWithProduct())));
         } else {

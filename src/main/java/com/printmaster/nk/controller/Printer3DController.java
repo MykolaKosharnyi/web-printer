@@ -143,6 +143,7 @@ public class Printer3DController {
         
         Printer3D product = productService.getPrinter3DById(id);
         model.addAttribute("product", product);
+        model.addAttribute("type", "3d_printer");
         if(product.getIdUseWithProduct()!=null){
         	model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(useWithProductService.getUseWithProductsByIds(product.getIdUseWithProduct())));
         } else {

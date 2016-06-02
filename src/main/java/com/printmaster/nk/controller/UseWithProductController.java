@@ -142,6 +142,7 @@ public class UseWithProductController {
     public String showUWP(@PathVariable("id") long id, Model model){
     	logger.info("/use_with_product/" + id + " page.");
         model.addAttribute("product", useWithProductService.getUseWithProductById(id));
+        model.addAttribute("type", "use_with_product");
         return "use_with_product";
     }
     

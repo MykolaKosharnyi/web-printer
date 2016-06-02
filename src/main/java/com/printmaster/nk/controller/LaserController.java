@@ -155,6 +155,7 @@ public class LaserController {
         
         Laser product = laserService.getLaserById(id);
         model.addAttribute("product", product);
+        model.addAttribute("type", "laser");
         if(product.getIdUseWithProduct()!=null){
         	model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(useWithProductService.getUseWithProductsByIds(product.getIdUseWithProduct())));
         } else {

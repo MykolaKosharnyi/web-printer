@@ -137,6 +137,7 @@ public class ScannerController {
     	logger.info("/scanner/" + id + " page.");
     	Scanner product = scannerService.getScannerById(id);
         model.addAttribute("product", product);
+        model.addAttribute("type", "scanner");
         if(product.getIdUseWithProduct()!=null){
         	model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(useWithProductService.getUseWithProductsByIds(product.getIdUseWithProduct())));
         } else {

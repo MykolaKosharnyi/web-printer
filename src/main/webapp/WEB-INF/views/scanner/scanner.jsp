@@ -13,27 +13,8 @@
 <body>   
          <div class="product">
             <div id="pictures_and_descriptions">
-				<div id="pictures">
-					<div class="col-md-10 col-sm-10 col-xs-10">
-						<div class="row bigImage">
-
-<a class="fancybox" data-fancybox-group="group" href="/images/scanners/${product.id}/${product.pathPictures.get(0)}">
-<img src="/images/scanners/${product.id}/${product.pathPictures.get(0)}" alt="alt" /></a>
-							
-						</div>
-					</div>
-
-					<div class="col-md-2 col-sm-2 col-xs-2">
-						<div class="row">
-							<div class="small_pictures">
-								<c:forEach items="${product.pathPictures}" var="pathPicture">
-<a class="fancybox" data-fancybox-group="group" href="/images/scanners/${product.id}/${pathPicture}">
-<img src="/images/scanners/${product.id}/${pathPicture}" alt="alt" /></a>
-								</c:forEach>
-							</div>
-						</div>
-					</div>
-				</div>
+            	<!-- inport pictures presentation -->
+				<jsp:include page="../product_page/pictures.jsp" />
                 <div class="descriptions">
  
                          <c:if test="${!empty product.timeShares}">					
@@ -45,14 +26,8 @@
                     <table id="table_in_head">
                        <caption></caption> 
                                           
-   							<tr>
-   								<td>Цена:</td>
-   								<td><c:if test="${product.prise < 0.1}"> уточняйте</c:if>
-										<c:if test="${!(product.prise < 0.1)}">					
-   											$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${product.prise}" />
-										</c:if>
-           						</td>
-           					</tr>
+   					   <!-- set price in table row -->
+					   <jsp:include page="../product_page/price.jsp" /> 
 					   
                        <c:if test="${!empty product.typeProduct}">
    							<tr><td>Тип сканера:</td><td>${product.typeProduct}</td></tr>
@@ -197,7 +172,7 @@
                     
                     <div>Третье содержимое</div>
                     
-                    <jsp:include page="../product_use_with.jsp" />
+                    <jsp:include page="../product_page/product_use_with.jsp" />
                 </div>            
             </div> 
         </div>

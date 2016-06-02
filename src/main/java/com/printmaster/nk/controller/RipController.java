@@ -97,6 +97,7 @@ public class RipController {
     public String showRip(@PathVariable("id") long id, Model model){
     	logger.info("/rip/" + id + " page.");
         model.addAttribute("product", ripService.getRipById(id));
+        model.addAttribute("type", "rip");
         return "rip";
     }
     

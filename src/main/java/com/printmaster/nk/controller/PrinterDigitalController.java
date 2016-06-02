@@ -133,6 +133,7 @@ public class PrinterDigitalController {
         
         DigitalPrinter product = productService.getPrinterById(id);
         model.addAttribute("product", product);
+        model.addAttribute("type", "digital_printer");
         if(product.getIdUseWithProduct()!=null){
         	model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(useWithProductService.getUseWithProductsByIds(product.getIdUseWithProduct())));
         } else {
