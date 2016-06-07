@@ -103,6 +103,19 @@
 						<form:radiobuttons items="${use_with_product.type_product}" path="typeProduct" element="li"/>
 					</ul>
 				</div>
+				<div class="characteristic">
+					<div class="block_title">
+						<i></i>
+						<p>Наличие (информация для пользователя)</p>
+					</div>
+					<ul class="check_boxes">
+						<form:radiobuttons items="${use_with_product.availability}" path="availability" element="li"/>
+						
+						<div class="text_output">
+							<form:input path="availabilitySpecialCase"/>
+						</div>
+					</ul>
+				</div>
 			</div>
 
 		<div class="textarea_description">

@@ -114,6 +114,9 @@ public abstract class Product implements Serializable{
 	@Column(name="availability")
 	protected String availability;
 	
+	@Column(name="availabilitySpecialCase")
+	protected String availabilitySpecialCase;
+	
 	@Column(nullable = false, columnDefinition = "bit default 1")
 	protected boolean showOnSite = true;
 	
@@ -131,6 +134,14 @@ public abstract class Product implements Serializable{
 //	protected Map<String,String> option = new HashMap<String,String>();
 	
 	public Product(){}
+
+	public String getAvailabilitySpecialCase() {
+		return availabilitySpecialCase;
+	}
+
+	public void setAvailabilitySpecialCase(String availabilitySpecialCase) {
+		this.availabilitySpecialCase = availabilitySpecialCase;
+	}
 
 	public String getTimeSharesText() {
 		return timeSharesText;

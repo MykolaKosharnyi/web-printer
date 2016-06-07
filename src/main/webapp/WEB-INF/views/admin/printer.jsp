@@ -796,6 +796,10 @@
 					</div>
 					<ul class="check_boxes">
 						<form:radiobuttons items="${printer.availability}" path="availability" element="li"/>
+						
+						<div class="text_output">
+							<form:input path="availabilitySpecialCase"/>
+						</div>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -804,7 +808,7 @@
 						<p>Опции</p>
 					</div>
 					<ul class="check_boxes">
-	  					<form:checkboxes items="${printer.availability}" path="availability" element="li"/>
+	  					<!-- <form:checkboxes items="${printer.availability}" path="availability" element="li"/>-->
 					</ul>
 				</div>
 			</div>

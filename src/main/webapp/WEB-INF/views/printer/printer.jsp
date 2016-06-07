@@ -14,6 +14,7 @@
             <div id="pictures_and_descriptions">
 				<!-- import pictures presentation -->
 				<jsp:include page="../product_page/pictures.jsp" />
+				
                 <div class="descriptions">
  			
  				<!-- import timer -->
@@ -46,9 +47,19 @@
    							<tr><td>Ширина печати:</td><td>${product.weightPrintMM} мм</td></tr>
 						</c:if>
                   </table>
+                  
+                 <c:if test="${!empty product.availability && empty product.availabilitySpecialCase}">
+                 	<div id="commom_information"><em>Наличие:</em> ${product.availability}</div>
+                 </c:if>
+                 
+                 <c:if test="${!empty product.availabilitySpecialCase}">
+                 	<div id="commom_information"><em>Наличие:</em> ${product.availabilitySpecialCase}</div>
+                 </c:if>
+                 
                  <c:if test="${!empty product.guarantee}">
                  	<div id="commom_information"><em>Гарантия:</em> ${product.guarantee} месяцев официальной гарантии от производителя.</div>
                  </c:if>
+                 
                 </div>
             </div>
             <div id="tabs_product">

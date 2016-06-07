@@ -9,7 +9,7 @@
 		<title>Admin</title>
 	</head>
 <body>
-<div style="width: 1200px; margin: 0 auto;">
+<div style="width: 1100px; margin: 0 auto;">
 	<jsp:include page="admin/admin_login_in_out.jsp" />
 
 	<div id="content">
@@ -22,6 +22,7 @@
 	    <a href="<c:url value='/admin/scanners' />">Сканеры</a>
 	    <a href="<c:url value='/admin/previous_use_equipments' />">Б/У Оборудование</a>
 	    <a href="<c:url value='/admin/rips' />">ПО</a>
+	    <a href="<c:url value='/admin/use_with_products' />">Cопутствующие товары</a>
 	    <a href="<c:url value='/admin/pictures' />">Изменение изображений главного меню/домашней страницы</a>
     </div>
 </div>

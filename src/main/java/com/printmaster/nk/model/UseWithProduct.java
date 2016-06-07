@@ -49,6 +49,12 @@ public class UseWithProduct implements Serializable{
 	@Column(nullable = false, columnDefinition = "bit default 0")
 	protected boolean showOnLeftSide = false;
 	
+	@Column(name="availability")
+	protected String availability;
+	
+	@Column(name="availabilitySpecialCase")
+	protected String availabilitySpecialCase;
+	
 	@Column(name="description", columnDefinition="TEXT")
 	protected String description;
 	
@@ -66,6 +72,22 @@ public class UseWithProduct implements Serializable{
 	//private Set<Cutter> useWithProduct = new HashSet<Cutter>(0);
 	
 	public UseWithProduct(){}
+
+	public String getAvailability() {
+		return availability;
+	}
+
+	public void setAvailability(String availability) {
+		this.availability = availability;
+	}
+
+	public String getAvailabilitySpecialCase() {
+		return availabilitySpecialCase;
+	}
+
+	public void setAvailabilitySpecialCase(String availabilitySpecialCase) {
+		this.availabilitySpecialCase = availabilitySpecialCase;
+	}
 
 	public String getTypeProduct() {
 		return typeProduct;
