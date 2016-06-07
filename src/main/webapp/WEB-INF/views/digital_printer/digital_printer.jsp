@@ -17,9 +17,8 @@
 				<jsp:include page="../product_page/pictures.jsp" />
                 <div class="descriptions">
  
-                         <c:if test="${!empty product.timeShares}">					
-   							<div class="your-clock"></div>
-						</c:if>     				
+                <!-- import timer -->
+				<jsp:include page="../product_page/clock.jsp" />    				
 				
                 	<div id="name_product_head_description">${product.name}</div>
                 	<div id="name_product_head_description">Код товара: ${product.partNumber}</div>
@@ -460,15 +459,9 @@
                 </div>            
             </div> 
         </div>
-	<script type="text/javascript">
-		var current = new Date();
-		var toDate = new Date(${product.timeShares.getTime()});
-		var clock = $('.your-clock').FlipClock((toDate.getTime()-current.getTime())/1000, {
-		clockFace: 'DailyCounter',
-		countdown: true,
-		language: 'ru',
-		showSeconds: false
-		});
-	</script>
+        
+        <!-- form for asking about product - give opportunity to user ask question
+        and code of javaScript in the end -->
+        <jsp:include page="../product_page/callback_ask_and_javascript_code.jsp" />
 </body>
 </html>

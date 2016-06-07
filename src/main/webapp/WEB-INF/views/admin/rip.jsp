@@ -217,6 +217,18 @@
 				</ul>
 			</div>
 		</div>
+		
+		<div class="textarea_description">
+			<div class="characteristic">
+				<div class="block_title">
+					<i></i>
+					<p>Текст сопровождаемый таймером (отображение в случае если дата на таймере больше текущей)</p>
+				</div>
+				<ul class="box_text_area">
+					<form:textarea name="content" path="timeSharesText" value="${product.timeSharesText}"></form:textarea>
+				</ul>
+			</div>
+		</div>
 
 		<div class="textarea_description">
 			<div class="characteristic">

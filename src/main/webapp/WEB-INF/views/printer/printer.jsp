@@ -12,16 +12,19 @@
 <body>   
          <div class="product">
             <div id="pictures_and_descriptions">
-				<!-- inport pictures presentation -->
+				<!-- import pictures presentation -->
 				<jsp:include page="../product_page/pictures.jsp" />
                 <div class="descriptions">
- 
-                         <c:if test="${!empty product.timeShares}">					
-   							<div class="your-clock"></div>
-						</c:if>     				
-				
-                	<div id="name_product_head_description">${product.name}</div>
+ 			
+ 				<!-- import timer -->
+				<jsp:include page="../product_page/clock.jsp" />
+					
+                <div id="name_product_head_description">${product.name}</div>
+                	
+                <c:if test="${!empty product.partNumber}">
                 	<div id="name_product_head_description">Код товара: ${product.partNumber}</div>
+				</c:if>
+					
                     <table id="table_in_head">
                        <caption></caption> 
                        <!-- set price in table row -->
@@ -397,25 +400,9 @@
             </div> 
         </div>
         
-        <div class="hidden">
-		<form id="callback" class="pop_form">
-			<h5 style="max-width: 300px;">Пожалуйста оставьте координаты, через некоторое время мы с вами свяжемся</h5>
-			<input type="hidden" name="id" value="${product.id}">
-			<input type="hidden" name="typeProduct" value="printer">
-			<input type="text" name="name" placeholder="Ваше имя..." required />
-			<input type="text" name="phone" placeholder="Ваше телефон..." required />
-			<button class="button" type="submit">Уточнить</button>
-		</form>
-	</div>
-	<script type="text/javascript">
-		var current = new Date();
-		var toDate = new Date(${product.timeShares.getTime()});
-		var clock = $('.your-clock').FlipClock((toDate.getTime()-current.getTime())/1000, {
-		clockFace: 'DailyCounter',
-		countdown: true,
-		language: 'ru',
-		showSeconds: false
-		});
-	</script>
+        <!-- form for asking about product - give opportunity to user ask question
+        and code of javaScript in the end -->
+        <jsp:include page="../product_page/callback_ask_and_javascript_code.jsp" />
+        
 </body>
 </html>

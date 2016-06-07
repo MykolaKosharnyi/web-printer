@@ -13,14 +13,13 @@
 <body>   
          <div class="product">
             <div id="pictures_and_descriptions">
-            	<!-- inport pictures presentation -->
+            	<!-- import pictures presentation -->
             	<jsp:include page="../product_page/pictures.jsp" />
 				
                 <div class="descriptions">
  
-                         <c:if test="${!empty product.timeShares}">					
-   							<div class="your-clock"></div>
-						</c:if>     				
+                <!-- import timer -->
+				<jsp:include page="../product_page/clock.jsp" />     				
 				
                 	<div id="name_product_head_description">${product.name}</div>
                 	<div id="name_product_head_description">Код товара: ${product.partNumber}</div>
@@ -184,6 +183,9 @@
                 </div>            
             </div> 
         </div>
-
+        
+		<!-- form for asking about product - give opportunity to user ask question
+        and code of javaScript in the end -->
+        <jsp:include page="../product_page/callback_ask_and_javascript_code.jsp" />
 </body>
 </html>

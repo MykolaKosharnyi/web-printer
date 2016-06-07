@@ -82,6 +82,9 @@ private static final long serialVersionUID = 3031695775597440046L;
 	@DateTimeFormat(pattern="dd.MM.yyyy")
 	private Date timeShares;
 	
+	@Column(name="timeSharesText", columnDefinition="TEXT")
+	protected String timeSharesText;
+	
 	@Column(name="description", columnDefinition="TEXT")
 	private String description;
 	
@@ -101,6 +104,14 @@ private static final long serialVersionUID = 3031695775597440046L;
 	private String serviceInformation;
 	
 	public Rip(){}
+
+	public String getTimeSharesText() {
+		return timeSharesText;
+	}
+
+	public void setTimeSharesText(String timeSharesText) {
+		this.timeSharesText = timeSharesText;
+	}
 
 	public Long getId() {
 		return id;

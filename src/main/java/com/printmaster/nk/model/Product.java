@@ -102,6 +102,9 @@ public abstract class Product implements Serializable{
 	@DateTimeFormat(pattern="dd.MM.yyyy")
 	protected Date timeShares;
 	
+	@Column(name="timeSharesText", columnDefinition="TEXT")
+	protected String timeSharesText;
+	
 	@Column(name="delivery")
 	protected String delivery;
 	
@@ -128,6 +131,14 @@ public abstract class Product implements Serializable{
 //	protected Map<String,String> option = new HashMap<String,String>();
 	
 	public Product(){}
+
+	public String getTimeSharesText() {
+		return timeSharesText;
+	}
+
+	public void setTimeSharesText(String timeSharesText) {
+		this.timeSharesText = timeSharesText;
+	}
 
 	public long[] getIdUseWithProduct() {
 		return idUseWithProduct;
