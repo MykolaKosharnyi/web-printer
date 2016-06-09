@@ -802,15 +802,10 @@
 						</div>
 					</ul>
 				</div>
-				<div class="characteristic">
-					<div class="block_title">
-						<i></i>
-						<p>Опции</p>
-					</div>
-					<ul class="check_boxes">
-	  					<!-- <form:checkboxes items="${printer.availability}" path="availability" element="li"/>-->
-					</ul>
-				</div>
+				
+				<!-- import option characteristic -->
+				<jsp:include page="product/characteristic_option.jsp" />
+				
 			</div>
 
 			<jsp:include page="product/textarea_descriptions.jsp" />

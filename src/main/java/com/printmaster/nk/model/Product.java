@@ -129,11 +129,74 @@ public abstract class Product implements Serializable{
 	@Column(name="service_information", columnDefinition="TEXT")
 	protected String serviceInformation;
 	
-//	@ElementCollection(fetch = FetchType.EAGER)
-//	@Column(name="option")
-//	protected Map<String,String> option = new HashMap<String,String>();
+	//Option - price for addition opportunity with product
+	@Column(name="optionRIP", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double optionRIP;
+	
+	@Column(name="optionSNCP", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double optionSNCP;
+	
+	@Column(name="optionDelivery", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double optionDelivery;
+	
+	@Column(name="optionGuarantee", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double optionGuarantee;
+	
+	@Column(name="nameAddedOption")
+	protected String nameAddedOption;
+	
+	@Column(name="priceAddedOption", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double priceAddedOption;
 	
 	public Product(){}
+
+	public double getOptionRIP() {
+		return optionRIP;
+	}
+
+	public void setOptionRIP(double optionRIP) {
+		this.optionRIP = optionRIP;
+	}
+
+	public double getOptionSNCP() {
+		return optionSNCP;
+	}
+
+	public void setOptionSNCP(double optionSNCP) {
+		this.optionSNCP = optionSNCP;
+	}
+
+	public double getOptionDelivery() {
+		return optionDelivery;
+	}
+
+	public void setOptionDelivery(double optionDelivery) {
+		this.optionDelivery = optionDelivery;
+	}
+
+	public double getOptionGuarantee() {
+		return optionGuarantee;
+	}
+
+	public void setOptionGuarantee(double optionGuarantee) {
+		this.optionGuarantee = optionGuarantee;
+	}
+
+	public String getNameAddedOption() {
+		return nameAddedOption;
+	}
+
+	public void setNameAddedOption(String nameAddedOption) {
+		this.nameAddedOption = nameAddedOption;
+	}
+
+	public double getPriceAddedOption() {
+		return priceAddedOption;
+	}
+
+	public void setPriceAddedOption(double priceAddedOption) {
+		this.priceAddedOption = priceAddedOption;
+	}
 
 	public String getAvailabilitySpecialCase() {
 		return availabilitySpecialCase;

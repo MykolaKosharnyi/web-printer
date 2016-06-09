@@ -934,17 +934,13 @@
 					</div>
 					<ul class="check_boxes">
 						<form:radiobuttons items="${digital_printer.availability}" path="availability" element="li"/>
+						<div class="text_output">
+							<form:input path="availabilitySpecialCase"/>
+						</div>
 					</ul>
 				</div>
-				<div class="characteristic">
-					<div class="block_title">
-						<i></i>
-						<p>Опции</p>
-					</div>
-					<ul class="check_boxes">
-						
-					</ul>
-				</div>
+				<!-- import option characteristic -->
+				<jsp:include page="product/characteristic_option.jsp" />
 			</div>
 
 			<jsp:include page="product/textarea_descriptions.jsp" />

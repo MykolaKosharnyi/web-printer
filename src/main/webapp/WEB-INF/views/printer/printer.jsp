@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE>
 <html lang="ru">
 <head>
@@ -25,28 +26,32 @@
                 <c:if test="${!empty product.partNumber}">
                 	<div id="name_product_head_description">Код товара: ${product.partNumber}</div>
 				</c:if>
-					
-                    <table id="table_in_head">
-                       <caption></caption> 
-                       <!-- set price in table row -->
-					   <jsp:include page="../product_page/price.jsp" />                
-					   
-                       <c:if test="${!empty product.typePrinter}">
-   							<tr><td>Тип принтера:</td><td>${product.typePrinter}</td></tr>
-					   </c:if>
-					   
-                       <c:if test="${!empty product.equipmentModel}">
-   							<tr><td>Модель:</td><td>${product.equipmentModel}</td></tr>
-					   </c:if>
-					   
-                       <c:if test="${product.inputFirstWeightPrintMM != 0}">
-   							<tr><td>Ширина печати:</td><td>${product.inputFirstWeightPrintMM}<c:if test="${product.inputSecondWeightPrintMM!=0}"> x ${product.inputSecondWeightPrintMM}</c:if> мм</td></tr>
-						</c:if>
-                       
-                       <c:if test="${(product.inputFirstWeightPrintMM == 0) && product.weightPrintMM > 0}">
-   							<tr><td>Ширина печати:</td><td>${product.weightPrintMM} мм</td></tr>
-						</c:if>
-                  </table>
+					<div class="outer_table_in_head">
+	                    <table id="table_in_head">
+	                       <caption></caption> 
+	                       <!-- set price in table row -->
+						   <jsp:include page="../product_page/price.jsp" />                
+						   
+	                       <c:if test="${!empty product.typePrinter}">
+	   							<tr><td>Тип принтера:</td><td>${product.typePrinter}</td></tr>
+						   </c:if>
+						   
+	                       <c:if test="${!empty product.equipmentModel}">
+	   							<tr><td>Модель:</td><td>${product.equipmentModel}</td></tr>
+						   </c:if>
+						   
+	                       <c:if test="${product.inputFirstWeightPrintMM != 0}">
+	   							<tr><td>Ширина печати:</td><td>${product.inputFirstWeightPrintMM}<c:if test="${product.inputSecondWeightPrintMM!=0}"> x ${product.inputSecondWeightPrintMM}</c:if> мм</td></tr>
+							</c:if>
+	                       
+	                       <c:if test="${(product.inputFirstWeightPrintMM == 0) && product.weightPrintMM > 0}">
+	   							<tr><td>Ширина печати:</td><td>${product.weightPrintMM} мм</td></tr>
+							</c:if>
+	                  </table>
+                  </div>
+                  
+                <!-- import opportunity add to product's price, price for different services -->
+				<jsp:include page="../product_page/option_product_with_price.jsp" />
                   
                  <c:if test="${!empty product.availability && empty product.availabilitySpecialCase}">
                  	<div id="commom_information"><em>Наличие:</em> ${product.availability}</div>

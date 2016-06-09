@@ -36,6 +36,18 @@
    							<tr><td>Модель:</td><td>${product.equipmentModel}</td></tr>
 						</c:if>
                   </table>
+                  
+                  <!-- import opportunity add to product's price, price for different services -->
+				<jsp:include page="../product_page/option_product_with_price.jsp" />
+                  
+                 <c:if test="${!empty product.availability && empty product.availabilitySpecialCase}">
+                 	<div id="commom_information"><em>Наличие:</em> ${product.availability}</div>
+                 </c:if>
+                 
+                 <c:if test="${!empty product.availabilitySpecialCase}">
+                 	<div id="commom_information"><em>Наличие:</em> ${product.availabilitySpecialCase}</div>
+                 </c:if>
+                  
                  <c:if test="${!empty product.guarantee}">
                  	<div id="commom_information"><em>Гарантия:</em> ${product.guarantee} месяцев официальной гарантии от производителя.</div>
                  </c:if>
