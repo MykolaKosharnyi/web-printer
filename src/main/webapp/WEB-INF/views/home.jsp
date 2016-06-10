@@ -14,6 +14,8 @@
 					<div class="row">
             <div class="sider_container">
 			         <div class="next_button"><i class="fa fa-angle-right"></i></div>
+			         <div class="pause_button"><i class="fa fa-pause" aria-hidden="true"></i></div>
+			         <div class="play_button" style="display: none;"><i class="fa fa-play" aria-hidden="true"></i></div>
 			         <div class="prev_button"><i class="fa fa-angle-left"></i></div>
 			         <div class="carousel">
 				          <c:forEach items="${homeJSON.listPicturesOfCentralReklam}" var="picture">
@@ -104,6 +106,8 @@
                 <div class="row">
                   <div class="sider_container">
                      <div class="next_button_printer"><i class="fa fa-angle-right"></i></div>
+                     <div class="pause_button_printer" style="display: none;"><i class="fa fa-pause" aria-hidden="true"></i></div>
+			         <div class="play_button_printer"><i class="fa fa-play" aria-hidden="true"></i></div>
                      <div class="prev_button_printer"><i class="fa fa-angle-left"></i></div>
                      <div class="carousel_printer">
                         <c:forEach items="${printers}" var="printer">
@@ -185,6 +189,8 @@
                 <div class="row">
                   <div class="sider_container">
                      <div class="next_button_printer_3d"><i class="fa fa-angle-right"></i></div>
+                     <div class="pause_button_printer_3d" style="display: none;"><i class="fa fa-pause" aria-hidden="true"></i></div>
+			         <div class="play_button_printer_3d"><i class="fa fa-play" aria-hidden="true"></i></div>
                      <div class="prev_button_printer_3d"><i class="fa fa-angle-left"></i></div>
                      <div class="carousel_printer_3d">
                         <c:forEach items="${printers3D}" var="printer3D">
@@ -265,6 +271,8 @@
                 <div class="row">
                   <div class="sider_container">
                      <div class="next_button_printer_d"><i class="fa fa-angle-right"></i></div>
+                     <div class="pause_button_printer_d" style="display: none;"><i class="fa fa-pause" aria-hidden="true"></i></div>
+			         <div class="play_button_printer_d"><i class="fa fa-play" aria-hidden="true"></i></div>
                      <div class="prev_button_printer_d"><i class="fa fa-angle-left"></i></div>
                      <div class="carousel_printer_d">
                         <c:forEach items="${digitalPrinters}" var="printer">
@@ -336,6 +344,8 @@
                 <div class="row">
                   <div class="sider_container">
                      <div class="next_button_laminator"><i class="fa fa-angle-right"></i></div>
+                     <div class="pause_button_laminator" style="display: none;"><i class="fa fa-pause" aria-hidden="true"></i></div>
+			         <div class="play_button_laminator"><i class="fa fa-play" aria-hidden="true"></i></div>
                      <div class="prev_button_laminator"><i class="fa fa-angle-left"></i></div>
                      <div class="carousel_laminator">
                          <c:forEach items="${laminators}" var="product">
@@ -424,6 +434,8 @@
                 <div class="row">
                   <div class="sider_container">
                      <div class="next_button_laser"><i class="fa fa-angle-right"></i></div>
+                     <div class="pause_button_laser" style="display: none;"><i class="fa fa-pause" aria-hidden="true"></i></div>
+			         <div class="play_button_laser"><i class="fa fa-play" aria-hidden="true"></i></div>
                      <div class="prev_button_laser"><i class="fa fa-angle-left"></i></div>
                      <div class="carousel_laser">
                         <c:forEach items="${lasers}" var="laser">
@@ -496,6 +508,8 @@
                 <div class="row">
                   <div class="sider_container">
                      <div class="next_button_cutter"><i class="fa fa-angle-right"></i></div>
+                     <div class="pause_button_cutter" style="display: none;"><i class="fa fa-pause" aria-hidden="true"></i></div>
+			         <div class="play_button_cutter"><i class="fa fa-play" aria-hidden="true"></i></div>
                      <div class="prev_button_cutter"><i class="fa fa-angle-left"></i></div>
                      <div class="carousel_cutter">
                         <c:forEach items="${cutters}" var="cutter">
@@ -578,6 +592,8 @@
                 <div class="row">
                   <div class="sider_container">
                      <div class="next_button_scaner"><i class="fa fa-angle-right"></i></div>
+                     <div class="pause_button_scaner" style="display: none;"><i class="fa fa-pause" aria-hidden="true"></i></div>
+			         <div class="play_button_scaner"><i class="fa fa-play" aria-hidden="true"></i></div>
                      <div class="prev_button_scaner"><i class="fa fa-angle-left"></i></div>
                      <div class="carousel_scaner">
                         <c:forEach items="${scanners}" var="scanner">
@@ -650,6 +666,8 @@
                 <div class="row">
                   <div class="sider_container">
                      <div class="next_button_previously_used"><i class="fa fa-angle-right"></i></div>
+                     <div class="pause_button_previously_used" style="display: none;"><i class="fa fa-pause" aria-hidden="true"></i></div>
+			         <div class="play_button_previously_used"><i class="fa fa-play" aria-hidden="true"></i></div>
                      <div class="prev_button_previously_used"><i class="fa fa-angle-left"></i></div>
                      <div class="carousel_previously_used">
                         <c:forEach items="${pue}" var="product">
@@ -726,6 +744,8 @@
                 <div class="row">
                   <div class="sider_container">
                      <div class="next_button_rip"><i class="fa fa-angle-right"></i></div>
+                     <div class="pause_button_rip" style="display: none;"><i class="fa fa-pause" aria-hidden="true"></i></div>
+			         <div class="play_button_rip"><i class="fa fa-play" aria-hidden="true"></i></div>
                      <div class="prev_button_rip"><i class="fa fa-angle-left"></i></div>
                      <div class="carousel_rip">
                         

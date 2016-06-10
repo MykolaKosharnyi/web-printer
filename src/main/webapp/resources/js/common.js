@@ -48,7 +48,11 @@ $(document).ready(function() {
 	owl.owlCarousel({
 		items : 1,
 		autoHeight : false,
-		itemsDesktop: false
+		itemsDesktop: false,
+		loop:true,
+		autoPlay:true,
+	    autoPlayTimeout:1000,
+	    autoplayHoverPause:true
 	});
 	owl.on("mousewheel", ".owl-wrapper", function (e) {
 		if (e.deltaY > 0) {
@@ -64,13 +68,28 @@ $(document).ready(function() {
 	$(".prev_button").click(function() {
 		owl.trigger("owl.prev");
 	});
+	
+	$('.play_button').on('click',function(){
+	    owl.trigger('owl.play',4000);
+	    $(this).css('display','none');
+		$('.pause_button').css('display','block');
+	});
+	$('.pause_button').on('click',function(){
+	    owl.trigger('owl.stop');
+	    $(this).css('display','none');
+		$('.play_button').css('display','block');
+	});
 
 	//Каруселька для принтеров
 	var owl_printer = $(".carousel_printer");
 	owl_printer.owlCarousel({
 		items : 3,
 		autoHeight : false,
-		itemsDesktop: false
+		itemsDesktop: false,
+		loop:true,
+		autoPlay:false,
+	    autoPlayTimeout:1000,
+	    autoplayHoverPause:true
 	});
 	owl_printer.on("mousewheel", ".owl-wrapper", function (e) {
 		if (e.deltaY > 0) {
@@ -86,6 +105,17 @@ $(document).ready(function() {
 	$(".prev_button_printer").click(function() {
 		owl_printer.trigger("owl.prev");
 	});
+	
+	$('.play_button_printer').on('click',function(){
+		owl_printer.trigger('owl.play',4000);
+	    $(this).css('display','none');
+		$('.pause_button_printer').css('display','block');
+	});
+	$('.pause_button_printer').on('click',function(){
+		owl_printer.trigger('owl.stop');
+	    $(this).css('display','none');
+		$('.play_button_printer').css('display','block');
+	});
 
 
 	//Каруселька для 3D принтеров
@@ -93,7 +123,11 @@ $(document).ready(function() {
 	owl_printer_3d.owlCarousel({
 		items : 3,
 		autoHeight : false,
-		itemsDesktop: false
+		itemsDesktop: false,
+		loop:true,
+		autoPlay:false,
+	    autoPlayTimeout:1000,
+	    autoplayHoverPause:true
 	});
 	owl_printer_3d.on("mousewheel", ".owl-wrapper", function (e) {
 		if (e.deltaY > 0) {
@@ -109,13 +143,28 @@ $(document).ready(function() {
 	$(".prev_button_printer_3d").click(function() {
 		owl_printer_3d.trigger("owl.prev");
 	});
+	
+	$('.play_button_printer_3d').on('click',function(){
+		owl_printer_3d.trigger('owl.play',4000);
+	    $(this).css('display','none');
+		$('.pause_button_printer_3d').css('display','block');
+	});
+	$('.pause_button_printer_3d').on('click',function(){
+		owl_printer_3d.trigger('owl.stop');
+	    $(this).css('display','none');
+		$('.play_button_printer_3d').css('display','block');
+	});
 
 	//Каруселька для цыфровых принтеров
 	var owl_printer_d = $(".carousel_printer_d");
 	owl_printer_d.owlCarousel({
 		items : 3,
 		autoHeight : false,
-		itemsDesktop: false
+		itemsDesktop: false,
+		loop:true,
+		autoPlay:false,
+	    autoPlayTimeout:1000,
+	    autoplayHoverPause:true
 	});
 	owl_printer_d.on("mousewheel", ".owl-wrapper", function (e) {
 		if (e.deltaY > 0) {
@@ -131,13 +180,28 @@ $(document).ready(function() {
 	$(".prev_button_printer_d").click(function() {
 		owl_printer_d.trigger("owl.prev");
 	});
+	
+	$('.play_button_printer_d').on('click',function(){
+		owl_printer_d.trigger('owl.play',4000);
+	    $(this).css('display','none');
+		$('.pause_button_printer_d').css('display','block');
+	});
+	$('.pause_button_printer_d').on('click',function(){
+		owl_printer_d.trigger('owl.stop');
+	    $(this).css('display','none');
+		$('.play_button_printer_d').css('display','block');
+	});
 
 //Каруселька for laminator
 	var owl_laminator = $(".carousel_laminator");
 	owl_laminator.owlCarousel({
 		items : 3,
 		autoHeight : false,
-		itemsDesktop: false
+		itemsDesktop: false,
+		loop:true,
+		autoPlay:false,
+	    autoPlayTimeout:1000,
+	    autoplayHoverPause:true
 	});
 	owl_laminator.on("mousewheel", ".owl-wrapper", function (e) {
 		if (e.deltaY > 0) {
@@ -153,13 +217,28 @@ $(document).ready(function() {
 	$(".prev_button_laminator").click(function() {
 		owl_laminator.trigger("owl.prev");
 	});
+	
+	$('.play_button_laminator').on('click',function(){
+		owl_laminator.trigger('owl.play',4000);
+	    $(this).css('display','none');
+		$('.pause_button_laminator').css('display','block');
+	});
+	$('.pause_button_laminator').on('click',function(){
+		owl_laminator.trigger('owl.stop');
+	    $(this).css('display','none');
+		$('.play_button_laminator').css('display','block');
+	});
 
 //Каруселька for laminator
 	var owl_laser = $(".carousel_laser");
 	owl_laser.owlCarousel({
 		items : 3,
 		autoHeight : false,
-		itemsDesktop: false
+		itemsDesktop: false,
+		loop:true,
+		autoPlay:false,
+	    autoPlayTimeout:1000,
+	    autoplayHoverPause:true
 	});
 	owl_laser.on("mousewheel", ".owl-wrapper", function (e) {
 		if (e.deltaY > 0) {
@@ -175,13 +254,28 @@ $(document).ready(function() {
 	$(".prev_button_laser").click(function() {
 		owl_laser.trigger("owl.prev");
 	});
+	
+	$('.play_button_laser').on('click',function(){
+		owl_laser.trigger('owl.play',4000);
+	    $(this).css('display','none');
+		$('.pause_button_laser').css('display','block');
+	});
+	$('.pause_button_laser').on('click',function(){
+		owl_laser.trigger('owl.stop');
+	    $(this).css('display','none');
+		$('.play_button_laser').css('display','block');
+	});
 
 //Каруселька for cutter
 	var owl_cutter = $(".carousel_cutter");
 	owl_cutter.owlCarousel({
 		items : 3,
 		autoHeight : false,
-		itemsDesktop: false
+		itemsDesktop: false,
+		loop:true,
+		autoPlay:false,
+	    autoPlayTimeout:1000,
+	    autoplayHoverPause:true
 	});
 	owl_cutter.on("mousewheel", ".owl-wrapper", function (e) {
 		if (e.deltaY > 0) {
@@ -197,13 +291,28 @@ $(document).ready(function() {
 	$(".prev_button_cutter").click(function() {
 		owl_cutter.trigger("owl.prev");
 	});
+	
+	$('.play_button_cutter').on('click',function(){
+		owl_cutter.trigger('owl.play',4000);
+	    $(this).css('display','none');
+		$('.pause_button_cutter').css('display','block');
+	});
+	$('.pause_button_cutter').on('click',function(){
+		owl_cutter.trigger('owl.stop');
+	    $(this).css('display','none');
+		$('.play_button_cutter').css('display','block');
+	});
 
 //Каруселька for scaner
 	var owl_scaner = $(".carousel_scaner");
 	owl_scaner.owlCarousel({
 		items : 3,
 		autoHeight : false,
-		itemsDesktop: false
+		itemsDesktop: false,
+		loop:true,
+		autoPlay:false,
+	    autoPlayTimeout:1000,
+	    autoplayHoverPause:true
 	});
 	owl_scaner.on("mousewheel", ".owl-wrapper", function (e) {
 		if (e.deltaY > 0) {
@@ -219,13 +328,28 @@ $(document).ready(function() {
 	$(".prev_button_scaner").click(function() {
 		owl_scaner.trigger("owl.prev");
 	});
+	
+	$('.play_button_scaner').on('click',function(){
+		owl_scaner.trigger('owl.play',4000);
+	    $(this).css('display','none');
+		$('.pause_button_scaner').css('display','block');
+	});
+	$('.pause_button_scaner').on('click',function(){
+		owl_scaner.trigger('owl.stop');
+	    $(this).css('display','none');
+		$('.play_button_scaner').css('display','block');
+	});
 
 //Каруселька for previously_used
 	var owl_previously_used = $(".carousel_previously_used");
 	owl_previously_used.owlCarousel({
 		items : 3,
 		autoHeight : false,
-		itemsDesktop: false
+		itemsDesktop: false,
+		loop:true,
+		autoPlay:false,
+	    autoPlayTimeout:1000,
+	    autoplayHoverPause:true
 	});
 	owl_previously_used.on("mousewheel", ".owl-wrapper", function (e) {
 		if (e.deltaY > 0) {
@@ -241,13 +365,28 @@ $(document).ready(function() {
 	$(".prev_button_previously_used").click(function() {
 		owl_previously_used.trigger("owl.prev");
 	});
+	
+	$('.play_button_previously_used').on('click',function(){
+		owl_previously_used.trigger('owl.play',4000);
+	    $(this).css('display','none');
+		$('.pause_button_previously_used').css('display','block');
+	});
+	$('.pause_button_previously_used').on('click',function(){
+		owl_previously_used.trigger('owl.stop');
+	    $(this).css('display','none');
+		$('.play_button_previously_used').css('display','block');
+	});
 
 //Каруселька for rip
 	var owl_rip = $(".carousel_rip");
 	owl_rip.owlCarousel({
 		items : 3,
 		autoHeight : false,
-		itemsDesktop: false
+		itemsDesktop: false,
+		loop:true,
+		autoPlay:false,
+	    autoPlayTimeout:1000,
+	    autoplayHoverPause:true
 	});
 	owl_rip.on("mousewheel", ".owl-wrapper", function (e) {
 		if (e.deltaY > 0) {
@@ -262,6 +401,17 @@ $(document).ready(function() {
 	});
 	$(".prev_button_rip").click(function() {
 		owl_rip.trigger("owl.prev");
+	});
+	
+	$('.play_button_rip').on('click',function(){
+		owl_rip.trigger('owl.play',4000);
+	    $(this).css('display','none');
+		$('.pause_button_rip').css('display','block');
+	});
+	$('.pause_button_rip').on('click',function(){
+		owl_rip.trigger('owl.stop');
+	    $(this).css('display','none');
+		$('.play_button_rip').css('display','block');
 	});
 
 	//Кнопка "Наверх"
