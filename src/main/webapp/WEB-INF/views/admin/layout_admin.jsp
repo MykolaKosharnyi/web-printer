@@ -21,9 +21,10 @@
 	<script src="http://malsup.github.com/jquery.form.js"></script>
 	<script src="<%=request.getContextPath()%>/resources/libs/fancybox/jquery.fancybox.pack.js"></script>
 	
-	<script src="<%=request.getContextPath()%>/products/ckeditor/ckeditor.js"></script>
-   <!--  <script src="<%=request.getContextPath()%>/resources/js/tiny_mce/tiny_mce.js"></script>
-    <script src="tinyfck/tiny_mce.js"></script> -->
+	<!-- <script src="<%=request.getContextPath()%>/products/ckeditor/ckeditor.js"></script>
+   <script src="<%=request.getContextPath()%>/products/tinyfck/tiny_mce.js"></script>  -->
+    
+<script src="<%=request.getContextPath()%>/products/tiny_mce/tinymce.min.js"></script>
 	<script src="<%=request.getContextPath()%>/resources/js/admin/common.js"></script>
 </head>
 <body>
