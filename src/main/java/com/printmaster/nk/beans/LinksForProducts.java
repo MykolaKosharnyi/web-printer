@@ -22,6 +22,7 @@ import com.printmaster.nk.model.Laminator;
 import com.printmaster.nk.model.Laser;
 import com.printmaster.nk.model.Printer;
 import com.printmaster.nk.model.Printer3D;
+import com.printmaster.nk.model.Rip;
 import com.printmaster.nk.model.Scanner;
 import com.printmaster.nk.model.UseWithProduct;
 
@@ -529,6 +530,84 @@ public class LinksForProducts {
 				scannersJSON.put("list_3d_scanners", list_3d_scanners);
 				
 				obj.put("scannersJSON", scannersJSON);
+				
+				Writer out = new PrintWriter(path, "UTF-8");
+				out.write(obj.toJSONString());
+				out.flush();
+				out.close();
+				
+			} catch (FileNotFoundException e1) {
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			} catch (ParseException e1) {
+				e1.printStackTrace();
+			}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void createLinksForRips(Set<Rip> rips){
+		JSONParser parser = new JSONParser();
+			try {
+				obj = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream(path), "UTF-8"));
+				
+				if( obj.get("ripsJSON") != null )
+					obj.remove("ripsJSON");
+				
+				JSONObject variable = null;
+				JSONObject ripsJSON = new JSONObject();
+				
+				JSONArray list_rip_printing_equipment = new JSONArray();
+				JSONArray list_rip_3D_printers = new JSONArray();
+				JSONArray list_rip_laser_milling_equipment = new JSONArray();
+				JSONArray list_rip_3D_scanners = new JSONArray();
+				JSONArray list_rip_scanners = new JSONArray();
+				
+				Iterator<Rip> it = rips.iterator();
+				
+				while(it.hasNext()){				
+					Rip currentRip = it.next();
+					String type = currentRip.getTypeEquipment();
+					
+					if(type.equals("Печатное оборудование")){
+						variable = new JSONObject();
+						variable.put("name", currentRip.getName());
+						variable.put("id", currentRip.getId());
+						list_rip_printing_equipment.add(variable);
+						
+		        	} else if(type.equals("3D Принтеры")){
+						variable = new JSONObject();
+						variable.put("name", currentRip.getName());
+						variable.put("id", currentRip.getId());
+						list_rip_3D_printers.add(variable);
+						
+		        	} else if(type.equals("Лазерно-Фрезеровальное оборудование")){
+						variable = new JSONObject();
+						variable.put("name", currentRip.getName());
+						variable.put("id", currentRip.getId());
+						list_rip_laser_milling_equipment.add(variable);
+						
+		        	} else if(type.equals("3D Сканеры")){
+						variable = new JSONObject();
+						variable.put("name", currentRip.getName());
+						variable.put("id", currentRip.getId());
+						list_rip_3D_scanners.add(variable);
+						
+		        	} else if(type.equals("Сканеры")){
+						variable = new JSONObject();
+						variable.put("name", currentRip.getName());
+						variable.put("id", currentRip.getId());
+						list_rip_scanners.add(variable);
+		        	} 
+			}
+		
+				ripsJSON.put("list_rip_printing_equipment", list_rip_printing_equipment);
+				ripsJSON.put("list_rip_3D_printers", list_rip_3D_printers);
+				ripsJSON.put("list_rip_laser_milling_equipment", list_rip_laser_milling_equipment);
+				ripsJSON.put("list_rip_3D_scanners", list_rip_3D_scanners);
+				ripsJSON.put("list_rip_scanners", list_rip_scanners);
+				
+				obj.put("ripsJSON", ripsJSON);
 				
 				Writer out = new PrintWriter(path, "UTF-8");
 				out.write(obj.toJSONString());

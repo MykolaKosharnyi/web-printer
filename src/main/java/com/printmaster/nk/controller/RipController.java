@@ -40,6 +40,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.printmaster.nk.beans.ComponetsForController;
 import com.printmaster.nk.beans.FileMeta;
+import com.printmaster.nk.beans.LinksForProducts;
 import com.printmaster.nk.beans.PicturesContainer;
 import com.printmaster.nk.model.Rip;
 import com.printmaster.nk.model.SearchRips;
@@ -53,8 +54,8 @@ public class RipController {
 	private String directory = "/var/www/localhost/images";
 	private String concreteFolder = "rips";
 
-//	@Autowired
-//	private LinksForProducts links;
+	@Autowired
+	private LinksForProducts links;
 
     @Autowired
     PicturesContainer files;
@@ -194,7 +195,7 @@ public class RipController {
             
             files.clear();
 		
-		  //links.createLinksForRips(ripService.listShowOnSite());
+		  links.createLinksForRips(ripService.listShowOnSite());
 		  
 		  if (product.isShowOnSite() && product.isShowOnLeftSide())
 			  componets.updateInLeftField(product, true);
@@ -256,7 +257,7 @@ public class RipController {
             
             files.clear();
 		  
-		  //links.createLinksForRips(ripService.listShowOnSite());	
+		  links.createLinksForRips(ripService.listShowOnSite());	
 		  if (product.isShowOnSite() && product.isShowOnLeftSide()){
 			  componets.updateInLeftField(product, true);
 	    	}
@@ -297,7 +298,7 @@ public class RipController {
         ripService.updateRip(product);
         logger.info("rip with id=" + product.getId() + " was UDPATED!");
 		  
-		//links.createLinksForRips(ripService.listShowOnSite());
+		links.createLinksForRips(ripService.listShowOnSite());
 	
 		if (product.isShowOnSite() && product.isShowOnLeftSide()){
 			componets.updateInLeftField(product, true);
@@ -331,7 +332,7 @@ public class RipController {
         
 		  files.clear();
 		  
-		  //links.createLinksForRips(ripService.listShowOnSite());
+		  links.createLinksForRips(ripService.listShowOnSite());
 	
 		  if (product.isShowOnSite() && product.isShowOnLeftSide()){
 			  componets.updateInLeftField(product, true);
@@ -481,7 +482,7 @@ public class RipController {
     		logger.info("DELETE rip with id=" + id + " from database!");
     		ripService.removeRip(id);
         
-    		//links.createLinksForRips(ripService.listShowOnSite());
+    		links.createLinksForRips(ripService.listShowOnSite());
     		
         return "redirect:/admin/rips";
     }  
@@ -498,7 +499,7 @@ public class RipController {
     		componets.updateInLeftField(rip, false);
     	}
     	
-    	//links.createLinksForRips(ripService.listShowOnSite());
+    	links.createLinksForRips(ripService.listShowOnSite());
     }
     
     @RequestMapping(value="/admin/rip/showOnHomePage/{id}", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")

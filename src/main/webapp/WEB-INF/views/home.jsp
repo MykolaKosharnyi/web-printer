@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE>
 <html lang="ru">
 <head>
@@ -75,7 +76,7 @@
 
 
 
-
+<c:if test="${fn:length(printers) > 0}">
 <div class="categories_of_goods">
 <div class="row">
 
@@ -132,10 +133,10 @@
 
             </div>
 </div>
+</c:if>
 
 
-
-
+<c:if test="${fn:length(printers3D) > 0}">
             <div class="advertising_second_variant">
 
 		<div class="col-md-6">
@@ -216,10 +217,10 @@
 
             </div>
 </div>
+</c:if>
 
 
-
-
+<c:if test="${fn:length(digitalPrinters) > 0}">
 <div class="advertising">
 		<div class="col-md-4">
 			<div class="row">
@@ -242,13 +243,6 @@
 
             </div>
             
-
-
-
-
-
-
-
 
            <div class="categories_of_goods">
 <div class="row">
@@ -297,9 +291,10 @@
 
             </div>
 </div>
+</c:if>
 
 
-
+<c:if test="${fn:length(laminators) > 0}">
 	<div class="advertising_second_variant">
 
 		<div class="col-md-6">
@@ -317,10 +312,6 @@
 		</div>
 
             </div>        
-
-
-
-
 
             <div class="categories_of_goods">
 <div class="row">
@@ -372,12 +363,12 @@
 
             </div>
 </div>
+</c:if>
 
 
 
 
-
-
+<c:if test="${fn:length(lasers) > 0}">
 <div class="advertising">
 		<div class="col-md-4">
 			<div class="row">
@@ -401,13 +392,6 @@
 </div>
 
 
-
-
-
-
-
-
- 
             <div class="categories_of_goods">
 <div class="row">
 
@@ -461,10 +445,10 @@
               
             </div>
 </div>
+</c:if>
 
 
-
-
+<c:if test="${fn:length(cutters) > 0}">
 <div class="advertising_second_variant">
 
 		<div class="col-md-6">
@@ -482,11 +466,6 @@
 		</div>
 
             </div>
-
-
-
-
-
 
             <div class="categories_of_goods">
 <div class="row">
@@ -536,12 +515,12 @@
 
             </div>
 </div>
+</c:if>
 
 
 
 
-
-
+<c:if test="${fn:length(scanners) > 0}">
 <div class="advertising">
 		<div class="col-md-4">
 			<div class="row">
@@ -563,13 +542,6 @@
 		</div>
 
             </div>
-
-
-
-
-
-
-
 
             <div class="categories_of_goods">
 <div class="row">
@@ -619,10 +591,12 @@
 
             </div>
 </div>
+</c:if>
 
 
 
 
+<c:if test="${fn:length(pue) > 0}">
 <div class="advertising_second_variant">
 
 		<div class="col-md-6">
@@ -640,11 +614,6 @@
 		</div>
 
             </div>
-
-
-
-
-
 
 
             <div class="categories_of_goods">
@@ -693,12 +662,12 @@
 
             </div>
 </div>
+</c:if>
 
 
 
 
-
-
+<c:if test="${fn:length(rips) > 0}">
 <div class="advertising">
 		<div class="col-md-4">
 			<div class="row">
@@ -723,10 +692,6 @@
 
 
 
-
-
-
-
             <div class="categories_of_goods">
 <div class="row">
 
@@ -748,7 +713,21 @@
 			         <div class="play_button_rip"><i class="fa fa-play" aria-hidden="true"></i></div>
                      <div class="prev_button_rip"><i class="fa fa-angle-left"></i></div>
                      <div class="carousel_rip">
-                        
+                        <c:forEach items="${rips}" var="rip">
+                              <div class="slide-item2">
+                                  <a class="slider_image" href="<c:url value='/rip/${rip.id}' />"><div class="outer_a_img"><img src="/images/rips/${rip.id}/${rip.pathPictures.get(0)}" alt="" /></div></a>
+                                  <a class="slide-buy2" href="javascript:void(0)" onclick="addToCart('rip', ${rip.id});">
+                                    <img src="/images/button_buy.png" alt="" />
+                                  </a>
+                                  <a href="<c:url value='/rip/${rip.id}' />" class="slide-title2">${rip.name}</a>
+                                  <div class="slide-price2">Цена:
+                                    <c:if test="${rip.prise < 0.1}"> уточняйте</c:if>
+					                <c:if test="${!(rip.prise < 0.1)}">         
+					                	$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${scanner.prise}" />
+					                </c:if>
+                        		</div>
+                              </div>
+                          </c:forEach>
 
 
                      </div>
@@ -758,6 +737,7 @@
 
             </div>
 </div>
+</c:if>
 
     </div>
 </body>

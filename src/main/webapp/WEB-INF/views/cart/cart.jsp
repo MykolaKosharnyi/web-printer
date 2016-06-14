@@ -88,6 +88,7 @@ padding: 5px;
 </head>
 <body>
 <div class="cart">
+<c:if test="${!empty cart.contents}">
 	<form action="cart/pleaceOrder" method="post">
 	${cartMessage}
 	<table class="table table-hover table-striped table-bordered">
@@ -115,8 +116,10 @@ padding: 5px;
 				</span>
 
 			</td>
-			<td>$ <fmt:formatNumber type="number" 
-           		maxFractionDigits="2" minFractionDigits="2" value="${item.key.prise * item.value }" /></td>
+			<td class="price">$ <span>
+						<fmt:formatNumber type="number" 
+           					maxFractionDigits="2" minFractionDigits="2" value="${item.key.prise * item.value }" />
+					</span><input type="hidden" name="price_ellement" value="${item.key.prise}"></td>
 			<td><a href="cart/delete/${item.key.partNumber }"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
 		</tr>
 		</c:forEach>
@@ -126,49 +129,77 @@ padding: 5px;
 			<td><spring:message code="cart.ownpage.total"/>:</td>
 			<td></td>
 			<td></td>
-			<td>$ <fmt:formatNumber type="number" 
-           		maxFractionDigits="2" minFractionDigits="2" value="${cart.totalCost }" /></td>
+			<td class="total_price">$ <span><fmt:formatNumber type="number" 
+           		maxFractionDigits="2" minFractionDigits="2" value="${cart.totalCost }" /></span></td>
 			<td></td>
 		</tr>
 	</table>
-	<input type="submit" value="<spring:message code="cart.ownpage.placeorder"/>"></input>
+	<input class="button" type="submit" value="<spring:message code="cart.ownpage.placeorder"/>"></input>
 	</form>
+	</c:if>
+	<c:if test="${empty cart.contents}">
+		Корзина пуста, Вы еще не добавляли товары в корзину.
+	</c:if>
 </div>
 
 <script type="text/javascript">
 	
 	$(function(){
-		$('.cart table .dec_value').click(function(){
-            var price_element = $(this).parent('td').find('input').val();
-			var element = new Number(price_element);
-			if(element!=0){
-				$(this).parent('td').find('input').val(element-1);
+		$('.dec_value').click(function(){
+            var quantity_element_val = $(this).parent('td').find('input').val();
+			var price_with_quantity =  $(this).parent('td').parent('tr').find('td.price').find('span');
+			var price = $(this).parent('td').parent('tr').find('td.price').find('input').val();
+			var quantity_numb = new Number(quantity_element_val);
+			var total_price = $('tr td.total_price span' );
+			if(quantity_numb==0){
 				$(this).css('color','grey');
+			} else if (quantity_numb==1) {
+				$(this).css('color','grey');
+				$(this).parent('td').find('input').val(quantity_numb-1);
+
+				$(this).hover(function() {
+						$(this).css('color','grey');
+					  }, function() {
+						$(this).css('color','grey');
+					  }
+				);
+
+				var price_n = new Number(price.replace(/\s/ig, '').replace(",", "."));
+				price_with_quantity.text(checkPrise(price_n * (quantity_numb - 1)));
+				total_price.text(allPrice());
+			} else {
+				$(this).parent('td').find('input').val(quantity_numb-1);
+				var price_n = new Number(price.replace(/\s/ig, '').replace(",", "."));
+				price_with_quantity.text(checkPrise(price_n * (quantity_numb - 1)));
+				total_price.text(allPrice());
 			}
- 
+ 			
         });
 		
 		$('.inc_value').click(function(){
 
-			var price_element = $(this).parent('td').find('input').val();
-			var element = new Number(price_element);
-            $(this).parent('td').find('input').val(element+1);
-/*
-            var current_count = $(this).parent('.block_product_price').parent('.option_product_with_price').find('label.total_price span');
-			var currentPrice = new Number(price_element.text().replace(/\s/ig, '').replace(",", "."));
-            var change_style = $(this).parent('.block_product_price');
-            var value_add_price = $(this).parent('.block_product_price').find('label.add_price_value span').text();
-			var addPrice = new Number(value_add_price.replace(/\s/ig, '').replace(",", "."));
+			var quantity_element_val = $(this).parent('td').find('input').val();
+			var quantity_numb = new Number(quantity_element_val);
 
-            if ($(this).prop( "checked" )) {
-            	change_style.css('color', '#006080');
+			var price_with_quantity = $(this).parent('td').parent('tr').find('td.price').find('span');
+			var price = $(this).parent('td').parent('tr').find('td.price').find('input').val();
+			var total_price = $('tr td.total_price span' );
+			if(quantity_numb==0){
+				var dec_v = $(this).parent('td').find('.dec_value');
+				dec_v.css('color','#006080');
+				dec_v.hover(function() {
+						$(this).css('color','red');
+					  }, function() {
+						$(this).css('color','#006080');
+					  }
+				);
+			} 
 
-				price_element.text(checkPrise(currentPrice+addPrice));
-            }else{
-            	change_style.css('color', '#333');
-				price_element.text(checkPrise(currentPrice-addPrice));
-            }
-          */  
+            $(this).parent('td').find('input').val(quantity_numb+1);
+			
+			var price_n = new Number(price.replace(/\s/ig, '').replace(",", "."));
+			price_with_quantity.text(checkPrise(price_n * (quantity_numb + 1)));
+ 			total_price.text(allPrice());
         });
 		
 		function checkPrise(num){
@@ -184,6 +215,14 @@ padding: 5px;
 				  }   
 				  return str.replace(".", ",");
 			
+		}
+
+		function allPrice(){
+			var total_price = new Number();
+			$('td.price span').each(function(i, price_el){
+				total_price += new Number($(price_el).text().replace(/\s/ig, '').replace(",", "."));
+			});	
+			return checkPrise(total_price);
 		}
 	});
 </script>

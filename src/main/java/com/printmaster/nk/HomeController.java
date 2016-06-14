@@ -28,6 +28,7 @@ import com.printmaster.nk.service.LaserService;
 import com.printmaster.nk.service.PreviousUsedEqvipmentService;
 import com.printmaster.nk.service.Printer3DService;
 import com.printmaster.nk.service.PrinterService;
+import com.printmaster.nk.service.RipService;
 import com.printmaster.nk.service.ScannerService;
 
 /**
@@ -59,6 +60,9 @@ public class HomeController {
 	
 	@Autowired
 	private PreviousUsedEqvipmentService pueService;
+	
+	@Autowired
+	private RipService ripService;
 	
 	@Autowired
     ComponetsForController componets;
@@ -100,6 +104,7 @@ public class HomeController {
 		model.addAttribute("laminators", componets.showSimplestArrayOfLaminator(laminatorService.listShowOnHomePage()));
 		model.addAttribute("scanners", componets.showSimplestArrayOfScanner(scannerService.listShowOnHomePage()));
 		model.addAttribute("pue", pueService.listProductForHomePage());
+		model.addAttribute("rips", ripService.listShowOnHomePage());
 		model.addAttribute("serverTime", formattedDate );
 		return "home";
 	}

@@ -79,6 +79,13 @@ jQuery(document).ready(function($) {
 		$( "li#list_scanner_large_format_scanners ul.menu_drop_drop" ).has( "li" ).length ? $( 'li#list_scanner_large_format_scanners').addClass( "menu_list_list" ) : "" ;
 		$( "li#list_scanner_3d_scanners ul.menu_drop_drop" ).has( "li" ).length ? $( 'li#list_scanner_3d_scanners').addClass( "menu_list_list" ) : "" ;
 		
+		/* For rips */
+		$( "li#list_rip_printing_equipment ul.menu_drop_drop" ).has( "li" ).length ? $( 'li#list_rip_printing_equipment').addClass( "menu_list_list" ) : "" ;
+		$( "li#list_rip_3D_printers ul.menu_drop_drop" ).has( "li" ).length ? $( 'li#list_rip_3D_printers').addClass( "menu_list_list" ) : "" ;
+		$( "li#list_rip_laser_milling_equipment ul.menu_drop_drop" ).has( "li" ).length ? $( 'li#list_rip_laser_milling_equipment').addClass( "menu_list_list" ) : "" ;
+		$( "li#list_rip_3D_scanners ul.menu_drop_drop" ).has( "li" ).length ? $( 'li#list_rip_3D_scanners').addClass( "menu_list_list" ) : "" ;
+		$( "li#list_rip_scanners ul.menu_drop_drop" ).has( "li" ).length ? $( 'li#list_rip_scanners').addClass( "menu_list_list" ) : "" ;
+		
 		/* For used with product */
 		$( "li#list_use_with_product_ink_for_inkjet ul.menu_drop_drop" ).has( "li" ).length ? $( 'li#list_use_with_product_ink_for_inkjet').addClass( "menu_list_list" ) : "" ;
 		$( "li#list_use_with_product_consumables_for_digital_equipment ul.menu_drop_drop" ).has( "li" ).length ? $( 'li#list_use_with_product_consumables_for_digital_equipment').addClass( "menu_list_list" ) : "" ;
