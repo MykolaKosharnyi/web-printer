@@ -276,39 +276,36 @@
                 </li>
 <!---------------------------------------------------------------------------------------------------------------------------------> 
                 <li class="menu_list"><a href="<c:url value='/rips' />"><spring:message code="head.rip"/></a>
-                    <!--  <ul class="menu_drop">
-                        <li><a href="#"><spring:message code="head.rip.RIP_system"/></a></li>
-                    </ul>-->
                     <ul class="menu_drop">
-                        <li id="list_rip_printing_equipment"><spring:message code="head.rip.printing_equipment"/>
+                        <li id="list_rip_printing_equipment"><a href="<c:url value='/rips' />"><spring:message code="head.rip.printing_equipment"/></a>
                         	<ul class="menu_drop_drop">
 								<c:forEach items="${listLeftLinks.ripsJSON.list_rip_printing_equipment}" var="link">
 									<li><a href="<c:url value='/rip/${link.id}' />">${link.name}</a></li>
 								</c:forEach>
 							</ul>
                         </li>
-                        <li id="list_rip_3D_printers"><spring:message code="head.rip.3D_printers"/>
+                        <li id="list_rip_3D_printers"><a href="<c:url value='/rips' />"><spring:message code="head.rip.3D_printers"/></a>
                         	<ul class="menu_drop_drop">
 								<c:forEach items="${listLeftLinks.ripsJSON.list_rip_3D_printers}" var="link">
 									<li><a href="<c:url value='/rip/${link.id}' />">${link.name}</a></li>
 								</c:forEach>
 							</ul>
                         </li>
-                        <li id="list_rip_laser_milling_equipment"><spring:message code="head.rip.laser_milling_equipment"/>
+                        <li id="list_rip_laser_milling_equipment"><a href="<c:url value='/rips' />"><spring:message code="head.rip.laser_milling_equipment"/></a>
                         	<ul class="menu_drop_drop">
 								<c:forEach items="${listLeftLinks.ripsJSON.list_rip_laser_milling_equipment}" var="link">
 									<li><a href="<c:url value='/rip/${link.id}' />">${link.name}</a></li>
 								</c:forEach>
 							</ul>
                         </li>
-                        <li id="list_rip_3D_scanners"><spring:message code="head.rip.3D_scanners"/>
+                        <li id="list_rip_3D_scanners"><a href="<c:url value='/rips' />"><spring:message code="head.rip.3D_scanners"/></a>
                         	<ul class="menu_drop_drop">
 								<c:forEach items="${listLeftLinks.ripsJSON.list_rip_3D_scanners}" var="link">
 									<li><a href="<c:url value='/rip/${link.id}' />">${link.name}</a></li>
 								</c:forEach>
 							</ul>
                         </li>
-                        <li id="list_rip_scanners"><spring:message code="head.rip.scanners"/>
+                        <li id="list_rip_scanners"><a href="<c:url value='/rips' />"><spring:message code="head.rip.scanners"/></a>
                         	<ul class="menu_drop_drop">
 								<c:forEach items="${listLeftLinks.ripsJSON.list_rip_scanners}" var="link">
 									<li><a href="<c:url value='/rip/${link.id}' />">${link.name}</a></li>

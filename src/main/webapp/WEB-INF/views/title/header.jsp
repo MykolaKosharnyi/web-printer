@@ -384,15 +384,7 @@
 				</li>
 				
 			<!-- Пункт меню 9 ПО rip-->
-                <li><a href="<c:url value='/rips' />"><spring:message code="head.rip"/></a>
-                	<!-- <div class="head_menu_point_8">
-                    	<div class="head_menu_point_element">
-                        	<a href="#">
-                            <img src="/images/menu/rip/${picturesInHeadMenu.ripJSON.list_RIP_system[0]}" alt="" >
-                            <p><spring:message code="head.rip.RIP_system"/></p></a>
-                        </div>
-                    </div> -->
-                </li>
+                <li><a href="<c:url value='/rips' />"><spring:message code="head.rip"/></a></li>
 
 			</ul><!-- Конец списка -->
 		</div><!-- Конец блока #mainmenu -->
