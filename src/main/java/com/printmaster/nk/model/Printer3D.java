@@ -62,8 +62,74 @@ public class Printer3D extends Product{
 	
 	@Column(name="maximum_weight_of_the_printed_model")
 	private int maximumWeightOfThePrintedModel;//Максимальная масса распечатываемой модели 
+	
+	@Column(name="typeExtruder")
+	private String typeExtruder;//Тип Экструдера
+	
+	@Column(name="extruderNumber", nullable = false, columnDefinition = "int default 0")
+	private int extruderNumber;//Количество экструдеров
+	
+	@Column(name="speedOfMovingThePrintHead", nullable = false, columnDefinition = "int default 0")
+	private int speedOfMovingThePrintHead;//Скорость перемещения печатной головки
+	
+	@Column(name="positioningAccuracyOfThePrintHead", nullable = false, columnDefinition = "int default 0")
+	private int positioningAccuracyOfThePrintHead;//Точность позиционирования печатной головки
+	
+	@Column(name="airflowModels")
+	private String airflowModels;//Обдув модели
+	
+	@Column(name="numberOfFansForBlowingModels", nullable = false, columnDefinition = "int default 0")
+	private int numberOfFansForBlowingModels;//Кол-во вентиляторов для обдува модели
 
 	public Printer3D() {}
+
+	public String getTypeExtruder() {
+		return typeExtruder;
+	}
+
+	public void setTypeExtruder(String typeExtruder) {
+		this.typeExtruder = typeExtruder;
+	}
+
+	public int getExtruderNumber() {
+		return extruderNumber;
+	}
+
+	public void setExtruderNumber(int extruderNumber) {
+		this.extruderNumber = extruderNumber;
+	}
+
+	public int getSpeedOfMovingThePrintHead() {
+		return speedOfMovingThePrintHead;
+	}
+
+	public void setSpeedOfMovingThePrintHead(int speedOfMovingThePrintHead) {
+		this.speedOfMovingThePrintHead = speedOfMovingThePrintHead;
+	}
+
+	public int getPositioningAccuracyOfThePrintHead() {
+		return positioningAccuracyOfThePrintHead;
+	}
+
+	public void setPositioningAccuracyOfThePrintHead(int positioningAccuracyOfThePrintHead) {
+		this.positioningAccuracyOfThePrintHead = positioningAccuracyOfThePrintHead;
+	}
+
+	public String getAirflowModels() {
+		return airflowModels;
+	}
+
+	public void setAirflowModels(String airflowModels) {
+		this.airflowModels = airflowModels;
+	}
+
+	public int getNumberOfFansForBlowingModels() {
+		return numberOfFansForBlowingModels;
+	}
+
+	public void setNumberOfFansForBlowingModels(int numberOfFansForBlowingModels) {
+		this.numberOfFansForBlowingModels = numberOfFansForBlowingModels;
+	}
 
 	public String[] getChromaticity() {
 		return chromaticity;

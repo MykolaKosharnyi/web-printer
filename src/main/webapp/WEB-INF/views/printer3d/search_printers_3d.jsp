@@ -90,6 +90,75 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
+				<p>Тип Экструдера</p>
+			</div>
+			<ul class="check_boxes">
+				<form:checkboxes items="${printer.type_extruder}" path="typeExtruder" element="li" />
+			</ul>
+		</div>
+		<div class="search_criteria">
+			<div class="block_title">
+				<i></i>
+				<p>Количество экструдеров</p>
+			</div>
+			<ul class="check_boxes">
+				<form:checkboxes items="${printer.extruder_number}" path="extruderNumber" element="li" />
+			</ul>
+		</div>
+		<div class="search_criteria">
+			<div class="block_title">
+				<i></i>
+				<p>Скорость перемещения печатной головки, мм/с</p>
+			</div>
+			<ul class="check_boxes">
+				<div class="text_output">
+					<form:input path="speedOfMovingThePrintHead0" class="amount-speedOfMovingThePrintHead0" value="${search.speedOfMovingThePrintHead0}" />
+					<p>&nbsp;-&nbsp;</p>
+					<form:input path="speedOfMovingThePrintHead1" class="amount-speedOfMovingThePrintHead1" value="${search.speedOfMovingThePrintHead1}" />
+				</div>
+					<div class="slider-range-speedOfMovingThePrintHead"></div>
+			</ul>
+		</div>
+		<div class="search_criteria">
+			<div class="block_title">
+				<i></i>
+				<p>Точность позиционирования печатной головки, мкм</p>
+			</div>
+			<ul class="check_boxes">
+				<div class="text_output">
+					<form:input path="positioningAccuracyOfThePrintHead0" class="amount-positioningAccuracyOfThePrintHead0" value="${search.positioningAccuracyOfThePrintHead0}" />
+					<p>&nbsp;-&nbsp;</p>
+					<form:input path="positioningAccuracyOfThePrintHead1" class="amount-positioningAccuracyOfThePrintHead1" value="${search.positioningAccuracyOfThePrintHead1}" />
+				</div>
+					<div class="slider-range-positioningAccuracyOfThePrintHead"></div>
+			</ul>
+		</div>
+		<div class="search_criteria">
+			<div class="block_title">
+				<i></i>
+				<p>Обдув модели</p>
+			</div>
+			<ul class="check_boxes">
+				<form:checkboxes items="${printer.airflow_models}" path="airflowModels" element="li" />
+			</ul>
+		</div>
+		<div class="search_criteria">
+			<div class="block_title">
+				<i></i>
+				<p>Кол-во вентиляторов для обдува модели</p>
+			</div>
+			<ul class="check_boxes">
+				<div class="text_output">
+					<form:input path="numberOfFansForBlowingModels0" class="amount-numberOfFansForBlowingModels0" value="${search.numberOfFansForBlowingModels0}" />
+					<p>&nbsp;-&nbsp;</p>
+					<form:input path="numberOfFansForBlowingModels1" class="amount-numberOfFansForBlowingModels1" value="${search.numberOfFansForBlowingModels1}" />
+				</div>
+					<div class="slider-range-numberOfFansForBlowingModels"></div>
+			</ul>
+		</div>
+		<div class="search_criteria">
+			<div class="block_title">
+				<i></i>
 				<p>Технология печати</p>
 			</div>
 			<ul class="check_boxes">
@@ -176,9 +245,9 @@
 			<ul class="check_boxes">
 				<div class="text_output">
 					<form:input path="thicknessOfThePrintingLayer0" class="amount-thicknessOfThePrintingLayer0" value="${search.thicknessOfThePrintingLayer0}" />
-					<p>&nbsp;микрон -&nbsp;</p>
+					<p>&nbsp;мкм -&nbsp;</p>
 					<form:input path="thicknessOfThePrintingLayer1" class="amount-thicknessOfThePrintingLayer1" value="${search.thicknessOfThePrintingLayer1}" />
-					<p>&nbsp;микрон</p>
+					<p>&nbsp;мкм</p>
 				</div>
 					<div class="slider-range-thicknessOfThePrintingLayer"></div>
 			</ul>

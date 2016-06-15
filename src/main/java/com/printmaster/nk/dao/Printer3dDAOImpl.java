@@ -105,6 +105,42 @@ public class Printer3dDAOImpl implements ProductDAO<Printer3D, SearchPrinters3D>
 			cr.add(Restrictions.between("sizePrintableAreaZ", searchPrinters.getSizePrintableAreaZ0(), searchPrinters.getSizePrintableAreaZ1()));
 		}		
 		
+		if(searchPrinters.getTypeExtruder()!= null){
+			Junction typeExtruderGroup = Restrictions.disjunction();
+			for(String tp : searchPrinters.getTypeExtruder()){
+				typeExtruderGroup.add(Restrictions.eq("typeExtruder",tp));
+			}
+			cr.add(typeExtruderGroup);
+		}	
+		
+		if(searchPrinters.getExtruderNumber()!= null){
+			Junction extruderNumberGroup = Restrictions.disjunction();
+			for(int tp : searchPrinters.getExtruderNumber()){
+				extruderNumberGroup.add(Restrictions.eq("extruderNumber",tp));
+			}
+			cr.add(extruderNumberGroup);
+		}
+		
+		if(searchPrinters.getSpeedOfMovingThePrintHead0()!=searchPrinters.getSpeedOfMovingThePrintHead1()){
+			cr.add(Restrictions.between("speedOfMovingThePrintHead", searchPrinters.getSpeedOfMovingThePrintHead0(), searchPrinters.getSpeedOfMovingThePrintHead1()));
+		}
+		
+		if(searchPrinters.getPositioningAccuracyOfThePrintHead0()!=searchPrinters.getPositioningAccuracyOfThePrintHead1()){
+			cr.add(Restrictions.between("positioningAccuracyOfThePrintHead", searchPrinters.getPositioningAccuracyOfThePrintHead0(), searchPrinters.getPositioningAccuracyOfThePrintHead1()));
+		}
+		
+		if(searchPrinters.getAirflowModels()!= null){
+			Junction airflowModelsGroup = Restrictions.disjunction();
+			for(String tp : searchPrinters.getAirflowModels()){
+				airflowModelsGroup.add(Restrictions.eq("airflowModels",tp));
+			}
+			cr.add(airflowModelsGroup);
+			}
+		
+		if(searchPrinters.getNumberOfFansForBlowingModels0()!=searchPrinters.getNumberOfFansForBlowingModels1()){
+			cr.add(Restrictions.between("numberOfFansForBlowingModels", searchPrinters.getNumberOfFansForBlowingModels0(), searchPrinters.getNumberOfFansForBlowingModels1()));
+		}
+		
 		if(searchPrinters.getPrintTechnology()!= null){
 		Junction typePrinterGroup = Restrictions.disjunction();
 		for(String tp : searchPrinters.getPrintTechnology()){

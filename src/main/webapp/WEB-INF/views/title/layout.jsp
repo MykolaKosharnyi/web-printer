@@ -89,7 +89,7 @@
 	<script src="<%=request.getContextPath()%>/resources/js/flipclock.min.js"></script>-->
 
 	<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
 	<script src="<%=request.getContextPath()%>/resources/libs/jquery-mousewheel/jquery.mousewheel.min.js"></script>
 	<script src="<%=request.getContextPath()%>/resources/libs/fancybox/jquery.fancybox.pack.js"></script>
@@ -100,8 +100,9 @@
 	<script src="<%=request.getContextPath()%>/resources/libs/countdown/jquery.countdown.min.js"></script>
 	<script src="<%=request.getContextPath()%>/resources/libs/countdown/jquery.countdown-ru.js"></script>
 	<script src="<%=request.getContextPath()%>/resources/libs/landing-nav/navigation.js"></script>
+	<script src="<%=request.getContextPath()%>/resources/js/js.cookie.js"></script>
+	
 	<script src="<%=request.getContextPath()%>/resources/js/common.js"></script>
-
 	<script src="<%=request.getContextPath()%>/resources/js/user/title.js"></script>
 
 	<script>

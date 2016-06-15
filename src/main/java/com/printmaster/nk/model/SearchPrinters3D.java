@@ -46,8 +46,89 @@ public class SearchPrinters3D implements Serializable {
 	private int heigth1;
 	private int depth0;
 	private int depth1;
+	private String[] typeExtruder;
+	private int[] extruderNumber;
+	private int speedOfMovingThePrintHead0;
+	private int speedOfMovingThePrintHead1;
+	private int positioningAccuracyOfThePrintHead0;
+	private int positioningAccuracyOfThePrintHead1;
+	private String[] airflowModels;
+	private int numberOfFansForBlowingModels0;
+	private int numberOfFansForBlowingModels1;
 	
 	public SearchPrinters3D() {}
+
+	public String[] getTypeExtruder() {
+		return typeExtruder;
+	}
+
+	public void setTypeExtruder(String[] typeExtruder) {
+		this.typeExtruder = typeExtruder;
+	}
+
+	public int[] getExtruderNumber() {
+		return extruderNumber;
+	}
+
+	public void setExtruderNumber(int[] extruderNumber) {
+		this.extruderNumber = extruderNumber;
+	}
+
+	public int getSpeedOfMovingThePrintHead0() {
+		return speedOfMovingThePrintHead0;
+	}
+
+	public void setSpeedOfMovingThePrintHead0(int speedOfMovingThePrintHead0) {
+		this.speedOfMovingThePrintHead0 = speedOfMovingThePrintHead0;
+	}
+
+	public int getSpeedOfMovingThePrintHead1() {
+		return speedOfMovingThePrintHead1;
+	}
+
+	public void setSpeedOfMovingThePrintHead1(int speedOfMovingThePrintHead1) {
+		this.speedOfMovingThePrintHead1 = speedOfMovingThePrintHead1;
+	}
+
+	public int getPositioningAccuracyOfThePrintHead0() {
+		return positioningAccuracyOfThePrintHead0;
+	}
+
+	public void setPositioningAccuracyOfThePrintHead0(int positioningAccuracyOfThePrintHead0) {
+		this.positioningAccuracyOfThePrintHead0 = positioningAccuracyOfThePrintHead0;
+	}
+
+	public int getPositioningAccuracyOfThePrintHead1() {
+		return positioningAccuracyOfThePrintHead1;
+	}
+
+	public void setPositioningAccuracyOfThePrintHead1(int positioningAccuracyOfThePrintHead1) {
+		this.positioningAccuracyOfThePrintHead1 = positioningAccuracyOfThePrintHead1;
+	}
+
+	public String[] getAirflowModels() {
+		return airflowModels;
+	}
+
+	public void setAirflowModels(String[] airflowModels) {
+		this.airflowModels = airflowModels;
+	}
+
+	public int getNumberOfFansForBlowingModels0() {
+		return numberOfFansForBlowingModels0;
+	}
+
+	public void setNumberOfFansForBlowingModels0(int numberOfFansForBlowingModels0) {
+		this.numberOfFansForBlowingModels0 = numberOfFansForBlowingModels0;
+	}
+
+	public int getNumberOfFansForBlowingModels1() {
+		return numberOfFansForBlowingModels1;
+	}
+
+	public void setNumberOfFansForBlowingModels1(int numberOfFansForBlowingModels1) {
+		this.numberOfFansForBlowingModels1 = numberOfFansForBlowingModels1;
+	}
 
 	public String[] getPreviouslyUsed() {
 		return previouslyUsed;

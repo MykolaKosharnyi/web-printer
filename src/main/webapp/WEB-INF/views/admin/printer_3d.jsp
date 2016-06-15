@@ -255,10 +255,67 @@
 						</div>
 							<div class="slider-range-sizeExtruder"></div>
 					</ul>
-				</div>			
+				</div>	
+				<div class="characteristic">
+					<div class="block_title">
+						<i></i>
+						<p>Тип Экструдера</p>
+					</div>
+					<div class="check_boxes">
+						<form:radiobuttons items="${printer.type_extruder}" path="typeExtruder" element="li"/>
+					</div>
+				</div>	
+				<div class="characteristic">
+					<div class="block_title">
+						<i></i>
+						<p>Количество экструдеров</p>
+					</div>
+					<div class="check_boxes">
+						<form:radiobuttons items="${printer.extruder_number}" path="extruderNumber" element="li"/>
+					</div>
+				</div>		
+				<div class="characteristic">
+					<div class="block_title">
+						<i></i>
+						<p>Скорость перемещения печатной головки, мм/с</p>
+						<form:errors path="speedOfMovingThePrintHead" cssClass="error"></form:errors>
+					</div>
+					<div class="check_boxes">
+						<form:input path="speedOfMovingThePrintHead" />
+					</div>
+				</div>
+				<div class="characteristic">
+					<div class="block_title">
+						<i></i>
+						<p>Точность позиционирования печатной головки, мкм</p>
+						<form:errors path="positioningAccuracyOfThePrintHead" cssClass="error"></form:errors>
+					</div>
+					<div class="check_boxes">
+						<form:input path="positioningAccuracyOfThePrintHead" />
+					</div>
+				</div>
 			</div>
 			
 			<div class="product_characteristic">
+				<div class="characteristic">
+					<div class="block_title">
+						<i></i>
+						<p>Обдув модели</p>
+					</div>
+					<div class="check_boxes">
+						<form:radiobuttons items="${printer.airflow_models}" path="airflowModels" element="li"/>
+					</div>
+				</div>
+				<div class="characteristic">
+					<div class="block_title">
+						<i></i>
+						<p>Кол-во вентиляторов для обдува модели</p>
+						<form:errors path="numberOfFansForBlowingModels" cssClass="error"></form:errors>
+					</div>
+					<div class="check_boxes">
+						<form:input path="numberOfFansForBlowingModels" />
+					</div>
+				</div>
 				<div class="characteristic">
 					<div class="block_title">
 						<i></i>
@@ -282,7 +339,7 @@
 					<ul class="check_boxes">
 						<div class="text_output">
 							<form:input path="thicknessOfThePrintingLayer" class="amount-thicknessOfThePrintingLayer" value="${product.thicknessOfThePrintingLayer}" />
-							<p>&nbsp;микрон</p>
+							<p>&nbsp;мкм</p>
 						</div>
 							<div class="slider-range-thicknessOfThePrintingLayer"></div>
 					</ul>
