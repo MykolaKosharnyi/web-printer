@@ -12,10 +12,10 @@
 		<i class="opened"></i>
 		<p>Фильтр товаров</p>
 	</div>
-				<a style="margin-left:10px;" class="accept" href="javascript:void(0)" onclick="$('#search').submit();">
-					ПРИМЕНИТЬ
-					<!--<img src="/images/Accept.gif" alt="" />-->
-				</a>
+			<a style="margin-left:10px;" class="accept" href="javascript:void(0)" onclick="$('#search').submit();">
+				ПРИМЕНИТЬ
+				<!--<img src="/images/Accept.gif" alt="" />-->
+			</a>
 				
 			<c:if test="${search.typePrinter3D[0].equals('Экструдные FDM')}">
 				<a class="reset" href="<c:url value='/3d_printers/FDM-extruder' />">СБРОСИТЬ</a>

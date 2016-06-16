@@ -99,6 +99,30 @@
                        	<c:if test="${product.sizePrintableAreaZ > 0}">
    							<tr><td>Размер запечатываемой области по оси Z:</td><td>${product.sizePrintableAreaZ} мм</td></tr>
 						</c:if>
+						
+						<c:if test="${!empty product.typeExtruder}">
+   							<tr><td>Тип Экструдера:</td><td>${product.typeExtruder}</td></tr>
+						</c:if>	
+						
+						<c:if test="${product.extruderNumber > 0}">
+   							<tr><td>Количество экструдеров:</td><td>${product.extruderNumber}</td></tr>
+						</c:if>
+						
+						<c:if test="${product.speedOfMovingThePrintHead > 0}">
+   							<tr><td>Скорость перемещения печатной головки:</td><td>${product.speedOfMovingThePrintHead} мм/с</td></tr>
+						</c:if>
+						
+						<c:if test="${product.positioningAccuracyOfThePrintHead > 0}">
+   							<tr><td>Точность позиционирования печатной головки:</td><td>${product.positioningAccuracyOfThePrintHead} мкм</td></tr>
+						</c:if>
+						
+						<c:if test="${!empty product.airflowModels}">
+   							<tr><td>Обдув модели:</td><td>${product.airflowModels}</td></tr>
+						</c:if>	
+						
+						<c:if test="${product.numberOfFansForBlowingModels > 0}">
+   							<tr><td>Кол-во вентиляторов для обдува модели:</td><td>${product.numberOfFansForBlowingModels}</td></tr>
+						</c:if>
                        
                        <c:if test="${!empty product.previouslyUsed}">
    							<tr><td>Состояние оборудования:</td><td>${product.previouslyUsed}</td></tr>

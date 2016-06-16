@@ -117,15 +117,112 @@
                			$( this ).parent('.search_criteria').css( "background", "#E8F2FE" ).find(".block_title").find("i, p").css('color','#006080'):
                 	$( this ).parent('.search_criteria').css( "background", "#FFFFFF" ).find(".block_title").find("i, p").css('color','rgb(144, 144, 144)');
                     
-               			if($( this ).has(".amount-averagePowerConsumption0").length>0)
-                       		$( this ).find(".amount-averagePowerConsumption0").val() != $( this ).find(".amount-averagePowerConsumption1").val() ?
-                       			$( this ).parent('.search_criteria').css( "background", "#E8F2FE" ).find(".block_title").find("i, p").css('color','#006080'):
-                        	$( this ).parent('.search_criteria').css( "background", "#FFFFFF" ).find(".block_title").find("i, p").css('color','rgb(144, 144, 144)');
-             });
+               if($( this ).has(".amount-averagePowerConsumption0").length>0)
+                    $( this ).find(".amount-averagePowerConsumption0").val() != $( this ).find(".amount-averagePowerConsumption1").val() ?
+                       $( this ).parent('.search_criteria').css( "background", "#E8F2FE" ).find(".block_title").find("i, p").css('color','#006080'):
+                    $( this ).parent('.search_criteria').css( "background", "#FFFFFF" ).find(".block_title").find("i, p").css('color','rgb(144, 144, 144)');
+                       
+               if($( this ).has(".amount-speedOfMovingThePrintHead0").length>0)
+               		$( this ).find(".amount-speedOfMovingThePrintHead0").val() != $( this ).find(".amount-speedOfMovingThePrintHead1").val() ?
+                    	$( this ).parent('.search_criteria').css( "background", "#E8F2FE" ).find(".block_title").find("i, p").css('color','#006080'):
+                	$( this ).parent('.search_criteria').css( "background", "#FFFFFF" ).find(".block_title").find("i, p").css('color','rgb(144, 144, 144)');
+            
+               if($( this ).has(".amount-positioningAccuracyOfThePrintHead0").length>0)
+               		$( this ).find(".amount-positioningAccuracyOfThePrintHead0").val() != $( this ).find(".amount-positioningAccuracyOfThePrintHead1").val() ?
+               			$( this ).parent('.search_criteria').css( "background", "#E8F2FE" ).find(".block_title").find("i, p").css('color','#006080'):
+               		$( this ).parent('.search_criteria').css( "background", "#FFFFFF" ).find(".block_title").find("i, p").css('color','rgb(144, 144, 144)');
+        	
+               if($( this ).has(".amount-numberOfFansForBlowingModels0").length>0)
+               		$( this ).find(".amount-numberOfFansForBlowingModels0").val() != $( this ).find(".amount-numberOfFansForBlowingModels1").val() ?
+                    	$( this ).parent('.search_criteria').css( "background", "#E8F2FE" ).find(".block_title").find("i, p").css('color','#006080'):
+                    $( this ).parent('.search_criteria').css( "background", "#FFFFFF" ).find(".block_title").find("i, p").css('color','rgb(144, 144, 144)');
+
+        	});
         	
         });		
 		
 /*--- пошли слайдеры ---*/
+        $(function() {
+            $( ".slider-range-speedOfMovingThePrintHead" ).slider({
+              range: true,
+              min: 0,
+              max: 1000,
+              create: function () {
+          	    $(this).slider( "values", 0, $(this).closest('.check_boxes').find('.text_output').find('.amount-speedOfMovingThePrintHead0').val() );
+          	    $(this).slider( "values", 1, $(this).closest('.check_boxes').find('.text_output').find('.amount-speedOfMovingThePrintHead1').val() );
+          	},
+              slide: function( event, ui ) {
+                $( ".amount-speedOfMovingThePrintHead0" ).val(ui.values[ 0 ]);
+                $( ".amount-speedOfMovingThePrintHead1" ).val(ui.values[ 1 ]);
+              }
+            });
+                
+            $( ".amount-speedOfMovingThePrintHead0" ).val( $( ".slider-range-speedOfMovingThePrintHead" ).slider("values", 0 ));             
+            $( ".amount-speedOfMovingThePrintHead1" ).val( $( ".slider-range-speedOfMovingThePrintHead" ).slider("values", 1 ));
+                
+            $( ".amount-speedOfMovingThePrintHead0" ).change(function() {
+            $(".slider-range-speedOfMovingThePrintHead").slider('values',0,this.value);
+                });
+                
+            $( ".amount-speedOfMovingThePrintHead1" ).change(function() {
+            $(".slider-range-speedOfMovingThePrintHead").slider('values',1,this.value);
+                });
+          });
+        
+        $(function() {
+            $( ".slider-range-positioningAccuracyOfThePrintHead" ).slider({
+              range: true,
+              min: 0,
+              max: 1000,
+              create: function () {
+          	    $(this).slider( "values", 0, $(this).closest('.check_boxes').find('.text_output').find('.amount-positioningAccuracyOfThePrintHead0').val() );
+          	    $(this).slider( "values", 1, $(this).closest('.check_boxes').find('.text_output').find('.amount-positioningAccuracyOfThePrintHead1').val() );
+          	},
+              slide: function( event, ui ) {
+                $( ".amount-positioningAccuracyOfThePrintHead0" ).val(ui.values[ 0 ]);
+                $( ".amount-positioningAccuracyOfThePrintHead1" ).val(ui.values[ 1 ]);
+              }
+            });
+                
+            $( ".amount-positioningAccuracyOfThePrintHead0" ).val( $( ".slider-range-positioningAccuracyOfThePrintHead" ).slider("values", 0 ));             
+            $( ".amount-positioningAccuracyOfThePrintHead1" ).val( $( ".slider-range-positioningAccuracyOfThePrintHead" ).slider("values", 1 ));
+                
+            $( ".amount-positioningAccuracyOfThePrintHead0" ).change(function() {
+            $(".slider-range-positioningAccuracyOfThePrintHead").slider('values',0,this.value);
+                });
+                
+            $( ".amount-positioningAccuracyOfThePrintHead1" ).change(function() {
+            $(".slider-range-positioningAccuracyOfThePrintHead").slider('values',1,this.value);
+                });
+          });
+        
+        $(function() {
+            $( ".slider-range-numberOfFansForBlowingModels" ).slider({
+              range: true,
+              min: 0,
+              max: 100,
+              create: function () {
+          	    $(this).slider( "values", 0, $(this).closest('.check_boxes').find('.text_output').find('.amount-numberOfFansForBlowingModels0').val() );
+          	    $(this).slider( "values", 1, $(this).closest('.check_boxes').find('.text_output').find('.amount-numberOfFansForBlowingModels1').val() );
+          	},
+              slide: function( event, ui ) {
+                $( ".amount-numberOfFansForBlowingModels0" ).val(ui.values[ 0 ]);
+                $( ".amount-numberOfFansForBlowingModels1" ).val(ui.values[ 1 ]);
+              }
+            });
+                
+            $( ".amount-numberOfFansForBlowingModels0" ).val( $( ".slider-range-numberOfFansForBlowingModels" ).slider("values", 0 ));             
+            $( ".amount-numberOfFansForBlowingModels1" ).val( $( ".slider-range-numberOfFansForBlowingModels" ).slider("values", 1 ));
+                
+            $( ".amount-numberOfFansForBlowingModels0" ).change(function() {
+            $(".slider-range-numberOfFansForBlowingModels").slider('values',0,this.value);
+                });
+                
+            $( ".amount-numberOfFansForBlowingModels1" ).change(function() {
+            $(".slider-range-numberOfFansForBlowingModels").slider('values',1,this.value);
+                });
+          });
+        
         $(function() {
             $( ".slider-range-prise" ).slider({
               range: true,
