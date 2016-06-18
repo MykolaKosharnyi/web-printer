@@ -34,11 +34,11 @@ public class Cart {
 	}
 	
 	public void removeProduct(ProductCart product){
-		if(contents.get(product) > 1){
-			contents.put(product, contents.get(product) - 1);
-		} else {
+		//if(contents.get(product) > 1){
+		//	contents.put(product, contents.get(product) - 1);
+		//} else {
 			contents.remove(product);
-		}
+		//}
 	}
 	
 	public void clearCart(){
@@ -53,7 +53,7 @@ public class Cart {
 	public double getTotalCost(){
 		double totalCost = 0;
 		for (ProductCart product : contents.keySet()){
-			totalCost += product.getPrise()* contents.get(product);
+			totalCost += product.getPrice()* contents.get(product);
 		}
 		return totalCost;
 	}

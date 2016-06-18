@@ -2,13 +2,12 @@ package com.printmaster.nk.beans;
 
 public class ProductCart {
 	
-	private String picturePath;
-	private String name;
-	private String typeProduct;
-	private String partNumber;
-	private double prise;
+	private String typeProduct;	
 	private Long idProduct;
-	
+	private String name;
+	private double price;
+	private String picturePath;
+
 	public String getPicturePath() {
 		return picturePath;
 	}
@@ -27,17 +26,11 @@ public class ProductCart {
 	public void setTypeProduct(String typeProduct) {
 		this.typeProduct = typeProduct;
 	}
-	public String getPartNumber() {
-		return partNumber;
+	public double getPrice() {
+		return price;
 	}
-	public void setPartNumber(String partNumber) {
-		this.partNumber = partNumber;
-	}
-	public double getPrise() {
-		return prise;
-	}
-	public void setPrise(double prise) {
-		this.prise = prise;
+	public void setPrice(double price) {
+		this.price = price;
 	}
 	public Long getIdProduct() {
 		return idProduct;
@@ -51,10 +44,9 @@ public class ProductCart {
 		int result = 1;
 		result = prime * result + ((idProduct == null) ? 0 : idProduct.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((partNumber == null) ? 0 : partNumber.hashCode());
 		result = prime * result + ((picturePath == null) ? 0 : picturePath.hashCode());
 		long temp;
-		temp = Double.doubleToLongBits(prise);
+		temp = Double.doubleToLongBits(price);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + ((typeProduct == null) ? 0 : typeProduct.hashCode());
 		return result;
@@ -78,17 +70,12 @@ public class ProductCart {
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
-		if (partNumber == null) {
-			if (other.partNumber != null)
-				return false;
-		} else if (!partNumber.equals(other.partNumber))
-			return false;
 		if (picturePath == null) {
 			if (other.picturePath != null)
 				return false;
 		} else if (!picturePath.equals(other.picturePath))
 			return false;
-		if (Double.doubleToLongBits(prise) != Double.doubleToLongBits(other.prise))
+		if (Double.doubleToLongBits(price) != Double.doubleToLongBits(other.price))
 			return false;
 		if (typeProduct == null) {
 			if (other.typeProduct != null)

@@ -106,10 +106,57 @@
 	<script src="<%=request.getContextPath()%>/resources/js/user/title.js"></script>
 
 	<script>
-	function addToCart(typeProduct, idProduct){
+function addToCart(typeProduct, idProduct, name, price, picturePath){
+		/*
+		var cartA = new Array();
+		var product = {};
+		
+		if (typeof(Cookies.get('cart')) === "undefined"){
+			
+			// create new product to drop it in cart 
+			product.quantity=1;
+			product.typeProduct=typeProduct;
+			product.idProduct=idProduct;
+			product.name=name;
+			product.price=price;
+			product.picturePath=picturePath;
+		} else {
+			cartA = Cookies.getJSON('cart');
+			
+			var findProduct = {};
+			//$.grep(cartA, function(n){ return n.typeProduct == typeProduct && n.idProduct == idProduct; });
+			var existingProduct = false;
+			for (var i = 0; i < cartA.length; i++) {
+   				if(cartA[i].typeProduct == typeProduct && cartA[i].idProduct == idProduct){
+					cartA[i].quantity += 1;		
+					existingProduct = true;
+					break;		
+				}
+			}		
+			
+			if (!existingProduct) {
+				// create new product to drop it in cart 
+				product.quantity=1;
+				product.typeProduct=typeProduct;
+				product.idProduct=idProduct;
+				product.name=name;
+				product.price=price;
+				product.picturePath=picturePath;
+				
+			} 
+			
+		}
+		
+		cartA.unshift(product);
+		
+		Cookies.set('cart', cartA, { expires: 7 });
+		*/
+		
+		var priceV = price.replace(".", ",");
+		var pictureV = picturePath.replace(".", ",");
 		$.ajax({
 			  type: 'POST',
-			  url: "/cart/add/" + typeProduct + "/" + idProduct,
+			  url: "/cart/add/" + typeProduct + "/" + idProduct + "/" + name + "/" + priceV + "/" + pictureV,
 			  contentType: "application/json; charset=utf-8",
               dataType: "json"
 			  });	

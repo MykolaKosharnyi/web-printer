@@ -14,10 +14,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.printmaster.nk.beans.Cart;
 import com.printmaster.nk.beans.ProductCart;
-import com.printmaster.nk.model.Printer;
-import com.printmaster.nk.model.Printer3D;
-import com.printmaster.nk.service.Printer3DService;
-import com.printmaster.nk.service.PrinterService;
 
 @Controller
 public class CartController {
@@ -25,52 +21,39 @@ public class CartController {
 	private static final Logger logger = Logger.getLogger(CartController.class);
 	
 	@Autowired
-	PrinterService printerService;
-	
-	@Autowired
-	Printer3DService printer3DService;
-	
-	@Autowired
 	Cart cart;
 	
-	@RequestMapping(value = "/cart/add/{typeProduct}/{productId}", method = RequestMethod.POST,consumes="application/json",
+	@RequestMapping(value = "/cart/add/{typeProduct}/{productId}/{productName}/{productPrice}/{pathToPicture}", method = RequestMethod.POST,consumes="application/json",
 			headers = "content-type=application/x-www-form-urlencoded")
-	public @ResponseBody void addToCart(@PathVariable("typeProduct") String typeProduct,
-							@PathVariable("productId") Long productId/*, @RequestHeader("referer") String referedForm*/){
+	public @ResponseBody void addToCart(
+			@PathVariable("typeProduct") String typeProduct,
+			@PathVariable("productId") long productId,
+			@PathVariable("productName") String productName,
+			@PathVariable("productPrice") String productPrice,
+			@PathVariable("pathToPicture") String pathToPicture){
+		
+		double price = Double.parseDouble(productPrice.replace(',', '.'));
+		String picture = pathToPicture.replace(',', '.');
 		
 		ProductCart productCart = new ProductCart();
-		
-		if(typeProduct.equals("printer")){
-			Printer product = printerService.getPrinterById(productId);
-			productCart.setPicturePath("printers/" + productId + "/" + product.getPathPictures().get(0));
-			productCart.setName(product.getName());
-			productCart.setTypeProduct(typeProduct);
-			productCart.setPartNumber(product.getPartNumber());
-			productCart.setPrise(product.getPrise());
-			productCart.setIdProduct(product.getId());
-			
-		} else if(typeProduct.equals("printer3d")){
-			Printer3D product = printer3DService.getPrinter3DById(productId);
-			productCart.setPicturePath("printers3d/" + productId + "/" + product.getPathPictures().get(0));
-			productCart.setName(product.getName());
-			productCart.setTypeProduct(typeProduct);
-			productCart.setPartNumber(product.getPartNumber());
-			productCart.setPrise(product.getPrise());
-			productCart.setIdProduct(product.getId());
-
-		}
+		productCart.setTypeProduct(typeProduct);
+		productCart.setIdProduct(productId);
+		productCart.setName(productName);
+		productCart.setPrice(price);
+		productCart.setPicturePath("images/" + typeProduct + "s/" + productId + "/" + picture);
 		
 		cart.addProduct(productCart , 1);
 		logger.debug("Adding product to cart " + productCart );
 		//return "redirect:" + referedForm;
 	}
 	
-	@RequestMapping(value = "cart/delete/{partNumber}")
-	public String removeFromCart(Model model, @PathVariable("partNumber") String partNumber){
+	
+	@RequestMapping(value = "cart/delete/{typeProduct}/{productId}")
+	public String removeFromCart(Model model, @PathVariable("typeProduct") String typeProduct, @PathVariable("productId") long productId){
 		
 		for (Map.Entry<ProductCart, Integer> entry : cart.getContents().entrySet()) {
 			ProductCart key = entry.getKey();
-			if (key.getPartNumber().equals(partNumber)){
+			if (key.getTypeProduct().equals(typeProduct) && key.getIdProduct()==productId){
 				cart.removeProduct(key);
 				logger.debug("Remove product from cart " + key );
 				break;
