@@ -23,7 +23,8 @@ public class CartController {
 	@Autowired
 	Cart cart;
 	
-	@RequestMapping(value = "/cart/add/{typeProduct}/{productId}/{productName}/{productPrice}/{pathToPicture}", method = RequestMethod.POST,consumes="application/json",
+	@RequestMapping(value = "/cart/add/{typeProduct}/{productId}/{productName}/{productPrice}/{pathToPicture}", 
+			method = RequestMethod.POST,consumes="application/json",
 			headers = "content-type=application/x-www-form-urlencoded")
 	public @ResponseBody void addToCart(
 			@PathVariable("typeProduct") String typeProduct,
@@ -48,8 +49,10 @@ public class CartController {
 	}
 	
 	
-	@RequestMapping(value = "cart/delete/{typeProduct}/{productId}")
-	public String removeFromCart(Model model, @PathVariable("typeProduct") String typeProduct, @PathVariable("productId") long productId){
+	@RequestMapping(value = "cart/delete/{typeProduct}/{productId}", method = RequestMethod.POST,
+			consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
+	public @ResponseBody void removeFromCart(Model model, @PathVariable("typeProduct") String typeProduct,
+			@PathVariable("productId") long productId){
 		
 		for (Map.Entry<ProductCart, Integer> entry : cart.getContents().entrySet()) {
 			ProductCart key = entry.getKey();
@@ -59,7 +62,24 @@ public class CartController {
 				break;
 			}
 		}
-		return "redirect:/cart";
+		/*return "redirect:/cart";*/
+	}
+	
+	@RequestMapping(value = "cart/change_quantity/{typeProduct}/{productId}/{quantity}", method = RequestMethod.POST,
+			consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
+	public @ResponseBody void changeQuantityProductInCart(Model model, 
+			@PathVariable("typeProduct") String typeProduct,
+			@PathVariable("productId") long productId,
+			@PathVariable("quantity") int quantity){
+		
+		for (Map.Entry<ProductCart, Integer> entry : cart.getContents().entrySet()) {
+			ProductCart key = entry.getKey();
+			if (key.getTypeProduct().equals(typeProduct) && key.getIdProduct()==productId){
+				cart.changeQuantityProduct(key , quantity);
+				logger.debug("Change quantity product in cart " + key );
+				break;
+			}
+		}
 	}
 	
 	@RequestMapping(value = "/cart", method = RequestMethod.GET)

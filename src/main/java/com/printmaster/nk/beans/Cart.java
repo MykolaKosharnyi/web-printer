@@ -33,6 +33,10 @@ public class Cart {
 		}
 	}
 	
+	public void changeQuantityProduct(ProductCart product, int count){
+		contents.put(product, count);
+	}
+	
 	public void removeProduct(ProductCart product){
 		//if(contents.get(product) > 1){
 		//	contents.put(product, contents.get(product) - 1);

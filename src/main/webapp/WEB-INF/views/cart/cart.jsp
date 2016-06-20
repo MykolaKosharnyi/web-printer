@@ -54,6 +54,15 @@ padding: 5px;
 	min-width: 117px;
 }
 
+.cart table td.delte_item i {
+	color:#006080;
+	cursor: pointer;
+}
+
+.cart table td.delte_item i:hover {
+	color:red;
+}
+
 .cart table td:first-child{
 	padding:1px;
 	height:auto; 
@@ -107,12 +116,16 @@ padding: 5px;
 			<td><img style="height:auto; width:100%;" src="<%=request.getContextPath()%>/${item.key.picturePath}" alt=""></td>
 			<td><c:out value="${item.key.name }"/></td>
 			<td>
-
+	
+				<input type="hidden" name="type" class="type" value="${item.key.typeProduct}">
+				
+				<input type="hidden" name="id" class="id" value="${item.key.idProduct}">
+	
 				<span class="dec_value">
 					<i class="fa fa-minus" aria-hidden="true"></i>
 				</span>
 
-				<input value="<c:out value="${item.value }"/>"></input>
+				<input class="quantity" value="<c:out value="${item.value }"/>"></input>
 
 				<span class="inc_value">
 					<i class="fa fa-plus" aria-hidden="true"></i>
@@ -120,10 +133,10 @@ padding: 5px;
 
 			</td>
 			<td class="price">$ <span>
-						<fmt:formatNumber type="number" 
+				<fmt:formatNumber type="number" 
            					maxFractionDigits="2" minFractionDigits="2" value="${item.key.price * item.value }" />
 					</span><input type="hidden" name="price_ellement" value="${item.key.price}"></td>
-			<td><a href="cart/delete/${item.key.typeProduct}/${item.key.idProduct}"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+			<td class="delte_item"><i class="fa fa-trash-o" aria-hidden="true"></i></td>
 		</tr>
 		</c:forEach>
 		
@@ -145,8 +158,7 @@ padding: 5px;
 </div>
 
 <script type="text/javascript">
-/*
-$( document ).ready(function() {
+/*$( document ).ready(function() {
 	var cartDiv = $('div.cart');
 	if (typeof(Cookies.get('cart')) == "undefined"){
 		cartDiv.append("Корзина пуста, Вы еще не добавляли товары в корзину.");
@@ -198,16 +210,19 @@ $( document ).ready(function() {
 	*/
 	$(function(){
 		$('.dec_value').click(function(){
-            var quantity_element_val = $(this).parent('td').find('input').val();
+            var quantity_element_val = $(this).parent('td').find('input.quantity').val();
 			var price_with_quantity =  $(this).parent('td').parent('tr').find('td.price').find('span');
 			var price = $(this).parent('td').parent('tr').find('td.price').find('input').val();
 			var quantity_numb = new Number(quantity_element_val);
-			var total_price = $('tr td.total_price span' );
-			if(quantity_numb==0){
+			
+			var type = $(this).parent('td').find('input.type').val();
+			var id = $(this).parent('td').find('input.id').val();
+			
+			/*if(quantity_numb==0){
 				$(this).css('color','grey');
-			} else if (quantity_numb==1) {
+			} else*/ if (quantity_numb==1) {
 				$(this).css('color','grey');
-				$(this).parent('td').find('input').val(quantity_numb-1);
+			/*	$(this).parent('td').find('input').val(quantity_numb-1);*/
 
 				$(this).hover(function() {
 						$(this).css('color','grey');
@@ -216,27 +231,33 @@ $( document ).ready(function() {
 					  }
 				);
 
-				var price_n = new Number(price.replace(/\s/ig, '').replace(",", "."));
-				price_with_quantity.text(checkPrise(price_n * (quantity_numb - 1)));
-				total_price.text(allPrice());
+				/*var price_n = new Number(price.replace(/\s/ig, '').replace(",", "."));*/
+				/*price_with_quantity.text(checkPrise(price_n * (quantity_numb - 1)));*/
+				/* set new price for all products */
+				/*totalPrice();*/
 			} else {
-				$(this).parent('td').find('input').val(quantity_numb-1);
+				$(this).parent('td').find('input.quantity').val(quantity_numb-1);
 				var price_n = new Number(price.replace(/\s/ig, '').replace(",", "."));
 				price_with_quantity.text(checkPrise(price_n * (quantity_numb - 1)));
-				total_price.text(allPrice());
+				
+				/* set new price for all products */
+				totalPrice();
+				
+				/* change quantity on server */
+				changeQuantityProductInCart(type, id, quantity_numb - 1);
 			}
  			
         });
 		
 		$('.inc_value').click(function(){
 
-			var quantity_element_val = $(this).parent('td').find('input').val();
+			var quantity_element_val = $(this).parent('td').find('input.quantity').val();
 			var quantity_numb = new Number(quantity_element_val);
 
 			var price_with_quantity = $(this).parent('td').parent('tr').find('td.price').find('span');
 			var price = $(this).parent('td').parent('tr').find('td.price').find('input').val();
-			var total_price = $('tr td.total_price span' );
-			if(quantity_numb==0){
+			
+			if(quantity_numb==1){
 				var dec_v = $(this).parent('td').find('.dec_value');
 				dec_v.css('color','#006080');
 				dec_v.hover(function() {
@@ -247,13 +268,24 @@ $( document ).ready(function() {
 				);
 			} 
 
-            $(this).parent('td').find('input').val(quantity_numb+1);
+            $(this).parent('td').find('input.quantity').val(quantity_numb+1);
 			
 			var price_n = new Number(price.replace(/\s/ig, '').replace(",", "."));
 			price_with_quantity.text(checkPrise(price_n * (quantity_numb + 1)));
- 			total_price.text(allPrice());
+			/* set new price for all products */
+			totalPrice();
+			
+			/* change quantity on server */
+			var type = $(this).parent('td').find('input.type').val();
+			var id = $(this).parent('td').find('input.id').val();
+			changeQuantityProductInCart(type, id, quantity_numb + 1);
         });
 		
+		function totalPrice(){
+			$('tr td.total_price span' ).text(allPrice());
+		}
+		
+		/* return price in presentable to user form */
 		function checkPrise(num){
 				  num = Math.round( num / 0.01 ) * 0.01;
 				  num = new Number(num).toFixed(2);   // особенности счета JavaScript ( x/100 не всегда = x*0.01 )
@@ -266,15 +298,47 @@ $( document ).ready(function() {
 				    if( s > 0 && !(s % 3) ) str  = " " + str;
 				  }   
 				  return str.replace(".", ",");
-			
 		}
 
+		/* method return all sum product item + return it in presentable form */
 		function allPrice(){
 			var total_price = new Number();
 			$('td.price span').each(function(i, price_el){
 				total_price += new Number($(price_el).text().replace(/\s/ig, '').replace(",", "."));
 			});	
 			return checkPrise(total_price);
+		}
+		
+		$('td.delte_item i').click(function(){
+			
+			var typeProduct = $(this).parent('td').parent('tr').find('td input.type').val();
+			var idProduct = $(this).parent('td').parent('tr').find('td  input.id').val();
+
+			/* first of all sent request on server to delete this item from buffer */
+			$.ajax({
+				  type: 'POST',
+				  url: "/cart/delete/" + typeProduct + "/" + idProduct,
+				  contentType: "application/json; charset=utf-8",
+	              dataType: "json"
+				  });
+			
+			/* delete on user side. Deleting without refreshing page */
+			$(this).parent('td').parent('tr').hide('slow', function(){ 
+				$(this).remove(); 
+				
+				/* set new price for all products */
+				totalPrice();	
+			});
+        });
+		
+		function changeQuantityProductInCart(typeProduct, idProduct, quantity){
+			/* change quantity on server */
+			$.ajax({
+				  type: 'POST',
+				  url: "/cart/change_quantity/" + typeProduct + "/" + idProduct + "/" + quantity,
+				  contentType: "application/json; charset=utf-8",
+	              dataType: "json"
+				  });
 		}
 	});
 </script>

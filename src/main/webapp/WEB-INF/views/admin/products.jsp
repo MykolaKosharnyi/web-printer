@@ -82,7 +82,7 @@
 	                	}
 	                	
 	                	var showOnHomePage = $('<input/>').attr("type", "checkbox").attr("name", "showOnHomePage").click(function(){
-	     					   setShowOnHomePage('${productType}', product.id, this);
+	     					setShowOnHomePage('${productType}', product.id, this);
 	                	});
 		                	
 		                if(product.showOnHomePage){
