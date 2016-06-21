@@ -1,6 +1,5 @@
 package com.printmaster.nk.beans;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Set;
 
@@ -228,8 +227,7 @@ public class ComponetsForController {
         reklamProduct.setRightSharesLinkColorText(product.getRightSharesLinkColorText());
         reklamProduct.setRightSharesLinkColorFone(product.getRightSharesLinkColorFone());
         
-        reklamProduct.setPathToPicture(File.separator + "images" + File.separator  + typeProduct + "s" +
-        		File.separator  + product.getId() + File.separator  + product.getPathPictures().get(0));
+        reklamProduct.setPathToPicture(product.getPathPictures().get(0));
         reklamProduct.setNameProduct(product.getName());
         reklamProduct.setPriceProduct(product.getPrise());       
  	
@@ -256,8 +254,7 @@ public class ComponetsForController {
         reklamProduct.setRightSharesLinkColorText(product.getRightSharesLinkColorText());
         reklamProduct.setRightSharesLinkColorFone(product.getRightSharesLinkColorFone());
         
-        reklamProduct.setPathToPicture(File.separator + "images" + File.separator + "rips" +
-        		File.separator  + product.getId() + File.separator  + product.getPathPictures().get(0));
+        reklamProduct.setPathToPicture(product.getPathPictures().get(0));
         reklamProduct.setNameProduct(product.getName());
         reklamProduct.setPriceProduct(product.getPrise());       
  	
@@ -276,8 +273,7 @@ public class ComponetsForController {
         reklamProduct.setId(product.getId());
         reklamProduct.setPartNumber(product.getPartNumber());
         
-        reklamProduct.setPathToPicture(File.separator + "images" + File.separator + "use_with_products" +
-        		File.separator  + product.getId() + File.separator  + product.getPathPictures().get(0));
+        reklamProduct.setPathToPicture(product.getPathPictures().get(0));
         reklamProduct.setNameProduct(product.getName());
         reklamProduct.setPriceProduct(product.getPrise());       
  	

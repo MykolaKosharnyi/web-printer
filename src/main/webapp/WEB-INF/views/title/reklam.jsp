@@ -11,14 +11,12 @@
         	
         				outerDiv.addClass("slide-item").append($('<a/>').addClass("slider_image")
         								 .attr("href", "/" + value.type + "/" + value.id)
-        								 .append($('<div/>').addClass("outer_a_img").append($('<img/>').attr("src", value.pathToPicture))))
-        				.append($('<a/>').addClass("slide-buy")
-        								 .attr("href", "javascript:void(0)").click(function(){
-        			                			addToCart(value.type, value.id);
-        			                		})
-        								 .append($('<img/>').attr("src", "/images/button_buy.png")))				 					 
+        								 .append($('<div/>').addClass("outer_a_img").append($('<img/>').attr("src", "/images/" + value.type + "s/" + value.id+ "/" +value.pathToPicture))))				 					 
                 		.append($('<a/>').attr("href", "/" + value.type + "/" + value.id).addClass("slide-title").text(value.nameProduct))
-                		.append($('<div/>').addClass("slide-price").text("Цена: $" + value.priceProduct))
+                		.append($('<p/>').addClass("slide-price").text("Цена: " + checkPrise(value.priceProduct)))
+                		.append($('<i/>').addClass("fa fa-cart-plus add_to_cart").click(function(){
+        			                			addToCart(value.type, value.id, value.nameProduct, value.priceProduct+'', value.pathToPicture);
+        			                		}))
         	
         	
         	if(value.leftSharesLink!=null && value.leftSharesLink!=""){

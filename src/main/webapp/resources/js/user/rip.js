@@ -15,11 +15,11 @@
 	                								 .attr("href", "/rip/" + product.id)
 	                								 .append($('<div/>').addClass("outer_a_img").append($('<img/>')
 	                										 .attr("src", "/images/rips/" + product.id + "/" + product.pathPictures[0]))))
-	                				.append($('<a/>').attr("href", "javascript:void(0)").addClass("products_buy").click(function(){
-	    	                			addToCart('rip', product.id);
-	    	                		}).append($('<img/>').attr("src", "/images/button_buy.png")))
 	    	                		.append($('<a/>').attr("href", "/rip/" + product.id).addClass("products_title").text(product.name))
-	    	                		.append($('<p/>').addClass("products_price").text("Цена: " + checkPrise(product.prise)))		
+	    	                		.append($('<p/>').addClass("products_price").text("Цена: " + checkPrise(product.prise)))
+	    	                		.append($('<i/>').addClass("fa fa-cart-plus add_to_cart").click(function(){
+        			                			addToCart('rip', product.id, product.name, product.prise+'', product.pathPictures[0]);
+        			                		}))
 	    	                				
 	                	
 	    	                				if(product.leftSharesLink!=null && product.leftSharesLink!=""){

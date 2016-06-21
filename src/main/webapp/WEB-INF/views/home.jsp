@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="h" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -103,6 +104,8 @@
                   </div>
                 </div>
 
+			
+
               <div class="col-md-9 col-lg-9">
                 <div class="row">
                   <div class="sider_container">
@@ -113,23 +116,25 @@
                      <div class="carousel_printer">
                         <c:forEach items="${printers}" var="printer">
                               <div class="slide-item1">
-                                  <a class="slider_image" href="<c:url value='/printer/${printer.id}' />"><div class="outer_a_img"><img src="/images/printers/${printer.id}/${printer.pathPictures.get(0)}" alt="" /></div></a>
-                                  <a class="slide-buy1" href="javascript:void(0)" onclick="addToCart('printer', ${printer.id});">
-                                    <img src="/images/button_buy.png" alt="" />
-                                  </a>
-                                  <a href="<c:url value='/printer/${printer.id}' />" class="slide-title1">${printer.name}</a>
-                                  <div class="slide-price1">Цена: 
+                                  <a class="slider_image" href="<c:url value='/printer/${printer.id}' />">
+                                  <div class="outer_a_img"><img src="/images/printers/${printer.id}/${printer.pathPictures.get(0)}" alt="" /></div></a>
+                                  <a href="<c:url value='/printer/${printer.id}' />" class="slide-title">${printer.name}</a>
+                                  <div class="slide-price">Цена: 
                                     <c:if test="${printer.prise < 0.1}"> уточняйте</c:if>
-                    <c:if test="${!(printer.prise < 0.1)}">         
-                        $<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${printer.prise}" />
-                    </c:if>
+				                    <c:if test="${!(printer.prise < 0.1)}">         
+				                        $<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${printer.prise}" />
+				                    </c:if>
                                   </div>
+                                  <i class="fa fa-cart-plus add_to_cart" aria-hidden="true" 
+			onclick="addToCart('printer', ${printer.id}, '${printer.name}', '${printer.prise}','${printer.pathPictures.get(0)}');"></i>
                               </div>
                             </c:forEach>
                      </div>
                   </div>
                 </div>
               </div>
+              
+             <%--  <h:home_section_of_product type="printer" arrayOfProduct="${printers}"/>--%>
 
             </div>
 </div>
@@ -198,16 +203,15 @@
                               <div class="slide-item2">
                                   <a class="slider_image" href="<c:url value='/3d_printer/${printer3D.id}' />">
                                   <div class="outer_a_img"><img src="/images/3d_printers/${printer3D.id}/${printer3D.pathPictures.get(0)}" alt="" /></div></a>
-                                  <a class="slide-buy2" href="javascript:void(0)" onclick="addToCart('3d_printer', ${printer3D.id});">
-                                    <img src="/images/button_buy.png" alt="" />
-                                  </a>
-                                  <a href="<c:url value='/3d_printer/${printer3D.id}' />" class="slide-title2">${printer3D.name}</a>
-                                  <div class="slide-price2">Цена:
+                                  <a href="<c:url value='/3d_printer/${printer3D.id}' />" class="slide-title">${printer3D.name}</a>
+                                  <div class="slide-price">Цена:
                                     <c:if test="${printer3D.prise < 0.1}"> уточняйте</c:if>
                     <c:if test="${!(printer3D.prise < 0.1)}">         
                         $<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${printer3D.prise}" />
                     </c:if>
                         </div>
+                        <i class="fa fa-cart-plus add_to_cart" aria-hidden="true" 
+			onclick="addToCart('3d_printer', ${printer3D.id}, '${printer3D.name}', '${printer3D.prise}','${printer3D.pathPictures.get(0)}');"></i>
                               </div>
                           </c:forEach>
                      </div>
@@ -254,7 +258,6 @@
 
                             <a href="<c:url value='/digital_printers/full_color_laser_printers' />" class="list-group-item"><spring:message code="head.digital_printer.full_color_laser_printers"/></a>
 
-
                             <a href="<c:url value='/digital_printers/monochrome_laser_printers' />" class="list-group-item"><spring:message code="head.digital_printer.monochrome_laser_printers"/></a>
 
                             <a href="<c:url value='/digital_printers/full-color_inkjet_printers' />" class="list-group-item"><spring:message code="head.digital_printer.full_color_inkjet_printers"/></a>
@@ -272,16 +275,15 @@
                         <c:forEach items="${digitalPrinters}" var="printer">
                               <div class="slide-item2">
                                   <a class="slider_image" href="<c:url value='/digital_printer/${printer.id}' />"><div class="outer_a_img"><img src="/images/digital_printers/${printer.id}/${printer.pathPictures.get(0)}" alt="" /></div></a>
-                                  <a class="slide-buy2" href="javascript:void(0)" onclick="addToCart('digital_printer', ${printer.id});">
-                                    <img src="/images/button_buy.png" alt="" />
-                                  </a>
-                                  <a href="<c:url value='/digital_printer/${printer.id}' />" class="slide-title2">${printer.name}</a>
-                                  <div class="slide-price2">Цена:
+                                  <a href="<c:url value='/digital_printer/${printer.id}' />" class="slide-title">${printer.name}</a>
+                                  <div class="slide-price">Цена:
                                     <c:if test="${printer.prise < 0.1}"> уточняйте</c:if>
                     <c:if test="${!(printer.prise < 0.1)}">         
                         $<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${printer.prise}" />
                     </c:if>
                         </div>
+                        <i class="fa fa-cart-plus add_to_cart" aria-hidden="true" 
+			onclick="addToCart('digital_printer', ${printer.id}, '${printer.name}', '${printer.prise}','${printer.pathPictures.get(0)}');"></i>
                               </div>
                           </c:forEach>
                      </div>
@@ -342,16 +344,15 @@
                          <c:forEach items="${laminators}" var="product">
                               <div class="slide-item2">
                                   <a class="slider_image" href="<c:url value='/laminator/${product.id}' />"><div class="outer_a_img"><img src="/images/laminators/${product.id}/${product.pathPictures.get(0)}" alt="" /></div></a>
-                                  <a class="slide-buy2" href="javascript:void(0)" onclick="addToCart('laminator', ${product.id});">
-                                    <img src="/images/button_buy.png" alt="" />
-                                  </a>
-                                  <a href="<c:url value='/laminator/${product.id}' />" class="slide-title2">${product.name}</a>
-                                  <div class="slide-price2">Цена:
+                                  <a href="<c:url value='/laminator/${product.id}' />" class="slide-title">${product.name}</a>
+                                  <div class="slide-price">Цена:
                                     <c:if test="${product.prise < 0.1}"> уточняйте</c:if>
                     				<c:if test="${!(product.prise < 0.1)}">         
                         				$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${product.prise}" />
                     				</c:if>
                         		</div>
+                        		<i class="fa fa-cart-plus add_to_cart" aria-hidden="true" 
+			onclick="addToCart('laminator', ${product.id}, '${product.name}', '${product.prise}','${product.pathPictures.get(0)}');"></i>
                               </div>
                           </c:forEach>
 
@@ -425,16 +426,15 @@
                         <c:forEach items="${lasers}" var="laser">
                               <div class="slide-item2">
                                   <a class="slider_image" href="<c:url value='/laser/${laser.id}' />"><div class="outer_a_img"><img src="/images/lasers/${laser.id}/${laser.pathPictures.get(0)}" alt="" /></div></a>
-                                  <a class="slide-buy2" href="javascript:void(0)" onclick="addToCart('laser', ${laser.id});">
-                                    <img src="/images/button_buy.png" alt="" />
-                                  </a>
-                                  <a href="<c:url value='/laser/${laser.id}' />" class="slide-title2">${laser.name}</a>
-                                  <div class="slide-price2">Цена:
+                                  <a href="<c:url value='/laser/${laser.id}' />" class="slide-title">${laser.name}</a>
+                                  <div class="slide-price">Цена:
                                     <c:if test="${laser.prise < 0.1}"> уточняйте</c:if>
                     <c:if test="${!(laser.prise < 0.1)}">         
                         $<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${laser.prise}" />
                     </c:if>
                         </div>
+                        <i class="fa fa-cart-plus add_to_cart" aria-hidden="true" 
+			onclick="addToCart('laser', ${laser.id}, '${laser.name}', '${laser.prise}','${laser.pathPictures.get(0)}');"></i>
                               </div>
                           </c:forEach>
 
@@ -494,16 +494,15 @@
                         <c:forEach items="${cutters}" var="cutter">
                               <div class="slide-item2">
                                   <a class="slider_image" href="<c:url value='/cutter/${cutter.id}' />"><div class="outer_a_img"><img src="/images/cutters/${cutter.id}/${cutter.pathPictures.get(0)}" alt="" /></div></a>
-                                  <a class="slide-buy2" href="javascript:void(0)" onclick="addToCart('cutter', ${cutter.id});">
-                                    <img src="/images/button_buy.png" alt="" />
-                                  </a>
-                                  <a href="<c:url value='/cutter/${cutter.id}' />" class="slide-title2">${cutter.name}</a>
-                                  <div class="slide-price2">Цена:
+                                  <a href="<c:url value='/cutter/${cutter.id}' />" class="slide-title">${cutter.name}</a>
+                                  <div class="slide-price">Цена:
                                     <c:if test="${cutter.prise < 0.1}"> уточняйте</c:if>
                     <c:if test="${!(cutter.prise < 0.1)}">         
                         $<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${cutter.prise}" />
                     </c:if>
                         </div>
+                        <i class="fa fa-cart-plus add_to_cart" aria-hidden="true" 
+			onclick="addToCart('cutter', ${cutter.id}, '${cutter.name}', '${cutter.prise}','${cutter.pathPictures.get(0)}');"></i>
                               </div>
                           </c:forEach>
 
@@ -571,16 +570,15 @@
                         <c:forEach items="${scanners}" var="scanner">
                               <div class="slide-item2">
                                   <a class="slider_image" href="<c:url value='/scanner/${cutter.id}' />"><div class="outer_a_img"><img src="/images/scanners/${scanner.id}/${scanner.pathPictures.get(0)}" alt="" /></div></a>
-                                  <a class="slide-buy2" href="javascript:void(0)" onclick="addToCart('scanner', ${scanner.id});">
-                                    <img src="/images/button_buy.png" alt="" />
-                                  </a>
-                                  <a href="<c:url value='/scanner/${scanner.id}' />" class="slide-title2">${scanner.name}</a>
-                                  <div class="slide-price2">Цена:
+                                  <a href="<c:url value='/scanner/${scanner.id}' />" class="slide-title">${scanner.name}</a>
+                                  <div class="slide-price">Цена:
                                     <c:if test="${scanner.prise < 0.1}"> уточняйте</c:if>
 					                <c:if test="${!(scanner.prise < 0.1)}">         
 					                	$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${scanner.prise}" />
 					                </c:if>
                         		</div>
+                        		<i class="fa fa-cart-plus add_to_cart" aria-hidden="true" 
+			onclick="addToCart('scanner', ${scanner.id}, '${scanner.name}', '${scanner.prise}','${scanner.pathPictures.get(0)}');"></i>
                               </div>
                           </c:forEach>
 
@@ -642,16 +640,15 @@
                         <c:forEach items="${pue}" var="product">
                               <div class="slide-item2">
                                   <a class="slider_image" href="<c:url value='/${product.type}/${product.id}' />"><div class="outer_a_img"><img src="/images/${product.type}s/${product.id}/${product.pathPictures.get(0)}" alt="" /></div></a>
-                                  <a class="slide-buy2" href="javascript:void(0)" onclick="addToCart(${product.type}, ${product.id});">
-                                    <img src="/images/button_buy.png" alt="" />
-                                  </a>
-                                  <a href="<c:url value='/${product.type}/${product.id}' />" class="slide-title2">${product.name}</a>
-                                  <div class="slide-price2">Цена:
+                                  <a href="<c:url value='/${product.type}/${product.id}' />" class="slide-title">${product.name}</a>
+                                  <div class="slide-price">Цена:
                                     <c:if test="${product.prise < 0.1}"> уточняйте</c:if>
 					                <c:if test="${!(product.prise < 0.1)}">         
 					                	$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${product.prise}" />
 					                </c:if>
                         		</div>
+                        		<i class="fa fa-cart-plus add_to_cart" aria-hidden="true" 
+			onclick="addToCart(${product.type}, ${product.id}, '${product.name}', '${product.prise}','${product.pathPictures.get(0)}');"></i>
                               </div>
                           </c:forEach>
 
@@ -713,17 +710,17 @@
                      <div class="carousel_rip">
                         <c:forEach items="${rips}" var="rip">
                               <div class="slide-item2">
-                                  <a class="slider_image" href="<c:url value='/rip/${rip.id}' />"><div class="outer_a_img"><img src="/images/rips/${rip.id}/${rip.pathPictures.get(0)}" alt="" /></div></a>
-                                  <a class="slide-buy2" href="javascript:void(0)" onclick="addToCart('rip', ${rip.id});">
-                                    <img src="/images/button_buy.png" alt="" />
-                                  </a>
-                                  <a href="<c:url value='/rip/${rip.id}' />" class="slide-title2">${rip.name}</a>
-                                  <div class="slide-price2">Цена:
+                                  <a class="slider_image" href="<c:url value='/rip/${rip.id}' />">
+                                  <div class="outer_a_img"><img src="/images/rips/${rip.id}/${rip.pathPictures.get(0)}" alt="" /></div></a>
+                                  <a href="<c:url value='/rip/${rip.id}' />" class="slide-title">${rip.name}</a>
+                                  <div class="slide-price">Цена:
                                     <c:if test="${rip.prise < 0.1}"> уточняйте</c:if>
 					                <c:if test="${!(rip.prise < 0.1)}">         
-					                	$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${scanner.prise}" />
+					                	$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${rip.prise}" />
 					                </c:if>
                         		</div>
+                        		<i class="fa fa-cart-plus add_to_cart" aria-hidden="true" 
+			onclick="addToCart('rip', ${rip.id}, '${rip.name}', '${rip.prise}','${rip.pathPictures.get(0)}');"></i>
                               </div>
                           </c:forEach>
 

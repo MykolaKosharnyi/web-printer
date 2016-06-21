@@ -65,7 +65,9 @@
 			   	maxFractionDigits="2" minFractionDigits="2" value="${product.prise}" /></span>
 	</label>
 		                  
-	<a href="javascript:void(0)" onclick="addToCart('${type}', ${product.id});" class="products_buy">
+	<a href="javascript:void(0)" 
+	onclick="addToCart('${type}', ${product.id}, '${product.name}', '${product.prise}', '${product.pathPictures.get(0)}');"
+	class="products_buy">
 		<img src="/images/button_buy.png" alt="" />
 	</a>
 </div>

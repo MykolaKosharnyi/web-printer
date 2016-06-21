@@ -20,7 +20,9 @@
 			" onmouseover="" class="link" href="<c:url value='/${type}/${product.id}' />">	
 					<div class="outer_a_img"><img src="/images/${type}s/${product.id}/${product.pathPictures.get(0)}" alt=""></div>
 			</a>
-			<a href="javascript:void(0)" onclick="addToCart('${type}', ${product.id});" class="products_buy">
+			<a href="javascript:void(0)" 
+			onclick="addToCart('${type}', ${product.id}, '${product.name}', '${product.prise}', '${product.pathPictures.get(0)}');"
+			class="products_buy">
 				<img src="/images/button_buy.png" alt="" />
 			</a>
 			<a href="<c:url value='/${type}/${product.id}' />" class="products_title">${product.name}</a>

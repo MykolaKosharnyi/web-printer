@@ -33,6 +33,22 @@
 					   </c:if>
 					   
                   </table>
+                  
+                  <div class="option_product_with_price">
+					                  
+						<label class="total_ptice_title">Стоимость:</label>
+							                  
+						<label class="total_price">$<span><fmt:formatNumber type="number" 
+								   	maxFractionDigits="2" minFractionDigits="2" value="${product.prise}" /></span>
+						</label>
+							                  
+						<a href="javascript:void(0)" 
+						onclick="addToCart('${type}', ${product.id}, '${product.name}', '${product.prise}', '${product.pathPictures.get(0)}');"
+						class="products_buy">
+							<img src="/images/button_buy.png" alt="" />
+						</a>
+				   </div>
+                  
                 </div>
             </div>
             <div id="tabs_product">

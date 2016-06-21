@@ -14,11 +14,11 @@
            								 			 .addClass("link")
 	                								 .attr("href", "/use_with_product/" + product.id)
 	                								 .append($('<div/>').addClass("outer_a_img").append($('<img/>').attr("src", "/images/use_with_products/" + product.id + "/" + product.pathPictures[0]))))
-	                				.append($('<a/>').attr("href", "javascript:void(0)").addClass("products_buy").click(function(){
-	    	                			addToCart('use_with_product', product.id);
-	    	                		}).append($('<img/>').attr("src", "/images/button_buy.png")))
 	    	                		.append($('<a/>').attr("href", "/use_with_product/" + product.id).addClass("products_title").text(product.name))
-	    	                		.append($('<p/>').addClass("products_price").text("Цена: " + checkPrise(product.prise)))		
+	    	                		.append($('<p/>').addClass("products_price").text("Цена: " + checkPrise(product.prise)))
+	    	                		.append($('<i/>').addClass("fa fa-cart-plus add_to_cart").click(function(){
+        			                			addToCart('use_with_product', product.id, product.name, product.prise+'', product.pathPictures[0]);
+        			                		}))
 	    	                				
 	                	
 	    	                				if(product.leftSharesLink!=null && product.leftSharesLink!=""){
