@@ -123,7 +123,6 @@
 			</ul>
 		</div>
 		
-		
 		<div class="block_search_criteria">
 			<div class="block_block_title">
 				<i></i>
@@ -596,7 +595,7 @@
 		<div class="block_search_criteria">
 			<div class="block_block_title">
 				<i></i>
-				<p>П/О</p>
+				<p>Програмное обеспечение</p>
 			</div>
 			<ul class="block_check_boxes">
 				<div class="search_criteria">

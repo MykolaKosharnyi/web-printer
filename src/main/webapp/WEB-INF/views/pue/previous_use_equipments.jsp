@@ -9,13 +9,12 @@
 			
 			<c:choose>
    		 		<c:when test="${fn:length(product.pathPictures) > 1}">
-					/images/${type}s/${product.id}/${product.pathPictures.get(1)}
+					/images/${product.type}s/${product.id}/${product.pathPictures[1]}
     			</c:when>    
     			<c:otherwise>
-					/images/${type}s/${product.id}/${product.pathPictures.get(0)}
+					/images/${product.type}s/${product.id}/${product.pathPictures[0]}
     			</c:otherwise>
 			</c:choose>
-
 			
 			" class="link" href="<c:url value='/${product.type}/${product.id}' />">	
 					<div class="outer_a_img"><img src="/images/${product.type}s/${product.id}/${product.pathPictures.get(0)}" alt=""></div>

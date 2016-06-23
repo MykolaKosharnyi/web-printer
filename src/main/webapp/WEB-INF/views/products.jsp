@@ -9,8 +9,7 @@
 			
 			<c:choose>
    		 		<c:when test="${fn:length(product.pathPictures) > 1}">/images/${type}s/${product.id}/${product.pathPictures.get(1)}</c:when>    
-    			<c:otherwise>/images/${type}s/${product.id}/${product.pathPictures.get(0)}
-    			</c:otherwise>
+    			<c:otherwise>/images/${type}s/${product.id}/${product.pathPictures.get(0)}</c:otherwise>
 			</c:choose>
 
 			

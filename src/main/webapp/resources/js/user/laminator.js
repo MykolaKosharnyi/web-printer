@@ -10,7 +10,7 @@
 	                	var outerDiv = $('<div/>');
 
 	                	outerDiv.addClass("products")
-	                				.append($('<a/>').attr("id", "/images/laminators/" + product.id + "/" + product.pathPictures[1])
+	                				.append($('<a/>').attr("id", "/images/laminators/" + product.id + "/" + checkPicture(product.pathPictures))
            								 			 .addClass("link")
 	                								 .attr("href", "/laminator/" + product.id)
 	                								 .append($('<div/>').addClass("outer_a_img").append($('<img/>').attr("src", "/images/laminators/" + product.id + "/" + product.pathPictures[0]))))

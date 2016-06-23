@@ -48,6 +48,15 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
+				<p>Б/У оборудование</p>
+			</div>
+			<ul class="check_boxes">
+				<form:checkboxes items="${printer.previously_used}" path="previouslyUsed" element="li" />
+			</ul>
+		</div>
+		<div class="search_criteria">
+			<div class="block_title">
+				<i></i>
 				<p>Ширина печати</p>
 			</div>
 			<ul class="check_boxes">
@@ -103,28 +112,10 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Б/У оборудование</p>
-			</div>
-			<ul class="check_boxes">
-				<form:checkboxes items="${printer.previously_used}" path="previouslyUsed" element="li" />
-			</ul>
-		</div>
-		<div class="search_criteria">
-			<div class="block_title">
-				<i></i>
 				<p>Тип печати</p>
 			</div>
 			<ul class="check_boxes">			
 				<form:checkboxes items="${printer.type_print}" path="typePrint" element="li" />
-			</ul>
-		</div>
-		<div class="search_criteria">
-			<div class="block_title">
-				<i></i>
-				<p>Подача метериала</p>
-			</div>
-			<ul class="check_boxes">			
-				<form:checkboxes items="${printer.feeds}" path="feed" element="li" />
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -139,116 +130,10 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Производитель печатающей головки</p>
-			</div>
-			<ul class="check_boxes">
-				<form:checkboxes items="${printer.manufacturer_printhead}" path="manufacturerPrinthead" element="li" />
-			</ul>
-		</div> 
-
-		<div class="block_search_criteria">
-			<div class="block_block_title">
-				<i></i>
-				<p>Тип печатающей головки</p>
-			</div>
-			<ul class="block_check_boxes">
-		
-				<c:forEach items="${printer.type_of_printhead}" var="item">
-				
-					<div class="search_criteria">
-						<div class="block_title">
-							<i></i>
-							<p>${item.name}</p>
-						</div>
-						<ul class="check_boxes">
-						
-							<c:forEach items="${item.values}" var="value">
-								<c:if test="${value.getClass().simpleName != 'String'}">
-									<div class="outer_type_print_head">
-										
-										<input class="check_print_head" type="checkbox" name="typeOfPrintheadSeries" value="${value.series}"
-										 id="${value.series}_${item.name}">
-										<label class="print_series" for="${value.series}_${item.name}">${value.series}</label></input>
-										
-										
-										<div class="inner_block_print_head" style="display: none; left:10px; position: relative;">
-											<form:checkboxes items="${value.values}" path="typeOfPrinthead" element="li" />
-										</div>
-									
-									</div>
-								</c:if>
-								
-								<c:if test="${value.getClass().simpleName == 'String'}">
-									<li>
-										<input type="checkbox" name="typeOfPrinthead" value="${value}"
-										 id="${value}_${item.name}"><label for="${value}_${item.name}">${value}</label></input>
-									</li>
-								</c:if>
-	  						</c:forEach>
-	  						
-						</ul>
-					</div>				
-				
-	  			</c:forEach>
-			</ul>
-		</div>
-	
-		<div class="search_criteria">
-			<div class="block_title">
-				<i></i>
 				<p>Совместимые чернила</p>
 			</div>
 			<ul class="check_boxes">
 				<form:checkboxes items="${printer.compatible_ink}" path="compatibleInk" element="li" />
-			</ul>
-		</div>
-		<div class="search_criteria">
-			<div class="block_title">
-				<i></i>
-				<p>Тип капли</p>
-			</div>
-			<ul class="check_boxes">
-				<form:checkboxes items="${printer.type_drops}" path="typeDrops" element="li" />
-			</ul>
-		</div>
-		<div class="search_criteria">
-			<div class="block_title">
-				<i></i>
-				<p>Размер капли</p>
-			</div>
-			<ul class="check_boxes">
-				<form:checkboxes items="${printer.size_drops}" path="sizeDrops" element="li" />
-				<div class="text_output">
-					<form:input path="sizeDropRangeFrom" class="amount-sizeDropRangeFrom" value="${search.sizeDropRangeFrom}" />
-					<p>&nbsp;pl -&nbsp;</p>
-					<form:input path="sizeDropRangeUntil" class="amount-sizeDropRangeUntil" value="${search.sizeDropRangeUntil}" />
-					<p>&nbsp;pl</p>
-				</div>
-					<div class="slider-range-size-drop"></div>
-			</ul>
-		</div>
-		<div class="search_criteria">
-			<div class="block_title">
-				<i></i>
-				<p>Скорость печати</p>
-			</div>
-			<ul class="check_boxes">
-				<div class="text_output">
-					<form:input path="speedPrint0" class="amount-speed-print0" value="${search.speedPrint0}" />
-					<p>&nbsp;м.кв./ч. -&nbsp;</p>
-					<form:input path="speedPrint1" class="amount-speed-print1" value="${search.speedPrint1}" />
-					<p>&nbsp;м.кв./ч.</p>
-				</div>
-					<div class="slider-range-speed-print"></div>
-			</ul>
-		</div>
-		<div class="search_criteria">
-			<div class="block_title">
-				<i></i>
-				<p>Разрешение печати</p>
-			</div>
-			<ul class="check_boxes">
-				<form:checkboxes items="${printer.print_resolution}" path="printResolution" element="li" />
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -260,153 +145,305 @@
 				<form:checkboxes items="${printer.equipment_manufacturer}" path="equipmentManufacturer" element="li" />
 			</ul>
 		</div>
-		<div class="search_criteria">
-			<div class="block_title">
+		<div class="block_search_criteria">
+			<div class="block_block_title">
 				<i></i>
-				<p>Интерфейс подключения</p>
+				<p>Печатающая головка</p>
 			</div>
-			<ul class="check_boxes">
-				<form:checkboxes items="${printer.interface_connection}" path="interfaceConnection" element="li" />
-			</ul>
-		</div>
-		<div class="search_criteria">
-			<div class="block_title">
-				<i></i>
-				<p>Максимальная толщина носителя</p>
-			</div>
-			<ul class="check_boxes">
-				<div class="text_output">
-					<form:input path="maximumMediaThickness60_0" class="amount-maximum_media_thickness60_0" value="${search.maximumMediaThickness60_0}" />
-					<p>&nbsp;мм -&nbsp;</p>
-					<form:input path="maximumMediaThickness60_1" class="amount-maximum_media_thickness60_1" value="${search.maximumMediaThickness60_1}" />
-					<p>&nbsp;мм</p>
+			<ul class="block_check_boxes">
+				<div class="search_criteria">
+					<div class="block_title">
+						<i></i>
+						<p>Производитель печатающей головки</p>
+					</div>
+					<ul class="check_boxes">
+						<form:checkboxes items="${printer.manufacturer_printhead}" path="manufacturerPrinthead" element="li" />
+					</ul>
 				</div>
-				<div class="slider-range-maximum_media_thickness60"></div>
-				<br>
-				<div class="text_output">
-					<form:input path="maximumMediaThickness500_0" class="amount-maximum_media_thickness500_0" value="${search.maximumMediaThickness500_0}" />
-					<p>&nbsp;мм -&nbsp;</p>
-					<form:input path="maximumMediaThickness500_1" class="amount-maximum_media_thickness500_1" value="${search.maximumMediaThickness500_1}" />
-					<p>&nbsp;мм</p>
+				<div class="search_criteria">
+					<div class="block_title">
+						<i></i>
+						<p>Тип капли</p>
+					</div>
+					<ul class="check_boxes">
+						<form:checkboxes items="${printer.type_drops}" path="typeDrops" element="li" />
+					</ul>
 				</div>
-				<div class="slider-range-maximum_media_thickness500"></div>
-			</ul>
-		</div>
-		<div class="search_criteria">
-			<div class="block_title">
-				<i></i>
-				<p>Максимальный вес носителя</p>
-			</div>
-			<ul class="check_boxes">
-				<div class="text_output">
-					<form:input path="maximumWeightOfVehicle0" class="amount-maximum_weight_of_vehicle0" value="${search.maximumWeightOfVehicle0}" />
-					<p>&nbsp;кг -&nbsp;</p>
-					<form:input path="maximumWeightOfVehicle1" class="amount-maximum_weight_of_vehicle1" value="${search.maximumWeightOfVehicle1}" />
-					<p>&nbsp;кг</p>
+				<div class="search_criteria">
+					<div class="block_title">
+						<i></i>
+						<p>Размер капли</p>
+					</div>
+					<ul class="check_boxes">
+						<form:checkboxes items="${printer.size_drops}" path="sizeDrops" element="li" />
+						<div class="text_output">
+							<form:input path="sizeDropRangeFrom" class="amount-sizeDropRangeFrom" value="${search.sizeDropRangeFrom}" />
+							<p>&nbsp;pl -&nbsp;</p>
+							<form:input path="sizeDropRangeUntil" class="amount-sizeDropRangeUntil" value="${search.sizeDropRangeUntil}" />
+							<p>&nbsp;pl</p>
+						</div>
+							<div class="slider-range-size-drop"></div>
+					</ul>
 				</div>
-					<div class="slider-range-maximum_weight_of_vehicle"></div>
 			</ul>
 		</div>
-		<div class="search_criteria">
-			<div class="block_title">
-				<i></i>
-				<p>П/О RIP</p>
-			</div>
-			<ul class="check_boxes">
-				<form:checkboxes items="${printer.rip}" path="rip" element="li" />
-			</ul>
-		</div>
-		<div class="search_criteria">
-			<div class="block_title">
-				<i></i>
-				<p>Средняя потребляемая мощность</p>
-			</div>
-			<ul class="check_boxes">
-				<div class="text_output">
-					<form:input path="averagePowerConsumption0" class="amount-averagePowerConsumption0" value="${search.averagePowerConsumption0}" />
-					<p>&nbsp;Вт -&nbsp;</p>
-					<form:input path="averagePowerConsumption1" class="amount-averagePowerConsumption1" value="${search.averagePowerConsumption1}" />
-					<p>&nbsp;Вт</p>
+		<div class="block_search_criteria">
+				<div class="block_block_title">
+					<i></i>
+					<p>Тип печатающей головки</p>
 				</div>
-					<div class="slider-range-averagePowerConsumption"></div>
-			</ul>
-		</div>
-		<div class="search_criteria">
-			<div class="block_title">
-				<i></i>
-				<p>Максимальная потребляемая мощность</p>
+				<ul class="block_check_boxes">
+				
+					<c:forEach items="${printer.type_of_printhead}" var="item">
+						
+						<div class="search_criteria">
+							<div class="block_title">
+								<i></i>
+								<p>${item.name}</p>
+							</div>
+							<ul class="check_boxes">
+								
+								<c:forEach items="${item.values}" var="value">
+									<c:if test="${value.getClass().simpleName != 'String'}">
+										<div class="outer_type_print_head">
+											
+											<input class="check_print_head" type="checkbox" name="typeOfPrintheadSeries" value="${value.series}"
+											 id="${value.series}_${item.name}">
+											<label class="print_series" for="${value.series}_${item.name}">${value.series}</label></input>
+												
+											
+											<div class="inner_block_print_head" style="display: none; left:10px; position: relative;">
+												<form:checkboxes items="${value.values}" path="typeOfPrinthead" element="li" />
+											</div>
+										
+										</div>
+									</c:if>
+										
+									<c:if test="${value.getClass().simpleName == 'String'}">
+										<li>
+											<input type="checkbox" name="typeOfPrinthead" value="${value}"
+											 id="${value}_${item.name}"><label for="${value}_${item.name}">${value}</label></input>
+										</li>
+									</c:if>
+		  						</c:forEach>
+		  						
+							</ul>
+						</div>				
+						
+		  			</c:forEach>
+				</ul>
 			</div>
-			<ul class="check_boxes">
-				<div class="text_output">
-					<form:input path="maxPowerConsumption0" class="amount-max_power_consumption0" value="${search.maxPowerConsumption0}" />
-					<p>&nbsp;Вт -&nbsp;</p>
-					<form:input path="maxPowerConsumption1" class="amount-max_power_consumption1" value="${search.maxPowerConsumption1}" />
-					<p>&nbsp;Вт</p>
-				</div>
-					<div class="slider-range-max_power_consumption"></div>
-			</ul>
-		</div>
-		<div class="search_criteria">
-			<div class="block_title">
+		<div class="block_search_criteria">
+			<div class="block_block_title">
 				<i></i>
-				<p>Вес</p>
+				<p>Скорость и разрешение печати</p>
 			</div>
-			<ul class="check_boxes">
-				<div class="text_output">
-					<form:input path="weight0" class="amount-weight0" value="${search.weight0}" />
-					<p>&nbsp;кг -&nbsp;</p>
-					<form:input path="weight1" class="amount-weight1" value="${search.weight1}" />
-					<p>&nbsp;кг</p>
+			<ul class="block_check_boxes">
+				<div class="search_criteria">
+					<div class="block_title">
+						<i></i>
+						<p>Скорость печати, м.кв./ч.</p>
+					</div>
+					<ul class="check_boxes">
+						<div class="text_output">
+							<form:input path="speedPrint0" class="amount-speed-print0" value="${search.speedPrint0}" />
+							<p>&nbsp;-&nbsp;</p>
+							<form:input path="speedPrint1" class="amount-speed-print1" value="${search.speedPrint1}" />
+						</div>
+							<div class="slider-range-speed-print"></div>
+					</ul>
 				</div>
-					<div class="slider-range-weight"></div>
+				<div class="search_criteria">
+					<div class="block_title">
+						<i></i>
+						<p>Разрешение печати</p>
+					</div>
+					<ul class="check_boxes">
+						<form:checkboxes items="${printer.print_resolution}" path="printResolution" element="li" />
+					</ul>
+				</div>
 			</ul>
 		</div>
-		<div class="search_criteria">
-			<div class="block_title">
+		<div class="block_search_criteria">
+			<div class="block_block_title">
 				<i></i>
-				<p>Ширина</p>
+				<p>Материал</p>
 			</div>
-			<ul class="check_boxes">
-				<div class="text_output">
-					<form:input path="width0" class="amount-width0" value="${search.width0}" />
-					<p>&nbsp;мм -&nbsp;</p>
-					<form:input path="width1" class="amount-width1" value="${search.width1}" />
-					<p>&nbsp;мм</p>
+			<ul class="block_check_boxes">
+				<div class="search_criteria">
+					<div class="block_title">
+						<i></i>
+						<p>Подача метериала</p>
+					</div>
+					<ul class="check_boxes">			
+						<form:checkboxes items="${printer.feeds}" path="feed" element="li" />
+					</ul>
 				</div>
-				<div class="slider-range-width"></div>
+				<div class="search_criteria">
+					<div class="block_title">
+						<i></i>
+						<p>Максимальная толщина носителя</p>
+					</div>
+					<ul class="check_boxes">
+						<div class="text_output">
+							<form:input path="maximumMediaThickness60_0" class="amount-maximum_media_thickness60_0" value="${search.maximumMediaThickness60_0}" />
+							<p>&nbsp;мм -&nbsp;</p>
+							<form:input path="maximumMediaThickness60_1" class="amount-maximum_media_thickness60_1" value="${search.maximumMediaThickness60_1}" />
+							<p>&nbsp;мм</p>
+						</div>
+						<div class="slider-range-maximum_media_thickness60"></div>
+						<br>
+						<div class="text_output">
+							<form:input path="maximumMediaThickness500_0" class="amount-maximum_media_thickness500_0" value="${search.maximumMediaThickness500_0}" />
+							<p>&nbsp;мм -&nbsp;</p>
+							<form:input path="maximumMediaThickness500_1" class="amount-maximum_media_thickness500_1" value="${search.maximumMediaThickness500_1}" />
+							<p>&nbsp;мм</p>
+						</div>
+						<div class="slider-range-maximum_media_thickness500"></div>
+					</ul>
+				</div>
+				<div class="search_criteria">
+					<div class="block_title">
+						<i></i>
+						<p>Максимальный вес носителя</p>
+					</div>
+					<ul class="check_boxes">
+						<div class="text_output">
+							<form:input path="maximumWeightOfVehicle0" class="amount-maximum_weight_of_vehicle0" value="${search.maximumWeightOfVehicle0}" />
+							<p>&nbsp;кг -&nbsp;</p>
+							<form:input path="maximumWeightOfVehicle1" class="amount-maximum_weight_of_vehicle1" value="${search.maximumWeightOfVehicle1}" />
+							<p>&nbsp;кг</p>
+						</div>
+							<div class="slider-range-maximum_weight_of_vehicle"></div>
+					</ul>
+				</div>
 			</ul>
 		</div>
-		<div class="search_criteria">
-			<div class="block_title">
+		<div class="block_search_criteria">
+			<div class="block_block_title">
 				<i></i>
-				<p>Глубина</p>
+				<p>Характеристики ПО</p>
 			</div>
-			<ul class="check_boxes">
-				<div class="text_output">
-					<form:input path="depth0" class="amount-depth0" value="${search.depth0}" />
-					<p>&nbsp;мм -&nbsp;</p>
-					<form:input path="depth1" class="amount-depth1" value="${search.depth1}" />
-					<p>&nbsp;мм</p>
+			<ul class="block_check_boxes">
+				<div class="search_criteria">
+					<div class="block_title">
+						<i></i>
+						<p>Програмное обеспечение</p>
+					</div>
+					<ul class="check_boxes">
+						<form:checkboxes items="${printer.rip}" path="rip" element="li" />
+					</ul>
 				</div>
-					<div class="slider-range-depth"></div>
+				<div class="search_criteria">
+					<div class="block_title">
+						<i></i>
+						<p>Интерфейс подключения</p>
+					</div>
+					<ul class="check_boxes">
+						<form:checkboxes items="${printer.interface_connection}" path="interfaceConnection" element="li" />
+					</ul>
+				</div>
 			</ul>
 		</div>
-		<div class="search_criteria">
-			<div class="block_title">
+		<div class="block_search_criteria">
+			<div class="block_block_title">
 				<i></i>
-				<p>Высота</p>
+				<p>Общие характеристики</p>
 			</div>
-			<ul class="check_boxes">
-				<div class="text_output">
-					<form:input path="heigth0" class="amount-heigth0" value="${search.heigth0}" />
-					<p>&nbsp;мм -&nbsp;</p>
-					<form:input path="heigth1" class="amount-heigth1" value="${search.heigth1}" />
-					<p>&nbsp;мм</p>
+			<ul class="block_check_boxes">
+				<div class="search_criteria">
+					<div class="block_title">
+						<i></i>
+						<p>Средняя потребляемая мощность</p>
+					</div>
+					<ul class="check_boxes">
+						<div class="text_output">
+							<form:input path="averagePowerConsumption0" class="amount-averagePowerConsumption0" value="${search.averagePowerConsumption0}" />
+							<p>&nbsp;Вт -&nbsp;</p>
+							<form:input path="averagePowerConsumption1" class="amount-averagePowerConsumption1" value="${search.averagePowerConsumption1}" />
+							<p>&nbsp;Вт</p>
+						</div>
+							<div class="slider-range-averagePowerConsumption"></div>
+					</ul>
 				</div>
-					<div class="slider-range-heigth"></div>
+				<div class="search_criteria">
+					<div class="block_title">
+						<i></i>
+						<p>Максимальная потребляемая мощность</p>
+					</div>
+					<ul class="check_boxes">
+						<div class="text_output">
+							<form:input path="maxPowerConsumption0" class="amount-max_power_consumption0" value="${search.maxPowerConsumption0}" />
+							<p>&nbsp;Вт -&nbsp;</p>
+							<form:input path="maxPowerConsumption1" class="amount-max_power_consumption1" value="${search.maxPowerConsumption1}" />
+							<p>&nbsp;Вт</p>
+						</div>
+							<div class="slider-range-max_power_consumption"></div>
+					</ul>
+				</div>
+				<div class="search_criteria">
+					<div class="block_title">
+						<i></i>
+						<p>Вес</p>
+					</div>
+					<ul class="check_boxes">
+						<div class="text_output">
+							<form:input path="weight0" class="amount-weight0" value="${search.weight0}" />
+							<p>&nbsp;кг -&nbsp;</p>
+							<form:input path="weight1" class="amount-weight1" value="${search.weight1}" />
+							<p>&nbsp;кг</p>
+						</div>
+							<div class="slider-range-weight"></div>
+					</ul>
+				</div>
+				<div class="search_criteria">
+					<div class="block_title">
+						<i></i>
+						<p>Ширина</p>
+					</div>
+					<ul class="check_boxes">
+						<div class="text_output">
+							<form:input path="width0" class="amount-width0" value="${search.width0}" />
+							<p>&nbsp;мм -&nbsp;</p>
+							<form:input path="width1" class="amount-width1" value="${search.width1}" />
+							<p>&nbsp;мм</p>
+						</div>
+						<div class="slider-range-width"></div>
+					</ul>
+				</div>
+				<div class="search_criteria">
+					<div class="block_title">
+						<i></i>
+						<p>Высота</p>
+					</div>
+					<ul class="check_boxes">
+						<div class="text_output">
+							<form:input path="heigth0" class="amount-heigth0" value="${search.heigth0}" />
+							<p>&nbsp;мм -&nbsp;</p>
+							<form:input path="heigth1" class="amount-heigth1" value="${search.heigth1}" />
+							<p>&nbsp;мм</p>
+						</div>
+							<div class="slider-range-heigth"></div>
+					</ul>
+				</div>
+				<div class="search_criteria">
+					<div class="block_title">
+						<i></i>
+						<p>Глубина</p>
+					</div>
+					<ul class="check_boxes">
+						<div class="text_output">
+							<form:input path="depth0" class="amount-depth0" value="${search.depth0}" />
+							<p>&nbsp;мм -&nbsp;</p>
+							<form:input path="depth1" class="amount-depth1" value="${search.depth1}" />
+							<p>&nbsp;мм</p>
+						</div>
+							<div class="slider-range-depth"></div>
+					</ul>
+				</div>
 			</ul>
 		</div>
-		
+
 			<a class="accept" href="javascript:void(0)" onclick="$('#search').submit();">
 				ПРИМЕНИТЬ
 				<!--<img src="/images/Accept.gif" alt="" />-->

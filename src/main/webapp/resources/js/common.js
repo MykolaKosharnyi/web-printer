@@ -442,3 +442,88 @@ $(document).ready(function() {
 	});
 
 });
+	// Common function check Price and check pictures
+	
+	function addToCart(typeProduct, idProduct, name, price, picturePath){
+		/*
+		var cartA = new Array();
+		var product = {};
+		
+		if (typeof(Cookies.get('cart')) === "undefined"){
+			
+			// create new product to drop it in cart 
+			product.quantity=1;
+			product.typeProduct=typeProduct;
+			product.idProduct=idProduct;
+			product.name=name;
+			product.price=price;
+			product.picturePath=picturePath;
+		} else {
+			cartA = Cookies.getJSON('cart');
+			
+			var findProduct = {};
+			//$.grep(cartA, function(n){ return n.typeProduct == typeProduct && n.idProduct == idProduct; });
+			var existingProduct = false;
+			for (var i = 0; i < cartA.length; i++) {
+   				if(cartA[i].typeProduct == typeProduct && cartA[i].idProduct == idProduct){
+					cartA[i].quantity += 1;		
+					existingProduct = true;
+					break;		
+				}
+			}		
+			
+			if (!existingProduct) {
+				// create new product to drop it in cart 
+				product.quantity=1;
+				product.typeProduct=typeProduct;
+				product.idProduct=idProduct;
+				product.name=name;
+				product.price=price;
+				product.picturePath=picturePath;
+				
+			} 
+			
+		}
+		
+		cartA.unshift(product);
+		
+		Cookies.set('cart', cartA, { expires: 7 });
+		*/
+		
+		var priceV = price.replace(".", ",");
+		var pictureV = picturePath.replace(".", ",");
+		$.ajax({
+			  type: 'POST',
+			  url: "/cart/add/" + typeProduct + "/" + idProduct + "/" + name + "/" + priceV + "/" + pictureV,
+			  contentType: "application/json; charset=utf-8",
+              dataType: "json"
+			  });	
+		}
+
+	function checkPrise(num){
+		if(num > 0.1){
+			  num = Math.round( num / 0.01 ) * 0.01;
+			  num = new Number(num).toFixed(2);   // особенности счета JavaScript ( x/100 не всегда = x*0.01 )
+			  var s = 0;
+			  var str = '';
+			  for( var i=num.toString().length-1; i>=0; i-- ) {
+			    s++;
+			    str = num.toString().charAt(i) + str;
+			    if(num.toString().charAt(i)=='.') s=0;
+			    if( s > 0 && !(s % 3) ) str  = " " + str;
+			  }   
+			  return "$" + str.replace(".", ",");
+		} else {
+			return "\u0443\u0442\u043E\u0447\u043D\u044F\u0439\u0442\u0435";
+		}
+	}
+	
+	/* Use in products pages for setting another picture after hovering on product current picture */
+	function checkPicture(array){
+		if(array.length > 1){
+			return array[1];
+		} else {
+			return array[0];
+		}
+	}
+
