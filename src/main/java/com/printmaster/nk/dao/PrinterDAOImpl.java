@@ -104,10 +104,21 @@ public class PrinterDAOImpl implements ProductDAO<Printer, SearchPrinters> {
 		cr.add(typePrinterGroup);
 		}
 		
-		if(searchPrinters.getWeightPrintMM()!= null){
+		if((searchPrinters.getWeightPrintMM()!= null) || 
+				((searchPrinters.getWeightPrintMMRangeUntil() > 0) && (searchPrinters.getWeightPrintMMRangeFrom() < searchPrinters.getWeightPrintMMRangeUntil()))
+				){
 		Junction weightPrintMMGroup = Restrictions.disjunction();
+		
+		if((searchPrinters.getWeightPrintMM()!= null))
 		for(String wp : searchPrinters.getWeightPrintMM()){
 			weightPrintMMGroup.add(Restrictions.eq("weightPrintMM",Integer.parseInt(wp)));
+		}
+		
+		if((searchPrinters.getWeightPrintMMRangeUntil() > 0) && (searchPrinters.getWeightPrintMMRangeFrom() < searchPrinters.getWeightPrintMMRangeUntil())){
+			weightPrintMMGroup.add(Restrictions.between("weightPrintMM", searchPrinters.getWeightPrintMMRangeFrom(), searchPrinters.getWeightPrintMMRangeUntil()));
+
+			weightPrintMMGroup.add(Restrictions.between("inputFirstWeightPrintMM", searchPrinters.getWeightPrintMMRangeFrom(), searchPrinters.getWeightPrintMMRangeUntil()));
+
 		}
 		cr.add(weightPrintMMGroup);
 		}
@@ -145,7 +156,7 @@ public class PrinterDAOImpl implements ProductDAO<Printer, SearchPrinters> {
 			cr.add(typePrintGroup);
 			}
 		
-		if((searchPrinters.getSizeDropRangeFrom() > 0.01) && (searchPrinters.getSizeDropRangeUntil() > 0.1) 
+		if( (searchPrinters.getSizeDropRangeUntil() > 0.1) 
 				&& (searchPrinters.getSizeDropRangeFrom() < searchPrinters.getSizeDropRangeUntil())){
 			Junction sizeDropGroup = Restrictions.disjunction();
 			sizeDropGroup.add(Restrictions.le("sizeDropRangeFrom", searchPrinters.getSizeDropRangeFrom()));

@@ -11,6 +11,8 @@ public class SearchPrinters implements Serializable{
 	private double prise1;
 	private String[] typePrinter;
 	private String[] weightPrintMM;
+	private int weightPrintMMRangeFrom;
+	private int weightPrintMMRangeUntil;
 	private String[] previouslyUsed;
 	private String[] typePrint;
 	private String[] feed;
@@ -71,6 +73,22 @@ public class SearchPrinters implements Serializable{
 				+ ", heigth0=" + heigth0 + ", heigth1=" + heigth1 + ", depth0=" + depth0 + ", depth1=" + depth1 + "]";
 	}
 	
+	public int getWeightPrintMMRangeFrom() {
+		return weightPrintMMRangeFrom;
+	}
+
+	public void setWeightPrintMMRangeFrom(int weightPrintMMRangeFrom) {
+		this.weightPrintMMRangeFrom = weightPrintMMRangeFrom;
+	}
+
+	public int getWeightPrintMMRangeUntil() {
+		return weightPrintMMRangeUntil;
+	}
+
+	public void setWeightPrintMMRangeUntil(int weightPrintMMRangeUntil) {
+		this.weightPrintMMRangeUntil = weightPrintMMRangeUntil;
+	}
+
 	public String[] getTypeOfPrintheadSeries() {
 		return typeOfPrintheadSeries;
 	}

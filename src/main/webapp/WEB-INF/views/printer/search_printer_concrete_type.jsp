@@ -85,6 +85,13 @@
 					<div>
 						<div>
 							<form:checkboxes items="${printer.weight_print_mm}" path="weightPrintMM" element="li" />
+							
+							<div class="text_output">
+								<form:input path="weightPrintMMRangeFrom" class="amount-weightPrintMMRangeFrom" value="${search.weightPrintMMRangeFrom}" />
+								<p>&nbsp;-&nbsp;</p>
+								<form:input path="weightPrintMMRangeUntil" class="amount-weightPrintMMRangeUntil" value="${search.weightPrintMMRangeUntil}" />
+							</div>
+								<div class="slider-range-weightPrintMMRange"></div>
 						</div>
 					    <div>
 							<li><input type="checkbox" name="weightPrintMM" value="305" id="weightPrintMM_12"><label for="weightPrintMM_12">12"</label></input></li>
@@ -102,6 +109,7 @@
 							<li><input type="checkbox" name="weightPrintMM" value="2600" id="weightPrintMM_102"><label for="weightPrintMM_102">102"</label></input></li>
 							<li><input type="checkbox" name="weightPrintMM" value="3200" id="weightPrintMM_126"><label for="weightPrintMM_126">126"</label></input></li>
 							<li><input type="checkbox" name="weightPrintMM" value="3300" id="weightPrintMM_130"><label for="weightPrintMM_130">130"</label></input></li>
+								
 						</div>
 						<!--<div>
 							<li><input type="checkbox" name="weightPrintMM">A0</input></li>

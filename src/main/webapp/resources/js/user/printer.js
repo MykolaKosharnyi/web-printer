@@ -114,6 +114,38 @@
              });
         	
         });
+        
+/*---- диапазон для поиска по определенной ширине ----*/          
+        $(function() {
+        $( ".slider-range-weightPrintMMRange" ).slider({
+          range: true,
+          min: 0,
+          max: 5400,
+          create: function () {
+      	    $(this).slider( "values", 0, $(this).closest('.check_boxes').find('.text_output').find('.amount-weightPrintMMRangeFrom').val() );
+      	    $(this).slider( "values", 1, $(this).closest('.check_boxes').find('.text_output').find('.amount-weightPrintMMRangeUntil').val() );
+      	},
+          slide: function( event, ui ) {
+            $( ".amount-weightPrintMMRangeFrom" ).val(ui.values[ 0 ]);
+            $( ".amount-weightPrintMMRangeUntil" ).val(ui.values[ 1 ]);
+          }
+        });
+            
+        $( ".amount-weightPrintMMRangeFrom" ).val( $( ".slider-range-weightPrintMMRange" ).slider("values", 0 ));             
+        $( ".amount-weightPrintMMRangeUntil" ).val( $( ".slider-range-weightPrintMMRange" ).slider("values", 1 ));
+            
+        $( ".amount-weightPrintMMRangeFrom" ).change(function() {
+        	$(".slider-range-weightPrintMMRange").slider('values',0,this.value);
+        });
+            
+        $( ".amount-weightPrintMMRangeUntil" ).change(function() {
+        	$(".slider-range-weightPrintMMRange").slider('values',1,this.value);
+        });
+       
+      });
+        
+        
+        
 /*---- диапазон для размера капли ----*/          
         $(function() {
         $( ".slider-range-size-drop" ).slider({
