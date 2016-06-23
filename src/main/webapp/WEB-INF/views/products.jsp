@@ -49,16 +49,6 @@
 	</c:forEach>
 </div>
 
-	<div class="hidden">
-		<form id="callback" class="pop_form">
-			<h5 style="max-width: 300px;">Пожалуйста оставьте координаты, через некоторое время мы с вами свяжемся</h5>
-			<input type="hidden" name="id" value="${product.id}">
-			<input type="hidden" name="typeProduct" value="${product.id}">
-			<input type="text" name="name" placeholder="Ваше имя..." required />
-			<input type="text" name="phone" placeholder="Ваше телефон..." required />
-			<button class="button" type="submit">Уточнить</button>
-		</form>
-	</div>
 <script type="text/javascript">
 
 $(function(){
