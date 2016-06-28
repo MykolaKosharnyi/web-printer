@@ -1,0 +1,53 @@
+            .amount-prise0,
+            .amount-prise1{
+                width: 51px;
+            }
+
+.amount-speedOfMovingThePrintHead0,
+.amount-speedOfMovingThePrintHead1,
+.amount-positioningAccuracyOfThePrintHead0,
+.amount-positioningAccuracyOfThePrintHead1,
+	    .amount-sizePrintableAreaX0,
+	    .amount-sizePrintableAreaY0,
+	    .amount-sizePrintableAreaZ0,
+            .amount-sizePrintableAreaX1,
+            .amount-sizePrintableAreaY1,
+            .amount-sizePrintableAreaZ1,
+            .amount-speedPrint0,
+            .amount-speedPrint1{
+                width: 35px;
+            }
+
+.amount-numberOfFansForBlowingModels0,
+.amount-numberOfFansForBlowingModels1,            
+            .amount-meltingPointOfThePrintingMaterial0,
+            .amount-meltingPointOfThePrintingMaterial1,
+            .amount-sizeExtruder0,
+            .amount-sizeExtruder1,
+            .amount-thicknessOfThePrintingLayer0,
+            .amount-thicknessOfThePrintingLayer1,
+            .amount-maximumWeightOfThePrintedModel0,
+            .amount-maximumWeightOfThePrintedModel1{
+            	width: 27px;
+            }
+
+			.amount-averagePowerConsumption0,
+			.amount-averagePowerConsumption1,
+            .amount-maxPowerConsumption0,
+            .amount-maxPowerConsumption1{
+                width: 35px;
+            }
+            
+            .amount-weight0,
+            .amount-weight1{
+                width: 35px;
+            }
+
+ 	    .amount-width0,
+            .amount-width1,
+	    .amount-heigth0,
+            .amount-heigth1,
+            .amount-depth0,
+            .amount-depth1{
+                width: 43px;
+            }

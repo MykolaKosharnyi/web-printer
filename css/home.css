@@ -1,0 +1,574 @@
+﻿*{
+    -moz-box-sizing: border-box;
+-webkit-box-sizing: border-box;
+box-sizing: border-box;
+}
+
+body { 
+    width: 100%;
+    font: 1em/1.4em sans-serif;
+    padding: 0;
+    margin: 0;
+}
+
+a{
+    text-decoration: none;
+}
+
+ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/*----------- ANIMATION IN HEAD PART OF PAGE, AFTER ROW MENU -----------------*/
+ .reklam_animation{
+            position: relative;
+            width: inherit;
+            height: 450px;
+            /*margin: 0 auto;*/
+            margin: 0px 0px 0px 5px;
+        }
+
+.reklam_animation img{
+            width: inherit;
+            height: inherit;
+        }
+
+        .rigt_of_reklam_animation{
+            position: relative;
+            float: left;
+            width: 100%;
+            height: 450px;
+	    margin-left: 5px;
+	    font: 16px "RobotoRegular", sans-serif;
+        }
+
+        .rigt_of_reklam_animation div{
+            position: relative;
+            /*margin: 155px 0;*/
+            height: auto;
+            width: 100%;
+            border: 1px #006080 solid;
+	    box-sizing: border-box;
+	    margin-bottom: 5px;
+	    padding: 0;
+        }
+
+	 .rigt_of_reklam_animation div:last-child{
+		margin-bottom: 0px;
+	}
+
+	.rigt_of_reklam_animation div img {
+	    position: relative:
+		margin: 0;
+		padding: 0;
+		width: inherit;
+		height: 145px;
+	}
+
+	.rigt_of_reklam_animation div p {
+	    position: absolute;
+		bottom: 0;
+		margin: 0;
+		padding: 0;
+		background: white;
+		width: inherit;
+		height: auto;
+		text-align: center;
+		display: none;
+		-webkit-border-top-left-radius: 3px;
+		border-top-left-radius: 3px;
+		-webkit-border-top-right-radius: 3px;
+		border-top-right-radius: 3px;
+	}
+
+            .rigt_of_reklam_animation_position a{
+                position: relative;
+                display: block;
+                width: inherit;
+                height: auto;
+                color: white;
+                border: 1px #006080 solid;
+            }
+
+                .rigt_of_reklam_animation_position a .for_right_reklam_image{
+                    position: relative;
+                    width: inherit;
+                    height: 190px;
+                }
+
+                .rigt_of_reklam_animation_position a .for_right_reklam_image img{
+                    position: relative;
+                    width: 100%;
+                    height: 100%;
+                }
+
+                .rigt_of_reklam_animation_position a p{
+                    margin: 0px;
+                    position: relative;
+                    bottom: 0;
+                    width: inherit;
+                    height: auto;
+                    color: black;
+                   border-top: 1px #006080 solid;
+                }
+/*------------- Категории товаров----------------*/
+    .goods{
+        position: relative;
+        float: left;
+        margin: 5px 0px 0px 5px;
+        z-index: 5;
+	width: 100%;
+    }
+
+        .advertising{
+            position: relative;
+            width: 100%;
+            height: 315px;
+        }
+
+                .advertising a{
+ 		-moz-box-sizing: content-box;
+		-webkit-box-sizing: content-box;
+		box-sizing: content-box;
+                /*margin: 0 17px;
+                padding: 0;*/
+                position: relative;
+                float: left;
+                height: 315px;
+                width: inherit;
+                border: 2px #006080 solid;
+                }
+
+.advertising .col-md-4 .row{
+	margin-right: -12px;
+	margin-left: -12px;
+}
+ 	.advertising .col-md-4:first-child .row{
+                margin-left: -15px;
+            }
+
+            .advertising .col-md-4:last-child .row{
+                margin-right: -15px;
+            }
+                    .advertising a img{
+                        height:100%;
+                        width: 100%;
+                    }
+/*---- для прикладу ще один варіант реклами на всю область -----*/
+        .advertising_second_variant{
+            position: relative;
+            width: 100%;
+            height: 167px;
+        }
+               .advertising_second_variant a{
+		-moz-box-sizing: content-box;
+		-webkit-box-sizing: content-box;
+		box-sizing: content-box;
+                position: relative;
+                float: left;
+                height: 167px;
+                width: 100%;
+		border: 1px #006080 solid;
+                }
+
+.advertising_second_variant .col-md-6 .row{
+	margin-right: -11px;
+	margin-left: -11px;
+}
+ 	.advertising_second_variant .col-md-6:first-child .row{
+                margin-left: -15px;
+            }
+
+            .advertising_second_variant .col-md-6:last-child .row{
+                margin-right: -15px;
+            }
+
+		/*.advertising_second_variant a:first-child{
+                	border-right: none;
+            	}*/
+                   .advertising_second_variant a img{
+                        height:100%;
+                        width: 100%;
+                    }
+/*------ закінчення другого варіанту -----*/
+
+
+        .categories_of_goods{
+            position: relative;
+            width: inherit;
+            height: auto;
+	    font: 14px "RobotoRegular", sans-serif;
+	    margin: 10px 0;
+        }
+
+	.categories_of_goods .list-group{
+		margin: 0px;
+	}
+
+        .categories_of_goods > div{
+            width: inherit;
+	    margin: 0px;
+        }
+
+            .description_slider{
+                width: 199px;
+                margin: 0 auto;
+                padding: 0 0px;
+                position: relative;
+                float: left;
+                /* Скроем то что выходит за границы */
+                overflow: hidden;
+                height: inherit;
+                border: 1px solid rgb(219, 219, 219);
+                border-right: none;
+            }
+
+                .description_slider a.label1,
+		.description_slider a.label2,
+		.description_slider a.label3,
+		.description_slider a.label4,
+		.description_slider a.label5,
+		.description_slider a.label6,
+		.description_slider a.label7,
+		.description_slider a.label8,
+		.description_slider a.label9{
+                    width: 100%;
+                    display: block;
+                    text-align: center; 
+                    vertical-align: middle;
+                    background: #006080;
+                    color: white;
+                    padding: 5px 0px;
+                    font-size: 18px;
+                    position: relative;
+                    float: left;
+                    /* Скроем то что выходит за границы */
+                    overflow: hidden;
+                }
+
+                .description_slider a.label1{
+			 background-color: #006080;
+		}
+
+		.description_slider a.label2{
+			 background-color: /*#FFD549*/#006080;
+		}
+
+		.description_slider a.label3{
+			 background-color: /*#085C50*/#006080;
+		}
+
+
+		.description_slider a.label4{
+			 background-color: /*#82A3CC*/#006080;
+		}
+
+		.description_slider a.label5{
+			 background-color: /*#6509CD*/#006080;
+		}
+
+		.description_slider a.label6{
+			 background-color: /*#FAB8CD*/#006080;
+		}
+
+		.description_slider a.label7{
+			 background-color: /*#B2D7E8*/#006080;
+		}
+
+		.description_slider a.label8{
+			 background-color: /*#FAB8CD*/#006080;
+		}
+
+		.description_slider a.label9{
+			 background-color: /*#B2D7E8*/#006080;
+		}
+
+                .body_description{
+                    position: relative;
+                    width: 100%;
+                     overflow: hidden;
+                }
+
+                    .body_description ul {
+                        font-size: 17px;
+                        position: relative;
+                        width: 100%;
+                    }
+
+                        .body_description ul li a{
+                            display: block;
+                            width: 100%;
+                            padding: 5% 5% 0 5%;
+                            color:black;
+                            -webkit-transition: all 0.2s linear;
+			    -moz-transition: all 0.2s linear;
+			    -ms-transition: all 0.2s linear;
+			    -o-transition: all 0.2s linear;
+			    transition: all 0.2s linear;
+                        }
+
+                        .body_description ul li a:hover{
+                            color: deepskyblue;
+                        }
+
+ /*-----------------------  карусель  -------------------------*/       
+        /* Все что ниже для галереи которую можно перелистывать*/
+        /* Задаем сброс обтекания */
+
+       .clear1, .clear2, .clear3, .clear4, .clear5, .clear6, .clear7, .clear8, .clear9{
+            margin-top: -1px;
+            height: 1px;
+            clear:both;
+            zoom: 1;
+        }		
+
+        .slider1, .slider2, .slider3, .slider4, .slider5, .slider6, .slider7, .slider8, .slider9{
+            width: 674px;
+            margin: 0 auto;
+            position: relative;
+            float: left;
+            height: 100%;
+            border: 1px rgb(219, 219, 219) solid;
+            overflow: hidden;
+        }
+
+        /* Двойной клик по ссылкам вперед/назад вызывает выделение всех элементов слайдера,
+        поэтому предотвращаем это */
+
+        .slider1::-moz-selection, .slider2::-moz-selection, .slider3::-moz-selection,
+        .slider4::-moz-selection, .slider5::-moz-selection, .slider6::-moz-selection,
+        .slider7::-moz-selection, .slider::-moz-selection8, .slider::-moz-selection9 {
+            background: transparent;
+            color: #fff;
+            text-shadow: none;
+        }
+
+        .slider1::selection, .slider2::selection, .slider3::selection, 
+	.slider4::selection, .slider5::selection, .slider6::selection, 
+	.slider7::selection, .slider::selection8, .slider::selection9 {
+            background: transparent;
+            color: #fff;
+            text-shadow: none;
+        }
+
+            .slide-list1, .slide-list2, .slide-list3, .slide-list4, .slide-list5, .slide-list6, .slide-list7, .slide-list8, .slide-list9 {
+                height: 90%;
+                position: relative;
+                width: 9999px;
+		overflow-y: hidden;
+            }
+
+                .slide-wrap1, .slide-wrap2, .slide-wrap3, .slide-wrap4, .slide-wrap5, .slide-wrap6, .slide-wrap7, .slide-wrap8, .slide-wrap9 {
+                    height: 100%;
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    right: 0px;
+                    /* максимально возможная ширина обертки слайдера */
+                  /*  width: 100%;*/
+                }
+
+                    .slide-item1, .slide-item2, .slide-item3, .slide-item4, .slide-item5, .slide-item6, .slide-item7, .slide-item8, .slide-item9 {
+                        position: relative;
+                        height: 280px;
+                        width: inherit;
+                        float: left;
+                        border: 1px rgb(219, 219, 219) solid;
+			/*border-bottom: 2px rgb(219, 219, 219) solid;*/
+			/*border-radius: 0 0 10px 10px;*/
+			z-index: 50;
+                    }
+			.slide-item1:hover, .slide-item2:hover, .slide-item3:hover, .slide-item4:hover, .slide-item5:hover,
+			.slide-item6:hover, .slide-item7:hover, .slide-item8:hover, .slide-item9:hover{
+				 border: 1px #006080 solid;
+				border-top: 2px #006080 solid;
+			}
+
+                        .slide-item1 a.slider_image, .slide-item2 a.slider_image, 
+			.slide-item3 a.slider_image, .slide-item4 a.slider_image, 
+			.slide-item5 a.slider_image, .slide-item6 a.slider_image, 
+			.slide-item7 a.slider_image, .slide-item8 a.slider_image,
+			.slide-item9 a.slider_image {
+                            height: 225px;
+                            width: inherit;
+                            border-bottom: 1px rgb(219, 219, 219) solid;
+		       	    display:table-cell;
+    			    vertical-align: middle;
+			    overflow: hidden;
+			    position: relative;
+                        }
+		 .outer_a_img{
+			display: block;
+    			position: relative;
+			height: auto;
+                        width: 100%;
+                    }
+
+                            .slide-item1 img, .slide-item2 img, .slide-item3 img, 
+			    .slide-item4 img, .slide-item5 img, .slide-item6 img, 
+			    .slide-item7 img, .slide-item8 img, .slide-item9 img{
+                                height: auto;
+                                width: inherit;
+                                -webkit-transition: all 0.5s linear;
+				-moz-transition: all 0.5s linear;
+				-ms-transition: all 0.5s linear;
+				-o-transition: all 0.5s linear;
+				transition: all 0.5s linear;
+				position: relative;
+				max-height: 225px;
+                            }
+
+                            .slide-item1 img:hover, .slide-item2 img:hover, .slide-item3 img:hover, 
+			    .slide-item4 img:hover, .slide-item5 img:hover, .slide-item6 img:hover, 
+			    .slide-item7 img:hover, .slide-item8 img:hover, .slide-item9 img:hover{
+                                -moz-transform: scale(1.1);
+				-webkit-transform: scale(1.1);
+				-o-transform: scale(1.1);
+				-ms-transform: scale(1.1);
+				transform: scale(1.1);                   
+                            }
+
+                        .slide-title,
+                        .slide-price{
+                            position: relative;
+	    		    float: left;
+            		    width: 200px;
+            		    height: 25px;
+            		    /* Шрифт */
+            		    font: 1em/1.4em sans-serif;
+	    		    padding: 4px 0px 0px 4px;
+					margin: 1px 0px 0px 1px;
+	    		    font-weight: bold;
+	    		    color: #006080;
+			    white-space: nowrap;/* Запрещаем перенос строк */
+			    overflow: hidden;
+			    text-overflow: ellipsis;
+                        }
+
+		 .slide-title:hover{
+	    background-color: white;
+	    white-space: normal;/* Запрещаем перенос строк */
+	    overflow: visible;
+		width: auto;
+		z-index: 120;
+		height: auto;
+		-webkit-box-shadow: 0 0 5px rgb(157, 157, 157);
+		-moz-box-shadow: 0 0 5px rgb(157, 157, 157);
+		box-shadow: 0 0 5px rgb(157, 157, 157);
+        }
+
+			.slide-price{
+             	color: #92A5A6;
+            }
+
+                    .slide-buy1, .slide-buy2, .slide-buy3, 
+		    .slide-buy4, .slide-buy5, .slide-buy6, 
+		    .slide-buy7, .slide-buy8, .slide-buy9 {
+                        position: relative;
+			height:auto;
+			width: auto;
+			float: right;
+			padding: 0;
+			margin: 2px;
+			back-ground: inherit;
+			-webkit-transition: all 1s linear;
+			-moz-transition: all 1s linear;
+			-ms-transition: all 1s linear;
+			-o-transition: all 1s linear;
+			transition: all 1s linear;
+                    }
+
+                    .slide-buy1:hover, .slide-buy2:hover, .slide-buy3:hover, 
+			.slide-buy4:hover, .slide-buy5:hover, .slide-buy6:hover, 
+			.slide-buy7:hover, .slide-buy:hover8, .slide-buy:hover9{
+                        -moz-transform: scale(1.1);
+			-webkit-transform: scale(1.1);
+			-o-transform: scale(1.1);
+			-ms-transform: scale(1.1);
+			transform: scale(1.1);
+                    }
+
+		.slide-buy1 img, .slide-buy2 img, .slide-buy3 img, 
+		.slide-buy4 img, .slide-buy5 img, .slide-buy6 img, 
+		.slide-buy7 img, .slide-buy8 img, .slide-buy9 img{
+                        position: relative;
+			height:50px;
+			width: 50px;
+                    }
+        
+            .bottom_of_slider{
+                position: relative;
+                height: 10%;
+                width: 75px;
+                margin: 1px auto 0;
+                padding: auto 0;
+                overflow: hidden;
+                bottom: 0;
+            }
+
+                /* навигация вперед/назад */
+                .navy1, .navy2, .navy3, .navy4, .navy5, .navy6, .navy7, .navy8, .navy9 {
+                    position: absolute;
+                    top: 0;
+                    z-index: 1;
+                    height: 100%;
+                    width: 24px;
+                    cursor: pointer;
+                }
+
+                .prev-slide1, .prev-slide2, .prev-slide3, .prev-slide4, .prev-slide5, .prev-slide6, .prev-slide7, .prev-slide8, .prev-slide9{
+                    left: 0;
+                    background: /*#2c5987*/ url(bg/left-arrow.png) 8px 50% no-repeat;
+                }
+
+                .next-slide1, .next-slide2, .next-slide3, .next-slide4, .next-slide5, .next-slide6, .next-slide7, .next-slide8, .next-slide9{
+                    right: 0;
+                    background: /*#2c5987*/ url(bg/right-arrow.png) 8px 50% no-repeat;
+                }
+
+            .disable1, .disable2, .disable3, .disable4, .disable5, .disable6, .disable7, .disable8, .disable9 {
+                background: white;
+            }
+
+            /* навигация старт/пауза */
+
+                .auto1, .auto2, .auto3, .auto4, .auto5, .auto6, .auto7, .auto8, .auto9{
+                    width: 7px;
+                    height: 100%;
+                    margin: 0 0 1%;
+                    cursor: pointer;
+                    margin: 0px auto;
+                }
+
+                .play1, .play2, .play3, .play4, .play5, .play6, .play7, .play8, .play9{
+                    height: 100%;
+                    background: url(bg/play.png) center no-repeat;
+                }
+
+                .pause1, .pause2, .pause3, .pause4, .pause5, .pause6, .pause7, .pause8, .pause9{
+                    height: 100%;
+                    background: url(bg/pause.png) center no-repeat;
+                }
+
+/*--- реклама справа в категории товаров ---*/
+.reklam_right_of_slider1, .reklam_right_of_slider2, .reklam_right_of_slider3, 
+.reklam_right_of_slider4, .reklam_right_of_slider5, .reklam_right_of_slider6, 
+.reklam_right_of_slider7, .reklam_right_of_slider8, .reklam_right_of_slider9{
+    position: relative;
+    float: right;
+    height: inherit;
+    width: 215px;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    border: 1px rgb(219, 219, 219) solid;
+}
+        .reklam_right_of_slider1 img,  .reklam_right_of_slider2 img,  .reklam_right_of_slider3 img,  
+	.reklam_right_of_slider4 img,  .reklam_right_of_slider5 img,  .reklam_right_of_slider6 img,  
+	.reklam_right_of_slider7 img,  .reklam_right_of_slider8 img,  .reklam_right_of_slider9 img{
+        position: relative;
+        height: inherit;
+        width: inherit;
+    }

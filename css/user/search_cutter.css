@@ -1,0 +1,54 @@
+	.amount-prise0,
+	.amount-prise1{
+           width: 51px;
+     }
+
+
+.amount-sizeWorkAreaX0,
+.amount-sizeWorkAreaY0,
+.amount-sizeWorkAreaZ0,
+.amount-sizeWorkAreaX1,
+.amount-sizeWorkAreaY1,
+.amount-sizeWorkAreaZ1{
+	width: 35px;
+}
+
+.amount-mechanicalResolution0,
+.amount-mechanicalResolution1,
+.amount-softwareResolution0,
+.amount-softwareResolution1,
+.amount-processingSpeedXY0,
+.amount-processingSpeedXY1,
+.amount-processingSpeedZ0,
+.amount-processingSpeedZ1{
+	width: 27px;
+}
+
+			.amount-averagePowerConsumption0,
+			.amount-averagePowerConsumption1,
+            .amount-max_power_consumption0,
+            .amount-max_power_consumption1{
+                width: 35px;
+            }
+
+            .amount-weight0,
+            .amount-weight1{
+                width: 35px;
+            }
+
+	    .amount-frequencySpindle0,
+	    .amount-frequencySpindle1,
+            .amount-width0,
+            .amount-width1{
+                width:43px;
+            }
+
+            .amount-heigth0,
+            .amount-heigth1{
+                width: 43px;
+            }
+
+            .amount-depth0,
+            .amount-depth1{
+                width: 43px;
+            }

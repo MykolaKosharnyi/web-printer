@@ -1,0 +1,101 @@
+            .amount-prise0,
+            .amount-prise1{
+                width: 51px;
+            }
+
+.amount-numberOfPagesPerMonth0,
+.amount-numberOfPagesPerMonth1,
+.amount-memory0,
+.amount-memory1,
+.amount-hardDriveCapacity0,
+.amount-hardDriveCapacity1,
+.amount-theNumberOfInstalledPostScriptFonts0,
+.amount-theNumberOfInstalledPostScriptFonts1,
+.amount-theNumberOfInstalledPCLFonts0,
+.amount-theNumberOfInstalledPCLFonts1{
+                width: 58px;
+            }
+
+.amount-resourceDeveloper0,
+.amount-resourceDeveloper1,
+.amount-resourceDrum0,
+.amount-resourceDrum1,
+.amount-resourceBWCartridgeToner0,
+.amount-resourceBWCartridgeToner1{
+                width: 67px;
+            }
+
+.amount-warmUpTime0,
+.amount-warmUpTime1,
+.amount-firstPrintColor0,
+.amount-firstPrintColor1,
+.amount-firstPrintBW0,
+.amount-firstPrintBW1,
+.amount-firstCopyOutTime0,
+.amount-firstCopyOutTime1,
+.amount-stepZoom0,
+.amount-stepZoom1{
+                width: 27px;
+            }
+
+.amount-speedPrintBW0,
+.amount-speedPrintBW1,
+.amount-speedPrintColor0,
+.amount-speedPrintColor1,
+.amount-speedCopyBW0,
+.amount-speedCopyBW1,
+.amount-speedCopyColor0,
+.amount-speedCopyColor1,
+.amount-scanSpeedColor0,
+.amount-scanSpeedColor1,
+.amount-scanSpeedBW0,
+.amount-scanSpeedBW1,
+.amount-zooming0,
+.amount-zooming1,
+.amount-theMaximumNumberOfCopiesPerCycle0,
+.amount-theMaximumNumberOfCopiesPerCycle1,
+.amount-paperFeedStandart0,
+.amount-paperFeedStandart1,
+.amount-paperFeedMax0,
+.amount-paperFeedMax1,
+.amount-paperOutputStandart0,
+.amount-paperOutputStandart1,
+.amount-paperOutputMax0,
+.amount-paperOutputMax1,
+.amount-theCapacityOfTheBypassTray0,
+.amount-theCapacityOfTheBypassTray1,
+.amount-paperDensity0,
+.amount-paperDensity1,
+.amount-numberOfCartridges0,
+.amount-numberOfCartridges1,
+.amount-displaySize0,
+.amount-displaySize1{
+                width: 35px;
+            }
+
+            .amount-averagePowerConsumption0,
+			.amount-averagePowerConsumption1,
+            .amount-maxPowerConsumption0,
+            .amount-maxPowerConsumption1{
+                width: 35px;
+            }
+
+            .amount-weight0,
+            .amount-weight1{
+                width: 35px;
+            }
+
+            .amount-width0,
+            .amount-width1{
+                width:43px;
+            }
+
+            .amount-heigth0,
+            .amount-heigth1{
+                width: 43px;
+            }
+
+            .amount-depth0,
+            .amount-depth1{
+                width: 43px;
+            }

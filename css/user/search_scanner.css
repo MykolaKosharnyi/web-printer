@@ -1,0 +1,41 @@
+            .amount-prise0,
+            .amount-prise1{
+                width: 51px;
+            }
+
+.amount-softwareResolution0,
+.amount-softwareResolution1{
+	width: 43px;
+}
+
+.amount-scanSpeed0,
+.amount-scanSpeed1{
+	width: 20px;
+}
+
+.amount-theMaximumThicknessOfTheCarrier0,
+.amount-theMaximumThicknessOfTheCarrier1{
+	width: 20px;
+}
+
+
+			.amount-averagePowerConsumption0,
+			.amount-averagePowerConsumption1,
+            .amount-max_power_consumption0,
+            .amount-max_power_consumption1{
+                width: 35px;
+            }
+
+            .amount-weight0,
+            .amount-weight1{
+                width: 35px;
+            }
+
+	    .amount-width0,
+            .amount-width1,
+	    .amount-heigth0,
+            .amount-heigth1,
+            .amount-depth0,
+            .amount-depth1{
+                width: 43px;
+            }

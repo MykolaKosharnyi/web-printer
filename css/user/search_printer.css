@@ -1,0 +1,49 @@
+            .amount-prise0,
+            .amount-prise1{
+                width: 51px;
+            }
+
+            .amount-speed-print0,
+            .amount-speed-print1,
+	    .amount-sizeDropRangeFrom,
+	    .amount-sizeDropRangeUntil{
+                width: 27px;
+            }
+
+            .amount-maximum_media_thickness60_0,
+            .amount-maximum_media_thickness60_1{
+                width: 17px;
+            }
+
+            .amount-maximum_media_thickness500_0,
+            .amount-maximum_media_thickness500_1{
+                width: 27px;
+            }
+
+            .amount-maximum_weight_of_vehicle0,
+            .amount-maximum_weight_of_vehicle1{
+                width: 27px;
+            }
+
+			.amount-weightPrintMMRangeFrom,
+			.amount-weightPrintMMRangeUntil,
+			.amount-averagePowerConsumption0,
+			.amount-averagePowerConsumption1,
+            .amount-max_power_consumption0,
+            .amount-max_power_consumption1{
+                width: 35px;
+            }
+
+            .amount-weight0,
+            .amount-weight1{
+                width: 35px;
+            }
+
+	    .amount-width0,
+            .amount-width1,
+	    .amount-heigth0,
+            .amount-heigth1,
+            .amount-depth0,
+            .amount-depth1{
+                width: 43px;
+            }

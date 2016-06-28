@@ -1,0 +1,404 @@
+/* ------ product page ------ */
+.product{
+    position: relative;
+    height: auto;
+    width: inherit;
+    padding-left: 5px;
+    font: 14px "RobotoRegular";
+}
+
+/*--- first part of product page ---*/
+    #pictures_and_descriptions{
+        position: relative;
+        width: 100%;
+        box-sizing: padding-box;
+        height: auto;
+    }
+
+        #pictures{
+            position: relative;
+            width: 50%;
+            height:auto;
+            float: left;
+            margin: 0px;
+        }
+
+            #pictures a{
+                position: relative;
+                height: auto;
+                width: 100%;
+                border: 1px #006080 solid;
+                /*margin: 0 auto;*/
+				float: left;
+                box-sizing: content-box;
+            }
+                #pictures a img{
+                    position: relative;
+                    height: inherit;
+                    width: inherit;
+                }
+
+            .small_pictures{
+				float: left;
+                position: relative;
+                height: auto;
+                width: 100%;
+				padding: 0px 5px 0px 5px;
+            }
+
+                .small_pictures a{
+                    position: relative;
+                    height: auto;
+                    width: 100%;
+                    margin-bottom: 5px;
+                    float: left;
+                    display: block;
+                    background: transparent;
+                    cursor: pointer;
+                    /*box-sizing: content-box;*/
+                }
+
+               .small_pictures a img{
+                    position: relative;
+                    height: auto;
+                    width: 100%;
+                    margin:0px;
+                    /*box-sizing: content-box;*/
+                }
+                
+               .small_pictures a img:hover{
+					border: 2px #006080 solid;
+                }
+/*--- Name of product ---*/
+
+    #name_product_head_description{
+        position: relative;
+        height: auto;
+        width: 70%;
+        margin-left: 15px;
+		padding: 5px 0;
+        font: 1.2em "RobotoRegular";
+    }
+.outer_div_clock{
+	padding: 5px;
+	margin: 3px;
+	border: 1px red solid;
+	border-radius: 5px;
+}
+
+#clock{
+	/*background: green none repeat scroll 0% 0%;*/
+	height: 50px;
+	color: white;
+}
+
+#clock .countdown-section{
+background: green none repeat scroll 0% 0%;
+margin: 0px 1px;
+border-radius: 5px;
+}
+
+.outer_div_clock .description_clock{
+	text-indent: 1.5em;
+	text-align: justify;
+	font-weight: bold;
+	font-style: italic;
+}
+        .descriptions{
+            position: relative;
+            width: 50%;
+            height: auto;
+            float: left;
+	    	margin-left: 0px;
+        }
+/*.outer_table_in_head{
+	position: relative;
+	height: auto;
+	width: 100%;
+	display: block;
+}*/
+
+            #table_in_head{
+                position: relative;
+                height: auto;
+                width: 100%;
+                /*font: 1em "Book Antiqua" sans-serif;*/
+                border: none;
+                margin-bottom: 15px;
+            }
+
+#table_in_head caption{
+	padding: 0px;
+}
+
+            .descriptions caption{
+                text-align: center;
+                /*font: 1.2em sans-serif;*/
+            }
+
+            .descriptions tr{
+                height: auto;
+                width: auto;
+                top: 0;
+                margin-bottom: 10px;
+            }
+            
+            .descriptions td{
+				padding: 5px 10px;
+                height: auto;
+                width: auto;
+                text-align: top;
+                top: 0;
+                border: 1px #E7EAED solid;
+            }
+            
+            .descriptions td:first-child{
+				font-weight: bold;
+            }
+            
+            /*----  Common information  -----*/
+			div#commom_information{
+				float:none;
+				position: relative; 
+				display:block !important; 
+				width: 500px; 
+				padding: 10px;
+				font-style: italic;
+			}
+			
+			#commom_information:first-word{
+				font: 2em sans-serif;
+			}
+
+/* addition to price on product page */
+.option_product_with_price{
+	position: relative;
+	height:auto;
+	width: 100%;
+	border-radius: 5px;
+	border: 1px dashed #006080;
+}
+
+.block_product_price{
+	padding: 2px;
+}
+
+input[type="checkbox"].add_price{
+	margin-left: 5px;
+}
+
+.option_product_with_price label {
+	margin-bottom: 0px;
+	font-weight: unset;
+	min-width: 240px;
+}
+
+label.add_price_value{
+	/*text-align: center;*/
+}
+
+.option_product_with_price label.total_ptice_title,
+.option_product_with_price label.total_price{
+min-width: 155px;
+margin:10px 0px;
+padding: 5px;
+text-align: right;
+}
+.option_product_with_price label.total_ptice_title{
+margin-left: 25px;
+}
+
+.products_buy{
+	position: relative;
+	height:auto;
+	width: auto;
+	padding: 0;
+	margin: 5px;
+	margin-top: 0px;
+	background: inherit;
+	-webkit-transition: all 1s linear;
+	-moz-transition: all 1s linear;
+	-ms-transition: all 1s linear;
+	-o-transition: all 1s linear;
+	transition: all 1s linear;
+	margin-left: 60px;
+}
+			
+.products_buy:hover{
+	-moz-transform: scale(1.2);
+	-webkit-transform: scale(1.2);
+	-o-transform: scale(1.2);
+	-ms-transform: scale(1.2);
+	transform: scale(1.2);
+}
+		
+				.products_buy img{
+					position: relative;
+					height:50px;
+					width: 50px;
+
+				}				
+/*---- second part of product page ----*/
+	#tabs_product{
+        position: relative;
+        width: 100%;
+        height: auto;
+        display:inline-block;
+        margin-top: 10px;
+    	}
+    	
+        .product #tabs_product div{
+        	position: relative;
+            width: inherit;
+        }
+
+	    #tabs_product div div{
+			font: 1.1em "Book Antiqua" sans-serif;
+			/*margin-left:15px;*/
+			margin-top:10px;
+			margin-bottom:10px;
+			width: 100%;
+            }
+
+		#tabs_product div div.use_with_product{
+			width: 337px;
+			margin:0px 5px 5px 0px;
+			float: left;
+			height: 365px;
+			border: 1px rgb(157, 157, 157) solid;
+			-webkit-border-radius: 3px;
+			border-radius: 3px;
+			-webkit-box-shadow: 0 0 15px rgb(157, 157, 157);
+			-moz-box-shadow: 0 0 15px rgb(157, 157, 157);
+			box-shadow: 0 0 15px rgb(157, 157, 157);
+			
+		}
+
+	#tabs_product div div p{
+		margin:0px;
+		text-indent: 1.5em;
+    	text-align: justify;
+    }
+
+div.use_with_product a.link{
+	position: relative;
+	display:table-cell;
+    vertical-align: middle;
+	width: inherit;
+	height:260px;
+	margin:0px;
+	border-bottom: 1px rgb(157, 157, 157) solid;
+}
+
+div.use_with_product a.link img{
+	position: relative;
+	width: 100%;
+	height:auto;
+	padding: 0px;
+	margin:0px;
+	max-height: 260px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+}
+
+#tabs_product div div .infrotamaton_about_uwp{
+	width:100%;
+	margin: 0px;
+	padding: 5px;
+	float:left;
+}
+
+#tabs_product div div .infrotamaton_about_uwp p{
+	text-indent: 0em;
+	text-align: left;
+	margin-bottom: 5px;
+	float: left;
+}
+
+#tabs_product div div .infrotamaton_about_uwp p span{
+	font-weight: bold;
+}
+
+#tabs_product div div.use_with_product a.button{
+	position: absolute;
+	bottom: 10px;
+	margin: 0px 5px;
+}
+
+	#tabs_product div div .listsul{
+		list-style: square;
+    }
+
+	#tabs_product div div h1,
+	#tabs_product div div h2,
+	#tabs_product div div h3,
+	#tabs_product div div h4,
+	#tabs_product div div h5,
+	#tabs_product div div h6{
+		margin-top: 15px;
+		margin-bottom: 10px;
+    }
+		
+	#tabs_product div div .listsul li{
+		margin-left:25px;
+    }
+
+            #tabs_product > div table{
+                position: relative;
+                height: auto;
+                width: auto;
+                top: 0;
+                float: left;
+            }
+
+           #tabs_product > div caption{
+                text-align: center;
+                font: 1.2em sans-serif;
+            }
+
+            #tabs_product > div td{
+                height: auto;
+                width: auto;
+                text-align: left;
+                top: 0;
+                margin-bottom: 10px;
+            }
+
+        #tabs_product ul#sub_tabs_product{
+            margin:0px;
+            padding:0px;
+        }
+        #tabs_product ul#sub_tabs_product:after{
+            content:"";
+            display:block;
+            clear:both;
+            height:5px;
+            background:#006080;
+        }
+        #tabs_product ul#sub_tabs_product li{
+            margin:0px;
+            padding:0px;
+            cursor:pointer;
+            display:block;
+            float:left;
+            padding:10px 15px;
+            background:#e9eaeb;
+            color:#707070;
+        }
+        #tabs_product ul#sub_tabs_product li.active, #tabs_product ul#sub_tabs_product li.active:hover{
+            background:#006080;
+            color:#fff;
+        }
+        #tabs_product ul#sub_tabs_product li:hover{
+            background:#d6d6d7;
+        }
+        
+        #output_description > *{
+        	margin: 0;
+        	padding: 0;
+        	font: 1em sans-serif;
+        	float: left;
+        	height: auto;
+            width: 100%;
+            text-align:none;
+        }

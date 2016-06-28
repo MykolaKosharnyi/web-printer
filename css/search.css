@@ -1,0 +1,618 @@
+ul.menu{
+	display:none;
+}
+/*---- Button change display on search block ----*/
+#display_search{
+    position: relative;
+    width: auto;
+    background: white/*#E8F2FE*/;
+    cursor: pointer;
+}
+    #display_search p{
+        display:block;
+        position: relative;
+        width: auto;
+        height: auto;
+        padding: 5px 0px 5px;
+        margin: 0;
+        font-weight: bold;
+        color: rgb(144, 144, 144);
+    }
+
+    #display_search i.opened{
+        background-clip: border-box;
+        background-color: inherit;
+        background-image: none;
+        background-origin: padding-box;
+        background-size: auto;
+        border: 5px black solid; 
+        border-bottom-width: 0px;
+        border-left-color: rgba(0, 0, 0, 0);
+        border-right-color: rgba(0, 0, 0, 0);
+        color: black;
+        cursor: pointer;
+        display: block;
+        font-family: Arial;
+        font: 12px italic;
+        font-weight: bold;
+        height: 0px;
+        left: 0px;
+        line-height: 16px;
+        margin: 3px 10px 0px 0px;
+        position: relative;
+        float: left;
+        top: 8px;
+        width: 0px;
+        z-index: 1;
+    }
+
+    #display_search i{
+        background-clip: border-box;
+        background-color: inherit;
+        background-image: none;
+        background-origin: padding-box;
+        background-size: auto;
+        border: 5px black solid; 
+        border-right-width: 0px;
+        border-top-color: rgba(0, 0, 0, 0);
+        border-bottom-color: rgba(0, 0, 0, 0);
+        color: black;
+        cursor: pointer;
+        display: block;
+        font-family: Arial;
+        font: 12px italic;
+        font-weight: bold;
+        height: 0px;
+        left: 0px;
+        line-height: 16px;
+        margin: 3px 10px 0px 0px;
+        position: relative;
+        float: left;
+        top: 6px;
+        width: 0px;
+        z-index: 1;
+    }
+
+/* ------ product page ------ */
+#search_product{
+    position: relative;
+    height: auto;
+    width: 201px;
+    float: left;
+    background: white/*#E8F2FE*/;
+}
+
+form#search{
+    position:relative;
+    margin: none;
+}
+
+#search_buttons{
+	display: block;
+	height: auto;
+	width: inherit;
+	margin: 10px 0px;
+}
+
+a.accept, a.reset {
+	display: block;
+	position: relative;
+	color: white;
+	padding: 2px;
+	font-family: 'Book Antiqua', Palatino, 'Palatino Linotype', 'Palatino LT STD', Georgia, serif;
+	font-size: 0.75em;
+	font-weight: bold;
+	-webkit-border-radius: 3px 3px 3px 3px;
+	border-radius: 3px 3px 3px 3px;
+
+	text-align: center;
+	vertical-align: middle;
+	-webkit-transition: all 0.5s ease-in;
+-moz-transition: all 0.5s ease-in;
+-ms-transition: all 0.5s ease-in;
+-o-transition: all 0.5s ease-in;
+transition: all 0.5s ease-in;
+	margin-bottom:5px;
+	margin-top: 5px;
+	float:left;
+}
+a.accept {
+	background: green;
+	width: 91px;
+	margin-right: 5px;
+	
+}
+
+a.accept:hover {
+	color: green;
+	background: white;
+}
+
+a.reset {
+	background: red;
+	width: 75px;
+}
+
+a.reset:hover {
+	color: red;
+	background: white;
+}
+    .block_search_criteria,
+    .search_criteria,
+    .block_search_check{
+	position: relative;
+        border-bottom: 1px solid rgb(219, 219, 219);
+        color: rgb(51, 51, 51);
+        display: block;
+        font: 12px Arial;
+        height: auto;
+        line-height: 16px;
+        padding: 5px 10px 3px 10px;
+        width: inherit;
+    }
+
+.block_search_check{
+	padding: 5px 0px 3px 0px;
+}
+
+.block_check_boxes .search_criteria{
+	border: none;
+}
+		.block_block_title,
+        .block_title,
+		.block_title_check,
+		.search_criteria_check{
+            color: rgb(219, 219, 219);
+            cursor: pointer;
+            display: block;
+            font: 14px Arial;
+            font-weight: bold;
+            height: auto;
+            line-height: auto;
+            margin: 0px 0px 5px 0px;
+            position: relative;
+            width: inherit;
+            z-index: 1;
+        }
+
+.block_title_check,
+.search_criteria_check{
+	left: 15px;
+	padding: 0px;
+	width: 92%;
+}
+
+.search_criteria_check{
+	left: 25px;
+	width: 84%;
+}
+
+input.input_check,
+input.input_check_block{
+	position: relative;
+	float: left;
+	margin: 1px 0px 0px 0px;	
+}
+
+input.input_check_block{
+	left: 10px;
+}
+
+.head_title_rip, .head_body_rip{
+				color: #005575;
+                cursor: pointer;
+                display: block;
+                font: 14px Arial;
+                font-weight: bold;
+                height: auto;
+                left: 10px;
+                line-height: 16px;
+                margin: 0px 0px 0px 0px;
+                position: relative;
+                top:0px;
+                z-index: 1;
+				width: 95%;
+				text-indent: -5px;
+}
+
+.head_body_rip{left: 17px;}
+
+			.block_title_check i.opened,
+			.block_title_check_check i.opened,
+	        .block_block_title i.opened,
+            .block_title i.opened{ /* Opened state of point. */
+                background-clip: border-box;
+                background-color: inherit;
+                background-image: none;
+                background-origin: padding-box;
+                background-size: auto;
+                border: 4px rgb(144, 144, 144) solid; 
+                border-bottom-width: 0px;
+                border-left-color: rgba(0, 0, 0, 0);
+                border-right-color: rgba(0, 0, 0, 0);
+                color: rgb(51, 51, 51);
+                cursor: pointer;
+                display: block;
+                font-family: Arial;
+                font: 12px italic;
+                font-weight: bold;
+                height: 0px;
+                left: 0px;
+                line-height: 16px;
+                margin: 3px 10px 0px 0px;
+                position: absolute;
+                top: 3px;
+                width: 0px;
+                z-index: 1;
+            }
+            
+			 .block_title_check i,
+			 .block_title_check_check i,
+	     	 .block_block_title i,
+             .block_title i{/* Normal state of point - closed */
+                background-clip: border-box;
+                background-color: inherit;
+                background-image: none;
+                background-origin: padding-box;
+                background-size: auto;
+                border: 4px rgb(144, 144, 144) solid; 
+                border-right-width: 0px;
+                border-top-color: rgba(0, 0, 0, 0);
+                border-bottom-color: rgba(0, 0, 0, 0);
+                color: rgb(51, 51, 51);
+                cursor: pointer;
+                display: block;
+                font: 12px Arial;
+                font-weight: bold;
+                height: 0px;
+                left: 0px;
+                line-height: 16px;
+                margin: 3px 10px 0px 0px;
+                position: absolute;
+                top:0px;
+                width: 0px;
+                z-index: 1;
+            }
+
+             .block_block_title p,
+             .block_title p,
+			 .block_title_check p,
+			 .block_title_check_check p{
+                color: rgb(144, 144, 144);
+                cursor: pointer;
+                display: block;
+                font: 14px Arial;
+                font-weight: bold;
+                height: auto;
+                left: 10px;
+                line-height: 16px;
+                margin: 0px 0px 0px 0px;
+                position: relative;
+                top:0px;
+                z-index: 1;
+            }
+
+.block_title_check p,
+.block_title_check_check p{
+	left: 0px;
+	padding: 0px;
+	text-indent: -10px;
+}
+
+.block_title_check p{text-indent: 10px;}
+
+.block_title_check_check p{
+	text-indent: 10px;
+}
+
+	     	.block_block_title p:hover,
+            .block_title p:hover{
+                color: #005575;
+            }
+
+	.block_check_boxes,
+        .check_boxes{
+            color: rgb(51, 51, 51);
+            display: none;
+            font: 14px Arial;
+            height: auto;
+            line-height: 16px;
+            list-style-image: none;
+            list-style-position: outside;
+            list-style-type: none;
+            margin: 0px;
+            padding: 0px;
+            padding-bottom: 5px;
+        }
+
+.block_check_boxes{padding-bottom: 0px;}
+
+/*.block_search_check .block_check_boxes{left: 10px;}*/
+
+.block_check_boxes li input[type=checkbox],
+.check_boxes li input[type=checkbox]{
+	position: relative;
+	top: 0px;
+	display: block;
+	float: left;
+}
+
+.block_check_boxes li label,
+.check_boxes li label{
+	position: relative;
+	font-weight: normal;
+	margin-left: 5px;
+	width: 162px;
+	padding-top: 3px;
+}
+
+.block_check_boxes li label{width: 140px;}
+
+            .text_output{
+                width: inherit;
+                height: 20px;
+				margin: 3px 0px 3px;
+            }
+
+            .text_output p{
+                float: left;
+                width: auto;
+                float: left;
+                padding: 0;
+                margin: 0;
+                border:0;
+                color:#006080;
+                background: inherit;
+                font-weight:bold;
+            }
+
+            .text_output input{  
+                float: left;
+                border:0;
+                color:#006080;
+                background: inherit; 
+                font-weight:bold;
+            }
+
+            input[type=text]{
+                padding: 0;
+                margin: 0;
+		border: 1px rgb(144, 144, 144) solid;
+		-webkit-border-radius: 3px 3px 3px 3px;
+		border-radius: 3px 3px 3px 3px;
+		
+            }
+
+input.input_pue{
+	float:left;
+	margin-top: 1px;
+}
+
+p.p_pue{
+	text-indent: -5px;
+} 
+
+            .slider{
+                margin-top: 0px;
+            }
+
+	.block_search_criteria fieldsert,
+        .search_criteria fieldset{
+            position: relative;
+            margin: 0;
+            padding-top: 5px;
+            padding-left: 5px;
+            border: 1px #006080 solid;
+        }
+    #tabs{
+        position: relative;
+        width: 100%;
+        height: auto;
+        display:inline-block;
+    }
+        #tabs > div{
+            padding-top:10px;
+            max-width: 300px;
+        }
+
+        #tabs ul{
+            margin:0px;
+            padding:0px;
+        }
+        #tabs ul:after{
+            content:"";
+            display:block;
+            clear:both;
+            height:3px;
+            background:#006080;
+        }
+        #tabs ul li{
+            margin:0px;
+            padding:0px;
+            cursor:pointer;
+            display:block;
+            float:left;
+            padding:5px 5px;
+            background:#e9eaeb;
+            color:#707070;
+            font: 13px Arial;
+        }
+        #tabs ul li.active, #tabs ul li.active:hover{
+            background:#006080;
+            color:#fff;
+        }
+        #tabs ul li:hover{
+            background:#d6d6d7;
+        }
+        
+/*      RESULT          */
+#out_result_of_search{
+    position: relative;
+    height: auto;
+    width: 100%;
+    margin-left: 0px;
+    font: 14px "RobotoRegular", sans-serif;
+}
+
+	.products{
+		position: relative;
+		width: 338px;
+		height: auto;
+		border: 1px rgb(219, 219, 219) solid;
+		margin: 3px 0px 3px 6px;
+		margin-right: 0px;
+		border-radius: 3px;
+		display:block;
+		float: left;
+		max-height:337px;
+		-webkit-box-shadow: 0 0 5px rgb(157, 157, 157);
+		-moz-box-shadow: 0 0 5px rgb(157, 157, 157);
+		box-shadow: 0 0 5px rgb(157, 157, 157);
+	}
+	.products:hover{
+		border: 2px #006080 solid;
+		-webkit-border-radius: 5px 5px 5px 5px;
+		border-radius: 5px 5px 5px 5px;
+		-webkit-box-shadow: 0 0 10px #006080;
+		-moz-box-shadow: 0 0 10px #006080;
+		box-shadow: 0 0 10px #006080;
+	}
+	
+
+	.products:hover a.link{
+		border-bottom: 1px #006080 solid;
+	}
+		.products a.link{
+			position: relative;
+			/*top: 0px;*/
+			height:275px;
+			width: inherit;
+			border-bottom: 1px rgb(219, 219, 219) solid;
+		    	
+			display:table-cell;
+    		vertical-align: middle;
+		}
+		
+		.products a.link .outer_a_img{
+			display: block;
+    			position: relative;
+                        width: 100%;
+			height:auto;
+                    }
+
+			.products a.link img{
+				height:auto;
+				width: inherit;
+				position: relative;
+				max-height:275px;
+			}
+		
+		.products_title, .products_price{
+			position: relative;
+			height: 30px;
+			width: 273px;
+			/*max-width: 280px;*/
+			float: left;
+			margin:0;
+			padding: 5px 10px 5px;
+			font-weight: bold;
+			text-align: left;
+			/*border: 1px red solid;*/
+			color: #006080;
+			white-space: nowrap;/* \C7\E0\EF\F0\E5\F9\E0\E5\EC \EF\E5\F0\E5\ED\EE\F1 \F1\F2\F0\EE\EA */
+			overflow: hidden;
+			text-overflow: ellipsis;
+			min-width: 65px;
+		}
+
+		/*.products_title:hover{
+			color: rgb(130, 130, 130);
+			height: auto;
+			white-space: normal;
+			overflow: inherit;
+		}*/
+
+		.products_price{
+			color: #92A5A6;
+		}
+
+
+/*			.products_buy{
+				position: relative;
+				height:auto;
+				width: auto;
+				float: right;
+				padding: 0;
+				margin: 5px;
+				margin-top: 0px;
+				background: inherit;
+				-webkit-transition: all 1s linear;
+				-moz-transition: all 1s linear;
+				-ms-transition: all 1s linear;
+				-o-transition: all 1s linear;
+				transition: all 1s linear;
+			}
+			
+			.products_buy:hover{
+				-moz-transform: scale(1.2);
+				-webkit-transform: scale(1.2);
+				-o-transform: scale(1.2);
+				-ms-transform: scale(1.2);
+				transform: scale(1.2);
+			}
+		
+				.products_buy img{
+					position: relative;
+					height:50px;
+					width: 50px;
+
+				}*/
+.ribbon-search-wrapper-right {
+  width: 135px;
+  height: 135px;
+  overflow: hidden;
+  position: absolute;
+  top: -3px;
+  right: -3px;
+}
+
+.ribbon-search-wrapper-left {
+  width: 135px;
+  height: 135px;
+  overflow: hidden;
+  position: absolute;
+  top: -3px;
+  left: -3px;
+}
+
+.ribbon-search-right {
+  font: bold 20px Sans-Serif;
+  text-align: center;
+-moz-transform: rotate(45deg);
+-webkit-transform: rotate(45deg);
+-o-transform: rotate(45deg);
+-ms-transform: rotate(45deg);
+transform: rotate(45deg);
+  position: relative;
+  padding: 4px 0;
+  right: 15px;
+  top: 42px;
+  width: 190px;
+z-index: 10;
+}   
+
+.ribbon-search-left {
+  font: bold 20px Sans-Serif;
+  text-align: center;
+-moz-transform: rotate(-45deg);
+-webkit-transform: rotate(-45deg);
+-o-transform: rotate(-45deg);
+-ms-transform: rotate(-45deg);
+transform: rotate(-45deg);
+  position: relative;
+  padding: 4px 0;
+  left: -38px;
+  top: 40px;
+  width: 190px;
+z-index: 10;
+}   

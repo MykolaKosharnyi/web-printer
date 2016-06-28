@@ -1,0 +1,362 @@
+*::-webkit-input-placeholder {
+	color: #666;
+	opacity: 1;
+}
+*:-moz-placeholder {
+	color: #666;
+	opacity: 1;
+}
+*::-moz-placeholder {
+	color: #666;
+	opacity: 1;
+}
+*:-ms-input-placeholder {
+	color: #666;
+	opacity: 1;
+}
+
+body input:focus:required:invalid,
+body textarea:focus:required:invalid {
+	border:red 3px solid
+}
+body input:required:valid,
+body textarea:required:valid {
+	border: green 3px solid
+}
+body {
+	font-family: "RobotoRegular", sans-serif;
+	font-size: 16px;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+.header_topline {
+	background-color: #005575;
+	color: white;
+}
+.header_topline a {
+	color: white;
+}
+
+.top_information{
+	display: block;
+	float: left;
+	margin: 4px 0 4px 10px;
+	
+	font-size: 17px;
+}
+.header_secondline {
+	background-color: white;
+	padding: 0px 0;
+	color: #006080;
+}
+
+.header_secondline .btn-group,
+.header_secondline .input-group {
+	padding:10px 0 0 0;
+}
+
+.header_secondline .input-group .btn-group{
+	padding:0;
+}
+
+.header_secondline a {
+	color: #006080;
+}
+
+.header_menu {
+	background-color: #005575;
+	padding: 0px 0;
+	color: white;
+}
+.top_links {
+	display: inline-block;
+	vertical-align: middle;
+	z-index: 10;
+}
+.top_links a {
+	text-decoration: underline;
+}
+.top_links a:hover {
+	text-decoration: none;
+}
+.soc_buttons {
+	float: right;
+}
+.soc_buttons > a {
+	font-size: 26px;
+	margin-left: 8px;
+}
+.auth_buttons,
+.main_mnu_button {
+	background-color: transparent;
+	border: medium none;
+	font-size: 26px;
+}
+.main_mnu_button {
+	color: #fff;
+	padding: 8px 15px 0;
+}
+.header_secondline .logo {
+	color: #006080;
+	display: block;
+	font-family: "NautilusPompiliusRegular";
+	font-size: 42px;
+	text-align: left;
+	float: left;
+	padding: 20px 0;
+	position: relative;
+}
+
+.header_secondline .logo:hover{
+	text-decoration: underline;
+}
+
+.top_header {
+	background-color: white;
+}
+.maian_mnu {
+	background-color: #3797bf;
+	color: #fff;
+	margin-bottom: 20px;
+}
+.maian_mnu a {
+	color: #fff;
+	padding: 15px;
+	display: block;
+	-webkit-transition: all .25s;
+	-o-transition: all .25s;
+	transition: all .25s;
+}
+.maian_mnu a:hover {
+	background-color: #2787af;
+}
+.maian_mnu ul {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	float: left;
+	text-transform: uppercase;
+}
+.top_contacts {
+	background-color: #2787af;
+	float: right;
+	font-size: 30px;
+	line-height: 53px;
+	padding: 0 15px;
+}
+.maian_mnu ul li {
+	display: inline-block;
+}
+.maian_mnu ul {
+	z-index: 12;
+}
+h1 {
+	color: #fff;
+	text-transform: uppercase;
+	text-align: center;
+	font-family: "RobotoCondensedLight";
+	padding: 16px 0;
+}
+.sider_container img {
+	max-width: 100%;
+}
+.sider_container {
+	position: relative;
+}
+
+.next_button, .prev_button,
+.next_button_printer, .prev_button_printer,
+.next_button_printer_3d, .prev_button_printer_3d,
+.next_button_printer_d, .prev_button_printer_d,
+.next_button_laminator, .prev_button_laminator,
+.next_button_laser, .prev_button_laser,
+.next_button_cutter, .prev_button_cutter,
+.next_button_scaner, .prev_button_scaner,
+.next_button_previously_used, .prev_button_previously_used,
+.next_button_rip, .prev_button_rip,
+.next_button_video, .prev_button_video,
+.pause_button, .play_button,
+.pause_button_printer, .play_button_printer,
+.pause_button_printer_3d, .play_button_printer_3d,
+.pause_button_printer_d, .play_button_printer_d,
+.pause_button_laminator, .play_button_laminator,
+.pause_button_laser, .play_button_laser,
+.pause_button_cutter, .play_button_cutter,
+.pause_button_scaner, .play_button_scaner,
+.pause_button_previously_used, .play_button_previously_used,
+.pause_button_rip, .play_button_rip,
+.pause_button_video, .play_button_video {
+	background-color: rgba(255, 255, 255, 0.5);
+	border-radius: 10em;
+	color: #006080;
+	cursor: pointer;
+	font-size: 46px;
+	padding: 0 25px;
+	position: absolute;
+	top: 40%;
+	z-index: 10;
+	border: 1px grey solid;
+}
+
+.pause_button, .play_button,
+.pause_button_printer, .play_button_printer,
+.pause_button_printer_3d, .play_button_printer_3d,
+.pause_button_printer_d, .play_button_printer_d,
+.pause_button_laminator, .play_button_laminator,
+.pause_button_laser, .play_button_laser,
+.pause_button_cutter, .play_button_cutter,
+.pause_button_scaner, .play_button_scaner,
+.pause_button_previously_used, .play_button_previously_used,
+.pause_button_rip, .play_button_rip,
+.pause_button_video, .play_button_video{
+top:80%;
+left: 46%;
+font-size: 38px;
+padding: 3px 20px;
+}
+
+.next_button:hover, .prev_button:hover,
+.next_button_printer:hover, .prev_button_printer:hover,
+.next_button_printer_3d:hover, .prev_button_printer_3d:hover,
+.next_button_printer_d:hover, .prev_button_printer_d:hover,
+.next_button_laminator:hover, .prev_button_laminator:hover,
+.next_button_laser:hover, .prev_button_laser:hover,
+.next_button_cutter:hover, .prev_button_cutter:hover,
+.next_button_scaner:hover, .prev_button_scaner:hover,
+.next_button_previously_used:hover, .prev_button_previously_used:hover,
+.next_button_rip:hover, .prev_button_rip:hover,
+.next_button_video:hover, .prev_button_video:hover,
+.pause_button:hover, .play_button:hover,
+.pause_button_printer:hover, .play_button_printer:hover,
+.pause_button_printer_3d:hover, .play_button_printer_3d:hover,
+.pause_button_printer_d:hover, .play_button_printer_d:hover,
+.pause_button_laminator:hover, .play_button_laminator:hover,
+.pause_button_laser:hover, .play_button_laser:hover,
+.pause_button_cutter:hover, .play_button_cutter:hover,
+.pause_button_scaner:hover, .play_button_scaner:hover,
+.pause_button_previously_used:hover, .play_button_previously_used:hover,
+.pause_button_rip:hover, .play_button_rip:hover,
+.pause_button_video:hover, .play_button_video:hover{
+	background-color: rgba(0, 0, 0, 0.5);
+	color: white;
+}
+.next_button,
+.next_button_printer,
+.next_button_printer_3d,
+.next_button_printer_d,
+.next_button_laminator,
+.next_button_laser,
+.next_button_cutter,
+.next_button_scaner,
+.next_button_previously_used,
+.next_button_rip,
+.next_button_video {
+	right: 20px;
+}
+.prev_button,
+.prev_button_printer,
+.prev_button_printer_3d,
+.prev_button_printer_d,
+.prev_button_laminator,
+.prev_button_laser,
+.prev_button_cutter,
+.prev_button_scaner,
+.prev_button_previously_used,
+.prev_button_rip,
+.prev_button_video {
+	left: 20px;
+}
+.reklam_animation .slide_item img{
+	height: 450px;
+}
+section.ord1er  {
+	background-color: #eee;
+	padding: 25px 0;
+}
+.sell_descr {
+    font-size: 22px;
+    padding-top: 5px;
+}
+.button {
+    background-color: #006080;
+    border: medium none;
+    border-radius: 5px;
+    color: #fff;
+    display: block;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    text-align: center;
+}
+.button:hover {
+	background-color: #0585B0;
+}
+.button:active {
+	background-color: #00A2D8;
+}
+
+.add_to_cart{
+	position: relative;
+	float: left;
+	padding: 1px;
+	color: #006080;
+	cursor: pointer;
+	font-size: 45px;
+	top: -25px;
+	right: -10px;
+}
+			
+.add_to_cart:hover{
+	color: #0585B0;
+}		
+
+.add_to_cart:active {
+	color: #00A2D8;
+}
+
+.sell_right .button {
+	float: right;
+}
+.hidden {
+	display: none;
+}
+.pop_form input[type="text"] {
+    display: block;
+    line-height: 24px;
+    margin: 0 auto 12px;
+    width: 90%;
+    border: #999 3px solid;
+}
+.pop_form .button {
+	margin: 20px auto 0;
+}
+.pop_form h3 {
+    margin: 10px auto 15px;
+    text-align: center;
+    font-weight: normal;
+    font-family: "RobotoCondensedBold";
+    text-transform: uppercase;
+}
+.blog_item img {
+	max-width: 100%;
+	margin-bottom: 20px;
+}
+.blog_item h3 {
+	text-transform: uppercase;
+	font-family: "RobotoCondensedRegular";
+	margin-bottom: 10px;
+}
+.blog_item h3 a {
+	text-decoration: underline;
+}
+.blog_item p {
+	margin-top: 0;
+}
+.right_aside {
+	padding: 15px 20px;
+	border-radius: 5px;
+	background-color: #EEEEEE;
+	margin-top: 30px;
+}
