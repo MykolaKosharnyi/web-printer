@@ -18,6 +18,13 @@ $(document).ready(function() {
 	//<a class="fancybox"><img src="image.jpg" /></a>
 	//<a class="fancybox" data-fancybox-group="group"><img src="image.jpg" /></a>
 	$(".fancybox").fancybox();
+	$(".fancybox_video").fancybox({
+        openEffect  : 'none',
+        closeEffect : 'none',
+        helpers : {
+            media : {}
+        }
+    });
 
 	//Навигация по Landing Page
 	//$(".top_mnu") - это верхняя панель со ссылками.
@@ -78,6 +85,42 @@ $(document).ready(function() {
 	    owl.trigger('owl.stop');
 	    $(this).css('display','none');
 		$('.play_button').css('display','block');
+	});
+	
+	//Каруселька для видео
+	var owl_video = $(".carousel_video");
+	owl_video.owlCarousel({
+		items : 4,
+		autoHeight : false,
+		itemsDesktop: false,
+		loop:true,
+		autoPlay:true,
+	    autoPlayTimeout:900,
+	    autoplayHoverPause:true
+	});
+	owl_video.on("mousewheel", ".owl-wrapper", function (e) {
+		if (e.deltaY > 0) {
+			owl.trigger("owl.prev");
+		} else {
+			owl.trigger("owl.next");
+		}
+		e.preventDefault();
+	});
+	$(".next_button_video").click(function() {
+		owl_video.trigger("owl.next");
+	});
+	$(".prev_button_video").click(function() {
+		owl_video.trigger("owl.prev");
+	});
+	$('.play_button_video').on('click',function(){
+	    owl.trigger('owl.play',3000);
+	    $(this).css('display','none');
+		$('.pause_button_video').css('display','block');
+	});
+	$('.pause_button_video').on('click',function(){
+	    owl_video.trigger('owl.stop');
+	    $(this).css('display','none');
+		$('.play_button_video').css('display','block');
 	});
 
 	//Каруселька для принтеров

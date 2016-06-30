@@ -11,25 +11,30 @@
 	<title><spring:message code="home.title"/></title>
 </head>
 <body>
-			<div class="reklam_animation">
-				<div class="col-md-10">
-					<div class="row">
-            <div class="sider_container">
-			         <div class="next_button"><i class="fa fa-angle-right"></i></div>
-			         <div class="pause_button"><i class="fa fa-pause" aria-hidden="true"></i></div>
-			         <div class="play_button" style="display: none;"><i class="fa fa-play" aria-hidden="true"></i></div>
-			         <div class="prev_button"><i class="fa fa-angle-left"></i></div>
-			         <div class="carousel">
-				          <c:forEach items="${homeJSON.listPicturesOfCentralReklam}" var="picture">
-                    <div class="slide_item"><a class="fancybox" data-fancybox-group="group" href="/images/home/big_reklam/${picture}"><img src="/images/home/big_reklam/${picture}" alt="alt" /></a></div>
-
-				          </c:forEach>
-			         </div>
-		        </div>
-					</div>
+	<div class="reklam_animation">
+		<div class="col-md-10">
+			<div class="row">
+	            <div class="sider_container">
+					<div class="next_button"><i class="fa fa-angle-right"></i></div>
+				    <div class="pause_button"><i class="fa fa-pause" aria-hidden="true"></i></div>
+				    <div class="play_button" style="display: none;"><i class="fa fa-play" aria-hidden="true"></i></div>
+				    <div class="prev_button"><i class="fa fa-angle-left"></i></div>
+				    <div class="carousel">
+						<c:forEach items="${homeJSON.listPicturesOfCentralReklam}" var="picture">
+	                		<div class="slide_item">
+	                			<a class="fancybox" 
+	                			data-fancybox-group="group" href="/images/home/big_reklam/${picture}">
+	                				<img src="/images/home/big_reklam/${picture}" alt="alt" />
+	                			</a>
+	                		</div>
+	
+					    </c:forEach>
+				   </div>
 				</div>
-				<div class="col-md-2">
-					<div class="row">
+			</div>
+		</div>
+		<div class="col-md-2">
+			<div class="row">
               <div class="rigt_of_reklam_animation">
             
                 <div><img src="/images/home/right_of_reklam/1/${homeJSON.listPicturesRightOfReklam1.fileNameArray.get(0)}" alt="Надпись" />
@@ -42,42 +47,81 @@
                 <c:if test="${homeJSON.listPicturesRightOfReklam3.description!='1'}"><p>${homeJSON.listPicturesRightOfReklam3.description}</p></c:if></div>
 
               </div>
+			</div>
+		</div>
+
+	</div>
+<%--        
+	<div class="video_content">
+		<div class="sider_container">
+			<div class="next_button_video"><i class="fa fa-angle-right"></i></div>
+			<div class="pause_button_video"><i class="fa fa-pause" aria-hidden="true"></i></div>
+			<div class="play_button_video" style="display: none;"><i class="fa fa-play" aria-hidden="true"></i></div>
+			<div class="prev_button_video"><i class="fa fa-angle-left"></i></div>
+			<div class="carousel_video">
+			
+			<div class="slide-item-video">
+				<iframe style="width: inherit;" src="http://www.youtube.com/embed/_nVzDSvv9bw"></iframe> 
+				<p>KFDJGk kdfjd dkfd dkfjad</p>
+	         </div>	
+	         
+	         <div class="slide-item-video">
+				<iframe style="width: inherit;" src="http://www.youtube.com/embed/_nVzDSvv9bw"></iframe> 
+				<p>KFDJGk kdfjd dkfd dkfjad</p>
+	         </div>	
+	         
+			<div class="slide-item-video">
+				<iframe style="width: inherit;" src="http://www.youtube.com/embed/_nVzDSvv9bw"></iframe> 
+				<p>KFDJGk kdfjd dkfd dkfjad</p>
+	         </div>	
+	         
+			<div class="slide-item-video">
+				<iframe style="width: inherit;" src="http://www.youtube.com/embed/_nVzDSvv9bw"></iframe> 
+				<p>KFDJGk kdfjd dkfd dkfjad</p>
+	         </div>		 
+	         
+	         <div class="slide-item-video">
+				<iframe style="width: inherit;" src="http://www.youtube.com/embed/_nVzDSvv9bw"></iframe> 
+				<p>KFDJGk kdfjd dkfd dkfjad</p>
+	         </div>      
+	         
+	         <div class="slide-item-video">
+				<iframe style="width: inherit;" src="http://www.youtube.com/embed/_nVzDSvv9bw"></iframe> 
+				<p>KFDJGk kdfjd dkfd dkfjad</p>
+	         </div>  
+
+			</div>
+		</div>
+</div>
+--%> 
+
+<div class="goods">   
+        
+<c:if test="${fn:length(printers) > 0}">        
+            <div class="advertising">
+				<div class="col-md-4">
+					<div class="row">
+						<a href="<c:if test="${homeJSON.list_printer_top1.href!='1'}">${homeJSON.list_printer_top1.href}</c:if>">
+		                			<img src="/images/home/three_big_pictures/printer_top/1/${homeJSON.list_printer_top1.fileNameArray.get(0)}" alt="" ></a>
 					</div>
 				</div>
-
-			</div>
-        
-
-
-
-        <div class="goods">   
-            <div class="advertising">
-		<div class="col-md-4">
-			<div class="row">
-				<a href="<c:if test="${homeJSON.list_printer_top1.href!='1'}">${homeJSON.list_printer_top1.href}</c:if>">
-                			<img src="/images/home/three_big_pictures/printer_top/1/${homeJSON.list_printer_top1.fileNameArray.get(0)}" alt="" ></a>
-			</div>
-		</div>
-		<div class="col-md-4">
-			<div class="row">
-				<a href="<c:if test="${homeJSON.list_printer_top2.href!='1'}">${homeJSON.list_printer_top2.href}</c:if>">
-                			<img src="/images/home/three_big_pictures/printer_top/2/${homeJSON.list_printer_top2.fileNameArray.get(0)}" alt="" ></a>
-			</div>
-		</div>
-		<div class="col-md-4">
-			<div class="row">
-				<a href="<c:if test="${homeJSON.list_printer_top3.href!='1'}">${homeJSON.list_printer_top3.href}</c:if>">
-                			<img src="/images/home/three_big_pictures/printer_top/3/${homeJSON.list_printer_top3.fileNameArray.get(0)}" alt="" ></a>
-			</div>
-		</div>
-
+				<div class="col-md-4">
+					<div class="row">
+						<a href="<c:if test="${homeJSON.list_printer_top2.href!='1'}">${homeJSON.list_printer_top2.href}</c:if>">
+		                			<img src="/images/home/three_big_pictures/printer_top/2/${homeJSON.list_printer_top2.fileNameArray.get(0)}" alt="" ></a>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="row">
+						<a href="<c:if test="${homeJSON.list_printer_top3.href!='1'}">${homeJSON.list_printer_top3.href}</c:if>">
+		                			<img src="/images/home/three_big_pictures/printer_top/3/${homeJSON.list_printer_top3.fileNameArray.get(0)}" alt="" ></a>
+					</div>
+				</div>
             </div>
 
 
 
 
-
-<c:if test="${fn:length(printers) > 0}">
 <div class="categories_of_goods">
 <div class="row">
 
@@ -120,7 +164,7 @@
                                   <div class="outer_a_img"><img src="/images/printers/${printer.id}/${printer.pathPictures.get(0)}" alt="" /></div></a>
                                   <a href="<c:url value='/printer/${printer.id}' />" class="slide-title">${printer.name}</a>
                                   <div class="slide-price">Цена: 
-                                    <c:if test="${printer.prise < 0.1}"> уточняйте</c:if>
+                                    <c:if test="${printer.prise < 0.1}"><a href="#callback" class="fancybox">уточняйте</a></c:if>
 				                    <c:if test="${!(printer.prise < 0.1)}">         
 				                        $<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${printer.prise}" />
 				                    </c:if>
@@ -205,7 +249,7 @@
                                   <div class="outer_a_img"><img src="/images/3d_printers/${printer3D.id}/${printer3D.pathPictures.get(0)}" alt="" /></div></a>
                                   <a href="<c:url value='/3d_printer/${printer3D.id}' />" class="slide-title">${printer3D.name}</a>
                                   <div class="slide-price">Цена:
-                                    <c:if test="${printer3D.prise < 0.1}"> уточняйте</c:if>
+                                    <c:if test="${printer3D.prise < 0.1}"><a href="#callback" class="fancybox">уточняйте</a></c:if>
                     <c:if test="${!(printer3D.prise < 0.1)}">         
                         $<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${printer3D.prise}" />
                     </c:if>
@@ -277,7 +321,7 @@
                                   <a class="slider_image" href="<c:url value='/digital_printer/${printer.id}' />"><div class="outer_a_img"><img src="/images/digital_printers/${printer.id}/${printer.pathPictures.get(0)}" alt="" /></div></a>
                                   <a href="<c:url value='/digital_printer/${printer.id}' />" class="slide-title">${printer.name}</a>
                                   <div class="slide-price">Цена:
-                                    <c:if test="${printer.prise < 0.1}"> уточняйте</c:if>
+                                    <c:if test="${printer.prise < 0.1}"><a href="#callback" class="fancybox">уточняйте</a></c:if>
                     <c:if test="${!(printer.prise < 0.1)}">         
                         $<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${printer.prise}" />
                     </c:if>
@@ -346,7 +390,7 @@
                                   <a class="slider_image" href="<c:url value='/laminator/${product.id}' />"><div class="outer_a_img"><img src="/images/laminators/${product.id}/${product.pathPictures.get(0)}" alt="" /></div></a>
                                   <a href="<c:url value='/laminator/${product.id}' />" class="slide-title">${product.name}</a>
                                   <div class="slide-price">Цена:
-                                    <c:if test="${product.prise < 0.1}"> уточняйте</c:if>
+                                    <c:if test="${product.prise < 0.1}"><a href="#callback" class="fancybox">уточняйте</a></c:if>
                     				<c:if test="${!(product.prise < 0.1)}">         
                         				$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${product.prise}" />
                     				</c:if>
@@ -428,7 +472,7 @@
                                   <a class="slider_image" href="<c:url value='/laser/${laser.id}' />"><div class="outer_a_img"><img src="/images/lasers/${laser.id}/${laser.pathPictures.get(0)}" alt="" /></div></a>
                                   <a href="<c:url value='/laser/${laser.id}' />" class="slide-title">${laser.name}</a>
                                   <div class="slide-price">Цена:
-                                    <c:if test="${laser.prise < 0.1}"> уточняйте</c:if>
+                                    <c:if test="${laser.prise < 0.1}"><a href="#callback" class="fancybox">уточняйте</a></c:if>
                     <c:if test="${!(laser.prise < 0.1)}">         
                         $<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${laser.prise}" />
                     </c:if>
@@ -496,7 +540,7 @@
                                   <a class="slider_image" href="<c:url value='/cutter/${cutter.id}' />"><div class="outer_a_img"><img src="/images/cutters/${cutter.id}/${cutter.pathPictures.get(0)}" alt="" /></div></a>
                                   <a href="<c:url value='/cutter/${cutter.id}' />" class="slide-title">${cutter.name}</a>
                                   <div class="slide-price">Цена:
-                                    <c:if test="${cutter.prise < 0.1}"> уточняйте</c:if>
+                                    <c:if test="${cutter.prise < 0.1}"><a href="#callback" class="fancybox">уточняйте</a></c:if>
                     <c:if test="${!(cutter.prise < 0.1)}">         
                         $<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${cutter.prise}" />
                     </c:if>
@@ -572,7 +616,7 @@
                                   <a class="slider_image" href="<c:url value='/scanner/${cutter.id}' />"><div class="outer_a_img"><img src="/images/scanners/${scanner.id}/${scanner.pathPictures.get(0)}" alt="" /></div></a>
                                   <a href="<c:url value='/scanner/${scanner.id}' />" class="slide-title">${scanner.name}</a>
                                   <div class="slide-price">Цена:
-                                    <c:if test="${scanner.prise < 0.1}"> уточняйте</c:if>
+                                    <c:if test="${scanner.prise < 0.1}"><a href="#callback" class="fancybox">уточняйте</a></c:if>
 					                <c:if test="${!(scanner.prise < 0.1)}">         
 					                	$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${scanner.prise}" />
 					                </c:if>
@@ -642,7 +686,7 @@
                                   <a class="slider_image" href="<c:url value='/${product.type}/${product.id}' />"><div class="outer_a_img"><img src="/images/${product.type}s/${product.id}/${product.pathPictures.get(0)}" alt="" /></div></a>
                                   <a href="<c:url value='/${product.type}/${product.id}' />" class="slide-title">${product.name}</a>
                                   <div class="slide-price">Цена:
-                                    <c:if test="${product.prise < 0.1}"> уточняйте</c:if>
+                                    <c:if test="${product.prise < 0.1}"><a href="#callback" class="fancybox">уточняйте</a></c:if>
 					                <c:if test="${!(product.prise < 0.1)}">         
 					                	$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${product.prise}" />
 					                </c:if>
@@ -714,7 +758,7 @@
                                   <div class="outer_a_img"><img src="/images/rips/${rip.id}/${rip.pathPictures.get(0)}" alt="" /></div></a>
                                   <a href="<c:url value='/rip/${rip.id}' />" class="slide-title">${rip.name}</a>
                                   <div class="slide-price">Цена:
-                                    <c:if test="${rip.prise < 0.1}"> уточняйте</c:if>
+                                    <c:if test="${rip.prise < 0.1}"><a href="#callback" class="fancybox">уточняйте</a></c:if>
 					                <c:if test="${!(rip.prise < 0.1)}">         
 					                	$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${rip.prise}" />
 					                </c:if>

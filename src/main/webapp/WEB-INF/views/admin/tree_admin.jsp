@@ -1047,6 +1047,11 @@
       
     </ul>
   </li>
+  
+<li class="Node IsRoot ExpandLeaf">
+	<div class="Expand"></div>
+	<div class="Content"><a href="<c:url value='/admin/video_on_home_page' />">Видео на главной странице</a></div>
+</li>
 
 <li class="Node IsRoot ExpandClosed IsLast">
     <div class="Expand"></div>

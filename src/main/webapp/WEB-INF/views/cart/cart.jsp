@@ -155,6 +155,7 @@ padding: 5px;
 	<c:if test="${empty cart.contents}">
 		Корзина пуста, Вы еще не добавляли товары в корзину.
 	</c:if>
+	
 </div>
 
 <script type="text/javascript">
