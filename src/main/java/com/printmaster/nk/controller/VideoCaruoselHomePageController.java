@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -30,7 +29,7 @@ public class VideoCaruoselHomePageController {
 	private Logger logger = Logger.getLogger(VideoCaruoselHomePageController.class);
 	
 	private JSONObject obj = null;
-	private String path = "/var/www/localhost/home.json";
+	private String pathToJSONFile = "/var/www/localhost/home.json";
     
     @RequestMapping(value="/admin/video_on_home_page", method = RequestMethod.GET)
     public String showMenu(Model model){
@@ -38,7 +37,7 @@ public class VideoCaruoselHomePageController {
     	JSONParser parser = new JSONParser();
 
 			try {
-				obj = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream(path), "UTF-8"));
+				obj = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream(pathToJSONFile), "UTF-8"));
 				model.addAttribute("listVideo", (JSONArray) obj.get("listVideo"));
 			} catch (IOException | ParseException  e) {
 				e.printStackTrace();
@@ -48,14 +47,14 @@ public class VideoCaruoselHomePageController {
     }
     
     @SuppressWarnings("unchecked")
-	@RequestMapping(value="/admin/video_on_home_page/upload_video/{path}", method = RequestMethod.POST,consumes="application/json",
+	@RequestMapping(value="/admin/video_on_home_page/upload_video/{pathVideo}/{description}", method = RequestMethod.POST,consumes="application/json",
 		headers = "content-type=application/x-www-form-urlencoded")
-    public @ResponseBody String uploadPicturesMenu(@PathVariable("path") String path,@RequestParam("description") String description) {
+    public @ResponseBody String uploadPicturesMenu(@PathVariable("pathVideo") String pathVideo, @PathVariable("description") String description) {
     	logger.info("upload new video.");
 		JSONParser parser = new JSONParser();
 		
 		try {
-			obj = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream(path), "UTF-8"));
+			obj = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream(pathToJSONFile), "UTF-8"));
 			
 			JSONArray arrayOfVideo = null;
 			if( obj.get("listVideo") != null ){
@@ -66,15 +65,16 @@ public class VideoCaruoselHomePageController {
 			}
 			
 			//add transformation DESCRIPTION into correct form
-			
+			String str = "word";
+			str = str.replace('>', '/');
 			JSONObject video = new JSONObject();
-			video.put("path", path);
-			video.put("description", description/*.replace('#', '.')*/);
+			video.put("path", pathVideo);
+			video.put("description", description.replace('^', '.').replace('>', '/'));
 			arrayOfVideo.add(video);
 
 			obj.put("listVideo", arrayOfVideo);
 			
-			Writer out = new PrintWriter(path, "UTF-8");
+			Writer out = new PrintWriter(pathToJSONFile, "UTF-8");
 			out.write(obj.toJSONString());
 			out.flush();
 			out.close();
@@ -101,7 +101,7 @@ public class VideoCaruoselHomePageController {
     	JSONParser parser = new JSONParser();
 		
 			try {
-			obj = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream(path), "UTF-8"));
+			obj = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream(pathToJSONFile), "UTF-8"));
 			
 			JSONArray arrayOfVideo = (JSONArray) obj.get("listVideo");			
 			JSONArray sortedArrayOfVideo = new JSONArray();
@@ -117,7 +117,7 @@ public class VideoCaruoselHomePageController {
 			obj.put("listVideo", sortedArrayOfVideo);
 			
 
-				Writer out = new PrintWriter(path, "UTF-8");
+				Writer out = new PrintWriter(pathToJSONFile, "UTF-8");
 				out.write(obj.toJSONString());
 				out.flush();
 				out.close();
@@ -152,14 +152,14 @@ public class VideoCaruoselHomePageController {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value="/admin/video_on_home_page/remove_video/{path}", method = RequestMethod.POST,consumes="application/json",
 		headers = "content-type=application/x-www-form-urlencoded")
-    public @ResponseBody void removeVideo(@PathVariable("path") String path) {
+    public @ResponseBody void removeVideo(@PathVariable("path") String pathVideo) {
 
     	logger.info("remove video from home page carousel"); 	
 
     	JSONParser parser = new JSONParser();
 		
 		try {
-			obj = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream(path), "UTF-8"));
+			obj = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream(pathToJSONFile), "UTF-8"));
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		} catch (FileNotFoundException e) {
@@ -175,8 +175,9 @@ public class VideoCaruoselHomePageController {
 		Iterator it = arrayOfVideo.iterator();
     	while(it.hasNext()){
     		JSONObject video = (JSONObject) it.next();
-    		if(video.get("path").equals(path)){
+    		if(video.get("path").equals(pathVideo)){
     			it.remove();
+    			break;
     		}
     	}
 		
@@ -184,7 +185,7 @@ public class VideoCaruoselHomePageController {
 		obj.put("listVideo", arrayOfVideo);
 		
 		try {
-			Writer out = new PrintWriter(path, "UTF-8");
+			Writer out = new PrintWriter(pathToJSONFile, "UTF-8");
 			out.write(obj.toJSONString());
 			out.flush();
 			out.close();

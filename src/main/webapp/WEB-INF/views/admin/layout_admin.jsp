@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/admin/add_change_printer.css">
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/jquery-ui.css">
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/libs/fancybox/jquery.fancybox.css" />
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/libs/font-awesome-4.2.0/css/font-awesome.min.css" />
 	
 <!--  	
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">

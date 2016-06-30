@@ -51,7 +51,10 @@
 		</div>
 
 	</div>
-<%--        
+
+<div class="goods">   
+        
+<c:if test="${fn:length(listVideo) > 0}">         
 	<div class="video_content">
 		<div class="sider_container">
 			<div class="next_button_video"><i class="fa fa-angle-right"></i></div>
@@ -59,43 +62,18 @@
 			<div class="play_button_video" style="display: none;"><i class="fa fa-play" aria-hidden="true"></i></div>
 			<div class="prev_button_video"><i class="fa fa-angle-left"></i></div>
 			<div class="carousel_video">
-			
-			<div class="slide-item-video">
-				<iframe style="width: inherit;" src="http://www.youtube.com/embed/_nVzDSvv9bw"></iframe> 
-				<p>KFDJGk kdfjd dkfd dkfjad</p>
-	         </div>	
-	         
-	         <div class="slide-item-video">
-				<iframe style="width: inherit;" src="http://www.youtube.com/embed/_nVzDSvv9bw"></iframe> 
-				<p>KFDJGk kdfjd dkfd dkfjad</p>
-	         </div>	
-	         
-			<div class="slide-item-video">
-				<iframe style="width: inherit;" src="http://www.youtube.com/embed/_nVzDSvv9bw"></iframe> 
-				<p>KFDJGk kdfjd dkfd dkfjad</p>
-	         </div>	
-	         
-			<div class="slide-item-video">
-				<iframe style="width: inherit;" src="http://www.youtube.com/embed/_nVzDSvv9bw"></iframe> 
-				<p>KFDJGk kdfjd dkfd dkfjad</p>
-	         </div>		 
-	         
-	         <div class="slide-item-video">
-				<iframe style="width: inherit;" src="http://www.youtube.com/embed/_nVzDSvv9bw"></iframe> 
-				<p>KFDJGk kdfjd dkfd dkfjad</p>
-	         </div>      
-	         
-	         <div class="slide-item-video">
-				<iframe style="width: inherit;" src="http://www.youtube.com/embed/_nVzDSvv9bw"></iframe> 
-				<p>KFDJGk kdfjd dkfd dkfjad</p>
-	         </div>  
-
+				
+			<c:forEach items="${listVideo}" var="video">
+				<div class="slide-item-video">
+					<iframe style="width: inherit;" src="http://www.youtube.com/embed/${video.path}"></iframe> 
+					<p>${video.description}</p>
+		         </div>	
+	           </c:forEach>
+	
 			</div>
 		</div>
-</div>
---%> 
-
-<div class="goods">   
+	</div>
+</c:if>
         
 <c:if test="${fn:length(printers) > 0}">        
             <div class="advertising">

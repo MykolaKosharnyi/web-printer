@@ -159,56 +159,7 @@ padding: 5px;
 </div>
 
 <script type="text/javascript">
-/*$( document ).ready(function() {
-	var cartDiv = $('div.cart');
-	if (typeof(Cookies.get('cart')) == "undefined"){
-		cartDiv.append("Корзина пуста, Вы еще не добавляли товары в корзину.");
-	} else {
-		var cartJSON = new Array(Cookies.getJSON('cart'));
-		var table = $('<table/>').addClass('table table-hover table-striped table-bordered');
-		table.append($('<thead/>')
-				.append($('<th/>').text("Изображение"))
-				.append($('<th/>').text("Название"))
-				.append($('<th/>').text("Количество"))
-				.append($('<th/>').text("Цена"))
-				.append($('<th/>'))
-			);
-		
-			
-		$.each(Cookies.getJSON('cart'), function( index, product ) {
-		  table.append(
-				$('<tr/>')
-					.append($('<td/>').append($('<img/>').attr("src", product.picturePath)))
-					.append($('<td/>').text(product.name))
-					.append($('<td/>')
-							.append($('<span/>').addClass('dec_value').append($('<i/>').addClass('fa fa-minus')))
-							.append($('<input/>').val(product.quantity))
-							.append($('<span/>').addClass('inc_value').append($('<i/>').addClass('fa fa-plus'))))	
-					.append($('<td/>').addClass('price')
-							.text('$ ')
-							.append($('<span/>').text(product.price * product.quantity))
-							.append($('<input/>').attr("type", "hidden").attr("id", "price_ellement").val(product.price)))
-					.append($('<td/>').append($('<a/>')
-												.attr("href", "cart/delete/" + product.typeProduct + "/" + product.idProduct)
-												.append($('<i/>').addClass('fa fa-trash-o'))))
-							
-			);
-		});
-		
-		table.append($('<tr/>')
-				 .append($('<td/>').text("Общая стоимость"))
-				 .append($('<td/>'))
-				 .append($('<td/>'))
-				 .append($('<td/>').addClass('total_price')
-								.text('$ ')
-								.append($('<span/>').text("1234567")))
-				 .append($('<td/>'))
-			);
-		
-		cartDiv.append(table);
-	}
-});	
-	*/
+
 	$(function(){
 		$('.dec_value').click(function(){
             var quantity_element_val = $(this).parent('td').find('input.quantity').val();

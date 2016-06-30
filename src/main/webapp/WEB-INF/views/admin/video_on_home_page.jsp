@@ -33,8 +33,8 @@
 
 		<label id="head_of_page" style="font-size: 21px; padding: 0px; text-decoration: underline;"><spring:message text="Добавление видео:" /></label>
 			
-		<span>Путь к картинке:</span><input id="path" style="width: 650px; float: none; display: block;"></input>	
-		<span>Подпись под картинкой:</span><input id="description_video" style="width: 650px; float: none; display: block;"></input>		
+		<span>Путь к картинке (желательно, что бы видео не повторялось):</span><input id="path" style="width: 650px; float: none; display: block;"></input>	
+		<span>Подпись под картинкой (будьте вниметельны с такими символами: !%*?./ и т.п. Если все-таки придется что-то подобное добавлять в описание, обязательно после добавления нового видео перезагрузите страницу, оно отобразит как будет выглядеть в действительности):</span><input id="description_video" style="width: 650px; float: none; display: block;"></input>		
 		<span id="error_video" style="color:red; display: none;">Оба поля должны быть заполнены!</span>
 		
 		<a style="text-decoration:none; padding: 5px; margin-top: 5px; border-radius: 5px;
@@ -54,6 +54,7 @@
 					<li class="ui-state-default" id="${video.path}">
 						<div>
 							<p class="delete_img" onclick="deleteVideo(this,'${video.path}', '${video.description}')">Удалить</p>
+							<p class="copy_video" onclick="copyVideo('${video.path}', '${video.description}')"><i class="fa fa-files-o" aria-hidden="true"></i></p>
 						</div>
 						<div class="slide-item-video">
 							<iframe style="width: inherit;" src="http://www.youtube.com/embed/${video.path}"></iframe> 
@@ -77,18 +78,20 @@
 			/* save on server new video woth description */
 			$.ajax({
 	  		  type: 'POST',
-	  		  url: "/admin/video_on_home_page/upload_video/" + path + "/" + description/*.replace(".", "#")*/,
-	  		  data: JSON.stringify({ 
-	  			  "description": description
-	  			}),
+	  		  url: "/admin/video_on_home_page/upload_video/" + path + "/" + description.replace(".", "^").replace("/", ">"),
 			  contentType: "application/json; charset=utf-8",
               dataType: "json"
 	  		});
 			
 	  			$('#file-list').append($('<li/>').addClass("ui-state-default").attr("id", path)
-	  								.append($('<div/>').append($('<p/>').addClass("delete_img").click(function(){
+	  								.append($('<div/>')
+	  										.append($('<p/>').addClass("delete_img").click(function(){
 	  									deleteVideo(this, path, description);
-			                		}).text("Удалить")))
+			                		}).text("Удалить"))
+			                		
+			                				.append($('<p/>').addClass("copy_video").click(function(){
+			                					copyVideo(path, description);
+			                		}).append($('<i/>').addClass("fa fa-files-o"))))
 			                		.append($('<div/>').addClass("slide-item-video").append($('<iframe/>').css('width','inherit')
 			                				.attr("src", "http://www.youtube.com/embed/" + path)).append($('<p/>').text(description)))
 	  							);	
@@ -134,24 +137,11 @@
     	  li.remove();
     	};
     
+    	function copyVideo(path, description){
+    		 $('#product input#path').val("https://www.youtube.com/watch?v=" + path);
+    		 $('#product input#description_video').val(description);
+    	}
 
-    	function saveDescpitpion(){
-    		if($("#hrefOnPicture").val()==null || ($("#hrefOnPicture").val())==""){
-    			$.ajax({
-    				  type: 'POST',
-    				  url: "/admin/pictures/three_big_pictures/${directory}/${subDirectory}/save_description/1",
-    				  contentType: "application/json; charset=utf-8",
-    		          dataType: "json"
-    				  });		
-    		}else{
-    			$.ajax({
-  				  type: 'POST',
-  				  url: "/admin/pictures/three_big_pictures/${directory}/${subDirectory}/save_description/" + $("#hrefOnPicture").val(),
-  				  contentType: "application/json; charset=utf-8",
-  		          dataType: "json"
-  				});	
-    		}
-    		}
        /*-- для перетаскивания картинок(изменения порядка показа) --*/
    $(function() {
     $( "#sortable" ).sortable();

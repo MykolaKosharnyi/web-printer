@@ -9,6 +9,7 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -86,6 +87,7 @@ public class HomeController {
 		try {
 			JSONObject homeJSON = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream("/var/www/localhost/home.json"), "UTF-8"));
 			model.addAttribute("homeJSON", (JSONObject) homeJSON.get("homeJSON"));
+			model.addAttribute("listVideo", (JSONArray) homeJSON.get("listVideo"));
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		} catch (FileNotFoundException e) {
