@@ -22,7 +22,7 @@
 			<div class="container">
 				<div class="col-md-4 col-sm-4 col-xs-4">
 					<div class="row">
-						<a href="<c:url value='/' />" class="logo">for Print</a>
+						<a href="<c:url value='/' />" class="logo">E-Machine</a>
 						
 
 		<div class="btn-group">

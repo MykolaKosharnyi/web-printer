@@ -71,7 +71,7 @@
 	function uploadVideo(){
 		var pathReal = $('#product input#path').val();
 		var description = $('#product input#description_video').val();
-		var path = pathReal.replace("https://www.youtube.com/watch?v=", "");
+		var path = youtube_parser(pathReal) /* pathReal.replace("https://www.youtube.com/watch?v=", "")*/;
 		
 		if((path != '') && (description != '')){
 			
@@ -105,6 +105,12 @@
 			$("#error_video").show( 2000 );
 		}
 	}
+
+function youtube_parser(url){
+    var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
+    var match = url.match(regExp);
+    return (match&&match[7].length==11)? match[7] : false;
+}
 	
 	 $(function() {
      	$('#file-list').sortable({

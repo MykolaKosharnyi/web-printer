@@ -397,6 +397,27 @@ public class PrinterController {
 		} catch (IOException | ParseException e) {}
 	    return "admin/printer";
 	}
+	
+	@RequestMapping(value = "/admin/printer/copy/{id}", method = RequestMethod.GET)
+	public String copyPrinter(@PathVariable("id") long id, Model model) {
+		files.clear();
+		logger.info("/admin/printer/copy/" + id + " page.");
+		
+		 logger.info("Copy all characteristic of printer.");
+		 Printer printer = printerService.getPrinterById(id);
+		
+		
+		 printer.setId(null);
+		 model.addAttribute("product", printer);
+		 model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+		 model.addAttribute("type", "printer");
+		 
+		try {
+			model.addAttribute("printer", (JSONObject)new JSONParser().
+					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/printer.json"), "UTF-8")));
+		} catch (IOException | ParseException e) {}
+	    return "admin/printer";
+	}
      
 	@RequestMapping(value = "/admin/printer/add", method = RequestMethod.POST) 
 	public String handleFormUpload(/*
