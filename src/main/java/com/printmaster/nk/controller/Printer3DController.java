@@ -322,6 +322,47 @@ public class Printer3DController {
 		logger.info("All characteristic of 3d printer.");
 		model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
 		model.addAttribute("type", "3d_printer");
+		model.addAttribute("productId", 0);
+		try {
+			model.addAttribute("printer", (JSONObject)new JSONParser().
+					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/3d_printer.json"), "UTF-8")));
+		} catch (IOException | ParseException e) {}
+	    return "admin/3d_printer";
+	}
+	
+	@RequestMapping(value = "/admin/3d_printer/copy/{id}", method = RequestMethod.GET)
+	public String copyProduct(@PathVariable("id") long id, Model model) {
+		files.clear();
+		logger.info("/admin/3d_printer/copy/" + id + " page.");
+		
+		 logger.info("Copy all characteristic of 3d_printer.");
+		 Printer3D printer3D = productService.getPrinter3DById(id);
+		
+		 
+		 /* copy pictures to buffer */
+		 FileMeta fm = null;
+	    	for(String path : printer3D.getPathPictures()){
+	    		fm = new FileMeta();
+	    		fm.setFileName(path);
+	    		
+	    		try {
+	    			File fi = new File(directory + File.separator + 
+	    					concreteFolder + File.separator + id + File.separator + path);
+	    			fm.setBytes(Files.readAllBytes(fi.toPath()));
+	    			logger.info("Load pictures from folder to the FILEMETA.");
+				} catch (IOException e) {
+					logger.error("Can't load pistures to the FILEMETA", e);
+				}
+	    		files.add(fm);
+	    	}
+		
+		 /* set null to id because we must get create new product operation */
+	     printer3D.setId(null);
+		 model.addAttribute("product", printer3D);
+		 model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+		 model.addAttribute("type", "3d_printer");
+		 model.addAttribute("productId", id);
+		 
 		try {
 			model.addAttribute("printer", (JSONObject)new JSONParser().
 					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/3d_printer.json"), "UTF-8")));

@@ -288,11 +288,51 @@ public class UseWithProductController {
 		 logger.info("All characteristic of use_with_product.");
 		 model.addAttribute("product", new UseWithProduct());
 		 model.addAttribute("type", "use_with_product");
+		 model.addAttribute("productId", 0);
 		 
 		 try {
 			model.addAttribute("use_with_product", (JSONObject)new JSONParser()
 					.parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/use_with_product.json"), "UTF-8")));
 			} catch (IOException | ParseException e) {}
+	    return "admin/use_with_product";
+	}
+	
+	@RequestMapping(value = "/admin/use_with_product/copy/{id}", method = RequestMethod.GET)
+	public String copyProduct(@PathVariable("id") long id, Model model) {
+		files.clear();
+		logger.info("/admin/use_with_product/copy/" + id + " page.");
+		
+		 logger.info("Copy all characteristic of use_with_product.");
+		 UseWithProduct useWithProduct = useWithProductService.getUseWithProductById(id);
+		
+		 
+		 /* copy pictures to buffer */
+		 FileMeta fm = null;
+	    	for(String path : useWithProduct.getPathPictures()){
+	    		fm = new FileMeta();
+	    		fm.setFileName(path);
+	    		
+	    		try {
+	    			File fi = new File(directory + File.separator + 
+	    					concreteFolder + File.separator + id + File.separator + path);
+	    			fm.setBytes(Files.readAllBytes(fi.toPath()));
+	    			logger.info("Load pictures from folder to the FILEMETA.");
+				} catch (IOException e) {
+					logger.error("Can't load pistures to the FILEMETA", e);
+				}
+	    		files.add(fm);
+	    	}
+		
+		 /* set null to id because we must get create new product operation */
+	     useWithProduct.setId(null);
+		 model.addAttribute("product", useWithProduct);
+		 model.addAttribute("type", "use_with_product");
+		 model.addAttribute("productId", id);
+		 
+		try {
+			model.addAttribute("use_with_product", (JSONObject)new JSONParser().
+					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/use_with_product.json"), "UTF-8")));
+		} catch (IOException | ParseException e) {}
 	    return "admin/use_with_product";
 	}
      

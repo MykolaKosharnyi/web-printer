@@ -233,6 +233,7 @@ public class ScannerController {
 		model.addAttribute("product", new Scanner());
 		model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
 		model.addAttribute("type", "scanner");
+		model.addAttribute("productId", 0);
 		try {
 			model.addAttribute("scanner", (JSONObject)new JSONParser().
 					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/scanner.json"), "UTF-8")));
@@ -240,6 +241,46 @@ public class ScannerController {
 	    return "admin/scanner";
 	}
      
+	@RequestMapping(value = "/admin/scanner/copy/{id}", method = RequestMethod.GET)
+	public String copyScanner(@PathVariable("id") long id, Model model) {
+		files.clear();
+		logger.info("/admin/scanner/copy/" + id + " page.");
+		
+		 logger.info("Copy all characteristic of scanner.");
+		 Scanner scanner = scannerService.getScannerById(id);
+		
+		 
+		 /* copy pictures to buffer */
+		 FileMeta fm = null;
+	    	for(String path : scanner.getPathPictures()){
+	    		fm = new FileMeta();
+	    		fm.setFileName(path);
+	    		
+	    		try {
+	    			File fi = new File(directory + File.separator + 
+	    					concreteFolder + File.separator + id + File.separator + path);
+	    			fm.setBytes(Files.readAllBytes(fi.toPath()));
+	    			logger.info("Load pictures from folder to the FILEMETA.");
+				} catch (IOException e) {
+					logger.error("Can't load pistures to the FILEMETA", e);
+				}
+	    		files.add(fm);
+	    	}
+		
+		 /* set null to id because we must get create new product operation */
+	     scanner.setId(null);
+		 model.addAttribute("product", scanner);
+		 model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+		 model.addAttribute("type", "scanner");
+		 model.addAttribute("productId", id);
+		 
+		try {
+			model.addAttribute("scanner", (JSONObject)new JSONParser().
+					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/scanner.json"), "UTF-8")));
+		} catch (IOException | ParseException e) {}
+	    return "admin/scanner";
+	}
+	
 	@RequestMapping(value = "/admin/scanner/add", method = RequestMethod.POST) 
 	public String handleFormUpload(@ModelAttribute("product") @Valid  Scanner product,
 			BindingResult result, Model model) throws IOException{

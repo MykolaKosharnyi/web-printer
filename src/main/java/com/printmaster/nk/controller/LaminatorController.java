@@ -285,6 +285,47 @@ public class LaminatorController {
 		model.addAttribute("product", new Laminator());
 		model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
 		model.addAttribute("type", "laminator");
+		model.addAttribute("productId", 0);
+		try {
+			model.addAttribute("laminator", (JSONObject)new JSONParser().
+					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/laminator.json"), "UTF-8")));
+		} catch (IOException | ParseException e) {}
+	    return "admin/laminator";
+	}
+	
+	@RequestMapping(value = "/admin/laminator/copy/{id}", method = RequestMethod.GET)
+	public String copyLaminator(@PathVariable("id") long id, Model model) {
+		files.clear();
+		logger.info("/admin/laminator/copy/" + id + " page.");
+		
+		 logger.info("Copy all characteristic of laminator.");
+		 Laminator laminator = laminatorService.getLaminatorById(id);
+		
+		 
+		 /* copy pictures to buffer */
+		 FileMeta fm = null;
+	    	for(String path : laminator.getPathPictures()){
+	    		fm = new FileMeta();
+	    		fm.setFileName(path);
+	    		
+	    		try {
+	    			File fi = new File(directory + File.separator + 
+	    					concreteFolder + File.separator + id + File.separator + path);
+	    			fm.setBytes(Files.readAllBytes(fi.toPath()));
+	    			logger.info("Load pictures from folder to the FILEMETA.");
+				} catch (IOException e) {
+					logger.error("Can't load pistures to the FILEMETA", e);
+				}
+	    		files.add(fm);
+	    	}
+		
+		 /* set null to id because we must get create new product operation */
+	     laminator.setId(null);
+		 model.addAttribute("product", laminator);
+		 model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+		 model.addAttribute("type", "laminator");
+		 model.addAttribute("productId", id);
+		 
 		try {
 			model.addAttribute("laminator", (JSONObject)new JSONParser().
 					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/laminator.json"), "UTF-8")));

@@ -16,16 +16,16 @@
 				</form:form>
 				
 				<ul id="file-list">
-					<c:if test="${empty product.id}">
+					<c:if test="${productId==0}">
 						<li class="no-items">(ни одного файла еще не загружено)</li>
 					</c:if>
-					<c:if test="${!empty product.id}">
+					<c:if test="${productId!=0}">
 						<c:forEach items="${product.pathPictures}" var="pathPicture">
 							<li class="ui-state-default" id="${pathPicture}">
 								<div>
 									<p class="delete_img">Удалить</p>
 								</div>
-								<img src="/images/${type}s/${product.id}/${pathPicture}" alt="">
+								<img src="/images/${type}s/${productId}/${pathPicture}" alt="">
 							</li>
 						</c:forEach>
 					</c:if>

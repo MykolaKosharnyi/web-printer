@@ -135,12 +135,52 @@ public class RipController {
 		logger.info("/admin/rip/new page.");
 		model.addAttribute("product", new Rip());
 		model.addAttribute("type", "rip");
+		model.addAttribute("productId", 0);
 		
 		logger.info("All characteristic of RIP.");
 		model.addAttribute("rip", (JSONArray)new JSONParser().parse(new InputStreamReader(new FileInputStream("/var/www/localhost/images/rip.json"), "UTF-8")));
 	    return "admin/rip";
 	}
      
+	@RequestMapping(value = "/admin/rip/copy/{id}", method = RequestMethod.GET)
+	public String copyProduct(@PathVariable("id") long id, Model model) {
+		files.clear();
+		logger.info("/admin/rip/copy/" + id + " page.");
+		
+		 logger.info("Copy all characteristic of rip.");
+		 Rip rip = ripService.getRipById(id);
+		
+		 
+		 /* copy pictures to buffer */
+		 FileMeta fm = null;
+	    	for(String path : rip.getPathPictures()){
+	    		fm = new FileMeta();
+	    		fm.setFileName(path);
+	    		
+	    		try {
+	    			File fi = new File(directory + File.separator + 
+	    					concreteFolder + File.separator + id + File.separator + path);
+	    			fm.setBytes(Files.readAllBytes(fi.toPath()));
+	    			logger.info("Load pictures from folder to the FILEMETA.");
+				} catch (IOException e) {
+					logger.error("Can't load pistures to the FILEMETA", e);
+				}
+	    		files.add(fm);
+	    	}
+		
+		 /* set null to id because we must get create new product operation */
+	     rip.setId(null);
+		 model.addAttribute("product", rip);
+		 model.addAttribute("type", "rip");
+		 model.addAttribute("productId", id);
+		 
+		try {
+			model.addAttribute("rip", (JSONArray)new JSONParser().
+					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/rip.json"), "UTF-8")));
+		} catch (IOException | ParseException e) {}
+	    return "admin/rip";
+	}
+	
 	@RequestMapping(value = "/admin/rip/add", method = RequestMethod.POST) 
 	public String handleFormUpload(@ModelAttribute("product") @Valid Rip product,
 			BindingResult result, Model model) throws IOException{

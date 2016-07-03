@@ -46,8 +46,8 @@
 					<td><input type="checkbox" name="showOnLeftSide" <c:if test="${product.showOnLeftSide}">checked</c:if>
 						onclick="setShowOnLeftSide('${product.type}', ${product.id}, this);"/></td>
 						
-					<td><a href="<c:url value='/admin/${product.type}/edit/${product.id}' />">Изменить</a></td>
-					<td><a href="<c:url value='/admin/${product.type}/remove/${product.id}' />">Удалить</a></td>
+					<td><a href="<c:url value='/admin/${product.type}/edit/${product.id}' />"><i class="fa fa-pencil edit" aria-hidden="true"></i></a></td>
+					<td><a href="<c:url value='/admin/${product.type}/remove/${product.id}' />"><i class="fa fa-trash-o remove" aria-hidden="true"></i></a></td>
 				</tr>
 			</c:forEach>
 		</table>

@@ -14,17 +14,17 @@
     <link rel="stylesheet" href="/css/admin/add_change_printer.css">
 	<script src="<%=request.getContextPath()%>/resources/js/admin/add_change_printer.js"></script>
 
-<c:if test="${empty product.id}">
-	<title>
-		<spring:message text="Добавление нового принтера" />
-	</title>
-</c:if>
-<c:if test="${!empty product.id}">
-	<title>
-		<spring:message text="Изменение" />
-	</title>
-</c:if>
-</head>
+	<c:if test="${empty product.id}">
+		<title>
+			<spring:message text="Добавление нового принтера" />
+		</title>
+	</c:if>
+	<c:if test="${!empty product.id}">
+		<title>
+			<spring:message text="Изменение" />
+		</title>
+	</c:if>
+	</head>
 <body>
 	
 	<div id="product">

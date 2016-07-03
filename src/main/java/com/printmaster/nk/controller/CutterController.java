@@ -267,6 +267,47 @@ public class CutterController {
 		
 		model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
 		model.addAttribute("type", "cutter");
+		model.addAttribute("productId", 0);
+	    return "admin/cutter";
+	}
+	
+	@RequestMapping(value = "/admin/cutter/copy/{id}", method = RequestMethod.GET)
+	public String copyProduct(@PathVariable("id") long id, Model model) {
+		files.clear();
+		logger.info("/admin/cutter/copy/" + id + " page.");
+		
+		 logger.info("Copy all characteristic of cutter.");
+		 Cutter cutter = cutterService.getCutterById(id);
+		
+		 
+		 /* copy pictures to buffer */
+		 FileMeta fm = null;
+	    	for(String path : cutter.getPathPictures()){
+	    		fm = new FileMeta();
+	    		fm.setFileName(path);
+	    		
+	    		try {
+	    			File fi = new File(directory + File.separator + 
+	    					concreteFolder + File.separator + id + File.separator + path);
+	    			fm.setBytes(Files.readAllBytes(fi.toPath()));
+	    			logger.info("Load pictures from folder to the FILEMETA.");
+				} catch (IOException e) {
+					logger.error("Can't load pistures to the FILEMETA", e);
+				}
+	    		files.add(fm);
+	    	}
+		
+		 /* set null to id because we must get create new product operation */
+	     cutter.setId(null);
+		 model.addAttribute("product", cutter);
+		 model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+		 model.addAttribute("type", "cutter");
+		 model.addAttribute("productId", id);
+		 
+		try {
+			model.addAttribute("cutter", (JSONObject)new JSONParser().
+					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/cutter.json"), "UTF-8")));
+		} catch (IOException | ParseException e) {}
 	    return "admin/cutter";
 	}
      

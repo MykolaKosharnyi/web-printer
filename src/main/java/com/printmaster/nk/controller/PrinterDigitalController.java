@@ -243,6 +243,47 @@ public class PrinterDigitalController {
 		model.addAttribute("product", new DigitalPrinter());
 		model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
 		model.addAttribute("type", "digital_printer");
+		model.addAttribute("productId", 0);
+		try {
+			model.addAttribute("digital_printer", (JSONObject)new JSONParser().
+					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/digital_printer.json"), "UTF-8")));
+		} catch (IOException | ParseException e) {}
+	    return "admin/digital_printer";
+	}
+	
+	@RequestMapping(value = "/admin/digital_printer/copy/{id}", method = RequestMethod.GET)
+	public String copyDigitalEquipment(@PathVariable("id") long id, Model model) {
+		files.clear();
+		logger.info("/admin/digital_printer/copy/" + id + " page.");
+		
+		 logger.info("Copy all characteristic of digital_printer.");
+		 DigitalPrinter digitalPrinter = productService.getPrinterById(id);
+		
+		 
+		 /* copy pictures to buffer */
+		 FileMeta fm = null;
+	    	for(String path : digitalPrinter.getPathPictures()){
+	    		fm = new FileMeta();
+	    		fm.setFileName(path);
+	    		
+	    		try {
+	    			File fi = new File(directory + File.separator + 
+	    					concreteFolder + File.separator + id + File.separator + path);
+	    			fm.setBytes(Files.readAllBytes(fi.toPath()));
+	    			logger.info("Load pictures from folder to the FILEMETA.");
+				} catch (IOException e) {
+					logger.error("Can't load pistures to the FILEMETA", e);
+				}
+	    		files.add(fm);
+	    	}
+		
+		 /* set null to id because we must get create new product operation */
+	    	digitalPrinter.setId(null);
+		 model.addAttribute("product", digitalPrinter);
+		 model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+		 model.addAttribute("type", "digital_printer");
+		 model.addAttribute("productId", id);
+		 
 		try {
 			model.addAttribute("digital_printer", (JSONObject)new JSONParser().
 					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/digital_printer.json"), "UTF-8")));

@@ -390,6 +390,7 @@ public class PrinterController {
 		 model.addAttribute("product", new Printer());
 		 model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
 		 model.addAttribute("type", "printer");
+		 model.addAttribute("productId", 0);
 		 
 		try {
 			model.addAttribute("printer", (JSONObject)new JSONParser().
@@ -406,11 +407,30 @@ public class PrinterController {
 		 logger.info("Copy all characteristic of printer.");
 		 Printer printer = printerService.getPrinterById(id);
 		
+		 
+		 /* copy pictures to buffer */
+		 FileMeta fm = null;
+	    	for(String path : printer.getPathPictures()){
+	    		fm = new FileMeta();
+	    		fm.setFileName(path);
+	    		
+	    		try {
+	    			File fi = new File(directory + File.separator + 
+	    					concreteFolder + File.separator + id + File.separator + path);
+	    			fm.setBytes(Files.readAllBytes(fi.toPath()));
+	    			logger.info("Load pictures from folder to the FILEMETA.");
+				} catch (IOException e) {
+					logger.error("Can't load pistures to the FILEMETA", e);
+				}
+	    		files.add(fm);
+	    	}
 		
+		 /* set null to id because we must get create new product operation */
 		 printer.setId(null);
 		 model.addAttribute("product", printer);
 		 model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
 		 model.addAttribute("type", "printer");
+		 model.addAttribute("productId", id);
 		 
 		try {
 			model.addAttribute("printer", (JSONObject)new JSONParser().

@@ -316,6 +316,7 @@ public class LaserController {
 		model.addAttribute("product", new Laser());
 		model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
 		model.addAttribute("type", "laser");
+		model.addAttribute("productId", 0);
 		 try {
 				model.addAttribute("laser", (JSONObject)new JSONParser().
 						parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/laser.json"), "UTF-8")));
@@ -323,6 +324,46 @@ public class LaserController {
 	    return "admin/laser";
 	}
      
+	@RequestMapping(value = "/admin/laser/copy/{id}", method = RequestMethod.GET)
+	public String copyProduct(@PathVariable("id") long id, Model model) {
+		files.clear();
+		logger.info("/admin/laser/copy/" + id + " page.");
+		
+		 logger.info("Copy all characteristic of laser.");
+		 Laser laser = laserService.getLaserById(id);
+		
+		 
+		 /* copy pictures to buffer */
+		 FileMeta fm = null;
+	    	for(String path : laser.getPathPictures()){
+	    		fm = new FileMeta();
+	    		fm.setFileName(path);
+	    		
+	    		try {
+	    			File fi = new File(directory + File.separator + 
+	    					concreteFolder + File.separator + id + File.separator + path);
+	    			fm.setBytes(Files.readAllBytes(fi.toPath()));
+	    			logger.info("Load pictures from folder to the FILEMETA.");
+				} catch (IOException e) {
+					logger.error("Can't load pistures to the FILEMETA", e);
+				}
+	    		files.add(fm);
+	    	}
+		
+		 /* set null to id because we must get create new product operation */
+	     laser.setId(null);
+		 model.addAttribute("product", laser);
+		 model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+		 model.addAttribute("type", "laser");
+		 model.addAttribute("productId", id);
+		 
+		try {
+			model.addAttribute("laser", (JSONObject)new JSONParser().
+					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/laser.json"), "UTF-8")));
+		} catch (IOException | ParseException e) {}
+	    return "admin/laser";
+	}
+	
 	@RequestMapping(value = "/admin/laser/add", method = RequestMethod.POST) 
 	public String handleFormUpload(@ModelAttribute("product") @Valid  Laser product,
 			BindingResult result, Model model) throws IOException{

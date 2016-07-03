@@ -32,6 +32,7 @@
 				<th width="60">Показ. на сайте</th>
 				<th width="60">Показ. на гл. меню</th>
 				<th width="60">Показ. в левом блоке</th>
+				<th width="60">Копировать товар</th>
 				<th width="60">Редактировать</th>
 				<th width="60">Удалить</th>
 			</tr>
@@ -51,9 +52,10 @@
 							
 					<td><input type="checkbox" name="showOnLeftSide" <c:if test="${product.showOnLeftSide}">checked</c:if>
 						onclick="setShowOnLeftSide('${productType}', ${product.id}, this);"/></td>
-							
-					<td><a href="<c:url value='/admin/${productType}/edit/${product.id}' />">Изменить</a></td>
-					<td><a href="<c:url value='/admin/${productType}/remove/${product.id}' />">Удалить</a></td>
+					
+					<td><a href="<c:url value='/admin/${productType}/copy/${product.id}' />"><i class="fa fa-clone clone" aria-hidden="true"></i></a></td>		
+					<td><a href="<c:url value='/admin/${productType}/edit/${product.id}' />"><i class="fa fa-pencil edit" aria-hidden="true"></i></a></td>
+					<td><a href="<c:url value='/admin/${productType}/remove/${product.id}' />"><i class="fa fa-trash-o remove" aria-hidden="true"></i></a></td>
 				</tr>
 			</c:forEach>
 		</table>
@@ -104,8 +106,9 @@
 	                		   .append($('<td/>').append(showOnSite))
 	                		   .append($('<td/>').append(showOnHomePage))
 	                		   .append($('<td/>').append(showOnLeftSide))
-	                		   .append($('<td/>').append($('<a/>').attr("href", "/admin/${productType}/edit/" + product.id).text("Изменить")))
-	                		   .append($('<td/>').append($('<a/>').attr("href", "/admin/${productType}/remove/" + product.id).text("Удалить")))
+	                		   .append($('<td/>').append($('<a/>').attr("href", "/admin/${productType}/copy/" + product.id).append($('<i/>').addClass('fa fa-clone'))))
+	                		   .append($('<td/>').append($('<a/>').attr("href", "/admin/${productType}/edit/" + product.id).append($('<i/>').addClass('fa fa-pencil'))))
+	                		   .append($('<td/>').append($('<a/>').attr("href", "/admin/${productType}/remove/" + product.id).append($('<i/>').addClass('fa fa-trash-o'))))
 	                		   	
 	                	$('.tg tr:last').after(outerTR);
 	                });
