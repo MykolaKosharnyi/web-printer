@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -133,14 +134,44 @@ public abstract class Product implements Serializable{
 	@Column(name="optionRIP", columnDefinition="Decimal(10,2) default '0.00'")
 	protected double optionRIP;
 	
+	@Size(min = 5, max = 50)
+	@Column(name="descriptionRIP")
+	protected String descriptionOptionRIP;
+	
 	@Column(name="optionSNCP", columnDefinition="Decimal(10,2) default '0.00'")
 	protected double optionSNCP;
+	
+	@Size(min = 5, max = 50)
+	@Column(name="descriptionSNCP")
+	protected String descriptionOptionSNCP;
 	
 	@Column(name="optionDelivery", columnDefinition="Decimal(10,2) default '0.00'")
 	protected double optionDelivery;
 	
+	@Size(min = 5, max = 50)
+	@Column(name="descriptionDelivery")
+	protected String descriptionOptionDelivery;
+	
 	@Column(name="optionGuarantee", columnDefinition="Decimal(10,2) default '0.00'")
 	protected double optionGuarantee;
+	
+	@Size(min = 5, max = 50)
+	@Column(name="descriptionGuarantee")
+	protected String descriptionOptionGuarantee;
+	
+	@Column(name="optionInstallation", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double optionInstallation;
+	
+	@Size(min = 5, max = 50)
+	@Column(name="descriptionInstallation")
+	protected String descriptionOptionInstallation;
+	
+	@Column(name="optionVAT", columnDefinition="Decimal(10,2) default '1.20'")
+	protected double optionVAT;
+	
+	@Size(min = 5, max = 50)
+	@Column(name="descriptionVAT")
+	protected String descriptionOptionVAT;
 	
 	@Column(name="nameAddedOption")
 	protected String nameAddedOption;
@@ -148,7 +179,153 @@ public abstract class Product implements Serializable{
 	@Column(name="priceAddedOption", columnDefinition="Decimal(10,2) default '0.00'")
 	protected double priceAddedOption;
 	
+	@Size(min = 5, max = 50)
+	@Column(name="descriptionAddedOption")
+	protected String descriptionOptionAddedOption;
+	
+	@Column(name="nameAddedOption2")
+	protected String nameAddedOption2;
+	
+	@Column(name="priceAddedOption2", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double priceAddedOption2;
+	
+	@Size(min = 5, max = 50)
+	@Column(name="descriptionAddedOption2")
+	protected String descriptionOptionAddedOption2;
+	
+	@Column(name="nameAddedOption3")
+	protected String nameAddedOption3;
+	
+	@Column(name="priceAddedOption3", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double priceAddedOption3;
+	
+	@Size(min = 5, max = 50)
+	@Column(name="descriptionAddedOption3")
+	protected String descriptionOptionAddedOption3;
+	
 	public Product(){}
+
+	public String getDescriptionOptionRIP() {
+		return descriptionOptionRIP;
+	}
+
+	public void setDescriptionOptionRIP(String descriptionOptionRIP) {
+		this.descriptionOptionRIP = descriptionOptionRIP;
+	}
+
+	public String getDescriptionOptionSNCP() {
+		return descriptionOptionSNCP;
+	}
+
+	public void setDescriptionOptionSNCP(String descriptionOptionSNCP) {
+		this.descriptionOptionSNCP = descriptionOptionSNCP;
+	}
+
+	public String getDescriptionOptionDelivery() {
+		return descriptionOptionDelivery;
+	}
+
+	public void setDescriptionOptionDelivery(String descriptionOptionDelivery) {
+		this.descriptionOptionDelivery = descriptionOptionDelivery;
+	}
+
+	public String getDescriptionOptionGuarantee() {
+		return descriptionOptionGuarantee;
+	}
+
+	public void setDescriptionOptionGuarantee(String descriptionOptionGuarantee) {
+		this.descriptionOptionGuarantee = descriptionOptionGuarantee;
+	}
+
+	public String getDescriptionOptionInstallation() {
+		return descriptionOptionInstallation;
+	}
+
+	public void setDescriptionOptionInstallation(String descriptionOptionInstallation) {
+		this.descriptionOptionInstallation = descriptionOptionInstallation;
+	}
+
+	public String getDescriptionOptionVAT() {
+		return descriptionOptionVAT;
+	}
+
+	public void setDescriptionOptionVAT(String descriptionOptionVAT) {
+		this.descriptionOptionVAT = descriptionOptionVAT;
+	}
+
+	public String getDescriptionOptionAddedOption() {
+		return descriptionOptionAddedOption;
+	}
+
+	public void setDescriptionOptionAddedOption(String descriptionOptionAddedOption) {
+		this.descriptionOptionAddedOption = descriptionOptionAddedOption;
+	}
+
+	public String getDescriptionOptionAddedOption2() {
+		return descriptionOptionAddedOption2;
+	}
+
+	public void setDescriptionOptionAddedOption2(String descriptionOptionAddedOption2) {
+		this.descriptionOptionAddedOption2 = descriptionOptionAddedOption2;
+	}
+
+	public String getDescriptionOptionAddedOption3() {
+		return descriptionOptionAddedOption3;
+	}
+
+	public void setDescriptionOptionAddedOption3(String descriptionOptionAddedOption3) {
+		this.descriptionOptionAddedOption3 = descriptionOptionAddedOption3;
+	}
+
+	public double getOptionInstallation() {
+		return optionInstallation;
+	}
+
+	public void setOptionInstallation(double optionInstallation) {
+		this.optionInstallation = optionInstallation;
+	}
+
+
+	public double getOptionVAT() {
+		return optionVAT;
+	}
+
+	public void setOptionVAT(double optionVAT) {
+		this.optionVAT = optionVAT;
+	}
+
+
+	public String getNameAddedOption2() {
+		return nameAddedOption2;
+	}
+
+	public void setNameAddedOption2(String nameAddedOption2) {
+		this.nameAddedOption2 = nameAddedOption2;
+	}
+
+	public double getPriceAddedOption2() {
+		return priceAddedOption2;
+	}
+
+	public void setPriceAddedOption2(double priceAddedOption2) {
+		this.priceAddedOption2 = priceAddedOption2;
+	}
+
+	public String getNameAddedOption3() {
+		return nameAddedOption3;
+	}
+
+	public void setNameAddedOption3(String nameAddedOption3) {
+		this.nameAddedOption3 = nameAddedOption3;
+	}
+
+	public double getPriceAddedOption3() {
+		return priceAddedOption3;
+	}
+
+	public void setPriceAddedOption3(double priceAddedOption3) {
+		this.priceAddedOption3 = priceAddedOption3;
+	}
 
 	public double getOptionRIP() {
 		return optionRIP;

@@ -12,6 +12,7 @@
 			<label class="add_price_value">$<span><fmt:formatNumber type="number" 
 						maxFractionDigits="2" minFractionDigits="2" value="${product.optionRIP}" /></span>
 			</label>
+			<label class="option_description">${product.descriptionOptionRIP}</label>
 		</div>
 	</c:if>
                  		
@@ -23,6 +24,19 @@
 			<label class="add_price_value">$<span><fmt:formatNumber type="number" 
 						maxFractionDigits="2" minFractionDigits="2" value="${product.optionSNCP}" /></span>
 			</label>
+			<label class="option_description">${product.descriptionOptionSNCP}</label>
+		</div>
+	</c:if>
+     
+    <c:if test="${product.optionVAT > 0.01}">
+		<div class="block_product_price">
+			<input class="add_price" type="checkbox" value="НДС" id="optionVAT_price">
+				<label class="add_price_title" for="optionVAT_price">НДС:</label>
+			</input>
+			<label class="add_price_value"><span><fmt:formatNumber type="number" 
+			   			maxFractionDigits="2" minFractionDigits="2" value="${product.optionVAT}" /></span>
+			</label>
+			<label class="option_description">${product.descriptionOptionVAT}</label>
 		</div>
 	</c:if>
                  		
@@ -34,6 +48,19 @@
 			<label class="add_price_value">$<span><fmt:formatNumber type="number" 
 			   			maxFractionDigits="2" minFractionDigits="2" value="${product.optionDelivery}" /></span>
 			</label>
+			<label class="option_description">${product.descriptionOptionDelivery}</label>
+		</div>
+	</c:if>
+	
+	<c:if test="${product.optionInstallation > 0.01}">
+		<div class="block_product_price">
+			<input class="add_price" type="checkbox" value="Инсталяция" id="optionInstallation_price">
+				<label class="add_price_title" for="optionInstallation_price">Инсталяция:</label>
+			</input>
+			<label class="add_price_value">$<span><fmt:formatNumber type="number" 
+			   			maxFractionDigits="2" minFractionDigits="2" value="${product.optionInstallation}" /></span>
+			</label>
+			<label class="option_description">${product.descriptionOptionInstallation}</label>
 		</div>
 	</c:if>
                  		
@@ -45,6 +72,31 @@
 			<label class="add_price_value">$<span><fmt:formatNumber type="number" 
 			   			maxFractionDigits="2" minFractionDigits="2" value="${product.priceAddedOption}" /></span>
 			</label>
+			<label class="option_description">${product.descriptionOptionAddedOption}</label>
+		</div>
+	</c:if>
+	
+	<c:if test="${product.priceAddedOption2 > 0.01 && (product.nameAddedOption2!=null && product.nameAddedOption2!='')}">
+		<div class="block_product_price">
+			<input class="add_price" type="checkbox" value="${product.nameAddedOption2}" id="priceAddedOption2_price">
+				<label class="add_price_title" for="priceAddedOption2_price">${product.nameAddedOption2}:</label>
+			</input>
+			<label class="add_price_value">$<span><fmt:formatNumber type="number" 
+			   			maxFractionDigits="2" minFractionDigits="2" value="${product.priceAddedOption2}" /></span>
+			</label>
+			<label class="option_description">${product.descriptionOptionAddedOption2}</label>
+		</div>
+	</c:if>
+	
+	<c:if test="${product.priceAddedOption3 > 0.01 && (product.nameAddedOption3!=null && product.nameAddedOption3!='')}">
+		<div class="block_product_price">
+			<input class="add_price" type="checkbox" value="${product.nameAddedOption3}" id="priceAddedOption3_price">
+				<label class="add_price_title" for="priceAddedOption3_price">${product.nameAddedOption3}:</label>
+			</input>
+			<label class="add_price_value">$<span><fmt:formatNumber type="number" 
+			   			maxFractionDigits="2" minFractionDigits="2" value="${product.priceAddedOption3}" /></span>
+			</label>
+			<label class="option_description">${product.descriptionOptionAddedOption3}</label>
 		</div>
 	</c:if>
                  		
@@ -56,6 +108,7 @@
 			<label class="add_price_value">$<span><fmt:formatNumber type="number" 
 			   			maxFractionDigits="2" minFractionDigits="2" value="${product.optionGuarantee}" /></span>
 			</label>
+			<label class="option_description">${product.descriptionOptionGuarantee}</label>
 		</div>
 	</c:if> 
 		                  
