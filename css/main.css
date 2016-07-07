@@ -193,13 +193,15 @@ h1 {
 	border-radius: 10em;
 	color: #006080;
 	cursor: pointer;
-	font-size: 46px;
+	font-size: 35px;
 	padding: 0 25px;
 	position: absolute;
 	top: 40%;
 	z-index: 10;
 	border: 1px grey solid;
 }
+
+.next_button, .prev_button{font-size: 46px;}
 
 .pause_button, .play_button,
 .pause_button_printer, .play_button_printer,
@@ -214,8 +216,15 @@ h1 {
 .pause_button_video, .play_button_video{
 top:80%;
 left: 46%;
-font-size: 38px;
+font-size: 27px;
 padding: 3px 20px;
+}
+
+.pause_button, .play_button{font-size: 38px;}
+
+.pause_button_video, .play_button_video{
+top:50%;
+left: 46.85%;
 }
 
 .next_button:hover, .prev_button:hover,
@@ -269,6 +278,45 @@ padding: 3px 20px;
 .prev_button_video {
 	left: 20px;
 }
+
+.fancybox_video{
+	width: inherit;
+}
+
+.slide-item-video{
+	position: relative;
+	height: 100%;
+	width: inherit;
+	float: left;
+	border: 1px rgb(219, 219, 219) solid;
+	z-index: 50;
+}
+
+.slide-item-video p{
+text-indent: 10px;
+height: 52px;
+min-height: 52px;
+padding: 5px;
+font-size: 15px;
+border: none;
+overflow: hidden;
+text-overflow: ellipsis;
+cursor: pointer;
+display: table-cell;
+vertical-align: middle;
+color: #006080;
+}
+
+.video_content{
+	margin-bottom: 5px;
+}
+
+.slide-item-video p:hover{
+	    overflow: visible;
+		width: auto;
+		/*height: auto;*/
+        }
+
 .reklam_animation .slide_item img{
 	height: 450px;
 }

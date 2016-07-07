@@ -577,12 +577,12 @@ p.p_pue{
 }
 
 .ribbon-search-wrapper-left {
-  width: 135px;
-  height: 135px;
-  overflow: hidden;
-  position: absolute;
-  top: -3px;
-  left: -3px;
+  width: 178px;
+	height: 178px;
+	overflow: hidden;
+	position: absolute;
+	top: -3px;
+	left: -3px;
 }
 
 .ribbon-search-right {
@@ -602,17 +602,20 @@ z-index: 10;
 }   
 
 .ribbon-search-left {
-  font: bold 20px Sans-Serif;
-  text-align: center;
+font: bold 12px Sans-Serif;
+text-align: center;
 -moz-transform: rotate(-45deg);
 -webkit-transform: rotate(-45deg);
 -o-transform: rotate(-45deg);
 -ms-transform: rotate(-45deg);
 transform: rotate(-45deg);
-  position: relative;
-  padding: 4px 0;
-  left: -38px;
-  top: 40px;
-  width: 190px;
+position: relative;
+padding: 4px 0;
+left: -50px;
+top: 50px;
+width: 242px;
 z-index: 10;
+height: auto;
+padding: 7px 35px;
+min-height: 23px;
 }   

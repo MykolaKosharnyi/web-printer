@@ -181,31 +181,46 @@ border-radius: 5px;
 
 .block_product_price{
 	padding: 2px;
+	height:auto;
+}
+
+.block_product_price input,
+.block_product_price label{
+top: 0px;
+position: relative;
 }
 
 input[type="checkbox"].add_price{
 	margin-left: 5px;
 }
 
-.option_product_with_price label {
+.option_product_with_price label{
 	margin-bottom: 0px;
 	font-weight: unset;
-	min-width: 240px;
+	/*min-width: 240px;*/
 }
 
+.option_description{
+height: auto;
+width: 215px;
+}
+
+label.add_price_title,.option_product_with_price label.total_ptice_title{min-width: 200px;}
+label.add_price_title{height: auto; max-width: 200px;}
+
 label.add_price_value{
-	/*text-align: center;*/
+	min-width: 60px;
 }
 
 .option_product_with_price label.total_ptice_title,
 .option_product_with_price label.total_price{
-min-width: 155px;
+/*min-width: 155px;*/
 margin:10px 0px;
-padding: 5px;
 text-align: right;
 }
 .option_product_with_price label.total_ptice_title{
 margin-left: 25px;
+padding: 5px;
 }
 
 .products_buy{
