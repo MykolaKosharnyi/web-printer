@@ -2,6 +2,7 @@ package com.printmaster.nk.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -131,77 +132,77 @@ public abstract class Product implements Serializable{
 	protected String serviceInformation;
 	
 	//Option - price for addition opportunity with product
-	@Column(name="optionRIP", columnDefinition="Decimal(10,2) default '0.00'")
-	protected double optionRIP;
-	
-	@Size(min = 5, max = 50)
-	@Column(name="descriptionRIP")
-	protected String descriptionOptionRIP;
-	
-	@Column(name="optionSNCP", columnDefinition="Decimal(10,2) default '0.00'")
-	protected double optionSNCP;
-	
-	@Size(min = 5, max = 50)
-	@Column(name="descriptionSNCP")
-	protected String descriptionOptionSNCP;
-	
-	@Column(name="optionDelivery", columnDefinition="Decimal(10,2) default '0.00'")
-	protected double optionDelivery;
-	
-	@Size(min = 5, max = 50)
-	@Column(name="descriptionDelivery")
-	protected String descriptionOptionDelivery;
-	
-	@Column(name="optionGuarantee", columnDefinition="Decimal(10,2) default '0.00'")
-	protected double optionGuarantee;
-	
-	@Size(min = 5, max = 50)
-	@Column(name="descriptionGuarantee")
-	protected String descriptionOptionGuarantee;
-	
-	@Column(name="optionInstallation", columnDefinition="Decimal(10,2) default '0.00'")
-	protected double optionInstallation;
-	
-	@Size(min = 5, max = 50)
-	@Column(name="descriptionInstallation")
-	protected String descriptionOptionInstallation;
-	
-	@Column(name="optionVAT", columnDefinition="Decimal(10,2) default '1.20'")
-	protected double optionVAT;
-	
-	@Size(min = 5, max = 50)
-	@Column(name="descriptionVAT")
-	protected String descriptionOptionVAT;
-	
-	@Column(name="nameAddedOption")
-	protected String nameAddedOption;
-	
-	@Column(name="priceAddedOption", columnDefinition="Decimal(10,2) default '0.00'")
-	protected double priceAddedOption;
-	
-	@Size(min = 5, max = 50)
-	@Column(name="descriptionAddedOption")
-	protected String descriptionOptionAddedOption;
-	
-	@Column(name="nameAddedOption2")
-	protected String nameAddedOption2;
-	
-	@Column(name="priceAddedOption2", columnDefinition="Decimal(10,2) default '0.00'")
-	protected double priceAddedOption2;
-	
-	@Size(min = 5, max = 50)
-	@Column(name="descriptionAddedOption2")
-	protected String descriptionOptionAddedOption2;
-	
-	@Column(name="nameAddedOption3")
-	protected String nameAddedOption3;
-	
-	@Column(name="priceAddedOption3", columnDefinition="Decimal(10,2) default '0.00'")
-	protected double priceAddedOption3;
-	
-	@Size(min = 5, max = 50)
-	@Column(name="descriptionAddedOption3")
-	protected String descriptionOptionAddedOption3;
+			@Column(name="optionRIP", columnDefinition="Decimal(10,2) default '0.00'")
+			protected double optionRIP;
+			
+			@Size(max = 50)
+			@Column(name="descriptionRIP")
+			protected String descriptionOptionRIP;
+			
+			@Column(name="optionSNCP", columnDefinition="Decimal(10,2) default '0.00'")
+			protected double optionSNCP;
+			
+			@Size(max = 50)
+			@Column(name="descriptionSNCP")
+			protected String descriptionOptionSNCP;
+			
+			@Column(name="optionDelivery", columnDefinition="Decimal(10,2) default '0.00'")
+			protected double optionDelivery;
+			
+			@Size(max = 50)
+			@Column(name="descriptionDelivery")
+			protected String descriptionOptionDelivery;
+			
+			@Column(name="optionGuarantee", columnDefinition="Decimal(10,2) default '0.00'")
+			protected double optionGuarantee;
+			
+			@Size(max = 50)
+			@Column(name="descriptionGuarantee")
+			protected String descriptionOptionGuarantee;
+			
+			@Column(name="optionInstallation", columnDefinition="Decimal(10,2) default '0.00'")
+			protected double optionInstallation;
+			
+			@Size(max = 50)
+			@Column(name="descriptionInstallation")
+			protected String descriptionOptionInstallation;
+			
+			@Column(name="optionVAT", columnDefinition="Decimal(10,2) default '1.20'")
+			protected double optionVAT;
+			
+			@Size(max = 50)
+			@Column(name="descriptionVAT")
+			protected String descriptionOptionVAT;
+			
+			@Column(name="nameAddedOption")
+			protected String nameAddedOption;
+			
+			@Column(name="priceAddedOption", columnDefinition="Decimal(10,2) default '0.00'")
+			protected double priceAddedOption;
+			
+			@Size(max = 50)
+			@Column(name="descriptionAddedOption")
+			protected String descriptionOptionAddedOption;
+			
+			@Column(name="nameAddedOption2")
+			protected String nameAddedOption2;
+			
+			@Column(name="priceAddedOption2", columnDefinition="Decimal(10,2) default '0.00'")
+			protected double priceAddedOption2;
+			
+			@Size(max = 50)
+			@Column(name="descriptionAddedOption2")
+			protected String descriptionOptionAddedOption2;
+			
+			@Column(name="nameAddedOption3")
+			protected String nameAddedOption3;
+			
+			@Column(name="priceAddedOption3", columnDefinition="Decimal(10,2) default '0.00'")
+			protected double priceAddedOption3;
+			
+			@Size(max = 50)
+			@Column(name="descriptionAddedOption3")
+			protected String descriptionOptionAddedOption3;
 	
 	public Product(){}
 
@@ -285,7 +286,6 @@ public abstract class Product implements Serializable{
 		this.optionInstallation = optionInstallation;
 	}
 
-
 	public double getOptionVAT() {
 		return optionVAT;
 	}
@@ -293,7 +293,6 @@ public abstract class Product implements Serializable{
 	public void setOptionVAT(double optionVAT) {
 		this.optionVAT = optionVAT;
 	}
-
 
 	public String getNameAddedOption2() {
 		return nameAddedOption2;
@@ -374,7 +373,7 @@ public abstract class Product implements Serializable{
 	public void setPriceAddedOption(double priceAddedOption) {
 		this.priceAddedOption = priceAddedOption;
 	}
-
+	
 	public String getAvailabilitySpecialCase() {
 		return availabilitySpecialCase;
 	}
@@ -644,23 +643,61 @@ public abstract class Product implements Serializable{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((availability == null) ? 0 : availability.hashCode());
+		result = prime * result + ((availabilitySpecialCase == null) ? 0 : availabilitySpecialCase.hashCode());
+		result = prime * result + averagePowerConsumption;
 		result = prime * result + ((delivery == null) ? 0 : delivery.hashCode());
 		result = prime * result + depth;
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((descriptionEng == null) ? 0 : descriptionEng.hashCode());
+		result = prime * result
+				+ ((descriptionOptionAddedOption == null) ? 0 : descriptionOptionAddedOption.hashCode());
+		result = prime * result
+				+ ((descriptionOptionAddedOption2 == null) ? 0 : descriptionOptionAddedOption2.hashCode());
+		result = prime * result
+				+ ((descriptionOptionAddedOption3 == null) ? 0 : descriptionOptionAddedOption3.hashCode());
+		result = prime * result + ((descriptionOptionDelivery == null) ? 0 : descriptionOptionDelivery.hashCode());
+		result = prime * result + ((descriptionOptionGuarantee == null) ? 0 : descriptionOptionGuarantee.hashCode());
+		result = prime * result
+				+ ((descriptionOptionInstallation == null) ? 0 : descriptionOptionInstallation.hashCode());
+		result = prime * result + ((descriptionOptionRIP == null) ? 0 : descriptionOptionRIP.hashCode());
+		result = prime * result + ((descriptionOptionSNCP == null) ? 0 : descriptionOptionSNCP.hashCode());
+		result = prime * result + ((descriptionOptionVAT == null) ? 0 : descriptionOptionVAT.hashCode());
 		result = prime * result + ((equipmentManufacturer == null) ? 0 : equipmentManufacturer.hashCode());
+		result = prime * result + ((equipmentModel == null) ? 0 : equipmentModel.hashCode());
 		result = prime * result + ((guarantee == null) ? 0 : guarantee.hashCode());
 		result = prime * result + heigth;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + Arrays.hashCode(idUseWithProduct);
 		result = prime * result + ((leftSharesLink == null) ? 0 : leftSharesLink.hashCode());
 		result = prime * result + ((leftSharesLinkColorFone == null) ? 0 : leftSharesLinkColorFone.hashCode());
 		result = prime * result + ((leftSharesLinkColorText == null) ? 0 : leftSharesLinkColorText.hashCode());
 		result = prime * result + maxPowerConsumption;
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((nameAddedOption == null) ? 0 : nameAddedOption.hashCode());
+		result = prime * result + ((nameAddedOption2 == null) ? 0 : nameAddedOption2.hashCode());
+		result = prime * result + ((nameAddedOption3 == null) ? 0 : nameAddedOption3.hashCode());
+		long temp;
+		temp = Double.doubleToLongBits(optionDelivery);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(optionGuarantee);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(optionInstallation);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(optionRIP);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(optionSNCP);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(optionVAT);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + ((partNumber == null) ? 0 : partNumber.hashCode());
 		result = prime * result + ((pathPictures == null) ? 0 : pathPictures.hashCode());
 		result = prime * result + ((previouslyUsed == null) ? 0 : previouslyUsed.hashCode());
-		long temp;
+		temp = Double.doubleToLongBits(priceAddedOption);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(priceAddedOption2);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(priceAddedOption3);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
 		temp = Double.doubleToLongBits(prise);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + ((rightSharesLink == null) ? 0 : rightSharesLink.hashCode());
@@ -671,6 +708,7 @@ public abstract class Product implements Serializable{
 		result = prime * result + (showOnLeftSide ? 1231 : 1237);
 		result = prime * result + (showOnSite ? 1231 : 1237);
 		result = prime * result + ((timeShares == null) ? 0 : timeShares.hashCode());
+		result = prime * result + ((timeSharesText == null) ? 0 : timeSharesText.hashCode());
 		result = prime * result + ((weight == null) ? 0 : weight.hashCode());
 		result = prime * result + width;
 		return result;
@@ -690,6 +728,13 @@ public abstract class Product implements Serializable{
 				return false;
 		} else if (!availability.equals(other.availability))
 			return false;
+		if (availabilitySpecialCase == null) {
+			if (other.availabilitySpecialCase != null)
+				return false;
+		} else if (!availabilitySpecialCase.equals(other.availabilitySpecialCase))
+			return false;
+		if (averagePowerConsumption != other.averagePowerConsumption)
+			return false;
 		if (delivery == null) {
 			if (other.delivery != null)
 				return false;
@@ -707,10 +752,60 @@ public abstract class Product implements Serializable{
 				return false;
 		} else if (!descriptionEng.equals(other.descriptionEng))
 			return false;
+		if (descriptionOptionAddedOption == null) {
+			if (other.descriptionOptionAddedOption != null)
+				return false;
+		} else if (!descriptionOptionAddedOption.equals(other.descriptionOptionAddedOption))
+			return false;
+		if (descriptionOptionAddedOption2 == null) {
+			if (other.descriptionOptionAddedOption2 != null)
+				return false;
+		} else if (!descriptionOptionAddedOption2.equals(other.descriptionOptionAddedOption2))
+			return false;
+		if (descriptionOptionAddedOption3 == null) {
+			if (other.descriptionOptionAddedOption3 != null)
+				return false;
+		} else if (!descriptionOptionAddedOption3.equals(other.descriptionOptionAddedOption3))
+			return false;
+		if (descriptionOptionDelivery == null) {
+			if (other.descriptionOptionDelivery != null)
+				return false;
+		} else if (!descriptionOptionDelivery.equals(other.descriptionOptionDelivery))
+			return false;
+		if (descriptionOptionGuarantee == null) {
+			if (other.descriptionOptionGuarantee != null)
+				return false;
+		} else if (!descriptionOptionGuarantee.equals(other.descriptionOptionGuarantee))
+			return false;
+		if (descriptionOptionInstallation == null) {
+			if (other.descriptionOptionInstallation != null)
+				return false;
+		} else if (!descriptionOptionInstallation.equals(other.descriptionOptionInstallation))
+			return false;
+		if (descriptionOptionRIP == null) {
+			if (other.descriptionOptionRIP != null)
+				return false;
+		} else if (!descriptionOptionRIP.equals(other.descriptionOptionRIP))
+			return false;
+		if (descriptionOptionSNCP == null) {
+			if (other.descriptionOptionSNCP != null)
+				return false;
+		} else if (!descriptionOptionSNCP.equals(other.descriptionOptionSNCP))
+			return false;
+		if (descriptionOptionVAT == null) {
+			if (other.descriptionOptionVAT != null)
+				return false;
+		} else if (!descriptionOptionVAT.equals(other.descriptionOptionVAT))
+			return false;
 		if (equipmentManufacturer == null) {
 			if (other.equipmentManufacturer != null)
 				return false;
 		} else if (!equipmentManufacturer.equals(other.equipmentManufacturer))
+			return false;
+		if (equipmentModel == null) {
+			if (other.equipmentModel != null)
+				return false;
+		} else if (!equipmentModel.equals(other.equipmentModel))
 			return false;
 		if (guarantee == null) {
 			if (other.guarantee != null)
@@ -723,6 +818,8 @@ public abstract class Product implements Serializable{
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
+			return false;
+		if (!Arrays.equals(idUseWithProduct, other.idUseWithProduct))
 			return false;
 		if (leftSharesLink == null) {
 			if (other.leftSharesLink != null)
@@ -746,6 +843,33 @@ public abstract class Product implements Serializable{
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
+		if (nameAddedOption == null) {
+			if (other.nameAddedOption != null)
+				return false;
+		} else if (!nameAddedOption.equals(other.nameAddedOption))
+			return false;
+		if (nameAddedOption2 == null) {
+			if (other.nameAddedOption2 != null)
+				return false;
+		} else if (!nameAddedOption2.equals(other.nameAddedOption2))
+			return false;
+		if (nameAddedOption3 == null) {
+			if (other.nameAddedOption3 != null)
+				return false;
+		} else if (!nameAddedOption3.equals(other.nameAddedOption3))
+			return false;
+		if (Double.doubleToLongBits(optionDelivery) != Double.doubleToLongBits(other.optionDelivery))
+			return false;
+		if (Double.doubleToLongBits(optionGuarantee) != Double.doubleToLongBits(other.optionGuarantee))
+			return false;
+		if (Double.doubleToLongBits(optionInstallation) != Double.doubleToLongBits(other.optionInstallation))
+			return false;
+		if (Double.doubleToLongBits(optionRIP) != Double.doubleToLongBits(other.optionRIP))
+			return false;
+		if (Double.doubleToLongBits(optionSNCP) != Double.doubleToLongBits(other.optionSNCP))
+			return false;
+		if (Double.doubleToLongBits(optionVAT) != Double.doubleToLongBits(other.optionVAT))
+			return false;
 		if (partNumber == null) {
 			if (other.partNumber != null)
 				return false;
@@ -760,6 +884,12 @@ public abstract class Product implements Serializable{
 			if (other.previouslyUsed != null)
 				return false;
 		} else if (!previouslyUsed.equals(other.previouslyUsed))
+			return false;
+		if (Double.doubleToLongBits(priceAddedOption) != Double.doubleToLongBits(other.priceAddedOption))
+			return false;
+		if (Double.doubleToLongBits(priceAddedOption2) != Double.doubleToLongBits(other.priceAddedOption2))
+			return false;
+		if (Double.doubleToLongBits(priceAddedOption3) != Double.doubleToLongBits(other.priceAddedOption3))
 			return false;
 		if (Double.doubleToLongBits(prise) != Double.doubleToLongBits(other.prise))
 			return false;
@@ -793,6 +923,11 @@ public abstract class Product implements Serializable{
 			if (other.timeShares != null)
 				return false;
 		} else if (!timeShares.equals(other.timeShares))
+			return false;
+		if (timeSharesText == null) {
+			if (other.timeSharesText != null)
+				return false;
+		} else if (!timeSharesText.equals(other.timeSharesText))
 			return false;
 		if (weight == null) {
 			if (other.weight != null)

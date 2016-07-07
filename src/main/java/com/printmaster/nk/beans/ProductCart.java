@@ -1,5 +1,9 @@
 package com.printmaster.nk.beans;
 
+import java.util.List;
+
+import com.printmaster.nk.model.Option;
+
 public class ProductCart {
 	
 	private String typeProduct;	
@@ -7,6 +11,7 @@ public class ProductCart {
 	private String name;
 	private double price;
 	private String picturePath;
+	private List<Option> options;
 
 	public String getPicturePath() {
 		return picturePath;
@@ -38,12 +43,20 @@ public class ProductCart {
 	public void setIdProduct(Long idProduct) {
 		this.idProduct = idProduct;
 	}
+	public List<Option> getOptions() {
+		return options;
+	}
+	public void setOptions(List<Option> options) {
+		this.options = options;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((idProduct == null) ? 0 : idProduct.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((options == null) ? 0 : options.hashCode());
 		result = prime * result + ((picturePath == null) ? 0 : picturePath.hashCode());
 		long temp;
 		temp = Double.doubleToLongBits(price);
@@ -51,6 +64,7 @@ public class ProductCart {
 		result = prime * result + ((typeProduct == null) ? 0 : typeProduct.hashCode());
 		return result;
 	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -70,6 +84,11 @@ public class ProductCart {
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
+		if (options == null) {
+			if (other.options != null)
+				return false;
+		} else if (!options.equals(other.options))
+			return false;
 		if (picturePath == null) {
 			if (other.picturePath != null)
 				return false;
@@ -84,4 +103,5 @@ public class ProductCart {
 			return false;
 		return true;
 	}
+
 }

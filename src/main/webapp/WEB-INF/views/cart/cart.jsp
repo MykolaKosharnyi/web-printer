@@ -96,6 +96,57 @@ padding: 5px;
 	width: 30px;
 }
 
+.cart .option_product_car{
+	height:auto;
+	width: 100%;
+}
+.cart .option_product_car label{
+	margin-bottom: 0px;
+	font-weight: unset;
+	/*min-width: 240px;*/
+}
+
+
+label.add_price_title,.option_product_car label.total_ptice_title{min-width: 200px;}
+label.add_price_title{height: auto; max-width: 200px;}
+
+.option_product_car label.total_ptice_title,
+.option_product_car label.total_price{
+/*min-width: 155px;*/
+margin:10px 0px;
+text-align: right;
+}
+
+.option_product_car .block_product_price{
+	padding: 2px;
+	height:auto;
+}
+
+.option_product_car .block_product_price input,
+.option_product_car .block_product_price label{
+top: 0px;
+position: relative;
+}
+
+
+.option_product_car input[type="checkbox"].add_price{
+	margin-left: 5px;
+}
+
+.option_product_car .option_description{
+height: auto;
+width: 215px;
+}
+
+.option_product_car label.add_price_value{
+	min-width: 60px;
+}
+
+.option_product_car label.total_ptice_title{
+margin-left: 25px;
+padding: 5px;
+}
+
 </style>
 </head>
 <body>
@@ -107,6 +158,7 @@ padding: 5px;
 		<thead>
 			<th><spring:message code="cart.ownpage.picture"/></th>
 			<th><spring:message code="cart.ownpage.item"/></th>
+			<th><spring:message code="cart.ownpage.option"/></th>
 			<th><spring:message code="cart.ownpage.quantity"/></th>
 			<th><spring:message code="cart.ownpage.price"/></th>
 			<th></th>
@@ -115,6 +167,125 @@ padding: 5px;
 		<tr>
 			<td><img style="height:auto; width:100%;" src="<%=request.getContextPath()%>/${item.key.picturePath}" alt=""></td>
 			<td><c:out value="${item.key.name }"/></td>
+			<td>
+				
+				
+				<div class="option_product_car">
+                 	
+	<c:if test="${item.key.optionRIP > 0.01}">
+		<div class="block_product_price">
+			<input class="add_price" type="checkbox" value="Програмное обеспечение" id="optionRIP_price">
+				<label class="add_price_title" for="optionRIP_price">Програмное обеспечение:</label>
+			</input>
+			<label class="add_price_value">$<span><fmt:formatNumber type="number" 
+						maxFractionDigits="2" minFractionDigits="2" value="${item.key.optionRIP}" /></span>
+			</label>
+			<label class="option_description">${item.key.descriptionOptionRIP}</label>
+		</div>
+	</c:if>
+                 		
+	<c:if test="${item.key.optionSNCP > 0.01}">
+		<div class="block_product_price">
+			<input class="add_price" type="checkbox" value="СНЧП" id="optionSNCP_price">
+				<label class="add_price_title" for="optionSNCP_price">СНЧП:</label>
+			</input>
+			<label class="add_price_value">$<span><fmt:formatNumber type="number" 
+						maxFractionDigits="2" minFractionDigits="2" value="${item.key.optionSNCP}" /></span>
+			</label>
+			<label class="option_description">${item.key.descriptionOptionSNCP}</label>
+		</div>
+	</c:if>
+     
+    <c:if test="${item.key.optionVAT > 0.01}">
+		<div class="block_product_price">
+			<input class="add_price" type="checkbox" value="НДС" id="optionVAT_price">
+				<label class="add_price_title" for="optionVAT_price">НДС:</label>
+			</input>
+			<label class="add_price_value"><span><fmt:formatNumber type="number" 
+			   			maxFractionDigits="2" minFractionDigits="2" value="${item.key.optionVAT}" /></span>
+			</label>
+			<label class="option_description">${item.key.descriptionOptionVAT}</label>
+		</div>
+	</c:if>
+                 		
+	<c:if test="${item.key.optionDelivery > 0.01}">
+		<div class="block_product_price">
+			<input class="add_price" type="checkbox" value="Доставка" id="optionDelivery_price">
+				<label class="add_price_title" for="optionDelivery_price">Доставка:</label>
+			</input>
+			<label class="add_price_value">$<span><fmt:formatNumber type="number" 
+			   			maxFractionDigits="2" minFractionDigits="2" value="${item.key.optionDelivery}" /></span>
+			</label>
+			<label class="option_description">${item.key.descriptionOptionDelivery}</label>
+		</div>
+	</c:if>
+	
+	<c:if test="${item.key.optionInstallation > 0.01}">
+		<div class="block_product_price">
+			<input class="add_price" type="checkbox" value="Инсталяция" id="optionInstallation_price">
+				<label class="add_price_title" for="optionInstallation_price">Инсталяция:</label>
+			</input>
+			<label class="add_price_value">$<span><fmt:formatNumber type="number" 
+			   			maxFractionDigits="2" minFractionDigits="2" value="${item.key.optionInstallation}" /></span>
+			</label>
+			<label class="option_description">${item.key.descriptionOptionInstallation}</label>
+		</div>
+	</c:if>
+                 		
+	<c:if test="${item.key.priceAddedOption > 0.01 && (item.key.nameAddedOption!=null && item.key.nameAddedOption!='')}">
+		<div class="block_product_price">
+			<input class="add_price" type="checkbox" value="${item.key.nameAddedOption}" id="priceAddedOption_price">
+				<label class="add_price_title" for="priceAddedOption_price">${item.key.nameAddedOption}:</label>
+			</input>
+			<label class="add_price_value">$<span><fmt:formatNumber type="number" 
+			   			maxFractionDigits="2" minFractionDigits="2" value="${item.key.priceAddedOption}" /></span>
+			</label>
+			<label class="option_description">${item.key.descriptionOptionAddedOption}</label>
+		</div>
+	</c:if>
+	
+	<c:if test="${item.key.priceAddedOption2 > 0.01 && (item.key.nameAddedOption2!=null && item.key.nameAddedOption2!='')}">
+		<div class="block_product_price">
+			<input class="add_price" type="checkbox" value="${item.key.nameAddedOption2}" id="priceAddedOption2_price">
+				<label class="add_price_title" for="priceAddedOption2_price">${item.key.nameAddedOption2}:</label>
+			</input>
+			<label class="add_price_value">$<span><fmt:formatNumber type="number" 
+			   			maxFractionDigits="2" minFractionDigits="2" value="${item.key.priceAddedOption2}" /></span>
+			</label>
+			<label class="option_description">${item.key.descriptionOptionAddedOption2}</label>
+		</div>
+	</c:if>
+	
+	<c:if test="${item.key.priceAddedOption3 > 0.01 && (item.key.nameAddedOption3!=null && item.key.nameAddedOption3!='')}">
+		<div class="block_product_price">
+			<input class="add_price" type="checkbox" value="${item.key.nameAddedOption3}" id="priceAddedOption3_price">
+				<label class="add_price_title" for="priceAddedOption3_price">${item.key.nameAddedOption3}:</label>
+			</input>
+			<label class="add_price_value">$<span><fmt:formatNumber type="number" 
+			   			maxFractionDigits="2" minFractionDigits="2" value="${item.key.priceAddedOption3}" /></span>
+			</label>
+			<label class="option_description">${item.key.descriptionOptionAddedOption3}</label>
+		</div>
+	</c:if>
+                 		
+	<c:if test="${item.key.optionGuarantee > 0.01}">
+		<div class="block_product_price">
+			<input class="add_price" type="checkbox" value="Гарантия" id="optionGuarantee_price">
+				<label class="add_price_title" for="optionGuarantee_price">Гарантия:</label>
+			</input>
+			<label class="add_price_value">$<span><fmt:formatNumber type="number" 
+			   			maxFractionDigits="2" minFractionDigits="2" value="${item.key.optionGuarantee}" /></span>
+			</label>
+			<label class="option_description">${item.key.descriptionOptionGuarantee}</label>
+		</div>
+	</c:if>
+				
+				
+				
+				
+				
+				
+			</td>
 			<td>
 	
 				<input type="hidden" name="type" class="type" value="${item.key.typeProduct}">
@@ -142,6 +313,7 @@ padding: 5px;
 		
 		<tr>
 			<td><spring:message code="cart.ownpage.total"/>:</td>
+			<td></td>
 			<td></td>
 			<td></td>
 			<td class="total_price">$ <span><fmt:formatNumber type="number" 
