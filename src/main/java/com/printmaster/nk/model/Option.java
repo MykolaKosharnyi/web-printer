@@ -5,7 +5,7 @@ public class Option{
 	private String name;
 	private Double price;
 	private String description;
-	private boolean cheked;
+	private boolean checked;
 	
 	public String getName() {
 		return name;
@@ -25,11 +25,11 @@ public class Option{
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public boolean isCheked() {
-		return cheked;
+	public boolean isChecked() {
+		return checked;
 	}
-	public void setCheked(boolean cheked) {
-		this.cheked = cheked;
+	public void setChecked(boolean checked) {
+		this.checked = checked;
 	}
 
 	

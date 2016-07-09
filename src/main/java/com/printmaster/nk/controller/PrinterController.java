@@ -680,7 +680,8 @@ public class PrinterController {
          return fileName;
     }
     
-    @RequestMapping(value="/admin/printer/change_order_pictures", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
+    @RequestMapping(value="/admin/printer/change_order_pictures", method = RequestMethod.POST,
+    		consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void changeOrderPictures(@RequestBody List<String> selectedIds) {
     	System.out.println("------------------------");
     	System.out.println("Получение нового порядка");

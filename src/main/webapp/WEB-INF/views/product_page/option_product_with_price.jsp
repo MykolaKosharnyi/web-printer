@@ -119,5 +119,5 @@
 	</label>
 		                  
 	<i class="fa fa-cart-plus add_to_cart" aria-hidden="true" style="top: 5px; right: -30px; float: none;"
-			onclick="addToCart('${type}', ${product.id}, '${product.name}', '${product.prise}', '${product.pathPictures.get(0)}');"></i>
+			onclick="addToCartProductPage('${type}', ${product.id}, '${product.name}', '${product.prise}', '${product.pathPictures.get(0)}', new Array());"></i>
 </div>

@@ -1,5 +1,7 @@
 package com.printmaster.nk.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
@@ -7,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -14,6 +17,15 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.printmaster.nk.beans.Cart;
 import com.printmaster.nk.beans.ProductCart;
+import com.printmaster.nk.model.Option;
+import com.printmaster.nk.model.Product;
+import com.printmaster.nk.service.CutterService;
+import com.printmaster.nk.service.DigitalPrinterService;
+import com.printmaster.nk.service.LaminatorService;
+import com.printmaster.nk.service.LaserService;
+import com.printmaster.nk.service.Printer3DService;
+import com.printmaster.nk.service.PrinterService;
+import com.printmaster.nk.service.ScannerService;
 
 @Controller
 public class CartController {
@@ -23,6 +35,27 @@ public class CartController {
 	@Autowired
 	Cart cart;
 	
+	@Autowired
+	private PrinterService printerService;
+	
+	@Autowired
+	private Printer3DService printer3DService;
+	
+	@Autowired
+	private DigitalPrinterService digitalPrinterService;
+	
+	@Autowired
+	private LaserService laserService;
+	
+	@Autowired
+	private CutterService cutterService;
+	
+	@Autowired
+	private LaminatorService laminatorService;
+	
+	@Autowired
+	private ScannerService scannerService;
+	
 	@RequestMapping(value = "/cart/add/{typeProduct}/{productId}/{productName}/{productPrice}/{pathToPicture}", 
 			method = RequestMethod.POST,consumes="application/json",
 			headers = "content-type=application/x-www-form-urlencoded")
@@ -31,7 +64,8 @@ public class CartController {
 			@PathVariable("productId") long productId,
 			@PathVariable("productName") String productName,
 			@PathVariable("productPrice") String productPrice,
-			@PathVariable("pathToPicture") String pathToPicture){
+			@PathVariable("pathToPicture") String pathToPicture,
+			@RequestBody List<String> checkedOption){
 		
 		double price = Double.parseDouble(productPrice.replace(',', '.'));
 		String picture = pathToPicture.replace(',', '.');
@@ -42,10 +76,95 @@ public class CartController {
 		productCart.setName(productName);
 		productCart.setPrice(price);
 		productCart.setPicturePath("images/" + typeProduct + "s/" + productId + "/" + picture);
+		//add option with price
+		productCart.setOptions(addOption(typeProduct, productId, checkedOption));
 		
 		cart.addProduct(productCart , 1);
 		logger.debug("Adding product to cart " + productCart );
 		//return "redirect:" + referedForm;
+	}
+	
+	private ArrayList<Option> addOption(String productType, long productId, List<String> checkedOption){
+		
+		if(productType.equals("printer")){
+			return getOption( printerService.getPrinterById(productId), checkedOption );
+			
+		} else if(productType.equals("3d_printer")){
+			return getOption( printer3DService.getPrinter3DById(productId), checkedOption );
+			
+		} else if(productType.equals("digital_printer")){
+			return getOption( digitalPrinterService.getPrinterById(productId), checkedOption );
+			
+		} else if(productType.equals("laminator")){
+			return getOption( laminatorService.getLaminatorById(productId), checkedOption );
+			
+		} else if(productType.equals("laser")){
+			return getOption( laserService.getLaserById(productId), checkedOption );
+			
+		} else if(productType.equals("cutter")){
+			return getOption( cutterService.getCutterById(productId), checkedOption );
+			
+		} else if(productType.equals("scanner")){
+			return getOption( scannerService.getScannerById(productId), checkedOption );
+			
+		} else {
+			return null;
+		}
+
+	}
+	
+	private ArrayList<Option> getOption(Product product, List<String> checkedOption){
+		ArrayList<Option> result = new ArrayList<Option>();
+		
+		if(product.getOptionRIP() > 0.01){
+			result.add(returnOption("Програмное обеспечение", product.getOptionRIP(), product.getDescriptionOptionRIP(), checkedOption));
+		}
+		
+		if(product.getOptionSNCP() > 0.01){
+			result.add(returnOption("СНЧП", product.getOptionSNCP(), product.getDescriptionOptionSNCP(), checkedOption));
+		}
+		
+		if(product.getOptionDelivery() > 0.01){
+			result.add(returnOption("Доставка", product.getOptionDelivery(), product.getDescriptionOptionDelivery(), checkedOption));
+		}
+		
+		if(product.getOptionGuarantee() > 0.01){
+			result.add(returnOption("Гарантия", product.getOptionGuarantee(), product.getDescriptionOptionGuarantee(), checkedOption));
+		}
+		
+		if(product.getOptionInstallation() > 0.01){
+			result.add(returnOption("Инсталяция", product.getOptionInstallation(), product.getDescriptionOptionInstallation(), checkedOption));
+		}
+		
+		if(product.getOptionVAT() > 0.01){
+			result.add(returnOption("НДС", product.getOptionVAT(), product.getDescriptionOptionVAT(), checkedOption));
+		}
+		
+		if(product.getPriceAddedOption() > 0.01){
+			result.add(returnOption(product.getNameAddedOption(), product.getPriceAddedOption(), product.getDescriptionOptionAddedOption(), checkedOption));
+		}
+		
+		if(product.getPriceAddedOption2() > 0.01){
+			result.add(returnOption(product.getNameAddedOption2(), product.getPriceAddedOption2(), product.getDescriptionOptionAddedOption2(), checkedOption));
+		}
+		
+		if(product.getPriceAddedOption3() > 0.01){
+			result.add(returnOption(product.getNameAddedOption3(), product.getPriceAddedOption3(), product.getDescriptionOptionAddedOption3(), checkedOption));
+		}
+		
+		return result;
+	}
+	
+	private Option returnOption(String name, double price, String description, List<String> checkedOption){
+		Option result = new Option();
+		result.setName(name);
+		result.setPrice(price);
+		result.setDescription(description);
+		
+		boolean boolResult = checkedOption.contains(name) ? true : false;
+		result.setChecked(boolResult);
+
+		return result;
 	}
 	
 	

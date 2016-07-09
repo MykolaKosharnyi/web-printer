@@ -15,7 +15,7 @@
 					</div>
 					<ul class="check_boxes">
 						<div class="text_output">
-							<p>Пр. обеспечение:&nbsp;</p>
+							<p>Програмное об.:&nbsp;</p>
 							<form:input path="optionRIP" class="option"/>
 							<form:errors path="optionRIP" cssClass="error"></form:errors>
 							<form:input path="descriptionOptionRIP" />

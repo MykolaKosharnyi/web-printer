@@ -1,2 +1,2 @@
 # web-printer
-Creating back-end part of web-site.
+Creating internet shop.
