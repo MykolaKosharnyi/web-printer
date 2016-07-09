@@ -98,7 +98,7 @@ padding: 5px;
 
 .cart .option_product_car{
 	height:auto;
-	width: 100%;
+	width: 250px;
 }
 .cart .option_product_car label{
 	margin-bottom: 0px;
@@ -108,18 +108,19 @@ padding: 5px;
 
 
 .option_product_car label.total_ptice_title{min-width: 200px;}
-label.add_price_title{height: auto; max-width: 200px; width: 200px; min-width: 170px; float:left;}
+label.add_price_title{height: auto; max-width: 150px; min-width: 150px; float:left; text-align: left;}
 
 .option_product_car label.total_ptice_title,
 .option_product_car label.total_price{
-/*min-width: 155px;*/
-margin:10px 0px;
-text-align: right;
+	/*min-width: 155px;*/
+	margin:10px 0px;
+	text-align: right;
 }
 
 .option_product_car .block_product_price{
 	padding: 2px;
 	height:auto;
+	float: left;
 }
 
 .option_product_car .block_product_price input,
@@ -176,11 +177,12 @@ padding: 5px;
 						<c:if test="${option.price > 0.01}">
 							<div class="block_product_price">
 								<input class="add_price" type="checkbox" value="${option.name}" 
-									id="${option.name}_name_cart"
+									id="${option.name}_${item.key.typeProduct}_${item.key.idProduct}"
 									<c:if test="${option.checked}">checked</c:if>>
-										<label class="add_price_title" for="${option.name}_name_cart">${option.name}:</label>
+										<label class="add_price_title"
+										 for="${option.name}_${item.key.typeProduct}_${item.key.idProduct}">${option.name}</label>
 								</input>
-								<label class="add_price_value">$<span><fmt:formatNumber type="number" 
+								<label class="add_price_value"><c:if test="${option.name!='НДС'}">$</c:if><span><fmt:formatNumber type="number" 
 											maxFractionDigits="2" minFractionDigits="2" value="${option.price}" /></span>
 								</label>
 								<%-- <label class="option_description">${option.description}</label>--%>
