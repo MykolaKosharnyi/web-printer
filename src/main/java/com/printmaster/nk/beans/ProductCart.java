@@ -49,14 +49,12 @@ public class ProductCart {
 	public void setOptions(List<Option> options) {
 		this.options = options;
 	}
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((idProduct == null) ? 0 : idProduct.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((options == null) ? 0 : options.hashCode());
 		result = prime * result + ((picturePath == null) ? 0 : picturePath.hashCode());
 		long temp;
 		temp = Double.doubleToLongBits(price);
@@ -64,7 +62,6 @@ public class ProductCart {
 		result = prime * result + ((typeProduct == null) ? 0 : typeProduct.hashCode());
 		return result;
 	}
-	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -84,11 +81,6 @@ public class ProductCart {
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
-		if (options == null) {
-			if (other.options != null)
-				return false;
-		} else if (!options.equals(other.options))
-			return false;
 		if (picturePath == null) {
 			if (other.picturePath != null)
 				return false;
@@ -103,5 +95,7 @@ public class ProductCart {
 			return false;
 		return true;
 	}
+
+	
 
 }

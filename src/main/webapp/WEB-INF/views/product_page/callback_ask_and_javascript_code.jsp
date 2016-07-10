@@ -7,6 +7,14 @@
 		$('#clock').countdown({until: austDay, format: 'D H M'});
 	});
 	
+	function getCheckedOption(){
+		var checkedArray = [];
+		$("input.add_price:checked").each(function(){
+			checkedArray.push($(this).val());
+		});
+		return checkedArray;
+	}
+	
 	$(function(){
 		$('.add_price').click(function(){
             var price_element = $(this).parent('.block_product_price').parent('.option_product_with_price').find('label.total_price span');
