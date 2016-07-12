@@ -212,8 +212,9 @@ padding: 5px;
 			</td>
 			<td class="price">$ <span>
 				<fmt:formatNumber type="number" 
-           					maxFractionDigits="2" minFractionDigits="2" value="${item.key.price * item.value }" />
-					</span><input type="hidden" name="price_ellement" value="${item.key.price}"></td>
+           					maxFractionDigits="2" minFractionDigits="2" value="${item.key.getPriceWithOption() * item.value }" />
+					</span><input type="hidden" name="price_ellement" value="${item.key.price}">
+			</td>
 			<td class="delte_item"><i class="fa fa-trash-o" aria-hidden="true"></i></td>
 		</tr>
 		</c:forEach>
@@ -240,6 +241,91 @@ padding: 5px;
 <script type="text/javascript">
 
 	$(function(){
+		/* CHECKING ON OPTION PRODUCT */
+		$('.add_price').click(function(){
+			// component with contain price including quantity and option for product in price
+			var price_element =  $(this).parent('.block_product_price').parent('.option_product_car').parent('td').parent('tr').find('td.price').find('span');
+			// price with quatntity and option
+			var price_with_quantity_and_option = new Number(price_element.text().replace(/\s/ig, '').replace(",", "."));
+			
+			// quantity of this product
+			var quantity_numb = new Number($(this).parent('.block_product_price').parent('.option_product_car').parent('td').parent('tr').find('input.quantity').val());
+			
+			// TYPE and ID of this product to send AJAX request for changing option product on sever
+			var type = $(this).parent('.block_product_price').parent('.option_product_car').parent('td').parent('tr').find('input.type').val();
+			var id = $(this).parent('.block_product_price').parent('.option_product_car').parent('td').parent('tr').find('input.id').val();
+			
+			// VAT coeficient
+			//var valueVAT = $('input#НДС_' + type + "_" + id ).prop( "checked" ) ?
+			//		new Number($('input#НДС_' + type + "_" + id).parent('.block_product_price')
+			//				.find('label.add_price_value span').text().replace(/\s/ig, '').replace(",", ".")) : new Number(1);
+			var valueVAT = 1;					
+			
+			// for changing style outer block if option checked
+	        var change_style = $(this).parent('.block_product_price');
+			// value wich will be added or substraction from all price for the product
+			var addPrice = new Number($(this).parent('.block_product_price').find('label.add_price_value span').text().replace(/\s/ig, '').replace(",", "."));
+			
+	        if ($(this).prop( "checked" )) {
+	        	/* check if it not checked VAT option; because for VAT option different way to calculate price */
+	        	if($(this).val()!="НДС"){
+	            	price_element.text(checkPrise( calculatePriceIncludingVAT(price_with_quantity_and_option, addPrice, quantity_numb, valueVAT, true) ));
+	        	} else {
+	        		price_element.text(checkPrise(price_with_quantity_and_option * addPrice));
+	        	}
+	        	// show changes on server
+	        	changeOptionProductInCart(type, id, $(this).val(), true);
+	        	// change presentaion on user page
+	        	change_style.css('color', '#006080');
+	        	/* set new price for all products */
+				totalPrice();
+	        	
+	        }else{
+	        	/* check if it not checked VAT option; because for VAT option different way to calculate price */
+	        	if($(this).val()!="НДС"){
+	        		price_element.text(checkPrise( calculatePriceIncludingVAT(price_with_quantity_and_option, addPrice, quantity_numb, valueVAT, false) ));
+	        	} else {
+	        		price_element.text(checkPrise(price_with_quantity_and_option / addPrice));
+	        	}
+	        	// show changes on server
+	        	changeOptionProductInCart(type, id, $(this).val(), false);
+	        	// change presentaion on user page
+	        	change_style.css('color', '#333');
+	        	/* set new price for all products */
+				totalPrice();
+	        }
+	        
+	    });
+		
+		function changeOptionProductInCart(typeProduct, idProduct, optionName, stateOption){
+			/* change option on server */
+			$.ajax({
+				  type: 'POST',
+				  url: "/cart/change_option/" + typeProduct + "/" + idProduct + "/" + optionName + "/" + stateOption,
+				  contentType: "application/json; charset=utf-8",
+	              dataType: "json"
+				  });
+		}
+		
+		/* calculating price include value of VAT; in the last operand boolead value: true for adding, false for substraction */
+		function calculatePriceIncludingVAT(allOldPrice, addPrice, quantity, valueVATOption, typeOfOperation){
+			return typeOfOperation ? 
+					(((allOldPrice/quantity)/valueVATOption + addPrice) * valueVATOption) * quantity : 
+				    (((allOldPrice/quantity)/valueVATOption - addPrice) * valueVATOption) * quantity;
+		}
+		
+		/* get value of ckecked VAT option if it not return '1' */
+		function valueVAT(idVat){
+			if($('input#' + idVat ).prop( "checked" )){
+				return new Number($('input#' + idVat).parent('.block_product_price')
+						.find('label.add_price_value span').text().replace(/\s/ig, '').replace(",", "."));
+			} else {
+				return new Number(1);
+			}
+		}
+		
+		
+		/* BUTTONS FOR INCREASING AND DECREASING QUANTITY ON PRODUCT */
 		$('.dec_value').click(function(){
             var quantity_element_val = $(this).parent('td').find('input.quantity').val();
 			var price_with_quantity =  $(this).parent('td').parent('tr').find('td.price').find('span');
@@ -249,11 +335,8 @@ padding: 5px;
 			var type = $(this).parent('td').find('input.type').val();
 			var id = $(this).parent('td').find('input.id').val();
 			
-			/*if(quantity_numb==0){
+			if (quantity_numb==1) {
 				$(this).css('color','grey');
-			} else*/ if (quantity_numb==1) {
-				$(this).css('color','grey');
-			/*	$(this).parent('td').find('input').val(quantity_numb-1);*/
 
 				$(this).hover(function() {
 						$(this).css('color','grey');
@@ -262,14 +345,12 @@ padding: 5px;
 					  }
 				);
 
-				/*var price_n = new Number(price.replace(/\s/ig, '').replace(",", "."));*/
-				/*price_with_quantity.text(checkPrise(price_n * (quantity_numb - 1)));*/
-				/* set new price for all products */
-				/*totalPrice();*/
 			} else {
 				$(this).parent('td').find('input.quantity').val(quantity_numb-1);
-				var price_n = new Number(price.replace(/\s/ig, '').replace(",", "."));
-				price_with_quantity.text(checkPrise(price_n * (quantity_numb - 1)));
+				//var price_n = new Number(price.replace(/\s/ig, '').replace(",", "."));
+				//price_with_quantity.text(checkPrise(price_n * (quantity_numb - 1)));
+				var price_n = new Number(price_with_quantity.text().replace(/\s/ig, '').replace(",", "."));
+				price_with_quantity.text(checkPrise((price_n/quantity_numb) * (quantity_numb - 1)));
 				
 				/* set new price for all products */
 				totalPrice();
@@ -301,8 +382,13 @@ padding: 5px;
 
             $(this).parent('td').find('input.quantity').val(quantity_numb+1);
 			
-			var price_n = new Number(price.replace(/\s/ig, '').replace(",", "."));
-			price_with_quantity.text(checkPrise(price_n * (quantity_numb + 1)));
+          //  getPrice($(this));
+            
+			//var price_n = new Number(price.replace(/\s/ig, '').replace(",", "."));
+			//price_with_quantity.text(checkPrise(price_n * (quantity_numb + 1)));
+			
+			var price_n = new Number(price_with_quantity.text().replace(/\s/ig, '').replace(",", "."));
+			price_with_quantity.text(checkPrise((price_n/quantity_numb) * (quantity_numb + 1)));
 			/* set new price for all products */
 			totalPrice();
 			
@@ -377,6 +463,13 @@ padding: 5px;
 	});
 
 $(document).ready(function() {
+	
+		$("input.add_price:checked").each(function(){
+			$(this).parent('.block_product_price').css('color', '#006080');
+			
+			
+		});
+	
 	    $("input.quantity").keydown(function (e) {
 	        // Allow: backspace, delete.
 	        if ($.inArray(e.keyCode, [46, 8]) !== -1 ||

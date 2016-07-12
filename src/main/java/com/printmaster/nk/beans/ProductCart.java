@@ -10,8 +10,25 @@ public class ProductCart {
 	private Long idProduct;
 	private String name;
 	private double price;
+	private double priceWithOption;
 	private String picturePath;
 	private List<Option> options;
+
+	public double getPriceWithOption() {
+		priceWithOption = price;
+		double coeficientVAT = 1;
+		for(Option option: options){
+			if(option.isChecked()){
+				if(option.getName() != "НДС"){
+					priceWithOption += option.getPrice();
+				} else {
+					coeficientVAT = option.getPrice();
+				}
+				
+			}
+		}
+		return priceWithOption * coeficientVAT;
+	}
 
 	public String getPicturePath() {
 		return picturePath;
