@@ -4,9 +4,9 @@
 <div id="navigation">
 
 	 <a href="<c:url value='/' />"><spring:message code="path.head_page"/></a>
-	 <span> > </span>
+	 <span><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span>
 	 <a href="<c:url value='/use_with_products' />"><spring:message code="head.useWithProduct"/></a>
-	 <span> > </span>
+	 <span><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span>
 		<c:choose>
 			<c:when test="${product.typeProduct.equals('Чернила для струйной печати')}">
 				<a href="<c:url value='/use_with_products/ink_for_inkjet' />"><spring:message code="head.useWithProduct.ink_for_inkjet"/></a>
@@ -24,6 +24,6 @@
 				<a href="<c:url value='/use_with_products/parts_and_accessories' />"><spring:message code="head.useWithProduct.parts_and_accessories"/></a>
 			</c:when>
 		</c:choose>
-	<span> > </span>
+	<span><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span>
 	<p>${product.name}</p>
 </div>

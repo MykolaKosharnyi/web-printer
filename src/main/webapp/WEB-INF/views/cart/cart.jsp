@@ -182,7 +182,8 @@ padding: 5px;
 										<label class="add_price_title"
 										 for="${option.name}_${item.key.typeProduct}_${item.key.idProduct}">${option.name}</label>
 								</input>
-								<label class="add_price_value"><c:if test="${option.name!='НДС'}">$</c:if><span><fmt:formatNumber type="number" 
+								<label class="add_price_value" <c:if test="${option.name=='НДС'}">style="display:none;"</c:if>
+									><c:if test="${option.name!='НДС'}">$</c:if><span><fmt:formatNumber type="number" 
 											maxFractionDigits="2" minFractionDigits="2" value="${option.price}" /></span>
 								</label>
 								<%-- <label class="option_description">${option.description}</label>--%>
@@ -256,10 +257,9 @@ padding: 5px;
 			var id = $(this).parent('.block_product_price').parent('.option_product_car').parent('td').parent('tr').find('input.id').val();
 			
 			// VAT coeficient
-			//var valueVAT = $('input#НДС_' + type + "_" + id ).prop( "checked" ) ?
-			//		new Number($('input#НДС_' + type + "_" + id).parent('.block_product_price')
-			//				.find('label.add_price_value span').text().replace(/\s/ig, '').replace(",", ".")) : new Number(1);
-			var valueVAT = 1;					
+			var valueVAT = $('input#НДС_' + type + "_" + id ).prop( "checked" ) ?
+					new Number($('input#НДС_' + type + "_" + id).parent('.block_product_price')
+							.find('label.add_price_value span').text().replace(/\s/ig, '').replace(",", ".")) : new Number(1);				
 			
 			// for changing style outer block if option checked
 	        var change_style = $(this).parent('.block_product_price');

@@ -4,9 +4,9 @@
 <div id="navigation">
 
 	 <a href="<c:url value='/' />"><spring:message code="path.head_page"/></a>
-	 <span> > </span>
+	 <span><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span>
 	 <a href="<c:url value='/scanners' />"><spring:message code="head.scanner"/></a>
-	 <span> > </span>
+	 <span><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span>
 	<c:forEach items="${product.typeProduct}" var="tp">
 		<c:choose>
 			<c:when test="${product.typeProduct.equals('Широкоформатные сканеры')}">
@@ -18,6 +18,6 @@
 			</c:when>
 		</c:choose>
 	</c:forEach>
-	<span> > </span>
+	<span><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span>
 	<p>${product.name}</p>
 </div>

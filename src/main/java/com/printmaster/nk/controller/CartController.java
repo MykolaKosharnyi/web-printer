@@ -19,13 +19,17 @@ import com.printmaster.nk.beans.Cart;
 import com.printmaster.nk.beans.ProductCart;
 import com.printmaster.nk.model.Option;
 import com.printmaster.nk.model.Product;
+import com.printmaster.nk.model.Rip;
+import com.printmaster.nk.model.UseWithProduct;
 import com.printmaster.nk.service.CutterService;
 import com.printmaster.nk.service.DigitalPrinterService;
 import com.printmaster.nk.service.LaminatorService;
 import com.printmaster.nk.service.LaserService;
 import com.printmaster.nk.service.Printer3DService;
 import com.printmaster.nk.service.PrinterService;
+import com.printmaster.nk.service.RipService;
 import com.printmaster.nk.service.ScannerService;
+import com.printmaster.nk.service.UseWithProductService;
 
 @Controller
 public class CartController {
@@ -55,6 +59,12 @@ public class CartController {
 	
 	@Autowired
 	private ScannerService scannerService;
+	
+	@Autowired
+	private RipService ripService;
+	
+	@Autowired
+	private UseWithProductService useWithProductService;
 	
 	@RequestMapping(value = "/cart/add/{typeProduct}/{productId}/{productName}/{productPrice}/{pathToPicture}", 
 			method = RequestMethod.POST,consumes="application/json",
@@ -107,8 +117,14 @@ public class CartController {
 		} else if(productType.equals("scanner")){
 			return getOption( scannerService.getScannerById(productId), checkedOption );
 			
+		} else if(productType.equals("use_with_product")){
+			return getOption( useWithProductService.getUseWithProductById(productId), checkedOption );
+			
+		} else if(productType.equals("rip")){
+			return getOption( ripService.getRipById(productId), checkedOption );
+			
 		} else {
-			return null;
+			return new ArrayList<Option>();
 		}
 
 	}
@@ -136,8 +152,30 @@ public class CartController {
 			result.add(returnOption("Инсталяция", product.getOptionInstallation(), product.getDescriptionOptionInstallation(), checkedOption));
 		}
 		
+		if(product.getPriceAddedOption() > 0.01){
+			result.add(returnOption(product.getNameAddedOption(), product.getPriceAddedOption(), product.getDescriptionOptionAddedOption(), checkedOption));
+		}
+		
+		if(product.getPriceAddedOption2() > 0.01){
+			result.add(returnOption(product.getNameAddedOption2(), product.getPriceAddedOption2(), product.getDescriptionOptionAddedOption2(), checkedOption));
+		}
+		
+		if(product.getPriceAddedOption3() > 0.01){
+			result.add(returnOption(product.getNameAddedOption3(), product.getPriceAddedOption3(), product.getDescriptionOptionAddedOption3(), checkedOption));
+		}
+		
 		if(product.getOptionVAT() > 0.01){
 			result.add(returnOption("НДС", product.getOptionVAT(), product.getDescriptionOptionVAT(), checkedOption));
+		}
+		
+		return result;
+	}
+	
+	private ArrayList<Option> getOption(UseWithProduct product, List<String> checkedOption){
+		ArrayList<Option> result = new ArrayList<Option>();
+		
+		if(product.getOptionInstallation() > 0.01){
+			result.add(returnOption("Инсталяция", product.getOptionInstallation(), product.getDescriptionOptionInstallation(), checkedOption));
 		}
 		
 		if(product.getPriceAddedOption() > 0.01){
@@ -150,6 +188,36 @@ public class CartController {
 		
 		if(product.getPriceAddedOption3() > 0.01){
 			result.add(returnOption(product.getNameAddedOption3(), product.getPriceAddedOption3(), product.getDescriptionOptionAddedOption3(), checkedOption));
+		}
+		
+		if(product.getOptionVAT() > 0.01){
+			result.add(returnOption("НДС", product.getOptionVAT(), product.getDescriptionOptionVAT(), checkedOption));
+		}
+		
+		return result;
+	}
+	
+	private ArrayList<Option> getOption(Rip product, List<String> checkedOption){
+		ArrayList<Option> result = new ArrayList<Option>();
+		
+		if(product.getOptionInstallation() > 0.01){
+			result.add(returnOption("Инсталяция", product.getOptionInstallation(), product.getDescriptionOptionInstallation(), checkedOption));
+		}
+		
+		if(product.getPriceAddedOption() > 0.01){
+			result.add(returnOption(product.getNameAddedOption(), product.getPriceAddedOption(), product.getDescriptionOptionAddedOption(), checkedOption));
+		}
+		
+		if(product.getPriceAddedOption2() > 0.01){
+			result.add(returnOption(product.getNameAddedOption2(), product.getPriceAddedOption2(), product.getDescriptionOptionAddedOption2(), checkedOption));
+		}
+		
+		if(product.getPriceAddedOption3() > 0.01){
+			result.add(returnOption(product.getNameAddedOption3(), product.getPriceAddedOption3(), product.getDescriptionOptionAddedOption3(), checkedOption));
+		}
+		
+		if(product.getOptionVAT() > 0.01){
+			result.add(returnOption("НДС", product.getOptionVAT(), product.getDescriptionOptionVAT(), checkedOption));
 		}
 		
 		return result;

@@ -3,9 +3,9 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <div id="navigation">
 	<a href="<c:url value='/' />"><spring:message code="path.head_page"/></a>
-	<span> > </span>
+	<span><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span>
 	<a href="<c:url value='/3d_printers' />"><spring:message code="head.3dprinter"/></a>
-	<span> > </span>
+	<span><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span>
 	
 	<c:forEach items="${search.typePrinter3D}" var="tp">
 		<c:choose>

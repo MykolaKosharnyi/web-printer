@@ -16,6 +16,7 @@ import javax.validation.Valid;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -91,11 +92,22 @@ public class PrinterController {
         
         logger.info("All characteristic of printer.");
 		try {
-			model.addAttribute("printer", (JSONObject)new JSONParser()
-					.parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/printer.json"), "UTF-8")));
+			model.addAttribute("printer", sortEquipment((JSONObject)new JSONParser()
+					.parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/printer.json"), "UTF-8"))));
 		} catch (IOException | ParseException e) {}
         return "printers";
     }
+	
+	@SuppressWarnings("unchecked")
+	private JSONObject sortEquipment(JSONObject corectedJSONObject){
+		JSONArray arrayToSort = (JSONArray) corectedJSONObject.get("equipment_manufacturer");
+		corectedJSONObject.remove("equipment_manufacturer");
+
+		Collections.sort(arrayToSort);
+		
+		corectedJSONObject.put("equipment_manufacturer", arrayToSort);
+		return corectedJSONObject;
+	}
 	
 	@RequestMapping(value = "/printers/{type}", method = RequestMethod.GET)	
     public String typePrinters(@PathVariable("type") String type, Model model) {
@@ -147,9 +159,9 @@ public class PrinterController {
         model.addAttribute("type", "printer");
         
         logger.info("All characteristic of printer.");
-		try {
-			model.addAttribute("printer", (JSONObject)new JSONParser().
-					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/printer.json"), "UTF-8")));
+        try {
+			model.addAttribute("printer", sortEquipment((JSONObject)new JSONParser()
+					.parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/printer.json"), "UTF-8"))));
 		} catch (IOException | ParseException e) {}
         return "printers/" + type ;
     }
@@ -392,10 +404,10 @@ public class PrinterController {
 		 model.addAttribute("type", "printer");
 		 model.addAttribute("productId", 0);
 		 
-		try {
-			model.addAttribute("printer", (JSONObject)new JSONParser().
-					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/printer.json"), "UTF-8")));
-		} catch (IOException | ParseException e) {}
+		 try {
+				model.addAttribute("printer", sortEquipment((JSONObject)new JSONParser()
+						.parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/printer.json"), "UTF-8"))));
+			} catch (IOException | ParseException e) {}
 	    return "admin/printer";
 	}
 	
@@ -432,10 +444,10 @@ public class PrinterController {
 		 model.addAttribute("type", "printer");
 		 model.addAttribute("productId", id);
 		 
-		try {
-			model.addAttribute("printer", (JSONObject)new JSONParser().
-					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/printer.json"), "UTF-8")));
-		} catch (IOException | ParseException e) {}
+		 try {
+				model.addAttribute("printer", sortEquipment((JSONObject)new JSONParser()
+						.parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/printer.json"), "UTF-8"))));
+			} catch (IOException | ParseException e) {}
 	    return "admin/printer";
 	}
      
@@ -449,8 +461,8 @@ public class PrinterController {
 				model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
 				model.addAttribute("type", "printer");
 				try {
-					model.addAttribute("printer", (JSONObject)new JSONParser().
-							parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/printer.json"), "UTF-8")));
+					model.addAttribute("printer", sortEquipment((JSONObject)new JSONParser()
+							.parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/printer.json"), "UTF-8"))));
 				} catch (IOException | ParseException e) {}
 	            return "admin/printer";
 	        }
@@ -513,8 +525,8 @@ public class PrinterController {
 				model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
 				model.addAttribute("type", "printer");
 				try {
-					model.addAttribute("printer", (JSONObject)new JSONParser().
-							parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/printer.json"), "UTF-8")));
+					model.addAttribute("printer", sortEquipment((JSONObject)new JSONParser()
+							.parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/printer.json"), "UTF-8"))));
 				} catch (IOException | ParseException e) {}
 	            return "admin/printer";
 	        }
@@ -577,8 +589,8 @@ public class PrinterController {
         model.addAttribute("type", "printer");
         
         try {
-			model.addAttribute("printer", (JSONObject)new JSONParser().
-					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/printer.json"), "UTF-8")));
+			model.addAttribute("printer", sortEquipment((JSONObject)new JSONParser()
+					.parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/printer.json"), "UTF-8"))));
 		} catch (IOException | ParseException e) {}
         return "admin/printer";
     }
@@ -592,8 +604,8 @@ public class PrinterController {
 			model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
 			model.addAttribute("type", "printer");
 			try {
-				model.addAttribute("printer", (JSONObject)new JSONParser().
-						parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/printer.json"), "UTF-8")));
+				model.addAttribute("printer", sortEquipment((JSONObject)new JSONParser()
+						.parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/printer.json"), "UTF-8"))));
 			} catch (IOException | ParseException e) {}
             return "admin/printer";
         }
@@ -625,8 +637,8 @@ public class PrinterController {
 			model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
 			model.addAttribute("type", "printer");
 			try {
-				model.addAttribute("printer", (JSONObject)new JSONParser().
-						parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/printer.json"), "UTF-8")));
+				model.addAttribute("printer", sortEquipment((JSONObject)new JSONParser()
+						.parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/printer.json"), "UTF-8"))));
 			} catch (IOException | ParseException e) {}
             return "admin/printer";
         }

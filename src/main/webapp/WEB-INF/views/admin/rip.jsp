@@ -126,7 +126,57 @@
 						value = "<fmt:formatDate value="${product.timeShares}" pattern="dd.MM.yyyy" />"/>
 					</div>
 				</div>
-				
+				<div class="characteristic">
+					<div class="block_title">
+						<i></i>
+						<p>Опции (с заданием цены за дополнительную услугу)</p>
+					</div>
+					<ul class="check_boxes">
+						<div class="text_output">
+							<p>Инсталяция:&nbsp;</p>
+							<form:input path="optionInstallation" class="option"/>
+							<form:errors path="optionInstallation" cssClass="error"></form:errors>
+							<form:input path="descriptionOptionInstallation" />
+							<form:errors path="descriptionOptionInstallation" cssClass="error"></form:errors>
+						</div>
+						<hr>
+						<div class="text_output">
+							<p>НДС:&nbsp;</p>
+							<form:input path="optionVAT" class="option"/>
+							<form:errors path="optionVAT" cssClass="error"></form:errors>
+							<form:input path="descriptionOptionVAT" />
+							<form:errors path="descriptionOptionVAT" cssClass="error"></form:errors>
+						</div>
+						<hr>
+						<div class="text_output">
+							<form:input path="nameAddedOption" class="option"/>
+							<p>:&nbsp;</p>
+							<form:input path="priceAddedOption" class="option"/>
+							<form:errors path="priceAddedOption" cssClass="error"></form:errors>
+							<form:input path="descriptionOptionAddedOption" />
+							<form:errors path="descriptionOptionAddedOption" cssClass="error"></form:errors>
+						</div>
+						<hr>
+						<div class="text_output">
+							<form:input path="nameAddedOption2" class="option"/>
+							<p>:&nbsp;</p>
+							<form:input path="priceAddedOption2" class="option"/>
+							<form:errors path="priceAddedOption2" cssClass="error"></form:errors>
+							<form:input path="descriptionOptionAddedOption2" />
+							<form:errors path="descriptionOptionAddedOption2" cssClass="error"></form:errors>
+						</div>
+						<hr>
+						<div class="text_output">
+							<form:input path="nameAddedOption3" class="option"/>
+							<p>:&nbsp;</p>
+							<form:input path="priceAddedOption3" class="option"/>
+							<form:errors path="priceAddedOption3" cssClass="error"></form:errors>
+							<form:input path="descriptionOptionAddedOption3" />
+							<form:errors path="descriptionOptionAddedOption3" cssClass="error"></form:errors>
+						</div>
+						
+					</ul>
+				</div>
 			</div>
 
 
