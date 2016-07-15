@@ -35,6 +35,15 @@
                   </table>
                   
 <div class="option_product_with_price">
+
+	<c:if test="${(product.optionInstallation > 0.01) ||
+    			  (product.priceAddedOption > 0.01 && (product.nameAddedOption!=null && product.nameAddedOption!='')) ||
+    			  (product.priceAddedOption2 > 0.01 && (product.nameAddedOption2!=null && product.nameAddedOption2!='')) ||
+    			  (product.priceAddedOption3 > 0.01 && (product.nameAddedOption3!=null && product.nameAddedOption3!=''))}">            
+	    <div class="title_block_product_price">
+			<span class="price">Цена</span><span class="description">Описание</span>
+		</div>             
+    </c:if>    
 	
 	<c:if test="${product.optionInstallation > 0.01}">
 		<div class="block_product_price">

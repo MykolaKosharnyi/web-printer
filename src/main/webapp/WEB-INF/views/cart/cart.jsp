@@ -108,7 +108,7 @@ padding: 5px;
 
 
 .option_product_car label.total_ptice_title{min-width: 200px;}
-label.add_price_title{height: auto; max-width: 150px; min-width: 150px; float:left; text-align: left;}
+label.add_price_title{height: auto; max-width: 150px; min-width: 150px; float:left; text-align: left; cursor: pointer;}
 
 .option_product_car label.total_ptice_title,
 .option_product_car label.total_price{
@@ -125,14 +125,15 @@ label.add_price_title{height: auto; max-width: 150px; min-width: 150px; float:le
 
 .option_product_car .block_product_price input,
 .option_product_car .block_product_price label{
-top: 0px;
-position: relative;
+	top: 0px;
+	position: relative;
 }
 
 
 .option_product_car input[type="checkbox"].add_price{
 	/*margin-left: 5px;*/
 	float: left;
+	cursor: pointer;
 }
 
 .option_product_car .option_description{
@@ -168,7 +169,7 @@ padding: 5px;
 		<c:forEach var="item" items="${cart.contents}">
 		<tr>
 			<td><img style="height:auto; width:100%;" src="<%=request.getContextPath()%>/${item.key.picturePath}" alt=""></td>
-			<td><c:out value="${item.key.name }"/></td>
+			<td><a style="color:black;" href="<c:url value='/${item.key.typeProduct}/${item.key.idProduct}' />">${item.key.name }</a></td>
 			<td>
 				
 				<div class="option_product_car">

@@ -78,14 +78,9 @@
 		/* calculating price include value of VAT; in the last operand boolead value: true for adding, false for substraction */
 		function calculatePriceIncludingVAT(totalPrice, addPrice, typeOfOperation){
 			var valueVATOption = valueVAT();
-			/*if(typeOfOperation){
-				return ((totalPrice/valueVATOption) + addPrice) * valueVATOption;
-			} else {
-				return ((totalPrice/valueVATOption) - addPrice) * valueVATOption;
-			}*/
-			
-			return typeOfOperation ? ((totalPrice/valueVATOption) + addPrice) * valueVATOption : ((totalPrice/valueVATOption) - addPrice) * valueVATOption;
-			  
+			return typeOfOperation ?
+					((totalPrice/valueVATOption) + addPrice) * valueVATOption : 
+					((totalPrice/valueVATOption) - addPrice) * valueVATOption;
 		}
 		
 		/* get value of ckecked VAT option if it not return '1' */

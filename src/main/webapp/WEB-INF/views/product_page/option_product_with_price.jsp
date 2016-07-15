@@ -3,7 +3,18 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <div class="option_product_with_price">
-                 	
+    
+    <c:if test="${(product.optionRIP > 0.01) || (product.optionSNCP > 0.01) || (product.optionDelivery > 0.01) ||
+    			  (product.optionInstallation > 0.01) ||
+    			  (product.priceAddedOption > 0.01 && (product.nameAddedOption!=null && product.nameAddedOption!='')) ||
+    			  (product.priceAddedOption2 > 0.01 && (product.nameAddedOption2!=null && product.nameAddedOption2!='')) ||
+    			  (product.priceAddedOption3 > 0.01 && (product.nameAddedOption3!=null && product.nameAddedOption3!='')) ||
+    			  (product.optionGuarantee > 0.01)}">            
+	    <div class="title_block_product_price">
+			<span class="price">Цена</span><span class="description">Описание</span>
+		</div>             
+    </c:if>       
+          	
 	<c:if test="${product.optionRIP > 0.01}">
 		<div class="block_product_price">
 			<input class="add_price" type="checkbox" value="Програмное обеспечение" id="optionRIP_price">

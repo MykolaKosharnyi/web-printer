@@ -19,7 +19,7 @@ $(function () {
 		});
 /* Для згортання-розгортання лівого меню */
 $( function() {
-           $("#full_menu").click(function(){
+           $("#full_menu i").click(function(){
                if ( $(".menu").css('display') == 'none' ) {
                      $(".menu").slideDown(1500);
                       } else {

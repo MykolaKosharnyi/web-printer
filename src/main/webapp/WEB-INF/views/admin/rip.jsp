@@ -129,7 +129,7 @@
 				<div class="characteristic">
 					<div class="block_title">
 						<i></i>
-						<p>Опции (с заданием цены за дополнительную услугу)</p>
+						<p>Опции (с заданием цены и описания за дополнительную услугу)</p>
 					</div>
 					<ul class="check_boxes">
 						<div class="text_output">

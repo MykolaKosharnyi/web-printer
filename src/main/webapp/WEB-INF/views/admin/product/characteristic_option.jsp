@@ -6,7 +6,7 @@
 			<div class="characteristic">
 					<div class="block_title">
 						<i></i>
-						<p>Опции (с заданием цены за дополнительную услугу)</p>
+						<p>Опции (с заданием цены и описания за дополнительную услугу)</p>
 						<form:errors path="optionRIP" cssClass="error"></form:errors>
 						<form:errors path="optionSNCP" cssClass="error"></form:errors>
 						<form:errors path="optionDelivery" cssClass="error"></form:errors>

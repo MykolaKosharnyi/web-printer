@@ -147,14 +147,11 @@
 				<div class="col-md-12">
 					<div class="row">
 						<div id="mainmenu">
-        						<div id="full_menu">
-            							<div class="toggle-menu">
-								<!--   <span class="menu-text hide-on-med-and-down">Меню</span>   -->
-									<span class="icon-bar skew-clock"></span>
-									<span class="icon-bar hide-closed"></span>
-									<span class="icon-bar skew-counter"></span>
-								</div>
-            						</div>
+        					<div id="full_menu">
+								<div class="toggle-menu">
+									<i class="fa fa-bars" aria-hidden="true"></i>
+								</div> 
+            				</div>
             <ul>
             
             <!-- PRINTERS -->
