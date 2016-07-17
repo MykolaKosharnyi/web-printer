@@ -48,8 +48,7 @@
 	<c:if test="${product.optionInstallation > 0.01}">
 		<div class="block_product_price">
 			<input class="add_price" type="checkbox" value="Инсталяция" id="optionInstallation_price">
-				<label class="add_price_title" for="optionInstallation_price">Инсталяция</label>
-			</input>
+			<label class="add_price_title" for="optionInstallation_price">Инсталяция</label>
 			<label class="add_price_value">$<span><fmt:formatNumber type="number" 
 			   			maxFractionDigits="2" minFractionDigits="2" value="${product.optionInstallation}" /></span>
 			</label>
@@ -60,8 +59,7 @@
 	<c:if test="${product.priceAddedOption > 0.01 && (product.nameAddedOption!=null && product.nameAddedOption!='')}">
 		<div class="block_product_price">
 			<input class="add_price" type="checkbox" value="${product.nameAddedOption}" id="priceAddedOption_price">
-				<label class="add_price_title" for="priceAddedOption_price">${product.nameAddedOption}</label>
-			</input>
+			<label class="add_price_title" for="priceAddedOption_price">${product.nameAddedOption}</label>
 			<label class="add_price_value">$<span><fmt:formatNumber type="number" 
 			   			maxFractionDigits="2" minFractionDigits="2" value="${product.priceAddedOption}" /></span>
 			</label>
@@ -72,8 +70,7 @@
 	<c:if test="${product.priceAddedOption2 > 0.01 && (product.nameAddedOption2!=null && product.nameAddedOption2!='')}">
 		<div class="block_product_price">
 			<input class="add_price" type="checkbox" value="${product.nameAddedOption2}" id="priceAddedOption2_price">
-				<label class="add_price_title" for="priceAddedOption2_price">${product.nameAddedOption2}</label>
-			</input>
+			<label class="add_price_title" for="priceAddedOption2_price">${product.nameAddedOption2}</label>
 			<label class="add_price_value">$<span><fmt:formatNumber type="number" 
 			   			maxFractionDigits="2" minFractionDigits="2" value="${product.priceAddedOption2}" /></span>
 			</label>
@@ -84,8 +81,7 @@
 	<c:if test="${product.priceAddedOption3 > 0.01 && (product.nameAddedOption3!=null && product.nameAddedOption3!='')}">
 		<div class="block_product_price">
 			<input class="add_price" type="checkbox" value="${product.nameAddedOption3}" id="priceAddedOption3_price">
-				<label class="add_price_title" for="priceAddedOption3_price">${product.nameAddedOption3}</label>
-			</input>
+			<label class="add_price_title" for="priceAddedOption3_price">${product.nameAddedOption3}</label>
 			<label class="add_price_value">$<span><fmt:formatNumber type="number" 
 			   			maxFractionDigits="2" minFractionDigits="2" value="${product.priceAddedOption3}" /></span>
 			</label>
@@ -96,8 +92,7 @@
 	<c:if test="${product.optionVAT > 0.01}">
 		<div class="block_product_price">
 			<input class="add_price" type="checkbox" value="НДС" id="optionVAT_price">
-				<label class="add_price_title" for="optionVAT_price">НДС</label>
-			</input>
+			<label class="add_price_title" for="optionVAT_price">НДС</label>
 			<label class="add_price_value" style="display:none;"><span><fmt:formatNumber type="number" 
 			   			maxFractionDigits="2" minFractionDigits="2" value="${product.optionVAT}" /></span>
 			</label>

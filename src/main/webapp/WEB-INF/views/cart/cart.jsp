@@ -180,9 +180,8 @@ padding: 5px;
 								<input class="add_price" type="checkbox" value="${option.name}" 
 									id="${option.name}_${item.key.typeProduct}_${item.key.idProduct}"
 									<c:if test="${option.checked}">checked</c:if>>
-										<label class="add_price_title"
+								<label class="add_price_title"
 										 for="${option.name}_${item.key.typeProduct}_${item.key.idProduct}">${option.name}</label>
-								</input>
 								<label class="add_price_value" <c:if test="${option.name=='НДС'}">style="display:none;"</c:if>
 									><c:if test="${option.name!='НДС'}">$</c:if><span><fmt:formatNumber type="number" 
 											maxFractionDigits="2" minFractionDigits="2" value="${option.price}" /></span>

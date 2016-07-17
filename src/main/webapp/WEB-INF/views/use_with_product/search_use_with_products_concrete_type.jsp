@@ -45,7 +45,7 @@
 					<p>&nbsp;-&nbsp; $</p>
 					<form:input path="prise1" class="amount-prise1" value="${search.prise1}" />
 				</div>
-				<div class="slider-range-prise"/>
+				<div class="slider-range-prise"></div>
 			</ul>
 		</div>
 		<div class="search_criteria" style="display: none;">
