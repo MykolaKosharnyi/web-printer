@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans:beans xmlns="http://www.springframework.org/schema/mvc"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/beans"
-    xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
-    xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
-        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
  
     <!-- DispatcherServlet Context: defines this servlet's request-processing 
         infrastructure -->
@@ -27,7 +29,7 @@
     <beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
         <beans:property name="driverClassName" value="com.mysql.jdbc.Driver" />
         <beans:property name="url"
-            value="jdbc:mysql://localhost:3306/pmdatabase?useUnicode=yes&amp;characterEncoding=UTF-8" />
+            value="jdbc:mysql://localhost:3306/pmdatabase?useUnicode=yes&amp;characterEncoding=utf8" />
         <beans:property name="username" value="root" />
         <beans:property name="password" value="" />
     </beans:bean>
@@ -48,6 +50,7 @@
                 <beans:value>com.printmaster.nk.model.Rip</beans:value>
                 <beans:value>com.printmaster.nk.model.UseWithProduct</beans:value>
                 <beans:value>com.printmaster.nk.model.User</beans:value>
+                <beans:value>com.printmaster.nk.model.Role</beans:value>
                 <beans:value>com.printmaster.nk.model.OrderPrinter</beans:value>
             </beans:list>
         </beans:property>
@@ -62,12 +65,19 @@
             </beans:props>
         </beans:property>
     </beans:bean>
-    
-    <beans:bean id="userDAO" class="com.printmaster.nk.dao.UserDAOImpl">
+
+	<beans:bean id="userDAO" class="com.printmaster.nk.dao.UserDAOImpl">
         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
     </beans:bean>
     <beans:bean id="userService" class="com.printmaster.nk.service.UserServiceImpl">
         <beans:property name="userDAO" ref="userDAO"></beans:property>
+    </beans:bean>
+    
+    <beans:bean id="roleDAO" class="com.printmaster.nk.dao.RoleDAOImpl">
+        <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+    </beans:bean>
+    <beans:bean id="roleService" class="com.printmaster.nk.service.RoleServiceImpl">
+        <beans:property name="roleDAO" ref="roleDAO"></beans:property>
     </beans:bean>
     
     <beans:bean id="printerDAO" class="com.printmaster.nk.dao.PrinterDAOImpl">

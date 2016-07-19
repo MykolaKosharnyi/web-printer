@@ -2,6 +2,8 @@ package com.printmaster.nk.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,10 +18,18 @@ public class UserServiceImpl implements UserService {
         this.userDAO = userDAO;
     }
 
+    @Autowired
+    private RoleService roleService;
+    
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    
 	@Override
 	@Transactional
-	public long addUser(User user) {
-		return this.userDAO.addUser(user);
+	public long save(User user) {
+		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        user.setRole(roleService.getById(1));
+        return userDAO.save(user);
 	}
 
 	@Override
@@ -48,15 +58,8 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional
-	public User loginUser(String userId, String password) {
-		if(!userId.equals(password)){
-			User newUser = new User();
-			newUser.setFirstName(userId);
-			newUser.setPassword(password);
-			return newUser;
-		}
-		
-		return null;
+	public User findByUsername(String username) {
+		return this.userDAO.findByUsername(username);
 	}
     
 }

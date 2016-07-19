@@ -2,7 +2,6 @@ package com.printmaster.nk.model;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Set;
 
 import javax.persistence.*;
 
@@ -15,12 +14,15 @@ public class User implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="id")
-	private long id;
+	private Long id;
+	
+	@Column(name="username")
+	private String username;
 	
 	@Column(name="firstname")
 	private String firstName;
 	
-	@Column(name="LASTNAME")
+	@Column(name="lastname")
 	private String lastname;
 	
 	@Column(name="password")
@@ -44,19 +46,46 @@ public class User implements Serializable{
 	@Transient
 	private String passwordConfirm;
 	
-	@ManyToMany
-    @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles;
+	@OneToOne(cascade=CascadeType.ALL)
+    @JoinTable(name="user_roles",
+        joinColumns = {@JoinColumn(name="user_id", referencedColumnName="id")},
+        inverseJoinColumns = {@JoinColumn(name="role_id", referencedColumnName="id")}
+    )
+    private Role role;
 	
 	public User(){
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPasswordConfirm() {
+		return passwordConfirm;
+	}
+
+	public void setPasswordConfirm(String passwordConfirm) {
+		this.passwordConfirm = passwordConfirm;
+	}
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
 	}
 
 	public String getPassword() {
