@@ -17,12 +17,13 @@ import com.printmaster.nk.service.UserService;
 public class UserDetailsServiceImpl implements UserDetailsService{
     
 	@Autowired
-    private UserService userRepository;
+    private UserService userService;
 
     @Override
     @Transactional(readOnly = true)
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username);
+    public UserDetails loadUserByUsername(String username)  {
+       // User user = userService.findByUsername(username);
+    	User user = userService.getUserById(1);
 
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
         //for (Role role : user.getRoles()){

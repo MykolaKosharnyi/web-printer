@@ -1,13 +1,9 @@
 package com.printmaster.nk.model;
 
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -269,9 +265,6 @@ public class Printer extends Product{
 	
 	@Column(name="rip")
 	private String[] rip;
-	
-	@OneToMany(mappedBy="printer", fetch = FetchType.EAGER/*, orphanRemoval=true*/)
-	private Set<OrderPrinter> orderPrinters = new HashSet<OrderPrinter>();
 
 	public Printer() {
 		super();
@@ -749,14 +742,6 @@ public class Printer extends Product{
 		this.chromaticity = chromaticity;
 	}
 
-	public Set<OrderPrinter> getOrderPrinters() {
-		return orderPrinters;
-	}
-
-	public void setOrderPrinters(Set<OrderPrinter> orderPrinters) {
-		this.orderPrinters = orderPrinters;
-	}
-
 	public void setTypeOfPrinthead(String typeOfPrinthead) {
 		this.typeOfPrinthead = typeOfPrinthead;
 	}
@@ -945,8 +930,7 @@ public class Printer extends Product{
 				+ speedPrintHiQual + ", speedPrintHiqualResolution=" + speedPrintHiqualResolution + ", printResolution="
 				+ Arrays.toString(printResolution) + ", interfaceConnection=" + Arrays.toString(interfaceConnection)
 				+ ", maximumMediaThickness=" + maximumMediaThickness + ", maximumWeightOfVehicle="
-				+ maximumWeightOfVehicle + ", rip=" + Arrays.toString(rip) + ", orderPrinters=" + orderPrinters +
-				super.toString();
+				+ maximumWeightOfVehicle + ", rip=" + Arrays.toString(rip) + super.toString();
 	}
 
 }

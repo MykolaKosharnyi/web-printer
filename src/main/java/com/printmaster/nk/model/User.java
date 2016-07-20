@@ -41,6 +41,7 @@ public class User implements Serializable{
 	private Date dateOfBirthDay;
 	
 	@Column(name="time_registration")
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date timeRegistration;
 	
 	@Transient

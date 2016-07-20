@@ -26,8 +26,8 @@ http://www.springframework.org/schema/security/spring-security-4.0.xsd">
             <password-encoder ref="encoder"></password-encoder>
         </authentication-provider>
     </authentication-manager>
-
-    <beans:bean id="userDetailsServiceImpl" class="com.printmaster.nk.service.user.UserDetailsServiceImpl"></beans:bean>
+	
+	<beans:bean id="userDetailsServiceImpl" class="com.printmaster.nk.service.user.UserDetailsServiceImpl"></beans:bean>
 
     <beans:bean id="encoder"
           class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">

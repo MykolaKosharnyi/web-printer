@@ -3,7 +3,7 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <title><spring:message code="login.title"/></title>
 
-    <form method="POST" action="${contextPath}/login" class="form-signin">
+    <form method="POST" action="<c:url value='/login' />" class="form-signin">
         <h2 class="form-heading"><spring:message code="login.head"/></h2>
 
         <div class="form-group ${error != null ? 'has-error' : ''}">

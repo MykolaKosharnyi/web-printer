@@ -4,5 +4,5 @@
 <div id="navigation">
 	<a href="<c:url value='/' />"><spring:message code="path.head_page"/></a>
 	<span><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span>
-	<p><spring:message code="path.login"/></p>
+	<p><spring:message code="login.registration.head"/></p>
 </div>
