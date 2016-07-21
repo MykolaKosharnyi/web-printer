@@ -42,7 +42,7 @@ public class User implements Serializable{
 	
 	@Column(name="time_registration")
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date timeRegistration;
+	private Date timeRegistration = new Date();
 	
 	@Transient
 	private String passwordConfirm;
