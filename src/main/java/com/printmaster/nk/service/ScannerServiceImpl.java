@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.printmaster.nk.dao.ProductDAO;
 import com.printmaster.nk.model.Scanner;
-import com.printmaster.nk.model.SearchScanners;
+import com.printmaster.nk.modelwork.SearchScanners;
 
 public class ScannerServiceImpl implements ScannerService {
 	private ProductDAO<Scanner, SearchScanners> productDAO;

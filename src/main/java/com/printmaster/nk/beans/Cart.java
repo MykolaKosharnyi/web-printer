@@ -9,7 +9,7 @@ import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
 import com.printmaster.nk.beans.ProductCart;
-import com.printmaster.nk.model.Option;
+import com.printmaster.nk.modelwork.Option;
 
 @Component
 @Scope(value=WebApplicationContext.SCOPE_SESSION,

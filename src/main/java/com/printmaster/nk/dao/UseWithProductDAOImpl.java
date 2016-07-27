@@ -16,6 +16,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.printmaster.nk.model.UseWithProduct;
+import com.printmaster.nk.modelwork.SearchUseWithProducts;
 import com.printmaster.nk.model.Cutter;
 import com.printmaster.nk.model.DigitalPrinter;
 import com.printmaster.nk.model.Laminator;
@@ -23,7 +24,6 @@ import com.printmaster.nk.model.Laser;
 import com.printmaster.nk.model.Printer;
 import com.printmaster.nk.model.Printer3D;
 import com.printmaster.nk.model.Scanner;
-import com.printmaster.nk.model.SearchUseWithProducts;
 
 @Repository
 public class UseWithProductDAOImpl  implements UseWithProductDAO{

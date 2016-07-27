@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.printmaster.nk.dao.ProductDAO;
 import com.printmaster.nk.model.Laminator;
-import com.printmaster.nk.model.SearchLaminators;
+import com.printmaster.nk.modelwork.SearchLaminators;
 
 public class LaminatorServiceImpl implements LaminatorService {
 	private ProductDAO<Laminator, SearchLaminators> productDAO;

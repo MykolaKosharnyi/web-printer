@@ -3,7 +3,7 @@ package com.printmaster.nk.service;
 import java.util.Set;
 
 import com.printmaster.nk.model.Cutter;
-import com.printmaster.nk.model.SearchCutters;
+import com.printmaster.nk.modelwork.SearchCutters;
 
 public interface CutterService {
 

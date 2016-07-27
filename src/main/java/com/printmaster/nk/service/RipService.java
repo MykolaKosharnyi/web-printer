@@ -3,7 +3,7 @@ package com.printmaster.nk.service;
 import java.util.Set;
 
 import com.printmaster.nk.model.Rip;
-import com.printmaster.nk.model.SearchRips;
+import com.printmaster.nk.modelwork.SearchRips;
 
 public interface RipService {
 

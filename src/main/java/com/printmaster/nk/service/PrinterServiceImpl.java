@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.printmaster.nk.dao.ProductDAO;
 import com.printmaster.nk.model.Printer;
-import com.printmaster.nk.model.SearchPrinters;
+import com.printmaster.nk.modelwork.SearchPrinters;
 
 @Service
 public class PrinterServiceImpl implements PrinterService {

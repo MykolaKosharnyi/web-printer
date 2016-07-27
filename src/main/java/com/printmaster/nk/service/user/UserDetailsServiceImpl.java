@@ -1,12 +1,14 @@
 package com.printmaster.nk.service.user;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -14,52 +16,41 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.printmaster.nk.model.Role;
-import com.printmaster.nk.model.User;
 import com.printmaster.nk.service.UserService;
 
-@Transactional(readOnly=true)
-@Service("userDetailsService")
+@Service("customUserDetailsService")
 public class UserDetailsServiceImpl implements UserDetailsService{
     
 	@Autowired
     private UserService userService;
+	
+	@Transactional(readOnly=true)
+    public UserDetails loadUserByUsername(final String username) 
+    		throws UsernameNotFoundException {
+    	
+    		com.printmaster.nk.model.User user = userService.findByUserName(username);
+    		List<GrantedAuthority> authorities = buildUserAuthority(user.getRole());
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userService.findByUsername(username);
-        
-        if(user==null) {throw new UsernameNotFoundException("No such user: " + username);}
-        
-   /*     boolean accountNonExpired = true;
-        boolean credentialsNonExpired = true;
-        boolean accountNonLocked = true;*/
+    		return buildUserForAuthentication(user, authorities);
+    		
+    	}
 
-        return new org.springframework.security.core.userdetails.User(
-        		user.getUsername(),
-        		user.getPassword(),
-        		true, 
-                true, 
-                true, 
-                true, 
-                getAuthorities(user.getRole()));
-    }
-    
-    public List<String> getRolesAsList(Role role) {
-        List <String> rolesAsList = new ArrayList<String>();
-        rolesAsList.add(role.getName());
-        return rolesAsList;
-    }
+    	// Converts com.mkyong.users.model.User user to
+    	// org.springframework.security.core.userdetails.User
+    	private User buildUserForAuthentication(com.printmaster.nk.model.User user, 
+    		List<GrantedAuthority> authorities) {
+    		return new User(user.getUsername(), user.getPassword(), true, true, true, true, authorities);
+    	}
 
-    public static List<GrantedAuthority> getGrantedAuthorities(List<String> roles) {
-        List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-        for (String role : roles) {
-            authorities.add(new SimpleGrantedAuthority(role));
-        }
-        return authorities;
-    }
+    	private List<GrantedAuthority> buildUserAuthority(Role userRole) {
 
-    public Collection<? extends GrantedAuthority> getAuthorities(Role role) {
-        List<GrantedAuthority> authList = getGrantedAuthorities(getRolesAsList(role));
-        return authList;
-    }
+    		Set<GrantedAuthority> setAuths = new HashSet<GrantedAuthority>();
+
+    		// Build user's authorities
+    		setAuths.add(new SimpleGrantedAuthority(userRole.getName()));
+
+    		List<GrantedAuthority> Result = new ArrayList<GrantedAuthority>(setAuths);
+
+    		return Result;
+    	}
 }

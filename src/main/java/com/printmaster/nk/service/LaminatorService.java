@@ -3,7 +3,7 @@ package com.printmaster.nk.service;
 import java.util.Set;
 
 import com.printmaster.nk.model.Laminator;
-import com.printmaster.nk.model.SearchLaminators;
+import com.printmaster.nk.modelwork.SearchLaminators;
 
 public interface LaminatorService {
 

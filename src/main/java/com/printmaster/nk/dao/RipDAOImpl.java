@@ -21,7 +21,7 @@ import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Repository;
 
 import com.printmaster.nk.model.Rip;
-import com.printmaster.nk.model.SearchRips;
+import com.printmaster.nk.modelwork.SearchRips;
 
 @Repository
 public class RipDAOImpl implements ProductDAO<Rip, SearchRips> {

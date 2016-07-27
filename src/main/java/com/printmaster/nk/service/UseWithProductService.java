@@ -3,7 +3,7 @@ package com.printmaster.nk.service;
 import java.util.Set;
 
 import com.printmaster.nk.model.UseWithProduct;
-import com.printmaster.nk.model.SearchUseWithProducts;
+import com.printmaster.nk.modelwork.SearchUseWithProducts;
 
 public interface UseWithProductService {
 

@@ -6,6 +6,8 @@ import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.printmaster.nk.modelwork.Product;
+
 @Entity
 @Table(name="digital_printer")
 public class DigitalPrinter extends Product{

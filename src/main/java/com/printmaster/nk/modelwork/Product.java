@@ -1,4 +1,4 @@
-package com.printmaster.nk.model;
+package com.printmaster.nk.modelwork;
 
 import java.io.Serializable;
 import java.util.ArrayList;

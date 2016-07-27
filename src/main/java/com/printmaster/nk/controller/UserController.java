@@ -1,12 +1,17 @@
 package com.printmaster.nk.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.printmaster.nk.model.User;
 import com.printmaster.nk.service.UserService;
@@ -52,8 +57,8 @@ public class UserController {
 	@Autowired
     private UserService userService;
 
-    @Autowired
-    private SecurityService securityService;
+   // @Autowired
+   // private SecurityService securityService;
 
     @Autowired
     private UserValidator userValidator;
@@ -75,7 +80,7 @@ public class UserController {
 
         userService.save(userForm);
 
-        securityService.autologin(userForm.getUsername(), userForm.getPasswordConfirm());
+        //securityService.autologin(userForm.getUsername(), userForm.getPassword());
 
         return "redirect:/printers";
     }
@@ -90,5 +95,23 @@ public class UserController {
 
         return "login";
     }
+    
+  //for 403 access denied page
+  	@RequestMapping(value = "/403", method = RequestMethod.GET)
+  	public ModelAndView accesssDenied() {
+
+  	  ModelAndView model = new ModelAndView();
+  		
+  	  //check if user is login
+  	  Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+  	  if (!(auth instanceof AnonymousAuthenticationToken)) {
+  		UserDetails userDetail = (UserDetails) auth.getPrincipal();	
+  		model.addObject("username", userDetail.getUsername());
+  	  }
+  		
+  	  model.setViewName("403");
+  	  return model;
+
+  	}
 
 }

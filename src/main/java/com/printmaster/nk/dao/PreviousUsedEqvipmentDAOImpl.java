@@ -20,7 +20,7 @@ import com.printmaster.nk.model.Laser;
 import com.printmaster.nk.model.Printer;
 import com.printmaster.nk.model.Printer3D;
 import com.printmaster.nk.model.Scanner;
-import com.printmaster.nk.model.SearchPUE;
+import com.printmaster.nk.modelwork.SearchPUE;
 
 @Repository
 public class PreviousUsedEqvipmentDAOImpl {

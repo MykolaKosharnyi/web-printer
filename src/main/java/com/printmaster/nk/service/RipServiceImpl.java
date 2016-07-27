@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.printmaster.nk.dao.ProductDAO;
 import com.printmaster.nk.model.Rip;
-import com.printmaster.nk.model.SearchRips;
+import com.printmaster.nk.modelwork.SearchRips;
 
 public class RipServiceImpl implements RipService {
 	private ProductDAO<Rip, SearchRips> productDAO;

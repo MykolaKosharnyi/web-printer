@@ -3,7 +3,7 @@ package com.printmaster.nk.service;
 import java.util.Set;
 
 import com.printmaster.nk.model.Scanner;
-import com.printmaster.nk.model.SearchScanners;
+import com.printmaster.nk.modelwork.SearchScanners;
 
 public interface ScannerService {
 

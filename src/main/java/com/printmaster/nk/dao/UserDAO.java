@@ -7,7 +7,7 @@ import com.printmaster.nk.model.User;
 public interface UserDAO {
 
 	public void save(User user);
-	public User findByUsername(String username);
+	public User findByUserName(String username);
     public void updateUser(User user);
     public List<User> listUsers();
     public User getUserById(long id);

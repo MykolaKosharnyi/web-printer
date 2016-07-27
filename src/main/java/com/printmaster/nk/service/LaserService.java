@@ -3,7 +3,7 @@ package com.printmaster.nk.service;
 import java.util.Set;
 
 import com.printmaster.nk.model.Laser;
-import com.printmaster.nk.model.SearchLasers;
+import com.printmaster.nk.modelwork.SearchLasers;
 
 public interface LaserService {
 

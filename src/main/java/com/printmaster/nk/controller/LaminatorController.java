@@ -39,7 +39,7 @@ import com.printmaster.nk.beans.FileMeta;
 import com.printmaster.nk.beans.LinksForProducts;
 import com.printmaster.nk.beans.PicturesContainer;
 import com.printmaster.nk.model.Laminator;
-import com.printmaster.nk.model.SearchLaminators;
+import com.printmaster.nk.modelwork.SearchLaminators;
 import com.printmaster.nk.service.LaminatorService;
 import com.printmaster.nk.service.UseWithProductService;
 
