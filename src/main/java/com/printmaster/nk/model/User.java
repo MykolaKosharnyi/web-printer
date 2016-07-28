@@ -28,6 +28,9 @@ public class User implements Serializable{
 	@Column(name="password")
 	private String password;
 	
+	@Column(nullable = false, columnDefinition = "bit default 1")
+	private boolean enabled;
+	
 	@Column(name="telephone")
 	private int telephone;
 	

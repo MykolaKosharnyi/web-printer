@@ -82,7 +82,7 @@ public class UserController {
 
         //securityService.autologin(userForm.getUsername(), userForm.getPassword());
 
-        return "redirect:/printers";
+        return "redirect:/login";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)

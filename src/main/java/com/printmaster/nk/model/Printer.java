@@ -8,8 +8,6 @@ import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-import com.printmaster.nk.modelwork.Product;
-
 @Entity
 @Table(name="printer")
 public class Printer extends Product{

@@ -28,7 +28,11 @@ public class PreviousUsedEqvipmentDAOImpl {
 	@Autowired
     ComponetsForController componets;
 	
-    private SessionFactory sessionFactory;
+    public void setComponets(ComponetsForController componets) {
+		this.componets = componets;
+	}
+
+	private SessionFactory sessionFactory;
      
     public void setSessionFactory(SessionFactory sf){
         this.sessionFactory = sf;

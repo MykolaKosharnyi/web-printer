@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.printmaster.nk.model.Role;
 import com.printmaster.nk.service.UserService;
 
-@Service("customUserDetailsService")
+@Service/*("customUserDetailsService")*/
 public class UserDetailsServiceImpl implements UserDetailsService{
     
 	@Autowired
