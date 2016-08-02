@@ -40,7 +40,7 @@ import com.printmaster.nk.beans.FileMeta;
 import com.printmaster.nk.beans.LinksForProducts;
 import com.printmaster.nk.beans.PicturesContainer;
 import com.printmaster.nk.model.DigitalPrinter;
-import com.printmaster.nk.modelwork.SearchDigitalPrinters;
+import com.printmaster.nk.model.SearchDigitalPrinters;
 import com.printmaster.nk.service.DigitalPrinterService;
 import com.printmaster.nk.service.UseWithProductService;
 

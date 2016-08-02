@@ -17,10 +17,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.printmaster.nk.beans.Cart;
 import com.printmaster.nk.beans.ProductCart;
+import com.printmaster.nk.model.Option;
 import com.printmaster.nk.model.Product;
 import com.printmaster.nk.model.Rip;
 import com.printmaster.nk.model.UseWithProduct;
-import com.printmaster.nk.modelwork.Option;
 import com.printmaster.nk.service.CutterService;
 import com.printmaster.nk.service.DigitalPrinterService;
 import com.printmaster.nk.service.LaminatorService;

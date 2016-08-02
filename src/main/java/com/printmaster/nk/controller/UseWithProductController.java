@@ -38,8 +38,8 @@ import com.printmaster.nk.beans.ComponetsForController;
 import com.printmaster.nk.beans.FileMeta;
 import com.printmaster.nk.beans.LinksForProducts;
 import com.printmaster.nk.beans.PicturesContainer;
+import com.printmaster.nk.model.SearchUseWithProducts;
 import com.printmaster.nk.model.UseWithProduct;
-import com.printmaster.nk.modelwork.SearchUseWithProducts;
 import com.printmaster.nk.service.UseWithProductService;
 
 @Controller

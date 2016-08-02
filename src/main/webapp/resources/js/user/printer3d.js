@@ -24,13 +24,14 @@
 	                				.append($('<a/>').attr("id", "/images/3d_printers/" + product.id + "/" + checkPicture(product.pathPictures))
            								 			 .addClass("link")
            								 			 .attr("href", "/3d_printer/" + product.id)
-	                	.append($('<div/>').addClass("outer_a_img").append($('<img/>')
+           								 			 .append($('<div/>').addClass("outer_a_img").append($('<img/>')
 	    	                								.attr("src", "/images/3d_printers/" + product.id + "/" + product.pathPictures[0]))))
-	    	                		.append($('<a/>').attr("href", "/3d_printer/" + product.id).addClass("products_title").text(product.name))
-	    	                		.append(slidePrice)
-	    	                		.append($('<i/>').addClass("fa fa-cart-plus add_to_cart").click(function(){
-        			                			addToCart('3d_printer', product.id, product.name, product.prise+'', product.pathPictures[0]);
-        			                		}))
+	                				.append($('<div/>').addClass("name_price_cart_block")
+	    	                				.append($('<a/>').attr("href", "/3d_printer/" + product.id).addClass("products_title").text(product.name))
+	    	    	                		.append(slidePrice)
+	    	    	                		.append($('<i/>').addClass("fa fa-cart-plus add_to_cart").click(function(){
+	            			                			addToCart('3d_printer', product.id, product.name, product.prise+'', product.pathPictures[0]);
+	            			                		})))	    	                		
 	    	          
 	    	                				if(product.leftSharesLink!=null && product.leftSharesLink!=""){
 	    	                	        		outerDiv.append($('<div/>').addClass("ribbon-search-wrapper-left")

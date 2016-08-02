@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import org.json.simple.JSONObject;
 
-import com.printmaster.nk.modelwork.SearchPUE;
+import com.printmaster.nk.model.SearchPUE;
 
 public interface PreviousUsedEqvipmentService {
 

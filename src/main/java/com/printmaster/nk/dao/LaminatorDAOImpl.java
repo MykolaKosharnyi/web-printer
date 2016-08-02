@@ -14,7 +14,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.printmaster.nk.model.Laminator;
-import com.printmaster.nk.modelwork.SearchLaminators;
+import com.printmaster.nk.model.SearchLaminators;
 
 @Repository
 public class LaminatorDAOImpl implements ProductDAO<Laminator, SearchLaminators>{

@@ -22,7 +22,6 @@ public class ReclamOnSite {
 	
 	private String path = "/var/www/localhost" + File.separator + "left_reklam.json";
 	
-	
 	@SuppressWarnings("unchecked")
 	public void addReklam(ReklamProduct reklamProduct){
 		JSONParser parser = new JSONParser();
@@ -37,6 +36,7 @@ public class ReclamOnSite {
 					jsonArray = new JSONArray();
 				}
 				
+				@SuppressWarnings("rawtypes")
 				Iterator iter = jsonArray.iterator();
 				
 				while (iter.hasNext()){
@@ -93,6 +93,7 @@ public class ReclamOnSite {
 				JSONArray jsonArray = (JSONArray) obj.get("reklam");
 				obj.remove("reklam");
 				
+				@SuppressWarnings("rawtypes")
 				Iterator iter = jsonArray.iterator();
 				
 				while (iter.hasNext()){

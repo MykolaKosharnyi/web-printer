@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.printmaster.nk.dao.UserDAO;
+import com.printmaster.nk.model.Role;
 import com.printmaster.nk.model.User;
 
 @Service
@@ -23,12 +24,13 @@ public class UserServiceImpl implements UserService {
     
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
-    
+
 	@Override
 	@Transactional
 	public void save(User user) {
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        user.setRole(roleService.getById(1));
+		Role role = roleService.getById(1);
+        user.setRole(role);
         userDAO.save(user);
 	}
 

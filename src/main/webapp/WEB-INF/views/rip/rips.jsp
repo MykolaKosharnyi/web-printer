@@ -20,17 +20,19 @@
 			" onmouseover="" class="link" href="<c:url value='/${type}/${product.id}' />">	
 					<div class="outer_a_img"><img src="/images/${type}s/${product.id}/${product.pathPictures.get(0)}" alt=""></div>
 			</a>
+			
+			<div class="name_price_cart_block">
+				<a href="<c:url value='/${type}/${product.id}' />" class="products_title">${product.name}</a>
+				<p class="products_price">Цена: 
+		       		<c:if test="${product.prise < 0.1}"><a href="#callback" class="fancybox">уточняйте</a></c:if>
+					<c:if test="${!(product.prise < 0.1)}">					
+	   					$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${product.prise}" />
+					</c:if>
+           		</p>
 
-			<a href="<c:url value='/${type}/${product.id}' />" class="products_title">${product.name}</a>
-			<p class="products_price">Цена: 
-           		<c:if test="${product.prise < 0.1}"><a href="#callback" class="fancybox">уточняйте</a></c:if>
-				<c:if test="${!(product.prise < 0.1)}">					
-   					$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${product.prise}" />
-				</c:if>
-           	</p>
-           	
-           	<i class="fa fa-cart-plus add_to_cart" aria-hidden="true" 
-			onclick="addToCart('${type}', ${product.id}, '${product.name}', '${product.prise}', '${product.pathPictures.get(0)}');"></i>
+				<i class="fa fa-cart-plus add_to_cart" aria-hidden="true" 
+				onclick="addToCart('${type}', ${product.id}, '${product.name}', '${product.prise}', '${product.pathPictures.get(0)}');"></i>
+			</div>	
 			
 			<c:if test="${!empty product.leftSharesLink}">
 				<div class="ribbon-search-wrapper-left">

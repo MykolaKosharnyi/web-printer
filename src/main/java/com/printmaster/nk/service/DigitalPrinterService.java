@@ -3,7 +3,7 @@ package com.printmaster.nk.service;
 import java.util.Set;
 
 import com.printmaster.nk.model.DigitalPrinter;
-import com.printmaster.nk.modelwork.SearchDigitalPrinters;
+import com.printmaster.nk.model.SearchDigitalPrinters;
 
 public interface DigitalPrinterService {
 	 

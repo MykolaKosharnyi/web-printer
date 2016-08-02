@@ -39,7 +39,7 @@ import com.printmaster.nk.beans.FileMeta;
 import com.printmaster.nk.beans.LinksForProducts;
 import com.printmaster.nk.beans.PicturesContainer;
 import com.printmaster.nk.model.Scanner;
-import com.printmaster.nk.modelwork.SearchScanners;
+import com.printmaster.nk.model.SearchScanners;
 import com.printmaster.nk.service.ScannerService;
 import com.printmaster.nk.service.UseWithProductService;
 

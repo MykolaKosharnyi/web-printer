@@ -45,7 +45,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context-support</artifactId>
-            <version>3.0.5.RELEASE</version>
+            <version>${org.springframework-version}</version>
         </dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -233,7 +233,7 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
-			<version>5.0.1.Final</version>
+			<version>5.2.1.Final</version>
 		</dependency>
 
 		<dependency>

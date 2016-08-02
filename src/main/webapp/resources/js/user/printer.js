@@ -22,14 +22,16 @@
 	                	
 	                	outerDiv.addClass("products")
 	                				.append($('<a/>').attr("id", "/images/printers/" + product.id + "/" + checkPicture(product.pathPictures))
-           								 			 .addClass("link")
-	                								 .attr("href", "/printer/" + product.id)
-	                								 .append($('<div/>').addClass("outer_a_img").append($('<img/>').attr("src", "/images/printers/" + product.id + "/" + product.pathPictures[0]))))
-	    	                		.append($('<a/>').attr("href", "/printer/" + product.id).addClass("products_title").text(product.name))
-	    	                		.append(slidePrice)
-	    	                		.append($('<i/>').addClass("fa fa-cart-plus add_to_cart").click(function(){
-        			                			addToCart('printer', product.id, product.name, product.prise+'', product.pathPictures[0]);
-        			                		}))
+	                						.addClass("link")
+	                						.attr("href", "/printer/" + product.id)
+	                						.append($('<div/>').addClass("outer_a_img").append($('<img/>').attr("src", "/images/printers/" + product.id + "/" + product.pathPictures[0]))))
+	    	                		.append($('<div/>').addClass("name_price_cart_block")
+	    	                				.append($('<a/>').attr("href", "/printer/" + product.id).addClass("products_title").text(product.name))
+	    	    	                		.append(slidePrice)
+	    	    	                		.append($('<i/>').addClass("fa fa-cart-plus add_to_cart").click(function(){
+	            			                			addToCart('printer', product.id, product.name, product.prise+'', product.pathPictures[0]);
+	            			                		})))
+	                				
 	    	                				
 	                	
 	    	                				if(product.leftSharesLink!=null && product.leftSharesLink!=""){

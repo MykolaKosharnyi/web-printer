@@ -40,7 +40,7 @@ import com.printmaster.nk.beans.FileMeta;
 import com.printmaster.nk.beans.LinksForProducts;
 import com.printmaster.nk.beans.PicturesContainer;
 import com.printmaster.nk.model.Printer3D;
-import com.printmaster.nk.modelwork.SearchPrinters3D;
+import com.printmaster.nk.model.SearchPrinters3D;
 import com.printmaster.nk.service.Printer3DService;
 import com.printmaster.nk.service.UseWithProductService;
 

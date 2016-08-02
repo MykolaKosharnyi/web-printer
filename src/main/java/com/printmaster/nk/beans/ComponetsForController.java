@@ -23,10 +23,6 @@ public class ComponetsForController {
 
 	@Autowired
 	public ReclamOnSite reklam;
-	
-	public void setReklam(ReclamOnSite reklam) {
-		this.reklam = reklam;
-	}
 
 	public ArrayList<JSONObject> showSimplestArrayOfPrinter(Set<Printer> set){
 		

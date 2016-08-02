@@ -1,4 +1,4 @@
-package com.printmaster.nk.modelwork;
+package com.printmaster.nk.model;
 
 public class Option{
 

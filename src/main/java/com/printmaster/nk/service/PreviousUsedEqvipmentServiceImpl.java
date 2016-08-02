@@ -6,7 +6,7 @@ import org.json.simple.JSONObject;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.printmaster.nk.dao.PreviousUsedEqvipmentDAOImpl;
-import com.printmaster.nk.modelwork.SearchPUE;
+import com.printmaster.nk.model.SearchPUE;
 
 public class PreviousUsedEqvipmentServiceImpl implements PreviousUsedEqvipmentService {
 	

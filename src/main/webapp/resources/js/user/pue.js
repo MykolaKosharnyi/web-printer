@@ -26,13 +26,13 @@
 	                								 .attr("href", "/" + product.type + "/" + product.id)
 	                								 .append($('<div/>').addClass("outer_a_img").append($('<img/>')
 	                										 .attr("src", "/images/" + product.type + "s/" + product.id + "/" + product.pathPictures[0]))))
-	    	                		.append($('<a/>').attr("href", "/" + product.type + "/" + product.id).addClass("products_title").text(product.name))
-	    	                		.append(slidePrice)
-	    	                		.append($('<i/>').addClass("fa fa-cart-plus add_to_cart").click(function(){
-        			                			addToCart(product.type, product.id, product.name, product.prise+'', product.pathPictures[0]);
-        			                		}))
-	    	                				
-	                	
+	                				.append($('<div/>').addClass("name_price_cart_block")
+	    	                				.append($('<a/>').attr("href", "/" + product.type + "/" + product.id).addClass("products_title").text(product.name))
+	    	    	                		.append(slidePrice)
+	    	    	                		.append($('<i/>').addClass("fa fa-cart-plus add_to_cart").click(function(){
+	            			                			addToCart(product.type, product.id, product.name, product.prise+'', product.pathPictures[0]);
+	            			                		})))	                										 
+
 	    	                				if(product.leftSharesLink!=null && product.leftSharesLink!=""){
 	    	                	        		outerDiv.append($('<div/>').addClass("ribbon-search-wrapper-left")
 	    	                										.append($('<div/>').addClass("ribbon-search-left")

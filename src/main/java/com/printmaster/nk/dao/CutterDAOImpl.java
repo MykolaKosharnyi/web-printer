@@ -15,7 +15,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.printmaster.nk.model.Cutter;
-import com.printmaster.nk.modelwork.SearchCutters;
+import com.printmaster.nk.model.SearchCutters;
 
 @Repository
 public class CutterDAOImpl implements ProductDAO<Cutter, SearchCutters>{

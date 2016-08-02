@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.printmaster.nk.dao.ProductDAO;
 import com.printmaster.nk.model.Laser;
-import com.printmaster.nk.modelwork.SearchLasers;
+import com.printmaster.nk.model.SearchLasers;
 
 public class LaserServiceImpl implements LaserService {
 	private ProductDAO<Laser, SearchLasers> productDAO;

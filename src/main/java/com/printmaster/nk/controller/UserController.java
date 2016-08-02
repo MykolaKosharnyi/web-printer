@@ -57,8 +57,8 @@ public class UserController {
 	@Autowired
     private UserService userService;
 
-   // @Autowired
-   // private SecurityService securityService;
+    @Autowired
+    private SecurityService securityService;
 
     @Autowired
     private UserValidator userValidator;
@@ -80,9 +80,9 @@ public class UserController {
 
         userService.save(userForm);
 
-        //securityService.autologin(userForm.getUsername(), userForm.getPassword());
+        securityService.autologin(userForm.getUsername(), userForm.getPassword());
 
-        return "redirect:/login";
+        return "redirect:/printers";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)

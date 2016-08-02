@@ -2,7 +2,7 @@ package com.printmaster.nk.beans;
 
 import java.util.List;
 
-import com.printmaster.nk.modelwork.Option;
+import com.printmaster.nk.model.Option;
 
 public class ProductCart {
 	

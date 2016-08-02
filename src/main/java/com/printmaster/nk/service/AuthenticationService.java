@@ -1,4 +1,4 @@
-package com.printmaster.nk.service.user;
+package com.printmaster.nk.service;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -16,11 +16,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.printmaster.nk.model.Role;
-import com.printmaster.nk.service.UserService;
 
-@Service/*("customUserDetailsService")*/
-public class UserDetailsServiceImpl implements UserDetailsService{
-    
+/*@Service("customUserDetailsService")*/
+public class AuthenticationService/* implements UserDetailsService*/{
+  /*  
 	@Autowired
     private UserService userService;
 	
@@ -52,5 +51,5 @@ public class UserDetailsServiceImpl implements UserDetailsService{
     		List<GrantedAuthority> Result = new ArrayList<GrantedAuthority>(setAuths);
 
     		return Result;
-    	}
+    	}*/
 }

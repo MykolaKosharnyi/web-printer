@@ -24,7 +24,7 @@ import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Repository;
 
 import com.printmaster.nk.model.Printer;
-import com.printmaster.nk.modelwork.SearchPrinters;
+import com.printmaster.nk.model.SearchPrinters;
 
 @Repository
 public class PrinterDAOImpl implements ProductDAO<Printer, SearchPrinters> {

@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.printmaster.nk.dao.ProductDAO;
 import com.printmaster.nk.model.DigitalPrinter;
-import com.printmaster.nk.modelwork.SearchDigitalPrinters;
+import com.printmaster.nk.model.SearchDigitalPrinters;
 
 public class DigitalPrinterServiceImpl implements DigitalPrinterService {
 	private ProductDAO<DigitalPrinter, SearchDigitalPrinters> productDAO;
