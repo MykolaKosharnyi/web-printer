@@ -73,6 +73,14 @@
         <beans:property name="userDAO" ref="userDAO"></beans:property>
     </beans:bean>
     
+    <beans:bean id="myUserDetailsService" class="com.printmaster.nk.service.AuthenticationService">
+		<beans:property name="userService" ref="userService" />
+	</beans:bean>
+	
+	<beans:bean id="bCryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+       <beans:constructor-arg name="strength" value="11"/>
+    </beans:bean>
+    
     <beans:bean id="roleDAO" class="com.printmaster.nk.dao.RoleDAOImpl">
         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
     </beans:bean>

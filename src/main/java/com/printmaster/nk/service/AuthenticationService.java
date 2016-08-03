@@ -17,15 +17,20 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.printmaster.nk.model.Role;
 
-/*@Service("customUserDetailsService")*/
-public class AuthenticationService/* implements UserDetailsService*/{
-  /*  
-	@Autowired
+public class AuthenticationService implements UserDetailsService{
+    
     private UserService userService;
 	
+	public UserService getUserService() {
+		return userService;
+	}
+
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
+
 	@Transactional(readOnly=true)
-    public UserDetails loadUserByUsername(final String username) 
-    		throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
     	
     		com.printmaster.nk.model.User user = userService.findByUserName(username);
     		List<GrantedAuthority> authorities = buildUserAuthority(user.getRole());
@@ -36,8 +41,7 @@ public class AuthenticationService/* implements UserDetailsService*/{
 
     	// Converts com.mkyong.users.model.User user to
     	// org.springframework.security.core.userdetails.User
-    	private User buildUserForAuthentication(com.printmaster.nk.model.User user, 
-    		List<GrantedAuthority> authorities) {
+    	private User buildUserForAuthentication(com.printmaster.nk.model.User user, List<GrantedAuthority> authorities) {
     		return new User(user.getUsername(), user.getPassword(), true, true, true, true, authorities);
     	}
 
@@ -51,5 +55,5 @@ public class AuthenticationService/* implements UserDetailsService*/{
     		List<GrantedAuthority> Result = new ArrayList<GrantedAuthority>(setAuths);
 
     		return Result;
-    	}*/
+    	}
 }

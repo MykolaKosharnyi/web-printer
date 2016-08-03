@@ -1,8 +1,12 @@
 package com.printmaster.nk.controller;
 
+import java.util.Iterator;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -70,6 +74,32 @@ public class UserController {
         return "registration";
     }
 
+    @SuppressWarnings("unchecked")
+	@RequestMapping(value = "/user", method = RequestMethod.GET)
+    public String user(Model model) {
+    	
+    	
+    	 Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+     	  if (!(auth instanceof AnonymousAuthenticationToken)) {
+     		UserDetails userDetail = (UserDetails) auth.getPrincipal();
+     		model.addAttribute("user", userService.findByUserName(userDetail.getUsername()));
+     		
+     		//model.addAttribute("user", userService.findByUserName((String) auth.getPrincipal()));
+     		
+//			List<GrantedAuthority> listGA = (List<GrantedAuthority>) userDetail.getAuthorities();
+//     		Iterator<GrantedAuthority> it = listGA.iterator();
+//     		while(it.hasNext()){
+//     			if(it.next().getAuthority().equals("ROLE_ADMIN")){
+//     				model.addAttribute("ROLE", "ROLE_ADMIN");
+//     			} else {
+//     				model.addAttribute("ROLE", "ROLE_USER");
+//     			}
+//     		}
+     	  }
+    	
+        return "user";
+    }
+    
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model) {
         userValidator.validate(userForm, bindingResult);

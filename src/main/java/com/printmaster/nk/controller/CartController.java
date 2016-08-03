@@ -235,7 +235,6 @@ public class CartController {
 		return result;
 	}
 	
-	
 	@RequestMapping(value = "cart/delete/{typeProduct}/{productId}", method = RequestMethod.POST,
 			consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
 	public @ResponseBody void removeFromCart(Model model, @PathVariable("typeProduct") String typeProduct,

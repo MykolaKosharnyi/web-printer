@@ -26,6 +26,11 @@
     	<put-attribute name="path" value="/WEB-INF/views/login/path_registration.jsp" />  
         <put-attribute name="body" value="/WEB-INF/views/login/registration.jsp" />  
     </definition>  
+    
+    <definition name="user" extends="base"> 
+    	<put-attribute name="path" value="/WEB-INF/views/user/path_user.jsp" />  
+        <put-attribute name="body" value="/WEB-INF/views/user/user.jsp" />  
+    </definition>
   
     <definition name="cart" extends="base"> 
     	<put-attribute name="path" value="/WEB-INF/views/cart/path_cart.jsp" />  

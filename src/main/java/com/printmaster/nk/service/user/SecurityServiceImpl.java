@@ -27,8 +27,8 @@ import com.printmaster.nk.service.UserService;
 public class SecurityServiceImpl implements SecurityService{
    
 //	@Autowired
-//  private AuthenticationManager authenticationManager;
-
+//	private AuthenticationManager authenticationManager;
+//
 //    @Autowired
 //    private UserDetailsService customUserDetailsService;
     

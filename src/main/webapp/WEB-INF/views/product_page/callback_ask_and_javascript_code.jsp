@@ -8,7 +8,7 @@
 	});
 	
 	function getCheckedOption(){
-		var checkedArray = [];
+		var checkedArray = new Array();
 		$("input.add_price:checked").each(function(){
 			checkedArray.push($(this).val());
 		});
