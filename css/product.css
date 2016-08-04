@@ -3,7 +3,7 @@
     position: relative;
     height: auto;
     width: inherit;
-    padding-left: 5px;
+    /*padding-left: 5px;*/
     font: 14px "RobotoRegular";
 }
 
@@ -158,9 +158,9 @@ border-radius: 5px;
             
             /*----  Common information  -----*/
 			div#commom_information{
-				float:none;
+				float: none;
 				position: relative; 
-				display:block !important; 
+				display: block !important; 
 				width: 500px; 
 				padding: 10px;
 				font-style: italic;
@@ -179,15 +179,22 @@ border-radius: 5px;
 	border: 1px dashed #006080;
 }
 
-.block_product_price{
+.block_product_price,
+.title_block_product_price{
 	padding: 2px;
 	height:auto;
 }
+.title_block_product_price{
+font-weight: bold;
+}
+
+.title_block_product_price .price{margin-left: 230px;}
+.title_block_product_price .description{margin-left: 60px;}
 
 .block_product_price input,
 .block_product_price label{
-top: 0px;
-position: relative;
+	top: 0px;
+	position: relative;
 }
 
 input[type="checkbox"].add_price{
@@ -201,8 +208,8 @@ input[type="checkbox"].add_price{
 }
 
 .option_description{
-height: auto;
-width: 215px;
+	height: auto;
+	width: 215px;
 }
 
 label.add_price_title,.option_product_with_price label.total_ptice_title{min-width: 200px;}
@@ -215,8 +222,8 @@ label.add_price_value{
 .option_product_with_price label.total_ptice_title,
 .option_product_with_price label.total_price{
 /*min-width: 155px;*/
-margin:10px 0px;
-text-align: right;
+	margin:10px 0px;
+	text-align: right;
 }
 .option_product_with_price label.total_ptice_title{
 margin-left: 25px;

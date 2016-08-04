@@ -374,7 +374,7 @@ input.input_check_block{
                 font-weight:bold;
             }
 
-            input[type=text]{
+            #search_product input[type=text]{
                 padding: 0;
                 margin: 0;
 		border: 1px rgb(144, 144, 144) solid;
@@ -456,18 +456,21 @@ p.p_pue{
 
 	.products{
 		position: relative;
-		width: 338px;
+		width: 336px;
 		height: auto;
 		border: 1px rgb(219, 219, 219) solid;
 		margin: 3px 0px 3px 6px;
 		margin-right: 0px;
 		border-radius: 3px;
-		display:block;
 		float: left;
-		max-height:337px;
+		max-height:338px;
 		-webkit-box-shadow: 0 0 5px rgb(157, 157, 157);
 		-moz-box-shadow: 0 0 5px rgb(157, 157, 157);
 		box-shadow: 0 0 5px rgb(157, 157, 157);
+
+		-moz-box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+		box-sizing: border-box;
 	}
 	.products:hover{
 		border: 2px #006080 solid;
@@ -485,18 +488,23 @@ p.p_pue{
 		.products a.link{
 			position: relative;
 			/*top: 0px;*/
-			height:275px;
+			height:276px;
+			max-height:276px;
 			width: inherit;
 			border-bottom: 1px rgb(219, 219, 219) solid;
 		    	
 			display:table-cell;
     		vertical-align: middle;
+
+			-moz-box-sizing: border-box;
+			-webkit-box-sizing: border-box;
+			box-sizing: border-box;
 		}
 		
 		.products a.link .outer_a_img{
 			display: block;
-    			position: relative;
-                        width: 100%;
+    		position: relative;
+            width: 100%;
 			height:auto;
                     }
 
@@ -506,15 +514,22 @@ p.p_pue{
 				position: relative;
 				max-height:275px;
 			}
-		
+			
+		.name_price_cart_block{
+			display: block;
+			padding: 10px;
+			position: relative;
+			height: 60px;
+		}		
+	
 		.products_title, .products_price{
 			position: relative;
-			height: 30px;
-			width: 273px;
+			height: 20px;
+			width: 80%;
 			/*max-width: 280px;*/
 			float: left;
 			margin:0;
-			padding: 5px 10px 5px;
+			/*padding: 5px 10px 5px;*/
 			font-weight: bold;
 			text-align: left;
 			/*border: 1px red solid;*/
