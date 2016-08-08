@@ -12,6 +12,7 @@ import com.printmaster.nk.model.Role;
 import com.printmaster.nk.model.User;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
     private UserDAO userDAO;
     
@@ -19,47 +20,45 @@ public class UserServiceImpl implements UserService {
         this.userDAO = userDAO;
     }
 
-    @Autowired
-    private RoleService roleService;
+  //  @Autowired
+  //  private RoleService roleService;
     
     @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private BCryptPasswordEncoder passwordEncoder;
 
 	@Override
-	@Transactional
 	public void save(User user) {
-		//user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-		Role role = roleService.getById(1);
-        user.setRole(role);
+		String encodedPassword = passwordEncoder.encode(user.getPassword());
+		user.setPassword(encodedPassword);
+		//Role role = roleService.getById(1);
+		//Role role = new Role();
+		//role.setId((long)1);
+		//role.setName("ROLE_USER");
+        user.setRole("ROLE_USER");
         userDAO.save(user);
 	}
 
 	@Override
-	@Transactional
 	public void updateUser(User user) {
 		this.userDAO.updateUser(user);
 	}
 
 	@Override
-	@Transactional
 	public List<User> listUsers() {
 		return this.userDAO.listUsers();
 	}
 
 	@Override
-	@Transactional
 	public User getUserById(long id) {
 		return this.userDAO.getUserById(id);
 	}
 
 	@Override
-	@Transactional
 	public void removeUser(long id) {
 		this.userDAO.removeUser(id);
 	}
 
 	@Override
-	@Transactional
 	public User findByUserName(String username) {
 		return this.userDAO.findByUserName(username);
 	}

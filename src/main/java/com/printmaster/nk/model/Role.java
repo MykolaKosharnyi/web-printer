@@ -20,19 +20,19 @@ public class Role implements Serializable{
     @Column(name="name")
     private String name;
     
-    @OneToMany(cascade=CascadeType.ALL)
-    @JoinTable(name="user_roles", 
-        joinColumns = {@JoinColumn(name="role_id", referencedColumnName="id")},
-        inverseJoinColumns = {@JoinColumn(name="user_id", referencedColumnName="id")}
-    )
-    private Set<User> users;
+//    @OneToMany(cascade=CascadeType.ALL)
+//    @JoinTable(name="user_roles", 
+//        joinColumns = {@JoinColumn(name="role_id", referencedColumnName="id")},
+//        inverseJoinColumns = {@JoinColumn(name="user_id", referencedColumnName="id")}
+//    )
+//    private Set<User> users;
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(Long i) {
+        this.id = i;
     }
 
     public String getName() {
@@ -43,13 +43,13 @@ public class Role implements Serializable{
         this.name = name;
     }
 
-	public Set<User> getUsers() {
-		return users;
-	}
-
-	public void setUsers(Set<User> users) {
-		this.users = users;
-	}
+//	public Set<User> getUsers() {
+//		return users;
+//	}
+//
+//	public void setUsers(Set<User> users) {
+//		this.users = users;
+//	}
 
     
 }

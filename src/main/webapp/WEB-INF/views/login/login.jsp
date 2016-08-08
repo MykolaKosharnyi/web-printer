@@ -3,13 +3,21 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <title><spring:message code="login.title"/></title>
 
-    <form method="POST" action="<c:url value='/login' />" class="form-signin">
+<div class="login-container">
+
+    <form method="POST" action="<c:url value='/login' />" class="form-horizontal">
         <h2 class="form-heading"><spring:message code="login.head"/></h2>
 
         <div class="form-group ${error != null ? 'has-error' : ''}">
             <span>${message}</span>
-            <input name="username" type="text" class="form-control" placeholder="<spring:message code="login.login"/>" autofocus/>
-            <input name="password" type="password" class="form-control" placeholder="<spring:message code="login.password"/>"/>
+            <div class="input-group input-sm">
+                <label class="input-group-addon" for="username"><i class="fa fa-user"></i></label>
+            	<input name="username" type="text" class="form-control" placeholder="<spring:message code="login.login"/>" autofocus/>
+            </div>
+            <div class="input-group input-sm">
+                <label class="input-group-addon" for="password"><i class="fa fa-lock"></i></label> 
+            	<input name="password" type="password" class="form-control" placeholder="<spring:message code="login.password"/>"/>
+            </div>
             <span>${error}</span>
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
@@ -18,3 +26,4 @@
         </div>
 
     </form>
+ </div>

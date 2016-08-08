@@ -1,12 +1,8 @@
 package com.printmaster.nk.controller;
 
-import java.util.Iterator;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -74,15 +70,30 @@ public class UserController {
         return "registration";
     }
 
-    @SuppressWarnings("unchecked")
 	@RequestMapping(value = "/user", method = RequestMethod.GET)
     public String user(Model model) {
     	
+    	Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     	
-    	 Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-     	  if (!(auth instanceof AnonymousAuthenticationToken)) {
-     		UserDetails userDetail = (UserDetails) auth.getPrincipal();
-     		model.addAttribute("user", userService.findByUserName(userDetail.getUsername()));
+    	String username = null;
+    	if (principal instanceof UserDetails) {
+    		username = ((UserDetails)principal).getUsername();
+    	} else {
+    		username = (String) principal;
+    	}
+    	
+//    	if(userService.findByUserName(username) == null){
+//    		User user = userService.findByUserName("printmaster");
+//    		user.setUsername("Username is null");
+//    		model.addAttribute("user", user);
+//    	} else {
+    		model.addAttribute("user", userService.findByUserName(username));
+    	//}
+    	
+//    	 Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//     	  if (!(auth instanceof AnonymousAuthenticationToken)) {
+//     		UserDetails userDetail = (UserDetails) auth.getPrincipal();
+//     		model.addAttribute("user", userService.findByUserName(userDetail.getUsername()));
      		
      		//model.addAttribute("user", userService.findByUserName((String) auth.getPrincipal()));
      		
@@ -95,7 +106,7 @@ public class UserController {
 //     				model.addAttribute("ROLE", "ROLE_USER");
 //     			}
 //     		}
-     	  }
+//     	  }
     	
         return "user";
     }
@@ -108,9 +119,10 @@ public class UserController {
             return "registration";
         }
 
+        String password = userForm.getPassword();
         userService.save(userForm);
 
-        securityService.autologin(userForm.getUsername(), userForm.getPassword());
+        securityService.autologin(userForm.getUsername(), password);
 
         return "redirect:/printers";
     }

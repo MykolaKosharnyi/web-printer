@@ -17,8 +17,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.printmaster.nk.model.Role;
 
-public class AuthenticationService implements UserDetailsService{
-    
+public class AuthenticationService/* implements UserDetailsService*/{
+ /*   
     private UserService userService;
 	
 	public UserService getUserService() {
@@ -55,5 +55,5 @@ public class AuthenticationService implements UserDetailsService{
     		List<GrantedAuthority> Result = new ArrayList<GrantedAuthority>(setAuths);
 
     		return Result;
-    	}
+    	}*/
 }

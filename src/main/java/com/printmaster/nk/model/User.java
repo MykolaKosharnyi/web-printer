@@ -50,12 +50,13 @@ public class User implements Serializable{
 	@Transient
 	private String passwordConfirm;
 	
-	@OneToOne(cascade=CascadeType.ALL)
-    @JoinTable(name="user_roles",
-        joinColumns = {@JoinColumn(name="user_id", referencedColumnName="id")},
-        inverseJoinColumns = {@JoinColumn(name="role_id", referencedColumnName="id")}
-    )
-    private Role role;
+//	@OneToOne(cascade=CascadeType.ALL)
+//    @JoinTable(name="user_roles",
+//        joinColumns = {@JoinColumn(name="user_id", referencedColumnName="id")},
+//        inverseJoinColumns = {@JoinColumn(name="role_id", referencedColumnName="id")}
+//    )
+	@Column(name="role")
+    private String role;
 	
 	public User(){
 	}
@@ -84,11 +85,11 @@ public class User implements Serializable{
 		this.passwordConfirm = passwordConfirm;
 	}
 
-	public Role getRole() {
+	public String getRole() {
 		return role;
 	}
 
-	public void setRole(Role role) {
+	public void setRole(String role) {
 		this.role = role;
 	}
 

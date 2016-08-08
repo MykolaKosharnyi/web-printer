@@ -11,7 +11,6 @@
 
 .cart{
 	width: auto;
-	margin: 0px 0px 0px 5px;
 	font: 15px "RobotoRegular";
 }
 
