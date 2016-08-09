@@ -204,6 +204,144 @@ public abstract class Product implements Serializable{
 			@Column(name="descriptionAddedOption3")
 			protected String descriptionOptionAddedOption3;
 	
+	//Option for delivery	
+	//air
+	@Column(name="airDeliveryWidth", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double airDeliveryWidth;
+	
+	@Column(name="airDeliveryHeight", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double airDeliveryHeight;
+	
+	@Column(name="airDeliveryDepth", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double airDeliveryDepth;
+	
+	@Column(name="airDeliveryPriceSize", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double airDeliveryPriceSize;
+	
+	@Column(name="airDeliveryWeight", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double airDeliveryWeight;
+	
+	@Column(name="airDeliveryPriceWeight", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double airDeliveryPriceWeight;
+	
+	//sea
+	@Column(name="seaDeliveryWidth", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double seaDeliveryWidth;
+		
+	@Column(name="seaDeliveryHeight", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double seaDeliveryHeight;
+		
+	@Column(name="seaDeliveryDepth", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double seaDeliveryDepth;
+		
+	@Column(name="seaDeliveryPriceSize", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double seaDeliveryPriceSize;
+		
+	@Column(name="seaDeliveryWeight", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double seaDeliveryWeight;
+		
+	@Column(name="seaDeliveryPriceWeight", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double seaDeliveryPriceWeight;
+	
+	//on Ukraine
+	@Column(name="ukraineDeliveryWidth", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double ukraineDeliveryWidth;
+			
+	@Column(name="ukraineDeliveryHeight", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double ukraineDeliveryHeight;
+			
+	@Column(name="ukraineDeliveryDepth", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double ukraineDeliveryDepth;
+			
+	@Column(name="ukraineDeliveryPriceSize", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double ukraineDeliveryPriceSize;
+			
+	@Column(name="ukraineDeliveryWeight", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double ukraineDeliveryWeight;
+			
+	@Column(name="ukraineDeliveryPriceWeight", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double ukraineDeliveryPriceWeight;
+	
+	//on Kyiv
+	@Column(name="kyivDeliveryWidth", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double kyivDeliveryWidth;
+				
+	@Column(name="kyivDeliveryHeight", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double kyivDeliveryHeight;
+				
+	@Column(name="kyivDeliveryDepth", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double kyivDeliveryDepth;
+				
+	@Column(name="kyivDeliveryPriceSize", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double kyivDeliveryPriceSize;
+				
+	@Column(name="kyivDeliveryWeight", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double kyivDeliveryWeight;
+				
+	@Column(name="kyivDeliveryPriceWeight", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double kyivDeliveryPriceWeight;
+	
+	//first custom variant
+	@Column(name="variant1DeliveryWidth", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double variant1DeliveryWidth;
+					
+	@Column(name="variant1DeliveryHeight", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double variant1DeliveryHeight;
+					
+	@Column(name="variant1DeliveryDepth", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double variant1DeliveryDepth;
+					
+	@Column(name="variant1DeliveryPriceSize", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double variant1DeliveryPriceSize;
+					
+	@Column(name="variant1DeliveryWeight", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double variant1DeliveryWeight;
+					
+	@Column(name="variant1DeliveryPriceWeight", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double variant1DeliveryPriceWeight;
+	
+	//second custom variant
+	@Column(name="variant2DeliveryWidth", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double variant2DeliveryWidth;
+						
+	@Column(name="variant2DeliveryHeight", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double variant2DeliveryHeight;
+						
+	@Column(name="variant2DeliveryDepth", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double variant2DeliveryDepth;
+						
+	@Column(name="variant2DeliveryPriceSize", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double variant2DeliveryPriceSize;
+						
+	@Column(name="variant2DeliveryWeight", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double variant2DeliveryWeight;
+						
+	@Column(name="variant2DeliveryPriceWeight", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double variant2DeliveryPriceWeight;
+	
+	//third custom variant
+	@Column(name="variant3DeliveryWidth", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double variant3DeliveryWidth;
+							
+	@Column(name="variant3DeliveryHeight", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double variant3DeliveryHeight;
+							
+	@Column(name="variant3DeliveryDepth", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double variant3DeliveryDepth;
+							
+	@Column(name="variant3DeliveryPriceSize", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double variant3DeliveryPriceSize;
+							
+	@Column(name="variant3DeliveryWeight", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double variant3DeliveryWeight;
+							
+	@Column(name="variant3DeliveryPriceWeight", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double variant3DeliveryPriceWeight;
+			
+	@Size(max = 50)
+	@Column(name="descriptionRIP")
+	protected String descriptionOptionRIP;
+			
 	public Product(){}
 
 	public String getDescriptionOptionRIP() {

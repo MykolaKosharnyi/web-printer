@@ -9,9 +9,12 @@
 	
 	function getCheckedOption(){
 		var checkedArray = new Array();
-		$("input.add_price:checked").each(function(){
-			checkedArray.push($(this).val());
-		});
+		
+		if($("input.add_price:checked").length > 0){
+			$("input.add_price:checked").each(function(){
+				checkedArray.push($(this).val());
+			});
+		}
 		return checkedArray;
 	}
 	

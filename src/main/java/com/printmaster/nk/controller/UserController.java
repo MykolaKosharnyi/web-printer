@@ -124,7 +124,7 @@ public class UserController {
 
         securityService.autologin(userForm.getUsername(), password);
 
-        return "redirect:/printers";
+        return "redirect:/user";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
