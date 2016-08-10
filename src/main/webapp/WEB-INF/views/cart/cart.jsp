@@ -33,13 +33,13 @@
 }
 
 .table > thead:first-child > tr:first-child > th{
-text-align: center;
-vertical-align: middle;
+	text-align: center;
+	vertical-align: middle;
 }
 
 .table-bordered > tbody > tr > td{
-vertical-align: middle;
-padding: 5px;
+	vertical-align: middle;
+	padding: 5px;
 }
 
 .cart table td{
@@ -107,7 +107,7 @@ padding: 5px;
 
 
 .option_product_car label.total_ptice_title{min-width: 200px;}
-label.add_price_title{height: auto; max-width: 150px; min-width: 150px; float:left; text-align: left; cursor: pointer;}
+label.add_price_title{height: auto; max-width: 136px; min-width: 136px; float:left; text-align: left; cursor: pointer;}
 
 .option_product_car label.total_ptice_title,
 .option_product_car label.total_price{
@@ -136,8 +136,8 @@ label.add_price_title{height: auto; max-width: 150px; min-width: 150px; float:le
 }
 
 .option_product_car .option_description{
-height: auto;
-width: 215px;
+	height: auto;
+	width: 215px;
 }
 
 .option_product_car label.add_price_value{
@@ -145,8 +145,8 @@ width: 215px;
 }
 
 .option_product_car label.total_ptice_title{
-margin-left: 25px;
-padding: 5px;
+	margin-left: 25px;
+	padding: 5px;
 }
 
 </style>

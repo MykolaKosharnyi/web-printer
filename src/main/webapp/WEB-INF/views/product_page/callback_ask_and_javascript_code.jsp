@@ -24,20 +24,21 @@
 	for option and VAT coeficient.
 	*/
 	$( document ).ready(function() {//set price while onload page
-		var price_element = $('.option_product_with_price').find('label.total_price span');
+		var price_element = $('.option_product_with_price').find('table.table_price_option tbody tr td label.total_price span');
 		var currentPrice = new Number(price_element.text().replace(/\s/ig, '').replace(",", "."));
 		
 		var valueVAT = 1;
 		$("input.add_price:checked").each(function(){
 			//add to price or if it is VAT coeficient
-			var addPrice = new Number($(this).parent('.block_product_price').find('label.add_price_value span').text().replace(/\s/ig, '').replace(",", "."));
+			var addPrice = new Number($(this).parent('td').parent('.block_product_price').find('td label.add_price_value span').text().replace(/\s/ig, '').replace(",", "."));
 			if($(this).val()!="НДС"){
 				currentPrice = currentPrice + addPrice;
 			} else {
 				valueVAT = addPrice;
 			}
 			
-			$(this).parent('.block_product_price').css('color', '#006080');
+			$(this).parent('td').parent('.block_product_price').css('color', 'white');
+			$(this).parent('td').parent('.block_product_price').css('background', '#2aabd2');
 		});
 		price_element.text(checkPriseProduct(currentPrice * valueVAT));
 	});
@@ -46,34 +47,37 @@
 	$(function(){
 		$('.add_price').click(function(){
 			// from wich we taken current price and after add/sub operation insert again value
-            var price_element = $(this).parent('.block_product_price').parent('.option_product_with_price').find('label.total_price span');
+            var price_element = $(this).parent('td').parent('.block_product_price').parent('tbody').parent('table.table_price_option')
+            	.parent('.option_product_with_price').find('table.table_price_option tbody tr td label.total_price span');
 			// total price in number presentation
 			var currentPrice = new Number(price_element.text().replace(/\s/ig, '').replace(",", "."));
 			// for changing style outer block if option checked
-            var change_style = $(this).parent('.block_product_price');
+            var change_style = $(this).parent('td').parent('.block_product_price');
 			// value wich will be added or substraction from all price for the product
-			var addPrice = new Number($(this).parent('.block_product_price').find('label.add_price_value span').text().replace(/\s/ig, '').replace(",", "."));
+			var addPrice = new Number($(this).parent('td').parent('.block_product_price').find('td label.add_price_value span').text().replace(/\s/ig, '').replace(",", "."));
 			
             if ($(this).prop( "checked" )) {
             	/* check if it not checked VAT option; because for VAT option different way to calculate price */
             	if($(this).val()!="НДС"){
                 	price_element.text(checkPriseProduct( calculatePriceIncludingVAT(currentPrice, addPrice, true) ));
             	} else {
-            		var valueVAT = new Number($(this).parent('.block_product_price').find('label.add_price_value span').text().replace(/\s/ig, '').replace(",", "."));
+            		var valueVAT = new Number($(this).parent('td').parent('.block_product_price').find('td label.add_price_value span').text().replace(/\s/ig, '').replace(",", "."));
             		price_element.text(checkPriseProduct(currentPrice * valueVAT));
             	}
             	
-            	change_style.css('color', '#006080');
+            	change_style.css('color', 'white');
+            	change_style.css('background', '#2aabd2');
             	
             }else{
             	/* check if it not checked VAT option; because for VAT option different way to calculate price */
             	if($(this).val()!="НДС"){
             		price_element.text(checkPriseProduct( calculatePriceIncludingVAT(currentPrice, addPrice, false) ));
             	} else {
-            		var valueVAT = new Number($(this).parent('.block_product_price').find('label.add_price_value span').text().replace(/\s/ig, '').replace(",", "."));
+            		var valueVAT = new Number($(this).parent('td').parent('.block_product_price').find('td label.add_price_value span').text().replace(/\s/ig, '').replace(",", "."));
             		price_element.text(checkPriseProduct(currentPrice / valueVAT));
             	}
             	change_style.css('color', '#333');
+            	change_style.css('background', 'white');
             }
             
         });
@@ -89,8 +93,8 @@
 		/* get value of ckecked VAT option if it not return '1' */
 		function valueVAT(){
 			if($('input#optionVAT_price').prop( "checked" )){
-				return new Number($('input#optionVAT_price').parent('.block_product_price')
-						.find('label.add_price_value span').text().replace(/\s/ig, '').replace(",", "."));
+				return new Number($('input#optionVAT_price').parent('td').parent('.block_product_price')
+						.find('td label.add_price_value span').text().replace(/\s/ig, '').replace(",", "."));
 			} else {
 				return new Number(1);
 			}
