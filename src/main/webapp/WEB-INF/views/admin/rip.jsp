@@ -126,25 +126,25 @@
 						value = "<fmt:formatDate value="${product.timeShares}" pattern="dd.MM.yyyy" />"/>
 					</div>
 				</div>
-				<div class="characteristic">
+				<div class="product_option">
 					<div class="block_title">
-						<i></i>
+						<i class="opened"></i>
 						<p>Опции (с заданием цены и описания за дополнительную услугу)</p>
 					</div>
-					<ul class="check_boxes">
+					<ul class="check_boxes" style="display: block;">
 						<div class="text_output">
-							<p>Инсталяция:&nbsp;</p>
+							<p class="option_name">Инсталяция:&nbsp;</p>
 							<form:input path="optionInstallation" class="option"/>
 							<form:errors path="optionInstallation" cssClass="error"></form:errors>
-							<form:input path="descriptionOptionInstallation" />
+							<form:input path="descriptionOptionInstallation"  class="option_description"/>
 							<form:errors path="descriptionOptionInstallation" cssClass="error"></form:errors>
 						</div>
 						<hr>
 						<div class="text_output">
-							<p>НДС:&nbsp;</p>
+							<p class="option_name">НДС:&nbsp;</p>
 							<form:input path="optionVAT" class="option"/>
 							<form:errors path="optionVAT" cssClass="error"></form:errors>
-							<form:input path="descriptionOptionVAT" />
+							<form:input path="descriptionOptionVAT"  class="option_description"/>
 							<form:errors path="descriptionOptionVAT" cssClass="error"></form:errors>
 						</div>
 						<hr>
@@ -153,7 +153,7 @@
 							<p>:&nbsp;</p>
 							<form:input path="priceAddedOption" class="option"/>
 							<form:errors path="priceAddedOption" cssClass="error"></form:errors>
-							<form:input path="descriptionOptionAddedOption" />
+							<form:input path="descriptionOptionAddedOption"  class="option_description"/>
 							<form:errors path="descriptionOptionAddedOption" cssClass="error"></form:errors>
 						</div>
 						<hr>
@@ -162,7 +162,7 @@
 							<p>:&nbsp;</p>
 							<form:input path="priceAddedOption2" class="option"/>
 							<form:errors path="priceAddedOption2" cssClass="error"></form:errors>
-							<form:input path="descriptionOptionAddedOption2" />
+							<form:input path="descriptionOptionAddedOption2"  class="option_description"/>
 							<form:errors path="descriptionOptionAddedOption2" cssClass="error"></form:errors>
 						</div>
 						<hr>
@@ -171,7 +171,7 @@
 							<p>:&nbsp;</p>
 							<form:input path="priceAddedOption3" class="option"/>
 							<form:errors path="priceAddedOption3" cssClass="error"></form:errors>
-							<form:input path="descriptionOptionAddedOption3" />
+							<form:input path="descriptionOptionAddedOption3"  class="option_description"/>
 							<form:errors path="descriptionOptionAddedOption3" cssClass="error"></form:errors>
 						</div>
 						

@@ -38,8 +38,24 @@ tinymce.init({
 				});
 /*--- реализация выпадающих подпунктов ---*/
         $( function(){
-            $(".block_title").click(function(){
+            $(".characteristic .block_title").click(function(){
                 var check = $(this).parent('.characteristic').find(".check_boxes, .box_text_area");
+                var check_point = $(this).find("i");
+                if (check.css('display') == 'none') {
+                    check.slideDown();
+                  /*  check.css('display', 'block');*/
+                    check_point.addClass('opened');
+                }else{
+                    check.slideUp();
+                 /*   check.css('display', 'none');*/
+                    check_point.removeClass('opened');
+                }
+            });
+        } ); 
+        
+        $( function(){
+            $(".product_option .block_title").click(function(){
+                var check = $(this).parent('.product_option').find(".check_boxes, .box_text_area");
                 var check_point = $(this).find("i");
                 if (check.css('display') == 'none') {
                     check.slideDown();
@@ -108,7 +124,7 @@ $( function() {
         
 /* Для розкрытия заполненных полей и придания им цвета */       
         $(function() {
-        	$( '.check_boxes' ).each(function() {
+        	$( '.characteristic .check_boxes' ).each(function() {
         		  $( this ).has(':checked').length ? changeFillStyle($( this )) : changeEmptyStyle($( this )) ;
         		  if($( this ).find(":text").val()!='' &&
         				  ($( this ).find(":text").val()!=0 || $( this ).find(":text").val()!=0.0) &&
