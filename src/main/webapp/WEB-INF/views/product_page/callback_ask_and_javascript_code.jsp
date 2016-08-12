@@ -18,6 +18,17 @@
 		return checkedArray;
 	}
 	
+	function getCheckedDelivery(){
+		var checkedArray = new Array();
+		
+		if($("input.add_price_delivery:checked").length > 0){
+			$("input.add_price_delivery:checked").each(function(){
+				checkedArray.push($(this).val());
+			});
+		}
+		return checkedArray;
+	}
+	
 	/*
 		Set the price after onload page. It was done for cause when user checked addition
 	option and onload page or open this tab in the future. After it price include price 
@@ -40,6 +51,21 @@
 			$(this).parent('td').parent('.block_product_price').css('color', 'white');
 			$(this).parent('td').parent('.block_product_price').css('background', '#2aabd2');
 		});
+		
+		$("input.add_price_delivery:checked").each(function(){
+			var addPrice = new Number(0);
+			$(this).parent('td').parent('.block_product_price').find('td label.add_price_delivery_value span').each(function(){
+				addPrice += new Number($(this).text().replace(/\s/ig, '').replace(",", "."));
+			});
+		
+			currentPrice = currentPrice + addPrice;
+			
+			$(this).parent('td').parent('.block_product_price').css('color', 'white');
+			$(this).parent('td').parent('.block_product_price').css('background', '#B9BF0B');
+			$(this).parent('td').parent('.block_product_price').css('border-bottom', '1px white solid');
+
+		});
+	
 		price_element.text(checkPriseProduct(currentPrice * valueVAT));
 	});
 
@@ -68,7 +94,7 @@
             	change_style.css('color', 'white');
             	change_style.css('background', '#2aabd2');
             	
-            }else{
+            } else {
             	/* check if it not checked VAT option; because for VAT option different way to calculate price */
             	if($(this).val()!="НДС"){
             		price_element.text(checkPriseProduct( calculatePriceIncludingVAT(currentPrice, addPrice, false) ));
@@ -78,6 +104,38 @@
             	}
             	change_style.css('color', '#333');
             	change_style.css('background', 'white');
+            }
+            
+        });
+		
+		$('.add_price_delivery').click(function(){
+			// from wich we taken current price and after add/sub operation insert again value
+            var price_element = $(this).parent('td').parent('.block_product_price').parent('tbody').parent('table.table_delivery_options')
+            	.parent('.delivery_options_body').parent('td').parent('tr.delivery').parent('tbody').parent('table.table_price_option')
+            	.parent('.option_product_with_price').find('table.table_price_option tbody tr td label.total_price span');
+			// total price in number presentation
+			var currentPrice = new Number(price_element.text().replace(/\s/ig, '').replace(",", "."));
+			// for changing style outer block if option checked
+            var change_style = $(this).parent('td').parent('.block_product_price');
+			// value wich will be added or substraction from all price for the product
+			var addPrice = new Number(0);
+			$(this).parent('td').parent('.block_product_price').find('td label.add_price_delivery_value span').each(function(){
+				addPrice += new Number($(this).text().replace(/\s/ig, '').replace(",", "."));
+			});
+			
+            if ($(this).prop( "checked" )) {
+
+                price_element.text(checkPriseProduct( calculatePriceIncludingVAT(currentPrice, addPrice, true) ));
+            	change_style.css('color', 'white');
+            	change_style.css('background', '#B9BF0B');
+				change_style.css('border-bottom', '1px white solid');
+            	
+            } else {
+            	
+            	price_element.text(checkPriseProduct( calculatePriceIncludingVAT(currentPrice, addPrice, false) ));
+            	change_style.css('color', '#333');
+            	change_style.css('background', 'white');
+            	change_style.css('border-bottom', 'none');
             }
             
         });
@@ -99,9 +157,23 @@
 				return new Number(1);
 			}
 		}
+
+		/* for opening delivery option on product page */
+		$('.delivery_options').click(function(){
+			var icon = $(this).find('i');
+			var body = $(this).parent('td').find('.delivery_options_body');	
+			
+			if(icon.hasClass( 'fa-arrow-right' )){
+				icon.removeClass('fa fa-arrow-right').addClass('fa fa-arrow-down');
+				body.slideDown(1000);
+			} else {
+				icon.removeClass('fa fa-arrow-down').addClass('fa fa-arrow-right');
+				body.slideUp(1000);
+			}
+		});
 		
 	});
-	
+
 	function checkPriseProduct(num){
 		  num = Math.round( num / 0.01 ) * 0.01;
 		  num = new Number(num).toFixed(2);   // особенности счета JavaScript ( x/100 не всегда = x*0.01 )

@@ -138,8 +138,51 @@
 	        <td>${product.descriptionOptionVAT}</td>
 	      </tr>
 	</c:if>
+	
+	<tr class="delivery">
+		<td colspan="3">
+			<div class="delivery_options">
+				<i class="fa fa-arrow-right"></i>
+				<p class="delivery_options_title">Доставка</p>
+			</div>
+			<div class="delivery_options_body">
+				<table class="table table-hover table_delivery_options">
+					<tbody>
+						<tr class="block_product_price">
+					        <td><input class="add_price_delivery" type="checkbox" value="Авиа" id="aviaDelivery_price">
+					        	<label class="add_price_delivery_title" for="aviaDelivery_price">Авиа</label>
+					        </td>
+					        <td>
+					        	<label class="add_price_delivery_value">С учетом габаритов: 1м * 1.5м * 1.5м * $10 = $<span><fmt:formatNumber type="number" 
+										maxFractionDigits="2" minFractionDigits="2" value="${1 * 1.5 * 1.5 * 10}" /></span>
+								</label>
+								<br>
+								<label class="add_price_delivery_value">С учетом веса: 2000кг * $5 = $<span><fmt:formatNumber type="number" 
+										maxFractionDigits="2" minFractionDigits="2" value="${2000 * 5}" /></span>
+								</label>
+								
+							</td>
+						</tr>
+						
+						<tr class="block_product_price">
+					        <td><input class="add_price_delivery" type="checkbox" value="Морем" id="seaDelivery_price">
+					        	<label class="add_price_delivery_title" for="seaDelivery_price">Морем</label>
+					        </td>
+					        <td>
+					        	С учетом габаритов: 1м * 1.5м * 1.5м * $10 = $22.5
+								<br>
+								С учетом веса: 2000кг * $5 = $10 000
+							</td>
+						</tr>
+						
+					</tbody>
+				</table>
+			</div>
+			
+		</td>
+	</tr>
 
-	<tr>
+	<tr class="output_result_of_option">
 		<td style="vertical-align: middle;">Общая стоимость:</td>
         <td style="vertical-align: middle;">
         	<label class="total_price">$<span><fmt:formatNumber type="number" 
