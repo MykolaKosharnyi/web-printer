@@ -176,58 +176,26 @@ border-radius: 5px;
 	height:auto;
 	width: 100%;
 	border-radius: 5px;
-	border: 1px dashed #006080;
-}
-
-.block_product_price,
-.title_block_product_price{
-	padding: 2px;
-	height:auto;
-}
-.title_block_product_price{
-font-weight: bold;
-}
-
-.title_block_product_price .price{margin-left: 230px;}
-.title_block_product_price .description{margin-left: 60px;}
-
-.block_product_price input,
-.block_product_price label{
-	top: 0px;
-	position: relative;
-}
-
-input[type="checkbox"].add_price{
-	margin-left: 5px;
+	border: 1px solid #006080;
+	padding: 5px;
 }
 
 .option_product_with_price label{
 	margin-bottom: 0px;
 	font-weight: unset;
 	/*min-width: 240px;*/
+	/*width: 190px;*/
 }
 
-.option_description{
-	height: auto;
-	width: 215px;
+label.add_price_title{
+	height: auto; 
+	max-width: 136px;
+	/*min-width: 170px;*/
 }
 
-label.add_price_title,.option_product_with_price label.total_ptice_title{min-width: 200px;}
-label.add_price_title{height: auto; max-width: 200px;}
-
-label.add_price_value{
-	min-width: 60px;
-}
-
-.option_product_with_price label.total_ptice_title,
 .option_product_with_price label.total_price{
-/*min-width: 155px;*/
-	margin:10px 0px;
-	text-align: right;
-}
-.option_product_with_price label.total_ptice_title{
-margin-left: 25px;
-padding: 5px;
+	min-width: 102px;
+	margin-bottom: 0px;
 }
 
 .products_buy{
@@ -259,7 +227,83 @@ padding: 5px;
 					height:50px;
 					width: 50px;
 
-				}				
+				}
+
+.table_price_option{
+	margin-bottom: 0px;
+}
+
+.table_price_option thead tr th{
+	vertical-align: middle;
+}
+
+.table_price_option td{
+	border-right: none;
+	border-left: none;
+}
+				
+.table_price_option tr.output_result_of_option td{
+	border-bottom: none;
+	font-weight: bold;
+	color: #006080;
+}
+
+.table_price_option tr.delivery{
+	background: white;
+}
+
+.table_price_option tr.delivery:hover{
+	background-color: white;
+}
+
+.table_price_option td:first-child{
+	font-weight: unset;
+}
+
+.table_price_option input[type="checkbox"].add_price{
+	position: relative;
+	/*top: -18px;*/
+}
+/* DELIVERY */
+.delivery_options{
+	width: inherit;
+	position: relative;
+	height: 30px;
+	margin-top: 2px;
+}
+
+.delivery_options i {
+	float: left;
+	margin-right: 5px;
+	border: 1px #A6AA26 solid;
+	border-radius: 12px;
+	padding: 5px;
+	cursor: pointer;
+}
+
+.delivery_options p.delivery_options_title {
+	width: 90%;
+	float: left;
+	margin: 0px;
+	margin-top: 3px;
+	cursor: pointer;
+	font-weight: bold;
+}
+
+.table_delivery_options{
+	margin: 0px;
+	width: 100%;
+}
+
+.table_price_option .table_delivery_options td{
+	border: none;
+}
+
+.add_price_delivery_title{
+	height: auto;
+	max-width: 100px;
+}
+
 /*---- second part of product page ----*/
 	#tabs_product{
         position: relative;

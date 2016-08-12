@@ -456,7 +456,7 @@ section.ord1er  {
 
 .login-container{
 	margin: 0 auto;
-	width: 320px;
+	width: 360px;
 }
 
 .login-container button{
@@ -469,7 +469,7 @@ section.ord1er  {
 /* user page */
 .user_page {
 	width: inherit;
-	border: 1px #00ff0c solid;
+	/*border: 1px #00ff0c solid;*/
 	border-radius: 5px;
 	font: 14px "RobotoRegular", sans-serif;
 }
@@ -478,10 +478,57 @@ section.ord1er  {
 	width: inherit;
 	height: 320px;
 	margin: 5px;
-	border-bottom: 1px blue solid;
+	/*border-bottom: 1px blue solid;*/
 }
 
 .bold_user_description{
 	font-weight: bold;
 	line-height: 25px;
+}
+/*---------------*/
+.user_block_products{
+	width: inherit;
+	/*background: yellow;*/
+	margin: 5px;
+	border-top: 2px #006080 solid;
+	height: auto;
+	min-height: 780px;
+	position: relative;
+	display: block;
+	margin-bottom: 25px;
+	padding-top: 10px;
+}
+
+.user_block_products span.title_block,
+.photo_and_information_about_user span.title_block_PAI{
+	font: 18px "RobotoRegular", sans-serif;
+	font-weight: bold;
+	margin: 0px 15px 10px;
+	position: relative;
+	display: block;
+	padding-top: 10px;
+}
+
+.user_block_products .product{
+	margin: 5px 5px 0px 0px;
+	padding: 5px;
+	border: 1px green dashed;
+	width: 333px;
+	display: -moz-box;
+	position: relative;
+	float: left;
+	height: auto;
+}
+
+.user_block_products .product img{
+	height: 300px;
+	/*border: 1px black dotted;*/
+	width: 100%;
+}
+
+.user_block_products .infrotamaton_product{
+	height: 30px;
+	position: relative;
+	display: block;
+	margin: 10px;
 }
