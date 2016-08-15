@@ -770,6 +770,7 @@
 						<div class="slider-range-heigth"></div>
 					</ul>
 				</div>
+				
 				<div class="characteristic">
 					<div class="block_title">
 						<i></i>
@@ -779,6 +780,10 @@
 						<form:radiobuttons items="${printer.delivery}" path="delivery" element="li"/>
 					</ul>
 				</div>
+				
+				<!-- import delivery option -->
+				<jsp:include page="product/delivery.jsp" />
+				
 				<div class="characteristic">
 					<div class="block_title">
 						<i></i>

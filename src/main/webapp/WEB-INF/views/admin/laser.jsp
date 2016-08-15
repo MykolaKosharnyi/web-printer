@@ -86,12 +86,12 @@
 						<p>Цена</p>
 						<form:errors path="prise" cssClass="error"></form:errors>
 					</div>
-					<ul class="check_boxes">
+					<div class="check_boxes">
 						<div class="text_output">
 							<p>$</p><form:input path="prise" class="amount-prise" value="${product.prise}"/>
 						</div>
 							<div class="slider-range-prise"></div>
-					</ul>
+					</div>
 				</div>
 				<div class="characteristic">
 					<div class="block_title">
@@ -163,7 +163,7 @@
 						<form:errors path="sizeWorkAreaY" cssClass="error"></form:errors>
 						<form:errors path="sizeWorkAreaZ" cssClass="error"></form:errors>
 					</div>
-					<ul class="check_boxes">
+					<div class="check_boxes">
 						<div class="text_output">
 							<p>По оси Х:</p>
 							<form:input path="sizeWorkAreaX" class="amount-speed-print-d"/>
@@ -182,7 +182,7 @@
 							<p>&nbsp;мм</p>
 							<form:errors path="sizeWorkAreaZ" cssClass="error"></form:errors>
 						</div>
-					</ul>
+					</div>
 				</div>
 				<div class="characteristic">
 					<div class="block_title">
@@ -248,7 +248,7 @@
 						<form:errors path="firstPartTheMinimumCharacterSize" cssClass="error"></form:errors>
 						<form:errors path="secondPartTheMinimumCharacterSize" cssClass="error"></form:errors>
 					</div>
-					<ul class="check_boxes">
+					<div class="check_boxes">
 						<div class="text_output">
 							<form:input style="width: 33px;" path="firstPartTheMinimumCharacterSize" />
 							<form:errors path="firstPartTheMinimumCharacterSize" cssClass="error"></form:errors>	 
@@ -256,7 +256,7 @@
 				    		<form:errors path="secondPartTheMinimumCharacterSize" cssClass="error"></form:errors>
 				    		<p>&nbsp; мм</p>
 						</div>
-					</ul>
+					</div>
 				</div>
 				<div class="characteristic">
 					<div class="block_title">
@@ -285,7 +285,7 @@
 						<form:errors path="firstPartAdjustingTheLaserPower" cssClass="error"></form:errors>
 						<form:errors path="secondPartAdjustingTheLaserPower" cssClass="error"></form:errors>
 					</div>
-					<ul class="check_boxes">
+					<div class="check_boxes">
 						<div class="text_output">
 							<form:input style="width: 33px;" path="firstPartAdjustingTheLaserPower" />
 							<form:errors path="firstPartAdjustingTheLaserPower" cssClass="error"></form:errors>	 
@@ -293,7 +293,7 @@
 				    		<form:errors path="secondPartAdjustingTheLaserPower" cssClass="error"></form:errors>
 				    		<p>&nbsp;%</p>
 						</div>
-					</ul>
+					</div>
 				</div>
 				<div class="characteristic">
 					<div class="block_title">
@@ -332,7 +332,7 @@
 						<form:errors path="specialPurpose2" cssClass="error"></form:errors>	 
 						<form:errors path="specialPurpose3" cssClass="error"></form:errors>	 
 					</div>
-					<ul class="check_boxes">
+					<div class="check_boxes">
 						<div class="text_output">
 							<form:input path="specialPurpose1" />
 							<form:errors path="specialPurpose1" cssClass="error"></form:errors>	 
@@ -345,7 +345,7 @@
 							<form:input path="specialPurpose3" />
 							<form:errors path="specialPurpose3" cssClass="error"></form:errors>	 
 						</div>
-					</ul>
+					</div>
 				</div>
 			</div>
 
@@ -357,14 +357,14 @@
 						<form:errors path="laserPulse0" cssClass="error"></form:errors>
 						<form:errors path="laserPulse1" cssClass="error"></form:errors>
 					</div>
-					<ul class="check_boxes">
+					<div class="check_boxes">
 						<div class="text_output">
 							<form:input style="width: 33px;" path="laserPulse0" />
 							<form:errors path="laserPulse0" cssClass="error"></form:errors>	 
 				    		<p>&nbsp;-&nbsp;</p><form:input style="width: 33px;" path="laserPulse1" />
 				    		<form:errors path="laserPulse1" cssClass="error"></form:errors>
 						</div>
-					</ul>
+					</div>
 				</div>
 				<div class="characteristic">
 					<div class="block_title">
@@ -497,13 +497,13 @@
 						<p>Максимальная потребляемая мощность</p>
 						<form:errors path="maxPowerConsumption" cssClass="error"></form:errors>
 					</div>
-					<ul class="check_boxes">
+					<div class="check_boxes">
 						<div class="text_output">
 							<form:input path="maxPowerConsumption" class="amount-max_power_consumption" value="${product.maxPowerConsumption}"/>
 							<p>&nbsp;Вт</p>
 						</div>
 						<div class="slider-range-max_power_consumption"></div>
-					</ul>
+					</div>
 				</div>
 				<div class="characteristic">
 					<div class="block_title">
@@ -511,13 +511,13 @@
 						<p>Вес</p>
 						<form:errors path="weight" cssClass="error"></form:errors>
 					</div>
-					<ul class="check_boxes">
+					<div class="check_boxes">
 						<div class="text_output">
 							<form:input path="weight" class="amount-weight" value="${product.weight}"/>
 							<p>&nbsp;кг</p>
 						</div>
 						<div class="slider-range-weight"></div>
-					</ul>
+					</div>
 				</div>
 				<div class="characteristic">
 					<div class="block_title">
@@ -525,13 +525,13 @@
 						<p>Ширина</p>
 						<form:errors path="width" cssClass="error"></form:errors>
 					</div>
-					<ul class="check_boxes">
+					<div class="check_boxes">
 						<div class="text_output">
 							<form:input path="width" class="amount-width" value="${product.width}"/>
 							<p>&nbsp;мм</p>
 						</div>
 						<div class="slider-range-width"></div>
-					</ul>
+					</div>
 				</div>
 				<div class="characteristic">
 					<div class="block_title">
@@ -539,13 +539,13 @@
 						<p>Глубина</p>
 						<form:errors path="depth" cssClass="error"></form:errors>
 					</div>
-					<ul class="check_boxes">
+					<div class="check_boxes">
 						<div class="text_output">
 							<form:input path="depth" class="amount-depth" value="${product.depth}"/>
 							<p>&nbsp;мм</p>
 						</div>
 						<div class="slider-range-depth"></div>
-					</ul>
+					</div>
 				</div>
 				<div class="characteristic">
 					<div class="block_title">
@@ -553,13 +553,13 @@
 						<p>Высота</p>
 						<form:errors path="heigth" cssClass="error"></form:errors>
 					</div>
-					<ul class="check_boxes">
+					<div class="check_boxes">
 						<div class="text_output">
 							<form:input path="heigth" class="amount-heigth" value="${product.heigth}"/>
 							<p>&nbsp;мм</p>
 						</div>
 						<div class="slider-range-heigth"></div>
-					</ul>
+					</div>
 				</div>
 				<div class="characteristic">
 					<div class="block_title">
@@ -585,12 +585,12 @@
 						<i></i>
 						<p>Наличие (информация для пользователя)</p>
 					</div>
-					<ul class="check_boxes">
+					<div class="check_boxes">
 						<form:radiobuttons items="${laser.availability}" path="availability" element="li"/>
 						<div class="text_output">
 							<form:input path="availabilitySpecialCase"/>
 						</div>
-					</ul>
+					</div>
 				</div>
 				
 				<!-- import option characteristic -->

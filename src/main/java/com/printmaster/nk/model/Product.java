@@ -146,13 +146,6 @@ public abstract class Product implements Serializable{
 			@Column(name="descriptionSNCP")
 			protected String descriptionOptionSNCP;
 			
-			@Column(name="optionDelivery", columnDefinition="Decimal(10,2) default '0.00'")
-			protected double optionDelivery;
-			
-			@Size(max = 50)
-			@Column(name="descriptionDelivery")
-			protected String descriptionOptionDelivery;
-			
 			@Column(name="optionGuarantee", columnDefinition="Decimal(10,2) default '0.00'")
 			protected double optionGuarantee;
 			
@@ -205,144 +198,245 @@ public abstract class Product implements Serializable{
 			protected String descriptionOptionAddedOption3;
 	
 	//Option for delivery	
+	@Column(name="deliveryWidth", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double deliveryWidth;
+			
+	@Column(name="deliveryHeight", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double deliveryHeight;
+			
+	@Column(name="deliveryDepth", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double deliveryDepth;	
+	
+	@Column(name="deliveryWeight", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double deliveryWeight;
+	
 	//air
-	@Column(name="airDeliveryWidth", columnDefinition="Decimal(10,2) default '0.00'")
-	protected double airDeliveryWidth;
-	
-	@Column(name="airDeliveryHeight", columnDefinition="Decimal(10,2) default '0.00'")
-	protected double airDeliveryHeight;
-	
-	@Column(name="airDeliveryDepth", columnDefinition="Decimal(10,2) default '0.00'")
-	protected double airDeliveryDepth;
-	
 	@Column(name="airDeliveryPriceSize", columnDefinition="Decimal(10,2) default '0.00'")
 	protected double airDeliveryPriceSize;
-	
-	@Column(name="airDeliveryWeight", columnDefinition="Decimal(10,2) default '0.00'")
-	protected double airDeliveryWeight;
 	
 	@Column(name="airDeliveryPriceWeight", columnDefinition="Decimal(10,2) default '0.00'")
 	protected double airDeliveryPriceWeight;
 	
-	//sea
-	@Column(name="seaDeliveryWidth", columnDefinition="Decimal(10,2) default '0.00'")
-	protected double seaDeliveryWidth;
-		
-	@Column(name="seaDeliveryHeight", columnDefinition="Decimal(10,2) default '0.00'")
-	protected double seaDeliveryHeight;
-		
-	@Column(name="seaDeliveryDepth", columnDefinition="Decimal(10,2) default '0.00'")
-	protected double seaDeliveryDepth;
-		
+	//sea	
 	@Column(name="seaDeliveryPriceSize", columnDefinition="Decimal(10,2) default '0.00'")
 	protected double seaDeliveryPriceSize;
-		
-	@Column(name="seaDeliveryWeight", columnDefinition="Decimal(10,2) default '0.00'")
-	protected double seaDeliveryWeight;
-		
+	
 	@Column(name="seaDeliveryPriceWeight", columnDefinition="Decimal(10,2) default '0.00'")
 	protected double seaDeliveryPriceWeight;
 	
-	//on Ukraine
-	@Column(name="ukraineDeliveryWidth", columnDefinition="Decimal(10,2) default '0.00'")
-	protected double ukraineDeliveryWidth;
-			
-	@Column(name="ukraineDeliveryHeight", columnDefinition="Decimal(10,2) default '0.00'")
-	protected double ukraineDeliveryHeight;
-			
-	@Column(name="ukraineDeliveryDepth", columnDefinition="Decimal(10,2) default '0.00'")
-	protected double ukraineDeliveryDepth;
-			
+	//on Ukraine		
 	@Column(name="ukraineDeliveryPriceSize", columnDefinition="Decimal(10,2) default '0.00'")
 	protected double ukraineDeliveryPriceSize;
-			
-	@Column(name="ukraineDeliveryWeight", columnDefinition="Decimal(10,2) default '0.00'")
-	protected double ukraineDeliveryWeight;
 			
 	@Column(name="ukraineDeliveryPriceWeight", columnDefinition="Decimal(10,2) default '0.00'")
 	protected double ukraineDeliveryPriceWeight;
 	
 	//on Kyiv
-	@Column(name="kyivDeliveryWidth", columnDefinition="Decimal(10,2) default '0.00'")
-	protected double kyivDeliveryWidth;
-				
-	@Column(name="kyivDeliveryHeight", columnDefinition="Decimal(10,2) default '0.00'")
-	protected double kyivDeliveryHeight;
-				
-	@Column(name="kyivDeliveryDepth", columnDefinition="Decimal(10,2) default '0.00'")
-	protected double kyivDeliveryDepth;
-				
 	@Column(name="kyivDeliveryPriceSize", columnDefinition="Decimal(10,2) default '0.00'")
 	protected double kyivDeliveryPriceSize;
-				
-	@Column(name="kyivDeliveryWeight", columnDefinition="Decimal(10,2) default '0.00'")
-	protected double kyivDeliveryWeight;
-				
+		
 	@Column(name="kyivDeliveryPriceWeight", columnDefinition="Decimal(10,2) default '0.00'")
 	protected double kyivDeliveryPriceWeight;
 	
 	//first custom variant
-	@Column(name="variant1DeliveryWidth", columnDefinition="Decimal(10,2) default '0.00'")
-	protected double variant1DeliveryWidth;
-					
-	@Column(name="variant1DeliveryHeight", columnDefinition="Decimal(10,2) default '0.00'")
-	protected double variant1DeliveryHeight;
-					
-	@Column(name="variant1DeliveryDepth", columnDefinition="Decimal(10,2) default '0.00'")
-	protected double variant1DeliveryDepth;
-					
+	@Column(name="variant1DeliveryName")
+	protected String variant1DeliveryName;
+
 	@Column(name="variant1DeliveryPriceSize", columnDefinition="Decimal(10,2) default '0.00'")
 	protected double variant1DeliveryPriceSize;
-					
-	@Column(name="variant1DeliveryWeight", columnDefinition="Decimal(10,2) default '0.00'")
-	protected double variant1DeliveryWeight;
-					
+			
 	@Column(name="variant1DeliveryPriceWeight", columnDefinition="Decimal(10,2) default '0.00'")
 	protected double variant1DeliveryPriceWeight;
 	
 	//second custom variant
-	@Column(name="variant2DeliveryWidth", columnDefinition="Decimal(10,2) default '0.00'")
-	protected double variant2DeliveryWidth;
-						
-	@Column(name="variant2DeliveryHeight", columnDefinition="Decimal(10,2) default '0.00'")
-	protected double variant2DeliveryHeight;
-						
-	@Column(name="variant2DeliveryDepth", columnDefinition="Decimal(10,2) default '0.00'")
-	protected double variant2DeliveryDepth;
-						
+	@Column(name="variant2DeliveryName")
+	protected String variant2DeliveryName;
+	
 	@Column(name="variant2DeliveryPriceSize", columnDefinition="Decimal(10,2) default '0.00'")
 	protected double variant2DeliveryPriceSize;
-						
-	@Column(name="variant2DeliveryWeight", columnDefinition="Decimal(10,2) default '0.00'")
-	protected double variant2DeliveryWeight;
 						
 	@Column(name="variant2DeliveryPriceWeight", columnDefinition="Decimal(10,2) default '0.00'")
 	protected double variant2DeliveryPriceWeight;
 	
 	//third custom variant
-	@Column(name="variant3DeliveryWidth", columnDefinition="Decimal(10,2) default '0.00'")
-	protected double variant3DeliveryWidth;
-							
-	@Column(name="variant3DeliveryHeight", columnDefinition="Decimal(10,2) default '0.00'")
-	protected double variant3DeliveryHeight;
-							
-	@Column(name="variant3DeliveryDepth", columnDefinition="Decimal(10,2) default '0.00'")
-	protected double variant3DeliveryDepth;
-							
+	@Column(name="variant3DeliveryName")
+	protected String variant3DeliveryName;
+
 	@Column(name="variant3DeliveryPriceSize", columnDefinition="Decimal(10,2) default '0.00'")
 	protected double variant3DeliveryPriceSize;
-							
-	@Column(name="variant3DeliveryWeight", columnDefinition="Decimal(10,2) default '0.00'")
-	protected double variant3DeliveryWeight;
-							
+								
 	@Column(name="variant3DeliveryPriceWeight", columnDefinition="Decimal(10,2) default '0.00'")
 	protected double variant3DeliveryPriceWeight;
 			
-	@Size(max = 50)
-	@Column(name="descriptionRIP")
-	protected String descriptionOptionRIP;
-			
 	public Product(){}
+	
+	public double getDeliveryWidth() {
+		return deliveryWidth;
+	}
+
+	public void setDeliveryWidth(double deliveryWidth) {
+		this.deliveryWidth = deliveryWidth;
+	}
+
+	public double getDeliveryHeight() {
+		return deliveryHeight;
+	}
+
+	public void setDeliveryHeight(double deliveryHeight) {
+		this.deliveryHeight = deliveryHeight;
+	}
+
+	public double getDeliveryDepth() {
+		return deliveryDepth;
+	}
+
+	public void setDeliveryDepth(double deliveryDepth) {
+		this.deliveryDepth = deliveryDepth;
+	}
+
+	public double getDeliveryWeight() {
+		return deliveryWeight;
+	}
+
+	public void setDeliveryWeight(double deliveryWeight) {
+		this.deliveryWeight = deliveryWeight;
+	}
+
+	public String getVariant1DeliveryName() {
+		return variant1DeliveryName;
+	}
+
+	public void setVariant1DeliveryName(String variant1DeliveryName) {
+		this.variant1DeliveryName = variant1DeliveryName;
+	}
+
+	public String getVariant2DeliveryName() {
+		return variant2DeliveryName;
+	}
+
+	public void setVariant2DeliveryName(String variant2DeliveryName) {
+		this.variant2DeliveryName = variant2DeliveryName;
+	}
+
+	public String getVariant3DeliveryName() {
+		return variant3DeliveryName;
+	}
+
+	public void setVariant3DeliveryName(String variant3DeliveryName) {
+		this.variant3DeliveryName = variant3DeliveryName;
+	}
+
+	public double getAirDeliveryPriceSize() {
+		return airDeliveryPriceSize;
+	}
+
+	public void setAirDeliveryPriceSize(double airDeliveryPriceSize) {
+		this.airDeliveryPriceSize = airDeliveryPriceSize;
+	}
+
+	public double getAirDeliveryPriceWeight() {
+		return airDeliveryPriceWeight;
+	}
+
+	public void setAirDeliveryPriceWeight(double airDeliveryPriceWeight) {
+		this.airDeliveryPriceWeight = airDeliveryPriceWeight;
+	}
+
+	public double getSeaDeliveryPriceSize() {
+		return seaDeliveryPriceSize;
+	}
+
+	public void setSeaDeliveryPriceSize(double seaDeliveryPriceSize) {
+		this.seaDeliveryPriceSize = seaDeliveryPriceSize;
+	}
+
+	public double getSeaDeliveryPriceWeight() {
+		return seaDeliveryPriceWeight;
+	}
+
+	public void setSeaDeliveryPriceWeight(double seaDeliveryPriceWeight) {
+		this.seaDeliveryPriceWeight = seaDeliveryPriceWeight;
+	}
+
+	public double getUkraineDeliveryPriceSize() {
+		return ukraineDeliveryPriceSize;
+	}
+
+	public void setUkraineDeliveryPriceSize(double ukraineDeliveryPriceSize) {
+		this.ukraineDeliveryPriceSize = ukraineDeliveryPriceSize;
+	}
+
+	public double getUkraineDeliveryPriceWeight() {
+		return ukraineDeliveryPriceWeight;
+	}
+
+	public void setUkraineDeliveryPriceWeight(double ukraineDeliveryPriceWeight) {
+		this.ukraineDeliveryPriceWeight = ukraineDeliveryPriceWeight;
+	}
+
+	public double getKyivDeliveryPriceSize() {
+		return kyivDeliveryPriceSize;
+	}
+
+	public void setKyivDeliveryPriceSize(double kyivDeliveryPriceSize) {
+		this.kyivDeliveryPriceSize = kyivDeliveryPriceSize;
+	}
+	
+	public double getKyivDeliveryPriceWeight() {
+		return kyivDeliveryPriceWeight;
+	}
+
+	public void setKyivDeliveryPriceWeight(double kyivDeliveryPriceWeight) {
+		this.kyivDeliveryPriceWeight = kyivDeliveryPriceWeight;
+	}
+
+	public double getVariant1DeliveryPriceSize() {
+		return variant1DeliveryPriceSize;
+	}
+
+	public void setVariant1DeliveryPriceSize(double variant1DeliveryPriceSize) {
+		this.variant1DeliveryPriceSize = variant1DeliveryPriceSize;
+	}
+
+	public double getVariant1DeliveryPriceWeight() {
+		return variant1DeliveryPriceWeight;
+	}
+
+	public void setVariant1DeliveryPriceWeight(double variant1DeliveryPriceWeight) {
+		this.variant1DeliveryPriceWeight = variant1DeliveryPriceWeight;
+	}
+
+	public double getVariant2DeliveryPriceSize() {
+		return variant2DeliveryPriceSize;
+	}
+
+	public void setVariant2DeliveryPriceSize(double variant2DeliveryPriceSize) {
+		this.variant2DeliveryPriceSize = variant2DeliveryPriceSize;
+	}
+
+	public double getVariant2DeliveryPriceWeight() {
+		return variant2DeliveryPriceWeight;
+	}
+
+	public void setVariant2DeliveryPriceWeight(double variant2DeliveryPriceWeight) {
+		this.variant2DeliveryPriceWeight = variant2DeliveryPriceWeight;
+	}
+
+	public double getVariant3DeliveryPriceSize() {
+		return variant3DeliveryPriceSize;
+	}
+
+	public void setVariant3DeliveryPriceSize(double variant3DeliveryPriceSize) {
+		this.variant3DeliveryPriceSize = variant3DeliveryPriceSize;
+	}
+
+	public double getVariant3DeliveryPriceWeight() {
+		return variant3DeliveryPriceWeight;
+	}
+
+	public void setVariant3DeliveryPriceWeight(double variant3DeliveryPriceWeight) {
+		this.variant3DeliveryPriceWeight = variant3DeliveryPriceWeight;
+	}
 
 	public String getDescriptionOptionRIP() {
 		return descriptionOptionRIP;
@@ -358,14 +452,6 @@ public abstract class Product implements Serializable{
 
 	public void setDescriptionOptionSNCP(String descriptionOptionSNCP) {
 		this.descriptionOptionSNCP = descriptionOptionSNCP;
-	}
-
-	public String getDescriptionOptionDelivery() {
-		return descriptionOptionDelivery;
-	}
-
-	public void setDescriptionOptionDelivery(String descriptionOptionDelivery) {
-		this.descriptionOptionDelivery = descriptionOptionDelivery;
 	}
 
 	public String getDescriptionOptionGuarantee() {
@@ -478,14 +564,6 @@ public abstract class Product implements Serializable{
 
 	public void setOptionSNCP(double optionSNCP) {
 		this.optionSNCP = optionSNCP;
-	}
-
-	public double getOptionDelivery() {
-		return optionDelivery;
-	}
-
-	public void setOptionDelivery(double optionDelivery) {
-		this.optionDelivery = optionDelivery;
 	}
 
 	public double getOptionGuarantee() {
@@ -793,7 +871,6 @@ public abstract class Product implements Serializable{
 				+ ((descriptionOptionAddedOption2 == null) ? 0 : descriptionOptionAddedOption2.hashCode());
 		result = prime * result
 				+ ((descriptionOptionAddedOption3 == null) ? 0 : descriptionOptionAddedOption3.hashCode());
-		result = prime * result + ((descriptionOptionDelivery == null) ? 0 : descriptionOptionDelivery.hashCode());
 		result = prime * result + ((descriptionOptionGuarantee == null) ? 0 : descriptionOptionGuarantee.hashCode());
 		result = prime * result
 				+ ((descriptionOptionInstallation == null) ? 0 : descriptionOptionInstallation.hashCode());
@@ -815,8 +892,6 @@ public abstract class Product implements Serializable{
 		result = prime * result + ((nameAddedOption2 == null) ? 0 : nameAddedOption2.hashCode());
 		result = prime * result + ((nameAddedOption3 == null) ? 0 : nameAddedOption3.hashCode());
 		long temp;
-		temp = Double.doubleToLongBits(optionDelivery);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
 		temp = Double.doubleToLongBits(optionGuarantee);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		temp = Double.doubleToLongBits(optionInstallation);
@@ -905,11 +980,6 @@ public abstract class Product implements Serializable{
 				return false;
 		} else if (!descriptionOptionAddedOption3.equals(other.descriptionOptionAddedOption3))
 			return false;
-		if (descriptionOptionDelivery == null) {
-			if (other.descriptionOptionDelivery != null)
-				return false;
-		} else if (!descriptionOptionDelivery.equals(other.descriptionOptionDelivery))
-			return false;
 		if (descriptionOptionGuarantee == null) {
 			if (other.descriptionOptionGuarantee != null)
 				return false;
@@ -995,8 +1065,6 @@ public abstract class Product implements Serializable{
 			if (other.nameAddedOption3 != null)
 				return false;
 		} else if (!nameAddedOption3.equals(other.nameAddedOption3))
-			return false;
-		if (Double.doubleToLongBits(optionDelivery) != Double.doubleToLongBits(other.optionDelivery))
 			return false;
 		if (Double.doubleToLongBits(optionGuarantee) != Double.doubleToLongBits(other.optionGuarantee))
 			return false;

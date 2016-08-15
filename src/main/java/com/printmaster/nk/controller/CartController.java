@@ -140,10 +140,6 @@ public class CartController {
 			result.add(returnOption("СНЧП", product.getOptionSNCP(), product.getDescriptionOptionSNCP(), checkedOption));
 		}
 		
-		if(product.getOptionDelivery() > 0.01){
-			result.add(returnOption("Доставка", product.getOptionDelivery(), product.getDescriptionOptionDelivery(), checkedOption));
-		}
-		
 		if(product.getOptionGuarantee() > 0.01){
 			result.add(returnOption("Гарантия", product.getOptionGuarantee(), product.getDescriptionOptionGuarantee(), checkedOption));
 		}

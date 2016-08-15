@@ -9,7 +9,6 @@
 						<p>Опции (с заданием цены и описания за дополнительную услугу)</p>
 						<form:errors path="optionRIP" cssClass="error"></form:errors>
 						<form:errors path="optionSNCP" cssClass="error"></form:errors>
-						<form:errors path="optionDelivery" cssClass="error"></form:errors>
 						<form:errors path="optionGuarantee" cssClass="error"></form:errors>
 						<form:errors path="priceAddedOption" cssClass="error"></form:errors>
 					</div>
@@ -28,14 +27,6 @@
 							<form:errors path="optionSNCP" cssClass="error"></form:errors>
 							<form:input path="descriptionOptionSNCP"  class="option_description"/>
 							<form:errors path="descriptionOptionSNCP" cssClass="error"></form:errors>
-						</div>
-						<hr>
-						<div class="text_output">
-							<p class="option_name">Доставка:&nbsp;</p>
-							<form:input path="optionDelivery" class="option"/>
-							<form:errors path="optionDelivery" cssClass="error"></form:errors>
-							<form:input path="descriptionOptionDelivery"  class="option_description"/>
-							<form:errors path="descriptionOptionDelivery" cssClass="error"></form:errors>
 						</div>
 						<hr>
 						<div class="text_output">
@@ -64,7 +55,7 @@
 						<hr>
 						<div class="text_output">
 							<form:input path="nameAddedOption" class="option"/>
-							<p>:&nbsp;</p>
+							<p>&nbsp;:&nbsp;</p>
 							<form:input path="priceAddedOption" class="option"/>
 							<form:errors path="priceAddedOption" cssClass="error"></form:errors>
 							<form:input path="descriptionOptionAddedOption"  class="option_description"/>
@@ -73,7 +64,7 @@
 						<hr>
 						<div class="text_output">
 							<form:input path="nameAddedOption2" class="option"/>
-							<p>:&nbsp;</p>
+							<p>&nbsp;:&nbsp;</p>
 							<form:input path="priceAddedOption2" class="option"/>
 							<form:errors path="priceAddedOption2" cssClass="error"></form:errors>
 							<form:input path="descriptionOptionAddedOption2"  class="option_description"/>
@@ -82,7 +73,7 @@
 						<hr>
 						<div class="text_output">
 							<form:input path="nameAddedOption3" class="option"/>
-							<p>:&nbsp;</p>
+							<p>&nbsp;:&nbsp;</p>
 							<form:input path="priceAddedOption3" class="option"/>
 							<form:errors path="priceAddedOption3" cssClass="error"></form:errors>
 							<form:input path="descriptionOptionAddedOption3"  class="option_description"/>
