@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.printmaster.nk.beans.Cart;
+import com.printmaster.nk.beans.Delivery;
 import com.printmaster.nk.beans.ProductCart;
 import com.printmaster.nk.model.Option;
 import com.printmaster.nk.model.Product;
@@ -66,28 +67,24 @@ public class CartController {
 	@Autowired
 	private UseWithProductService useWithProductService;
 	
-	@RequestMapping(value = "/cart/add/{typeProduct}/{productId}/{productName}/{productPrice}/{pathToPicture}", 
+	@RequestMapping(value = "/cart/add/{typeProduct}/{productId}/{productName}", 
 			method = RequestMethod.POST,consumes="application/json",
 			headers = "content-type=application/x-www-form-urlencoded")
 	public @ResponseBody void addToCart(
 			@PathVariable("typeProduct") String typeProduct,
 			@PathVariable("productId") long productId,
 			@PathVariable("productName") String productName,
-			@PathVariable("productPrice") String productPrice,
-			@PathVariable("pathToPicture") String pathToPicture,
-			@RequestBody List<String> checkedOption){
-		
-		double price = Double.parseDouble(productPrice.replace(',', '.'));
-		String picture = pathToPicture.replace(',', '.');
-		
+			@RequestBody Shopping checkedOption){
+
 		ProductCart productCart = new ProductCart();
 		productCart.setTypeProduct(typeProduct);
 		productCart.setIdProduct(productId);
 		productCart.setName(productName);
-		productCart.setPrice(price);
-		productCart.setPicturePath("images/" + typeProduct + "s/" + productId + "/" + picture);
+		productCart.setPrice(checkedOption.getPrice());
+		productCart.setPicturePath("images/" + typeProduct + "s/" + productId + "/" + checkedOption.getPathToPicture());
 		//add option with price
-		productCart.setOptions(addOption(typeProduct, productId, checkedOption));
+		productCart.setOptions(addOption(typeProduct, productId, checkedOption.getArrayOfCheckedOption()));
+		productCart.setDeliveries(addDelivery(typeProduct, productId, checkedOption.getArrayOfCheckedDelivery()));
 		
 		cart.addProduct(productCart , 1);
 		logger.debug("Adding product to cart " + productCart );
@@ -226,6 +223,86 @@ public class CartController {
 		result.setDescription(description);
 		
 		boolean boolResult = checkedOption.contains(name) ? true : false;
+		result.setChecked(boolResult);
+
+		return result;
+	}
+	
+	private ArrayList<Delivery> addDelivery(String productType, long productId, List<String> checkedDelivery){
+		
+		if(productType.equals("printer")){
+			return getDelivery( printerService.getPrinterById(productId), checkedDelivery );
+			
+		} else if(productType.equals("3d_printer")){
+			return getDelivery( printer3DService.getPrinter3DById(productId), checkedDelivery );
+			
+		} else if(productType.equals("digital_printer")){
+			return getDelivery( digitalPrinterService.getPrinterById(productId), checkedDelivery );
+			
+		} else if(productType.equals("laminator")){
+			return getDelivery( laminatorService.getLaminatorById(productId), checkedDelivery );
+			
+		} else if(productType.equals("laser")){
+			return getDelivery( laserService.getLaserById(productId), checkedDelivery );
+			
+		} else if(productType.equals("cutter")){
+			return getDelivery( cutterService.getCutterById(productId), checkedDelivery );
+			
+		} else if(productType.equals("scanner")){
+			return getDelivery( scannerService.getScannerById(productId), checkedDelivery );
+			
+		} else {
+			return new ArrayList<Delivery>();
+		}
+	}
+	
+	private ArrayList<Delivery> getDelivery(Product product, List<String> checkedDelivery){
+		ArrayList<Delivery> result = new ArrayList<Delivery>();
+		
+		double size = product.getDeliveryWidth() * product.getDeliveryHeight() * product.getDeliveryDepth();
+		double weigth = product.getDeliveryWeight();
+		
+		if((size * product.getAirDeliveryPriceSize() > 0) || (weigth * product.getAirDeliveryPriceWeight() > 0)){
+			result.add(returnDelivery("Авиа", size * product.getAirDeliveryPriceSize(), weigth * product.getAirDeliveryPriceWeight(), checkedDelivery));
+		}
+		
+		if((size * product.getSeaDeliveryPriceSize() > 0) || (weigth * product.getSeaDeliveryPriceWeight() > 0)){
+			result.add(returnDelivery("Морем", size * product.getSeaDeliveryPriceSize(), weigth * product.getSeaDeliveryPriceWeight(), checkedDelivery));
+		}
+		
+		if((size * product.getUkraineDeliveryPriceSize() > 0) || (weigth * product.getUkraineDeliveryPriceWeight() > 0)){
+			result.add(returnDelivery("По Украине", size * product.getUkraineDeliveryPriceSize(), weigth * product.getUkraineDeliveryPriceWeight(), checkedDelivery));
+		}
+		
+		if((size * product.getKyivDeliveryPriceSize() > 0) || (weigth * product.getKyivDeliveryPriceWeight() > 0)){
+			result.add(returnDelivery("По Киеву", size * product.getKyivDeliveryPriceSize(), weigth * product.getKyivDeliveryPriceWeight(), checkedDelivery));
+		}
+		
+		if((size * product.getVariant1DeliveryPriceSize() > 0) || (weigth * product.getVariant1DeliveryPriceWeight() > 0)){
+			result.add(returnDelivery(product.getVariant1DeliveryName(), size * product.getVariant1DeliveryPriceSize(), 
+					weigth * product.getVariant1DeliveryPriceWeight(), checkedDelivery));
+		}
+		
+		if((size * product.getVariant2DeliveryPriceSize() > 0) || (weigth * product.getVariant2DeliveryPriceWeight() > 0)){
+			result.add(returnDelivery(product.getVariant2DeliveryName(), size * product.getVariant2DeliveryPriceSize(), 
+					weigth * product.getVariant2DeliveryPriceWeight(), checkedDelivery));
+		}
+		
+		if((size * product.getVariant3DeliveryPriceSize() > 0) || (weigth * product.getVariant3DeliveryPriceWeight() > 0)){
+			result.add(returnDelivery(product.getVariant3DeliveryName(), size * product.getVariant3DeliveryPriceSize(), 
+					weigth * product.getVariant3DeliveryPriceWeight(), checkedDelivery));
+		}
+		
+		return result;
+	}
+	
+	private Delivery returnDelivery(String name, double priceSize, double priceWeight, List<String> checkedDelivery){
+		Delivery result = new Delivery();
+		result.setName(name);
+		result.setPriceSize(priceSize);
+		result.setPriceWeight(priceWeight);
+		
+		boolean boolResult = checkedDelivery.contains(name) ? true : false;
 		result.setChecked(boolResult);
 
 		return result;

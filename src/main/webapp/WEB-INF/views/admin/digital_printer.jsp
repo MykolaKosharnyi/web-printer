@@ -908,15 +908,10 @@
 						<div class="slider-range-heigth"></div>
 					</ul>
 				</div>
-				<div class="characteristic">
-					<div class="block_title">
-						<i></i>
-						<p>Доставка</p>
-					</div>
-					<ul class="check_boxes">
-						<form:radiobuttons items="${digital_printer.delivery}" path="delivery" element="li"/>
-					</ul>
-				</div>
+				
+				<!-- import delivery option -->
+				<jsp:include page="product/delivery.jsp" />
+				
 				<div class="characteristic">
 					<div class="block_title">
 						<i></i>

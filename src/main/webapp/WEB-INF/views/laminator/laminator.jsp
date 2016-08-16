@@ -162,8 +162,8 @@
             </div> 
         </div>
         
-        <!-- form for asking about product - give opportunity to user ask question
-        and code of javaScript in the end -->
+        <!-- code of javaScript in the end -->
+        <jsp:include page="../product_page/timer.jsp" />
         <jsp:include page="../product_page/callback_ask_and_javascript_code.jsp" />
 </body>
 </html>

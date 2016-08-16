@@ -10,24 +10,41 @@ public class ProductCart {
 	private Long idProduct;
 	private String name;
 	private double price;
-	private double priceWithOption;
+	private double priceWithOptionAndDeivery;
 	private String picturePath;
 	private List<Option> options;
+	private List<Delivery> deliveries;
 
-	public double getPriceWithOption() {
-		priceWithOption = price;
+	public double getPriceWithOptionAndDeivery() {
+		priceWithOptionAndDeivery = price;
 		double coeficientVAT = 1;
+		
 		for(Option option: options){
 			if(option.isChecked()){
 				if(option.getName() != "НДС"){
-					priceWithOption += option.getPrice();
+					priceWithOptionAndDeivery += option.getPrice();
 				} else {
 					coeficientVAT = option.getPrice();
 				}
-				
 			}
 		}
-		return priceWithOption * coeficientVAT;
+		
+		for(Delivery delivery: deliveries){
+			if(delivery.isChecked()){
+				priceWithOptionAndDeivery += delivery.getPriceSize();
+				priceWithOptionAndDeivery += delivery.getPriceWeight();
+			}
+		}
+		
+		return priceWithOptionAndDeivery * coeficientVAT;
+	}
+	
+	public List<Delivery> getDeliveries() {
+		return deliveries;
+	}
+
+	public void setDeliveries(List<Delivery> deliveries) {
+		this.deliveries = deliveries;
 	}
 
 	public String getPicturePath() {
@@ -112,7 +129,5 @@ public class ProductCart {
 			return false;
 		return true;
 	}
-
-	
 
 }

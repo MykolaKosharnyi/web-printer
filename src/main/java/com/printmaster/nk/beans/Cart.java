@@ -67,7 +67,7 @@ public class Cart {
 	public double getTotalCost(){
 		double totalCost = 0;
 		for (ProductCart product : contents.keySet()){
-			totalCost += product.getPriceWithOption() * contents.get(product);
+			totalCost += product.getPriceWithOptionAndDeivery() * contents.get(product);
 		}
 		return totalCost;
 	}

@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -188,7 +189,30 @@ label.add_price_title{height: auto; max-width: 136px; min-width: 136px; float:le
 								<%-- <label class="option_description">${option.description}</label>--%>
 							</div>
 						</c:if>
-					</c:forEach>			
+					</c:forEach>		
+					
+					<c:if test="${fn:length(item.key.deliveries) > 0}">
+					<hr>
+					<div class="block_product_price">
+								<label class="add_price_title">Доставка:</label>
+								<label class="add_price_value"></label>
+							</div>
+					</c:if>
+					
+					<c:forEach items="${item.key.deliveries}" var="delivery">
+						<c:if test="${(delivery.priceSize > 0) || (delivery.priceWeight > 0)}">
+							<div class="block_product_price">
+								<input class="add_price" type="checkbox" value="${delivery.name}" 
+									id="${delivery.name}_${item.key.typeProduct}_${item.key.idProduct}_delivery"
+									<c:if test="${delivery.checked}">checked</c:if>>
+								<label class="add_price_title"
+										 for="${delivery.name}_${item.key.typeProduct}_${item.key.idProduct}_delivery">${delivery.name}</label>
+								<label class="add_price_value">
+									$<span><fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${delivery.priceSize + delivery.priceWeight}" /></span>
+								</label>
+							</div>
+						</c:if>
+					</c:forEach>	
 					
 				</div>				
 		
@@ -212,7 +236,7 @@ label.add_price_title{height: auto; max-width: 136px; min-width: 136px; float:le
 			</td>
 			<td class="price">$ <span>
 				<fmt:formatNumber type="number" 
-           					maxFractionDigits="2" minFractionDigits="2" value="${item.key.getPriceWithOption() * item.value }" />
+           					maxFractionDigits="2" minFractionDigits="2" value="${item.key.getPriceWithOptionAndDeivery() * item.value }" />
 					</span><input type="hidden" name="price_ellement" value="${item.key.price}">
 			</td>
 			<td class="delte_item"><i class="fa fa-trash-o" aria-hidden="true"></i></td>

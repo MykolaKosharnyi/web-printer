@@ -489,30 +489,56 @@ $(document).ready(function() {
 	
 	function addToCart(typeProduct, idProduct, name, price, picturePath){
 		
-		var data = JSON.stringify([]);
+		var dataToSend = {
+				'price':price,
+				'pathToPicture':picturePath,
+				'arrayOfChekedOption':[],
+				'arrayOfCheckedDelivery':[]
+		};
 		
-		var priceV = price.replace(".", ",");
-		var pictureV = picturePath.replace(".", ",");
 		$.ajax({
 			  type: 'POST',
-			  url: "/cart/add/" + typeProduct + "/" + idProduct + "/" + name + "/" + priceV + "/" + pictureV,
+			  url: "/cart/add/" + typeProduct + "/" + idProduct + "/" + name,
 			  contentType: "application/json; charset=utf-8",
-			  data: data,
+			  data: JSON.stringify(dataToSend),
               dataType: "json"
 			  });	
 		}
 	
-	function addToCartProductPage(typeProduct, idProduct, name, price, picturePath, arrayOfChekedOption){
+	
+	
+	function addToCartProductPageRIPaUWP(typeProduct, idProduct, name, price, picturePath, arrayOfChekedOption){
 		
-		var data = JSON.stringify(arrayOfChekedOption);
+		var dataToSend = {
+				'price':price,
+				'pathToPicture':picturePath,
+				'arrayOfChekedOption':arrayOfChekedOption,
+				'arrayOfCheckedDelivery':[]
+		};
 		
-		var priceV = price.replace(".", ",");
-		var pictureV = picturePath.replace(".", ",");
 		$.ajax({
 			  type: 'POST',
-			  url: "/cart/add/" + typeProduct + "/" + idProduct + "/" + name + "/" + priceV + "/" + pictureV,
+			  url: "/cart/add/" + typeProduct + "/" + idProduct + "/" + name,
 			  contentType: "application/json; charset=utf-8",
-			  data: data,
+			  data: JSON.stringify(dataToSend),
+              dataType: "json"
+			  });	
+		}
+	
+	function addToCartProductPage(typeProduct, idProduct, name, price, picturePath, arrayOfChekedOption, arrayOfCheckedDelivery){
+		
+		var dataToSend = {
+				'price':price,
+				'pathToPicture':picturePath,
+				'arrayOfChekedOption':arrayOfChekedOption,
+				'arrayOfCheckedDelivery':arrayOfCheckedDelivery
+		};
+		
+		$.ajax({
+			  type: 'POST',
+			  url: "/cart/add/" + typeProduct + "/" + idProduct + "/" + name,
+			  contentType: "application/json; charset=utf-8",
+			  data: JSON.stringify(dataToSend),
               dataType: "json"
 			  });	
 		}

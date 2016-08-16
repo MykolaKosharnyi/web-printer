@@ -771,16 +771,6 @@
 					</ul>
 				</div>
 				
-				<div class="characteristic">
-					<div class="block_title">
-						<i></i>
-						<p>Доставка</p>
-					</div>
-					<ul class="check_boxes">
-						<form:radiobuttons items="${printer.delivery}" path="delivery" element="li"/>
-					</ul>
-				</div>
-				
 				<!-- import delivery option -->
 				<jsp:include page="product/delivery.jsp" />
 				
