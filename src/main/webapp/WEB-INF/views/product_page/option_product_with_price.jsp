@@ -124,7 +124,21 @@
 	        <td>${product.descriptionOptionVAT}</td>
 	      </tr>
 	</c:if>
-	
+
+<c:if test="${(product.deliveryWidth * product.deliveryHeight * product.deliveryDepth * product.airDeliveryPriceSize > 0) ||
+						(product.deliveryWeight * product.airDeliveryPriceWeight > 0) ||
+			  (product.deliveryWidth * product.deliveryHeight * product.deliveryDepth * product.seaDeliveryPriceSize > 0) ||
+						(product.deliveryWeight * product.seaDeliveryPriceWeight > 0) ||
+			  (product.deliveryWidth * product.deliveryHeight * product.deliveryDepth * product.ukraineDeliveryPriceSize > 0) ||
+						(product.deliveryWeight * product.ukraineDeliveryPriceWeight > 0) ||
+			  (product.deliveryWidth * product.deliveryHeight * product.deliveryDepth * product.kyivDeliveryPriceSize > 0) ||
+						(product.deliveryWeight * product.kyivDeliveryPriceWeight > 0) ||
+			  (product.deliveryWidth * product.deliveryHeight * product.deliveryDepth * product.variant1DeliveryPriceSize > 0) ||
+						(product.deliveryWeight * product.variant1DeliveryPriceWeight > 0) ||
+			  (product.deliveryWidth * product.deliveryHeight * product.deliveryDepth * product.variant2DeliveryPriceSize > 0) ||
+						(product.deliveryWeight * product.variant2DeliveryPriceWeight > 0) ||
+			  (product.deliveryWidth * product.deliveryHeight * product.deliveryDepth * product.variant3DeliveryPriceSize > 0) ||
+						(product.deliveryWeight * product.variant3DeliveryPriceWeight > 0)}">	
 	<tr class="delivery">
 		<td colspan="3">
 			<div class="delivery_options">
@@ -319,6 +333,7 @@
 			
 		</td>
 	</tr>
+</c:if>
 
 	<tr class="output_result_of_option">
 		<td style="vertical-align: middle;">Общая стоимость:</td>

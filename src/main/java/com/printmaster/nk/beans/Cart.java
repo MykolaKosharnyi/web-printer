@@ -1,6 +1,6 @@
 package com.printmaster.nk.beans;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -16,7 +16,7 @@ import com.printmaster.nk.model.Option;
 		proxyMode  = ScopedProxyMode.TARGET_CLASS)
 public class Cart {
 
-	private Map<ProductCart, Integer> contents = new HashMap<ProductCart, Integer>();
+	private Map<ProductCart, Integer> contents = new LinkedHashMap<ProductCart, Integer>();
 	
 	public Map<ProductCart, Integer> getContents(){
 		return contents;
@@ -44,6 +44,19 @@ public class Cart {
 		for(Option option : product.getOptions()){
 			if(option.getName().equals(optionName)){
 				option.setChecked(stateOfOption);
+				break;
+			}
+		}
+		
+		contents.put(product, quantity);
+	}
+	
+	public void changeDeliveryProduct(ProductCart product, String deliveryName, boolean stateOfOption){
+		int quantity = contents.get(product);
+		contents.remove(product);
+		for(Delivery delivery : product.getDeliveries()){
+			if(delivery.getName().equals(deliveryName)){
+				delivery.setChecked(stateOfOption);
 				break;
 			}
 		}

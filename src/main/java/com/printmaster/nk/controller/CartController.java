@@ -359,6 +359,24 @@ public class CartController {
 		}
 	}
 	
+	@RequestMapping(value = "cart/change_delivery/{typeProduct}/{productId}/{deliveryName}/{stateOption}", method = RequestMethod.POST,
+			consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
+	public @ResponseBody void changeDeliveryProductInCart(Model model, 
+			@PathVariable("typeProduct") String typeProduct,
+			@PathVariable("productId") long productId,
+			@PathVariable("deliveryName") String deliveryName,
+			@PathVariable("stateOption") boolean stateOption){
+		
+		for (Map.Entry<ProductCart, Integer> entry : cart.getContents().entrySet()) {
+			ProductCart key = entry.getKey();
+			if (key.getTypeProduct().equals(typeProduct) && key.getIdProduct()==productId){
+				cart.changeDeliveryProduct(key, deliveryName, stateOption);
+				logger.debug("Change delivery product in cart " + key );
+				break;
+			}
+		}
+	}
+	
 	@RequestMapping(value = "/cart", method = RequestMethod.GET)
 	public String showCart(Model model){
 		model.addAttribute("cart",cart);

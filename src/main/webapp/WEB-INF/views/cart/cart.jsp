@@ -121,6 +121,8 @@ label.add_price_title{height: auto; max-width: 136px; min-width: 136px; float:le
 	padding: 2px;
 	height:auto;
 	float: left;
+	width: 250px;
+	min-width: 250px;
 }
 
 .option_product_car .block_product_price input,
@@ -130,7 +132,8 @@ label.add_price_title{height: auto; max-width: 136px; min-width: 136px; float:le
 }
 
 
-.option_product_car input[type="checkbox"].add_price{
+.option_product_car input[type="checkbox"].add_price,
+.option_product_car input[type="checkbox"].add_price_delivery{
 	/*margin-left: 5px;*/
 	float: left;
 	cursor: pointer;
@@ -170,7 +173,7 @@ label.add_price_title{height: auto; max-width: 136px; min-width: 136px; float:le
 		<tr>
 			<td><img style="height:auto; width:100%;" src="<%=request.getContextPath()%>/${item.key.picturePath}" alt=""></td>
 			<td><a style="color:black;" href="<c:url value='/${item.key.typeProduct}/${item.key.idProduct}' />">${item.key.name }</a></td>
-			<td>
+			<td style="width: 250px;">
 				
 				<div class="option_product_car">
 				
@@ -192,17 +195,18 @@ label.add_price_title{height: auto; max-width: 136px; min-width: 136px; float:le
 					</c:forEach>		
 					
 					<c:if test="${fn:length(item.key.deliveries) > 0}">
-					<hr>
-					<div class="block_product_price">
-								<label class="add_price_title">Доставка:</label>
-								<label class="add_price_value"></label>
-							</div>
+						<div class="block_product_price" style="width: inherit;">
+							<hr style="margin-top:5px; margin-bottom:5px;">
+							<label class="add_price_title" style="font-weight:bold;">Доставка:</label>
+							<label class="add_price_value"></label>
+						</div>
 					</c:if>
 					
 					<c:forEach items="${item.key.deliveries}" var="delivery">
-						<c:if test="${(delivery.priceSize > 0) || (delivery.priceWeight > 0)}">
+						<c:if test="${((delivery.priceSize > 0) || (delivery.priceWeight > 0)) &&
+									((delivery.name!=null) && (delivery.name!=''))}">
 							<div class="block_product_price">
-								<input class="add_price" type="checkbox" value="${delivery.name}" 
+								<input class="add_price_delivery" type="checkbox" value="${delivery.name}" 
 									id="${delivery.name}_${item.key.typeProduct}_${item.key.idProduct}_delivery"
 									<c:if test="${delivery.checked}">checked</c:if>>
 								<label class="add_price_title"
@@ -320,11 +324,68 @@ label.add_price_title{height: auto; max-width: 136px; min-width: 136px; float:le
 	        
 	    });
 		
+		/* checking delivery option */
+		$('.add_price_delivery').click(function(){
+			// component with contain price including quantity and option for product in price
+			var price_element =  $(this).parent('.block_product_price').parent('.option_product_car').parent('td').parent('tr').find('td.price').find('span');
+			// price with quatntity and option
+			var price_with_quantity_and_option = new Number(price_element.text().replace(/\s/ig, '').replace(",", "."));
+			
+			// quantity of this product
+			var quantity_numb = new Number($(this).parent('.block_product_price').parent('.option_product_car').parent('td').parent('tr').find('input.quantity').val());
+			
+			// TYPE and ID of this product to send AJAX request for changing option product on sever
+			var type = $(this).parent('.block_product_price').parent('.option_product_car').parent('td').parent('tr').find('input.type').val();
+			var id = $(this).parent('.block_product_price').parent('.option_product_car').parent('td').parent('tr').find('input.id').val();
+			
+			// VAT coeficient
+			var valueVAT = $('input#НДС_' + type + "_" + id ).prop( "checked" ) ?
+					new Number($('input#НДС_' + type + "_" + id).parent('.block_product_price')
+							.find('label.add_price_value span').text().replace(/\s/ig, '').replace(",", ".")) : new Number(1);				
+			
+			// for changing style outer block if option checked
+	        var change_style = $(this).parent('.block_product_price');
+			// value wich will be added or substraction from all price for the product
+			var addPrice = new Number($(this).parent('.block_product_price').find('label.add_price_value span').text().replace(/\s/ig, '').replace(",", "."));
+			
+	        if ($(this).prop( "checked" )) {
+	            price_element.text(checkPrise( calculatePriceIncludingVAT(price_with_quantity_and_option, addPrice, quantity_numb, valueVAT, true) ));
+
+	        	// show changes on server
+	        	changeDeliveryProductInCart(type, id, $(this).val(), true);
+	        	// change presentaion on user page
+	        	change_style.css('color', '#006080');
+	        	/* set new price for all products */
+				totalPrice();
+	        	
+	        }else{
+	        	price_element.text(checkPrise( calculatePriceIncludingVAT(price_with_quantity_and_option, addPrice, quantity_numb, valueVAT, false) ));
+
+	        	// show changes on server
+	        	changeDeliveryProductInCart(type, id, $(this).val(), false);
+	        	// change presentaion on user page
+	        	change_style.css('color', '#333');
+	        	/* set new price for all products */
+				totalPrice();
+	        }
+	        
+	    });
+		
 		function changeOptionProductInCart(typeProduct, idProduct, optionName, stateOption){
 			/* change option on server */
 			$.ajax({
 				  type: 'POST',
 				  url: "/cart/change_option/" + typeProduct + "/" + idProduct + "/" + optionName + "/" + stateOption,
+				  contentType: "application/json; charset=utf-8",
+	              dataType: "json"
+				  });
+		}
+		
+		function changeDeliveryProductInCart(typeProduct, idProduct, deliveryName, stateOption){
+			/* change delivery on server */
+			$.ajax({
+				  type: 'POST',
+				  url: "/cart/change_delivery/" + typeProduct + "/" + idProduct + "/" + deliveryName + "/" + stateOption,
 				  contentType: "application/json; charset=utf-8",
 	              dataType: "json"
 				  });
@@ -481,7 +542,7 @@ label.add_price_title{height: auto; max-width: 136px; min-width: 136px; float:le
 				  url: "/cart/change_quantity/" + typeProduct + "/" + idProduct + "/" + quantity,
 				  contentType: "application/json; charset=utf-8",
 	              dataType: "json"
-				  });
+			});
 		}
 	});
 
@@ -489,8 +550,10 @@ $(document).ready(function() {
 	
 		$("input.add_price:checked").each(function(){
 			$(this).parent('.block_product_price').css('color', '#006080');
-			
-			
+		});
+		
+		$("input.add_price_delivery:checked").each(function(){
+			$(this).parent('.block_product_price').css('color', '#006080');
 		});
 	
 	    $("input.quantity").keydown(function (e) {

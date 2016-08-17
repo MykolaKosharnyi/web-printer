@@ -492,7 +492,7 @@ $(document).ready(function() {
 		var dataToSend = {
 				'price':price,
 				'pathToPicture':picturePath,
-				'arrayOfChekedOption':[],
+				'arrayOfCheckedOption':[],
 				'arrayOfCheckedDelivery':[]
 		};
 		
@@ -512,7 +512,7 @@ $(document).ready(function() {
 		var dataToSend = {
 				'price':price,
 				'pathToPicture':picturePath,
-				'arrayOfChekedOption':arrayOfChekedOption,
+				'arrayOfCheckedOption':arrayOfChekedOption,
 				'arrayOfCheckedDelivery':[]
 		};
 		
@@ -530,7 +530,7 @@ $(document).ready(function() {
 		var dataToSend = {
 				'price':price,
 				'pathToPicture':picturePath,
-				'arrayOfChekedOption':arrayOfChekedOption,
+				'arrayOfCheckedOption':arrayOfChekedOption,
 				'arrayOfCheckedDelivery':arrayOfCheckedDelivery
 		};
 		
