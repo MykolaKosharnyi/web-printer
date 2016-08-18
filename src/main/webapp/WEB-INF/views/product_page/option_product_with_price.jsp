@@ -133,12 +133,15 @@
 						(product.deliveryWeight * product.ukraineDeliveryPriceWeight > 0) ||
 			  (product.deliveryWidth * product.deliveryHeight * product.deliveryDepth * product.kyivDeliveryPriceSize > 0) ||
 						(product.deliveryWeight * product.kyivDeliveryPriceWeight > 0) ||
-			  (product.deliveryWidth * product.deliveryHeight * product.deliveryDepth * product.variant1DeliveryPriceSize > 0) ||
-						(product.deliveryWeight * product.variant1DeliveryPriceWeight > 0) ||
-			  (product.deliveryWidth * product.deliveryHeight * product.deliveryDepth * product.variant2DeliveryPriceSize > 0) ||
-						(product.deliveryWeight * product.variant2DeliveryPriceWeight > 0) ||
-			  (product.deliveryWidth * product.deliveryHeight * product.deliveryDepth * product.variant3DeliveryPriceSize > 0) ||
-						(product.deliveryWeight * product.variant3DeliveryPriceWeight > 0)}">	
+			  (((product.deliveryWidth * product.deliveryHeight * product.deliveryDepth * product.variant1DeliveryPriceSize > 0) ||
+						(product.deliveryWeight * product.variant1DeliveryPriceWeight > 0)) &&
+						 ((product.variant1DeliveryName !=null) && (product.variant1DeliveryName!=''))) ||
+			  (((product.deliveryWidth * product.deliveryHeight * product.deliveryDepth * product.variant2DeliveryPriceSize > 0) ||
+						(product.deliveryWeight * product.variant2DeliveryPriceWeight > 0)) &&
+						 ((product.variant2DeliveryName !=null) && (product.variant2DeliveryName!=''))) ||
+			  (((product.deliveryWidth * product.deliveryHeight * product.deliveryDepth * product.variant3DeliveryPriceSize > 0) ||
+						(product.deliveryWeight * product.variant3DeliveryPriceWeight > 0)) &&
+						 ((product.variant3DeliveryName !=null) && (product.variant3DeliveryName!='')))}">	
 	<tr class="delivery">
 		<td colspan="3">
 			<div class="delivery_options">
@@ -327,6 +330,96 @@
 							</tr>
 				      	</c:if>
 						
+					</tbody>
+				</table>
+			</div>
+			
+		</td>
+	</tr>
+</c:if>
+
+<c:if test="${ (type == 'printer') && ((product.cyanPaint > 0) || (product.magentaPaint > 0) || (product.yellowPaint > 0) ||
+		       (product.blackPaint > 0) || (product.lightCyanPaint > 0) || (product.lightMagentaPaint > 0) || (product.solventPaint > 0) ||
+		       (product.matteBlackPaint > 0) || (product.grayPaint > 0) || (product.orangePaint > 0) || (product.greenPaint > 0) ||
+		       ((product.variant1Paint > 0) && (product.variant1NamePaint !=null) && (product.variant1NamePaint!='')) ||
+		       ((product.variant2Paint > 0) && (product.variant2NamePaint !=null) && (product.variant2NamePaint!='')) ||
+		       ((product.variant3Paint > 0) && (product.variant3NamePaint !=null) && (product.variant3NamePaint!='')))}">
+	<tr class=paint>
+		<td colspan="3">
+			<div class="paint_options">
+				<i class="fa fa-arrow-right"></i>
+				<p class="paint_options_title">Краска</p>
+			</div>
+			<div class="paint_options_body">
+				<table class="table table-hover table_paint_options">
+					<thead>
+				      <tr>
+				        <th>Тип</th>
+				        <th>Цена за 1л</th>
+				        <th>Количество</th>
+				        <th>Общая стоимость</th>
+				      </tr>
+				    </thead>
+					<tbody>
+					
+							<tr class="block_product_price">
+								<td><input class="add_price_paint" type="checkbox" value="Cyan" id="cyanPaint_price">
+						        	<label class="add_price_paint_title" for="cyanPaint_price">Cyan</label>
+						        </td>
+						        <td class="paint_price">
+									<label>$ <span><fmt:formatNumber type="number" 
+											maxFractionDigits="2" minFractionDigits="2" value="${50}" /></span>
+									</label>
+								</td>
+						        <td>
+
+									<span class="dec_value_paint">
+										<i class="fa fa-minus" aria-hidden="true"></i>
+									</span>
+					
+									<input class="quantity_paint"  value="<c:out value="1"/>"></input>
+					
+									<span class="inc_value_paint">
+										<i class="fa fa-plus" aria-hidden="true"></i>
+									</span>
+
+								</td>
+								<td class="add_price_value">
+									<label>$ <span><fmt:formatNumber type="number" 
+											maxFractionDigits="2" minFractionDigits="2" value="${50}" /></span>
+									</label>
+								</td>
+							</tr>
+							
+							<tr class="block_product_price">
+								<td><input class="add_price_paint" type="checkbox" value="Magenta" id="MagentaPaint_price">
+						        	<label class="add_price_paint_title" for="MagentaPaint_price">Magenta</label>
+						        </td>
+						        <td class="paint_price">
+									<label>$ <span><fmt:formatNumber type="number" 
+											maxFractionDigits="2" minFractionDigits="2" value="${60}" /></span>
+									</label>
+								</td>
+						        <td>
+
+									<span class="dec_value_paint">
+										<i class="fa fa-minus" aria-hidden="true"></i>
+									</span>
+					
+									<input class="quantity_paint"  value="<c:out value="1"/>"></input>
+					
+									<span class="inc_value_paint">
+										<i class="fa fa-plus" aria-hidden="true"></i>
+									</span>
+
+								</td>
+								<td class="add_price_value">
+									<label>$ <span><fmt:formatNumber type="number" 
+											maxFractionDigits="2" minFractionDigits="2" value="${60}" /></span>
+									</label>
+								</td>
+							</tr>
+
 					</tbody>
 				</table>
 			</div>

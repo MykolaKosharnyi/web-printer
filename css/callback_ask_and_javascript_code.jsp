@@ -120,7 +120,7 @@
             if ($(this).prop( "checked" )) {
 
                 price_element.text(checkPriseProduct( calculatePriceIncludingVAT(currentPrice, addPrice, true) ));
-            	change_style.css('color', 'black');
+            	change_style.css('color', 'white');
             	change_style.css('background', '#B9BF0B');
 				change_style.css('border-bottom', '1px white solid');
             	
@@ -130,35 +130,6 @@
             	change_style.css('color', '#333');
             	change_style.css('background', 'white');
             	change_style.css('border-bottom', 'none');
-            }
-            
-        });
-		
-		$('.add_price_paint').click(function(){
-            // from wich we taken current price for all product and after add/sub operation insert again value
-        	var price_element = $(this).parent('td').parent('.block_product_price').parent('tbody').parent('table.table_paint_options')
-        		.parent('.paint_options_body').parent('td').parent('tr.paint').parent('tbody').parent('table.table_price_option')
-        		.parent('.option_product_with_price').find('table.table_price_option tbody tr td label.total_price span');
-			// total price in number presentation
-			var currentPrice = new Number(price_element.text().replace(/\s/ig, '').replace(",", "."));
-			// for changing style outer block if option checked
-            var change_style = $(this).parent('td').parent('.block_product_price');
-			// value wich will be added or substraction from all price for the product
-			var addPrice = new Number($(this).parent('td').parent('tr').find('td.add_price_value').find('span').text().replace(/\s/ig, '').replace(",", "."));
-			
-            if ($(this).prop( "checked" )) {
-
-                price_element.text(checkPriseProduct( calculatePriceIncludingVAT(currentPrice, addPrice, true) ));
-            	change_style.css('color', 'black');
-            	change_style.css('background', '#B9BF0B');
-				/*change_style.css('border-bottom', '1px white solid');*/
-            	
-            } else {
-            	
-            	price_element.text(checkPriseProduct( calculatePriceIncludingVAT(currentPrice, addPrice, false) ));
-            	change_style.css('color', '#333');
-            	change_style.css('background', 'white');
-            	/*change_style.css('border-bottom', 'none');*/
             }
             
         });
@@ -195,93 +166,6 @@
 			}
 		});
 		
-		/* for opening paint option on product page */
-		$('.paint_options').click(function(){
-			var icon = $(this).find('i');
-			var body = $(this).parent('td').find('.paint_options_body');	
-			
-			if(icon.hasClass( 'fa-arrow-right' )){
-				icon.removeClass('fa fa-arrow-right').addClass('fa fa-arrow-down');
-				body.slideDown(1000);
-			} else {
-				icon.removeClass('fa fa-arrow-down').addClass('fa fa-arrow-right');
-				body.slideUp(1000);
-			}
-		});
-		
-		/* BUTTONS FOR INCREASING AND DECREASING QUANTITY ON PAINT */
-		$('.dec_value_paint').click(function(){
-			// from wich we taken current price for all product and after add/sub operation insert again value
-	        var price_element = $(this).parent('td').parent('.block_product_price').parent('tbody').parent('table.table_paint_options')
-	        	.parent('.paint_options_body').parent('td').parent('tr.paint').parent('tbody').parent('table.table_price_option')
-	        	.parent('.option_product_with_price').find('table.table_price_option tbody tr td label.total_price span');
-	     	// total price in number presentation
-			var currentPrice = new Number(price_element.text().replace(/\s/ig, '').replace(",", "."));
-	     	
-	        var quantity_element_val = $(this).parent('td').find('input.quantity_paint').val();
-	        var quantity_numb = new Number(quantity_element_val);
-			var price_with_quantity =  $(this).parent('td').parent('tr').find('td.add_price_value').find('span');
-			var price = new Number($(this).parent('td').parent('tr').find('td.paint_price').find('span').text().replace(/\s/ig, '').replace(",", "."));
-			
-			if (quantity_numb==1) {
-				$(this).css('color','grey');
-
-				$(this).hover(function() {
-						$(this).css('color','grey');
-					  }, function() {
-						$(this).css('color','grey');
-					  }
-				);
-
-			} else {
-				$(this).parent('td').find('input.quantity_paint').val(quantity_numb-1);
-				price_with_quantity.text(checkPriseProduct(price * (quantity_numb - 1)));
-				
-				/* set new price for all products */
-				/* first check if our input checked, after it we will know add price to allPrice or not */
-				if ($(this).parent('td').parent('tr.block_product_price').find('td input.add_price_paint').prop( "checked" )) {
-
-	                price_element.text(checkPriseProduct( calculatePriceIncludingVAT(currentPrice, price, false) ));
-	            	
-	            }
-			}
-				
-	    });
-		
-		$('.inc_value_paint').click(function(){
-			// from wich we taken current price for all product and after add/sub operation insert again value
-	        var price_element = $(this).parent('td').parent('.block_product_price').parent('tbody').parent('table.table_paint_options')
-	        	.parent('.paint_options_body').parent('td').parent('tr.paint').parent('tbody').parent('table.table_price_option')
-	        	.parent('.option_product_with_price').find('table.table_price_option tbody tr td label.total_price span');
-	     	// total price in number presentation
-			var currentPrice = new Number(price_element.text().replace(/\s/ig, '').replace(",", "."));
-	     	
-	        var quantity_element_val = $(this).parent('td').find('input.quantity_paint').val();
-	        var quantity_numb = new Number(quantity_element_val);
-			var price_with_quantity =  $(this).parent('td').parent('tr').find('td.add_price_value').find('span');
-			var price = new Number($(this).parent('td').parent('tr').find('td.paint_price').find('span').text().replace(/\s/ig, '').replace(",", "."));
-			
-			if(quantity_numb==1){
-				var dec_v = $(this).parent('td').find('.dec_value_paint');
-				dec_v.css('color','#006080');
-				dec_v.hover(function() {
-						$(this).css('color','red');
-					  }, function() {
-						$(this).css('color','#006080');
-					  }
-				);
-			} 
-
-			$(this).parent('td').find('input.quantity_paint').val(quantity_numb + 1);
-			price_with_quantity.text(checkPriseProduct(price * (quantity_numb + 1)));
-			
-			/* set new price for all products */
-			/* first check if our input checked, after it we will know add price to allPrice or not */
-			if ($(this).parent('td').parent('tr.block_product_price').find('td input.add_price_paint').prop( "checked" )) {
-	            price_element.text(checkPriseProduct( calculatePriceIncludingVAT(currentPrice, price, true) ));
-	        }
-			
-	    });
 	});
 
 	function checkPriseProduct(num){
@@ -296,6 +180,6 @@
 		    if( s > 0 && !(s % 3) ) str  = " " + str;
 		  }   
 		  return str.replace(".", ",");
-	}
 	
+}
 </script>

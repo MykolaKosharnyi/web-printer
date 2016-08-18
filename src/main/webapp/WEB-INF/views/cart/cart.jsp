@@ -91,7 +91,7 @@
 	color: red;
 }
 
-.cart table input{
+/*.cart table*/ input.quantity{
 	text-align: center;
 	width: 30px;
 }
