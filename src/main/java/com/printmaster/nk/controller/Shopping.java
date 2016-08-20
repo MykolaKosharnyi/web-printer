@@ -1,6 +1,7 @@
 package com.printmaster.nk.controller;
 
 import java.util.List;
+import java.util.Map;
 
 public class Shopping {
 	
@@ -8,8 +9,17 @@ public class Shopping {
 	String pathToPicture;
 	List<String> arrayOfCheckedOption;
 	List<String> arrayOfCheckedDelivery;
+	Map<String, Integer> mapOfPaint;
 	
 	public Shopping(){}
+
+	public Map<String, Integer> getMapOfPaint() {
+		return mapOfPaint;
+	}
+
+	public void setMapOfPaint(Map<String, Integer> mapOfPaint) {
+		this.mapOfPaint = mapOfPaint;
+	}
 
 	public double getPrice() {
 		return price;
@@ -42,5 +52,4 @@ public class Shopping {
 	public void setArrayOfCheckedDelivery(List<String> arrayOfCheckedDelivery) {
 		this.arrayOfCheckedDelivery = arrayOfCheckedDelivery;
 	}
-	
 }

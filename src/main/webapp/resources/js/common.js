@@ -493,7 +493,8 @@ $(document).ready(function() {
 				'price':price,
 				'pathToPicture':picturePath,
 				'arrayOfCheckedOption':[],
-				'arrayOfCheckedDelivery':[]
+				'arrayOfCheckedDelivery':[],
+				'mapOfPaint':{}
 		};
 		
 		$.ajax({
@@ -513,7 +514,8 @@ $(document).ready(function() {
 				'price':price,
 				'pathToPicture':picturePath,
 				'arrayOfCheckedOption':arrayOfChekedOption,
-				'arrayOfCheckedDelivery':[]
+				'arrayOfCheckedDelivery':[],
+				'mapOfPaint':{}
 		};
 		
 		$.ajax({
@@ -525,13 +527,15 @@ $(document).ready(function() {
 			  });	
 		}
 	
-	function addToCartProductPage(typeProduct, idProduct, name, price, picturePath, arrayOfChekedOption, arrayOfCheckedDelivery){
+	function addToCartProductPage(typeProduct, idProduct, name, price,
+								picturePath, arrayOfChekedOption, arrayOfCheckedDelivery, mapOfPaint){
 		
 		var dataToSend = {
 				'price':price,
 				'pathToPicture':picturePath,
 				'arrayOfCheckedOption':arrayOfChekedOption,
-				'arrayOfCheckedDelivery':arrayOfCheckedDelivery
+				'arrayOfCheckedDelivery':arrayOfCheckedDelivery,
+				'mapOfPaint':mapOfPaint
 		};
 		
 		$.ajax({

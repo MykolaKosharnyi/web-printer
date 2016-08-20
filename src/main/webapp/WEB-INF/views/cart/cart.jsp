@@ -253,7 +253,7 @@ label.add_price_title{height: auto; max-width: 136px; min-width: 136px; float:le
 			<td></td>
 			<td></td>
 			<td class="total_price">$ <span><fmt:formatNumber type="number" 
-           		maxFractionDigits="2" minFractionDigits="2" value="${cart.totalCost }" /></span></td>
+           		maxFractionDigits="2" minFractionDigits="2" value="${cart.getTotalCost()}" /></span></td>
 			<td></td>
 		</tr>
 	</table>

@@ -23,6 +23,18 @@
 		return checkedArray;
 	}
 	
+	function getCheckedPaint(){
+		var checkedMap = {};
+		
+		if($("input.add_price_paint:checked").length > 0){
+			$("input.add_price_paint:checked").each(function(){	
+				var key = "" + $(this).val();
+				checkedMap[key] = new Number($(this).parent('td').parent('.block_product_price').find('td input.quantity_paint').val());
+			});
+		}
+		return checkedMap;
+	}
+	
 	/*
 		Set the price after onload page. It was done for cause when user checked addition
 	option and onload page or open this tab in the future. After it price include price 
@@ -54,15 +66,34 @@
 		
 			currentPrice = currentPrice + addPrice;
 			
-			$(this).parent('td').parent('.block_product_price').css('color', 'white');
+			$(this).parent('td').parent('.block_product_price').css('color', 'black');
 			$(this).parent('td').parent('.block_product_price').css('background', '#B9BF0B');
 			$(this).parent('td').parent('.block_product_price').css('border-bottom', '1px white solid');
 
 		});
+		
+		$("input.add_price_paint").each(function(){
+			
+			var priceForOne = new Number($(this).parent('td').parent('.block_product_price')
+					.find('td.paint_price label span').text().replace(/\s/ig, '').replace(",", "."));
+			var quantity = new Number($(this).parent('td').parent('.block_product_price')
+					.find('td input.quantity_paint').val());
+			
+			var addAllPaintPrice = $(this).parent('td').parent('.block_product_price').find('td.add_price_value label span');
+			addAllPaintPrice.text(checkPriseProduct(priceForOne * quantity));
+	
+			if($(this).prop( "checked" )){
+				var addPricePaint = new Number(addAllPaintPrice.text().replace(/\s/ig, '').replace(",", "."));
+				
+				currentPrice = currentPrice + addPricePaint;
+				
+				$(this).parent('td').parent('.block_product_price').css('color', 'black');
+				$(this).parent('td').parent('.block_product_price').css('background', '#B9BF0B');
+			}
+		});
 	
 		price_element.text(checkPriseProduct(currentPrice * valueVAT));
 	});
-
 	
 	$(function(){
 		$('.add_price').click(function(){
@@ -151,14 +182,12 @@
                 price_element.text(checkPriseProduct( calculatePriceIncludingVAT(currentPrice, addPrice, true) ));
             	change_style.css('color', 'black');
             	change_style.css('background', '#B9BF0B');
-				/*change_style.css('border-bottom', '1px white solid');*/
             	
             } else {
             	
             	price_element.text(checkPriseProduct( calculatePriceIncludingVAT(currentPrice, addPrice, false) ));
             	change_style.css('color', '#333');
             	change_style.css('background', 'white');
-            	/*change_style.css('border-bottom', 'none');*/
             }
             
         });
