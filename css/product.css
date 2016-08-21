@@ -17,7 +17,7 @@
 
         #pictures{
             position: relative;
-            width: 50%;
+            width: 40%;
             height:auto;
             float: left;
             margin: 0px;
@@ -106,7 +106,7 @@ border-radius: 5px;
 }
         .descriptions{
             position: relative;
-            width: 50%;
+            width: 60%;
             height: auto;
             float: left;
 	    	margin-left: 0px;
@@ -248,11 +248,13 @@ label.add_price_title{
 	color: #006080;
 }
 
-.table_price_option tr.delivery{
+.table-striped > tbody > tr.delivery,
+.table-striped > tbody > tr.paint{
 	background: white;
 }
 
-.table_price_option tr.delivery:hover{
+.table-striped > tbody > tr.delivery:hover,
+.table-striped > tbody > tr.paint:hover{
 	background-color: white;
 }
 
@@ -264,15 +266,17 @@ label.add_price_title{
 	position: relative;
 	/*top: -18px;*/
 }
-/* DELIVERY */
-.delivery_options{
+/* DELIVERY AND PAINT option*/
+.delivery_options,
+.paint_options{
 	width: inherit;
 	position: relative;
 	height: 30px;
 	margin-top: 2px;
 }
 
-.delivery_options i {
+.delivery_options i,
+.paint_options i{
 	float: left;
 	margin-right: 5px;
 	border: 1px #A6AA26 solid;
@@ -281,7 +285,8 @@ label.add_price_title{
 	cursor: pointer;
 }
 
-.delivery_options p.delivery_options_title {
+.delivery_options p.delivery_options_title,
+.paint_options p.paint_options_title {
 	width: 90%;
 	float: left;
 	margin: 0px;
@@ -290,7 +295,13 @@ label.add_price_title{
 	font-weight: bold;
 }
 
-.table_delivery_options{
+.delivery_options_body,
+.paint_options_body{
+	display: none;
+}
+
+.table_delivery_options,
+.table_paint_options{
 	margin: 0px;
 	width: 100%;
 }
@@ -299,9 +310,34 @@ label.add_price_title{
 	border: none;
 }
 
-.add_price_delivery_title{
+.table_price_option .table_paint_options td,
+.table_price_option .table_paint_options th{text-align:center;}
+
+.table_price_option .table_paint_options td:first-child,
+.table_price_option .table_paint_options th:first-child{text-align:left;}
+
+.table_price_option .table_paint_options tr:last-child td{border-bottom: none;}
+
+.add_price_delivery_title,
+.add_price_paint_title{
 	height: auto;
 	max-width: 100px;
+}
+
+.dec_value_paint,
+.inc_value_paint{
+	color: #006080;
+	cursor: pointer;
+}
+
+.dec_value_paint:hover,
+.inc_value_paint:hover{
+	color: red;
+}
+
+input.quantity_paint{
+	text-align: center;
+	width: 30px;
 }
 
 /*---- second part of product page ----*/
