@@ -38,6 +38,20 @@ public class Cart {
 		contents.put(product, count);
 	}
 	
+	public void changeQuantityPaintProduct(ProductCart product, String namePaint, int quantityConcretePaint){
+		int quantity = contents.get(product);
+		contents.remove(product);
+
+		for(Paint paint : product.getPaints()){
+			if(paint.getName().equals(namePaint)){
+				paint.setQuantity(quantityConcretePaint);
+				break;
+			}
+		}
+		
+		contents.put(product, quantity);
+	}
+	
 	public void changeOptionProduct(ProductCart product, String optionName, boolean stateOfOption){
 		int quantity = contents.get(product);
 		contents.remove(product);
@@ -57,6 +71,19 @@ public class Cart {
 		for(Delivery delivery : product.getDeliveries()){
 			if(delivery.getName().equals(deliveryName)){
 				delivery.setChecked(stateOfOption);
+				break;
+			}
+		}
+		
+		contents.put(product, quantity);
+	}
+	
+	public void changePaintProduct(ProductCart product, String paintName, boolean stateOfOption){
+		int quantity = contents.get(product);
+		contents.remove(product);
+		for(Paint paint : product.getPaints()){
+			if(paint.getName().equals(paintName)){
+				paint.setChecked(stateOfOption);
 				break;
 			}
 		}

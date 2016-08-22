@@ -81,24 +81,29 @@
 }
 
 .dec_value,
-.inc_value{
+.inc_value,
+.dec_value_paint,
+.inc_value_paint{
 	color: #006080;
 	cursor: pointer;
 }
 
 .dec_value:hover,
-.inc_value:hover{
+.inc_value:hover,
+.dec_value_paint:hover,
+.inc_value_paint:hover{
 	color: red;
 }
 
-/*.cart table*/ input.quantity{
+input.quantity,
+input.quantity_paint{
 	text-align: center;
 	width: 30px;
 }
 
 .cart .option_product_car{
 	height:auto;
-	width: 250px;
+	width: 300px;
 }
 .cart .option_product_car label{
 	margin-bottom: 0px;
@@ -109,6 +114,8 @@
 
 .option_product_car label.total_ptice_title{min-width: 200px;}
 label.add_price_title{height: auto; max-width: 136px; min-width: 136px; float:left; text-align: left; cursor: pointer;}
+
+.paint_block label.add_price_title{max-width: 70px; min-width: 70px;}
 
 .option_product_car label.total_ptice_title,
 .option_product_car label.total_price{
@@ -121,8 +128,8 @@ label.add_price_title{height: auto; max-width: 136px; min-width: 136px; float:le
 	padding: 2px;
 	height:auto;
 	float: left;
-	width: 250px;
-	min-width: 250px;
+	width: 300px;
+	min-width: 300px;
 }
 
 .option_product_car .block_product_price input,
@@ -133,8 +140,10 @@ label.add_price_title{height: auto; max-width: 136px; min-width: 136px; float:le
 
 
 .option_product_car input[type="checkbox"].add_price,
-.option_product_car input[type="checkbox"].add_price_delivery{
-	/*margin-left: 5px;*/
+.option_product_car input[type="checkbox"].add_price_delivery,
+.option_product_car input[type="checkbox"].add_price_paint{
+	margin-left: 5px;
+	margin-right: 5px;
 	float: left;
 	cursor: pointer;
 }
@@ -147,6 +156,11 @@ label.add_price_title{height: auto; max-width: 136px; min-width: 136px; float:le
 .option_product_car label.add_price_value{
 	min-width: 60px;
 }
+
+.option_product_car .paint_block label.add_price_value{
+	left: 20px;
+}
+
 
 .option_product_car label.total_ptice_title{
 	margin-left: 25px;
@@ -218,6 +232,40 @@ label.add_price_title{height: auto; max-width: 136px; min-width: 136px; float:le
 						</c:if>
 					</c:forEach>	
 					
+					<c:if test="${fn:length(item.key.paints) > 0}">
+						<div class="block_product_price" style="width: inherit;">
+							<hr style="margin-top:5px; margin-bottom:5px;">
+							<label class="add_price_title" style="font-weight:bold;">Краска:</label>
+							<label class="add_price_value"></label>
+						</div>
+					</c:if>
+					
+					<c:forEach items="${item.key.paints}" var="paint">
+						<c:if test="${ paint.price > 0 }">
+							<div class="block_product_price paint_block">
+								<input class="add_price_paint" type="checkbox" value="${paint.name}" 
+									id="${paint.name}_${item.key.typeProduct}_${item.key.idProduct}_paint"
+									<c:if test="${paint.checked}">checked</c:if>>
+								<label class="add_price_title"
+										 for="${paint.name}_${item.key.typeProduct}_${item.key.idProduct}_paint">${paint.name}</label>
+										 
+								<span class="dec_value_paint">
+									<i class="fa fa-minus" aria-hidden="true"></i>
+								</span>
+				
+								<input class="quantity_paint"  value="<c:out value="${paint.quantity}"/>"></input>
+				
+								<span class="inc_value_paint">
+									<i class="fa fa-plus" aria-hidden="true"></i>
+								</span>		 
+										 
+								<label class="add_price_value">
+									$<span><fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${paint.quantity*paint.price}" /></span>
+								</label>
+							</div>
+						</c:if>
+					</c:forEach>
+					
 				</div>				
 		
 			</td>
@@ -239,9 +287,9 @@ label.add_price_title{height: auto; max-width: 136px; min-width: 136px; float:le
 
 			</td>
 			<td class="price">$ <span>
-				<fmt:formatNumber type="number" 
-           					maxFractionDigits="2" minFractionDigits="2" value="${item.key.getPriceWithOptionAndDeivery() * item.value }" />
-					</span><input type="hidden" name="price_ellement" value="${item.key.price}">
+				<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${item.key.getPriceWithOptionAndDeivery() * item.value }" />
+					</span>
+					<input type="hidden" name="price_ellement" value="${item.key.price}">
 			</td>
 			<td class="delte_item"><i class="fa fa-trash-o" aria-hidden="true"></i></td>
 		</tr>
@@ -257,7 +305,7 @@ label.add_price_title{height: auto; max-width: 136px; min-width: 136px; float:le
 			<td></td>
 		</tr>
 	</table>
-	<input class="button" type="submit" value="<spring:message code="cart.ownpage.placeorder"/>"></input>
+		<input class="button" type="submit" value="<spring:message code="cart.ownpage.placeorder"/>"></input>
 	</form>
 	</c:if>
 	<c:if test="${empty cart.contents}">
@@ -304,6 +352,7 @@ label.add_price_title{height: auto; max-width: 136px; min-width: 136px; float:le
 	        	changeOptionProductInCart(type, id, $(this).val(), true);
 	        	// change presentaion on user page
 	        	change_style.css('color', '#006080');
+	        	change_style.css('background', '#b5d9f0');
 	        	/* set new price for all products */
 				totalPrice();
 	        	
@@ -318,6 +367,7 @@ label.add_price_title{height: auto; max-width: 136px; min-width: 136px; float:le
 	        	changeOptionProductInCart(type, id, $(this).val(), false);
 	        	// change presentaion on user page
 	        	change_style.css('color', '#333');
+	        	change_style.css('background', 'none');
 	        	/* set new price for all products */
 				totalPrice();
 	        }
@@ -355,6 +405,7 @@ label.add_price_title{height: auto; max-width: 136px; min-width: 136px; float:le
 	        	changeDeliveryProductInCart(type, id, $(this).val(), true);
 	        	// change presentaion on user page
 	        	change_style.css('color', '#006080');
+	        	change_style.css('background', '#b5d9f0');
 	        	/* set new price for all products */
 				totalPrice();
 	        	
@@ -365,6 +416,56 @@ label.add_price_title{height: auto; max-width: 136px; min-width: 136px; float:le
 	        	changeDeliveryProductInCart(type, id, $(this).val(), false);
 	        	// change presentaion on user page
 	        	change_style.css('color', '#333');
+	        	change_style.css('background', 'none');
+	        	/* set new price for all products */
+				totalPrice();
+	        }
+	        
+	    });
+		
+		/* checking delivery option */
+		$('.add_price_paint').click(function(){
+			// component with contain price including quantity and option for product in price
+			var price_element =  $(this).parent('.block_product_price').parent('.option_product_car').parent('td').parent('tr').find('td.price').find('span');
+			// price with quatntity and option
+			var price_with_quantity_and_option = new Number(price_element.text().replace(/\s/ig, '').replace(",", "."));
+			
+			// quantity of this product
+			var quantity_numb = new Number($(this).parent('.block_product_price').parent('.option_product_car').parent('td').parent('tr').find('input.quantity').val());
+			
+			// TYPE and ID of this product to send AJAX request for changing option product on sever
+			var type = $(this).parent('.block_product_price').parent('.option_product_car').parent('td').parent('tr').find('input.type').val();
+			var id = $(this).parent('.block_product_price').parent('.option_product_car').parent('td').parent('tr').find('input.id').val();
+			
+			// VAT coeficient
+			var valueVAT = $('input#НДС_' + type + "_" + id ).prop( "checked" ) ?
+					new Number($('input#НДС_' + type + "_" + id).parent('.block_product_price')
+							.find('label.add_price_value span').text().replace(/\s/ig, '').replace(",", ".")) : new Number(1);				
+			
+			// for changing style outer block if option checked
+	        var change_style = $(this).parent('.block_product_price');
+			// value wich will be added or substraction from all price for the product
+			var addPrice = new Number($(this).parent('.block_product_price').find('label.add_price_value span').text().replace(/\s/ig, '').replace(",", "."));
+			
+	        if ($(this).prop( "checked" )) {
+	            price_element.text(checkPrise( calculatePriceIncludingVAT(price_with_quantity_and_option, addPrice, quantity_numb, valueVAT, true) ));
+
+	        	// show changes on server
+	        	changePaintProductInCart(type, id, $(this).val(), true);
+	        	// change presentaion on user page
+	        	change_style.css('color', '#006080');
+	        	change_style.css('background', '#b5d9f0');
+	        	/* set new price for all products */
+				totalPrice();
+	        	
+	        }else{
+	        	price_element.text(checkPrise( calculatePriceIncludingVAT(price_with_quantity_and_option, addPrice, quantity_numb, valueVAT, false) ));
+
+	        	// show changes on server
+	        	changePaintProductInCart(type, id, $(this).val(), false);
+	        	// change presentaion on user page
+	        	change_style.css('color', '#333');
+	        	change_style.css('background', 'none');
 	        	/* set new price for all products */
 				totalPrice();
 	        }
@@ -386,6 +487,16 @@ label.add_price_title{height: auto; max-width: 136px; min-width: 136px; float:le
 			$.ajax({
 				  type: 'POST',
 				  url: "/cart/change_delivery/" + typeProduct + "/" + idProduct + "/" + deliveryName + "/" + stateOption,
+				  contentType: "application/json; charset=utf-8",
+	              dataType: "json"
+				  });
+		}
+		
+		function changePaintProductInCart(typeProduct, idProduct, paintName, stateOption){
+			/* change delivery on server */
+			$.ajax({
+				  type: 'POST',
+				  url: "/cart/change_paint/" + typeProduct + "/" + idProduct + "/" + paintName + "/" + stateOption,
 				  contentType: "application/json; charset=utf-8",
 	              dataType: "json"
 				  });
@@ -482,6 +593,124 @@ label.add_price_title{height: auto; max-width: 136px; min-width: 136px; float:le
 			changeQuantityProductInCart(type, id, quantity_numb + 1);
         });
 		
+		/* BUTTONS FOR INCREASING AND DECREASING QUANTITY ON PAINT */
+		$('.dec_value_paint').click(function(){
+			// current quantity paint
+			var quantity_node = $(this).parent('.block_product_price').find('input.quantity_paint');
+			var quantity = new Number(quantity_node.val());// quantity of paint
+			
+			//all price for current paint
+			var paint_price_node = $(this).parent('.block_product_price').find('label.add_price_value  span');
+			
+			/* change quantity paint on server */
+			var type = $(this).parent('.block_product_price').parent('.option_product_car').parent('td').parent('tr').find('td input.type').val();
+			var id = $(this).parent('.block_product_price').parent('.option_product_car').parent('td').parent('tr').find('td input.id').val();
+			var namePaint = $(this).parent('.block_product_price').find('input.add_price_paint').val();
+			changeQuantityPaintProductInCart(type, id, namePaint, quantity - 1);	
+			
+			// VAT coeficient
+			var valueVAT = $('input#НДС_' + type + "_" + id ).prop( "checked" ) ?
+					new Number($('input#НДС_' + type + "_" + id).parent('.block_product_price')
+							.find('label.add_price_value span').text().replace(/\s/ig, '').replace(",", ".")) : new Number(1);
+			
+			if (quantity==1) {
+				$(this).css('color','grey');
+
+				$(this).hover(function() {
+						$(this).css('color','grey');
+					  }, function() {
+						$(this).css('color','grey');
+					  }
+				);
+
+			} else {
+				quantity_node.val(quantity-1);
+				
+				var oldPaintPrice = new Number( paint_price_node.text().replace(/\s/ig, '').replace(",", ".") );
+				var newPaintPrice = new Number( (oldPaintPrice/quantity) * (quantity-1) );
+				
+				//set new value in 
+				paint_price_node.text(checkPrise(newPaintPrice));
+				
+				/* set new price for all products */
+				/* first check if our input checked, after it we will know add price to allPrice or not */
+				if ($(this).parent('.block_product_price').find('input.add_price_paint').prop( "checked" )) {
+					//quantity of product
+					var quantity_product = new Number($(this).parent('.block_product_price').parent('.option_product_car')
+							.parent('td').parent('tr').find('td input.quantity').val());
+					
+					//product for this product with all checked options
+					var price_product_node = $(this).parent('.block_product_price').parent('.option_product_car').parent('td').parent('tr').find('td.price span');
+					
+					//set new value to product
+					price_product_node.text(checkPrise( calculatePriceIncludingVAT(new Number(price_product_node.text().replace(/\s/ig, '').replace(",", ".")),
+							oldPaintPrice - newPaintPrice, quantity_product, valueVAT, false) ));
+					
+					/* set new total price including all products price */
+					totalPrice();
+	            }
+			}
+				
+	    });
+		
+		$('.inc_value_paint').click(function(){
+			// current quantity paint
+			var quantity_node = $(this).parent('.block_product_price').find('input.quantity_paint');
+			var quantity = new Number(quantity_node.val());// quantity of paint
+			
+			//all price for current paint
+			var paint_price_node = $(this).parent('.block_product_price').find('label.add_price_value  span');
+			
+			/* change quantity paint on server */
+			var type = $(this).parent('.block_product_price').parent('.option_product_car').parent('td').parent('tr').find('td input.type').val();
+			var id = $(this).parent('.block_product_price').parent('.option_product_car').parent('td').parent('tr').find('td input.id').val();
+			var namePaint = $(this).parent('.block_product_price').find('input.add_price_paint').val();
+			changeQuantityPaintProductInCart(type, id, namePaint, quantity + 1);	
+			
+			// VAT coeficient
+			var valueVAT = $('input#НДС_' + type + "_" + id ).prop( "checked" ) ?
+					new Number($('input#НДС_' + type + "_" + id).parent('.block_product_price')
+							.find('label.add_price_value span').text().replace(/\s/ig, '').replace(",", ".")) : new Number(1);
+			
+			if(quantity==1){
+				var dec_v = $(this).parent('.block_product_price').find('.dec_value_paint');
+				dec_v.css('color','#006080');
+				dec_v.hover(function() {
+						$(this).css('color','red');
+					}, function() {
+						$(this).css('color','#006080');
+					}
+				);
+			} 		
+					
+				quantity_node.val(quantity+1);
+				
+				var oldPaintPrice = new Number( paint_price_node.text().replace(/\s/ig, '').replace(",", ".") );
+				var newPaintPrice = new Number( (oldPaintPrice/quantity) * (quantity+1) );
+				
+				//set new value in 
+				paint_price_node.text(checkPrise(newPaintPrice));
+				
+				/* set new price for all products */
+				/* first check if our input checked, after it we will know add price to allPrice or not */
+				if ($(this).parent('.block_product_price').find('input.add_price_paint').prop( "checked" )) {
+					//quantity of product
+					var quantity_product = new Number($(this).parent('.block_product_price').parent('.option_product_car')
+							.parent('td').parent('tr').find('td input.quantity').val());
+					
+					//product for this product with all checked options
+					var price_product_node = $(this).parent('.block_product_price').parent('.option_product_car').parent('td').parent('tr').find('td.price span');
+					
+					//set new value to product
+					price_product_node.text(checkPrise( calculatePriceIncludingVAT(new Number(price_product_node.text().replace(/\s/ig, '').replace(",", ".")),
+							newPaintPrice - oldPaintPrice, quantity_product, valueVAT, true) ));
+					
+					/* set new total price including all products price */
+					totalPrice();
+	            }
+				
+	    });
+		
 		function totalPrice(){
 			$('tr td.total_price span' ).text(allPrice());
 		}
@@ -544,17 +773,28 @@ label.add_price_title{height: auto; max-width: 136px; min-width: 136px; float:le
 	              dataType: "json"
 			});
 		}
+		
+		function changeQuantityPaintProductInCart(typeProduct, idProduct, namePaint, quantity){
+			/* change quantity on server */
+			$.ajax({
+				  type: 'POST',
+				  url: "/cart/change_quantity_paint/" + typeProduct + "/" + idProduct + "/" + namePaint + "/" + quantity,
+				  contentType: "application/json; charset=utf-8",
+	              dataType: "json"
+			});
+		}
 	});
 
 $(document).ready(function() {
 	
-		$("input.add_price:checked").each(function(){
+		$("input.add_price:checked, input.add_price_delivery:checked, input.add_price_paint:checked").each(function(){
 			$(this).parent('.block_product_price').css('color', '#006080');
+			$(this).parent('.block_product_price').css('background', '#b5d9f0');
 		});
 		
-		$("input.add_price_delivery:checked").each(function(){
+	/*	$("input.add_price_delivery:checked").each(function(){
 			$(this).parent('.block_product_price').css('color', '#006080');
-		});
+		});*/
 	
 	    $("input.quantity").keydown(function (e) {
 	        // Allow: backspace, delete.

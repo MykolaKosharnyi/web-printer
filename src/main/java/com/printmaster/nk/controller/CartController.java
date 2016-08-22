@@ -429,6 +429,24 @@ public class CartController {
 		}
 	}
 	
+	@RequestMapping(value = "cart/change_quantity_paint/{typeProduct}/{productId}/{typePaint}/{quantity}", method = RequestMethod.POST,
+			consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
+	public @ResponseBody void changeQuantityPaintProductInCart(Model model, 
+			@PathVariable("typeProduct") String typeProduct,
+			@PathVariable("productId") long productId,
+			@PathVariable("typePaint") String typePaint,
+			@PathVariable("quantity") int quantity){
+		
+		for (Map.Entry<ProductCart, Integer> entry : cart.getContents().entrySet()) {
+			ProductCart key = entry.getKey();
+			if (key.getTypeProduct().equals(typeProduct) && key.getIdProduct()==productId){
+				cart.changeQuantityPaintProduct(key, typePaint, quantity);
+				logger.debug("Change quantity paint product in cart " + key );
+				break;
+			}
+		}
+	}
+	
 	@RequestMapping(value = "cart/change_option/{typeProduct}/{productId}/{optionName}/{stateOption}", method = RequestMethod.POST,
 			consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
 	public @ResponseBody void changeOptionProductInCart(Model model, 
@@ -460,6 +478,24 @@ public class CartController {
 			if (key.getTypeProduct().equals(typeProduct) && key.getIdProduct()==productId){
 				cart.changeDeliveryProduct(key, deliveryName, stateOption);
 				logger.debug("Change delivery product in cart " + key );
+				break;
+			}
+		}
+	}
+	
+	@RequestMapping(value = "cart/change_paint/{typeProduct}/{productId}/{paintName}/{stateOption}", method = RequestMethod.POST,
+			consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
+	public @ResponseBody void changePaintProductInCart(Model model, 
+			@PathVariable("typeProduct") String typeProduct,
+			@PathVariable("productId") long productId,
+			@PathVariable("paintName") String paintName,
+			@PathVariable("stateOption") boolean stateOption){
+		
+		for (Map.Entry<ProductCart, Integer> entry : cart.getContents().entrySet()) {
+			ProductCart key = entry.getKey();
+			if (key.getTypeProduct().equals(typeProduct) && key.getIdProduct()==productId){
+				cart.changePaintProduct(key, paintName, stateOption);
+				logger.debug("Change paint product in cart " + key );
 				break;
 			}
 		}
