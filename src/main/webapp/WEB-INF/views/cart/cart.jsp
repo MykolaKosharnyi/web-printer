@@ -10,19 +10,19 @@
 <title>Корзина</title>
 <style type="text/css">
 
-.cart{
+#cart{
 	width: auto;
 	font: 15px "RobotoRegular";
 }
 
-.cart h2 {
+#cart h2 {
 	width: 200px;
 	hidth: auto;
 	margin: 0 auto;
 	color: #006080;
 }
 
-.cart table{
+#cart table{
 	position: relative;
 	height: auto;
 	width: 100%;
@@ -43,41 +43,63 @@
 	padding: 5px;
 }
 
-.cart table td{
+#cart table td{
 	height: auto;
 	width: auto;
 
 	border: 1px #E7EAED solid;
 }
 
-.cart table td.price{
+#cart table td.price{
 	min-width: 117px;
 }
 
-.cart table td.delte_item i {
+#cart table td.delte_item i {
 	color:#006080;
 	cursor: pointer;
 }
 
-.cart table td.delte_item i:hover {
+#cart table td.delte_item i:hover {
 	color:red;
 }
 
-.cart table td:first-child{
+#cart table td:first-child{
 	padding:1px;
 	height:auto; 
 	width:160px;
 }
 
-.cart table tr:last-child td{
+#cart table tr:last-child td{
 	border: none;
 	font-weight: bold;
 	height:auto; 
 	width:auto;
 }
 
-.cart table td:last-child{
+#cart .option_product_car table tr:last-child td{
+	border: 1px #E7EAED solid;
+	font-weight: unset;
+}
+
+#cart table td:last-child{
 	font-size: 35px;
+}
+
+#cart .option_product_car table td:last-child{
+	font-size: 15px;
+}
+
+#cart .option_product_car table tr td{
+	vertical-align: middle;
+	/*border: none;*/
+}
+
+#cart .option_product_car table tr td:last-child{
+	/*text-align: left;*/
+}
+
+#cart .option_product_car table{
+	margin-bottom: 0px;
 }
 
 .dec_value,
@@ -101,11 +123,7 @@ input.quantity_paint{
 	width: 30px;
 }
 
-.cart .option_product_car{
-	height:auto;
-	width: 300px;
-}
-.cart .option_product_car label{
+#cart .option_product_car label{
 	margin-bottom: 0px;
 	font-weight: unset;
 	/*min-width: 240px;*/
@@ -113,7 +131,7 @@ input.quantity_paint{
 
 
 .option_product_car label.total_ptice_title{min-width: 200px;}
-label.add_price_title{height: auto; max-width: 136px; min-width: 136px; float:left; text-align: left; cursor: pointer;}
+label.add_price_title{height: auto; float:left; text-align: left; cursor: pointer;}
 
 .paint_block label.add_price_title{max-width: 70px; min-width: 70px;}
 
@@ -122,14 +140,6 @@ label.add_price_title{height: auto; max-width: 136px; min-width: 136px; float:le
 	/*min-width: 155px;*/
 	margin:10px 0px;
 	text-align: right;
-}
-
-.option_product_car .block_product_price{
-	padding: 2px;
-	height:auto;
-	float: left;
-	width: 300px;
-	min-width: 300px;
 }
 
 .option_product_car .block_product_price input,
@@ -157,11 +167,6 @@ label.add_price_title{height: auto; max-width: 136px; min-width: 136px; float:le
 	min-width: 60px;
 }
 
-.option_product_car .paint_block label.add_price_value{
-	left: 20px;
-}
-
-
 .option_product_car label.total_ptice_title{
 	margin-left: 25px;
 	padding: 5px;
@@ -170,11 +175,11 @@ label.add_price_title{height: auto; max-width: 136px; min-width: 136px; float:le
 </style>
 </head>
 <body>
-<div class="cart">
+<div id="cart">
 <c:if test="${!empty cart.contents}">
 	<form action="cart/pleaceOrder" method="post">
 	${cartMessage}
-	<table class="table table-hover table-striped table-bordered">
+	<table class="table table-hover table-striped table-bordered table_option">
 		<thead>
 			<th><spring:message code="cart.ownpage.picture"/></th>
 			<th><spring:message code="cart.ownpage.item"/></th>
@@ -186,87 +191,118 @@ label.add_price_title{height: auto; max-width: 136px; min-width: 136px; float:le
 		<c:forEach var="item" items="${cart.contents}">
 		<tr>
 			<td><img style="height:auto; width:100%;" src="<%=request.getContextPath()%>/${item.key.picturePath}" alt=""></td>
-			<td><a style="color:black;" href="<c:url value='/${item.key.typeProduct}/${item.key.idProduct}' />">${item.key.name }</a></td>
-			<td style="width: 250px;">
+			<td style="max-width: 235px;"><a style="color:black;" href="<c:url value='/${item.key.typeProduct}/${item.key.idProduct}' />">${item.key.name }</a></td>
+			<td style="padding: 0px;" class="option_product_car">
 				
-				<div class="option_product_car">
+				<table class="table table-hover">
 				
 					<c:forEach items="${item.key.options}" var="option">
 						<c:if test="${option.price > 0.01}">
-							<div class="block_product_price">
-								<input class="add_price" type="checkbox" value="${option.name}" 
-									id="${option.name}_${item.key.typeProduct}_${item.key.idProduct}"
-									<c:if test="${option.checked}">checked</c:if>>
-								<label class="add_price_title"
-										 for="${option.name}_${item.key.typeProduct}_${item.key.idProduct}">${option.name}</label>
-								<label class="add_price_value" <c:if test="${option.name=='НДС'}">style="display:none;"</c:if>
-									><c:if test="${option.name!='НДС'}">$</c:if><span><fmt:formatNumber type="number" 
-											maxFractionDigits="2" minFractionDigits="2" value="${option.price}" /></span>
-								</label>
-								<%-- <label class="option_description">${option.description}</label>--%>
-							</div>
+							<tr class="block_product_price">
+								<c:if test="${option.name!='НДС'}">
+									<td colspan="2">
+										<input class="add_price" type="checkbox" value="${option.name}" 
+											id="${option.name}_${item.key.typeProduct}_${item.key.idProduct}"
+											<c:if test="${option.checked}">checked</c:if>>
+										<label class="add_price_title"
+												 for="${option.name}_${item.key.typeProduct}_${item.key.idProduct}">${option.name}</label>
+									</td>
+									<td>
+										<label class="add_price_value">
+											$<span><fmt:formatNumber type="number" 
+													maxFractionDigits="2" minFractionDigits="2" value="${option.price}" /></span>
+										</label>
+									</td>
+									<%-- <label class="option_description">${option.description}</label>--%>
+								</c:if>
+								
+								<c:if test="${option.name=='НДС'}">
+									<td colspan="3" style="padding: 8px 0px;">
+										<input class="add_price" type="checkbox" value="${option.name}" 
+											id="${option.name}_${item.key.typeProduct}_${item.key.idProduct}"
+											<c:if test="${option.checked}">checked</c:if>>
+										<label class="add_price_title"
+												 for="${option.name}_${item.key.typeProduct}_${item.key.idProduct}">${option.name}</label>
+									</td>
+									<td style="display:none;">
+										<label class="add_price_value">
+											$<span><fmt:formatNumber type="number" 
+													maxFractionDigits="2" minFractionDigits="2" value="${option.price}" /></span>
+										</label>
+									</td>
+									<%-- <label class="option_description">${option.description}</label>--%>
+								</c:if>
+							</tr>
 						</c:if>
 					</c:forEach>		
 					
 					<c:if test="${fn:length(item.key.deliveries) > 0}">
-						<div class="block_product_price" style="width: inherit;">
-							<hr style="margin-top:5px; margin-bottom:5px;">
-							<label class="add_price_title" style="font-weight:bold;">Доставка:</label>
-							<label class="add_price_value"></label>
-						</div>
+						<tr class="block_product_price">
+							<td colspan="3">
+								<label style="font-weight:bold; float: left; margin:5px;">Доставка:</label>
+							</td>
+						</tr>
 					</c:if>
 					
 					<c:forEach items="${item.key.deliveries}" var="delivery">
 						<c:if test="${((delivery.priceSize > 0) || (delivery.priceWeight > 0)) &&
 									((delivery.name!=null) && (delivery.name!=''))}">
-							<div class="block_product_price">
-								<input class="add_price_delivery" type="checkbox" value="${delivery.name}" 
-									id="${delivery.name}_${item.key.typeProduct}_${item.key.idProduct}_delivery"
-									<c:if test="${delivery.checked}">checked</c:if>>
-								<label class="add_price_title"
-										 for="${delivery.name}_${item.key.typeProduct}_${item.key.idProduct}_delivery">${delivery.name}</label>
-								<label class="add_price_value">
-									$<span><fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${delivery.priceSize + delivery.priceWeight}" /></span>
-								</label>
-							</div>
+							<tr class="block_product_price">
+								<td colspan="2">
+									<input class="add_price_delivery" type="checkbox" value="${delivery.name}" 
+										id="${delivery.name}_${item.key.typeProduct}_${item.key.idProduct}_delivery"
+										<c:if test="${delivery.checked}">checked</c:if>>
+									<label class="add_price_title"
+											 for="${delivery.name}_${item.key.typeProduct}_${item.key.idProduct}_delivery">${delivery.name}</label>
+								</td>
+								<td>
+									<label class="add_price_value">
+										$<span><fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${delivery.priceSize + delivery.priceWeight}" /></span>
+									</label>
+								</td>
+							</tr>
 						</c:if>
 					</c:forEach>	
 					
 					<c:if test="${fn:length(item.key.paints) > 0}">
-						<div class="block_product_price" style="width: inherit;">
-							<hr style="margin-top:5px; margin-bottom:5px;">
-							<label class="add_price_title" style="font-weight:bold;">Краска:</label>
-							<label class="add_price_value"></label>
-						</div>
+						<tr class="block_product_price">
+							<td colspan="3">
+								<label  style="font-weight:bold; float: left; margin:5px;">Краска:</label>
+							</td>
+						</tr>
 					</c:if>
 					
 					<c:forEach items="${item.key.paints}" var="paint">
 						<c:if test="${ paint.price > 0 }">
-							<div class="block_product_price paint_block">
-								<input class="add_price_paint" type="checkbox" value="${paint.name}" 
-									id="${paint.name}_${item.key.typeProduct}_${item.key.idProduct}_paint"
-									<c:if test="${paint.checked}">checked</c:if>>
-								<label class="add_price_title"
-										 for="${paint.name}_${item.key.typeProduct}_${item.key.idProduct}_paint">${paint.name}</label>
-										 
-								<span class="dec_value_paint">
-									<i class="fa fa-minus" aria-hidden="true"></i>
-								</span>
-				
-								<input class="quantity_paint"  value="<c:out value="${paint.quantity}"/>"></input>
-				
-								<span class="inc_value_paint">
-									<i class="fa fa-plus" aria-hidden="true"></i>
-								</span>		 
-										 
-								<label class="add_price_value">
-									$<span><fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${paint.quantity*paint.price}" /></span>
-								</label>
-							</div>
+							<tr class="block_product_price paint_block">
+								<td>
+									<input class="add_price_paint" type="checkbox" value="${paint.name}" 
+										id="${paint.name}_${item.key.typeProduct}_${item.key.idProduct}_paint"
+										<c:if test="${paint.checked}">checked</c:if>>
+									<label class="add_price_title"
+											 for="${paint.name}_${item.key.typeProduct}_${item.key.idProduct}_paint">${paint.name}</label>
+								</td>		
+								<td style="padding: 0px 15px;"> 
+									<span class="dec_value_paint">
+										<i class="fa fa-minus" aria-hidden="true"></i>
+									</span>
+					
+									<input class="quantity_paint"  value="<c:out value="${paint.quantity}"/>"></input>
+					
+									<span class="inc_value_paint">
+										<i class="fa fa-plus" aria-hidden="true"></i>
+									</span>		 
+								</td>
+								<td>		 
+									<label class="add_price_value">
+										$<span><fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${paint.quantity*paint.price}" /></span>
+									</label>
+								</td>
+							</tr>
 						</c:if>
 					</c:forEach>
 					
-				</div>				
+				</table>				
 		
 			</td>
 			<td>
@@ -315,31 +351,64 @@ label.add_price_title{height: auto; max-width: 136px; min-width: 136px; float:le
 </div>
 
 <script type="text/javascript">
+	$(document).ready(function() {
+		
+		$("input.add_price:checked, input.add_price_delivery:checked, input.add_price_paint:checked").each(function(){
+			$(this).parent('td').parent('tr.block_product_price').css('color', '#006080');
+			$(this).parent('td').parent('tr.block_product_price').css('background', '#b5d9f0');
+		});
+		
+	
+	    $("input.quantity").keydown(function (e) {
+	        // Allow: backspace, delete.
+	        if ($.inArray(e.keyCode, [46, 8]) !== -1 ||
+	             // Allow: Ctrl+A
+	            (e.keyCode == 65 && e.ctrlKey === true) ||
+	             // Allow: Ctrl+C
+	            (e.keyCode == 67 && e.ctrlKey === true) ||
+	             // Allow: Ctrl+X
+	            (e.keyCode == 88 && e.ctrlKey === true) ||
+	             // Allow: home, end, left, right
+	            (e.keyCode >= 35 && e.keyCode <= 39)) {
+	                 // let it happen, don't do anything
+	                 return;
+	        }
+	        // Ensure that it is a number and stop the keypress
+	        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105) ) {
+	            e.preventDefault();
+	        }
+	    });
+	});
 
 	$(function(){
 		/* CHECKING ON OPTION PRODUCT */
 		$('.add_price').click(function(){
 			// component with contain price including quantity and option for product in price
-			var price_element =  $(this).parent('.block_product_price').parent('.option_product_car').parent('td').parent('tr').find('td.price').find('span');
+			var price_element = $(this).parent('td').parent('tr.block_product_price').parent('tbody').parent('table')
+				.parent('td.option_product_car').parent('tr').find('td.price').find('span');
 			// price with quatntity and option
 			var price_with_quantity_and_option = new Number(price_element.text().replace(/\s/ig, '').replace(",", "."));
 			
 			// quantity of this product
-			var quantity_numb = new Number($(this).parent('.block_product_price').parent('.option_product_car').parent('td').parent('tr').find('input.quantity').val());
+			var quantity_numb = new Number($(this).parent('td').parent('tr.block_product_price').parent('tbody').parent('table')
+					.parent('td.option_product_car').parent('tr').find('td input.quantity').val());
 			
 			// TYPE and ID of this product to send AJAX request for changing option product on sever
-			var type = $(this).parent('.block_product_price').parent('.option_product_car').parent('td').parent('tr').find('input.type').val();
-			var id = $(this).parent('.block_product_price').parent('.option_product_car').parent('td').parent('tr').find('input.id').val();
+			var type = $(this).parent('td').parent('tr.block_product_price').parent('tbody').parent('table').parent('td.option_product_car')
+				.parent('tr').find('td input.type').val();
+			var id = $(this).parent('td').parent('tr.block_product_price').parent('tbody').parent('table').parent('td.option_product_car')
+				.parent('tr').find('td input.id').val();
 			
 			// VAT coeficient
 			var valueVAT = $('input#НДС_' + type + "_" + id ).prop( "checked" ) ?
-					new Number($('input#НДС_' + type + "_" + id).parent('.block_product_price')
-							.find('label.add_price_value span').text().replace(/\s/ig, '').replace(",", ".")) : new Number(1);				
+					new Number($('input#НДС_' + type + "_" + id).parent('td').parent('tr.block_product_price')
+							.find('td label.add_price_value span').text().replace(/\s/ig, '').replace(",", ".")) : new Number(1);				
 			
 			// for changing style outer block if option checked
-	        var change_style = $(this).parent('.block_product_price');
+	        var change_style = $(this).parent('td').parent('.block_product_price');
 			// value wich will be added or substraction from all price for the product
-			var addPrice = new Number($(this).parent('.block_product_price').find('label.add_price_value span').text().replace(/\s/ig, '').replace(",", "."));
+			var addPrice = new Number($(this).parent('td').parent('tr.block_product_price').find('td label.add_price_value span')
+					.text().replace(/\s/ig, '').replace(",", "."));
 			
 	        if ($(this).prop( "checked" )) {
 	        	/* check if it not checked VAT option; because for VAT option different way to calculate price */
@@ -377,26 +446,31 @@ label.add_price_title{height: auto; max-width: 136px; min-width: 136px; float:le
 		/* checking delivery option */
 		$('.add_price_delivery').click(function(){
 			// component with contain price including quantity and option for product in price
-			var price_element =  $(this).parent('.block_product_price').parent('.option_product_car').parent('td').parent('tr').find('td.price').find('span');
+			var price_element = $(this).parent('td').parent('tr.block_product_price').parent('tbody').parent('table')
+				.parent('td.option_product_car').parent('tr').find('td.price').find('span');
 			// price with quatntity and option
 			var price_with_quantity_and_option = new Number(price_element.text().replace(/\s/ig, '').replace(",", "."));
 			
 			// quantity of this product
-			var quantity_numb = new Number($(this).parent('.block_product_price').parent('.option_product_car').parent('td').parent('tr').find('input.quantity').val());
+			var quantity_numb = new Number($(this).parent('td').parent('tr.block_product_price').parent('tbody').parent('table')
+					.parent('td.option_product_car').parent('tr').find('input.quantity').val());
 			
 			// TYPE and ID of this product to send AJAX request for changing option product on sever
-			var type = $(this).parent('.block_product_price').parent('.option_product_car').parent('td').parent('tr').find('input.type').val();
-			var id = $(this).parent('.block_product_price').parent('.option_product_car').parent('td').parent('tr').find('input.id').val();
+			var type = $(this).parent('td').parent('tr.block_product_price').parent('tbody').parent('table').parent('td.option_product_car')
+				.parent('tr').find('td input.type').val();
+			var id = $(this).parent('td').parent('tr.block_product_price').parent('tbody').parent('table').parent('td.option_product_car')
+				.parent('tr').find('td input.id').val();
 			
 			// VAT coeficient
 			var valueVAT = $('input#НДС_' + type + "_" + id ).prop( "checked" ) ?
-					new Number($('input#НДС_' + type + "_" + id).parent('.block_product_price')
-							.find('label.add_price_value span').text().replace(/\s/ig, '').replace(",", ".")) : new Number(1);				
+					new Number($('input#НДС_' + type + "_" + id).parent('td').parent('tr.block_product_price')
+							.find('td label.add_price_value span').text().replace(/\s/ig, '').replace(",", ".")) : new Number(1);				
 			
 			// for changing style outer block if option checked
-	        var change_style = $(this).parent('.block_product_price');
+			var change_style = $(this).parent('td').parent('.block_product_price');
 			// value wich will be added or substraction from all price for the product
-			var addPrice = new Number($(this).parent('.block_product_price').find('label.add_price_value span').text().replace(/\s/ig, '').replace(",", "."));
+			var addPrice = new Number($(this).parent('td').parent('tr.block_product_price').find('td label.add_price_value span')
+				.text().replace(/\s/ig, '').replace(",", "."));
 			
 	        if ($(this).prop( "checked" )) {
 	            price_element.text(checkPrise( calculatePriceIncludingVAT(price_with_quantity_and_option, addPrice, quantity_numb, valueVAT, true) ));
@@ -423,29 +497,34 @@ label.add_price_title{height: auto; max-width: 136px; min-width: 136px; float:le
 	        
 	    });
 		
-		/* checking delivery option */
+		/* checking paint option */
 		$('.add_price_paint').click(function(){
 			// component with contain price including quantity and option for product in price
-			var price_element =  $(this).parent('.block_product_price').parent('.option_product_car').parent('td').parent('tr').find('td.price').find('span');
+			var price_element = $(this).parent('td').parent('tr.block_product_price').parent('tbody').parent('table')
+				.parent('td.option_product_car').parent('tr').find('td.price').find('span');
 			// price with quatntity and option
 			var price_with_quantity_and_option = new Number(price_element.text().replace(/\s/ig, '').replace(",", "."));
 			
 			// quantity of this product
-			var quantity_numb = new Number($(this).parent('.block_product_price').parent('.option_product_car').parent('td').parent('tr').find('input.quantity').val());
+			var quantity_numb = new Number($(this).parent('td').parent('tr.block_product_price').parent('tbody').parent('table')
+					.parent('td.option_product_car').parent('tr').find('input.quantity').val());
 			
 			// TYPE and ID of this product to send AJAX request for changing option product on sever
-			var type = $(this).parent('.block_product_price').parent('.option_product_car').parent('td').parent('tr').find('input.type').val();
-			var id = $(this).parent('.block_product_price').parent('.option_product_car').parent('td').parent('tr').find('input.id').val();
+			var type = $(this).parent('td').parent('tr.block_product_price').parent('tbody').parent('table').parent('td.option_product_car')
+				.parent('tr').find('td input.type').val();
+			var id = $(this).parent('td').parent('tr.block_product_price').parent('tbody').parent('table').parent('td.option_product_car')
+				.parent('tr').find('td input.id').val();
 			
 			// VAT coeficient
 			var valueVAT = $('input#НДС_' + type + "_" + id ).prop( "checked" ) ?
-					new Number($('input#НДС_' + type + "_" + id).parent('.block_product_price')
-							.find('label.add_price_value span').text().replace(/\s/ig, '').replace(",", ".")) : new Number(1);				
+					new Number($('input#НДС_' + type + "_" + id).parent('td').parent('tr.block_product_price')
+							.find('td label.add_price_value span').text().replace(/\s/ig, '').replace(",", ".")) : new Number(1);				
 			
 			// for changing style outer block if option checked
-	        var change_style = $(this).parent('.block_product_price');
+			var change_style = $(this).parent('td').parent('.block_product_price');
 			// value wich will be added or substraction from all price for the product
-			var addPrice = new Number($(this).parent('.block_product_price').find('label.add_price_value span').text().replace(/\s/ig, '').replace(",", "."));
+			var addPrice = new Number($(this).parent('td').parent('tr.block_product_price').find('td label.add_price_value span')
+				.text().replace(/\s/ig, '').replace(",", "."));
 			
 	        if ($(this).prop( "checked" )) {
 	            price_element.text(checkPrise( calculatePriceIncludingVAT(price_with_quantity_and_option, addPrice, quantity_numb, valueVAT, true) ));
@@ -512,8 +591,8 @@ label.add_price_title{height: auto; max-width: 136px; min-width: 136px; float:le
 		/* get value of ckecked VAT option if it not return '1' */
 		function valueVAT(idVat){
 			if($('input#' + idVat ).prop( "checked" )){
-				return new Number($('input#' + idVat).parent('.block_product_price')
-						.find('label.add_price_value span').text().replace(/\s/ig, '').replace(",", "."));
+				return new Number($('input#' + idVat).parent('td').parent('tr.block_product_price')
+						.find('td label.add_price_value span').text().replace(/\s/ig, '').replace(",", "."));
 			} else {
 				return new Number(1);
 			}
@@ -596,22 +675,24 @@ label.add_price_title{height: auto; max-width: 136px; min-width: 136px; float:le
 		/* BUTTONS FOR INCREASING AND DECREASING QUANTITY ON PAINT */
 		$('.dec_value_paint').click(function(){
 			// current quantity paint
-			var quantity_node = $(this).parent('.block_product_price').find('input.quantity_paint');
+			var quantity_node = $(this).parent('td').find('input.quantity_paint');
 			var quantity = new Number(quantity_node.val());// quantity of paint
 			
 			//all price for current paint
-			var paint_price_node = $(this).parent('.block_product_price').find('label.add_price_value  span');
+			var paint_price_node = $(this).parent('td').parent('.block_product_price').find('td label.add_price_value  span');
 			
 			/* change quantity paint on server */
-			var type = $(this).parent('.block_product_price').parent('.option_product_car').parent('td').parent('tr').find('td input.type').val();
-			var id = $(this).parent('.block_product_price').parent('.option_product_car').parent('td').parent('tr').find('td input.id').val();
-			var namePaint = $(this).parent('.block_product_price').find('input.add_price_paint').val();
+			var type = $(this).parent('td').parent('tr.block_product_price').parent('tbody').parent('table').parent('td.option_product_car')
+				.parent('tr').find('td input.type').val();
+			var id = $(this).parent('td').parent('tr.block_product_price').parent('tbody').parent('table').parent('td.option_product_car')
+				.parent('tr').find('td input.id').val();
+			var namePaint = $(this).parent('td').parent('.block_product_price').find('td input.add_price_paint').val();
 			changeQuantityPaintProductInCart(type, id, namePaint, quantity - 1);	
 			
 			// VAT coeficient
 			var valueVAT = $('input#НДС_' + type + "_" + id ).prop( "checked" ) ?
-					new Number($('input#НДС_' + type + "_" + id).parent('.block_product_price')
-							.find('label.add_price_value span').text().replace(/\s/ig, '').replace(",", ".")) : new Number(1);
+					new Number($('input#НДС_' + type + "_" + id).parent('td').parent('tr.block_product_price')
+							.find('td label.add_price_value span').text().replace(/\s/ig, '').replace(",", ".")) : new Number(1);
 			
 			if (quantity==1) {
 				$(this).css('color','grey');
@@ -634,13 +715,14 @@ label.add_price_title{height: auto; max-width: 136px; min-width: 136px; float:le
 				
 				/* set new price for all products */
 				/* first check if our input checked, after it we will know add price to allPrice or not */
-				if ($(this).parent('.block_product_price').find('input.add_price_paint').prop( "checked" )) {
+				if ($(this).parent('td').parent('.block_product_price').find('td input.add_price_paint').prop( "checked" )) {
 					//quantity of product
-					var quantity_product = new Number($(this).parent('.block_product_price').parent('.option_product_car')
-							.parent('td').parent('tr').find('td input.quantity').val());
+					var quantity_product = new Number($(this).parent('td').parent('tr.block_product_price').parent('tbody').parent('table')
+							.parent('td.option_product_car').parent('tr').find('input.quantity').val());
 					
 					//product for this product with all checked options
-					var price_product_node = $(this).parent('.block_product_price').parent('.option_product_car').parent('td').parent('tr').find('td.price span');
+					var price_product_node = $(this).parent('td').parent('tr.block_product_price').parent('tbody').parent('table')
+						.parent('td.option_product_car').parent('tr').find('td.price span');
 					
 					//set new value to product
 					price_product_node.text(checkPrise( calculatePriceIncludingVAT(new Number(price_product_node.text().replace(/\s/ig, '').replace(",", ".")),
@@ -655,25 +737,27 @@ label.add_price_title{height: auto; max-width: 136px; min-width: 136px; float:le
 		
 		$('.inc_value_paint').click(function(){
 			// current quantity paint
-			var quantity_node = $(this).parent('.block_product_price').find('input.quantity_paint');
+			var quantity_node = $(this).parent('td').find('input.quantity_paint');
 			var quantity = new Number(quantity_node.val());// quantity of paint
 			
 			//all price for current paint
-			var paint_price_node = $(this).parent('.block_product_price').find('label.add_price_value  span');
+			var paint_price_node = $(this).parent('td').parent('.block_product_price').find('td label.add_price_value  span');
 			
 			/* change quantity paint on server */
-			var type = $(this).parent('.block_product_price').parent('.option_product_car').parent('td').parent('tr').find('td input.type').val();
-			var id = $(this).parent('.block_product_price').parent('.option_product_car').parent('td').parent('tr').find('td input.id').val();
-			var namePaint = $(this).parent('.block_product_price').find('input.add_price_paint').val();
+			var type = $(this).parent('td').parent('tr.block_product_price').parent('tbody').parent('table').parent('td.option_product_car')
+				.parent('tr').find('td input.type').val();
+			var id = $(this).parent('td').parent('tr.block_product_price').parent('tbody').parent('table').parent('td.option_product_car')
+				.parent('tr').find('td input.id').val();
+			var namePaint = $(this).parent('td').parent('.block_product_price').find('td input.add_price_paint').val();
 			changeQuantityPaintProductInCart(type, id, namePaint, quantity + 1);	
 			
 			// VAT coeficient
 			var valueVAT = $('input#НДС_' + type + "_" + id ).prop( "checked" ) ?
-					new Number($('input#НДС_' + type + "_" + id).parent('.block_product_price')
-							.find('label.add_price_value span').text().replace(/\s/ig, '').replace(",", ".")) : new Number(1);
+					new Number($('input#НДС_' + type + "_" + id).parent('td').parent('tr.block_product_price')
+							.find('td label.add_price_value span').text().replace(/\s/ig, '').replace(",", ".")) : new Number(1);
 			
 			if(quantity==1){
-				var dec_v = $(this).parent('.block_product_price').find('.dec_value_paint');
+				var dec_v = $(this).parent('td').parent('.block_product_price').find('td .dec_value_paint');
 				dec_v.css('color','#006080');
 				dec_v.hover(function() {
 						$(this).css('color','red');
@@ -693,13 +777,14 @@ label.add_price_title{height: auto; max-width: 136px; min-width: 136px; float:le
 				
 				/* set new price for all products */
 				/* first check if our input checked, after it we will know add price to allPrice or not */
-				if ($(this).parent('.block_product_price').find('input.add_price_paint').prop( "checked" )) {
+				if ($(this).parent('td').parent('.block_product_price').find('td input.add_price_paint').prop( "checked" )) {
 					//quantity of product
-					var quantity_product = new Number($(this).parent('.block_product_price').parent('.option_product_car')
-							.parent('td').parent('tr').find('td input.quantity').val());
+					var quantity_product = new Number($(this).parent('td').parent('tr.block_product_price').parent('tbody').parent('table')
+							.parent('td.option_product_car').parent('tr').find('input.quantity').val());
 					
 					//product for this product with all checked options
-					var price_product_node = $(this).parent('.block_product_price').parent('.option_product_car').parent('td').parent('tr').find('td.price span');
+					var price_product_node = $(this).parent('td').parent('tr.block_product_price').parent('tbody').parent('table')
+						.parent('td.option_product_car').parent('tr').find('td.price span');
 					
 					//set new value to product
 					price_product_node.text(checkPrise( calculatePriceIncludingVAT(new Number(price_product_node.text().replace(/\s/ig, '').replace(",", ".")),
@@ -785,37 +870,6 @@ label.add_price_title{height: auto; max-width: 136px; min-width: 136px; float:le
 		}
 	});
 
-$(document).ready(function() {
-	
-		$("input.add_price:checked, input.add_price_delivery:checked, input.add_price_paint:checked").each(function(){
-			$(this).parent('.block_product_price').css('color', '#006080');
-			$(this).parent('.block_product_price').css('background', '#b5d9f0');
-		});
-		
-	/*	$("input.add_price_delivery:checked").each(function(){
-			$(this).parent('.block_product_price').css('color', '#006080');
-		});*/
-	
-	    $("input.quantity").keydown(function (e) {
-	        // Allow: backspace, delete.
-	        if ($.inArray(e.keyCode, [46, 8]) !== -1 ||
-	             // Allow: Ctrl+A
-	            (e.keyCode == 65 && e.ctrlKey === true) ||
-	             // Allow: Ctrl+C
-	            (e.keyCode == 67 && e.ctrlKey === true) ||
-	             // Allow: Ctrl+X
-	            (e.keyCode == 88 && e.ctrlKey === true) ||
-	             // Allow: home, end, left, right
-	            (e.keyCode >= 35 && e.keyCode <= 39)) {
-	                 // let it happen, don't do anything
-	                 return;
-	        }
-	        // Ensure that it is a number and stop the keypress
-	        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
-	            e.preventDefault();
-	        }
-	    });
-	});
 </script>
 </body>
 </html>
