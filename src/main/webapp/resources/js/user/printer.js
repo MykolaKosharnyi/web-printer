@@ -132,7 +132,7 @@
         $(function() {
         $( ".slider-range-weightPrintMMRange" ).slider({
           range: true,
-          min: 0,
+          min: 1,
           max: 5400,
           create: function () {
       	    $(this).slider( "values", 0, $(this).closest('.check_boxes').find('.text_output').find('.amount-weightPrintMMRangeFrom').val() );

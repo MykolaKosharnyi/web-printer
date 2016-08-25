@@ -27,7 +27,7 @@
            		</p>
 
 				<i class="fa fa-cart-plus add_to_cart" aria-hidden="true" 
-				onclick="addToCart('${type}', ${product.id}, '${product.name}', '${product.prise}', '${product.pathPictures.get(0)}');"></i>
+					onclick="addToCart('${type}', ${product.id}, '${product.name}', '${product.prise}', '${product.pathPictures.get(0)}');"></i>
 			</div>	
 
 			<c:if test="${!empty product.leftSharesLink}">

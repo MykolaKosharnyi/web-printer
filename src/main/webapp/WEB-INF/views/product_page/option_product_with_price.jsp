@@ -19,7 +19,7 @@
 	        	<label class="add_price_title" for="optionRIP_price">Програмное обеспечение</label>
 	        </td>
 	        <td>
-				<label class="add_price_value">$<span><fmt:formatNumber type="number" 
+				<label class="add_price_value">$ <span><fmt:formatNumber type="number" 
 						maxFractionDigits="2" minFractionDigits="2" value="${product.optionRIP}" /></span>
 				</label>
 			</td>
@@ -33,7 +33,7 @@
 	        	<label class="add_price_title" for="optionSNCP_price">СНЧП</label>
 	        </td>
 	        <td>
-				<label class="add_price_value">$<span><fmt:formatNumber type="number" 
+				<label class="add_price_value">$ <span><fmt:formatNumber type="number" 
 						maxFractionDigits="2" minFractionDigits="2" value="${product.optionSNCP}" /></span>
 				</label>
 			</td>
@@ -47,7 +47,7 @@
 	        	<label class="add_price_title" for="optionInstallation_price">Инсталяция</label>
 	        </td>
 	        <td>
-				<label class="add_price_value">$<span><fmt:formatNumber type="number" 
+				<label class="add_price_value">$ <span><fmt:formatNumber type="number" 
 						maxFractionDigits="2" minFractionDigits="2" value="${product.optionInstallation}" /></span>
 				</label>
 			</td>
@@ -61,7 +61,7 @@
 	        	<label class="add_price_title" for="priceAddedOption_price">${product.nameAddedOption}</label>
 	        </td>
 	        <td>
-				<label class="add_price_value">$<span><fmt:formatNumber type="number" 
+				<label class="add_price_value">$ <span><fmt:formatNumber type="number" 
 						maxFractionDigits="2" minFractionDigits="2" value="${product.priceAddedOption}" /></span>
 				</label>
 			</td>
@@ -75,7 +75,7 @@
 	        	<label class="add_price_title" for="priceAddedOption2_price">${product.nameAddedOption2}</label>
 	        </td>
 	        <td>
-				<label class="add_price_value">$<span><fmt:formatNumber type="number" 
+				<label class="add_price_value">$ <span><fmt:formatNumber type="number" 
 						maxFractionDigits="2" minFractionDigits="2" value="${product.priceAddedOption2}" /></span>
 				</label>
 			</td>
@@ -89,7 +89,7 @@
 	        	<label class="add_price_title" for="priceAddedOption3_price">${product.nameAddedOption3}</label>
 	        </td>
 	        <td>
-				<label class="add_price_value">$<span><fmt:formatNumber type="number" 
+				<label class="add_price_value">$ <span><fmt:formatNumber type="number" 
 						maxFractionDigits="2" minFractionDigits="2" value="${product.priceAddedOption3}" /></span>
 				</label>
 			</td>
@@ -103,7 +103,7 @@
 	        	<label class="add_price_title" for="optionGuarantee_price">Гарантия</label>
 	        </td>
 	        <td>
-				<label class="add_price_value">$<span><fmt:formatNumber type="number" 
+				<label class="add_price_value">$ <span><fmt:formatNumber type="number" 
 						maxFractionDigits="2" minFractionDigits="2" value="${product.optionGuarantee}" /></span>
 				</label>
 			</td>
@@ -159,20 +159,11 @@
 						        	<label class="add_price_delivery_title" for="aviaDelivery_price">Авиа</label>
 						        </td>
 						        <td>
-						        	<c:if test="${product.deliveryWidth * product.deliveryHeight * product.deliveryDepth * 
-						        		product.airDeliveryPriceSize > 0}">
-							        	<label class="add_price_delivery_value">С учетом габаритов: $<span><fmt:formatNumber type="number" 
-												maxFractionDigits="2" minFractionDigits="2" value="${product.deliveryWidth * product.deliveryHeight * 
-												product.deliveryDepth * product.airDeliveryPriceSize}" /></span>
-										</label>
-										<br>
-									</c:if>
-									<c:if test="${product.deliveryWeight * product.airDeliveryPriceWeight > 0}">
-										<label class="add_price_delivery_value">С учетом веса: $<span><fmt:formatNumber type="number" 
-												maxFractionDigits="2" minFractionDigits="2" value="${product.deliveryWeight 
-												* product.airDeliveryPriceWeight}" /></span>
-										</label>
-									</c:if>
+							    	<label class="add_price_delivery_value">$ <span><fmt:formatNumber type="number" 
+											maxFractionDigits="2" minFractionDigits="2" value="${product.deliveryWidth * product.deliveryHeight * 
+												product.deliveryDepth * product.airDeliveryPriceSize + 
+												product.deliveryWeight * product.airDeliveryPriceWeight}" /></span>
+									</label>
 								</td>
 							</tr>
 				      	</c:if>
@@ -184,20 +175,11 @@
 						        	<label class="add_price_delivery_title" for="seaDelivery_price">Морем</label>
 						        </td>
 						        <td>
-						        	<c:if test="${product.deliveryWidth * product.deliveryHeight * product.deliveryDepth * 
-						        		product.seaDeliveryPriceSize > 0}">
-							        	<label class="add_price_delivery_value">С учетом габаритов: $<span><fmt:formatNumber type="number" 
-												maxFractionDigits="2" minFractionDigits="2" value="${product.deliveryWidth * product.deliveryHeight * 
-												product.deliveryDepth * product.seaDeliveryPriceSize}" /></span>
-										</label>
-										<br>
-									</c:if>
-									<c:if test="${product.deliveryWeight * product.seaDeliveryPriceWeight > 0}">
-										<label class="add_price_delivery_value">С учетом веса: $<span><fmt:formatNumber type="number" 
-												maxFractionDigits="2" minFractionDigits="2" value="${product.deliveryWeight 
-												* product.seaDeliveryPriceWeight}" /></span>
-										</label>
-									</c:if>
+							    	<label class="add_price_delivery_value">$ <span><fmt:formatNumber type="number" 
+											maxFractionDigits="2" minFractionDigits="2" value="${product.deliveryWidth * product.deliveryHeight * 
+												product.deliveryDepth * product.seaDeliveryPriceSize + 
+												product.deliveryWeight * product.seaDeliveryPriceWeight}" /></span>
+									</label>
 								</td>
 							</tr>
 				      	</c:if>
@@ -209,20 +191,11 @@
 						        	<label class="add_price_delivery_title" for="ukraineDelivery_price">По Украине</label>
 						        </td>
 						        <td>
-						        	<c:if test="${product.deliveryWidth * product.deliveryHeight * product.deliveryDepth * 
-						        		product.ukraineDeliveryPriceSize > 0}">
-							        	<label class="add_price_delivery_value">С учетом габаритов: $<span><fmt:formatNumber type="number" 
-												maxFractionDigits="2" minFractionDigits="2" value="${product.deliveryWidth * product.deliveryHeight * 
-												product.deliveryDepth * product.ukraineDeliveryPriceSize}" /></span>
-										</label>
-										<br>
-									</c:if>
-									<c:if test="${product.deliveryWeight * product.ukraineDeliveryPriceWeight > 0}">
-										<label class="add_price_delivery_value">С учетом веса: $<span><fmt:formatNumber type="number" 
-												maxFractionDigits="2" minFractionDigits="2" value="${product.deliveryWeight 
-												* product.ukraineDeliveryPriceWeight}" /></span>
-										</label>
-									</c:if>
+							    	<label class="add_price_delivery_value">$ <span><fmt:formatNumber type="number" 
+											maxFractionDigits="2" minFractionDigits="2" value="${product.deliveryWidth * product.deliveryHeight * 
+												product.deliveryDepth * product.ukraineDeliveryPriceSize + 
+												product.deliveryWeight * product.ukraineDeliveryPriceWeight}" /></span>
+									</label>
 								</td>
 							</tr>
 				      	</c:if>
@@ -234,20 +207,11 @@
 						        	<label class="add_price_delivery_title" for="kyivDelivery_price">По Киеву</label>
 						        </td>
 						        <td>
-						        	<c:if test="${product.deliveryWidth * product.deliveryHeight * product.deliveryDepth * 
-						        		product.kyivDeliveryPriceSize > 0}">
-							        	<label class="add_price_delivery_value">С учетом габаритов: $<span><fmt:formatNumber type="number" 
-												maxFractionDigits="2" minFractionDigits="2" value="${product.deliveryWidth * product.deliveryHeight * 
-												product.deliveryDepth * product.kyivDeliveryPriceSize}" /></span>
-										</label>
-										<br>
-									</c:if>
-									<c:if test="${product.deliveryWeight * product.kyivDeliveryPriceWeight > 0}">
-										<label class="add_price_delivery_value">С учетом веса: $<span><fmt:formatNumber type="number" 
-												maxFractionDigits="2" minFractionDigits="2" value="${product.deliveryWeight 
-												* product.kyivDeliveryPriceWeight}" /></span>
-										</label>
-									</c:if>
+							    	<label class="add_price_delivery_value">$ <span><fmt:formatNumber type="number" 
+											maxFractionDigits="2" minFractionDigits="2" value="${product.deliveryWidth * product.deliveryHeight * 
+												product.deliveryDepth * product.kyivDeliveryPriceSize + 
+												product.deliveryWeight * product.kyivDeliveryPriceWeight}" /></span>
+									</label>
 								</td>
 							</tr>
 				      	</c:if>
@@ -260,20 +224,11 @@
 						        	<label class="add_price_delivery_title" for="variant1Delivery_price">${product.variant1DeliveryName}</label>
 						        </td>
 						        <td>
-						        	<c:if test="${product.deliveryWidth * product.deliveryHeight * product.deliveryDepth * 
-						        		product.variant1DeliveryPriceSize > 0}">
-							        	<label class="add_price_delivery_value">С учетом габаритов: $<span><fmt:formatNumber type="number" 
-												maxFractionDigits="2" minFractionDigits="2" value="${product.deliveryWidth * product.deliveryHeight * 
-												product.deliveryDepth * product.variant1DeliveryPriceSize}" /></span>
-										</label>
-										<br>
-									</c:if>
-									<c:if test="${product.deliveryWeight * product.variant1DeliveryPriceWeight > 0}">
-										<label class="add_price_delivery_value">С учетом веса: $<span><fmt:formatNumber type="number" 
-												maxFractionDigits="2" minFractionDigits="2" value="${product.deliveryWeight 
-												* product.variant1DeliveryPriceWeight}" /></span>
-										</label>
-									</c:if>
+							    	<label class="add_price_delivery_value">$ <span><fmt:formatNumber type="number" 
+											maxFractionDigits="2" minFractionDigits="2" value="${product.deliveryWidth * product.deliveryHeight * 
+												product.deliveryDepth * product.variant1DeliveryPriceSize + 
+												product.deliveryWeight * product.variant1DeliveryPriceWeight}" /></span>
+									</label>
 								</td>
 							</tr>
 				      	</c:if>
@@ -286,20 +241,11 @@
 						        	<label class="add_price_delivery_title" for="variant2Delivery_price">${product.variant2DeliveryName}</label>
 						        </td>
 						        <td>
-						        	<c:if test="${product.deliveryWidth * product.deliveryHeight * product.deliveryDepth * 
-						        		product.variant2DeliveryPriceSize > 0}">
-							        	<label class="add_price_delivery_value">С учетом габаритов: $<span><fmt:formatNumber type="number" 
-												maxFractionDigits="2" minFractionDigits="2" value="${product.deliveryWidth * product.deliveryHeight * 
-												product.deliveryDepth * product.variant2DeliveryPriceSize}" /></span>
-										</label>
-										<br>
-									</c:if>
-									<c:if test="${product.deliveryWeight * product.variant2DeliveryPriceWeight > 0}">
-										<label class="add_price_delivery_value">С учетом веса: $<span><fmt:formatNumber type="number" 
-												maxFractionDigits="2" minFractionDigits="2" value="${product.deliveryWeight 
-												* product.variant2DeliveryPriceWeight}" /></span>
-										</label>
-									</c:if>
+							    	<label class="add_price_delivery_value">$ <span><fmt:formatNumber type="number" 
+											maxFractionDigits="2" minFractionDigits="2" value="${product.deliveryWidth * product.deliveryHeight * 
+												product.deliveryDepth * product.variant2DeliveryPriceSize + 
+												product.deliveryWeight * product.variant2DeliveryPriceWeight}" /></span>
+									</label>
 								</td>
 							</tr>
 				      	</c:if>
@@ -312,20 +258,11 @@
 						        	<label class="add_price_delivery_title" for="variant3Delivery_price">${product.variant3DeliveryName}</label>
 						        </td>
 						        <td>
-						        	<c:if test="${product.deliveryWidth * product.deliveryHeight * product.deliveryDepth * 
-						        		product.variant3DeliveryPriceSize > 0}">
-							        	<label class="add_price_delivery_value">С учетом габаритов: $<span><fmt:formatNumber type="number" 
-												maxFractionDigits="2" minFractionDigits="2" value="${product.deliveryWidth * product.deliveryHeight * 
-												product.deliveryDepth * product.variant3DeliveryPriceSize}" /></span>
-										</label>
-										<br>
-									</c:if>
-									<c:if test="${product.deliveryWeight * product.variant3DeliveryPriceWeight > 0}">
-										<label class="add_price_delivery_value">С учетом веса: $<span><fmt:formatNumber type="number" 
-												maxFractionDigits="2" minFractionDigits="2" value="${product.deliveryWeight 
-												* product.variant3DeliveryPriceWeight}" /></span>
-										</label>
-									</c:if>
+							    	<label class="add_price_delivery_value">$ <span><fmt:formatNumber type="number" 
+											maxFractionDigits="2" minFractionDigits="2" value="${product.deliveryWidth * product.deliveryHeight * 
+												product.deliveryDepth * product.variant3DeliveryPriceSize + 
+												product.deliveryWeight * product.variant3DeliveryPriceWeight}" /></span>
+									</label>
 								</td>
 							</tr>
 				      	</c:if>
@@ -807,7 +744,7 @@
 	<tr class="output_result_of_option">
 		<td style="vertical-align: middle;">Общая стоимость:</td>
         <td style="vertical-align: middle;">
-        	<label class="total_price">$<span><fmt:formatNumber type="number" 
+        	<label class="total_price">$ <span><fmt:formatNumber type="number" 
 			   	maxFractionDigits="2" minFractionDigits="2" value="${product.prise}" /></span>
 			</label>
         </td>

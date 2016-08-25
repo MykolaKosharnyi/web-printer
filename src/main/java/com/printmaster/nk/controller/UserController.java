@@ -27,7 +27,7 @@ public class UserController {
 //	@Autowired
 //    private MailSender mailSender;
 	
-/*	@RequestMapping(value="/ask/product", method = RequestMethod.POST,consumes="application/json",
+/*	@RequestMapping(value="/ask/product", method = RequestMethod.POST, consumes="application/json",
 			headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void askProductPage(HttpServletRequest request) {
 		// takes input from e-mail form

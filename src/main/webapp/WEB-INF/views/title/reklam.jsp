@@ -22,11 +22,13 @@
         				outerDiv.addClass("slide-item").append($('<a/>').addClass("slider_image")
         								 .attr("href", "/" + value.type + "/" + value.id)
         								 .append($('<div/>').addClass("outer_a_img").append($('<img/>').attr("src", "/images/" + value.type + "s/" + value.id+ "/" +value.pathToPicture))))				 					 
-                		.append($('<a/>').attr("href", "/" + value.type + "/" + value.id).addClass("slide-title").text(value.nameProduct))
-                		.append(slidePrice)
-                		.append($('<i/>').addClass("fa fa-cart-plus add_to_cart").click(function(){
-        			                			addToCart(value.type, value.id, value.nameProduct, value.priceProduct+'', value.pathToPicture);
-        			                		}))
+                		.append($('<div/>').addClass("block_title_and_price")
+                				.append($('<a/>').attr("href", "/" + value.type + "/" + value.id).addClass("slide-title").text(value.nameProduct))
+                        		.append(slidePrice)
+                        		.append($('<a/>').addClass("reklam_add_to_cart").text("Добавить в корзину").click(function(){
+		                			addToCart(value.type, value.id, value.nameProduct, value.priceProduct+'', value.pathToPicture);
+		                		})))
+                		
         	
         	
         	if(value.leftSharesLink!=null && value.leftSharesLink!=""){
