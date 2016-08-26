@@ -127,7 +127,26 @@
 			<input type="text" name="name" placeholder="Ваше имя..." required />
 			<input type="text" name="phone" placeholder="Ваше телефон..." required />
 			<button class="button" type="submit">Уточнить</button>
+			<button class="button button-close">Закрыть</button>
 		</form>
 	</div>
+	
+	<%-- callback on all site --%>
+	<div class="hidden">
+		<form id="cart_modal" class="pop_form">
+			<h5 style="max-width: 300px;">Добавленные товары в корзыну</h5>
+
+			<button class="button button-close">Вернуться к просмотру товара</button>
+		</form>
+	</div>
+	
+	<script type="text/javascript">
+	
+	$( '.button-close' ).click( function() {
+        $( '.fancybox-overlay', window.parent.document ).click();
+        return false;
+    });
+	
+	</script>
 </body>
 </html>

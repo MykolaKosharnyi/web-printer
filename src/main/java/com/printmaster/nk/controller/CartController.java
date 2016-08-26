@@ -72,7 +72,7 @@ public class CartController {
 	@RequestMapping(value = "/cart/add/{typeProduct}/{productId}/{productName}", 
 			method = RequestMethod.POST,consumes="application/json",
 			headers = "content-type=application/x-www-form-urlencoded")
-	public @ResponseBody void addToCart(
+	public Cart/* @ResponseBody*/ addToCart(
 			@PathVariable("typeProduct") String typeProduct,
 			@PathVariable("productId") long productId,
 			@PathVariable("productName") String productName,
@@ -92,6 +92,7 @@ public class CartController {
 		cart.addProduct(productCart , 1);
 		logger.debug("Adding product to cart " + productCart );
 		//return "redirect:" + referedForm;
+		return cart;
 	}
 	
 	private ArrayList<Option> addOption(String productType, long productId, List<String> checkedOption){

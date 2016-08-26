@@ -504,6 +504,10 @@ $(document).ready(function() {
 			  data: JSON.stringify(dataToSend),
               dataType: "json"
 			  });	
+		
+			var cartModal = $("#cart_modal");
+			cartModal.prepend($('<p/>').text('Everething is okay!'));
+			cartModal.fancybox().trigger('click');
 		}
 	
 	

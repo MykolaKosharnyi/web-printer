@@ -8,171 +8,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Корзина</title>
-<style type="text/css">
-
-#cart{
-	width: auto;
-	font: 15px "RobotoRegular";
-}
-
-#cart h2 {
-	width: 200px;
-	hidth: auto;
-	margin: 0 auto;
-	color: #006080;
-}
-
-#cart table{
-	position: relative;
-	height: auto;
-	width: 100%;
-	/*font: 1.3em sans-serif;*/
-	top: 0;
-	text-align: center;
-	/*border: none;*/
-	margin-bottom: 15px;
-}
-
-.table > thead:first-child > tr:first-child > th{
-	text-align: center;
-	vertical-align: middle;
-}
-
-.table-bordered > tbody > tr > td{
-	vertical-align: middle;
-	padding: 5px;
-}
-
-#cart table td{
-	height: auto;
-	width: auto;
-
-	border: 1px #E7EAED solid;
-}
-
-#cart table td.price{
-	min-width: 117px;
-}
-
-#cart table td.delte_item i {
-	color:#006080;
-	cursor: pointer;
-}
-
-#cart table td.delte_item i:hover {
-	color:red;
-}
-
-#cart table td:first-child{
-	padding:1px;
-	height:auto; 
-	width:160px;
-}
-
-#cart table tr:last-child td{
-	border: none;
-	font-weight: bold;
-	height:auto; 
-	width:auto;
-}
-
-#cart .option_product_car table tr:last-child td{
-	border: 1px #E7EAED solid;
-	font-weight: unset;
-}
-
-#cart table td:last-child{
-	font-size: 35px;
-}
-
-#cart .option_product_car table td:last-child{
-	font-size: 15px;
-}
-
-#cart .option_product_car table tr td{
-	vertical-align: middle;
-	/*border: none;*/
-}
-
-#cart .option_product_car table tr td:last-child{
-	/*text-align: left;*/
-}
-
-#cart .option_product_car table{
-	margin-bottom: 0px;
-}
-
-.dec_value,
-.inc_value,
-.dec_value_paint,
-.inc_value_paint{
-	color: #006080;
-	cursor: pointer;
-}
-
-.dec_value:hover,
-.inc_value:hover,
-.dec_value_paint:hover,
-.inc_value_paint:hover{
-	color: red;
-}
-
-input.quantity,
-input.quantity_paint{
-	text-align: center;
-	width: 30px;
-}
-
-#cart .option_product_car label{
-	margin-bottom: 0px;
-	font-weight: unset;
-	/*min-width: 240px;*/
-}
-
-
-.option_product_car label.total_ptice_title{min-width: 200px;}
-label.add_price_title{height: auto; float:left; text-align: left; cursor: pointer;}
-
-.paint_block label.add_price_title{max-width: 70px; min-width: 70px;}
-
-.option_product_car label.total_ptice_title,
-.option_product_car label.total_price{
-	/*min-width: 155px;*/
-	margin:10px 0px;
-	text-align: right;
-}
-
-.option_product_car .block_product_price input,
-.option_product_car .block_product_price label{
-	top: 0px;
-	position: relative;
-}
-
-
-.option_product_car input[type="checkbox"].add_price,
-.option_product_car input[type="checkbox"].add_price_delivery,
-.option_product_car input[type="checkbox"].add_price_paint{
-	margin-left: 5px;
-	margin-right: 5px;
-	float: left;
-	cursor: pointer;
-}
-
-.option_product_car .option_description{
-	height: auto;
-	width: 215px;
-}
-
-.option_product_car label.add_price_value{
-	min-width: 60px;
-}
-
-.option_product_car label.total_ptice_title{
-	margin-left: 25px;
-	padding: 5px;
-}
-
-</style>
 </head>
 <body>
 <div id="cart">
@@ -192,9 +27,9 @@ label.add_price_title{height: auto; float:left; text-align: left; cursor: pointe
 		<tr>
 			<td><img style="height:auto; width:100%;" src="<%=request.getContextPath()%>/${item.key.picturePath}" alt=""></td>
 			<td style="max-width: 235px;"><a style="color:black;" href="<c:url value='/${item.key.typeProduct}/${item.key.idProduct}' />">${item.key.name }</a></td>
-			<td style="padding: 0px;" class="option_product_car">
+			<td style="padding: 0px; width:350px;" class="option_product_car">
 				
-				<table class="table table-hover">
+				<table class="table table-hover" style="width:350px;">
 				
 					<c:forEach items="${item.key.options}" var="option">
 						<c:if test="${option.price > 0.01}">
@@ -237,9 +72,10 @@ label.add_price_title{height: auto; float:left; text-align: left; cursor: pointe
 					</c:forEach>		
 					
 					<c:if test="${fn:length(item.key.deliveries) > 0}">
-						<tr class="block_product_price">
+						<tr class="delivery_options">
 							<td colspan="3">
-								<label style="font-weight:bold; float: left; margin:5px;">Доставка:</label>
+								<i class="fa fa-arrow-right"></i>
+								<p class="delivery_options_title">Доставка</p>
 							</td>
 						</tr>
 					</c:if>
@@ -247,7 +83,7 @@ label.add_price_title{height: auto; float:left; text-align: left; cursor: pointe
 					<c:forEach items="${item.key.deliveries}" var="delivery">
 						<c:if test="${((delivery.priceSize > 0) || (delivery.priceWeight > 0)) &&
 									((delivery.name!=null) && (delivery.name!=''))}">
-							<tr class="block_product_price">
+							<tr class="block_product_price delivery_options_body">
 								<td colspan="2">
 									<input class="add_price_delivery" type="checkbox" value="${delivery.name}" 
 										id="${delivery.name}_${item.key.typeProduct}_${item.key.idProduct}_delivery"
@@ -265,16 +101,17 @@ label.add_price_title{height: auto; float:left; text-align: left; cursor: pointe
 					</c:forEach>	
 					
 					<c:if test="${fn:length(item.key.paints) > 0}">
-						<tr class="block_product_price">
+						<tr class="paint_options">
 							<td colspan="3">
-								<label  style="font-weight:bold; float: left; margin:5px;">Краска:</label>
+								<i class="fa fa-arrow-right"></i>
+								<p class="paint_options_title">Краска</p>
 							</td>
 						</tr>
 					</c:if>
 					
 					<c:forEach items="${item.key.paints}" var="paint">
 						<c:if test="${ paint.price > 0 }">
-							<tr class="block_product_price paint_block">
+							<tr class="block_product_price paint_options_body">
 								<td>
 									<input class="add_price_paint" type="checkbox" value="${paint.name}" 
 										id="${paint.name}_${item.key.typeProduct}_${item.key.idProduct}_paint"
@@ -866,6 +703,42 @@ label.add_price_title{height: auto; float:left; text-align: left; cursor: pointe
 				  url: "/cart/change_quantity_paint/" + typeProduct + "/" + idProduct + "/" + namePaint + "/" + quantity,
 				  contentType: "application/json; charset=utf-8",
 	              dataType: "json"
+			});
+		}
+	});
+	
+	/* for opening delivery option on product page */
+	$('.delivery_options').click(function(){
+		var icon = $(this).find('i');
+		var body = $(this).parent('tbody').find('.delivery_options_body');		
+		
+		if(icon.hasClass( 'fa-arrow-right' )){
+			icon.removeClass('fa fa-arrow-right').addClass('fa fa-arrow-down');
+			body.each(function(i){	
+				$(this).show(i*500);
+			});
+		} else {
+			icon.removeClass('fa fa-arrow-down').addClass('fa fa-arrow-right');
+			body.each(function(i){	
+				$(this).hide(i*100);
+			});
+		}
+	});
+	
+	/* for opening paint option on product page */
+	$('.paint_options').click(function(){
+		var icon = $(this).find('i');
+		var body = $(this).parent('tbody').find('.paint_options_body');		
+		
+		if(icon.hasClass( 'fa-arrow-right' )){
+			icon.removeClass('fa fa-arrow-right').addClass('fa fa-arrow-down');
+			body.each(function(i){	
+				$(this).show(i*500);
+			});
+		} else {
+			icon.removeClass('fa fa-arrow-down').addClass('fa fa-arrow-right');
+			body.each(function(i){	
+				$(this).hide(i*100);
 			});
 		}
 	});
