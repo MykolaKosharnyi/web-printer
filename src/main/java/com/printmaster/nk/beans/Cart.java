@@ -1,5 +1,6 @@
 package com.printmaster.nk.beans;
 
+import java.io.Serializable;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
@@ -13,9 +14,11 @@ import com.printmaster.nk.model.Option;
 
 @Component
 @Scope(value=WebApplicationContext.SCOPE_SESSION,
-		proxyMode  = ScopedProxyMode.TARGET_CLASS)
-public class Cart {
+		proxyMode = ScopedProxyMode.TARGET_CLASS)
+public class Cart implements Serializable{
 
+	private static final long serialVersionUID = 3085887569799299321L;
+	
 	private Map<ProductCart, Integer> contents = new LinkedHashMap<ProductCart, Integer>();
 	
 	public Map<ProductCart, Integer> getContents(){

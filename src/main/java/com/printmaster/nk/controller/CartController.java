@@ -69,10 +69,8 @@ public class CartController {
 	@Autowired
 	private UseWithProductService useWithProductService;
 	
-	@RequestMapping(value = "/cart/add/{typeProduct}/{productId}/{productName}", 
-			method = RequestMethod.POST,consumes="application/json",
-			headers = "content-type=application/x-www-form-urlencoded")
-	public Cart/* @ResponseBody*/ addToCart(
+	@RequestMapping(value = "/cart/add/{typeProduct}/{productId}/{productName}", method = RequestMethod.POST)
+	public @ResponseBody Cart addToCart(
 			@PathVariable("typeProduct") String typeProduct,
 			@PathVariable("productId") long productId,
 			@PathVariable("productName") String productName,

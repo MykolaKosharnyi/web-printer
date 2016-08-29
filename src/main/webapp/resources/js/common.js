@@ -497,17 +497,50 @@ $(document).ready(function() {
 				'mapOfPaint':{}
 		};
 		
+		var cartModal = $("#cart");
+		
 		$.ajax({
 			  type: 'POST',
 			  url: "/cart/add/" + typeProduct + "/" + idProduct + "/" + name,
 			  contentType: "application/json; charset=utf-8",
 			  data: JSON.stringify(dataToSend),
               dataType: "json"
-			  });	
-		
-			var cartModal = $("#cart_modal");
-			cartModal.prepend($('<p/>').text('Everething is okay!'));
-			cartModal.fancybox().trigger('click');
+		}).done(function( cart ){
+			
+			  var headTable = $('<table/>').addClass('table table-hover table-striped table-bordered table_option')
+			  							.append($('<thead/>')
+			  									.append($('<th/>').text('Изображение'))
+			  									.append($('<th/>').text('Наименование товара'))
+			  									.append($('<th/>').text('Опции'))
+			  									.append($('<th/>').text('Количество'))
+			  									.append($('<th/>').text('Цена'))
+			  							);
+			 
+			  $(cart.contents).each(function(item, i) {
+				  headTable.append($('<tr/>')
+						  .append($('<td/>').append($('<img/>').attr("src", item.key.picturePath).css('height','auto').css('width','100%')))
+						  .append($('<td/>').css( "max-width", "300px" ).append($('<a/>').css( "color", "black" )
+								  .attr("href", '/' + item.key.typeProduct + '/' +item.key.idProduct)
+								  .text(item.key.name)))
+						  .append($('<td/>').css("padding","0px").css("width","350px").addClass('option_product_car'))
+						  .append($('<td/>'))
+						  .append($('<td/>'))
+						  .append($('<td/>')))
+			  });
+			  
+			  
+			  	cartModal.empty();
+				cartModal.append($('<h5/>').text('Добавленные товары в корзыну').css( "max-width", "300px" ));
+				cartModal.append(headTable);
+				cartModal.append($('<button/>').addClass('button button-close').html('Вернуться к просмотру товара').click( function() {
+			        $( '.fancybox-overlay', window.parent.document ).click();
+			        return false;
+			    }));
+				
+				cartModal.fancybox().trigger('click');
+		});	
+
+			
 		}
 	
 	
