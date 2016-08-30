@@ -673,15 +673,16 @@
 				  contentType: "application/json; charset=utf-8",
 	              dataType: "json"
 				  });
-			
+	
 			/* delete on user side. Deleting without refreshing page */
 			$(this).parent('td').parent('tr').hide('slow', function(){ 
+				var cartBody = $(this).parent('tbody');
 				$(this).remove(); 
 				
 				/* set new price for all products */
 				totalPrice();
 				
-				($( ".cart table tbody tr" ).length == 1) ? $( "div.cart" ).html("").append("Корзина пуста."): "";
+				(cartBody.find( "tr" ).length == 1) ? cartBody.parent('table.table_option').parent('form').empty().append("Корзина пуста."): "";
 	
 			});
         });

@@ -497,9 +497,23 @@ $(document).ready(function() {
 				'mapOfPaint':{}
 		};
 		
-		var cartModal = $("#cart");
+		$(".cart-modal-window").click();
+		
 		
 		$.ajax({
+			  type: 'POST',
+			  url: "/cart/add/" + typeProduct + "/" + idProduct + "/" + name,
+			  data: JSON.stringify(dataToSend),
+			  beforeSend: function(xhr) {
+		            xhr.setRequestHeader("Accept", "application/json");
+		            xhr.setRequestHeader("Content-Type", "application/json");
+		        }
+		});
+		
+		
+		
+		
+/*		$.ajax({
 			  type: 'POST',
 			  url: "/cart/add/" + typeProduct + "/" + idProduct + "/" + name,
 			  contentType: "application/json; charset=utf-8",
@@ -538,7 +552,7 @@ $(document).ready(function() {
 			    }));
 				
 				cartModal.fancybox().trigger('click');
-		});	
+		});	*/
 
 			
 		}

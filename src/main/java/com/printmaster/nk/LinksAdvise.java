@@ -13,6 +13,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
@@ -20,11 +21,21 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+import com.printmaster.nk.beans.Cart;
+
 @ControllerAdvice
 public class LinksAdvise {
 	private Logger logger = Logger.getLogger(LinksAdvise.class);
 
 	private String path = "/var/www/localhost" + File.separator + "links.json";
+
+	@Autowired
+	Cart cart;
+	
+	@ModelAttribute
+    public void cart(Model model) {
+		model.addAttribute("cart", cart);
+    }
 	
 	@ModelAttribute
     public void addLinksInLeftMenu(Model model) {

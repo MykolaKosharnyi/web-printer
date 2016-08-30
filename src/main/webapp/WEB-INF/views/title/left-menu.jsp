@@ -360,3 +360,8 @@
                </li>
                
            </ul>
+           
+   <!-- Button trigger modal -->
+<button class="btn btn-primary btn-lg cart-modal-window" data-toggle="modal" data-target="#myModal">
+  Корзина
+</button>        

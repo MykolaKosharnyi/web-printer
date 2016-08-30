@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -69,7 +70,8 @@ public class CartController {
 	@Autowired
 	private UseWithProductService useWithProductService;
 	
-	@RequestMapping(value = "/cart/add/{typeProduct}/{productId}/{productName}", method = RequestMethod.POST)
+	@RequestMapping(value = "/cart/add/{typeProduct}/{productId}/{productName}", method = RequestMethod.POST, 
+            produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody Cart addToCart(
 			@PathVariable("typeProduct") String typeProduct,
 			@PathVariable("productId") long productId,
