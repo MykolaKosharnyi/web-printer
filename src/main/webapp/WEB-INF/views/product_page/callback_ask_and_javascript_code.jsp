@@ -4,8 +4,8 @@
 	function getCheckedOption(){
 		var checkedArray = new Array();
 		
-		if($("input.add_price:checked").length > 0){
-			$("input.add_price:checked").each(function(){
+		if($(".option_product_with_price input.add_price:checked").length > 0){
+			$(".option_product_with_price input.add_price:checked").each(function(){
 				checkedArray.push($(this).val());
 			});
 		}
@@ -15,8 +15,8 @@
 	function getCheckedDelivery(){
 		var checkedArray = new Array();
 		
-		if($("input.add_price_delivery:checked").length > 0){
-			$("input.add_price_delivery:checked").each(function(){
+		if($(".option_product_with_price input.add_price_delivery:checked").length > 0){
+			$(".option_product_with_price input.add_price_delivery:checked").each(function(){
 				checkedArray.push($(this).val());
 			});
 		}
@@ -26,8 +26,8 @@
 	function getCheckedPaint(){
 		var checkedMap = {};
 		
-		if($("input.add_price_paint:checked").length > 0){
-			$("input.add_price_paint:checked").each(function(){	
+		if($(".option_product_with_price input.add_price_paint:checked").length > 0){
+			$(".option_product_with_price input.add_price_paint:checked").each(function(){	
 				var key = "" + $(this).val();
 				checkedMap[key] = new Number($(this).parent('td').parent('.block_product_price').find('td input.quantity_paint').val());
 			});
@@ -45,7 +45,7 @@
 		var currentPrice = new Number(price_element.text().replace(/\s/ig, '').replace(",", "."));
 		
 		var valueVAT = 1;
-		$("input.add_price:checked").each(function(){
+		$(".option_product_with_price input.add_price:checked").each(function(){
 			//add to price or if it is VAT coeficient
 			var addPrice = new Number($(this).parent('td').parent('.block_product_price').find('td label.add_price_value span').text().replace(/\s/ig, '').replace(",", "."));
 			if($(this).val()!="НДС"){
@@ -58,7 +58,7 @@
 			$(this).parent('td').parent('.block_product_price').css('background', '#2aabd2');
 		});
 		
-		$("input.add_price_delivery:checked").each(function(){
+		$(".option_product_with_price input.add_price_delivery:checked").each(function(){
 			var addPrice = new Number(0);
 			$(this).parent('td').parent('.block_product_price').find('td label.add_price_delivery_value span').each(function(){
 				addPrice += new Number($(this).text().replace(/\s/ig, '').replace(",", "."));
@@ -72,7 +72,7 @@
 
 		});
 		
-		$("input.add_price_paint").each(function(){
+		$(".option_product_with_price input.add_price_paint").each(function(){
 			
 			var priceForOne = new Number($(this).parent('td').parent('.block_product_price')
 					.find('td.paint_price label span').text().replace(/\s/ig, '').replace(",", "."));
@@ -96,7 +96,7 @@
 	});
 	
 	$(function(){
-		$('.add_price').click(function(){
+		$('.option_product_with_price .add_price').click(function(){
 			// from wich we taken current price and after add/sub operation insert again value
             var price_element = $(this).parent('td').parent('.block_product_price').parent('tbody').parent('table.table_price_option')
             	.parent('.option_product_with_price').find('table.table_price_option tbody tr td label.total_price span');
@@ -133,7 +133,7 @@
             
         });
 		
-		$('.add_price_delivery').click(function(){
+		$('.option_product_with_price .add_price_delivery').click(function(){
 			// from wich we taken current price and after add/sub operation insert again value
             var price_element = $(this).parent('td').parent('.block_product_price').parent('tbody').parent('table.table_delivery_options')
             	.parent('.delivery_options_body').parent('td').parent('tr.delivery').parent('tbody').parent('table.table_price_option')
@@ -165,7 +165,7 @@
             
         });
 		
-		$('.add_price_paint').click(function(){
+		$('.option_product_with_price .add_price_paint').click(function(){
             // from wich we taken current price for all product and after add/sub operation insert again value
         	var price_element = $(this).parent('td').parent('.block_product_price').parent('tbody').parent('table.table_paint_options')
         		.parent('.paint_options_body').parent('td').parent('tr.paint').parent('tbody').parent('table.table_price_option')
@@ -211,7 +211,7 @@
 		}
 
 		/* for opening delivery option on product page */
-		$('.delivery_options').click(function(){
+		$('.option_product_with_price .delivery_options').click(function(){
 			var icon = $(this).find('i');
 			var body = $(this).parent('td').find('.delivery_options_body');	
 			
@@ -225,7 +225,7 @@
 		});
 		
 		/* for opening paint option on product page */
-		$('.paint_options').click(function(){
+		$('.option_product_with_price .paint_options').click(function(){
 			var icon = $(this).find('i');
 			var body = $(this).parent('td').find('.paint_options_body');	
 			
@@ -239,7 +239,7 @@
 		});
 		
 		/* BUTTONS FOR INCREASING AND DECREASING QUANTITY ON PAINT */
-		$('.dec_value_paint').click(function(){
+		$('.option_product_with_price .dec_value_paint').click(function(){
 			// from wich we taken current price for all product and after add/sub operation insert again value
 	        var price_element = $(this).parent('td').parent('.block_product_price').parent('tbody').parent('table.table_paint_options')
 	        	.parent('.paint_options_body').parent('td').parent('tr.paint').parent('tbody').parent('table.table_price_option')
@@ -277,7 +277,7 @@
 				
 	    });
 		
-		$('.inc_value_paint').click(function(){
+		$('.option_product_with_price .inc_value_paint').click(function(){
 			// from wich we taken current price for all product and after add/sub operation insert again value
 	        var price_element = $(this).parent('td').parent('.block_product_price').parent('tbody').parent('table.table_paint_options')
 	        	.parent('.paint_options_body').parent('td').parent('tr.paint').parent('tbody').parent('table.table_price_option')
