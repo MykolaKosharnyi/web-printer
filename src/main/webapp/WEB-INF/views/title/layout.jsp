@@ -232,7 +232,7 @@
 					<i class="fa fa-minus" aria-hidden="true"></i>
 				</span>
 
-				<input class="quantity"  value="<c:out value="${item.value }"/>"></input>
+				<input class="quantity quantity_${item.key.typeProduct}_${item.key.idProduct}"  value="<c:out value="${item.value }"/>"></input>
 
 				<span class="inc_value">
 					<i class="fa fa-plus" aria-hidden="true"></i>
@@ -262,7 +262,9 @@
 	</form>
 	</c:if>
 	<c:if test="${empty cart.contents}">
-		Корзина пуста, Вы еще не добавляли товары в корзину.
+		<form action="cart/pleaceOrder" method="post">
+			Корзина пуста, Вы еще не добавляли товары в корзину.
+		</form>
 	</c:if>
 	
 </div>
@@ -270,7 +272,9 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Продолжить просмотр товара</button>
-                <button type="button" class="btn btn-primary"><spring:message code="cart.ownpage.placeorder"/></button>
+                <c:if test="${!empty cart.contents}">
+                	<button type="button" class="btn btn-primary"><spring:message code="cart.ownpage.placeorder"/></button>
+                </c:if>	
             </div>
         </div>
         <!-- /.modal-content -->
