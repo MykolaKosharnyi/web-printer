@@ -61,7 +61,7 @@
 		</div>
 	</div>
 
-	<div class="container" style="margin-top: 131px;">
+	<div class="container" style="margin-top: 140px;">
 		<div class="col-md-2">
 			<div class="row">
 				<div class="left_field">
@@ -90,7 +90,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title">Корзина</h4>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" style="padding: 5px 5px 0px 5px;">
                 <div id="cart">
 <c:if test="${!empty cart.contents}">
 	<form action="cart/pleaceOrder" method="post">

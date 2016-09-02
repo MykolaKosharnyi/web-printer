@@ -69,17 +69,17 @@
 
 				<div class="col-md-3  col-sm-3 col-xs-3 col-md-offset-1">
 					<div class="row">
-<div class="btn-group">
-  						<button type="button" class="btn btn-info"><i class="fa fa-globe"></i></button>
+						<div class="btn-group">
+  							<button type="button" class="btn btn-info"><i class="fa fa-globe"></i></button>
   							<button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     								<span class="caret"></span>
     								<span class="sr-only">Toggle Dropdown</span>
   							</button>
   							<ul class="dropdown-menu">
-    								<li><a href="?lang=en">English</a></li>
-    								<li><a href="?lang=ru">Русский</a></li>
-    							</ul>
-    						</div>
+    							<li><a href="?lang=en">English</a></li>
+    							<li><a href="?lang=ru">Русский</a></li>
+    						</ul>
+    					</div>
 
 
 						<div class="btn-group">
@@ -119,8 +119,8 @@
     						</div>
 
 
-<div class="btn-group">
-  					<button type="button" class="btn btn-warning"><i class="fa fa-shopping-cart"></i></button>
+						<div class="btn-group">
+  							<button type="button" class="btn btn-warning"><i class="fa fa-shopping-cart"></i></button>
   							<button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     								<span class="caret"></span>
     								<span class="sr-only">Toggle Dropdown</span>
@@ -131,7 +131,14 @@
     								<li role="separator" class="divider"></li>
     								<li><a href="#">Очистить корзину</a></li>
     							</ul>
-    						</div>
+    					</div>
+    					
+    					   <!-- Button trigger modal -->
+						<button class="btn btn-primary btn-lg cart-modal-window" data-toggle="modal" data-target="#myModal">
+						  <i class="fa fa-shopping-basket" aria-hidden="true"></i>
+						  <i id="quantity_products_in_cart">0</i>
+						</button> 
+    					
 					</div>
 				</div>
 

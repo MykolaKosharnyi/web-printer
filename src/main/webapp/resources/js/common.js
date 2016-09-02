@@ -485,7 +485,8 @@ $(document).ready(function() {
 	});
 
 });
-	// Common function check Price and check pictures
+
+// FUNCTION TO WORK WITH CART
 
 function createTRInTableForProduct(product){
 	var headTr = $('<tr/>');
@@ -674,107 +675,6 @@ function createTRInTableForProduct(product){
 		return TRs;
 	}
 	
-	function addToCart(typeProduct, idProduct, name, price, picturePath){
-		
-		var dataToSend = {
-				'price':price,
-				'pathToPicture':picturePath,
-				'arrayOfCheckedOption':[],
-				'arrayOfCheckedDelivery':[],
-				'mapOfPaint':{}
-		};
-		
-		$.ajax({
-			  type: 'POST',
-			  url: "/cart/add/" + typeProduct + "/" + idProduct + "/" + name,
-			  data: JSON.stringify(dataToSend),
-			  beforeSend: function(xhr) {
-		            xhr.setRequestHeader("Accept", "application/json");
-		            xhr.setRequestHeader("Content-Type", "application/json");
-		        }
-		      
-		}).done(function( product ){
-			if($("#cart form table.table_option").length == 0){
-				var headTable = $('<table/>').addClass('table table-hover table-striped table-bordered table_option')
-					.append($('<thead/>').append($("<tr/>")
-							.append($('<th/>').text('Изображение'))
-							.append($('<th/>').text('Наименование товара'))
-							.append($('<th/>').text('Опции'))
-							.append($('<th/>').text('Количество'))
-							.append($('<th/>').text('Цена'))))
-					.append($('<tbody/>')
-							.append($('<tr/>')
-									.append($('<td/>').text('Сумма:'))
-									.append($('<td/>'))
-									.append($('<td/>'))
-									.append($('<td/>'))
-									.append($('<td/>').addClass('total_price').html("$ <span>" + checkPriseCart(product.priceWithOptionAndDeivery) + "<span/>"))
-									.append($('<td/>'))
-									));
-				
-				$("#cart form").empty().append(headTable);//add table
-				$("#cart form table.table_option tbody").first().prepend(createTRInTableForProduct(product));//add new product to cart
-				//Add button to take everything from cart
-				$('.modal-content .modal-footer').append($('<button/>').addClass('btn btn-primary').attr("type", "button").html('Оформить заказ'));
-			}else {
-				//in case if this type of product already added to cart
-				if(!checkExistProduct(product.typeProduct, product.idProduct)){
-					$("#cart form table.table_option tbody").first().prepend(createTRInTableForProduct(product));
-				}
-			}
-
-			totalPrice();
-			$(".cart-modal-window").click();
-			
-		});
-		
-		
-		
-		
-/*		$.ajax({
-			  type: 'POST',
-			  url: "/cart/add/" + typeProduct + "/" + idProduct + "/" + name,
-			  contentType: "application/json; charset=utf-8",
-			  data: JSON.stringify(dataToSend),
-              dataType: "json"
-		}).done(function( cart ){
-			
-			  var headTable = $('<table/>').addClass('table table-hover table-striped table-bordered table_option')
-			  							.append($('<thead/>')
-			  									.append($('<th/>').text('Изображение'))
-			  									.append($('<th/>').text('Наименование товара'))
-			  									.append($('<th/>').text('Опции'))
-			  									.append($('<th/>').text('Количество'))
-			  									.append($('<th/>').text('Цена'))
-			  							);
-			 
-			  $(cart.contents).each(function(item, i) {
-				  headTable.append($('<tr/>')
-						  .append($('<td/>').append($('<img/>').attr("src", item.key.picturePath).css('height','auto').css('width','100%')))
-						  .append($('<td/>').css( "max-width", "300px" ).append($('<a/>').css( "color", "black" )
-								  .attr("href", '/' + item.key.typeProduct + '/' +item.key.idProduct)
-								  .text(item.key.name)))
-						  .append($('<td/>').css("padding","0px").css("width","350px").addClass('option_product_car'))
-						  .append($('<td/>'))
-						  .append($('<td/>'))
-						  .append($('<td/>')))
-			  });
-			  
-			  
-			  	cartModal.empty();
-				cartModal.append($('<h5/>').text('Добавленные товары в корзыну').css( "max-width", "300px" ));
-				cartModal.append(headTable);
-				cartModal.append($('<button/>').addClass('button button-close').html('Вернуться к просмотру товара').click( function() {
-			        $( '.fancybox-overlay', window.parent.document ).click();
-			        return false;
-			    }));
-				
-				cartModal.fancybox().trigger('click');
-		});	*/
-
-			
-		}
-	
 	function checkExistProduct(typeProduct, idProduct){
 		//in case if this product did not added previously
 		//method search in the future (maybe)
@@ -800,6 +700,80 @@ function createTRInTableForProduct(product){
 		
 	}
 	
+	function addProductAfterAJAXcall(product){
+		if($("#cart form table.table_option").length == 0){
+			var headTable = $('<table/>').addClass('table table-hover table-striped table-bordered table_option')
+				.append($('<thead/>').append($("<tr/>")
+						.append($('<th/>').text('Изображение'))
+						.append($('<th/>').text('Наименование товара'))
+						.append($('<th/>').text('Опции'))
+						.append($('<th/>').text('Количество'))
+						.append($('<th/>').text('Цена'))))
+				.append($('<tbody/>')
+						.append($('<tr/>')
+								.append($('<td/>').text('Сумма:'))
+								.append($('<td/>'))
+								.append($('<td/>'))
+								.append($('<td/>'))
+								.append($('<td/>').addClass('total_price').html("$ <span>" + checkPriseCart(product.priceWithOptionAndDeivery) + "<span/>"))
+								.append($('<td/>'))
+								));
+			
+			$("#cart form").empty().append(headTable);//add table
+			$("#cart form table.table_option tbody").first().prepend(createTRInTableForProduct(product));//add new product to cart
+			//Add button to take everything from cart
+			$('.modal-content .modal-footer').append($('<button/>').addClass('btn btn-primary').attr("type", "button").html('Оформить заказ'));
+		}else {
+			//in case if this type of product already added to cart
+			if(!checkExistProduct(product.typeProduct, product.idProduct)){
+				$("#cart form table.table_option tbody").first().prepend(createTRInTableForProduct(product));
+			}
+		}
+		
+		setStylesForCheckedOptions();
+
+		totalPrice();
+	}
+	
+	//set new quantity on cart icon
+	function setQuantityInCart(){
+		var quantity = new Number(0);
+		$("#cart form table.table_option tbody tr td input.quantity").each(function(){
+			quantity += new Number($(this).val());
+		});
+		$('i#quantity_products_in_cart').empty().text(quantity);
+	}
+	
+	function addToCart(typeProduct, idProduct, name, price, picturePath){
+		
+		var dataToSend = {
+				'price':price,
+				'pathToPicture':picturePath,
+				'arrayOfCheckedOption':[],
+				'arrayOfCheckedDelivery':[],
+				'mapOfPaint':{}
+		};
+		
+		$.ajax({
+			  type: 'POST',
+			  url: "/cart/add/" + typeProduct + "/" + idProduct + "/" + name,
+			  data: JSON.stringify(dataToSend),
+			  beforeSend: function(xhr) {
+		            xhr.setRequestHeader("Accept", "application/json");
+		            xhr.setRequestHeader("Content-Type", "application/json");
+		        }
+		      
+		}).done(function( product ){
+			addProductAfterAJAXcall(product);
+			
+			setQuantityInCart();
+			
+			$(".cart-modal-window").click();
+			
+		});
+
+		}
+	
 	function addToCartProductPageRIPaUWP(typeProduct, idProduct, name, price, picturePath, arrayOfChekedOption){
 		
 		var dataToSend = {
@@ -813,10 +787,16 @@ function createTRInTableForProduct(product){
 		$.ajax({
 			  type: 'POST',
 			  url: "/cart/add/" + typeProduct + "/" + idProduct + "/" + name,
-			  contentType: "application/json; charset=utf-8",
 			  data: JSON.stringify(dataToSend),
-              dataType: "json"
-			  });	
+			  beforeSend: function(xhr) {
+		            xhr.setRequestHeader("Accept", "application/json");
+		            xhr.setRequestHeader("Content-Type", "application/json");
+		        }
+			  }).done(function( product ){
+				  addProductAfterAJAXcall(product);
+				  
+				  setQuantityInCart();
+				});	
 		}
 	
 	function addToCartProductPage(typeProduct, idProduct, name, price,
@@ -833,10 +813,16 @@ function createTRInTableForProduct(product){
 		$.ajax({
 			  type: 'POST',
 			  url: "/cart/add/" + typeProduct + "/" + idProduct + "/" + name,
-			  contentType: "application/json; charset=utf-8",
 			  data: JSON.stringify(dataToSend),
-              dataType: "json"
-			  });	
+			  beforeSend: function(xhr) {
+		            xhr.setRequestHeader("Accept", "application/json");
+		            xhr.setRequestHeader("Content-Type", "application/json");
+		        }
+			  }).done(function( product ){
+				  addProductAfterAJAXcall(product);
+				  
+				  setQuantityInCart();
+				});	
 		}
 	
 	/* Use in products pages for setting another picture after hovering on product current picture */
@@ -851,12 +837,19 @@ function createTRInTableForProduct(product){
 /* CODE FOR DISPLAYING CART ELEMENT */
 $(document).ready(function() {
 		
+		setStylesForCheckedOptions();
+		
+		setQuantityInCart();
+		
+	});
+
+	function setStylesForCheckedOptions(){
 		$("#cart input.add_price:checked, #cart input.add_price_delivery:checked, #cart input.add_price_paint:checked")
 		.each(function(){
 			$(this).parent('td').parent('tr.block_product_price').css('color', '#006080');
 			$(this).parent('td').parent('tr.block_product_price').css('background', '#b5d9f0');
 		});
-	});
+	}
 
 $(document).on("keydown", '"#cart input.quantity"', function(e){
 /*$("#cart input.quantity").keydown(function (e) {*/
@@ -1127,6 +1120,9 @@ $(document).on("keydown", '"#cart input.quantity"', function(e){
 				/* set new price for all products */
 				totalPrice();
 				
+				//set new quantity on cart icon
+				setQuantityInCart();
+				
 				/* change quantity on server */
 				changeQuantityProductInCart(type, id, quantity_numb - 1);
 			}
@@ -1161,8 +1157,12 @@ $(document).on("keydown", '"#cart input.quantity"', function(e){
 			
 			var price_n = new Number(price_with_quantity.text().replace(/\s/ig, '').replace(",", "."));
 			price_with_quantity.text(checkPriseCart((price_n/quantity_numb) * (quantity_numb + 1)));
+			
 			/* set new price for all products */
 			totalPrice();
+			
+			//set new quantity on cart icon
+			setQuantityInCart();
 			
 			/* change quantity on server */
 			var type = $(this).parent('td').find('input.type').val();
@@ -1327,12 +1327,16 @@ $(document).on("keydown", '"#cart input.quantity"', function(e){
 				
 				/* set new price for all products */
 				totalPrice();
+				
+				//set new quantity on cart icon
+				setQuantityInCart();
 
 				if(cartBody.find( "tr" ).length == 1){
 					cartBody.parent('table.table_option').parent('form').empty().append("Корзина пуста.");
 					//Delete button to take everything from cart
 					$('.modal-content .modal-footer button.btn-primary').remove();
 				}
+				
 				
 			});
         });
