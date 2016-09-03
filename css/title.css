@@ -313,7 +313,7 @@ border-radius: 0 0 3px 3px;
 #navigation{
     position: relative;
     height: 23px;
-    top: 131px;
+    top: 140px;
     margin: 2px 0px 4px;
     border-top: 1px solid rgb(219, 219, 219);
     border-bottom: 1px solid rgb(219, 219, 219);
@@ -469,7 +469,7 @@ transition: opacity; 0.5s linear;
 
              #reklam .slide-item {
              	position: relative;
-                height: 250px;
+                height: auto;
                 width: inherit;
                 float: left;
                 margin: 0px 0px 5px 0px;
@@ -509,7 +509,7 @@ transition: opacity; 0.5s linear;
          #reklam .slide-price{
 	    position: relative;
 	    float: left;
-            width: 145px;
+            width: inherit;
             height: auto;
             /* Шрифт */
             font: 14px "RobotoRegular", sans-serif;
@@ -522,6 +522,11 @@ transition: opacity; 0.5s linear;
 	    overflow: hidden;
 	    text-overflow: ellipsis;
         }
+
+		#reklam .block_title_and_price{
+			width: inherit;
+			padding: 10px;		
+		}
 
 		#reklam .slide-title:hover,
 		.products_title:hover{
@@ -540,6 +545,38 @@ transition: opacity; 0.5s linear;
 	#reklam .slide-price{
 	    color: #92A5A6;
 	}
+
+
+/* reklam buttom buy */
+a.reklam_add_to_cart {
+  position: relative;
+  display: inline-block;
+  color: #777674;
+  font-weight: bold;
+  padding: 5px 0px;
+  outline: none;
+  border-radius: 3px / 100%;
+  background-image:
+   linear-gradient(45deg, rgba(255,255,255,.0) 30%, rgba(255,255,255,.8), rgba(255,255,255,.0) 70%),
+   linear-gradient(to right, rgba(255,255,255,1), rgba(255,255,255,0) 20%, rgba(255,255,255,0) 90%, rgba(255,255,255,.3)),
+   linear-gradient(to right, rgba(125,125,125,1), rgba(255,255,255,.9) 45%, rgba(125,125,125,.5)),
+   linear-gradient(to right, rgba(125,125,125,1), rgba(255,255,255,.9) 45%, rgba(125,125,125,.5)),
+   linear-gradient(to right, rgba(223,190,170,1), rgba(255,255,255,.9) 45%, rgba(223,190,170,.5)),
+   linear-gradient(to right, rgba(223,190,170,1), rgba(255,255,255,.9) 45%, rgba(223,190,170,.5));
+  background-repeat: no-repeat;
+  background-size: 200% 100%, auto, 100% 2px, 100% 2px, 100% 1px, 100% 1px;
+  background-position: 200% 0, 0 0, 0 0, 0 100%, 0 4px, 0 calc(100% - 4px);
+  box-shadow: rgba(0,0,0,.5) 3px 10px 10px -10px;
+  margin: 5px 0px 0px;
+  cursor: pointer;
+}
+a.reklam_add_to_cart:hover {
+  transition: .5s linear;
+  background-position: -200% 0, 0 0, 0 0, 0 100%, 0 4px, 0 calc(100% - 4px);
+}
+a.reklam_add_to_cart:active {
+  top: 1px;
+}
 
 	     .left_shares_link img{
              	position: absolute;

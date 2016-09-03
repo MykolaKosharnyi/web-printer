@@ -287,7 +287,6 @@ label.add_price_title{
 
 .delivery_options p.delivery_options_title,
 .paint_options p.paint_options_title {
-	width: 90%;
 	float: left;
 	margin: 0px;
 	margin-top: 3px;
@@ -307,7 +306,16 @@ label.add_price_title{
 }
 
 .table_price_option .table_delivery_options td{
-	border: none;
+	border-left: none;
+	border-right: none;
+}
+
+.table_price_option .table_delivery_options tr:last-child td{
+	border-bottom: none;
+}
+
+.table_price_option .table_delivery_options tr td:first-child{
+	width:200px;
 }
 
 .table_price_option .table_paint_options td,
