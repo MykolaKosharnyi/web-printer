@@ -11,8 +11,11 @@
 						<div class="top_information"><i class="fa fa-phone"></i> (044)-405-96-88</div>
 						<div class="top_information"><i class="fa fa-map-marker"></i> г. Киев, ул. Картвелишвили, д. 7/2</div>
 						<div class="top_information"><i class="fa fa-envelope-o"></i> office@forprint.net.ua</div>
-						<a href="#" class="top_information"><i class="fa fa-vk"></i></a>
-						<a href="#" class="top_information"><i class="fa fa-facebook-square"></i></a>
+						<div class="top_information" style="float:right;">
+							<a href="#"><i class="fa fa-vk"></i></a>
+							<a href="#"><i class="fa fa-facebook-square"></i></a>
+							<a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+						</div>
 
 					</div>
 				</div>
@@ -117,32 +120,15 @@
     							<li><a href="#">Еще что-то</a></li> --%>
     							</ul>
     						</div>
-
-
-						<div class="btn-group">
-  							<button type="button" class="btn btn-warning"><i class="fa fa-shopping-cart"></i></button>
-  							<button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    								<span class="caret"></span>
-    								<span class="sr-only">Toggle Dropdown</span>
-  							</button>
-  							<ul class="dropdown-menu">
-    								<li><a href="<c:url value='/cart' />">Ваша корзина</a></li>
-    								<li><a href="#">Вы просматривали</a></li>
-    								<li role="separator" class="divider"></li>
-    								<li><a href="#">Очистить корзину</a></li>
-    							</ul>
-    					</div>
     					
     					   <!-- Button trigger modal -->
 						<button class="btn btn-primary btn-lg cart-modal-window" data-toggle="modal" data-target="#myModal">
 						  <i class="fa fa-shopping-basket" aria-hidden="true"></i>
-						  <i id="quantity_products_in_cart">0</i>
+						  <i id="quantity_products_in_cart">${cart.getTotalQuantity()}</i>
 						</button> 
     					
 					</div>
 				</div>
-
-
 
 
 			</div>

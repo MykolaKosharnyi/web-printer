@@ -709,24 +709,20 @@ function createTRInTableForProduct(product){
 						.append($('<th/>').text('Опции'))
 						.append($('<th/>').text('Количество'))
 						.append($('<th/>').text('Цена'))))
-				.append($('<tbody/>')
-						.append($('<tr/>')
-								.append($('<td/>').text('Сумма:'))
-								.append($('<td/>'))
-								.append($('<td/>'))
-								.append($('<td/>'))
-								.append($('<td/>').addClass('total_price').html("$ <span>" + checkPriseCart(product.priceWithOptionAndDeivery) + "<span/>"))
-								.append($('<td/>'))
-								));
+				.append($('<tbody/>'));
 			
 			$("#cart form").empty().append(headTable);//add table
-			$("#cart form table.table_option tbody").first().prepend(createTRInTableForProduct(product));//add new product to cart
+			$("#cart form table.table_option tbody").first().append(createTRInTableForProduct(product));//add new product to cart
 			//Add button to take everything from cart
 			$('.modal-content .modal-footer').append($('<button/>').addClass('btn btn-primary').attr("type", "button").html('Оформить заказ'));
+			//add total cart price
+			$('.modal-content .modal-footer').prepend($('<div/>').attr("id", "div_total_price")
+					.html("$ <span id='total_price'>" + checkPriseCart(product.priceWithOptionAndDeivery) + "<span/>")
+					.prepend($('<span/>').text('Общая стоимость: ')));
 		}else {
 			//in case if this type of product already added to cart
 			if(!checkExistProduct(product.typeProduct, product.idProduct)){
-				$("#cart form table.table_option tbody").first().prepend(createTRInTableForProduct(product));
+				$("#cart form table.table_option tbody").first().append(createTRInTableForProduct(product));
 			}
 		}
 		
@@ -838,8 +834,8 @@ function createTRInTableForProduct(product){
 $(document).ready(function() {
 		
 		setStylesForCheckedOptions();
-		
-		setQuantityInCart();
+
+		//setQuantityInCart();
 		
 	});
 
@@ -1295,7 +1291,7 @@ $(document).on("keydown", '"#cart input.quantity"', function(e){
 	    });
 		
 		function totalPrice(){
-			$('#cart tr td.total_price span' ).text(allPrice());
+			$('span#total_price' ).text(allPrice());
 		}
 
 		/* method return all sum product item + return it in presentable form */
@@ -1331,10 +1327,11 @@ $(document).on("keydown", '"#cart input.quantity"', function(e){
 				//set new quantity on cart icon
 				setQuantityInCart();
 
-				if(cartBody.find( "tr" ).length == 1){
+				if(cartBody.find( "tr" ).length == 0){
 					cartBody.parent('table.table_option').parent('form').empty().append("Корзина пуста.");
 					//Delete button to take everything from cart
 					$('.modal-content .modal-footer button.btn-primary').remove();
+					$('.modal-content .modal-footer #div_total_price').remove();
 				}
 				
 				

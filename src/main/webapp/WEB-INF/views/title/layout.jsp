@@ -247,16 +247,7 @@
 			<td class="delte_item"><i class="fa fa-trash-o" aria-hidden="true"></i></td>
 		</tr>
 		</c:forEach>
-		
-		<tr>
-			<td><spring:message code="cart.ownpage.total"/>:</td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td class="total_price">$ <span><fmt:formatNumber type="number" 
-           		maxFractionDigits="2" minFractionDigits="2" value="${cart.getTotalCost()}" /></span></td>
-			<td></td>
-		</tr>
+
 	</table>
 
 	</form>
@@ -271,6 +262,13 @@
 
             </div>
             <div class="modal-footer">
+            	<c:if test="${!empty cart.contents}">
+					<div id="div_total_price">
+						<span>Общая стоимость: </span>$ <span id="total_price"><fmt:formatNumber type="number" 
+				   		maxFractionDigits="2" minFractionDigits="2" value="${cart.getTotalCost()}" /></span>
+					</div>
+				</c:if>
+				
                 <button type="button" class="btn btn-default" data-dismiss="modal">Продолжить просмотр товара</button>
                 <c:if test="${!empty cart.contents}">
                 	<button type="button" class="btn btn-primary"><spring:message code="cart.ownpage.placeorder"/></button>

@@ -30,12 +30,7 @@
     <definition name="user" extends="base"> 
     	<put-attribute name="path" value="/WEB-INF/views/user/path_user.jsp" />  
         <put-attribute name="body" value="/WEB-INF/views/user/user.jsp" />  
-    </definition>
-  
-    <definition name="cart" extends="base"> 
-    	<put-attribute name="path" value="/WEB-INF/views/cart/path_cart.jsp" />  
-        <put-attribute name="body" value="/WEB-INF/views/cart/cart.jsp" />  
-    </definition>   
+    </definition>  
   
     <definition name="printers" extends="base"> 
     	<put-attribute name="path" value="/WEB-INF/views/printer/path_user_printers.jsp" />  

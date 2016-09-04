@@ -502,11 +502,11 @@ public class CartController {
 		}
 	}
 	
-	@RequestMapping(value = "/cart", method = RequestMethod.GET)
-	public String showCart(Model model){
-		model.addAttribute("cart",cart);
-		return "cart";
-	}
+//	@RequestMapping(value = "/cart", method = RequestMethod.GET)
+//	public String showCart(Model model){
+//		model.addAttribute("cart",cart);
+//		return "cart";
+//	}
 	
 	@RequestMapping(value = "/cart/placeOrder", method = RequestMethod.POST)
 	public String placeOrder(/*HttpSession session*/RedirectAttributes redirectAttributes){
