@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
@@ -305,23 +304,8 @@ public class UseWithProductController {
 		 logger.info("Copy all characteristic of use_with_product.");
 		 UseWithProduct useWithProduct = useWithProductService.getUseWithProductById(id);
 		
-		 
 		 /* copy pictures to buffer */
-		 FileMeta fm = null;
-	    	for(String path : useWithProduct.getPathPictures()){
-	    		fm = new FileMeta();
-	    		fm.setFileName(path);
-	    		
-	    		try {
-	    			File fi = new File(directory + File.separator + 
-	    					concreteFolder + File.separator + id + File.separator + path);
-	    			fm.setBytes(Files.readAllBytes(fi.toPath()));
-	    			logger.info("Load pictures from folder to the FILEMETA.");
-				} catch (IOException e) {
-					logger.error("Can't load pistures to the FILEMETA", e);
-				}
-	    		files.add(fm);
-	    	}
+		 componets.copyPicturesToBuffer(useWithProduct.getPathPictures(), directory, concreteFolder, id, files);
 		
 		 /* set null to id because we must get create new product operation */
 	     useWithProduct.setId(null);
@@ -354,38 +338,8 @@ public class UseWithProductController {
             long id = useWithProductService.addUseWithProduct(product);
             logger.info("Create new use_with_product! With id=" + id);
 
-            if(new File(directory + File.separator + 
-            		concreteFolder + File.separator + id).mkdir()){
-            	System.out.println("Создано новую директорию!" + id);
-            	logger.info("Create new use_with_product directory! With id=" + id);
-            } else {
-            	logger.error("Don't create new use_with_product directory!");
-            }
-            
-			if (files != null && files.size()!=0) {
-				for (FileMeta fm : files.getFiles()) {
-					try {
-						FileCopyUtils.copy(fm.getBytes(), new FileOutputStream(
-								directory + File.separator + concreteFolder
-			    				+ File.separator + id + File.separator + fm.getFileName()));
-						product.getPathPictures().add(fm.getFileName());
-						logger.info("Add path of the pictures to use_with_product with id=" + id);
-					} catch (IOException e) {
-						logger.error("Can't add paths of the pictures to use_with_product with id=" + id, e);
-					}
-				}
-			} else {
-	    		try {
-	    			File fi = new File(directory + File.separator + "default.jpg");
-        			FileCopyUtils.copy(Files.readAllBytes(fi.toPath()), new FileOutputStream(directory + File.separator + 
-        					concreteFolder + File.separator + id + File.separator + "default.jpg"));
-	    			product.getPathPictures().add("default.jpg");
-	    			logger.error("User didn't add any picture to the use_with_product with id=" + id + ", so picture of the"
-	    					+ "product will has name 'default.jpg' ");
-				} catch (IOException e) {
-					logger.error("Can't add path of the default picture to use_with_product with id=" + id, e);
-				}
-			}
+            //create folder and add to her new pictures
+            product.getPathPictures().addAll(componets.createFolderAndWriteToItPictures(directory, concreteFolder, id, files));
 			
             this.useWithProductService.updateUseWithProduct(product);
             
@@ -418,38 +372,8 @@ public class UseWithProductController {
             long id = useWithProductService.addUseWithProduct(product);
             logger.info("Create new use_with_product! With id=" + id);
   
-            if(new File(directory + File.separator + 
-            		concreteFolder + File.separator + id).mkdir()){
-            	System.out.println("Создано новую директорию!" + id);
-            	logger.info("Create new use_with_product directory! With id=" + id);
-            } else {
-            	logger.error("Don't create new use_with_product directory!");
-            }
-            
-			if (files != null && files.size()!=0) {
-				for (FileMeta fm : files.getFiles()) {
-					try {
-						FileCopyUtils.copy(fm.getBytes(), new FileOutputStream(
-								directory + File.separator + concreteFolder
-			    				+ File.separator + id + File.separator + fm.getFileName()));
-						product.getPathPictures().add(fm.getFileName());
-						logger.info("Add path of the pictures to use_with_product with id=" + id);
-					} catch (IOException e) {
-						logger.error("Can't add paths of the pictures to use_with_product with id=" + id, e);
-					}
-				}
-			} else {
-	    		try {
-	    			File fi = new File(directory + File.separator + "default.jpg");
-        			FileCopyUtils.copy(Files.readAllBytes(fi.toPath()), new FileOutputStream(directory + File.separator + 
-        					concreteFolder + File.separator + id + File.separator + "default.jpg"));
-	    			product.getPathPictures().add("default.jpg");
-	    			logger.error("User didn't add any picture to the use_with_product with id=" + id + ", so picture of the"
-	    					+ "product will has name 'default.jpg' ");
-				} catch (IOException e) {
-					logger.error("Can't add path of the default picture to use_with_product with id=" + id, e);
-				}
-			}
+            //create folder and add to her new pictures
+            product.getPathPictures().addAll(componets.createFolderAndWriteToItPictures(directory, concreteFolder, id, files));
 			
             this.useWithProductService.updateUseWithProduct(product);
             
@@ -577,27 +501,12 @@ public class UseWithProductController {
     
     @RequestMapping(value="/admin/use_with_product/change_order_pictures", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void changeOrderPictures(@RequestBody List<String> selectedIds) {
-    	for(int i = 0; i < selectedIds.size(); i++){
-    		for(int k = 0; k < files.size() ; k++){
-        		if(files.get(k).getFileName().equals(selectedIds.get(i))){
-        			Collections.swap(files.getFiles(), i, k);
-        			break;
-        		}
-        	}
-    	} 	
+    	componets.changeOrderPictures(concreteFolder, selectedIds, files); 	
     }
     
     @RequestMapping(value="/admin/use_with_product/remove_picture/{name_picture}", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void removePicture(@PathVariable("name_picture") String namePicture) {
-    	String name = namePicture.replace(":", ".");
-    		Iterator<FileMeta> fmi = files.getFiles().iterator();
-    		while(fmi.hasNext()){
-        		if(fmi.next().getFileName().equals(name)){
-        			fmi.remove();
-        			break;
-        		}
-        	}
-    	logger.info("Remove pictore with name=" + namePicture + "from FILEMETA");	
+    	componets.removePicture(concreteFolder, namePicture, files);	
     }
     
     @RequestMapping(value="/admin/use_with_product/upload_pictures_update/{id}", method = RequestMethod.POST)

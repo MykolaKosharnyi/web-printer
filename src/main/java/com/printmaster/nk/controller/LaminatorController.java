@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
@@ -300,24 +299,9 @@ public class LaminatorController {
 		
 		 logger.info("Copy all characteristic of laminator.");
 		 Laminator laminator = laminatorService.getLaminatorById(id);
-		
 		 
 		 /* copy pictures to buffer */
-		 FileMeta fm = null;
-	    	for(String path : laminator.getPathPictures()){
-	    		fm = new FileMeta();
-	    		fm.setFileName(path);
-	    		
-	    		try {
-	    			File fi = new File(directory + File.separator + 
-	    					concreteFolder + File.separator + id + File.separator + path);
-	    			fm.setBytes(Files.readAllBytes(fi.toPath()));
-	    			logger.info("Load pictures from folder to the FILEMETA.");
-				} catch (IOException e) {
-					logger.error("Can't load pistures to the FILEMETA", e);
-				}
-	    		files.add(fm);
-	    	}
+		 componets.copyPicturesToBuffer(laminator.getPathPictures(), directory, concreteFolder, id, files);
 		
 		 /* set null to id because we must get create new product operation */
 	     laminator.setId(null);
@@ -351,38 +335,8 @@ public class LaminatorController {
             long id = laminatorService.addLaminator(product);
             logger.info("Create new laminator! With id=" + id);
   
-            if(new File(directory + File.separator + 
-            		concreteFolder + File.separator + id).mkdir()){
-            	System.out.println("Создано новую директорию!" + id);
-            	logger.info("Create new laminator directory! With id=" + id);
-            } else {
-            	logger.error("Don't create new laminator directory!");
-            }
-            
-			if (files != null && files.size()!=0) {
-				for (FileMeta fm : files.getFiles()) {
-					try {
-						FileCopyUtils.copy(fm.getBytes(), new FileOutputStream(
-								directory + File.separator + concreteFolder
-			    				+ File.separator + id + File.separator + fm.getFileName()));
-						product.getPathPictures().add(fm.getFileName());
-						logger.info("Add path of the pictures to laminator with id=" + id);
-					} catch (IOException e) {
-						logger.error("Can't add paths of the pictures to laminator with id=" + id, e);
-					}
-				}
-			} else {
-	    		try {
-	    			File fi = new File(directory + File.separator + "default.jpg");
-        			FileCopyUtils.copy(Files.readAllBytes(fi.toPath()), new FileOutputStream(directory + File.separator + 
-        					concreteFolder + File.separator + id + File.separator + "default.jpg"));
-	    			product.getPathPictures().add("default.jpg");
-	    			logger.error("User didn't add any picture to the laminator with id=" + id + ", so picture of the"
-	    					+ "product will has name 'default.jpg' ");
-				} catch (IOException e) {
-					logger.error("Can't add path of the default picture to laminator with id=" + id, e);
-				}
-			}
+            //create folder and add to her new files
+            product.getPathPictures().addAll(componets.createFolderAndWriteToItPictures(directory, concreteFolder, id, files));
 			
             this.laminatorService.updateLaminator(product);
             
@@ -415,37 +369,8 @@ public class LaminatorController {
             long id = laminatorService.addLaminator(product);
             logger.info("Create new laminator! With id=" + id);
   
-            if(new File(directory + File.separator + 
-            		concreteFolder + File.separator + id).mkdir()){
-            	logger.info("Create new laminator directory! With id=" + id);
-            } else {
-            	logger.error("Don't create new laminator directory!");
-            }
-            
-			if (files != null && files.size()!=0) {
-				for (FileMeta fm : files.getFiles()) {
-					try {
-						FileCopyUtils.copy(fm.getBytes(), new FileOutputStream(
-								directory + File.separator + concreteFolder
-			    				+ File.separator + id + File.separator + fm.getFileName()));
-						product.getPathPictures().add(fm.getFileName());
-						logger.info("Add path of the pictures to laminator with id=" + id);
-					} catch (IOException e) {
-						logger.error("Can't add paths of the pictures to laminator with id=" + id, e);
-					}
-				}
-			} else {
-	    		try {
-	    			File fi = new File(directory + File.separator + "default.jpg");
-        			FileCopyUtils.copy(Files.readAllBytes(fi.toPath()), new FileOutputStream(directory + File.separator + 
-        					concreteFolder + File.separator + id + File.separator + "default.jpg"));
-	    			product.getPathPictures().add("default.jpg");
-	    			logger.error("User didn't add any picture to the laminator with id=" + id + ", so picture of the"
-	    					+ "product will has name 'default.jpg' ");
-				} catch (IOException e) {
-					logger.error("Can't add path of the default picture to laminator with id=" + id, e);
-				}
-			}
+            //create folder and add to her new files
+            product.getPathPictures().addAll(componets.createFolderAndWriteToItPictures(directory, concreteFolder, id, files));
 			
             this.laminatorService.updateLaminator(product);
             
@@ -573,28 +498,12 @@ public class LaminatorController {
     
     @RequestMapping(value="/admin/laminator/change_order_pictures", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void changeOrderPictures(@RequestBody List<String> selectedIds) {
-    	logger.info("change order of pictures in FILEMETA");
-    	for(int i = 0; i < selectedIds.size(); i++){
-    		for(int k = 0; k < files.size() ; k++){
-        		if(files.get(k).getFileName().equals(selectedIds.get(i))){
-        			Collections.swap(files.getFiles(), i, k);
-        			break;
-        		}
-        	}
-    	}   	  	
+    	componets.changeOrderPictures(concreteFolder, selectedIds, files);  	  	
     }
     
     @RequestMapping(value="/admin/laminator/remove_picture/{name_picture}", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void removePicture(@PathVariable("name_picture") String namePicture) {
-    	String name = namePicture.replace(":", ".");
-    		Iterator<FileMeta> fmi = files.getFiles().iterator();
-    		while(fmi.hasNext()){
-        		if(fmi.next().getFileName().equals(name)){
-        			fmi.remove();
-        			break;
-        		}
-        	}
-    	logger.info("Remove pictore with name = " + namePicture + " from FILEMETA");
+    	componets.removePicture(concreteFolder, namePicture, files);
     }
     
     @RequestMapping(value="/admin/laminator/upload_pictures_update/{id}", method = RequestMethod.POST)

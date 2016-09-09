@@ -412,30 +412,30 @@ public class PrinterController {
 	}
 	
 	@RequestMapping(value = "/admin/printer/copy/{id}", method = RequestMethod.GET)
-	public String copyPrinter(@PathVariable("id") long id, Model model) {
+	public String copyProduct(@PathVariable("id") long id, Model model) {
 		files.clear();
 		logger.info("/admin/printer/copy/" + id + " page.");
 		
 		 logger.info("Copy all characteristic of printer.");
 		 Printer printer = printerService.getPrinterById(id);
-		
-		 
+			 
 		 /* copy pictures to buffer */
-		 FileMeta fm = null;
-	    	for(String path : printer.getPathPictures()){
-	    		fm = new FileMeta();
-	    		fm.setFileName(path);
-	    		
-	    		try {
-	    			File fi = new File(directory + File.separator + 
-	    					concreteFolder + File.separator + id + File.separator + path);
-	    			fm.setBytes(Files.readAllBytes(fi.toPath()));
-	    			logger.info("Load pictures from folder to the FILEMETA.");
-				} catch (IOException e) {
-					logger.error("Can't load pistures to the FILEMETA", e);
-				}
-	    		files.add(fm);
-	    	}
+		 componets.copyPicturesToBuffer(printer.getPathPictures(), directory, concreteFolder, id, files);
+//		 FileMeta fm = null;
+//	    	for(String path : printer.getPathPictures()){
+//	    		fm = new FileMeta();
+//	    		fm.setFileName(path);
+//	    		
+//	    		try {
+//	    			File fi = new File(directory + File.separator + 
+//	    					concreteFolder + File.separator + id + File.separator + path);
+//	    			fm.setBytes(Files.readAllBytes(fi.toPath()));
+//	    			logger.info("Load pictures from folder to the FILEMETA.");
+//				} catch (IOException e) {
+//					logger.error("Can't load pistures to the FILEMETA", e);
+//				}
+//	    		files.add(fm);
+//	    	}
 		
 		 /* set null to id because we must get create new product operation */
 		 printer.setId(null);
@@ -469,39 +469,42 @@ public class PrinterController {
 		
             long id = printerService.addPrinter(product);
             logger.info("Create new printer! With id=" + id);
-
-            if(new File(directory + File.separator + 
-            		concreteFolder + File.separator + id).mkdir()){
-            	System.out.println("Создано новую директорию!" + id);
-            	logger.info("Create new printer directory! With id=" + id);
-            } else {
-            	logger.error("Don't create new printer directory!");
-            }
             
-			if (files != null && files.size()!=0) {
-				for (FileMeta fm : files.getFiles()) {
-					try {
-						FileCopyUtils.copy(fm.getBytes(), new FileOutputStream(
-								directory + File.separator + concreteFolder
-			    				+ File.separator + id + File.separator + fm.getFileName()));
-						product.getPathPictures().add(fm.getFileName());
-						logger.info("Add path of the pictures to printer with id=" + id);
-					} catch (IOException e) {
-						logger.error("Can't add paths of the pictures to printer with id=" + id, e);
-					}
-				}
-			} else {
-	    		try {
-	    			File fi = new File(directory + File.separator + "default.jpg");
-        			FileCopyUtils.copy(Files.readAllBytes(fi.toPath()), new FileOutputStream(directory + File.separator + 
-        					concreteFolder + File.separator + id + File.separator + "default.jpg"));
-	    			product.getPathPictures().add("default.jpg");
-	    			logger.error("User didn't add any picture to the printer with id=" + id + ", so picture of the"
-	    					+ "product will has name 'default.jpg' ");
-				} catch (IOException e) {
-					logger.error("Can't add path of the default picture to printer with id=" + id, e);
-				}
-			}
+            //create folder and add to her new files
+            product.getPathPictures().addAll(componets.createFolderAndWriteToItPictures(directory, concreteFolder, id, files));
+
+//            if(new File(directory + File.separator + 
+//            		concreteFolder + File.separator + id).mkdir()){
+//            	System.out.println("Создано новую директорию!" + id);
+//            	logger.info("Create new printer directory! With id=" + id);
+//            } else {
+//            	logger.error("Don't create new printer directory!");
+//            }
+//            
+//			if (files != null && files.size()!=0) {
+//				for (FileMeta fm : files.getFiles()) {
+//					try {
+//						FileCopyUtils.copy(fm.getBytes(), new FileOutputStream(
+//								directory + File.separator + concreteFolder
+//			    				+ File.separator + id + File.separator + fm.getFileName()));
+//						product.getPathPictures().add(fm.getFileName());
+//						logger.info("Add path of the pictures to printer with id=" + id);
+//					} catch (IOException e) {
+//						logger.error("Can't add paths of the pictures to printer with id=" + id, e);
+//					}
+//				}
+//			} else {
+//	    		try {
+//	    			File fi = new File(directory + File.separator + "default.jpg");
+//        			FileCopyUtils.copy(Files.readAllBytes(fi.toPath()), new FileOutputStream(directory + File.separator + 
+//        					concreteFolder + File.separator + id + File.separator + "default.jpg"));
+//	    			product.getPathPictures().add("default.jpg");
+//	    			logger.error("User didn't add any picture to the printer with id=" + id + ", so picture of the"
+//	    					+ "product will has name 'default.jpg' ");
+//				} catch (IOException e) {
+//					logger.error("Can't add path of the default picture to printer with id=" + id, e);
+//				}
+//			}
 			
             this.printerService.updatePrinter(product);
             
@@ -534,38 +537,41 @@ public class PrinterController {
             long id = printerService.addPrinter(product);
             logger.info("Create new printer! With id=" + id);
   
-            if(new File(directory + File.separator + 
-            		concreteFolder + File.separator + id).mkdir()){
-            	System.out.println("Создано новую директорию!" + id);
-            	logger.info("Create new printer directory! With id=" + id);
-            } else {
-            	logger.error("Don't create new printer directory!");
-            }
+           //create folder and add to her new files
+            product.getPathPictures().addAll(componets.createFolderAndWriteToItPictures(directory, concreteFolder, id, files));
             
-			if (files != null && files.size()!=0) {
-				for (FileMeta fm : files.getFiles()) {
-					try {
-						FileCopyUtils.copy(fm.getBytes(), new FileOutputStream(
-								directory + File.separator + concreteFolder
-			    				+ File.separator + id + File.separator + fm.getFileName()));
-						product.getPathPictures().add(fm.getFileName());
-						logger.info("Add path of the pictures to printer with id=" + id);
-					} catch (IOException e) {
-						logger.error("Can't add paths of the pictures to printer with id=" + id, e);
-					}
-				}
-			} else {
-	    		try {
-	    			File fi = new File(directory + File.separator + "default.jpg");
-        			FileCopyUtils.copy(Files.readAllBytes(fi.toPath()), new FileOutputStream(directory + File.separator + 
-        					concreteFolder + File.separator + id + File.separator + "default.jpg"));
-	    			product.getPathPictures().add("default.jpg");
-	    			logger.error("User didn't add any picture to the printer with id=" + id + ", so picture of the"
-	    					+ "product will has name 'default.jpg' ");
-				} catch (IOException e) {
-					logger.error("Can't add path of the default picture to printer with id=" + id, e);
-				}
-			}
+//            if(new File(directory + File.separator + 
+//            		concreteFolder + File.separator + id).mkdir()){
+//            	System.out.println("Создано новую директорию!" + id);
+//            	logger.info("Create new printer directory! With id=" + id);
+//            } else {
+//            	logger.error("Don't create new printer directory!");
+//            }
+//            
+//			if (files != null && files.size()!=0) {
+//				for (FileMeta fm : files.getFiles()) {
+//					try {
+//						FileCopyUtils.copy(fm.getBytes(), new FileOutputStream(
+//								directory + File.separator + concreteFolder
+//			    				+ File.separator + id + File.separator + fm.getFileName()));
+//						product.getPathPictures().add(fm.getFileName());
+//						logger.info("Add path of the pictures to printer with id=" + id);
+//					} catch (IOException e) {
+//						logger.error("Can't add paths of the pictures to printer with id=" + id, e);
+//					}
+//				}
+//			} else {
+//	    		try {
+//	    			File fi = new File(directory + File.separator + "default.jpg");
+//        			FileCopyUtils.copy(Files.readAllBytes(fi.toPath()), new FileOutputStream(directory + File.separator + 
+//        					concreteFolder + File.separator + id + File.separator + "default.jpg"));
+//	    			product.getPathPictures().add("default.jpg");
+//	    			logger.error("User didn't add any picture to the printer with id=" + id + ", so picture of the"
+//	    					+ "product will has name 'default.jpg' ");
+//				} catch (IOException e) {
+//					logger.error("Can't add path of the default picture to printer with id=" + id, e);
+//				}
+//			}
 			
             this.printerService.updatePrinter(product);
             
@@ -695,50 +701,52 @@ public class PrinterController {
     @RequestMapping(value="/admin/printer/change_order_pictures", method = RequestMethod.POST,
     		consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void changeOrderPictures(@RequestBody List<String> selectedIds) {
-    	System.out.println("------------------------");
-    	System.out.println("Получение нового порядка");
-    	logger.info("change order of pictures in FILEMETA");
-    	for(String s : selectedIds){
-    		System.out.println(s);
-    	}
-    	for(int i = 0; i < selectedIds.size(); i++){
-    		for(int k = 0; k < files.size() ; k++){
-        		if(files.get(k).getFileName().equals(selectedIds.get(i))){
-        			Collections.swap(files.getFiles(), i, k);
-        			break;
-        		}
-        	}
-    	}
-    	System.out.println("------------------------");
-    	System.out.println("After sorting: ");
-    	for(FileMeta s : files.getFiles()){
-    		System.out.println(s.getFileName());
-    	}
-    	  	
+    	componets.changeOrderPictures(concreteFolder, selectedIds, files);
+//    	System.out.println("------------------------");
+//    	System.out.println("Получение нового порядка");
+//    	logger.info("change order of pictures in FILEMETA");
+//    	for(String s : selectedIds){
+//    		System.out.println(s);
+//    	}
+//    	for(int i = 0; i < selectedIds.size(); i++){
+//    		for(int k = 0; k < files.size() ; k++){
+//        		if(files.get(k).getFileName().equals(selectedIds.get(i))){
+//        			Collections.swap(files.getFiles(), i, k);
+//        			break;
+//        		}
+//        	}
+//    	}
+//    	System.out.println("------------------------");
+//    	System.out.println("After sorting: ");
+//    	for(FileMeta s : files.getFiles()){
+//    		System.out.println(s.getFileName());
+//    	}
+//    	  	
     }
     
     @RequestMapping(value="/admin/printer/remove_picture/{name_picture}", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void removePicture(@PathVariable("name_picture") String namePicture) {
-    	String name = namePicture.replace(":", ".");
-    	System.out.println("------------------------");
-    	System.out.println("ID: " + name);
-    	System.out.println("Before removing");
-    	for(FileMeta s : files.getFiles()){
-    		System.out.println(s.getFileName());
-    	}
-    		Iterator<FileMeta> fmi = files.getFiles().iterator();
-    		while(fmi.hasNext()){
-        		if(fmi.next().getFileName().equals(name)){
-        			fmi.remove();
-        			break;
-        		}
-        	}
-    		logger.info("Remove pictore with name=" + namePicture + "from FILEMETA");
-    	System.out.println("------------------------");
-    	System.out.println("After removing: ");
-    	for(FileMeta s : files.getFiles()){
-    		System.out.println(s.getFileName());
-    	}	
+    	componets.removePicture(concreteFolder, namePicture, files);
+//    	String name = namePicture.replace(":", ".");
+//    	System.out.println("------------------------");
+//    	System.out.println("ID: " + name);
+//    	System.out.println("Before removing");
+//    	for(FileMeta s : files.getFiles()){
+//    		System.out.println(s.getFileName());
+//    	}
+//    		Iterator<FileMeta> fmi = files.getFiles().iterator();
+//    		while(fmi.hasNext()){
+//        		if(fmi.next().getFileName().equals(name)){
+//        			fmi.remove();
+//        			break;
+//        		}
+//        	}
+//    		logger.info("Remove pictore with name=" + namePicture + "from FILEMETA");
+//    	System.out.println("------------------------");
+//    	System.out.println("After removing: ");
+//    	for(FileMeta s : files.getFiles()){
+//    		System.out.println(s.getFileName());
+//    	}	
     }
     
     @RequestMapping(value="/admin/printer/upload_pictures_update/{id}", method = RequestMethod.POST)

@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
@@ -337,24 +336,9 @@ public class Printer3DController {
 		
 		 logger.info("Copy all characteristic of 3d_printer.");
 		 Printer3D printer3D = productService.getPrinter3DById(id);
-		
 		 
 		 /* copy pictures to buffer */
-		 FileMeta fm = null;
-	    	for(String path : printer3D.getPathPictures()){
-	    		fm = new FileMeta();
-	    		fm.setFileName(path);
-	    		
-	    		try {
-	    			File fi = new File(directory + File.separator + 
-	    					concreteFolder + File.separator + id + File.separator + path);
-	    			fm.setBytes(Files.readAllBytes(fi.toPath()));
-	    			logger.info("Load pictures from folder to the FILEMETA.");
-				} catch (IOException e) {
-					logger.error("Can't load pistures to the FILEMETA", e);
-				}
-	    		files.add(fm);
-	    	}
+		 componets.copyPicturesToBuffer(printer3D.getPathPictures(), directory, concreteFolder, id, files);
 		
 		 /* set null to id because we must get create new product operation */
 	     printer3D.setId(null);
@@ -387,29 +371,9 @@ public class Printer3DController {
 
             long id = productService.addPrinter3D(product);
   
-            new File(directory + File.separator + 
-            		concreteFolder + File.separator + id).mkdir();
+            //create folder and add to her new files
+            product.getPathPictures().addAll(componets.createFolderAndWriteToItPictures(directory, concreteFolder, id, files));
             
-    		if (files != null && files.size()!=0) {
-    			for (FileMeta fm : files.getFiles()) {
-    				try {
-    					FileCopyUtils.copy(fm.getBytes(), new FileOutputStream(directory + File.separator + concreteFolder
-    				+ File.separator + id + File.separator + fm.getFileName()));
-    					product.getPathPictures().add(fm.getFileName());
-    				} catch (IOException e) {
-    					e.printStackTrace();
-    				}
-    			}
-    		} else {
-        		try {
-        			File fi = new File(directory + File.separator + "default.jpg");
-        			FileCopyUtils.copy(Files.readAllBytes(fi.toPath()), new FileOutputStream(directory + File.separator + 
-        					concreteFolder + File.separator + id + File.separator + "default.jpg"));
-        			product.getPathPictures().add("default.jpg");
-    			} catch (IOException e) {
-    				e.printStackTrace();
-    			}
-    		}
             productService.updatePrinter3D(product);
             files.clear();
 		
@@ -437,29 +401,9 @@ public class Printer3DController {
 
             long id = productService.addPrinter3D(product);
   
-            new File(directory + File.separator + 
-            		concreteFolder + File.separator + id).mkdir();
+            //create folder and add to her new files
+            product.getPathPictures().addAll(componets.createFolderAndWriteToItPictures(directory, concreteFolder, id, files));
             
-    		if (files != null && files.size()!=0) {
-    			for (FileMeta fm : files.getFiles()) {
-    				try {
-    					FileCopyUtils.copy(fm.getBytes(), new FileOutputStream(directory + File.separator + concreteFolder
-    				+ File.separator + id + File.separator + fm.getFileName()));
-    					product.getPathPictures().add(fm.getFileName());
-    				} catch (IOException e) {
-    					e.printStackTrace();
-    				}
-    			}
-    		} else {
-        		try {
-        			File fi = new File(directory + File.separator + "default.jpg");
-        			FileCopyUtils.copy(Files.readAllBytes(fi.toPath()), new FileOutputStream(directory + File.separator + 
-        					concreteFolder + File.separator + id + File.separator + "default.jpg"));
-        			product.getPathPictures().add("default.jpg");
-    			} catch (IOException e) {
-    				e.printStackTrace();
-    			}
-    		}
             productService.updatePrinter3D(product);
             files.clear();
 		
@@ -572,26 +516,12 @@ public class Printer3DController {
     
     @RequestMapping(value="/admin/3d_printer/change_order_pictures", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void changeOrderPictures(@RequestBody List<String> selectedIds) {
-    	for(int i = 0; i < selectedIds.size(); i++){
-    		for(int k = 0; k < files.size() ; k++){
-        		if(files.get(k).getFileName().equals(selectedIds.get(i))){
-        			Collections.swap(files.getFiles(), i, k);
-        			break;
-        		}
-        	}
-    	}
+    	componets.changeOrderPictures(concreteFolder, selectedIds, files);
     }
     
     @RequestMapping(value="/admin/3d_printer/remove_picture/{name_picture}", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void removePicture(@PathVariable("name_picture") String namePicture) {
-    	String name = namePicture.replace(":", ".");
-    		Iterator<FileMeta> fmi = files.getFiles().iterator();
-    		while(fmi.hasNext()){
-        		if(fmi.next().getFileName().equals(name)){
-        			fmi.remove();
-        			break;
-        		}
-        	}	
+    	componets.removePicture(concreteFolder, namePicture, files);
     }
     
     @RequestMapping(value="/admin/3d_printer/upload_pictures_update/{id}", method = RequestMethod.POST)
