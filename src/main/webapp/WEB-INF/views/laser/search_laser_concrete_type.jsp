@@ -395,12 +395,12 @@
 					</div>
 					<ul class="check_boxes">
 						<div class="text_output">
-							<form:input path="maxPowerConsumption0" class="amount-maxPowerConsumption0" value="${search.maxPowerConsumption0}" />
+							<form:input path="maxPowerConsumption0" class="amount-max_power_consumption0" value="${search.maxPowerConsumption0}" />
 							<p>&nbsp;Вт -&nbsp;</p>
-							<form:input path="maxPowerConsumption1" class="amount-maxPowerConsumption1" value="${search.maxPowerConsumption1}" />
+							<form:input path="maxPowerConsumption1" class="amount-max_power_consumption1" value="${search.maxPowerConsumption1}" />
 							<p>&nbsp;Вт</p>
 						</div>
-							<div class="slider-range-maxPowerConsumption"></div>
+							<div class="slider-range-max_power_consumption"></div>
 					</ul>
 				</div>
 				<div class="search_criteria">
