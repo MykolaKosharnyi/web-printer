@@ -105,7 +105,11 @@
 		</thead>
 		<c:forEach var="item" items="${cart.contents}">
 		<tr>
-			<td><img style="height:auto; width:100%;" src="<%=request.getContextPath()%>/${item.key.picturePath}" alt=""></td>
+			<td style="width: 220px;">
+				<a href="<c:url value='/${item.key.typeProduct}/${item.key.idProduct}' />">
+					<img style="height:auto; width:100%;" src="<%=request.getContextPath()%>/${item.key.picturePath}" alt="">
+				</a>
+			</td>
 			<td style="max-width: 235px;"><a style="color:black;" href="<c:url value='/${item.key.typeProduct}/${item.key.idProduct}' />">${item.key.name }</a></td>
 			<td style="padding: 0px; width:350px;" class="option_product_car">
 				

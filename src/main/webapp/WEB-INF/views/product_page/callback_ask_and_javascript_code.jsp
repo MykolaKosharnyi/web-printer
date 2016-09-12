@@ -13,14 +13,14 @@
 	}
 	
 	function getCheckedDelivery(){
-		var checkedArray = new Array();
+/*		var checkedArray = new Array();
 		
 		if($(".option_product_with_price input.add_price_delivery:checked").length > 0){
 			$(".option_product_with_price input.add_price_delivery:checked").each(function(){
 				checkedArray.push($(this).val());
 			});
-		}
-		return checkedArray;
+		}*/
+		return $(".option_product_with_price input:radio.add_price_delivery:checked").val();
 	}
 	
 	function getCheckedPaint(){
@@ -69,6 +69,14 @@
 			$(this).parent('td').parent('.block_product_price').css('color', 'black');
 			$(this).parent('td').parent('.block_product_price').css('background', '#B9BF0B');
 			$(this).parent('td').parent('.block_product_price').css('border-bottom', '1px white solid');
+			
+			//save current name
+			$(this).parent('td').parent('.block_product_price').parent('tbody').parent('table.table_delivery_options')
+        	.parent('.delivery_options_body').find('input.delivery_radio_name').val($(this).val());
+			
+			//save current price
+			var deliveryValueContainer = $(this).parent('td').parent('.block_product_price').parent('tbody').parent('table.table_delivery_options')
+        	.parent('.delivery_options_body').find('input.delivery_radio_value').val(addPrice);
 
 		});
 		
@@ -148,19 +156,65 @@
 				addPrice += new Number($(this).text().replace(/\s/ig, '').replace(",", "."));
 			});
 			
-            if ($(this).prop( "checked" )) {
+			//previous checked element
+			var deliveryNameContainer = $(this).parent('td').parent('.block_product_price').parent('tbody').parent('table.table_delivery_options')
+        	.parent('.delivery_options_body').find('input.delivery_radio_name');
+			
+			//value wich caries previous value of delivery price
+			var deliveryValueContainer = $(this).parent('td').parent('.block_product_price').parent('tbody').parent('table.table_delivery_options')
+        	.parent('.delivery_options_body').find('input.delivery_radio_value');
+			
+            if ($(this).val()!=deliveryNameContainer.val()) {
+            	
+            	//erase old style
+            	if(deliveryNameContainer.val()!=''){
+	            	var oldCheckedDelivery = deliveryNameContainer
+	            								.parent('.delivery_options_body')
+	            								.find('table.table_delivery_options tbody tr td input:radio[value="' + deliveryNameContainer.val() +'"]')
+	            								.parent('td')
+	            								.parent('.block_product_price')
+	            	oldCheckedDelivery.css('color', '#333');
+	            	oldCheckedDelivery.css('background', 'white');
+	            	oldCheckedDelivery.css('border-bottom', 'none');
+            	}
+            	
+            	//set new name delivery
+            	deliveryNameContainer.val($(this).val());
 
-                price_element.text(checkPriseProduct( calculatePriceIncludingVAT(currentPrice, addPrice, true) ));
+            	//first sub old checked radio value and than add new checked radio value
+                price_element.text(checkPriseProduct( calculatePriceIncludingVAT(calculatePriceIncludingVAT(currentPrice, new Number(deliveryValueContainer.val()), false), addPrice, true) ));
             	change_style.css('color', 'black');
             	change_style.css('background', '#B9BF0B');
 				change_style.css('border-bottom', '1px white solid');
+				
+				//set new value delivery container
+				deliveryValueContainer.val(addPrice);
             	
             } else {
             	
+            	//erase old style
+            	if(deliveryNameContainer.val()!=''){
+	            	var oldCheckedDelivery = deliveryNameContainer
+	            								.parent('.delivery_options_body')
+	            								.find('table.table_delivery_options tbody tr td input:radio[value="' + deliveryNameContainer.val() +'"]')
+	            								.parent('td')
+	            								.parent('.block_product_price')
+	            	oldCheckedDelivery.css('color', '#333');
+	            	oldCheckedDelivery.css('background', 'white');
+	            	oldCheckedDelivery.css('border-bottom', 'none');
+            	}
+            	
+            	//set new name delivery
+            	deliveryNameContainer.val('');
+            	
+            	//first sub old checked radio value and than add new checked radio value
             	price_element.text(checkPriseProduct( calculatePriceIncludingVAT(currentPrice, addPrice, false) ));
-            	change_style.css('color', '#333');
-            	change_style.css('background', 'white');
-            	change_style.css('border-bottom', 'none');
+
+            	//set new value delivery container
+				deliveryValueContainer.val(new Number(0));
+            	
+            	//clean this radio
+				$(this).prop('checked', false);
             }
             
         });

@@ -518,7 +518,10 @@ function createTRInTableForProduct(product){
 		tableOptionDeliveryPaint.append(paint);
 	});
 	
-	headTr.append($('<td/>').append($('<img/>').attr("src", "/" + product.picturePath).css('height','auto').css('width','100%')))
+	headTr.append($('<td/>').css( "width", "220px" ).append(
+			$('<a/>').attr("href", '/' + product.typeProduct + '/' + product.idProduct)
+				.append(
+						$('<img/>').attr("src", "/" + product.picturePath).css('height','auto').css('width','100%'))))
 		  .append($('<td/>').css( "max-width", "300px" ).append($('<a/>').css( "color", "black" )
 							  .attr("href", '/' + product.typeProduct + '/' + product.idProduct)
 							  .text(product.name)))
@@ -746,7 +749,7 @@ function createTRInTableForProduct(product){
 				'price':price,
 				'pathToPicture':picturePath,
 				'arrayOfCheckedOption':[],
-				'arrayOfCheckedDelivery':[],
+				'checkedDelivery':"",
 				'mapOfPaint':{}
 		};
 		
@@ -776,7 +779,7 @@ function createTRInTableForProduct(product){
 				'price':price,
 				'pathToPicture':picturePath,
 				'arrayOfCheckedOption':arrayOfChekedOption,
-				'arrayOfCheckedDelivery':[],
+				'checkedDelivery':"",
 				'mapOfPaint':{}
 		};
 		
@@ -796,13 +799,13 @@ function createTRInTableForProduct(product){
 		}
 	
 	function addToCartProductPage(typeProduct, idProduct, name, price,
-								picturePath, arrayOfChekedOption, arrayOfCheckedDelivery, mapOfPaint){
+								picturePath, arrayOfChekedOption, checkedDelivery, mapOfPaint){
 		
 		var dataToSend = {
 				'price':price,
 				'pathToPicture':picturePath,
 				'arrayOfCheckedOption':arrayOfChekedOption,
-				'arrayOfCheckedDelivery':arrayOfCheckedDelivery,
+				'checkedDelivery':checkedDelivery,
 				'mapOfPaint':mapOfPaint
 		};
 		

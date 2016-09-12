@@ -115,8 +115,8 @@ public class Cart implements Serializable{
 		return totalCost;
 	}
 	
-	public double getTotalQuantity(){
-		double quantity = 0;
+	public int getTotalQuantity(){
+		int quantity = 0;
 		for (ProductCart product : contents.keySet()){
 			quantity += contents.get(product);
 		}

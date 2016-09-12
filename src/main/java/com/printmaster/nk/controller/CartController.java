@@ -86,7 +86,7 @@ public class CartController {
 		productCart.setPicturePath("images/" + typeProduct + "s/" + productId + "/" + checkedOption.getPathToPicture());
 		//add option with price
 		productCart.setOptions(addOption(typeProduct, productId, checkedOption.getArrayOfCheckedOption()));
-		productCart.setDeliveries(addDelivery(typeProduct, productId, checkedOption.getArrayOfCheckedDelivery()));
+		productCart.setDeliveries(addDelivery(typeProduct, productId, checkedOption.getCheckedDelivery()));
 		productCart.setPaints(addPaint(typeProduct, productId, checkedOption.getMapOfPaint()));
 		
 		cart.addProduct(productCart , 1);
@@ -317,7 +317,7 @@ public class CartController {
 		return result;
 	}
 	
-	private ArrayList<Delivery> addDelivery(String productType, long productId, List<String> checkedDelivery){
+	private ArrayList<Delivery> addDelivery(String productType, long productId, String checkedDelivery){
 		
 		if(productType.equals("printer")){
 			return getDelivery( printerService.getPrinterById(productId), checkedDelivery );
@@ -345,7 +345,7 @@ public class CartController {
 		}
 	}
 	
-	private ArrayList<Delivery> getDelivery(Product product, List<String> checkedDelivery){
+	private ArrayList<Delivery> getDelivery(Product product, String checkedDelivery){
 		ArrayList<Delivery> result = new ArrayList<Delivery>();
 		
 		double size = product.getDeliveryWidth() * product.getDeliveryHeight() * product.getDeliveryDepth();
@@ -385,13 +385,13 @@ public class CartController {
 		return result;
 	}
 	
-	private Delivery returnDelivery(String name, double priceSize, double priceWeight, List<String> checkedDelivery){
+	private Delivery returnDelivery(String name, double priceSize, double priceWeight, String checkedDelivery){
 		Delivery result = new Delivery();
 		result.setName(name);
 		result.setPriceSize(priceSize);
 		result.setPriceWeight(priceWeight);
 		
-		boolean boolResult = checkedDelivery.contains(name) ? true : false;
+		boolean boolResult = name.equals(checkedDelivery) ? true : false;
 		result.setChecked(boolResult);
 
 		return result;

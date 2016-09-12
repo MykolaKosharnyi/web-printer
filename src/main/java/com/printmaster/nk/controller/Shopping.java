@@ -8,7 +8,7 @@ public class Shopping {
 	double price;
 	String pathToPicture;
 	List<String> arrayOfCheckedOption;
-	List<String> arrayOfCheckedDelivery;
+	String checkedDelivery;
 	Map<String, Integer> mapOfPaint;
 	
 	public Shopping(){}
@@ -45,11 +45,12 @@ public class Shopping {
 		this.arrayOfCheckedOption = arrayOfCheckedOption;
 	}
 
-	public List<String> getArrayOfCheckedDelivery() {
-		return arrayOfCheckedDelivery;
+	public String getCheckedDelivery() {
+		return checkedDelivery;
 	}
 
-	public void setArrayOfCheckedDelivery(List<String> arrayOfCheckedDelivery) {
-		this.arrayOfCheckedDelivery = arrayOfCheckedDelivery;
+	public void setCheckedDelivery(String checkedDelivery) {
+		this.checkedDelivery = checkedDelivery;
 	}
+
 }
