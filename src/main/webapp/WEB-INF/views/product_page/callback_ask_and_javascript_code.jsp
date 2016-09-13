@@ -174,7 +174,7 @@
 	            								.parent('td')
 	            								.parent('.block_product_price')
 	            	oldCheckedDelivery.css('color', '#333');
-	            	oldCheckedDelivery.css('background', 'white');
+	            	oldCheckedDelivery.css('background', 'none');
 	            	oldCheckedDelivery.css('border-bottom', 'none');
             	}
             	
@@ -200,7 +200,7 @@
 	            								.parent('td')
 	            								.parent('.block_product_price')
 	            	oldCheckedDelivery.css('color', '#333');
-	            	oldCheckedDelivery.css('background', 'white');
+	            	oldCheckedDelivery.css('background', 'none');
 	            	oldCheckedDelivery.css('border-bottom', 'none');
             	}
             	

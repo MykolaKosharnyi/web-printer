@@ -488,6 +488,26 @@ $(document).ready(function() {
 
 // FUNCTION TO WORK WITH CART
 
+$(document).ready(function() {
+	
+	setStylesForCheckedOptions();
+
+	//set value and name of delivery
+	$("#cart input.add_price_delivery:checked").each(function(){
+
+		//save current name
+		$('#cart input.delivery_radio_name').val($(this).val());
+			
+		//save current price
+		$('#cart input.delivery_radio_value').val(new Number($(this).parent('td').parent('tr').find('td label.add_price_value span')
+				.text().replace(/\s/ig, '').replace(",", ".")));
+		
+	});
+	
+	//setQuantityInCart();
+	
+});
+
 function createTRInTableForProduct(product){
 	var headTr = $('<tr/>');
 	var tableOptionDeliveryPaint = $('<table/>').addClass('table table-hover').css( "width", "355px" );
@@ -501,6 +521,10 @@ function createTRInTableForProduct(product){
 				.append($('<td/>').attr("colspan", 3)
 						.append($('<i/>').addClass('fa fa-arrow-right'))
 						.append($('<p/>').addClass('delivery_options_title').text("Доставка"))));
+		
+		tableOptionDeliveryPaint.find('tbody')
+				.append($('<input/>').attr("type", "hidden").attr("name", "delivery_radio_name").addClass('delivery_radio_name').val(""))
+				.append($('<input/>').attr("type", "hidden").attr("name", "delivery_radio_value").addClass('delivery_radio_value').val(0));
 	}
 	
 	$(productDeliveries(product.deliveries, product.typeProduct, product.idProduct)).each(function(i, delivery){
@@ -616,7 +640,8 @@ function createTRInTableForProduct(product){
 
 					var checkedInput = $('<input/>')
 						.addClass('add_price_delivery')
-						.attr("type", "checkbox")
+						.attr("type", "radio")
+						.attr("name", "delivery")
 						.val(delivery.name)
 						.attr("id", "" + delivery.name + "_" + typeProduct + "_" + idProduct);
 					
@@ -749,7 +774,7 @@ function createTRInTableForProduct(product){
 				'price':price,
 				'pathToPicture':picturePath,
 				'arrayOfCheckedOption':[],
-				'checkedDelivery':"",
+				'checkedDelivery':null,
 				'mapOfPaint':{}
 		};
 		
@@ -779,7 +804,7 @@ function createTRInTableForProduct(product){
 				'price':price,
 				'pathToPicture':picturePath,
 				'arrayOfCheckedOption':arrayOfChekedOption,
-				'checkedDelivery':"",
+				'checkedDelivery':null,
 				'mapOfPaint':{}
 		};
 		
@@ -834,13 +859,6 @@ function createTRInTableForProduct(product){
 	}
 	
 /* CODE FOR DISPLAYING CART ELEMENT */
-$(document).ready(function() {
-		
-		setStylesForCheckedOptions();
-
-		//setQuantityInCart();
-		
-	});
 
 	function setStylesForCheckedOptions(){
 		$("#cart input.add_price:checked, #cart input.add_price_delivery:checked, #cart input.add_price_paint:checked")
@@ -962,29 +980,79 @@ $(document).on("keydown", '"#cart input.quantity"', function(e){
 			var addPrice = new Number($(this).parent('td').parent('tr.block_product_price').find('td label.add_price_value span')
 				.text().replace(/\s/ig, '').replace(",", "."));
 			
-	        if ($(this).prop( "checked" )) {
-	            price_element.text(checkPriseCart( calculatePriceIncludingVAT(price_with_quantity_and_option, addPrice, quantity_numb, valueVAT, true) ));
+			//previous checked element
+			var deliveryNameContainer = $('#cart input.delivery_radio_name');
+			
+			//value wich caries previous value of delivery price
+			var deliveryValueContainer = $('#cart input.delivery_radio_value');
+			
+			 if ($(this).val()!=deliveryNameContainer.val()) {
+	      
+	            	//erase old style
+	            	if(deliveryNameContainer.val()!=''){
+	            		var oldCheckedDelivery = deliveryNameContainer.parent('tbody').parent('table')
+						.find('tbody tr.delivery_options_body td input:radio[value="' + deliveryNameContainer.val() +'"].add_price_delivery')
+						.parent('td').parent('tr.delivery_options_body')
+						oldCheckedDelivery.css('color', '#333');
+			        	oldCheckedDelivery.css('background', 'none');
+	            	}
+	            	
+	            	// show changes on server
+		        	changeDeliveryProductInCart(type, id, $(this).val(), true);//set new value
+		        	changeDeliveryProductInCart(type, id, deliveryNameContainer.val(), false);//erase old value
+	            	
+	            	//set new name delivery
+	            	deliveryNameContainer.val($(this).val());
 
-	        	// show changes on server
-	        	changeDeliveryProductInCart(type, id, $(this).val(), true);
-	        	// change presentaion on user page
-	        	change_style.css('color', '#006080');
-	        	change_style.css('background', '#b5d9f0');
-	        	/* set new price for all products */
-				totalPrice();
-	        	
-	        }else{
-	        	price_element.text(checkPriseCart( calculatePriceIncludingVAT(price_with_quantity_and_option, addPrice, quantity_numb, valueVAT, false) ));
+	            	//first sub old checked radio value and than add new checked radio value	
+	            	price_element.text(checkPriseCart( 
+	            			calculatePriceIncludingVAT(
+	            				calculatePriceIncludingVAT(price_with_quantity_and_option,new Number(deliveryValueContainer.val()),quantity_numb,valueVAT,false), 
+	            				addPrice, 
+	            				quantity_numb, 
+	            				valueVAT, 
+	            				true) 
+	            			));
 
-	        	// show changes on server
-	        	changeDeliveryProductInCart(type, id, $(this).val(), false);
-	        	// change presentaion on user page
-	        	change_style.css('color', '#333');
-	        	change_style.css('background', 'none');
-	        	/* set new price for all products */
-				totalPrice();
-	        }
-	        
+	            	// change presentaion on user page
+		        	change_style.css('color', '#006080');
+		        	change_style.css('background', '#b5d9f0');
+		        	/* set new price for all products */
+					totalPrice();
+					
+					//set new value delivery container
+					deliveryValueContainer.val(addPrice);
+	            	
+	            } else {
+	            	
+	            	price_element.text(checkPriseCart( calculatePriceIncludingVAT(price_with_quantity_and_option, addPrice, quantity_numb, valueVAT, false) ));
+
+		        	// show changes on server
+		        	changeDeliveryProductInCart(type, id, $(this).val(), false);
+		        	
+		        	//erase old style
+		        	var oldCheckedDelivery = deliveryNameContainer.parent('table')
+					.find('tr.delivery_options_body td input:radio[value="' + deliveryNameContainer.val() +'"]')
+					.parent('td').parent('tr.delivery_options_body')
+					oldCheckedDelivery.css('color', '#333');
+		        	oldCheckedDelivery.css('background', 'none');
+		        	
+		        	// change presentaion on user page
+		        	change_style.css('color', '#333');
+		        	change_style.css('background', 'none');
+		        	
+		        	/* set new price for all products */
+					totalPrice();
+	            	
+	            	//set new name delivery
+	            	deliveryNameContainer.val('');
+
+	            	//set new value delivery container
+					deliveryValueContainer.val(new Number(0));
+	            	
+	            	//clean this radio
+					$(this).prop('checked', false);
+	            }
 	    });
 		
 		/* checking paint option */

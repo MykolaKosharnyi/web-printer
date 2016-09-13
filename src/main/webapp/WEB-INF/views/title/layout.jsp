@@ -162,6 +162,10 @@
 								<p class="delivery_options_title">Доставка</p>
 							</td>
 						</tr>
+						
+						<input type="hidden" name="delivery_radio_name" class="delivery_radio_name" value="">
+						<input type="hidden" name="delivery_radio_value" class="delivery_radio_value" value="0">
+						
 					</c:if>
 					
 					<c:forEach items="${item.key.deliveries}" var="delivery">
@@ -169,7 +173,7 @@
 									((delivery.name!=null) && (delivery.name!=''))}">
 							<tr class="block_product_price delivery_options_body">
 								<td colspan="2">
-									<input class="add_price_delivery" type="checkbox" value="${delivery.name}" 
+									<input class="add_price_delivery" type="radio" name="delivery" value="${delivery.name}" 
 										id="${delivery.name}_${item.key.typeProduct}_${item.key.idProduct}_delivery"
 										<c:if test="${delivery.checked}">checked</c:if>>
 									<label class="add_price_title"
