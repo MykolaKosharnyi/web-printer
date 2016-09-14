@@ -24,10 +24,11 @@
 							<p class="delivery_option_name">Авиа:&nbsp;</p>
 							
 							<p>цена по габаритам - &nbsp;</p>
-							<form:input path="airDeliveryPriceSize" class="delivery_option" style="float: none;"/>
+							<input name="airDeliveryPriceSize" type="checkbox" <c:if test="${product.airDeliveryPriceSize}">checked</c:if> style="float: none;"/>
 							<br>
 							<p class="delivery_last_price_description">цена по весу - &nbsp;</p>
-							<form:input path="airDeliveryPriceWeight" style="left: 90px; position: relative;" class="delivery_option"/>
+							<input name="airDeliveryPriceWeight" type="checkbox" <c:if test="${product.airDeliveryPriceWeight}">checked</c:if>
+							 style="left: 90px; position: relative;"/>
 							
 							<form:errors path="airDeliveryPriceSize" cssClass="error"></form:errors>
 							<form:errors path="airDeliveryPriceWeight" cssClass="error"></form:errors>
@@ -38,10 +39,11 @@
 							<p class="delivery_option_name">Морем:&nbsp;</p>
 							
 							<p>цена по габаритам - &nbsp;</p>
-							<form:input path="seaDeliveryPriceSize" class="delivery_option" style="float: none;"/>
+							<input name="seaDeliveryPriceSize" type="checkbox" <c:if test="${product.seaDeliveryPriceSize}">checked</c:if> style="float: none;"/>
 							<br>
 							<p class="delivery_last_price_description">цена по весу - &nbsp;</p>
-							<form:input path="seaDeliveryPriceWeight" style="left: 90px; position: relative;" class="delivery_option"/>
+							<input name="seaDeliveryPriceWeight" type="checkbox" <c:if test="${product.seaDeliveryPriceWeight}">checked</c:if>
+							 style="left: 90px; position: relative;"/>
 							
 							<form:errors path="seaDeliveryPriceSize" cssClass="error"></form:errors>
 							<form:errors path="seaDeliveryPriceWeight" cssClass="error"></form:errors>
@@ -52,10 +54,11 @@
 							<p class="delivery_option_name">По Украине:&nbsp;</p>
 							
 							<p>цена по габаритам - &nbsp;</p>
-							<form:input path="ukraineDeliveryPriceSize" class="delivery_option" style="float: none;"/>
+							<input name="ukraineDeliveryPriceSize" type="checkbox" <c:if test="${product.ukraineDeliveryPriceSize}">checked</c:if> style="float: none;"/>
 							<br>
 							<p class="delivery_last_price_description">цена по весу - &nbsp;</p>
-							<form:input path="ukraineDeliveryPriceWeight" style="left: 90px; position: relative;" class="delivery_option"/>
+							<input name="ukraineDeliveryPriceWeight" type="checkbox" <c:if test="${product.ukraineDeliveryPriceWeight}">checked</c:if>
+							 style="left: 90px; position: relative;"/>
 							
 							<form:errors path="ukraineDeliveryPriceSize" cssClass="error"></form:errors>
 							<form:errors path="ukraineDeliveryPriceWeight" cssClass="error"></form:errors>
@@ -66,10 +69,11 @@
 							<p class="delivery_option_name">По Киеву:&nbsp;</p>
 
 							<p>цена по габаритам - &nbsp;</p>
-							<form:input path="kyivDeliveryPriceSize" class="delivery_option" style="float: none;"/>
+							<input name="kyivDeliveryPriceSize" type="checkbox" <c:if test="${product.kyivDeliveryPriceSize}">checked</c:if> style="float: none;"/>
 							<br>
 							<p class="delivery_last_price_description">цена по весу - &nbsp;</p>
-							<form:input path="kyivDeliveryPriceWeight" style="left: 90px; position: relative;" class="delivery_option"/>
+							<input name="kyivDeliveryPriceWeight" type="checkbox" <c:if test="${product.kyivDeliveryPriceWeight}">checked</c:if>
+							 style="left: 90px; position: relative;"/>
 
 							<form:errors path="kyivDeliveryPriceSize" cssClass="error"></form:errors>
 							<form:errors path="kyivDeliveryPriceWeight" cssClass="error"></form:errors>

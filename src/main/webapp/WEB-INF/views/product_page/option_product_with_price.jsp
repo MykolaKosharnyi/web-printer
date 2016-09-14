@@ -125,14 +125,10 @@
 	      </tr>
 	</c:if>
 
-<c:if test="${(product.deliveryWidth * product.deliveryHeight * product.deliveryDepth * product.airDeliveryPriceSize > 0) ||
-						(product.deliveryWeight * product.airDeliveryPriceWeight > 0) ||
-			  (product.deliveryWidth * product.deliveryHeight * product.deliveryDepth * product.seaDeliveryPriceSize > 0) ||
-						(product.deliveryWeight * product.seaDeliveryPriceWeight > 0) ||
-			  (product.deliveryWidth * product.deliveryHeight * product.deliveryDepth * product.ukraineDeliveryPriceSize > 0) ||
-						(product.deliveryWeight * product.ukraineDeliveryPriceWeight > 0) ||
-			  (product.deliveryWidth * product.deliveryHeight * product.deliveryDepth * product.kyivDeliveryPriceSize > 0) ||
-						(product.deliveryWeight * product.kyivDeliveryPriceWeight > 0) ||
+<c:if test="${product.airDeliveryPriceSize || product.airDeliveryPriceWeight ||
+			  product.seaDeliveryPriceSize || product.seaDeliveryPriceWeight ||
+			  product.ukraineDeliveryPriceSize || product.ukraineDeliveryPriceWeight ||
+			  product.kyivDeliveryPriceSize || product.kyivDeliveryPriceWeight ||
 			  (((product.deliveryWidth * product.deliveryHeight * product.deliveryDepth * product.variant1DeliveryPriceSize > 0) ||
 						(product.deliveryWeight * product.variant1DeliveryPriceWeight > 0)) &&
 						 ((product.variant1DeliveryName !=null) && (product.variant1DeliveryName!=''))) ||
@@ -156,65 +152,69 @@
 				<table class="table table-hover table_delivery_options">
 					<tbody>
 					
-						<c:if test="${(product.deliveryWidth * product.deliveryHeight * product.deliveryDepth * product.airDeliveryPriceSize > 0) ||
-						(product.deliveryWeight * product.airDeliveryPriceWeight > 0)}">
+						<c:if test="${ product.airDeliveryPriceSize || product.airDeliveryPriceWeight }">
 							<tr class="block_product_price">
 								<td><input class="add_price_delivery" type="radio" name="delivery" value="Авиа" id="aviaDelivery_price">
 						        	<label class="add_price_delivery_title" for="aviaDelivery_price">Авиа</label>
 						        </td>
 						        <td>
 							    	<label class="add_price_delivery_value">$ <span><fmt:formatNumber type="number" 
-											maxFractionDigits="2" minFractionDigits="2" value="${product.deliveryWidth * product.deliveryHeight * 
-												product.deliveryDepth * product.airDeliveryPriceSize + 
-												product.deliveryWeight * product.airDeliveryPriceWeight}" /></span>
+											maxFractionDigits="2" minFractionDigits="2" value="${
+											(product.airDeliveryPriceSize ? product.deliveryWidth * product.deliveryHeight * 
+												product.deliveryDepth * constants.price_avia_size : 0) + 
+												(product.airDeliveryPriceWeight ? product.deliveryWeight * constants.price_avia_weight : 0)
+											}" /></span>
 									</label>
 								</td>
 							</tr>
 				      	</c:if>
 				      	
-				      	<c:if test="${(product.deliveryWidth * product.deliveryHeight * product.deliveryDepth * product.seaDeliveryPriceSize > 0) ||
-						(product.deliveryWeight * product.seaDeliveryPriceWeight > 0)}">
+				      	<c:if test="${ product.seaDeliveryPriceSize || product.seaDeliveryPriceWeight }">
 							<tr class="block_product_price">
 								<td><input class="add_price_delivery" type="radio" name="delivery" value="Морем" id="seaDelivery_price">
 						        	<label class="add_price_delivery_title" for="seaDelivery_price">Морем</label>
 						        </td>
 						        <td>
 							    	<label class="add_price_delivery_value">$ <span><fmt:formatNumber type="number" 
-											maxFractionDigits="2" minFractionDigits="2" value="${product.deliveryWidth * product.deliveryHeight * 
-												product.deliveryDepth * product.seaDeliveryPriceSize + 
-												product.deliveryWeight * product.seaDeliveryPriceWeight}" /></span>
+											maxFractionDigits="2" minFractionDigits="2" value="${
+											(product.seaDeliveryPriceSize ? product.deliveryWidth * product.deliveryHeight * 
+												product.deliveryDepth * constants.price_sea_size : 0) + 
+												(product.seaDeliveryPriceWeight ? product.deliveryWeight * constants.price_sea_weight : 0)
+											}" /></span>
 									</label>
 								</td>
 							</tr>
 				      	</c:if>
 	
-						<c:if test="${(product.deliveryWidth * product.deliveryHeight * product.deliveryDepth * product.ukraineDeliveryPriceSize > 0) ||
-						(product.deliveryWeight * product.ukraineDeliveryPriceWeight > 0)}">
+						<c:if test="${ product.ukraineDeliveryPriceSize || product.ukraineDeliveryPriceWeight }">
 							<tr class="block_product_price">
 								<td><input class="add_price_delivery" type="radio" name="delivery" value="По Украине" id="ukraineDelivery_price">
 						        	<label class="add_price_delivery_title" for="ukraineDelivery_price">По Украине</label>
 						        </td>
 						        <td>
 							    	<label class="add_price_delivery_value">$ <span><fmt:formatNumber type="number" 
-											maxFractionDigits="2" minFractionDigits="2" value="${product.deliveryWidth * product.deliveryHeight * 
-												product.deliveryDepth * product.ukraineDeliveryPriceSize + 
-												product.deliveryWeight * product.ukraineDeliveryPriceWeight}" /></span>
+											maxFractionDigits="2" minFractionDigits="2" value="${
+											(product.ukraineDeliveryPriceSize ? product.deliveryWidth * product.deliveryHeight * 
+												product.deliveryDepth * constants.price_ukraine_size : 0) + 
+												(product.ukraineDeliveryPriceWeight ? product.deliveryWeight * constants.price_ukraine_weight : 0)
+											}" /></span>
 									</label>
 								</td>
 							</tr>
 				      	</c:if>
 				      	
-				      	<c:if test="${(product.deliveryWidth * product.deliveryHeight * product.deliveryDepth * product.kyivDeliveryPriceSize > 0) ||
-						(product.deliveryWeight * product.kyivDeliveryPriceWeight > 0)}">
+				      	<c:if test="${ product.kyivDeliveryPriceSize || product.kyivDeliveryPriceWeight }">
 							<tr class="block_product_price">
 								<td><input class="add_price_delivery" type="radio" name="delivery" value="По Киеву" id="kyivDelivery_price">
 						        	<label class="add_price_delivery_title" for="kyivDelivery_price">По Киеву</label>
 						        </td>
 						        <td>
 							    	<label class="add_price_delivery_value">$ <span><fmt:formatNumber type="number" 
-											maxFractionDigits="2" minFractionDigits="2" value="${product.deliveryWidth * product.deliveryHeight * 
-												product.deliveryDepth * product.kyivDeliveryPriceSize + 
-												product.deliveryWeight * product.kyivDeliveryPriceWeight}" /></span>
+											maxFractionDigits="2" minFractionDigits="2" value="${
+											(product.kyivDeliveryPriceSize ? product.deliveryWidth * product.deliveryHeight * 
+												product.deliveryDepth * constants.price_kyiv_size : 0) + 
+												(product.kyivDeliveryPriceWeight ? product.deliveryWeight * constants.price_kyiv_weight : 0)
+											}" /></span>
 									</label>
 								</td>
 							</tr>

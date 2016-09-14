@@ -211,32 +211,32 @@ public abstract class Product implements Serializable{
 	protected double deliveryWeight;
 	
 	//air
-	@Column(name="airDeliveryPriceSize", columnDefinition="Decimal(10,2) default '0.00'")
-	protected double airDeliveryPriceSize;
+	@Column(name="airDeliveryPriceSize", nullable = false, columnDefinition = "bit default 0")
+	protected boolean airDeliveryPriceSize;
 	
-	@Column(name="airDeliveryPriceWeight", columnDefinition="Decimal(10,2) default '0.00'")
-	protected double airDeliveryPriceWeight;
+	@Column(name="airDeliveryPriceWeight", nullable = false, columnDefinition = "bit default 0")
+	protected boolean airDeliveryPriceWeight;
 	
 	//sea	
-	@Column(name="seaDeliveryPriceSize", columnDefinition="Decimal(10,2) default '0.00'")
-	protected double seaDeliveryPriceSize;
+	@Column(name="seaDeliveryPriceSize", nullable = false, columnDefinition = "bit default 0")
+	protected boolean seaDeliveryPriceSize;
 	
-	@Column(name="seaDeliveryPriceWeight", columnDefinition="Decimal(10,2) default '0.00'")
-	protected double seaDeliveryPriceWeight;
+	@Column(name="seaDeliveryPriceWeight", nullable = false, columnDefinition = "bit default 0")
+	protected boolean seaDeliveryPriceWeight;
 	
 	//on Ukraine		
-	@Column(name="ukraineDeliveryPriceSize", columnDefinition="Decimal(10,2) default '0.00'")
-	protected double ukraineDeliveryPriceSize;
+	@Column(name="ukraineDeliveryPriceSize", nullable = false, columnDefinition = "bit default 0")
+	protected boolean ukraineDeliveryPriceSize;
 			
-	@Column(name="ukraineDeliveryPriceWeight", columnDefinition="Decimal(10,2) default '0.00'")
-	protected double ukraineDeliveryPriceWeight;
+	@Column(name="ukraineDeliveryPriceWeight", nullable = false, columnDefinition = "bit default 0")
+	protected boolean ukraineDeliveryPriceWeight;
 	
 	//on Kyiv
-	@Column(name="kyivDeliveryPriceSize", columnDefinition="Decimal(10,2) default '0.00'")
-	protected double kyivDeliveryPriceSize;
+	@Column(name="kyivDeliveryPriceSize", nullable = false, columnDefinition = "bit default 0")
+	protected boolean kyivDeliveryPriceSize;
 		
-	@Column(name="kyivDeliveryPriceWeight", columnDefinition="Decimal(10,2) default '0.00'")
-	protected double kyivDeliveryPriceWeight;
+	@Column(name="kyivDeliveryPriceWeight", nullable = false, columnDefinition = "bit default 0")
+	protected boolean kyivDeliveryPriceWeight;
 	
 	//first custom variant
 	@Column(name="variant1DeliveryName")
@@ -326,67 +326,67 @@ public abstract class Product implements Serializable{
 		this.variant3DeliveryName = variant3DeliveryName;
 	}
 
-	public double getAirDeliveryPriceSize() {
+	public boolean isAirDeliveryPriceSize() {
 		return airDeliveryPriceSize;
 	}
 
-	public void setAirDeliveryPriceSize(double airDeliveryPriceSize) {
+	public void setAirDeliveryPriceSize(boolean airDeliveryPriceSize) {
 		this.airDeliveryPriceSize = airDeliveryPriceSize;
 	}
 
-	public double getAirDeliveryPriceWeight() {
+	public boolean isAirDeliveryPriceWeight() {
 		return airDeliveryPriceWeight;
 	}
 
-	public void setAirDeliveryPriceWeight(double airDeliveryPriceWeight) {
+	public void setAirDeliveryPriceWeight(boolean airDeliveryPriceWeight) {
 		this.airDeliveryPriceWeight = airDeliveryPriceWeight;
 	}
 
-	public double getSeaDeliveryPriceSize() {
+	public boolean isSeaDeliveryPriceSize() {
 		return seaDeliveryPriceSize;
 	}
 
-	public void setSeaDeliveryPriceSize(double seaDeliveryPriceSize) {
+	public void setSeaDeliveryPriceSize(boolean seaDeliveryPriceSize) {
 		this.seaDeliveryPriceSize = seaDeliveryPriceSize;
 	}
 
-	public double getSeaDeliveryPriceWeight() {
+	public boolean isSeaDeliveryPriceWeight() {
 		return seaDeliveryPriceWeight;
 	}
 
-	public void setSeaDeliveryPriceWeight(double seaDeliveryPriceWeight) {
+	public void setSeaDeliveryPriceWeight(boolean seaDeliveryPriceWeight) {
 		this.seaDeliveryPriceWeight = seaDeliveryPriceWeight;
 	}
 
-	public double getUkraineDeliveryPriceSize() {
+	public boolean isUkraineDeliveryPriceSize() {
 		return ukraineDeliveryPriceSize;
 	}
 
-	public void setUkraineDeliveryPriceSize(double ukraineDeliveryPriceSize) {
+	public void setUkraineDeliveryPriceSize(boolean ukraineDeliveryPriceSize) {
 		this.ukraineDeliveryPriceSize = ukraineDeliveryPriceSize;
 	}
 
-	public double getUkraineDeliveryPriceWeight() {
+	public boolean isUkraineDeliveryPriceWeight() {
 		return ukraineDeliveryPriceWeight;
 	}
 
-	public void setUkraineDeliveryPriceWeight(double ukraineDeliveryPriceWeight) {
+	public void setUkraineDeliveryPriceWeight(boolean ukraineDeliveryPriceWeight) {
 		this.ukraineDeliveryPriceWeight = ukraineDeliveryPriceWeight;
 	}
 
-	public double getKyivDeliveryPriceSize() {
+	public boolean isKyivDeliveryPriceSize() {
 		return kyivDeliveryPriceSize;
 	}
 
-	public void setKyivDeliveryPriceSize(double kyivDeliveryPriceSize) {
+	public void setKyivDeliveryPriceSize(boolean kyivDeliveryPriceSize) {
 		this.kyivDeliveryPriceSize = kyivDeliveryPriceSize;
 	}
-	
-	public double getKyivDeliveryPriceWeight() {
+
+	public boolean isKyivDeliveryPriceWeight() {
 		return kyivDeliveryPriceWeight;
 	}
 
-	public void setKyivDeliveryPriceWeight(double kyivDeliveryPriceWeight) {
+	public void setKyivDeliveryPriceWeight(boolean kyivDeliveryPriceWeight) {
 		this.kyivDeliveryPriceWeight = kyivDeliveryPriceWeight;
 	}
 

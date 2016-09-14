@@ -83,6 +83,64 @@
 	        <td>${product.descriptionOptionVAT}</td>
 	      </tr>
 	</c:if>
+	
+	<c:if test="${ product.ukraineDeliveryPriceSize || product.ukraineDeliveryPriceWeight ||
+			       product.kyivDeliveryPriceSize || product.kyivDeliveryPriceWeight }">	
+	<tr class="delivery">
+		<td colspan="3">
+			<div class="delivery_options">
+				<i class="fa fa-arrow-right"></i>
+				<p class="delivery_options_title">Доставка</p>
+			</div>
+			<div class="delivery_options_body">
+			
+				<input type="hidden" name="delivery_radio_name" class="delivery_radio_name" value="">
+				<input type="hidden" name="delivery_radio_value" class="delivery_radio_value" value="0">
+				
+				<table class="table table-hover table_delivery_options">
+					<tbody>
+
+						<c:if test="${ product.ukraineDeliveryPriceSize || product.ukraineDeliveryPriceWeight }">
+							<tr class="block_product_price">
+								<td><input class="add_price_delivery" type="radio" name="delivery" value="По Украине" id="ukraineDelivery_price">
+						        	<label class="add_price_delivery_title" for="ukraineDelivery_price">По Украине</label>
+						        </td>
+						        <td>
+							    	<label class="add_price_delivery_value">$ <span><fmt:formatNumber type="number" 
+											maxFractionDigits="2" minFractionDigits="2" value="${
+											(product.ukraineDeliveryPriceSize ? product.deliveryWidth * product.deliveryHeight * 
+												product.deliveryDepth * constants.price_ukraine_size : 0) + 
+												(product.ukraineDeliveryPriceWeight ? product.deliveryWeight * constants.price_ukraine_weight : 0)
+											}" /></span>
+									</label>
+								</td>
+							</tr>
+				      	</c:if>
+				      	
+				      	<c:if test="${ product.kyivDeliveryPriceSize || product.kyivDeliveryPriceWeight }">
+							<tr class="block_product_price">
+								<td><input class="add_price_delivery" type="radio" name="delivery" value="По Киеву" id="kyivDelivery_price">
+						        	<label class="add_price_delivery_title" for="kyivDelivery_price">По Киеву</label>
+						        </td>
+						        <td>
+							    	<label class="add_price_delivery_value">$ <span><fmt:formatNumber type="number" 
+											maxFractionDigits="2" minFractionDigits="2" value="${
+											(product.kyivDeliveryPriceSize ? product.deliveryWidth * product.deliveryHeight * 
+												product.deliveryDepth * constants.price_kyiv_size : 0) + 
+												(product.kyivDeliveryPriceWeight ? product.deliveryWeight * constants.price_kyiv_weight : 0)
+											}" /></span>
+									</label>
+								</td>
+							</tr>
+				      	</c:if>
+						
+					</tbody>
+				</table>
+			</div>
+			
+		</td>
+	</tr>
+</c:if>
 
 	<tr class="output_result_of_option">
 		<td style="vertical-align: middle;">Общая стоимость:</td>
@@ -94,7 +152,7 @@
         <td>
         	<i class="fa fa-cart-plus add_to_cart" aria-hidden="true" style="top: 0px; right: -30px; float: none;"
 			onclick="addToCartProductPageRIPaUWP('${type}', ${product.id}, '${product.name}',
-			 '${product.prise}', '${product.pathPictures.get(0)}', getCheckedOption());"></i>		
+			 '${product.prise}', '${product.pathPictures.get(0)}', getCheckedOption(), getCheckedDelivery());"></i>		
         </td>
 	</tr>
 

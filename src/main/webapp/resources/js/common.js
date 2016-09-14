@@ -798,13 +798,14 @@ function createTRInTableForProduct(product){
 
 		}
 	
-	function addToCartProductPageRIPaUWP(typeProduct, idProduct, name, price, picturePath, arrayOfChekedOption){
+	function addToCartProductPageRIPaUWP(typeProduct, idProduct, name, price, 
+			picturePath, arrayOfChekedOption, checkedDelivery){
 		
 		var dataToSend = {
 				'price':price,
 				'pathToPicture':picturePath,
 				'arrayOfCheckedOption':arrayOfChekedOption,
-				'checkedDelivery':null,
+				'checkedDelivery':checkedDelivery,
 				'mapOfPaint':{}
 		};
 		

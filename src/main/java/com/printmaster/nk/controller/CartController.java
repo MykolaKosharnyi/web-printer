@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.printmaster.nk.beans.Cart;
+import com.printmaster.nk.beans.ConstServer;
 import com.printmaster.nk.beans.Delivery;
 import com.printmaster.nk.beans.Paint;
 import com.printmaster.nk.beans.ProductCart;
@@ -42,6 +43,9 @@ public class CartController {
 	
 	@Autowired
 	Cart cart;
+	
+	@Autowired
+	private ConstServer constants;
 	
 	@Autowired
 	private PrinterService printerService;
@@ -351,20 +355,24 @@ public class CartController {
 		double size = product.getDeliveryWidth() * product.getDeliveryHeight() * product.getDeliveryDepth();
 		double weigth = product.getDeliveryWeight();
 		
-		if((size * product.getAirDeliveryPriceSize() > 0) || (weigth * product.getAirDeliveryPriceWeight() > 0)){
-			result.add(returnDelivery("Авиа", size * product.getAirDeliveryPriceSize(), weigth * product.getAirDeliveryPriceWeight(), checkedDelivery));
+		if(product.isAirDeliveryPriceSize() ||  product.isAirDeliveryPriceWeight()){
+			result.add(returnDelivery("Авиа", size * constants.getConstants().get("price_avia_size"),
+					weigth * constants.getConstants().get("price_avia_weight"), checkedDelivery));
 		}
 		
-		if((size * product.getSeaDeliveryPriceSize() > 0) || (weigth * product.getSeaDeliveryPriceWeight() > 0)){
-			result.add(returnDelivery("Морем", size * product.getSeaDeliveryPriceSize(), weigth * product.getSeaDeliveryPriceWeight(), checkedDelivery));
+		if(product.isSeaDeliveryPriceSize() || product.isSeaDeliveryPriceWeight()){
+			result.add(returnDelivery("Морем", size * constants.getConstants().get("price_sea_size"),
+					weigth * constants.getConstants().get("price_sea_weight"), checkedDelivery));
 		}
 		
-		if((size * product.getUkraineDeliveryPriceSize() > 0) || (weigth * product.getUkraineDeliveryPriceWeight() > 0)){
-			result.add(returnDelivery("По Украине", size * product.getUkraineDeliveryPriceSize(), weigth * product.getUkraineDeliveryPriceWeight(), checkedDelivery));
+		if(product.isUkraineDeliveryPriceSize() || product.isUkraineDeliveryPriceWeight()){
+			result.add(returnDelivery("По Украине", size * constants.getConstants().get("price_ukraine_size"),
+					weigth * constants.getConstants().get("price_ukraine_weight"), checkedDelivery));
 		}
 		
-		if((size * product.getKyivDeliveryPriceSize() > 0) || (weigth * product.getKyivDeliveryPriceWeight() > 0)){
-			result.add(returnDelivery("По Киеву", size * product.getKyivDeliveryPriceSize(), weigth * product.getKyivDeliveryPriceWeight(), checkedDelivery));
+		if(product.isKyivDeliveryPriceSize() || product.isKyivDeliveryPriceWeight()){
+			result.add(returnDelivery("По Киеву", size * constants.getConstants().get("price_kyiv_size"),
+					weigth * constants.getConstants().get("price_kyiv_weight"), checkedDelivery));
 		}
 		
 		if((size * product.getVariant1DeliveryPriceSize() > 0) || (weigth * product.getVariant1DeliveryPriceWeight() > 0)){

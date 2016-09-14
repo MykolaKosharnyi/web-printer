@@ -85,6 +85,19 @@ public class LinksAdvise {
 			}
     }
 	
+	@ModelAttribute
+    public void constant(Model model) {
+		logger.info("Add constant to the page.");
+		JSONParser parser = new JSONParser();
+	
+			try {
+				JSONObject jsonObject = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/constant.json"), "UTF-8"));
+				model.addAttribute("constants", jsonObject);
+			} catch (IOException | ParseException e) {
+				e.printStackTrace();
+			}
+    }
+	
 	@InitBinder
     public void initBinder(WebDataBinder binder) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
