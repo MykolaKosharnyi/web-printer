@@ -266,4 +266,9 @@
         <put-attribute name="body" value="/WEB-INF/views/admin/video_on_home_page.jsp" />  
     </definition>
     
+    <!-- CHANGE CONSTANTS -->    
+     <definition name="admin/constants" extends="admin_base">    
+        <put-attribute name="body" value="/WEB-INF/views/admin/constants.jsp" />  
+    </definition>
+    
 </tiles-definitions>  

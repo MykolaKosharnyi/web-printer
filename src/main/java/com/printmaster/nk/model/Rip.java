@@ -148,7 +148,98 @@ private static final long serialVersionUID = 3031695775597440046L;
 	@Column(name="descriptionAddedOption3")
 	protected String descriptionOptionAddedOption3;
 	
+	//Option for delivery	
+	@Column(name="deliveryWidth", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double deliveryWidth;
+					
+	@Column(name="deliveryHeight", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double deliveryHeight;
+					
+	@Column(name="deliveryDepth", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double deliveryDepth;	
+			
+	@Column(name="deliveryWeight", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double deliveryWeight;
+			
+	//on Ukraine		
+	@Column(name="ukraineDeliveryPriceSize", nullable = false, columnDefinition = "bit default 0")
+	protected boolean ukraineDeliveryPriceSize;
+					
+	@Column(name="ukraineDeliveryPriceWeight", nullable = false, columnDefinition = "bit default 0")
+	protected boolean ukraineDeliveryPriceWeight;
+			
+	//on Kyiv
+	@Column(name="kyivDeliveryPriceSize", nullable = false, columnDefinition = "bit default 0")
+	protected boolean kyivDeliveryPriceSize;
+				
+	@Column(name="kyivDeliveryPriceWeight", nullable = false, columnDefinition = "bit default 0")
+	protected boolean kyivDeliveryPriceWeight;
+	
 	public Rip(){}
+	
+	public double getDeliveryWidth() {
+		return deliveryWidth;
+	}
+
+	public void setDeliveryWidth(double deliveryWidth) {
+		this.deliveryWidth = deliveryWidth;
+	}
+
+	public double getDeliveryHeight() {
+		return deliveryHeight;
+	}
+
+	public void setDeliveryHeight(double deliveryHeight) {
+		this.deliveryHeight = deliveryHeight;
+	}
+
+	public double getDeliveryDepth() {
+		return deliveryDepth;
+	}
+
+	public void setDeliveryDepth(double deliveryDepth) {
+		this.deliveryDepth = deliveryDepth;
+	}
+
+	public double getDeliveryWeight() {
+		return deliveryWeight;
+	}
+
+	public void setDeliveryWeight(double deliveryWeight) {
+		this.deliveryWeight = deliveryWeight;
+	}
+
+	public boolean isUkraineDeliveryPriceSize() {
+		return ukraineDeliveryPriceSize;
+	}
+
+	public void setUkraineDeliveryPriceSize(boolean ukraineDeliveryPriceSize) {
+		this.ukraineDeliveryPriceSize = ukraineDeliveryPriceSize;
+	}
+
+	public boolean isUkraineDeliveryPriceWeight() {
+		return ukraineDeliveryPriceWeight;
+	}
+
+	public void setUkraineDeliveryPriceWeight(boolean ukraineDeliveryPriceWeight) {
+		this.ukraineDeliveryPriceWeight = ukraineDeliveryPriceWeight;
+	}
+
+	public boolean isKyivDeliveryPriceSize() {
+		return kyivDeliveryPriceSize;
+	}
+
+	public void setKyivDeliveryPriceSize(boolean kyivDeliveryPriceSize) {
+		this.kyivDeliveryPriceSize = kyivDeliveryPriceSize;
+	}
+
+	public boolean isKyivDeliveryPriceWeight() {
+		return kyivDeliveryPriceWeight;
+	}
+
+	public void setKyivDeliveryPriceWeight(boolean kyivDeliveryPriceWeight) {
+		this.kyivDeliveryPriceWeight = kyivDeliveryPriceWeight;
+	}
 
 	public double getOptionInstallation() {
 		return optionInstallation;

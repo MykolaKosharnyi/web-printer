@@ -344,6 +344,12 @@ public class CartController {
 		} else if(productType.equals("scanner")){
 			return getDelivery( scannerService.getScannerById(productId), checkedDelivery );
 			
+		} else if(productType.equals("use_with_product")){
+			return getDelivery( useWithProductService.getUseWithProductById(productId), checkedDelivery );
+			
+		} else if(productType.equals("rip")){
+			return getDelivery( ripService.getRipById(productId), checkedDelivery );
+			
 		} else {
 			return new ArrayList<Delivery>();
 		}
@@ -388,6 +394,44 @@ public class CartController {
 		if((size * product.getVariant3DeliveryPriceSize() > 0) || (weigth * product.getVariant3DeliveryPriceWeight() > 0)){
 			result.add(returnDelivery(product.getVariant3DeliveryName(), size * product.getVariant3DeliveryPriceSize(), 
 					weigth * product.getVariant3DeliveryPriceWeight(), checkedDelivery));
+		}
+		
+		return result;
+	}
+	
+	private ArrayList<Delivery> getDelivery(Rip product, String checkedDelivery){
+		ArrayList<Delivery> result = new ArrayList<Delivery>();
+		
+		double size = product.getDeliveryWidth() * product.getDeliveryHeight() * product.getDeliveryDepth();
+		double weigth = product.getDeliveryWeight();
+		
+		if(product.isUkraineDeliveryPriceSize() || product.isUkraineDeliveryPriceWeight()){
+			result.add(returnDelivery("По Украине", size * constants.getConstants().get("price_ukraine_size"),
+					weigth * constants.getConstants().get("price_ukraine_weight"), checkedDelivery));
+		}
+		
+		if(product.isKyivDeliveryPriceSize() || product.isKyivDeliveryPriceWeight()){
+			result.add(returnDelivery("По Киеву", size * constants.getConstants().get("price_kyiv_size"),
+					weigth * constants.getConstants().get("price_kyiv_weight"), checkedDelivery));
+		}
+		
+		return result;
+	}
+	
+	private ArrayList<Delivery> getDelivery(UseWithProduct product, String checkedDelivery){
+		ArrayList<Delivery> result = new ArrayList<Delivery>();
+		
+		double size = product.getDeliveryWidth() * product.getDeliveryHeight() * product.getDeliveryDepth();
+		double weigth = product.getDeliveryWeight();
+		
+		if(product.isUkraineDeliveryPriceSize() || product.isUkraineDeliveryPriceWeight()){
+			result.add(returnDelivery("По Украине", size * constants.getConstants().get("price_ukraine_size"),
+					weigth * constants.getConstants().get("price_ukraine_weight"), checkedDelivery));
+		}
+		
+		if(product.isKyivDeliveryPriceSize() || product.isKyivDeliveryPriceWeight()){
+			result.add(returnDelivery("По Киеву", size * constants.getConstants().get("price_kyiv_size"),
+					weigth * constants.getConstants().get("price_kyiv_weight"), checkedDelivery));
 		}
 		
 		return result;
