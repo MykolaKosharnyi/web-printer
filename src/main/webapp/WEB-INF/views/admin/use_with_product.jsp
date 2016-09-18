@@ -80,19 +80,24 @@
 						<form:input path="partNumber" />
 					</div>
 				</div>
-				<div class="characteristic">
-					<div class="block_title">
-						<i></i>
-						<p>Цена</p>
-						<form:errors path="prise" cssClass="error"></form:errors>
-					</div>
-					<ul class="check_boxes">
-						<div class="text_output">
-							<p>$</p><form:input path="prise" class="amount-prise" value="${product.prise}"/>
+				
+   			    <c:if test="${product.typeProduct!='Чернила для струйной печати'}">
+   					<div class="characteristic">
+						<div class="block_title">
+							<i></i>
+							<p>Цена</p>
+							<form:errors path="prise" cssClass="error"></form:errors>
 						</div>
-							<div class="slider-range-prise"></div>
-					</ul>
-				</div>
+						<div class="check_boxes">
+							<div class="text_output">
+								<p>$</p><form:input path="prise" class="amount-prise" value="${product.prise}"/>
+							</div>
+								<div class="slider-range-prise"></div>
+						</div>
+					</div>
+				</c:if>  
+				
+				
 				<div class="characteristic">
 					<div class="block_title">
 						<i></i>
@@ -108,13 +113,13 @@
 						<i></i>
 						<p>Наличие (информация для пользователя)</p>
 					</div>
-					<ul class="check_boxes">
+					<div class="check_boxes">
 						<form:radiobuttons items="${use_with_product.availability}" path="availability" element="li"/>
 						
 						<div class="text_output">
 							<form:input path="availabilitySpecialCase"/>
 						</div>
-					</ul>
+					</div>
 				</div>
 			</div>
 			
@@ -176,7 +181,7 @@
 						<i class="opened"></i>
 						<p>Опции (с заданием цены и описания за дополнительную услугу)</p>
 					</div>
-					<ul class="check_boxes" style="display: block;">
+					<div class="check_boxes" style="display: block;">
 						<div class="text_output">
 							<p class="option_name">Инсталяция:&nbsp;</p>
 							<form:input path="optionInstallation" class="option"/>
@@ -220,7 +225,7 @@
 							<form:errors path="descriptionOptionAddedOption3" cssClass="error"></form:errors>
 						</div>
 						
-					</ul>
+					</div>
 				</div>
 			</div>
 

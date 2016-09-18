@@ -16,14 +16,16 @@
 				<div class="infrotamaton_about_uwp">
 					<a href="<c:url value='/use_with_product/${uwProduct.id}' />">${uwProduct.name}</a>
 					<p><span>Целевое назначение:</span> ${uwProduct.typeProduct}</p>
-					<p><span>Цена:</span>
-						
-						<c:if test="${uwProduct.prise < 0.1}"> уточняйте</c:if>
-						<c:if test="${!(uwProduct.prise < 0.1)}">					
-							   					$<fmt:formatNumber type="number" maxFractionDigits="2"
-								minFractionDigits="2" value="${uwProduct.prise}" />
-						</c:if>
-					</p>
+					<c:if test="${uwProduct.typeProduct!='Чернила для струйной печати'}">
+						<p><span>Цена:</span>
+							
+							<c:if test="${uwProduct.prise < 0.1}"> уточняйте</c:if>
+							<c:if test="${!(uwProduct.prise < 0.1)}">					
+								   					$<fmt:formatNumber type="number" maxFractionDigits="2"
+									minFractionDigits="2" value="${uwProduct.prise}" />
+							</c:if>
+						</p>
+					</c:if>
 					<i style="right:0px; float: right;" class="fa fa-cart-plus add_to_cart" aria-hidden="true" onclick="addToCart('use_with_product', ${uwProduct.id}, '${uwProduct.name}', '${uwProduct.prise}', '${uwProduct.pathPictures.get(0)}');"></i>
 				</div>
 				

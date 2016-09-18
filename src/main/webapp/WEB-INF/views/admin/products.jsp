@@ -41,8 +41,11 @@
 					<td>${product.id}</td>
 					<td>${product.name}</td>
 					<td><img src="/images/${productType}s/${product.id}/${product.pathPictures.get(0)}" alt=""></td>
-					<td>$<fmt:formatNumber type="number" 
-	           			maxFractionDigits="2" minFractionDigits="2" value="${product.prise}" /></td>
+					<td>
+						<c:if test="${product.prise > 0}">
+							$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${product.prise}" />
+						</c:if>				
+	           		</td>
 	           				
 					<td><input type="checkbox" name="showOnSite" <c:if test="${product.showOnSite}">checked</c:if> 
 						onclick="setShowOnSite('${productType}', ${product.id}, this);"/></td>

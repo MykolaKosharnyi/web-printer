@@ -23,7 +23,9 @@
                        <caption></caption> 
                                           
    					   <!-- set price in table row -->
-					   <jsp:include page="../product_page/price.jsp" /> 
+   					   <c:if test="${!empty product.typeProduct && product.typeProduct!='Чернила для струйной печати'}">
+   							<jsp:include page="../product_page/price.jsp" />
+					   </c:if>  
 					   
                        <c:if test="${!empty product.typeProduct}">
    							<tr><td>Тип товара:</td><td>${product.typeProduct}</td></tr>

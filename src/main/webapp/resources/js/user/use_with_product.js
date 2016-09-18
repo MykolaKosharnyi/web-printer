@@ -9,15 +9,28 @@
 	                $(products).each(function(i, product) {
 	                	var outerDiv = $('<div/>');
 
-	                	var slidePrice = $('<p/>').addClass("products_price").append($('<div/>').text("Цена:").css(
-        						{
-        							"float":"left",
-        							"margin-right": "5px"
-        						}));
-        				if(product.prise < 0.1){
-        					slidePrice.append($('<a/>').attr("href","#callback_reklam").addClass('fancybox').text("\u0443\u0442\u043E\u0447\u043D\u044F\u0439\u0442\u0435"));
+	                	var productType = $('<a/>').attr("href", "/use_with_product/" + product.id).addClass("products_title").text(product.name);
+	                	
+	                	var slidePrice = $('<p/>').addClass("products_price");
+        				
+        				if(product.typeProduct!='Чернила для струйной печати'){
+        					slidePrice.append($('<div/>').text("Цена:").css(
+            						{
+            							"float":"left",
+            							"margin-right": "5px"
+            						}));
+        					
+        					if(product.prise < 0.1){
+            					slidePrice.append($('<a/>').attr("href","#callback_reklam").addClass('fancybox').text("\u0443\u0442\u043E\u0447\u043D\u044F\u0439\u0442\u0435"));
+            				} else {
+            					slidePrice.append($('<div/>').text(checkPrise(product.prise)));
+            				}
         				} else {
-        					slidePrice.append($('<div/>').text(checkPrise(product.prise)));
+        					productType.css(
+            						{
+            							"white-space":"normal",
+            							"overflow": "unset"
+            						});
         				}
 	                	
 	                	outerDiv.addClass("products")
@@ -26,7 +39,7 @@
 	                								 .attr("href", "/use_with_product/" + product.id)
 	                								 .append($('<div/>').addClass("outer_a_img").append($('<img/>').attr("src", "/images/use_with_products/" + product.id + "/" + product.pathPictures[0]))))
 	    	                		.append($('<div/>').addClass("name_price_cart_block")
-	    	                				.append($('<a/>').attr("href", "/use_with_product/" + product.id).addClass("products_title").text(product.name))
+	    	                				.append(productType)
 	    	    	                		.append(slidePrice)
 	    	    	                		.append($('<i/>').addClass("fa fa-cart-plus add_to_cart").click(function(){
 	            			                			addToCart('use_with_product', product.id, product.name, product.prise+'', product.pathPictures[0]);

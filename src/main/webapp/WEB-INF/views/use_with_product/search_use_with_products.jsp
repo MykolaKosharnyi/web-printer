@@ -18,7 +18,7 @@
 				<a class="reset" href="<c:url value='/use_with_products' />">
 					СБРОСИТЬ
 				</a>
-	<div id="search_product">
+<div id="search_product">
 	<c:url var="product_search" value="/use_with_products/search" ></c:url>
 	<form:form method="POST" commandName="search" action="${product_search}">
 		<div class="search_criteria">
@@ -48,5 +48,5 @@
 		
 			<a class="accept" href="javascript:void(0)" onclick="$('#search').submit();">ПРИМЕНИТЬ</a>
 			<a class="reset" href="<c:url value='/use_with_products' />">СБРОСИТЬ</a>
-		</form:form>
-	</div>
+	</form:form>
+</div>

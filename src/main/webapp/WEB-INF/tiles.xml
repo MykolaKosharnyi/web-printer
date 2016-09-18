@@ -164,7 +164,7 @@
     <definition name="use_with_products" extends="base"> 
     	<put-attribute name="path" value="/WEB-INF/views/use_with_product/path_user_use_with_products.jsp" />  
         <put-attribute name="search" value="/WEB-INF/views/use_with_product/search_use_with_products.jsp" /> 
-        <put-attribute name="body" value="/WEB-INF/views/products.jsp" />  
+        <put-attribute name="body" value="/WEB-INF/views/use_with_product/products_uwp.jsp" />  
     </definition> 
     
     <definition name="use_with_products/*" extends="use_with_products"> 

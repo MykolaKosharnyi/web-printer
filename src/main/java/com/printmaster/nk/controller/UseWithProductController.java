@@ -341,6 +341,10 @@ public class UseWithProductController {
             //create folder and add to her new pictures
             product.getPathPictures().addAll(componets.createFolderAndWriteToItPictures(directory, concreteFolder, id, files));
 			
+            //if it is PAINT type product
+            if(product.getTypeProduct().equals("Чернила для струйной печати"))
+            	product.setPrise(0);
+            
             this.useWithProductService.updateUseWithProduct(product);
             
             files.clear();
@@ -375,6 +379,10 @@ public class UseWithProductController {
             //create folder and add to her new pictures
             product.getPathPictures().addAll(componets.createFolderAndWriteToItPictures(directory, concreteFolder, id, files));
 			
+            //if it is PAINT type product
+            if(product.getTypeProduct().equals("Чернила для струйной печати"))
+            	product.setPrise(0);
+            
             this.useWithProductService.updateUseWithProduct(product);
             
             files.clear();
@@ -422,6 +430,10 @@ public class UseWithProductController {
 		List<String> pathPictures = useWithProductService.getUseWithProductById(product.getId()).getPathPictures();
 		product.setPathPictures(pathPictures);
         
+		//if it is PAINT type product
+        if(product.getTypeProduct().equals("Чернила для струйной печати"))
+        	product.setPrise(0);
+		
         useWithProductService.updateUseWithProduct(product);
         logger.info("use_with_product with id=" + product.getId() + " was UDPATED!");
 		  
@@ -455,6 +467,10 @@ public class UseWithProductController {
 		List<String> pathPictures = useWithProductService.getUseWithProductById(product.getId()).getPathPictures();
 		product.setPathPictures(pathPictures);
         
+		//if it is PAINT type product
+        if(product.getTypeProduct().equals("Чернила для струйной печати"))
+        	product.setPrise(0);
+		
         useWithProductService.updateUseWithProduct(product);
         logger.info("use_with_product with id=" + product.getId() + " was UDPATED!");
         
