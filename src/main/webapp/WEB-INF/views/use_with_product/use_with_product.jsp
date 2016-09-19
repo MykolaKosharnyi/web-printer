@@ -30,6 +30,9 @@
                        <c:if test="${!empty product.typeProduct}">
    							<tr><td>Тип товара:</td><td>${product.typeProduct}</td></tr>
 					   </c:if> 
+					   <c:if test="${product.typeProduct=='Чернила для струйной печати' && !empty product.typeInk}">
+   							<tr><td>Тип краски:</td><td>${product.typeInk}</td></tr>
+					   </c:if> 
 					   
                   </table>
                   

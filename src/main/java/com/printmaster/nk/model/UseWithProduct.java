@@ -41,6 +41,9 @@ public class UseWithProduct implements Serializable{
 	@Column(name="prise")
 	protected double prise;
 	
+	@Column(name="typeInk")
+	private String typeInk; 
+	
 	@Column(nullable = false, columnDefinition = "bit default 1")
 	protected boolean showOnSite = true;
 	
@@ -142,7 +145,195 @@ public class UseWithProduct implements Serializable{
 	@Column(name="kyivDeliveryPriceWeight", nullable = false, columnDefinition = "bit default 0")
 	protected boolean kyivDeliveryPriceWeight;
 	
+	/* FOR PAINT OPTION SECTION */
+	@Column(name="cyanPaint", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double cyanPaint;//Cyan
+	
+	@Column(name="magentaPaint", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double magentaPaint;//Magenta
+
+	@Column(name="yellowPaint", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double yellowPaint;//Yellow
+	
+	@Column(name="blackPaint", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double blackPaint;//Black
+	
+	@Column(name="lightCyanPaint", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double lightCyanPaint;//Light Cyan
+	
+	@Column(name="lightMagentaPaint", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double lightMagentaPaint;//Light Magenta
+	
+	@Column(name="solventPaint", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double solventPaint;//Solvent
+	
+	@Column(name="matteBlackPaint", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double matteBlackPaint;//Matte black
+	
+	@Column(name="grayPaint", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double grayPaint;//Gray
+	
+	@Column(name="orangePaint", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double orangePaint;//Orange
+	
+	@Column(name="greenPaint", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double greenPaint;//Green
+	
+	@Column(name="variant1NamePaint")
+	protected String variant1NamePaint;//Name paint first custom variant
+	
+	@Column(name="variant1Paint", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double variant1Paint;//First custom variant
+	
+	@Column(name="variant2NamePaint")
+	protected String variant2NamePaint;//Name paint second custom variant
+	
+	@Column(name="variant2Paint", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double variant2Paint;//Second custom variant
+	
+	@Column(name="variant3NamePaint")
+	protected String variant3NamePaint;//Name paint third custom variant
+	
+	@Column(name="variant3Paint", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double variant3Paint;//Third custom variant
+	
 	public UseWithProduct(){}
+
+	public double getCyanPaint() {
+		return cyanPaint;
+	}
+
+	public void setCyanPaint(double cyanPaint) {
+		this.cyanPaint = cyanPaint;
+	}
+
+	public double getMagentaPaint() {
+		return magentaPaint;
+	}
+
+	public void setMagentaPaint(double magentaPaint) {
+		this.magentaPaint = magentaPaint;
+	}
+
+	public double getYellowPaint() {
+		return yellowPaint;
+	}
+
+	public void setYellowPaint(double yellowPaint) {
+		this.yellowPaint = yellowPaint;
+	}
+
+	public double getBlackPaint() {
+		return blackPaint;
+	}
+
+	public void setBlackPaint(double blackPaint) {
+		this.blackPaint = blackPaint;
+	}
+
+	public double getLightCyanPaint() {
+		return lightCyanPaint;
+	}
+
+	public void setLightCyanPaint(double lightCyanPaint) {
+		this.lightCyanPaint = lightCyanPaint;
+	}
+
+	public double getLightMagentaPaint() {
+		return lightMagentaPaint;
+	}
+
+	public void setLightMagentaPaint(double lightMagentaPaint) {
+		this.lightMagentaPaint = lightMagentaPaint;
+	}
+
+	public double getSolventPaint() {
+		return solventPaint;
+	}
+
+	public void setSolventPaint(double solventPaint) {
+		this.solventPaint = solventPaint;
+	}
+
+	public double getMatteBlackPaint() {
+		return matteBlackPaint;
+	}
+
+	public void setMatteBlackPaint(double matteBlackPaint) {
+		this.matteBlackPaint = matteBlackPaint;
+	}
+
+	public double getGrayPaint() {
+		return grayPaint;
+	}
+
+	public void setGrayPaint(double grayPaint) {
+		this.grayPaint = grayPaint;
+	}
+
+	public double getOrangePaint() {
+		return orangePaint;
+	}
+
+	public void setOrangePaint(double orangePaint) {
+		this.orangePaint = orangePaint;
+	}
+
+	public double getGreenPaint() {
+		return greenPaint;
+	}
+
+	public void setGreenPaint(double greenPaint) {
+		this.greenPaint = greenPaint;
+	}
+
+	public String getVariant1NamePaint() {
+		return variant1NamePaint;
+	}
+
+	public void setVariant1NamePaint(String variant1NamePaint) {
+		this.variant1NamePaint = variant1NamePaint;
+	}
+
+	public double getVariant1Paint() {
+		return variant1Paint;
+	}
+
+	public void setVariant1Paint(double variant1Paint) {
+		this.variant1Paint = variant1Paint;
+	}
+
+	public String getVariant2NamePaint() {
+		return variant2NamePaint;
+	}
+
+	public void setVariant2NamePaint(String variant2NamePaint) {
+		this.variant2NamePaint = variant2NamePaint;
+	}
+
+	public double getVariant2Paint() {
+		return variant2Paint;
+	}
+
+	public void setVariant2Paint(double variant2Paint) {
+		this.variant2Paint = variant2Paint;
+	}
+
+	public String getVariant3NamePaint() {
+		return variant3NamePaint;
+	}
+
+	public void setVariant3NamePaint(String variant3NamePaint) {
+		this.variant3NamePaint = variant3NamePaint;
+	}
+
+	public double getVariant3Paint() {
+		return variant3Paint;
+	}
+
+	public void setVariant3Paint(double variant3Paint) {
+		this.variant3Paint = variant3Paint;
+	}
 
 	public double getDeliveryWidth() {
 		return deliveryWidth;
@@ -422,6 +613,14 @@ public class UseWithProduct implements Serializable{
 
 	public void setServiceInformation(String serviceInformation) {
 		this.serviceInformation = serviceInformation;
+	}
+	
+	public String getTypeInk() {
+		return typeInk;
+	}
+
+	public void setTypeInk(String typeInk) {
+		this.typeInk = typeInk;
 	}
 
 	@Override

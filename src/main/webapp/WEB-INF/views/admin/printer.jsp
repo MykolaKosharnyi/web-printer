@@ -777,61 +777,6 @@
 				<div class="characteristic">
 					<div class="block_title">
 						<i></i>
-						<p>Краска</p>
-					</div>
-					<div class="check_boxes">
-					
-							<p class="deliveryWHW">Cyan :&nbsp;</p><form:input path="cyanPaint" class="delivery_option"/>
-							<form:errors path="cyanPaint" cssClass="error"></form:errors><br>
-							
-							<p class="deliveryWHW">Magenta :&nbsp;</p><form:input path="magentaPaint" class="delivery_option"/>
-							<form:errors path="magentaPaint" cssClass="error"></form:errors><br>
-							
-							<p class="deliveryWHW">Yellow :&nbsp;</p><form:input path="yellowPaint" class="delivery_option"/>
-							<form:errors path="yellowPaint" cssClass="error"></form:errors><br>
-							
-							<p class="deliveryWHW">Black :&nbsp;</p><form:input path="blackPaint" class="delivery_option"/>
-							<form:errors path="blackPaint" cssClass="error"></form:errors><br>
-							
-							<p class="deliveryWHW">Light Cyan :&nbsp;</p><form:input path="lightCyanPaint" class="delivery_option"/>
-							<form:errors path="lightCyanPaint" cssClass="error"></form:errors><br>
-							
-							<p class="deliveryWHW">Light Magenta :&nbsp;</p><form:input path="lightMagentaPaint" class="delivery_option"/>
-							<form:errors path="lightMagentaPaint" cssClass="error"></form:errors><br>
-							
-							<p class="deliveryWHW">Solvent :&nbsp;</p><form:input path="solventPaint" class="delivery_option"/>
-							<form:errors path="solventPaint" cssClass="error"></form:errors><br>
-							
-							<p class="deliveryWHW">Matte black :&nbsp;</p><form:input path="matteBlackPaint" class="delivery_option"/>
-							<form:errors path="matteBlackPaint" cssClass="error"></form:errors><br>
-							
-							<p class="deliveryWHW">Gray :&nbsp;</p><form:input path="grayPaint" class="delivery_option"/>
-							<form:errors path="grayPaint" cssClass="error"></form:errors><br>
-							
-							<p class="deliveryWHW">Orange :&nbsp;</p><form:input path="orangePaint" class="delivery_option"/>
-							<form:errors path="orangePaint" cssClass="error"></form:errors><br>
-							
-							<p class="deliveryWHW">Green :&nbsp;</p><form:input path="greenPaint" class="delivery_option"/>
-							<form:errors path="greenPaint" cssClass="error"></form:errors><br>
-							
-							<form:input path="variant1NamePaint" class="paint_option"/>
-							<p class="paint_option"> :&nbsp;</p><form:input path="variant1Paint" class="delivery_option"/>
-							<form:errors path="variant1Paint" cssClass="error"></form:errors><br>
-							
-							<form:input path="variant2NamePaint" class="paint_option"/>
-							<p class="paint_option"> :&nbsp;</p><form:input path="variant2Paint" class="delivery_option"/>
-							<form:errors path="variant2Paint" cssClass="error"></form:errors><br>
-							
-							<form:input path="variant3NamePaint" class="paint_option"/>
-							<p class="paint_option"> :&nbsp;</p><form:input path="variant3Paint" class="delivery_option"/>
-							<form:errors path="variant3Paint" cssClass="error"></form:errors>
-
-					</div>
-				</div>
-				
-				<div class="characteristic">
-					<div class="block_title">
-						<i></i>
 						<p>Гарантия, месяцев</p>
 						<form:errors path="guarantee" cssclass="error"></form:errors>
 					</div>

@@ -799,14 +799,14 @@ function createTRInTableForProduct(product){
 		}
 	
 	function addToCartProductPageRIPaUWP(typeProduct, idProduct, name, price, 
-			picturePath, arrayOfChekedOption, checkedDelivery){
+			picturePath, arrayOfChekedOption, checkedDelivery, mapOfPaint){
 		
 		var dataToSend = {
 				'price':price,
 				'pathToPicture':picturePath,
 				'arrayOfCheckedOption':arrayOfChekedOption,
 				'checkedDelivery':checkedDelivery,
-				'mapOfPaint':{}
+				'mapOfPaint':mapOfPaint
 		};
 		
 		$.ajax({
@@ -825,14 +825,14 @@ function createTRInTableForProduct(product){
 		}
 	
 	function addToCartProductPage(typeProduct, idProduct, name, price,
-								picturePath, arrayOfChekedOption, checkedDelivery, mapOfPaint){
+								picturePath, arrayOfChekedOption, checkedDelivery){
 		
 		var dataToSend = {
 				'price':price,
 				'pathToPicture':picturePath,
 				'arrayOfCheckedOption':arrayOfChekedOption,
 				'checkedDelivery':checkedDelivery,
-				'mapOfPaint':mapOfPaint
+				'mapOfPaint':{}
 		};
 		
 		$.ajax({

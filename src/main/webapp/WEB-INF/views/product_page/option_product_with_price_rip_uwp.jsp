@@ -142,6 +142,471 @@
 	</tr>
 </c:if>
 
+<c:if test="${ (type == 'use_with_product') && (product.typeProduct=='Чернила для струйной печати') && ((product.cyanPaint > 0) || (product.magentaPaint > 0) || (product.yellowPaint > 0) ||
+		       (product.blackPaint > 0) || (product.lightCyanPaint > 0) || (product.lightMagentaPaint > 0) || (product.solventPaint > 0) ||
+		       (product.matteBlackPaint > 0) || (product.grayPaint > 0) || (product.orangePaint > 0) || (product.greenPaint > 0) ||
+		       ((product.variant1Paint > 0) && (product.variant1NamePaint !=null) && (product.variant1NamePaint!='')) ||
+		       ((product.variant2Paint > 0) && (product.variant2NamePaint !=null) && (product.variant2NamePaint!='')) ||
+		       ((product.variant3Paint > 0) && (product.variant3NamePaint !=null) && (product.variant3NamePaint!='')))}">
+	<tr class=paint>
+		<td colspan="3">
+			<div class="paint_options">
+				<i class="fa fa-arrow-right"></i>
+				<p class="paint_options_title">Краска</p>
+			</div>
+			<div class="paint_options_body">
+				<table class="table table-hover table_paint_options">
+					<thead>
+				      <tr>
+				        <th>Тип</th>
+				        <th>Цена за 1л</th>
+				        <th>Количество</th>
+				        <th>Общая стоимость</th>
+				      </tr>
+				    </thead>
+					<tbody>
+						<c:if test="${ product.cyanPaint > 0 }">
+							<tr class="block_product_price">
+								<td><input class="add_price_paint" type="checkbox" value="Cyan" id="cyanPaint_price">
+						        	<label class="add_price_paint_title" for="cyanPaint_price">Cyan</label>
+						        </td>
+						        <td class="paint_price">
+									<label>$ <span><fmt:formatNumber type="number" 
+											maxFractionDigits="2" minFractionDigits="2" value="${product.cyanPaint}" /></span>
+									</label>
+								</td>
+						        <td>
+
+									<span class="dec_value_paint">
+										<i class="fa fa-minus" aria-hidden="true"></i>
+									</span>
+					
+									<input class="quantity_paint"  value="<c:out value="1"/>"></input>
+					
+									<span class="inc_value_paint">
+										<i class="fa fa-plus" aria-hidden="true"></i>
+									</span>
+
+								</td>
+								<td class="add_price_value">
+									<label>$ <span><fmt:formatNumber type="number" 
+											maxFractionDigits="2" minFractionDigits="2" value="${product.cyanPaint}" /></span>
+									</label>
+								</td>
+							</tr>
+						</c:if>	
+						
+						<c:if test="${ product.magentaPaint > 0 }">
+							<tr class="block_product_price">
+								<td><input class="add_price_paint" type="checkbox" value="Magenta" id="MagentaPaint_price">
+						        	<label class="add_price_paint_title" for="MagentaPaint_price">Magenta</label>
+						        </td>
+						        <td class="paint_price">
+									<label>$ <span><fmt:formatNumber type="number" 
+											maxFractionDigits="2" minFractionDigits="2" value="${product.magentaPaint}" /></span>
+									</label>
+								</td>
+						        <td>
+
+									<span class="dec_value_paint">
+										<i class="fa fa-minus" aria-hidden="true"></i>
+									</span>
+					
+									<input class="quantity_paint"  value="<c:out value="1"/>"></input>
+					
+									<span class="inc_value_paint">
+										<i class="fa fa-plus" aria-hidden="true"></i>
+									</span>
+
+								</td>
+								<td class="add_price_value">
+									<label>$ <span><fmt:formatNumber type="number" 
+											maxFractionDigits="2" minFractionDigits="2" value="${product.magentaPaint}" /></span>
+									</label>
+								</td>
+							</tr>
+						</c:if>	
+						
+						<c:if test="${ product.yellowPaint > 0 }">
+							<tr class="block_product_price">
+								<td><input class="add_price_paint" type="checkbox" value="Yellow" id="YellowPaint_price">
+						        	<label class="add_price_paint_title" for="YellowPaint_price">Yellow</label>
+						        </td>
+						        <td class="paint_price">
+									<label>$ <span><fmt:formatNumber type="number" 
+											maxFractionDigits="2" minFractionDigits="2" value="${product.yellowPaint}" /></span>
+									</label>
+								</td>
+						        <td>
+
+									<span class="dec_value_paint">
+										<i class="fa fa-minus" aria-hidden="true"></i>
+									</span>
+					
+									<input class="quantity_paint"  value="<c:out value="1"/>"></input>
+					
+									<span class="inc_value_paint">
+										<i class="fa fa-plus" aria-hidden="true"></i>
+									</span>
+
+								</td>
+								<td class="add_price_value">
+									<label>$ <span><fmt:formatNumber type="number" 
+											maxFractionDigits="2" minFractionDigits="2" value="${product.yellowPaint}" /></span>
+									</label>
+								</td>
+							</tr>
+						</c:if>	
+						
+						<c:if test="${ product.blackPaint > 0 }">
+							<tr class="block_product_price">
+								<td><input class="add_price_paint" type="checkbox" value="Black" id="BlackPaint_price">
+						        	<label class="add_price_paint_title" for="BlackPaint_price">Black</label>
+						        </td>
+						        <td class="paint_price">
+									<label>$ <span><fmt:formatNumber type="number" 
+											maxFractionDigits="2" minFractionDigits="2" value="${product.blackPaint}" /></span>
+									</label>
+								</td>
+						        <td>
+
+									<span class="dec_value_paint">
+										<i class="fa fa-minus" aria-hidden="true"></i>
+									</span>
+					
+									<input class="quantity_paint"  value="<c:out value="1"/>"></input>
+					
+									<span class="inc_value_paint">
+										<i class="fa fa-plus" aria-hidden="true"></i>
+									</span>
+
+								</td>
+								<td class="add_price_value">
+									<label>$ <span><fmt:formatNumber type="number" 
+											maxFractionDigits="2" minFractionDigits="2" value="${product.blackPaint}" /></span>
+									</label>
+								</td>
+							</tr>
+						</c:if>
+						
+						<c:if test="${ product.lightCyanPaint > 0 }">
+							<tr class="block_product_price">
+								<td><input class="add_price_paint" type="checkbox" value="Light Cyan" id="LightCyanPaint_price">
+						        	<label class="add_price_paint_title" for="LightCyanPaint_price">Light Cyan</label>
+						        </td>
+						        <td class="paint_price">
+									<label>$ <span><fmt:formatNumber type="number" 
+											maxFractionDigits="2" minFractionDigits="2" value="${product.lightCyanPaint}" /></span>
+									</label>
+								</td>
+						        <td>
+
+									<span class="dec_value_paint">
+										<i class="fa fa-minus" aria-hidden="true"></i>
+									</span>
+					
+									<input class="quantity_paint"  value="<c:out value="1"/>"></input>
+					
+									<span class="inc_value_paint">
+										<i class="fa fa-plus" aria-hidden="true"></i>
+									</span>
+
+								</td>
+								<td class="add_price_value">
+									<label>$ <span><fmt:formatNumber type="number" 
+											maxFractionDigits="2" minFractionDigits="2" value="${product.lightCyanPaint}" /></span>
+									</label>
+								</td>
+							</tr>
+						</c:if>
+						
+						<c:if test="${ product.lightMagentaPaint > 0 }">
+							<tr class="block_product_price">
+								<td><input class="add_price_paint" type="checkbox" value="Light Magenta" id="LightMagentaPaint_price">
+						        	<label class="add_price_paint_title" for="LightMagentaPaint_price">Light Magenta</label>
+						        </td>
+						        <td class="paint_price">
+									<label>$ <span><fmt:formatNumber type="number" 
+											maxFractionDigits="2" minFractionDigits="2" value="${product.lightMagentaPaint}" /></span>
+									</label>
+								</td>
+						        <td>
+
+									<span class="dec_value_paint">
+										<i class="fa fa-minus" aria-hidden="true"></i>
+									</span>
+					
+									<input class="quantity_paint"  value="<c:out value="1"/>"></input>
+					
+									<span class="inc_value_paint">
+										<i class="fa fa-plus" aria-hidden="true"></i>
+									</span>
+
+								</td>
+								<td class="add_price_value">
+									<label>$ <span><fmt:formatNumber type="number" 
+											maxFractionDigits="2" minFractionDigits="2" value="${product.lightMagentaPaint}" /></span>
+									</label>
+								</td>
+							</tr>
+						</c:if>
+						
+						<c:if test="${ product.solventPaint > 0 }">
+							<tr class="block_product_price">
+								<td><input class="add_price_paint" type="checkbox" value="Solvent" id="SolventPaint_price">
+						        	<label class="add_price_paint_title" for="SolventPaint_price">Solvent</label>
+						        </td>
+						        <td class="paint_price">
+									<label>$ <span><fmt:formatNumber type="number" 
+											maxFractionDigits="2" minFractionDigits="2" value="${product.solventPaint}" /></span>
+									</label>
+								</td>
+						        <td>
+
+									<span class="dec_value_paint">
+										<i class="fa fa-minus" aria-hidden="true"></i>
+									</span>
+					
+									<input class="quantity_paint"  value="<c:out value="1"/>"></input>
+					
+									<span class="inc_value_paint">
+										<i class="fa fa-plus" aria-hidden="true"></i>
+									</span>
+
+								</td>
+								<td class="add_price_value">
+									<label>$ <span><fmt:formatNumber type="number" 
+											maxFractionDigits="2" minFractionDigits="2" value="${product.solventPaint}" /></span>
+									</label>
+								</td>
+							</tr>
+						</c:if>
+						
+						<c:if test="${ product.matteBlackPaint > 0 }">
+							<tr class="block_product_price">
+								<td><input class="add_price_paint" type="checkbox" value="Matte black" id="MatteblackPaint_price">
+						        	<label class="add_price_paint_title" for="MatteblackPaint_price">Matte black</label>
+						        </td>
+						        <td class="paint_price">
+									<label>$ <span><fmt:formatNumber type="number" 
+											maxFractionDigits="2" minFractionDigits="2" value="${product.matteBlackPaint}" /></span>
+									</label>
+								</td>
+						        <td>
+
+									<span class="dec_value_paint">
+										<i class="fa fa-minus" aria-hidden="true"></i>
+									</span>
+					
+									<input class="quantity_paint"  value="<c:out value="1"/>"></input>
+					
+									<span class="inc_value_paint">
+										<i class="fa fa-plus" aria-hidden="true"></i>
+									</span>
+
+								</td>
+								<td class="add_price_value">
+									<label>$ <span><fmt:formatNumber type="number" 
+											maxFractionDigits="2" minFractionDigits="2" value="${product.matteBlackPaint}" /></span>
+									</label>
+								</td>
+							</tr>
+						</c:if>
+						
+						<c:if test="${ product.grayPaint > 0 }">
+							<tr class="block_product_price">
+								<td><input class="add_price_paint" type="checkbox" value="Gray" id="GrayPaint_price">
+						        	<label class="add_price_paint_title" for="GrayPaint_price">Gray</label>
+						        </td>
+						        <td class="paint_price">
+									<label>$ <span><fmt:formatNumber type="number" 
+											maxFractionDigits="2" minFractionDigits="2" value="${product.grayPaint}" /></span>
+									</label>
+								</td>
+						        <td>
+
+									<span class="dec_value_paint">
+										<i class="fa fa-minus" aria-hidden="true"></i>
+									</span>
+					
+									<input class="quantity_paint"  value="<c:out value="1"/>"></input>
+					
+									<span class="inc_value_paint">
+										<i class="fa fa-plus" aria-hidden="true"></i>
+									</span>
+
+								</td>
+								<td class="add_price_value">
+									<label>$ <span><fmt:formatNumber type="number" 
+											maxFractionDigits="2" minFractionDigits="2" value="${product.grayPaint}" /></span>
+									</label>
+								</td>
+							</tr>
+						</c:if>
+						
+						<c:if test="${ product.orangePaint > 0 }">
+							<tr class="block_product_price">
+								<td><input class="add_price_paint" type="checkbox" value="Orange" id="OrangePaint_price">
+						        	<label class="add_price_paint_title" for="OrangePaint_price">Orange</label>
+						        </td>
+						        <td class="paint_price">
+									<label>$ <span><fmt:formatNumber type="number" 
+											maxFractionDigits="2" minFractionDigits="2" value="${product.orangePaint}" /></span>
+									</label>
+								</td>
+						        <td>
+
+									<span class="dec_value_paint">
+										<i class="fa fa-minus" aria-hidden="true"></i>
+									</span>
+					
+									<input class="quantity_paint"  value="<c:out value="1"/>"></input>
+					
+									<span class="inc_value_paint">
+										<i class="fa fa-plus" aria-hidden="true"></i>
+									</span>
+
+								</td>
+								<td class="add_price_value">
+									<label>$ <span><fmt:formatNumber type="number" 
+											maxFractionDigits="2" minFractionDigits="2" value="${product.orangePaint}" /></span>
+									</label>
+								</td>
+							</tr>
+						</c:if>
+						
+						<c:if test="${ product.greenPaint > 0 }">
+							<tr class="block_product_price">
+								<td><input class="add_price_paint" type="checkbox" value="Green" id="GreenPaint_price">
+						        	<label class="add_price_paint_title" for="GreenPaint_price">Green</label>
+						        </td>
+						        <td class="paint_price">
+									<label>$ <span><fmt:formatNumber type="number" 
+											maxFractionDigits="2" minFractionDigits="2" value="${product.greenPaint}" /></span>
+									</label>
+								</td>
+						        <td>
+
+									<span class="dec_value_paint">
+										<i class="fa fa-minus" aria-hidden="true"></i>
+									</span>
+					
+									<input class="quantity_paint"  value="<c:out value="1"/>"></input>
+					
+									<span class="inc_value_paint">
+										<i class="fa fa-plus" aria-hidden="true"></i>
+									</span>
+
+								</td>
+								<td class="add_price_value">
+									<label>$ <span><fmt:formatNumber type="number" 
+											maxFractionDigits="2" minFractionDigits="2" value="${product.greenPaint}" /></span>
+									</label>
+								</td>
+							</tr>
+						</c:if>
+						
+						<c:if test="${ (product.variant1Paint > 0) && (product.variant1NamePaint !=null) && (product.variant1NamePaint!='') }">
+							<tr class="block_product_price">
+								<td><input class="add_price_paint" type="checkbox" value="${product.variant1NamePaint}" id="variant1NamePaint_price">
+						        	<label class="add_price_paint_title" for="variant1NamePaint_price">${product.variant1NamePaint}</label>
+						        </td>
+						        <td class="paint_price">
+									<label>$ <span><fmt:formatNumber type="number" 
+											maxFractionDigits="2" minFractionDigits="2" value="${product.variant1Paint}" /></span>
+									</label>
+								</td>
+						        <td>
+
+									<span class="dec_value_paint">
+										<i class="fa fa-minus" aria-hidden="true"></i>
+									</span>
+					
+									<input class="quantity_paint"  value="<c:out value="1"/>"></input>
+					
+									<span class="inc_value_paint">
+										<i class="fa fa-plus" aria-hidden="true"></i>
+									</span>
+
+								</td>
+								<td class="add_price_value">
+									<label>$ <span><fmt:formatNumber type="number" 
+											maxFractionDigits="2" minFractionDigits="2" value="${product.variant1Paint}" /></span>
+									</label>
+								</td>
+							</tr>
+						</c:if>
+						
+						<c:if test="${ (product.variant2Paint > 0) && (product.variant2NamePaint !=null) && (product.variant2NamePaint!='') }">
+							<tr class="block_product_price">
+								<td><input class="add_price_paint" type="checkbox" value="${product.variant2NamePaint}" id="variant2NamePaint_price">
+						        	<label class="add_price_paint_title" for="variant2NamePaint_price">${product.variant2NamePaint}</label>
+						        </td>
+						        <td class="paint_price">
+									<label>$ <span><fmt:formatNumber type="number" 
+											maxFractionDigits="2" minFractionDigits="2" value="${product.variant2Paint}" /></span>
+									</label>
+								</td>
+						        <td>
+
+									<span class="dec_value_paint">
+										<i class="fa fa-minus" aria-hidden="true"></i>
+									</span>
+					
+									<input class="quantity_paint"  value="<c:out value="1"/>"></input>
+					
+									<span class="inc_value_paint">
+										<i class="fa fa-plus" aria-hidden="true"></i>
+									</span>
+
+								</td>
+								<td class="add_price_value">
+									<label>$ <span><fmt:formatNumber type="number" 
+											maxFractionDigits="2" minFractionDigits="2" value="${product.variant2Paint}" /></span>
+									</label>
+								</td>
+							</tr>
+						</c:if>
+						
+						<c:if test="${ (product.variant3Paint > 0) && (product.variant3NamePaint !=null) && (product.variant3NamePaint!='') }">
+							<tr class="block_product_price">
+								<td><input class="add_price_paint" type="checkbox" value="${product.variant3NamePaint}" id="variant3NamePaint_price">
+						        	<label class="add_price_paint_title" for="variant3NamePaint_price">${product.variant3NamePaint}</label>
+						        </td>
+						        <td class="paint_price">
+									<label>$ <span><fmt:formatNumber type="number" 
+											maxFractionDigits="2" minFractionDigits="2" value="${product.variant3Paint}" /></span>
+									</label>
+								</td>
+						        <td>
+
+									<span class="dec_value_paint">
+										<i class="fa fa-minus" aria-hidden="true"></i>
+									</span>
+					
+									<input class="quantity_paint"  value="<c:out value="1"/>"></input>
+					
+									<span class="inc_value_paint">
+										<i class="fa fa-plus" aria-hidden="true"></i>
+									</span>
+
+								</td>
+								<td class="add_price_value">
+									<label>$ <span><fmt:formatNumber type="number" maxFractionDigits="2" 
+										minFractionDigits="2" value="${product.variant3Paint}" /></span>
+									</label>
+								</td>
+							</tr>
+						</c:if>
+
+					</tbody>
+				</table>
+			</div>
+			
+		</td>
+	</tr>
+</c:if>
+
 	<tr class="output_result_of_option">
 		<td style="vertical-align: middle;">Общая стоимость:</td>
         <td style="vertical-align: middle;">
@@ -152,7 +617,7 @@
         <td>
         	<i class="fa fa-cart-plus add_to_cart" aria-hidden="true" style="top: 0px; right: -30px; float: none;"
 			onclick="addToCartProductPageRIPaUWP('${type}', ${product.id}, '${product.name}',
-			 '${product.prise}', '${product.pathPictures.get(0)}', getCheckedOption(), getCheckedDelivery());"></i>		
+			 '${product.prise}', '${product.pathPictures.get(0)}', getCheckedOption(), getCheckedDelivery(), getCheckedPaint());"></i>		
         </td>
 	</tr>
 

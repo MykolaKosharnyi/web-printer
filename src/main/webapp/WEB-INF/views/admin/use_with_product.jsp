@@ -95,10 +95,9 @@
 								<div class="slider-range-prise"></div>
 						</div>
 					</div>
-				</c:if>  
+				</c:if>  		
 				
-				
-				<div class="characteristic">
+				<div class="characteristic type_product_uwp">
 					<div class="block_title">
 						<i></i>
 						<p>Тип товара</p>
@@ -108,6 +107,72 @@
 						<form:radiobuttons items="${use_with_product.type_product}" path="typeProduct" element="li"/>
 					</ul>
 				</div>
+				
+				<div class="characteristic checked_ink_type_product" style="display:none;">
+					<div class="block_title">
+						<i></i>
+						<p>Тип краски</p>
+					</div>
+					<ul class="check_boxes">
+						<form:radiobuttons items="${use_with_product.type_ink}" path="typeInk" element="li"/>
+					</ul>
+				</div>
+				
+				<div class="characteristic checked_ink_type_product" style="display:none;">
+					<div class="block_title">
+						<i></i>
+						<p>Краска</p>
+					</div>
+					<div class="check_boxes">
+					
+							<p class="deliveryWHW">Cyan :&nbsp;</p><form:input path="cyanPaint" class="delivery_option"/>
+							<form:errors path="cyanPaint" cssClass="error"></form:errors><br>
+							
+							<p class="deliveryWHW">Magenta :&nbsp;</p><form:input path="magentaPaint" class="delivery_option"/>
+							<form:errors path="magentaPaint" cssClass="error"></form:errors><br>
+							
+							<p class="deliveryWHW">Yellow :&nbsp;</p><form:input path="yellowPaint" class="delivery_option"/>
+							<form:errors path="yellowPaint" cssClass="error"></form:errors><br>
+							
+							<p class="deliveryWHW">Black :&nbsp;</p><form:input path="blackPaint" class="delivery_option"/>
+							<form:errors path="blackPaint" cssClass="error"></form:errors><br>
+							
+							<p class="deliveryWHW">Light Cyan :&nbsp;</p><form:input path="lightCyanPaint" class="delivery_option"/>
+							<form:errors path="lightCyanPaint" cssClass="error"></form:errors><br>
+							
+							<p class="deliveryWHW">Light Magenta :&nbsp;</p><form:input path="lightMagentaPaint" class="delivery_option"/>
+							<form:errors path="lightMagentaPaint" cssClass="error"></form:errors><br>
+							
+							<p class="deliveryWHW">Solvent :&nbsp;</p><form:input path="solventPaint" class="delivery_option"/>
+							<form:errors path="solventPaint" cssClass="error"></form:errors><br>
+							
+							<p class="deliveryWHW">Matte black :&nbsp;</p><form:input path="matteBlackPaint" class="delivery_option"/>
+							<form:errors path="matteBlackPaint" cssClass="error"></form:errors><br>
+							
+							<p class="deliveryWHW">Gray :&nbsp;</p><form:input path="grayPaint" class="delivery_option"/>
+							<form:errors path="grayPaint" cssClass="error"></form:errors><br>
+							
+							<p class="deliveryWHW">Orange :&nbsp;</p><form:input path="orangePaint" class="delivery_option"/>
+							<form:errors path="orangePaint" cssClass="error"></form:errors><br>
+							
+							<p class="deliveryWHW">Green :&nbsp;</p><form:input path="greenPaint" class="delivery_option"/>
+							<form:errors path="greenPaint" cssClass="error"></form:errors><br>
+							
+							<form:input path="variant1NamePaint" class="paint_option"/>
+							<p class="paint_option"> :&nbsp;</p><form:input path="variant1Paint" class="delivery_option"/>
+							<form:errors path="variant1Paint" cssClass="error"></form:errors><br>
+							
+							<form:input path="variant2NamePaint" class="paint_option"/>
+							<p class="paint_option"> :&nbsp;</p><form:input path="variant2Paint" class="delivery_option"/>
+							<form:errors path="variant2Paint" cssClass="error"></form:errors><br>
+							
+							<form:input path="variant3NamePaint" class="paint_option"/>
+							<p class="paint_option"> :&nbsp;</p><form:input path="variant3Paint" class="delivery_option"/>
+							<form:errors path="variant3Paint" cssClass="error"></form:errors>
+
+					</div>
+				</div>
+				
 				<div class="characteristic">
 					<div class="block_title">
 						<i></i>
@@ -278,5 +343,30 @@
 	
 	<jsp:include page="product/js_code.jsp" />
 	
+	
+	<script type="text/javascript">
+		$(document).ready(function() {
+			
+			if($('.type_product_uwp ul.check_boxes input:radio:checked').val()=='Чернила для струйной печати'){
+				$('.checked_ink_type_product').each(function(){
+					$(this).css("display", "block");
+				});
+			}
+		});
+		
+		$(document).on("click", '.type_product_uwp ul.check_boxes input:radio', function(){
+			if($(this).val()=='Чернила для струйной печати'){
+				$('.checked_ink_type_product').each(function(){
+					$(this).slideDown(500);
+				});
+			} else {
+				$('.checked_ink_type_product').each(function(){
+					$(this).slideUp(500);
+				});
+			}
+			
+		});
+		
+	</script>
 </body>
 </html>

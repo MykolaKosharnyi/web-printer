@@ -22,7 +22,6 @@ import com.printmaster.nk.beans.Delivery;
 import com.printmaster.nk.beans.Paint;
 import com.printmaster.nk.beans.ProductCart;
 import com.printmaster.nk.model.Option;
-import com.printmaster.nk.model.Printer;
 import com.printmaster.nk.model.Product;
 import com.printmaster.nk.model.Rip;
 import com.printmaster.nk.model.UseWithProduct;
@@ -238,73 +237,75 @@ public class CartController {
 	
 	private ArrayList<Paint> addPaint(String productType, long productId, Map<String, Integer> checkedPaint){
 		
-		if(productType.equals("printer")){
-			return getPaint( printerService.getPrinterById(productId), checkedPaint );
+		if(productType.equals("use_with_product")){
+			return getPaint( useWithProductService.getUseWithProductById(productId), checkedPaint );
 		} else {
 			return new ArrayList<Paint>();
 		}
 
 	}
 	
-	private ArrayList<Paint> getPaint(Printer product, Map<String, Integer> checkedPaint){
+	private ArrayList<Paint> getPaint(UseWithProduct product, Map<String, Integer> checkedPaint){
 		ArrayList<Paint> result = new ArrayList<Paint>();
 		
-		if(product.getCyanPaint() > 0){
-			result.add(returnPaint("Cyan", product.getCyanPaint(), checkedPaint));
-		}
-		
-		if(product.getMagentaPaint() > 0){
-			result.add(returnPaint("Magenta", product.getMagentaPaint(), checkedPaint));
-		}
-		
-		if(product.getYellowPaint() > 0){
-			result.add(returnPaint("Yellow", product.getYellowPaint(), checkedPaint));
-		}
-		
-		if(product.getBlackPaint() > 0){
-			result.add(returnPaint("Black", product.getBlackPaint(), checkedPaint));
-		}
-		
-		if(product.getLightCyanPaint() > 0){
-			result.add(returnPaint("Light Cyan", product.getLightCyanPaint(), checkedPaint));
-		}
-		
-		if(product.getLightMagentaPaint() > 0){
-			result.add(returnPaint("Light Magenta", product.getLightMagentaPaint(), checkedPaint));
-		}
-		
-		if(product.getSolventPaint() > 0){
-			result.add(returnPaint("Solvent", product.getSolventPaint(), checkedPaint));
-		}
-		
-		if(product.getMatteBlackPaint() > 0){
-			result.add(returnPaint("Matte black", product.getMatteBlackPaint(), checkedPaint));
-		}
-		
-		if(product.getGrayPaint() > 0){
-			result.add(returnPaint("Gray", product.getGrayPaint(), checkedPaint));
-		}
-		
-		if(product.getOrangePaint() > 0){
-			result.add(returnPaint("Orange", product.getOrangePaint(), checkedPaint));
-		}
-		
-		if(product.getGreenPaint() > 0){
-			result.add(returnPaint("Green", product.getGreenPaint(), checkedPaint));
+		if(product.getTypeProduct().equals("Чернила для струйной печати")){
+			if(product.getCyanPaint() > 0){
+				result.add(returnPaint("Cyan", product.getCyanPaint(), checkedPaint));
+			}
+			
+			if(product.getMagentaPaint() > 0){
+				result.add(returnPaint("Magenta", product.getMagentaPaint(), checkedPaint));
+			}
+			
+			if(product.getYellowPaint() > 0){
+				result.add(returnPaint("Yellow", product.getYellowPaint(), checkedPaint));
+			}
+			
+			if(product.getBlackPaint() > 0){
+				result.add(returnPaint("Black", product.getBlackPaint(), checkedPaint));
+			}
+			
+			if(product.getLightCyanPaint() > 0){
+				result.add(returnPaint("Light Cyan", product.getLightCyanPaint(), checkedPaint));
+			}
+			
+			if(product.getLightMagentaPaint() > 0){
+				result.add(returnPaint("Light Magenta", product.getLightMagentaPaint(), checkedPaint));
+			}
+			
+			if(product.getSolventPaint() > 0){
+				result.add(returnPaint("Solvent", product.getSolventPaint(), checkedPaint));
+			}
+			
+			if(product.getMatteBlackPaint() > 0){
+				result.add(returnPaint("Matte black", product.getMatteBlackPaint(), checkedPaint));
+			}
+			
+			if(product.getGrayPaint() > 0){
+				result.add(returnPaint("Gray", product.getGrayPaint(), checkedPaint));
+			}
+			
+			if(product.getOrangePaint() > 0){
+				result.add(returnPaint("Orange", product.getOrangePaint(), checkedPaint));
+			}
+			
+			if(product.getGreenPaint() > 0){
+				result.add(returnPaint("Green", product.getGreenPaint(), checkedPaint));
+			}
+
+			if((product.getVariant1Paint() > 0) && (product.getVariant1NamePaint() != null) && (product.getVariant1NamePaint() != "") ){
+				result.add(returnPaint( product.getVariant1NamePaint(), product.getVariant1Paint(), checkedPaint ));
+			}
+			
+			if((product.getVariant2Paint() > 0) && (product.getVariant2NamePaint() != null) && (product.getVariant2NamePaint() != "") ){
+				result.add(returnPaint( product.getVariant2NamePaint(), product.getVariant2Paint(), checkedPaint ));
+			}
+			
+			if((product.getVariant3Paint() > 0) && (product.getVariant3NamePaint() != null) && (product.getVariant3NamePaint() != "") ){
+				result.add(returnPaint( product.getVariant3NamePaint(), product.getVariant3Paint(), checkedPaint ));
+			}
 		}
 
-		if((product.getVariant1Paint() > 0) && (product.getVariant1NamePaint() != null) && (product.getVariant1NamePaint() != "") ){
-			result.add(returnPaint( product.getVariant1NamePaint(), product.getVariant1Paint(), checkedPaint ));
-		}
-		
-		if((product.getVariant2Paint() > 0) && (product.getVariant2NamePaint() != null) && (product.getVariant2NamePaint() != "") ){
-			result.add(returnPaint( product.getVariant2NamePaint(), product.getVariant2Paint(), checkedPaint ));
-		}
-		
-		if((product.getVariant3Paint() > 0) && (product.getVariant3NamePaint() != null) && (product.getVariant3NamePaint() != "") ){
-			result.add(returnPaint( product.getVariant3NamePaint(), product.getVariant3Paint(), checkedPaint ));
-		}
-		
 		return result;
 	}
 	
