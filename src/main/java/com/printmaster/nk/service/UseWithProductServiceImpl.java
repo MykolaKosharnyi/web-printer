@@ -68,5 +68,11 @@ public class UseWithProductServiceImpl implements UseWithProductService {
 	public Set<UseWithProduct> getUseWithProductsByIds(long[] p) {
 		return this.productDAO.getProductsByIds(p);
 	}
+	
+	@Override
+	@Transactional
+	public Set<UseWithProduct> getPrintersByTypeInk(String[] typeInk){
+		return this.productDAO.getPrintersByTypeInk(typeInk);
+	}
 
 }

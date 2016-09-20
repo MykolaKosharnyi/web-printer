@@ -16,5 +16,6 @@ public interface UseWithProductService {
     public UseWithProduct getUseWithProductById(long id);
     public Set<UseWithProduct> getUseWithProductsByIds(long[] p);
     public void removeUseWithProduct(long id);
+    public Set<UseWithProduct> getPrintersByTypeInk(String[] typeInk);
 	
 }

@@ -153,7 +153,7 @@
     <definition name="rips" extends="base"> 
     	<put-attribute name="path" value="/WEB-INF/views/rip/path_user_rips.jsp" />  
         <put-attribute name="search" value="/WEB-INF/views/rip/search_rips.jsp" /> 
-        <put-attribute name="body" value="/WEB-INF/views/rip/rips.jsp" />  
+        <put-attribute name="body" value="/WEB-INF/views/products.jsp" />  
     </definition>   
     
     <definition name="rip" extends="base">

@@ -9,8 +9,10 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 import javax.validation.Valid;
 
@@ -42,6 +44,7 @@ import com.printmaster.nk.beans.LinksForProducts;
 import com.printmaster.nk.beans.PicturesContainer;
 import com.printmaster.nk.model.Printer;
 import com.printmaster.nk.model.SearchPrinters;
+import com.printmaster.nk.model.UseWithProduct;
 import com.printmaster.nk.service.PrinterService;
 import com.printmaster.nk.service.UseWithProductService;
 
@@ -179,11 +182,29 @@ public class PrinterController {
         Printer product = printerService.getPrinterById(id);
         model.addAttribute("product", product);
         model.addAttribute("type", "printer");
-        if(product.getIdUseWithProduct()!=null){
-        	model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(useWithProductService.getUseWithProductsByIds(product.getIdUseWithProduct())));
+        
+        if(product.getIdUseWithProduct()!=null || product.getCompatibleInk()!=null){
+	        Set<UseWithProduct> useWithThisProduct = new LinkedHashSet<UseWithProduct>();
+	        
+	        //get checked USE WITH PRODUCT from admin page
+	        if(product.getIdUseWithProduct()!=null){
+	        	useWithThisProduct.addAll(useWithProductService.getUseWithProductsByIds(product.getIdUseWithProduct()));
+	        }
+	        
+	        //get PAIN to product by COMPATIBLE INK in printer
+	        if(product.getCompatibleInk()!=null){
+	        	useWithThisProduct.addAll(useWithProductService.getPrintersByTypeInk(product.getCompatibleInk()));
+	        }
+	  
+	        model.addAttribute("uwp", useWithThisProduct);
         } else {
         	model.addAttribute("uwp", null);
         }
+//        if(product.getIdUseWithProduct()!=null){
+//        	model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(useWithProductService.getUseWithProductsByIds(product.getIdUseWithProduct())));
+//        } else {
+//        	model.addAttribute("uwp", null);
+//        }
         return "printer";
     }
     

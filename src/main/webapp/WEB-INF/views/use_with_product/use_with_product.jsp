@@ -43,9 +43,13 @@
             <div id="tabs_product">
                 <ul id="sub_tabs_product">
                     <li>Описание</li>
+                    <li>Отзывы</li>
                 </ul>
                 <div>
                     <div id="output_description">${product.description}</div>
+                    
+                    <!-- comments to this product -->
+                    <jsp:include page="../product_page/comments.jsp" />
                 </div>            
             </div> 
 </div>

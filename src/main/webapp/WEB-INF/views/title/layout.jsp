@@ -319,6 +319,7 @@
 	<script src="<%=request.getContextPath()%>/resources/libs/landing-nav/navigation.js"></script>
 	<script src="<%=request.getContextPath()%>/resources/js/js.cookie.js"></script>
 	
+	<script src="<%=request.getContextPath()%>/resources/js/cart.js"></script>
 	<script src="<%=request.getContextPath()%>/resources/js/common.js"></script>
 	<script src="<%=request.getContextPath()%>/resources/js/user/title.js"></script>
 

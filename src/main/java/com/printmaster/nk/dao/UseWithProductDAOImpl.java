@@ -323,4 +323,27 @@ public class UseWithProductDAOImpl  implements UseWithProductDAO{
 			return new LinkedHashSet<UseWithProduct>(cr.list());
 		}
 	
+		@SuppressWarnings("unchecked")
+		@Override
+		public Set<UseWithProduct> getPrintersByTypeInk(String[] typeInk){
+			
+			if(typeInk!= null && (typeInk.length > 0)){
+				
+				Session session = this.sessionFactory.getCurrentSession();
+				Criteria cr = session.createCriteria(UseWithProduct.class);
+				
+				cr.add(Restrictions.eq("typeProduct", "Чернила для струйной печати"));
+				
+				Junction searchForTypeInk = Restrictions.disjunction();
+				for(String ink : typeInk){
+					searchForTypeInk.add(Restrictions.eq("typeInk", ink));
+				}
+				cr.add(searchForTypeInk);
+				
+				return new LinkedHashSet<UseWithProduct>(cr.list());
+			} else {
+				return new LinkedHashSet<UseWithProduct>();
+			}
+			
+		}
 }

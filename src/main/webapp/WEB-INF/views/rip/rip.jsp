@@ -73,7 +73,9 @@
                   </table>
                   </div>
                     
-                    <div>Третье содержимое</div>
+                    <!-- comments to this product -->
+                    <jsp:include page="../product_page/comments.jsp" />
+
                 </div>            
             </div> 
         </div>

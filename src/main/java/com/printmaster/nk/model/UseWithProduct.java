@@ -627,20 +627,11 @@ public class UseWithProduct implements Serializable{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((description == null) ? 0 : description.hashCode());
-		result = prime * result + ((descriptionEng == null) ? 0 : descriptionEng.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((partNumber == null) ? 0 : partNumber.hashCode());
-		result = prime * result + ((pathPictures == null) ? 0 : pathPictures.hashCode());
 		long temp;
 		temp = Double.doubleToLongBits(prise);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + ((serviceInformation == null) ? 0 : serviceInformation.hashCode());
-		result = prime * result + (showOnHomePage ? 1231 : 1237);
-		result = prime * result + (showOnLeftSide ? 1231 : 1237);
-		result = prime * result + (showOnSite ? 1231 : 1237);
-		result = prime * result + ((typeProduct == null) ? 0 : typeProduct.hashCode());
 		return result;
 	}
 
@@ -653,16 +644,6 @@ public class UseWithProduct implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		UseWithProduct other = (UseWithProduct) obj;
-		if (description == null) {
-			if (other.description != null)
-				return false;
-		} else if (!description.equals(other.description))
-			return false;
-		if (descriptionEng == null) {
-			if (other.descriptionEng != null)
-				return false;
-		} else if (!descriptionEng.equals(other.descriptionEng))
-			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -673,33 +654,7 @@ public class UseWithProduct implements Serializable{
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
-		if (partNumber == null) {
-			if (other.partNumber != null)
-				return false;
-		} else if (!partNumber.equals(other.partNumber))
-			return false;
-		if (pathPictures == null) {
-			if (other.pathPictures != null)
-				return false;
-		} else if (!pathPictures.equals(other.pathPictures))
-			return false;
 		if (Double.doubleToLongBits(prise) != Double.doubleToLongBits(other.prise))
-			return false;
-		if (serviceInformation == null) {
-			if (other.serviceInformation != null)
-				return false;
-		} else if (!serviceInformation.equals(other.serviceInformation))
-			return false;
-		if (showOnHomePage != other.showOnHomePage)
-			return false;
-		if (showOnLeftSide != other.showOnLeftSide)
-			return false;
-		if (showOnSite != other.showOnSite)
-			return false;
-		if (typeProduct == null) {
-			if (other.typeProduct != null)
-				return false;
-		} else if (!typeProduct.equals(other.typeProduct))
 			return false;
 		return true;
 	}

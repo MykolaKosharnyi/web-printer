@@ -16,4 +16,5 @@ public interface UseWithProductDAO {
     public UseWithProduct getProductById(long id);
     public Set<UseWithProduct> getProductsByIds(long[] p);
     public void removeProduct(long id);
+    public Set<UseWithProduct> getPrintersByTypeInk(String[] typeInk);
 }

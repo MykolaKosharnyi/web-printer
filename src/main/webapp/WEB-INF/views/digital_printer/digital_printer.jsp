@@ -465,8 +465,10 @@
                   </table>
                   </div>
                     
-                    <div>Третье содержимое</div>
+                    <!-- comments to this product -->
+                    <jsp:include page="../product_page/comments.jsp" />
                     
+                    <!-- products use with this product -->
                     <jsp:include page="../product_page/product_use_with.jsp" />
                 </div>            
             </div> 
