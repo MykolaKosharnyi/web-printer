@@ -168,6 +168,16 @@ public class CartController {
 			result.add(returnOption("НДС", product.getOptionVAT(), product.getDescriptionOptionVAT(), checkedOption));
 		}
 		
+		if(product.getInsuranceInternationalTransport() > 0){
+			result.add(returnOption("Страхование груза международная перевозка", product.getInsuranceInternationalTransport()/100 * product.getPrise(), 
+					product.getDescriptionInsuranceInternationalTransport(), checkedOption));
+		}
+		
+		if(product.getInsuranceUkraineTransport() > 0){
+			result.add(returnOption("Страхование груза по Украине", product.getInsuranceUkraineTransport()/100 * product.getPrise(), 
+					product.getDescriptionInsuranceUkraineTransport(), checkedOption));
+		}
+		
 		return result;
 	}
 	
@@ -192,6 +202,16 @@ public class CartController {
 		
 		if(product.getOptionVAT() > 0.01){
 			result.add(returnOption("НДС", product.getOptionVAT(), product.getDescriptionOptionVAT(), checkedOption));
+		}
+		
+		if(product.getInsuranceInternationalTransport() > 0){
+			result.add(returnOption("Страхование груза международная перевозка", product.getInsuranceInternationalTransport()/100 * product.getPrise(), 
+					product.getDescriptionInsuranceInternationalTransport(), checkedOption));
+		}
+		
+		if(product.getInsuranceUkraineTransport() > 0){
+			result.add(returnOption("Страхование груза по Украине", product.getInsuranceUkraineTransport()/100 * product.getPrise(), 
+					product.getDescriptionInsuranceUkraineTransport(), checkedOption));
 		}
 		
 		return result;

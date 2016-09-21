@@ -124,6 +124,36 @@
 	        <td>${product.descriptionOptionVAT}</td>
 	      </tr>
 	</c:if>
+	
+	<c:if test="${product.insuranceInternationalTransport > 0}">
+	      <tr class="block_product_price">
+	        <td style="position: relative;">
+	        	<input class="add_price" style="position: absolute; top: 5px;" type="checkbox" value="Страхование груза международная перевозка" id="insuranceInternationalTransport_price">
+	        	<label class="add_price_title" style="margin-left:20px;" for="insuranceInternationalTransport_price">Страхование груза международная перевозка</label>
+	        </td>
+	        <td>
+				<label class="add_price_value">$ <span><fmt:formatNumber type="number" 
+						maxFractionDigits="2" minFractionDigits="2" value="${(product.insuranceInternationalTransport/100) * product.prise}" /></span>
+				</label>
+			</td>
+	        <td>${product.descriptionInsuranceInternationalTransport}</td>
+	      </tr>
+    </c:if>
+    
+    <c:if test="${product.insuranceUkraineTransport > 0}">
+	      <tr class="block_product_price">
+	        <td style="position: relative;">
+	        	<input class="add_price" style="position: absolute; top: 5px;" type="checkbox" value="Страхование груза по Украине" id="insuranceUkraineTransport_price">
+	        	<label class="add_price_title" style="margin-left:20px;" for="insuranceUkraineTransport_price">Страхование груза по Украине</label>
+	        </td>
+	        <td>
+				<label class="add_price_value">$ <span><fmt:formatNumber type="number" 
+						maxFractionDigits="2" minFractionDigits="2" value="${(product.insuranceUkraineTransport/100) * product.prise}" /></span>
+				</label>
+			</td>
+	        <td>${product.descriptionInsuranceUkraineTransport}</td>
+	      </tr>
+    </c:if>
 
 <c:if test="${product.airDeliveryPriceSize || product.airDeliveryPriceWeight ||
 			  product.seaDeliveryPriceSize || product.seaDeliveryPriceWeight ||

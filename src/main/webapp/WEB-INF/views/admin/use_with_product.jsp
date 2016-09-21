@@ -263,6 +263,22 @@
 							<form:errors path="descriptionOptionVAT" cssClass="error"></form:errors>
 						</div>
 						<hr>
+						<div class="text_output" style="height: 75px;">
+							<p class="option_name" style="width: 100%;">Страхование груза международная перевозка (указывать процент от 1 до 100%):&nbsp;</p>
+							<form:input path="insuranceInternationalTransport" class="option"/>
+							<form:errors path="insuranceInternationalTransport" cssClass="error"></form:errors>
+							<form:input path="descriptionInsuranceInternationalTransport"  class="option_description"/>
+							<form:errors path="descriptionInsuranceInternationalTransport" cssClass="error"></form:errors>
+						</div>
+						<hr>
+						<div class="text_output" style="height: 60px;">
+							<p class="option_name" style="width: 100%;">Страхование груза по Украине (указывать процент от 1 до 100%):&nbsp;</p>
+							<form:input path="insuranceUkraineTransport" class="option"/>
+							<form:errors path="insuranceUkraineTransport" cssClass="error"></form:errors>
+							<form:input path="descriptionInsuranceUkraineTransport"  class="option_description"/>
+							<form:errors path="descriptionInsuranceUkraineTransport" cssClass="error"></form:errors>
+						</div>
+						<hr>
 						<div class="text_output">
 							<form:input path="nameAddedOption" class="option"/>
 							<p>:&nbsp;</p>

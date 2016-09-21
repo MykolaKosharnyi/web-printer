@@ -268,8 +268,57 @@ public abstract class Product implements Serializable{
 	@Column(name="variant3DeliveryPriceWeight", columnDefinition="Decimal(10,2) default '0.00'")
 	protected double variant3DeliveryPriceWeight;
 			
+	//insurance
+	//1. Страхование груза международная перевозка
+	//2. Страхование груза по Украине
+	@Column(name="insuranceInternationalTransport", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double insuranceInternationalTransport;
+	
+	@Size(max = 50)
+	@Column(name="descriptionInsuranceInternationalTransport")
+	protected String descriptionInsuranceInternationalTransport;
+	
+	@Column(name="insuranceUkraineTransport", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double insuranceUkraineTransport;
+	
+	@Size(max = 50)
+	@Column(name="descriptionInsuranceUkraineTransport")
+	protected String descriptionInsuranceUkraineTransport;
+	
 	public Product(){}
 	
+	public String getDescriptionInsuranceInternationalTransport() {
+		return descriptionInsuranceInternationalTransport;
+	}
+
+	public void setDescriptionInsuranceInternationalTransport(String descriptionInsuranceInternationalTransport) {
+		this.descriptionInsuranceInternationalTransport = descriptionInsuranceInternationalTransport;
+	}
+
+	public String getDescriptionInsuranceUkraineTransport() {
+		return descriptionInsuranceUkraineTransport;
+	}
+
+	public void setDescriptionInsuranceUkraineTransport(String descriptionInsuranceUkraineTransport) {
+		this.descriptionInsuranceUkraineTransport = descriptionInsuranceUkraineTransport;
+	}
+
+	public double getInsuranceInternationalTransport() {
+		return insuranceInternationalTransport;
+	}
+
+	public void setInsuranceInternationalTransport(double insuranceInternationalTransport) {
+		this.insuranceInternationalTransport = insuranceInternationalTransport;
+	}
+
+	public double getInsuranceUkraineTransport() {
+		return insuranceUkraineTransport;
+	}
+
+	public void setInsuranceUkraineTransport(double insuranceUkraineTransport) {
+		this.insuranceUkraineTransport = insuranceUkraineTransport;
+	}
+
 	public double getDeliveryWidth() {
 		return deliveryWidth;
 	}
