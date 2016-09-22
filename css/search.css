@@ -583,8 +583,8 @@ p.p_pue{
 
 				}*/
 .ribbon-search-wrapper-right {
-  width: 135px;
-  height: 135px;
+  width: 178px;
+  height: 178px;
   overflow: hidden;
   position: absolute;
   top: -3px;
@@ -601,7 +601,7 @@ p.p_pue{
 }
 
 .ribbon-search-right {
-  font: bold 20px Sans-Serif;
+  font: bold 12px Sans-Serif;
   text-align: center;
 -moz-transform: rotate(45deg);
 -webkit-transform: rotate(45deg);
@@ -609,11 +609,14 @@ p.p_pue{
 -ms-transform: rotate(45deg);
 transform: rotate(45deg);
   position: relative;
-  padding: 4px 0;
   right: 15px;
-  top: 42px;
-  width: 190px;
+  top: 50px;
+padding: 7px 35px;
+height: auto;
+width: 242px;
 z-index: 10;
+padding: 7px 35px;
+min-height: 23px;
 }   
 
 .ribbon-search-left {
@@ -625,7 +628,6 @@ text-align: center;
 -ms-transform: rotate(-45deg);
 transform: rotate(-45deg);
 position: relative;
-padding: 4px 0;
 left: -50px;
 top: 50px;
 width: 242px;

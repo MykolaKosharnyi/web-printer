@@ -326,8 +326,7 @@ label.add_price_title{
 
 .table_price_option .table_paint_options tr:last-child td{border-bottom: none;}
 
-.add_price_delivery_title,
-.add_price_paint_title{
+.add_price_delivery_title{
 	height: auto;
 	max-width: 100px;
 }

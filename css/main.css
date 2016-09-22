@@ -35,18 +35,30 @@ a:hover {
 .header_topline {
 	background-color: #005575;
 	color: white;
+	cursor: pointer;
 }
 .header_topline a {
 	color: white;
+	margin-left: 5px;
 }
 
 .top_information{
 	display: block;
 	float: left;
-	margin: 4px 0 4px 10px;
-	
+	margin: 4px 15px;	
 	font-size: 17px;
 }
+
+.top_information:hover,
+.top_information a:hover{color: rgb(157, 241, 251); }
+.top_information:last-of-type:hover{color: inherit; }
+
+.top_information:first-of-type{margin-left: 0px;}
+.top_information:last-of-type{
+	margin-right: 0px;
+	cursor: inherit;
+}
+
 .header_secondline {
 	background-color: white;
 	padding: 0px 0;
@@ -489,7 +501,7 @@ section.ord1er  {
 	color: black;
 	bottom: 4px;
 	right: 1px;
-	background: gold;
+	background: white;
 	padding: 0px;
 	margin: 0px;
 	height: 24px;
@@ -638,7 +650,7 @@ section.ord1er  {
 #div_total_price{
 	float:left;
 	line-height: 34px;
-	font-size: 14px;
+	font-size: 16px;
 	font-weight: bold;
 	color: #006080;
 }
@@ -725,6 +737,7 @@ section.ord1er  {
 
 #cart .option_product_car input[type="checkbox"].add_price,
 #cart .option_product_car input[type="checkbox"].add_price_delivery,
+#cart .option_product_car input[type="radio"].add_price_delivery,
 #cart .option_product_car input[type="checkbox"].add_price_paint{
 	margin-left: 5px;
 	margin-right: 5px;
