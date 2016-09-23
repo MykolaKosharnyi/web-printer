@@ -24,7 +24,7 @@
 			<spring:message text="Изменение" />
 		</title>
 	</c:if>
-	</head>
+</head>
 <body>
 	
 	<div id="product">
@@ -415,61 +415,6 @@
 						<form:checkboxes items="${printer.type_drops}" path="typeDrops" element="li"/>
 					</ul>
 				</div>
-			</div>
-
-			<div class="product_characteristic">
-				<div class="characteristic">
-					<div class="block_title">
-						<i></i>
-						<p>Размер капли (постоянная)</p>
-						<form:errors path="sizeDropStatic" cssClass="error"></form:errors>
-					</div>
-					<ul class="check_boxes">
-						<div class="text_output">
-							<p>постоянная &nbsp;</p><form:input style="width: 28px;" path="sizeDropStatic" />
-							<form:errors path="sizeDropStatic" cssClass="error"></form:errors>	 
-						</div>
-					</ul>
-				</div>
-				<div class="characteristic">
-					<div class="block_title">
-						<i></i>
-						<p>Размер капли (если диапазон)</p>
-						<form:errors path="sizeDropRangeFrom" cssClass="error"></form:errors>
-						<form:errors path="sizeDropRangeUntil" cssClass="error"></form:errors>
-					</div>
-					<ul class="check_boxes">
-						<div class="text_output">
-							<p>переменная от&nbsp;</p><form:input style="width: 28px;" path="sizeDropRangeFrom" />
-							<form:errors path="sizeDropRangeFrom" cssClass="error"></form:errors>	 
-				    		<p>&nbsp;до&nbsp;</p> <form:input style="width: 28px;" path="sizeDropRangeUntil" />
-				    		<form:errors path="sizeDropRangeUntil" cssClass="error"></form:errors>
-						</div>
-					</ul>
-				</div>
-				<div class="characteristic">
-					<div class="block_title">
-						<i></i>
-						<p>Размер капли (с заданием типа капли)</p>
-						<form:errors path="valueOfNewTypeDrop" cssClass="error"></form:errors>
-					</div>
-					<ul class="check_boxes">
-						<div class="text_output">
-							<p>&nbsp;</p><form:input style="width: 60px;" path="nameOfNewTypeDrop" />	 
-				    		<p>&nbsp;-&nbsp;</p> <form:input style="width: 28px;" path="valueOfNewTypeDrop" />
-				    		<form:errors path="valueOfNewTypeDrop" cssClass="error"></form:errors>
-						</div>
-					</ul>
-				</div>
-				<div class="characteristic">
-					<div class="block_title">
-						<i></i>
-						<p>Размер капли (для выбора с уже имеющихся)</p>
-					</div>
-					<ul class="check_boxes">
-						<form:checkboxes items="${printer.size_drops}" path="sizeDrops" element="li"/>
-					</ul>
-				</div>
 				<div class="characteristic">
 					<div class="block_title">
 						<i></i>
@@ -613,6 +558,61 @@
 						</div>
 					</ul>
 				</div>
+			</div>
+
+			<div class="product_characteristic">
+				<div class="characteristic">
+					<div class="block_title">
+						<i></i>
+						<p>Размер капли (постоянная)</p>
+						<form:errors path="sizeDropStatic" cssClass="error"></form:errors>
+					</div>
+					<ul class="check_boxes">
+						<div class="text_output">
+							<p>постоянная &nbsp;</p><form:input style="width: 28px;" path="sizeDropStatic" />
+							<form:errors path="sizeDropStatic" cssClass="error"></form:errors>	 
+						</div>
+					</ul>
+				</div>
+				<div class="characteristic">
+					<div class="block_title">
+						<i></i>
+						<p>Размер капли (если диапазон)</p>
+						<form:errors path="sizeDropRangeFrom" cssClass="error"></form:errors>
+						<form:errors path="sizeDropRangeUntil" cssClass="error"></form:errors>
+					</div>
+					<ul class="check_boxes">
+						<div class="text_output">
+							<p>переменная от&nbsp;</p><form:input style="width: 28px;" path="sizeDropRangeFrom" />
+							<form:errors path="sizeDropRangeFrom" cssClass="error"></form:errors>	 
+				    		<p>&nbsp;до&nbsp;</p> <form:input style="width: 28px;" path="sizeDropRangeUntil" />
+				    		<form:errors path="sizeDropRangeUntil" cssClass="error"></form:errors>
+						</div>
+					</ul>
+				</div>
+				<div class="characteristic">
+					<div class="block_title">
+						<i></i>
+						<p>Размер капли (с заданием типа капли)</p>
+						<form:errors path="valueOfNewTypeDrop" cssClass="error"></form:errors>
+					</div>
+					<ul class="check_boxes">
+						<div class="text_output">
+							<p>&nbsp;</p><form:input style="width: 60px;" path="nameOfNewTypeDrop" />	 
+				    		<p>&nbsp;-&nbsp;</p> <form:input style="width: 28px;" path="valueOfNewTypeDrop" />
+				    		<form:errors path="valueOfNewTypeDrop" cssClass="error"></form:errors>
+						</div>
+					</ul>
+				</div>
+				<div class="characteristic">
+					<div class="block_title">
+						<i></i>
+						<p>Размер капли (для выбора с уже имеющихся)</p>
+					</div>
+					<ul class="check_boxes">
+						<form:checkboxes items="${printer.size_drops}" path="sizeDrops" element="li"/>
+					</ul>
+				</div>				
 				<div class="characteristic">
 					<div class="block_title">
 						<i></i>
@@ -762,13 +762,13 @@
 						<p>Высота</p>
 						<form:errors path="heigth" cssClass="error"></form:errors>
 					</div>
-					<ul class="check_boxes">
+					<div class="check_boxes">
 						<div class="text_output">
 							<form:input path="heigth" class="amount-heigth" value="${product.heigth}"/>
 							<p>&nbsp;мм</p>
 						</div>
 						<div class="slider-range-heigth"></div>
-					</ul>
+					</div>
 				</div>
 				
 				<!-- import delivery option -->
@@ -789,17 +789,313 @@
 						<i></i>
 						<p>Наличие (информация для пользователя)</p>
 					</div>
-					<ul class="check_boxes">
+					<div class="check_boxes">
 						<form:radiobuttons items="${printer.availability}" path="availability" element="li"/>
 						
 						<div class="text_output">
 							<form:input path="availabilitySpecialCase"/>
 						</div>
-					</ul>
+					</div>
 				</div>
 				
 				<!-- import option characteristic -->
 				<jsp:include page="product/characteristic_option.jsp" />
+				
+				<div class="characteristic">
+					<div class="block_title">
+						<i></i>
+						<p>Рейтинг</p>
+					</div>
+					<div class="check_boxes">
+					
+						<!-- Качество печати -->
+						<div class="rating_block">
+							<p>Качество печати:</p>
+							<div class="reviewStars-input">
+							    <input id="star-5-ratingPrintQuality" type="radio" name="ratingPrintQuality" 
+							    	<c:if test="${product.ratingPrintQuality == 5}">checked</c:if> value="5"/>
+							    <label title="Очень хорошо" for="star-5-ratingPrintQuality"></label>
+							
+							    <input id="star-4-ratingPrintQuality" type="radio" name="ratingPrintQuality" 
+							    	<c:if test="${product.ratingPrintQuality == 4}">checked</c:if> value="4"/>
+							    <label title="Хорошо" for="star-4-ratingPrintQuality"></label>
+							
+							    <input id="star-3-ratingPrintQuality" type="radio" name="ratingPrintQuality" 
+							    	<c:if test="${product.ratingPrintQuality == 3}">checked</c:if> value="3"/>
+							    <label title="Средне" for="star-3-ratingPrintQuality"></label>
+							
+							    <input id="star-2-ratingPrintQuality" type="radio" name="ratingPrintQuality" 
+							    	<c:if test="${product.ratingPrintQuality == 2}">checked</c:if> value="2"/>
+							    <label title="Ниже среднего" for="star-2-ratingPrintQuality"></label>
+							
+							    <input id="star-1-ratingPrintQuality" type="radio" name="ratingPrintQuality" 
+							    	<c:if test="${product.ratingPrintQuality == 1}">checked</c:if> value="1"/>
+							    <label title="Плохо" for="star-1-ratingPrintQuality"></label>
+							</div>
+						</div>
+						
+						<!-- Скорость печати -->
+						<div class="rating_block">
+							<p>Скорость печати:</p>
+							<div class="reviewStars-input">
+							    <input id="star-5-ratingPrintSpeed" type="radio" name="ratingPrintSpeed" 
+							    	<c:if test="${product.ratingPrintSpeed == 5}">checked</c:if> value="5"/>
+							    <label title="Очень хорошо" for="star-5-ratingPrintSpeed"></label>
+							
+							    <input id="star-4-ratingPrintSpeed" type="radio" name="ratingPrintSpeed" 
+							    	<c:if test="${product.ratingPrintSpeed == 4}">checked</c:if> value="4"/>
+							    <label title="Хорошо" for="star-4-ratingPrintSpeed"></label>
+							
+							    <input id="star-3-ratingPrintSpeed" type="radio" name="ratingPrintSpeed" 
+							    	<c:if test="${product.ratingPrintSpeed == 3}">checked</c:if> value="3"/>
+							    <label title="Средне" for="star-3-ratingPrintSpeed"></label>
+							
+							    <input id="star-2-ratingPrintSpeed" type="radio" name="ratingPrintSpeed" 
+							    	<c:if test="${product.ratingPrintSpeed == 2}">checked</c:if> value="2"/>
+							    <label title="Ниже среднего" for="star-2-ratingPrintSpeed"></label>
+							
+							    <input id="star-1-ratingPrintSpeed" type="radio" name="ratingPrintSpeed" 
+							    	<c:if test="${product.ratingPrintSpeed == 1}">checked</c:if> value="1"/>
+							    <label title="Плохо" for="star-1-ratingPrintSpeed"></label>
+							</div>
+						</div>
+						
+						<!-- Стабильность работы -->
+						<div class="rating_block">
+							<p>Стабильность работы:</p>
+							<div class="reviewStars-input">
+							    <input id="star-5-ratingStablePerformance" type="radio" name="ratingStablePerformance" 
+							    	<c:if test="${product.ratingStablePerformance == 5}">checked</c:if> value="5"/>
+							    <label title="Очень хорошо" for="star-5-ratingStablePerformance"></label>
+							
+							    <input id="star-4-ratingStablePerformance" type="radio" name="ratingStablePerformance" 
+							    	<c:if test="${product.ratingStablePerformance == 4}">checked</c:if> value="4"/>
+							    <label title="Хорошо" for="star-4-ratingStablePerformance"></label>
+							
+							    <input id="star-3-ratingStablePerformance" type="radio" name="ratingStablePerformance" 
+							    	<c:if test="${product.ratingStablePerformance == 3}">checked</c:if> value="3"/>
+							    <label title="Средне" for="star-3-ratingStablePerformance"></label>
+							
+							    <input id="star-2-ratingStablePerformance" type="radio" name="ratingStablePerformance" 
+							    	<c:if test="${product.ratingStablePerformance == 2}">checked</c:if> value="2"/>
+							    <label title="Ниже среднего" for="star-2-ratingStablePerformance"></label>
+							
+							    <input id="star-1-ratingStablePerformance" type="radio" name="ratingStablePerformance" 
+							    	<c:if test="${product.ratingStablePerformance == 1}">checked</c:if> value="1"/>
+							    <label title="Плохо" for="star-1-ratingStablePerformance"></label>
+							</div>
+						</div>
+						
+						<!-- Простота эксплуатации -->
+						<div class="rating_block">
+							<p>Простота эксплуатации:</p>
+							<div class="reviewStars-input">
+							    <input id="star-5-ratingEaseOfUse" type="radio" name="ratingEaseOfUse" 
+							    	<c:if test="${product.ratingEaseOfUse == 5}">checked</c:if> value="5"/>
+							    <label title="Очень хорошо" for="star-5-ratingEaseOfUse"></label>
+							
+							    <input id="star-4-ratingEaseOfUse" type="radio" name="ratingEaseOfUse" 
+							    	<c:if test="${product.ratingEaseOfUse == 4}">checked</c:if> value="4"/>
+							    <label title="Хорошо" for="star-4-ratingEaseOfUse"></label>
+							
+							    <input id="star-3-ratingEaseOfUse" type="radio" name="ratingEaseOfUse" 
+							    	<c:if test="${product.ratingEaseOfUse == 3}">checked</c:if> value="3"/>
+							    <label title="Средне" for="star-3-ratingEaseOfUse"></label>
+							
+							    <input id="star-2-ratingEaseOfUse" type="radio" name="ratingEaseOfUse" 
+							    	<c:if test="${product.ratingEaseOfUse == 2}">checked</c:if> value="2"/>
+							    <label title="Ниже среднего" for="star-2-ratingEaseOfUse"></label>
+							
+							    <input id="star-1-ratingEaseOfUse" type="radio" name="ratingEaseOfUse" 
+							    	<c:if test="${product.ratingEaseOfUse == 1}">checked</c:if> value="1"/>
+							    <label title="Плохо" for="star-1-ratingEaseOfUse"></label>
+							</div>
+						</div>
+						
+						<!-- Надёжность сборки -->
+						<div class="rating_block">
+							<p>Надёжность сборки:</p>
+							<div class="reviewStars-input">
+							    <input id="star-5-ratingReliabilityAssembly" type="radio" name="ratingReliabilityAssembly" 
+							    	<c:if test="${product.ratingReliabilityAssembly == 5}">checked</c:if> value="5"/>
+							    <label title="Очень хорошо" for="star-5-ratingReliabilityAssembly"></label>
+							
+							    <input id="star-4-ratingReliabilityAssembly" type="radio" name="ratingReliabilityAssembly" 
+							    	<c:if test="${product.ratingReliabilityAssembly == 4}">checked</c:if> value="4"/>
+							    <label title="Хорошо" for="star-4-ratingReliabilityAssembly"></label>
+							
+							    <input id="star-3-ratingReliabilityAssembly" type="radio" name="ratingReliabilityAssembly" 
+							    	<c:if test="${product.ratingReliabilityAssembly == 3}">checked</c:if> value="3"/>
+							    <label title="Средне" for="star-3-ratingReliabilityAssembly"></label>
+							
+							    <input id="star-2-ratingReliabilityAssembly" type="radio" name="ratingReliabilityAssembly" 
+							    	<c:if test="${product.ratingReliabilityAssembly == 2}">checked</c:if> value="2"/>
+							    <label title="Ниже среднего" for="star-2-ratingReliabilityAssembly"></label>
+							
+							    <input id="star-1-ratingReliabilityAssembly" type="radio" name="ratingReliabilityAssembly" 
+							    	<c:if test="${product.ratingReliabilityAssembly == 1}">checked</c:if> value="1"/>
+							    <label title="Плохо" for="star-1-ratingReliabilityAssembly"></label>
+							</div>
+						</div>
+						
+						<!-- Срок эксплуатации -->
+						<div class="rating_block">
+							<p>Срок эксплуатации:</p>
+							<div class="reviewStars-input">
+							    <input id="star-5-ratingLifetime" type="radio" name="ratingLifetime" 
+							    	<c:if test="${product.ratingLifetime == 5}">checked</c:if> value="5"/>
+							    <label title="Очень хорошо" for="star-5-ratingLifetime"></label>
+							
+							    <input id="star-4-ratingLifetime" type="radio" name="ratingLifetime" 
+							    	<c:if test="${product.ratingLifetime == 4}">checked</c:if> value="4"/>
+							    <label title="Хорошо" for="star-4-ratingLifetime"></label>
+							
+							    <input id="star-3-ratingLifetime" type="radio" name="ratingLifetime" 
+							    	<c:if test="${product.ratingLifetime == 3}">checked</c:if> value="3"/>
+							    <label title="Средне" for="star-3-ratingLifetime"></label>
+							
+							    <input id="star-2-ratingLifetime" type="radio" name="ratingLifetime" 
+							    	<c:if test="${product.ratingLifetime == 2}">checked</c:if> value="2"/>
+							    <label title="Ниже среднего" for="star-2-ratingLifetime"></label>
+							
+							    <input id="star-1-ratingLifetime" type="radio" name="ratingLifetime" 
+							    	<c:if test="${product.ratingLifetime == 1}">checked</c:if> value="1"/>
+							    <label title="Плохо" for="star-1-ratingLifetime"></label>
+							</div>
+						</div>
+						
+						<!-- Стоимость профилактического обслуживания -->
+						<div class="rating_block">
+							<p>Стоимость профилактического обслуживания:</p>
+							<div class="reviewStars-input">
+							    <input id="star-5-ratingPreventiveMaintenanceCost" type="radio" name="ratingPreventiveMaintenanceCost" 
+							    	<c:if test="${product.ratingPreventiveMaintenanceCost == 5}">checked</c:if> value="5"/>
+							    <label title="Очень хорошо" for="star-5-ratingPreventiveMaintenanceCost"></label>
+							
+							    <input id="star-4-ratingPreventiveMaintenanceCost" type="radio" name="ratingPreventiveMaintenanceCost" 
+							    	<c:if test="${product.ratingPreventiveMaintenanceCost == 4}">checked</c:if> value="4"/>
+							    <label title="Хорошо" for="star-4-ratingPreventiveMaintenanceCost"></label>
+							
+							    <input id="star-3-ratingPreventiveMaintenanceCost" type="radio" name="ratingPreventiveMaintenanceCost" 
+							    	<c:if test="${product.ratingPreventiveMaintenanceCost == 3}">checked</c:if> value="3"/>
+							    <label title="Средне" for="star-3-ratingPreventiveMaintenanceCost"></label>
+							
+							    <input id="star-2-ratingPreventiveMaintenanceCost" type="radio" name="ratingPreventiveMaintenanceCost" 
+							    	<c:if test="${product.ratingPreventiveMaintenanceCost == 2}">checked</c:if> value="2"/>
+							    <label title="Ниже среднего" for="star-2-ratingPreventiveMaintenanceCost"></label>
+							
+							    <input id="star-1-ratingPreventiveMaintenanceCost" type="radio" name="ratingPreventiveMaintenanceCost" 
+							    	<c:if test="${product.ratingPreventiveMaintenanceCost == 1}">checked</c:if> value="1"/>
+							    <label title="Плохо" for="star-1-ratingPreventiveMaintenanceCost"></label>
+							</div>
+						</div>
+						
+						<!-- Стоимость запчастей -->
+						<div class="rating_block">
+							<p>Стоимость запчастей:</p>
+							<div class="reviewStars-input">
+							    <input id="star-5-ratingTheCostOfSpareParts" type="radio" name="ratingTheCostOfSpareParts" 
+							    	<c:if test="${product.ratingTheCostOfSpareParts == 5}">checked</c:if> value="5"/>
+							    <label title="Очень хорошо" for="star-5-ratingTheCostOfSpareParts"></label>
+							
+							    <input id="star-4-ratingTheCostOfSpareParts" type="radio" name="ratingTheCostOfSpareParts" 
+							    	<c:if test="${product.ratingTheCostOfSpareParts == 4}">checked</c:if> value="4"/>
+							    <label title="Хорошо" for="star-4-ratingTheCostOfSpareParts"></label>
+							
+							    <input id="star-3-ratingTheCostOfSpareParts" type="radio" name="ratingTheCostOfSpareParts" 
+							    	<c:if test="${product.ratingTheCostOfSpareParts == 3}">checked</c:if> value="3"/>
+							    <label title="Средне" for="star-3-ratingTheCostOfSpareParts"></label>
+							
+							    <input id="star-2-ratingTheCostOfSpareParts" type="radio" name="ratingTheCostOfSpareParts" 
+							    	<c:if test="${product.ratingTheCostOfSpareParts == 2}">checked</c:if> value="2"/>
+							    <label title="Ниже среднего" for="star-2-ratingTheCostOfSpareParts"></label>
+							
+							    <input id="star-1-ratingTheCostOfSpareParts" type="radio" name="ratingTheCostOfSpareParts" 
+							    	<c:if test="${product.ratingTheCostOfSpareParts == 1}">checked</c:if> value="1"/>
+							    <label title="Плохо" for="star-1-ratingTheCostOfSpareParts"></label>
+							</div>
+						</div>
+						
+						<!-- Стоимость расходных материалов -->
+						<div class="rating_block">
+							<p>Стоимость расходных материалов:</p>
+							<div class="reviewStars-input">
+							    <input id="star-5-ratingTheCostOfConsumables" type="radio" name="ratingTheCostOfConsumables" 
+							    	<c:if test="${product.ratingTheCostOfConsumables == 5}">checked</c:if> value="5"/>
+							    <label title="Очень хорошо" for="star-5-ratingTheCostOfConsumables"></label>
+							
+							    <input id="star-4-ratingTheCostOfConsumables" type="radio" name="ratingTheCostOfConsumables" 
+							    	<c:if test="${product.ratingTheCostOfConsumables == 4}">checked</c:if> value="4"/>
+							    <label title="Хорошо" for="star-4-ratingTheCostOfConsumables"></label>
+							
+							    <input id="star-3-ratingTheCostOfConsumables" type="radio" name="ratingTheCostOfConsumables" 
+							    	<c:if test="${product.ratingTheCostOfConsumables == 3}">checked</c:if> value="3"/>
+							    <label title="Средне" for="star-3-ratingTheCostOfConsumables"></label>
+							
+							    <input id="star-2-ratingTheCostOfConsumables" type="radio" name="ratingTheCostOfConsumables" 
+							    	<c:if test="${product.ratingTheCostOfConsumables == 2}">checked</c:if> value="2"/>
+							    <label title="Ниже среднего" for="star-2-ratingTheCostOfConsumables"></label>
+							
+							    <input id="star-1-ratingTheCostOfConsumables" type="radio" name="ratingTheCostOfConsumables" 
+							    	<c:if test="${product.ratingTheCostOfConsumables == 1}">checked</c:if> value="1"/>
+							    <label title="Плохо" for="star-1-ratingTheCostOfConsumables"></label>
+							</div>
+						</div>
+						
+						<!-- Стоимость оригинальных чернил -->
+						<div class="rating_block">
+							<p>Стоимость оригинальных чернил:</p>
+							<div class="reviewStars-input">
+							    <input id="star-5-ratingTheCostOfOriginalInk" type="radio" name="ratingTheCostOfOriginalInk" 
+							    	<c:if test="${product.ratingTheCostOfOriginalInk == 5}">checked</c:if> value="5"/>
+							    <label title="Очень хорошо" for="star-5-ratingTheCostOfOriginalInk"></label>
+							
+							    <input id="star-4-ratingTheCostOfOriginalInk" type="radio" name="ratingTheCostOfOriginalInk" 
+							    	<c:if test="${product.ratingTheCostOfOriginalInk == 4}">checked</c:if> value="4"/>
+							    <label title="Хорошо" for="star-4-ratingTheCostOfOriginalInk"></label>
+							
+							    <input id="star-3-ratingTheCostOfOriginalInk" type="radio" name="ratingTheCostOfOriginalInk" 
+							    	<c:if test="${product.ratingTheCostOfOriginalInk == 3}">checked</c:if> value="3"/>
+							    <label title="Средне" for="star-3-ratingTheCostOfOriginalInk"></label>
+							
+							    <input id="star-2-ratingTheCostOfOriginalInk" type="radio" name="ratingTheCostOfOriginalInk" 
+							    	<c:if test="${product.ratingTheCostOfOriginalInk == 2}">checked</c:if> value="2"/>
+							    <label title="Ниже среднего" for="star-2-ratingTheCostOfOriginalInk"></label>
+							
+							    <input id="star-1-ratingTheCostOfOriginalInk" type="radio" name="ratingTheCostOfOriginalInk" 
+							    	<c:if test="${product.ratingTheCostOfOriginalInk == 1}">checked</c:if> value="1"/>
+							    <label title="Плохо" for="star-1-ratingTheCostOfOriginalInk"></label>
+							</div>
+						</div>
+						
+						<!-- Себестоимость печати -->
+						<div class="rating_block">
+							<p>Себестоимость печати:</p>
+							<div class="reviewStars-input">
+							    <input id="star-5-ratingCostOfPrinting" type="radio" name="ratingCostOfPrinting" 
+							    	<c:if test="${product.ratingCostOfPrinting == 5}">checked</c:if> value="5"/>
+							    <label title="Очень хорошо" for="star-5-ratingCostOfPrinting"></label>
+							
+							    <input id="star-4-ratingCostOfPrinting" type="radio" name="ratingCostOfPrinting" 
+							    	<c:if test="${product.ratingCostOfPrinting == 4}">checked</c:if> value="4"/>
+							    <label title="Хорошо" for="star-4-ratingCostOfPrinting"></label>
+							
+							    <input id="star-3-ratingCostOfPrinting" type="radio" name="ratingCostOfPrinting" 
+							    	<c:if test="${product.ratingCostOfPrinting == 3}">checked</c:if> value="3"/>
+							    <label title="Средне" for="star-3-ratingCostOfPrinting"></label>
+							
+							    <input id="star-2-ratingCostOfPrinting" type="radio" name="ratingCostOfPrinting" 
+							    	<c:if test="${product.ratingCostOfPrinting == 2}">checked</c:if> value="2"/>
+							    <label title="Ниже среднего" for="star-2-ratingCostOfPrinting"></label>
+							
+							    <input id="star-1-ratingCostOfPrinting" type="radio" name="ratingCostOfPrinting" 
+							    	<c:if test="${product.ratingCostOfPrinting == 1}">checked</c:if> value="1"/>
+							    <label title="Плохо" for="star-1-ratingCostOfPrinting"></label>
+							</div>
+						</div>
+						
+					</div>
+				</div>
 				
 			</div>
 

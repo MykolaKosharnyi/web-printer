@@ -15,7 +15,7 @@
     <tbody>
 		<c:if test="${product.optionRIP > 0.01}">
 	      <tr class="block_product_price">
-	        <td><input class="add_price" type="checkbox" value="Програмное обеспечение" id="optionRIP_price" style="top:-18px;">
+	        <td><input class="add_price" type="checkbox" value="Програмное обеспечение" id="optionRIP_price">
 	        	<label class="add_price_title" for="optionRIP_price">Програмное обеспечение</label>
 	        </td>
 	        <td>
@@ -127,9 +127,9 @@
 	
 	<c:if test="${product.insuranceInternationalTransport > 0}">
 	      <tr class="block_product_price">
-	        <td style="position: relative;">
-	        	<input class="add_price" style="position: absolute; top: 5px;" type="checkbox" value="Страхование груза международная перевозка" id="insuranceInternationalTransport_price">
-	        	<label class="add_price_title" style="margin-left:20px;" for="insuranceInternationalTransport_price">Страхование груза международная перевозка</label>
+	        <td>
+	        	<input class="add_price" type="checkbox" value="Страхование груза международная перевозка" id="insuranceInternationalTransport_price">
+	        	<label class="add_price_title" for="insuranceInternationalTransport_price">Страхование груза международная перевозка</label>
 	        </td>
 	        <td>
 				<label class="add_price_value">$ <span><fmt:formatNumber type="number" 
@@ -142,9 +142,9 @@
     
     <c:if test="${product.insuranceUkraineTransport > 0}">
 	      <tr class="block_product_price">
-	        <td style="position: relative;">
-	        	<input class="add_price" style="position: absolute; top: 5px;" type="checkbox" value="Страхование груза по Украине" id="insuranceUkraineTransport_price">
-	        	<label class="add_price_title" style="margin-left:20px;" for="insuranceUkraineTransport_price">Страхование груза по Украине</label>
+	        <td>
+	        	<input class="add_price" type="checkbox" value="Страхование груза по Украине" id="insuranceUkraineTransport_price">
+	        	<label class="add_price_title" for="insuranceUkraineTransport_price">Страхование груза по Украине</label>
 	        </td>
 	        <td>
 				<label class="add_price_value">$ <span><fmt:formatNumber type="number" 

@@ -266,8 +266,141 @@ public class Printer extends Product{
 	@Column(name="rip")
 	private String[] rip;
 	
+	//rating
+	@Column(name="ratingPrintQuality", nullable = false, columnDefinition = "int default 0")//Качество печати
+	private int ratingPrintQuality;
+	
+	@Column(name="ratingPrintSpeed", nullable = false, columnDefinition = "int default 0")//Скорость печати
+	private int ratingPrintSpeed;
+	
+	@Column(name="ratingStablePerformance", nullable = false, columnDefinition = "int default 0")//Стабильность работы
+	private int ratingStablePerformance;
+	
+	@Column(name="ratingEaseOfUse", nullable = false, columnDefinition = "int default 0")//Простота эксплуатации
+	private int ratingEaseOfUse;
+	
+	@Column(name="ratingReliabilityAssembly", nullable = false, columnDefinition = "int default 0")//Надёжность сборки
+	private int ratingReliabilityAssembly;
+	
+	@Column(name="ratingLifetime", nullable = false, columnDefinition = "int default 0")//Срок эксплуатации
+	private int ratingLifetime;
+	
+	@Column(name="ratingPreventiveMaintenanceCost", nullable = false, columnDefinition = "int default 0")//Стоимость профилактического обслуживания
+	private int ratingPreventiveMaintenanceCost;
+	
+	@Column(name="ratingTheCostOfSpareParts", nullable = false, columnDefinition = "int default 0")//Стоимость запчастей
+	private int ratingTheCostOfSpareParts;
+	
+	@Column(name="ratingOverallRating", columnDefinition="Decimal(10,2) default '0.00'")//Общая оценка
+	private double ratingOverallRating;
+	
+	@Column(name="ratingTheCostOfConsumables", nullable = false, columnDefinition = "int default 0")//Стоимость расходных материалов
+	private int ratingTheCostOfConsumables;
+	
+	@Column(name="ratingTheCostOfOriginalInk", nullable = false, columnDefinition = "int default 0")//Стоимость оригинальных чернил
+	private int ratingTheCostOfOriginalInk;
+	
+	@Column(name="ratingCostOfPrinting", nullable = false, columnDefinition = "int default 0")//Себестоимость печати
+	private int ratingCostOfPrinting;
+	
 	public Printer() {
 		super();
+	}
+
+	public int getRatingPrintQuality() {
+		return ratingPrintQuality;
+	}
+
+	public void setRatingPrintQuality(int ratingPrintQuality) {
+		this.ratingPrintQuality = ratingPrintQuality;
+	}
+
+	public int getRatingPrintSpeed() {
+		return ratingPrintSpeed;
+	}
+
+	public void setRatingPrintSpeed(int ratingPrintSpeed) {
+		this.ratingPrintSpeed = ratingPrintSpeed;
+	}
+
+	public int getRatingStablePerformance() {
+		return ratingStablePerformance;
+	}
+
+	public void setRatingStablePerformance(int ratingStablePerformance) {
+		this.ratingStablePerformance = ratingStablePerformance;
+	}
+
+	public int getRatingEaseOfUse() {
+		return ratingEaseOfUse;
+	}
+
+	public void setRatingEaseOfUse(int ratingEaseOfUse) {
+		this.ratingEaseOfUse = ratingEaseOfUse;
+	}
+
+	public int getRatingReliabilityAssembly() {
+		return ratingReliabilityAssembly;
+	}
+
+	public void setRatingReliabilityAssembly(int ratingReliabilityAssembly) {
+		this.ratingReliabilityAssembly = ratingReliabilityAssembly;
+	}
+
+	public int getRatingLifetime() {
+		return ratingLifetime;
+	}
+
+	public void setRatingLifetime(int ratingLifetime) {
+		this.ratingLifetime = ratingLifetime;
+	}
+
+	public int getRatingPreventiveMaintenanceCost() {
+		return ratingPreventiveMaintenanceCost;
+	}
+
+	public void setRatingPreventiveMaintenanceCost(int ratingPreventiveMaintenanceCost) {
+		this.ratingPreventiveMaintenanceCost = ratingPreventiveMaintenanceCost;
+	}
+
+	public int getRatingTheCostOfSpareParts() {
+		return ratingTheCostOfSpareParts;
+	}
+
+	public void setRatingTheCostOfSpareParts(int ratingTheCostOfSpareParts) {
+		this.ratingTheCostOfSpareParts = ratingTheCostOfSpareParts;
+	}
+
+	public double getRatingOverallRating() {
+		return ratingOverallRating;
+	}
+
+	public void setRatingOverallRating(double ratingOverallRating) {
+		this.ratingOverallRating = ratingOverallRating;
+	}
+
+	public int getRatingTheCostOfConsumables() {
+		return ratingTheCostOfConsumables;
+	}
+
+	public void setRatingTheCostOfConsumables(int ratingTheCostOfConsumables) {
+		this.ratingTheCostOfConsumables = ratingTheCostOfConsumables;
+	}
+
+	public int getRatingTheCostOfOriginalInk() {
+		return ratingTheCostOfOriginalInk;
+	}
+
+	public void setRatingTheCostOfOriginalInk(int ratingTheCostOfOriginalInk) {
+		this.ratingTheCostOfOriginalInk = ratingTheCostOfOriginalInk;
+	}
+
+	public int getRatingCostOfPrinting() {
+		return ratingCostOfPrinting;
+	}
+
+	public void setRatingCostOfPrinting(int ratingCostOfPrinting) {
+		this.ratingCostOfPrinting = ratingCostOfPrinting;
 	}
 
 	public int getQuantityUVlamp() {
