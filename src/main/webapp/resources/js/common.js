@@ -483,5 +483,9 @@ $(document).ready(function() {
 		});
 		return false;
 	});
+	
+	$('.reviewStars-input input:radio').click(function(){
+	    return false;
+	});
 
 });

@@ -13,8 +13,12 @@
 <body>   
          <div class="product">
             <div id="pictures_and_descriptions">
-				<!-- inport pictures presentation -->
-				<jsp:include page="../product_page/pictures.jsp" />
+				<div class="pictures-and-rating">
+            	
+            		<!-- import pictures presentation -->
+					<jsp:include page="../product_page/pictures.jsp" />
+
+            	</div>
                 <div class="descriptions">
  
                 <!-- import timer -->
