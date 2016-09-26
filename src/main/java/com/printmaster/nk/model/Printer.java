@@ -372,7 +372,65 @@ public class Printer extends Product{
 	}
 
 	public double getRatingOverallRating() {
-		return ratingOverallRating;
+		int quantity = 0;
+		int sum = 0;
+		
+		if(ratingPrintQuality!=0){
+			quantity++;
+			sum+=ratingPrintQuality;
+		}
+		
+		if(ratingPrintSpeed!=0){
+			quantity++;
+			sum+=ratingPrintSpeed;
+		}
+		
+		if(ratingStablePerformance!=0){
+			quantity++;
+			sum+=ratingStablePerformance;
+		}
+		
+		if(ratingEaseOfUse!=0){
+			quantity++;
+			sum+=ratingEaseOfUse;
+		}
+		
+		if(ratingReliabilityAssembly!=0){
+			quantity++;
+			sum+=ratingReliabilityAssembly;
+		}
+		
+		if(ratingLifetime!=0){
+			quantity++;
+			sum+=ratingLifetime;
+		}
+		
+		if(ratingPreventiveMaintenanceCost!=0){
+			quantity++;
+			sum+=ratingPreventiveMaintenanceCost;
+		}
+		
+		if(ratingTheCostOfSpareParts!=0){
+			quantity++;
+			sum+=ratingTheCostOfSpareParts;
+		}
+		
+		if(ratingTheCostOfConsumables!=0){
+			quantity++;
+			sum+=ratingTheCostOfConsumables;
+		}
+		
+		if(ratingTheCostOfOriginalInk!=0){
+			quantity++;
+			sum+=ratingTheCostOfOriginalInk;
+		}
+		
+		if(ratingCostOfPrinting!=0){
+			quantity++;
+			sum+=ratingCostOfPrinting;
+		}
+		
+		return (quantity > 0) ? sum/quantity : 0;
 	}
 
 	public void setRatingOverallRating(double ratingOverallRating) {
