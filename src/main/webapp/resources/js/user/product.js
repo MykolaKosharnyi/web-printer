@@ -30,18 +30,33 @@
 
 $(document).ready(function(){
     $("#tabs_product").lightTabs();
+    setNewHeightOfPicturesBlock();
     
     $('.small_pictures a').on('click', function(e) {
 
 		var currImg = $(this).find('img').attr('src');
-		$('.bigImage img').attr('src', currImg);
-		$('.bigImage a').attr('href', currImg);
-
+		var bigImage = $(this).parent('.small_pictures').parent('div.row').parent('div').parent('div#pictures')
+			.find('div div.bigImage');
+		bigImage.find('img').attr('src', currImg);
+		bigImage.find('a').attr('href', currImg);
+		
+		setNewHeightOfPicturesBlock();
 	});
     
 	$(".small_pictures a").hover(function() {
+		
 		var currImg = $(this).find('img').attr('src');
-		$('.bigImage img').attr('src', currImg);
-		$('.bigImage a').attr('href', currImg);
+		var bigImage = $(this).parent('.small_pictures').parent('div.row').parent('div').parent('div#pictures')
+			.find('div div.bigImage');
+		bigImage.find('img').attr('src', currImg);
+		bigImage.find('a').attr('href', currImg);
+		
+		setNewHeightOfPicturesBlock();
 	});
 });
+
+function setNewHeightOfPicturesBlock(){
+	var firstDiv = $('#pictures div').first();
+	var newHeight = (firstDiv.height()-firstDiv.next('div').height() > 0) ? firstDiv.height():firstDiv.next('div').height();
+	$('#pictures').height( newHeight );
+}

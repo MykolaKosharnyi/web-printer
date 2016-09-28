@@ -214,7 +214,18 @@ public class UseWithProduct implements Serializable{
 	@Column(name="descriptionInsuranceUkraineTransport")
 	protected String descriptionInsuranceUkraineTransport;
 	
+	@Column(name="top",nullable = false, columnDefinition = "bit default 0")
+	private boolean top;
+	
 	public UseWithProduct(){}
+
+	public boolean isTop() {
+		return top;
+	}
+
+	public void setTop(boolean top) {
+		this.top = top;
+	}
 
 	public String getDescriptionInsuranceInternationalTransport() {
 		return descriptionInsuranceInternationalTransport;

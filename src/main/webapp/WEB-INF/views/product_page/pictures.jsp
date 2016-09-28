@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <div id="pictures">
-	<div class="col-md-10 col-sm-10 col-xs-10" style="margin-bottom: 20px;">
+	<div class="col-md-10 col-sm-10 col-xs-10">
 		<div class="row bigImage">
 			<a class="fancybox" data-fancybox-group="group" href="/images/${type}s/${product.id}/${product.pathPictures.get(0)}">
 				<img src="/images/${type}s/${product.id}/${product.pathPictures.get(0)}" alt="alt" />

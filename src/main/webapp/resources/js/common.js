@@ -470,7 +470,7 @@ $(document).ready(function() {
 	
 	//Аякс отправка форм
 	//Документация: http://api.jquery.com/jquery.ajax/
-	$("#callback").submit(function() {
+/*	$("#callback").submit(function() {
 		$.ajax({
 			type: "GET",
 			url: "mail.php",
@@ -482,7 +482,7 @@ $(document).ready(function() {
 			}, 1000);
 		});
 		return false;
-	});
+	});*/
 	
 	$('.reviewStars-input input:radio').click(function(){
 	    return false;

@@ -175,8 +175,19 @@ private static final long serialVersionUID = 3031695775597440046L;
 	@Column(name="kyivDeliveryPriceWeight", nullable = false, columnDefinition = "bit default 0")
 	protected boolean kyivDeliveryPriceWeight;
 	
+	@Column(name="top",nullable = false, columnDefinition = "bit default 0")
+	private boolean top;
+	
 	public Rip(){}
 	
+	public boolean isTop() {
+		return top;
+	}
+
+	public void setTop(boolean top) {
+		this.top = top;
+	}
+
 	public double getDeliveryWidth() {
 		return deliveryWidth;
 	}

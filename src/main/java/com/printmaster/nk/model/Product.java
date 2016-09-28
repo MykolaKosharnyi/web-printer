@@ -285,8 +285,19 @@ public abstract class Product implements Serializable{
 	@Column(name="descriptionInsuranceUkraineTransport")
 	protected String descriptionInsuranceUkraineTransport;
 	
+	@Column(name="top",nullable = false, columnDefinition = "bit default 0")
+	private boolean top;
+	
 	public Product(){}
 	
+	public boolean isTop() {
+		return top;
+	}
+
+	public void setTop(boolean top) {
+		this.top = top;
+	}
+
 	public String getDescriptionInsuranceInternationalTransport() {
 		return descriptionInsuranceInternationalTransport;
 	}
