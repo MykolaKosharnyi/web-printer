@@ -556,6 +556,13 @@ public class ScannerController {
     	links.createLinksForScanners(scannerService.listShowOnSite());
     }
     
+    @RequestMapping(value="/admin/scanner/setTop/{id}", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
+    public @ResponseBody void setTop(@PathVariable("id") long id, @RequestBody boolean value) {
+    	Scanner scanner = scannerService.getScannerById(id);
+    	scanner.setTop(value);
+    	scannerService.updateScanner(scanner);
+    }
+    
     @RequestMapping(value="/admin/scanner/showOnHomePage/{id}", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void showOnHomePage(@PathVariable("id") long id, @RequestBody boolean value) {
     	Scanner scanner = scannerService.getScannerById(id);

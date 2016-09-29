@@ -609,6 +609,13 @@ public class LaminatorController {
     	links.createLinksForLaminators(laminatorService.listShowOnSite());
     }
     
+    @RequestMapping(value="/admin/laminator/setTop/{id}", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
+    public @ResponseBody void setTop(@PathVariable("id") long id, @RequestBody boolean value) {
+    	Laminator laminator = laminatorService.getLaminatorById(id);
+    	laminator.setTop(value);
+    	laminatorService.updateLaminator(laminator);
+    }
+    
     @RequestMapping(value="/admin/laminator/showOnHomePage/{id}", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void showOnHomePage(@PathVariable("id") long id, @RequestBody boolean value) {
     	Laminator laminator = laminatorService.getLaminatorById(id);

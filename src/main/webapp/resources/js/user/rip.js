@@ -5,6 +5,7 @@
 				type: 'post',
 				success: function(products) { 
 					$("#out_result_of_search").html('');
+					$("#top_result_of_search").html('');
 					
 	                $(products).each(function(i, product) {
 	                	var outerDiv = $('<div/>');
@@ -53,7 +54,11 @@
 	    	                				}
 	    	                				
 	    	                				
-	                	$("#out_result_of_search").append(outerDiv)
+	    	                	        	if(product.top){
+	    	        	    	            	$("#top_result_of_search").append(outerDiv);
+	    	        	    	            } else {
+	    	        	    	            	$("#out_result_of_search").append(outerDiv);
+	    	        	    	            } 	
 	                });
 				}
 				

@@ -874,6 +874,13 @@ public class PrinterController {
     	links.createLinksForPrinters(printerService.listShowOnSite());
     }
     
+    @RequestMapping(value="/admin/printer/setTop/{id}", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
+    public @ResponseBody void setTop(@PathVariable("id") long id, @RequestBody boolean value) {
+    	Printer printer = printerService.getPrinterById(id);
+    	printer.setTop(value);
+    	printerService.updatePrinter(printer);
+    }
+    
     @RequestMapping(value="/admin/printer/showOnHomePage/{id}", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void showOnHomePage(@PathVariable("id") long id, @RequestBody boolean value) {
     	Printer printer = printerService.getPrinterById(id);

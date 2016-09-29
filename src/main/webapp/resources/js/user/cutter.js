@@ -5,6 +5,7 @@
 				type: 'post',
 				success: function(products) { 
 					$("#out_result_of_search").html('');
+					$("#top_result_of_search").html('');
 					
 	                $(products).each(function(i, product) {
 	                	var outerDiv = $('<div/>');
@@ -50,9 +51,21 @@
 	    	                														   ))
 	    	                				}
 	    	                				
-	    	                				
-	                	$("#out_result_of_search").append(outerDiv)
+	    	            if(product.top){
+	    	            	$("#top_result_of_search").append(outerDiv);
+	    	            } else {
+	    	            	$("#out_result_of_search").append(outerDiv);
+	    	            } 				
+	                	
 	                });
+	                
+	                var topResult = $('#top_result_of_search');
+	                if(topResult.find('.products').length > 0){
+	                	topResult.height( Math.ceil(topResult.find('.products').length/3 ) * (topResult.find('.products').first().height() + 9 ));
+	                } else {
+	                	topResult.height(0);
+	                }
+
 				}
 				
 				}); 

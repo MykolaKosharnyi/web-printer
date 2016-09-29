@@ -147,6 +147,7 @@ public class ComponetsForController {
 			curObj.put("prise", currentProduct.getPrise());
 			curObj.put("name", currentProduct.getName());
 			curObj.put("pathPictures", currentProduct.getPathPictures());
+			curObj.put("top", currentProduct.isTop());
 
 			arrayResult.add(curObj);
 		}
@@ -166,6 +167,7 @@ public class ComponetsForController {
 			curObj.put("name", currentProduct.getName());
 			curObj.put("pathPictures", currentProduct.getPathPictures());
 			curObj.put("typeProduct", currentProduct.getTypeProduct());
+			curObj.put("top", currentProduct.isTop());
 
 			arrayResult.add(curObj);
 		}
@@ -207,6 +209,7 @@ public class ComponetsForController {
 
 	@SuppressWarnings("unchecked")
 	private void standartOutPutDataOfProduct(Product currentProduct, JSONObject curObj) {
+		curObj.put("top", currentProduct.isTop());
 		curObj.put("id", currentProduct.getId());
 		curObj.put("partNumber", currentProduct.getPartNumber());
 		
@@ -221,6 +224,7 @@ public class ComponetsForController {
 		curObj.put("prise", currentProduct.getPrise());
 		curObj.put("name", currentProduct.getName());
 		curObj.put("pathPictures", currentProduct.getPathPictures());
+		
 	}
 		
     public void updateInLeftField(Product product, boolean isShow, String typeProduct){

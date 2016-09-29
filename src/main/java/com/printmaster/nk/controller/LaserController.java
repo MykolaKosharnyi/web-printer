@@ -639,6 +639,13 @@ public class LaserController {
     	links.createLinksForLasers(laserService.listShowOnSite());
     }
     
+    @RequestMapping(value="/admin/laser/setTop/{id}", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
+    public @ResponseBody void setTop(@PathVariable("id") long id, @RequestBody boolean value) {
+    	Laser laser = laserService.getLaserById(id);
+    	laser.setTop(value);
+    	laserService.updateLaser(laser);
+    }
+    
     @RequestMapping(value="/admin/laser/showOnHomePage/{id}", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void showOnHomePage(@PathVariable("id") long id, @RequestBody boolean value) {
     	Laser laser = laserService.getLaserById(id);

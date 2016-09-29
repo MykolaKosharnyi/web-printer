@@ -373,7 +373,7 @@ public class Printer extends Product{
 
 	public double getRatingOverallRating() {
 		int quantity = 0;
-		int sum = 0;
+		double sum = 0;
 		
 		if(ratingPrintQuality!=0){
 			quantity++;

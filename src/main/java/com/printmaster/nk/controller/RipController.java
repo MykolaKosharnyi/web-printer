@@ -449,6 +449,13 @@ public class RipController {
     	links.createLinksForRips(ripService.listShowOnSite());
     }
     
+    @RequestMapping(value="/admin/rip/setTop/{id}", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
+    public @ResponseBody void setTop(@PathVariable("id") long id, @RequestBody boolean value) {
+    	Rip rip = ripService.getRipById(id);
+    	rip.setTop(value);
+    	ripService.updateRip(rip);
+    }
+    
     @RequestMapping(value="/admin/rip/showOnHomePage/{id}", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void showOnHomePage(@PathVariable("id") long id, @RequestBody boolean value) {
     	Rip rip = ripService.getRipById(id);

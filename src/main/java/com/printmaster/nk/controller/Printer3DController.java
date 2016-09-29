@@ -622,6 +622,13 @@ public class Printer3DController {
     	}
     }
     
+    @RequestMapping(value="/admin/3d_printer/setTop/{id}", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
+    public @ResponseBody void setTop(@PathVariable("id") long id, @RequestBody boolean value) {
+    	Printer3D printer = productService.getPrinter3DById(id);
+    	printer.setTop(value);
+    	productService.updatePrinter3D(printer);
+    }
+    
     @RequestMapping(value="/admin/3d_printer/showOnHomePage/{id}", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void showOnHomePage(@PathVariable("id") long id, @RequestBody boolean value) {
     	Printer3D printer3d = productService.getPrinter3DById(id);

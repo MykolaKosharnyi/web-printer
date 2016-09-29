@@ -545,6 +545,13 @@ public class PrinterDigitalController {
     	}
     }
     
+    @RequestMapping(value="/admin/digital_printer/setTop/{id}", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
+    public @ResponseBody void setTop(@PathVariable("id") long id, @RequestBody boolean value) {
+    	DigitalPrinter printer = productService.getPrinterById(id);
+    	printer.setTop(value);
+    	productService.updatePrinter(printer);
+    }
+    
     @RequestMapping(value="/admin/digital_printer/showOnHomePage/{id}", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void showOnHomePage(@PathVariable("id") long id, @RequestBody boolean value) {
     	DigitalPrinter printer = productService.getPrinterById(id);

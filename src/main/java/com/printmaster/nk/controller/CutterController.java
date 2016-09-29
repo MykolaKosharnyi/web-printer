@@ -558,23 +558,22 @@ public class CutterController {
     
     @RequestMapping("/admin/cutter/remove/{id}")
     public String removeCutter(@PathVariable("id") long id){
-    		logger.info("Start deleting cutter from database, id=" + id);
-    		try {
-    			FileUtils.deleteDirectory(new File(directory + File.separator + 
-						concreteFolder + File.separator + id));
-    			logger.info("deleted all pictures and pictures directory of this cutter");
-			} catch (IOException e) {
-				logger.error("Deleting all pictures from this cutter has a problem: ", e);
-			}
+    	logger.info("Start deleting cutter from database, id=" + id);
+    	try {
+    		FileUtils.deleteDirectory(new File(directory + File.separator + 
+					concreteFolder + File.separator + id));
+    		logger.info("deleted all pictures and pictures directory of this cutter");
+		} catch (IOException e) {
+			logger.error("Deleting all pictures from this cutter has a problem: ", e);
+		}
     		
-    		logger.info("Update links to the products in left menu!");
-
-    		componets.updateInLeftField(cutterService.getCutterById(id), false, "cutter");
+    	logger.info("Update links to the products in left menu!");
+    	componets.updateInLeftField(cutterService.getCutterById(id), false, "cutter");
     		
-    		logger.info("DELETE cutter with id=" + id + " from database!");
-    		cutterService.removeCutter(id);
+    	logger.info("DELETE cutter with id=" + id + " from database!");
+    	cutterService.removeCutter(id);
         
-    		links.createLinksForCutters(cutterService.listShowOnSite());
+    	links.createLinksForCutters(cutterService.listShowOnSite());
     		
         return "redirect:/admin/cutters";
     }  
@@ -592,6 +591,13 @@ public class CutterController {
     	}
     	
     	links.createLinksForCutters(cutterService.listShowOnSite());
+    }
+    
+    @RequestMapping(value="/admin/cutter/setTop/{id}", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
+    public @ResponseBody void setTop(@PathVariable("id") long id, @RequestBody boolean value) {
+    	Cutter cutter = cutterService.getCutterById(id);
+    	cutter.setTop(value);
+    	cutterService.updateCutter(cutter);
     }
     
     @RequestMapping(value="/admin/cutter/showOnHomePage/{id}", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")

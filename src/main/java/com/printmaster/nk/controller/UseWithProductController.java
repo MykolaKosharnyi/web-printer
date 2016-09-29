@@ -629,6 +629,13 @@ public class UseWithProductController {
     	links.createLinksForUseWithProducts(useWithProductService.listShowOnSite());
     }
     
+    @RequestMapping(value="/admin/use_with_product/setTop/{id}", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
+    public @ResponseBody void setTop(@PathVariable("id") long id, @RequestBody boolean value) {
+    	UseWithProduct useWithProduct = useWithProductService.getUseWithProductById(id);
+    	useWithProduct.setTop(value);
+    	useWithProductService.updateUseWithProduct(useWithProduct);
+    }
+    
     @RequestMapping(value="/admin/use_with_product/showOnHomePage/{id}", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void showOnHomePage(@PathVariable("id") long id, @RequestBody boolean value) {
     	UseWithProduct useWithProduct = useWithProductService.getUseWithProductById(id);

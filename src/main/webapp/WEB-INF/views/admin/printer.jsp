@@ -1112,6 +1112,12 @@
 		</form:form>
 	</div>
 	<script type="text/javascript">
+	/* uncheck if raiting ckecked */
+	$(document).on("click", '#product input:radio:checked', function(){
+		if($(this).is(':checked'))
+			$(this).prop('checked', false);
+    });
+	
 	function setTypeOfPrinthead(name_manufacturer, type_printhead){
 		var output = $("#type_of_printhead").html('');
 		
