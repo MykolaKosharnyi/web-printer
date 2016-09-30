@@ -812,6 +812,9 @@
 						<div class="rating_block">
 							<p>Качество печати:</p>
 							<div class="reviewStars-input">
+								
+								<input type="hidden" name="hidden_value_rating" value="${product.ratingPrintQuality}">
+								
 							    <input id="star-5-ratingPrintQuality" type="radio" name="ratingPrintQuality" 
 							    	<c:if test="${product.ratingPrintQuality == 5}">checked</c:if> value="5"/>
 							    <label title="Очень хорошо" for="star-5-ratingPrintQuality"></label>
@@ -838,6 +841,9 @@
 						<div class="rating_block">
 							<p>Скорость печати:</p>
 							<div class="reviewStars-input">
+							
+								<input type="hidden" name="hidden_value_rating" value="${product.ratingPrintSpeed}">
+							
 							    <input id="star-5-ratingPrintSpeed" type="radio" name="ratingPrintSpeed" 
 							    	<c:if test="${product.ratingPrintSpeed == 5}">checked</c:if> value="5"/>
 							    <label title="Очень хорошо" for="star-5-ratingPrintSpeed"></label>
@@ -864,6 +870,9 @@
 						<div class="rating_block">
 							<p>Стабильность работы:</p>
 							<div class="reviewStars-input">
+							
+								<input type="hidden" name="hidden_value_rating" value="${product.ratingStablePerformance}">
+							
 							    <input id="star-5-ratingStablePerformance" type="radio" name="ratingStablePerformance" 
 							    	<c:if test="${product.ratingStablePerformance == 5}">checked</c:if> value="5"/>
 							    <label title="Очень хорошо" for="star-5-ratingStablePerformance"></label>
@@ -890,6 +899,9 @@
 						<div class="rating_block">
 							<p>Простота эксплуатации:</p>
 							<div class="reviewStars-input">
+							
+								<input type="hidden" name="hidden_value_rating" value="${product.ratingEaseOfUse}">
+							
 							    <input id="star-5-ratingEaseOfUse" type="radio" name="ratingEaseOfUse" 
 							    	<c:if test="${product.ratingEaseOfUse == 5}">checked</c:if> value="5"/>
 							    <label title="Очень хорошо" for="star-5-ratingEaseOfUse"></label>
@@ -916,6 +928,9 @@
 						<div class="rating_block">
 							<p>Надёжность сборки:</p>
 							<div class="reviewStars-input">
+							
+								<input type="hidden" name="hidden_value_rating" value="${product.ratingReliabilityAssembly}">
+							
 							    <input id="star-5-ratingReliabilityAssembly" type="radio" name="ratingReliabilityAssembly" 
 							    	<c:if test="${product.ratingReliabilityAssembly == 5}">checked</c:if> value="5"/>
 							    <label title="Очень хорошо" for="star-5-ratingReliabilityAssembly"></label>
@@ -942,6 +957,9 @@
 						<div class="rating_block">
 							<p>Срок эксплуатации:</p>
 							<div class="reviewStars-input">
+							
+								<input type="hidden" name="hidden_value_rating" value="${product.ratingLifetime}">
+							
 							    <input id="star-5-ratingLifetime" type="radio" name="ratingLifetime" 
 							    	<c:if test="${product.ratingLifetime == 5}">checked</c:if> value="5"/>
 							    <label title="Очень хорошо" for="star-5-ratingLifetime"></label>
@@ -968,6 +986,9 @@
 						<div class="rating_block">
 							<p>Стоимость профилактического обслуживания:</p>
 							<div class="reviewStars-input">
+							
+								<input type="hidden" name="hidden_value_rating" value="${product.ratingPreventiveMaintenanceCost}">
+							
 							    <input id="star-5-ratingPreventiveMaintenanceCost" type="radio" name="ratingPreventiveMaintenanceCost" 
 							    	<c:if test="${product.ratingPreventiveMaintenanceCost == 5}">checked</c:if> value="5"/>
 							    <label title="Очень хорошо" for="star-5-ratingPreventiveMaintenanceCost"></label>
@@ -994,6 +1015,9 @@
 						<div class="rating_block">
 							<p>Стоимость запчастей:</p>
 							<div class="reviewStars-input">
+							
+								<input type="hidden" name="hidden_value_rating" value="${product.ratingTheCostOfSpareParts}">
+							
 							    <input id="star-5-ratingTheCostOfSpareParts" type="radio" name="ratingTheCostOfSpareParts" 
 							    	<c:if test="${product.ratingTheCostOfSpareParts == 5}">checked</c:if> value="5"/>
 							    <label title="Очень хорошо" for="star-5-ratingTheCostOfSpareParts"></label>
@@ -1020,6 +1044,9 @@
 						<div class="rating_block">
 							<p>Стоимость расходных материалов:</p>
 							<div class="reviewStars-input">
+							
+								<input type="hidden" name="hidden_value_rating" value="${product.ratingTheCostOfConsumables}">
+							
 							    <input id="star-5-ratingTheCostOfConsumables" type="radio" name="ratingTheCostOfConsumables" 
 							    	<c:if test="${product.ratingTheCostOfConsumables == 5}">checked</c:if> value="5"/>
 							    <label title="Очень хорошо" for="star-5-ratingTheCostOfConsumables"></label>
@@ -1046,6 +1073,9 @@
 						<div class="rating_block">
 							<p>Стоимость оригинальных чернил:</p>
 							<div class="reviewStars-input">
+							
+								<input type="hidden" name="hidden_value_rating" value="${product.ratingTheCostOfOriginalInk}">
+							
 							    <input id="star-5-ratingTheCostOfOriginalInk" type="radio" name="ratingTheCostOfOriginalInk" 
 							    	<c:if test="${product.ratingTheCostOfOriginalInk == 5}">checked</c:if> value="5"/>
 							    <label title="Очень хорошо" for="star-5-ratingTheCostOfOriginalInk"></label>
@@ -1072,6 +1102,9 @@
 						<div class="rating_block">
 							<p>Себестоимость печати:</p>
 							<div class="reviewStars-input">
+							
+								<input type="hidden" name="hidden_value_rating" value="${product.ratingCostOfPrinting}">
+							
 							    <input id="star-5-ratingCostOfPrinting" type="radio" name="ratingCostOfPrinting" 
 							    	<c:if test="${product.ratingCostOfPrinting == 5}">checked</c:if> value="5"/>
 							    <label title="Очень хорошо" for="star-5-ratingCostOfPrinting"></label>
@@ -1113,9 +1146,18 @@
 	</div>
 	<script type="text/javascript">
 	/* uncheck if raiting ckecked */
-	$(document).on("click", '#product input:radio:checked', function(){
-		if($(this).is(':checked'))
-			$(this).prop('checked', false);
+	$(document).on("click", '#product .rating_block .reviewStars-input input:radio', function(){
+		
+		var hiddenInputRating = $(this).parent('.reviewStars-input').find('input[name="hidden_value_rating"]');
+		
+		if( hiddenInputRating.val() == $(this).val() ){
+			$(this).attr('checked',false);
+			hiddenInputRating.val(0);
+		} else {
+			hiddenInputRating.val($(this).val());
+		}
+		
+			
     });
 	
 	function setTypeOfPrinthead(name_manufacturer, type_printhead){
