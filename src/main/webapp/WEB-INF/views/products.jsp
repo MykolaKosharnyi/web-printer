@@ -115,11 +115,12 @@
 <script type="text/javascript">
 jQuery(document).ready(function($) {
 	var topResult = $('#top_result_of_search');
-	topResult.height( Math.ceil(topResult.find('.products').length/3 ) * (topResult.find('.products').first().height() + 9 ));
+	topResult.height( Math.ceil(topResult.find('.products').length/3 ) * (topResult.find('.products').first().height() + 6 ));
 }); // ready()
 
 $(function(){
-	$("#out_result_of_search").on('mouseenter', '.products a.link', function() {
+	/* for changing background picture */
+	$("#top_result_of_search, #out_result_of_search").on('mouseenter', '.products a.link', function() {
 		var currImg = $(this).find('img').attr('src');
 	  	var needImg = $(this).attr('id');
 	  
@@ -128,13 +129,25 @@ $(function(){
 	  $(this).attr('id', currImg);
 	});
 	
-	$("#out_result_of_search").on('mouseleave', '.products a.link', function() {
+	$("#top_result_of_search, #out_result_of_search").on('mouseleave', '.products a.link', function() {
 		var currImg = $(this).find('img').attr('src');
 	   	var needImg = $(this).attr('id');
 		  
 	   $(this).find('img')
 		 .attr('src', needImg);
 	   $(this).attr('id', currImg);
+	});
+	
+	/* for changing height of name and price after hovering on product field */
+	$("#top_result_of_search, #out_result_of_search").on('mouseenter', '.products', function() {
+		var name_and_price_block = $(this).find('.name_price_cart_block');
+		name_and_price_block.outerHeight(name_and_price_block.find('a.products_title').outerHeight(true) + name_and_price_block.find('p.products_price').outerHeight(true) + 15);
+		name_and_price_block.css('min-height','60px');
+	});
+	
+	$("#top_result_of_search, #out_result_of_search").on('mouseleave', '.products', function() {
+		var name_and_price_block = $(this).find('.name_price_cart_block');
+		name_and_price_block.outerHeight(60);
 	});
 });
 

@@ -147,7 +147,7 @@
 				                        $<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${printer.prise}" />
 				                    </c:if>
                                   </div>
-                                  <i class="fa fa-cart-plus add_to_cart" aria-hidden="true" 
+                                  <i class="fa fa-cart-plus add_to_cart" aria-hidden="true" style="margin-top: 3px; right: 0px;"
 			onclick="addToCart('printer', ${printer.id}, '${printer.name}', '${printer.prise}','${printer.pathPictures.get(0)}');"></i>
                               </div>
                             </c:forEach>
@@ -232,7 +232,7 @@
                         $<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${printer3D.prise}" />
                     </c:if>
                         </div>
-                        <i class="fa fa-cart-plus add_to_cart" aria-hidden="true" 
+                        <i class="fa fa-cart-plus add_to_cart" aria-hidden="true" style="margin-top: 3px; right: 0px;"
 			onclick="addToCart('3d_printer', ${printer3D.id}, '${printer3D.name}', '${printer3D.prise}','${printer3D.pathPictures.get(0)}');"></i>
                               </div>
                           </c:forEach>
@@ -304,7 +304,7 @@
                         $<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${printer.prise}" />
                     </c:if>
                         </div>
-                        <i class="fa fa-cart-plus add_to_cart" aria-hidden="true" 
+                        <i class="fa fa-cart-plus add_to_cart" aria-hidden="true" style="margin-top: 3px; right: 0px;" 
 			onclick="addToCart('digital_printer', ${printer.id}, '${printer.name}', '${printer.prise}','${printer.pathPictures.get(0)}');"></i>
                               </div>
                           </c:forEach>
@@ -373,7 +373,7 @@
                         				$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${product.prise}" />
                     				</c:if>
                         		</div>
-                        		<i class="fa fa-cart-plus add_to_cart" aria-hidden="true" 
+                        		<i class="fa fa-cart-plus add_to_cart" aria-hidden="true"  style="margin-top: 3px; right: 0px;"
 			onclick="addToCart('laminator', ${product.id}, '${product.name}', '${product.prise}','${product.pathPictures.get(0)}');"></i>
                               </div>
                           </c:forEach>
@@ -455,7 +455,7 @@
                         $<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${laser.prise}" />
                     </c:if>
                         </div>
-                        <i class="fa fa-cart-plus add_to_cart" aria-hidden="true" 
+                        <i class="fa fa-cart-plus add_to_cart" aria-hidden="true" style="margin-top: 3px; right: 0px;" 
 			onclick="addToCart('laser', ${laser.id}, '${laser.name}', '${laser.prise}','${laser.pathPictures.get(0)}');"></i>
                               </div>
                           </c:forEach>
@@ -523,7 +523,7 @@
                         $<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${cutter.prise}" />
                     </c:if>
                         </div>
-                        <i class="fa fa-cart-plus add_to_cart" aria-hidden="true" 
+                        <i class="fa fa-cart-plus add_to_cart" aria-hidden="true" style="margin-top: 3px; right: 0px;" 
 			onclick="addToCart('cutter', ${cutter.id}, '${cutter.name}', '${cutter.prise}','${cutter.pathPictures.get(0)}');"></i>
                               </div>
                           </c:forEach>
@@ -599,7 +599,7 @@
 					                	$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${scanner.prise}" />
 					                </c:if>
                         		</div>
-                        		<i class="fa fa-cart-plus add_to_cart" aria-hidden="true" 
+                        		<i class="fa fa-cart-plus add_to_cart" aria-hidden="true" style="margin-top: 3px; right: 0px;" 
 			onclick="addToCart('scanner', ${scanner.id}, '${scanner.name}', '${scanner.prise}','${scanner.pathPictures.get(0)}');"></i>
                               </div>
                           </c:forEach>
@@ -669,7 +669,7 @@
 					                	$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${product.prise}" />
 					                </c:if>
                         		</div>
-                        		<i class="fa fa-cart-plus add_to_cart" aria-hidden="true" 
+                        		<i class="fa fa-cart-plus add_to_cart" aria-hidden="true" style="margin-top: 3px; right: 0px;" 
 			onclick="addToCart(${product.type}, ${product.id}, '${product.name}', '${product.prise}','${product.pathPictures.get(0)}');"></i>
                               </div>
                           </c:forEach>
@@ -741,7 +741,7 @@
 					                	$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${rip.prise}" />
 					                </c:if>
                         		</div>
-                        		<i class="fa fa-cart-plus add_to_cart" aria-hidden="true" 
+                        		<i class="fa fa-cart-plus add_to_cart" aria-hidden="true" style="margin-top: 3px; right: 0px;" 
 			onclick="addToCart('rip', ${rip.id}, '${rip.name}', '${rip.prise}','${rip.pathPictures.get(0)}');"></i>
                               </div>
                           </c:forEach>
