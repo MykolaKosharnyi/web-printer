@@ -372,7 +372,7 @@ ul{
 
                     .slide-item1, .slide-item2, .slide-item3, .slide-item4, .slide-item5, .slide-item6, .slide-item7, .slide-item8, .slide-item9 {
                         position: relative;
-                        height: 280px;
+                        height: 285px;
                         width: inherit;
                         float: left;
                         border: 1px rgb(219, 219, 219) solid;
@@ -430,24 +430,24 @@ ul{
 				transform: scale(1.1);                   
                             }
 
-                        .slide-title,
-                        .slide-price{
-                            position: relative;
+                .slide-title,
+                .slide-price{
+                    position: relative;
 	    		    float: left;
-            		    width: 200px;
-            		    height: 25px;
-            		    /* Шрифт */
-            		    font: 1em/1.4em sans-serif;
+            		width: 200px;
+            		height: 25px;
+            		/* Шрифт */
+            		font: 1em/1.4em sans-serif;
 	    		    padding: 4px 0px 0px 4px;
 					margin: 1px 0px 0px 1px;
 	    		    font-weight: bold;
 	    		    color: #006080;
-			    white-space: nowrap;/* Запрещаем перенос строк */
-			    overflow: hidden;
-			    text-overflow: ellipsis;
-                        }
+			    	white-space: nowrap;/* Запрещаем перенос строк */
+			    	overflow: hidden;
+			    	text-overflow: ellipsis;
+                }
 
-		 .slide-title:hover{
+		 .sider_container .slide-title:hover{
 	    background-color: white;
 	    white-space: normal;/* Запрещаем перенос строк */
 	    overflow: visible;

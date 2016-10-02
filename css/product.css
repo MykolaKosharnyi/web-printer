@@ -15,13 +15,151 @@
         height: auto;
     }
 
-        #pictures{
+.pictures-and-rating{
+	position: relative;
+    width: 40%;
+	height:auto;
+	float: left;
+	margin: 0px;
+}
+
+        #pictures, .rating{
             position: relative;
-            width: 40%;
+            width: 100%;
             height:auto;
-            float: left;
+            float: /*left*/none;
             margin: 0px;
         }
+
+	.rating{margin-top: 10px;}
+
+/* Rating */
+	.reviewStars-input input:checked ~ label, .reviewStars-input label, .reviewStars-input label:hover, .reviewStars-input label:hover ~ label {
+	background: url(/images/star.png);
+	background-size: 20px 40px;
+	}
+
+	.reviewStars-input {
+	  
+	  /*fix floating problems*/
+	  overflow: hidden;
+	  *zoom: 1;
+	  /*end of fix floating problems*/
+	  
+	  position: relative;
+	  float: left;
+	}
+
+	.reviewStars-input input {
+	  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+	  opacity: 0;
+	  
+	  width: 20px;
+	  height: 20px;
+	  
+	  position: absolute;
+	  top: 0;
+	  z-index: 0;
+	}
+
+	.reviewStars-input input:checked ~ label {
+	  background-position: 0 -20px;
+	  height: 20px;
+	  width: 20px;
+	}
+
+	.reviewStars-input label {
+	  background-position: 0 0;
+	  height: 20px;
+	  width: 20px;
+	  float: right;
+	  cursor: pointer;
+	  /*margin-right: 5px;*/
+	  
+	  position: relative;
+	  z-index: 1;
+	}
+
+ input[id^="star-1-"]
+
+	.reviewStars-input input[id^="star-1-"] {
+	  left: 0px;
+	}
+	.reviewStars-input input[id^="star-2-"] {
+	  left: 20px;
+	}
+	.reviewStars-input input[id^="star-3-"] {
+	  left: 40px;
+	}
+	.reviewStars-input input[id^="star-4-"] {
+	  left: 60px;
+	}
+	.reviewStars-input input[id^="star-5-"] {
+	  left: 80px;
+	}
+	.rating_block{
+		height: 35px;
+		padding: 5px;
+		/*border-bottom: 1px #006080 solid;*/
+	}
+
+	.rating_block p{
+		width: 235px;
+		padding: 0;
+		border: 0;
+		color: black;
+		background: inherit;
+		float: left;
+		margin: 5px 0;
+		margin-right: 4px;
+		font: 14px "RobotoRegular";
+	}
+
+/*-- average raiting --*/
+.rating_average {
+	position: relative;
+	width: 100px;
+	list-style: none;
+	background: url(/images/star.png);
+	background-size: 20px 40px;
+}
+.rating_average li {
+	float: left;
+	height: 20px;
+}
+
+.rating_average li.current {
+	z-index: 1;
+	background: url(/images/star.png) left bottom;
+	background-size: 20px 40px;
+}
+.rating_average li span[class*="star"] {
+	position: absolute;
+	z-index: 5;
+	display: block;
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+}
+
+.rating_average li span.star1 {
+	left: 0;
+}
+.rating_average li span.star2 {
+	left: 20px;
+}
+.rating li span.star3 {
+	left: 40px;
+}
+.rating_average li span.star4 {
+	left: 60px;
+}
+.rating_average li span.star5 {
+	left: 80px;
+}
+/*-- average raiting END --*/
+
+/* end style rating */
 
             #pictures a{
                 position: relative;
@@ -111,12 +249,6 @@ border-radius: 5px;
             float: left;
 	    	margin-left: 0px;
         }
-/*.outer_table_in_head{
-	position: relative;
-	height: auto;
-	width: 100%;
-	display: block;
-}*/
 
             #table_in_head{
                 position: relative;
@@ -157,16 +289,28 @@ border-radius: 5px;
             }
             
             /*----  Common information  -----*/
-			div#commom_information{
+			div.commom_information{
 				float: none;
-				position: relative; 
-				display: block !important; 
-				width: 500px; 
-				padding: 10px;
+				position: relative;
+				padding: 5px;
 				font-style: italic;
+				min-height: 47px;
+			}
+
+			.commom_information em {
+				float: left;
+				padding: 10px 5px 10px 0px;
 			}
 			
-			#commom_information:first-word{
+			.commom_information p.value_of_availability{
+				padding: 10px;
+				border-radius: 10px;
+				position: relative;
+				float: left;
+				margin: 0px;
+			}
+
+			div.commom_information:first-word{
 				font: 2em sans-serif;
 			}
 
@@ -190,6 +334,7 @@ border-radius: 5px;
 label.add_price_title{
 	height: auto; 
 	max-width: 136px;
+	margin-left:20px;
 	/*min-width: 170px;*/
 }
 
@@ -263,8 +408,8 @@ label.add_price_title{
 }
 
 .table_price_option input[type="checkbox"].add_price{
-	position: relative;
-	/*top: -18px;*/
+	position: absolute;
+	
 }
 /* DELIVERY AND PAINT option*/
 .delivery_options,

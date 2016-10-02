@@ -537,8 +537,9 @@ p.paint_option{
 	position: relative;
 	background: #eee;
 	padding: 5px;
-	width: 200px;
+	width: 221px;
 	margin: 2px;
+	height: 280px;
 }
 
 .use_with_product div{
@@ -551,6 +552,10 @@ p.paint_option{
 	width: 100%;
 	padding-top: 5px;
 	height: 190px;
+	bottom: 0px;
+	position: absolute;
+	left: 0px;
+	padding: 5px;
 }
 
 .input_uwp{
@@ -765,6 +770,95 @@ p.paint_option{
 }
 
 .error{
-	color: yellow;
+	color: blue;
 	/*background-color: yellow;*/
 }
+
+/* SECTION WITH RAITING */
+/*sprite with stars*/
+	.reviewStars-input input:checked ~ label, .reviewStars-input label, .reviewStars-input label:hover, .reviewStars-input label:hover ~ label {
+		background: url(/images/star.png);
+		background-size: 20px 40px;
+	}
+
+	.reviewStars-input {
+	  
+	  /*fix floating problems*/
+	  overflow: hidden;
+	  *zoom: 1;
+	  /*end of fix floating problems*/
+	  
+	  position: relative;
+	  float: left;
+	}
+
+	.reviewStars-input input {
+	  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+	  opacity: 0;
+	  
+	  width: 20px;
+	  height: 20px;
+	  
+	  position: absolute;
+	  top: 0;
+	  z-index: 0;
+	}
+
+	.reviewStars-input input:checked ~ label {
+	  background-position: 0 -20px;
+	  height: 20px;
+	  width: 20px;
+	}
+
+	.reviewStars-input label {
+	  background-position: 0 0;
+	  height: 20px;
+	  width: 20px;
+	  float: right;
+	  cursor: pointer;
+	  /*margin-right: 5px;*/
+	  
+	  position: relative;
+	  z-index: 1;
+	}
+
+	.reviewStars-input label:hover, .reviewStars-input label:hover ~ label {
+	  background-position: 0 -20px;
+	  height: 20px;
+	  width: 20px;
+	}
+
+ input[id^="star-1-"]
+
+	.reviewStars-input input[id^="star-1-"] {
+	  left: 0px;
+	}
+	.reviewStars-input input[id^="star-2-"] {
+	  left: 20px;
+	}
+	.reviewStars-input input[id^="star-3-"] {
+	  left: 40px;
+	}
+	.reviewStars-input input[id^="star-4-"] {
+	  left: 60px;
+	}
+	.reviewStars-input input[id^="star-5-"] {
+	  left: 80px;
+	}
+	.rating_block{
+		height: 42px;
+		padding: 5px;
+		/*border-bottom: 1px #006080 solid;*/
+	}
+
+	.rating_block p{
+		width: 200px;
+		padding: 0;
+		border: 0;
+		color: black;
+		background: inherit;
+		font-weight: bold;
+		float: left;
+		margin: 5px 0;
+		margin-right: 4px;
+	}

@@ -529,7 +529,7 @@ transition: opacity; 0.5s linear;
 		}
 
 		#reklam .slide-title:hover,
-		.products_title:hover{
+		#reklam .products_title:hover{
 	    background-color: white;
 	    white-space: pre;/* Запрещаем перенос строк */
 	    overflow: visible;

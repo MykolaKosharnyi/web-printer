@@ -374,6 +374,7 @@ section.ord1er  {
 	box-shadow: 3px 3px #0C607D, 0 3px 6px rgb(31, 50, 131);
 	border-radius: 5px;
 	background: #fff;
+	padding-right: 5px;
 }
 			
 .add_to_cart:hover{
@@ -840,3 +841,9 @@ section.ord1er  {
 	cursor:pointer;
 	display:none; /* в oбычнoм сoстoянии её нет) */
 }
+
+/* ------- PRODUCTS PAGE ----------*/
+
+
+
+/* ------- END PRODUCTS PAGE ----------*/
