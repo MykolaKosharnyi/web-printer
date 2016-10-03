@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <div id="top_result_of_search">
 	<c:forEach items="${listProducts}" var="product">
 		<c:if test="${product.top}">
@@ -28,12 +29,26 @@
 							</c:if>
 		           		</p>
 		
-						<i class="fa fa-cart-plus add_to_cart" aria-hidden="true" style="padding-right: 5px; top: 5px; right: 10px; position: absolute;"
+						<i class="fa fa-cart-plus add_to_cart" aria-hidden="true" style="padding-right: 5px; top: 2px; right: 10px; position: absolute;"
 							onclick="addToCart('${type}', ${product.id}, '${product.name}', '${product.prise}', '${product.pathPictures.get(0)}');"></i>
 					</div>	
 					
 					<div class="name_price_cart_block_hidden">
-
+						<c:if test="${type=='printer' && product.ratingOverallRating > 0}">
+							<!-- Общая оценка -->
+								<div class="rating_block">
+									<p style="font-weight: bold;">Общая оценка:</p>
+									<div style="width: 100px; float: left;">
+										<ul class="rating_average clearfix">
+											<li class="current" style="width: ${product.ratingOverallRating * 20}%;"><span class="star1" title="Плохо"></span></li>
+											<li><span class="star2" title="Ниже среднего" ></span></li>
+											<li><span class="star3" title="Средне" ></span></li>
+											<li><span class="star4" title="Хорошо"  ></span></li>
+											<li><span class="star5" title="Очень хорошо" ></span></li>
+										</ul>
+									</div>
+								</div>
+						</c:if>
 					</div>	
 		
 					<c:if test="${!empty product.leftSharesLink}">
@@ -83,12 +98,26 @@
 						</c:if>
 	           		</p>
 	
-					<i class="fa fa-cart-plus add_to_cart" aria-hidden="true" style="padding-right: 5px; top: 5px; right: 10px; position: absolute;"
+					<i class="fa fa-cart-plus add_to_cart" aria-hidden="true" style="padding-right: 5px; top: 2px; right: 10px; position: absolute;"
 						onclick="addToCart('${type}', ${product.id}, '${product.name}', '${product.prise}', '${product.pathPictures.get(0)}');"></i>
 				</div>	
 				
 				<div class="name_price_cart_block_hidden">
-	
+					<c:if test="${type=='printer' && product.ratingOverallRating > 0}">
+						<!-- Общая оценка -->
+							<div class="rating_block">
+								<p style="font-weight: bold;">Общая оценка:</p>
+								<div style="width: 100px; float: left;">
+									<ul class="rating_average clearfix">
+										<li class="current" style="width: ${product.ratingOverallRating * 20}%;"><span class="star1" title="Плохо"></span></li>
+										<li><span class="star2" title="Ниже среднего" ></span></li>
+										<li><span class="star3" title="Средне" ></span></li>
+										<li><span class="star4" title="Хорошо"  ></span></li>
+										<li><span class="star5" title="Очень хорошо" ></span></li>
+									</ul>
+								</div>
+							</div>
+					</c:if>
 				</div>	
 	
 				<c:if test="${!empty product.leftSharesLink}">
@@ -142,13 +171,93 @@ $(function(){
 	$("#top_result_of_search, #out_result_of_search").on('mouseenter', '.products', function() {
 		var name_and_price_block = $(this).find('.name_price_cart_block');
 		name_and_price_block.outerHeight(name_and_price_block.find('a.products_title').outerHeight(true) + name_and_price_block.find('p.products_price').outerHeight(true) + 15);
-		name_and_price_block.css('min-height','60px');
 	});
 	
 	$("#top_result_of_search, #out_result_of_search").on('mouseleave', '.products', function() {
 		var name_and_price_block = $(this).find('.name_price_cart_block');
-		name_and_price_block.outerHeight(60);
+		name_and_price_block.outerHeight(54);
 	});
+});
+
+/*----  Для вывода товара при поиске  -----*/        
+$(document).ready(function() {
+	
+	$('#search').ajaxForm( {
+		type: 'post',
+		success: function(products) { 
+			$("#out_result_of_search").html('');
+			$("#top_result_of_search").html('');
+			
+            $(products).each(function(i, product) {
+            	var outerDiv = $('<div/>').addClass("products");
+            	var innterDiv = $('<div/>').addClass('inner_div_product');
+
+            	var slidePrice = $('<p/>').addClass("products_price").append($('<div/>').text("Цена:").css(
+						{
+							"float":"left",
+							"margin-right": "5px"
+						}));
+				if(product.prise < 0.1){
+					slidePrice.append($('<a/>').attr("href","#callback_reklam").addClass('fancybox').text("\u0443\u0442\u043E\u0447\u043D\u044F\u0439\u0442\u0435"));
+				} else {
+					slidePrice.append($('<div/>').text(checkPrise(product.prise)));
+				}
+            	
+				innterDiv.append($('<a/>').attr("id", "/images/${type}s/" + product.id + "/" + checkPicture(product.pathPictures))
+   								 			 .addClass("link")
+            								 .attr("href", "/${type}/" + product.id)
+            								 .append($('<div/>').addClass("outer_a_img").append($('<img/>').attr("src", "/images/${type}s/" + product.id + "/" + product.pathPictures[0]))))
+            				.append($('<div/>').addClass("name_price_cart_block")
+	                				.append($('<a/>').attr("href", "/${type}/" + product.id).addClass("products_title").text(product.name))
+	    	                		.append(slidePrice)
+	    	                		.append($('<i/>').addClass("fa fa-cart-plus add_to_cart").click(function(){
+        			                			addToCart("${type}" , product.id, product.name, product.prise+'', product.pathPictures[0]);
+        			                		}).css(
+        			        						{
+        			        							"padding-right": "5px",
+        			        							"top": "2px",
+        			        							"right": "10px",
+        			        							"position": "absolute"
+        			        						})))	    	                		
+
+	                				if(product.leftSharesLink!=null && product.leftSharesLink!=""){
+	                					innterDiv.append($('<div/>').addClass("ribbon-search-wrapper-left")
+	                										.append($('<div/>').addClass("ribbon-search-left")
+	                														   .text(product.leftSharesLink)
+	                														   .css( "color", product.leftSharesLinkColorText )
+	                														   .css( "background", product.leftSharesLinkColorFone )
+	                														   ))
+	                				}
+	                	        	
+	                	        	if(product.rightSharesLink!=null && product.rightSharesLink!=""){
+	                	        		innterDiv.append($('<div/>').addClass("ribbon-search-wrapper-right")
+	                										.append($('<div/>').addClass("ribbon-search-right")
+	                														   .text(product.rightSharesLink)
+	                														   .css( "color", product.rightSharesLinkColorText )
+	                														   .css( "background", product.rightSharesLinkColorFone )
+	                														   ))
+	                				}
+	                	        	
+	            outerDiv.append(innterDiv);   	        	
+	                				
+	            if(product.top){
+	            	$("#top_result_of_search").append(outerDiv);
+	            } else {
+	            	$("#out_result_of_search").append(outerDiv);
+	            } 				
+            	
+            });
+            
+            var topResult = $('#top_result_of_search');
+            if(topResult.find('.products').length > 0){
+            	topResult.height( Math.ceil(topResult.find('.products').length/3 ) * (topResult.find('.products').first().height() + 9 ));
+            } else {
+            	topResult.height(0);
+            }
+
+		}
+		
+		}); 
 });
 
 </script>

@@ -86,12 +86,12 @@
 						<p>Цена</p>
 						<form:errors path="prise" cssClass="error"></form:errors>
 					</div>
-					<ul class="check_boxes">
+					<div class="check_boxes">
 						<div class="text_output">
 							<p>$</p><form:input path="prise" class="amount-prise" value="${product.prise}"/>
 						</div>
 							<div class="slider-range-prise"></div>
-					</ul>
+					</div>
 				</div>
 				<div class="characteristic">
 					<div class="block_title">
@@ -153,7 +153,7 @@
 						<form:errors path="inputFirstWeightPrintMM" cssClass="error"></form:errors>
 						<form:errors path="inputSecondWeightPrintMM" cssClass="error"></form:errors>
 					</div>
-					<ul class="check_boxes">
+					<div class="check_boxes">
 						<div class="text_output">
 							<form:input style="width: 33px;" path="inputFirstWeightPrintMM" />
 							<form:errors path="inputFirstWeightPrintMM" cssClass="error"></form:errors>	 
@@ -161,7 +161,7 @@
 				    		<p>&nbsp; мм</p>
 				    		<form:errors path="inputSecondWeightPrintMM" cssClass="error"></form:errors>
 						</div>
-					</ul>
+					</div>
 				</div>
 				<div class="characteristic">
 					<div class="block_title">
@@ -201,7 +201,7 @@
 						<form:errors path="quantityUVlamp" cssClass="error"></form:errors>
 						<form:errors path="quantityLEDmodule" cssClass="error"></form:errors>
 					</div>
-					<ul class="check_boxes">
+					<div class="check_boxes">
 						<div class="text_output">
 							<p>UV лампа:</p>	 
 						</div>
@@ -233,7 +233,7 @@
 							<p>количество:&nbsp;</p><form:input style="width: 35px;" path="quantityLEDmodule" /><p>&nbsp;шт</p>
 							<form:errors path="quantityLEDmodule" cssClass="error"></form:errors>	 
 						</div>
-					</ul>
+					</div>
 				</div>
 				<div class="characteristic">
 					<div class="block_title">
@@ -332,7 +332,7 @@
 						<form:errors path="firstTypeNumberOfPrintheads" cssClass="error"></form:errors>
 						<form:errors path="secondTypeNumberOfPrintheads" cssClass="error"></form:errors>
 					</div>
-					<ul class="check_boxes">
+					<div class="check_boxes">
 						<div class="text_output">
 							<form:input style="width: 35px;" path="numberOfPrintheads" /><p>&nbsp;шт</p>
 							<form:errors path="numberOfPrintheads" cssClass="error"></form:errors>	 
@@ -359,7 +359,7 @@
 							<p>:&nbsp;</p><form:input style="width: 35px;" path="secondTypeNumberOfPrintheads" />
 							<form:errors path="secondTypeNumberOfPrintheads" cssClass="error"></form:errors>	 
 						</div>
-					</ul>
+					</div>
 				</div>
 				<div class="characteristic">
 					<div class="block_title">
@@ -371,7 +371,7 @@
 						<form:errors path="averageDischarge2" cssClass="error"></form:errors>
 						<form:errors path="averageDischarge3" cssClass="error"></form:errors>
 					</div>
-					<ul class="check_boxes">
+					<div class="check_boxes">
 						<div class="text_output">
 							<p>Средний расход чернил CMYK:&nbsp;</p><form:input style="width: 35px;" path="averageConsumptionOfCMYKink" /><p>&nbsp;мл./м.кв.</p>
 							<form:errors path="averageConsumptionOfCMYKink" cssClass="error"></form:errors>	 
@@ -395,7 +395,7 @@
 							<form:input style="width: 35px;" path="averageDischarge3" /><p>&nbsp;мл./м.кв.</p>
 							<form:errors path="averageDischarge3" cssClass="error"></form:errors>	 
 						</div>
-					</ul>
+					</div>
 				</div>
 				<div class="characteristic">
 					<div class="block_title">
@@ -440,7 +440,7 @@
 						<form:errors path="speedPrintPass4" cssClass="error"></form:errors>
 						<form:errors path="speedPrintPass5" cssClass="error"></form:errors>
 					</div>
-					<ul class="check_boxes">
+					<div class="check_boxes">
 						<div class="text_output">
 							<p>Draft Speed&nbsp;</p>
 							<form:input path="speedPrintDraftPass" class="speed_print_pass"/>
@@ -556,7 +556,7 @@
 							<form:errors path="speedPrint5" cssClass="error"></form:errors>
 							<form:errors path="speedPrintPass5" cssClass="error"></form:errors>
 						</div>
-					</ul>
+					</div>
 				</div>
 			</div>
 
@@ -567,12 +567,12 @@
 						<p>Размер капли (постоянная)</p>
 						<form:errors path="sizeDropStatic" cssClass="error"></form:errors>
 					</div>
-					<ul class="check_boxes">
+					<div class="check_boxes">
 						<div class="text_output">
 							<p>постоянная &nbsp;</p><form:input style="width: 28px;" path="sizeDropStatic" />
 							<form:errors path="sizeDropStatic" cssClass="error"></form:errors>	 
 						</div>
-					</ul>
+					</div>
 				</div>
 				<div class="characteristic">
 					<div class="block_title">
@@ -581,14 +581,14 @@
 						<form:errors path="sizeDropRangeFrom" cssClass="error"></form:errors>
 						<form:errors path="sizeDropRangeUntil" cssClass="error"></form:errors>
 					</div>
-					<ul class="check_boxes">
+					<div class="check_boxes">
 						<div class="text_output">
 							<p>переменная от&nbsp;</p><form:input style="width: 28px;" path="sizeDropRangeFrom" />
 							<form:errors path="sizeDropRangeFrom" cssClass="error"></form:errors>	 
 				    		<p>&nbsp;до&nbsp;</p> <form:input style="width: 28px;" path="sizeDropRangeUntil" />
 				    		<form:errors path="sizeDropRangeUntil" cssClass="error"></form:errors>
 						</div>
-					</ul>
+					</div>
 				</div>
 				<div class="characteristic">
 					<div class="block_title">
@@ -596,13 +596,13 @@
 						<p>Размер капли (с заданием типа капли)</p>
 						<form:errors path="valueOfNewTypeDrop" cssClass="error"></form:errors>
 					</div>
-					<ul class="check_boxes">
+					<div class="check_boxes">
 						<div class="text_output">
 							<p>&nbsp;</p><form:input style="width: 60px;" path="nameOfNewTypeDrop" />	 
 				    		<p>&nbsp;-&nbsp;</p> <form:input style="width: 28px;" path="valueOfNewTypeDrop" />
 				    		<form:errors path="valueOfNewTypeDrop" cssClass="error"></form:errors>
 						</div>
-					</ul>
+					</div>
 				</div>
 				<div class="characteristic">
 					<div class="block_title">
@@ -620,7 +620,7 @@
 						<form:errors path="inputFirstPrintResolution" cssClass="error"></form:errors>
 						<form:errors path="inputSecondPrintResolution" cssClass="error"></form:errors>
 					</div>
-					<ul class="check_boxes">
+					<div class="check_boxes">
 						<div class="text_output">
 							<form:input style="width: 33px;" path="inputFirstPrintResolution" />
 							<form:errors path="inputFirstPrintResolution" cssClass="error"></form:errors>	 
@@ -628,7 +628,7 @@
 				    		<p>&nbsp;dpi</p>
 				    		<form:errors path="inputSecondPrintResolution" cssClass="error"></form:errors>
 						</div>
-					</ul>
+					</div>
 				</div>
 				<div class="characteristic">
 					<div class="block_title">
@@ -663,11 +663,11 @@
 						<p>Максимальная толщина носителя, мм</p>
 						<form:errors path="maximumMediaThickness" cssClass="error"></form:errors>
 					</div>
-					<ul class="check_boxes">
+					<div class="check_boxes">
 						<div class="text_output">
 							<form:input path="maximumMediaThickness" class="amount-maximum_media_thickness"/>
 						</div>
-					</ul>
+					</div>
 				</div>
 				<div class="characteristic">
 					<div class="block_title">
@@ -675,11 +675,11 @@
 						<p>Максимальный вес носителя, кг</p>
 						<form:errors path="maximumWeightOfVehicle" cssClass="error"></form:errors>
 					</div>
-					<ul class="check_boxes">
+					<div class="check_boxes">
 						<div class="text_output">
 							<form:input path="maximumWeightOfVehicle" class="amount-maximum_weight_of_vehicle"/>
 						</div>
-					</ul>
+					</div>
 				</div>
 				<div class="characteristic">
 					<div class="block_title">
@@ -706,13 +706,13 @@
 						<p>Максимальная потребляемая мощность</p>
 						<form:errors path="maxPowerConsumption" cssClass="error"></form:errors>
 					</div>
-					<ul class="check_boxes">
+					<div class="check_boxes">
 						<div class="text_output">
 							<form:input path="maxPowerConsumption" class="amount-max_power_consumption" value="${product.maxPowerConsumption}"/>
 							<p>&nbsp;Вт</p>
 						</div>
 						<div class="slider-range-max_power_consumption"></div>
-					</ul>
+					</div>
 				</div>
 				<div class="characteristic">
 					<div class="block_title">
@@ -720,13 +720,13 @@
 						<p>Вес</p>
 						<form:errors path="weight" cssClass="error"></form:errors>
 					</div>
-					<ul class="check_boxes">
+					<div class="check_boxes">
 						<div class="text_output">
 							<form:input path="weight" class="amount-weight" value="${product.weight}"/>
 							<p>&nbsp;кг</p>
 						</div>
 						<div class="slider-range-weight"></div>
-					</ul>
+					</div>
 				</div>
 				<div class="characteristic">
 					<div class="block_title">
@@ -734,13 +734,13 @@
 						<p>Ширина</p>
 						<form:errors path="width" cssClass="error"></form:errors>
 					</div>
-					<ul class="check_boxes">
+					<div class="check_boxes">
 						<div class="text_output">
 							<form:input path="width" class="amount-width" value="${product.width}"/>
 							<p>&nbsp;мм</p>
 						</div>
 						<div class="slider-range-width"></div>
-					</ul>
+					</div>
 				</div>
 				<div class="characteristic">
 					<div class="block_title">
@@ -748,13 +748,13 @@
 						<p>Глубина</p>
 						<form:errors path="depth" cssClass="error"></form:errors>
 					</div>
-					<ul class="check_boxes">
+					<div class="check_boxes">
 						<div class="text_output">
 							<form:input path="depth" class="amount-depth" value="${product.depth}"/>
 							<p>&nbsp;мм</p>
 						</div>
 						<div class="slider-range-depth"></div>
-					</ul>
+					</div>
 				</div>
 				<div class="characteristic">
 					<div class="block_title">

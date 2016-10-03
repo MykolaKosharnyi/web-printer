@@ -35,6 +35,7 @@ public class ComponetsForController {
 	@Autowired
 	public ReclamOnSite reklam;
 
+	@SuppressWarnings("unchecked")
 	public ArrayList<JSONObject> showSimplestArrayOfPrinter(Set<Printer> set){
 		
 		ArrayList<JSONObject> arrayResult = new ArrayList<JSONObject>();
@@ -43,7 +44,11 @@ public class ComponetsForController {
 			
 			standartOutPutDataOfProduct(currentProduct, curObj);
 
+			//add property that must be output only to printer at current time(in the future to all product)
+			curObj.put("ratingOverallRating", currentProduct.getRatingOverallRating());
+
 			arrayResult.add(curObj);
+			
 		}
 		return arrayResult;
 	}
@@ -223,6 +228,8 @@ public class ComponetsForController {
 		
 		curObj.put("prise", currentProduct.getPrise());
 		curObj.put("name", currentProduct.getName());
+		curObj.put("pathPictures", currentProduct.getPathPictures());
+		
 		curObj.put("pathPictures", currentProduct.getPathPictures());
 		
 	}

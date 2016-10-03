@@ -247,7 +247,7 @@
 				</span>
 
 			</td>
-			<td class="price">$ <span>
+			<td class="price">$<span>
 				<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${item.key.getPriceWithOptionAndDeivery() * item.value }" />
 					</span>
 					<input type="hidden" name="price_ellement" value="${item.key.price}">
@@ -272,7 +272,7 @@
             <div class="modal-footer">
             	<c:if test="${!empty cart.contents}">
 					<div id="div_total_price">
-						<span>Общая стоимость: </span>$ <span id="total_price"><fmt:formatNumber type="number" 
+						<span>Общая стоимость: </span>$<span id="total_price"><fmt:formatNumber type="number" 
 				   		maxFractionDigits="2" minFractionDigits="2" value="${cart.getTotalCost()}" /></span>
 					</div>
 				</c:if>

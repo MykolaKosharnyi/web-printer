@@ -8,7 +8,8 @@
 					$("#top_result_of_search").html('');
 					
 	                $(products).each(function(i, product) {
-	                	var outerDiv = $('<div/>');
+	                	var outerDiv = $('<div/>').addClass("products");
+	                	var innterDiv = $('<div/>').addClass('inner_div_product');
 
 	                	var slidePrice = $('<p/>').addClass("products_price").append($('<div/>').text("Цена:").css(
         						{
@@ -21,8 +22,7 @@
         					slidePrice.append($('<div/>').text(checkPrise(product.prise)));
         				}
 	                	
-	                	outerDiv.addClass("products")
-	                				.append($('<a/>').attr("id", "/images/" + product.type + "s/" + product.id + "/" + checkPicture(product.pathPictures))
+        				innterDiv.append($('<a/>').attr("id", "/images/" + product.type + "s/" + product.id + "/" + checkPicture(product.pathPictures))
            								 			 .addClass("link")
 	                								 .attr("href", "/" + product.type + "/" + product.id)
 	                								 .append($('<div/>').addClass("outer_a_img").append($('<img/>')
@@ -32,10 +32,16 @@
 	    	    	                		.append(slidePrice)
 	    	    	                		.append($('<i/>').addClass("fa fa-cart-plus add_to_cart").click(function(){
 	            			                			addToCart(product.type, product.id, product.name, product.prise+'', product.pathPictures[0]);
-	            			                		})))	                										 
+	            			                		}).css(
+	            			        						{
+	            			        							"padding-right": "5px",
+	            			        							"top": "2px",
+	            			        							"right": "10px",
+	            			        							"position": "absolute"
+	            			        						})))	                										 
 
 	    	                				if(product.leftSharesLink!=null && product.leftSharesLink!=""){
-	    	                	        		outerDiv.append($('<div/>').addClass("ribbon-search-wrapper-left")
+	    	                					innterDiv.append($('<div/>').addClass("ribbon-search-wrapper-left")
 	    	                										.append($('<div/>').addClass("ribbon-search-left")
 	    	                														   .text(product.leftSharesLink)
 	    	                														   .css( "color", product.leftSharesLinkColorText )
@@ -44,7 +50,7 @@
 	    	                				}
 	    	                	        	
 	    	                	        	if(product.rightSharesLink!=null && product.rightSharesLink!=""){
-	    	                	        		outerDiv.append($('<div/>').addClass("ribbon-search-wrapper-right")
+	    	                	        		innterDiv.append($('<div/>').addClass("ribbon-search-wrapper-right")
 	    	                										.append($('<div/>').addClass("ribbon-search-right")
 	    	                														   .text(product.rightSharesLink)
 	    	                														   .css( "color", product.rightSharesLinkColorText )
@@ -52,6 +58,7 @@
 	    	                														   ))
 	    	                				}
 	    	                				
+	    	                	        	outerDiv.append(innterDiv); 
 	    	                				
 	    	                	        	if(product.top){
 	    	        	    	            	$("#top_result_of_search").append(outerDiv);

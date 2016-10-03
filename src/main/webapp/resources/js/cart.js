@@ -79,7 +79,7 @@ function createTRInTableForProduct(product){
 					.append($('<input/>').addClass('quantity quantity_' + product.typeProduct + '_' + product.idProduct).val(1).css('margin','0px 5px'))
 					.append($('<span/>').addClass('inc_value').append($('<i/>').addClass('fa fa-plus').attr("aria-hidden", true)))
 				)
-		  .append($('<td/>').addClass('price').html("$ <span>" + checkPriseCart(product.priceWithOptionAndDeivery) + "<span/>")
+		  .append($('<td/>').addClass('price').html("$<span>" + checkPriseCart(product.priceWithOptionAndDeivery) + "<span/>")
 				  							 	.append($('<input/>').attr("type", "hidden").attr("name", "price_ellement").val(product.price)))
 		  .append($('<td/>').addClass('delte_item').append($('<i/>').addClass('fa fa-trash-o')));
 
@@ -110,7 +110,7 @@ function createTRInTableForProduct(product){
 					  .append($('<td/>')
 							  .append($('<label/>')
 									  .addClass('add_price_value')
-									  .html("$ <span>" + checkPriseCart(option.price) + "<span/>")));
+									  .html("$<span>" + checkPriseCart(option.price) + "<span/>")));
 					
 				} else {
 					
@@ -133,7 +133,7 @@ function createTRInTableForProduct(product){
 				  .append($('<td/>').css('display','none')
 						  .append($('<label/>')
 								  .addClass('add_price_value')
-								  .html("$ <span>" + checkPriseCart(option.price) + "<span/>")));
+								  .html("$<span>" + checkPriseCart(option.price) + "<span/>")));
 				}
 				
 			}
@@ -169,7 +169,7 @@ function createTRInTableForProduct(product){
 					  .append($('<td/>')
 							  .append($('<label/>')
 									  .addClass('add_price_value')
-									  .html("$ <span>" + checkPriseCart(delivery.priceSize + delivery.priceWeight) + "<span/>")));
+									  .html("$<span>" + checkPriseCart(delivery.priceSize + delivery.priceWeight) + "<span/>")));
 				
 			}
 			TRs.push(tr);
@@ -206,7 +206,7 @@ function createTRInTableForProduct(product){
 					  .append($('<td/>')
 							 .append($('<label/>')
 									  .addClass('add_price_value')
-									  .html("$ <span>" + checkPriseCart(paint.quantity*paint.price) + "<span/>")));
+									  .html("$<span>" + checkPriseCart(paint.quantity*paint.price) + "<span/>")));
 				
 			}
 			TRs.push(tr);
@@ -257,7 +257,7 @@ function createTRInTableForProduct(product){
 			$('.modal-content .modal-footer').append($('<button/>').addClass('btn btn-primary').attr("type", "button").html('Оформить заказ'));
 			//add total cart price
 			$('.modal-content .modal-footer').prepend($('<div/>').attr("id", "div_total_price")
-					.html("$ <span id='total_price'>" + checkPriseCart(product.priceWithOptionAndDeivery) + "<span/>")
+					.html("$<span id='total_price'>" + checkPriseCart(product.priceWithOptionAndDeivery) + "<span/>")
 					.prepend($('<span/>').text('Общая стоимость: ')));
 		}else {
 			//in case if this type of product already added to cart
