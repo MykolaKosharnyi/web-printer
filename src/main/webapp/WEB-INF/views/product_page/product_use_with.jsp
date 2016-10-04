@@ -26,7 +26,9 @@
 							</c:if>
 						</p>
 					</c:if>
-					<i style="right:0px; float: right;" class="fa fa-cart-plus add_to_cart" aria-hidden="true" onclick="addToCart('use_with_product', ${uwProduct.id}, '${uwProduct.name}', '${uwProduct.prise}', '${uwProduct.pathPictures.get(0)}');"></i>
+					<i style="position: absolute; top: 45px; right: 10px;" 
+						class="fa fa-cart-plus add_to_cart" aria-hidden="true" 
+						onclick="addToCart('use_with_product', ${uwProduct.id}, '${uwProduct.name}', '${uwProduct.prise}', '${uwProduct.pathPictures.get(0)}');"></i>
 				</div>
 				
 			</div>

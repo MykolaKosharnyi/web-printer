@@ -28,9 +28,9 @@
 						<a href="<c:url value='/' />" class="logo">E-Machine</a>
 						
 
-		<div class="btn-group">
-  			<button type="button" class="btn btn-primary" style="margin-left:15px;">Стоимость в:</button>
-  							<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" 													aria-haspopup="true" aria-expanded="false">
+						<div class="btn-group">
+  							<button type="button" class="btn btn-primary" style="margin-left:15px;">Стоимость в:</button>
+  							<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     								<span class="caret"></span>
     								<span class="sr-only">Toggle Dropdown</span>
   							</button>
@@ -45,25 +45,31 @@
 				
 
 
-		<div class="col-md-4  col-sm-4 col-xs-4">
+				<div class="col-md-4  col-sm-4 col-xs-4">
 					<div class="row">
-						<div class="input-group">
-  <input type="text" class="form-control" aria-label="..." placeholder="<spring:message code="head.search.pleaceholder"/>">
-  <div class="input-group-btn">
-    <div class="btn-group">
-  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Поиск <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu">
-    <li><a href="#">Принтеры</a></li>
-    <li><a href="#">3Д принтеры</a></li>
-    <li><a href="#">Цыфровые принтеры</a></li>
-    <li role="separator" class="divider"></li>
-    <li><a href="#">По всех разделах</a></li>
-  </ul>
-</div>
-  </div>
-</div>
+						<div class="input-group" id="search_area_by_phrase">
+		  					<input id="search_input_by_phrase" type="text" class="form-control" aria-label="..." placeholder="<spring:message code="head.search.pleaceholder"/>">
+						  	<div class="input-group-btn">
+						    	<div class="btn-group">
+								  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								    Поиск <span class="caret"></span>
+								  </button>
+								  <ul class="dropdown-menu">
+								    <li><a href="#">Принтеры</a></li>
+								    <li><a href="#">3Д принтеры</a></li>
+								    <li><a href="#">Цыфровые принтеры</a></li>
+								    <li><a href="#">Ламинаторы</a></li>
+								    <li><a href="#">Лазеры</a></li>
+								    <li><a href="#">Фрезеры</a></li>
+								    <li><a href="#">Сканеры</a></li>
+								    <li><a href="#">ПО</a></li>
+								    <li><a href="#">Сопутствующие товары</a></li>
+								    <li role="separator" class="divider"></li>
+								    <li><a href="#">По всех разделах</a></li>
+								  </ul>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 

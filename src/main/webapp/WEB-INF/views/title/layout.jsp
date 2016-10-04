@@ -62,7 +62,7 @@
 	</div>
 
 	<div class="container" style="margin-top: 140px;">
-		<div class="col-md-2">
+		<div class="col-md-2" style="max-width: 207px;">
 			<div class="row">
 				<div class="left_field">
 					<tiles:insertAttribute name="left-menu" />

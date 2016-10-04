@@ -1,3 +1,28 @@
+/* for searching in input field */
+$(function(){
+	$( "#search_input_by_phrase" ).focus(function() {
+		
+		if( $('#search_area_by_phrase').find( ".result_of_search_by_phrase" ).length == 0 ){
+			$('#search_area_by_phrase').append($('<div/>').addClass('result_of_search_by_phrase').append(createResultOfSearchByPhrase($(this).val())));
+		} else {
+			$('#search_area_by_phrase .result_of_search_by_phrase').append(createResultOfSearchByPhrase($(this).val()));
+		}
+		  
+		});
+	
+	function createResultOfSearchByPhrase(text){
+		var result = $('<div/>').addClass('result_of_search');
+		result.append($('<a/>').attr("href", "/printer/56")
+				.append($('<img/>').attr("src", "/images/printers/56/814.jpg"))
+				.append($('<span/>').addClass('name_searched_product').text("My first searched priner, second, third, next, next"))
+				/*.append($('<span/>').addClass('price_searched_product').text("10 000"))*/);
+		/*result.text(text);*/
+		
+		return result;
+	}
+ 	});
+
+
 /* for showing desctiption on divs wich right of big animation on home page*/
 $(function(){
   		$('.rigt_of_reklam_animation div').hover(function(){
