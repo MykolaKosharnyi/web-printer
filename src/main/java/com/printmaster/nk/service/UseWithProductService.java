@@ -13,6 +13,7 @@ public interface UseWithProductService {
     public Set<UseWithProduct> listShowOnSite();
     public Set<UseWithProduct> listShowOnHomePage();
     public Set<UseWithProduct> listSearchUseWithProducts(SearchUseWithProducts searchUseWithProducts);
+    public Set<UseWithProduct> listSearchByPhrase(String phrase);
     public UseWithProduct getUseWithProductById(long id);
     public Set<UseWithProduct> getUseWithProductsByIds(long[] p);
     public void removeUseWithProduct(long id);

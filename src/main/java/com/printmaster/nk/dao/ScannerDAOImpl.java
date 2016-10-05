@@ -10,6 +10,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Junction;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
@@ -28,6 +29,18 @@ public class ScannerDAOImpl implements ProductDAO<Scanner, SearchScanners>{
 	        this.sessionFactory = sf;
 	    }
 	 
+	    @SuppressWarnings("unchecked")
+		@Override
+		public Set<Scanner> listSearchByPhrase(String phrase) {
+			Session session = this.sessionFactory.getCurrentSession();
+			Criteria cr = session.createCriteria(Scanner.class);
+			
+			cr.add(Restrictions.eq("showOnSite", true));
+			cr.add(Restrictions.like("name", phrase, MatchMode.ANYWHERE));
+			
+			return new HashSet<Scanner>(cr.list());
+		}
+	    
 	    @Override
 	    public long addProduct(Scanner s) {
 	        Session session = this.sessionFactory.getCurrentSession();

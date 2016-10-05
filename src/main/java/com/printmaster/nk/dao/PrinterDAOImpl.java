@@ -15,6 +15,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Junction;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.json.simple.JSONArray;
@@ -37,6 +38,18 @@ public class PrinterDAOImpl implements ProductDAO<Printer, SearchPrinters> {
         this.sessionFactory = sf;
     }
  
+    @SuppressWarnings("unchecked")
+	@Override
+	public Set<Printer> listSearchByPhrase(String phrase) {
+		Session session = this.sessionFactory.getCurrentSession();
+		Criteria cr = session.createCriteria(Printer.class);
+		
+		cr.add(Restrictions.eq("showOnSite", true));
+		cr.add(Restrictions.like("name", phrase, MatchMode.ANYWHERE));
+		
+		return new HashSet<Printer>(cr.list());
+	}
+    
     @Override
     public long addProduct(Printer p) {
         Session session = this.sessionFactory.getCurrentSession();

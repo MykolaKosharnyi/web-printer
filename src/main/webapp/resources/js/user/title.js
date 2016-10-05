@@ -22,6 +22,27 @@ $(function(){
 	}
  	});
 
+	function searchByPhrase(typeProduct){
+		var dataToSend = {
+				'typeProduct':typeProduct,
+				'phrase':'принтер'
+		};
+		
+		$.ajax({
+			  type: 'POST',
+			  url: "/search_by_phrase",
+			  data: JSON.stringify(dataToSend),
+			  beforeSend: function(xhr) {
+		            xhr.setRequestHeader("Accept", "application/json");
+		            xhr.setRequestHeader("Content-Type", "application/json");
+		        }
+			  }).done(function( result ){
+				  addProductAfterAJAXcall(product);
+				  
+				  setQuantityInCart();
+				});
+	}
+
 
 /* for showing desctiption on divs wich right of big animation on home page*/
 $(function(){

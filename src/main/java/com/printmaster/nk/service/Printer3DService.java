@@ -13,6 +13,7 @@ public interface Printer3DService {
     public Set<Printer3D> listShowOnSite();
     public Set<Printer3D> listShowOnHomePage();
     public Set<Printer3D> listSearchPrinters3D(SearchPrinters3D searchPrinters);
+    public Set<Printer3D> listSearchByPhrase(String phrase);
     public Printer3D getPrinter3DById(long id);
     public void removePrinter3D(long id);
      

@@ -10,6 +10,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Junction;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
@@ -262,6 +263,18 @@ public class CutterDAOImpl implements ProductDAO<Cutter, SearchCutters>{
 	            logger.info("Cutter list::" + c);
 	        }
 	        return result;
+		}
+
+		@SuppressWarnings("unchecked")
+		@Override
+		public Set<Cutter> listSearchByPhrase(String phrase) {
+			Session session = this.sessionFactory.getCurrentSession();
+			Criteria cr = session.createCriteria(Cutter.class);
+			
+			cr.add(Restrictions.eq("showOnSite", true));
+			cr.add(Restrictions.like("name", phrase, MatchMode.ANYWHERE));
+			
+			return new HashSet<Cutter>(cr.list());
 		}
 	
 }

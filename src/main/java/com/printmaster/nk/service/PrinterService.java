@@ -13,6 +13,7 @@ public interface PrinterService {
     public Set<Printer> listShowOnSite();
     public Set<Printer> listShowOnHomePage();
     public Set<Printer> listSearchPrinters(SearchPrinters searchPrinters);
+    public Set<Printer> listSearchByPhrase(String phrase);
     public Printer getPrinterById(long id);
     public void removePrinter(long id);
      

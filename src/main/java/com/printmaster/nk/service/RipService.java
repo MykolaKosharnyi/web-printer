@@ -13,6 +13,7 @@ public interface RipService {
     public Set<Rip> listShowOnSite();
     public Set<Rip> listShowOnHomePage();
     public Set<Rip> listSearchRips(SearchRips searchRips);
+    public Set<Rip> listSearchByPhrase(String phrase);
     public Rip getRipById(long id);
     public void removeRip(long id);
 	

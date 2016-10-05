@@ -10,6 +10,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Junction;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
@@ -28,6 +29,18 @@ public class Printer3dDAOImpl implements ProductDAO<Printer3D, SearchPrinters3D>
         this.sessionFactory = sf;
     }
  
+    @SuppressWarnings("unchecked")
+	@Override
+	public Set<Printer3D> listSearchByPhrase(String phrase) {
+		Session session = this.sessionFactory.getCurrentSession();
+		Criteria cr = session.createCriteria(Printer3D.class);
+		
+		cr.add(Restrictions.eq("showOnSite", true));
+		cr.add(Restrictions.like("name", phrase, MatchMode.ANYWHERE));
+		
+		return new HashSet<Printer3D>(cr.list());
+	}
+    
     @Override
     public long addProduct(Printer3D p) {
         Session session = this.sessionFactory.getCurrentSession();

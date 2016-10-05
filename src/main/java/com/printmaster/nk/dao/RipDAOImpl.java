@@ -12,6 +12,7 @@ import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.json.simple.JSONArray;
@@ -42,6 +43,18 @@ public class RipDAOImpl implements ProductDAO<Rip, SearchRips> {
 		return id;
 	}
 
+    @SuppressWarnings("unchecked")
+	@Override
+	public Set<Rip> listSearchByPhrase(String phrase) {
+		Session session = this.sessionFactory.getCurrentSession();
+		Criteria cr = session.createCriteria(Rip.class);
+		
+		cr.add(Restrictions.eq("showOnSite", true));
+		cr.add(Restrictions.like("name", phrase, MatchMode.ANYWHERE));
+		
+		return new HashSet<Rip>(cr.list());
+	}
+	
 	@Override
 	public void updateProduct(Rip c) {
 		Session session = this.sessionFactory.getCurrentSession();

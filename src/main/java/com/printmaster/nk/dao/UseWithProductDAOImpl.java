@@ -11,6 +11,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Junction;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
@@ -44,6 +45,18 @@ public class UseWithProductDAOImpl  implements UseWithProductDAO{
 	        return id;
 	    }
 	 
+	    @SuppressWarnings("unchecked")
+		@Override
+		public Set<UseWithProduct> listSearchByPhrase(String phrase) {
+			Session session = this.sessionFactory.getCurrentSession();
+			Criteria cr = session.createCriteria(UseWithProduct.class);
+			
+			cr.add(Restrictions.eq("showOnSite", true));
+			cr.add(Restrictions.like("name", phrase, MatchMode.ANYWHERE));
+			
+			return new HashSet<UseWithProduct>(cr.list());
+		}
+	    
 	    @Override
 	    public void updateProduct(UseWithProduct c) {
 	        Session session = this.sessionFactory.getCurrentSession();

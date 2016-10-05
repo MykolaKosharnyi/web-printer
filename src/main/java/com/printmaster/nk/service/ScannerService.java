@@ -13,6 +13,7 @@ public interface ScannerService {
     public Set<Scanner> listShowOnSite();
     public Set<Scanner> listShowOnHomePage();
     public Set<Scanner> listSearchScanners(SearchScanners searchScanners);
+    public Set<Scanner> listSearchByPhrase(String phrase);
     public Scanner getScannerById(long id);
     public void removeScanner(long id);
 	

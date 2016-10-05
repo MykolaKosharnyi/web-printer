@@ -9,6 +9,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Junction;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
@@ -27,6 +28,18 @@ public class LaminatorDAOImpl implements ProductDAO<Laminator, SearchLaminators>
 	        this.sessionFactory = sf;
 	    }
 	 
+	    @SuppressWarnings("unchecked")
+		@Override
+		public Set<Laminator> listSearchByPhrase(String phrase) {
+			Session session = this.sessionFactory.getCurrentSession();
+			Criteria cr = session.createCriteria(Laminator.class);
+			
+			cr.add(Restrictions.eq("showOnSite", true));
+			cr.add(Restrictions.like("name", phrase, MatchMode.ANYWHERE));
+			
+			return new HashSet<Laminator>(cr.list());
+		}
+	    
 	    @Override
 	    public long addProduct(Laminator l) {
 	        Session session = this.sessionFactory.getCurrentSession();

@@ -13,6 +13,7 @@ public interface LaminatorService {
     public Set<Laminator> listShowOnSite();
     public Set<Laminator> listShowOnHomePage();
     public Set<Laminator> listSearchLaminators(SearchLaminators searchLaminators);
+    public Set<Laminator> listSearchByPhrase(String phrase);
     public Laminator getLaminatorById(long id);
     public void removeLaminator(long id);
 	

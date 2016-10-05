@@ -195,6 +195,54 @@ public class ComponetsForController {
 	}
 	
 	@SuppressWarnings("unchecked")
+	public ArrayList<JSONObject> simpleResultOfSearchByPhrase(Set<? extends Product> set, String type){
+		ArrayList<JSONObject> arrayResult = new ArrayList<JSONObject>();
+		for(Product currentProduct : set){
+			JSONObject curObj = new JSONObject();
+			
+			curObj.put("name", currentProduct.getName());
+			curObj.put("type", type);
+			curObj.put("id", currentProduct.getId());
+			curObj.put("pathToPicture", currentProduct.getPathPictures().get(0));
+			
+			arrayResult.add(curObj);
+		}
+		return arrayResult;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public ArrayList<JSONObject> simpleResultOfSearchByPhraseRip(Set<Rip> set){
+		ArrayList<JSONObject> arrayResult = new ArrayList<JSONObject>();
+		for(Rip currentProduct : set){
+			JSONObject curObj = new JSONObject();
+			
+			curObj.put("name", currentProduct.getName());
+			curObj.put("type", "rip");
+			curObj.put("id", currentProduct.getId());
+			curObj.put("pathToPicture", currentProduct.getPathPictures().get(0));
+			
+			arrayResult.add(curObj);
+		}
+		return arrayResult;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public ArrayList<JSONObject> simpleResultOfSearchByPhraseUseWithProduct(Set<UseWithProduct> set){
+		ArrayList<JSONObject> arrayResult = new ArrayList<JSONObject>();
+		for(UseWithProduct currentProduct : set){
+			JSONObject curObj = new JSONObject();
+			
+			curObj.put("name", currentProduct.getName());
+			curObj.put("type", "use_with_product");
+			curObj.put("id", currentProduct.getId());
+			curObj.put("pathToPicture", currentProduct.getPathPictures().get(0));
+			
+			arrayResult.add(curObj);
+		}
+		return arrayResult;
+	}
+	
+	@SuppressWarnings("unchecked")
 	public ArrayList<JSONObject> showSimplestArrayWichCheckboxes(Set<? extends Product> set, String type){
 		
 		ArrayList<JSONObject> arrayResult = new ArrayList<JSONObject>();

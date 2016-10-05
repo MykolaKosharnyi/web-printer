@@ -6,7 +6,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import org.json.simple.JSONArray;
@@ -16,12 +18,18 @@ import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.printmaster.nk.beans.ComponetsForController;
+import com.printmaster.nk.beans.ProductCart;
+import com.printmaster.nk.controller.Shopping;
 import com.printmaster.nk.service.CutterService;
 import com.printmaster.nk.service.DigitalPrinterService;
 import com.printmaster.nk.service.LaminatorService;
@@ -111,4 +119,14 @@ public class HomeController {
 		return "home";
 	}
 	
+	@RequestMapping(value = "/search_by_phrase", method = RequestMethod.POST, 
+            produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody List<JSONObject> searchByPhrase(@RequestBody CriteriaSearchByPhrase criteries){
+		List<JSONObject> result = new ArrayList<>();
+		
+		
+
+		logger.debug("Searching by phase done successful!");
+		return result;
+	}
 }

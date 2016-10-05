@@ -10,6 +10,7 @@ public interface ProductDAO<P,C> {//P - product, C - criteria for with we will b
     public Set<P> listShowOnSite();
     public Set<P> listShowOnHomePage();
     public Set<P> listSearchProducts(C searchProductCriteria);
+    public Set<P> listSearchByPhrase(String phrase);
     public P getProductById(long id);
     public void removeProduct(long id);
     

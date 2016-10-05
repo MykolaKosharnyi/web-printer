@@ -13,6 +13,7 @@ public interface CutterService {
     public Set<Cutter> listShowOnSite();
     public Set<Cutter> listShowOnHomePage();
     public Set<Cutter> listSearchCutters(SearchCutters searchCutters);
+    public Set<Cutter> listSearchByPhrase(String phrase);
     public Cutter getCutterById(long id);
     public void removeCutter(long id);
 	

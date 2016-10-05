@@ -13,6 +13,7 @@ public interface UseWithProductDAO {
     public Set<UseWithProduct> listShowOnSite();
     public Set<UseWithProduct> listShowOnHomePage();
     public Set<UseWithProduct> listSearchProducts(SearchUseWithProducts searchProductCriteria);
+    public Set<UseWithProduct> listSearchByPhrase(String phrase);
     public UseWithProduct getProductById(long id);
     public Set<UseWithProduct> getProductsByIds(long[] p);
     public void removeProduct(long id);

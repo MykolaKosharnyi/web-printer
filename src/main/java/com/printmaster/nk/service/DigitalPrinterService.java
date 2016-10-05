@@ -13,6 +13,7 @@ public interface DigitalPrinterService {
     public Set<DigitalPrinter> listShowOnSite();
     public Set<DigitalPrinter> listShowOnHomePage();
     public Set<DigitalPrinter> listSearchDigitalPrinters(SearchDigitalPrinters searchPrinters);
+    public Set<DigitalPrinter> listSearchByPhrase(String phrase);
     public DigitalPrinter getPrinterById(long id);
     public void removePrinter(long id);
      

@@ -10,6 +10,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Junction;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
@@ -561,5 +562,16 @@ public class DigitalPrinterDAOImpl implements ProductDAO<DigitalPrinter, SearchD
         return result;
 	}
  
+	@SuppressWarnings("unchecked")
+	@Override
+	public Set<DigitalPrinter> listSearchByPhrase(String phrase) {
+		Session session = this.sessionFactory.getCurrentSession();
+		Criteria cr = session.createCriteria(DigitalPrinter.class);
+		
+		cr.add(Restrictions.eq("showOnSite", true));
+		cr.add(Restrictions.like("name", phrase, MatchMode.ANYWHERE));
+		
+		return new HashSet<DigitalPrinter>(cr.list());
+	}
 }
 

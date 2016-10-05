@@ -13,6 +13,7 @@ public interface LaserService {
     public Set<Laser> listShowOnSite();
     public Set<Laser> listShowOnHomePage();
     public Set<Laser> listSearchLasers(SearchLasers searchLasers);
+    public Set<Laser> listSearchByPhrase(String phrase);
     public Laser getLaserById(long id);
     public void removeLaser(long id);
 	
