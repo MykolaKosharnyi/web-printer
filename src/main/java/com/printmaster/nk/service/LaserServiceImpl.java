@@ -63,4 +63,10 @@ public class LaserServiceImpl implements LaserService {
 		return this.productDAO.listShowOnHomePage();
 	}
 
+	@Override
+	@Transactional
+	public Set<Laser> listSearchByPhrase(String phrase) {
+		return this.productDAO.listSearchByPhrase(phrase);
+	}
+
 }

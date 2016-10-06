@@ -55,17 +55,17 @@
 								    Поиск <span class="caret"></span>
 								  </button>
 								  <ul class="dropdown-menu">
-								    <li><a href="#">Принтеры</a></li>
-								    <li><a href="#">3Д принтеры</a></li>
-								    <li><a href="#">Цыфровые принтеры</a></li>
-								    <li><a href="#">Ламинаторы</a></li>
-								    <li><a href="#">Лазеры</a></li>
-								    <li><a href="#">Фрезеры</a></li>
-								    <li><a href="#">Сканеры</a></li>
-								    <li><a href="#">ПО</a></li>
-								    <li><a href="#">Сопутствующие товары</a></li>
+								    <li><a href="javascript:searchByPhraseIncludeType('printer')">Принтеры</a></li>
+								    <li><a href="javascript:searchByPhraseIncludeType('3d_printer')">3Д принтеры</a></li>
+								    <li><a href="javascript:searchByPhraseIncludeType('digital_printer')">Цыфровые принтеры</a></li>
+								    <li><a href="javascript:searchByPhraseIncludeType('laminator')">Ламинаторы</a></li>
+								    <li><a href="javascript:searchByPhraseIncludeType('laser')">Лазеры</a></li>
+								    <li><a href="javascript:searchByPhraseIncludeType('cutter')">Фрезеры</a></li>
+								    <li><a href="javascript:searchByPhraseIncludeType('scanner')">Сканеры</a></li>
+								    <li><a href="javascript:searchByPhraseIncludeType('rip')">ПО</a></li>
+								    <li><a href="javascript:searchByPhraseIncludeType('use_with_product')">Сопутствующие товары</a></li>
 								    <li role="separator" class="divider"></li>
-								    <li><a href="#">По всех разделах</a></li>
+								    <li><a href="javascript:searchByPhraseIncludeType('all')">По всех разделах</a></li>
 								  </ul>
 								</div>
 							</div>

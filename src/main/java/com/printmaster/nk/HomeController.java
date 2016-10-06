@@ -21,15 +21,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.printmaster.nk.beans.ComponetsForController;
-import com.printmaster.nk.beans.ProductCart;
-import com.printmaster.nk.controller.Shopping;
 import com.printmaster.nk.service.CutterService;
 import com.printmaster.nk.service.DigitalPrinterService;
 import com.printmaster.nk.service.LaminatorService;
@@ -39,6 +36,7 @@ import com.printmaster.nk.service.Printer3DService;
 import com.printmaster.nk.service.PrinterService;
 import com.printmaster.nk.service.RipService;
 import com.printmaster.nk.service.ScannerService;
+import com.printmaster.nk.service.UseWithProductService;
 
 /**
  * Handles requests for the application home page.
@@ -72,6 +70,9 @@ public class HomeController {
 	
 	@Autowired
 	private RipService ripService;
+	
+	@Autowired
+	private UseWithProductService useWithProductService;
 	
 	@Autowired
     ComponetsForController componets;
@@ -124,7 +125,45 @@ public class HomeController {
 	public @ResponseBody List<JSONObject> searchByPhrase(@RequestBody CriteriaSearchByPhrase criteries){
 		List<JSONObject> result = new ArrayList<>();
 		
+		boolean ifAll = false;
+		if(criteries.getType().equals("all"))
+			ifAll = true;
 		
+		if(ifAll || criteries.getType().equals("printer")){
+			result.addAll(componets.simpleResultOfSearchByPhrase(printerService.listSearchByPhrase(criteries.getPhrase()), "printer"));
+		}
+		
+		if(ifAll || criteries.getType().equals("3d_printer")){
+			result.addAll(componets.simpleResultOfSearchByPhrase(printer3DService.listSearchByPhrase(criteries.getPhrase()), "3d_printer"));
+		}
+		
+		if(ifAll || criteries.getType().equals("digital_printer")){
+			result.addAll(componets.simpleResultOfSearchByPhrase(digitalPrinterService.listSearchByPhrase(criteries.getPhrase()), "digital_printer"));
+		}
+		
+		if(ifAll || criteries.getType().equals("laser")){
+			result.addAll(componets.simpleResultOfSearchByPhrase(laserService.listSearchByPhrase(criteries.getPhrase()), "laser"));
+		}
+		
+		if(ifAll || criteries.getType().equals("cutter")){
+			result.addAll(componets.simpleResultOfSearchByPhrase(cutterService.listSearchByPhrase(criteries.getPhrase()), "cutter"));
+		}
+		
+		if(ifAll || criteries.getType().equals("laminator")){
+			result.addAll(componets.simpleResultOfSearchByPhrase(laminatorService.listSearchByPhrase(criteries.getPhrase()), "laminator"));
+		}
+		
+		if(ifAll || criteries.getType().equals("scanner")){
+			result.addAll(componets.simpleResultOfSearchByPhrase(scannerService.listSearchByPhrase(criteries.getPhrase()), "scanner"));
+		}
+		
+		if(ifAll || criteries.getType().equals("rip")){
+			result.addAll(componets.simpleResultOfSearchByPhraseRip(ripService.listSearchByPhrase(criteries.getPhrase())));
+		}
+		
+		if(ifAll || criteries.getType().equals("use_with_product")){
+			result.addAll(componets.simpleResultOfSearchByPhraseUseWithProduct(useWithProductService.listSearchByPhrase(criteries.getPhrase())));
+		}	
 
 		logger.debug("Searching by phase done successful!");
 		return result;

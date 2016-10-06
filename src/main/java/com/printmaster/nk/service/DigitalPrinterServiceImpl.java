@@ -63,4 +63,10 @@ public class DigitalPrinterServiceImpl implements DigitalPrinterService {
 		return this.productDAO.listShowOnHomePage();
 	}
 
+	@Override
+	@Transactional
+	public Set<DigitalPrinter> listSearchByPhrase(String phrase) {
+		return this.productDAO.listSearchByPhrase(phrase);
+	}
+
 }

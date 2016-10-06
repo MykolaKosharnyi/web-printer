@@ -65,5 +65,11 @@ public class PrinterServiceImpl implements PrinterService {
 	public Set<Printer> listShowOnHomePage() {
 		return this.productDAO.listShowOnHomePage();
 	}
+
+	@Override
+	@Transactional
+	public Set<Printer> listSearchByPhrase(String phrase) {
+		return this.productDAO.listSearchByPhrase(phrase);
+	}
  
 }

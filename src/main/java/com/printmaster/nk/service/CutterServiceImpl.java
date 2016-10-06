@@ -14,7 +14,7 @@ public class CutterServiceImpl implements CutterService {
 	public void setProductDAO(ProductDAO<Cutter,SearchCutters> productDAO) {
         this.productDAO = productDAO;
     }
- 
+
     @Override
     @Transactional
     public long addCutter(Cutter p) {
@@ -61,6 +61,12 @@ public class CutterServiceImpl implements CutterService {
 	@Transactional
 	public Set<Cutter> listShowOnHomePage() {
 		return this.productDAO.listShowOnHomePage();
+	}
+
+	@Override
+	@Transactional
+	public Set<Cutter> listSearchByPhrase(String phrase) {
+		return this.productDAO.listSearchByPhrase(phrase);
 	}
 
 }

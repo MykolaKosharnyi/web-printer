@@ -63,4 +63,10 @@ public class ScannerServiceImpl implements ScannerService {
 		return this.productDAO.listShowOnHomePage();
 	}
 
+	@Override
+	@Transactional
+	public Set<Scanner> listSearchByPhrase(String phrase) {
+		return this.productDAO.listSearchByPhrase(phrase);
+	}
+
 }

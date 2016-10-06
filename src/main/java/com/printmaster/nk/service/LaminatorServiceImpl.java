@@ -63,4 +63,10 @@ public class LaminatorServiceImpl implements LaminatorService {
 		return this.productDAO.listShowOnHomePage();
 	}
 
+	@Override
+	@Transactional
+	public Set<Laminator> listSearchByPhrase(String phrase) {
+		return this.productDAO.listSearchByPhrase(phrase);
+	}
+
 }

@@ -65,6 +65,12 @@ public class Printer3DServiceImpl implements Printer3DService {
 	public Set<Printer3D> listShowOnHomePage() {
 		return this.productDAO.listShowOnHomePage();
 	}
+
+	@Override
+	@Transactional
+	public Set<Printer3D> listSearchByPhrase(String phrase) {
+		return this.productDAO.listSearchByPhrase(phrase);
+	}
  
 }
 

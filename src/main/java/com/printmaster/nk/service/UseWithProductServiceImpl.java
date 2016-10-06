@@ -75,4 +75,10 @@ public class UseWithProductServiceImpl implements UseWithProductService {
 		return this.productDAO.getPrintersByTypeInk(typeInk);
 	}
 
+	@Override
+	@Transactional
+	public Set<UseWithProduct> listSearchByPhrase(String phrase) {
+		return this.productDAO.listSearchByPhrase(phrase);
+	}
+
 }

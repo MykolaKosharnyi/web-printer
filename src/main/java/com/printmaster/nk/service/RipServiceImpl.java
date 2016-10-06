@@ -63,4 +63,10 @@ public class RipServiceImpl implements RipService {
 		return this.productDAO.listShowOnHomePage();
 	}
 
+	@Override
+	@Transactional
+	public Set<Rip> listSearchByPhrase(String phrase) {
+		return this.productDAO.listSearchByPhrase(phrase);
+	}
+
 }
