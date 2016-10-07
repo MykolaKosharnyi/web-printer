@@ -2,11 +2,14 @@
 $(function(){
 	$( "#search_input_by_phrase" ).focus(function() {
 		
-		searchByPhrase("printer", "Epson");
+		searchByPhrase("all", "Epson");
 		  
 		});
 	
-	function searchByPhraseIncludeType(typeProduct)
+});
+	function searchByPhraseIncludeType(typeProduct){
+		return false;
+	}
 	
 	function searchByPhrase(typeProduct, phrase){
 		var dataToSend = {
@@ -22,7 +25,13 @@ $(function(){
 		            xhr.setRequestHeader("Accept", "application/json");
 		            xhr.setRequestHeader("Content-Type", "application/json");
 		        }
-			  }).done(function( result ){
+			  }).done(function( str ){
+				  
+				  var result = [
+				                {"name": str, "type":"printer", "id":54, "pathToPicture":"545.jpg"},
+				                {"name": str + " " + str, "type":"printer", "id":54, "pathToPicture":"754.jpg"}
+				                ];
+				  
 				  $(result).each(function(i, product) {
 					  if( $('#search_area_by_phrase').find( ".result_of_search_by_phrase" ).length == 0 ){
 							$('#search_area_by_phrase').append($('<div/>').addClass('result_of_search_by_phrase').append(createResultOfSearchByPhrase(product)));
@@ -43,7 +52,7 @@ $(function(){
 		
 		return result;
 	}
- });
+
 
 /* for showing desctiption on divs wich right of big animation on home page*/
 $(function(){

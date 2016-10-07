@@ -120,52 +120,74 @@ public class HomeController {
 		return "home";
 	}
 	
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/search_by_phrase", method = RequestMethod.POST, 
             produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody List<JSONObject> searchByPhrase(@RequestBody CriteriaSearchByPhrase criteries){
-		List<JSONObject> result = new ArrayList<>();
-		
-		boolean ifAll = false;
-		if(criteries.getType().equals("all"))
-			ifAll = true;
-		
-		if(ifAll || criteries.getType().equals("printer")){
-			result.addAll(componets.simpleResultOfSearchByPhrase(printerService.listSearchByPhrase(criteries.getPhrase()), "printer"));
-		}
-		
-		if(ifAll || criteries.getType().equals("3d_printer")){
-			result.addAll(componets.simpleResultOfSearchByPhrase(printer3DService.listSearchByPhrase(criteries.getPhrase()), "3d_printer"));
-		}
-		
-		if(ifAll || criteries.getType().equals("digital_printer")){
-			result.addAll(componets.simpleResultOfSearchByPhrase(digitalPrinterService.listSearchByPhrase(criteries.getPhrase()), "digital_printer"));
-		}
-		
-		if(ifAll || criteries.getType().equals("laser")){
-			result.addAll(componets.simpleResultOfSearchByPhrase(laserService.listSearchByPhrase(criteries.getPhrase()), "laser"));
-		}
-		
-		if(ifAll || criteries.getType().equals("cutter")){
-			result.addAll(componets.simpleResultOfSearchByPhrase(cutterService.listSearchByPhrase(criteries.getPhrase()), "cutter"));
-		}
-		
-		if(ifAll || criteries.getType().equals("laminator")){
-			result.addAll(componets.simpleResultOfSearchByPhrase(laminatorService.listSearchByPhrase(criteries.getPhrase()), "laminator"));
-		}
-		
-		if(ifAll || criteries.getType().equals("scanner")){
-			result.addAll(componets.simpleResultOfSearchByPhrase(scannerService.listSearchByPhrase(criteries.getPhrase()), "scanner"));
-		}
-		
-		if(ifAll || criteries.getType().equals("rip")){
-			result.addAll(componets.simpleResultOfSearchByPhraseRip(ripService.listSearchByPhrase(criteries.getPhrase())));
-		}
-		
-		if(ifAll || criteries.getType().equals("use_with_product")){
-			result.addAll(componets.simpleResultOfSearchByPhraseUseWithProduct(useWithProductService.listSearchByPhrase(criteries.getPhrase())));
-		}	
+	public @ResponseBody String searchByPhrase(@RequestBody CriteriaSearchByPhrase criteries){
+		//List<JSONObject> result = new ArrayList<>();
+		JSONArray result = new JSONArray();
 
+		
+//		boolean ifAll = false;
+//		if(criteries.getType().equals("all"))
+//			ifAll = true;
+//		
+//		if(ifAll || criteries.getType().equals("printer")){
+//			result.addAll(componets.simpleResultOfSearchByPhrase(printerService.listSearchByPhrase(criteries.getPhrase()), "printer"));
+//		}
+//		
+//		if(ifAll || criteries.getType().equals("3d_printer")){
+//			result.addAll(componets.simpleResultOfSearchByPhrase(printer3DService.listSearchByPhrase(criteries.getPhrase()), "3d_printer"));
+//		}
+//		
+//		if(ifAll || criteries.getType().equals("digital_printer")){
+//			result.addAll(componets.simpleResultOfSearchByPhrase(digitalPrinterService.listSearchByPhrase(criteries.getPhrase()), "digital_printer"));
+//		}
+//		
+//		if(ifAll || criteries.getType().equals("laser")){
+//			result.addAll(componets.simpleResultOfSearchByPhrase(laserService.listSearchByPhrase(criteries.getPhrase()), "laser"));
+//		}
+//		
+//		if(ifAll || criteries.getType().equals("cutter")){
+//			result.addAll(componets.simpleResultOfSearchByPhrase(cutterService.listSearchByPhrase(criteries.getPhrase()), "cutter"));
+//		}
+//		
+//		if(ifAll || criteries.getType().equals("laminator")){
+//			result.addAll(componets.simpleResultOfSearchByPhrase(laminatorService.listSearchByPhrase(criteries.getPhrase()), "laminator"));
+//		}
+//		
+//		if(ifAll || criteries.getType().equals("scanner")){
+//			result.addAll(componets.simpleResultOfSearchByPhrase(scannerService.listSearchByPhrase(criteries.getPhrase()), "scanner"));
+//		}
+//		
+//		if(ifAll || criteries.getType().equals("rip")){
+//			result.addAll(componets.simpleResultOfSearchByPhraseRip(ripService.listSearchByPhrase(criteries.getPhrase())));
+//		}
+//		
+//		if(ifAll || criteries.getType().equals("use_with_product")){
+//			result.addAll(componets.simpleResultOfSearchByPhraseUseWithProduct(useWithProductService.listSearchByPhrase(criteries.getPhrase())));
+//		}	
+
+		
+		JSONObject curObj = new JSONObject();
+		
+		curObj.put("name", criteries.getPhrase());
+		curObj.put("type", "printer");
+		curObj.put("id", 54);
+		curObj.put("pathToPicture", "545.jpg");
+		
+		result.add(curObj);
+		
+		curObj = new JSONObject();
+		
+		curObj.put("name", criteries.getPhrase() + " " + criteries.getPhrase());
+		curObj.put("type", "printer");
+		curObj.put("id", 54);
+		curObj.put("pathToPicture", "754.jpg");
+		
+		result.add(curObj);
+		
 		logger.debug("Searching by phase done successful!");
-		return result;
+		return criteries.getPhrase();
 	}
 }
