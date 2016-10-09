@@ -1,8 +1,10 @@
 /* for searching in input field */
 $(function(){
-	$( "#search_input_by_phrase" ).focus(function() {
+	$( "input#search_input_by_phrase" ).change(function() {
+	
+		$('#search_area_by_phrase .result_of_search_by_phrase').remove();
 		
-		searchByPhrase("all", "Epson");
+		searchByPhrase("all", $(this).val());
 		  
 		});
 	
@@ -11,9 +13,9 @@ $(function(){
 		return false;
 	}
 	
-	function searchByPhrase(typeProduct, phrase){
+	function searchByPhrase(type, phrase){
 		var dataToSend = {
-			'typeProduct':typeProduct,
+			'type':type,
 			'phrase':phrase
 		};
 		
@@ -25,12 +27,7 @@ $(function(){
 		            xhr.setRequestHeader("Accept", "application/json");
 		            xhr.setRequestHeader("Content-Type", "application/json");
 		        }
-			  }).done(function( str ){
-				  
-				  var result = [
-				                {"name": str, "type":"printer", "id":54, "pathToPicture":"545.jpg"},
-				                {"name": str + " " + str, "type":"printer", "id":54, "pathToPicture":"754.jpg"}
-				                ];
+			  }).done(function(result){
 				  
 				  $(result).each(function(i, product) {
 					  if( $('#search_area_by_phrase').find( ".result_of_search_by_phrase" ).length == 0 ){
