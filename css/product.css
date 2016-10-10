@@ -80,8 +80,6 @@
 	  z-index: 1;
 	}
 
- input[id^="star-1-"]
-
 	.reviewStars-input input[id^="star-1-"] {
 	  left: 0px;
 	}
@@ -114,50 +112,6 @@
 		margin-right: 4px;
 		font: 14px "RobotoRegular";
 	}
-
-/*-- average raiting --*/
-.rating_average {
-	position: relative;
-	width: 100px;
-	list-style: none;
-	background: url(/images/star.png);
-	background-size: 20px 40px;
-}
-.rating_average li {
-	float: left;
-	height: 20px;
-}
-
-.rating_average li.current {
-	z-index: 1;
-	background: url(/images/star.png) left bottom;
-	background-size: 20px 40px;
-}
-.rating_average li span[class*="star"] {
-	position: absolute;
-	z-index: 5;
-	display: block;
-	width: 20px;
-	height: 20px;
-	cursor: pointer;
-}
-
-.rating_average li span.star1 {
-	left: 0;
-}
-.rating_average li span.star2 {
-	left: 20px;
-}
-.rating li span.star3 {
-	left: 40px;
-}
-.rating_average li span.star4 {
-	left: 60px;
-}
-.rating_average li span.star5 {
-	left: 80px;
-}
-/*-- average raiting END --*/
 
 /* end style rating */
 
@@ -220,8 +174,9 @@
 .outer_div_clock{
 	padding: 5px;
 	margin: 3px;
-	border: 1px red solid;
+	border: 2px #1B4699 solid;
 	border-radius: 5px;
+	margin-top: 0px;
 }
 
 #clock{
@@ -231,7 +186,7 @@
 }
 
 #clock .countdown-section{
-background: green none repeat scroll 0% 0%;
+background: #1B4699 none repeat scroll 0% 0%;
 margin: 0px 1px;
 border-radius: 5px;
 }
@@ -331,7 +286,7 @@ border-radius: 5px;
 	/*width: 190px;*/
 }
 
-label.add_price_title{
+.option_product_with_price label.add_price_title{
 	height: auto; 
 	max-width: 136px;
 	margin-left:20px;
@@ -527,6 +482,15 @@ input.quantity_paint{
 			box-shadow: 0 0 15px rgb(157, 157, 157);
 			
 		}
+#tabs_product div div.use_with_product:hover{
+	border: 2px #006080 solid;
+		-webkit-border-radius: 5px 5px 5px 5px;
+		border-radius: 5px 5px 5px 5px;
+		-webkit-box-shadow: 0 0 40px #006080;
+		-moz-box-shadow: 0 0 40px #006080;
+		box-shadow: 0 0 40px #006080;
+		z-index: 91;
+}
 
 	#tabs_product div div p{
 		margin:0px;

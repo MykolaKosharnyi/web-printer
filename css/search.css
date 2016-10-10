@@ -537,6 +537,8 @@ p.p_pue{
 				width: inherit;
 				position: relative;
 				max-height:275px;
+				-webkit-border-radius: 5px 5px 0px 0px;
+				border-radius: 5px 5px 0px 0px;
 			}
 			
 		.name_price_cart_block,
@@ -544,7 +546,9 @@ p.p_pue{
 			display: block;
 			padding: 10px;
 			position: relative;
-			height: 60px;
+			height: 54px;
+			/*padding-bottom: 0px;*/
+			margin: 3px 0px;
 		}	
 
 .name_price_cart_block_hidden{
@@ -552,13 +556,14 @@ p.p_pue{
 	background: inherit;
 	-webkit-border-radius: 5px 5px 5px 5px;
 	border-radius: 5px 5px 5px 5px;
-	height: 0px;
-	padding: 0px;
+	height: auto;
+	padding: 0px 10px;
+	width: 80%;
+	margin: 0px;
 }	
 	
 		 .products_title, .products_price{
 			position: relative;
-			height: 20px;
 			width: 80%;
 			/*max-width: 280px;*/
 			float: left;

@@ -312,11 +312,13 @@ border-radius: 0 0 3px 3px;
 /*--- NAVIGATION ---*/
 #navigation{
     position: relative;
-    height: 23px;
+    height: auto;
     top: 140px;
     margin: 2px 0px 4px;
     border-top: 1px solid rgb(219, 219, 219);
     border-bottom: 1px solid rgb(219, 219, 219);
+	display: table;
+	width:100%;
 }
 
     #navigation a, #navigation span, #navigation p{
@@ -336,6 +338,104 @@ border-radius: 0 0 3px 3px;
     #navigation a:hover{
         color:#6699CC;
     }
+
+#search_area_by_phrase .result_of_search_by_phrase{
+	position: absolute;
+	display: block;
+	width: 100%;
+	height: auto;
+	background: white;
+	left: 0px;
+	z-index: 100;
+	margin-top: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	border: 1px #006080 solid;
+	padding: 0px 3px;
+	max-height: 263px;
+	overflow-y: auto;
+}
+
+#search_area_by_phrase .result_of_search_by_phrase .result_of_search{
+	position: relative;
+	display: block;
+	width: 100%;
+	height: 40px;
+	background: white;
+	left: 0px;
+	z-index: 100;
+	margin: 3px 0px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	border: 1px #006080 solid;
+}
+
+#search_area_by_phrase .result_of_search_by_phrase .result_of_search a{
+	position: relative;
+	display: block;
+	width: 100%;
+	height: inherit;
+	border-radius: 3px;
+	-webkit-box-shadow: 0 0 5px rgb(157, 157, 157);
+	-moz-box-shadow: 0 0 5px rgb(157, 157, 157);
+	box-shadow: 0 0 5px rgb(157, 157, 157);
+}
+
+#search_area_by_phrase .result_of_search_by_phrase .result_of_search a:hover{
+	background: #4fb4f5;
+}
+
+#search_area_by_phrase .result_of_search_by_phrase .result_of_search a img{
+	position: relative;
+	height: inherit;
+	padding: 3px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	float: left;
+	max-width: 75px;
+}
+
+#search_area_by_phrase .result_of_search_by_phrase .result_of_search a span.name_searched_product{
+	font-size: 14px;
+	max-width: 315px;
+	position: relative;
+	display: table-cell;
+	/*background: #0bffdd;*/
+	box-sizing: padding-box;
+	vertical-align: middle;
+	line-height: 35px;
+
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+#search_area_by_phrase .result_of_search_by_phrase span.no_search_result{
+	padding: 10px;
+	height: 35px;
+	position: relative;
+	display: block;
+	font-size: 13px;
+	color: rgb(189, 56, 56);
+}
+
+#search_area_by_phrase .close_result_of_search{
+	position: absolute;
+	height: 20px;
+	width: 30px;
+	background: grey;
+	top: 55px;
+	right: -35px;
+	z-index: 90;
+}
+
+#search_area_by_phrase .close_result_of_search i{
+	color: #006080;
+}
+
+#search_area_by_phrase .close_result_of_search i:hover{
+	color: red;
+}
 /*-------------------- Тело страницы --------------------*/
 
 #the_main_part {

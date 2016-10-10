@@ -842,8 +842,65 @@ section.ord1er  {
 	display:none; /* в oбычнoм сoстoянии её нет) */
 }
 
-/* ------- PRODUCTS PAGE ----------*/
+/*-- AVERAGE RATING --*/
+/* ".rating_block" and ".rating_block p" - defined for all RATING */
+.rating_block{
+		height: 30px;
+		padding: 0px;
+		/*border-bottom: 1px #006080 solid;*/
+	}
 
+	.rating_block p{
+		width: 140px;
+		padding: 0;
+		border: 0;
+		color: black;
+		background: inherit;
+		float: left;
+		margin: 5px 0;
+		margin-right: 4px;
+		font: 14px "RobotoRegular";
+	}
 
+.rating_average {
+	position: relative;
+	width: 100px;
+	list-style: none;
+	background: url(/images/star.png);
+	background-size: 20px 40px;
+}
+.rating_average li {
+	float: left;
+	height: 20px;
+}
 
-/* ------- END PRODUCTS PAGE ----------*/
+.rating_average li.current {
+	z-index: 1;
+	background: url(/images/star.png) left bottom;
+	background-size: 20px 40px;
+}
+.rating_average li span[class*="star"] {
+	position: absolute;
+	z-index: 5;
+	display: block;
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+}
+
+.rating_average li span.star1 {
+	left: 0;
+}
+.rating_average li span.star2 {
+	left: 20px;
+}
+.rating li span.star3 {
+	left: 40px;
+}
+.rating_average li span.star4 {
+	left: 60px;
+}
+.rating_average li span.star5 {
+	left: 80px;
+}
+/*-- average raiting END --*/
