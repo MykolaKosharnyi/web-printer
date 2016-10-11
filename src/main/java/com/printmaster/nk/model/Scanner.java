@@ -10,7 +10,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name="scaner")
-public class Scanner extends Product{
+public class Scanner extends HeadProduct{
 
 	private static final long serialVersionUID = 3857611283069796552L;
 	

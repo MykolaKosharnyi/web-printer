@@ -22,7 +22,7 @@ import com.printmaster.nk.beans.Delivery;
 import com.printmaster.nk.beans.Paint;
 import com.printmaster.nk.beans.ProductCart;
 import com.printmaster.nk.model.Option;
-import com.printmaster.nk.model.Product;
+import com.printmaster.nk.model.HeadProduct;
 import com.printmaster.nk.model.Rip;
 import com.printmaster.nk.model.UseWithProduct;
 import com.printmaster.nk.service.CutterService;
@@ -133,7 +133,7 @@ public class CartController {
 
 	}
 	
-	private ArrayList<Option> getOption(Product product, List<String> checkedOption){
+	private ArrayList<Option> getOption(HeadProduct product, List<String> checkedOption){
 		ArrayList<Option> result = new ArrayList<Option>();
 		
 		if(product.getOptionRIP() > 0.01){
@@ -376,7 +376,7 @@ public class CartController {
 		}
 	}
 	
-	private ArrayList<Delivery> getDelivery(Product product, String checkedDelivery){
+	private ArrayList<Delivery> getDelivery(HeadProduct product, String checkedDelivery){
 		ArrayList<Delivery> result = new ArrayList<Delivery>();
 		
 		double size = product.getDeliveryWidth() * product.getDeliveryHeight() * product.getDeliveryDepth();

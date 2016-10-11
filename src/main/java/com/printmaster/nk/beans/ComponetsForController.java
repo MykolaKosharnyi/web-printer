@@ -22,7 +22,7 @@ import com.printmaster.nk.model.Laminator;
 import com.printmaster.nk.model.Laser;
 import com.printmaster.nk.model.Printer;
 import com.printmaster.nk.model.Printer3D;
-import com.printmaster.nk.model.Product;
+import com.printmaster.nk.model.HeadProduct;
 import com.printmaster.nk.model.Rip;
 import com.printmaster.nk.model.Scanner;
 import com.printmaster.nk.model.UseWithProduct;
@@ -180,10 +180,10 @@ public class ComponetsForController {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public ArrayList<JSONObject> showSimplestArray(Set<? extends Product> set, String type){
+	public ArrayList<JSONObject> showSimplestArray(Set<? extends HeadProduct> set, String type){
 		
 		ArrayList<JSONObject> arrayResult = new ArrayList<JSONObject>();
-		for(Product currentProduct : set){
+		for(HeadProduct currentProduct : set){
 			JSONObject curObj = new JSONObject();
 			
 			standartOutPutDataOfProduct(currentProduct, curObj);
@@ -195,9 +195,9 @@ public class ComponetsForController {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public ArrayList<JSONObject> simpleResultOfSearchByPhrase(Set<? extends Product> set, String type){
+	public ArrayList<JSONObject> simpleResultOfSearchByPhrase(Set<? extends HeadProduct> set, String type){
 		ArrayList<JSONObject> arrayResult = new ArrayList<JSONObject>();
-		for(Product currentProduct : set){
+		for(HeadProduct currentProduct : set){
 			JSONObject curObj = new JSONObject();
 			
 			curObj.put("name", currentProduct.getName());
@@ -243,10 +243,10 @@ public class ComponetsForController {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public ArrayList<JSONObject> showSimplestArrayWichCheckboxes(Set<? extends Product> set, String type){
+	public ArrayList<JSONObject> showSimplestArrayWichCheckboxes(Set<? extends HeadProduct> set, String type){
 		
 		ArrayList<JSONObject> arrayResult = new ArrayList<JSONObject>();
-		for(Product currentProduct : set){
+		for(HeadProduct currentProduct : set){
 			JSONObject curObj = new JSONObject();
 			
 			standartOutPutDataOfProduct(currentProduct, curObj);
@@ -261,7 +261,7 @@ public class ComponetsForController {
 	}
 
 	@SuppressWarnings("unchecked")
-	private void standartOutPutDataOfProduct(Product currentProduct, JSONObject curObj) {
+	private void standartOutPutDataOfProduct(HeadProduct currentProduct, JSONObject curObj) {
 		curObj.put("top", currentProduct.isTop());
 		curObj.put("id", currentProduct.getId());
 		curObj.put("partNumber", currentProduct.getPartNumber());
@@ -282,7 +282,7 @@ public class ComponetsForController {
 		
 	}
 		
-    public void updateInLeftField(Product product, boolean isShow, String typeProduct){
+    public void updateInLeftField(HeadProduct product, boolean isShow, String typeProduct){
 		
     	ReklamProduct reklamProduct = new ReklamProduct();
         reklamProduct.setType(typeProduct);

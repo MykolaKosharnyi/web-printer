@@ -8,7 +8,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name="digital_printer")
-public class DigitalPrinter extends Product{
+public class DigitalPrinter extends HeadProduct{
 
 	private static final long serialVersionUID = -7914406547800809890L;
 	

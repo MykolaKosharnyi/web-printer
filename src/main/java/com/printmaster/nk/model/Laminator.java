@@ -8,7 +8,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name="laminator")
-public class Laminator extends Product{
+public class Laminator extends HeadProduct{
 
 	private static final long serialVersionUID = 3857611283069796552L;
 	

@@ -10,7 +10,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name="printer3d")
-public class Printer3D extends Product{
+public class Printer3D extends HeadProduct{
 
 	private static final long serialVersionUID = -3145839526222670744L;
 

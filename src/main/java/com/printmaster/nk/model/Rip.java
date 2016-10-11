@@ -1,17 +1,10 @@
 package com.printmaster.nk.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -22,24 +15,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name="rip")
-public class Rip implements Serializable {
+public class Rip extends Product implements Serializable {
 	
 private static final long serialVersionUID = 3031695775597440046L;
-	
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="id")
-	private Long id;
-	
-	@Column(name="part_number")
-	private String partNumber;
-	
-	@NotEmpty(message = "Please enter name of product.")
-	@Column(name="name")
-	private String name;
-	
-	@Column(name="prise")
-	private double prise; 
 
 	@NotEmpty
 	@Column(name="typeEquipment")
@@ -55,10 +33,6 @@ private static final long serialVersionUID = 3031695775597440046L;
 	
 	@Column(name="softwareVersion", length = 10)
 	private String softwareVersion;//Версия ПО
-	
-	@ElementCollection(fetch = FetchType.EAGER)
-	@Column(name="path_pictures")
-	private List<String> pathPictures = new ArrayList<String>();
 	
 	@Column(name="left_shares_link")
 	private String leftSharesLink;
@@ -85,24 +59,6 @@ private static final long serialVersionUID = 3031695775597440046L;
 	
 	@Column(name="timeSharesText", columnDefinition="TEXT")
 	protected String timeSharesText;
-	
-	@Column(name="description", columnDefinition="TEXT")
-	private String description;
-	
-	@Column(name="description_eng", columnDefinition="TEXT")
-	private String descriptionEng;
-	
-	@Column(nullable = false, columnDefinition = "bit default 1")
-	private boolean showOnSite = true;
-	
-	@Column(nullable = false, columnDefinition = "bit default 1")
-	private boolean showOnHomePage = true;
-	
-	@Column(nullable = false, columnDefinition = "bit default 0")
-	private boolean showOnLeftSide = false;
-	
-	@Column(name="service_information", columnDefinition="TEXT")
-	private String serviceInformation;
 	
 	@Column(name="optionInstallation", columnDefinition="Decimal(10,2) default '0.00'")
 	protected double optionInstallation;
@@ -175,81 +131,102 @@ private static final long serialVersionUID = 3031695775597440046L;
 	@Column(name="kyivDeliveryPriceWeight", nullable = false, columnDefinition = "bit default 0")
 	protected boolean kyivDeliveryPriceWeight;
 	
-	@Column(name="top",nullable = false, columnDefinition = "bit default 0")
-	private boolean top;
-	
 	public Rip(){}
-	
-	public boolean isTop() {
-		return top;
+
+	public String getTypeEquipment() {
+		return typeEquipment;
 	}
 
-	public void setTop(boolean top) {
-		this.top = top;
+	public void setTypeEquipment(String typeEquipment) {
+		this.typeEquipment = typeEquipment;
 	}
 
-	public double getDeliveryWidth() {
-		return deliveryWidth;
+	public String getSoftwareMaker() {
+		return softwareMaker;
 	}
 
-	public void setDeliveryWidth(double deliveryWidth) {
-		this.deliveryWidth = deliveryWidth;
+	public void setSoftwareMaker(String softwareMaker) {
+		this.softwareMaker = softwareMaker;
 	}
 
-	public double getDeliveryHeight() {
-		return deliveryHeight;
+	public String getSoftwareClass() {
+		return softwareClass;
 	}
 
-	public void setDeliveryHeight(double deliveryHeight) {
-		this.deliveryHeight = deliveryHeight;
+	public void setSoftwareClass(String softwareClass) {
+		this.softwareClass = softwareClass;
 	}
 
-	public double getDeliveryDepth() {
-		return deliveryDepth;
+	public String getSoftwareVersion() {
+		return softwareVersion;
 	}
 
-	public void setDeliveryDepth(double deliveryDepth) {
-		this.deliveryDepth = deliveryDepth;
+	public void setSoftwareVersion(String softwareVersion) {
+		this.softwareVersion = softwareVersion;
 	}
 
-	public double getDeliveryWeight() {
-		return deliveryWeight;
+	public String getLeftSharesLink() {
+		return leftSharesLink;
 	}
 
-	public void setDeliveryWeight(double deliveryWeight) {
-		this.deliveryWeight = deliveryWeight;
+	public void setLeftSharesLink(String leftSharesLink) {
+		this.leftSharesLink = leftSharesLink;
 	}
 
-	public boolean isUkraineDeliveryPriceSize() {
-		return ukraineDeliveryPriceSize;
+	public String getLeftSharesLinkColorText() {
+		return leftSharesLinkColorText;
 	}
 
-	public void setUkraineDeliveryPriceSize(boolean ukraineDeliveryPriceSize) {
-		this.ukraineDeliveryPriceSize = ukraineDeliveryPriceSize;
+	public void setLeftSharesLinkColorText(String leftSharesLinkColorText) {
+		this.leftSharesLinkColorText = leftSharesLinkColorText;
 	}
 
-	public boolean isUkraineDeliveryPriceWeight() {
-		return ukraineDeliveryPriceWeight;
+	public String getLeftSharesLinkColorFone() {
+		return leftSharesLinkColorFone;
 	}
 
-	public void setUkraineDeliveryPriceWeight(boolean ukraineDeliveryPriceWeight) {
-		this.ukraineDeliveryPriceWeight = ukraineDeliveryPriceWeight;
+	public void setLeftSharesLinkColorFone(String leftSharesLinkColorFone) {
+		this.leftSharesLinkColorFone = leftSharesLinkColorFone;
 	}
 
-	public boolean isKyivDeliveryPriceSize() {
-		return kyivDeliveryPriceSize;
+	public String getRightSharesLink() {
+		return rightSharesLink;
 	}
 
-	public void setKyivDeliveryPriceSize(boolean kyivDeliveryPriceSize) {
-		this.kyivDeliveryPriceSize = kyivDeliveryPriceSize;
+	public void setRightSharesLink(String rightSharesLink) {
+		this.rightSharesLink = rightSharesLink;
 	}
 
-	public boolean isKyivDeliveryPriceWeight() {
-		return kyivDeliveryPriceWeight;
+	public String getRightSharesLinkColorText() {
+		return rightSharesLinkColorText;
 	}
 
-	public void setKyivDeliveryPriceWeight(boolean kyivDeliveryPriceWeight) {
-		this.kyivDeliveryPriceWeight = kyivDeliveryPriceWeight;
+	public void setRightSharesLinkColorText(String rightSharesLinkColorText) {
+		this.rightSharesLinkColorText = rightSharesLinkColorText;
+	}
+
+	public String getRightSharesLinkColorFone() {
+		return rightSharesLinkColorFone;
+	}
+
+	public void setRightSharesLinkColorFone(String rightSharesLinkColorFone) {
+		this.rightSharesLinkColorFone = rightSharesLinkColorFone;
+	}
+
+	public Date getTimeShares() {
+		return timeShares;
+	}
+
+	public void setTimeShares(Date timeShares) {
+		this.timeShares = timeShares;
+	}
+
+	public String getTimeSharesText() {
+		return timeSharesText;
+	}
+
+	public void setTimeSharesText(String timeSharesText) {
+		this.timeSharesText = timeSharesText;
 	}
 
 	public double getOptionInstallation() {
@@ -356,188 +333,68 @@ private static final long serialVersionUID = 3031695775597440046L;
 		this.descriptionOptionAddedOption3 = descriptionOptionAddedOption3;
 	}
 
-	public String getTimeSharesText() {
-		return timeSharesText;
+	public double getDeliveryWidth() {
+		return deliveryWidth;
 	}
 
-	public void setTimeSharesText(String timeSharesText) {
-		this.timeSharesText = timeSharesText;
+	public void setDeliveryWidth(double deliveryWidth) {
+		this.deliveryWidth = deliveryWidth;
 	}
 
-	public Long getId() {
-		return id;
+	public double getDeliveryHeight() {
+		return deliveryHeight;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setDeliveryHeight(double deliveryHeight) {
+		this.deliveryHeight = deliveryHeight;
 	}
 
-	public String getPartNumber() {
-		return partNumber;
+	public double getDeliveryDepth() {
+		return deliveryDepth;
 	}
 
-	public void setPartNumber(String partNumber) {
-		this.partNumber = partNumber;
+	public void setDeliveryDepth(double deliveryDepth) {
+		this.deliveryDepth = deliveryDepth;
 	}
 
-	public String getName() {
-		return name;
+	public double getDeliveryWeight() {
+		return deliveryWeight;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setDeliveryWeight(double deliveryWeight) {
+		this.deliveryWeight = deliveryWeight;
 	}
 
-	public double getPrise() {
-		return prise;
+	public boolean isUkraineDeliveryPriceSize() {
+		return ukraineDeliveryPriceSize;
 	}
 
-	public void setPrise(double prise) {
-		this.prise = prise;
+	public void setUkraineDeliveryPriceSize(boolean ukraineDeliveryPriceSize) {
+		this.ukraineDeliveryPriceSize = ukraineDeliveryPriceSize;
 	}
 
-	public String getTypeEquipment() {
-		return typeEquipment;
+	public boolean isUkraineDeliveryPriceWeight() {
+		return ukraineDeliveryPriceWeight;
 	}
 
-	public void setTypeEquipment(String typeEquipment) {
-		this.typeEquipment = typeEquipment;
+	public void setUkraineDeliveryPriceWeight(boolean ukraineDeliveryPriceWeight) {
+		this.ukraineDeliveryPriceWeight = ukraineDeliveryPriceWeight;
 	}
 
-	public String getSoftwareMaker() {
-		return softwareMaker;
+	public boolean isKyivDeliveryPriceSize() {
+		return kyivDeliveryPriceSize;
 	}
 
-	public void setSoftwareMaker(String softwareMaker) {
-		this.softwareMaker = softwareMaker;
+	public void setKyivDeliveryPriceSize(boolean kyivDeliveryPriceSize) {
+		this.kyivDeliveryPriceSize = kyivDeliveryPriceSize;
 	}
 
-	public String getSoftwareClass() {
-		return softwareClass;
+	public boolean isKyivDeliveryPriceWeight() {
+		return kyivDeliveryPriceWeight;
 	}
 
-	public void setSoftwareClass(String softwareClass) {
-		this.softwareClass = softwareClass;
-	}
-
-	public String getSoftwareVersion() {
-		return softwareVersion;
-	}
-
-	public void setSoftwareVersion(String softwareVersion) {
-		this.softwareVersion = softwareVersion;
-	}
-
-	public List<String> getPathPictures() {
-		return pathPictures;
-	}
-
-	public void setPathPictures(List<String> pathPictures) {
-		this.pathPictures = pathPictures;
-	}
-
-	public String getLeftSharesLink() {
-		return leftSharesLink;
-	}
-
-	public void setLeftSharesLink(String leftSharesLink) {
-		this.leftSharesLink = leftSharesLink;
-	}
-
-	public String getLeftSharesLinkColorText() {
-		return leftSharesLinkColorText;
-	}
-
-	public void setLeftSharesLinkColorText(String leftSharesLinkColorText) {
-		this.leftSharesLinkColorText = leftSharesLinkColorText;
-	}
-
-	public String getLeftSharesLinkColorFone() {
-		return leftSharesLinkColorFone;
-	}
-
-	public void setLeftSharesLinkColorFone(String leftSharesLinkColorFone) {
-		this.leftSharesLinkColorFone = leftSharesLinkColorFone;
-	}
-
-	public String getRightSharesLink() {
-		return rightSharesLink;
-	}
-
-	public void setRightSharesLink(String rightSharesLink) {
-		this.rightSharesLink = rightSharesLink;
-	}
-
-	public String getRightSharesLinkColorText() {
-		return rightSharesLinkColorText;
-	}
-
-	public void setRightSharesLinkColorText(String rightSharesLinkColorText) {
-		this.rightSharesLinkColorText = rightSharesLinkColorText;
-	}
-
-	public String getRightSharesLinkColorFone() {
-		return rightSharesLinkColorFone;
-	}
-
-	public void setRightSharesLinkColorFone(String rightSharesLinkColorFone) {
-		this.rightSharesLinkColorFone = rightSharesLinkColorFone;
-	}
-
-	public Date getTimeShares() {
-		return timeShares;
-	}
-
-	public void setTimeShares(Date timeShares) {
-		this.timeShares = timeShares;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public String getDescriptionEng() {
-		return descriptionEng;
-	}
-
-	public void setDescriptionEng(String descriptionEng) {
-		this.descriptionEng = descriptionEng;
-	}
-
-	public boolean isShowOnSite() {
-		return showOnSite;
-	}
-
-	public void setShowOnSite(boolean showOnSite) {
-		this.showOnSite = showOnSite;
-	}
-
-	public boolean isShowOnHomePage() {
-		return showOnHomePage;
-	}
-
-	public void setShowOnHomePage(boolean showOnHomePage) {
-		this.showOnHomePage = showOnHomePage;
-	}
-
-	public boolean isShowOnLeftSide() {
-		return showOnLeftSide;
-	}
-
-	public void setShowOnLeftSide(boolean showOnLeftSide) {
-		this.showOnLeftSide = showOnLeftSide;
-	}
-
-	public String getServiceInformation() {
-		return serviceInformation;
-	}
-
-	public void setServiceInformation(String serviceInformation) {
-		this.serviceInformation = serviceInformation;
+	public void setKyivDeliveryPriceWeight(boolean kyivDeliveryPriceWeight) {
+		this.kyivDeliveryPriceWeight = kyivDeliveryPriceWeight;
 	}
 
 	@Override
@@ -552,7 +409,6 @@ private static final long serialVersionUID = 3031695775597440046L;
 		result = prime * result + ((leftSharesLinkColorText == null) ? 0 : leftSharesLinkColorText.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((partNumber == null) ? 0 : partNumber.hashCode());
-		result = prime * result + ((pathPictures == null) ? 0 : pathPictures.hashCode());
 		long temp;
 		temp = Double.doubleToLongBits(prise);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
@@ -620,11 +476,6 @@ private static final long serialVersionUID = 3031695775597440046L;
 				return false;
 		} else if (!partNumber.equals(other.partNumber))
 			return false;
-		if (pathPictures == null) {
-			if (other.pathPictures != null)
-				return false;
-		} else if (!pathPictures.equals(other.pathPictures))
-			return false;
 		if (Double.doubleToLongBits(prise) != Double.doubleToLongBits(other.prise))
 			return false;
 		if (rightSharesLink == null) {
@@ -685,7 +536,7 @@ private static final long serialVersionUID = 3031695775597440046L;
 	public String toString() {
 		return "Rip [id=" + id + ", partNumber=" + partNumber + ", name=" + name + ", prise=" + prise
 				+ ", typeEquipment=" + typeEquipment + ", softwareMaker=" + softwareMaker + ", softwareClass="
-				+ softwareClass + ", softwareVersion=" + softwareVersion + ", pathPictures=" + pathPictures
+				+ softwareClass + ", softwareVersion=" + softwareVersion
 				+ ", leftSharesLink=" + leftSharesLink + ", leftSharesLinkColorText=" + leftSharesLinkColorText
 				+ ", leftSharesLinkColorFone=" + leftSharesLinkColorFone + ", rightSharesLink=" + rightSharesLink
 				+ ", rightSharesLinkColorText=" + rightSharesLinkColorText + ", rightSharesLinkColorFone="

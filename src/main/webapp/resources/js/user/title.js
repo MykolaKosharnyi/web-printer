@@ -3,14 +3,30 @@ $(function(){
 	$( "input#search_input_by_phrase" ).change(function() {
 	
 		$('#search_area_by_phrase .result_of_search_by_phrase').remove();
+		$('#search_area_by_phrase .close_result_of_search').remove();
 		
 		searchByPhrase("all", $(this).val());
 		  
-		});
+	});
+	
+	$(document).on("click", '#search_area_by_phrase .close_result_of_search', function(){
+		$('#search_area_by_phrase .result_of_search_by_phrase').remove();
+		$('#search_area_by_phrase .close_result_of_search').remove();
+	});
+	
+/*	$('#search_area_by_phrase .search_by_phrase_button').on("click", function(){
+		$('#search_area_by_phrase .result_of_search_by_phrase').remove();
+		$('#search_area_by_phrase .close_result_of_search').remove();
+		
+		searchByPhrase("all", $( "input#search_input_by_phrase" ).val());
+	});*/
 	
 });
 	function searchByPhraseIncludeType(typeProduct){
-		return false;
+		$('#search_area_by_phrase .result_of_search_by_phrase').remove();
+		$('#search_area_by_phrase .close_result_of_search').remove();
+		
+		searchByPhrase( typeProduct, $( "input#search_input_by_phrase" ).val());
 	}
 	
 	function searchByPhrase(type, phrase){
@@ -28,14 +44,22 @@ $(function(){
 		            xhr.setRequestHeader("Content-Type", "application/json");
 		        }
 			  }).done(function(result){
+				  if(result.length > 0){
+					  $(result).each(function(i, product) {
+						  if( $('#search_area_by_phrase').find( ".result_of_search_by_phrase" ).length == 0 ){
+								$('#search_area_by_phrase').append($('<div/>').addClass('result_of_search_by_phrase').append(createResultOfSearchByPhrase(product)))
+									.append($('<span/>').addClass('close_result_of_search').append($('<i/>').addClass('fa fa-close')));
+							} else {
+								$('#search_area_by_phrase .result_of_search_by_phrase').append(createResultOfSearchByPhrase(product));
+							}
+					  });
+				  } else {
+					  $('#search_area_by_phrase')
+					  		  .append($('<div/>').addClass('result_of_search_by_phrase')
+					  				  .append($('<span/>').addClass('no_search_result').text("Поиск за словом/фразой не дал результата.")))
+							  .append($('<span/>').addClass('close_result_of_search').append($('<i/>').addClass('fa fa-close')));
+				  }
 				  
-				  $(result).each(function(i, product) {
-					  if( $('#search_area_by_phrase').find( ".result_of_search_by_phrase" ).length == 0 ){
-							$('#search_area_by_phrase').append($('<div/>').addClass('result_of_search_by_phrase').append(createResultOfSearchByPhrase(product)));
-						} else {
-							$('#search_area_by_phrase .result_of_search_by_phrase').append(createResultOfSearchByPhrase(product));
-						}
-				  });
 				});
 	}
 	

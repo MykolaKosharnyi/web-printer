@@ -1,16 +1,9 @@
 package com.printmaster.nk.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -18,59 +11,22 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name="use_with_product")
-public class UseWithProduct implements Serializable{
+public class UseWithProduct extends Product implements Serializable{
 
 	private static final long serialVersionUID = 3031695775597440046L;	
-	
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="id")
-	protected Long id;
-	
-	@Column(name="part_number")
-	protected String partNumber;
-	
-	@NotEmpty(message = "Please enter name of product.")
-	@Column(name="name")
-	protected String name;
 	
 	@NotEmpty
 	@Column(name="typeProduct")//Тип продукта
 	private String typeProduct;
 	
-	@Column(name="prise")
-	protected double prise;
-	
 	@Column(name="typeInk")
 	private String typeInk; 
-	
-	@Column(nullable = false, columnDefinition = "bit default 1")
-	protected boolean showOnSite = true;
-	
-	@Column(nullable = false, columnDefinition = "bit default 1")
-	protected boolean showOnHomePage = true;
-	
-	@Column(nullable = false, columnDefinition = "bit default 0")
-	protected boolean showOnLeftSide = false;
 	
 	@Column(name="availability")
 	protected String availability;
 	
 	@Column(name="availabilitySpecialCase")
 	protected String availabilitySpecialCase;
-	
-	@Column(name="description", columnDefinition="TEXT")
-	protected String description;
-	
-	@Column(name="description_eng", columnDefinition="TEXT")
-	protected String descriptionEng;
-	
-	@ElementCollection(fetch = FetchType.EAGER)
-	@Column(name="path_pictures")
-	private List<String> pathPictures = new ArrayList<String>();
-	
-	@Column(name="service_information", columnDefinition="TEXT")
-	protected String serviceInformation;
 	
 	@Column(name="optionInstallation", columnDefinition="Decimal(10,2) default '0.00'")
 	protected double optionInstallation;
@@ -214,49 +170,206 @@ public class UseWithProduct implements Serializable{
 	@Column(name="descriptionInsuranceUkraineTransport")
 	protected String descriptionInsuranceUkraineTransport;
 	
-	@Column(name="top",nullable = false, columnDefinition = "bit default 0")
-	private boolean top;
-	
 	public UseWithProduct(){}
-
-	public boolean isTop() {
-		return top;
+	
+	public String getTypeProduct() {
+		return typeProduct;
 	}
 
-	public void setTop(boolean top) {
-		this.top = top;
+	public void setTypeProduct(String typeProduct) {
+		this.typeProduct = typeProduct;
 	}
 
-	public String getDescriptionInsuranceInternationalTransport() {
-		return descriptionInsuranceInternationalTransport;
+	public String getTypeInk() {
+		return typeInk;
 	}
 
-	public void setDescriptionInsuranceInternationalTransport(String descriptionInsuranceInternationalTransport) {
-		this.descriptionInsuranceInternationalTransport = descriptionInsuranceInternationalTransport;
+	public void setTypeInk(String typeInk) {
+		this.typeInk = typeInk;
 	}
 
-	public String getDescriptionInsuranceUkraineTransport() {
-		return descriptionInsuranceUkraineTransport;
+	public String getAvailability() {
+		return availability;
 	}
 
-	public void setDescriptionInsuranceUkraineTransport(String descriptionInsuranceUkraineTransport) {
-		this.descriptionInsuranceUkraineTransport = descriptionInsuranceUkraineTransport;
+	public void setAvailability(String availability) {
+		this.availability = availability;
 	}
 
-	public double getInsuranceInternationalTransport() {
-		return insuranceInternationalTransport;
+	public String getAvailabilitySpecialCase() {
+		return availabilitySpecialCase;
 	}
 
-	public void setInsuranceInternationalTransport(double insuranceInternationalTransport) {
-		this.insuranceInternationalTransport = insuranceInternationalTransport;
+	public void setAvailabilitySpecialCase(String availabilitySpecialCase) {
+		this.availabilitySpecialCase = availabilitySpecialCase;
 	}
 
-	public double getInsuranceUkraineTransport() {
-		return insuranceUkraineTransport;
+	public double getOptionInstallation() {
+		return optionInstallation;
 	}
 
-	public void setInsuranceUkraineTransport(double insuranceUkraineTransport) {
-		this.insuranceUkraineTransport = insuranceUkraineTransport;
+	public void setOptionInstallation(double optionInstallation) {
+		this.optionInstallation = optionInstallation;
+	}
+
+	public String getDescriptionOptionInstallation() {
+		return descriptionOptionInstallation;
+	}
+
+	public void setDescriptionOptionInstallation(String descriptionOptionInstallation) {
+		this.descriptionOptionInstallation = descriptionOptionInstallation;
+	}
+
+	public double getOptionVAT() {
+		return optionVAT;
+	}
+
+	public void setOptionVAT(double optionVAT) {
+		this.optionVAT = optionVAT;
+	}
+
+	public String getDescriptionOptionVAT() {
+		return descriptionOptionVAT;
+	}
+
+	public void setDescriptionOptionVAT(String descriptionOptionVAT) {
+		this.descriptionOptionVAT = descriptionOptionVAT;
+	}
+
+	public String getNameAddedOption() {
+		return nameAddedOption;
+	}
+
+	public void setNameAddedOption(String nameAddedOption) {
+		this.nameAddedOption = nameAddedOption;
+	}
+
+	public double getPriceAddedOption() {
+		return priceAddedOption;
+	}
+
+	public void setPriceAddedOption(double priceAddedOption) {
+		this.priceAddedOption = priceAddedOption;
+	}
+
+	public String getDescriptionOptionAddedOption() {
+		return descriptionOptionAddedOption;
+	}
+
+	public void setDescriptionOptionAddedOption(String descriptionOptionAddedOption) {
+		this.descriptionOptionAddedOption = descriptionOptionAddedOption;
+	}
+
+	public String getNameAddedOption2() {
+		return nameAddedOption2;
+	}
+
+	public void setNameAddedOption2(String nameAddedOption2) {
+		this.nameAddedOption2 = nameAddedOption2;
+	}
+
+	public double getPriceAddedOption2() {
+		return priceAddedOption2;
+	}
+
+	public void setPriceAddedOption2(double priceAddedOption2) {
+		this.priceAddedOption2 = priceAddedOption2;
+	}
+
+	public String getDescriptionOptionAddedOption2() {
+		return descriptionOptionAddedOption2;
+	}
+
+	public void setDescriptionOptionAddedOption2(String descriptionOptionAddedOption2) {
+		this.descriptionOptionAddedOption2 = descriptionOptionAddedOption2;
+	}
+
+	public String getNameAddedOption3() {
+		return nameAddedOption3;
+	}
+
+	public void setNameAddedOption3(String nameAddedOption3) {
+		this.nameAddedOption3 = nameAddedOption3;
+	}
+
+	public double getPriceAddedOption3() {
+		return priceAddedOption3;
+	}
+
+	public void setPriceAddedOption3(double priceAddedOption3) {
+		this.priceAddedOption3 = priceAddedOption3;
+	}
+
+	public String getDescriptionOptionAddedOption3() {
+		return descriptionOptionAddedOption3;
+	}
+
+	public void setDescriptionOptionAddedOption3(String descriptionOptionAddedOption3) {
+		this.descriptionOptionAddedOption3 = descriptionOptionAddedOption3;
+	}
+
+	public double getDeliveryWidth() {
+		return deliveryWidth;
+	}
+
+	public void setDeliveryWidth(double deliveryWidth) {
+		this.deliveryWidth = deliveryWidth;
+	}
+
+	public double getDeliveryHeight() {
+		return deliveryHeight;
+	}
+
+	public void setDeliveryHeight(double deliveryHeight) {
+		this.deliveryHeight = deliveryHeight;
+	}
+
+	public double getDeliveryDepth() {
+		return deliveryDepth;
+	}
+
+	public void setDeliveryDepth(double deliveryDepth) {
+		this.deliveryDepth = deliveryDepth;
+	}
+
+	public double getDeliveryWeight() {
+		return deliveryWeight;
+	}
+
+	public void setDeliveryWeight(double deliveryWeight) {
+		this.deliveryWeight = deliveryWeight;
+	}
+
+	public boolean isUkraineDeliveryPriceSize() {
+		return ukraineDeliveryPriceSize;
+	}
+
+	public void setUkraineDeliveryPriceSize(boolean ukraineDeliveryPriceSize) {
+		this.ukraineDeliveryPriceSize = ukraineDeliveryPriceSize;
+	}
+
+	public boolean isUkraineDeliveryPriceWeight() {
+		return ukraineDeliveryPriceWeight;
+	}
+
+	public void setUkraineDeliveryPriceWeight(boolean ukraineDeliveryPriceWeight) {
+		this.ukraineDeliveryPriceWeight = ukraineDeliveryPriceWeight;
+	}
+
+	public boolean isKyivDeliveryPriceSize() {
+		return kyivDeliveryPriceSize;
+	}
+
+	public void setKyivDeliveryPriceSize(boolean kyivDeliveryPriceSize) {
+		this.kyivDeliveryPriceSize = kyivDeliveryPriceSize;
+	}
+
+	public boolean isKyivDeliveryPriceWeight() {
+		return kyivDeliveryPriceWeight;
+	}
+
+	public void setKyivDeliveryPriceWeight(boolean kyivDeliveryPriceWeight) {
+		this.kyivDeliveryPriceWeight = kyivDeliveryPriceWeight;
 	}
 
 	public double getCyanPaint() {
@@ -395,292 +508,36 @@ public class UseWithProduct implements Serializable{
 		this.variant3Paint = variant3Paint;
 	}
 
-	public double getDeliveryWidth() {
-		return deliveryWidth;
+	public double getInsuranceInternationalTransport() {
+		return insuranceInternationalTransport;
 	}
 
-	public void setDeliveryWidth(double deliveryWidth) {
-		this.deliveryWidth = deliveryWidth;
+	public void setInsuranceInternationalTransport(double insuranceInternationalTransport) {
+		this.insuranceInternationalTransport = insuranceInternationalTransport;
 	}
 
-	public double getDeliveryHeight() {
-		return deliveryHeight;
+	public String getDescriptionInsuranceInternationalTransport() {
+		return descriptionInsuranceInternationalTransport;
 	}
 
-	public void setDeliveryHeight(double deliveryHeight) {
-		this.deliveryHeight = deliveryHeight;
+	public void setDescriptionInsuranceInternationalTransport(String descriptionInsuranceInternationalTransport) {
+		this.descriptionInsuranceInternationalTransport = descriptionInsuranceInternationalTransport;
 	}
 
-	public double getDeliveryDepth() {
-		return deliveryDepth;
+	public double getInsuranceUkraineTransport() {
+		return insuranceUkraineTransport;
 	}
 
-	public void setDeliveryDepth(double deliveryDepth) {
-		this.deliveryDepth = deliveryDepth;
+	public void setInsuranceUkraineTransport(double insuranceUkraineTransport) {
+		this.insuranceUkraineTransport = insuranceUkraineTransport;
 	}
 
-	public double getDeliveryWeight() {
-		return deliveryWeight;
+	public String getDescriptionInsuranceUkraineTransport() {
+		return descriptionInsuranceUkraineTransport;
 	}
 
-	public void setDeliveryWeight(double deliveryWeight) {
-		this.deliveryWeight = deliveryWeight;
-	}
-
-	public boolean isUkraineDeliveryPriceSize() {
-		return ukraineDeliveryPriceSize;
-	}
-
-	public void setUkraineDeliveryPriceSize(boolean ukraineDeliveryPriceSize) {
-		this.ukraineDeliveryPriceSize = ukraineDeliveryPriceSize;
-	}
-
-	public boolean isUkraineDeliveryPriceWeight() {
-		return ukraineDeliveryPriceWeight;
-	}
-
-	public void setUkraineDeliveryPriceWeight(boolean ukraineDeliveryPriceWeight) {
-		this.ukraineDeliveryPriceWeight = ukraineDeliveryPriceWeight;
-	}
-
-	public boolean isKyivDeliveryPriceSize() {
-		return kyivDeliveryPriceSize;
-	}
-
-	public void setKyivDeliveryPriceSize(boolean kyivDeliveryPriceSize) {
-		this.kyivDeliveryPriceSize = kyivDeliveryPriceSize;
-	}
-
-	public boolean isKyivDeliveryPriceWeight() {
-		return kyivDeliveryPriceWeight;
-	}
-
-	public void setKyivDeliveryPriceWeight(boolean kyivDeliveryPriceWeight) {
-		this.kyivDeliveryPriceWeight = kyivDeliveryPriceWeight;
-	}
-
-	public double getOptionInstallation() {
-		return optionInstallation;
-	}
-
-	public void setOptionInstallation(double optionInstallation) {
-		this.optionInstallation = optionInstallation;
-	}
-
-	public String getDescriptionOptionInstallation() {
-		return descriptionOptionInstallation;
-	}
-
-	public void setDescriptionOptionInstallation(String descriptionOptionInstallation) {
-		this.descriptionOptionInstallation = descriptionOptionInstallation;
-	}
-
-	public double getOptionVAT() {
-		return optionVAT;
-	}
-
-	public void setOptionVAT(double optionVAT) {
-		this.optionVAT = optionVAT;
-	}
-
-	public String getDescriptionOptionVAT() {
-		return descriptionOptionVAT;
-	}
-
-	public void setDescriptionOptionVAT(String descriptionOptionVAT) {
-		this.descriptionOptionVAT = descriptionOptionVAT;
-	}
-
-	public String getNameAddedOption() {
-		return nameAddedOption;
-	}
-
-	public void setNameAddedOption(String nameAddedOption) {
-		this.nameAddedOption = nameAddedOption;
-	}
-
-	public double getPriceAddedOption() {
-		return priceAddedOption;
-	}
-
-	public void setPriceAddedOption(double priceAddedOption) {
-		this.priceAddedOption = priceAddedOption;
-	}
-
-	public String getDescriptionOptionAddedOption() {
-		return descriptionOptionAddedOption;
-	}
-
-	public void setDescriptionOptionAddedOption(String descriptionOptionAddedOption) {
-		this.descriptionOptionAddedOption = descriptionOptionAddedOption;
-	}
-
-	public String getNameAddedOption2() {
-		return nameAddedOption2;
-	}
-
-	public void setNameAddedOption2(String nameAddedOption2) {
-		this.nameAddedOption2 = nameAddedOption2;
-	}
-
-	public double getPriceAddedOption2() {
-		return priceAddedOption2;
-	}
-
-	public void setPriceAddedOption2(double priceAddedOption2) {
-		this.priceAddedOption2 = priceAddedOption2;
-	}
-
-	public String getDescriptionOptionAddedOption2() {
-		return descriptionOptionAddedOption2;
-	}
-
-	public void setDescriptionOptionAddedOption2(String descriptionOptionAddedOption2) {
-		this.descriptionOptionAddedOption2 = descriptionOptionAddedOption2;
-	}
-
-	public String getNameAddedOption3() {
-		return nameAddedOption3;
-	}
-
-	public void setNameAddedOption3(String nameAddedOption3) {
-		this.nameAddedOption3 = nameAddedOption3;
-	}
-
-	public double getPriceAddedOption3() {
-		return priceAddedOption3;
-	}
-
-	public void setPriceAddedOption3(double priceAddedOption3) {
-		this.priceAddedOption3 = priceAddedOption3;
-	}
-
-	public String getDescriptionOptionAddedOption3() {
-		return descriptionOptionAddedOption3;
-	}
-
-	public void setDescriptionOptionAddedOption3(String descriptionOptionAddedOption3) {
-		this.descriptionOptionAddedOption3 = descriptionOptionAddedOption3;
-	}
-
-	public String getAvailability() {
-		return availability;
-	}
-
-	public void setAvailability(String availability) {
-		this.availability = availability;
-	}
-
-	public String getAvailabilitySpecialCase() {
-		return availabilitySpecialCase;
-	}
-
-	public void setAvailabilitySpecialCase(String availabilitySpecialCase) {
-		this.availabilitySpecialCase = availabilitySpecialCase;
-	}
-
-	public String getTypeProduct() {
-		return typeProduct;
-	}
-
-	public void setTypeProduct(String typeProduct) {
-		this.typeProduct = typeProduct;
-	}
-
-	public boolean isShowOnSite() {
-		return showOnSite;
-	}
-
-	public void setShowOnSite(boolean showOnSite) {
-		this.showOnSite = showOnSite;
-	}
-
-	public boolean isShowOnHomePage() {
-		return showOnHomePage;
-	}
-
-	public void setShowOnHomePage(boolean showOnHomePage) {
-		this.showOnHomePage = showOnHomePage;
-	}
-
-	public boolean isShowOnLeftSide() {
-		return showOnLeftSide;
-	}
-
-	public void setShowOnLeftSide(boolean showOnLeftSide) {
-		this.showOnLeftSide = showOnLeftSide;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getPartNumber() {
-		return partNumber;
-	}
-
-	public void setPartNumber(String partNumber) {
-		this.partNumber = partNumber;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public double getPrise() {
-		return prise;
-	}
-
-	public void setPrise(double prise) {
-		this.prise = prise;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public String getDescriptionEng() {
-		return descriptionEng;
-	}
-
-	public void setDescriptionEng(String descriptionEng) {
-		this.descriptionEng = descriptionEng;
-	}
-
-	public List<String> getPathPictures() {
-		return pathPictures;
-	}
-
-	public void setPathPictures(List<String> pathPictures) {
-		this.pathPictures = pathPictures;
-	}
-
-	public String getServiceInformation() {
-		return serviceInformation;
-	}
-
-	public void setServiceInformation(String serviceInformation) {
-		this.serviceInformation = serviceInformation;
-	}
-	
-	public String getTypeInk() {
-		return typeInk;
-	}
-
-	public void setTypeInk(String typeInk) {
-		this.typeInk = typeInk;
+	public void setDescriptionInsuranceUkraineTransport(String descriptionInsuranceUkraineTransport) {
+		this.descriptionInsuranceUkraineTransport = descriptionInsuranceUkraineTransport;
 	}
 
 	@Override
