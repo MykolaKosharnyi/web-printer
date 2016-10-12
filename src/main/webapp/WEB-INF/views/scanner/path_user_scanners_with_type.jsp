@@ -11,10 +11,12 @@
 		<c:choose>
 			<c:when test="${tp.equals('Широкоформатные сканеры')}">	
 				<p><spring:message code="head.scanner.large_format_scanners"/></p>
+				<title><spring:message code="head.scanner.large_format_scanners"/></title>
 			</c:when>
 			
 			<c:when test="${tp.equals('3D Сканеры')}">	
 				<p><spring:message code="head.scanner.3d_scanners"/></p>
+				<title><spring:message code="head.scanner.3d_scanners"/></title>
 			</c:when>
 		</c:choose>
 	</c:forEach>

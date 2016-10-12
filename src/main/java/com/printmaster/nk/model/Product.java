@@ -10,9 +10,11 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+@MappedSuperclass
 public abstract class Product implements Serializable{
 	
 	private static final long serialVersionUID = 3031695775597440046L;

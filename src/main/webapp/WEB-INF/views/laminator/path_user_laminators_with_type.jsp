@@ -11,12 +11,15 @@
 		<c:choose>
 			<c:when test="${tp.equals('Горячего ламинирования')}">	
 				<p><spring:message code="head.laminator.hot_lamination"/></p>
+				<title><spring:message code="head.laminator.hot_lamination"/></title>
 			</c:when>
 			<c:when test="${tp.equals('Холодного ламинирования')}">
 				<p><spring:message code="head.laminator.cold_laminating"/></p>
+				<title><spring:message code="head.laminator.cold_laminating"/></title>
 			</c:when>
 			<c:when test="${tp.equals('Жидкостные')}">
 				<p><spring:message code="head.laminator.liquid"/></p>
+				<title><spring:message code="head.laminator.liquid"/></title>
 			</c:when>
 		</c:choose>
 	</c:forEach>

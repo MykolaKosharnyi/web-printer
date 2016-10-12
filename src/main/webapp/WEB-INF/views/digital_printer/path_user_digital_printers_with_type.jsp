@@ -12,14 +12,17 @@
 		
 			<c:when test="${tp.equals('Полноцветное лазерное оборудование')}">
 				<p><spring:message code="head.digital_printer.full_color_laser_printers"/></p>
+				<title><spring:message code="head.digital_printer.full_color_laser_printers"/></title>
 			</c:when>
 			
 			<c:when test="${tp.equals('Монохромное лазерное оборудование')}">
 				<p><spring:message code="head.digital_printer.monochrome_laser_printers"/></p>
+				<title><spring:message code="head.digital_printer.monochrome_laser_printers"/></title>
 			</c:when>
 			
 			<c:when test="${tp.equals('Полноцветное струйное оборудование')}">
 				<p><spring:message code="head.digital_printer.full_color_inkjet_printers"/></p>
+				<title><spring:message code="head.digital_printer.full_color_inkjet_printers"/></title>
 			</c:when>
 			
 		</c:choose>

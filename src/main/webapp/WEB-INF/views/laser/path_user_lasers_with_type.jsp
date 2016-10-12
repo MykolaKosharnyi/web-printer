@@ -11,21 +11,27 @@
 		<c:choose>
 			<c:when test="${tp.equals('Газовые лазеры СО2')}">
 				<p><spring:message code="head.laser.CO2_gas_lasers"/></p>
+				<title><spring:message code="head.laser.CO2_gas_lasers"/></title>
 			</c:when>
 			<c:when test="${tp.equals('Твердотельные лазеры')}">
 				<p><spring:message code="head.laser.solid_state_lasers"/></p>
+				<title><spring:message code="head.laser.solid_state_lasers"/></title>
 			</c:when>
 			<c:when test="${tp.equals('Для обработки метала')}">
 				<p><spring:message code="head.laser.for_the_treatment_of_metal"/></p>
+				<title><spring:message code="head.laser.for_the_treatment_of_metal"/></title>
 			</c:when>
 			<c:when test="${tp.equals('С диодной накачкой')}">
 				<p><spring:message code="head.laser.diode_pumped"/></p>
+				<title><spring:message code="head.laser.diode_pumped"/></title>
 			</c:when>
 			<c:when test="${tp.equals('Оптоволоконные лазеры')}">
 				<p><spring:message code="head.laser.fiber_lasers"/></p>
+				<title><spring:message code="head.laser.fiber_lasers"/></title>
 			</c:when>
 			<c:when test="${tp.equals('Плазменные лазеры')}">
 				<p><spring:message code="head.laser.plasma_lasers"/></p>
+				<title><spring:message code="head.laser.plasma_lasers"/></title>
 			</c:when>
 		</c:choose>
 	</c:forEach>

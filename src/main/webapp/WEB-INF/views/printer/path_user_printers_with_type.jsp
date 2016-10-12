@@ -11,27 +11,35 @@
 		<c:choose>
 			<c:when test="${tp.equals('Сольвентный')}">
 				<p><spring:message code="head.printer.dissolving"/></p>
+				<title><spring:message code="head.printer.dissolving"/></title>
 			</c:when>
 			<c:when test="${tp.equals('Экосольвентный')}">
 				<p><spring:message code="head.printer.ecosolvent"/></p>
+				<title><spring:message code="head.printer.ecosolvent"/></title>
 			</c:when>
 			<c:when test="${tp.equals('UV рулонный')}">
 				<p><spring:message code="head.printer.uv_roll"/></p>
+				<title><spring:message code="head.printer.uv_roll"/></title>
 			</c:when>
 			<c:when test="${tp.equals('UV плоскопечатный')}">
 				<p><spring:message code="head.printer.flatbed"/></p>
+				<title><spring:message code="head.printer.flatbed"/></title>
 			</c:when>
 			<c:when test="${tp.equals('Сублимационный')}">
 				<p><spring:message code="head.printer.sublimation"/></p>
+				<title><spring:message code="head.printer.sublimation"/></title>
 			</c:when>
 			<c:when test="${tp.equals('Текстильный')}">
 				<p><spring:message code="head.printer.textile"/></p>
+				<title><spring:message code="head.printer.textile"/></title>
 			</c:when>
 			<c:when test="${tp.equals('Водный/Пигментный')}">
 				<p><spring:message code="head.printer.water_pigment"/></p>
+				<title><spring:message code="head.printer.water_pigment"/></title>
 			</c:when>
 			<c:when test="${tp.equals('САПР/ГИС')}">
 				<p><spring:message code="head.printer.SAPR-GIS"/></p>
+				<title><spring:message code="head.printer.SAPR-GIS"/></title>
 			</c:when>
 		</c:choose>
 	</c:forEach>

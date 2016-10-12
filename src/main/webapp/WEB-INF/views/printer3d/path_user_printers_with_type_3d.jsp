@@ -11,24 +11,31 @@
 		<c:choose>
 			<c:when test="${tp.equals('Экструдные FDM')}">
 				<p><spring:message code="head.3dprinter.FDM-extruder"/></p>
+				<title><spring:message code="head.3dprinter.FDM-extruder"/></title>
 			</c:when>
 			<c:when test="${tp.equals('Фото печать Polyjet')}">
 				<p><spring:message code="head.3dprinter.photo_printing_polyjet"/></p>
+				<title><spring:message code="head.3dprinter.photo_printing_polyjet"/></title>
 			</c:when>
 			<c:when test="${tp.equals('Лазерного спекания LENS')}">
 				<p><spring:message code="head.3dprinter.laser_sintering_LENS"/></p>
+				<title><spring:message code="head.3dprinter.laser_sintering_LENS"/></title>
 			</c:when>
 			<c:when test="${tp.equals('Ламинация LOM')}">
 				<p><spring:message code="head.3dprinter.lamination_LOM"/></p>
+				<title><spring:message code="head.3dprinter.lamination_LOM"/></title>
 			</c:when>
 			<c:when test="${tp.equals('Стереолитография SL')}">
 				<p><spring:message code="head.3dprinter.stereolithography_SL"/></p>
+				<title><spring:message code="head.3dprinter.stereolithography_SL"/></title>
 			</c:when>
 			<c:when test="${tp.equals('Лазерное спекание LS')}">
 				<p><spring:message code="head.3dprinter.laser_sintering_LS"/></p>
+				<title><spring:message code="head.3dprinter.laser_sintering_LS"/></title>
 			</c:when>
 			<c:when test="${tp.equals('Порошкового склеивания 3DP')}">
 				<p><spring:message code="head.3dprinter.powder_bonding_3DP"/></p>
+				<title><spring:message code="head.3dprinter.powder_bonding_3DP"/></title>
 			</c:when>
 		</c:choose>
 	</c:forEach>
