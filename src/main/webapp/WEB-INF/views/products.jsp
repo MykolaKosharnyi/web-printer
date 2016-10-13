@@ -167,6 +167,24 @@ $(function(){
 	   $(this).attr('id', currImg);
 	});
 	
+	$("#top_result_of_search, #out_result_of_search").on('mouseenter', '.ribbon-search-wrapper-left, .ribbon-search-wrapper-right', function() {
+		var currImg = $(this).parent('.inner_div_product').parent('.products').find('.inner_div_product a.link').find('img').attr('src');
+	  	var needImg = $(this).parent('.inner_div_product').parent('.products').find('.inner_div_product a.link').attr('id');
+	  
+	  $(this).parent('.inner_div_product').parent('.products').find('.inner_div_product a.link').find('img')
+		.attr('src', needImg);
+	  $(this).parent('.inner_div_product').parent('.products').find('.inner_div_product a.link').attr('id', currImg);
+	});
+	
+	$("#top_result_of_search, #out_result_of_search").on('mouseleave', '.ribbon-search-wrapper-left, .ribbon-search-wrapper-right', function() {
+		var currImg = $(this).parent('.inner_div_product').parent('.products').find('.inner_div_product a.link').find('img').attr('src');
+	  	var needImg = $(this).parent('.inner_div_product').parent('.products').find('.inner_div_product a.link').attr('id');
+	  
+	  $(this).parent('.inner_div_product').parent('.products').find('.inner_div_product a.link').find('img')
+		.attr('src', needImg);
+	  $(this).parent('.inner_div_product').parent('.products').find('.inner_div_product a.link').attr('id', currImg);
+	});
+	
 	/* for changing height of name and price after hovering on product field */
 	$("#top_result_of_search, #out_result_of_search").on('mouseenter', '.products', function() {
 		var name_and_price_block = $(this).find('.name_price_cart_block');
@@ -218,7 +236,23 @@ $(document).ready(function() {
         			        							"top": "2px",
         			        							"right": "10px",
         			        							"position": "absolute"
-        			        						})))	    	                		
+        			        						})))	  
+    			        						
+        			        		if("${type}"=='printer' && product.ratingOverallRating > 0){
+        			        			innterDiv.append($('<div/>').addClass('name_price_cart_block_hidden')
+        			        					.append($('<div/>').addClass('rating_block')
+        			        							.append($('<p/>').css( "font-weight", "bold" ).text("Общая оценка:"))
+        			        							.append($('<div/>').css( "width", "100px" ).css( "float", "left" )
+        			        									.append($('<ul/>').addClass('rating_average clearfix')
+        			        											.append($('<li/>').addClass('current').css( "width", product.ratingOverallRating * 20 + "%" )
+        			        													.append($('<span/>').addClass('star1').attr("title", "Плохо")))
+        			        											.append($('<li/>').append($('<span/>').addClass('star2').attr("title", "Ниже среднего")))
+        			        											.append($('<li/>').append($('<span/>').addClass('star3').attr("title", "Средне")))
+        			        											.append($('<li/>').append($('<span/>').addClass('star4').attr("title", "Хорошо")))
+        			        											.append($('<li/>').append($('<span/>').addClass('star4').attr("title", "Очень хорошо")))
+        			        									))))
+        			        		}
+        			        						
 
 	                				if(product.leftSharesLink!=null && product.leftSharesLink!=""){
 	                					innterDiv.append($('<div/>').addClass("ribbon-search-wrapper-left")

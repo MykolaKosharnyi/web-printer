@@ -14,13 +14,6 @@ $(function(){
 		$('#search_area_by_phrase .close_result_of_search').remove();
 	});
 	
-/*	$('#search_area_by_phrase .search_by_phrase_button').on("click", function(){
-		$('#search_area_by_phrase .result_of_search_by_phrase').remove();
-		$('#search_area_by_phrase .close_result_of_search').remove();
-		
-		searchByPhrase("all", $( "input#search_input_by_phrase" ).val());
-	});*/
-	
 });
 	function searchByPhraseIncludeType(typeProduct){
 		$('#search_area_by_phrase .result_of_search_by_phrase').remove();
