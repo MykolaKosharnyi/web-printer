@@ -421,20 +421,31 @@ border-radius: 0 0 3px 3px;
 
 #search_area_by_phrase .close_result_of_search{
 	position: absolute;
-	height: 20px;
-	width: 30px;
-	background: grey;
+	height: auto;
+	width: auto;
+	background: white;
 	top: 55px;
 	right: -35px;
 	z-index: 90;
+	border-radius: 9px;
+}
+
+#search_area_by_phrase .close_result_of_search:hover{
+	
 }
 
 #search_area_by_phrase .close_result_of_search i{
 	color: #006080;
+	cursor: pointer;
+	font-size: 21px;
+	border-radius: 9px;
+	border: 1px #006080 solid;
+	padding: 7px;
 }
 
 #search_area_by_phrase .close_result_of_search i:hover{
 	color: red;
+	border: 1px red solid;
 }
 /*-------------------- Тело страницы --------------------*/
 

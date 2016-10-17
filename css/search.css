@@ -611,6 +611,7 @@ p.p_pue{
   position: absolute;
   top: -3px;
   right: -3px;
+  cursor: pointer;
 }
 
 .ribbon-search-wrapper-left {
@@ -620,6 +621,7 @@ p.p_pue{
 	position: absolute;
 	top: -3px;
 	left: -3px;
+	cursor: pointer;
 }
 
 .ribbon-search-right {
