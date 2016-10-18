@@ -35,9 +35,9 @@
     								<span class="sr-only">Toggle Dropdown</span>
   							</button>
   							<ul class="dropdown-menu">
-    								<li><a href="#"><i class="fa fa-usd"></i></a></li>
-    								<li><a href="#"><i class="fa fa-eur"></i></a></li>
-    								<li><a href="#">UA <i class="fa fa-money"></i></a></li>
+    								<li><a href="#"><i class="fa fa-usd"></i> ( ${ constants.dollar_in_grivna } грн. )</a></li>
+    								<li><a href="#"><i class="fa fa-eur"></i> ( ${ constants.euro_in_grivna } грн. )</a></li>
+    								<li><a href="#">&#8372;</a></li>
     							</ul>
     						</div>
 					</div>
