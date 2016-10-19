@@ -994,22 +994,3 @@ $(document).on("keydown", '"#cart input.quantity"', function(e){
 			  }   
 			  return str.replace(".", ",");
 	}
-
-	
-	function checkPrise(num){
-		if(num > 0.1){
-			  num = Math.round( num / 0.01 ) * 0.01;
-			  num = new Number(num).toFixed(2);   // особенности счета JavaScript ( x/100 не всегда = x*0.01 )
-			  var s = 0;
-			  var str = '';
-			  for( var i=num.toString().length-1; i>=0; i-- ) {
-			    s++;
-			    str = num.toString().charAt(i) + str;
-			    if(num.toString().charAt(i)=='.') s=0;
-			    if( s > 0 && !(s % 3) ) str  = " " + str;
-			  }   
-			  return "$" + str.replace(".", ",");
-		} else {
-			return "\u0443\u0442\u043E\u0447\u043D\u044F\u0439\u0442\u0435";
-		}
-	}
