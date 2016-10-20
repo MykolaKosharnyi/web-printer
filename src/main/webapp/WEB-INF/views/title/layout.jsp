@@ -348,6 +348,43 @@
 			<button class="button button-close">Закрыть</button>
 		</form>
 	</div>
+<script type="text/javascript">
+function checkPrise(num){
+	if(num > 0.1){
+		  var priceDollarInGrivna = new Number("${ constants.dollar_in_grivna }");
+		  var priceEuroInGrivna = new Number("${ constants.euro_in_grivna }");
+		
+		  //return name of currency
+		  var currency = readCookie('check_name_currency');
+		  
+		  //&#8364; - euro
+		  //&#8372; - gryvna
+		  if(currency==="grinva"){
+			  return '\u20B4' + convernPriceToString(num*priceDollarInGrivna).replace(".", ",");
+		  } else if (currency==="euro"){
+			  return '\u20ac' + convernPriceToString(num*priceDollarInGrivna/priceEuroInGrivna).replace(".", ",");
+		  } else {
+			  return "$" + convernPriceToString(num).replace(".", ",");
+		  }
 
+	} else {
+		return "\u0443\u0442\u043E\u0447\u043D\u044F\u0439\u0442\u0435";
+	}
+}
+
+function convernPriceToString(num){
+	  num = Math.round( num / 0.01 ) * 0.01;
+	  num = new Number(num).toFixed(2);   // особенности счета JavaScript ( x/100 не всегда = x*0.01 )
+	  var s = 0;
+	  var str = '';
+	  for( var i=num.toString().length-1; i>=0; i-- ) {
+	    s++;
+	    str = num.toString().charAt(i) + str;
+	    if(num.toString().charAt(i)=='.') s=0;
+	    if( s > 0 && !(s % 3) ) str  = " " + str;
+	  }   
+	  return str.indexOf(" ") == 0 ? str.substring(1) : str;
+}
+</script>
 </body>
 </html>

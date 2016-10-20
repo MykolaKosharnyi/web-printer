@@ -23,6 +23,7 @@
 					<div class="name_price_cart_block">
 						<a href="<c:url value='/${type}/${product.id}' />" class="products_title">${product.name}</a>
 						<div class="products_price"><span style="float: left;">Цена:&nbsp;</span> 
+							<input type="hidden" name="price_value" value="${product.prise}">
 				       		<c:if test="${product.prise < 0.1}"><a href="#callback" class="fancybox">уточняйте</a></c:if>
 							<c:if test="${!(product.prise < 0.1)}">					
 			   					<div>$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${product.prise}" /></div>
@@ -92,6 +93,7 @@
 				<div class="name_price_cart_block">
 					<a href="<c:url value='/${type}/${product.id}' />" class="products_title">${product.name}</a>
 					<div class="products_price"><span style="float: left;">Цена:&nbsp;</span> 
+						<input type="hidden" name="price_value" value="${product.prise}">
 			       		<c:if test="${product.prise < 0.1}"><a href="#callback" class="fancybox">уточняйте</a></c:if>
 						<c:if test="${!(product.prise < 0.1)}">					
 		   					<div>$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${product.prise}" /></div>

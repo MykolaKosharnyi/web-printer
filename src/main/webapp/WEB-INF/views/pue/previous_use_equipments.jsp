@@ -21,12 +21,13 @@
 		
 					<div class="name_price_cart_block">
 						<a href="<c:url value='/${product.type}/${product.id}' />" class="products_title">${product.name}</a>
-						<p class="products_price">Цена: 
+						<div class="products_price"><span style="float: left;">Цена:&nbsp;</span> 
+							<input type="hidden" name="price_value" value="${product.prise}"> 
 				       		<c:if test="${product.prise < 0.1}"><a href="#callback" class="fancybox">уточняйте</a></c:if>
 							<c:if test="${!(product.prise < 0.1)}">					
-			   					$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${product.prise}" />
+			   					<div>$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${product.prise}" /></div>
 							</c:if>
-		           		</p>
+		           		</div>
 		
 						<i class="fa fa-cart-plus add_to_cart" aria-hidden="true" style="padding-right: 5px; top: 2px; right: 10px; position: absolute;"
 							onclick="addToCart('${product.type}', ${product.id}, '${product.name}', '${product.prise}', '${product.pathPictures.get(0)}');"></i>
@@ -93,12 +94,13 @@
 					
 					<div class="name_price_cart_block">
 						<a href="<c:url value='/${product.type}/${product.id}' />" class="products_title">${product.name}</a>
-						<p class="products_price">Цена: 
+						<div class="products_price"><span style="float: left;">Цена:&nbsp;</span> 
+							<input type="hidden" name="price_value" value="${product.prise}">
 				       		<c:if test="${product.prise < 0.1}"><a href="#callback" class="fancybox">уточняйте</a></c:if>
 							<c:if test="${!(product.prise < 0.1)}">					
-			   					$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${product.prise}" />
+			   					<div>$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${product.prise}" /></div>
 							</c:if>
-		           		</p>
+		           		</div>
 		
 						<i class="fa fa-cart-plus add_to_cart" aria-hidden="true" style="padding-right: 5px; top: 2px; right: 10px; position: absolute;"
 						onclick="addToCart('${product.type}', ${product.id}, '${product.name}', '${product.prise}', '${product.pathPictures.get(0)}');"></i>
@@ -172,7 +174,7 @@ $(function(){
 	/* for changing height of name and price after hovering on product field */
 	$("#top_result_of_search, #out_result_of_search").on('mouseenter', '.products', function() {
 		var name_and_price_block = $(this).find('.name_price_cart_block');
-		name_and_price_block.outerHeight(name_and_price_block.find('a.products_title').outerHeight(true) + name_and_price_block.find('p.products_price').outerHeight(true) + 15);
+		name_and_price_block.outerHeight(name_and_price_block.find('a.products_title').outerHeight(true) + name_and_price_block.find('.products_price').outerHeight(true) + 15);
 	});
 	
 	$("#top_result_of_search, #out_result_of_search").on('mouseleave', '.products', function() {

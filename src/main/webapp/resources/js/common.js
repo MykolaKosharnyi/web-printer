@@ -488,6 +488,11 @@ $(document).ready(function() {
 	    return false;
 	});
 
+	$('.inner_div_product .name_price_cart_block .products_price div').each(function(){
+		var priceInDollars = $(this).parent('.products_price').find('input[type=hidden]').val();
+		$(this).empty().text(checkPrise(new Number(priceInDollars)));
+	});
+	
 });
 
 // block for changing price for current value
@@ -496,39 +501,9 @@ function convertPriceOnSite(name_currency, price_for_grivna){
 	createCookie("check_name_currency", name_currency, 10);
 	
 	$('.inner_div_product .name_price_cart_block .products_price div').each(function(){
-		$(this).empty().text(checkPrise(1000));
+		var priceInDollars = $(this).parent('.products_price').find('input[type=hidden]').val();
+		$(this).empty().text(checkPrise(new Number(priceInDollars)));
 	});
-}
-
-function checkPrise(num){
-	if(num > 0.1){
-		  num = Math.round( num / 0.01 ) * 0.01;
-		  num = new Number(num).toFixed(2);   // особенности счета JavaScript ( x/100 не всегда = x*0.01 )
-		  var s = 0;
-		  var str = '';
-		  for( var i=num.toString().length-1; i>=0; i-- ) {
-		    s++;
-		    str = num.toString().charAt(i) + str;
-		    if(num.toString().charAt(i)=='.') s=0;
-		    if( s > 0 && !(s % 3) ) str  = " " + str;
-		  }   
-		  
-		  //return name of currency
-		  var currency = readCookie('check_name_currency');
-		  
-		  //&#8364; - euro
-		  //&#8372; - gryvna
-		  if(currency==="grinva"){
-			  return '\u20B4' + str.replace(".", ",");
-		  } else if (currency==="euro"){
-			  return '\u20ac' + str.replace(".", ",");
-		  } else {
-			  return "$" + str.replace(".", ",");
-		  }
-
-	} else {
-		return "\u0443\u0442\u043E\u0447\u043D\u044F\u0439\u0442\u0435";
-	}
 }
 
 function createCookie(name,value,days) {
