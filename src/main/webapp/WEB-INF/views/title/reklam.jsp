@@ -8,7 +8,7 @@
 				
 		$.each(reklam, function(i, value) {
         	var outerDiv = $('<div/>');
-        				var slidePrice = $('<p/>').addClass("slide-price").append($('<div/>').text("Цена:").css(
+        				var slidePrice = $('<div/>').addClass("product_price").append($('<span/>').text("Цена:").css(
         						{
         							"float":"left",
         							"margin-right": "5px"
@@ -16,6 +16,7 @@
         				if(value.priceProduct < 0.1){
         					slidePrice.append($('<a/>').attr("href","#callback_reklam").addClass('fancybox').text("\u0443\u0442\u043E\u0447\u043D\u044F\u0439\u0442\u0435"));
         				} else {
+        					slidePrice.append($('<input/>').attr("type", "hidden").val(value.priceProduct));
         					slidePrice.append($('<div/>').text(checkPrise(value.priceProduct)));
         				}
         	

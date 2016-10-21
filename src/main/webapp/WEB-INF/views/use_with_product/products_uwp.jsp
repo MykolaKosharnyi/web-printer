@@ -22,7 +22,7 @@
 					<div class="name_price_cart_block">
 						<c:if test="${product.typeProduct!='Чернила для струйной печати'}">
 							<a href="<c:url value='/${type}/${product.id}' />" class="products_title">${product.name}</a>
-							<div class="products_price"><span style="float: left;">Цена:&nbsp;</span> 
+							<div class="product_price"><span style="float: left;">Цена:&nbsp;</span> 
 								<input type="hidden" name="price_value" value="${product.prise}">
 				       			<c:if test="${product.prise < 0.1}"><a href="#callback" class="fancybox">уточняйте</a></c:if>
 								<c:if test="${!(product.prise < 0.1)}">					
@@ -98,7 +98,7 @@
 				<div class="name_price_cart_block">
 					<c:if test="${product.typeProduct!='Чернила для струйной печати'}">
 						<a href="<c:url value='/${type}/${product.id}' />" class="products_title">${product.name}</a>
-						<div class="products_price"><span style="float: left;">Цена:&nbsp;</span> 
+						<div class="product_price"><span style="float: left;">Цена:&nbsp;</span> 
 							<input type="hidden" name="price_value" value="${product.prise}">
 				       		<c:if test="${product.prise < 0.1}"><a href="#callback" class="fancybox">уточняйте</a></c:if>
 							<c:if test="${!(product.prise < 0.1)}">					
@@ -183,7 +183,7 @@ $(function(){
 	/* for changing height of name and price after hovering on product field */
 	$("#top_result_of_search, #out_result_of_search").on('mouseenter', '.products', function() {
 		var name_and_price_block = $(this).find('.name_price_cart_block');
-		name_and_price_block.outerHeight(name_and_price_block.find('a.products_title').outerHeight(true) + name_and_price_block.find('.products_price').outerHeight(true) + 15);
+		name_and_price_block.outerHeight(name_and_price_block.find('a.products_title').outerHeight(true) + name_and_price_block.find('.product_price').outerHeight(true) + 15);
 		name_and_price_block.css('min-height','54px');
 	});
 	

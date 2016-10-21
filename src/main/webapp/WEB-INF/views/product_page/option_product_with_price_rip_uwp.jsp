@@ -20,9 +20,9 @@
 	        	<label class="add_price_title" for="optionInstallation_price">Инсталяция</label>
 	        </td>
 	        <td>
-				<label class="add_price_value">$<span><fmt:formatNumber type="number" 
+				<div class="add_price_value">$<span><fmt:formatNumber type="number" 
 						maxFractionDigits="2" minFractionDigits="2" value="${product.optionInstallation}" /></span>
-				</label>
+				</div>
 			</td>
 	        <td>${product.descriptionOptionInstallation}</td>
 	      </tr>
@@ -34,9 +34,9 @@
 	        	<label class="add_price_title" for="priceAddedOption_price">${product.nameAddedOption}</label>
 	        </td>
 	        <td>
-				<label class="add_price_value">$<span><fmt:formatNumber type="number" 
+				<div class="add_price_value">$<span><fmt:formatNumber type="number" 
 						maxFractionDigits="2" minFractionDigits="2" value="${product.priceAddedOption}" /></span>
-				</label>
+				</div>
 			</td>
 	        <td>${product.descriptionOptionAddedOption}</td>
 	      </tr>
@@ -48,9 +48,9 @@
 	        	<label class="add_price_title" for="priceAddedOption2_price">${product.nameAddedOption2}</label>
 	        </td>
 	        <td>
-				<label class="add_price_value">$<span><fmt:formatNumber type="number" 
+				<div class="add_price_value">$<span><fmt:formatNumber type="number" 
 						maxFractionDigits="2" minFractionDigits="2" value="${product.priceAddedOption2}" /></span>
-				</label>
+				</div>
 			</td>
 	        <td>${product.descriptionOptionAddedOption2}</td>
 	      </tr>
@@ -62,9 +62,9 @@
 	        	<label class="add_price_title" for="priceAddedOption3_price">${product.nameAddedOption3}</label>
 	        </td>
 	        <td>
-				<label class="add_price_value">$<span><fmt:formatNumber type="number" 
+				<div class="add_price_value">$<span><fmt:formatNumber type="number" 
 						maxFractionDigits="2" minFractionDigits="2" value="${product.priceAddedOption3}" /></span>
-				</label>
+				</div>
 			</td>
 	        <td>${product.descriptionOptionAddedOption3}</td>
 	      </tr>
@@ -76,9 +76,9 @@
 	        	<label class="add_price_title" for="optionVAT_price">НДС</label>
 	        </td>
 	        <td>
-	        	<label class="add_price_value" style="display:none;"><span><fmt:formatNumber type="number" 
+	        	<div class="add_price_value" style="display:none;"><span><fmt:formatNumber type="number" 
 			   			maxFractionDigits="2" minFractionDigits="2" value="${product.optionVAT}" /></span>
-				</label>
+				</div>
 	        </td>
 	        <td>${product.descriptionOptionVAT}</td>
 	      </tr>
@@ -91,9 +91,9 @@
 	        	<label class="add_price_title" style="margin-left:20px;" for="insuranceInternationalTransport_price">Страхование груза международная перевозка</label>
 	        </td>
 	        <td>
-				<label class="add_price_value">$ <span><fmt:formatNumber type="number" 
+				<div class="add_price_value">$ <span><fmt:formatNumber type="number" 
 						maxFractionDigits="2" minFractionDigits="2" value="${(product.insuranceInternationalTransport/100) * product.prise}" /></span>
-				</label>
+				</div>
 			</td>
 	        <td>${product.descriptionInsuranceInternationalTransport}</td>
 	      </tr>
@@ -106,9 +106,9 @@
 	        	<label class="add_price_title" style="margin-left:20px;" for="insuranceUkraineTransport_price">Страхование груза по Украине</label>
 	        </td>
 	        <td>
-				<label class="add_price_value">$ <span><fmt:formatNumber type="number" 
+				<div class="add_price_value">$ <span><fmt:formatNumber type="number" 
 						maxFractionDigits="2" minFractionDigits="2" value="${(product.insuranceUkraineTransport/100) * product.prise}" /></span>
-				</label>
+				</div>
 			</td>
 	        <td>${product.descriptionInsuranceUkraineTransport}</td>
 	      </tr>

@@ -488,8 +488,8 @@ $(document).ready(function() {
 	    return false;
 	});
 
-	$('.inner_div_product .name_price_cart_block .products_price div').each(function(){
-		var priceInDollars = $(this).parent('.products_price').find('input[type=hidden]').val();
+	$('.product_price div').each(function(){
+		var priceInDollars = $(this).parent('.product_price').find('input[type=hidden]').val();
 		$(this).empty().text(checkPrise(new Number(priceInDollars)));
 	});
 	
@@ -500,8 +500,8 @@ function convertPriceOnSite(name_currency, price_for_grivna){
 	
 	createCookie("check_name_currency", name_currency, 10);
 	
-	$('.inner_div_product .name_price_cart_block .products_price div').each(function(){
-		var priceInDollars = $(this).parent('.products_price').find('input[type=hidden]').val();
+	$('.product_price div').each(function(){
+		var priceInDollars = $(this).parent('.product_price').find('input[type=hidden]').val();
 		$(this).empty().text(checkPrise(new Number(priceInDollars)));
 	});
 }

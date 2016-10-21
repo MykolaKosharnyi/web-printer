@@ -47,7 +47,7 @@
 		var valueVAT = 1;
 		$(".option_product_with_price input.add_price:checked").each(function(){
 			//add to price or if it is VAT coeficient
-			var addPrice = new Number($(this).parent('td').parent('.block_product_price').find('td label.add_price_value span').text().replace(/\s/ig, '').replace(",", "."));
+			var addPrice = new Number($(this).parent('td').parent('.block_product_price').find('td .add_price_value span').text().replace(/\s/ig, '').replace(",", "."));
 			if($(this).val()!="НДС"){
 				currentPrice = currentPrice + addPrice;
 			} else {
@@ -113,14 +113,14 @@
 			// for changing style outer block if option checked
             var change_style = $(this).parent('td').parent('.block_product_price');
 			// value wich will be added or substraction from all price for the product
-			var addPrice = new Number($(this).parent('td').parent('.block_product_price').find('td label.add_price_value span').text().replace(/\s/ig, '').replace(",", "."));
+			var addPrice = new Number($(this).parent('td').parent('.block_product_price').find('td .add_price_value span').text().replace(/\s/ig, '').replace(",", "."));
 			
             if ($(this).prop( "checked" )) {
             	/* check if it not checked VAT option; because for VAT option different way to calculate price */
             	if($(this).val()!="НДС"){
                 	price_element.text(checkPriseProduct( calculatePriceIncludingVAT(currentPrice, addPrice, true) ));
             	} else {
-            		var valueVAT = new Number($(this).parent('td').parent('.block_product_price').find('td label.add_price_value span').text().replace(/\s/ig, '').replace(",", "."));
+            		var valueVAT = new Number($(this).parent('td').parent('.block_product_price').find('td .add_price_value span').text().replace(/\s/ig, '').replace(",", "."));
             		price_element.text(checkPriseProduct(currentPrice * valueVAT));
             	}
             	
@@ -132,7 +132,7 @@
             	if($(this).val()!="НДС"){
             		price_element.text(checkPriseProduct( calculatePriceIncludingVAT(currentPrice, addPrice, false) ));
             	} else {
-            		var valueVAT = new Number($(this).parent('td').parent('.block_product_price').find('td label.add_price_value span').text().replace(/\s/ig, '').replace(",", "."));
+            		var valueVAT = new Number($(this).parent('td').parent('.block_product_price').find('td .add_price_value span').text().replace(/\s/ig, '').replace(",", "."));
             		price_element.text(checkPriseProduct(currentPrice / valueVAT));
             	}
             	change_style.css('color', '#333');
@@ -258,7 +258,7 @@
 		function valueVAT(){
 			if($('input#optionVAT_price').prop( "checked" )){
 				return new Number($('input#optionVAT_price').parent('td').parent('.block_product_price')
-						.find('td label.add_price_value span').text().replace(/\s/ig, '').replace(",", "."));
+						.find('td .add_price_value span').text().replace(/\s/ig, '').replace(",", "."));
 			} else {
 				return new Number(1);
 			}

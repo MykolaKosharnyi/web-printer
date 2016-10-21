@@ -11,7 +11,7 @@
 	                	var outerDiv = $('<div/>').addClass("products");
 	                	var innterDiv = $('<div/>').addClass('inner_div_product');
 
-	                	var slidePrice = $('<p/>').addClass("products_price").append($('<div/>').text("Цена:").css(
+	                	var slidePrice = $('<div/>').addClass("product_price").append($('<span/>').text("Цена:").css(
         						{
         							"float":"left",
         							"margin-right": "5px"
@@ -19,6 +19,7 @@
         				if(product.prise < 0.1){
         					slidePrice.append($('<a/>').attr("href","#callback_reklam").addClass('fancybox').text("\u0443\u0442\u043E\u0447\u043D\u044F\u0439\u0442\u0435"));
         				} else {
+        					slidePrice.append($('<input/>').attr("type", "hidden").val(product.prise));
         					slidePrice.append($('<div/>').text(checkPrise(product.prise)));
         				}
 	                	
