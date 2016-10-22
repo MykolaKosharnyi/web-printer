@@ -8,7 +8,7 @@
 		<c:if test="${product.prise < 0.1}"><a href="#callback" class="fancybox">уточняйте</a></c:if>
 		<c:if test="${!(product.prise < 0.1)}">						
 			<div class="product_price">
-				<input name="price_value" value="20000.0" type="hidden">				
+				<input name="price_value" value="${product.prise}" type="hidden">				
 			   	<div>$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${product.prise}" /></div>
 		    </div>
 		</c:if>

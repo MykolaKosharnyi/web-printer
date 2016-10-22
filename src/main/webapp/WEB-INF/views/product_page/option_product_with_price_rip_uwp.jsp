@@ -20,8 +20,9 @@
 	        	<label class="add_price_title" for="optionInstallation_price">Инсталяция</label>
 	        </td>
 	        <td>
-				<div class="add_price_value">$<span><fmt:formatNumber type="number" 
-						maxFractionDigits="2" minFractionDigits="2" value="${product.optionInstallation}" /></span>
+				<div class="product_price">
+					<input name="price_value" value="${product.optionInstallation}" type="hidden">				
+			   		<div>$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${product.optionInstallation}" /></div>
 				</div>
 			</td>
 	        <td>${product.descriptionOptionInstallation}</td>
@@ -34,8 +35,9 @@
 	        	<label class="add_price_title" for="priceAddedOption_price">${product.nameAddedOption}</label>
 	        </td>
 	        <td>
-				<div class="add_price_value">$<span><fmt:formatNumber type="number" 
-						maxFractionDigits="2" minFractionDigits="2" value="${product.priceAddedOption}" /></span>
+				<div class="product_price">
+					<input name="price_value" value="${product.priceAddedOption}" type="hidden">				
+			   		<div>$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${product.priceAddedOption}" /></div>
 				</div>
 			</td>
 	        <td>${product.descriptionOptionAddedOption}</td>
@@ -48,8 +50,9 @@
 	        	<label class="add_price_title" for="priceAddedOption2_price">${product.nameAddedOption2}</label>
 	        </td>
 	        <td>
-				<div class="add_price_value">$<span><fmt:formatNumber type="number" 
-						maxFractionDigits="2" minFractionDigits="2" value="${product.priceAddedOption2}" /></span>
+				<div class="product_price">
+					<input name="price_value" value="${product.priceAddedOption2}" type="hidden">				
+			   		<div>$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${product.priceAddedOption2}" /></div>	
 				</div>
 			</td>
 	        <td>${product.descriptionOptionAddedOption2}</td>
@@ -62,8 +65,9 @@
 	        	<label class="add_price_title" for="priceAddedOption3_price">${product.nameAddedOption3}</label>
 	        </td>
 	        <td>
-				<div class="add_price_value">$<span><fmt:formatNumber type="number" 
-						maxFractionDigits="2" minFractionDigits="2" value="${product.priceAddedOption3}" /></span>
+				<div class="product_price">
+					<input name="price_value" value="${product.priceAddedOption3}" type="hidden">				
+			   		<div>$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${product.priceAddedOption3}" /></div>
 				</div>
 			</td>
 	        <td>${product.descriptionOptionAddedOption3}</td>
@@ -76,8 +80,9 @@
 	        	<label class="add_price_title" for="optionVAT_price">НДС</label>
 	        </td>
 	        <td>
-	        	<div class="add_price_value" style="display:none;"><span><fmt:formatNumber type="number" 
-			   			maxFractionDigits="2" minFractionDigits="2" value="${product.optionVAT}" /></span>
+	        	<div class="product_price" style="display:none;">
+			   		<input name="price_value" value="${product.optionVAT}" type="hidden">				
+			   		<div>$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${product.optionVAT}" /></div>
 				</div>
 	        </td>
 	        <td>${product.descriptionOptionVAT}</td>
@@ -91,8 +96,9 @@
 	        	<label class="add_price_title" style="margin-left:20px;" for="insuranceInternationalTransport_price">Страхование груза международная перевозка</label>
 	        </td>
 	        <td>
-				<div class="add_price_value">$ <span><fmt:formatNumber type="number" 
-						maxFractionDigits="2" minFractionDigits="2" value="${(product.insuranceInternationalTransport/100) * product.prise}" /></span>
+				<div class="product_price">
+					<input name="price_value" value="${(product.insuranceInternationalTransport/100) * product.prise}" type="hidden">				
+			   		<div>$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${(product.insuranceInternationalTransport/100) * product.prise}" /></div>
 				</div>
 			</td>
 	        <td>${product.descriptionInsuranceInternationalTransport}</td>
@@ -106,8 +112,9 @@
 	        	<label class="add_price_title" style="margin-left:20px;" for="insuranceUkraineTransport_price">Страхование груза по Украине</label>
 	        </td>
 	        <td>
-				<div class="add_price_value">$ <span><fmt:formatNumber type="number" 
-						maxFractionDigits="2" minFractionDigits="2" value="${(product.insuranceUkraineTransport/100) * product.prise}" /></span>
+				<div class="product_price">	
+					<input name="price_value" value="${(product.insuranceUkraineTransport/100) * product.prise}" type="hidden">				
+			   		<div>$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${(product.insuranceUkraineTransport/100) * product.prise}" /></div>
 				</div>
 			</td>
 	        <td>${product.descriptionInsuranceUkraineTransport}</td>
@@ -136,13 +143,18 @@
 						        	<label class="add_price_delivery_title" for="ukraineDelivery_price">По Украине</label>
 						        </td>
 						        <td>
-							    	<label class="add_price_delivery_value">$ <span><fmt:formatNumber type="number" 
-											maxFractionDigits="2" minFractionDigits="2" value="${
+									<div class="product_price">
+										<input name="price_value" value="${
 											(product.ukraineDeliveryPriceSize ? product.deliveryWidth * product.deliveryHeight * 
 												product.deliveryDepth * constants.price_ukraine_size : 0) + 
 												(product.ukraineDeliveryPriceWeight ? product.deliveryWeight * constants.price_ukraine_weight : 0)
-											}" /></span>
-									</label>
+											}" type="hidden">				
+								   		<div>$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${
+											(product.ukraineDeliveryPriceSize ? product.deliveryWidth * product.deliveryHeight * 
+												product.deliveryDepth * constants.price_ukraine_size : 0) + 
+												(product.ukraineDeliveryPriceWeight ? product.deliveryWeight * constants.price_ukraine_weight : 0)
+											}" /></div>
+									</div>
 								</td>
 							</tr>
 				      	</c:if>
@@ -152,14 +164,19 @@
 								<td><input class="add_price_delivery" type="radio" name="delivery" value="По Киеву" id="kyivDelivery_price">
 						        	<label class="add_price_delivery_title" for="kyivDelivery_price">По Киеву</label>
 						        </td>
-						        <td>
-							    	<label class="add_price_delivery_value">$ <span><fmt:formatNumber type="number" 
-											maxFractionDigits="2" minFractionDigits="2" value="${
+						        <td>		
+									<div class="product_price">
+										<input name="price_value" value="${
 											(product.kyivDeliveryPriceSize ? product.deliveryWidth * product.deliveryHeight * 
 												product.deliveryDepth * constants.price_kyiv_size : 0) + 
 												(product.kyivDeliveryPriceWeight ? product.deliveryWeight * constants.price_kyiv_weight : 0)
-											}" /></span>
-									</label>
+											}" type="hidden">				
+								   		<div>$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${
+											(product.kyivDeliveryPriceSize ? product.deliveryWidth * product.deliveryHeight * 
+												product.deliveryDepth * constants.price_kyiv_size : 0) + 
+												(product.kyivDeliveryPriceWeight ? product.deliveryWeight * constants.price_kyiv_weight : 0)
+											}" /></div>
+									</div>
 								</td>
 							</tr>
 				      	</c:if>
@@ -621,10 +638,9 @@
 									</span>
 
 								</td>
-								<td class="add_price_value">
-									<label>$ <span><fmt:formatNumber type="number" maxFractionDigits="2" 
-										minFractionDigits="2" value="${product.variant3Paint}" /></span>
-									</label>
+								<td class="product_price">
+									<input name="price_value" value="${product.prise}" type="hidden">				
+			   						<div>$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${product.variant3Paint}" /></div>
 								</td>
 							</tr>
 						</c:if>
@@ -640,9 +656,10 @@
 	<tr class="output_result_of_option">
 		<td style="vertical-align: middle;">Общая стоимость:</td>
         <td style="vertical-align: middle;">
-        	<label class="total_price">$<span><fmt:formatNumber type="number" 
-			   	maxFractionDigits="2" minFractionDigits="2" value="${product.prise}" /></span>
-			</label>
+        	<div class="total_price product_price">
+			   	<input name="price_value" value="${product.prise}" type="hidden">				
+			   	<div>$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${product.prise}" /></div>
+			</div>
         </td>
         <td>
         	<i class="fa fa-cart-plus add_to_cart" aria-hidden="true" style="top: 0px; right: -30px; float: none;"
