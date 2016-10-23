@@ -83,15 +83,16 @@
 		$(".option_product_with_price input.add_price_paint").each(function(){
 			
 			var priceForOne = new Number($(this).parent('td').parent('.block_product_price')
-					.find('td.paint_price label span').text().replace(/\s/ig, '').replace(",", "."));
+					.find('td.paint_price .product_price input[type=hidden]').val());
 			var quantity = new Number($(this).parent('td').parent('.block_product_price')
 					.find('td input.quantity_paint').val());
 			
-			var addAllPaintPrice = $(this).parent('td').parent('.block_product_price').find('td.add_price_value label span');
-			addAllPaintPrice.text(checkPriseProduct(priceForOne * quantity));
+			var addAllPaintPrice = $(this).parent('td').parent('.block_product_price').find('td.add_price_value .product_price');
+			addAllPaintPrice.find('input[type=hidden]').val(priceForOne * quantity);
+			addAllPaintPrice.find('div').text(checkPrise(priceForOne * quantity));
 	
 			if($(this).prop( "checked" )){
-				var addPricePaint = new Number(addAllPaintPrice.text().replace(/\s/ig, '').replace(",", "."));
+				var addPricePaint = new Number(addAllPaintPrice.find('input[type=hidden]').val());
 				
 				currentPrice = currentPrice + addPricePaint;
 				
@@ -240,7 +241,7 @@
 			// for changing style outer block if option checked
             var change_style = $(this).parent('td').parent('.block_product_price');
 			// value wich will be added or substraction from all price for the product
-			var addPrice = new Number($(this).parent('td').parent('tr').find('td.add_price_value span').text().replace(/\s/ig, '').replace(",", "."));
+			var addPrice = new Number($(this).parent('td').parent('tr').find('td.add_price_value .product_price input[type=hidden]').val());
 			
             if ($(this).prop( "checked" )) {
 			
@@ -318,8 +319,8 @@
 	     	
 	        var quantity_element_val = $(this).parent('td').find('input.quantity_paint').val();
 	        var quantity_numb = new Number(quantity_element_val);
-			var price_with_quantity =  $(this).parent('td').parent('tr').find('td.product_price').find('input[type=hidden]');
-			var price = new Number($(this).parent('td').parent('tr').find('td.paint_price').find('span').text().replace(/\s/ig, '').replace(",", "."));
+			var price_with_quantity =  $(this).parent('td').parent('tr').find('td.add_price_value .product_price');
+			var price = new Number($(this).parent('td').parent('tr').find('td.paint_price .product_price input[type=hidden]').val());
 			
 			if (quantity_numb==1) {
 				$(this).css('color','grey');
@@ -333,7 +334,9 @@
 
 			} else {
 				$(this).parent('td').find('input.quantity_paint').val(quantity_numb-1);
-				price_with_quantity.text(checkPriseProduct(price * (quantity_numb - 1)));
+
+				price_with_quantity.find('input[type=hidden]').val( price * (quantity_numb - 1) );
+				price_with_quantity.find('div').text(checkPrise( price * (quantity_numb - 1) ));
 				
 				/* set new price for all products */
 				/* first check if our input checked, after it we will know add price to allPrice or not */
@@ -358,8 +361,8 @@
 	     	
 	        var quantity_element_val = $(this).parent('td').find('input.quantity_paint').val();
 	        var quantity_numb = new Number(quantity_element_val);
-			var price_with_quantity =  $(this).parent('td').parent('tr').find('td.product_price').find('input[type=hidden]');
-			var price = new Number($(this).parent('td').parent('tr').find('td.paint_price').find('span').text().replace(/\s/ig, '').replace(",", "."));
+			var price_with_quantity =  $(this).parent('td').parent('tr').find('td.add_price_value .product_price');
+			var price = new Number($(this).parent('td').parent('tr').find('td.paint_price .product_price input[type=hidden]').val());
 			
 			if(quantity_numb==1){
 				var dec_v = $(this).parent('td').find('.dec_value_paint');
@@ -373,7 +376,9 @@
 			} 
 
 			$(this).parent('td').find('input.quantity_paint').val(quantity_numb + 1);
-			price_with_quantity.text(checkPriseProduct(price * (quantity_numb + 1)));
+			
+			price_with_quantity.find('input[type=hidden]').val( price * (quantity_numb + 1) );
+			price_with_quantity.find('div').text(checkPrise( price * (quantity_numb + 1) ));
 			
 			/* set new price for all products */
 			/* first check if our input checked, after it we will know add price to allPrice or not */
@@ -386,19 +391,5 @@
 			
 	    });
 	});
-
-	function checkPriseProduct(num){
-		  num = Math.round( num / 0.01 ) * 0.01;
-		  num = new Number(num).toFixed(2);   // особенности счета JavaScript ( x/100 не всегда = x*0.01 )
-		  var s = 0;
-		  var str = '';
-		  for( var i=num.toString().length-1; i>=0; i-- ) {
-		    s++;
-		    str = num.toString().charAt(i) + str;
-		    if(num.toString().charAt(i)=='.') s=0;
-		    if( s > 0 && !(s % 3) ) str  = " " + str;
-		  }   
-		  return str.replace(".", ",");
-	}
 	
 </script>

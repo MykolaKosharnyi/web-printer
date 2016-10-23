@@ -218,9 +218,10 @@
 						        	<label class="add_price_paint_title" for="cyanPaint_price">Cyan</label>
 						        </td>
 						        <td class="paint_price">
-									<label>$ <span><fmt:formatNumber type="number" 
-											maxFractionDigits="2" minFractionDigits="2" value="${product.cyanPaint}" /></span>
-									</label>
+									<div class="product_price">
+										<input name="price_value" value="${product.cyanPaint}" type="hidden">				
+								   		<div>$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${product.cyanPaint}" /></div>
+									</div>
 								</td>
 						        <td>
 
@@ -236,9 +237,10 @@
 
 								</td>
 								<td class="add_price_value">
-									<label>$ <span><fmt:formatNumber type="number" 
-											maxFractionDigits="2" minFractionDigits="2" value="${product.cyanPaint}" /></span>
-									</label>
+									<div class="product_price">
+										<input name="price_value" value="${product.cyanPaint}" type="hidden">				
+								   		<div>$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${product.cyanPaint}" /></div>
+									</div>
 								</td>
 							</tr>
 						</c:if>	
@@ -249,9 +251,10 @@
 						        	<label class="add_price_paint_title" for="MagentaPaint_price">Magenta</label>
 						        </td>
 						        <td class="paint_price">
-									<label>$ <span><fmt:formatNumber type="number" 
-											maxFractionDigits="2" minFractionDigits="2" value="${product.magentaPaint}" /></span>
-									</label>
+									<div class="product_price">
+										<input name="price_value" value="${product.magentaPaint}" type="hidden">				
+								   		<div>$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${product.magentaPaint}" /></div>
+									</div>
 								</td>
 						        <td>
 
@@ -267,9 +270,10 @@
 
 								</td>
 								<td class="add_price_value">
-									<label>$ <span><fmt:formatNumber type="number" 
-											maxFractionDigits="2" minFractionDigits="2" value="${product.magentaPaint}" /></span>
-									</label>
+									<div class="product_price">
+										<input name="price_value" value="${product.magentaPaint}" type="hidden">				
+								   		<div>$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${product.magentaPaint}" /></div>
+									</div>
 								</td>
 							</tr>
 						</c:if>	
@@ -280,9 +284,10 @@
 						        	<label class="add_price_paint_title" for="YellowPaint_price">Yellow</label>
 						        </td>
 						        <td class="paint_price">
-									<label>$ <span><fmt:formatNumber type="number" 
-											maxFractionDigits="2" minFractionDigits="2" value="${product.yellowPaint}" /></span>
-									</label>
+									<div class="product_price">
+										<input name="price_value" value="${product.yellowPaint}" type="hidden">				
+								   		<div>$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${product.yellowPaint}" /></div>
+									</div>
 								</td>
 						        <td>
 
@@ -298,9 +303,10 @@
 
 								</td>
 								<td class="add_price_value">
-									<label>$ <span><fmt:formatNumber type="number" 
-											maxFractionDigits="2" minFractionDigits="2" value="${product.yellowPaint}" /></span>
-									</label>
+									<div class="product_price">
+										<input name="price_value" value="${product.yellowPaint}" type="hidden">				
+								   		<div>$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${product.yellowPaint}" /></div>
+									</div>
 								</td>
 							</tr>
 						</c:if>	
@@ -311,9 +317,10 @@
 						        	<label class="add_price_paint_title" for="BlackPaint_price">Black</label>
 						        </td>
 						        <td class="paint_price">
-									<label>$ <span><fmt:formatNumber type="number" 
-											maxFractionDigits="2" minFractionDigits="2" value="${product.blackPaint}" /></span>
-									</label>
+									<div class="product_price">
+										<input name="price_value" value="${product.blackPaint}" type="hidden">				
+								   		<div>$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${product.blackPaint}" /></div>
+									</div>
 								</td>
 						        <td>
 
@@ -329,9 +336,10 @@
 
 								</td>
 								<td class="add_price_value">
-									<label>$ <span><fmt:formatNumber type="number" 
-											maxFractionDigits="2" minFractionDigits="2" value="${product.blackPaint}" /></span>
-									</label>
+									<div class="product_price">
+										<input name="price_value" value="${product.blackPaint}" type="hidden">				
+								   		<div>$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${product.blackPaint}" /></div>
+									</div>
 								</td>
 							</tr>
 						</c:if>
@@ -342,9 +350,10 @@
 						        	<label class="add_price_paint_title" for="LightCyanPaint_price">Light Cyan</label>
 						        </td>
 						        <td class="paint_price">
-									<label>$ <span><fmt:formatNumber type="number" 
-											maxFractionDigits="2" minFractionDigits="2" value="${product.lightCyanPaint}" /></span>
-									</label>
+									<div class="product_price">
+										<input name="price_value" value="${product.lightCyanPaint}" type="hidden">				
+								   		<div>$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${product.lightCyanPaint}" /></div>
+									</div>
 								</td>
 						        <td>
 
@@ -360,9 +369,10 @@
 
 								</td>
 								<td class="add_price_value">
-									<label>$ <span><fmt:formatNumber type="number" 
-											maxFractionDigits="2" minFractionDigits="2" value="${product.lightCyanPaint}" /></span>
-									</label>
+									<div class="product_price">
+										<input name="price_value" value="${product.lightCyanPaint}" type="hidden">				
+								   		<div>$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${product.lightCyanPaint}" /></div>
+									</div>
 								</td>
 							</tr>
 						</c:if>
@@ -373,9 +383,10 @@
 						        	<label class="add_price_paint_title" for="LightMagentaPaint_price">Light Magenta</label>
 						        </td>
 						        <td class="paint_price">
-									<label>$ <span><fmt:formatNumber type="number" 
-											maxFractionDigits="2" minFractionDigits="2" value="${product.lightMagentaPaint}" /></span>
-									</label>
+									<div class="product_price">
+										<input name="price_value" value="${product.lightMagentaPaint}" type="hidden">				
+								   		<div>$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${product.lightMagentaPaint}" /></div>
+									</div>
 								</td>
 						        <td>
 
@@ -391,9 +402,10 @@
 
 								</td>
 								<td class="add_price_value">
-									<label>$ <span><fmt:formatNumber type="number" 
-											maxFractionDigits="2" minFractionDigits="2" value="${product.lightMagentaPaint}" /></span>
-									</label>
+									<div class="product_price">
+										<input name="price_value" value="${product.lightMagentaPaint}" type="hidden">				
+								   		<div>$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${product.lightMagentaPaint}" /></div>
+									</div>
 								</td>
 							</tr>
 						</c:if>
@@ -404,9 +416,10 @@
 						        	<label class="add_price_paint_title" for="SolventPaint_price">Solvent</label>
 						        </td>
 						        <td class="paint_price">
-									<label>$ <span><fmt:formatNumber type="number" 
-											maxFractionDigits="2" minFractionDigits="2" value="${product.solventPaint}" /></span>
-									</label>
+									<div class="product_price">
+										<input name="price_value" value="${product.solventPaint}" type="hidden">				
+								   		<div>$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${product.solventPaint}" /></div>
+									</div>
 								</td>
 						        <td>
 
@@ -422,9 +435,10 @@
 
 								</td>
 								<td class="add_price_value">
-									<label>$ <span><fmt:formatNumber type="number" 
-											maxFractionDigits="2" minFractionDigits="2" value="${product.solventPaint}" /></span>
-									</label>
+									<div class="product_price">
+										<input name="price_value" value="${product.solventPaint}" type="hidden">				
+								   		<div>$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${product.solventPaint}" /></div>
+									</div>
 								</td>
 							</tr>
 						</c:if>
@@ -435,9 +449,10 @@
 						        	<label class="add_price_paint_title" for="MatteblackPaint_price">Matte black</label>
 						        </td>
 						        <td class="paint_price">
-									<label>$ <span><fmt:formatNumber type="number" 
-											maxFractionDigits="2" minFractionDigits="2" value="${product.matteBlackPaint}" /></span>
-									</label>
+									<div class="product_price">
+										<input name="price_value" value="${product.matteBlackPaint}" type="hidden">				
+								   		<div>$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${product.matteBlackPaint}" /></div>
+									</div>
 								</td>
 						        <td>
 
@@ -453,9 +468,10 @@
 
 								</td>
 								<td class="add_price_value">
-									<label>$ <span><fmt:formatNumber type="number" 
-											maxFractionDigits="2" minFractionDigits="2" value="${product.matteBlackPaint}" /></span>
-									</label>
+									<div class="product_price">
+										<input name="price_value" value="${product.matteBlackPaint}" type="hidden">				
+								   		<div>$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${product.matteBlackPaint}" /></div>
+									</div>
 								</td>
 							</tr>
 						</c:if>
@@ -466,9 +482,10 @@
 						        	<label class="add_price_paint_title" for="GrayPaint_price">Gray</label>
 						        </td>
 						        <td class="paint_price">
-									<label>$ <span><fmt:formatNumber type="number" 
-											maxFractionDigits="2" minFractionDigits="2" value="${product.grayPaint}" /></span>
-									</label>
+									<div class="product_price">
+										<input name="price_value" value="${product.grayPaint}" type="hidden">				
+								   		<div>$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${product.grayPaint}" /></div>
+									</div>
 								</td>
 						        <td>
 
@@ -484,9 +501,10 @@
 
 								</td>
 								<td class="add_price_value">
-									<label>$ <span><fmt:formatNumber type="number" 
-											maxFractionDigits="2" minFractionDigits="2" value="${product.grayPaint}" /></span>
-									</label>
+									<div class="product_price">
+										<input name="price_value" value="${product.grayPaint}" type="hidden">				
+								   		<div>$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${product.grayPaint}" /></div>
+									</div>
 								</td>
 							</tr>
 						</c:if>
@@ -497,9 +515,10 @@
 						        	<label class="add_price_paint_title" for="OrangePaint_price">Orange</label>
 						        </td>
 						        <td class="paint_price">
-									<label>$ <span><fmt:formatNumber type="number" 
-											maxFractionDigits="2" minFractionDigits="2" value="${product.orangePaint}" /></span>
-									</label>
+									<div class="product_price">
+										<input name="price_value" value="${product.orangePaint}" type="hidden">				
+								   		<div>$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${product.orangePaint}" /></div>
+									</div>
 								</td>
 						        <td>
 
@@ -515,9 +534,10 @@
 
 								</td>
 								<td class="add_price_value">
-									<label>$ <span><fmt:formatNumber type="number" 
-											maxFractionDigits="2" minFractionDigits="2" value="${product.orangePaint}" /></span>
-									</label>
+									<div class="product_price">
+										<input name="price_value" value="${product.orangePaint}" type="hidden">				
+								   		<div>$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${product.orangePaint}" /></div>
+									</div>
 								</td>
 							</tr>
 						</c:if>
@@ -528,9 +548,10 @@
 						        	<label class="add_price_paint_title" for="GreenPaint_price">Green</label>
 						        </td>
 						        <td class="paint_price">
-									<label>$ <span><fmt:formatNumber type="number" 
-											maxFractionDigits="2" minFractionDigits="2" value="${product.greenPaint}" /></span>
-									</label>
+									<div class="product_price">
+										<input name="price_value" value="${product.greenPaint}" type="hidden">				
+								   		<div>$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${product.greenPaint}" /></div>
+									</div>
 								</td>
 						        <td>
 
@@ -546,9 +567,10 @@
 
 								</td>
 								<td class="add_price_value">
-									<label>$ <span><fmt:formatNumber type="number" 
-											maxFractionDigits="2" minFractionDigits="2" value="${product.greenPaint}" /></span>
-									</label>
+									<div class="product_price">
+										<input name="price_value" value="${product.greenPaint}" type="hidden">				
+								   		<div>$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${product.greenPaint}" /></div>
+									</div>
 								</td>
 							</tr>
 						</c:if>
@@ -559,9 +581,10 @@
 						        	<label class="add_price_paint_title" for="variant1NamePaint_price">${product.variant1NamePaint}</label>
 						        </td>
 						        <td class="paint_price">
-									<label>$ <span><fmt:formatNumber type="number" 
-											maxFractionDigits="2" minFractionDigits="2" value="${product.variant1Paint}" /></span>
-									</label>
+									<div class="product_price">
+										<input name="price_value" value="${product.variant1Paint}" type="hidden">				
+								   		<div>$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${product.variant1Paint}" /></div>
+									</div>
 								</td>
 						        <td>
 
@@ -577,9 +600,10 @@
 
 								</td>
 								<td class="add_price_value">
-									<label>$ <span><fmt:formatNumber type="number" 
-											maxFractionDigits="2" minFractionDigits="2" value="${product.variant1Paint}" /></span>
-									</label>
+									<div class="product_price">
+										<input name="price_value" value="${product.variant1Paint}" type="hidden">				
+								   		<div>$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${product.variant1Paint}" /></div>
+									</div>
 								</td>
 							</tr>
 						</c:if>
@@ -590,9 +614,10 @@
 						        	<label class="add_price_paint_title" for="variant2NamePaint_price">${product.variant2NamePaint}</label>
 						        </td>
 						        <td class="paint_price">
-									<label>$ <span><fmt:formatNumber type="number" 
-											maxFractionDigits="2" minFractionDigits="2" value="${product.variant2Paint}" /></span>
-									</label>
+									<div class="product_price">
+										<input name="price_value" value="${product.variant2Paint}" type="hidden">				
+								   		<div>$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${product.variant2Paint}" /></div>
+									</div>
 								</td>
 						        <td>
 
@@ -608,9 +633,10 @@
 
 								</td>
 								<td class="add_price_value">
-									<label>$ <span><fmt:formatNumber type="number" 
-											maxFractionDigits="2" minFractionDigits="2" value="${product.variant2Paint}" /></span>
-									</label>
+									<div class="product_price">
+										<input name="price_value" value="${product.variant2Paint}" type="hidden">				
+								   		<div>$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${product.variant2Paint}" /></div>
+									</div>
 								</td>
 							</tr>
 						</c:if>
@@ -621,9 +647,10 @@
 						        	<label class="add_price_paint_title" for="variant3NamePaint_price">${product.variant3NamePaint}</label>
 						        </td>
 						        <td class="paint_price">
-									<label>$ <span><fmt:formatNumber type="number" 
-											maxFractionDigits="2" minFractionDigits="2" value="${product.variant3Paint}" /></span>
-									</label>
+									<div class="product_price">
+										<input name="price_value" value="${product.variant3Paint}" type="hidden">				
+								   		<div>$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${product.variant3Paint}" /></div>
+									</div>
 								</td>
 						        <td>
 
@@ -638,9 +665,11 @@
 									</span>
 
 								</td>
-								<td class="product_price">
-									<input name="price_value" value="${product.prise}" type="hidden">				
-			   						<div>$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${product.variant3Paint}" /></div>
+								<td class="add_price_value">
+									<div class="product_price">
+										<input name="price_value" value="${product.variant3Paint}" type="hidden">				
+								   		<div>$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${product.variant3Paint}" /></div>
+									</div>
 								</td>
 							</tr>
 						</c:if>
