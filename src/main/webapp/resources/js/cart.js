@@ -11,8 +11,7 @@ $(document).ready(function() {
 		$('#cart input.delivery_radio_name').val($(this).val());
 			
 		//save current price
-		$('#cart input.delivery_radio_value').val(new Number($(this).parent('td').parent('tr').find('td label.add_price_value span')
-				.text().replace(/\s/ig, '').replace(",", ".")));
+		$('#cart input.delivery_radio_value').val(new Number($(this).parent('td').parent('tr').find('td .product_price input[type=hidden]').val()));
 		
 	});
 	
@@ -108,9 +107,10 @@ function createTRInTableForProduct(product){
 									.attr("for", "" + option.name + "_" + typeProduct + "_" + idProduct)
 									.text(option.name)))
 					  .append($('<td/>')
-							  .append($('<label/>')
-									  .addClass('add_price_value')
-									  .html("$<span>" + checkPriseCart(option.price) + "<span/>")));
+							  .append($('<div/>').addClass("product_price")
+									  .append($('<input/>').attr("type", "hidden").val(option.price))
+									  .append($('<div/>').text(checkPrise(option.price)))
+									  ));
 					
 				} else {
 					
@@ -131,9 +131,10 @@ function createTRInTableForProduct(product){
 								.attr("for", "" + option.name + "_" + typeProduct + "_" + idProduct)
 								.text(option.name)))
 				  .append($('<td/>').css('display','none')
-						  .append($('<label/>')
-								  .addClass('add_price_value')
-								  .html("$<span>" + checkPriseCart(option.price) + "<span/>")));
+						  .append($('<div/>').addClass("product_price")
+								  .append($('<input/>').attr("type", "hidden").val(option.price))
+								  .append($('<div/>').text(checkPrise(option.price)))
+								  ));
 				}
 				
 			}
@@ -167,9 +168,10 @@ function createTRInTableForProduct(product){
 									.attr("for", "" + delivery.name + "_" + typeProduct + "_" + idProduct)
 									.text(delivery.name)))
 					  .append($('<td/>')
-							  .append($('<label/>')
-									  .addClass('add_price_value')
-									  .html("$<span>" + checkPriseCart(delivery.priceSize + delivery.priceWeight) + "<span/>")));
+							.append($('<div/>').addClass("product_price")
+									  .append($('<input/>').attr("type", "hidden").val(delivery.priceSize + delivery.priceWeight))
+									  .append($('<div/>').text(checkPrise(delivery.priceSize + delivery.priceWeight)))
+									  ));
 				
 			}
 			TRs.push(tr);
@@ -204,9 +206,11 @@ function createTRInTableForProduct(product){
 							.append($('<input/>').addClass('quantity_paint').val(paint.quantity).css('margin','0px 5px'))
 							.append($('<span/>').addClass('inc_value_paint').append($('<i/>').addClass('fa fa-plus').attr("aria-hidden", true))))
 					  .append($('<td/>')
-							 .append($('<label/>')
-									  .addClass('add_price_value')
-									  .html("$<span>" + checkPriseCart(paint.quantity*paint.price) + "<span/>")));
+							.append($('<div/>').addClass("product_price")
+									  .append($('<input/>').attr("type", "hidden").val(paint.quantity*paint.price))
+									  .append($('<div/>').text(checkPrise(paint.quantity*paint.price)))
+									  ));
+					
 				
 			}
 			TRs.push(tr);
@@ -423,13 +427,12 @@ $(document).on("keydown", '"#cart input.quantity"', function(e){
 			// VAT coeficient
 			var valueVAT = $('input#НДС_' + type + "_" + id ).prop( "checked" ) ?
 					new Number($('input#НДС_' + type + "_" + id).parent('td').parent('tr.block_product_price')
-							.find('td label.add_price_value span').text().replace(/\s/ig, '').replace(",", ".")) : new Number(1);				
+							.find('td .product_price input[type=hidden]').val()) : new Number(1);				
 			
 			// for changing style outer block if option checked
 	        var change_style = $(this).parent('td').parent('.block_product_price');
 			// value wich will be added or substraction from all price for the product
-			var addPrice = new Number($(this).parent('td').parent('tr.block_product_price').find('td label.add_price_value span')
-					.text().replace(/\s/ig, '').replace(",", "."));
+			var addPrice = new Number($(this).parent('td').parent('tr.block_product_price').find('td .product_price input[type=hidden]').val());
 			
 	        if ($(this).prop( "checked" )) {
 	        	/* check if it not checked VAT option; because for VAT option different way to calculate price */
@@ -485,13 +488,12 @@ $(document).on("keydown", '"#cart input.quantity"', function(e){
 			// VAT coeficient
 			var valueVAT = $('input#НДС_' + type + "_" + id ).prop( "checked" ) ?
 					new Number($('input#НДС_' + type + "_" + id).parent('td').parent('tr.block_product_price')
-							.find('td label.add_price_value span').text().replace(/\s/ig, '').replace(",", ".")) : new Number(1);				
+							.find('td .product_price input[type=hidden]').val()) : new Number(1);				
 			
 			// for changing style outer block if option checked
 			var change_style = $(this).parent('td').parent('.block_product_price');
 			// value wich will be added or substraction from all price for the product
-			var addPrice = new Number($(this).parent('td').parent('tr.block_product_price').find('td label.add_price_value span')
-				.text().replace(/\s/ig, '').replace(",", "."));
+			var addPrice = new Number($(this).parent('td').parent('tr.block_product_price').find('td .product_price input[type=hidden]').val());
 			
 			//previous checked element
 			var deliveryNameContainer = $('#cart input.delivery_radio_name');
@@ -589,13 +591,12 @@ $(document).on("keydown", '"#cart input.quantity"', function(e){
 			// VAT coeficient
 			var valueVAT = $('input#НДС_' + type + "_" + id ).prop( "checked" ) ?
 					new Number($('input#НДС_' + type + "_" + id).parent('td').parent('tr.block_product_price')
-							.find('td label.add_price_value span').text().replace(/\s/ig, '').replace(",", ".")) : new Number(1);				
+							.find('td .product_price input[type=hidden]').val()) : new Number(1);				
 			
 			// for changing style outer block if option checked
 			var change_style = $(this).parent('td').parent('.block_product_price');
 			// value wich will be added or substraction from all price for the product
-			var addPrice = new Number($(this).parent('td').parent('tr.block_product_price').find('td label.add_price_value span')
-				.text().replace(/\s/ig, '').replace(",", "."));
+			var addPrice = new Number($(this).parent('td').parent('tr.block_product_price').find('td .product_price input[type=hidden]').val());
 			
 	        if ($(this).prop( "checked" )) {
 	            price_element.text(checkPriseCart( calculatePriceIncludingVAT(price_with_quantity_and_option, addPrice, quantity_numb, valueVAT, true) ));
@@ -663,7 +664,7 @@ $(document).on("keydown", '"#cart input.quantity"', function(e){
 		function valueVAT(idVat){
 			if($('#cart input#' + idVat ).prop( "checked" )){
 				return new Number($('#cart input#' + idVat).parent('td').parent('tr.block_product_price')
-						.find('td label.add_price_value span').text().replace(/\s/ig, '').replace(",", "."));
+						.find('td .product_price input[type=hidden]').val());
 			} else {
 				return new Number(1);
 			}
@@ -769,7 +770,7 @@ $(document).on("keydown", '"#cart input.quantity"', function(e){
 			} else {
 				
 				//all price for current paint
-				var paint_price_node = $(this).parent('td').parent('.block_product_price').find('td label.add_price_value  span');
+				var paint_price_node = $(this).parent('td').parent('.block_product_price').find('td .product_price');
 				
 				/* change quantity paint on server */
 				var type = $(this).parent('td').parent('tr.block_product_price').parent('tbody').parent('table').parent('td.option_product_car')
@@ -782,16 +783,16 @@ $(document).on("keydown", '"#cart input.quantity"', function(e){
 				// VAT coeficient
 				var valueVAT = $('input#НДС_' + type + "_" + id ).prop( "checked" ) ?
 						new Number($('input#НДС_' + type + "_" + id).parent('td').parent('tr.block_product_price')
-								.find('td label.add_price_value span').text().replace(/\s/ig, '').replace(",", ".")) : new Number(1);
+								.find('td .product_price input[type=hidden]').val()) : new Number(1);
 				
 				
 				quantity_node.val(quantity-1);
 				
-				var oldPaintPrice = new Number( paint_price_node.text().replace(/\s/ig, '').replace(",", ".") );
-				var newPaintPrice = new Number( (oldPaintPrice/quantity) * (quantity-1) );
+				var priceForOne = new Number( paint_price_node.find('input[type=hidden]').val() );
+				var newPaintPrice = new Number( priceForOne * (quantity-1) );
 				
 				//set new value in 
-				paint_price_node.text(checkPriseCart(newPaintPrice));
+				paint_price_node.find('div').text(checkPrise(newPaintPrice));
 				
 				/* set new price for all products */
 				/* first check if our input checked, after it we will know add price to allPrice or not */
@@ -806,7 +807,7 @@ $(document).on("keydown", '"#cart input.quantity"', function(e){
 					
 					//set new value to product
 					price_product_node.text(checkPriseCart( calculatePriceIncludingVAT(new Number(price_product_node.text().replace(/\s/ig, '').replace(",", ".")),
-							oldPaintPrice - newPaintPrice, quantity_product, valueVAT, false) ));
+							priceForOne, quantity_product, valueVAT, false) ));
 					
 					/* set new total price including all products price */
 					totalPrice();
@@ -821,7 +822,7 @@ $(document).on("keydown", '"#cart input.quantity"', function(e){
 			var quantity = new Number(quantity_node.val());// quantity of paint
 			
 			//all price for current paint
-			var paint_price_node = $(this).parent('td').parent('.block_product_price').find('td label.add_price_value  span');
+			var paint_price_node = $(this).parent('td').parent('.block_product_price').find('td .product_price');
 			
 			/* change quantity paint on server */
 			var type = $(this).parent('td').parent('tr.block_product_price').parent('tbody').parent('table').parent('td.option_product_car')
@@ -834,7 +835,7 @@ $(document).on("keydown", '"#cart input.quantity"', function(e){
 			// VAT coeficient
 			var valueVAT = $('input#НДС_' + type + "_" + id ).prop( "checked" ) ?
 					new Number($('input#НДС_' + type + "_" + id).parent('td').parent('tr.block_product_price')
-							.find('td label.add_price_value span').text().replace(/\s/ig, '').replace(",", ".")) : new Number(1);
+							.find('td .product_price input[type=hidden]').val()) : new Number(1);
 			
 			if(quantity==1){
 				var dec_v = $(this).parent('td').parent('.block_product_price').find('td .dec_value_paint');
@@ -849,11 +850,11 @@ $(document).on("keydown", '"#cart input.quantity"', function(e){
 					
 				quantity_node.val(quantity+1);
 				
-				var oldPaintPrice = new Number( paint_price_node.text().replace(/\s/ig, '').replace(",", ".") );
-				var newPaintPrice = new Number( (oldPaintPrice/quantity) * (quantity+1) );
+				var priceForOne = new Number( paint_price_node.find('input[type=hidden]').val() );
+				var newPaintPrice = new Number( priceForOne * (quantity-1) );
 				
 				//set new value in 
-				paint_price_node.text(checkPriseCart(newPaintPrice));
+				paint_price_node.find('div').text(checkPrise(newPaintPrice));
 				
 				/* set new price for all products */
 				/* first check if our input checked, after it we will know add price to allPrice or not */
@@ -868,7 +869,7 @@ $(document).on("keydown", '"#cart input.quantity"', function(e){
 					
 					//set new value to product
 					price_product_node.text(checkPriseCart( calculatePriceIncludingVAT(new Number(price_product_node.text().replace(/\s/ig, '').replace(",", ".")),
-							newPaintPrice - oldPaintPrice, quantity_product, valueVAT, true) ));
+							priceForOne, quantity_product, valueVAT, true) ));
 					
 					/* set new total price including all products price */
 					totalPrice();

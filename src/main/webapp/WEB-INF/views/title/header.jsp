@@ -37,7 +37,7 @@
   							<ul class="dropdown-menu">
     								<li><a href="javascript:convertPriceOnSite('dollar', ${ constants.dollar_in_grivna })"><i class="fa fa-usd"></i> ( ${ constants.dollar_in_grivna } грн. )</a></li>
     								<li><a href="javascript:convertPriceOnSite('euro', ${ constants.euro_in_grivna })"><i class="fa fa-eur"></i> ( ${ constants.euro_in_grivna } грн. )</a></li>
-    								<li><a href="javascript:convertPriceOnSite('grinva', 1)">&#8372;</a></li>
+    								<li><a href="javascript:convertPriceOnSite('grinva', 1)">&#8372;, UAH</a></li>
     							</ul>
     						</div>
 					</div>

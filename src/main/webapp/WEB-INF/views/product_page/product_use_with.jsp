@@ -20,9 +20,11 @@
 						<p><span>Цена:</span>
 							
 							<c:if test="${uwProduct.prise < 0.1}"> уточняйте</c:if>
-							<c:if test="${!(uwProduct.prise < 0.1)}">					
-								   					$<fmt:formatNumber type="number" maxFractionDigits="2"
-									minFractionDigits="2" value="${uwProduct.prise}" />
+							<c:if test="${!(uwProduct.prise < 0.1)}">
+								<div class="product_price" style="position: relative; display: block; width: auto; margin: 0px; float: left;">
+									<input name="price_value" value="${uwProduct.prise}" type="hidden">				
+								   	<div style="margin: 1px 0px 0px 5px;"></div>
+							    </div>
 							</c:if>
 						</p>
 					</c:if>

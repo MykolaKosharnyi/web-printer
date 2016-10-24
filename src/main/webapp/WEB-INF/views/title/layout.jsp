@@ -127,10 +127,10 @@
 												 for="${option.name}_${item.key.typeProduct}_${item.key.idProduct}">${option.name}</label>
 									</td>
 									<td>
-										<label class="add_price_value">
-											$<span><fmt:formatNumber type="number" 
-													maxFractionDigits="2" minFractionDigits="2" value="${option.price}" /></span>
-										</label>
+										<div class="product_price">
+											<input name="price_value" value="${option.price}" type="hidden">				
+										   	<div></div>
+									    </div>
 									</td>
 									<%-- <label class="option_description">${option.description}</label>--%>
 								</c:if>
@@ -144,10 +144,10 @@
 												 for="${option.name}_${item.key.typeProduct}_${item.key.idProduct}">${option.name}</label>
 									</td>
 									<td style="display:none;">
-										<label class="add_price_value">
-											$<span><fmt:formatNumber type="number" 
-													maxFractionDigits="2" minFractionDigits="2" value="${option.price}" /></span>
-										</label>
+										<div class="product_price">
+											<input name="price_value" value="${option.price}" type="hidden">				
+										   	<div></div>
+									    </div>
 									</td>
 									<%-- <label class="option_description">${option.description}</label>--%>
 								</c:if>
@@ -180,9 +180,10 @@
 											 for="${delivery.name}_${item.key.typeProduct}_${item.key.idProduct}_delivery">${delivery.name}</label>
 								</td>
 								<td>
-									<label class="add_price_value">
-										$<span><fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${delivery.priceSize + delivery.priceWeight}" /></span>
-									</label>
+									<div class="product_price">
+										<input name="price_value" value="${delivery.priceSize + delivery.priceWeight}" type="hidden">				
+										<div></div>
+									</div>
 								</td>
 							</tr>
 						</c:if>
@@ -218,10 +219,11 @@
 										<i class="fa fa-plus" aria-hidden="true"></i>
 									</span>		 
 								</td>
-								<td>		 
-									<label class="add_price_value">
-										$<span><fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${paint.quantity*paint.price}" /></span>
-									</label>
+								<td>
+									<div class="product_price">
+										<input name="price_value" value="${paint.quantity*paint.price}" type="hidden">				
+										<div></div>
+									</div>
 								</td>
 							</tr>
 						</c:if>
@@ -360,11 +362,13 @@ function checkPrise(num){
 		  //&#8364; - euro
 		  //&#8372; - gryvna
 		  if(currency==="grinva"){
-			  return '\u20B4' + convernPriceToString(num*priceDollarInGrivna).replace(".", ",");
+			  return '\u20B4' + convernPriceToString(num*priceDollarInGrivna).replace(".", ",") + " UAH";
 		  } else if (currency==="euro"){
 			  return '\u20ac' + convernPriceToString(num*priceDollarInGrivna/priceEuroInGrivna).replace(".", ",");
-		  } else {
+		  } else if (currency==="dollar"){
 			  return "$" + convernPriceToString(num).replace(".", ",");
+		  } else {
+			  return '\u20B4' + convernPriceToString(num*priceDollarInGrivna).replace(".", ",") + " UAH";
 		  }
 
 	} else {

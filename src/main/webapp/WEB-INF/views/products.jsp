@@ -25,8 +25,8 @@
 						<div class="product_price"><span style="float: left;">Цена:&nbsp;</span> 
 							<input type="hidden" name="price_value" value="${product.prise}">
 				       		<c:if test="${product.prise < 0.1}"><a href="#callback" class="fancybox">уточняйте</a></c:if>
-							<c:if test="${!(product.prise < 0.1)}">					
-			   					<div>$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${product.prise}" /></div>
+							<c:if test="${!(product.prise < 0.1)}">
+								<div></div>
 							</c:if>
 		           		</div>
 		
@@ -96,7 +96,7 @@
 						<input type="hidden" name="price_value" value="${product.prise}">
 			       		<c:if test="${product.prise < 0.1}"><a href="#callback" class="fancybox">уточняйте</a></c:if>
 						<c:if test="${!(product.prise < 0.1)}">					
-		   					<div>$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${product.prise}" /></div>
+		   					<div></div>
 						</c:if>
 	           		</div>
 	
@@ -287,7 +287,7 @@ $(document).ready(function() {
             
             var topResult = $('#top_result_of_search');
             if(topResult.find('.products').length > 0){
-            	topResult.height( Math.ceil(topResult.find('.products').length/3 ) * (topResult.find('.products').first().height() + 9 ));
+            	topResult.height( Math.ceil(topResult.find('.products').length/3 ) * (topResult.find('.products').first().height() + 6 ));
             } else {
             	topResult.height(0);
             }
