@@ -21,7 +21,7 @@ $(document).ready(function() {
 
 function createTRInTableForProduct(product){
 	var headTr = $('<tr/>');
-	var tableOptionDeliveryPaint = $('<table/>').addClass('table table-hover').css( "width", "355px" );
+	var tableOptionDeliveryPaint = $('<table/>').addClass('table table-hover').css( "width", "inherit" );
 	
 	$(productOptions(product.options, product.typeProduct, product.idProduct)).each(function(i, option){
 		tableOptionDeliveryPaint.append(option);
@@ -60,7 +60,7 @@ function createTRInTableForProduct(product){
 		  .append($('<td/>').css( "max-width", "300px" ).append($('<a/>').css( "color", "black" )
 							  .attr("href", '/' + product.typeProduct + '/' + product.idProduct)
 							  .text(product.name)))
-		  .append($('<td/>').css("padding","0px").css("width","350px").addClass('option_product_car').append(tableOptionDeliveryPaint))
+		  .append($('<td/>').css("padding","0px").css("width","390px").addClass('option_product_car').append(tableOptionDeliveryPaint))
 		  .append($('<td/>')
 				    .append($('<input/>')
 						  .attr("type", "hidden")
@@ -78,8 +78,9 @@ function createTRInTableForProduct(product){
 					.append($('<input/>').addClass('quantity quantity_' + product.typeProduct + '_' + product.idProduct).val(1).css('margin','0px 5px'))
 					.append($('<span/>').addClass('inc_value').append($('<i/>').addClass('fa fa-plus').attr("aria-hidden", true)))
 				)
-		  .append($('<td/>').addClass('price').html("$<span>" + checkPriseCart(product.priceWithOptionAndDeivery) + "<span/>")
-				  							 	.append($('<input/>').attr("type", "hidden").attr("name", "price_ellement").val(product.price)))
+		  .append($('<td/>').addClass('price product_price')
+				  			.append($('<input/>').attr("type", "hidden").val(product.priceWithOptionAndDeivery))
+							.append($('<div/>').text(checkPrise(product.priceWithOptionAndDeivery))))
 		  .append($('<td/>').addClass('delte_item').append($('<i/>').addClass('fa fa-trash-o')));
 
 	return headTr;
@@ -230,9 +231,11 @@ function createTRInTableForProduct(product){
 		if(quantity.length > 0){
 			var quantity_numb = new Number(quantity.val());
 			//set new price of this product
-			var price_with_quantity = quantity.parent('td').parent('tr').find('td.price').find('span');		
-			var price_n = new Number(price_with_quantity.text().replace(/\s/ig, '').replace(",", "."));
-			price_with_quantity.text(checkPriseCart((price_n/quantity_numb) * (quantity_numb + 1)));
+			var price = quantity.parent('td').parent('tr').find('td.price');		
+			var price_n = new Number(price.find('input[type=hidden]').val());
+			
+			price.find('input[type=hidden]').val( price_n/quantity_numb * (quantity_numb + 1) );
+			price.find('div').text(checkPrise( price_n/quantity_numb * (quantity_numb + 1) ));
 			
 			//set new quantity of this product
 			quantity.val(quantity_numb + 1);
@@ -261,8 +264,13 @@ function createTRInTableForProduct(product){
 			$('.modal-content .modal-footer').append($('<button/>').addClass('btn btn-primary').attr("type", "button").html('Оформить заказ'));
 			//add total cart price
 			$('.modal-content .modal-footer').prepend($('<div/>').attr("id", "div_total_price")
-					.html("$<span id='total_price'>" + checkPriseCart(product.priceWithOptionAndDeivery) + "<span/>")
-					.prepend($('<span/>').text('Общая стоимость: ')));
+					.append($('<span/>').css('float','left').text('Общая стоимость: '))
+					.append($('<div/>').addClass('product_price').css({
+							"float":"left",
+							"margin-left":"10px"
+						}).append($('<input/>').attr("type", "hidden").val(product.priceWithOptionAndDeivery))
+						  .append($('<div/>').text(checkPrise(product.priceWithOptionAndDeivery))))
+			);
 		}else {
 			//in case if this type of product already added to cart
 			if(!checkExistProduct(product.typeProduct, product.idProduct)){
@@ -410,9 +418,9 @@ $(document).on("keydown", '"#cart input.quantity"', function(e){
 		$(document).on("click", '#cart .add_price', function(){
 			// component with contain price including quantity and option for product in price
 			var price_element = $(this).parent('td').parent('tr.block_product_price').parent('tbody').parent('table')
-				.parent('td.option_product_car').parent('tr').find('td.price').find('span');
+				.parent('td.option_product_car').parent('tr').find('td.price');
 			// price with quatntity and option
-			var price_with_quantity_and_option = new Number(price_element.text().replace(/\s/ig, '').replace(",", "."));
+			var price_with_quantity_and_option = new Number(price_element.find('input[type=hidden]').val());
 			
 			// quantity of this product
 			var quantity_numb = new Number($(this).parent('td').parent('tr.block_product_price').parent('tbody').parent('table')
@@ -437,9 +445,12 @@ $(document).on("keydown", '"#cart input.quantity"', function(e){
 	        if ($(this).prop( "checked" )) {
 	        	/* check if it not checked VAT option; because for VAT option different way to calculate price */
 	        	if($(this).val()!="НДС"){
-	            	price_element.text(checkPriseCart( calculatePriceIncludingVAT(price_with_quantity_and_option, addPrice, quantity_numb, valueVAT, true) ));
+	        		var result_val = calculatePriceIncludingVAT(price_with_quantity_and_option, addPrice, quantity_numb, valueVAT, true);
+	        		price_element.find('input[type=hidden]').val( result_val );
+	            	price_element.find('div').text(checkPrise( result_val ));
 	        	} else {
-	        		price_element.text(checkPriseCart(price_with_quantity_and_option * addPrice));
+	        		price_element.find('input[type=hidden]').val( price_with_quantity_and_option * addPrice );
+	        		price_element.find('div').text(checkPrise( price_with_quantity_and_option * addPrice ));
 	        	}
 	        	// show changes on server
 	        	changeOptionProductInCart(type, id, $(this).val(), true);
@@ -452,9 +463,12 @@ $(document).on("keydown", '"#cart input.quantity"', function(e){
 	        }else{
 	        	/* check if it not checked VAT option; because for VAT option different way to calculate price */
 	        	if($(this).val()!="НДС"){
-	        		price_element.text(checkPriseCart( calculatePriceIncludingVAT(price_with_quantity_and_option, addPrice, quantity_numb, valueVAT, false) ));
+	        		var result_val = calculatePriceIncludingVAT(price_with_quantity_and_option, addPrice, quantity_numb, valueVAT, false);
+	        		price_element.find('input[type=hidden]').val( result_val );
+	            	price_element.find('div').text(checkPrise( result_val ));
 	        	} else {
-	        		price_element.text(checkPriseCart(price_with_quantity_and_option / addPrice));
+	        		price_element.find('input[type=hidden]').val( price_with_quantity_and_option / addPrice );
+	        		price_element.find('div').text(checkPrise( price_with_quantity_and_option / addPrice ));
 	        	}
 	        	// show changes on server
 	        	changeOptionProductInCart(type, id, $(this).val(), false);
@@ -471,9 +485,9 @@ $(document).on("keydown", '"#cart input.quantity"', function(e){
 		$(document).on("click", '#cart .add_price_delivery', function(){
 			// component with contain price including quantity and option for product in price
 			var price_element = $(this).parent('td').parent('tr.block_product_price').parent('tbody').parent('table')
-				.parent('td.option_product_car').parent('tr').find('td.price').find('span');
+				.parent('td.option_product_car').parent('tr').find('td.price');
 			// price with quatntity and option
-			var price_with_quantity_and_option = new Number(price_element.text().replace(/\s/ig, '').replace(",", "."));
+			var price_with_quantity_and_option = new Number(price_element.find('input[type=hidden]').val());
 			
 			// quantity of this product
 			var quantity_numb = new Number($(this).parent('td').parent('tr.block_product_price').parent('tbody').parent('table')
@@ -519,15 +533,11 @@ $(document).on("keydown", '"#cart input.quantity"', function(e){
 	            	//set new name delivery
 	            	deliveryNameContainer.val($(this).val());
 
-	            	//first sub old checked radio value and than add new checked radio value	
-	            	price_element.text(checkPriseCart( 
-	            			calculatePriceIncludingVAT(
-	            				calculatePriceIncludingVAT(price_with_quantity_and_option,new Number(deliveryValueContainer.val()),quantity_numb,valueVAT,false), 
-	            				addPrice, 
-	            				quantity_numb, 
-	            				valueVAT, 
-	            				true) 
-	            			));
+	            	//first sub old checked radio value and than add new checked radio value	  
+	            	var pre_result = calculatePriceIncludingVAT(price_with_quantity_and_option,new Number(deliveryValueContainer.val()),quantity_numb,valueVAT,false);
+	            	var result_finish = calculatePriceIncludingVAT(pre_result, addPrice, quantity_numb, valueVAT, true);
+	            	price_element.find('input[type=hidden]').val(result_finish);
+	            	price_element.find('div').text(checkPrise( result_finish ));
 
 	            	// change presentaion on user page
 		        	change_style.css('color', '#006080');
@@ -539,8 +549,9 @@ $(document).on("keydown", '"#cart input.quantity"', function(e){
 					deliveryValueContainer.val(addPrice);
 	            	
 	            } else {
-	            	
-	            	price_element.text(checkPriseCart( calculatePriceIncludingVAT(price_with_quantity_and_option, addPrice, quantity_numb, valueVAT, false) ));
+	            	var result_val = calculatePriceIncludingVAT(price_with_quantity_and_option, addPrice, quantity_numb, valueVAT, false);
+	            	price_element.find('input[type=hidden]').val( result_val );
+	            	price_element.find('div').text(checkPrise( result_val ));
 
 		        	// show changes on server
 		        	changeDeliveryProductInCart(type, id, $(this).val(), false);
@@ -574,9 +585,9 @@ $(document).on("keydown", '"#cart input.quantity"', function(e){
 		$(document).on("click", '#cart  .add_price_paint', function(){
 			// component with contain price including quantity and option for product in price
 			var price_element = $(this).parent('td').parent('tr.block_product_price').parent('tbody').parent('table')
-				.parent('td.option_product_car').parent('tr').find('td.price').find('span');
+				.parent('td.option_product_car').parent('tr').find('td.price');
 			// price with quatntity and option
-			var price_with_quantity_and_option = new Number(price_element.text().replace(/\s/ig, '').replace(",", "."));
+			var price_with_quantity_and_option = new Number(price_element.find('input[type=hidden]').val());
 			
 			// quantity of this product
 			var quantity_numb = new Number($(this).parent('td').parent('tr.block_product_price').parent('tbody').parent('table')
@@ -599,7 +610,9 @@ $(document).on("keydown", '"#cart input.quantity"', function(e){
 			var addPrice = new Number($(this).parent('td').parent('tr.block_product_price').find('td .product_price input[type=hidden]').val());
 			
 	        if ($(this).prop( "checked" )) {
-	            price_element.text(checkPriseCart( calculatePriceIncludingVAT(price_with_quantity_and_option, addPrice, quantity_numb, valueVAT, true) ));
+	        	var val_result = calculatePriceIncludingVAT(price_with_quantity_and_option, addPrice, quantity_numb, valueVAT, true);
+	        	price_element.find('input[type=hidden]').val( val_result );
+	            price_element.find('div').text(checkPrise( val_result ));
 
 	        	// show changes on server
 	        	changePaintProductInCart(type, id, $(this).val(), true);
@@ -610,7 +623,9 @@ $(document).on("keydown", '"#cart input.quantity"', function(e){
 				totalPrice();
 	        	
 	        }else{
-	        	price_element.text(checkPriseCart( calculatePriceIncludingVAT(price_with_quantity_and_option, addPrice, quantity_numb, valueVAT, false) ));
+	        	var val_result = calculatePriceIncludingVAT(price_with_quantity_and_option, addPrice, quantity_numb, valueVAT, false);
+	        	price_element.find('input[type=hidden]').val( val_result );
+	        	price_element.find('div').text(checkPrise( val_result ));
 
 	        	// show changes on server
 	        	changePaintProductInCart(type, id, $(this).val(), false);
@@ -674,7 +689,7 @@ $(document).on("keydown", '"#cart input.quantity"', function(e){
 		/* BUTTONS FOR INCREASING AND DECREASING QUANTITY ON PRODUCT */
 		$(document).on("click", '#cart .dec_value', function(){
             var quantity_element_val = $(this).parent('td').find('input.quantity').val();
-			var price_with_quantity =  $(this).parent('td').parent('tr').find('td.price').find('span');
+			var price_with_quantity =  $(this).parent('td').parent('tr').find('td.price');
 			var price = $(this).parent('td').parent('tr').find('td.price').find('input').val();
 			var quantity_numb = new Number(quantity_element_val);
 			
@@ -693,10 +708,11 @@ $(document).on("keydown", '"#cart input.quantity"', function(e){
 
 			} else {
 				$(this).parent('td').find('input.quantity').val(quantity_numb-1);
-				//var price_n = new Number(price.replace(/\s/ig, '').replace(",", "."));
-				//price_with_quantity.text(checkPriseCart(price_n * (quantity_numb - 1)));
-				var price_n = new Number(price_with_quantity.text().replace(/\s/ig, '').replace(",", "."));
-				price_with_quantity.text(checkPriseCart((price_n/quantity_numb) * (quantity_numb - 1)));
+
+				var price_n = new Number(price_with_quantity.find('input[type=hidden]').val());
+				
+				price_with_quantity.find('input[type=hidden]').val( price_n/quantity_numb * (quantity_numb - 1) );
+				price_with_quantity.find('div').text(checkPrise( price_n/quantity_numb * (quantity_numb - 1) ));
 				
 				/* set new price for all products */
 				totalPrice();
@@ -715,7 +731,7 @@ $(document).on("keydown", '"#cart input.quantity"', function(e){
 			var quantity_element_val = $(this).parent('td').find('input.quantity').val();
 			var quantity_numb = new Number(quantity_element_val);
 
-			var price_with_quantity = $(this).parent('td').parent('tr').find('td.price').find('span');
+			var price_with_quantity = $(this).parent('td').parent('tr').find('td.price');
 			var price = $(this).parent('td').parent('tr').find('td.price').find('input').val();
 			
 			if(quantity_numb==1){
@@ -731,13 +747,9 @@ $(document).on("keydown", '"#cart input.quantity"', function(e){
 
             $(this).parent('td').find('input.quantity').val(quantity_numb+1);
 			
-          //  getPrice($(this));
-            
-			//var price_n = new Number(price.replace(/\s/ig, '').replace(",", "."));
-			//price_with_quantity.text(checkPriseCart(price_n * (quantity_numb + 1)));
-			
-			var price_n = new Number(price_with_quantity.text().replace(/\s/ig, '').replace(",", "."));
-			price_with_quantity.text(checkPriseCart((price_n/quantity_numb) * (quantity_numb + 1)));
+			var price_n = new Number(price_with_quantity.find('input[type=hidden]').val());
+			price_with_quantity.find('input[type=hidden]').val( price_n/quantity_numb * (quantity_numb + 1) );
+			price_with_quantity.find('div').text(checkPrise((price_n/quantity_numb) * (quantity_numb + 1)));
 			
 			/* set new price for all products */
 			totalPrice();
@@ -788,11 +800,12 @@ $(document).on("keydown", '"#cart input.quantity"', function(e){
 				
 				quantity_node.val(quantity-1);
 				
-				var priceForOne = new Number( paint_price_node.find('input[type=hidden]').val() );
-				var newPaintPrice = new Number( priceForOne * (quantity-1) );
+				var oldPrice = new Number( paint_price_node.find('input[type=hidden]').val() );
+				var newPaintPrice = new Number( oldPrice/quantity * (quantity-1) );
 				
 				//set new value in 
-				paint_price_node.find('div').text(checkPrise(newPaintPrice));
+				paint_price_node.find('input[type=hidden]').val( newPaintPrice )
+				paint_price_node.find('div').text(checkPrise( newPaintPrice ));
 				
 				/* set new price for all products */
 				/* first check if our input checked, after it we will know add price to allPrice or not */
@@ -803,11 +816,13 @@ $(document).on("keydown", '"#cart input.quantity"', function(e){
 					
 					//product for this product with all checked options
 					var price_product_node = $(this).parent('td').parent('tr.block_product_price').parent('tbody').parent('table')
-						.parent('td.option_product_car').parent('tr').find('td.price span');
+						.parent('td.option_product_car').parent('tr').find('td.price');
 					
 					//set new value to product
-					price_product_node.text(checkPriseCart( calculatePriceIncludingVAT(new Number(price_product_node.text().replace(/\s/ig, '').replace(",", ".")),
-							priceForOne, quantity_product, valueVAT, false) ));
+					var new_value = calculatePriceIncludingVAT(new Number(price_product_node.find('input[type=hidden]').val()),
+							oldPrice - newPaintPrice, quantity_product, valueVAT, false);
+					price_product_node.find('input[type=hidden]').val( new_value );
+					price_product_node.find('div').text(checkPrise( new_value ));
 					
 					/* set new total price including all products price */
 					totalPrice();
@@ -850,10 +865,11 @@ $(document).on("keydown", '"#cart input.quantity"', function(e){
 					
 				quantity_node.val(quantity+1);
 				
-				var priceForOne = new Number( paint_price_node.find('input[type=hidden]').val() );
-				var newPaintPrice = new Number( priceForOne * (quantity-1) );
+				var oldPrice = new Number( paint_price_node.find('input[type=hidden]').val() );
+				var newPaintPrice = new Number( oldPrice/quantity * (quantity+1) );
 				
 				//set new value in 
+				paint_price_node.find('input[type=hidden]').val(newPaintPrice);
 				paint_price_node.find('div').text(checkPrise(newPaintPrice));
 				
 				/* set new price for all products */
@@ -865,11 +881,13 @@ $(document).on("keydown", '"#cart input.quantity"', function(e){
 					
 					//product for this product with all checked options
 					var price_product_node = $(this).parent('td').parent('tr.block_product_price').parent('tbody').parent('table')
-						.parent('td.option_product_car').parent('tr').find('td.price span');
+						.parent('td.option_product_car').parent('tr').find('td.price');
 					
 					//set new value to product
-					price_product_node.text(checkPriseCart( calculatePriceIncludingVAT(new Number(price_product_node.text().replace(/\s/ig, '').replace(",", ".")),
-							priceForOne, quantity_product, valueVAT, true) ));
+					var new_value = calculatePriceIncludingVAT(new Number(price_product_node.find('input[type=hidden]').val()),
+							newPaintPrice-oldPrice, quantity_product, valueVAT, true);
+					price_product_node.find('input[type=hidden]').val( new_value )
+					price_product_node.find('div').text(checkPrise( new_value ));
 					
 					/* set new total price including all products price */
 					totalPrice();
@@ -878,16 +896,26 @@ $(document).on("keydown", '"#cart input.quantity"', function(e){
 	    });
 		
 		function totalPrice(){
-			$('span#total_price' ).text(allPrice());
+			var total_price_block = $('#div_total_price .product_price' );
+			var all_price = allPrice();
+			total_price_block.find('input[type=hidden]').val( all_price );
+		
+			if(all_price==0){
+				total_price_block.find('div').text( all_price );
+			} else {
+				total_price_block.find('div').text(checkPrise( all_price ));
+			}
+			
+			
 		}
 
 		/* method return all sum product item + return it in presentable form */
 		function allPrice(){
-			var total_price = new Number();
-			$('#cart td.price span').each(function(i, price_el){
-				total_price += new Number($(price_el).text().replace(/\s/ig, '').replace(",", "."));
+			var total_price = new Number(0);
+			$('#cart td.price input[type=hidden]').each(function(){
+				total_price += new Number($(this).val());
 			});	
-			return checkPriseCart(total_price);
+			return total_price;
 		}
 		
 		$(document).on("click", '#cart td.delte_item i', function(){
@@ -980,18 +1008,3 @@ $(document).on("keydown", '"#cart input.quantity"', function(e){
 			});
 		}
 	});	
-	
-	/* return price in presentable to user form */
-	function checkPriseCart(num){
-			  num = Math.round( num / 0.01 ) * 0.01;
-			  num = new Number(num).toFixed(2);   // особенности счета JavaScript ( x/100 не всегда = x*0.01 )
-			  var s = 0;
-			  var str = '';
-			  for( var i=num.toString().length-1; i>=0; i-- ) {
-			    s++;
-			    str = num.toString().charAt(i) + str;
-			    if(num.toString().charAt(i)=='.') s=0;
-			    if( s > 0 && !(s % 3) ) str  = " " + str;
-			  }   
-			  return str.replace(".", ",");
-	}

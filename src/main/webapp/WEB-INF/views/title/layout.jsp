@@ -111,9 +111,9 @@
 				</a>
 			</td>
 			<td style="max-width: 235px;"><a style="color:black;" href="<c:url value='/${item.key.typeProduct}/${item.key.idProduct}' />">${item.key.name }</a></td>
-			<td style="padding: 0px; width:350px;" class="option_product_car">
+			<td style="padding: 0px; width:390px;" class="option_product_car">
 				
-				<table class="table table-hover" style="width:355px;">
+				<table class="table table-hover" style="width:inherit;">
 				
 					<c:forEach items="${item.key.options}" var="option">
 						<c:if test="${option.price > 0.01}">
@@ -249,10 +249,9 @@
 				</span>
 
 			</td>
-			<td class="price">$<span>
-				<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${item.key.getPriceWithOptionAndDeivery() * item.value }" />
-					</span>
-					<input type="hidden" name="price_ellement" value="${item.key.price}">
+			<td class="price product_price">
+				<input name="price_value" value="${item.key.getPriceWithOptionAndDeivery() * item.value }" type="hidden">				
+			   	<div></div>
 			</td>
 			<td class="delte_item"><i class="fa fa-trash-o" aria-hidden="true"></i></td>
 		</tr>
@@ -274,8 +273,11 @@
             <div class="modal-footer">
             	<c:if test="${!empty cart.contents}">
 					<div id="div_total_price">
-						<span>Общая стоимость: </span>$<span id="total_price"><fmt:formatNumber type="number" 
-				   		maxFractionDigits="2" minFractionDigits="2" value="${cart.getTotalCost()}" /></span>
+						<span style="float: left;">Общая стоимость: </span>
+						<div class="product_price" style="float: left; margin-left: 10px;">
+							<input name="price_value" value="${cart.getTotalCost()}" type="hidden">				
+						   	<div></div>
+					    </div>
 					</div>
 				</c:if>
 				
