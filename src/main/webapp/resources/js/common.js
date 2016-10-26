@@ -530,3 +530,15 @@ function readCookie(name) {
 function eraseCookie(name) {
 	createCookie(name,"",-1);
 }
+
+/* code for home page */
+/* for changing height of name and price after hovering on product field */
+$(".sider_container .slide-item").on('mouseenter', function() {
+	var name_and_price_block = $(this).find('.name_price_cart_block');
+	name_and_price_block.outerHeight(name_and_price_block.find('a.slide-title').outerHeight(true) + name_and_price_block.find('.product_price').outerHeight(true) + 4);
+});
+
+$(".sider_container .slide-item").on('mouseleave', function() {
+	var name_and_price_block = $(this).find('.name_price_cart_block');
+	name_and_price_block.outerHeight(54);
+});

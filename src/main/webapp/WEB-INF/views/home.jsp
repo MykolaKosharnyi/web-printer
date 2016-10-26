@@ -156,7 +156,7 @@
 					           		 </div>
 					           		 
 					           		 <i class="fa fa-cart-plus add_to_cart" aria-hidden="true" 
-					           		 	style="padding-right: 5px; top: 2px; right: 5px; position: absolute;"
+					           		 	style="padding-right: 5px; top: 3px; right: 5px; position: absolute; font-size: 40px;"
 									onclick="addToCart('printer', ${product.id}, '${product.name}', '${product.prise}','${product.pathPictures.get(0)}');"></i>
 					
 								</div>
@@ -240,22 +240,30 @@
 			         <div class="play_button_printer_3d"><i class="fa fa-play" aria-hidden="true"></i></div>
                      <div class="prev_button_printer_3d"><i class="fa fa-angle-left"></i></div>
                      <div class="carousel_printer_3d">
-                        <c:forEach items="${printers3D}" var="printer3D">
+                        <c:forEach items="${printers3D}" var="product">
                               <div class="slide-item">
-                                  <a class="slider_image" href="<c:url value='/3d_printer/${printer3D.id}' />">
-                                  <div class="outer_a_img"><img src="/images/3d_printers/${printer3D.id}/${printer3D.pathPictures.get(0)}" alt="" /></div></a>
-                                  <a href="<c:url value='/3d_printer/${printer3D.id}' />" class="slide-title">${printer3D.name}</a>                              
-                        
-	                        	  <div class="product_price"><span style="float: left;">Цена:&nbsp;</span> 
-									<input type="hidden" name="price_value" value="${printer3D.prise}">
-							       	<c:if test="${printer3D.prise < 0.1}"><a href="#callback" class="fancybox">уточняйте</a></c:if>
-									<c:if test="${!(printer3D.prise < 0.1)}">					
-						   				<div></div>
-									</c:if>
-					           	  </div>
-                        
-                        <i class="fa fa-cart-plus add_to_cart" aria-hidden="true" style="margin-top: 3px; right: 0px;"
-			onclick="addToCart('3d_printer', ${printer3D.id}, '${printer3D.name}', '${printer3D.prise}','${printer3D.pathPictures.get(0)}');"></i>
+                                  <a class="slider_image" href="<c:url value='/3d_printer/${product.id}' />">
+                                  	<div class="outer_a_img"><img src="/images/3d_printers/${product.id}/${product.pathPictures.get(0)}" alt="" /></div>
+                                  </a>
+                                  
+                                  <div class="name_price_cart_block">
+                                               
+                                      <a href="<c:url value='/3d_printer/${product.id}' />" class="slide-title">${product.name}</a>         
+                                                                    
+	                                  <div class="product_price"><span style="float: left;">Цена:&nbsp;</span> 
+										<input type="hidden" name="price_value" value="${product.prise}">
+							       		<c:if test="${product.prise < 0.1}"><a href="#callback" class="fancybox">уточняйте</a></c:if>
+										<c:if test="${!(product.prise < 0.1)}">					
+						   					<div></div>
+										</c:if>
+					           		 </div>
+					           		 
+					           		 <i class="fa fa-cart-plus add_to_cart" aria-hidden="true" 
+					           		 	style="padding-right: 5px; top: 3px; right: 5px; position: absolute; font-size: 40px;"
+									onclick="addToCart('3d_printer', ${product.id}, '${product.name}', '${product.prise}','${product.pathPictures.get(0)}');"></i>
+					
+								</div>
+
                               </div>
                           </c:forEach>
                      </div>
@@ -319,23 +327,30 @@
 			         <div class="play_button_printer_d"><i class="fa fa-play" aria-hidden="true"></i></div>
                      <div class="prev_button_printer_d"><i class="fa fa-angle-left"></i></div>
                      <div class="carousel_printer_d">
-                        <c:forEach items="${digitalPrinters}" var="printer">
+                        <c:forEach items="${digitalPrinters}" var="product">
                               <div class="slide-item">
-                                  <a class="slider_image" href="<c:url value='/digital_printer/${printer.id}' />">
-                                  	<div class="outer_a_img"><img src="/images/digital_printers/${printer.id}/${printer.pathPictures.get(0)}" alt="" /></div>
+                                  <a class="slider_image" href="<c:url value='/digital_printer/${product.id}' />">
+                                  	<div class="outer_a_img"><img src="/images/digital_printers/${product.id}/${product.pathPictures.get(0)}" alt="" /></div>
                                   </a>
-                                  <a href="<c:url value='/digital_printer/${printer.id}' />" class="slide-title">${printer.name}</a>                             
-                        
-                        		  <div class="product_price"><span style="float: left;">Цена:&nbsp;</span> 
-									<input type="hidden" name="price_value" value="${printer.prise}">
-							       	<c:if test="${printer.prise < 0.1}"><a href="#callback" class="fancybox">уточняйте</a></c:if>
-									<c:if test="${!(printer.prise < 0.1)}">					
-						   				<div></div>
-									</c:if>
-					           	  </div>
-                        
-                        <i class="fa fa-cart-plus add_to_cart" aria-hidden="true" style="margin-top: 3px; right: 0px;" 
-			onclick="addToCart('digital_printer', ${printer.id}, '${printer.name}', '${printer.prise}','${printer.pathPictures.get(0)}');"></i>
+                                  
+                                  <div class="name_price_cart_block">
+                                               
+                                      <a href="<c:url value='/digital_printer/${product.id}' />" class="slide-title">${product.name}</a>         
+                                                                    
+	                                  <div class="product_price"><span style="float: left;">Цена:&nbsp;</span> 
+										<input type="hidden" name="price_value" value="${product.prise}">
+							       		<c:if test="${product.prise < 0.1}"><a href="#callback" class="fancybox">уточняйте</a></c:if>
+										<c:if test="${!(product.prise < 0.1)}">					
+						   					<div></div>
+										</c:if>
+					           		 </div>
+					           		 
+					           		 <i class="fa fa-cart-plus add_to_cart" aria-hidden="true" 
+					           		 	style="padding-right: 5px; top: 3px; right: 5px; position: absolute; font-size: 40px;"
+									onclick="addToCart('digital_printer', ${product.id}, '${product.name}', '${product.prise}','${product.pathPictures.get(0)}');"></i>
+					
+								</div>
+
                               </div>
                           </c:forEach>
                      </div>
@@ -402,18 +417,25 @@
                                   <a class="slider_image" href="<c:url value='/laminator/${product.id}' />">
                                   	<div class="outer_a_img"><img src="/images/laminators/${product.id}/${product.pathPictures.get(0)}" alt="" /></div>
                                   </a>
-                                  <a href="<c:url value='/laminator/${product.id}' />" class="slide-title">${product.name}</a>                            
-                        		
-                        		  <div class="product_price"><span style="float: left;">Цена:&nbsp;</span> 
-									 <input type="hidden" name="price_value" value="${product.prise}">
-							       	 <c:if test="${product.prise < 0.1}"><a href="#callback" class="fancybox">уточняйте</a></c:if>
-									 <c:if test="${!(product.prise < 0.1)}">					
-						   				<div></div>
-									 </c:if>
-					           	  </div>
-                        		
-                        		<i class="fa fa-cart-plus add_to_cart" aria-hidden="true"  style="margin-top: 3px; right: 0px;"
-			onclick="addToCart('laminator', ${product.id}, '${product.name}', '${product.prise}','${product.pathPictures.get(0)}');"></i>
+                                  
+                                  <div class="name_price_cart_block">
+                                               
+                                      <a href="<c:url value='/laminator/${product.id}' />" class="slide-title">${product.name}</a>         
+                                                                    
+	                                  <div class="product_price"><span style="float: left;">Цена:&nbsp;</span> 
+										<input type="hidden" name="price_value" value="${product.prise}">
+							       		<c:if test="${product.prise < 0.1}"><a href="#callback" class="fancybox">уточняйте</a></c:if>
+										<c:if test="${!(product.prise < 0.1)}">					
+						   					<div></div>
+										</c:if>
+					           		 </div>
+					           		 
+					           		 <i class="fa fa-cart-plus add_to_cart" aria-hidden="true" 
+					           		 	style="padding-right: 5px; top: 3px; right: 5px; position: absolute; font-size: 40px;"
+									onclick="addToCart('laminator', ${product.id}, '${product.name}', '${product.prise}','${product.pathPictures.get(0)}');"></i>
+					
+								</div>
+
                               </div>
                           </c:forEach>
 
@@ -490,23 +512,30 @@
 			         <div class="play_button_laser"><i class="fa fa-play" aria-hidden="true"></i></div>
                      <div class="prev_button_laser"><i class="fa fa-angle-left"></i></div>
                      <div class="carousel_laser">
-                        <c:forEach items="${lasers}" var="laser">
+                        <c:forEach items="${lasers}" var="product">
                               <div class="slide-item">
-                                  <a class="slider_image" href="<c:url value='/laser/${laser.id}' />">
-                                  	<div class="outer_a_img"><img src="/images/lasers/${laser.id}/${laser.pathPictures.get(0)}" alt="" /></div>
+                                  <a class="slider_image" href="<c:url value='/laser/${product.id}' />">
+                                  	<div class="outer_a_img"><img src="/images/lasers/${product.id}/${product.pathPictures.get(0)}" alt="" /></div>
                                   </a>
-                                  <a href="<c:url value='/laser/${laser.id}' />" class="slide-title">${laser.name}</a>
                                   
-                        		  <div class="product_price"><span style="float: left;">Цена:&nbsp;</span> 
-									 <input type="hidden" name="price_value" value="${laser.prise}">
-							       	 <c:if test="${laser.prise < 0.1}"><a href="#callback" class="fancybox">уточняйте</a></c:if>
-									 <c:if test="${!(laser.prise < 0.1)}">					
-						   				<div></div>
-									 </c:if>
-					           	  </div>
-                        
-                        <i class="fa fa-cart-plus add_to_cart" aria-hidden="true" style="margin-top: 3px; right: 0px;" 
-			onclick="addToCart('laser', ${laser.id}, '${laser.name}', '${laser.prise}','${laser.pathPictures.get(0)}');"></i>
+                                  <div class="name_price_cart_block">
+                                               
+                                      <a href="<c:url value='/laser/${product.id}' />" class="slide-title">${product.name}</a>         
+                                                                    
+	                                  <div class="product_price"><span style="float: left;">Цена:&nbsp;</span> 
+										<input type="hidden" name="price_value" value="${product.prise}">
+							       		<c:if test="${product.prise < 0.1}"><a href="#callback" class="fancybox">уточняйте</a></c:if>
+										<c:if test="${!(product.prise < 0.1)}">					
+						   					<div></div>
+										</c:if>
+					           		 </div>
+					           		 
+					           		 <i class="fa fa-cart-plus add_to_cart" aria-hidden="true" 
+					           		 	style="padding-right: 5px; top: 3px; right: 5px; position: absolute; font-size: 40px;"
+									onclick="addToCart('laser', ${product.id}, '${product.name}', '${product.prise}','${product.pathPictures.get(0)}');"></i>
+					
+								</div>
+								
                               </div>
                           </c:forEach>
 
@@ -567,23 +596,30 @@
 			         <div class="play_button_cutter"><i class="fa fa-play" aria-hidden="true"></i></div>
                      <div class="prev_button_cutter"><i class="fa fa-angle-left"></i></div>
                      <div class="carousel_cutter">
-                        <c:forEach items="${cutters}" var="cutter">
+                        <c:forEach items="${cutters}" var="product">
                               <div class="slide-item">
-                                  <a class="slider_image" href="<c:url value='/cutter/${cutter.id}' />">
-                                  	<div class="outer_a_img"><img src="/images/cutters/${cutter.id}/${cutter.pathPictures.get(0)}" alt="" /></div>
+                                  <a class="slider_image" href="<c:url value='/cutter/${product.id}' />">
+                                  	<div class="outer_a_img"><img src="/images/cutters/${product.id}/${product.pathPictures.get(0)}" alt="" /></div>
                                   </a>
-                                  <a href="<c:url value='/cutter/${cutter.id}' />" class="slide-title">${cutter.name}</a>                                 
-                        
-                        		  <div class="product_price"><span style="float: left;">Цена:&nbsp;</span> 
-									 <input type="hidden" name="price_value" value="${cutter.prise}">
-							       	 <c:if test="${cutter.prise < 0.1}"><a href="#callback" class="fancybox">уточняйте</a></c:if>
-									 <c:if test="${!(cutter.prise < 0.1)}">					
-						   				<div></div>
-									 </c:if>
-					           	  </div>
-                        
-                        <i class="fa fa-cart-plus add_to_cart" aria-hidden="true" style="margin-top: 3px; right: 0px;" 
-			onclick="addToCart('cutter', ${cutter.id}, '${cutter.name}', '${cutter.prise}','${cutter.pathPictures.get(0)}');"></i>
+                                  
+                                  <div class="name_price_cart_block">
+                                               
+                                      <a href="<c:url value='/cutter/${product.id}' />" class="slide-title">${product.name}</a>         
+                                                                    
+	                                  <div class="product_price"><span style="float: left;">Цена:&nbsp;</span> 
+										<input type="hidden" name="price_value" value="${product.prise}">
+							       		<c:if test="${product.prise < 0.1}"><a href="#callback" class="fancybox">уточняйте</a></c:if>
+										<c:if test="${!(product.prise < 0.1)}">					
+						   					<div></div>
+										</c:if>
+					           		 </div>
+					           		 
+					           		 <i class="fa fa-cart-plus add_to_cart" aria-hidden="true" 
+					           		 	style="padding-right: 5px; top: 3px; right: 5px; position: absolute; font-size: 40px;"
+									onclick="addToCart('cutter', ${product.id}, '${product.name}', '${product.prise}','${product.pathPictures.get(0)}');"></i>
+					
+								</div>
+                            
                               </div>
                           </c:forEach>
 
@@ -648,23 +684,30 @@
 			         <div class="play_button_scaner"><i class="fa fa-play" aria-hidden="true"></i></div>
                      <div class="prev_button_scaner"><i class="fa fa-angle-left"></i></div>
                      <div class="carousel_scaner">
-                        <c:forEach items="${scanners}" var="scanner">
+                        <c:forEach items="${scanners}" var="product">
                               <div class="slide-item">
-                                  <a class="slider_image" href="<c:url value='/scanner/${cutter.id}' />">
-                                  	<div class="outer_a_img"><img src="/images/scanners/${scanner.id}/${scanner.pathPictures.get(0)}" alt="" /></div>
+                                  <a class="slider_image" href="<c:url value='/scanner/${product.id}' />">
+                                  	<div class="outer_a_img"><img src="/images/scanners/${product.id}/${product.pathPictures.get(0)}" alt="" /></div>
                                   </a>
-                                  <a href="<c:url value='/scanner/${scanner.id}' />" class="slide-title">${scanner.name}</a>
-                        		
-                        		  <div class="product_price"><span style="float: left;">Цена:&nbsp;</span> 
-									 <input type="hidden" name="price_value" value="${scanner.prise}">
-							       	 <c:if test="${scanner.prise < 0.1}"><a href="#callback" class="fancybox">уточняйте</a></c:if>
-									 <c:if test="${!(scanner.prise < 0.1)}">					
-						   				<div></div>
-									 </c:if>
-					           	  </div>
-                        		
-                        		<i class="fa fa-cart-plus add_to_cart" aria-hidden="true" style="margin-top: 3px; right: 0px;" 
-			onclick="addToCart('scanner', ${scanner.id}, '${scanner.name}', '${scanner.prise}','${scanner.pathPictures.get(0)}');"></i>
+                                  
+                                  <div class="name_price_cart_block">
+                                               
+                                      <a href="<c:url value='/scanner/${product.id}' />" class="slide-title">${product.name}</a>         
+                                                                    
+	                                  <div class="product_price"><span style="float: left;">Цена:&nbsp;</span> 
+										<input type="hidden" name="price_value" value="${product.prise}">
+							       		<c:if test="${product.prise < 0.1}"><a href="#callback" class="fancybox">уточняйте</a></c:if>
+										<c:if test="${!(product.prise < 0.1)}">					
+						   					<div></div>
+										</c:if>
+					           		 </div>
+					           		 
+					           		 <i class="fa fa-cart-plus add_to_cart" aria-hidden="true" 
+					           		 	style="padding-right: 5px; top: 3px; right: 5px; position: absolute; font-size: 40px;"
+									onclick="addToCart('scanner', ${product.id}, '${product.name}', '${product.prise}','${product.pathPictures.get(0)}');"></i>
+					
+								</div>
+
                               </div>
                           </c:forEach>
 
@@ -728,18 +771,25 @@
                                   <a class="slider_image" href="<c:url value='/${product.type}/${product.id}' />">
                                   	<div class="outer_a_img"><img src="/images/${product.type}s/${product.id}/${product.pathPictures.get(0)}" alt="" /></div>
                                   </a>
-                                  <a href="<c:url value='/${product.type}/${product.id}' />" class="slide-title">${product.name}</a>                               
-                        		
-                        		  <div class="product_price"><span style="float: left;">Цена:&nbsp;</span> 
-									 <input type="hidden" name="price_value" value="${product.prise}">
-							       	 <c:if test="${product.prise < 0.1}"><a href="#callback" class="fancybox">уточняйте</a></c:if>
-									 <c:if test="${!(product.prise < 0.1)}">					
-						   				<div></div>
-									 </c:if>
-					           	  </div>                        		                        		
-                        		
-                        		<i class="fa fa-cart-plus add_to_cart" aria-hidden="true" style="margin-top: 3px; right: 0px;" 
-			onclick="addToCart(${product.type}, ${product.id}, '${product.name}', '${product.prise}','${product.pathPictures.get(0)}');"></i>
+                                  
+                                  <div class="name_price_cart_block">
+                                               
+                                      <a href="<c:url value='/${product.type}/${product.id}' />" class="slide-title">${product.name}</a>         
+                                                                    
+	                                  <div class="product_price"><span style="float: left;">Цена:&nbsp;</span> 
+										<input type="hidden" name="price_value" value="${product.prise}">
+							       		<c:if test="${product.prise < 0.1}"><a href="#callback" class="fancybox">уточняйте</a></c:if>
+										<c:if test="${!(product.prise < 0.1)}">					
+						   					<div></div>
+										</c:if>
+					           		 </div>
+					           		 
+					           		 <i class="fa fa-cart-plus add_to_cart" aria-hidden="true" 
+					           		 	style="padding-right: 5px; top: 3px; right: 5px; position: absolute; font-size: 40px;"
+									onclick="addToCart(${product.type}, ${product.id}, '${product.name}', '${product.prise}','${product.pathPictures.get(0)}');"></i>
+					
+								</div>
+                                  
                               </div>
                           </c:forEach>
 
@@ -799,22 +849,30 @@
 			         <div class="play_button_rip"><i class="fa fa-play" aria-hidden="true"></i></div>
                      <div class="prev_button_rip"><i class="fa fa-angle-left"></i></div>
                      <div class="carousel_rip">
-                        <c:forEach items="${rips}" var="rip">
+                        <c:forEach items="${rips}" var="product">
                               <div class="slide-item">
-                                  <a class="slider_image" href="<c:url value='/rip/${rip.id}' />">
-                                  <div class="outer_a_img"><img src="/images/rips/${rip.id}/${rip.pathPictures.get(0)}" alt="" /></div></a>
-                                  <a href="<c:url value='/rip/${rip.id}' />" class="slide-title">${rip.name}</a>                                  
-                        		
-                        		  <div class="product_price"><span style="float: left;">Цена:&nbsp;</span> 
-									 <input type="hidden" name="price_value" value="${rip.prise}">
-							       	 <c:if test="${rip.prise < 0.1}"><a href="#callback" class="fancybox">уточняйте</a></c:if>
-									 <c:if test="${!(rip.prise < 0.1)}">					
-						   				<div></div>
-									 </c:if>
-					           	  </div>                           		
-                        		
-                        		<i class="fa fa-cart-plus add_to_cart" aria-hidden="true" style="margin-top: 3px; right: 0px;" 
-			onclick="addToCart('rip', ${rip.id}, '${rip.name}', '${rip.prise}','${rip.pathPictures.get(0)}');"></i>
+                                  <a class="slider_image" href="<c:url value='/rip/${product.id}' />">
+                                  	<div class="outer_a_img"><img src="/images/rips/${product.id}/${product.pathPictures.get(0)}" alt="" /></div>
+                                  </a>
+                                  
+                                  <div class="name_price_cart_block">
+                                               
+                                      <a href="<c:url value='/rip/${product.id}' />" class="slide-title">${product.name}</a>         
+                                                                    
+	                                  <div class="product_price"><span style="float: left;">Цена:&nbsp;</span> 
+										<input type="hidden" name="price_value" value="${product.prise}">
+							       		<c:if test="${product.prise < 0.1}"><a href="#callback" class="fancybox">уточняйте</a></c:if>
+										<c:if test="${!(product.prise < 0.1)}">					
+						   					<div></div>
+										</c:if>
+					           		 </div>
+					           		 
+					           		 <i class="fa fa-cart-plus add_to_cart" aria-hidden="true" 
+					           		 	style="padding-right: 5px; top: 3px; right: 5px; position: absolute; font-size: 40px;"
+									onclick="addToCart('rip', ${product.id}, '${product.name}', '${product.prise}','${product.pathPictures.get(0)}');"></i>
+					
+								</div>
+
                               </div>
                           </c:forEach>
 

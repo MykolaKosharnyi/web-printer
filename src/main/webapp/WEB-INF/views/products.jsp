@@ -190,7 +190,7 @@ $(function(){
 	/* for changing height of name and price after hovering on product field */
 	$("#top_result_of_search, #out_result_of_search").on('mouseenter', '.products', function() {
 		var name_and_price_block = $(this).find('.name_price_cart_block');
-		name_and_price_block.outerHeight(name_and_price_block.find('a.products_title').outerHeight(true) + name_and_price_block.find('.product_price').outerHeight(true) + 15);
+		name_and_price_block.outerHeight(name_and_price_block.find('a.products_title').outerHeight(true) + name_and_price_block.find('.product_price').outerHeight(true) + 18);
 	});
 	
 	$("#top_result_of_search, #out_result_of_search").on('mouseleave', '.products', function() {
