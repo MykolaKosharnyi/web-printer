@@ -136,21 +136,33 @@
 			         <div class="play_button_printer"><i class="fa fa-play" aria-hidden="true"></i></div>
                      <div class="prev_button_printer"><i class="fa fa-angle-left"></i></div>
                      <div class="carousel_printer">
-                        <c:forEach items="${printers}" var="printer">
-                              <div class="slide-item1">
-                                  <a class="slider_image" href="<c:url value='/printer/${printer.id}' />">
-                                  <div class="outer_a_img"><img src="/images/printers/${printer.id}/${printer.pathPictures.get(0)}" alt="" /></div></a>
-                                  <a href="<c:url value='/printer/${printer.id}' />" class="slide-title">${printer.name}</a>
-                                  <div class="slide-price">Цена: 
-                                    <c:if test="${printer.prise < 0.1}"><a href="#callback" class="fancybox">уточняйте</a></c:if>
-				                    <c:if test="${!(printer.prise < 0.1)}">         
-				                        $<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${printer.prise}" />
-				                    </c:if>
-                                  </div>
-                                  <i class="fa fa-cart-plus add_to_cart" aria-hidden="true" style="margin-top: 3px; right: 0px;"
-			onclick="addToCart('printer', ${printer.id}, '${printer.name}', '${printer.prise}','${printer.pathPictures.get(0)}');"></i>
+                        <c:forEach items="${printers}" var="product">
+                              <div class="slide-item">
+                                  <a class="slider_image" href="<c:url value='/printer/${product.id}' />">
+                                  	<div class="outer_a_img"><img src="/images/printers/${product.id}/${product.pathPictures.get(0)}" alt="" /></div>
+                                  </a>
+                                  
+                                  
+                                  <div class="name_price_cart_block">
+                                               
+                                      <a href="<c:url value='/printer/${product.id}' />" class="slide-title">${product.name}</a>         
+                                                                    
+	                                  <div class="product_price"><span style="float: left;">Цена:&nbsp;</span> 
+										<input type="hidden" name="price_value" value="${product.prise}">
+							       		<c:if test="${product.prise < 0.1}"><a href="#callback" class="fancybox">уточняйте</a></c:if>
+										<c:if test="${!(product.prise < 0.1)}">					
+						   					<div></div>
+										</c:if>
+					           		 </div>
+					           		 
+					           		 <i class="fa fa-cart-plus add_to_cart" aria-hidden="true" 
+					           		 	style="padding-right: 5px; top: 2px; right: 5px; position: absolute;"
+									onclick="addToCart('printer', ${product.id}, '${product.name}', '${product.prise}','${product.pathPictures.get(0)}');"></i>
+					
+								</div>
+
                               </div>
-                            </c:forEach>
+                     	</c:forEach>
                      </div>
                   </div>
                 </div>
@@ -197,19 +209,26 @@
                     <a href="<c:url value='/3d_printers' />" class="list-group-item active">
                       <spring:message code="head.3dprinter"/>
                     </a>
-                            <a href="<c:url value='/3d_printers/FDM-extruder' />" class="list-group-item"><spring:message code="head.3dprinter.FDM-extruder"/></a>
+                            <a href="<c:url value='/3d_printers/FDM-extruder' />" class="list-group-item">
+                            <spring:message code="head.3dprinter.FDM-extruder"/></a>
 
-                            <a href="<c:url value='/3d_printers/photo_printing_polyjet' />" class="list-group-item"><spring:message code="head.3dprinter.photo_printing_polyjet"/></a>
+                            <a href="<c:url value='/3d_printers/photo_printing_polyjet' />" class="list-group-item">
+                            <spring:message code="head.3dprinter.photo_printing_polyjet"/></a>
 
-                            <a href="<c:url value='/3d_printers/laser_sintering_LENS' />" class="list-group-item"><spring:message code="head.3dprinter.laser_sintering_LENS"/></a>
+                            <a href="<c:url value='/3d_printers/laser_sintering_LENS' />" class="list-group-item">
+                            <spring:message code="head.3dprinter.laser_sintering_LENS"/></a>
 
-                            <a href="<c:url value='/3d_printers/lamination_LOM' />" class="list-group-item"><spring:message code="head.3dprinter.lamination_LOM"/></a>
+                            <a href="<c:url value='/3d_printers/lamination_LOM' />" class="list-group-item">
+                            <spring:message code="head.3dprinter.lamination_LOM"/></a>
 
-                            <a href="<c:url value='/3d_printers/stereolithography_SL' />" class="list-group-item"><spring:message code="head.3dprinter.stereolithography_SL"/></a>
+                            <a href="<c:url value='/3d_printers/stereolithography_SL' />" class="list-group-item">
+                            <spring:message code="head.3dprinter.stereolithography_SL"/></a>
 
-                            <a href="<c:url value='/3d_printers/laser_sintering_LS' />" class="list-group-item"><spring:message code="head.3dprinter.laser_sintering_LS"/></a>
+                            <a href="<c:url value='/3d_printers/laser_sintering_LS' />" class="list-group-item">
+                            <spring:message code="head.3dprinter.laser_sintering_LS"/></a>
                             
-                            <a href="<c:url value='/3d_printers/powder_bonding_3DP' />" class="list-group-item"><spring:message code="head.3dprinter.powder_bonding_3DP"/></a>
+                            <a href="<c:url value='/3d_printers/powder_bonding_3DP' />" class="list-group-item">
+                            <spring:message code="head.3dprinter.powder_bonding_3DP"/></a>
                   </div>
                 </div>
 
@@ -222,16 +241,19 @@
                      <div class="prev_button_printer_3d"><i class="fa fa-angle-left"></i></div>
                      <div class="carousel_printer_3d">
                         <c:forEach items="${printers3D}" var="printer3D">
-                              <div class="slide-item2">
+                              <div class="slide-item">
                                   <a class="slider_image" href="<c:url value='/3d_printer/${printer3D.id}' />">
                                   <div class="outer_a_img"><img src="/images/3d_printers/${printer3D.id}/${printer3D.pathPictures.get(0)}" alt="" /></div></a>
-                                  <a href="<c:url value='/3d_printer/${printer3D.id}' />" class="slide-title">${printer3D.name}</a>
-                                  <div class="slide-price">Цена:
-                                    <c:if test="${printer3D.prise < 0.1}"><a href="#callback" class="fancybox">уточняйте</a></c:if>
-                    <c:if test="${!(printer3D.prise < 0.1)}">         
-                        $<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${printer3D.prise}" />
-                    </c:if>
-                        </div>
+                                  <a href="<c:url value='/3d_printer/${printer3D.id}' />" class="slide-title">${printer3D.name}</a>                              
+                        
+	                        	  <div class="product_price"><span style="float: left;">Цена:&nbsp;</span> 
+									<input type="hidden" name="price_value" value="${printer3D.prise}">
+							       	<c:if test="${printer3D.prise < 0.1}"><a href="#callback" class="fancybox">уточняйте</a></c:if>
+									<c:if test="${!(printer3D.prise < 0.1)}">					
+						   				<div></div>
+									</c:if>
+					           	  </div>
+                        
                         <i class="fa fa-cart-plus add_to_cart" aria-hidden="true" style="margin-top: 3px; right: 0px;"
 			onclick="addToCart('3d_printer', ${printer3D.id}, '${printer3D.name}', '${printer3D.prise}','${printer3D.pathPictures.get(0)}');"></i>
                               </div>
@@ -251,19 +273,19 @@
 		<div class="col-md-4">
 			<div class="row">
 				<a href="${homeJSON.list_digital_printer_top1.href}">
-                			<img src="/images/home/three_big_pictures/digital_printer_top/1/${homeJSON.list_digital_printer_top1.fileNameArray.get(0)}" alt="" ></a>
+                	<img src="/images/home/three_big_pictures/digital_printer_top/1/${homeJSON.list_digital_printer_top1.fileNameArray.get(0)}" alt="" ></a>
 			</div>
 		</div>
 		<div class="col-md-4">
 			<div class="row">
 				<a href="${homeJSON.list_digital_printer_top2.href}">
-                			<img src="/images/home/three_big_pictures/digital_printer_top/2/${homeJSON.list_digital_printer_top2.fileNameArray.get(0)}" alt="" ></a>
+                	<img src="/images/home/three_big_pictures/digital_printer_top/2/${homeJSON.list_digital_printer_top2.fileNameArray.get(0)}" alt="" ></a>
 			</div>
 		</div>
 		<div class="col-md-4">
 			<div class="row">
 				<a href="${homeJSON.list_digital_printer_top3.href}">
-                			<img src="/images/home/three_big_pictures/digital_printer_top/3/${homeJSON.list_digital_printer_top3.fileNameArray.get(0)}" alt="" ></a>
+                	<img src="/images/home/three_big_pictures/digital_printer_top/3/${homeJSON.list_digital_printer_top3.fileNameArray.get(0)}" alt="" ></a>
 			</div>
 		</div>
 
@@ -278,11 +300,14 @@
 
                      <a href="<c:url value='/digital_printers' />" class="list-group-item active"><spring:message code="head.digital_printer"/></a>
 
-                            <a href="<c:url value='/digital_printers/full_color_laser_printers' />" class="list-group-item"><spring:message code="head.digital_printer.full_color_laser_printers"/></a>
+                            <a href="<c:url value='/digital_printers/full_color_laser_printers' />" class="list-group-item">
+                            <spring:message code="head.digital_printer.full_color_laser_printers"/></a>
 
-                            <a href="<c:url value='/digital_printers/monochrome_laser_printers' />" class="list-group-item"><spring:message code="head.digital_printer.monochrome_laser_printers"/></a>
+                            <a href="<c:url value='/digital_printers/monochrome_laser_printers' />" class="list-group-item">
+                            <spring:message code="head.digital_printer.monochrome_laser_printers"/></a>
 
-                            <a href="<c:url value='/digital_printers/full-color_inkjet_printers' />" class="list-group-item"><spring:message code="head.digital_printer.full_color_inkjet_printers"/></a>
+                            <a href="<c:url value='/digital_printers/full-color_inkjet_printers' />" class="list-group-item">
+                            <spring:message code="head.digital_printer.full_color_inkjet_printers"/></a>
                   </div>
                 </div>
 
@@ -295,15 +320,20 @@
                      <div class="prev_button_printer_d"><i class="fa fa-angle-left"></i></div>
                      <div class="carousel_printer_d">
                         <c:forEach items="${digitalPrinters}" var="printer">
-                              <div class="slide-item2">
-                                  <a class="slider_image" href="<c:url value='/digital_printer/${printer.id}' />"><div class="outer_a_img"><img src="/images/digital_printers/${printer.id}/${printer.pathPictures.get(0)}" alt="" /></div></a>
-                                  <a href="<c:url value='/digital_printer/${printer.id}' />" class="slide-title">${printer.name}</a>
-                                  <div class="slide-price">Цена:
-                                    <c:if test="${printer.prise < 0.1}"><a href="#callback" class="fancybox">уточняйте</a></c:if>
-                    <c:if test="${!(printer.prise < 0.1)}">         
-                        $<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${printer.prise}" />
-                    </c:if>
-                        </div>
+                              <div class="slide-item">
+                                  <a class="slider_image" href="<c:url value='/digital_printer/${printer.id}' />">
+                                  	<div class="outer_a_img"><img src="/images/digital_printers/${printer.id}/${printer.pathPictures.get(0)}" alt="" /></div>
+                                  </a>
+                                  <a href="<c:url value='/digital_printer/${printer.id}' />" class="slide-title">${printer.name}</a>                             
+                        
+                        		  <div class="product_price"><span style="float: left;">Цена:&nbsp;</span> 
+									<input type="hidden" name="price_value" value="${printer.prise}">
+							       	<c:if test="${printer.prise < 0.1}"><a href="#callback" class="fancybox">уточняйте</a></c:if>
+									<c:if test="${!(printer.prise < 0.1)}">					
+						   				<div></div>
+									</c:if>
+					           	  </div>
+                        
                         <i class="fa fa-cart-plus add_to_cart" aria-hidden="true" style="margin-top: 3px; right: 0px;" 
 			onclick="addToCart('digital_printer', ${printer.id}, '${printer.name}', '${printer.prise}','${printer.pathPictures.get(0)}');"></i>
                               </div>
@@ -345,13 +375,17 @@
 
                      <a href="<c:url value='/laminators' />" class="list-group-item active"><spring:message code="head.laminator"/></a>
 
-                            <a href="<c:url value='/laminators/hot_lamination' />" class="list-group-item"><spring:message code="head.laminator.hot_lamination"/></a>
+                            <a href="<c:url value='/laminators/hot_lamination' />" class="list-group-item">
+                            <spring:message code="head.laminator.hot_lamination"/></a>
 
-                            <a href="<c:url value='/laminators/cold_laminating' />" class="list-group-item"><spring:message code="head.laminator.cold_laminating"/></a>
+                            <a href="<c:url value='/laminators/cold_laminating' />" class="list-group-item">
+                            <spring:message code="head.laminator.cold_laminating"/></a>
 
-                            <a href="<c:url value='/laminators/liquid' />" class="list-group-item"><spring:message code="head.laminator.liquid"/></a>
+                            <a href="<c:url value='/laminators/liquid' />" class="list-group-item">
+                            <spring:message code="head.laminator.liquid"/></a>
                             
-                            <a href="<c:url value='/laminators/flatbed_laminating_machine' />" class="list-group-item"><spring:message code="head.laminator.flatbed_laminating_machine"/></a>
+                            <a href="<c:url value='/laminators/flatbed_laminating_machine' />" class="list-group-item">
+                            <spring:message code="head.laminator.flatbed_laminating_machine"/></a>
                   </div>
                 </div>
 
@@ -364,15 +398,20 @@
                      <div class="prev_button_laminator"><i class="fa fa-angle-left"></i></div>
                      <div class="carousel_laminator">
                          <c:forEach items="${laminators}" var="product">
-                              <div class="slide-item2">
-                                  <a class="slider_image" href="<c:url value='/laminator/${product.id}' />"><div class="outer_a_img"><img src="/images/laminators/${product.id}/${product.pathPictures.get(0)}" alt="" /></div></a>
-                                  <a href="<c:url value='/laminator/${product.id}' />" class="slide-title">${product.name}</a>
-                                  <div class="slide-price">Цена:
-                                    <c:if test="${product.prise < 0.1}"><a href="#callback" class="fancybox">уточняйте</a></c:if>
-                    				<c:if test="${!(product.prise < 0.1)}">         
-                        				$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${product.prise}" />
-                    				</c:if>
-                        		</div>
+                              <div class="slide-item">
+                                  <a class="slider_image" href="<c:url value='/laminator/${product.id}' />">
+                                  	<div class="outer_a_img"><img src="/images/laminators/${product.id}/${product.pathPictures.get(0)}" alt="" /></div>
+                                  </a>
+                                  <a href="<c:url value='/laminator/${product.id}' />" class="slide-title">${product.name}</a>                            
+                        		
+                        		  <div class="product_price"><span style="float: left;">Цена:&nbsp;</span> 
+									 <input type="hidden" name="price_value" value="${product.prise}">
+							       	 <c:if test="${product.prise < 0.1}"><a href="#callback" class="fancybox">уточняйте</a></c:if>
+									 <c:if test="${!(product.prise < 0.1)}">					
+						   				<div></div>
+									 </c:if>
+					           	  </div>
+                        		
                         		<i class="fa fa-cart-plus add_to_cart" aria-hidden="true"  style="margin-top: 3px; right: 0px;"
 			onclick="addToCart('laminator', ${product.id}, '${product.name}', '${product.prise}','${product.pathPictures.get(0)}');"></i>
                               </div>
@@ -423,17 +462,23 @@
 
                      <a href="<c:url value='/lasers' />" class="list-group-item active"><spring:message code="head.laser"/></a>
 
-                            <a href="<c:url value='/lasers/CO2_gas_lasers' />" class="list-group-item"><spring:message code="head.laser.CO2_gas_lasers"/></a>
+                            <a href="<c:url value='/lasers/CO2_gas_lasers' />" class="list-group-item">
+                            <spring:message code="head.laser.CO2_gas_lasers"/></a>
 
-                            <a href="<c:url value='/lasers/solid_state_lasers' />" class="list-group-item"><spring:message code="head.laser.solid_state_lasers"/></a>
+                            <a href="<c:url value='/lasers/solid_state_lasers' />" class="list-group-item">
+                            <spring:message code="head.laser.solid_state_lasers"/></a>
 
-                            <a href="<c:url value='/lasers/for_the_treatment_of_metal' />" class="list-group-item"><spring:message code="head.laser.for_the_treatment_of_metal"/></a>
+                            <a href="<c:url value='/lasers/for_the_treatment_of_metal' />" class="list-group-item">
+                            <spring:message code="head.laser.for_the_treatment_of_metal"/></a>
 
-                            <a href="<c:url value='/lasers/diode_pumped' />" class="list-group-item"><spring:message code="head.laser.diode_pumped"/></a>
+                            <a href="<c:url value='/lasers/diode_pumped' />" class="list-group-item">
+                            <spring:message code="head.laser.diode_pumped"/></a>
                             
-                            <a href="<c:url value='/lasers/fiber_lasers' />" class="list-group-item"><spring:message code="head.laser.fiber_lasers"/></a>
+                            <a href="<c:url value='/lasers/fiber_lasers' />" class="list-group-item">
+                            <spring:message code="head.laser.fiber_lasers"/></a>
                             
-                            <a href="<c:url value='/lasers/plasma_lasers' />" class="list-group-item"><spring:message code="head.laser.plasma_lasers"/></a>
+                            <a href="<c:url value='/lasers/plasma_lasers' />" class="list-group-item">
+                            <spring:message code="head.laser.plasma_lasers"/></a>
                   </div>
                 </div>
 
@@ -446,15 +491,20 @@
                      <div class="prev_button_laser"><i class="fa fa-angle-left"></i></div>
                      <div class="carousel_laser">
                         <c:forEach items="${lasers}" var="laser">
-                              <div class="slide-item2">
-                                  <a class="slider_image" href="<c:url value='/laser/${laser.id}' />"><div class="outer_a_img"><img src="/images/lasers/${laser.id}/${laser.pathPictures.get(0)}" alt="" /></div></a>
+                              <div class="slide-item">
+                                  <a class="slider_image" href="<c:url value='/laser/${laser.id}' />">
+                                  	<div class="outer_a_img"><img src="/images/lasers/${laser.id}/${laser.pathPictures.get(0)}" alt="" /></div>
+                                  </a>
                                   <a href="<c:url value='/laser/${laser.id}' />" class="slide-title">${laser.name}</a>
-                                  <div class="slide-price">Цена:
-                                    <c:if test="${laser.prise < 0.1}"><a href="#callback" class="fancybox">уточняйте</a></c:if>
-                    <c:if test="${!(laser.prise < 0.1)}">         
-                        $<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${laser.prise}" />
-                    </c:if>
-                        </div>
+                                  
+                        		  <div class="product_price"><span style="float: left;">Цена:&nbsp;</span> 
+									 <input type="hidden" name="price_value" value="${laser.prise}">
+							       	 <c:if test="${laser.prise < 0.1}"><a href="#callback" class="fancybox">уточняйте</a></c:if>
+									 <c:if test="${!(laser.prise < 0.1)}">					
+						   				<div></div>
+									 </c:if>
+					           	  </div>
+                        
                         <i class="fa fa-cart-plus add_to_cart" aria-hidden="true" style="margin-top: 3px; right: 0px;" 
 			onclick="addToCart('laser', ${laser.id}, '${laser.name}', '${laser.prise}','${laser.pathPictures.get(0)}');"></i>
                               </div>
@@ -495,13 +545,17 @@
                 <div class="col-md-3" style="padding: 0px;">
                   <div class="list-group">
 
-                     <a href="<c:url value='/cutters' />" class="list-group-item active"><spring:message code="head.cutter"/></a>
+                     <a href="<c:url value='/cutters' />" class="list-group-item active">
+                     <spring:message code="head.cutter"/></a>
 
-                            <a href="<c:url value='/cutters/for_wood' />" class="list-group-item"><spring:message code="head.cutter.for_wood"/></a>
+                            <a href="<c:url value='/cutters/for_wood' />" class="list-group-item">
+                            <spring:message code="head.cutter.for_wood"/></a>
 
-                            <a href="<c:url value='/cutters/for_the_treatment_of_metal' />" class="list-group-item"><spring:message code="head.cutter.for_the_treatment_of_metal"/></a>
+                            <a href="<c:url value='/cutters/for_the_treatment_of_metal' />" class="list-group-item">
+                            <spring:message code="head.cutter.for_the_treatment_of_metal"/></a>
 
-                            <a href="<c:url value='/cutters/stone_processing' />" class="list-group-item"><spring:message code="head.cutter.stone_processing"/></a>
+                            <a href="<c:url value='/cutters/stone_processing' />" class="list-group-item">
+                            <spring:message code="head.cutter.stone_processing"/></a>
                   </div>
                 </div>
 
@@ -514,15 +568,20 @@
                      <div class="prev_button_cutter"><i class="fa fa-angle-left"></i></div>
                      <div class="carousel_cutter">
                         <c:forEach items="${cutters}" var="cutter">
-                              <div class="slide-item2">
-                                  <a class="slider_image" href="<c:url value='/cutter/${cutter.id}' />"><div class="outer_a_img"><img src="/images/cutters/${cutter.id}/${cutter.pathPictures.get(0)}" alt="" /></div></a>
-                                  <a href="<c:url value='/cutter/${cutter.id}' />" class="slide-title">${cutter.name}</a>
-                                  <div class="slide-price">Цена:
-                                    <c:if test="${cutter.prise < 0.1}"><a href="#callback" class="fancybox">уточняйте</a></c:if>
-                    <c:if test="${!(cutter.prise < 0.1)}">         
-                        $<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${cutter.prise}" />
-                    </c:if>
-                        </div>
+                              <div class="slide-item">
+                                  <a class="slider_image" href="<c:url value='/cutter/${cutter.id}' />">
+                                  	<div class="outer_a_img"><img src="/images/cutters/${cutter.id}/${cutter.pathPictures.get(0)}" alt="" /></div>
+                                  </a>
+                                  <a href="<c:url value='/cutter/${cutter.id}' />" class="slide-title">${cutter.name}</a>                                 
+                        
+                        		  <div class="product_price"><span style="float: left;">Цена:&nbsp;</span> 
+									 <input type="hidden" name="price_value" value="${cutter.prise}">
+							       	 <c:if test="${cutter.prise < 0.1}"><a href="#callback" class="fancybox">уточняйте</a></c:if>
+									 <c:if test="${!(cutter.prise < 0.1)}">					
+						   				<div></div>
+									 </c:if>
+					           	  </div>
+                        
                         <i class="fa fa-cart-plus add_to_cart" aria-hidden="true" style="margin-top: 3px; right: 0px;" 
 			onclick="addToCart('cutter', ${cutter.id}, '${cutter.name}', '${cutter.prise}','${cutter.pathPictures.get(0)}');"></i>
                               </div>
@@ -590,15 +649,20 @@
                      <div class="prev_button_scaner"><i class="fa fa-angle-left"></i></div>
                      <div class="carousel_scaner">
                         <c:forEach items="${scanners}" var="scanner">
-                              <div class="slide-item2">
-                                  <a class="slider_image" href="<c:url value='/scanner/${cutter.id}' />"><div class="outer_a_img"><img src="/images/scanners/${scanner.id}/${scanner.pathPictures.get(0)}" alt="" /></div></a>
+                              <div class="slide-item">
+                                  <a class="slider_image" href="<c:url value='/scanner/${cutter.id}' />">
+                                  	<div class="outer_a_img"><img src="/images/scanners/${scanner.id}/${scanner.pathPictures.get(0)}" alt="" /></div>
+                                  </a>
                                   <a href="<c:url value='/scanner/${scanner.id}' />" class="slide-title">${scanner.name}</a>
-                                  <div class="slide-price">Цена:
-                                    <c:if test="${scanner.prise < 0.1}"><a href="#callback" class="fancybox">уточняйте</a></c:if>
-					                <c:if test="${!(scanner.prise < 0.1)}">         
-					                	$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${scanner.prise}" />
-					                </c:if>
-                        		</div>
+                        		
+                        		  <div class="product_price"><span style="float: left;">Цена:&nbsp;</span> 
+									 <input type="hidden" name="price_value" value="${scanner.prise}">
+							       	 <c:if test="${scanner.prise < 0.1}"><a href="#callback" class="fancybox">уточняйте</a></c:if>
+									 <c:if test="${!(scanner.prise < 0.1)}">					
+						   				<div></div>
+									 </c:if>
+					           	  </div>
+                        		
                         		<i class="fa fa-cart-plus add_to_cart" aria-hidden="true" style="margin-top: 3px; right: 0px;" 
 			onclick="addToCart('scanner', ${scanner.id}, '${scanner.name}', '${scanner.prise}','${scanner.pathPictures.get(0)}');"></i>
                               </div>
@@ -660,15 +724,20 @@
                      <div class="prev_button_previously_used"><i class="fa fa-angle-left"></i></div>
                      <div class="carousel_previously_used">
                         <c:forEach items="${pue}" var="product">
-                              <div class="slide-item2">
-                                  <a class="slider_image" href="<c:url value='/${product.type}/${product.id}' />"><div class="outer_a_img"><img src="/images/${product.type}s/${product.id}/${product.pathPictures.get(0)}" alt="" /></div></a>
-                                  <a href="<c:url value='/${product.type}/${product.id}' />" class="slide-title">${product.name}</a>
-                                  <div class="slide-price">Цена:
-                                    <c:if test="${product.prise < 0.1}"><a href="#callback" class="fancybox">уточняйте</a></c:if>
-					                <c:if test="${!(product.prise < 0.1)}">         
-					                	$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${product.prise}" />
-					                </c:if>
-                        		</div>
+                              <div class="slide-item">
+                                  <a class="slider_image" href="<c:url value='/${product.type}/${product.id}' />">
+                                  	<div class="outer_a_img"><img src="/images/${product.type}s/${product.id}/${product.pathPictures.get(0)}" alt="" /></div>
+                                  </a>
+                                  <a href="<c:url value='/${product.type}/${product.id}' />" class="slide-title">${product.name}</a>                               
+                        		
+                        		  <div class="product_price"><span style="float: left;">Цена:&nbsp;</span> 
+									 <input type="hidden" name="price_value" value="${product.prise}">
+							       	 <c:if test="${product.prise < 0.1}"><a href="#callback" class="fancybox">уточняйте</a></c:if>
+									 <c:if test="${!(product.prise < 0.1)}">					
+						   				<div></div>
+									 </c:if>
+					           	  </div>                        		                        		
+                        		
                         		<i class="fa fa-cart-plus add_to_cart" aria-hidden="true" style="margin-top: 3px; right: 0px;" 
 			onclick="addToCart(${product.type}, ${product.id}, '${product.name}', '${product.prise}','${product.pathPictures.get(0)}');"></i>
                               </div>
@@ -731,16 +800,19 @@
                      <div class="prev_button_rip"><i class="fa fa-angle-left"></i></div>
                      <div class="carousel_rip">
                         <c:forEach items="${rips}" var="rip">
-                              <div class="slide-item2">
+                              <div class="slide-item">
                                   <a class="slider_image" href="<c:url value='/rip/${rip.id}' />">
                                   <div class="outer_a_img"><img src="/images/rips/${rip.id}/${rip.pathPictures.get(0)}" alt="" /></div></a>
-                                  <a href="<c:url value='/rip/${rip.id}' />" class="slide-title">${rip.name}</a>
-                                  <div class="slide-price">Цена:
-                                    <c:if test="${rip.prise < 0.1}"><a href="#callback" class="fancybox">уточняйте</a></c:if>
-					                <c:if test="${!(rip.prise < 0.1)}">         
-					                	$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${rip.prise}" />
-					                </c:if>
-                        		</div>
+                                  <a href="<c:url value='/rip/${rip.id}' />" class="slide-title">${rip.name}</a>                                  
+                        		
+                        		  <div class="product_price"><span style="float: left;">Цена:&nbsp;</span> 
+									 <input type="hidden" name="price_value" value="${rip.prise}">
+							       	 <c:if test="${rip.prise < 0.1}"><a href="#callback" class="fancybox">уточняйте</a></c:if>
+									 <c:if test="${!(rip.prise < 0.1)}">					
+						   				<div></div>
+									 </c:if>
+					           	  </div>                           		
+                        		
                         		<i class="fa fa-cart-plus add_to_cart" aria-hidden="true" style="margin-top: 3px; right: 0px;" 
 			onclick="addToCart('rip', ${rip.id}, '${rip.name}', '${rip.prise}','${rip.pathPictures.get(0)}');"></i>
                               </div>
