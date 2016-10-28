@@ -29,7 +29,7 @@
 	<script src="<%=request.getContextPath()%>/resources/js/admin/common.js"></script>
 </head>
 <body>
-	<div style="width: 1200px; margin: 0 auto;">
+	<div style="width: 1200px; margin: 0px auto 30px;">
 		<tiles:insertAttribute name="header" />
 		<tiles:insertAttribute name="tree" />
 		<tiles:insertAttribute name="body" />	

@@ -72,7 +72,7 @@ public class UserController {
 
 	@RequestMapping(value = "/user", method = RequestMethod.GET)
     public String user(Model model) {
-    	
+		
     	Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     	
     	String username = null;

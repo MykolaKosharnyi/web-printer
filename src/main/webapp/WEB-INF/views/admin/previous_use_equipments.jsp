@@ -31,8 +31,12 @@
 			<c:forEach items="${listProducts}" var="product">
 				<tr id="${product.id}">
 					<td>${product.id}</td>
-					<td>${product.name}</td>
-					<td><img src="/images/${product.type}s/${product.id}/${product.pathPictures.get(0)}" alt=""></td>
+					<td><a href="<c:url value='/admin/${product.type}/edit/${product.id}' />">${product.name}</a></td>
+					<td>
+						<a href="<c:url value='/admin/${product.type}/edit/${product.id}' />">
+							<img src="/images/${product.type}s/${product.id}/${product.pathPictures.get(0)}" alt="">
+						</a>
+					</td>
 					<td>${product.type}</td>
 					<td>$<fmt:formatNumber type="number" 
            				maxFractionDigits="2" minFractionDigits="2" value="${product.prise}" /></td>
