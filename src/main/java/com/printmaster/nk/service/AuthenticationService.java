@@ -45,15 +45,15 @@ public class AuthenticationService/* implements UserDetailsService*/{
     		return new User(user.getUsername(), user.getPassword(), true, true, true, true, authorities);
     	}
 
-    	private List<GrantedAuthority> buildUserAuthority(Role userRole) {
+    	private List<GrantedAuthority> buildUserAuthority(String userRole) {
 
     		Set<GrantedAuthority> setAuths = new HashSet<GrantedAuthority>();
 
     		// Build user's authorities
-    		setAuths.add(new SimpleGrantedAuthority(userRole.getName()));
+    		setAuths.add(new SimpleGrantedAuthority(userRole));
 
-    		List<GrantedAuthority> Result = new ArrayList<GrantedAuthority>(setAuths);
+    		List<GrantedAuthority> result = new ArrayList<GrantedAuthority>(setAuths);
 
-    		return Result;
+    		return result;
     	}*/
 }

@@ -43,7 +43,7 @@
 											<li class="current" style="width: ${product.ratingOverallRating * 20}%;"><span class="star1" title="Плохо"></span></li>
 											<li><span class="star2" title="Ниже среднего" ></span></li>
 											<li><span class="star3" title="Средне" ></span></li>
-											<li><span class="star4" title="Хорошо"  ></span></li>
+											<li><span class="star4" title="Хорошо" ></span></li>
 											<li><span class="star5" title="Очень хорошо" ></span></li>
 										</ul>
 									</div>

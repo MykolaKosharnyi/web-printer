@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -37,7 +38,7 @@ public class SecurityServiceImpl implements SecurityService {
 	 private BCryptPasswordEncoder passwordEncoder;
 	
     @Override
-    public String findLoggedInUsername() {
+    public String findLoggedInUsername(){
         Object userDetails = SecurityContextHolder.getContext().getAuthentication().getDetails();
         if (userDetails instanceof UserDetails) {
             return ((UserDetails)userDetails).getUsername();
@@ -55,13 +56,19 @@ public class SecurityServiceImpl implements SecurityService {
     	  // Make sure to encode the password first before comparing
     	  if (  passwordEncoder.matches(password, user.getPassword()) ) {
     		  logger.debug("User details are good and ready to go");
-       	  	  SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(user.getUsername(),
-          			password, buildUserAuthority(user.getRole())));
+    		  Authentication auth = 
+            		  new UsernamePasswordAuthenticationToken(user.getUsername(), password, buildUserAuthority(user.getRole()));
+
+            		SecurityContextHolder.getContext().setAuthentication(auth);
+    		  
+    		  
+       	  	/*  SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(user.getUsername(),
+          			password, buildUserAuthority(user.getRole())));*/
+       	  	  
     	  } else {
     		  logger.error("Wrong password!");
-    		   throw new BadCredentialsException("Wrong password!");
-    	  }
-   	  
+    		  throw new BadCredentialsException("Wrong password!");
+    	  }	  
     }
     
     private List<GrantedAuthority> buildUserAuthority(String userRole) {

@@ -63,13 +63,6 @@ public class UserController {
     @Autowired
     private UserValidator userValidator;
 
-    @RequestMapping(value = "/registration", method = RequestMethod.GET)
-    public String registration(Model model) {
-        model.addAttribute("userForm", new User());
-
-        return "registration";
-    }
-
 	@RequestMapping(value = "/user", method = RequestMethod.GET)
     public String user(Model model) {
 		
@@ -111,6 +104,39 @@ public class UserController {
         return "user";
     }
     
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login(Model model, String error, String logout) {
+    	model.addAttribute("userForm", new User());
+        if (error != null)
+            model.addAttribute("error", "Your username and password is invalid.");
+
+        if (logout != null)
+            model.addAttribute("message", "You have been logged out successfully.");
+
+        return "login";
+    }
+	
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String login(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model) {
+
+        if (bindingResult.hasErrors()) {
+            return "login";
+        }
+
+        String password = userForm.getPassword();
+
+        securityService.autologin(userForm.getUsername(), password);
+
+        return "redirect:/user";
+    }
+	
+    @RequestMapping(value = "/registration", method = RequestMethod.GET)
+    public String registration(Model model) {
+        model.addAttribute("userForm", new User());
+
+        return "registration";
+    }
+	
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model) {
         userValidator.validate(userForm, bindingResult);
@@ -126,29 +152,25 @@ public class UserController {
 
         return "redirect:/user";
     }
-
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login(Model model, String error, String logout) {
-        if (error != null)
-            model.addAttribute("error", "Your username and password is invalid.");
-
-        if (logout != null)
-            model.addAttribute("message", "You have been logged out successfully.");
-
-        return "login";
-    }
     
   //for 403 access denied page
   	@RequestMapping(value = "/403", method = RequestMethod.GET)
   	public ModelAndView accesssDenied() {
 
   	  ModelAndView model = new ModelAndView();
-  		
+  	  
   	  //check if user is login
   	  Authentication auth = SecurityContextHolder.getContext().getAuthentication();
   	  if (!(auth instanceof AnonymousAuthenticationToken)) {
-  		UserDetails userDetail = (UserDetails) auth.getPrincipal();	
-  		model.addObject("username", userDetail.getUsername());
+  		Object principal = auth.getPrincipal();
+  		String username = null;
+  		if (principal instanceof UserDetails) {
+  			username = ((UserDetails)principal).getUsername();
+  		} else {
+  			username = (String) principal;
+  		}
+  		 
+  		model.addObject("username", username);
   	  }
   		
   	  model.setViewName("403");

@@ -17,23 +17,42 @@
    					<a href="<c:url value='/admin' />">Перейти в админку</a><br/>
 				</c:if>
     
-			    <span class="bold_user_description">Имя в базе данных: </span><span>${user.username}</span><br/>
+			    <span class="bold_user_description">Никнейм: </span><span>${user.username}</span><br/>
+			    
+			    <c:if test="${!empty user.firstName}">
+   					<span class="bold_user_description">Имя: </span><span>${user.firstName}</span><br/>
+				</c:if>
+				
+				<c:if test="${!empty user.lastname}">
+   					<span class="bold_user_description">Фамилия: </span><span>${user.lastname}</span><br/>
+				</c:if>
 			    
 			    <span class="bold_user_description">Пароль в базе данных: </span><span>${user.password}</span><br/>
 			    
-			    <span class="bold_user_description">Компания: </span><span>${user.company}</span><br/>
+			    <c:if test="${!empty user.company}">
+   					<span class="bold_user_description">Компания: </span><span>${user.company}</span><br/>
+				</c:if>
 			    
-			    <span class="bold_user_description">E-mail: </span><span>${user.email}</span><br/>
+			    <c:if test="${!empty user.email}">
+   					<span class="bold_user_description">E-mail: </span><span>${user.email}</span><br/>
+				</c:if>
 			    
-			    <span class="bold_user_description">Номер телефона: </span><span>${user.telephone}</span><br/>
+			    <c:if test="${ user.telephone != 0 }">
+   					<span class="bold_user_description">Номер телефона: </span><span>${user.telephone}</span><br/>
+				</c:if>
 			    
-			    <span class="bold_user_description">Дата рождения: </span><span>${user.dateOfBirthDay}</span><br/>
-			    
-			    <span class="bold_user_description">Дата регистрации: </span><span>${user.timeRegistration}</span><br/>
+			    <c:if test="${!empty user.dateOfBirthDay}">
+   					 <span class="bold_user_description">Дата рождения: </span><span>${user.dateOfBirthDay}</span><br/>
+				</c:if>
+			   
+			    <c:if test="${!empty user.timeRegistration}">
+   					 <span class="bold_user_description">Дата регистрации: </span><span>${user.timeRegistration}</span><br/>
+				</c:if>
 			</div>
 		</div>
 	</div>
 	
+	<!--  
 	<div class="user_block_products">
 		<span class="title_block">Товары в корзине: </span>
 	
@@ -78,5 +97,5 @@
 			</div>
 
 	</div>
-	
+	-->
 </div>

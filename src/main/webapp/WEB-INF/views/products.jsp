@@ -149,8 +149,9 @@ jQuery(document).ready(function($) {
 	
 	if(topResult.find('.products').length > 0){
     	topResult.prepend($('<div/>').addClass('top_result_title').text("Топ Продаж"));
+    	topResult.append($('<div/>').addClass('top_result_title').text("Топ Продаж"));
     	topResult.height( Math.ceil(topResult.find('.products').length/3 ) * (topResult.find('.products').first().height() + 6 ) +
-    		topResult.find('.top_result_title').outerHeight(true));
+    		topResult.find('.top_result_title').outerHeight(true)*2);
     	topResult.css("margin-bottom","12px");
     } else {
     	topResult.height(0);
@@ -297,8 +298,9 @@ $(document).ready(function() {
             var topResult = $('#top_result_of_search');
             if(topResult.find('.products').length > 0){
             	topResult.prepend($('<div/>').addClass('top_result_title').text("Топ Продаж"));
+            	topResult.append($('<div/>').addClass('top_result_title').text("Топ Продаж"));
             	topResult.height( Math.ceil(topResult.find('.products').length/3 ) * (topResult.find('.products').first().height() + 6 ) +
-            			topResult.find('.top_result_title').outerHeight(true));
+            			topResult.find('.top_result_title').outerHeight(true)*2);
             	topResult.css("margin-bottom","12px");
             } else {
             	topResult.height(0);
