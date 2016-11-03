@@ -213,9 +213,14 @@ h1 {
 	font-size: 35px;
 	padding: 0 25px;
 	position: absolute;
-	top: 40%;
+	top: 120px;
 	z-index: 10;
 	border: 1px grey solid;
+}
+
+.next_button, .prev_button,
+.next_button_video, .prev_button_video{
+top: 40%;
 }
 
 .next_button, .prev_button{font-size: 46px;}
@@ -231,10 +236,15 @@ h1 {
 .pause_button_previously_used, .play_button_previously_used,
 .pause_button_rip, .play_button_rip,
 .pause_button_video, .play_button_video{
-top:80%;
+top:170px;
 left: 46%;
 font-size: 27px;
 padding: 3px 20px;
+}
+
+.pause_button, .play_button,
+.pause_button_video, .play_button_video{
+top:80%;
 }
 
 .pause_button, .play_button{font-size: 38px;}
@@ -751,7 +761,7 @@ section.ord1er  {
 	width: 215px;
 }
 
-#cart .option_product_car label.add_price_value{
+#cart .option_product_car .product_price{
 	min-width: 85px;
 }
 

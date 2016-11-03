@@ -456,7 +456,7 @@ border-radius: 0 0 3px 3px;
     margin: 0 auto;
 }
     .left_field{
-	font: 15px "RobotoRegular";
+	font: 14px "RobotoRegular";
         position: relative;
 -webkit-transition: opacity 0.5s linear;
 -moz-transition: opacity 0.5s linear;
@@ -603,57 +603,61 @@ transition: opacity; 0.5s linear;
                 }
 
                      #reklam .slide-item a.slider_image img{
-			position: relative;
+						position: relative;
                         height: inherit;
                         width: inherit;
                     }
 
                     #reklam .slide-item a.slider_image img:hover{
                         -moz-transform: scale(1.1);
-			-webkit-transform: scale(1.1);
-			-o-transform: scale(1.1);
-			-ms-transform: scale(1.1);
-			transform: scale(1.1);
+						-webkit-transform: scale(1.1);
+						-o-transform: scale(1.1);
+						-ms-transform: scale(1.1);
+						transform: scale(1.1);
                     }
 
          #reklam .slide-title,
-         #reklam .slide-price{
-	    position: relative;
-	    float: left;
+         #reklam .product_price{
+	    	position: relative;
+	    	float: left;
             width: inherit;
             height: auto;
             /* Шрифт */
             font: 14px "RobotoRegular", sans-serif;
-	    padding: 1px 0px 0px 3px;
-		margin-top: 1px;
-		margin-left: 1px;
-	    font-weight: bold;
-	    color: #006080;
-	    white-space: nowrap;/* Запрещаем перенос строк */
-	    overflow: hidden;
-	    text-overflow: ellipsis;
+	    	padding: 1px 0px 0px 0px;
+			margin-top: 1px;
+			margin-left: 1px;
+	    	font-weight: bold;
+	    	color: #006080;	    	
+	    	overflow: hidden;
+	    	text-overflow: ellipsis;
         }
+
+#reklam .product_price{white-space: nowrap;/* Запрещаем перенос строк */}
+
+		#reklam .product_price{
+			color: #92A5A6;
+		}
 
 		#reklam .block_title_and_price{
 			width: inherit;
 			padding: 10px;		
 		}
 
-		#reklam .slide-title:hover,
-		#reklam .products_title:hover{
+		/*#reklam .product_price:hover{
 	    background-color: white;
-	    white-space: pre;/* Запрещаем перенос строк */
+	    white-space: pre;
 	    overflow: visible;
 		width: auto;
 		z-index: 100;
 		-webkit-box-shadow: 0 0 5px rgb(157, 157, 157);
 		-moz-box-shadow: 0 0 5px rgb(157, 157, 157);
 		box-shadow: 0 0 5px rgb(157, 157, 157);
-        }
+        }*/
 			
-		#reklam .slide-title:hover{padding: 0 10px; }
+		/*#reklam .slide-title:hover{padding: 0 10px; }*/
 	
-	#reklam .slide-price{
+	#reklam .products_price{
 	    color: #92A5A6;
 	}
 
@@ -680,6 +684,7 @@ a.reklam_add_to_cart {
   box-shadow: rgba(0,0,0,.5) 3px 10px 10px -10px;
   margin: 5px 0px 0px;
   cursor: pointer;
+  width: inherit;
 }
 a.reklam_add_to_cart:hover {
   transition: .5s linear;

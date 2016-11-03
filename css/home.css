@@ -370,9 +370,9 @@ ul{
                   /*  width: 100%;*/
                 }
 
-                    .slide-item1, .slide-item2, .slide-item3, .slide-item4, .slide-item5, .slide-item6, .slide-item7, .slide-item8, .slide-item9 {
+                    .slide-item{
                         position: relative;
-                        height: 285px;
+                        height: auto;
                         width: inherit;
                         float: left;
                         border: 1px rgb(219, 219, 219) solid;
@@ -380,24 +380,19 @@ ul{
 			/*border-radius: 0 0 10px 10px;*/
 			z-index: 50;
                     }
-			.slide-item1:hover, .slide-item2:hover, .slide-item3:hover, .slide-item4:hover, .slide-item5:hover,
-			.slide-item6:hover, .slide-item7:hover, .slide-item8:hover, .slide-item9:hover{
+			.slide-item:hover{
 				 border: 1px #006080 solid;
 				border-top: 2px #006080 solid;
 			}
 
-                        .slide-item1 a.slider_image, .slide-item2 a.slider_image, 
-			.slide-item3 a.slider_image, .slide-item4 a.slider_image, 
-			.slide-item5 a.slider_image, .slide-item6 a.slider_image, 
-			.slide-item7 a.slider_image, .slide-item8 a.slider_image,
-			.slide-item9 a.slider_image {
+                        .slide-item a.slider_image {
                             height: 225px;
                             width: inherit;
                             border-bottom: 1px rgb(219, 219, 219) solid;
-		       	    display:table-cell;
-    			    vertical-align: middle;
-			    overflow: hidden;
-			    position: relative;
+		       	    		display:table-cell;
+    			    		vertical-align: middle;
+			    			overflow: hidden;
+			    			position: relative;
                         }
 		 .outer_a_img{
 			display: block;
@@ -406,9 +401,7 @@ ul{
                         width: 100%;
                     }
 
-                            .slide-item1 img, .slide-item2 img, .slide-item3 img, 
-			    .slide-item4 img, .slide-item5 img, .slide-item6 img, 
-			    .slide-item7 img, .slide-item8 img, .slide-item9 img{
+                            .slide-item img{
                                 height: auto;
                                 width: inherit;
                                 -webkit-transition: all 0.5s linear;
@@ -420,9 +413,7 @@ ul{
 				max-height: 225px;
                             }
 
-                            .slide-item1 img:hover, .slide-item2 img:hover, .slide-item3 img:hover, 
-			    .slide-item4 img:hover, .slide-item5 img:hover, .slide-item6 img:hover, 
-			    .slide-item7 img:hover, .slide-item8 img:hover, .slide-item9 img:hover{
+                            .slide-item img:hover{
                                 -moz-transform: scale(1.1);
 				-webkit-transform: scale(1.1);
 				-o-transform: scale(1.1);
@@ -430,12 +421,19 @@ ul{
 				transform: scale(1.1);                   
                             }
 
-                .slide-title,
-                .slide-price{
+.slide-item .name_price_cart_block, .slide-item .name_price_cart_block_hidden {
+    display: block;
+    position: relative;
+    height: 54px;
+    padding-bottom: 0px;
+    margin: 3px 0px;
+}
+
+               .sider_container .slide-title,
+               .sider_container .product_price{
                     position: relative;
 	    		    float: left;
             		width: 200px;
-            		height: 25px;
             		/* Шрифт */
             		font: 1em/1.4em sans-serif;
 	    		    padding: 4px 0px 0px 4px;
@@ -447,19 +445,12 @@ ul{
 			    	text-overflow: ellipsis;
                 }
 
-		 .sider_container .slide-title:hover{
-	    background-color: white;
-	    white-space: normal;/* Запрещаем перенос строк */
+		 .sider_container .slide-item:hover .slide-title{
+	    white-space: normal;/* разрешаем перенос строк */
 	    overflow: visible;
-		width: auto;
-		z-index: 120;
-		height: auto;
-		-webkit-box-shadow: 0 0 5px rgb(157, 157, 157);
-		-moz-box-shadow: 0 0 5px rgb(157, 157, 157);
-		box-shadow: 0 0 5px rgb(157, 157, 157);
         }
 
-			.slide-price{
+			.sider_container .product_price{
              	color: #92A5A6;
             }
 

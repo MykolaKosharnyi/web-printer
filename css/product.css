@@ -293,8 +293,8 @@ border-radius: 5px;
 	/*min-width: 170px;*/
 }
 
-.option_product_with_price label.total_price{
-	min-width: 102px;
+.option_product_with_price .total_price{
+	min-width: 150px;
 	margin-bottom: 0px;
 }
 
