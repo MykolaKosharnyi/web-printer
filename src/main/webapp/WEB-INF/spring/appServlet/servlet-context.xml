@@ -150,6 +150,9 @@
         <beans:property name="productDAO" ref="uwpDAO"></beans:property>
     </beans:bean>
     
+    <!-- Import spring security configurations 
+    <beans:import resource="../security.xml" />-->
+    
     <context:component-scan base-package="com.printmaster.nk" />
      
     <tx:annotation-driven transaction-manager="transactionManager"/>

@@ -13,11 +13,11 @@ import com.printmaster.nk.model.Role;
 import com.printmaster.nk.model.User;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
+
     private UserDAO userDAO;
     
-    @Autowired(required=true)
-    @Qualifier(value="userDAO")
     public void setUserDAO(UserDAO userDAO) {
         this.userDAO = userDAO;
     }

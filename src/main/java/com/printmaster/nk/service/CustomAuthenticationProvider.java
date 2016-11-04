@@ -8,7 +8,6 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -19,7 +18,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import com.printmaster.nk.model.Role;
 import com.printmaster.nk.model.User;
  
 /**
@@ -27,78 +25,92 @@ import com.printmaster.nk.model.User;
  * exist in the database and if the username and password are not the same.
  * Otherwise, throw a {@link BadCredentialsException}
  */
+@Component
 public class CustomAuthenticationProvider implements AuthenticationProvider {
- 
- protected static Logger logger = Logger.getLogger("service");
- 
- // Our custom DAO layer
- private UserService userService;
- 
- @Autowired(required=true)
- @Qualifier(value="userService")
- public void setUserService(UserService ps){
-     this.userService = ps;
- }
- 
- // We need an BCryptPasswordEncoder encoder since our passwords in the database are BCryptPasswordEncoder encoded. 
- @Autowired
- private BCryptPasswordEncoder passwordEncoder;
-  
- public Authentication authenticate(Authentication auth) throws AuthenticationException {
+	 
+	 protected static Logger logger = Logger.getLogger(CustomAuthenticationProvider.class);
+	 
+	 /**
+	  * Our custom DAO layer
+	  */
+	 private UserService userService;
+	
+	/**
+	  * We need an BCryptPasswordEncoder encoder since our passwords in the database are BCryptPasswordEncoder encoded. 
+	  */
+	 private BCryptPasswordEncoder passwordEncoder;
 
-  logger.debug("Performing custom authentication");
-  
-   // Retrieve user details from database
-  User user = null;
-  
-  if(auth.getName()!=null){
-	  user = userService.findByUserName(auth.getName());
-  }
-  
-  if( user == null ){
-	  logger.error("User does not exists!");
-	  throw new BadCredentialsException("User does not exists!");
-  }
-	  
-  /*  
-  // Compare passwords
-  // Make sure to encode the password first before comparing
-  if (  passwordEncoder.matches((CharSequence) auth.getCredentials(), user.getPassword()) == false ) {
-   logger.error("Wrong password!");
-   throw new BadCredentialsException("Wrong password!");
-  }
-*/  
-  // Here's the main logic of this custom authentication manager
-  // Username and password must be the same to authenticate
-  if (auth.getName().equals(auth.getCredentials()) == true) {
-   logger.debug("Entered username and password are the same!");
-   throw new BadCredentialsException("Entered username and password are the same!");
-    
-  } else {
-    
-   logger.debug("User details are good and ready to go");
-   return new UsernamePasswordAuthenticationToken(
-     auth.getName(), 
-     auth.getCredentials(), 
-     buildUserAuthority(user.getRole()));
-  }
- }
-  
- private List<GrantedAuthority> buildUserAuthority(String userRole) {
-
+	@Override
+	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+	
+		  logger.debug("Performing custom authentication");
+		  
+		   // Retrieve user details from database
+		  User user = userService.findByUserName(authentication.getName());
+		  
+		  if( user == null ){
+			  logger.error("User does not exists!");
+			  throw new BadCredentialsException("User does not exists!");
+		  }
+			    
+		  // Compare passwords
+		  // Make sure to encode the password first before comparing
+		  if (  passwordEncoder.matches((CharSequence) authentication.getCredentials(), user.getPassword()) == false ) {
+		   logger.error("Wrong password!");
+		   throw new BadCredentialsException("Wrong password!");
+		  }
+	
+		  // Here's the main logic of this custom authentication manager
+		  // Username and password must be the same to authenticate
+		  if (authentication.getName().equals(authentication.getCredentials()) == true) {
+		   logger.debug("Entered username and password are the same!");
+		   throw new BadCredentialsException("Entered username and password are the same!");
+		    
+		  } else {
+		    
+		   logger.debug("User details are good and ready to go");
+		   return new UsernamePasswordAuthenticationToken(
+				   authentication.getName(), 
+				   authentication.getCredentials(), 
+		     buildUserAuthority(user.getRole()));
+		  }
+	}
+	
+	private List<GrantedAuthority> buildUserAuthority(String userRole) {
+	
 		Set<GrantedAuthority> setAuths = new HashSet<GrantedAuthority>();
-
+	
 		// Build user's authorities
 		setAuths.add(new SimpleGrantedAuthority(userRole));
-
+	
 		List<GrantedAuthority> result = new ArrayList<GrantedAuthority>(setAuths);
-
+	
 		return result;
 	}
-
-@Override
-public boolean supports(Class<?> authentication) {
-	return (UsernamePasswordAuthenticationToken.class.isAssignableFrom(authentication));
-}
+	
+	@Override
+	public boolean supports(Class<?> authentication) {
+		return (UsernamePasswordAuthenticationToken.class.isAssignableFrom(authentication));
+	}
+	
+	public UserService getUserService() {
+		return userService;
+	}
+	
+	@Autowired(required=true)
+    @Qualifier(value="userService")
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
+	
+	public BCryptPasswordEncoder getPasswordEncoder() {
+		return passwordEncoder;
+	}
+	
+	@Autowired(required=true)
+    @Qualifier(value="passwordEncoder")
+	public void setPasswordEncoder(BCryptPasswordEncoder passwordEncoder) {
+		this.passwordEncoder = passwordEncoder;
+	}
  
 }
