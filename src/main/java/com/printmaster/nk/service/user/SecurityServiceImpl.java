@@ -20,10 +20,9 @@ import org.springframework.stereotype.Service;
 
 import com.printmaster.nk.service.UserService;
 
-/*
- * We create SecurityService to provide current loggedin user and auto login user after resgistering an account. 
+/**
+ * We create SecurityService to provide auto login user after resgistering an account. 
  * */
-
 @Service("securityService")
 public class SecurityServiceImpl implements SecurityService {
 

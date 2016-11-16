@@ -2,7 +2,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@page session="true"%>				
+<%@page session="true"%>		
+			<!-- delivery -->		
 			<div class="characteristic">
 					<div class="block_title">
 						<i></i>
@@ -126,5 +127,32 @@
 						</div>
 						<hr>
 						
+					</div>
+				</div>
+				
+				<!-- insurance -->	
+				<div class="characteristic">
+					<div class="block_title">
+						<i class="opened"></i>
+						<p>Страхование</p>
+					</div>
+					<div class="check_boxes" style="display: block;">
+
+						<div class="text_output" style="height: 75px;">
+							<p class="option_name" style="width: 100%;">Страхование груза международная перевозка (указывать процент от 1 до 100%):&nbsp;</p>
+							<form:input path="insuranceInternationalTransport" class="option"/>
+							<form:errors path="insuranceInternationalTransport" cssClass="error"></form:errors>
+							<form:input path="descriptionInsuranceInternationalTransport"  class="option_description"/>
+							<form:errors path="descriptionInsuranceInternationalTransport" cssClass="error"></form:errors>
+						</div>
+						<hr>
+						<div class="text_output" style="height: 60px;">
+							<p class="option_name" style="width: 100%;">Страхование груза по Украине (указывать процент от 1 до 100%):&nbsp;</p>
+							<form:input path="insuranceUkraineTransport" class="option"/>
+							<form:errors path="insuranceUkraineTransport" cssClass="error"></form:errors>
+							<form:input path="descriptionInsuranceUkraineTransport"  class="option_description"/>
+							<form:errors path="descriptionInsuranceUkraineTransport" cssClass="error"></form:errors>
+						</div>
+
 					</div>
 				</div>

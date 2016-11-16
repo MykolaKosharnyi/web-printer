@@ -75,31 +75,7 @@ public class UserController {
     		username = (String) principal;
     	}
     	
-//    	if(userService.findByUserName(username) == null){
-//    		User user = userService.findByUserName("printmaster");
-//    		user.setUsername("Username is null");
-//    		model.addAttribute("user", user);
-//    	} else {
-    		model.addAttribute("user", userService.findByUserName(username));
-    	//}
-    	
-//    	 Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//     	  if (!(auth instanceof AnonymousAuthenticationToken)) {
-//     		UserDetails userDetail = (UserDetails) auth.getPrincipal();
-//     		model.addAttribute("user", userService.findByUserName(userDetail.getUsername()));
-     		
-     		//model.addAttribute("user", userService.findByUserName((String) auth.getPrincipal()));
-     		
-//			List<GrantedAuthority> listGA = (List<GrantedAuthority>) userDetail.getAuthorities();
-//     		Iterator<GrantedAuthority> it = listGA.iterator();
-//     		while(it.hasNext()){
-//     			if(it.next().getAuthority().equals("ROLE_ADMIN")){
-//     				model.addAttribute("ROLE", "ROLE_ADMIN");
-//     			} else {
-//     				model.addAttribute("ROLE", "ROLE_USER");
-//     			}
-//     		}
-//     	  }
+    	model.addAttribute("user", userService.findByUserName(username));
     	
         return "user";
     }
@@ -114,20 +90,6 @@ public class UserController {
             model.addAttribute("message", "You have been logged out successfully.");
 
         return "login";
-    }
-	
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model) {
-
-        if (bindingResult.hasErrors()) {
-            return "login";
-        }
-
-        String password = userForm.getPassword();
-
-        securityService.autologin(userForm.getUsername(), password);
-
-        return "redirect:/user";
     }
 	
     @RequestMapping(value = "/registration", method = RequestMethod.GET)

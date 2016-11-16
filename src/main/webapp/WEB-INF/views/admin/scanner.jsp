@@ -386,8 +386,8 @@
 					</ul>
 				</div>
 				
-				<!-- import delivery option -->
-				<jsp:include page="product/delivery.jsp" />
+				<!-- import delivery and insurance option -->
+				<jsp:include page="product/delivery_and_insurance.jsp" />
 				
 				<div class="characteristic">
 					<div class="block_title">

@@ -51,7 +51,8 @@ import com.printmaster.nk.service.UseWithProductService;
 @Controller
 public class PrinterController {
 	
-	private Logger logger = Logger.getLogger(PrinterController.class);
+	private Logger logger = Logger.getLogger(this.getClass());
+	//private Logger logger = Logger.getLogger(PrinterController.class);
 	
 	private String directory = "/var/www/localhost/images";
 	private String concreteFolder = "printers";

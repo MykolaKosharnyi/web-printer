@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Set;
  
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -97,8 +95,6 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 		return userService;
 	}
 	
-	@Autowired(required=true)
-    @Qualifier(value="userService")
 	public void setUserService(UserService userService) {
 		this.userService = userService;
 	}
@@ -107,8 +103,6 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 		return passwordEncoder;
 	}
 	
-	@Autowired(required=true)
-    @Qualifier(value="passwordEncoder")
 	public void setPasswordEncoder(BCryptPasswordEncoder passwordEncoder) {
 		this.passwordEncoder = passwordEncoder;
 	}
