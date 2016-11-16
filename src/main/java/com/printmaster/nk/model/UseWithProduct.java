@@ -93,6 +93,9 @@ public class UseWithProduct extends Product implements Serializable{
 				
 	@Column(name="ukraineDeliveryPriceWeight", nullable = false, columnDefinition = "bit default 0")
 	protected boolean ukraineDeliveryPriceWeight;
+	
+	@Column(name="ukraineDeliveryDescription")
+	protected String ukraineDeliveryDescription;
 		
 	//on Kyiv
 	@Column(name="kyivDeliveryPriceSize", nullable = false, columnDefinition = "bit default 0")
@@ -100,6 +103,9 @@ public class UseWithProduct extends Product implements Serializable{
 			
 	@Column(name="kyivDeliveryPriceWeight", nullable = false, columnDefinition = "bit default 0")
 	protected boolean kyivDeliveryPriceWeight;
+	
+	@Column(name="kyivDeliveryDescription")
+	protected String kyivDeliveryDescription;
 	
 	/* FOR PAINT OPTION SECTION */
 	@Column(name="cyanPaint", columnDefinition="Decimal(10,2) default '0.00'")
@@ -172,6 +178,22 @@ public class UseWithProduct extends Product implements Serializable{
 	
 	public UseWithProduct(){}
 	
+	public String getUkraineDeliveryDescription() {
+		return ukraineDeliveryDescription;
+	}
+
+	public void setUkraineDeliveryDescription(String ukraineDeliveryDescription) {
+		this.ukraineDeliveryDescription = ukraineDeliveryDescription;
+	}
+
+	public String getKyivDeliveryDescription() {
+		return kyivDeliveryDescription;
+	}
+
+	public void setKyivDeliveryDescription(String kyivDeliveryDescription) {
+		this.kyivDeliveryDescription = kyivDeliveryDescription;
+	}
+
 	public String getTypeProduct() {
 		return typeProduct;
 	}

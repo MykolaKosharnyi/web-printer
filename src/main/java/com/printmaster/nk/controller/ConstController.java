@@ -48,8 +48,10 @@ public class ConstController {
 		constants.setPriceUkraineSize(constantsServer.getConstants().get("price_ukraine_size"));
 		constants.setPriceUkraineWeight(constantsServer.getConstants().get("price_ukraine_weight"));
 		constants.setPriceKyivSize(constantsServer.getConstants().get("price_kyiv_size"));
-		constants.setPriceKyivWeight(constantsServer.getConstants().get("price_kyiv_weight"));
-		
+		constants.setPriceKyivWeight(constantsServer.getConstants().get("price_kyiv_weight"));	
+		constants.setPercentInsuranceUkraine(constantsServer.getConstants().get("percent_insurance_ukraine"));
+		constants.setPercentInsuranceInternational(constantsServer.getConstants().get("percent_insurance_international"));
+	
 		model.addAttribute("constantsChange", constants);
 	    return "admin/constants";
 	}
@@ -90,6 +92,10 @@ public class ConstController {
 				jsonFile.put("price_kyiv_size", constants.getPriceKyivSize());
 
 				jsonFile.put("price_kyiv_weight", constants.getPriceKyivWeight());
+				
+				jsonFile.put("percent_insurance_ukraine", constants.getPercentInsuranceUkraine());
+				
+				jsonFile.put("percent_insurance_international", constants.getPercentInsuranceInternational());
 			
 			Writer out = new PrintWriter(pathToFile, "UTF-8");
 			out.write(jsonFile.toJSONString());

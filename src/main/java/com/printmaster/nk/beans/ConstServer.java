@@ -40,6 +40,8 @@ public class ConstServer {
 		constants.put("price_ukraine_weight", ((Number)jsonFile.get("price_ukraine_weight")).doubleValue());
 		constants.put("price_kyiv_size", ((Number)jsonFile.get("price_kyiv_size")).doubleValue());
 		constants.put("price_kyiv_weight", ((Number)jsonFile.get("price_kyiv_weight")).doubleValue());
+		constants.put("percent_insurance_ukraine", ((Number)jsonFile.get("percent_insurance_ukraine")).doubleValue());
+		constants.put("percent_insurance_international", ((Number)jsonFile.get("percent_insurance_international")).doubleValue());
 		
 		return constants;
 	}

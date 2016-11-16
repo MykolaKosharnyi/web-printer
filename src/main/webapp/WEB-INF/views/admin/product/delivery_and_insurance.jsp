@@ -35,6 +35,8 @@
 							<form:errors path="airDeliveryPriceWeight" cssClass="error"></form:errors>
 							
 						</div>
+						<form:input path="airDeliveryDescription" style="width: 100%;"/>
+						
 						<hr>
 						<div class="delivery_text_output">
 							<p class="delivery_option_name">Морем:&nbsp;</p>
@@ -50,6 +52,8 @@
 							<form:errors path="seaDeliveryPriceWeight" cssClass="error"></form:errors>
 							
 						</div>
+						<form:input path="seaDeliveryDescription" style="width: 100%;"/>
+						
 						<hr>
 						<div class="delivery_text_output">
 							<p class="delivery_option_name">По Украине:&nbsp;</p>
@@ -65,6 +69,8 @@
 							<form:errors path="ukraineDeliveryPriceWeight" cssClass="error"></form:errors>
 							
 						</div>
+						<form:input path="ukraineDeliveryDescription" style="width: 100%;"/>
+						
 						<hr>
 						<div class="delivery_text_output">
 							<p class="delivery_option_name">По Киеву:&nbsp;</p>
@@ -80,6 +86,8 @@
 							<form:errors path="kyivDeliveryPriceWeight" cssClass="error"></form:errors>
 							
 						</div>
+						<form:input path="kyivDeliveryDescription" style="width: 100%;"/>
+						
 						<hr>
 						<div class="delivery_text_output">
 							<form:input path="variant1DeliveryName" class="delivery_custom_option_name"/>
@@ -95,6 +103,8 @@
 							<form:errors path="variant1DeliveryPriceWeight" cssClass="error"></form:errors>
 							
 						</div>
+						<form:input path="variant1DeliveryDescription" style="width: 100%;"/>		
+						
 						<hr>
 						<div class="delivery_text_output">
 							<form:input path="variant2DeliveryName" class="delivery_custom_option_name"/>
@@ -110,6 +120,8 @@
 							<form:errors path="variant2DeliveryPriceWeight" cssClass="error"></form:errors>
 							
 						</div>
+						<form:input path="variant2DeliveryDescription" style="width: 100%;"/>
+						
 						<hr>
 						<div class="delivery_text_output">
 							<form:input path="variant3DeliveryName" class="delivery_custom_option_name"/>
@@ -125,6 +137,8 @@
 							<form:errors path="variant3DeliveryPriceWeight" cssClass="error"></form:errors>
 							
 						</div>
+						<form:input path="variant3DeliveryDescription" style="width: 100%;"/>
+						
 						<hr>
 						
 					</div>

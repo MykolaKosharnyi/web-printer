@@ -12,6 +12,8 @@ public class Constants {
 	private double priceUkraineWeight;
 	private double priceKyivSize;
 	private double priceKyivWeight;
+	private double percentInsuranceUkraine;
+	private double percentInsuranceInternational;
 	
 	public Constants(){}
 
@@ -93,6 +95,22 @@ public class Constants {
 
 	public void setPriceKyivWeight(double priceKyivWeight) {
 		this.priceKyivWeight = priceKyivWeight;
+	}
+
+	public double getPercentInsuranceUkraine() {
+		return percentInsuranceUkraine;
+	}
+
+	public void setPercentInsuranceUkraine(double percentInsuranceUkraine) {
+		this.percentInsuranceUkraine = percentInsuranceUkraine;
+	}
+
+	public double getPercentInsuranceInternational() {
+		return percentInsuranceInternational;
+	}
+
+	public void setPercentInsuranceInternational(double percentInsuranceInternational) {
+		this.percentInsuranceInternational = percentInsuranceInternational;
 	}
 
 	@Override

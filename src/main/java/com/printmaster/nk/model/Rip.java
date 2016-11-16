@@ -123,6 +123,9 @@ private static final long serialVersionUID = 3031695775597440046L;
 					
 	@Column(name="ukraineDeliveryPriceWeight", nullable = false, columnDefinition = "bit default 0")
 	protected boolean ukraineDeliveryPriceWeight;
+	
+	@Column(name="ukraineDeliveryDescription")
+	protected String ukraineDeliveryDescription;
 			
 	//on Kyiv
 	@Column(name="kyivDeliveryPriceSize", nullable = false, columnDefinition = "bit default 0")
@@ -131,7 +134,26 @@ private static final long serialVersionUID = 3031695775597440046L;
 	@Column(name="kyivDeliveryPriceWeight", nullable = false, columnDefinition = "bit default 0")
 	protected boolean kyivDeliveryPriceWeight;
 	
+	@Column(name="kyivDeliveryDescription")
+	protected String kyivDeliveryDescription;
+	
 	public Rip(){}
+
+	public String getUkraineDeliveryDescription() {
+		return ukraineDeliveryDescription;
+	}
+
+	public void setUkraineDeliveryDescription(String ukraineDeliveryDescription) {
+		this.ukraineDeliveryDescription = ukraineDeliveryDescription;
+	}
+
+	public String getKyivDeliveryDescription() {
+		return kyivDeliveryDescription;
+	}
+
+	public void setKyivDeliveryDescription(String kyivDeliveryDescription) {
+		this.kyivDeliveryDescription = kyivDeliveryDescription;
+	}
 
 	public String getTypeEquipment() {
 		return typeEquipment;

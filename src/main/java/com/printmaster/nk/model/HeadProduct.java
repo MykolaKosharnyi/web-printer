@@ -172,12 +172,18 @@ public abstract class HeadProduct extends Product implements Serializable{
 	@Column(name="airDeliveryPriceWeight", nullable = false, columnDefinition = "bit default 0")
 	protected boolean airDeliveryPriceWeight;
 	
+	@Column(name="airDeliveryDescription")
+	protected String airDeliveryDescription;
+	
 	//sea	
 	@Column(name="seaDeliveryPriceSize", nullable = false, columnDefinition = "bit default 0")
 	protected boolean seaDeliveryPriceSize;
 	
 	@Column(name="seaDeliveryPriceWeight", nullable = false, columnDefinition = "bit default 0")
 	protected boolean seaDeliveryPriceWeight;
+	
+	@Column(name="seaDeliveryDescription")
+	protected String seaDeliveryDescription;
 	
 	//on Ukraine		
 	@Column(name="ukraineDeliveryPriceSize", nullable = false, columnDefinition = "bit default 0")
@@ -186,12 +192,18 @@ public abstract class HeadProduct extends Product implements Serializable{
 	@Column(name="ukraineDeliveryPriceWeight", nullable = false, columnDefinition = "bit default 0")
 	protected boolean ukraineDeliveryPriceWeight;
 	
+	@Column(name="ukraineDeliveryDescription")
+	protected String ukraineDeliveryDescription;
+	
 	//on Kyiv
 	@Column(name="kyivDeliveryPriceSize", nullable = false, columnDefinition = "bit default 0")
 	protected boolean kyivDeliveryPriceSize;
 		
 	@Column(name="kyivDeliveryPriceWeight", nullable = false, columnDefinition = "bit default 0")
 	protected boolean kyivDeliveryPriceWeight;
+	
+	@Column(name="kyivDeliveryDescription")
+	protected String kyivDeliveryDescription;
 	
 	//first custom variant
 	@Column(name="variant1DeliveryName")
@@ -203,6 +215,9 @@ public abstract class HeadProduct extends Product implements Serializable{
 	@Column(name="variant1DeliveryPriceWeight", columnDefinition="Decimal(10,2) default '0.00'")
 	protected double variant1DeliveryPriceWeight;
 	
+	@Column(name="variant1DeliveryDescription")
+	protected String variant1DeliveryDescription;
+	
 	//second custom variant
 	@Column(name="variant2DeliveryName")
 	protected String variant2DeliveryName;
@@ -213,6 +228,9 @@ public abstract class HeadProduct extends Product implements Serializable{
 	@Column(name="variant2DeliveryPriceWeight", columnDefinition="Decimal(10,2) default '0.00'")
 	protected double variant2DeliveryPriceWeight;
 	
+	@Column(name="variant2DeliveryDescription")
+	protected String variant2DeliveryDescription;
+	
 	//third custom variant
 	@Column(name="variant3DeliveryName")
 	protected String variant3DeliveryName;
@@ -222,6 +240,9 @@ public abstract class HeadProduct extends Product implements Serializable{
 								
 	@Column(name="variant3DeliveryPriceWeight", columnDefinition="Decimal(10,2) default '0.00'")
 	protected double variant3DeliveryPriceWeight;
+	
+	@Column(name="variant3DeliveryDescription")
+	protected String variant3DeliveryDescription;
 			
 	//insurance
 	//1. Страхование груза международная перевозка
@@ -241,6 +262,62 @@ public abstract class HeadProduct extends Product implements Serializable{
 	protected String descriptionInsuranceUkraineTransport;
 	
 	public HeadProduct(){}
+
+	public String getAirDeliveryDescription() {
+		return airDeliveryDescription;
+	}
+
+	public void setAirDeliveryDescription(String airDeliveryDescription) {
+		this.airDeliveryDescription = airDeliveryDescription;
+	}
+
+	public String getSeaDeliveryDescription() {
+		return seaDeliveryDescription;
+	}
+
+	public void setSeaDeliveryDescription(String seaDeliveryDescription) {
+		this.seaDeliveryDescription = seaDeliveryDescription;
+	}
+
+	public String getUkraineDeliveryDescription() {
+		return ukraineDeliveryDescription;
+	}
+
+	public void setUkraineDeliveryDescription(String ukraineDeliveryDescription) {
+		this.ukraineDeliveryDescription = ukraineDeliveryDescription;
+	}
+
+	public String getKyivDeliveryDescription() {
+		return kyivDeliveryDescription;
+	}
+
+	public void setKyivDeliveryDescription(String kyivDeliveryDescription) {
+		this.kyivDeliveryDescription = kyivDeliveryDescription;
+	}
+
+	public String getVariant1DeliveryDescription() {
+		return variant1DeliveryDescription;
+	}
+
+	public void setVariant1DeliveryDescription(String variant1DeliveryDescription) {
+		this.variant1DeliveryDescription = variant1DeliveryDescription;
+	}
+
+	public String getVariant2DeliveryDescription() {
+		return variant2DeliveryDescription;
+	}
+
+	public void setVariant2DeliveryDescription(String variant2DeliveryDescription) {
+		this.variant2DeliveryDescription = variant2DeliveryDescription;
+	}
+
+	public String getVariant3DeliveryDescription() {
+		return variant3DeliveryDescription;
+	}
+
+	public void setVariant3DeliveryDescription(String variant3DeliveryDescription) {
+		this.variant3DeliveryDescription = variant3DeliveryDescription;
+	}
 
 	public String getPreviouslyUsed() {
 		return previouslyUsed;
