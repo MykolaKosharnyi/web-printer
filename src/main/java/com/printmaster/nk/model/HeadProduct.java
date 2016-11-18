@@ -247,15 +247,20 @@ public abstract class HeadProduct extends Product implements Serializable{
 	//insurance
 	//1. Страхование груза международная перевозка
 	//2. Страхование груза по Украине
-	@Column(name="insuranceInternationalTransport", columnDefinition="Decimal(10,2) default '0.00'")
-	protected double insuranceInternationalTransport;
+//	@Column(name="insuranceInternationalTransport", columnDefinition="Decimal(10,2) default '0.00'")
+//	protected double insuranceInternationalTransport;
+	@Column(name="insuranceInternationalTransport", nullable = false, columnDefinition = "bit default 0")
+	protected boolean insuranceInternationalTransport;
+	
 	
 	@Size(max = 50)
 	@Column(name="descriptionInsuranceInternationalTransport")
 	protected String descriptionInsuranceInternationalTransport;
 	
-	@Column(name="insuranceUkraineTransport", columnDefinition="Decimal(10,2) default '0.00'")
-	protected double insuranceUkraineTransport;
+//	@Column(name="insuranceUkraineTransport", columnDefinition="Decimal(10,2) default '0.00'")
+//	protected double insuranceUkraineTransport;
+	@Column(name="insuranceUkraineTransport", nullable = false, columnDefinition = "bit default 0")
+	protected boolean insuranceUkraineTransport;
 	
 	@Size(max = 50)
 	@Column(name="descriptionInsuranceUkraineTransport")
@@ -815,14 +820,6 @@ public abstract class HeadProduct extends Product implements Serializable{
 		this.variant3DeliveryPriceWeight = variant3DeliveryPriceWeight;
 	}
 
-	public double getInsuranceInternationalTransport() {
-		return insuranceInternationalTransport;
-	}
-
-	public void setInsuranceInternationalTransport(double insuranceInternationalTransport) {
-		this.insuranceInternationalTransport = insuranceInternationalTransport;
-	}
-
 	public String getDescriptionInsuranceInternationalTransport() {
 		return descriptionInsuranceInternationalTransport;
 	}
@@ -831,13 +828,6 @@ public abstract class HeadProduct extends Product implements Serializable{
 		this.descriptionInsuranceInternationalTransport = descriptionInsuranceInternationalTransport;
 	}
 
-	public double getInsuranceUkraineTransport() {
-		return insuranceUkraineTransport;
-	}
-
-	public void setInsuranceUkraineTransport(double insuranceUkraineTransport) {
-		this.insuranceUkraineTransport = insuranceUkraineTransport;
-	}
 
 	public String getDescriptionInsuranceUkraineTransport() {
 		return descriptionInsuranceUkraineTransport;
@@ -845,6 +835,22 @@ public abstract class HeadProduct extends Product implements Serializable{
 
 	public void setDescriptionInsuranceUkraineTransport(String descriptionInsuranceUkraineTransport) {
 		this.descriptionInsuranceUkraineTransport = descriptionInsuranceUkraineTransport;
+	}
+
+	public boolean isInsuranceInternationalTransport() {
+		return insuranceInternationalTransport;
+	}
+
+	public void setInsuranceInternationalTransport(boolean insuranceInternationalTransport) {
+		this.insuranceInternationalTransport = insuranceInternationalTransport;
+	}
+
+	public boolean isInsuranceUkraineTransport() {
+		return insuranceUkraineTransport;
+	}
+
+	public void setInsuranceUkraineTransport(boolean insuranceUkraineTransport) {
+		this.insuranceUkraineTransport = insuranceUkraineTransport;
 	}
 
 	@Override

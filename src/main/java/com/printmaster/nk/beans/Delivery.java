@@ -6,8 +6,17 @@ public class Delivery {
 	private String name;
 	private double priceSize;
 	private double priceWeight;
+	private String description;
 	
 	public Delivery(){}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
 	public boolean isChecked() {
 		return checked;

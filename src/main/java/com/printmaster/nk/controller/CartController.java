@@ -168,13 +168,13 @@ public class CartController {
 			result.add(returnOption("НДС", product.getOptionVAT(), product.getDescriptionOptionVAT(), checkedOption));
 		}
 		
-		if(product.getInsuranceInternationalTransport() > 0){
-			result.add(returnOption("Страхование груза международная перевозка", product.getInsuranceInternationalTransport()/100 * product.getPrise(), 
+		if( product.isInsuranceInternationalTransport() ){
+			result.add(returnOption("Страхование груза международная перевозка", constants.getConstants().get("percent_insurance_international")/100 * product.getPrise(), 
 					product.getDescriptionInsuranceInternationalTransport(), checkedOption));
 		}
 		
-		if(product.getInsuranceUkraineTransport() > 0){
-			result.add(returnOption("Страхование груза по Украине", product.getInsuranceUkraineTransport()/100 * product.getPrise(), 
+		if( product.isInsuranceUkraineTransport() ){
+			result.add(returnOption("Страхование груза по Украине", constants.getConstants().get("percent_insurance_ukraine")/100 * product.getPrise(), 
 					product.getDescriptionInsuranceUkraineTransport(), checkedOption));
 		}
 		
@@ -204,13 +204,13 @@ public class CartController {
 			result.add(returnOption("НДС", product.getOptionVAT(), product.getDescriptionOptionVAT(), checkedOption));
 		}
 		
-		if(product.getInsuranceInternationalTransport() > 0){
-			result.add(returnOption("Страхование груза международная перевозка", product.getInsuranceInternationalTransport()/100 * product.getPrise(), 
+		if( product.isInsuranceInternationalTransport() ){
+			result.add(returnOption("Страхование груза международная перевозка", constants.getConstants().get("percent_insurance_international")/100 * product.getPrise(), 
 					product.getDescriptionInsuranceInternationalTransport(), checkedOption));
 		}
 		
-		if(product.getInsuranceUkraineTransport() > 0){
-			result.add(returnOption("Страхование груза по Украине", product.getInsuranceUkraineTransport()/100 * product.getPrise(), 
+		if( product.isInsuranceUkraineTransport() ){
+			result.add(returnOption("Страхование груза по Украине", constants.getConstants().get("percent_insurance_ukraine")/100 * product.getPrise(), 
 					product.getDescriptionInsuranceUkraineTransport(), checkedOption));
 		}
 		
@@ -384,37 +384,42 @@ public class CartController {
 		
 		if(product.isAirDeliveryPriceSize() ||  product.isAirDeliveryPriceWeight()){
 			result.add(returnDelivery("Авиа", size * constants.getConstants().get("price_avia_size"),
-					weigth * constants.getConstants().get("price_avia_weight"), checkedDelivery));
+					weigth * constants.getConstants().get("price_avia_weight"), product.getAirDeliveryDescription(),
+					checkedDelivery));
 		}
 		
 		if(product.isSeaDeliveryPriceSize() || product.isSeaDeliveryPriceWeight()){
 			result.add(returnDelivery("Морем", size * constants.getConstants().get("price_sea_size"),
-					weigth * constants.getConstants().get("price_sea_weight"), checkedDelivery));
+					weigth * constants.getConstants().get("price_sea_weight"), product.getSeaDeliveryDescription(),
+					checkedDelivery));
 		}
 		
 		if(product.isUkraineDeliveryPriceSize() || product.isUkraineDeliveryPriceWeight()){
 			result.add(returnDelivery("По Украине", size * constants.getConstants().get("price_ukraine_size"),
-					weigth * constants.getConstants().get("price_ukraine_weight"), checkedDelivery));
+					weigth * constants.getConstants().get("price_ukraine_weight"), product.getUkraineDeliveryDescription()
+					, checkedDelivery));
 		}
 		
 		if(product.isKyivDeliveryPriceSize() || product.isKyivDeliveryPriceWeight()){
 			result.add(returnDelivery("По Киеву", size * constants.getConstants().get("price_kyiv_size"),
-					weigth * constants.getConstants().get("price_kyiv_weight"), checkedDelivery));
+					weigth * constants.getConstants().get("price_kyiv_weight"), product.getKyivDeliveryDescription(),
+					checkedDelivery));
 		}
 		
 		if((size * product.getVariant1DeliveryPriceSize() > 0) || (weigth * product.getVariant1DeliveryPriceWeight() > 0)){
 			result.add(returnDelivery(product.getVariant1DeliveryName(), size * product.getVariant1DeliveryPriceSize(), 
-					weigth * product.getVariant1DeliveryPriceWeight(), checkedDelivery));
+					weigth * product.getVariant1DeliveryPriceWeight(), product.getVariant1DeliveryDescription(), checkedDelivery));
 		}
 		
 		if((size * product.getVariant2DeliveryPriceSize() > 0) || (weigth * product.getVariant2DeliveryPriceWeight() > 0)){
 			result.add(returnDelivery(product.getVariant2DeliveryName(), size * product.getVariant2DeliveryPriceSize(), 
-					weigth * product.getVariant2DeliveryPriceWeight(), checkedDelivery));
+					weigth * product.getVariant2DeliveryPriceWeight(), product.getVariant2DeliveryDescription(), checkedDelivery));
 		}
 		
 		if((size * product.getVariant3DeliveryPriceSize() > 0) || (weigth * product.getVariant3DeliveryPriceWeight() > 0)){
 			result.add(returnDelivery(product.getVariant3DeliveryName(), size * product.getVariant3DeliveryPriceSize(), 
-					weigth * product.getVariant3DeliveryPriceWeight(), checkedDelivery));
+					weigth * product.getVariant3DeliveryPriceWeight(), product.getVariant3DeliveryDescription()
+					, checkedDelivery));
 		}
 		
 		return result;
@@ -428,12 +433,13 @@ public class CartController {
 		
 		if(product.isUkraineDeliveryPriceSize() || product.isUkraineDeliveryPriceWeight()){
 			result.add(returnDelivery("По Украине", size * constants.getConstants().get("price_ukraine_size"),
-					weigth * constants.getConstants().get("price_ukraine_weight"), checkedDelivery));
+					weigth * constants.getConstants().get("price_ukraine_weight"), product.getUkraineDeliveryDescription()
+					, checkedDelivery));
 		}
 		
 		if(product.isKyivDeliveryPriceSize() || product.isKyivDeliveryPriceWeight()){
 			result.add(returnDelivery("По Киеву", size * constants.getConstants().get("price_kyiv_size"),
-					weigth * constants.getConstants().get("price_kyiv_weight"), checkedDelivery));
+					weigth * constants.getConstants().get("price_kyiv_weight"), product.getKyivDeliveryDescription(), checkedDelivery));
 		}
 		
 		return result;
@@ -447,22 +453,25 @@ public class CartController {
 		
 		if(product.isUkraineDeliveryPriceSize() || product.isUkraineDeliveryPriceWeight()){
 			result.add(returnDelivery("По Украине", size * constants.getConstants().get("price_ukraine_size"),
-					weigth * constants.getConstants().get("price_ukraine_weight"), checkedDelivery));
+					weigth * constants.getConstants().get("price_ukraine_weight"), product.getUkraineDeliveryDescription(),
+					checkedDelivery));
 		}
 		
 		if(product.isKyivDeliveryPriceSize() || product.isKyivDeliveryPriceWeight()){
 			result.add(returnDelivery("По Киеву", size * constants.getConstants().get("price_kyiv_size"),
-					weigth * constants.getConstants().get("price_kyiv_weight"), checkedDelivery));
+					weigth * constants.getConstants().get("price_kyiv_weight"), product.getKyivDeliveryDescription(),
+					checkedDelivery));
 		}
 		
 		return result;
 	}
 	
-	private Delivery returnDelivery(String name, double priceSize, double priceWeight, String checkedDelivery){
+	private Delivery returnDelivery(String name, double priceSize, double priceWeight, String description, String checkedDelivery){
 		Delivery result = new Delivery();
 		result.setName(name);
 		result.setPriceSize(priceSize);
 		result.setPriceWeight(priceWeight);
+		result.setDescription(description);
 		
 		boolean boolResult = name.equals(checkedDelivery) ? true : false;
 		result.setChecked(boolResult);

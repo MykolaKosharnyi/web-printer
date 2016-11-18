@@ -152,17 +152,21 @@
 					</div>
 					<div class="check_boxes" style="display: block;">
 
-						<div class="text_output" style="height: 75px;">
-							<p class="option_name" style="width: 100%;">Страхование груза международная перевозка (указывать процент от 1 до 100%):&nbsp;</p>
-							<form:input path="insuranceInternationalTransport" class="option"/>
+						<div class="text_output" style="height: 40px;">
+							<p class="option_name" style="width: auto;">Страхование груза международная перевозка -&nbsp;</p>
+							<input name="insuranceInternationalTransport" type="checkbox" <c:if test="${product.insuranceInternationalTransport}">checked</c:if>
+							 style="width: inherit;" class="option"/>
+
 							<form:errors path="insuranceInternationalTransport" cssClass="error"></form:errors>
 							<form:input path="descriptionInsuranceInternationalTransport"  class="option_description"/>
 							<form:errors path="descriptionInsuranceInternationalTransport" cssClass="error"></form:errors>
 						</div>
 						<hr>
-						<div class="text_output" style="height: 60px;">
-							<p class="option_name" style="width: 100%;">Страхование груза по Украине (указывать процент от 1 до 100%):&nbsp;</p>
-							<form:input path="insuranceUkraineTransport" class="option"/>
+						<div class="text_output" style="height: 40px;">
+							<p class="option_name" style="width: auto;">Страхование груза по Украине -&nbsp;</p>
+							<input name="insuranceUkraineTransport" type="checkbox" <c:if test="${product.insuranceUkraineTransport}">checked</c:if>
+							 style="width: inherit;" class="option"/>
+
 							<form:errors path="insuranceUkraineTransport" cssClass="error"></form:errors>
 							<form:input path="descriptionInsuranceUkraineTransport"  class="option_description"/>
 							<form:errors path="descriptionInsuranceUkraineTransport" cssClass="error"></form:errors>

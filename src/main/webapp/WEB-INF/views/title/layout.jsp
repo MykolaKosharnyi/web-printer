@@ -80,9 +80,6 @@
 	
 	<tiles:insertAttribute name="footer" />
 
-
-
-
 <div id="myModal" class="modal fade">
     <div class="modal-dialog" style="width:1050px;">
         <div class="modal-content">

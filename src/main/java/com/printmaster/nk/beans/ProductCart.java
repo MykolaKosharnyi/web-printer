@@ -100,6 +100,7 @@ public class ProductCart {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((idProduct == null) ? 0 : idProduct.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((typeProduct == null) ? 0 : typeProduct.hashCode());
 		return result;
 	}
@@ -117,6 +118,11 @@ public class ProductCart {
 			if (other.idProduct != null)
 				return false;
 		} else if (!idProduct.equals(other.idProduct))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
 			return false;
 		if (typeProduct == null) {
 			if (other.typeProduct != null)

@@ -89,39 +89,9 @@
 	      </tr>
 	</c:if>
 	
-	<c:if test="${ (type == 'use_with_product') && (product.insuranceInternationalTransport/100) * product.prise > 0}">
-	      <tr class="block_product_price">
-	        <td style="position: relative;">
-	        	<input class="add_price" style="position: absolute; top: 5px;" type="checkbox" value="Страхование груза международная перевозка" id="insuranceInternationalTransport_price">
-	        	<label class="add_price_title" style="margin-left:20px;" for="insuranceInternationalTransport_price">Страхование груза международная перевозка</label>
-	        </td>
-	        <td>
-				<div class="product_price">
-					<input name="price_value" value="${(product.insuranceInternationalTransport/100) * product.prise}" type="hidden">				
-			   		<div></div>
-				</div>
-			</td>
-	        <td>${product.descriptionInsuranceInternationalTransport}</td>
-	      </tr>
-    </c:if>
-    
-    <c:if test="${ (type == 'use_with_product') && (product.insuranceUkraineTransport/100) * product.prise > 0}">
-	      <tr class="block_product_price">
-	        <td style="position: relative;">
-	        	<input class="add_price" style="position: absolute; top: 5px;" type="checkbox" value="Страхование груза по Украине" id="insuranceUkraineTransport_price">
-	        	<label class="add_price_title" style="margin-left:20px;" for="insuranceUkraineTransport_price">Страхование груза по Украине</label>
-	        </td>
-	        <td>
-				<div class="product_price">	
-					<input name="price_value" value="${(product.insuranceUkraineTransport/100) * product.prise}" type="hidden">				
-			   		<div></div>
-				</div>
-			</td>
-	        <td>${product.descriptionInsuranceUkraineTransport}</td>
-	      </tr>
-    </c:if>
-	
 	<c:if test="${ product.ukraineDeliveryPriceSize || product.ukraineDeliveryPriceWeight ||
+				((type == 'use_with_product') && product.insuranceInternationalTransport) ||
+				((type == 'use_with_product') && product.insuranceUkraineTransport) ||	
 			       product.kyivDeliveryPriceSize || product.kyivDeliveryPriceWeight }">	
 	<tr class="delivery">
 		<td colspan="3">
@@ -152,6 +122,7 @@
 								   		<div></div>
 									</div>
 								</td>
+								<td>${product.ukraineDeliveryDescription}</td>
 							</tr>
 				      	</c:if>
 				      	
@@ -170,11 +141,45 @@
 								   		<div></div>
 									</div>
 								</td>
+								<td>${product.kyivDeliveryDescription}</td>
 							</tr>
 				      	</c:if>
+				      	
+				      		<c:if test="${ (type == 'use_with_product') && product.insuranceInternationalTransport }">
+						      <tr class="block_product_price">
+						        <td style="position: relative;">
+						        	<input class="add_price" style="position: absolute; top: 5px;" type="checkbox" value="Страхование груза международная перевозка" id="insuranceInternationalTransport_price">
+						        	<label class="add_price_title" style="margin-left:20px;" for="insuranceInternationalTransport_price">Страхование груза международная перевозка</label>
+						        </td>
+						        <td>
+									<div class="product_price">
+										<input name="price_value" value="${product.prise * constants.percent_insurance_international / 100}" type="hidden">				
+								   		<div></div>
+									</div>
+								</td>
+						        <td>${product.descriptionInsuranceInternationalTransport}</td>
+						      </tr>
+					    </c:if>
+					    
+					    <c:if test="${ (type == 'use_with_product') && product.insuranceUkraineTransport }">
+						      <tr class="block_product_price">
+						        <td style="position: relative;">
+						        	<input class="add_price" style="position: absolute; top: 5px;" type="checkbox" value="Страхование груза по Украине" id="insuranceUkraineTransport_price">
+						        	<label class="add_price_title" style="margin-left:20px;" for="insuranceUkraineTransport_price">Страхование груза по Украине</label>
+						        </td>
+						        <td>
+									<div class="product_price">	
+										<input name="price_value" value="${product.prise * constants.percent_insurance_ukraine / 100}" type="hidden">				
+								   		<div></div>
+									</div>
+								</td>
+						        <td>${product.descriptionInsuranceUkraineTransport}</td>
+						      </tr>
+					    </c:if>
 						
 					</tbody>
 				</table>
+				<div class="delivery_notes"><p>*</p>Стоимость ориентировочная и может изменятся в зависимости от перевозчика.</div>
 			</div>
 			
 		</td>
