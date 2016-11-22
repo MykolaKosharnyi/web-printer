@@ -3,7 +3,7 @@
             $( ".slider-range-prise" ).slider({
               range: "min",
               min: 0,
-              max: 100000,
+              max: 1000000,
               create: function () {
             	    $(this).slider( "option", "value", $(this).closest('.check_boxes').find('.text_output').find('.amount-prise').val() );
             	},
@@ -193,7 +193,7 @@ $(function() {
     $( ".slider-range-maxPowerConsumption" ).slider({
       range: "min",
       min: 0,
-      max: 1000,
+      max: 100000,
       create: function () {
     	    $(this).slider( "option", "value", $(this).closest('.check_boxes').find('.text_output').find('.amount-maxPowerConsumption').val() );
     	},

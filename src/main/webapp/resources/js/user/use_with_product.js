@@ -106,7 +106,7 @@
             $( ".slider-range-prise" ).slider({
               range: true,
               min: 0,
-              max: 100000,
+              max: 1000000,
               create: function () {
           	    $(this).slider( "values", 0, $(this).closest('.check_boxes').find('.text_output').find('.amount-prise0').val() );
           	    $(this).slider( "values", 1, $(this).closest('.check_boxes').find('.text_output').find('.amount-prise1').val() );

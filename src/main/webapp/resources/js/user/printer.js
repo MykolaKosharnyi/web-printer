@@ -132,7 +132,7 @@
         $( ".slider-range-averagePowerConsumption" ).slider({
           range: true,
           min: 0,
-          max: 1000,
+          max: 100000,
           create: function () {
       	    $(this).slider( "values", 0, $(this).closest('.check_boxes').find('.text_output').find('.amount-averagePowerConsumption0').val() );
       	    $(this).slider( "values", 1, $(this).closest('.check_boxes').find('.text_output').find('.amount-averagePowerConsumption1').val() );
@@ -161,7 +161,7 @@
             $( ".slider-range-prise" ).slider({
               range: true,
               min: 0,
-              max: 100000,
+              max: 1000000,
               create: function () {
           	    $(this).slider( "values", 0, $(this).closest('.check_boxes').find('.text_output').find('.amount-prise0').val() );
           	    $(this).slider( "values", 1, $(this).closest('.check_boxes').find('.text_output').find('.amount-prise1').val() );
@@ -302,7 +302,7 @@
             $( ".slider-range-max_power_consumption" ).slider({
               range: true,
               min: 0,
-              max: 2500,
+              max: 100000,
               create: function () {
             	    $(this).slider( "values", 0, $(this).closest('.check_boxes').find('.text_output').find('.amount-max_power_consumption0').val() );
             	    $(this).slider( "values", 1, $(this).closest('.check_boxes').find('.text_output').find('.amount-max_power_consumption1').val() );
