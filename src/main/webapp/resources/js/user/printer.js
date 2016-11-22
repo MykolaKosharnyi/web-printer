@@ -1,442 +1,113 @@
-
 		/* Для обозначения заполненных полей в поиске */       
         $(function() {
-        	$('.check_boxes').click(function(){
-        		
-                $( this ).has(':checked').length ? 
-                	$( this ).parent('.search_criteria').css( "background", "#E8F2FE" ).find(".block_title").find("i, p").css('color','#006080'):
-                	$( this ).parent('.search_criteria').css( "background", "#FFFFFF" ).find(".block_title").find("i, p").css('color','rgb(144, 144, 144)');
-       	       			
-       	       	if($( this ).has(".amount-sizeDropRangeFrom").length>0)
-       	       		$( this ).find(".amount-sizeDropRangeFrom").val() != $( this ).find(".amount-sizeDropRangeUntil").val() ?
-       	       	    	$( this ).parent('.search_criteria').css( "background", "#E8F2FE" ).find(".block_title").find("i, p").css('color','#006080'):
-                	$( this ).parent('.search_criteria').css( "background", "#FFFFFF" ).find(".block_title").find("i, p").css('color','rgb(144, 144, 144)');
+        	
+        	function ifCheckedOption(this_object){
+        		this_object.parent('.search_criteria').css( "background", "#E8F2FE" ).find(".block_title").find("i, p").css('color','#006080')
+        	}
+        	
+        	function ifUnCheckedOption(this_object){
+        		this_object.parent('.search_criteria').css( "background", "#FFFFFF" ).find(".block_title").find("i, p").css('color','rgb(144, 144, 144)')	
+        	}
+    		
+    		function checkOption(element, class0, class1){
+        		if(element.has(class0).length>0)
+        			element.find(class0).val() != element.find(class1).val() ? ifCheckedOption( element ): ifUnCheckedOption( element ) ;
+        	}
 
-       	        if($( this ).has(".amount-prise0").length>0)
-       	        	$( this ).find(".amount-prise0").val() != $( this ).find(".amount-prise1").val() ?
-       	        		$( this ).parent('.search_criteria').css( "background", "#E8F2FE" ).find(".block_title").find("i, p").css('color','#006080'):
-                	$( this ).parent('.search_criteria').css( "background", "#FFFFFF" ).find(".block_title").find("i, p").css('color','rgb(144, 144, 144)');
+        	$('.check_boxes').click(function(){
+
+                $( this ).has(':checked').length ? ifCheckedOption( $(this) ): ifUnCheckedOption( $(this) ) ;
+       	       			
+       	       	checkOption( $(this),".amount-sizeDropRangeFrom", ".amount-sizeDropRangeUntil");       	       				
+       	       	checkOption( $(this),".amount-prise0", ".amount-prise1");			
+       	       	checkOption( $(this),".amount-speed-print0", ".amount-speed-print1");	
+       	       	checkOption( $(this),".amount-maximum_weight_of_vehicle0", ".amount-maximum_weight_of_vehicle1");       	       	
        	        	       	       		
-       	        if($( this ).has(".amount-speed-print0").length>0)
-             		$( this ).find(".amount-speed-print0").val() != $( this ).find(".amount-speed-print1").val() ?
-             	    	$( this ).parent('.search_criteria').css( "background", "#E8F2FE" ).find(".block_title").find("i, p").css('color','#006080'):
-                	$( this ).parent('.search_criteria').css( "background", "#FFFFFF" ).find(".block_title").find("i, p").css('color','rgb(144, 144, 144)');
-             	    	
-             	if($( this ).has(".amount-maximum_media_thickness60_0").length>0)
-                	($( this ).find(".amount-maximum_media_thickness60_0").val() != $( this ).find(".amount-maximum_media_thickness60_1").val())
-                	|| ($( this ).find(".amount-maximum_media_thickness500_0").val() != $( this ).find(".amount-maximum_media_thickness500_1").val()) ?
-                    	$( this ).parent('.search_criteria').css( "background", "#E8F2FE" ).find(".block_title").find("i, p").css('color','#006080'):
-                	$( this ).parent('.search_criteria').css( "background", "#FFFFFF" ).find(".block_title").find("i, p").css('color','rgb(144, 144, 144)');
-                    	
-                if($( this ).has(".amount-maximum_weight_of_vehicle0").length>0)
-                	$( this ).find(".amount-maximum_weight_of_vehicle0").val() != $( this ).find(".amount-maximum_weight_of_vehicle1").val() ?
-                    	$( this ).parent('.search_criteria').css( "background", "#E8F2FE" ).find(".block_title").find("i, p").css('color','#006080'):
-                	$( this ).parent('.search_criteria').css( "background", "#FFFFFF" ).find(".block_title").find("i, p").css('color','rgb(144, 144, 144)');
-                    	
-                if($( this ).has(".amount-max_power_consumption0").length>0)
-                	$( this ).find(".amount-max_power_consumption0").val() != $( this ).find(".amount-max_power_consumption1").val() ?
-                    	$( this ).parent('.search_criteria').css( "background", "#E8F2FE" ).find(".block_title").find("i, p").css('color','#006080'):
-                	$( this ).parent('.search_criteria').css( "background", "#FFFFFF" ).find(".block_title").find("i, p").css('color','rgb(144, 144, 144)');
-                    	
-                if($( this ).has(".amount-weight0").length>0)
-                	$( this ).find(".amount-weight0").val() != $( this ).find(".amount-weight1").val() ?
-                    	$( this ).parent('.search_criteria').css( "background", "#E8F2FE" ).find(".block_title").find("i, p").css('color','#006080'):
-                	$( this ).parent('.search_criteria').css( "background", "#FFFFFF" ).find(".block_title").find("i, p").css('color','rgb(144, 144, 144)');
-                    	
-                if($( this ).has(".amount-width0").length>0)
-                	$( this ).find(".amount-width0").val() != $( this ).find(".amount-width1").val() ?
-                    	$( this ).parent('.search_criteria').css( "background", "#E8F2FE" ).find(".block_title").find("i, p").css('color','#006080'):
-                	$( this ).parent('.search_criteria').css( "background", "#FFFFFF" ).find(".block_title").find("i, p").css('color','rgb(144, 144, 144)');
-                    	
-                if($( this ).has(".amount-depth0").length>0)		
-                    $( this ).find(".amount-depth0").val() != $( this ).find(".amount-depth1").val() ?
-                    	$( this ).parent('.search_criteria').css( "background", "#E8F2FE" ).find(".block_title").find("i, p").css('color','#006080'):
-                	$( this ).parent('.search_criteria').css( "background", "#FFFFFF" ).find(".block_title").find("i, p").css('color','rgb(144, 144, 144)');
-                            
-               if($( this ).has(".amount-heigth0").length>0)
-               		$( this ).find(".amount-heigth0").val() != $( this ).find(".amount-heigth1").val() ?
-               			$( this ).parent('.search_criteria').css( "background", "#E8F2FE" ).find(".block_title").find("i, p").css('color','#006080'):
-                	$( this ).parent('.search_criteria').css( "background", "#FFFFFF" ).find(".block_title").find("i, p").css('color','rgb(144, 144, 144)');
-               			
-               			if($( this ).has(".amount-averagePowerConsumption0").length>0)
-                       		$( this ).find(".amount-averagePowerConsumption0").val() != $( this ).find(".amount-averagePowerConsumption1").val() ?
-                       			$( this ).parent('.search_criteria').css( "background", "#E8F2FE" ).find(".block_title").find("i, p").css('color','#006080'):
-                        	$( this ).parent('.search_criteria').css( "background", "#FFFFFF" ).find(".block_title").find("i, p").css('color','rgb(144, 144, 144)');
-                    
+       	        checkOption( $(this),".amount-max_power_consumption0", ".amount-max_power_consumption1");	
+       	        checkOption( $(this),".amount-weight0", ".amount-weight1");             	
+       	        checkOption( $(this),".amount-width0", ".amount-width1");
+       	        checkOption( $(this),".amount-depth0", ".amount-depth1");       	        
+       	        checkOption( $(this),".amount-heigth0", ".amount-heigth1");        	        
+       	        checkOption( $(this),".amount-averagePowerConsumption0", ".amount-averagePowerConsumption1");        	        
+                     				
+               if($( this ).has(".amount-maximum_media_thickness60_0").length>0)
+            	   ($( this ).find(".amount-maximum_media_thickness60_0").val() != $( this ).find(".amount-maximum_media_thickness60_1").val())
+            	   	|| ($( this ).find(".amount-maximum_media_thickness500_0").val() != $( this ).find(".amount-maximum_media_thickness500_1").val()) ?
+            	   			ifCheckedOption( $(this) ): ifUnCheckedOption( $(this) ) ;
              });
         	
         });
-        
-/*---- диапазон для поиска по определенной ширине ----*/          
+               
         $(function() {
-        $( ".slider-range-weightPrintMMRange" ).slider({
-          range: true,
-          min: 1,
-          max: 5400,
-          create: function () {
-      	    $(this).slider( "values", 0, $(this).closest('.check_boxes').find('.text_output').find('.amount-weightPrintMMRangeFrom').val() );
-      	    $(this).slider( "values", 1, $(this).closest('.check_boxes').find('.text_output').find('.amount-weightPrintMMRangeUntil').val() );
-      	},
-          slide: function( event, ui ) {
-            $( ".amount-weightPrintMMRangeFrom" ).val(ui.values[ 0 ]);
-            $( ".amount-weightPrintMMRangeUntil" ).val(ui.values[ 1 ]);
-          }
-        });
-            
-        $( ".amount-weightPrintMMRangeFrom" ).val( $( ".slider-range-weightPrintMMRange" ).slider("values", 0 ));             
-        $( ".amount-weightPrintMMRangeUntil" ).val( $( ".slider-range-weightPrintMMRange" ).slider("values", 1 ));
-            
-        $( ".amount-weightPrintMMRangeFrom" ).change(function() {
-        	$(".slider-range-weightPrintMMRange").slider('values',0,this.value);
-        });
-            
-        $( ".amount-weightPrintMMRangeUntil" ).change(function() {
-        	$(".slider-range-weightPrintMMRange").slider('values',1,this.value);
-        });
-       
+        	
+        	function range(range, left_edge, right_edge, min_val, max_val){
+//        		 $(function() {
+	        		$( range ).slider({
+	        	          range: true,
+	        	          min: min_val,
+	        	          max: max_val,
+	        	          create: function () {
+	        	      	    $(this).slider( "values", 0, $(this).closest('.check_boxes').find('.text_output').find( left_edge ).val() );
+	        	      	    $(this).slider( "values", 1, $(this).closest('.check_boxes').find('.text_output').find( right_edge ).val() );
+	        	      	},
+	        	          slide: function( event, ui ) {
+	        	            $( left_edge ).val(ui.values[ 0 ]);
+	        	            $( right_edge ).val(ui.values[ 1 ]);
+	        	          }
+	        	        });
+	        	            
+	        	        $( left_edge ).val( $( range ).slider("values", 0 ));             
+	        	        $( right_edge ).val( $( range ).slider("values", 1 ));
+	        	            
+	        	        $( left_edge ).change(function() {
+	        	        	$( range ).slider('values',0,this.value);
+	        	            });
+	        	            
+	        	        $( right_edge ).change(function() {
+	        	        	$( range ).slider('values',1,this.value);
+	        	            });
+//        		 })
+        	}
+        	
+        	 /*---- диапазон для цены ----*/   
+        	range(".slider-range-prise", ".amount-prise0", ".amount-prise1", 0, 1000000);
+        	
+        	/*---- диапазон для поиска по определенной ширине ----*/ 
+        	range(".slider-range-weightPrintMMRange", ".amount-weightPrintMMRangeFrom", ".amount-weightPrintMMRangeUntil", 1, 5400);
+        	
+        	/*---- диапазон для размера капли ----*/  
+        	range(".slider-range-size-drop", ".amount-sizeDropRangeFrom", ".amount-sizeDropRangeUntil", 0, 100);
+        	
+        	/*---- Средняя потребляемая мощность ----*/
+        	range(".slider-range-averagePowerConsumption", ".amount-averagePowerConsumption0", ".amount-averagePowerConsumption1", 0, 100000);
+        	
+        	/*---- диапазон для скорости печати----*/ 
+        	range(".slider-range-speed-print", ".amount-speed-print0", ".amount-speed-print1", 1, 300);
+        	
+        	/*---- диапазон для максимальной толщины носителя ----*/
+            /*для диапазона от 1 до 60*/
+        	range(".slider-range-maximum_media_thickness60", ".amount-maximum_media_thickness60_0", ".amount-maximum_media_thickness60_1", 1, 60);
+        	/*для диапазона от 60 до 500*/
+        	range(".slider-range-maximum_media_thickness500", ".amount-maximum_media_thickness500_0", ".amount-maximum_media_thickness500_1", 60, 500);
+        	
+        	/*--- для максимального веса носителя ---*/
+        	range(".slider-range-maximum_weight_of_vehicle", ".amount-maximum_weight_of_vehicle0", ".amount-maximum_weight_of_vehicle1", 5, 500);
+        	
+        	/*--- для максимальной потребляемой мощности ----*/
+        	range(".slider-range-max_power_consumption", ".amount-max_power_consumption0", ".amount-max_power_consumption1", 0, 100000);
+        	
+        	/*--- для веса ----*/
+        	range(".slider-range-weight", ".amount-weight0", ".amount-weight1", 0, 5000);
+        	
+        	/*--- для ширины ---*/
+        	range(".slider-range-width", ".amount-width0", ".amount-width1", 0, 10000);
+        	
+        	/*--- для высоты ---*/
+        	range(".slider-range-heigth", ".amount-heigth0", ".amount-heigth1", 0, 10000);
+        	
+        	/*--- для глубины ---*/
+        	range(".slider-range-depth", ".amount-depth0", ".amount-depth1", 0, 10000);
       });
-        
-        
-        
-/*---- диапазон для размера капли ----*/          
-        $(function() {
-        $( ".slider-range-size-drop" ).slider({
-          range: true,
-          min: 0,
-          max: 100,
-          create: function () {
-      	    $(this).slider( "values", 0, $(this).closest('.check_boxes').find('.text_output').find('.amount-sizeDropRangeFrom').val() );
-      	    $(this).slider( "values", 1, $(this).closest('.check_boxes').find('.text_output').find('.amount-sizeDropRangeUntil').val() );
-      	},
-          slide: function( event, ui ) {
-            $( ".amount-sizeDropRangeFrom" ).val(ui.values[ 0 ]);
-            $( ".amount-sizeDropRangeUntil" ).val(ui.values[ 1 ]);
-          }
-        });
-            
-        $( ".amount-sizeDropRangeFrom" ).val( $( ".slider-range-size-drop" ).slider("values", 0 ));             
-        $( ".amount-sizeDropRangeUntil" ).val( $( ".slider-range-size-drop" ).slider("values", 1 ));
-            
-        $( ".amount-sizeDropRangeFrom" ).change(function() {
-        $(".slider-range-size-drop").slider('values',0,this.value);
-            });
-            
-        $( ".amount-sizeDropRangeUntil" ).change(function() {
-        $(".slider-range-size-drop").slider('values',1,this.value);
-            });
-       
-      });
-        
-/*---- Средняя потребляемая мощность ----*/          
-        $(function() {
-        $( ".slider-range-averagePowerConsumption" ).slider({
-          range: true,
-          min: 0,
-          max: 100000,
-          create: function () {
-      	    $(this).slider( "values", 0, $(this).closest('.check_boxes').find('.text_output').find('.amount-averagePowerConsumption0').val() );
-      	    $(this).slider( "values", 1, $(this).closest('.check_boxes').find('.text_output').find('.amount-averagePowerConsumption1').val() );
-      	},
-          slide: function( event, ui ) {
-            $( ".amount-averagePowerConsumption0" ).val(ui.values[ 0 ]);
-            $( ".amount-averagePowerConsumption1" ).val(ui.values[ 1 ]);
-          }
-        });
-            
-        $( ".amount-averagePowerConsumption0" ).val( $( ".slider-range-averagePowerConsumption" ).slider("values", 0 ));             
-        $( ".amount-averagePowerConsumption1" ).val( $( ".slider-range-averagePowerConsumption" ).slider("values", 1 ));
-            
-        $( ".amount-averagePowerConsumption0" ).change(function() {
-        $(".slider-range-averagePowerConsumption").slider('values',0,this.value);
-            });
-            
-        $( ".amount-averagePowerConsumption1" ).change(function() {
-        $(".slider-range-averagePowerConsumption").slider('values',1,this.value);
-            });
-       
-      });
-        
-/*---- диапазон для цены ----*/          
-            $(function() {
-            $( ".slider-range-prise" ).slider({
-              range: true,
-              min: 0,
-              max: 1000000,
-              create: function () {
-          	    $(this).slider( "values", 0, $(this).closest('.check_boxes').find('.text_output').find('.amount-prise0').val() );
-          	    $(this).slider( "values", 1, $(this).closest('.check_boxes').find('.text_output').find('.amount-prise1').val() );
-          	},
-              slide: function( event, ui ) {
-                $( ".amount-prise0" ).val(ui.values[ 0 ]);
-                $( ".amount-prise1" ).val(ui.values[ 1 ]);
-              }
-            });
-                
-            $( ".amount-prise0" ).val( $( ".slider-range-prise" ).slider("values", 0 ));             
-            $( ".amount-prise1" ).val( $( ".slider-range-prise" ).slider("values", 1 ));
-                
-            $( ".amount-prise0" ).change(function() {
-            $(".slider-range-prise").slider('values',0,this.value);
-                });
-                
-            $( ".amount-prise1" ).change(function() {
-            $(".slider-range-prise").slider('values',1,this.value);
-                });
-            
-          });
-/*---- диапазон для скорости печати----*/ 
-          $(function() {
-            $( ".slider-range-speed-print" ).slider({
-              range: true,
-              min: 1,
-              max: 300,
-              create: function () {
-            	    $(this).slider( "values", 0, $(this).closest('.check_boxes').find('.text_output').find('.amount-speed-print0').val() );
-            	    $(this).slider( "values", 1, $(this).closest('.check_boxes').find('.text_output').find('.amount-speed-print1').val() );
-            	},
-              slide: function( event, ui ) {
-                $( ".amount-speed-print0" ).val( ui.values[ 0 ]);
-                $( ".amount-speed-print1" ).val( ui.values[ 1 ]);
-              }
-            });
-              
-            $( ".amount-speed-print0" ).val($( ".slider-range-speed-print" ).slider( "values", 0 ));
-            $( ".amount-speed-print1" ).val($( ".slider-range-speed-print" ).slider( "values", 1 ));
-              
-              
-            $( ".amount-speed-print0" ).change(function() {
-            $(".slider-range-speed-print").slider('values',0,this.value);
-                });
-                
-            $( ".amount-speed-print1" ).change(function() {
-            $(".slider-range-speed-print").slider('values',1,this.value);
-                });  
-            
-          });
-/*---- диапазон для максимальной толщины носителя ----*/
-        /*для диапазона от 1 до 60*/
-          $(function() {
-            $( ".slider-range-maximum_media_thickness60" ).slider({
-              range: true,
-              min: 1,
-              max: 60,
-              create: function () {
-          	    $(this).slider( "values", 0, $(this).closest('.check_boxes').find('.text_output').find('.amount-maximum_media_thickness60_0').val() );
-          	    $(this).slider( "values", 1, $(this).closest('.check_boxes').find('.text_output').find('.amount-maximum_media_thickness60_1').val() );
-          	},
-              slide: function( event, ui ) {
-                $( ".amount-maximum_media_thickness60_0" ).val( ui.values[ 0 ] );
-                $( ".amount-maximum_media_thickness60_1" ).val( ui.values[ 1 ] );
-              }
-            });
-              
-            $( ".amount-maximum_media_thickness60_0" ).val( $( ".slider-range-maximum_media_thickness60" ).slider( "values", 0 ));    
-            $( ".amount-maximum_media_thickness60_1" ).val( $( ".slider-range-maximum_media_thickness60" ).slider( "values", 1 ) );
-            
-            $( ".amount-maximum_media_thickness60_0" ).change(function() {
-            $(".slider-range-maximum_media_thickness60").slider('values',0,this.value);
-                });
-                
-            $( ".amount-maximum_media_thickness60_1" ).change(function() {
-            $(".slider-range-maximum_media_thickness60").slider('values',1,this.value);
-                });  
-            
-          });
-        /*для диапазона от 60 до 500*/
-          $(function() {
-            $( ".slider-range-maximum_media_thickness500" ).slider({
-              range: true,
-              min: 60,
-              max: 500,
-              create: function () {
-            	    $(this).slider( "values", 0, $(this).closest('.check_boxes').find('.text_output').find('.amount-maximum_media_thickness500_0').val() );
-            	    $(this).slider( "values", 1, $(this).closest('.check_boxes').find('.text_output').find('.amount-maximum_media_thickness500_1').val() );
-            	},
-              slide: function( event, ui ) {
-                $( ".amount-maximum_media_thickness500_0" ).val( ui.values[ 0 ] );
-                $( ".amount-maximum_media_thickness500_1" ).val( ui.values[ 1 ] );
-              }
-            });
-              
-            $( ".amount-maximum_media_thickness500_0" ).val( $( ".slider-range-maximum_media_thickness500" ).slider( "values", 0 ));    
-            $( ".amount-maximum_media_thickness500_1" ).val( $( ".slider-range-maximum_media_thickness500" ).slider( "values", 1 ) );
-            
-            $( ".amount-maximum_media_thickness500_0" ).change(function() {
-            $(".slider-range-maximum_media_thickness500").slider('values',0,this.value);
-                });
-                
-            $( ".amount-maximum_media_thickness500_1" ).change(function() {
-            $(".slider-range-maximum_media_thickness500").slider('values',1,this.value);
-                });  
-          });
-/*--- для максимального веса носителя ---*/
-          $(function() {
-            $( ".slider-range-maximum_weight_of_vehicle" ).slider({
-              range: true,
-              min: 5,
-              max: 500,
-              create: function () {
-          	    $(this).slider( "values", 0, $(this).closest('.check_boxes').find('.text_output').find('.amount-maximum_weight_of_vehicle0').val() );
-          	    $(this).slider( "values", 1, $(this).closest('.check_boxes').find('.text_output').find('.amount-maximum_weight_of_vehicle1').val() );
-          	},
-              slide: function( event, ui ) {
-                $( ".amount-maximum_weight_of_vehicle0" ).val( ui.values[ 0 ] );
-                $( ".amount-maximum_weight_of_vehicle1" ).val( ui.values[ 1 ] );
-              }
-            });
-              
-            $( ".amount-maximum_weight_of_vehicle0" ).val($( ".slider-range-maximum_weight_of_vehicle" ).slider( "values", 0 )); 
-            $( ".amount-maximum_weight_of_vehicle1" ).val($( ".slider-range-maximum_weight_of_vehicle" ).slider( "values", 1 ));
-              
-            $( ".amount-maximum_weight_of_vehicle0" ).change(function() {
-            $(".slider-range-maximum_weight_of_vehicle").slider('values',0,this.value);
-                });
-                
-            $( ".amount-maximum_weight_of_vehicle1" ).change(function() {
-            $(".slider-range-maximum_weight_of_vehicle").slider('values',1,this.value);
-                });  
-              
-          });
-/*--- для максимальной потребляемой мощности ----*/
-          $(function() {
-            $( ".slider-range-max_power_consumption" ).slider({
-              range: true,
-              min: 0,
-              max: 100000,
-              create: function () {
-            	    $(this).slider( "values", 0, $(this).closest('.check_boxes').find('.text_output').find('.amount-max_power_consumption0').val() );
-            	    $(this).slider( "values", 1, $(this).closest('.check_boxes').find('.text_output').find('.amount-max_power_consumption1').val() );
-            	},
-              slide: function( event, ui ) {
-                $( ".amount-max_power_consumption0" ).val( ui.values[ 0 ] );
-                $( ".amount-max_power_consumption1" ).val( ui.values[ 1 ] );
-              }
-            });
-              
-            $( ".amount-max_power_consumption0" ).val($( ".slider-range-max_power_consumption" ).slider( "values", 0 ));
-            $( ".amount-max_power_consumption1" ).val($( ".slider-range-max_power_consumption" ).slider( "values", 1 ));
-              
-            $( ".amount-max_power_consumption0" ).change(function() {
-            $(".slider-range-max_power_consumption").slider('values',0,this.value);
-                });
-                
-            $( ".amount-max_power_consumption1" ).change(function() {
-            $(".slider-range-max_power_consumption").slider('values',1,this.value);
-                });   
-
-          });
-/*--- для веса ----*/
-          $(function() {
-            $( ".slider-range-weight" ).slider({
-              range: true,
-              min: 0,
-              max: 5000,
-              create: function () {
-          	    $(this).slider( "values", 0, $(this).closest('.check_boxes').find('.text_output').find('.amount-weight0').val() );
-          	    $(this).slider( "values", 1, $(this).closest('.check_boxes').find('.text_output').find('.amount-weight1').val() );
-          	},
-              slide: function( event, ui ) {
-                $( ".amount-weight0" ).val( ui.values[ 0 ] );
-                $( ".amount-weight1" ).val( ui.values[ 1 ] );
-              }
-            });
-              
-            $( ".amount-weight0" ).val($( ".slider-range-weight" ).slider( "values", 0 ));
-            $( ".amount-weight1" ).val($( ".slider-range-weight" ).slider( "values", 1 ));
-              
-            $( ".amount-weight0" ).change(function() {
-            $(".slider-range-weight").slider('values',0,this.value);
-                });
-                
-            $( ".amount-weight1" ).change(function() {
-            $(".slider-range-weight").slider('values',1,this.value);
-                });  
-
-          });
-/*--- для ширины ---*/
-          $(function() {
-            $( ".slider-range-width" ).slider({
-              range: true,
-              min: 0,
-              max: 10000,
-              create: function () {
-            	    $(this).slider( "values", 0, $(this).closest('.check_boxes').find('.text_output').find('.amount-width0').val() );
-            	    $(this).slider( "values", 1, $(this).closest('.check_boxes').find('.text_output').find('.amount-width1').val() );
-            	},
-              slide: function( event, ui ) {
-                $( ".amount-width0" ).val( ui.values[ 0 ] );
-                $( ".amount-width1" ).val( ui.values[ 1 ] );
-              }
-            });
-              
-            $( ".amount-width0" ).val($( ".slider-range-width" ).slider( "values", 0 ));
-            $( ".amount-width1" ).val($( ".slider-range-width" ).slider( "values", 1 ));
-              
-            $( ".amount-width0" ).change(function() {
-            $(".slider-range-width").slider('values',0,this.value);
-                });
-                
-            $( ".amount-width1" ).change(function() {
-            $(".slider-range-width").slider('values',1,this.value);
-                }); 
-
-          });
-/*--- для высоты ---*/
-          $(function() {
-            $( ".slider-range-heigth" ).slider({
-              range: true,
-              min: 0,
-              max: 10000,
-              create: function () {
-          	    $(this).slider( "values", 0, $(this).closest('.check_boxes').find('.text_output').find('.amount-heigth0').val() );
-          	    $(this).slider( "values", 1, $(this).closest('.check_boxes').find('.text_output').find('.amount-heigth1').val() );
-          	},
-              slide: function( event, ui ) {
-                $( ".amount-heigth0" ).val( ui.values[ 0 ] );
-                $( ".amount-heigth1" ).val( ui.values[ 1 ] );
-              }
-            });
-              
-            $( ".amount-heigth0" ).val($( ".slider-range-heigth" ).slider( "values", 0 ));
-            $( ".amount-heigth1" ).val($( ".slider-range-heigth" ).slider( "values", 1 ));
-              
-            $( ".amount-heigth0" ).change(function() {
-            $(".slider-range-heigth").slider('values',0,this.value);
-                });
-                
-            $( ".amount-heigth1" ).change(function() {
-            $(".slider-range-heigth").slider('values',1,this.value);
-                }); 
-
-          });
-/*--- для глубины ---*/
-          $(function() {
-            $( ".slider-range-depth" ).slider({
-              range: true,
-              min: 0,
-              max: 10000,
-              create: function () {
-            	    $(this).slider( "values", 0, $(this).closest('.check_boxes').find('.text_output').find('.amount-depth0').val() );
-            	    $(this).slider( "values", 1, $(this).closest('.check_boxes').find('.text_output').find('.amount-depth1').val() );
-            	},
-              slide: function( event, ui ) {
-                $( ".amount-depth0" ).val( ui.values[ 0 ] );
-                $( ".amount-depth1" ).val( ui.values[ 1 ] );
-              }
-            });
-              
-            $( ".amount-depth0" ).val($( ".slider-range-depth" ).slider( "values", 0 ));
-            $( ".amount-depth1" ).val($( ".slider-range-depth" ).slider( "values", 1 ));
-              
-            $( ".amount-depth0" ).change(function() {
-            	$(".slider-range-depth").slider('values',0,this.value);
-                });
-                
-            $( ".amount-depth1" ).change(function() {
-            	$(".slider-range-depth").slider('values',1,this.value);
-                }); 
-            
-          });
 
 /*-- реализация подпунктов ширины в виде вкладок --*/
         (function($){				
