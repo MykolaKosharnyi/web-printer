@@ -1,603 +1,108 @@
 
 /* Для обозначения заполненных полей в поиске */       
-        $(function() {
-        	$('.check_boxes').click(function(){
+$(function() {
+    
+	function ifCheckedOption(this_object){
+		this_object.parent('.search_criteria').css( "background", "#E8F2FE" ).find(".block_title").find("i, p").css('color','#006080')
+	}
+	
+	function ifUnCheckedOption(this_object){
+		this_object.parent('.search_criteria').css( "background", "#FFFFFF" ).find(".block_title").find("i, p").css('color','rgb(144, 144, 144)')	
+	}
+	
+	function checkOption(element, class0, class1){
+		if(element.has(class0).length>0)
+			element.find(class0).val() != element.find(class1).val() ? ifCheckedOption( element ): ifUnCheckedOption( element ) ;
+	}
+        	
+    $('.check_boxes').click(function(){
         		
-                $( this ).has(':checked').length ? 
-                		$( this ).parent('.search_criteria').css( "background", "#E8F2FE" ).find(".block_title").find("i, p").css('color','#006080'):
-                	$( this ).parent('.search_criteria').css( "background", "#FFFFFF" ).find(".block_title").find("i, p").css('color','rgb(144, 144, 144)');
-       	       			
-       	        if($( this ).has(".amount-prise0").length>0)
-       	        	$( this ).find(".amount-prise0").val() != $( this ).find(".amount-prise1").val() ?
-       	        		$( this ).parent('.search_criteria').css( "background", "#E8F2FE" ).find(".block_title").find("i, p").css('color','#006080'):
-                	$( this ).parent('.search_criteria').css( "background", "#FFFFFF" ).find(".block_title").find("i, p").css('color','rgb(144, 144, 144)');
+                $( this ).has(':checked').length ? ifCheckedOption( $(this) ): ifUnCheckedOption( $(this) );
+                
+                checkOption( $(this),".amount-prise0", ".amount-prise1");
+                checkOption( $(this),".amount-meltingPointOfThePrintingMaterial0", ".amount-meltingPointOfThePrintingMaterial1");
+                checkOption( $(this),".amount-sizeExtruder0", ".amount-sizeExtruder1");
+                checkOption( $(this),".amount-speedPrint0", ".amount-speedPrint1");
+                checkOption( $(this),".amount-maxPowerConsumption0", ".amount-maxPowerConsumption1");
+                checkOption( $(this),".amount-thicknessOfThePrintingLayer0", ".amount-thicknessOfThePrintingLayer1");
+                checkOption( $(this),".amount-maximumWeightOfThePrintedModel0", ".amount-maximumWeightOfThePrintedModel1");
+                checkOption( $(this),".amount-weight0", ".amount-weight1");
+                checkOption( $(this),".amount-width0", ".amount-width1");
+                checkOption( $(this),".amount-depth0", ".amount-depth1");
+                checkOption( $(this),".amount-heigth0", ".amount-heigth1");
+                checkOption( $(this),".amount-averagePowerConsumption0", ".amount-averagePowerConsumption1");
+                checkOption( $(this),".amount-speedOfMovingThePrintHead0", ".amount-speedOfMovingThePrintHead1");
+                checkOption( $(this),".amount-positioningAccuracyOfThePrintHead0", ".amount-positioningAccuracyOfThePrintHead1");
+                checkOption( $(this),".amount-numberOfFansForBlowingModels0", ".amount-numberOfFansForBlowingModels1");   
 
              	if($( this ).has(".amount-sizePrintableAreaX0").length>0)
                 	($( this ).find(".amount-sizePrintableAreaX0").val() != $( this ).find(".amount-sizePrintableAreaX1").val())
                 	|| ($( this ).find(".amount-sizePrintableAreaY0").val() != $( this ).find(".amount-sizePrintableAreaY1").val())
                 	|| ($( this ).find(".amount-sizePrintableAreaZ0").val() != $( this ).find(".amount-sizePrintableAreaZ1").val()) ?
-                    	$( this ).parent('.search_criteria').css( "background", "#E8F2FE" ).find(".block_title").find("i, p").css('color','#006080'):
-                	$( this ).parent('.search_criteria').css( "background", "#FFFFFF" ).find(".block_title").find("i, p").css('color','rgb(144, 144, 144)');
-                    	
-                if($( this ).has(".amount-meltingPointOfThePrintingMaterial0").length>0)
-                	$( this ).find(".amount-meltingPointOfThePrintingMaterial0").val() != $( this ).find(".amount-meltingPointOfThePrintingMaterial1").val() ?
-                    	$( this ).parent('.search_criteria').css( "background", "#E8F2FE" ).find(".block_title").find("i, p").css('color','#006080'):
-                	$( this ).parent('.search_criteria').css( "background", "#FFFFFF" ).find(".block_title").find("i, p").css('color','rgb(144, 144, 144)');
-
-                if($( this ).has(".amount-sizeExtruder0").length>0)
-               		$( this ).find(".amount-sizeExtruder0").val() != $( this ).find(".amount-sizeExtruder1").val() ?
-               	    	$( this ).parent('.search_criteria').css( "background", "#E8F2FE" ).find(".block_title").find("i, p").css('color','#006080'):
-                	$( this ).parent('.search_criteria').css( "background", "#FFFFFF" ).find(".block_title").find("i, p").css('color','rgb(144, 144, 144)');
-                    	
-                if($( this ).has(".amount-speedPrint0").length>0)
-                	$( this ).find(".amount-speedPrint0").val() != $( this ).find(".amount-speedPrint1").val() ?
-                    	$( this ).parent('.search_criteria').css( "background", "#E8F2FE" ).find(".block_title").find("i, p").css('color','#006080'):
-                	$( this ).parent('.search_criteria').css( "background", "#FFFFFF" ).find(".block_title").find("i, p").css('color','rgb(144, 144, 144)');
-                    	
-                if($( this ).has(".amount-maxPowerConsumption0").length>0)
-                	$( this ).find(".amount-maxPowerConsumption0").val() != $( this ).find(".amount-maxPowerConsumption1").val() ?
-                    	$( this ).parent('.search_criteria').css( "background", "#E8F2FE" ).find(".block_title").find("i, p").css('color','#006080'):
-                	$( this ).parent('.search_criteria').css( "background", "#FFFFFF" ).find(".block_title").find("i, p").css('color','rgb(144, 144, 144)');
-                    	
-                if($( this ).has(".amount-thicknessOfThePrintingLayer0").length>0)
-                	$( this ).find(".amount-thicknessOfThePrintingLayer0").val() != $( this ).find(".amount-thicknessOfThePrintingLayer1").val() ?
-                    	$( this ).parent('.search_criteria').css( "background", "#E8F2FE" ).find(".block_title").find("i, p").css('color','#006080'):
-                	$( this ).parent('.search_criteria').css( "background", "#FFFFFF" ).find(".block_title").find("i, p").css('color','rgb(144, 144, 144)');
-                        
-                if($( this ).has(".amount-maximumWeightOfThePrintedModel0").length>0)
-                	$( this ).find(".amount-maximumWeightOfThePrintedModel0").val() != $( this ).find(".amount-maximumWeightOfThePrintedModel1").val() ?
-                    	$( this ).parent('.search_criteria').css( "background", "#E8F2FE" ).find(".block_title").find("i, p").css('color','#006080'):
-                	$( this ).parent('.search_criteria').css( "background", "#FFFFFF" ).find(".block_title").find("i, p").css('color','rgb(144, 144, 144)');   	       
-                    	
-                if($( this ).has(".amount-weight0").length>0)
-                	$( this ).find(".amount-weight0").val() != $( this ).find(".amount-weight1").val() ?
-                    	$( this ).parent('.search_criteria').css( "background", "#E8F2FE" ).find(".block_title").find("i, p").css('color','#006080'):
-                	$( this ).parent('.search_criteria').css( "background", "#FFFFFF" ).find(".block_title").find("i, p").css('color','rgb(144, 144, 144)');
-                    	
-                if($( this ).has(".amount-width0").length>0)
-                	$( this ).find(".amount-width0").val() != $( this ).find(".amount-width1").val() ?
-                    	$( this ).parent('.search_criteria').css( "background", "#E8F2FE" ).find(".block_title").find("i, p").css('color','#006080'):
-                	$( this ).parent('.search_criteria').css( "background", "#FFFFFF" ).find(".block_title").find("i, p").css('color','rgb(144, 144, 144)');
-                    	
-                if($( this ).has(".amount-depth0").length>0)		
-                    $( this ).find(".amount-depth0").val() != $( this ).find(".amount-depth1").val() ?
-                    	$( this ).parent('.search_criteria').css( "background", "#E8F2FE" ).find(".block_title").find("i, p").css('color','#006080'):
-                	$( this ).parent('.search_criteria').css( "background", "#FFFFFF" ).find(".block_title").find("i, p").css('color','rgb(144, 144, 144)');
-                            
-               if($( this ).has(".amount-heigth0").length>0)
-               		$( this ).find(".amount-heigth0").val() != $( this ).find(".amount-heigth1").val() ?
-               			$( this ).parent('.search_criteria').css( "background", "#E8F2FE" ).find(".block_title").find("i, p").css('color','#006080'):
-                	$( this ).parent('.search_criteria').css( "background", "#FFFFFF" ).find(".block_title").find("i, p").css('color','rgb(144, 144, 144)');
-                    
-               if($( this ).has(".amount-averagePowerConsumption0").length>0)
-                    $( this ).find(".amount-averagePowerConsumption0").val() != $( this ).find(".amount-averagePowerConsumption1").val() ?
-                       $( this ).parent('.search_criteria').css( "background", "#E8F2FE" ).find(".block_title").find("i, p").css('color','#006080'):
-                    $( this ).parent('.search_criteria').css( "background", "#FFFFFF" ).find(".block_title").find("i, p").css('color','rgb(144, 144, 144)');
-                       
-               if($( this ).has(".amount-speedOfMovingThePrintHead0").length>0)
-               		$( this ).find(".amount-speedOfMovingThePrintHead0").val() != $( this ).find(".amount-speedOfMovingThePrintHead1").val() ?
-                    	$( this ).parent('.search_criteria').css( "background", "#E8F2FE" ).find(".block_title").find("i, p").css('color','#006080'):
-                	$( this ).parent('.search_criteria').css( "background", "#FFFFFF" ).find(".block_title").find("i, p").css('color','rgb(144, 144, 144)');
-            
-               if($( this ).has(".amount-positioningAccuracyOfThePrintHead0").length>0)
-               		$( this ).find(".amount-positioningAccuracyOfThePrintHead0").val() != $( this ).find(".amount-positioningAccuracyOfThePrintHead1").val() ?
-               			$( this ).parent('.search_criteria').css( "background", "#E8F2FE" ).find(".block_title").find("i, p").css('color','#006080'):
-               		$( this ).parent('.search_criteria').css( "background", "#FFFFFF" ).find(".block_title").find("i, p").css('color','rgb(144, 144, 144)');
-        	
-               if($( this ).has(".amount-numberOfFansForBlowingModels0").length>0)
-               		$( this ).find(".amount-numberOfFansForBlowingModels0").val() != $( this ).find(".amount-numberOfFansForBlowingModels1").val() ?
-                    	$( this ).parent('.search_criteria').css( "background", "#E8F2FE" ).find(".block_title").find("i, p").css('color','#006080'):
-                    $( this ).parent('.search_criteria').css( "background", "#FFFFFF" ).find(".block_title").find("i, p").css('color','rgb(144, 144, 144)');
+                			ifCheckedOption( $(this) ): ifUnCheckedOption( $(this) );
 
         	});
         	
         });		
-		
-/*--- пошли слайдеры ---*/
-        $(function() {
-            $( ".slider-range-speedOfMovingThePrintHead" ).slider({
-              range: true,
-              min: 0,
-              max: 1000,
-              create: function () {
-          	    $(this).slider( "values", 0, $(this).closest('.check_boxes').find('.text_output').find('.amount-speedOfMovingThePrintHead0').val() );
-          	    $(this).slider( "values", 1, $(this).closest('.check_boxes').find('.text_output').find('.amount-speedOfMovingThePrintHead1').val() );
-          	},
-              slide: function( event, ui ) {
-                $( ".amount-speedOfMovingThePrintHead0" ).val(ui.values[ 0 ]);
-                $( ".amount-speedOfMovingThePrintHead1" ).val(ui.values[ 1 ]);
-              }
-            });
-                
-            $( ".amount-speedOfMovingThePrintHead0" ).val( $( ".slider-range-speedOfMovingThePrintHead" ).slider("values", 0 ));             
-            $( ".amount-speedOfMovingThePrintHead1" ).val( $( ".slider-range-speedOfMovingThePrintHead" ).slider("values", 1 ));
-                
-            $( ".amount-speedOfMovingThePrintHead0" ).change(function() {
-            $(".slider-range-speedOfMovingThePrintHead").slider('values',0,this.value);
-                });
-                
-            $( ".amount-speedOfMovingThePrintHead1" ).change(function() {
-            $(".slider-range-speedOfMovingThePrintHead").slider('values',1,this.value);
-                });
-          });
-        
-        $(function() {
-            $( ".slider-range-positioningAccuracyOfThePrintHead" ).slider({
-              range: true,
-              min: 0,
-              max: 1000,
-              create: function () {
-          	    $(this).slider( "values", 0, $(this).closest('.check_boxes').find('.text_output').find('.amount-positioningAccuracyOfThePrintHead0').val() );
-          	    $(this).slider( "values", 1, $(this).closest('.check_boxes').find('.text_output').find('.amount-positioningAccuracyOfThePrintHead1').val() );
-          	},
-              slide: function( event, ui ) {
-                $( ".amount-positioningAccuracyOfThePrintHead0" ).val(ui.values[ 0 ]);
-                $( ".amount-positioningAccuracyOfThePrintHead1" ).val(ui.values[ 1 ]);
-              }
-            });
-                
-            $( ".amount-positioningAccuracyOfThePrintHead0" ).val( $( ".slider-range-positioningAccuracyOfThePrintHead" ).slider("values", 0 ));             
-            $( ".amount-positioningAccuracyOfThePrintHead1" ).val( $( ".slider-range-positioningAccuracyOfThePrintHead" ).slider("values", 1 ));
-                
-            $( ".amount-positioningAccuracyOfThePrintHead0" ).change(function() {
-            $(".slider-range-positioningAccuracyOfThePrintHead").slider('values',0,this.value);
-                });
-                
-            $( ".amount-positioningAccuracyOfThePrintHead1" ).change(function() {
-            $(".slider-range-positioningAccuracyOfThePrintHead").slider('values',1,this.value);
-                });
-          });
-        
-        $(function() {
-            $( ".slider-range-numberOfFansForBlowingModels" ).slider({
-              range: true,
-              min: 0,
-              max: 100,
-              create: function () {
-          	    $(this).slider( "values", 0, $(this).closest('.check_boxes').find('.text_output').find('.amount-numberOfFansForBlowingModels0').val() );
-          	    $(this).slider( "values", 1, $(this).closest('.check_boxes').find('.text_output').find('.amount-numberOfFansForBlowingModels1').val() );
-          	},
-              slide: function( event, ui ) {
-                $( ".amount-numberOfFansForBlowingModels0" ).val(ui.values[ 0 ]);
-                $( ".amount-numberOfFansForBlowingModels1" ).val(ui.values[ 1 ]);
-              }
-            });
-                
-            $( ".amount-numberOfFansForBlowingModels0" ).val( $( ".slider-range-numberOfFansForBlowingModels" ).slider("values", 0 ));             
-            $( ".amount-numberOfFansForBlowingModels1" ).val( $( ".slider-range-numberOfFansForBlowingModels" ).slider("values", 1 ));
-                
-            $( ".amount-numberOfFansForBlowingModels0" ).change(function() {
-            $(".slider-range-numberOfFansForBlowingModels").slider('values',0,this.value);
-                });
-                
-            $( ".amount-numberOfFansForBlowingModels1" ).change(function() {
-            $(".slider-range-numberOfFansForBlowingModels").slider('values',1,this.value);
-                });
-          });
-        
-        $(function() {
-            $( ".slider-range-prise" ).slider({
-              range: true,
-              min: 0,
-              max: 1000000,
-              create: function () {
-          	    $(this).slider( "values", 0, $(this).closest('.check_boxes').find('.text_output').find('.amount-prise0').val() );
-          	    $(this).slider( "values", 1, $(this).closest('.check_boxes').find('.text_output').find('.amount-prise1').val() );
-          	},
-              slide: function( event, ui ) {
-                $( ".amount-prise0" ).val(ui.values[ 0 ]);
-                $( ".amount-prise1" ).val(ui.values[ 1 ]);
-              }
-            });
-                
-            $( ".amount-prise0" ).val( $( ".slider-range-prise" ).slider("values", 0 ));             
-            $( ".amount-prise1" ).val( $( ".slider-range-prise" ).slider("values", 1 ));
-                
-            $( ".amount-prise0" ).change(function() {
-            $(".slider-range-prise").slider('values',0,this.value);
-                });
-                
-            $( ".amount-prise1" ).change(function() {
-            $(".slider-range-prise").slider('values',1,this.value);
-                });
-          });
-        
-		$(function() {
-            $( ".slider-range-sizePrintableAreaX" ).slider({
-              range: true,
-              min: 1,
-              max: 1000,
-              create: function () {
-            	    $(this).slider( "values", 0, $(this).closest('.check_boxes').find('.text_output').find('.amount-sizePrintableAreaX0').val() );
-            	    $(this).slider( "values", 1, $(this).closest('.check_boxes').find('.text_output').find('.amount-sizePrintableAreaX1').val() );
-            	},
-              slide: function( event, ui ) {
-                $( ".amount-sizePrintableAreaX0" ).val( ui.values[ 0 ]);
-                $( ".amount-sizePrintableAreaX1" ).val( ui.values[ 1 ]);
-              }
-            });
-              
-            $( ".amount-sizePrintableAreaX0" ).val($( ".slider-range-sizePrintableAreaX" ).slider( "values", 0 ));
-            $( ".amount-sizePrintableAreaX1" ).val($( ".slider-range-sizePrintableAreaX" ).slider( "values", 1 ));
-              
-              
-            $( ".amount-sizePrintableAreaX0" ).change(function() {
-            $(".slider-range-sizePrintableAreaX").slider('values',0,this.value);
-                });
-                
-            $( ".amount-sizePrintableAreaX1" ).change(function() {
-            $(".slider-range-sizePrintableAreaX").slider('values',1,this.value);
-                });  
-          });
-		
-		$(function() {
-            $( ".slider-range-sizePrintableAreaY" ).slider({
-              range: true,
-              min: 1,
-              max: 1000,
-              create: function () {
-            	    $(this).slider( "values", 0, $(this).closest('.check_boxes').find('.text_output').find('.amount-sizePrintableAreaY0').val() );
-            	    $(this).slider( "values", 1, $(this).closest('.check_boxes').find('.text_output').find('.amount-sizePrintableAreaY1').val() );
-            	},
-              slide: function( event, ui ) {
-                $( ".amount-sizePrintableAreaY0" ).val( ui.values[ 0 ]);
-                $( ".amount-sizePrintableAreaY1" ).val( ui.values[ 1 ]);
-              }
-            });
-              
-            $( ".amount-sizePrintableAreaY0" ).val($( ".slider-range-sizePrintableAreaY" ).slider( "values", 0 ));
-            $( ".amount-sizePrintableAreaY1" ).val($( ".slider-range-sizePrintableAreaY" ).slider( "values", 1 ));
-              
-              
-            $( ".amount-sizePrintableAreaY0" ).change(function() {
-            $(".slider-range-sizePrintableAreaY").slider('values',0,this.value);
-                });
-                
-            $( ".amount-sizePrintableAreaY1" ).change(function() {
-            $(".slider-range-sizePrintableAreaY").slider('values',1,this.value);
-                });  
-          });
-		
-		$(function() {
-            $( ".slider-range-sizePrintableAreaZ" ).slider({
-              range: true,
-              min: 1,
-              max: 1000,
-              create: function () {
-            	    $(this).slider( "values", 0, $(this).closest('.check_boxes').find('.text_output').find('.amount-sizePrintableAreaZ0').val() );
-            	    $(this).slider( "values", 1, $(this).closest('.check_boxes').find('.text_output').find('.amount-sizePrintableAreaZ1').val() );
-            	},
-              slide: function( event, ui ) {
-                $( ".amount-sizePrintableAreaZ0" ).val( ui.values[ 0 ]);
-                $( ".amount-sizePrintableAreaZ1" ).val( ui.values[ 1 ]);
-              }
-            });
-              
-            $( ".amount-sizePrintableAreaZ0" ).val($( ".slider-range-sizePrintableAreaZ" ).slider( "values", 0 ));
-            $( ".amount-sizePrintableAreaZ1" ).val($( ".slider-range-sizePrintableAreaZ" ).slider( "values", 1 ));
-              
-              
-            $( ".amount-sizePrintableAreaZ0" ).change(function() {
-            $(".slider-range-sizePrintableAreaZ").slider('values',0,this.value);
-                });
-                
-            $( ".amount-sizePrintableAreaZ1" ).change(function() {
-            $(".slider-range-sizePrintableAreaZ").slider('values',1,this.value);
-                });  
-          });
 
-/*---- Средняя потребляемая мощность ----*/          
-        $(function() {
-        $( ".slider-range-averagePowerConsumption" ).slider({
-          range: true,
-          min: 0,
-          max: 1000,
-          create: function () {
-      	    $(this).slider( "values", 0, $(this).closest('.check_boxes').find('.text_output').find('.amount-averagePowerConsumption0').val() );
-      	    $(this).slider( "values", 1, $(this).closest('.check_boxes').find('.text_output').find('.amount-averagePowerConsumption1').val() );
-      	},
-          slide: function( event, ui ) {
-            $( ".amount-averagePowerConsumption0" ).val(ui.values[ 0 ]);
-            $( ".amount-averagePowerConsumption1" ).val(ui.values[ 1 ]);
-          }
-        });
-            
-        $( ".amount-averagePowerConsumption0" ).val( $( ".slider-range-averagePowerConsumption" ).slider("values", 0 ));             
-        $( ".amount-averagePowerConsumption1" ).val( $( ".slider-range-averagePowerConsumption" ).slider("values", 1 ));
-            
-        $( ".amount-averagePowerConsumption0" ).change(function() {
-        $(".slider-range-averagePowerConsumption").slider('values',0,this.value);
-            });
-            
-        $( ".amount-averagePowerConsumption1" ).change(function() {
-        $(".slider-range-averagePowerConsumption").slider('values',1,this.value);
-            });
-       
-      });		
-		
-		$(function() {
-            $( ".slider-range-meltingPointOfThePrintingMaterial" ).slider({
-              range: true,
-              min: 1,
-              max: 500,
-              create: function () {
-            	    $(this).slider( "values", 0, $(this).closest('.check_boxes').find('.text_output').find('.amount-meltingPointOfThePrintingMaterial0').val() );
-            	    $(this).slider( "values", 1, $(this).closest('.check_boxes').find('.text_output').find('.amount-meltingPointOfThePrintingMaterial1').val() );
-            	},
-              slide: function( event, ui ) {
-                $( ".amount-meltingPointOfThePrintingMaterial0" ).val( ui.values[ 0 ]);
-                $( ".amount-meltingPointOfThePrintingMaterial1" ).val( ui.values[ 1 ]);
-              }
-            });
-              
-            $( ".amount-meltingPointOfThePrintingMaterial0" ).val($( ".slider-range-meltingPointOfThePrintingMaterial" ).slider( "values", 0 ));
-            $( ".amount-meltingPointOfThePrintingMaterial1" ).val($( ".slider-range-meltingPointOfThePrintingMaterial" ).slider( "values", 1 ));
-              
-              
-            $( ".amount-meltingPointOfThePrintingMaterial0" ).change(function() {
-            $(".slider-range-meltingPointOfThePrintingMaterial").slider('values',0,this.value);
-                });
-                
-            $( ".amount-meltingPointOfThePrintingMaterial1" ).change(function() {
-            $(".slider-range-meltingPointOfThePrintingMaterial").slider('values',1,this.value);
-                });  
-          });
-		
-		$(function() {
-            $( ".slider-range-sizeExtruder" ).slider({
-              range: true,
-              min: 0,
-              max: 2,
-              create: function () {
-            	    $(this).slider( "values", 0, $(this).closest('.check_boxes').find('.text_output').find('.amount-sizeExtruder0').val() );
-            	    $(this).slider( "values", 1, $(this).closest('.check_boxes').find('.text_output').find('.amount-sizeExtruder1').val() );
-            	},
-              slide: function( event, ui ) {
-                $( ".amount-sizeExtruder0" ).val( ui.values[ 0 ]);
-                $( ".amount-sizeExtruder1" ).val( ui.values[ 1 ]);
-              }
-            });
-              
-            $( ".amount-sizeExtruder0" ).val($( ".slider-range-sizeExtruder" ).slider( "values", 0 ));
-            $( ".amount-sizeExtruder1" ).val($( ".slider-range-sizeExtruder" ).slider( "values", 1 ));
-              
-              
-            $( ".amount-sizeExtruder0" ).change(function() {
-            $(".slider-range-sizeExtruder").slider('values',0,this.value);
-                });
-                
-            $( ".amount-sizeExtruder1" ).change(function() {
-            $(".slider-range-sizeExtruder").slider('values',1,this.value);
-                });  
-          });
-		
-		$(function() {
-            $( ".slider-range-speedPrint" ).slider({
-              range: true,
-              min: 1,
-              max: 1000,
-              create: function () {
-            	    $(this).slider( "values", 0, $(this).closest('.check_boxes').find('.text_output').find('.amount-speedPrint0').val() );
-            	    $(this).slider( "values", 1, $(this).closest('.check_boxes').find('.text_output').find('.amount-speedPrint1').val() );
-            	},
-              slide: function( event, ui ) {
-                $( ".amount-speedPrint0" ).val( ui.values[ 0 ]);
-                $( ".amount-speedPrint1" ).val( ui.values[ 1 ]);
-              }
-            });
-              
-            $( ".amount-speedPrint0" ).val($( ".slider-range-speedPrint" ).slider( "values", 0 ));
-            $( ".amount-speedPrint1" ).val($( ".slider-range-speedPrint" ).slider( "values", 1 ));
-              
-              
-            $( ".amount-speedPrint0" ).change(function() {
-            $(".slider-range-speedPrint").slider('values',0,this.value);
-                });
-                
-            $( ".amount-sizeExtruder1" ).change(function() {
-            $(".slider-range-speedPrint").slider('values',1,this.value);
-                });  
-          });
-		
-		$(function() {
-            $( ".slider-range-thicknessOfThePrintingLayer" ).slider({
-              range: true,
-              min: 1,
-              max: 500,
-              create: function () {
-            	    $(this).slider( "values", 0, $(this).closest('.check_boxes').find('.text_output').find('.amount-thicknessOfThePrintingLayer0').val() );
-            	    $(this).slider( "values", 1, $(this).closest('.check_boxes').find('.text_output').find('.amount-thicknessOfThePrintingLayer1').val() );
-            	},
-              slide: function( event, ui ) {
-                $( ".amount-thicknessOfThePrintingLayer0" ).val( ui.values[ 0 ]);
-                $( ".amount-thicknessOfThePrintingLayer1" ).val( ui.values[ 1 ]);
-              }
-            });
-              
-            $( ".amount-thicknessOfThePrintingLayer0" ).val($( ".slider-range-thicknessOfThePrintingLayer" ).slider( "values", 0 ));
-            $( ".amount-thicknessOfThePrintingLayer1" ).val($( ".slider-range-thicknessOfThePrintingLayer" ).slider( "values", 1 ));
-              
-              
-            $( ".amount-thicknessOfThePrintingLayer0" ).change(function() {
-            $(".slider-range-thicknessOfThePrintingLayer").slider('values',0,this.value);
-                });
-                
-            $( ".amount-thicknessOfThePrintingLayer1" ).change(function() {
-            $(".slider-range-thicknessOfThePrintingLayer").slider('values',1,this.value);
-                });  
-          });
-		
-		$(function() {
-            $( ".slider-range-maximumWeightOfThePrintedModel" ).slider({
-              range: true,
-              min: 0,
-              max: 100,
-              create: function () {
-            	    $(this).slider( "values", 0, $(this).closest('.check_boxes').find('.text_output').find('.amount-maximumWeightOfThePrintedModel0').val() );
-            	    $(this).slider( "values", 1, $(this).closest('.check_boxes').find('.text_output').find('.amount-maximumWeightOfThePrintedModel1').val() );
-            	},
-              slide: function( event, ui ) {
-                $( ".amount-maximumWeightOfThePrintedModel0" ).val( ui.values[ 0 ]);
-                $( ".amount-maximumWeightOfThePrintedModel1" ).val( ui.values[ 1 ]);
-              }
-            });
-              
-            $( ".amount-maximumWeightOfThePrintedModel0" ).val($( ".slider-range-maximumWeightOfThePrintedModel" ).slider( "values", 0 ));
-            $( ".amount-maximumWeightOfThePrintedModel1" ).val($( ".slider-range-maximumWeightOfThePrintedModel" ).slider( "values", 1 ));
-              
-              
-            $( ".amount-maximumWeightOfThePrintedModel0" ).change(function() {
-            $(".slider-range-maximumWeightOfThePrintedModel").slider('values',0,this.value);
-                });
-                
-            $( ".amount-maximumWeightOfThePrintedModel1" ).change(function() {
-            $(".slider-range-maximumWeightOfThePrintedModel").slider('values',1,this.value);
-                });  
-          });
-		
-		$(function() {
-            $( ".slider-range-maxPowerConsumption" ).slider({
-              range: true,
-              min: 0,
-              max: 100000,
-              create: function () {
-            	    $(this).slider( "values", 0, $(this).closest('.check_boxes').find('.text_output').find('.amount-maxPowerConsumption0').val() );
-            	    $(this).slider( "values", 1, $(this).closest('.check_boxes').find('.text_output').find('.amount-maxPowerConsumption1').val() );
-            	},
-              slide: function( event, ui ) {
-                $( ".amount-maxPowerConsumption0" ).val( ui.values[ 0 ]);
-                $( ".amount-maxPowerConsumption1" ).val( ui.values[ 1 ]);
-              }
-            });
-              
-            $( ".amount-maxPowerConsumption0" ).val($( ".slider-range-maxPowerConsumption" ).slider( "values", 0 ));
-            $( ".amount-maxPowerConsumption1" ).val($( ".slider-range-maxPowerConsumption" ).slider( "values", 1 ));
-              
-              
-            $( ".amount-maxPowerConsumption0" ).change(function() {
-            $(".slider-range-maxPowerConsumption").slider('values',0,this.value);
-                });
-                
-            $( ".amount-maxPowerConsumption1" ).change(function() {
-            $(".slider-range-maxPowerConsumption").slider('values',1,this.value);
-                });  
-          });
-		
-		/*--- для веса ----*/
-        $(function() {
-          $( ".slider-range-weight" ).slider({
-            range: true,
-            min: 0,
-            max: 5000,
-            create: function () {
-        	    $(this).slider( "values", 0, $(this).closest('.check_boxes').find('.text_output').find('.amount-weight0').val() );
-        	    $(this).slider( "values", 1, $(this).closest('.check_boxes').find('.text_output').find('.amount-weight1').val() );
-        	},
-            slide: function( event, ui ) {
-              $( ".amount-weight0" ).val( ui.values[ 0 ] );
-              $( ".amount-weight1" ).val( ui.values[ 1 ] );
-            }
-          });
-            
-          $( ".amount-weight0" ).val($( ".slider-range-weight" ).slider( "values", 0 ));
-          $( ".amount-weight1" ).val($( ".slider-range-weight" ).slider( "values", 1 ));
-            
-          $( ".amount-weight0" ).change(function() {
-          $(".slider-range-weight").slider('values',0,this.value);
-              });
-              
-          $( ".amount-weight1" ).change(function() {
-          $(".slider-range-weight").slider('values',1,this.value);
-              });  
-            
-        });
-        
-/*--- для ширины ---*/
-        $(function() {
-          $( ".slider-range-width" ).slider({
-            range: true,
-            min: 0,
-            max: 10000,
-            create: function () {
-          	    $(this).slider( "values", 0, $(this).closest('.check_boxes').find('.text_output').find('.amount-width0').val() );
-          	    $(this).slider( "values", 1, $(this).closest('.check_boxes').find('.text_output').find('.amount-width1').val() );
-          	},
-            slide: function( event, ui ) {
-              $( ".amount-width0" ).val( ui.values[ 0 ] );
-              $( ".amount-width1" ).val( ui.values[ 1 ] );
-            }
-          });
-            
-          $( ".amount-width0" ).val($( ".slider-range-width" ).slider( "values", 0 ));
-          $( ".amount-width1" ).val($( ".slider-range-width" ).slider( "values", 1 ));
-            
-          $( ".amount-width0" ).change(function() {
-          $(".slider-range-width").slider('values',0,this.value);
-              });
-              
-          $( ".amount-width1" ).change(function() {
-          $(".slider-range-width").slider('values',1,this.value);
-              }); 
-            
-        });
-        
-/*--- для высоты ---*/
-        $(function() {
-          $( ".slider-range-heigth" ).slider({
-            range: true,
-            min: 0,
-            max: 10000,
-            create: function () {
-        	    $(this).slider( "values", 0, $(this).closest('.check_boxes').find('.text_output').find('.amount-heigth0').val() );
-        	    $(this).slider( "values", 1, $(this).closest('.check_boxes').find('.text_output').find('.amount-heigth1').val() );
-        	},
-            slide: function( event, ui ) {
-              $( ".amount-heigth0" ).val( ui.values[ 0 ] );
-              $( ".amount-heigth1" ).val( ui.values[ 1 ] );
-            }
-          });
-            
-          $( ".amount-heigth0" ).val($( ".slider-range-heigth" ).slider( "values", 0 ));
-          $( ".amount-heigth1" ).val($( ".slider-range-heigth" ).slider( "values", 1 ));
-            
-          $( ".amount-heigth0" ).change(function() {
-          $(".slider-range-heigth").slider('values',0,this.value);
-              });
-              
-          $( ".amount-heigth1" ).change(function() {
-          $(".slider-range-heigth").slider('values',1,this.value);
-              }); 
-            
-        });
-        
-/*--- для глубины ---*/
-        $(function() {
-          $( ".slider-range-depth" ).slider({
-            range: true,
-            min: 0,
-            max: 10000,
-            create: function () {
-          	    $(this).slider( "values", 0, $(this).closest('.check_boxes').find('.text_output').find('.amount-depth0').val() );
-          	    $(this).slider( "values", 1, $(this).closest('.check_boxes').find('.text_output').find('.amount-depth1').val() );
-          	},
-            slide: function( event, ui ) {
-              $( ".amount-depth0" ).val( ui.values[ 0 ] );
-              $( ".amount-depth1" ).val( ui.values[ 1 ] );
-            }
-          });
-            
-          $( ".amount-depth0" ).val($( ".slider-range-depth" ).slider( "values", 0 ));
-          $( ".amount-depth1" ).val($( ".slider-range-depth" ).slider( "values", 1 ));
-            
-          $( ".amount-depth0" ).change(function() {
-          $(".slider-range-depth").slider('values',0,this.value);
-              });
-              
-          $( ".amount-depth1" ).change(function() {
-          $(".slider-range-depth").slider('values',1,this.value);
-              }); 
-            
-        });
+/*--- пошли слайдеры ---*/
+$(function() {
+	
+	function range(range, left_edge, right_edge, min_val, max_val){
+    		$( range ).slider({
+    	          range: true,
+    	          min: min_val,
+    	          max: max_val,
+    	          create: function () {
+    	      	    $(this).slider( "values", 0, $(this).closest('.check_boxes').find('.text_output').find( left_edge ).val() );
+    	      	    $(this).slider( "values", 1, $(this).closest('.check_boxes').find('.text_output').find( right_edge ).val() );
+    	      	},
+    	          slide: function( event, ui ) {
+    	            $( left_edge ).val(ui.values[ 0 ]);
+    	            $( right_edge ).val(ui.values[ 1 ]);
+    	          }
+    	        });
+    	            
+    	        $( left_edge ).val( $( range ).slider("values", 0 ));             
+    	        $( right_edge ).val( $( range ).slider("values", 1 ));
+    	            
+    	        $( left_edge ).change(function() {
+    	        	$( range ).slider('values',0,this.value);
+    	            });
+    	            
+    	        $( right_edge ).change(function() {
+    	        	$( range ).slider('values',1,this.value);
+    	            });
+	}
+	 
+	range(".slider-range-speedOfMovingThePrintHead", ".amount-speedOfMovingThePrintHead0", ".amount-speedOfMovingThePrintHead1", 0, 1000);
+	range(".slider-range-positioningAccuracyOfThePrintHead", ".amount-positioningAccuracyOfThePrintHead0",
+			".amount-positioningAccuracyOfThePrintHead1", 0, 1000);
+	range(".slider-range-numberOfFansForBlowingModels", ".amount-numberOfFansForBlowingModels0", ".amount-numberOfFansForBlowingModels1", 0, 100);
+	range(".slider-range-prise", ".amount-prise0", ".amount-prise1", 0, 1000000);
+	range(".slider-range-sizePrintableAreaX", ".amount-sizePrintableAreaX0", ".amount-sizePrintableAreaX1", 1, 1000);
+	range(".slider-range-sizePrintableAreaY", ".amount-sizePrintableAreaY0", ".amount-sizePrintableAreaY1", 1, 1000);
+	range(".slider-range-sizePrintableAreaZ", ".amount-sizePrintableAreaZ0", ".amount-sizePrintableAreaZ1", 1, 1000);
+	
+	/*---- Средняя потребляемая мощность ----*/ 
+	range(".slider-range-averagePowerConsumption", ".amount-averagePowerConsumption0", ".amount-averagePowerConsumption1", 0, 1000);
+	
+	range(".slider-range-meltingPointOfThePrintingMaterial", ".amount-meltingPointOfThePrintingMaterial0", ".amount-meltingPointOfThePrintingMaterial1", 1, 500);
+	range(".slider-range-sizeExtruder", ".amount-sizeExtruder0", ".amount-sizeExtruder1", 0, 2);
+	range(".slider-range-speedPrint", ".amount-speedPrint0", ".amount-speedPrint1", 1, 1000);
+	range(".slider-range-thicknessOfThePrintingLayer", ".amount-thicknessOfThePrintingLayer0", ".amount-thicknessOfThePrintingLayer1", 1, 500);
+	range(".slider-range-maximumWeightOfThePrintedModel", ".amount-maximumWeightOfThePrintedModel0", ".amount-maximumWeightOfThePrintedModel1", 0, 100);
+	range(".slider-range-maxPowerConsumption", ".amount-maxPowerConsumption0", ".amount-maxPowerConsumption1", 0, 100000);
+	/*--- для веса ----*/
+	range(".slider-range-weight", ".amount-weight0", ".amount-weight1", 0, 5000);
+	/*--- для ширины ---*/
+	range(".slider-range-width", ".amount-width0", ".amount-width1", 0, 10000);
+	/*--- для высоты ---*/
+	range(".slider-range-heigth", ".amount-heigth0", ".amount-heigth1", 0, 10000);
+	/*--- для глубины ---*/
+	range(".slider-range-depth", ".amount-depth0", ".amount-depth1", 0, 10000);
+  	
+});
         
         /*--- реализация выпадающих подпунктов ---*/
         $( function(){
