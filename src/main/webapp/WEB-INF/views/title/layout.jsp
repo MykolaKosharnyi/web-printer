@@ -84,6 +84,38 @@
 <jsp:include page="modal_cart_window.jsp" />
 
 
+
+
+
+
+
+<div id="myAdress" class="modal fade">
+    <div class="modal-dialog" style="width:600px;height: auto;">
+        <div class="modal-content">
+			<div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Офис на карте</h4>
+            </div>
+            <div class="modal-body" >
+                
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2541.9341001895555!2d30.383658021157956!3d50.42369943624072!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40d4cb928d1b99ff%3A0x32c8f63e129a5eca!2z0LLRg9C70LjRhtGPINCS0L7Qu9C-0LTQuNC80LjRgNCwINCf0L7QutC-0YLQuNC70LAsIDcvMiwg0JrQuNGX0LI!5e0!3m2!1suk!2sua!4v1480292202676" style="border:0; width: 100%; height:420px;" ></iframe>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
 <!--[if lt IE 9]>
 	<script src="libs/html5shiv/es5-shim.min.js"></script>
 	<script src="libs/html5shiv/html5shiv.min.js"></script>
@@ -117,10 +149,12 @@
 	
 	<%-- callback for reklam in left menu --%>
 	<div class="hidden">
-		<form id="callback_reklam" class="pop_form">
+		<form id="callback_reklam" action="/ask/product" method="POST" class="pop_form">
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 			<h5 style="max-width: 300px;">Пожалуйста оставьте координаты, через некоторое время мы с вами свяжемся</h5>
 			<input type="text" name="name" placeholder="Ваше имя..." required />
-			<input type="text" name="phone" placeholder="Ваше телефон..." required />
+			<input type="text" name="subject" placeholder="subject..." required />
+			<input type="text" name="message" placeholder="message..." required />
 			<button class="button" type="submit">Уточнить</button>
 		</form>
 	</div>
