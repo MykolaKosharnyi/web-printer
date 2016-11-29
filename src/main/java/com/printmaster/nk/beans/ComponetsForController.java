@@ -46,6 +46,18 @@ public class ComponetsForController {
 
 			//add property that must be output only to printer at current time(in the future to all product)
 			curObj.put("ratingOverallRating", currentProduct.getRatingOverallRating());
+			//type of printhead
+			curObj.put("typeOfPrinthead", currentProduct.getTypeOfPrinthead());
+			//print resolution
+			curObj.put("printResolution", currentProduct.getPrintResolution());
+			curObj.put("inputFirstPrintResolution", currentProduct.getInputFirstPrintResolution());
+			curObj.put("inputSecondPrintResolution", currentProduct.getInputSecondPrintResolution());
+			//chromaticity
+			curObj.put("chromaticity", currentProduct.getChromaticity());
+			curObj.put("chromaticityCMYK", currentProduct.getChromaticityCMYK());
+			curObj.put("chromaticityCMYKx2", currentProduct.getChromaticityCMYKx2());
+			curObj.put("chromaticityCMYKLcLm", currentProduct.getChromaticityCMYKLcLm());
+			curObj.put("chromaticityCMYKLcLmOG", currentProduct.getChromaticityCMYKLcLmOG());	
 
 			arrayResult.add(curObj);
 			

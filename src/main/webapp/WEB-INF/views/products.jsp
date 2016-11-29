@@ -50,6 +50,61 @@
 									</div>
 								</div>
 						</c:if>
+						
+						<!-- type of printhead -->
+						<c:if test="${type=='printer' && !empty product.typeOfPrinthead}">							
+							<div style="height: 40px; margin-bottom: 5px;">
+								<p style="font-weight: bold; width: 50%; float: left;">Тип печатающей головки:</p>
+								<div style="float: left; width: 50%;">${product.typeOfPrinthead}</div>
+							</div>
+						</c:if>			
+						
+						<!-- print resolution -->
+						<c:if test="${type=='printer' && product.inputFirstPrintResolution != 0 && product.inputSecondPrintResolution != 0}">
+							<div style="height: 40px; margin-bottom: 5px;">
+								<p style="font-weight: bold; width: 50%; float: left;">Разрешение печати:</p>
+								<div style="float: left; width: 50%;">${product.inputFirstPrintResolution}x${product.inputSecondPrintResolution}dpi</div>
+							</div>
+						</c:if>
+                      
+                      	<c:if test="${type=='printer' && (product.inputFirstPrintResolution == 0 || product.inputSecondPrintResolution == 0) && !empty product.printResolution}">
+                      		<div style="height: 40px; margin-bottom: 5px;">
+								<p style="font-weight: bold; width: 50%; float: left;">Разрешение печати:</p>
+								<div style="float: left; width: 50%;">
+									<c:forEach var="tp" items="${product.printResolution}" varStatus="status">  
+	    								${tp}<c:if test="${ ! status.last}" >, </c:if>  
+									</c:forEach>  </div>
+							</div>
+						</c:if>
+						
+						<!-- chromaticity -->
+						<c:if test="${type=='printer' && !empty product.chromaticity}">
+							<div style="height: 30px; margin-bottom: 5px;">
+								<p style="font-weight: bold; width: 50%; float: left;">Цветовая схема:</p>
+								<div style="float: left; width: 50%;">
+									<c:forEach var="tp" items="${product.chromaticity}" varStatus="status">  
+		                   		
+			                   			<c:if test="${tp.equals('CMYK')}">
+											${tp}<c:if test="${product.chromaticityCMYK!=''}" >+${product.chromaticityCMYK}</c:if> <c:if test="${ ! status.last}" >, </c:if> 
+										</c:if>
+										
+										<c:if test="${tp.equals('CMYK x 2')}">
+											${tp}<c:if test="${product.chromaticityCMYKx2!=''}" >+${product.chromaticityCMYKx2}</c:if> <c:if test="${ ! status.last}" >, </c:if> 
+										</c:if>
+										
+										<c:if test="${tp.equals('CMYKLcLm')}">
+											${tp}<c:if test="${product.chromaticityCMYKLcLm!=''}" >+${product.chromaticityCMYKLcLm}</c:if> <c:if test="${ ! status.last}" >, </c:if> 
+										</c:if>
+										
+										<c:if test="${tp.equals('CMYKLcLmOG')}">
+											${tp}<c:if test="${product.chromaticityCMYKLcLmOG!=''}" >+${product.chromaticityCMYKLcLmOG}</c:if> <c:if test="${ ! status.last}" >, </c:if> 
+										</c:if>
+		    						
+									</c:forEach> 
+								</div>
+							</div>
+						</c:if>	
+						
 					</div>	
 		
 					<c:if test="${!empty product.leftSharesLink}">
@@ -120,6 +175,60 @@
 								</div>
 							</div>
 					</c:if>
+					
+					<!-- type of printhead -->
+						<c:if test="${type=='printer' && !empty product.typeOfPrinthead}">							
+							<div style="height: 40px; margin-bottom: 5px;">
+								<p style="font-weight: bold; width: 50%; float: left;">Тип печатающей головки:</p>
+								<div style="float: left; width: 50%;">${product.typeOfPrinthead}</div>
+							</div>
+						</c:if>			
+						
+						<!-- print resolution -->
+						<c:if test="${type=='printer' && product.inputFirstPrintResolution != 0 && product.inputSecondPrintResolution != 0}">
+							<div style="height: 40px; margin-bottom: 5px;">
+								<p style="font-weight: bold; width: 50%; float: left;">Разрешение печати:</p>
+								<div style="float: left; width: 50%;">${product.inputFirstPrintResolution}x${product.inputSecondPrintResolution}dpi</div>
+							</div>
+						</c:if>
+                      
+                      	<c:if test="${type=='printer' && (product.inputFirstPrintResolution == 0 || product.inputSecondPrintResolution == 0) && !empty product.printResolution}">
+                      		<div style="height: 40px; margin-bottom: 5px;">
+								<p style="font-weight: bold; width: 50%; float: left;">Разрешение печати:</p>
+								<div style="float: left; width: 50%;">
+									<c:forEach var="tp" items="${product.printResolution}" varStatus="status">  
+	    								${tp}<c:if test="${ ! status.last}" >, </c:if>  
+									</c:forEach>  </div>
+							</div>
+						</c:if>
+						
+						<!-- chromaticity -->
+						<c:if test="${type=='printer' && !empty product.chromaticity}">
+							<div style="height: 30px; margin-bottom: 5px;">
+								<p style="font-weight: bold; width: 50%; float: left;">Цветовая схема:</p>
+								<div style="float: left; width: 50%;">
+									<c:forEach var="tp" items="${product.chromaticity}" varStatus="status">  
+		                   		
+			                   			<c:if test="${tp.equals('CMYK')}">
+											${tp}<c:if test="${product.chromaticityCMYK!=''}" >+${product.chromaticityCMYK}</c:if> <c:if test="${ ! status.last}" >, </c:if> 
+										</c:if>
+										
+										<c:if test="${tp.equals('CMYK x 2')}">
+											${tp}<c:if test="${product.chromaticityCMYKx2!=''}" >+${product.chromaticityCMYKx2}</c:if> <c:if test="${ ! status.last}" >, </c:if> 
+										</c:if>
+										
+										<c:if test="${tp.equals('CMYKLcLm')}">
+											${tp}<c:if test="${product.chromaticityCMYKLcLm!=''}" >+${product.chromaticityCMYKLcLm}</c:if> <c:if test="${ ! status.last}" >, </c:if> 
+										</c:if>
+										
+										<c:if test="${tp.equals('CMYKLcLmOG')}">
+											${tp}<c:if test="${product.chromaticityCMYKLcLmOG!=''}" >+${product.chromaticityCMYKLcLmOG}</c:if> <c:if test="${ ! status.last}" >, </c:if> 
+										</c:if>
+		    						
+									</c:forEach> 
+								</div>
+							</div>
+						</c:if>	
 				</div>	
 	
 				<c:if test="${!empty product.leftSharesLink}">
