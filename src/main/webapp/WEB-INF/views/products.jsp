@@ -360,9 +360,10 @@ $(document).ready(function() {
         			        							"position": "absolute"
         			        						})))	  
     			        						
-        			        		if("${type}"=='printer' && product.ratingOverallRating > 0){
-        			        			innterDiv.append($('<div/>').addClass('name_price_cart_block_hidden')
-        			        					.append($('<div/>').addClass('rating_block')
+        			        		var name_price_cart_block = $('<div/>').addClass('name_price_cart_block_hidden');			
+        			        						
+        			        		if("${type}"=='printer' && product.ratingOverallRating > 0){	       			        			
+        			        			name_price_cart_block.append($('<div/>').addClass('rating_block')
         			        							.append($('<p/>').css( "font-weight", "bold" ).text("Общая оценка:"))
         			        							.append($('<div/>').css( "width", "100px" ).css( "float", "left" )
         			        									.append($('<ul/>').addClass('rating_average clearfix')
@@ -372,9 +373,162 @@ $(document).ready(function() {
         			        											.append($('<li/>').append($('<span/>').addClass('star3').attr("title", "Средне")))
         			        											.append($('<li/>').append($('<span/>').addClass('star4').attr("title", "Хорошо")))
         			        											.append($('<li/>').append($('<span/>').addClass('star4').attr("title", "Очень хорошо")))
-        			        									))))
+        			        									)))
         			        		}
-        			        						
+			// in this block added information about print head		
+			if("${type}"=='printer' && product.typeOfPrinthead!=null && product.typeOfPrinthead!=""){
+				name_price_cart_block.append($('<div/>').css( "height", "40px" ).css( "margin-bottom", "5px" )
+						.append($('<p/>').css( "font-weight", "bold" ).css( "width", "50%" ).css( "float", "left" ).text("Тип печатающей головки:"))
+						.append($('<div/>').css( "width", "50%" ).css( "float", "left" ).text(product.typeOfPrinthead))
+								)
+    		}
+
+			// in this two blocks added information about printer resolution			
+			if("${type}"=='printer' && product.inputFirstPrintResolution != 0 && product.inputSecondPrintResolution != 0){
+				name_price_cart_block.append($('<div/>').css( "height", "40px" ).css( "margin-bottom", "5px" )
+						.append($('<p/>').css( "font-weight", "bold" ).css( "width", "50%" ).css( "float", "left" ).text("Разрешение печати:"))
+						.append($('<div/>').css( "width", "50%" ).css( "float", "left" ).text(product.inputFirstPrintResolution + "x" + product.inputSecondPrintResolution + "dpi"))
+								)
+    		}
+			
+			if("${type}"=='printer' && (product.inputFirstPrintResolution == 0 || product.inputSecondPrintResolution == 0) && product.printResolution!=null){
+				var resultResolution="";
+				$(product.printResolution).each(function(i, resolution) {
+					if(resultResolution==""){
+						resultResolution+="" + resolution;
+					} else {
+						resultResolution+=", " + resolution;
+					}
+					
+				})
+
+				name_price_cart_block.append($('<div/>').css( "height", "40px" ).css( "margin-bottom", "5px" )
+						.append($('<p/>').css( "font-weight", "bold" ).css( "width", "50%" ).css( "float", "left" ).text("Разрешение печати:"))
+						.append($('<div/>').css( "width", "50%" ).css( "float", "left" ).text(resultResolution))
+								)
+    		}
+			
+			
+/*
+ * 
+ 
+ <c:if test="${type=='printer' && !empty product.chromaticity}">
+	<div style="height: 30px; margin-bottom: 5px;">
+		<p style="font-weight: bold; width: 50%; float: left;">Цветовая схема:</p>
+		<div style="float: left; width: 50%;">
+			<c:forEach var="tp" items="${product.chromaticity}" varStatus="status">  
+		
+    			<c:if test="${tp.equals('CMYK')}">
+					${tp}<c:if test="${product.chromaticityCMYK!=''}" >+${product.chromaticityCMYK}</c:if> <c:if test="${ ! status.last}" >, </c:if> 
+				</c:if>
+				
+				<c:if test="${tp.equals('CMYK x 2')}">
+					${tp}<c:if test="${product.chromaticityCMYKx2!=''}" >+${product.chromaticityCMYKx2}</c:if> <c:if test="${ ! status.last}" >, </c:if> 
+				</c:if>
+				
+				<c:if test="${tp.equals('CMYKLcLm')}">
+					${tp}<c:if test="${product.chromaticityCMYKLcLm!=''}" >+${product.chromaticityCMYKLcLm}</c:if> <c:if test="${ ! status.last}" >, </c:if> 
+				</c:if>
+				
+				<c:if test="${tp.equals('CMYKLcLmOG')}">
+					${tp}<c:if test="${product.chromaticityCMYKLcLmOG!=''}" >+${product.chromaticityCMYKLcLmOG}</c:if> <c:if test="${ ! status.last}" >, </c:if> 
+				</c:if>
+			
+			</c:forEach> 
+		</div>
+	</div>
+</c:if>	
+ 
+ 
+ */			
+ 
+			//in this block added information about chromaticity	
+			if("${type}"=='printer' && product.chromaticity!=null){
+				var resultChromaticity="";
+				$(product.chromaticity).each(function(i, enty) {
+					if(resultChromaticity==""){
+						if(enty=="CMYK"){
+							if(product.chromaticityCMYK!=""){
+								resultChromaticity+="" + enty + "+" + product.chromaticityCMYK;
+							} else {
+								resultChromaticity+="" + enty;
+							}
+						}
+						
+						if(enty=="CMYK x 2"){
+							if(product.chromaticityCMYKx2!=""){
+								resultChromaticity+="" + enty + "+" + product.chromaticityCMYKx2;
+							} else {
+								resultChromaticity+="" + enty;
+							}
+						}
+												
+						if(enty=="CMYKLcLm"){
+							if(product.chromaticityCMYKLcLm!=""){
+								resultChromaticity+="" + enty + "+" + product.chromaticityCMYKLcLm;
+							} else {
+								resultChromaticity+="" + enty;
+							}
+						}
+						
+						if(enty=="CMYKLcLmOG"){
+							if(product.chromaticityCMYKLcLmOG!=""){
+								resultChromaticity+="" + enty + "+" + product.chromaticityCMYKLcLmOG;
+							} else {
+								resultChromaticity+="" + enty;
+							}
+						}
+						
+					} else {
+						if(enty=="CMYK"){
+							if(product.chromaticityCMYK!=""){
+								resultChromaticity+=", " + enty + "+" + product.chromaticityCMYK;
+							} else {
+								resultChromaticity+=", " + enty;
+							}
+						}
+						
+						if(enty=="CMYK x 2"){
+							if(product.chromaticityCMYKx2!=""){
+								resultChromaticity+=", " + enty + "+" + product.chromaticityCMYKx2;
+							} else {
+								resultChromaticity+=", " + enty;
+							}
+						}
+												
+						if(enty=="CMYKLcLm"){
+							if(product.chromaticityCMYKLcLm!=""){
+								resultChromaticity+=", " + enty + "+" + product.chromaticityCMYKLcLm;
+							} else {
+								resultChromaticity+=", " + enty;
+							}
+						}
+						
+						if(enty=="CMYKLcLmOG"){
+							if(product.chromaticityCMYKLcLmOG!=""){
+								resultChromaticity+=", " + enty + "+" + product.chromaticityCMYKLcLmOG;
+							} else {
+								resultChromaticity+=", " + enty;
+							}
+						}
+						
+					}
+					
+				});
+
+				name_price_cart_block.append($('<div/>').css( "height", "30px" ).css( "margin-bottom", "5px" )
+						.append($('<p/>').css( "font-weight", "bold" ).css( "width", "50%" ).css( "float", "left" ).text("Цветовая схема:"))
+						.append($('<div/>').css( "width", "50%" ).css( "float", "left" ).text(resultChromaticity))
+								)
+    		}
+			
+			
+			
+			
+			
+				
+									//add inner name_price_cart_block 
+									innterDiv.append(name_price_cart_block);				
 
 	                				if(product.leftSharesLink!=null && product.leftSharesLink!=""){
 	                					innterDiv.append($('<div/>').addClass("ribbon-search-wrapper-left")
