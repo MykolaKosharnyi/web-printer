@@ -1,188 +1,64 @@
 
 /* Для обозначения заполненных полей в поиске */
 $(function() {
-	
-	function ifCheckedOption(this_object){
-		this_object.parent('.search_criteria').css( "background", "#E8F2FE" ).find(".block_title").find("i, p").css('color','#006080')
-	}
-	
-	function ifUnCheckedOption(this_object){
-		this_object.parent('.search_criteria').css( "background", "#FFFFFF" ).find(".block_title").find("i, p").css('color','rgb(144, 144, 144)')	
-	}
-	
-	function checkOption(element, class0, class1){
-		if(element.has(class0).length>0)
-			element.find(class0).val() != element.find(class1).val() ? ifCheckedOption( element ): ifUnCheckedOption( element ) ;
-	}
 		
 	$('.check_boxes').click(function() {
 
-		$(this).has(':checked').length ? ifCheckedOption( $(this) ): ifUnCheckedOption( $(this) );
+		$(this).has(':checked').length ? ifCheckedOptionSearch( $(this) ): ifUnCheckedOptionSearch( $(this) );
 		
-		checkOption( $(this),".amount-prise0", ".amount-prise1" );
-		checkOption( $(this),".amount-numberOfShafts0", ".amount-numberOfShafts1" );
-		checkOption( $(this),".amount-shaftDiameter0", ".amount-shaftDiameter1" );
-		checkOption( $(this),".amount-filmThickness0", ".amount-filmThickness1" );
-		checkOption( $(this),".amount-warmUpTime0", ".amount-warmUpTime1" );
-		checkOption( $(this),".amount-laminationTemperature0", ".amount-laminationTemperature1" );
-		checkOption( $(this),".amount-laminatingSpeed0", ".amount-laminatingSpeed1" );
-		checkOption( $(this),".amount-max_power_consumption0", ".amount-max_power_consumption1" );
-		checkOption( $(this),".amount-weight0", ".amount-weight1" );
-		checkOption( $(this),".amount-width0", ".amount-width1" );
-		checkOption( $(this),".amount-depth0", ".amount-depth1" );
-		checkOption( $(this),".amount-heigth0", ".amount-heigth1" );
-		checkOption( $(this),".amount-averagePowerConsumption0", ".amount-averagePowerConsumption1" );
+		checkOptionSearch( $(this),".amount-prise0", ".amount-prise1" );
+		checkOptionSearch( $(this),".amount-numberOfShafts0", ".amount-numberOfShafts1" );
+		checkOptionSearch( $(this),".amount-shaftDiameter0", ".amount-shaftDiameter1" );
+		checkOptionSearch( $(this),".amount-filmThickness0", ".amount-filmThickness1" );
+		checkOptionSearch( $(this),".amount-warmUpTime0", ".amount-warmUpTime1" );
+		checkOptionSearch( $(this),".amount-laminationTemperature0", ".amount-laminationTemperature1" );
+		checkOptionSearch( $(this),".amount-laminatingSpeed0", ".amount-laminatingSpeed1" );
+		checkOptionSearch( $(this),".amount-max_power_consumption0", ".amount-max_power_consumption1" );
+		checkOptionSearch( $(this),".amount-weight0", ".amount-weight1" );
+		checkOptionSearch( $(this),".amount-width0", ".amount-width1" );
+		checkOptionSearch( $(this),".amount-depth0", ".amount-depth1" );
+		checkOptionSearch( $(this),".amount-heigth0", ".amount-heigth1" );
+		checkOptionSearch( $(this),".amount-averagePowerConsumption0", ".amount-averagePowerConsumption1" );
 		
 	});
-
-});
-
-$(function() {
-	
-	function range(range, left_edge, right_edge, min_val, max_val){
-    		$( range ).slider({
-    	          range: true,
-    	          min: min_val,
-    	          max: max_val,
-    	          create: function () {
-    	      	    $(this).slider( "values", 0, $(this).closest('.check_boxes').find('.text_output').find( left_edge ).val() );
-    	      	    $(this).slider( "values", 1, $(this).closest('.check_boxes').find('.text_output').find( right_edge ).val() );
-    	      	},
-    	          slide: function( event, ui ) {
-    	            $( left_edge ).val(ui.values[ 0 ]);
-    	            $( right_edge ).val(ui.values[ 1 ]);
-    	          }
-    	        });
-    	            
-    	        $( left_edge ).val( $( range ).slider("values", 0 ));             
-    	        $( right_edge ).val( $( range ).slider("values", 1 ));
-    	            
-    	        $( left_edge ).change(function() {
-    	        	$( range ).slider('values',0,this.value);
-    	            });
-    	            
-    	        $( right_edge ).change(function() {
-    	        	$( range ).slider('values',1,this.value);
-    	            });
-	}
 	
 	 /*---- диапазон для цены ----*/   
-	range(".slider-range-prise", ".amount-prise0", ".amount-prise1", 0, 1000000);
+	rangeSearch(".slider-range-prise", ".amount-prise0", ".amount-prise1", 0, 1000000);
 	
 	/*---- Средняя потребляемая мощность ----*/
-	range(".slider-range-averagePowerConsumption", ".amount-averagePowerConsumption0", ".amount-averagePowerConsumption1", 0, 100000); 
+	rangeSearch(".slider-range-averagePowerConsumption", ".amount-averagePowerConsumption0", ".amount-averagePowerConsumption1", 0, 100000); 
 	
 	/*---- Количество валов ----*/
-	range(".slider-range-numberOfShafts", ".amount-numberOfShafts0", ".amount-numberOfShafts1", 0, 10); 
+	rangeSearch(".slider-range-numberOfShafts", ".amount-numberOfShafts0", ".amount-numberOfShafts1", 0, 10); 
 	
 	/*---- Диаметр вала ----*/
-	range(".slider-range-shaftDiameter", ".amount-shaftDiameter0", ".amount-shaftDiameter1", 0, 1000);
+	rangeSearch(".slider-range-shaftDiameter", ".amount-shaftDiameter0", ".amount-shaftDiameter1", 0, 1000);
 	
 	/*---- Толщина пленки ----*/  
-	range(".slider-range-filmThickness", ".amount-filmThickness0", ".amount-filmThickness1", 0, 1000); 
+	rangeSearch(".slider-range-filmThickness", ".amount-filmThickness0", ".amount-filmThickness1", 0, 1000); 
 	
 	/*---- Время разогрева ----*/ 
-	range(".slider-range-warmUpTime", ".amount-warmUpTime0", ".amount-warmUpTime1", 0, 100); 
+	rangeSearch(".slider-range-warmUpTime", ".amount-warmUpTime0", ".amount-warmUpTime1", 0, 100); 
 	
 	/*---- Температура ламинации ----*/
-	range(".slider-range-laminationTemperature", ".amount-laminationTemperature0", ".amount-laminationTemperature1", 0, 500); 
+	rangeSearch(".slider-range-laminationTemperature", ".amount-laminationTemperature0", ".amount-laminationTemperature1", 0, 500); 
 	
 	/*---- Скорость ламинирования ----*/ 
-	range(".slider-range-laminatingSpeed", ".amount-laminatingSpeed0", ".amount-laminatingSpeed1", 0, 1000);
+	rangeSearch(".slider-range-laminatingSpeed", ".amount-laminatingSpeed0", ".amount-laminatingSpeed1", 0, 1000);
 	
 	/*--- для максимальной потребляемой мощности ----*/
-	range(".slider-range-max_power_consumption", ".amount-max_power_consumption0", ".amount-max_power_consumption1", 0, 1000); 	
+	rangeSearch(".slider-range-max_power_consumption", ".amount-max_power_consumption0", ".amount-max_power_consumption1", 0, 1000); 	
 	
 	/*--- для веса ----*/
-	range(".slider-range-weight", ".amount-weight0", ".amount-weight1", 0, 5000);
+	rangeSearch(".slider-range-weight", ".amount-weight0", ".amount-weight1", 0, 5000);
 	
 	/*--- для ширины ---*/
-	range(".slider-range-width", ".amount-width0", ".amount-width1", 0, 10000); 
+	rangeSearch(".slider-range-width", ".amount-width0", ".amount-width1", 0, 10000); 
 	
 	/*--- для высоты ---*/
-	range(".slider-range-heigth", ".amount-heigth0", ".amount-heigth1", 0, 10000);
+	rangeSearch(".slider-range-heigth", ".amount-heigth0", ".amount-heigth1", 0, 10000);
 	
 	/*--- для глубины ---*/
-	range(".slider-range-depth", ".amount-depth0", ".amount-depth1", 0, 10000);
+	rangeSearch(".slider-range-depth", ".amount-depth0", ".amount-depth1", 0, 10000);
 	
 });
-
-
-/*-- реализация подпунктов ширины в виде вкладок --*/
-          (function($){				
-              jQuery.fn.lightTabs = function(options){
-                  var createTabs = function(){
-                      tabs = this;
-                      i = 0;
-
-                      showPage = function(i){
-                          $(tabs).children("div").children("div").hide();
-                          $(tabs).children("div").children("div").eq(i).show();
-                          $(tabs).children("ul").children("li").removeClass("active");
-                          $(tabs).children("ul").children("li").eq(i).addClass("active");
-                      }
-
-                      showPage(0);				
-
-                      $(tabs).children("ul").children("li").each(function(index, element){
-                          $(element).attr("data-page", i);
-                          i++;                        
-                      });
-
-                      $(tabs).children("ul").children("li").click(function(){
-                          showPage(parseInt($(this).attr("data-page")));
-                      });				
-                  };		
-                  return this.each(createTabs);
-              };	
-          })(jQuery);
-          $(document).ready(function(){
-              $("#tabs").lightTabs();
-          });
-
-/*--- реализация выпадающих подпунктов ---*/
-        $( function(){
-            $(".block_title").click(function(){
-                var check = $(this).parent('.search_criteria').find(".check_boxes");
-                var check_point = $(this).find("i");
-                if (check.css('display') == 'none') {
-                    check.slideDown();
-                    check_point.addClass('opened');
-                }else{
-                    check.slideUp();
-                    check_point.removeClass('opened');
-                }
-            });
-        } );
-        
-        /* for block characteric */
-    	$( function(){
-                $(".block_search_criteria .block_block_title").click(function(){
-                    var check = $(this).parent('.block_search_criteria').find(".block_check_boxes");
-                    var check_point = $(this).find("i").first();
-    		var description = $(this).find("p").first();
-                    if (check.css('display') == 'none') {
-                        check.slideDown();
-    		    description.css('color', '#006080');
-                        check_point.addClass('opened');
-                    }else{
-                        check.slideUp();
-                        description.css('color', 'rgb(144, 144, 144)');
-                        check_point.removeClass('opened');
-                    }
-                });
-            } ); 
-        
-/*---- Button change display on search block ----*/
-        $( function() {
-           $("#display_search").click(function(){ 
-            var check_point = $(this).find("i");
-              if ( $("#search_product").css('display') == 'none' ) {
-                     $("#search_product").slideDown(1000);
-                     check_point.addClass('opened');
-                      } else {
-                     $("#search_product").slideUp(1000);
-                     check_point.removeClass('opened');
-                     }
-              });
-        } );

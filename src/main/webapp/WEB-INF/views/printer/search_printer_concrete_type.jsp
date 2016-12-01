@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/css/search.css">
     
     <script src="<%=request.getContextPath()%>/resources/js/user/printer.js"></script>
+    <script src="<%=request.getContextPath()%>/resources/js/user/search.js"></script>
 
 	<div id="display_search">
 		<i class="opened"></i>
