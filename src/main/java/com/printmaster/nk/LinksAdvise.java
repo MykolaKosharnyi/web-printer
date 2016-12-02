@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.Date;
 
 import org.apache.log4j.Logger;
@@ -66,6 +67,9 @@ public class LinksAdvise {
 			try {
 				JSONObject jsonObject = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream("/var/www/localhost/left_reklam.json"), "UTF-8"));
 				JSONArray reklam = (JSONArray) jsonObject.get("reklam");
+				
+				//for showing new added reklam in top
+				Collections.reverse(reklam);
 				model.addAttribute("reklam", reklam);
 			} catch (IOException | ParseException e) {
 				e.printStackTrace();

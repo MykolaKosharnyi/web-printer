@@ -1,58 +1,52 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-	<div id="reklam"></div>
- <script type="text/javascript">
- $(document).ready(function () {
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-	  //var jsonURL = "/images/reklam.json";
-	  var reklam = ${reklam};
-				
-		$.each(reklam, function(i, value) {
-        	var outerDiv = $('<div/>');
-        				var slidePrice = $('<div/>').addClass("product_price").append($('<span/>').text("Цена:").css(
-        						{
-        							"float":"left",
-        							"margin-right": "5px"
-        						}));
-        				if(value.priceProduct < 0.1){
-        					slidePrice.append($('<a/>').attr("href","#callback_reklam").addClass('fancybox').text("\u0443\u0442\u043E\u0447\u043D\u044F\u0439\u0442\u0435"));
-        				} else {
-        					slidePrice.append($('<input/>').attr("type", "hidden").val(value.priceProduct));
-        					slidePrice.append($('<div/>').text(checkPrise(value.priceProduct)));
-        				}
-        	
-        				outerDiv.addClass("slide-item").append($('<a/>').addClass("slider_image")
-        								 .attr("href", "/" + value.type + "/" + value.id)
-        								 .append($('<div/>').addClass("outer_a_img").append($('<img/>').attr("src", "/images/" + value.type + "s/" + value.id+ "/" +value.pathToPicture))))				 					 
-                		.append($('<div/>').addClass("block_title_and_price")
-                				.append($('<a/>').attr("href", "/" + value.type + "/" + value.id).addClass("slide-title").text(value.nameProduct))
-                        		.append(slidePrice)
-                        		.append($('<a/>').addClass("reklam_add_to_cart").text("Добавить в корзину").click(function(){
-		                			addToCart(value.type, value.id, value.nameProduct, value.priceProduct+'', value.pathToPicture);
-		                		})))
-                		
-        	
-        	
-        	if(value.leftSharesLink!=null && value.leftSharesLink!=""){
-        		outerDiv.append($('<div/>').addClass("ribbon-wrapper-left")
-									.append($('<div/>').addClass("ribbon-left")
-													   .text(value.leftSharesLink)
-													   .css( "color", value.leftSharesLinkColorText )
-													   .css( "background", value.leftSharesLinkColorFone )
-													   ))
-			}
-        	
-        	if(value.rightSharesLink!=null && value.rightSharesLink!=""){
-        		outerDiv.append($('<div/>').addClass("ribbon-wrapper-right")
-									.append($('<div/>').addClass("ribbon-right")
-													   .text(value.rightSharesLink)
-													   .css( "color", value.rightSharesLinkColorText )
-													   .css( "background", value.rightSharesLinkColorFone )
-													   ))
-			}
-        	
-        	$("#reklam").prepend(outerDiv)
-        	
-        });
+	<div id="reklam">
 		
-});
-</script>
+		<c:forEach items="${reklam}" var="value">  
+			<div class="slide-item">
+				<a href="/${value.type}/${value.id}" class="slider_image">
+					<div class="outer_a_img">
+						<img src='/images/${value.type}s/${value.id}/${value.pathToPicture}'>
+					</div>
+				</a>
+				<div class="block_title_and_price">
+					<a href="/${value.type}/${value.id}" class="slide-title">${value.nameProduct}</a>
+					
+					<div class="product_price">
+			    		<span style="float:left; margin-right: 5px;">Цена:</span>
+			    		<c:if test="${value.priceProduct < 0.1}">
+			    			<a href="#callback_reklam" class="fancybox">уточняйте</a>
+			    		</c:if>
+			    		<c:if test="${value.priceProduct >= 0.1}">
+			    			<input type="hidden" value="${value.priceProduct}">
+			    			<div></div>
+			    		</c:if>
+		    		</div> 
+		    		
+		    		<a class="reklam_add_to_cart"
+		    		 onclick="addToCart('${ value.type}', '${value.id}', '${value.nameProduct}', '${value.priceProduct}', '${value.pathToPicture}');"
+		    		 >Добавить в корзину</a>
+				</div>
+				
+				<c:if test="${!empty value.leftSharesLink}">
+					<div class="ribbon-wrapper-left">
+						<div class="ribbon-left" style="color:${value.leftSharesLinkColorFone}; background:${value.leftSharesLinkColorFone};">
+							${value.leftSharesLink}
+						</div>
+					</div>
+				</c:if>
+					
+				<c:if test="${!empty value.rightSharesLink}">
+					<div class="ribbon-wrapper-right">
+						<div class="ribbon-right" style="color:${value.rightSharesLinkColorText}; background:${value.rightSharesLinkColorFone};">
+							${value.rightSharesLink}
+						</div>
+					</div>
+				</c:if>
+				
+			</div>
+	    	 
+		</c:forEach>   
+		
+	</div>
