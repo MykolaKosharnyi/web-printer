@@ -28,6 +28,26 @@
 				<th width="60">Редактировать</th>
 				<th width="60">Удалить</th>
 			</tr>
+			
+			<!-- fixed header -->
+			<tr class="fixed_header" 
+			style="position: fixed;
+    			top: 0px;
+    			width:899px;
+    			display:none;
+    			background-color:white;">
+				<th style="width: 31px;">ID</th>
+				<th style="width: 128px;">Имя товара</th>
+				<th style="width: 221px;">Изображение</th>
+				<th style="width: 60px;">Тип продукта</th>
+				<th style="width: 96px;">Цена</th>
+				<th style="width: 53px;">Показ. на сайте</th>
+				<th style="width: 55px;">Показ. на гл. меню</th>
+				<th style="width: 54px;">Показ. в левом блоке</th>
+				<th width="60">Редактировать</th>
+				<th style="width: 58px;">Удалить</th>
+			</tr>
+			
 			<c:forEach items="${listProducts}" var="product">
 				<tr id="${product.id}">
 					<td>${product.id}</td>
@@ -58,6 +78,20 @@
 	</c:if>
 	</div>
 	<script type="text/javascript">
+	var tableOffset = $("table").offset().top;
+	var $header = $("table tbody tr.fixed_header");
+	
+	$(window).bind("scroll", function() {
+	    var offset = $(this).scrollTop();
+	
+	    if (offset >= tableOffset) {
+	    	$header.show();
+	    }
+	    else if (offset < tableOffset) {
+	    	$header.hide();
+	    }
+	});
+	
 	function setShowOnSite(type, id, element){
 		
 		$.ajax({

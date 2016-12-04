@@ -56,8 +56,6 @@
 				<th style="width:60px;">Копировать товар</th>
 				<th style="width:59px;">Удалить</th>
 			</tr>
-			 
-			
 			
 			<c:forEach items="${listProducts}" var="product">
 				<tr id="${product.id}" class="output_pruduct">
