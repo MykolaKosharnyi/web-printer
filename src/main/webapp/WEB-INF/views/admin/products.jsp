@@ -26,52 +26,90 @@
 	<c:if test="${!empty listProducts}">
 		<table class="tg">
 			<tr>
-				<th width="40">ID</th>
-				<th width="120">${nameProduct}</th>
-				<th width="200">Изображение</th>
-				<th width="100">Цена</th>
-				<th width="60">Топ</th>
-				<th width="60">Показ. на сайте</th>
-				<th width="60">Показ. на гл. меню</th>
-				<th width="60">Показ. в левом блоке</th>
-				<th width="60">Копировать товар</th>
-				<th width="60">Удалить</th>
+				<th style="width:40px;">ID</th>
+				<th style="width:120px;">${nameProduct}</th>
+				<th style="width:200px;">Изображение</th>
+				<th style="width:100px;">Цена</th>
+				<th style="width:60px;">Топ</th>
+				<th style="width:60px;">Показ. на сайте</th>
+				<th style="width:60px;">Показ. на гл. меню</th>
+				<th style="width:60px;">Показ. в левом блоке</th>
+				<th style="width:60px;">Копировать товар</th>
+				<th style="width:60px;">Удалить</th>
 			</tr>
+			
+			<!-- fixed header -->
+			<tr class="fixed_header" 
+			style="position: fixed;
+    			top: 0px;
+    			width:899px;
+    			display:none;
+    			background-color:white;">
+				<th style="width:35px;">ID</th>
+				<th style="width:130px;">${nameProduct}</th>
+				<th style="width:214px;">Изображение</th>
+				<th style="width:101px;">Цена</th>
+				<th style="width:53px;">Топ</th>
+				<th style="width:56px;">Показ. на сайте</th>
+				<th style="width:57px;">Показ. на гл. меню</th>
+				<th style="width:56px;">Показ. в левом блоке</th>
+				<th style="width:60px;">Копировать товар</th>
+				<th style="width:59px;">Удалить</th>
+			</tr>
+			 
+			
+			
 			<c:forEach items="${listProducts}" var="product">
 				<tr id="${product.id}" class="output_pruduct">
-					<td>${product.id}</td>
-					<td><a href="<c:url value='/admin/${productType}/edit/${product.id}' />">${product.name}</a></td>
-					<td>
+					<td width="40px">${product.id}</td>
+					<td width="120px"><a href="<c:url value='/admin/${productType}/edit/${product.id}' />">${product.name}</a></td>
+					<td width="200px">
 						<a href="<c:url value='/admin/${productType}/edit/${product.id}' />">
 							<img src="/images/${productType}s/${product.id}/${product.pathPictures.get(0)}" alt="">
 						</a>
 					</td>
-					<td>
+					<td width="100px">
 						<c:if test="${product.prise > 0}">
 							$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${product.prise}" />
 						</c:if>				
 	           		</td>
 	           		
-	           		<td><input type="checkbox" name="top" <c:if test="${product.top}">checked</c:if> 
+	           		<td width="60px"><input type="checkbox" name="top" <c:if test="${product.top}">checked</c:if> 
 						onclick="setTop('${productType}', ${product.id}, this);"/></td>
 	           				
-					<td><input type="checkbox" name="showOnSite" <c:if test="${product.showOnSite}">checked</c:if> 
+					<td width="60px"><input type="checkbox" name="showOnSite" <c:if test="${product.showOnSite}">checked</c:if> 
 						onclick="setShowOnSite('${productType}', ${product.id}, this);"/></td>
 							
-					<td><input type="checkbox" name="showOnHomePage" <c:if test="${product.showOnHomePage}">checked</c:if>
+					<td width="60px"><input type="checkbox" name="showOnHomePage" <c:if test="${product.showOnHomePage}">checked</c:if>
 						onclick="setShowOnHomePage('${productType}', ${product.id}, this);"/></td>
 							
-					<td><input type="checkbox" name="showOnLeftSide" <c:if test="${product.showOnLeftSide}">checked</c:if>
+					<td width="60px"><input type="checkbox" name="showOnLeftSide" <c:if test="${product.showOnLeftSide}">checked</c:if>
 						onclick="setShowOnLeftSide('${productType}', ${product.id}, this);"/></td>
 					
-					<td><a href="<c:url value='/admin/${productType}/copy/${product.id}' />"><i class="fa fa-clone clone" aria-hidden="true"></i></a></td>		
-					<td><a href="<c:url value='/admin/${productType}/remove/${product.id}' />"><i class="fa fa-trash-o remove" aria-hidden="true"></i></a></td>
+					<td width="60px"><a href="<c:url value='/admin/${productType}/copy/${product.id}' />"><i class="fa fa-clone clone" aria-hidden="true"></i></a></td>		
+					<td width="60px"><a href="<c:url value='/admin/${productType}/remove/${product.id}' />"><i class="fa fa-trash-o remove" aria-hidden="true"></i></a></td>
 				</tr>
 			</c:forEach>
 		</table>
 	</c:if>
 	</div>
 	<script type="text/javascript">
+	
+	var tableOffset = $("table").offset().top;
+	var $header = $("table tbody tr.fixed_header");
+	
+	$(window).bind("scroll", function() {
+	    var offset = $(this).scrollTop();
+	
+	    if (offset >= tableOffset) {
+	    	$header.show();
+	    }
+	    else if (offset < tableOffset) {
+	    	$header.hide();
+	    }
+	});
+	
+	
 	$('#sorting_parameter').change(function(){ 
 	    var value = $(this).val();
 	    $.ajax({
@@ -117,17 +155,26 @@
 		                	showOnLeftSide.prop("checked", true );
 		                }
 
-	                	outerTR.append($('<td/>').text(product.id))
-	                		   .append($('<td/>').append($('<a/>').attr("href", "/admin/${productType}/edit/" + product.id).text(product.name)))
-	                		   .append($('<td/>').append($('<a/>').attr("href", "/admin/${productType}/edit/" + product.id)
+	                	outerTR.append($('<td/>').css("width","40px").text(product.id))
+	                		   .append($('<td/>').css("width","120px")
+	                				   .append($('<a/>')
+	                						   .attr("href", "/admin/${productType}/edit/" + product.id).text(product.name)))
+	                		   .append($('<td/>').css("width","200px")
+	                				   .append($('<a/>').attr("href", "/admin/${productType}/edit/" + product.id)
 	                				   .append($('<img/>').attr("src", "/images/${productType}s/" + product.id + "/" + product.pathPictures[0]))))
-	                		   .append($('<td/>').text(checkPrise(product.prise)))
-	                		   .append($('<td/>').append(setTopProduct))
-	                		   .append($('<td/>').append(showOnSite))
-	                		   .append($('<td/>').append(showOnHomePage))
-	                		   .append($('<td/>').append(showOnLeftSide))
-	                		   .append($('<td/>').append($('<a/>').attr("href", "/admin/${productType}/copy/" + product.id).append($('<i/>').addClass('fa fa-clone'))))
-	                		   .append($('<td/>').append($('<a/>').attr("href", "/admin/${productType}/remove/" + product.id).append($('<i/>').addClass('fa fa-trash-o'))))
+	                		   .append($('<td/>').css("width","100px").text(checkPrise(product.prise)))
+	                		   .append($('<td/>').css("width","60px").append(setTopProduct))
+	                		   .append($('<td/>').css("width","60px").append(showOnSite))
+	                		   .append($('<td/>').css("width","60px").append(showOnHomePage))
+	                		   .append($('<td/>').css("width","60px").append(showOnLeftSide))
+	                		   .append($('<td/>').css("width","60px")
+	                				   .append($('<a/>')
+	                						   .attr("href", "/admin/${productType}/copy/" + product.id)
+	                						   .append($('<i/>').addClass('fa fa-clone'))))
+	                		   .append($('<td/>').css("width","60px")
+	                				   .append($('<a/>')
+	                						   .attr("href", "/admin/${productType}/remove/" + product.id)
+	                						   .append($('<i/>').addClass('fa fa-trash-o'))))
 	                		   	
 	                	$('.tg tr:last').after(outerTR);
 	                });
