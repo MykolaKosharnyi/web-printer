@@ -77,7 +77,7 @@ public class RipController {
         SearchRips search = new SearchRips();
         search.setPrise0(0);
         search.setPrise1(100000);
-   
+
         logger.info("All characteristic of RIP.");
         model.addAttribute("type", "rip");
 		model.addAttribute("rip", (JSONArray)new JSONParser().parse(new InputStreamReader(new FileInputStream("/var/www/localhost/images/rip.json"), "UTF-8")));

@@ -98,7 +98,9 @@ public class PrinterController {
 		try {
 			model.addAttribute("printer", sortEquipment((JSONObject)new JSONParser()
 					.parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/printer.json"), "UTF-8"))));
-		} catch (IOException | ParseException e) {}
+		} catch (IOException | ParseException e) {
+			
+		}
         return "printers";
     }
 	
