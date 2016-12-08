@@ -247,18 +247,13 @@ public abstract class HeadProduct extends Product implements Serializable{
 	//insurance
 	//1. Страхование груза международная перевозка
 	//2. Страхование груза по Украине
-//	@Column(name="insuranceInternationalTransport", columnDefinition="Decimal(10,2) default '0.00'")
-//	protected double insuranceInternationalTransport;
 	@Column(name="insuranceInternationalTransport", nullable = false, columnDefinition = "bit default 0")
 	protected boolean insuranceInternationalTransport;
-	
 	
 	@Size(max = 50)
 	@Column(name="descriptionInsuranceInternationalTransport")
 	protected String descriptionInsuranceInternationalTransport;
 	
-//	@Column(name="insuranceUkraineTransport", columnDefinition="Decimal(10,2) default '0.00'")
-//	protected double insuranceUkraineTransport;
 	@Column(name="insuranceUkraineTransport", nullable = false, columnDefinition = "bit default 0")
 	protected boolean insuranceUkraineTransport;
 	
