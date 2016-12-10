@@ -1,8 +1,10 @@
 package com.printmaster.nk.beans;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -11,9 +13,13 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 
 import com.printmaster.nk.model.Cutter;
@@ -448,4 +454,60 @@ public class ComponetsForController {
     	}
 	logger.info("Remove picture with name  '" + namePicture + "' from FILEMETA, in" + type + " section ");
     }
+    
+    /**
+     * Adding to model json file with characteristic of this type product
+     * @param model in which added json file of this type of pruduct
+     * @param typeOfProduct
+     */
+    public void setJSONtoModelAttribute(Model model, String typeOfProduct){
+    	if(typeOfProduct.equals("printer")){//separate for printers because they need to sort by equipment
+    		
+    		try {
+				model.addAttribute("printer", sortEquipment((JSONObject)new JSONParser()
+						.parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/printer.json"), "UTF-8"))));
+			} catch (IOException | ParseException e) {
+				logger.error("Error in read " + typeOfProduct + ".json file", e); 
+			}
+    		
+    	}if(typeOfProduct.equals("rip")){// rip has JSONArray in his structure
+    		
+    		try {
+    			model.addAttribute(typeOfProduct , (JSONArray)new JSONParser().
+    						parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/" + typeOfProduct + ".json"), "UTF-8")));
+    			} catch (IOException | ParseException e) {
+    				logger.error("Error in read " + typeOfProduct + ".json file", e); 
+    			}
+    		
+    	}if(typeOfProduct.equals("3d_printer")){//bad naming of attribute in 3d printers
+    		
+    		try {
+    			model.addAttribute("printer" , (JSONObject)new JSONParser().
+    						parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/" + typeOfProduct + ".json"), "UTF-8")));
+    			} catch (IOException | ParseException e) {
+    				logger.error("Error in read " + typeOfProduct + ".json file", e); 
+    			}
+    		
+    	} else {
+    		
+    		try {
+    			model.addAttribute(typeOfProduct , (JSONObject)new JSONParser().
+    						parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/" + typeOfProduct + ".json"), "UTF-8")));
+    			} catch (IOException | ParseException e) {
+    				logger.error("Error in read " + typeOfProduct + ".json file", e); 
+    			}
+    		
+    	}
+	}
+    
+	@SuppressWarnings("unchecked")
+	private JSONObject sortEquipment(JSONObject corectedJSONObject){
+		JSONArray arrayToSort = (JSONArray) corectedJSONObject.get("equipment_manufacturer");
+		corectedJSONObject.remove("equipment_manufacturer");
+
+		Collections.sort(arrayToSort);
+		
+		corectedJSONObject.put("equipment_manufacturer", arrayToSort);
+		return corectedJSONObject;
+	}
 }

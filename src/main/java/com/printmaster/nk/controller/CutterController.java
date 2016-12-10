@@ -1,10 +1,8 @@
 package com.printmaster.nk.controller;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -16,8 +14,6 @@ import javax.validation.Valid;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -87,10 +83,8 @@ public class CutterController {
         model.addAttribute("type", "cutter");
         logger.info("On '../cutters' page.");
         
-        try {
-		model.addAttribute("cutter", (JSONObject)new JSONParser().
-					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/cutter.json"), "UTF-8")));
-		} catch (IOException | ParseException e) {}
+        componets.setJSONtoModelAttribute(model, "cutter");
+        
         return "cutters";
     }
 	
@@ -123,10 +117,8 @@ public class CutterController {
         model.addAttribute("listProducts", componets.showSimplestArrayOfCutter(cutterService.listSearchCutters(search)));
         model.addAttribute("type", "cutter");
         
-        try {
-    		model.addAttribute("cutter", (JSONObject)new JSONParser().
-    					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/cutter.json"), "UTF-8")));
-    		} catch (IOException | ParseException e) {}
+        componets.setJSONtoModelAttribute(model, "cutter");
+        
         return "cutters/" + type ;
     }
 
@@ -259,10 +251,7 @@ public class CutterController {
 		logger.info("/admin/cutter/new page.");
 		model.addAttribute("product", new Cutter());
 		
-		try {
-			model.addAttribute("cutter", (JSONObject)new JSONParser().
-						parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/cutter.json"), "UTF-8")));
-			} catch (IOException | ParseException e) {}
+		componets.setJSONtoModelAttribute(model, "cutter");
 		
 		model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
 		model.addAttribute("type", "cutter");
@@ -288,10 +277,7 @@ public class CutterController {
 		 model.addAttribute("type", "cutter");
 		 model.addAttribute("productId", id);
 		 
-		try {
-			model.addAttribute("cutter", (JSONObject)new JSONParser().
-					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/cutter.json"), "UTF-8")));
-		} catch (IOException | ParseException e) {}
+		 componets.setJSONtoModelAttribute(model, "cutter");
 	    return "admin/cutter";
 	}
      
@@ -303,10 +289,8 @@ public class CutterController {
 				model.addAttribute("product", product);
 				model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
 				model.addAttribute("type", "cutter");
-				try {
-					model.addAttribute("cutter", (JSONObject)new JSONParser().
-							parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/cutter.json"), "UTF-8")));
-				} catch (IOException | ParseException e) {}
+				
+				componets.setJSONtoModelAttribute(model, "cutter");
 	            return "admin/cutter";
 	        }
 
@@ -340,10 +324,8 @@ public class CutterController {
 				model.addAttribute("product", product);
 				model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
 				model.addAttribute("type", "cutter");
-				try {
-					model.addAttribute("cutter", (JSONObject)new JSONParser().
-							parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/cutter.json"), "UTF-8")));
-				} catch (IOException | ParseException e) {}
+				
+				componets.setJSONtoModelAttribute(model, "cutter");
 	            return "admin/cutter";
 	        }
 
@@ -376,13 +358,8 @@ public class CutterController {
         model.addAttribute("product", undateCutter);
         model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(useWithProductService.listShowOnSite()));
         model.addAttribute("type", "cutter");
-        try {
-			model.addAttribute("cutter", (JSONObject)new JSONParser().
-						parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/cutter.json"), "UTF-8")));
-			} catch (IOException | ParseException e) {}
+        componets.setJSONtoModelAttribute(model, "cutter");
         
-       
-  
         return "admin/cutter";
     }
 	
@@ -394,10 +371,8 @@ public class CutterController {
 			model.addAttribute("product", product);
 			model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
 			model.addAttribute("type", "cutter");
-			try {
-				model.addAttribute("cutter", (JSONObject)new JSONParser().
-						parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/cutter.json"), "UTF-8")));
-			} catch (IOException | ParseException e) {}
+			
+			componets.setJSONtoModelAttribute(model, "cutter");
             return "admin/cutter";
         }
 		
@@ -426,10 +401,8 @@ public class CutterController {
 			model.addAttribute("product", product);
 			model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
 			model.addAttribute("type", "cutter");
-			try {
-				model.addAttribute("cutter", (JSONObject)new JSONParser().
-						parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/cutter.json"), "UTF-8")));
-			} catch (IOException | ParseException e) {}
+			
+			componets.setJSONtoModelAttribute(model, "cutter");
             return "admin/cutter";
         }
 		
@@ -617,7 +590,7 @@ public class CutterController {
     		componets.updateInLeftField(cutter, true, "cutter");
     	} else {
     		componets.updateInLeftField(cutter, false, "cutter");
-    	}
-    		
+    	} 		
     }
+   
 }

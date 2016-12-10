@@ -1,10 +1,8 @@
 package com.printmaster.nk.controller;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -16,8 +14,6 @@ import javax.validation.Valid;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -84,11 +80,8 @@ public class PrinterDigitalController {
         search.setPrise1(30000);
         model.addAttribute("search", search);
         model.addAttribute("type", "digital_printer");
-        
-        try {
-			model.addAttribute("digital_printer", (JSONObject)new JSONParser().
-					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/digital_printer.json"), "UTF-8")));
-		} catch (IOException | ParseException e) {}
+           
+        componets.setJSONtoModelAttribute(model, "digital_printer");
         return "digital_printers";
     }
 	
@@ -115,10 +108,7 @@ public class PrinterDigitalController {
 		model.addAttribute("listProducts", componets.showSimplestArrayOfDigitalPrinter(productService.listSearchDigitalPrinters(search)));
 		model.addAttribute("type", "digital_printer");
 		
-		try {
-			model.addAttribute("digital_printer", (JSONObject)new JSONParser().
-					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/digital_printer.json"), "UTF-8")));
-		} catch (IOException | ParseException e) {}
+		componets.setJSONtoModelAttribute(model, "digital_printer");
 		return "digital_printers/" + type;
 	}
 
@@ -243,10 +233,8 @@ public class PrinterDigitalController {
 		model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
 		model.addAttribute("type", "digital_printer");
 		model.addAttribute("productId", 0);
-		try {
-			model.addAttribute("digital_printer", (JSONObject)new JSONParser().
-					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/digital_printer.json"), "UTF-8")));
-		} catch (IOException | ParseException e) {}
+		
+		componets.setJSONtoModelAttribute(model, "digital_printer");
 	    return "admin/digital_printer";
 	}
 	
@@ -268,10 +256,7 @@ public class PrinterDigitalController {
 		 model.addAttribute("type", "digital_printer");
 		 model.addAttribute("productId", id);
 		 
-		try {
-			model.addAttribute("digital_printer", (JSONObject)new JSONParser().
-					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/digital_printer.json"), "UTF-8")));
-		} catch (IOException | ParseException e) {}
+		 componets.setJSONtoModelAttribute(model, "digital_printer");
 	    return "admin/digital_printer";
 	}
      
@@ -283,10 +268,8 @@ public class PrinterDigitalController {
 				model.addAttribute("product", product);
 				model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
 				model.addAttribute("type", "digital_printer");
-				try {
-					model.addAttribute("digital_printer", (JSONObject)new JSONParser().
-							parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/digital_printer.json"), "UTF-8")));
-				} catch (IOException | ParseException e) {}
+				
+				componets.setJSONtoModelAttribute(model, "digital_printer");
 	            return "admin/digital_printer";
 	        }
 
@@ -314,10 +297,8 @@ public class PrinterDigitalController {
 				model.addAttribute("product", product);
 				model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
 				model.addAttribute("type", "digital_printer");
-				try {
-					model.addAttribute("digital_printer", (JSONObject)new JSONParser().
-							parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/digital_printer.json"), "UTF-8")));
-				} catch (IOException | ParseException e) {}
+				
+				componets.setJSONtoModelAttribute(model, "digital_printer");
 	            return "admin/digital_printer";
 	        }
 
@@ -344,10 +325,8 @@ public class PrinterDigitalController {
         model.addAttribute("product", undatePrinter);
         model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
         model.addAttribute("type", "digital_printer");
-        try {
-			model.addAttribute("digital_printer", (JSONObject)new JSONParser().
-					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/digital_printer.json"), "UTF-8")));
-		} catch (IOException | ParseException e) {}
+        
+        componets.setJSONtoModelAttribute(model, "digital_printer");
         return "admin/digital_printer";
     }
 	
@@ -359,10 +338,8 @@ public class PrinterDigitalController {
 			model.addAttribute("product", product);
 			model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
 			model.addAttribute("type", "digital_printer");
-			try {
-				model.addAttribute("digital_printer", (JSONObject)new JSONParser().
-						parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/digital_printer.json"), "UTF-8")));
-			} catch (IOException | ParseException e) {}
+			
+			componets.setJSONtoModelAttribute(model, "digital_printer");
             return "admin/digital_printer";
         }
 		
@@ -389,10 +366,8 @@ public class PrinterDigitalController {
 			model.addAttribute("product", product);
 			model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
 			model.addAttribute("type", "digital_printer");
-			try {
-				model.addAttribute("digital_printer", (JSONObject)new JSONParser().
-						parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/digital_printer.json"), "UTF-8")));
-			} catch (IOException | ParseException e) {}
+			
+			componets.setJSONtoModelAttribute(model, "digital_printer");
             return "admin/digital_printer";
         }
 		

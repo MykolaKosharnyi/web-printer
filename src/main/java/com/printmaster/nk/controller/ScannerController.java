@@ -1,10 +1,8 @@
 package com.printmaster.nk.controller;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -16,8 +14,6 @@ import javax.validation.Valid;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -87,10 +83,7 @@ public class ScannerController {
         model.addAttribute("type", "scanner");
         logger.info("On '../scanners' page.");
         
-        try {
-			model.addAttribute("scanner", (JSONObject)new JSONParser().
-					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/scanner.json"), "UTF-8")));
-		} catch (IOException | ParseException e) {}
+        componets.setJSONtoModelAttribute(model, "scanner");
         return "scanners";
     }
 	
@@ -118,10 +111,7 @@ public class ScannerController {
         model.addAttribute("listProducts", componets.showSimplestArrayOfScanner(scannerService.listSearchScanners(search)));
         model.addAttribute("type", "scanner");
         
-        try {
-			model.addAttribute("scanner", (JSONObject)new JSONParser().
-					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/scanner.json"), "UTF-8")));
-		} catch (IOException | ParseException e) {}
+        componets.setJSONtoModelAttribute(model, "scanner");
         return "scanners/" + type ;
     }
 
@@ -233,10 +223,8 @@ public class ScannerController {
 		model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
 		model.addAttribute("type", "scanner");
 		model.addAttribute("productId", 0);
-		try {
-			model.addAttribute("scanner", (JSONObject)new JSONParser().
-					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/scanner.json"), "UTF-8")));
-		} catch (IOException | ParseException e) {}
+		
+		componets.setJSONtoModelAttribute(model, "scanner");
 	    return "admin/scanner";
 	}
      
@@ -258,10 +246,7 @@ public class ScannerController {
 		 model.addAttribute("type", "scanner");
 		 model.addAttribute("productId", id);
 		 
-		try {
-			model.addAttribute("scanner", (JSONObject)new JSONParser().
-					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/scanner.json"), "UTF-8")));
-		} catch (IOException | ParseException e) {}
+		 componets.setJSONtoModelAttribute(model, "scanner");
 	    return "admin/scanner";
 	}
 	
@@ -273,10 +258,7 @@ public class ScannerController {
 				model.addAttribute("product", product);
 				model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
 				model.addAttribute("type", "scanner");
-				try {
-					model.addAttribute("scanner", (JSONObject)new JSONParser().
-							parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/scanner.json"), "UTF-8")));
-				} catch (IOException | ParseException e) {}
+				componets.setJSONtoModelAttribute(model, "scanner");
 	            return "admin/scanner";
 	        }
 
@@ -307,10 +289,7 @@ public class ScannerController {
 				model.addAttribute("product", product);
 				model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
 				model.addAttribute("type", "scanner");
-				try {
-					model.addAttribute("scanner", (JSONObject)new JSONParser().
-							parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/scanner.json"), "UTF-8")));
-				} catch (IOException | ParseException e) {}
+				componets.setJSONtoModelAttribute(model, "scanner");
 	            return "admin/scanner";
 	        }
 		
@@ -341,10 +320,7 @@ public class ScannerController {
         model.addAttribute("product", undateScanner);
         model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
         model.addAttribute("type", "scanner");
-        try {
-			model.addAttribute("scanner", (JSONObject)new JSONParser().
-					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/scanner.json"), "UTF-8")));
-		} catch (IOException | ParseException e) {}
+        componets.setJSONtoModelAttribute(model, "scanner");
         return "admin/scanner";
     }
 	
@@ -356,10 +332,7 @@ public class ScannerController {
 			model.addAttribute("product", product);
 			model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
 			model.addAttribute("type", "scanner");
-			try {
-				model.addAttribute("scanner", (JSONObject)new JSONParser().
-						parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/scanner.json"), "UTF-8")));
-			} catch (IOException | ParseException e) {}
+			componets.setJSONtoModelAttribute(model, "scanner");
             return "admin/scanner";
         }
 		
@@ -388,10 +361,7 @@ public class ScannerController {
 			model.addAttribute("product", product);
 			model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
 			model.addAttribute("type", "scanner");
-			try {
-				model.addAttribute("scanner", (JSONObject)new JSONParser().
-						parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/scanner.json"), "UTF-8")));
-			} catch (IOException | ParseException e) {}
+			componets.setJSONtoModelAttribute(model, "scanner");
             return "admin/scanner";
         }
 		

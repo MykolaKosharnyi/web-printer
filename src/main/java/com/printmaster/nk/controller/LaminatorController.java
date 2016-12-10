@@ -1,10 +1,8 @@
 package com.printmaster.nk.controller;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -16,8 +14,6 @@ import javax.validation.Valid;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -87,10 +83,7 @@ public class LaminatorController {
         model.addAttribute("type", "laminator");
         logger.info("On '../laminators' page.");
         
-        try {
-			model.addAttribute("laminator", (JSONObject)new JSONParser().
-					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/laminator.json"), "UTF-8")));
-		} catch (IOException | ParseException e) {}
+        componets.setJSONtoModelAttribute(model, "laminator");
         return "laminators";
     }
 	
@@ -127,10 +120,7 @@ public class LaminatorController {
         model.addAttribute("listProducts", componets.showSimplestArrayOfLaminator(laminatorService.listSearchLaminators(search)));
         model.addAttribute("type", "laminator");
         
-        try {
-			model.addAttribute("laminator", (JSONObject)new JSONParser().
-					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/laminator.json"), "UTF-8")));
-		} catch (IOException | ParseException e) {}
+        componets.setJSONtoModelAttribute(model, "laminator");
         return "laminators/" + type ;
     }
 
@@ -285,10 +275,7 @@ public class LaminatorController {
 		model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
 		model.addAttribute("type", "laminator");
 		model.addAttribute("productId", 0);
-		try {
-			model.addAttribute("laminator", (JSONObject)new JSONParser().
-					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/laminator.json"), "UTF-8")));
-		} catch (IOException | ParseException e) {}
+		componets.setJSONtoModelAttribute(model, "laminator");
 	    return "admin/laminator";
 	}
 	
@@ -310,10 +297,7 @@ public class LaminatorController {
 		 model.addAttribute("type", "laminator");
 		 model.addAttribute("productId", id);
 		 
-		try {
-			model.addAttribute("laminator", (JSONObject)new JSONParser().
-					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/laminator.json"), "UTF-8")));
-		} catch (IOException | ParseException e) {}
+		 componets.setJSONtoModelAttribute(model, "laminator");
 	    return "admin/laminator";
 	}
      
@@ -325,10 +309,7 @@ public class LaminatorController {
 				model.addAttribute("product", product);
 				model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
 				model.addAttribute("type", "laminator");
-				try {
-					model.addAttribute("laminator", (JSONObject)new JSONParser().
-							parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/laminator.json"), "UTF-8")));
-				} catch (IOException | ParseException e) {}
+				componets.setJSONtoModelAttribute(model, "laminator");
 	            return "admin/laminator";
 	        }
 
@@ -359,10 +340,7 @@ public class LaminatorController {
 				model.addAttribute("product", product);
 				model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
 				model.addAttribute("type", "laminator");
-				try {
-					model.addAttribute("laminator", (JSONObject)new JSONParser().
-							parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/laminator.json"), "UTF-8")));
-				} catch (IOException | ParseException e) {}
+				componets.setJSONtoModelAttribute(model, "laminator");
 	            return "admin/laminator";
 	        }
 		
@@ -394,10 +372,7 @@ public class LaminatorController {
         model.addAttribute("product", undateLaminator);
         model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
         model.addAttribute("type", "laminator");
-        try {
-			model.addAttribute("laminator", (JSONObject)new JSONParser().
-					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/laminator.json"), "UTF-8")));
-		} catch (IOException | ParseException e) {}
+        componets.setJSONtoModelAttribute(model, "laminator");
         return "admin/laminator";
     }
 	
@@ -409,10 +384,7 @@ public class LaminatorController {
 			model.addAttribute("product", product);
 			model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
 			model.addAttribute("type", "laminator");
-			try {
-				model.addAttribute("laminator", (JSONObject)new JSONParser().
-						parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/laminator.json"), "UTF-8")));
-			} catch (IOException | ParseException e) {}
+			componets.setJSONtoModelAttribute(model, "laminator");
             return "admin/laminator";
         }
 		
@@ -441,10 +413,7 @@ public class LaminatorController {
 			model.addAttribute("product", product);
 			model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
 			model.addAttribute("type", "laminator");
-			try {
-				model.addAttribute("laminator", (JSONObject)new JSONParser().
-						parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/laminator.json"), "UTF-8")));
-			} catch (IOException | ParseException e) {}
+			componets.setJSONtoModelAttribute(model, "laminator");
             return "admin/laminator";
         }
 		

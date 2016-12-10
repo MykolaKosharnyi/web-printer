@@ -1,10 +1,8 @@
 package com.printmaster.nk.controller;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -16,8 +14,6 @@ import javax.validation.Valid;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -87,10 +83,8 @@ public class LaserController {
         model.addAttribute("type", "laser");
         logger.info("On '../lasers' page.");
         
-        try {
-			model.addAttribute("laser", (JSONObject)new JSONParser().
-					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/laser.json"), "UTF-8")));
-		} catch (IOException | ParseException e) {}
+        componets.setJSONtoModelAttribute(model, "laser");
+    
         return "lasers";
     }
 	
@@ -135,10 +129,7 @@ public class LaserController {
         model.addAttribute("listProducts", componets.showSimplestArrayOfLaser(laserService.listSearchLasers(search)));
         model.addAttribute("type", "laser");
         
-        try {
-			model.addAttribute("laser", (JSONObject)new JSONParser().
-					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/laser.json"), "UTF-8")));
-		} catch (IOException | ParseException e) {}
+        componets.setJSONtoModelAttribute(model, "laser");
         return "lasers/" + type ;
     }
 
@@ -316,10 +307,8 @@ public class LaserController {
 		model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
 		model.addAttribute("type", "laser");
 		model.addAttribute("productId", 0);
-		 try {
-				model.addAttribute("laser", (JSONObject)new JSONParser().
-						parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/laser.json"), "UTF-8")));
-			} catch (IOException | ParseException e) {}
+		
+		componets.setJSONtoModelAttribute(model, "laser");
 	    return "admin/laser";
 	}
      
@@ -341,10 +330,7 @@ public class LaserController {
 		 model.addAttribute("type", "laser");
 		 model.addAttribute("productId", id);
 		 
-		try {
-			model.addAttribute("laser", (JSONObject)new JSONParser().
-					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/laser.json"), "UTF-8")));
-		} catch (IOException | ParseException e) {}
+		 componets.setJSONtoModelAttribute(model, "laser");
 	    return "admin/laser";
 	}
 	
@@ -356,10 +342,8 @@ public class LaserController {
 				model.addAttribute("product", product);
 				model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
 				model.addAttribute("type", "laser");
-				try {
-					model.addAttribute("laser", (JSONObject)new JSONParser().
-							parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/laser.json"), "UTF-8")));
-				} catch (IOException | ParseException e) {}
+				
+				componets.setJSONtoModelAttribute(model, "laser");
 	            return "admin/laser";
 	        }
 
@@ -389,10 +373,8 @@ public class LaserController {
 				model.addAttribute("product", product);
 				model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
 				model.addAttribute("type", "laser");
-				try {
-					model.addAttribute("laser", (JSONObject)new JSONParser().
-							parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/laser.json"), "UTF-8")));
-				} catch (IOException | ParseException e) {}
+				
+				componets.setJSONtoModelAttribute(model, "laser");
 	            return "admin/laser";
 	        }
 		
@@ -424,10 +406,7 @@ public class LaserController {
         model.addAttribute("product", undateLaser);
         model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
         model.addAttribute("type", "laser");
-        try {
-			model.addAttribute("laser", (JSONObject)new JSONParser().
-					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/laser.json"), "UTF-8")));
-		} catch (IOException | ParseException e) {}
+        componets.setJSONtoModelAttribute(model, "laser");
         return "admin/laser";
     }
 	
@@ -439,10 +418,7 @@ public class LaserController {
 			model.addAttribute("product", product);
 			model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
 			model.addAttribute("type", "laser");
-			try {
-				model.addAttribute("laser", (JSONObject)new JSONParser().
-						parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/laser.json"), "UTF-8")));
-			} catch (IOException | ParseException e) {}
+			componets.setJSONtoModelAttribute(model, "laser");
             return "admin/laser";
         }
 		
@@ -471,10 +447,8 @@ public class LaserController {
 			model.addAttribute("product", product);
 			model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
 			model.addAttribute("type", "laser");
-			try {
-				model.addAttribute("laser", (JSONObject)new JSONParser().
-						parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/laser.json"), "UTF-8")));
-			} catch (IOException | ParseException e) {}
+			
+			componets.setJSONtoModelAttribute(model, "laser");
             return "admin/laser";
         }
 		

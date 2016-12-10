@@ -1,10 +1,8 @@
 package com.printmaster.nk.controller;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -16,8 +14,6 @@ import javax.validation.Valid;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -79,10 +75,7 @@ public class UseWithProductController {
         logger.info("On '../use_with_products' page.");
         
         logger.info("All characteristic of 'Use with product'.");
-		try {
-			model.addAttribute("use_with_product", (JSONObject)new JSONParser()
-					.parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/use_with_product.json"), "UTF-8")));
-		} catch (IOException | ParseException e) {}
+        componets.setJSONtoModelAttribute(model, "use_with_product");
         return "use_with_products";
     }
 	
@@ -124,10 +117,7 @@ public class UseWithProductController {
         model.addAttribute("type", "use_with_product");
         
         logger.info("All characteristic of 'Use with product'.");
-		try {
-			model.addAttribute("use_with_product", (JSONObject)new JSONParser()
-					.parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/use_with_product.json"), "UTF-8")));
-		} catch (IOException | ParseException e) {}
+        componets.setJSONtoModelAttribute(model, "use_with_product");
         return "use_with_products/" + type ;
     }
 
@@ -289,10 +279,7 @@ public class UseWithProductController {
 		 model.addAttribute("type", "use_with_product");
 		 model.addAttribute("productId", 0);
 		 
-		 try {
-			model.addAttribute("use_with_product", (JSONObject)new JSONParser()
-					.parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/use_with_product.json"), "UTF-8")));
-			} catch (IOException | ParseException e) {}
+		 componets.setJSONtoModelAttribute(model, "use_with_product");
 	    return "admin/use_with_product";
 	}
 	
@@ -313,10 +300,7 @@ public class UseWithProductController {
 		 model.addAttribute("type", "use_with_product");
 		 model.addAttribute("productId", id);
 		 
-		try {
-			model.addAttribute("use_with_product", (JSONObject)new JSONParser().
-					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/use_with_product.json"), "UTF-8")));
-		} catch (IOException | ParseException e) {}
+		 componets.setJSONtoModelAttribute(model, "use_with_product");
 	    return "admin/use_with_product";
 	}
      
@@ -327,10 +311,7 @@ public class UseWithProductController {
 			if (result.hasErrors()) {
 				model.addAttribute("product", product);
 				model.addAttribute("type", "use_with_product");
-				try {
-					model.addAttribute("use_with_product", (JSONObject)new JSONParser()
-							.parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/use_with_product.json"), "UTF-8")));
-				} catch (IOException | ParseException e) {}
+				componets.setJSONtoModelAttribute(model, "use_with_product");
 				
 	            return "admin/use_with_product";
 	        }
@@ -365,10 +346,7 @@ public class UseWithProductController {
 			if (result.hasErrors()) {
 				model.addAttribute("product", product);
 				model.addAttribute("type", "use_with_product");
-				try {
-					model.addAttribute("use_with_product", (JSONObject)new JSONParser()
-							.parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/use_with_product.json"), "UTF-8")));
-				} catch (IOException | ParseException e) {}
+				componets.setJSONtoModelAttribute(model, "use_with_product");
 				
 	            return "admin/use_with_product";
 	        }
@@ -403,10 +381,7 @@ public class UseWithProductController {
         model.addAttribute("product", undateUWP);
         model.addAttribute("type", "use_with_product");
         
-        try {
-			model.addAttribute("use_with_product", (JSONObject)new JSONParser()
-					.parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/use_with_product.json"), "UTF-8")));
-		} catch (IOException | ParseException e) {}
+        componets.setJSONtoModelAttribute(model, "use_with_product");
         return "admin/use_with_product";
     }
 	
@@ -417,10 +392,7 @@ public class UseWithProductController {
 		if (result.hasErrors()) {
 			model.addAttribute("product", product);
 			model.addAttribute("type", "use_with_product");
-			try {
-				model.addAttribute("use_with_product", (JSONObject)new JSONParser()
-						.parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/use_with_product.json"), "UTF-8")));
-			} catch (IOException | ParseException e) {}
+			componets.setJSONtoModelAttribute(model, "use_with_product");
 			
             return "admin/use_with_product";
         }
@@ -454,10 +426,8 @@ public class UseWithProductController {
 		if (result.hasErrors()) {
 			model.addAttribute("product", product);
 			model.addAttribute("type", "use_with_product");
-			try {
-				model.addAttribute("use_with_product", (JSONObject)new JSONParser()
-						.parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/use_with_product.json"), "UTF-8")));
-			} catch (IOException | ParseException e) {}
+			
+			componets.setJSONtoModelAttribute(model, "use_with_product");
 			
             return "admin/use_with_product";
         }

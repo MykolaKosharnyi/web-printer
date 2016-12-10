@@ -1,11 +1,9 @@
 package com.printmaster.nk.controller;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.nio.file.Files;
 import java.util.ArrayList;
@@ -17,9 +15,7 @@ import javax.validation.Valid;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -80,7 +76,7 @@ public class RipController {
 
         logger.info("All characteristic of RIP.");
         model.addAttribute("type", "rip");
-		model.addAttribute("rip", (JSONArray)new JSONParser().parse(new InputStreamReader(new FileInputStream("/var/www/localhost/images/rip.json"), "UTF-8")));
+        componets.setJSONtoModelAttribute(model, "rip");
         
         model.addAttribute("search", search);
         logger.info("On '../rips' page.");
@@ -137,7 +133,7 @@ public class RipController {
 		model.addAttribute("productId", 0);
 		
 		logger.info("All characteristic of RIP.");
-		model.addAttribute("rip", (JSONArray)new JSONParser().parse(new InputStreamReader(new FileInputStream("/var/www/localhost/images/rip.json"), "UTF-8")));
+		componets.setJSONtoModelAttribute(model, "rip");
 	    return "admin/rip";
 	}
      
@@ -158,10 +154,7 @@ public class RipController {
 		 model.addAttribute("type", "rip");
 		 model.addAttribute("productId", id);
 		 
-		try {
-			model.addAttribute("rip", (JSONArray)new JSONParser().
-					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/rip.json"), "UTF-8")));
-		} catch (IOException | ParseException e) {}
+		 componets.setJSONtoModelAttribute(model, "rip");
 	    return "admin/rip";
 	}
 	
@@ -173,9 +166,7 @@ public class RipController {
 			if (result.hasErrors()) {
 				model.addAttribute("type", "rip");
 				model.addAttribute("product", product);
-				try {
-					model.addAttribute("rip", (JSONArray)new JSONParser().parse(new InputStreamReader(new FileInputStream("/var/www/localhost/images/rip.json"), "UTF-8")));
-				} catch (ParseException e) {}
+				componets.setJSONtoModelAttribute(model, "rip");
 	            return "admin/rip";
 	        }
 		
@@ -205,9 +196,7 @@ public class RipController {
 			if (result.hasErrors()) {
 				model.addAttribute("product", product);
 				model.addAttribute("type", "rip");
-				try {
-					model.addAttribute("rip", (JSONArray)new JSONParser().parse(new InputStreamReader(new FileInputStream("/var/www/localhost/images/rip.json"), "UTF-8")));
-				} catch (ParseException e) {}
+				componets.setJSONtoModelAttribute(model, "rip");
 	            return "admin/rip";
 	        }
 		
@@ -237,7 +226,7 @@ public class RipController {
         model.addAttribute("product", undateRip);
         
         logger.info("All characteristic of RIP.");
-		model.addAttribute("rip", (JSONArray)new JSONParser().parse(new InputStreamReader(new FileInputStream("/var/www/localhost/images/rip.json"), "UTF-8")));
+        componets.setJSONtoModelAttribute(model, "rip");
         return "admin/rip";
     }
 	
@@ -248,9 +237,7 @@ public class RipController {
 		if (result.hasErrors()) {
 			model.addAttribute("product", product);
 			model.addAttribute("type", "rip");
-			try {
-				model.addAttribute("rip", (JSONArray)new JSONParser().parse(new InputStreamReader(new FileInputStream("/var/www/localhost/images/rip.json"), "UTF-8")));
-			} catch (ParseException e) {}
+			componets.setJSONtoModelAttribute(model, "rip");
             return "admin/rip";
         }
 		
@@ -280,9 +267,7 @@ public class RipController {
 		if (result.hasErrors()) {
 			model.addAttribute("product", product);
 			model.addAttribute("type", "rip");
-			try {
-				model.addAttribute("rip", (JSONArray)new JSONParser().parse(new InputStreamReader(new FileInputStream("/var/www/localhost/images/rip.json"), "UTF-8")));
-			} catch (ParseException e) {}
+			componets.setJSONtoModelAttribute(model, "rip");
             return "admin/rip";
         }
 		

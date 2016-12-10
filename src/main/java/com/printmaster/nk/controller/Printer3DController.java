@@ -1,10 +1,8 @@
 package com.printmaster.nk.controller;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -16,8 +14,6 @@ import javax.validation.Valid;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -86,10 +82,8 @@ public class Printer3DController {
         model.addAttribute("type", "3d_printer");
         
         logger.info("All characteristic of 3d printer.");
-		try {
-			model.addAttribute("printer", (JSONObject)new JSONParser().
-					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/3d_printer.json"), "UTF-8")));
-		} catch (IOException | ParseException e) {}
+        
+        componets.setJSONtoModelAttribute(model, "3d_printer");
         return "3d_printers";
     }
 	
@@ -125,10 +119,7 @@ public class Printer3DController {
 		model.addAttribute("type", "3d_printer");
 		
 		logger.info("All characteristic of 3d printer.");
-		try {
-			model.addAttribute("printer", (JSONObject)new JSONParser().
-					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/3d_printer.json"), "UTF-8")));
-		} catch (IOException | ParseException e) {}
+		componets.setJSONtoModelAttribute(model, "3d_printer");
 		return "3d_printers/" + type;
 	}
 
@@ -322,10 +313,7 @@ public class Printer3DController {
 		model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
 		model.addAttribute("type", "3d_printer");
 		model.addAttribute("productId", 0);
-		try {
-			model.addAttribute("printer", (JSONObject)new JSONParser().
-					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/3d_printer.json"), "UTF-8")));
-		} catch (IOException | ParseException e) {}
+		componets.setJSONtoModelAttribute(model, "3d_printer");
 	    return "admin/3d_printer";
 	}
 	
@@ -347,10 +335,7 @@ public class Printer3DController {
 		 model.addAttribute("type", "3d_printer");
 		 model.addAttribute("productId", id);
 		 
-		try {
-			model.addAttribute("printer", (JSONObject)new JSONParser().
-					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/3d_printer.json"), "UTF-8")));
-		} catch (IOException | ParseException e) {}
+		 componets.setJSONtoModelAttribute(model, "3d_printer");
 	    return "admin/3d_printer";
 	}
      
@@ -362,10 +347,7 @@ public class Printer3DController {
 				model.addAttribute("product", product);
 				model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
 				model.addAttribute("type", "3d_printer");
-				try {
-					model.addAttribute("printer", (JSONObject)new JSONParser().
-							parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/3d_printer.json"), "UTF-8")));
-				} catch (IOException | ParseException e) {}
+				componets.setJSONtoModelAttribute(model, "3d_printer");
 	            return "admin/3d_printer";
 	        }
 
@@ -392,10 +374,7 @@ public class Printer3DController {
 				model.addAttribute("product", product);
 				model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
 				model.addAttribute("type", "3d_printer");
-				try {
-					model.addAttribute("printer", (JSONObject)new JSONParser().
-							parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/3d_printer.json"), "UTF-8")));
-				} catch (IOException | ParseException e) {}
+				componets.setJSONtoModelAttribute(model, "3d_printer");
 	            return "admin/3d_printer";
 	        }
 
@@ -423,10 +402,7 @@ public class Printer3DController {
         model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
         model.addAttribute("type", "3d_printer");
         logger.info("All characteristic of 3d printer.");
-		try {
-			model.addAttribute("printer", (JSONObject)new JSONParser().
-					parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/3d_printer.json"), "UTF-8")));
-		} catch (IOException | ParseException e) {}
+        componets.setJSONtoModelAttribute(model, "3d_printer");
         return "admin/3d_printer";
     }
 	
@@ -438,10 +414,7 @@ public class Printer3DController {
 			model.addAttribute("product", product);
 			model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
 			model.addAttribute("type", "3d_printer");
-			try {
-				model.addAttribute("printer", (JSONObject)new JSONParser().
-						parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/3d_printer.json"), "UTF-8")));
-			} catch (IOException | ParseException e) {}
+			componets.setJSONtoModelAttribute(model, "3d_printer");
             return "admin/3d_printer";
         }
 		
@@ -467,10 +440,7 @@ public class Printer3DController {
 			model.addAttribute("product", product);
 			model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
 			model.addAttribute("type", "3d_printer");
-			try {
-				model.addAttribute("printer", (JSONObject)new JSONParser().
-						parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/3d_printer.json"), "UTF-8")));
-			} catch (IOException | ParseException e) {}
+			componets.setJSONtoModelAttribute(model, "3d_printer");
             return "admin/3d_printer";
         }
 		

@@ -1,13 +1,10 @@
 package com.printmaster.nk.controller;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -18,10 +15,7 @@ import javax.validation.Valid;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -95,25 +89,10 @@ public class PrinterController {
         logger.info("On '../printers' page.");
         
         logger.info("All characteristic of printer.");
-		try {
-			model.addAttribute("printer", sortEquipment((JSONObject)new JSONParser()
-					.parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/printer.json"), "UTF-8"))));
-		} catch (IOException | ParseException e) {
-			
-		}
+        
+        componets.setJSONtoModelAttribute(model, "printer");
         return "printers";
     }
-	
-	@SuppressWarnings("unchecked")
-	private JSONObject sortEquipment(JSONObject corectedJSONObject){
-		JSONArray arrayToSort = (JSONArray) corectedJSONObject.get("equipment_manufacturer");
-		corectedJSONObject.remove("equipment_manufacturer");
-
-		Collections.sort(arrayToSort);
-		
-		corectedJSONObject.put("equipment_manufacturer", arrayToSort);
-		return corectedJSONObject;
-	}
 	
 	@RequestMapping(value = "/printers/{type}", method = RequestMethod.GET)	
     public String typePrinters(@PathVariable("type") String type, Model model) {
@@ -165,10 +144,7 @@ public class PrinterController {
         model.addAttribute("type", "printer");
         
         logger.info("All characteristic of printer.");
-        try {
-			model.addAttribute("printer", sortEquipment((JSONObject)new JSONParser()
-					.parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/printer.json"), "UTF-8"))));
-		} catch (IOException | ParseException e) {}
+        componets.setJSONtoModelAttribute(model, "printer");
         return "printers/" + type ;
     }
 
@@ -428,10 +404,7 @@ public class PrinterController {
 		 model.addAttribute("type", "printer");
 		 model.addAttribute("productId", 0);
 		 
-		 try {
-				model.addAttribute("printer", sortEquipment((JSONObject)new JSONParser()
-						.parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/printer.json"), "UTF-8"))));
-			} catch (IOException | ParseException e) {}
+		 componets.setJSONtoModelAttribute(model, "printer");
 	    return "admin/printer";
 	}
 	
@@ -468,10 +441,7 @@ public class PrinterController {
 		 model.addAttribute("type", "printer");
 		 model.addAttribute("productId", id);
 		 
-		 try {
-				model.addAttribute("printer", sortEquipment((JSONObject)new JSONParser()
-						.parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/printer.json"), "UTF-8"))));
-			} catch (IOException | ParseException e) {}
+		 componets.setJSONtoModelAttribute(model, "printer");
 	    return "admin/printer";
 	}
      
@@ -484,10 +454,8 @@ public class PrinterController {
 				model.addAttribute("product", product);
 				model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
 				model.addAttribute("type", "printer");
-				try {
-					model.addAttribute("printer", sortEquipment((JSONObject)new JSONParser()
-							.parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/printer.json"), "UTF-8"))));
-				} catch (IOException | ParseException e) {}
+				
+				componets.setJSONtoModelAttribute(model, "printer");
 	            return "admin/printer";
 	        }
 		
@@ -551,10 +519,8 @@ public class PrinterController {
 				model.addAttribute("product", product);
 				model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
 				model.addAttribute("type", "printer");
-				try {
-					model.addAttribute("printer", sortEquipment((JSONObject)new JSONParser()
-							.parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/printer.json"), "UTF-8"))));
-				} catch (IOException | ParseException e) {}
+				
+				componets.setJSONtoModelAttribute(model, "printer");
 	            return "admin/printer";
 	        }
 		
@@ -618,10 +584,7 @@ public class PrinterController {
         model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
         model.addAttribute("type", "printer");
         
-        try {
-			model.addAttribute("printer", sortEquipment((JSONObject)new JSONParser()
-					.parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/printer.json"), "UTF-8"))));
-		} catch (IOException | ParseException e) {}
+        componets.setJSONtoModelAttribute(model, "printer");
         return "admin/printer";
     }
 	
@@ -633,10 +596,8 @@ public class PrinterController {
 			model.addAttribute("product", product);
 			model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
 			model.addAttribute("type", "printer");
-			try {
-				model.addAttribute("printer", sortEquipment((JSONObject)new JSONParser()
-						.parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/printer.json"), "UTF-8"))));
-			} catch (IOException | ParseException e) {}
+			
+			componets.setJSONtoModelAttribute(model, "printer");
             return "admin/printer";
         }
 		
@@ -666,10 +627,7 @@ public class PrinterController {
 			model.addAttribute("product", product);
 			model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
 			model.addAttribute("type", "printer");
-			try {
-				model.addAttribute("printer", sortEquipment((JSONObject)new JSONParser()
-						.parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/printer.json"), "UTF-8"))));
-			} catch (IOException | ParseException e) {}
+			componets.setJSONtoModelAttribute(model, "printer");
             return "admin/printer";
         }
 		
