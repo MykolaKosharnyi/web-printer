@@ -39,9 +39,9 @@ public class PicturesManipulator {
 	    			File fi = new File(directory + File.separator + 
 	    					concreteFolder + File.separator + id + File.separator + path);
 	    			fm.setBytes(Files.readAllBytes(fi.toPath()));
-	    			logger.info("Load pictures from" + directory + "folder, with id " + id + " to the FILEMETA.");
+	    			logger.info(String.format("Load pictures from %s folder, with id=%d to the FILEMETA.", directory, id));
 				} catch (IOException e) {
-					logger.error("Can't load pistures from" + directory + "folder, with id " + id + " to the FILEMETA", e);
+					logger.error(String.format("Can't load pistures from %s folder, with id=%d to the FILEMETA", directory, id), e);
 				}
 	    		files.add(fm);
 	    	}
@@ -53,9 +53,9 @@ public class PicturesManipulator {
 		
 		if(new File(directory + File.separator + 
         		concreteFolder + File.separator + id).mkdir()){
-        	logger.info("Create new " + directory + " folder! With id=" + id);
+        	logger.info(String.format("Load pictures from %s folder, with id=%d to the FILEMETA.", directory, id));        	
         } else {
-        	logger.error("Don't create new " + directory + " folder!");
+        	logger.error(String.format("Don't create new %s folder!", directory));
         }
         
 		if (files != null && files.size()!=0) {
@@ -65,9 +65,9 @@ public class PicturesManipulator {
 							directory + File.separator + concreteFolder
 		    				+ File.separator + id + File.separator + fm.getFileName()));
 					pictures.add(fm.getFileName());
-					logger.info("Add path of the pictures to " + directory + " with id=" + id);
+					logger.info(String.format("Add path of the pictures to %s with id=%d", directory, id));      
 				} catch (IOException e) {
-					logger.error("Can't add paths of the pictures to " + directory + " with id=" + id, e);
+					logger.error(String.format("Can't add paths of the pictures to %s with id=%d", directory, id), e);
 				}
 			}
 		} else {
@@ -76,10 +76,10 @@ public class PicturesManipulator {
     			FileCopyUtils.copy(Files.readAllBytes(fi.toPath()), new FileOutputStream(directory + File.separator + 
     					concreteFolder + File.separator + id + File.separator + "default.jpg"));
     			pictures.add("default.jpg");
-    			logger.error("User didn't add any picture to the " + directory + " with id=" + id + ", so picture of the"
-    					+ "product will has name 'default.jpg' ");
+    			logger.info(String.format("User didn't add any picture to the %s with id=%d, so picture of the product will has name 'default.jpg' ",
+    					directory, id));
 			} catch (IOException e) {
-				logger.error("Can't add path of the default picture to " + directory + " with id=" + id, e);
+				logger.error(String.format("Can't add path of the default picture to %s with id=%d", directory, id), e);
 			}
 		}
 		
@@ -87,7 +87,7 @@ public class PicturesManipulator {
 	}
 	
     public void changeOrderPictures(String type, List<String> selectedIds, PicturesContainer files){
-    	logger.info("change order of pictures in " + type + "section, in FILEMETA");
+    	logger.info(String.format("change order of pictures in %s section, in FILEMETA", type));    
     	for(int i = 0; i < selectedIds.size(); i++){
     		for(int k = 0; k < files.size() ; k++){
         		if(files.get(k).getFileName().equals(selectedIds.get(i))){
@@ -107,7 +107,7 @@ public class PicturesManipulator {
     			break;
     		}
     	}
-		logger.info("Remove picture with name  '" + namePicture + "' from FILEMETA, in" + type + " section ");
+		logger.info(String.format("remove picture with name '%s' from FILEMETA, in %s section", namePicture, type));  
     }
 	
 	public String uploadPictureOnCreationProduct(MultipartHttpServletRequest request, PicturesContainer files){
@@ -132,7 +132,7 @@ public class PicturesManipulator {
                logger.error("WRITTING picture to the FILEMETA has a problem: ",e);
            }
             
-            logger.info("pictute added to the FILEMETA successful - " + fileMeta.getFileName());
+            logger.info(String.format("pictute added to the FILEMETA successful - %s", fileMeta.getFileName()));  
             files.add(fileMeta);
         }  
     	return fileName;
@@ -163,9 +163,9 @@ public class PicturesManipulator {
 	
     public void removePicture(String name, String directory, String concreteFolder, long id){
     	try {
-    		FileUtils.forceDelete(new File(directory + File.separator + concreteFolder+ File.separator + id + File.separator + name));
+    		FileUtils.forceDelete(new File(directory + File.separator + concreteFolder + File.separator + id + File.separator + name));
 		} catch (IOException e) {
-			logger.error("Can't delete picture from " + concreteFolder + " folder, with id = " + id + ", with name = " + name, e);
+			logger.error(String.format("Can't delete picture from %s folder, with id = %d, with name = %s", concreteFolder, id, name), e);
 		} 
     }
 	
@@ -175,7 +175,7 @@ public class PicturesManipulator {
 			FileCopyUtils.copy(Files.readAllBytes(fi.toPath()), new FileOutputStream(
 					directory + File.separator + concreteFolder + File.separator + id + File.separator + "default.jpg"));
 		} catch (IOException e) {
-			logger.error("Can't load the default picture to " + concreteFolder + " folder, with id = " + id, e);
+			logger.error(String.format("Can't load the default picture to %s folder, with id = %d", concreteFolder, id), e);
 		}
     }
 	
@@ -183,9 +183,9 @@ public class PicturesManipulator {
     	try {
     		FileUtils.deleteDirectory(new File(directory + File.separator + 
     				concreteFolder + File.separator + id));
-    		logger.info("deleted all pictures from " + concreteFolder + " folder, with id = " + id);
+    		logger.info(String.format("deleted all pictures from %s folder, with id = %d", concreteFolder, id));
 		} catch (IOException e) {
-			logger.error("Deleting all pictures from " + concreteFolder + " folder, with id = " + id + ", has a problem: ", e);
+			logger.error(String.format("Deleting all pictures from %s folder, with id = %d, has a problem: ", concreteFolder, id), e);
 		}
     }
 
