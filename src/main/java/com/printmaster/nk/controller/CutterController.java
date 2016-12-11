@@ -77,7 +77,7 @@ public class CutterController {
     }
     
 	@RequestMapping(value = "/"+ TYPE +"s", method = RequestMethod.GET)	
-    public String allCutters(Model model) {
+    public String allProducts(Model model) {
         model.addAttribute("listProducts", componets.showSimplestArrayOfCutter(this.cutterService.listShowOnSite()));
         SearchCutters search = new SearchCutters();
         search.setPrise0(0);
@@ -93,7 +93,7 @@ public class CutterController {
     }
 	
 	@RequestMapping(value = "/"+ TYPE +"s/{type}", method = RequestMethod.GET)	
-    public String typeCutters(@PathVariable("type") String type, Model model) {
+    public String typeProducts(@PathVariable("type") String type, Model model) {
         SearchCutters search = new SearchCutters();
         String currentType = null;
    
@@ -118,13 +118,13 @@ public class CutterController {
     }
 
     @RequestMapping(value="/"+ TYPE +"s/search",method=RequestMethod.POST, produces = "application/json; charset=utf-8")
-    public @ResponseBody ArrayList<JSONObject> showSearchCutters(@ModelAttribute(value="search") SearchCutters search, BindingResult result ){
+    public @ResponseBody ArrayList<JSONObject> showSearchProducts(@ModelAttribute(value="search") SearchCutters search, BindingResult result ){
     	logger.info(String.format("On the /%s/search page.", TYPE));
     	return componets.showSimplestArrayOfCutter(cutterService.listSearchCutters(search));
     }
 	
     @RequestMapping("/"+ TYPE +"/{id}")
-    public String showCutter(@PathVariable("id") long id, Model model){
+    public String showProduct(@PathVariable("id") long id, Model model){
     	logger.info(String.format("On /%s/%d page.", TYPE, id));
         
         Cutter product = cutterService.getCutterById(id);
@@ -139,7 +139,7 @@ public class CutterController {
     }
     
 	@RequestMapping(value = "/admin/"+ TYPE +"s", method = RequestMethod.GET)	
-    public String listCutters(Model model) {
+    public String listProducts(Model model) {
 		model.addAttribute("titleOfTable", "Список загруженных граверов/фрезеров");
         model.addAttribute("listProducts", cutterService.listCutters("id"));
         logger.info(String.format("/admin/%s page.", CONCRETE_FOLDER));
@@ -153,7 +153,7 @@ public class CutterController {
     }
 	
 	@RequestMapping(value = "/admin/"+ TYPE +"s/{type}", method = RequestMethod.GET)	
-    public String listConcreteTypeCutters(@PathVariable("type") String type, Model model) {
+    public String listConcreteTypeProducts(@PathVariable("type") String type, Model model) {
 		
 		List<Cutter> listResult = new ArrayList<Cutter>();
         
@@ -187,24 +187,23 @@ public class CutterController {
     public @ResponseBody List<Cutter> sortingProductsInAdmin(@PathVariable("type") String type, @PathVariable("value") String value) {
 		
 		List<Cutter> list = new ArrayList<Cutter>();
-		
-		if(links.containsKey(type)){
-			
-			for(Cutter cutter : cutterService.listCutters(value)){
-        		if(cutter.getTypeCutter().equals(links.get(type))){
-        			list.add(cutter);
-        		}
-        	}
-			
+
+		if (links.containsKey(type)) {
+
+			for (Cutter cutter : cutterService.listCutters(value)) {
+				if (cutter.getTypeCutter().equals(links.get(type))) 
+					list.add(cutter);
+			}
+
 		} else {
-    		list.addAll(cutterService.listCutters(value));
-    	}
-		
+			list.addAll(cutterService.listCutters(value));
+		}
+
 		return list;
     }
 	
 	@RequestMapping(value = "/admin/"+ TYPE +"/new", method = RequestMethod.GET)
-	public String addNewCutter(Model model) {
+	public String addNewProduct(Model model) {
 		files.clear();
 		logger.info(String.format("/admin/%s/new page.", TYPE));
 		model.addAttribute("product", new Cutter());
@@ -243,8 +242,7 @@ public class CutterController {
 	public String handleFormUpload(@ModelAttribute("product") @Valid Cutter product,
 			BindingResult result, Model model){
 
-		if (result.hasErrors())
-			return adminFormHasError(product, model);
+		if (result.hasErrors()) return adminFormHasError(product, model);
 
 		long id = cutterService.addCutter(product);
 		logger.info(String.format("Create new %s! With id=%d", TYPE, id));
@@ -269,30 +267,30 @@ public class CutterController {
 	@RequestMapping(value = "/admin/"+ TYPE +"/save_add", method = RequestMethod.POST) 
 	public String handleFormUploadSave(@ModelAttribute("product") @Valid Cutter product,
 			BindingResult result, Model model){
-		
+
 		if (result.hasErrors()) return adminFormHasError(product, model);
 
-            long id = cutterService.addCutter(product);
-            logger.info(String.format("Create new %s! With id=%d", TYPE, id));
-  
-            //create folder and add to her new pictures
-            product.getPathPictures().addAll(componets.createFolderAndWriteToItPictures(DIRECTORY, CONCRETE_FOLDER, id, files));
-			
-            this.cutterService.updateCutter(product);
-            
-            files.clear();
-		  
-		  linksForProduct.createLinksForCutters(cutterService.listShowOnSite());	
-		  
-		  if (product.isShowOnSite() && product.isShowOnLeftSide())
-	    		componets.updateInLeftField(product, true, TYPE);
-	    	
-		  logger.info("Update links to the products in left menu!");
-	   return "redirect:/admin/"+ TYPE +"/edit/" + id;
+		long id = cutterService.addCutter(product);
+		logger.info(String.format("Create new %s! With id=%d", TYPE, id));
+
+		// create folder and add to her new pictures
+		product.getPathPictures().addAll(componets.createFolderAndWriteToItPictures(DIRECTORY, CONCRETE_FOLDER, id, files));
+
+		this.cutterService.updateCutter(product);
+
+		files.clear();
+
+		linksForProduct.createLinksForCutters(cutterService.listShowOnSite());
+
+		if (product.isShowOnSite() && product.isShowOnLeftSide())
+			componets.updateInLeftField(product, true, TYPE);
+
+		logger.info("Update links to the products in left menu!");
+		return "redirect:/admin/" + TYPE + "/edit/" + id;
 	}
 	
     @RequestMapping("/admin/"+ TYPE +"/edit/{id}")
-    public String editCutter(@PathVariable("id") long id, Model model){
+    public String editProduct(@PathVariable("id") long id, Model model){
     	logger.info(String.format("Begin editing %s with id=%d", TYPE, id));
     	Cutter undateCutter = cutterService.getCutterById(id);
     	
@@ -306,7 +304,7 @@ public class CutterController {
     }
 	
 	@RequestMapping(value = "/admin/" + TYPE + "/save_update", method = RequestMethod.POST) 
-	public String updateSaveCutter(@ModelAttribute("product") @Valid Cutter product,
+	public String updateSaveProduct(@ModelAttribute("product") @Valid Cutter product,
 			BindingResult result, Model model){
 		
 		if (result.hasErrors()) return adminFormHasError(product, model);
@@ -329,27 +327,27 @@ public class CutterController {
 	}
 	
 	@RequestMapping(value = "/admin/" + TYPE + "/update", method = RequestMethod.POST) 
-	public String updateCutter(@ModelAttribute("product") @Valid Cutter product,
+	public String updateProduct(@ModelAttribute("product") @Valid Cutter product,
 			BindingResult result, Model model){
 		
-		if (result.hasErrors()) return adminFormHasError(product, model);      
-		
+		if (result.hasErrors()) return adminFormHasError(product, model);
+
 		logger.info(String.format("%s UPDATE id=%d", TYPE, product.getId()));
 		List<String> pathPictures = cutterService.getCutterById(product.getId()).getPathPictures();
 		product.setPathPictures(pathPictures);
-        
+
 		cutterService.updateCutter(product);
-        logger.info(String.format("%s with id=%d was UDPATED", TYPE, product.getId()));
-        
-		  files.clear();
-		  
-		  linksForProduct.createLinksForCutters(cutterService.listShowOnSite());
-	
-		  if (product.isShowOnSite() && product.isShowOnLeftSide())
-	    		componets.updateInLeftField(product, true, TYPE);
-		  
-		  logger.info("Update links to the products in left menu!");
-	   return "redirect:/admin/" + TYPE + "s";
+		logger.info(String.format("%s with id=%d was UDPATED", TYPE, product.getId()));
+
+		files.clear();
+
+		linksForProduct.createLinksForCutters(cutterService.listShowOnSite());
+
+		if (product.isShowOnSite() && product.isShowOnLeftSide())
+			componets.updateInLeftField(product, true, TYPE);
+
+		logger.info("Update links to the products in left menu!");
+		return "redirect:/admin/" + TYPE + "s";
 	}
 	
 	private String adminFormHasError(Cutter product, Model model){
@@ -422,7 +420,7 @@ public class CutterController {
     }
     
     @RequestMapping("/admin/" + TYPE + "/remove/{id}")
-    public String removeCutter(@PathVariable("id") long id){
+    public String removeProduct(@PathVariable("id") long id){
     	logger.info(String.format("Start deleting %s from database, id=%d", TYPE, id));
     	
     	componets.removeAllPricturesOfConcreteProduct(DIRECTORY, CONCRETE_FOLDER, id);
