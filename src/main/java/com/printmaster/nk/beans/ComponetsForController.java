@@ -10,8 +10,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -21,6 +23,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.printmaster.nk.model.Cutter;
 import com.printmaster.nk.model.DigitalPrinter;
@@ -443,7 +447,7 @@ public class ComponetsForController {
     	}  
     }
     
-    public void removePicture(String type, String namePicture, PicturesContainer files){
+    public void removePictureFromPicturesContainer(String type, String namePicture, PicturesContainer files){
     	String name = namePicture.replace(":", ".");
 		Iterator<FileMeta> fmi = files.getFiles().iterator();
 		while(fmi.hasNext()){
@@ -500,6 +504,11 @@ public class ComponetsForController {
     	}
 	}
     
+    /**
+     * Sort equipment manufacturer of PRINTERS 
+     * @param corectedJSONObject
+     * @return
+     */
 	@SuppressWarnings("unchecked")
 	private JSONObject sortEquipment(JSONObject corectedJSONObject){
 		JSONArray arrayToSort = (JSONArray) corectedJSONObject.get("equipment_manufacturer");
@@ -510,4 +519,121 @@ public class ComponetsForController {
 		corectedJSONObject.put("equipment_manufacturer", arrayToSort);
 		return corectedJSONObject;
 	}
+	
+	/**
+	 * Upload pictures to Files container of this product (files) 
+	 * 
+	 * @param request which has loaded pictures
+	 * @param files file container
+	 * @return name of added picture
+	 */
+	public String uploadPictureOnCreationProduct(MultipartHttpServletRequest request, PicturesContainer files){
+    	logger.info("upload new picture");
+        
+        Iterator<String> itr =  request.getFileNames();
+        MultipartFile mpf = null;
+        String fileName = null;
+
+        while(itr.hasNext()){
+            mpf = request.getFile(itr.next()); 
+            
+            FileMeta fileMeta = new FileMeta();
+    		
+    		fileName = files.size() + new Random().nextInt(1000000) + "" + mpf.getOriginalFilename().substring(mpf.getOriginalFilename().lastIndexOf("."))/*last part is file extension*/; 
+            fileMeta.setFileName(fileName);
+
+            try {
+               fileMeta.setBytes(mpf.getBytes());
+               logger.info("WRITED new picture to the FILEMETA.");
+           } catch (IOException e) {
+               logger.error("WRITTING picture to the FILEMETA has a problem: ",e);
+           }
+            
+            logger.info("pictute added to the FILEMETA successful - " + fileMeta.getFileName());
+            files.add(fileMeta);
+        }  
+    	return fileName;
+    }
+	
+	/**
+	 * Method for loading new picture for concrete existed product
+	 * 
+	 * @param request contain loaded picture
+	 * @param directory
+	 * @param concreteFolder
+	 * @param id of added product
+	 * @return name of added picture
+	 */
+	public String uploadPictureToExistedProduct(MultipartHttpServletRequest request, String directory, String concreteFolder, long id) {
+		logger.info("upload new picture");
+
+		Iterator<String> itr = request.getFileNames();
+		MultipartFile mpf = null;
+		String fileName = null;
+
+		while (itr.hasNext()) {
+			mpf = request.getFile(itr.next());
+			fileName = new Random().nextInt(10000000) + "" + mpf.getOriginalFilename().substring(mpf.getOriginalFilename()
+							.lastIndexOf("."))/* last part is file extension */;
+
+			try {
+				FileCopyUtils.copy(mpf.getBytes(), new FileOutputStream(directory + File.separator + concreteFolder
+						+ File.separator + id + File.separator + fileName));
+			} catch (IOException e) {
+				logger.error("Don't write picture to the folder", e);
+			}
+
+		}
+		return fileName;
+	}
+	
+	/**
+	 * Remove picture from concrete product
+	 * 
+	 * @param name
+	 * @param directory
+	 * @param concreteFolder
+	 * @param id
+	 */
+    public void removePicture(String name, String directory, String concreteFolder, long id){
+    	try {
+    		FileUtils.forceDelete(new File(directory + File.separator + concreteFolder+ File.separator + id + File.separator + name));
+		} catch (IOException e) {
+			logger.error("Can't delete picture from " + concreteFolder + " folder, with id = " + id + ", with name = " + name, e);
+		} 
+    }
+    
+    /**
+     * Load default picture to concrete product if length of pictures equals to '0'
+     * 
+     * @param directory
+     * @param concreteFolder
+     * @param id
+     */
+    public void loadDefaultPicture(String directory, String concreteFolder, long id){
+    	File fi = new File(directory + File.separator + "default.jpg");
+		try {
+			FileCopyUtils.copy(Files.readAllBytes(fi.toPath()), new FileOutputStream(
+					directory + File.separator + concreteFolder + File.separator + id + File.separator + "default.jpg"));
+		} catch (IOException e) {
+			logger.error("Can't load the default picture to " + concreteFolder + " folder, with id = " + id, e);
+		}
+    }
+    
+    /**
+     * This method delete all pictures when concrete product is deleting
+     * 
+     * @param directory
+     * @param concreteFolder
+     * @param id
+     */
+    public void removeAllPricturesOfConcreteProduct(String directory, String concreteFolder, long id){
+    	try {
+    		FileUtils.deleteDirectory(new File(directory + File.separator + 
+    				concreteFolder + File.separator + id));
+    		logger.info("deleted all pictures from " + concreteFolder + " folder, with id = " + id);
+		} catch (IOException e) {
+			logger.error("Deleting all pictures from " + concreteFolder + " folder, with id = " + id + ", has a problem: ", e);
+		}
+    }
 }

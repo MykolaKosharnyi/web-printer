@@ -472,7 +472,7 @@ public class LaminatorController {
     
     @RequestMapping(value="/admin/laminator/remove_picture/{name_picture}", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void removePicture(@PathVariable("name_picture") String namePicture) {
-    	componets.removePicture(concreteFolder, namePicture, files);
+    	componets.removePictureFromPicturesContainer(concreteFolder, namePicture, files);
     }
     
     @RequestMapping(value="/admin/laminator/upload_pictures_update/{id}", method = RequestMethod.POST)

@@ -708,7 +708,7 @@ public class PrinterController {
     
     @RequestMapping(value="/admin/printer/remove_picture/{name_picture}", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void removePicture(@PathVariable("name_picture") String namePicture) {
-    	componets.removePicture(concreteFolder, namePicture, files);
+    	componets.removePictureFromPicturesContainer(concreteFolder, namePicture, files);
 //    	String name = namePicture.replace(":", ".");
 //    	System.out.println("------------------------");
 //    	System.out.println("ID: " + name);
