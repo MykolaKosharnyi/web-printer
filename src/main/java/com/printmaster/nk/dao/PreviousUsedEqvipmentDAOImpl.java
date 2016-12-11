@@ -12,7 +12,7 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.printmaster.nk.beans.ComponetsForController;
+import com.printmaster.nk.beans.ComponentsForControllers;
 import com.printmaster.nk.model.Cutter;
 import com.printmaster.nk.model.DigitalPrinter;
 import com.printmaster.nk.model.Laminator;
@@ -26,7 +26,7 @@ import com.printmaster.nk.model.SearchPUE;
 public class PreviousUsedEqvipmentDAOImpl {
 	
 	@Autowired
-    ComponetsForController componets;
+    ComponentsForControllers componets;
 
 	private SessionFactory sessionFactory;
      

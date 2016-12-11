@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.printmaster.nk.beans.ComponetsForController;
+import com.printmaster.nk.beans.ComponentsForControllers;
 import com.printmaster.nk.service.CutterService;
 import com.printmaster.nk.service.DigitalPrinterService;
 import com.printmaster.nk.service.LaminatorService;
@@ -73,7 +73,7 @@ public class HomeController {
 	private UseWithProductService useWithProductService;
 	
 	@Autowired
-    ComponetsForController componets;
+    ComponentsForControllers componets;
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	

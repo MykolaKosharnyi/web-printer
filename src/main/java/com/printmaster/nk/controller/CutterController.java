@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.printmaster.nk.beans.ComponetsForController;
+import com.printmaster.nk.beans.ComponentsForControllers;
 import com.printmaster.nk.beans.LinksForProducts;
 import com.printmaster.nk.beans.PicturesContainer;
 import com.printmaster.nk.model.Cutter;
@@ -53,7 +53,7 @@ public class CutterController {
 	private LinksForProducts linksForProduct;
 	
 	@Autowired
-    ComponetsForController componets;
+    ComponentsForControllers componets;
 
     @Autowired
     PicturesContainer files;

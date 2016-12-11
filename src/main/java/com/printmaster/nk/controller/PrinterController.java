@@ -32,7 +32,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.printmaster.nk.beans.ComponetsForController;
+import com.printmaster.nk.beans.ComponentsForControllers;
 import com.printmaster.nk.beans.FileMeta;
 import com.printmaster.nk.beans.LinksForProducts;
 import com.printmaster.nk.beans.PicturesContainer;
@@ -58,7 +58,7 @@ public class PrinterController {
     PicturesContainer files;
     
     @Autowired
-    ComponetsForController componets;
+    ComponentsForControllers componets;
  
     private PrinterService printerService;
     
