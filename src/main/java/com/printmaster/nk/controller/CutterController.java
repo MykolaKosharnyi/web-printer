@@ -190,9 +190,9 @@ public class CutterController {
 
 		if (links.containsKey(type)) {
 
-			for (Cutter cutter : cutterService.listCutters(value)) {
-				if (cutter.getTypeCutter().equals(links.get(type))) 
-					list.add(cutter);
+			for (Cutter product : cutterService.listCutters(value)) {
+				if (product.getTypeCutter().equals(links.get(type))) 
+					list.add(product);
 			}
 
 		} else {
@@ -222,14 +222,14 @@ public class CutterController {
 		logger.info(String.format("/admin/%s/copy/%d page.", TYPE, id));
 		
 		logger.info(String.format("Copy all characteristic of %s.", TYPE));
-		Cutter cutter = cutterService.getCutterById(id);
+		Cutter product = cutterService.getCutterById(id);
 		
 		 /* copy pictures to buffer */
-		 componets.copyPicturesToBuffer( cutter.getPathPictures(), DIRECTORY, CONCRETE_FOLDER, id, files );
+		 componets.copyPicturesToBuffer( product.getPathPictures(), DIRECTORY, CONCRETE_FOLDER, id, files );
 		
 		 /* set null to id because we must get create new product operation */
-	     cutter.setId(null);
-		 model.addAttribute("product", cutter);
+	     product.setId(null);
+		 model.addAttribute("product", product);
 		 model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
 		 model.addAttribute("type", TYPE);
 		 model.addAttribute("productId", id);
@@ -292,9 +292,9 @@ public class CutterController {
     @RequestMapping("/admin/"+ TYPE +"/edit/{id}")
     public String editProduct(@PathVariable("id") long id, Model model){
     	logger.info(String.format("Begin editing %s with id=%d", TYPE, id));
-    	Cutter undateCutter = cutterService.getCutterById(id);
+    	Cutter undateProduct = cutterService.getCutterById(id);
     	
-        model.addAttribute("product", undateCutter);
+        model.addAttribute("product", undateProduct);
         model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(
         		useWithProductService.listShowOnSite()));
         model.addAttribute("type", TYPE);
@@ -439,38 +439,38 @@ public class CutterController {
     @RequestMapping(value="/admin/" + TYPE + "/showOnSite/{id}", method = RequestMethod.POST,consumes="application/json",
     		headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void showOnSite(@PathVariable("id") long id, @RequestBody boolean value) {
-    	Cutter cutter = cutterService.getCutterById(id);
-    	cutter.setShowOnSite(value);
-    	cutterService.updateCutter(cutter);
+    	Cutter product = cutterService.getCutterById(id);
+    	product.setShowOnSite(value);
+    	cutterService.updateCutter(product);
     	
-    	componets.updateInLeftField(cutter, cutter.isShowOnSite() && cutter.isShowOnLeftSide() , TYPE);
+    	componets.updateInLeftField(product, product.isShowOnSite() && product.isShowOnLeftSide() , TYPE);
     	linksForProduct.createLinksForCutters(cutterService.listShowOnSite());
     }
     
     @RequestMapping(value="/admin/" + TYPE + "/setTop/{id}", method = RequestMethod.POST,consumes="application/json",
     		headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void setTop(@PathVariable("id") long id, @RequestBody boolean value) {
-    	Cutter cutter = cutterService.getCutterById(id);
-    	cutter.setTop(value);
-    	cutterService.updateCutter(cutter);
+    	Cutter product = cutterService.getCutterById(id);
+    	product.setTop(value);
+    	cutterService.updateCutter(product);
     }
     
     @RequestMapping(value="/admin/" + TYPE + "/showOnHomePage/{id}", method = RequestMethod.POST,consumes="application/json",
     		headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void showOnHomePage(@PathVariable("id") long id, @RequestBody boolean value) {
-    	Cutter cutter = cutterService.getCutterById(id);
-    	cutter.setShowOnHomePage(value);
-    	cutterService.updateCutter(cutter);
+    	Cutter product = cutterService.getCutterById(id);
+    	product.setShowOnHomePage(value);
+    	cutterService.updateCutter(product);
     }
     
     @RequestMapping(value="/admin/" + TYPE + "/showOnLeftSide/{id}", method = RequestMethod.POST,consumes="application/json",
     		headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void showOnLeftSide(@PathVariable("id") long id, @RequestBody boolean value) {
-    	Cutter cutter = cutterService.getCutterById(id);
-    	cutter.setShowOnLeftSide(value);
-    	cutterService.updateCutter(cutter);
+    	Cutter product = cutterService.getCutterById(id);
+    	product.setShowOnLeftSide(value);
+    	cutterService.updateCutter(product);
     	
-    	componets.updateInLeftField(cutter, cutter.isShowOnSite() && cutter.isShowOnLeftSide(), TYPE);
+    	componets.updateInLeftField(product, product.isShowOnSite() && product.isShowOnLeftSide(), TYPE);
     }
    
 }
