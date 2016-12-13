@@ -42,31 +42,31 @@ public class PreviousUsedEqvipmentDAOImpl {
 		
 		Criteria cr = session.createCriteria(Printer.class);
 		searchProduct(searchProduct, cr, "typePrinter", searchProduct.getTypePrinter(), searchProduct.getPrinterEquipment());
-		result.addAll(componets.showSimplestArray(new HashSet<Printer>(cr.list()), "printer"));
+		result.addAll(componets.showSimplestArrayPUE(new HashSet<Printer>(cr.list()), "printer"));
 		
 		cr = session.createCriteria(Printer3D.class);
 		searchProduct(searchProduct, cr, "typePrinter3D", searchProduct.getType3dPrinter(), searchProduct.getD3PrinterEquipment());
-		result.addAll(componets.showSimplestArray(new HashSet<Printer3D>(cr.list()), "3d_printer"));
+		result.addAll(componets.showSimplestArrayPUE(new HashSet<Printer3D>(cr.list()), "3d_printer"));
 		
 		cr = session.createCriteria(DigitalPrinter.class);
 		searchProduct(searchProduct, cr, "typePrinter", searchProduct.getTypeDigitalPrinter(), searchProduct.getDigitalPrinterEquipment());
-		result.addAll(componets.showSimplestArray(new HashSet<DigitalPrinter>(cr.list()), "digital_printer"));
+		result.addAll(componets.showSimplestArrayPUE(new HashSet<DigitalPrinter>(cr.list()), "digital_printer"));
 		
 		cr = session.createCriteria(Laminator.class);
 		searchProduct(searchProduct, cr, "typeProduct", searchProduct.getTypeLaminator(), searchProduct.getLaminatorEquipment());
-		result.addAll(componets.showSimplestArray(new HashSet<Laminator>(cr.list()), "laminator"));
+		result.addAll(componets.showSimplestArrayPUE(new HashSet<Laminator>(cr.list()), "laminator"));
 		
 		cr = session.createCriteria(Laser.class);
 		searchProduct(searchProduct, cr, "typeLaser", searchProduct.getTypeLaser(), searchProduct.getLaserEquipment());
-		result.addAll(componets.showSimplestArray(new HashSet<Laser>(cr.list()), "laser"));
+		result.addAll(componets.showSimplestArrayPUE(new HashSet<Laser>(cr.list()), "laser"));
 		
 		cr = session.createCriteria(Cutter.class);
 		searchProduct(searchProduct, cr, "typeCutter", searchProduct.getTypeCutter(), searchProduct.getCutterEquipment());
-		result.addAll(componets.showSimplestArray(new HashSet<Cutter>(cr.list()), "cutter"));
+		result.addAll(componets.showSimplestArrayPUE(new HashSet<Cutter>(cr.list()), "cutter"));
 		
 		cr = session.createCriteria(Scanner.class);
 		searchProduct(searchProduct, cr, "typeProduct", searchProduct.getTypeScanner(), searchProduct.getScannerEquipment());
-		result.addAll(componets.showSimplestArray(new HashSet<Scanner>(cr.list()), "scanner"));
+		result.addAll(componets.showSimplestArrayPUE(new HashSet<Scanner>(cr.list()), "scanner"));
 		
         return result;
 	}
@@ -84,43 +84,43 @@ public class PreviousUsedEqvipmentDAOImpl {
 				if (type.equals("printer")) {
 					cr = session.createCriteria(Printer.class);
 					searchProduct(searchProduct, cr, "typePrinter", searchProduct.getTypePrinter(),searchProduct.getPrinterEquipment());
-					result.addAll(componets.showSimplestArray(new HashSet<Printer>(cr.list()), "printer"));
+					result.addAll(componets.showSimplestArrayPUE(new HashSet<Printer>(cr.list()), "printer"));
 				}
 
 				if (type.equals("3d_printer")) {
 					cr = session.createCriteria(Printer3D.class);
 					searchProduct(searchProduct, cr, "typePrinter3D", searchProduct.getType3dPrinter(),searchProduct.getD3PrinterEquipment());
-					result.addAll(componets.showSimplestArray(new HashSet<Printer3D>(cr.list()), "3d_printer"));
+					result.addAll(componets.showSimplestArrayPUE(new HashSet<Printer3D>(cr.list()), "3d_printer"));
 				}
 
 				if (type.equals("digital_printer")) {
 					cr = session.createCriteria(DigitalPrinter.class);
 					searchProduct(searchProduct, cr, "typePrinter", searchProduct.getTypeDigitalPrinter(),searchProduct.getDigitalPrinterEquipment());
-					result.addAll(componets.showSimplestArray(new HashSet<DigitalPrinter>(cr.list()), "digital_printer"));
+					result.addAll(componets.showSimplestArrayPUE(new HashSet<DigitalPrinter>(cr.list()), "digital_printer"));
 				}
 
 				if (type.equals("laminator")) {
 					cr = session.createCriteria(Laminator.class);
 					searchProduct(searchProduct, cr, "typeProduct", searchProduct.getTypeLaminator(),searchProduct.getLaminatorEquipment());
-					result.addAll(componets.showSimplestArray(new HashSet<Laminator>(cr.list()), "laminator"));
+					result.addAll(componets.showSimplestArrayPUE(new HashSet<Laminator>(cr.list()), "laminator"));
 				}
 
 				if (type.equals("laser")) {
 					cr = session.createCriteria(Laser.class);
 					searchProduct(searchProduct, cr, "typeLaser", searchProduct.getTypeLaser(),searchProduct.getLaserEquipment());
-					result.addAll(componets.showSimplestArray(new HashSet<Laser>(cr.list()), "laser"));
+					result.addAll(componets.showSimplestArrayPUE(new HashSet<Laser>(cr.list()), "laser"));
 				}
 
 				if (type.equals("cutter")) {
 					cr = session.createCriteria(Cutter.class);
 					searchProduct(searchProduct, cr, "typeCutter", searchProduct.getTypeCutter(),searchProduct.getCutterEquipment());
-					result.addAll(componets.showSimplestArray(new HashSet<Cutter>(cr.list()), "cutter"));
+					result.addAll(componets.showSimplestArrayPUE(new HashSet<Cutter>(cr.list()), "cutter"));
 				}
 
 				if (type.equals("scanner")) {
 					cr = session.createCriteria(Scanner.class);
 					searchProduct(searchProduct, cr, "typeProduct", searchProduct.getTypeScanner(),searchProduct.getScannerEquipment());
-					result.addAll(componets.showSimplestArray(new HashSet<Scanner>(cr.list()), "scanner"));
+					result.addAll(componets.showSimplestArrayPUE(new HashSet<Scanner>(cr.list()), "scanner"));
 				}
 
 			}
@@ -128,31 +128,31 @@ public class PreviousUsedEqvipmentDAOImpl {
 
 			cr = session.createCriteria(Printer.class);
 			searchProduct(searchProduct, cr, "typePrinter", searchProduct.getTypePrinter(),searchProduct.getPrinterEquipment());
-			result.addAll(componets.showSimplestArray(new HashSet<Printer>(cr.list()), "printer"));
+			result.addAll(componets.showSimplestArrayPUE(new HashSet<Printer>(cr.list()), "printer"));
 
 			cr = session.createCriteria(Printer3D.class);
 			searchProduct(searchProduct, cr, "typePrinter3D", searchProduct.getType3dPrinter(),searchProduct.getD3PrinterEquipment());
-			result.addAll(componets.showSimplestArray(new HashSet<Printer3D>(cr.list()), "3d_printer"));
+			result.addAll(componets.showSimplestArrayPUE(new HashSet<Printer3D>(cr.list()), "3d_printer"));
 
 			cr = session.createCriteria(DigitalPrinter.class);
 			searchProduct(searchProduct, cr, "typePrinter", searchProduct.getTypeDigitalPrinter(),searchProduct.getDigitalPrinterEquipment());
-			result.addAll(componets.showSimplestArray(new HashSet<DigitalPrinter>(cr.list()), "digital_printer"));
+			result.addAll(componets.showSimplestArrayPUE(new HashSet<DigitalPrinter>(cr.list()), "digital_printer"));
 
 			cr = session.createCriteria(Laminator.class);
 			searchProduct(searchProduct, cr, "typeProduct", searchProduct.getTypeLaminator(),searchProduct.getLaminatorEquipment());
-			result.addAll(componets.showSimplestArray(new HashSet<Laminator>(cr.list()), "laminator"));
+			result.addAll(componets.showSimplestArrayPUE(new HashSet<Laminator>(cr.list()), "laminator"));
 
 			cr = session.createCriteria(Laser.class);
 			searchProduct(searchProduct, cr, "typeLaser", searchProduct.getTypeLaser(),searchProduct.getLaserEquipment());
-			result.addAll(componets.showSimplestArray(new HashSet<Laser>(cr.list()), "laser"));
+			result.addAll(componets.showSimplestArrayPUE(new HashSet<Laser>(cr.list()), "laser"));
 
 			cr = session.createCriteria(Cutter.class);
 			searchProduct(searchProduct, cr, "typeCutter", searchProduct.getTypeCutter(),searchProduct.getCutterEquipment());
-			result.addAll(componets.showSimplestArray(new HashSet<Cutter>(cr.list()), "cutter"));
+			result.addAll(componets.showSimplestArrayPUE(new HashSet<Cutter>(cr.list()), "cutter"));
 
 			cr = session.createCriteria(Scanner.class);
 			searchProduct(searchProduct, cr, "typeProduct", searchProduct.getTypeScanner(),searchProduct.getScannerEquipment());
-			result.addAll(componets.showSimplestArray(new HashSet<Scanner>(cr.list()), "scanner"));
+			result.addAll(componets.showSimplestArrayPUE(new HashSet<Scanner>(cr.list()), "scanner"));
 		}
         return result;
 	}
@@ -165,31 +165,31 @@ public class PreviousUsedEqvipmentDAOImpl {
    		
    		Criteria cr = session.createCriteria(Printer.class);
    		searchProductForHomePage(cr);
-   		result.addAll(componets.showSimplestArray(new HashSet<Printer>(cr.list()), "printer"));
+   		result.addAll(componets.showSimplestArrayPUE(new HashSet<Printer>(cr.list()), "printer"));
    		
    		cr = session.createCriteria(Printer3D.class);
    		searchProductForHomePage(cr);
-   		result.addAll(componets.showSimplestArray(new HashSet<Printer3D>(cr.list()), "3d_printer"));
+   		result.addAll(componets.showSimplestArrayPUE(new HashSet<Printer3D>(cr.list()), "3d_printer"));
    		
    		cr = session.createCriteria(DigitalPrinter.class);
    		searchProductForHomePage(cr);
-   		result.addAll(componets.showSimplestArray(new HashSet<DigitalPrinter>(cr.list()), "digital_printer"));
+   		result.addAll(componets.showSimplestArrayPUE(new HashSet<DigitalPrinter>(cr.list()), "digital_printer"));
    		
    		cr = session.createCriteria(Laminator.class);
    		searchProductForHomePage(cr);
-   		result.addAll(componets.showSimplestArray(new HashSet<Laminator>(cr.list()), "laminator"));
+   		result.addAll(componets.showSimplestArrayPUE(new HashSet<Laminator>(cr.list()), "laminator"));
    		
    		cr = session.createCriteria(Laser.class);
    		searchProductForHomePage(cr);
-   		result.addAll(componets.showSimplestArray(new HashSet<Laser>(cr.list()), "laser"));
+   		result.addAll(componets.showSimplestArrayPUE(new HashSet<Laser>(cr.list()), "laser"));
    		
    		cr = session.createCriteria(Cutter.class);
    		searchProductForHomePage(cr);
-   		result.addAll(componets.showSimplestArray(new HashSet<Cutter>(cr.list()), "cutter"));
+   		result.addAll(componets.showSimplestArrayPUE(new HashSet<Cutter>(cr.list()), "cutter"));
    		
    		cr = session.createCriteria(Scanner.class);
    		searchProductForHomePage(cr);
-   		result.addAll(componets.showSimplestArray(new HashSet<Scanner>(cr.list()), "scanner"));
+   		result.addAll(componets.showSimplestArrayPUE(new HashSet<Scanner>(cr.list()), "scanner"));
    		
            return result;
    	}

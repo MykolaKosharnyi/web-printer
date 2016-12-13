@@ -39,115 +39,65 @@ public class ComponentsForControllers {
 	
 	@Autowired
 	public PicturesManipulator picturesManipulator;
-
+	
+	/**
+	 * This method made every product more lightweight(without some characteristic),
+	 * it was done for make products page more lightweight (for higher speed loading).
+	 * 
+	 * @param set input collection which we need to make lightweight
+	 * @return lightweight version of input collection
+	 */
 	@SuppressWarnings("unchecked")
-	public ArrayList<JSONObject> showSimplestArrayOfPrinter(Set<Printer> set){
-		
+	public ArrayList<JSONObject> makeLightWeightCollectionOfProduct(Set<? extends HeadProduct> set){
 		ArrayList<JSONObject> arrayResult = new ArrayList<JSONObject>();
-		for(Printer currentProduct : set){
+			
+		for (HeadProduct currentProduct : set) {
 			JSONObject curObj = new JSONObject();
-			
+
 			standartOutPutDataOfProduct(currentProduct, curObj);
-
-			//add property that must be output only to printer at current time(in the future to all product)
-			curObj.put("ratingOverallRating", currentProduct.getRatingOverallRating());
-			//type of printhead
-			curObj.put("typeOfPrinthead", currentProduct.getTypeOfPrinthead());
-			//print resolution
-			curObj.put("printResolution", currentProduct.getPrintResolution());
-			curObj.put("inputFirstPrintResolution", currentProduct.getInputFirstPrintResolution());
-			curObj.put("inputSecondPrintResolution", currentProduct.getInputSecondPrintResolution());
-			//chromaticity
-			curObj.put("chromaticity", currentProduct.getChromaticity());
-			curObj.put("chromaticityCMYK", currentProduct.getChromaticityCMYK());
-			curObj.put("chromaticityCMYKx2", currentProduct.getChromaticityCMYKx2());
-			curObj.put("chromaticityCMYKLcLm", currentProduct.getChromaticityCMYKLcLm());
-			curObj.put("chromaticityCMYKLcLmOG", currentProduct.getChromaticityCMYKLcLmOG());	
-
-			arrayResult.add(curObj);
 			
-		}
-		return arrayResult;
-	}
-	
-	public ArrayList<JSONObject> showSimplestArrayOfPrinter3D(Set<Printer3D> set){
-		
-		ArrayList<JSONObject> arrayResult = new ArrayList<JSONObject>();
-		for(Printer3D currentProduct : set){
-			JSONObject curObj = new JSONObject();
-			
-			standartOutPutDataOfProduct(currentProduct, curObj);
+			// add characteristic for concrete type product
+			if (currentProduct instanceof Printer) {
+				//add property that must be output only to printer at current time(in the future to all product)
+				curObj.put("ratingOverallRating", ((Printer)currentProduct).getRatingOverallRating());
+				//type of printhead
+				curObj.put("typeOfPrinthead", ((Printer)currentProduct).getTypeOfPrinthead());
+				//print resolution
+				curObj.put("printResolution", ((Printer)currentProduct).getPrintResolution());
+				curObj.put("inputFirstPrintResolution", ((Printer)currentProduct).getInputFirstPrintResolution());
+				curObj.put("inputSecondPrintResolution", ((Printer)currentProduct).getInputSecondPrintResolution());
+				//chromaticity
+				curObj.put("chromaticity", ((Printer)currentProduct).getChromaticity());
+				curObj.put("chromaticityCMYK", ((Printer)currentProduct).getChromaticityCMYK());
+				curObj.put("chromaticityCMYKx2", ((Printer)currentProduct).getChromaticityCMYKx2());
+				curObj.put("chromaticityCMYKLcLm", ((Printer)currentProduct).getChromaticityCMYKLcLm());
+				curObj.put("chromaticityCMYKLcLmOG", ((Printer)currentProduct).getChromaticityCMYKLcLmOG());	
 
-			arrayResult.add(curObj);
-		}
-		return arrayResult;
-	}
-	
-	public ArrayList<JSONObject> showSimplestArrayOfDigitalPrinter(Set<DigitalPrinter> set){
-		
-		ArrayList<JSONObject> arrayResult = new ArrayList<JSONObject>();
-		for(DigitalPrinter currentProduct : set){
-			JSONObject curObj = new JSONObject();
-			
-			standartOutPutDataOfProduct(currentProduct, curObj);
+			} else if (currentProduct instanceof Printer3D) {
 
+			} else if (currentProduct instanceof DigitalPrinter) {
+
+			} else if (currentProduct instanceof Cutter) {
+
+			} else if (currentProduct instanceof Laminator) {
+
+			} else if (currentProduct instanceof Laser) {
+
+			} else if (currentProduct instanceof Scanner) {
+
+			}
 			arrayResult.add(curObj);
 		}
 		return arrayResult;
-	}
+	}	
 	
-	public ArrayList<JSONObject> showSimplestArrayOfCutter(Set<Cutter> set){
-		
-		ArrayList<JSONObject> arrayResult = new ArrayList<JSONObject>();
-		for(Cutter currentProduct : set){
-			JSONObject curObj = new JSONObject();
-			
-			standartOutPutDataOfProduct(currentProduct, curObj);
-
-			arrayResult.add(curObj);
-		}
-		return arrayResult;
-	}
-	
-	public ArrayList<JSONObject> showSimplestArrayOfLaminator(Set<Laminator> set){
-		
-		ArrayList<JSONObject> arrayResult = new ArrayList<JSONObject>();
-		for(Laminator currentProduct : set){
-			JSONObject curObj = new JSONObject();
-			
-			standartOutPutDataOfProduct(currentProduct, curObj);
-
-			arrayResult.add(curObj);
-		}
-		return arrayResult;
-	}
-	
-	public ArrayList<JSONObject> showSimplestArrayOfLaser(Set<Laser> set){
-		
-		ArrayList<JSONObject> arrayResult = new ArrayList<JSONObject>();
-		for(Laser currentProduct : set){
-			JSONObject curObj = new JSONObject();
-			
-			standartOutPutDataOfProduct(currentProduct, curObj);
-
-			arrayResult.add(curObj);
-		}
-		return arrayResult;
-	}
-	
-	public ArrayList<JSONObject> showSimplestArrayOfScanner(Set<Scanner> set){
-		
-		ArrayList<JSONObject> arrayResult = new ArrayList<JSONObject>();
-		for(Scanner currentProduct : set){
-			JSONObject curObj = new JSONObject();
-			
-			standartOutPutDataOfProduct(currentProduct, curObj);
-
-			arrayResult.add(curObj);
-		}
-		return arrayResult;
-	}
-	
+	/**
+	 * This method made every product more lightweight(without some characteristic),
+	 * it was done for make products page more lightweight (for higher speed loading).
+	 * 
+	 * @param set input collection which we need to make lightweight
+	 * @return lightweight version of input collection
+	 */
 	@SuppressWarnings("unchecked")
 	public ArrayList<JSONObject> showSimplestArrayOfRip(Set<Rip> set){
 		
@@ -176,6 +126,13 @@ public class ComponentsForControllers {
 		return arrayResult;
 	}
 	
+	/**
+	 * This method made every product more lightweight(without some characteristic),
+	 * it was done for make products page more lightweight (for higher speed loading).
+	 * 
+	 * @param set input collection which we need to make lightweight
+	 * @return lightweight version of input collection
+	 */
 	@SuppressWarnings("unchecked")
 	public ArrayList<JSONObject> showSimplestArrayOfUseWithProduct(Set<UseWithProduct> set){
 		
@@ -196,8 +153,16 @@ public class ComponentsForControllers {
 		return arrayResult;
 	}
 	
+	/**
+	 * Show simplest list of product (without most of characteristic), 
+	 * used in PreviouslyUsedEqvipmentDAOImpl class
+	 * 
+	 * @param set
+	 * @param type
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
-	public ArrayList<JSONObject> showSimplestArray(Set<? extends HeadProduct> set, String type){
+	public ArrayList<JSONObject> showSimplestArrayPUE(Set<? extends HeadProduct> set, String type){
 		
 		ArrayList<JSONObject> arrayResult = new ArrayList<JSONObject>();
 		for(HeadProduct currentProduct : set){
@@ -277,6 +242,13 @@ public class ComponentsForControllers {
 		return arrayResult;
 	}
 
+	/**
+	 * Standard data characteristic of product which must be output in all
+	 * types of product.
+	 * 
+	 * @param currentProduct
+	 * @param curObj
+	 */
 	@SuppressWarnings("unchecked")
 	private void standartOutPutDataOfProduct(HeadProduct currentProduct, JSONObject curObj) {
 		curObj.put("top", currentProduct.isTop());

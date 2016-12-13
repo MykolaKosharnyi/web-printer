@@ -105,13 +105,13 @@ public class HomeController {
 			e.printStackTrace();
 		}
 		
-		model.addAttribute("printers", componets.showSimplestArrayOfPrinter(printerService.listShowOnHomePage()));
-		model.addAttribute("printers3D", printer3DService.listShowOnHomePage());
-		model.addAttribute("digitalPrinters", componets.showSimplestArrayOfDigitalPrinter(digitalPrinterService.listShowOnHomePage()));
-		model.addAttribute("lasers", componets.showSimplestArrayOfLaser(laserService.listShowOnHomePage()));
-		model.addAttribute("cutters", componets.showSimplestArrayOfCutter(cutterService.listShowOnHomePage()));
-		model.addAttribute("laminators", componets.showSimplestArrayOfLaminator(laminatorService.listShowOnHomePage()));
-		model.addAttribute("scanners", componets.showSimplestArrayOfScanner(scannerService.listShowOnHomePage()));
+		model.addAttribute("printers", componets.makeLightWeightCollectionOfProduct(printerService.listShowOnHomePage()));
+		model.addAttribute("printers3D", componets.makeLightWeightCollectionOfProduct(printer3DService.listShowOnHomePage()));  
+		model.addAttribute("digitalPrinters", componets.makeLightWeightCollectionOfProduct(digitalPrinterService.listShowOnHomePage()));
+		model.addAttribute("lasers", componets.makeLightWeightCollectionOfProduct(laserService.listShowOnHomePage()));
+		model.addAttribute("cutters", componets.makeLightWeightCollectionOfProduct(cutterService.listShowOnHomePage()));
+		model.addAttribute("laminators", componets.makeLightWeightCollectionOfProduct(laminatorService.listShowOnHomePage()));
+		model.addAttribute("scanners", componets.makeLightWeightCollectionOfProduct(scannerService.listShowOnHomePage()));
 		model.addAttribute("pue", pueService.listProductForHomePage());
 		model.addAttribute("rips", ripService.listShowOnHomePage());
 		model.addAttribute("serverTime", formattedDate );
