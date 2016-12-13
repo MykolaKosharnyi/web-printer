@@ -20,37 +20,37 @@ public class Printer3DServiceImpl implements Printer3DService {
  
     @Override
     @Transactional
-    public long addPrinter3D(Printer3D p) {
+    public long addProduct(Printer3D p) {
     	return this.productDAO.addProduct(p);
     }
  
     @Override
     @Transactional
-    public void updatePrinter3D(Printer3D p) {
+    public void updateProduct(Printer3D p) {
     	this.productDAO.updateProduct(p);
     }
  
     @Override
     @Transactional
-    public Set<Printer3D> listPrinters3D(String sortCriteria) {
+    public Set<Printer3D> listProducts(String sortCriteria) {
     	 return this.productDAO.listProducts(sortCriteria);
     }
  
     @Override
     @Transactional
-    public Printer3D getPrinter3DById(long id) {
+    public Printer3D getProductById(long id) {
     	return this.productDAO.getProductById(id);
     }
  
     @Override
     @Transactional
-    public void removePrinter3D(long id) {
+    public void removeProduct(long id) {
     	this.productDAO.removeProduct(id);
     }
 
 	@Override
 	@Transactional
-	public Set<Printer3D> listSearchPrinters3D(SearchPrinters3D searchPrinters) {
+	public Set<Printer3D> listSearchProducts(SearchPrinters3D searchPrinters) {
 		return this.productDAO.listSearchProducts(searchPrinters);
 	}
 

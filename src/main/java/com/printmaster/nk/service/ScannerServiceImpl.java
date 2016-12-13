@@ -17,37 +17,37 @@ public class ScannerServiceImpl implements ScannerService {
  
     @Override
     @Transactional
-    public long addScanner(Scanner p) {
+    public long addProduct(Scanner p) {
         return this.productDAO.addProduct(p);
     }
  
     @Override
     @Transactional
-    public void updateScanner(Scanner p) {
+    public void updateProduct(Scanner p) {
         this.productDAO.updateProduct(p);
     }
  
     @Override
     @Transactional
-    public Set<Scanner> listScanners(String sortCriteria) {
+    public Set<Scanner> listProducts(String sortCriteria) {
         return this.productDAO.listProducts(sortCriteria);
     }
  
     @Override
     @Transactional
-    public Scanner getScannerById(long id) {
+    public Scanner getProductById(long id) {
         return this.productDAO.getProductById(id);
     }
  
     @Override
     @Transactional
-    public void removeScanner(long id) {
+    public void removeProduct(long id) {
         this.productDAO.removeProduct(id);
     }
 
 	@Override
 	@Transactional
-	public Set<Scanner> listSearchScanners(SearchScanners searchScanners) {
+	public Set<Scanner> listSearchProducts(SearchScanners searchScanners) {
 		return this.productDAO.listSearchProducts(searchScanners);
 	}
 

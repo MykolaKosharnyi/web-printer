@@ -1,20 +1,8 @@
 package com.printmaster.nk.service;
 
-import java.util.Set;
-
 import com.printmaster.nk.model.DigitalPrinter;
 import com.printmaster.nk.model.SearchDigitalPrinters;
 
-public interface DigitalPrinterService {
-	 
-    public long addPrinter(DigitalPrinter p);
-    public void updatePrinter(DigitalPrinter p);
-    public Set<DigitalPrinter> listPrinters(String sortCriteria);
-    public Set<DigitalPrinter> listShowOnSite();
-    public Set<DigitalPrinter> listShowOnHomePage();
-    public Set<DigitalPrinter> listSearchDigitalPrinters(SearchDigitalPrinters searchPrinters);
-    public Set<DigitalPrinter> listSearchByPhrase(String phrase);
-    public DigitalPrinter getPrinterById(long id);
-    public void removePrinter(long id);
+public interface DigitalPrinterService extends ProductService <DigitalPrinter,SearchDigitalPrinters>{
      
 }

@@ -17,37 +17,37 @@ public class UseWithProductServiceImpl implements UseWithProductService {
  
     @Override
     @Transactional
-    public long addUseWithProduct(UseWithProduct p) {
+    public long addProduct(UseWithProduct p) {
         return this.productDAO.addProduct(p);
     }
  
     @Override
     @Transactional
-    public void updateUseWithProduct(UseWithProduct p) {
+    public void updateProduct(UseWithProduct p) {
         this.productDAO.updateProduct(p);
     }
  
     @Override
     @Transactional
-    public Set<UseWithProduct> listUseWithProducts(String sortCriteria) {
+    public Set<UseWithProduct> listProducts(String sortCriteria) {
         return this.productDAO.listProducts(sortCriteria);
     }
  
     @Override
     @Transactional
-    public UseWithProduct getUseWithProductById(long id) {
+    public UseWithProduct getProductById(long id) {
         return this.productDAO.getProductById(id);
     }
  
     @Override
     @Transactional
-    public void removeUseWithProduct(long id) {
+    public void removeProduct(long id) {
         this.productDAO.removeProduct(id);
     }
 
 	@Override
 	@Transactional
-	public Set<UseWithProduct> listSearchUseWithProducts(SearchUseWithProducts searchUseWithProducts) {
+	public Set<UseWithProduct> listSearchProducts(SearchUseWithProducts searchUseWithProducts) {
 		return this.productDAO.listSearchProducts(searchUseWithProducts);
 	}
 
@@ -65,7 +65,7 @@ public class UseWithProductServiceImpl implements UseWithProductService {
 	
 	@Override
 	@Transactional
-	public Set<UseWithProduct> getUseWithProductsByIds(long[] p) {
+	public Set<UseWithProduct> getProductsByIds(long[] p) {
 		return this.productDAO.getProductsByIds(p);
 	}
 	

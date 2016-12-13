@@ -20,37 +20,37 @@ public class PrinterServiceImpl implements PrinterService {
  
     @Override
     @Transactional
-    public long addPrinter(Printer p) {
+    public long addProduct(Printer p) {
         return this.productDAO.addProduct(p);
     }
  
     @Override
     @Transactional
-    public void updatePrinter(Printer p) {
+    public void updateProduct(Printer p) {
         this.productDAO.updateProduct(p);
     }
  
     @Override
     @Transactional
-    public Set<Printer> listPrinters(String sortCriteria) {
+    public Set<Printer> listProducts(String sortCriteria) {
         return this.productDAO.listProducts(sortCriteria);
     }
  
     @Override
     @Transactional
-    public Printer getPrinterById(long id) {
+    public Printer getProductById(long id) {
         return this.productDAO.getProductById(id);
     }
  
     @Override
     @Transactional
-    public void removePrinter(long id) {
+    public void removeProduct(long id) {
         this.productDAO.removeProduct(id);
     }
 
 	@Override
 	@Transactional
-	public Set<Printer> listSearchPrinters(SearchPrinters searchPrinters) {
+	public Set<Printer> listSearchProducts(SearchPrinters searchPrinters) {
 		return this.productDAO.listSearchProducts(searchPrinters);
 	}
 

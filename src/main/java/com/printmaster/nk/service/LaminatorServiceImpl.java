@@ -17,37 +17,37 @@ public class LaminatorServiceImpl implements LaminatorService {
  
     @Override
     @Transactional
-    public long addLaminator(Laminator p) {
+    public long addProduct(Laminator p) {
         return this.productDAO.addProduct(p);
     }
  
     @Override
     @Transactional
-    public void updateLaminator(Laminator p) {
+    public void updateProduct(Laminator p) {
         this.productDAO.updateProduct(p);
     }
  
     @Override
     @Transactional
-    public Set<Laminator> listLaminators(String sortCriteria) {
+    public Set<Laminator> listProducts(String sortCriteria) {
         return this.productDAO.listProducts(sortCriteria);
     }
  
     @Override
     @Transactional
-    public Laminator getLaminatorById(long id) {
+    public Laminator getProductById(long id) {
         return this.productDAO.getProductById(id);
     }
  
     @Override
     @Transactional
-    public void removeLaminator(long id) {
+    public void removeProduct(long id) {
         this.productDAO.removeProduct(id);
     }
 
 	@Override
 	@Transactional
-	public Set<Laminator> listSearchLaminators(SearchLaminators searchLaminators) {
+	public Set<Laminator> listSearchProducts(SearchLaminators searchLaminators) {
 		return this.productDAO.listSearchProducts(searchLaminators);
 	}
 

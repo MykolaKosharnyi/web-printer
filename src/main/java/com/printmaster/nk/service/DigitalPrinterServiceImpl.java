@@ -17,37 +17,37 @@ public class DigitalPrinterServiceImpl implements DigitalPrinterService {
  
     @Override
     @Transactional
-    public long addPrinter(DigitalPrinter p) {
+    public long addProduct(DigitalPrinter p) {
         return this.productDAO.addProduct(p);
     }
  
     @Override
     @Transactional
-    public void updatePrinter(DigitalPrinter p) {
+    public void updateProduct(DigitalPrinter p) {
         this.productDAO.updateProduct(p);
     }
  
     @Override
     @Transactional
-    public Set<DigitalPrinter> listPrinters(String sortCriteria) {
+    public Set<DigitalPrinter> listProducts(String sortCriteria) {
         return this.productDAO.listProducts(sortCriteria);
     }
  
     @Override
     @Transactional
-    public DigitalPrinter getPrinterById(long id) {
+    public DigitalPrinter getProductById(long id) {
         return this.productDAO.getProductById(id);
     }
  
     @Override
     @Transactional
-    public void removePrinter(long id) {
+    public void removeProduct(long id) {
         this.productDAO.removeProduct(id);
     }
 
 	@Override
 	@Transactional
-	public Set<DigitalPrinter> listSearchDigitalPrinters(SearchDigitalPrinters searchPrinters) {
+	public Set<DigitalPrinter> listSearchProducts(SearchDigitalPrinters searchPrinters) {
 		return this.productDAO.listSearchProducts(searchPrinters);
 	}
 

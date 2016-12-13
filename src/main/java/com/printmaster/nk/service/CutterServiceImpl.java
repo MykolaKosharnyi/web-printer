@@ -17,37 +17,37 @@ public class CutterServiceImpl implements CutterService {
 
     @Override
     @Transactional
-    public long addCutter(Cutter p) {
+    public long addProduct(Cutter p) {
         return this.productDAO.addProduct(p);
     }
  
     @Override
     @Transactional
-    public void updateCutter(Cutter p) {
+    public void updateProduct(Cutter p) {
         this.productDAO.updateProduct(p);
     }
  
     @Override
     @Transactional
-    public Set<Cutter> listCutters(String sortCriteria) {
+    public Set<Cutter> listProducts(String sortCriteria) {
         return this.productDAO.listProducts(sortCriteria);
     }
  
     @Override
     @Transactional
-    public Cutter getCutterById(long id) {
+    public Cutter getProductById(long id) {
         return this.productDAO.getProductById(id);
     }
  
     @Override
     @Transactional
-    public void removeCutter(long id) {
+    public void removeProduct(long id) {
         this.productDAO.removeProduct(id);
     }
 
 	@Override
 	@Transactional
-	public Set<Cutter> listSearchCutters(SearchCutters searchCutters) {
+	public Set<Cutter> listSearchProducts(SearchCutters searchCutters) {
 		return this.productDAO.listSearchProducts(searchCutters);
 	}
 

@@ -17,37 +17,37 @@ public class LaserServiceImpl implements LaserService {
  
     @Override
     @Transactional
-    public long addLaser(Laser p) {
+    public long addProduct(Laser p) {
         return this.productDAO.addProduct(p);
     }
  
     @Override
     @Transactional
-    public void updateLaser(Laser p) {
+    public void updateProduct(Laser p) {
         this.productDAO.updateProduct(p);
     }
  
     @Override
     @Transactional
-    public Set<Laser> listLasers(String sortCriteria) {
+    public Set<Laser> listProducts(String sortCriteria) {
         return this.productDAO.listProducts(sortCriteria);
     }
  
     @Override
     @Transactional
-    public Laser getLaserById(long id) {
+    public Laser getProductById(long id) {
         return this.productDAO.getProductById(id);
     }
  
     @Override
     @Transactional
-    public void removeLaser(long id) {
+    public void removeProduct(long id) {
         this.productDAO.removeProduct(id);
     }
 
 	@Override
 	@Transactional
-	public Set<Laser> listSearchLasers(SearchLasers searchLasers) {
+	public Set<Laser> listSearchProducts(SearchLasers searchLasers) {
 		return this.productDAO.listSearchProducts(searchLasers);
 	}
 

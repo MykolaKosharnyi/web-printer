@@ -17,37 +17,37 @@ public class RipServiceImpl implements RipService {
  
     @Override
     @Transactional
-    public long addRip(Rip p) {
+    public long addProduct(Rip p) {
         return this.productDAO.addProduct(p);
     }
  
     @Override
     @Transactional
-    public void updateRip(Rip p) {
+    public void updateProduct(Rip p) {
         this.productDAO.updateProduct(p);
     }
  
     @Override
     @Transactional
-    public Set<Rip> listRips(String sortCriteria) {
+    public Set<Rip> listProducts(String sortCriteria) {
         return this.productDAO.listProducts(sortCriteria);
     }
  
     @Override
     @Transactional
-    public Rip getRipById(long id) {
+    public Rip getProductById(long id) {
         return this.productDAO.getProductById(id);
     }
  
     @Override
     @Transactional
-    public void removeRip(long id) {
+    public void removeProduct(long id) {
         this.productDAO.removeProduct(id);
     }
 
 	@Override
 	@Transactional
-	public Set<Rip> listSearchRips(SearchRips searchRips) {
+	public Set<Rip> listSearchProducts(SearchRips searchRips) {
 		return this.productDAO.listSearchProducts(searchRips);
 	}
 
