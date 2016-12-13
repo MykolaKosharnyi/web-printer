@@ -45,7 +45,15 @@ public class PrinterDAOImpl implements ProductDAO<Printer, SearchPrinters> {
 		Criteria cr = session.createCriteria(Printer.class);
 		
 		cr.add(Restrictions.eq("showOnSite", true));
-		cr.add(Restrictions.like("name", phrase, MatchMode.ANYWHERE));
+		
+		Junction searchByPhraseGroup = Restrictions.disjunction();
+
+		searchByPhraseGroup.add(Restrictions.like("name", phrase, MatchMode.ANYWHERE));
+		searchByPhraseGroup.add(Restrictions.like("typePrinter", phrase, MatchMode.ANYWHERE));
+		searchByPhraseGroup.add(Restrictions.like("compatibleInk", phrase, MatchMode.ANYWHERE));
+		searchByPhraseGroup.add(Restrictions.like("equipmentManufacturer", phrase, MatchMode.ANYWHERE));
+		searchByPhraseGroup.add(Restrictions.like("description", phrase, MatchMode.ANYWHERE));
+		cr.add(searchByPhraseGroup);
 		
 		return new HashSet<Printer>(cr.list());
 	}
@@ -167,7 +175,7 @@ public class PrinterDAOImpl implements ProductDAO<Printer, SearchPrinters> {
 				typePrintGroup.add(Restrictions.eq("typePrint",typePrint));
 			}
 			cr.add(typePrintGroup);
-			}
+		}
 		
 		if( (searchPrinters.getSizeDropRangeUntil() > 0.1) 
 				&& (searchPrinters.getSizeDropRangeFrom() < searchPrinters.getSizeDropRangeUntil())){

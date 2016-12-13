@@ -31,7 +31,7 @@
 				
 				<c:if test="${!empty value.leftSharesLink}">
 					<div class="ribbon-wrapper-left">
-						<div class="ribbon-left" style="color:${value.leftSharesLinkColorFone}; background:${value.leftSharesLinkColorFone};">
+						<div class="ribbon-left" style="color:${value.leftSharesLinkColorText}; background:${value.leftSharesLinkColorFone};">
 							${value.leftSharesLink}
 						</div>
 					</div>
