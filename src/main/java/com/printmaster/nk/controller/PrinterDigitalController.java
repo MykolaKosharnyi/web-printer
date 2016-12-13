@@ -74,7 +74,7 @@ public class PrinterDigitalController {
 	
 	@RequestMapping(value = "/digital_printers", method = RequestMethod.GET)	
     public String allPrinters(Model model) {
-        model.addAttribute("listProducts", componets.showSimplestArrayOfDigitalPrinter(productService.listShowOnSite()));
+        model.addAttribute("listProducts", componets.makeLightWeightCollectionOfProduct(productService.listShowOnSite()));
         SearchDigitalPrinters search = new SearchDigitalPrinters();
         search.setPrise0(0);
         search.setPrise1(30000);
@@ -105,7 +105,7 @@ public class PrinterDigitalController {
 		search.setPrise0(0);
 		search.setPrise1(30000);
 		model.addAttribute("search", search);
-		model.addAttribute("listProducts", componets.showSimplestArrayOfDigitalPrinter(productService.listSearchDigitalPrinters(search)));
+		model.addAttribute("listProducts", componets.makeLightWeightCollectionOfProduct(productService.listSearchProducts(search)));
 		model.addAttribute("type", "digital_printer");
 		
 		componets.setJSONtoModelAttribute(model, "digital_printer");
@@ -114,17 +114,17 @@ public class PrinterDigitalController {
 
     @RequestMapping(value="/digital_printers/search",method=RequestMethod.POST, produces = "application/json; charset=utf-8")
     public @ResponseBody ArrayList<JSONObject> addUser(@ModelAttribute(value="search") SearchDigitalPrinters search, BindingResult result ){
-        return componets.showSimplestArrayOfDigitalPrinter(productService.listSearchDigitalPrinters(search));
+        return componets.makeLightWeightCollectionOfProduct(productService.listSearchProducts(search));
     }
 	
     @RequestMapping("/digital_printer/{id}")
     public String showPrinter(@PathVariable("id") long id, Model model){
         
-        DigitalPrinter product = productService.getPrinterById(id);
+        DigitalPrinter product = productService.getProductById(id);
         model.addAttribute("product", product);
         model.addAttribute("type", "digital_printer");
         if(product.getIdUseWithProduct()!=null){
-        	model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(useWithProductService.getUseWithProductsByIds(product.getIdUseWithProduct())));
+        	model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(useWithProductService.getProductsByIds(product.getIdUseWithProduct())));
         } else {
         	model.addAttribute("uwp", null);
         }
@@ -134,7 +134,7 @@ public class PrinterDigitalController {
 	@RequestMapping(value = "/admin/digital_printers", method = RequestMethod.GET)	
     public String listPrinters(Model model) {
 		model.addAttribute("titleOfTable", "Список загруженого цыфрового оборудования");
-        model.addAttribute("listProducts", productService.listPrinters("id"));
+        model.addAttribute("listProducts", productService.listProducts("id"));
         
         model.addAttribute("productType", "digital_printer");
 		model.addAttribute("nameProduct", "Имя цыфрового оборудования");
@@ -150,7 +150,7 @@ public class PrinterDigitalController {
         
 		List<DigitalPrinter> list = new ArrayList<DigitalPrinter>();
         if(type.equals("full_color_laser_printers")){
-        	for(DigitalPrinter printer : productService.listPrinters("id")){
+        	for(DigitalPrinter printer : productService.listProducts("id")){
         		if(printer.getTypePrinter().equals("Полноцветное лазерное оборудование")){
         			list.add(printer);
         		}
@@ -161,7 +161,7 @@ public class PrinterDigitalController {
             logger.info("On /admin/digital_printers/full_color_laser_printers page.");
 
     	} else if(type.equals("monochrome_laser_printers")){
-        	for(DigitalPrinter printer : productService.listPrinters("id")){
+        	for(DigitalPrinter printer : productService.listProducts("id")){
         		if(printer.getTypePrinter().equals("Монохромное лазерное оборудование")){
         			list.add(printer);
         		}
@@ -172,7 +172,7 @@ public class PrinterDigitalController {
             logger.info("On /admin/digital_printers/monochrome_laser_printers page.");
             
     	} else if(type.equals("full-color_inkjet_printers")){
-        	for(DigitalPrinter printer : productService.listPrinters("id")){
+        	for(DigitalPrinter printer : productService.listProducts("id")){
         		if(printer.getTypePrinter().equals("Полноцветное струйное оборудование")){
         			list.add(printer);
         		}
@@ -185,7 +185,7 @@ public class PrinterDigitalController {
     	} else {
     		model.addAttribute("productSubType", "none");
     		model.addAttribute("titleOfTable", "Список загруженных цыфровых принтеров");
-            model.addAttribute("listProducts", productService.listPrinters("id"));
+            model.addAttribute("listProducts", productService.listProducts("id"));
             logger.info("/admin/digital_printers page.");
     	}
         
@@ -202,25 +202,25 @@ public class PrinterDigitalController {
 		
 		List<DigitalPrinter> list = new ArrayList<DigitalPrinter>();
         if(type.equals("full_color_laser_printers")){
-        	for(DigitalPrinter printer : productService.listPrinters(value)){
+        	for(DigitalPrinter printer : productService.listProducts(value)){
         		if(printer.getTypePrinter().equals("Полноцветное лазерное оборудование")){
         			list.add(printer);
         		}
         	}
     	} else if(type.equals("monochrome_laser_printers")){
-        	for(DigitalPrinter printer : productService.listPrinters(value)){
+        	for(DigitalPrinter printer : productService.listProducts(value)){
         		if(printer.getTypePrinter().equals("Монохромное лазерное оборудование")){
         			list.add(printer);
         		}
         	} 
     	} else if(type.equals("full-color_inkjet_printers")){
-        	for(DigitalPrinter printer : productService.listPrinters(value)){
+        	for(DigitalPrinter printer : productService.listProducts(value)){
         		if(printer.getTypePrinter().equals("Полноцветное струйное оборудование")){
         			list.add(printer);
         		}
         	}  		
     	} else {
-    		list.addAll(productService.listPrinters(value));
+    		list.addAll(productService.listProducts(value));
     	}
 
 		return list;
@@ -244,7 +244,7 @@ public class PrinterDigitalController {
 		logger.info("/admin/digital_printer/copy/" + id + " page.");
 		
 		 logger.info("Copy all characteristic of digital_printer.");
-		 DigitalPrinter digitalPrinter = productService.getPrinterById(id);
+		 DigitalPrinter digitalPrinter = productService.getProductById(id);
 		 
 		 /* copy pictures to buffer */
 		 componets.copyPicturesToBuffer(digitalPrinter.getPathPictures(), directory, concreteFolder, id, files);
@@ -273,12 +273,12 @@ public class PrinterDigitalController {
 	            return "admin/digital_printer";
 	        }
 
-            long id = productService.addPrinter(product);
+            long id = productService.addProduct(product);
   
             //create folder and add to her new pictures
             product.getPathPictures().addAll(componets.createFolderAndWriteToItPictures(directory, concreteFolder, id, files));
             
-            productService.updatePrinter(product);
+            productService.updateProduct(product);
             files.clear();
 		
 		  links.createLinksForDigitalPrinters(productService.listShowOnSite());	
@@ -302,12 +302,12 @@ public class PrinterDigitalController {
 	            return "admin/digital_printer";
 	        }
 
-            long id = productService.addPrinter(product);
+            long id = productService.addProduct(product);
   
             //create folder and add to her new pictures
             product.getPathPictures().addAll(componets.createFolderAndWriteToItPictures(directory, concreteFolder, id, files));
             
-            productService.updatePrinter(product);
+            productService.updateProduct(product);
             files.clear();
 		
 		  links.createLinksForDigitalPrinters(productService.listShowOnSite());	
@@ -320,7 +320,7 @@ public class PrinterDigitalController {
 	
     @RequestMapping("/admin/digital_printer/edit/{id}")
     public String editPrinter(@PathVariable("id") long id, Model model){
-    	DigitalPrinter undatePrinter = productService.getPrinterById(id);
+    	DigitalPrinter undatePrinter = productService.getProductById(id);
     	
         model.addAttribute("product", undatePrinter);
         model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
@@ -343,10 +343,10 @@ public class PrinterDigitalController {
             return "admin/digital_printer";
         }
 		
-		List<String> pathPictures = productService.getPrinterById(product.getId()).getPathPictures();
+		List<String> pathPictures = productService.getProductById(product.getId()).getPathPictures();
 		product.setPathPictures(pathPictures);
 
-        productService.updatePrinter(product);
+        productService.updateProduct(product);
         
 		files.clear();
 
@@ -371,10 +371,10 @@ public class PrinterDigitalController {
             return "admin/digital_printer";
         }
 		
-		List<String> pathPictures = productService.getPrinterById(product.getId()).getPathPictures();
+		List<String> pathPictures = productService.getProductById(product.getId()).getPathPictures();
 		product.setPathPictures(pathPictures);
 
-        productService.updatePrinter(product);
+        productService.updateProduct(product);
 
 		  links.createLinksForDigitalPrinters(productService.listShowOnSite());	
 		  
@@ -440,9 +440,9 @@ public class PrinterDigitalController {
  				logger.error("Don't write picture to the folder", e);
  			} 
         	 
- 			DigitalPrinter product = productService.getPrinterById(id);
+ 			DigitalPrinter product = productService.getProductById(id);
  			product.getPathPictures().add(fileName);
- 			productService.updatePrinter(product);
+ 			productService.updateProduct(product);
          }  
          return fileName;
     }
@@ -452,17 +452,17 @@ public class PrinterDigitalController {
     public @ResponseBody void changeOrderPicturesUpdate(@RequestBody List<String> selectedIds, @PathVariable("id") long id) {
     	logger.info("change order of pictures in changed digital printer product");
     	
-    	DigitalPrinter product = productService.getPrinterById(id);
+    	DigitalPrinter product = productService.getProductById(id);
     	product.getPathPictures().clear();
     	product.getPathPictures().addAll(selectedIds);
-    	productService.updatePrinter(product);
+    	productService.updateProduct(product);
     }
     
     @RequestMapping(value="/admin/digital_printer/remove_picture_update/{name_picture}/{id}", method = RequestMethod.POST,consumes="application/json",
     		headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void removePicture(@PathVariable("name_picture") String namePicture, @PathVariable("id") long id) {
     	String name = namePicture.replace(":", ".");
-    	DigitalPrinter product = productService.getPrinterById(id);
+    	DigitalPrinter product = productService.getProductById(id);
     	product.getPathPictures().remove(name);
     	
     	try {
@@ -482,7 +482,7 @@ public class PrinterDigitalController {
 			product.getPathPictures().add("default.jpg");
     	}
     	
-    	productService.updatePrinter(product);
+    	productService.updateProduct(product);
     	
     	logger.info("Remove pictore with name = " + name + " from changed digital printer product");
     }
@@ -497,9 +497,9 @@ public class PrinterDigitalController {
 				e.printStackTrace();
 			}
 
-    	componets.updateInLeftField(productService.getPrinterById(id), false, "digital_printer");
+    	componets.updateInLeftField(productService.getProductById(id), false, "digital_printer");
 
-        productService.removePrinter(id);
+        productService.removeProduct(id);
         
     	links.createLinksForDigitalPrinters(productService.listShowOnSite());
         
@@ -508,9 +508,9 @@ public class PrinterDigitalController {
 
     @RequestMapping(value="/admin/digital_printer/showOnSite/{id}", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void showOnSite(@PathVariable("id") long id, @RequestBody boolean value) {
-    	DigitalPrinter printer = productService.getPrinterById(id);
+    	DigitalPrinter printer = productService.getProductById(id);
     	printer.setShowOnSite(value);
-    	productService.updatePrinter(printer);
+    	productService.updateProduct(printer);
     	links.createLinksForDigitalPrinters(productService.listShowOnSite());
     	
     	if (printer.isShowOnSite() && printer.isShowOnLeftSide()){
@@ -522,23 +522,23 @@ public class PrinterDigitalController {
     
     @RequestMapping(value="/admin/digital_printer/setTop/{id}", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void setTop(@PathVariable("id") long id, @RequestBody boolean value) {
-    	DigitalPrinter printer = productService.getPrinterById(id);
+    	DigitalPrinter printer = productService.getProductById(id);
     	printer.setTop(value);
-    	productService.updatePrinter(printer);
+    	productService.updateProduct(printer);
     }
     
     @RequestMapping(value="/admin/digital_printer/showOnHomePage/{id}", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void showOnHomePage(@PathVariable("id") long id, @RequestBody boolean value) {
-    	DigitalPrinter printer = productService.getPrinterById(id);
+    	DigitalPrinter printer = productService.getProductById(id);
     	printer.setShowOnHomePage(value);
-    	productService.updatePrinter(printer);
+    	productService.updateProduct(printer);
     }
     
     @RequestMapping(value="/admin/digital_printer/showOnLeftSide/{id}", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void showOnLeftSide(@PathVariable("id") long id, @RequestBody boolean value) {
-    	DigitalPrinter printer = productService.getPrinterById(id);
+    	DigitalPrinter printer = productService.getProductById(id);
     	printer.setShowOnLeftSide(value);
-    	productService.updatePrinter(printer);
+    	productService.updateProduct(printer);
     	
     	if (printer.isShowOnSite() && printer.isShowOnLeftSide()){
     		componets.updateInLeftField(printer, true, "digital_printer");

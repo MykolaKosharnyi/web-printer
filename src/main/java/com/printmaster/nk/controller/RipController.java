@@ -86,13 +86,13 @@ public class RipController {
     @RequestMapping(value="/rips/search",method=RequestMethod.POST, produces = "application/json; charset=utf-8")
     public @ResponseBody ArrayList<JSONObject> showSearchRips(@ModelAttribute(value="search") SearchRips search, BindingResult result ){
     	logger.info("On the /rip/search page.");
-    	return componets.showSimplestArrayOfRip(ripService.listSearchRips(search));
+    	return componets.showSimplestArrayOfRip(ripService.listSearchProducts(search));
     }
 	
     @RequestMapping("/rip/{id}")
     public String showRip(@PathVariable("id") long id, Model model){
     	logger.info("/rip/" + id + " page.");
-        model.addAttribute("product", ripService.getRipById(id));
+        model.addAttribute("product", ripService.getProductById(id));
         model.addAttribute("type", "rip");
         return "rip";
     }
@@ -102,7 +102,7 @@ public class RipController {
 		model.addAttribute("productType", "rip");
 		model.addAttribute("nameProduct", "Наименование ПО");
 		model.addAttribute("titleOfTable", "Список загруженного ПО");
-        model.addAttribute("listProducts", ripService.listRips("id"));
+        model.addAttribute("listProducts", ripService.listProducts("id"));
         model.addAttribute("title", "ПО");
         model.addAttribute("addProduct", "Добавить новое ПО");
         model.addAttribute("productSubType", "none");
@@ -116,9 +116,9 @@ public class RipController {
 		
 		List<Rip> list = new ArrayList<Rip>();
         if(type.equals("none")){
-        	list.addAll(ripService.listRips(value));
+        	list.addAll(ripService.listProducts(value));
     	} else {
-    		list.addAll(ripService.listRips(value));
+    		list.addAll(ripService.listProducts(value));
     	}
 
 		return list;
@@ -143,7 +143,7 @@ public class RipController {
 		logger.info("/admin/rip/copy/" + id + " page.");
 		
 		 logger.info("Copy all characteristic of rip.");
-		 Rip rip = ripService.getRipById(id);
+		 Rip rip = ripService.getProductById(id);
 		
 		 /* copy pictures to buffer */
 		 componets.copyPicturesToBuffer(rip.getPathPictures(), directory, concreteFolder, id, files);
@@ -170,13 +170,13 @@ public class RipController {
 	            return "admin/rip";
 	        }
 		
-            long id = ripService.addRip(product);
+            long id = ripService.addProduct(product);
             logger.info("Create new RIP! With id=" + id);
 
             //create folder and add to her new pictures
             product.getPathPictures().addAll(componets.createFolderAndWriteToItPictures(directory, concreteFolder, id, files));
 			
-            this.ripService.updateRip(product);
+            this.ripService.updateProduct(product);
             
             files.clear();
 		
@@ -200,13 +200,13 @@ public class RipController {
 	            return "admin/rip";
 	        }
 		
-            long id = ripService.addRip(product);
+            long id = ripService.addProduct(product);
             logger.info("Create new rip! With id=" + id);
   
             //create folder and add to her new pictures
             product.getPathPictures().addAll(componets.createFolderAndWriteToItPictures(directory, concreteFolder, id, files));
 			
-            this.ripService.updateRip(product);
+            this.ripService.updateProduct(product);
             
             files.clear();
 		  
@@ -221,7 +221,7 @@ public class RipController {
     @RequestMapping("/admin/rip/edit/{id}")
     public String editRip(@PathVariable("id") long id, Model model) throws UnsupportedEncodingException, FileNotFoundException, IOException, ParseException {
     	logger.info("Begin editing rip with id=" + id);
-    	Rip undateRip = ripService.getRipById(id);
+    	Rip undateRip = ripService.getProductById(id);
     	model.addAttribute("type", "rip");
         model.addAttribute("product", undateRip);
         
@@ -243,10 +243,10 @@ public class RipController {
 		
 		logger.info("RIP UPDATE with save, id=" + product.getId());
 		
-		List<String> pathPictures = ripService.getRipById(product.getId()).getPathPictures();
+		List<String> pathPictures = ripService.getProductById(product.getId()).getPathPictures();
 		product.setPathPictures(pathPictures);
         
-        ripService.updateRip(product);
+        ripService.updateProduct(product);
         logger.info("rip with id=" + product.getId() + " was UDPATED!");
 		  
 		links.createLinksForRips(ripService.listShowOnSite());
@@ -273,10 +273,10 @@ public class RipController {
 		
 		logger.info("RIP UPDATE id=" + product.getId());
 		
-		List<String> pathPictures = ripService.getRipById(product.getId()).getPathPictures();
+		List<String> pathPictures = ripService.getProductById(product.getId()).getPathPictures();
 		product.setPathPictures(pathPictures);
         
-        ripService.updateRip(product);
+        ripService.updateProduct(product);
         logger.info("rip with id=" + product.getId() + " was UDPATED!");
         
 		  files.clear();
@@ -349,9 +349,9 @@ public class RipController {
  				logger.error("Don't write picture to the folder", e);
  			} 
         	 
- 			Rip product = ripService.getRipById(id);
+ 			Rip product = ripService.getProductById(id);
  			product.getPathPictures().add(fileName);
- 			ripService.updateRip(product);
+ 			ripService.updateProduct(product);
          }  
          return fileName;
     }
@@ -361,17 +361,17 @@ public class RipController {
     public @ResponseBody void changeOrderPicturesUpdate(@RequestBody List<String> selectedIds, @PathVariable("id") long id) {
     	logger.info("change order of pictures in changed rip product");
     	
-    	Rip product = ripService.getRipById(id);
+    	Rip product = ripService.getProductById(id);
     	product.getPathPictures().clear();
     	product.getPathPictures().addAll(selectedIds);
-    	ripService.updateRip(product);
+    	ripService.updateProduct(product);
     }
     
     @RequestMapping(value="/admin/rip/remove_picture_update/{name_picture}/{id}", method = RequestMethod.POST,consumes="application/json",
     		headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void removePicture(@PathVariable("name_picture") String namePicture, @PathVariable("id") long id) {
     	String name = namePicture.replace(":", ".");
-    	Rip product = ripService.getRipById(id);
+    	Rip product = ripService.getProductById(id);
     	product.getPathPictures().remove(name);
     	
     	try {
@@ -391,7 +391,7 @@ public class RipController {
 			product.getPathPictures().add("default.jpg");
     	}
     	
-    	ripService.updateRip(product);
+    	ripService.updateProduct(product);
     	
     	logger.info("Remove pictore with name = " + name + " from changed rip product");
     }
@@ -409,10 +409,10 @@ public class RipController {
     		
     		logger.info("Update links to the products in left menu!");
     		
-    		componets.updateInLeftField(ripService.getRipById(id), false);
+    		componets.updateInLeftField(ripService.getProductById(id), false);
     		
     		logger.info("DELETE rip with id=" + id + " from database!");
-    		ripService.removeRip(id);
+    		ripService.removeProduct(id);
         
     		links.createLinksForRips(ripService.listShowOnSite());
     		
@@ -421,9 +421,9 @@ public class RipController {
     
     @RequestMapping(value="/admin/rip/showOnSite/{id}", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void showOnSite(@PathVariable("id") long id, @RequestBody boolean value) {
-    	Rip rip = ripService.getRipById(id);
+    	Rip rip = ripService.getProductById(id);
     	rip.setShowOnSite(value);
-    	ripService.updateRip(rip);
+    	ripService.updateProduct(rip);
     	
     	if (rip.isShowOnSite() && rip.isShowOnLeftSide()){
     		componets.updateInLeftField(rip, true);
@@ -436,23 +436,23 @@ public class RipController {
     
     @RequestMapping(value="/admin/rip/setTop/{id}", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void setTop(@PathVariable("id") long id, @RequestBody boolean value) {
-    	Rip rip = ripService.getRipById(id);
+    	Rip rip = ripService.getProductById(id);
     	rip.setTop(value);
-    	ripService.updateRip(rip);
+    	ripService.updateProduct(rip);
     }
     
     @RequestMapping(value="/admin/rip/showOnHomePage/{id}", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void showOnHomePage(@PathVariable("id") long id, @RequestBody boolean value) {
-    	Rip rip = ripService.getRipById(id);
+    	Rip rip = ripService.getProductById(id);
     	rip.setShowOnHomePage(value);
-    	ripService.updateRip(rip);
+    	ripService.updateProduct(rip);
     }
     
     @RequestMapping(value="/admin/rip/showOnLeftSide/{id}", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void showOnLeftSide(@PathVariable("id") long id, @RequestBody boolean value) {
-    	Rip rip = ripService.getRipById(id);
+    	Rip rip = ripService.getProductById(id);
     	rip.setShowOnLeftSide(value);
-    	ripService.updateRip(rip);
+    	ripService.updateProduct(rip);
     	
     	if (rip.isShowOnSite() && rip.isShowOnLeftSide()){
     		componets.updateInLeftField(rip, true);

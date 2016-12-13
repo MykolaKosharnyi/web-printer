@@ -81,7 +81,7 @@ public class LaserController {
 
 	@RequestMapping(value = "/"+ TYPE +"s", method = RequestMethod.GET)	
     public String allProducts(Model model) {
-        model.addAttribute("listProducts", componets.showSimplestArrayOfLaser(this.laserService.listShowOnSite()));
+        model.addAttribute("listProducts", componets.makeLightWeightCollectionOfProduct(this.laserService.listShowOnSite()));
         SearchLasers search = new SearchLasers();
         search.setPrise0(0);
         search.setPrise1(100000);
@@ -112,7 +112,7 @@ public class LaserController {
         search.setPrise0(0);
         search.setPrise1(100000);
         model.addAttribute("search", search);
-        model.addAttribute("listProducts", componets.showSimplestArrayOfLaser(laserService.listSearchLasers(search)));
+        model.addAttribute("listProducts", componets.makeLightWeightCollectionOfProduct(laserService.listSearchProducts(search)));
         model.addAttribute("type", TYPE);
         
         componets.setJSONtoModelAttribute(model, TYPE);
@@ -123,20 +123,20 @@ public class LaserController {
     @RequestMapping(value="/"+ TYPE +"s/search",method=RequestMethod.POST, produces = "application/json; charset=utf-8")
     public @ResponseBody ArrayList<JSONObject> showSearchProducts(@ModelAttribute(value="search") SearchLasers search, BindingResult result ){
     	logger.info(String.format("On the /%s/search page.", TYPE));
-    	return componets.showSimplestArrayOfLaser(laserService.listSearchLasers(search));
+    	return componets.makeLightWeightCollectionOfProduct(laserService.listSearchProducts(search));
     }
 	
     @RequestMapping("/"+ TYPE +"/{id}")
     public String showProduct(@PathVariable("id") long id, Model model){
     	logger.info(String.format("On /%s/%d page.", TYPE, id));
         
-        Laser product = laserService.getLaserById(id);
+        Laser product = laserService.getProductById(id);
         model.addAttribute("product", product);
         model.addAttribute("type", TYPE);
         
         model.addAttribute("uwp", product.getIdUseWithProduct()!=null ?
         		componets.showSimplestArrayOfUseWithProduct(
-        				useWithProductService.getUseWithProductsByIds(product.getIdUseWithProduct())) : null);
+        				useWithProductService.getProductsByIds(product.getIdUseWithProduct())) : null);
         
         return TYPE;
     }
@@ -144,7 +144,7 @@ public class LaserController {
 	@RequestMapping(value = "/admin/"+ TYPE +"s", method = RequestMethod.GET)	
     public String listProducts(Model model) {
 		model.addAttribute("titleOfTable", "Список загруженных лазеров");
-        model.addAttribute("listProducts", laserService.listLasers("id"));
+        model.addAttribute("listProducts", laserService.listProducts("id"));
         logger.info(String.format("/admin/%s page.", CONCRETE_FOLDER));
         
         model.addAttribute("productType", TYPE);
@@ -161,7 +161,7 @@ public class LaserController {
 		List<Laser> listResult = new ArrayList<Laser>();
         
         if(links.containsKey(type)){
-        	for(Laser laser : laserService.listLasers("id")){
+        	for(Laser laser : laserService.listProducts("id")){
         		if(laser.getTypeLaser().equals(links.get(type))){
         			listResult.add(laser);
         		}
@@ -173,7 +173,7 @@ public class LaserController {
         } else {
         	model.addAttribute("productSubType", "none");
     		model.addAttribute("titleOfTable", "Список загруженных лазеров");
-            model.addAttribute("listProducts", laserService.listLasers("id"));
+            model.addAttribute("listProducts", laserService.listProducts("id"));
             logger.info(String.format("On /admin/%s page.", CONCRETE_FOLDER));
         }
         
@@ -193,13 +193,13 @@ public class LaserController {
 
 		if (links.containsKey(type)) {
 
-			for (Laser laser : laserService.listLasers(value)) {
+			for (Laser laser : laserService.listProducts(value)) {
 				if (laser.getTypeLaser().equals(links.get(type))) 
 					list.add(laser);
 			}
 
 		} else {
-			list.addAll(laserService.listLasers(value));
+			list.addAll(laserService.listProducts(value));
 		}
 
 		return list;
@@ -225,7 +225,7 @@ public class LaserController {
 		logger.info(String.format("/admin/%s/copy/%d page.", TYPE, id));
 		
 		logger.info(String.format("Copy all characteristic of %s.", TYPE));
-		Laser laser = laserService.getLaserById(id);
+		Laser laser = laserService.getProductById(id);
 		
 		 /* copy pictures to buffer */
 		 componets.copyPicturesToBuffer( laser.getPathPictures(), DIRECTORY, CONCRETE_FOLDER, id, files );
@@ -247,14 +247,14 @@ public class LaserController {
 
 		if (result.hasErrors()) return adminFormHasError(product, model);
 
-		long id = laserService.addLaser(product);
+		long id = laserService.addProduct(product);
 		logger.info(String.format("Create new %s! With id=%d", TYPE, id));
 
 		// create folder and add to her new pictures
 		product.getPathPictures()
 				.addAll(componets.createFolderAndWriteToItPictures(DIRECTORY, CONCRETE_FOLDER, id, files));
 
-		this.laserService.updateLaser(product);
+		this.laserService.updateProduct(product);
 
 		files.clear();
 
@@ -273,13 +273,13 @@ public class LaserController {
 
 		if (result.hasErrors()) return adminFormHasError(product, model);
 
-		long id = laserService.addLaser(product);
+		long id = laserService.addProduct(product);
 		logger.info(String.format("Create new %s! With id=%d", TYPE, id));
 
 		// create folder and add to her new pictures
 		product.getPathPictures().addAll(componets.createFolderAndWriteToItPictures(DIRECTORY, CONCRETE_FOLDER, id, files));
 
-		this.laserService.updateLaser(product);
+		this.laserService.updateProduct(product);
 
 		files.clear();
 
@@ -295,7 +295,7 @@ public class LaserController {
     @RequestMapping("/admin/"+ TYPE +"/edit/{id}")
     public String editProduct(@PathVariable("id") long id, Model model){
     	logger.info(String.format("Begin editing %s with id=%d", TYPE, id));
-    	Laser undateLaser = laserService.getLaserById(id);
+    	Laser undateLaser = laserService.getProductById(id);
     	
         model.addAttribute("product", undateLaser);
         model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(
@@ -314,10 +314,10 @@ public class LaserController {
 		
 		logger.info(String.format("%s UPDATE with save, id=%d", TYPE, product.getId()));
 		
-		List<String> pathPictures = laserService.getLaserById(product.getId()).getPathPictures();
+		List<String> pathPictures = laserService.getProductById(product.getId()).getPathPictures();
 		product.setPathPictures(pathPictures);
         
-		laserService.updateLaser(product);
+		laserService.updateProduct(product);
         logger.info(String.format("%s with id=%d was UDPATED", TYPE, product.getId()));
 		  
 		linksForProduct.createLinksForLasers(laserService.listShowOnSite());
@@ -336,10 +336,10 @@ public class LaserController {
 		if (result.hasErrors()) return adminFormHasError(product, model);
 
 		logger.info(String.format("%s UPDATE id=%d", TYPE, product.getId()));
-		List<String> pathPictures = laserService.getLaserById(product.getId()).getPathPictures();
+		List<String> pathPictures = laserService.getProductById(product.getId()).getPathPictures();
 		product.setPathPictures(pathPictures);
 
-		laserService.updateLaser(product);
+		laserService.updateProduct(product);
 		logger.info(String.format("%s with id=%d was UDPATED", TYPE, product.getId()));
 
 		files.clear();
@@ -384,9 +384,9 @@ public class LaserController {
     		 
     	String nameOfAddedPicture = componets.uploadPictureToExistedProduct(request, DIRECTORY, CONCRETE_FOLDER, id);
     	
- 		Laser product = laserService.getLaserById(id);
+ 		Laser product = laserService.getProductById(id);
  		product.getPathPictures().add(nameOfAddedPicture);
- 		laserService.updateLaser(product);
+ 		laserService.updateProduct(product);
          
        return nameOfAddedPicture;
     }
@@ -396,10 +396,10 @@ public class LaserController {
     public @ResponseBody void changeOrderPicturesUpdate(@RequestBody List<String> selectedIds, @PathVariable("id") long id) {
     	logger.info(String.format("change order of pictures in changed %s product", TYPE));
     	
-    	Laser product = laserService.getLaserById(id);
+    	Laser product = laserService.getProductById(id);
     	product.getPathPictures().clear();
     	product.getPathPictures().addAll(selectedIds);
-    	laserService.updateLaser(product);
+    	laserService.updateProduct(product);
     }
     
     @RequestMapping(value="/admin/" + TYPE + "/remove_picture_update/{name_picture}/{id}", method = RequestMethod.POST,consumes="application/json",
@@ -407,7 +407,7 @@ public class LaserController {
     public @ResponseBody void removePicture(@PathVariable("name_picture") String namePicture, @PathVariable("id") long id) {
     	
     	String name = namePicture.replace(":", ".");
-    	Laser product = laserService.getLaserById(id);
+    	Laser product = laserService.getProductById(id);
     	product.getPathPictures().remove(name);
     	
     	componets.removePicture(name, DIRECTORY, CONCRETE_FOLDER, id);
@@ -419,7 +419,7 @@ public class LaserController {
     	
     	logger.info(String.format("Remove pictore with name = %s from changed %s product", name, TYPE));
 
-    	laserService.updateLaser(product);
+    	laserService.updateProduct(product);
     }
     
     @RequestMapping("/admin/" + TYPE + "/remove/{id}")
@@ -429,10 +429,10 @@ public class LaserController {
     	componets.removeAllPricturesOfConcreteProduct(DIRECTORY, CONCRETE_FOLDER, id);
     		
     	logger.info("Update links to the products in left menu!");
-    	componets.updateInLeftField(laserService.getLaserById(id), false, TYPE);
+    	componets.updateInLeftField(laserService.getProductById(id), false, TYPE);
     		
     	logger.info(String.format("DELETE %s with id=%d from database", TYPE, id));
-    	laserService.removeLaser(id);
+    	laserService.removeProduct(id);
         
     	linksForProduct.createLinksForLasers(laserService.listShowOnSite());
     		
@@ -442,9 +442,9 @@ public class LaserController {
     @RequestMapping(value="/admin/" + TYPE + "/showOnSite/{id}", method = RequestMethod.POST,consumes="application/json",
     		headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void showOnSite(@PathVariable("id") long id, @RequestBody boolean value) {
-    	Laser laser = laserService.getLaserById(id);
+    	Laser laser = laserService.getProductById(id);
     	laser.setShowOnSite(value);
-    	laserService.updateLaser(laser);
+    	laserService.updateProduct(laser);
     	
     	componets.updateInLeftField(laser, laser.isShowOnSite() && laser.isShowOnLeftSide() , TYPE);
     	linksForProduct.createLinksForLasers(laserService.listShowOnSite());
@@ -453,25 +453,25 @@ public class LaserController {
     @RequestMapping(value="/admin/" + TYPE + "/setTop/{id}", method = RequestMethod.POST,consumes="application/json",
     		headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void setTop(@PathVariable("id") long id, @RequestBody boolean value) {
-    	Laser laser = laserService.getLaserById(id);
+    	Laser laser = laserService.getProductById(id);
     	laser.setTop(value);
-    	laserService.updateLaser(laser);
+    	laserService.updateProduct(laser);
     }
     
     @RequestMapping(value="/admin/" + TYPE + "/showOnHomePage/{id}", method = RequestMethod.POST,consumes="application/json",
     		headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void showOnHomePage(@PathVariable("id") long id, @RequestBody boolean value) {
-    	Laser laser = laserService.getLaserById(id);
+    	Laser laser = laserService.getProductById(id);
     	laser.setShowOnHomePage(value);
-    	laserService.updateLaser(laser);
+    	laserService.updateProduct(laser);
     }
     
     @RequestMapping(value="/admin/" + TYPE + "/showOnLeftSide/{id}", method = RequestMethod.POST,consumes="application/json",
     		headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void showOnLeftSide(@PathVariable("id") long id, @RequestBody boolean value) {
-    	Laser laser = laserService.getLaserById(id);
+    	Laser laser = laserService.getProductById(id);
     	laser.setShowOnLeftSide(value);
-    	laserService.updateLaser(laser);
+    	laserService.updateProduct(laser);
     	
     	componets.updateInLeftField(laser, laser.isShowOnSite() && laser.isShowOnLeftSide(), TYPE);
     }

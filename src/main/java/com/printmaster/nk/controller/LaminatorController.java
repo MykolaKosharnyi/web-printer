@@ -79,7 +79,7 @@ public class LaminatorController {
 	
 	@RequestMapping(value = "/"+ TYPE +"s", method = RequestMethod.GET)	
     public String allProducts(Model model) {
-        model.addAttribute("listProducts", componets.showSimplestArrayOfLaminator(this.laminatorService.listShowOnSite()));
+        model.addAttribute("listProducts", componets.makeLightWeightCollectionOfProduct(this.laminatorService.listShowOnSite()));
         SearchLaminators search = new SearchLaminators();
         search.setPrise0(0);
         search.setPrise1(100000);
@@ -110,7 +110,7 @@ public class LaminatorController {
         search.setPrise0(0);
         search.setPrise1(100000);
         model.addAttribute("search", search);
-        model.addAttribute("listProducts", componets.showSimplestArrayOfLaminator(laminatorService.listSearchLaminators(search)));
+        model.addAttribute("listProducts", componets.makeLightWeightCollectionOfProduct(laminatorService.listSearchProducts(search)));
         model.addAttribute("type", TYPE);
         
         componets.setJSONtoModelAttribute(model, TYPE);
@@ -121,20 +121,20 @@ public class LaminatorController {
 	@RequestMapping(value="/"+ TYPE +"s/search",method=RequestMethod.POST, produces = "application/json; charset=utf-8")
     public @ResponseBody ArrayList<JSONObject> showSearchProducts(@ModelAttribute(value="search") SearchLaminators search, BindingResult result ){
     	logger.info(String.format("On the /%s/search page.", TYPE));
-    	return componets.showSimplestArrayOfLaminator(laminatorService.listSearchLaminators(search));
+    	return componets.makeLightWeightCollectionOfProduct(laminatorService.listSearchProducts(search));
     }
 	
 	@RequestMapping("/"+ TYPE +"/{id}")
     public String showProduct(@PathVariable("id") long id, Model model){
     	logger.info(String.format("On /%s/%d page.", TYPE, id));
         
-    	Laminator product = laminatorService.getLaminatorById(id);
+    	Laminator product = laminatorService.getProductById(id);
         model.addAttribute("product", product);
         model.addAttribute("type", TYPE);
         
         model.addAttribute("uwp", product.getIdUseWithProduct()!=null ?
         		componets.showSimplestArrayOfUseWithProduct(
-        				useWithProductService.getUseWithProductsByIds(product.getIdUseWithProduct())) : null);
+        				useWithProductService.getProductsByIds(product.getIdUseWithProduct())) : null);
         
         return TYPE;
     }
@@ -142,7 +142,7 @@ public class LaminatorController {
 	@RequestMapping(value = "/admin/"+ TYPE +"s", method = RequestMethod.GET)	
     public String listProducts(Model model) {
 		model.addAttribute("titleOfTable", "Список загруженных ламинаторов");
-        model.addAttribute("listProducts", laminatorService.listLaminators("id"));
+        model.addAttribute("listProducts", laminatorService.listProducts("id"));
         logger.info(String.format("/admin/%s page.", CONCRETE_FOLDER));
         
         model.addAttribute("productType", TYPE);
@@ -159,7 +159,7 @@ public class LaminatorController {
 		List<Laminator> listResult = new ArrayList<Laminator>();
         
         if(links.containsKey(type)){
-        	for(Laminator laminator : laminatorService.listLaminators("id")){
+        	for(Laminator laminator : laminatorService.listProducts("id")){
         		if(laminator.getTypeProduct().equals(links.get(type))){
         			listResult.add(laminator);
         		}
@@ -171,7 +171,7 @@ public class LaminatorController {
         } else {
         	model.addAttribute("productSubType", "none");
     		model.addAttribute("titleOfTable", "Список загруженных ламинаторов ");
-            model.addAttribute("listProducts", laminatorService.listLaminators("id"));
+            model.addAttribute("listProducts", laminatorService.listProducts("id"));
             logger.info(String.format("On /admin/%s page.", CONCRETE_FOLDER));
         }
         
@@ -191,13 +191,13 @@ public class LaminatorController {
 
 		if (links.containsKey(type)) {
 
-			for (Laminator laminator : laminatorService.listLaminators(value)) {
+			for (Laminator laminator : laminatorService.listProducts(value)) {
 				if (laminator.getTypeProduct().equals(links.get(type))) 
 					list.add(laminator);
 			}
 
 		} else {
-			list.addAll(laminatorService.listLaminators(value));
+			list.addAll(laminatorService.listProducts(value));
 		}
 
 		return list;
@@ -223,7 +223,7 @@ public class LaminatorController {
 		logger.info(String.format("/admin/%s/copy/%d page.", TYPE, id));
 		
 		logger.info(String.format("Copy all characteristic of %s.", TYPE));
-		Laminator laminator = laminatorService.getLaminatorById(id);
+		Laminator laminator = laminatorService.getProductById(id);
 		
 		 /* copy pictures to buffer */
 		 componets.copyPicturesToBuffer( laminator.getPathPictures(), DIRECTORY, CONCRETE_FOLDER, id, files );
@@ -245,14 +245,14 @@ public class LaminatorController {
 
 		if (result.hasErrors()) return adminFormHasError(product, model);
 
-		long id = laminatorService.addLaminator(product);
+		long id = laminatorService.addProduct(product);
 		logger.info(String.format("Create new %s! With id=%d", TYPE, id));
 
 		// create folder and add to her new pictures
 		product.getPathPictures()
 				.addAll(componets.createFolderAndWriteToItPictures(DIRECTORY, CONCRETE_FOLDER, id, files));
 
-		 this.laminatorService.updateLaminator(product);
+		 this.laminatorService.updateProduct(product);
 
 		files.clear();
 
@@ -271,13 +271,13 @@ public class LaminatorController {
 
 		if (result.hasErrors()) return adminFormHasError(product, model);
 
-		long id = laminatorService.addLaminator(product);
+		long id = laminatorService.addProduct(product);
 		logger.info(String.format("Create new %s! With id=%d", TYPE, id));
 
 		// create folder and add to her new pictures
 		product.getPathPictures().addAll(componets.createFolderAndWriteToItPictures(DIRECTORY, CONCRETE_FOLDER, id, files));
 
-		this.laminatorService.updateLaminator(product);
+		this.laminatorService.updateProduct(product);
 
 		files.clear();
 
@@ -293,7 +293,7 @@ public class LaminatorController {
 	@RequestMapping("/admin/"+ TYPE +"/edit/{id}")
     public String editProduct(@PathVariable("id") long id, Model model){
     	logger.info(String.format("Begin editing %s with id=%d", TYPE, id));
-    	Laminator undateLaminator = laminatorService.getLaminatorById(id);
+    	Laminator undateLaminator = laminatorService.getProductById(id);
     	
         model.addAttribute("product", undateLaminator);
         model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(
@@ -312,10 +312,10 @@ public class LaminatorController {
 		
 		logger.info(String.format("%s UPDATE with save, id=%d", TYPE, product.getId()));
 		
-		List<String> pathPictures = laminatorService.getLaminatorById(product.getId()).getPathPictures();
+		List<String> pathPictures = laminatorService.getProductById(product.getId()).getPathPictures();
 		product.setPathPictures(pathPictures);
         
-		laminatorService.updateLaminator(product);
+		laminatorService.updateProduct(product);
         logger.info(String.format("%s with id=%d was UDPATED", TYPE, product.getId()));
 		  
         linksForProduct.createLinksForLaminators(laminatorService.listShowOnSite());
@@ -334,10 +334,10 @@ public class LaminatorController {
 		if (result.hasErrors()) return adminFormHasError(product, model);
 
 		logger.info(String.format("%s UPDATE id=%d", TYPE, product.getId()));
-		List<String> pathPictures = laminatorService.getLaminatorById(product.getId()).getPathPictures();
+		List<String> pathPictures = laminatorService.getProductById(product.getId()).getPathPictures();
 		product.setPathPictures(pathPictures);
 
-		laminatorService.updateLaminator(product);
+		laminatorService.updateProduct(product);
 		logger.info(String.format("%s with id=%d was UDPATED", TYPE, product.getId()));
 
 		files.clear();
@@ -382,9 +382,9 @@ public class LaminatorController {
     		 
     	String nameOfAddedPicture = componets.uploadPictureToExistedProduct(request, DIRECTORY, CONCRETE_FOLDER, id);
     	
-    	Laminator product = laminatorService.getLaminatorById(id);
+    	Laminator product = laminatorService.getProductById(id);
  		product.getPathPictures().add(nameOfAddedPicture);
- 		laminatorService.updateLaminator(product);
+ 		laminatorService.updateProduct(product);
          
        return nameOfAddedPicture;
     }
@@ -394,10 +394,10 @@ public class LaminatorController {
     public @ResponseBody void changeOrderPicturesUpdate(@RequestBody List<String> selectedIds, @PathVariable("id") long id) {
     	logger.info(String.format("change order of pictures in changed %s product", TYPE));
     	
-    	Laminator product = laminatorService.getLaminatorById(id);
+    	Laminator product = laminatorService.getProductById(id);
     	product.getPathPictures().clear();
     	product.getPathPictures().addAll(selectedIds);
-    	laminatorService.updateLaminator(product);
+    	laminatorService.updateProduct(product);
     }
     
 	@RequestMapping(value="/admin/" + TYPE + "/remove_picture_update/{name_picture}/{id}", method = RequestMethod.POST,consumes="application/json",
@@ -405,7 +405,7 @@ public class LaminatorController {
     public @ResponseBody void removePicture(@PathVariable("name_picture") String namePicture, @PathVariable("id") long id) {
     	
     	String name = namePicture.replace(":", ".");
-    	Laminator product = laminatorService.getLaminatorById(id);
+    	Laminator product = laminatorService.getProductById(id);
     	product.getPathPictures().remove(name);
     	
     	componets.removePicture(name, DIRECTORY, CONCRETE_FOLDER, id);
@@ -417,7 +417,7 @@ public class LaminatorController {
     	
     	logger.info(String.format("Remove pictore with name = %s from changed %s product", name, TYPE));
 
-    	laminatorService.updateLaminator(product);
+    	laminatorService.updateProduct(product);
     }
     
 	@RequestMapping("/admin/" + TYPE + "/remove/{id}")
@@ -427,10 +427,10 @@ public class LaminatorController {
     	componets.removeAllPricturesOfConcreteProduct(DIRECTORY, CONCRETE_FOLDER, id);
     		
     	logger.info("Update links to the products in left menu!");
-    	componets.updateInLeftField(laminatorService.getLaminatorById(id), false, TYPE);
+    	componets.updateInLeftField(laminatorService.getProductById(id), false, TYPE);
     		
     	logger.info(String.format("DELETE %s with id=%d from database", TYPE, id));
-    	laminatorService.removeLaminator(id);
+    	laminatorService.removeProduct(id);
         
     	linksForProduct.createLinksForLaminators(laminatorService.listShowOnSite());
     		
@@ -440,9 +440,9 @@ public class LaminatorController {
 	@RequestMapping(value="/admin/" + TYPE + "/showOnSite/{id}", method = RequestMethod.POST,consumes="application/json",
     		headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void showOnSite(@PathVariable("id") long id, @RequestBody boolean value) {
-		Laminator laminator = laminatorService.getLaminatorById(id);
+		Laminator laminator = laminatorService.getProductById(id);
 		laminator.setShowOnSite(value);
-    	laminatorService.updateLaminator(laminator);
+    	laminatorService.updateProduct(laminator);
     	
     	componets.updateInLeftField(laminator, laminator.isShowOnSite() && laminator.isShowOnLeftSide(), TYPE);
     	linksForProduct.createLinksForLaminators(laminatorService.listShowOnSite());
@@ -451,25 +451,25 @@ public class LaminatorController {
 	@RequestMapping(value="/admin/" + TYPE + "/setTop/{id}", method = RequestMethod.POST,consumes="application/json",
     		headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void setTop(@PathVariable("id") long id, @RequestBody boolean value) {
-		Laminator laminator = laminatorService.getLaminatorById(id);
+		Laminator laminator = laminatorService.getProductById(id);
     	laminator.setTop(value);
-    	laminatorService.updateLaminator(laminator);
+    	laminatorService.updateProduct(laminator);
     }
     
 	@RequestMapping(value="/admin/" + TYPE + "/showOnHomePage/{id}", method = RequestMethod.POST,consumes="application/json",
     		headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void showOnHomePage(@PathVariable("id") long id, @RequestBody boolean value) {
-		Laminator laminator = laminatorService.getLaminatorById(id);
+		Laminator laminator = laminatorService.getProductById(id);
     	laminator.setShowOnHomePage(value);
-    	laminatorService.updateLaminator(laminator);
+    	laminatorService.updateProduct(laminator);
     }
     
 	@RequestMapping(value="/admin/" + TYPE + "/showOnLeftSide/{id}", method = RequestMethod.POST,consumes="application/json",
     		headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void showOnLeftSide(@PathVariable("id") long id, @RequestBody boolean value) {
-		Laminator laminator = laminatorService.getLaminatorById(id);
+		Laminator laminator = laminatorService.getProductById(id);
     	laminator.setShowOnLeftSide(value);
-    	laminatorService.updateLaminator(laminator);
+    	laminatorService.updateProduct(laminator);
     	
     	componets.updateInLeftField(laminator, laminator.isShowOnSite() && laminator.isShowOnLeftSide(), TYPE);
     }

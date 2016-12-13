@@ -74,7 +74,7 @@ public class ScannerController {
 
 	@RequestMapping(value = "/scanners", method = RequestMethod.GET)	
     public String allScanners(Model model) {
-        model.addAttribute("listProducts", componets.showSimplestArrayOfScanner(this.scannerService.listShowOnSite()));
+        model.addAttribute("listProducts", componets.makeLightWeightCollectionOfProduct(this.scannerService.listShowOnSite()));
         SearchScanners search = new SearchScanners();
         search.setPrise0(0);
         search.setPrise1(100000);
@@ -108,7 +108,7 @@ public class ScannerController {
         search.setPrise0(0);
         search.setPrise1(100000);
         model.addAttribute("search", search);
-        model.addAttribute("listProducts", componets.showSimplestArrayOfScanner(scannerService.listSearchScanners(search)));
+        model.addAttribute("listProducts", componets.makeLightWeightCollectionOfProduct(scannerService.listSearchProducts(search)));
         model.addAttribute("type", "scanner");
         
         componets.setJSONtoModelAttribute(model, "scanner");
@@ -118,17 +118,17 @@ public class ScannerController {
     @RequestMapping(value="/scanners/search",method=RequestMethod.POST, produces = "application/json; charset=utf-8")
     public @ResponseBody ArrayList<JSONObject> showSearchScanners(@ModelAttribute(value="search") SearchScanners search, BindingResult result ){
     	logger.info("On the /scanner/search page.");
-    	return componets.showSimplestArrayOfScanner(scannerService.listSearchScanners(search));
+    	return componets.makeLightWeightCollectionOfProduct(scannerService.listSearchProducts(search));
     }
 	
     @RequestMapping("/scanner/{id}")
     public String showScanner(@PathVariable("id") long id, Model model){
     	logger.info("/scanner/" + id + " page.");
-    	Scanner product = scannerService.getScannerById(id);
+    	Scanner product = scannerService.getProductById(id);
         model.addAttribute("product", product);
         model.addAttribute("type", "scanner");
         if(product.getIdUseWithProduct()!=null){
-        	model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(useWithProductService.getUseWithProductsByIds(product.getIdUseWithProduct())));
+        	model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(useWithProductService.getProductsByIds(product.getIdUseWithProduct())));
         } else {
         	model.addAttribute("uwp", null);
         }
@@ -139,7 +139,7 @@ public class ScannerController {
 	@RequestMapping(value = "/admin/scanners", method = RequestMethod.GET)	
     public String listScanners(Model model) {
 		model.addAttribute("titleOfTable", "Список загруженных сканеров");
-        model.addAttribute("listProducts", scannerService.listScanners("id"));
+        model.addAttribute("listProducts", scannerService.listProducts("id"));
 
         model.addAttribute("productType", "scanner");
         model.addAttribute("nameProduct", "Имя сканера");
@@ -155,7 +155,7 @@ public class ScannerController {
 
 		List<Scanner> list = new ArrayList<Scanner>();
         if(type.equals("large_format_scanners")){
-        	for(Scanner scanner : scannerService.listScanners("id")){
+        	for(Scanner scanner : scannerService.listProducts("id")){
         		if(scanner.getTypeProduct().equals("Широкоформатные сканеры")){
         			list.add(scanner);
         		}
@@ -166,7 +166,7 @@ public class ScannerController {
             logger.info("On /admin/scanners/large_format_scanners page.");
     		
     	} else if(type.equals("3d_scanners")){
-        	for(Scanner scanner : scannerService.listScanners("id")){
+        	for(Scanner scanner : scannerService.listProducts("id")){
         		if(scanner.getTypeProduct().equals("3D Сканеры")){
         			list.add(scanner);
         		}
@@ -179,7 +179,7 @@ public class ScannerController {
     	} else {
     		model.addAttribute("productSubType", "none");
     		model.addAttribute("titleOfTable", "Список загруженных сканеров");
-            model.addAttribute("listProducts", scannerService.listScanners("id"));
+            model.addAttribute("listProducts", scannerService.listProducts("id"));
             logger.info("/admin/scanners page.");
     	}
         model.addAttribute("productType", "scanner");
@@ -195,21 +195,21 @@ public class ScannerController {
 		
 		List<Scanner> list = new ArrayList<Scanner>();
         if(type.equals("large_format_scanners")){
-        	for(Scanner scanner : scannerService.listScanners(value)){
+        	for(Scanner scanner : scannerService.listProducts(value)){
         		if(scanner.getTypeProduct().equals("Широкоформатные сканеры")){
         			list.add(scanner);
         		}
         	}
     		
     	} else if(type.equals("3d_scanners")){
-        	for(Scanner scanner : scannerService.listScanners(value)){
+        	for(Scanner scanner : scannerService.listProducts(value)){
         		if(scanner.getTypeProduct().equals("3D Сканеры")){
         			list.add(scanner);
         		}
         	}
             
     	} else {
-    		list.addAll(scannerService.listScanners(value));
+    		list.addAll(scannerService.listProducts(value));
     	}
 
 		return list;
@@ -234,7 +234,7 @@ public class ScannerController {
 		logger.info("/admin/scanner/copy/" + id + " page.");
 		
 		 logger.info("Copy all characteristic of scanner.");
-		 Scanner scanner = scannerService.getScannerById(id);
+		 Scanner scanner = scannerService.getProductById(id);
 		
 		 /* copy pictures to buffer */
 		 componets.copyPicturesToBuffer(scanner.getPathPictures(), directory, concreteFolder, id, files);
@@ -262,13 +262,13 @@ public class ScannerController {
 	            return "admin/scanner";
 	        }
 
-            long id = scannerService.addScanner(product);
+            long id = scannerService.addProduct(product);
             logger.info("Create new scanner! With id=" + id);
   
             //create folder and add to her new pictures
             product.getPathPictures().addAll(componets.createFolderAndWriteToItPictures(directory, concreteFolder, id, files));
 			
-            this.scannerService.updateScanner(product);
+            this.scannerService.updateProduct(product);
             
             files.clear();
 		  
@@ -293,13 +293,13 @@ public class ScannerController {
 	            return "admin/scanner";
 	        }
 		
-            long id = scannerService.addScanner(product);
+            long id = scannerService.addProduct(product);
             logger.info("Create new scanner! With id=" + id);
   
             //create folder and add to her new pictures
             product.getPathPictures().addAll(componets.createFolderAndWriteToItPictures(directory, concreteFolder, id, files));
 			
-            this.scannerService.updateScanner(product);
+            this.scannerService.updateProduct(product);
             
             files.clear(); 
 		  
@@ -315,7 +315,7 @@ public class ScannerController {
     @RequestMapping("/admin/scanner/edit/{id}")
     public String editScanner(@PathVariable("id") long id, Model model){
     	logger.info("Begin editing scanner with id=" + id);
-    	Scanner undateScanner = scannerService.getScannerById(id);
+    	Scanner undateScanner = scannerService.getProductById(id);
     	
         model.addAttribute("product", undateScanner);
         model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
@@ -338,10 +338,10 @@ public class ScannerController {
 		
 		logger.info("scanner UPDATE with save, id=" + product.getId());
         
-		List<String> pathPictures = scannerService.getScannerById(product.getId()).getPathPictures();
+		List<String> pathPictures = scannerService.getProductById(product.getId()).getPathPictures();
 		product.setPathPictures(pathPictures);
 		
-		scannerService.updateScanner(product);
+		scannerService.updateProduct(product);
         logger.info("scanner with id=" + product.getId() + " was UDPATED!");
 		  
 		links.createLinksForScanners(scannerService.listShowOnSite());
@@ -367,10 +367,10 @@ public class ScannerController {
 		
 			logger.info("scanner UPDATE id=" + product.getId());
         
-			List<String> pathPictures = scannerService.getScannerById(product.getId()).getPathPictures();
+			List<String> pathPictures = scannerService.getProductById(product.getId()).getPathPictures();
 			product.setPathPictures(pathPictures);
 			
-			scannerService.updateScanner(product);
+			scannerService.updateProduct(product);
 			logger.info("scanner with id=" + product.getId() + " was UDPATED!");
 		  
 			links.createLinksForScanners(scannerService.listShowOnSite());
@@ -442,9 +442,9 @@ public class ScannerController {
  				logger.error("Don't write picture to the folder", e);
  			} 
         	 
- 			Scanner product = scannerService.getScannerById(id);
+ 			Scanner product = scannerService.getProductById(id);
  			product.getPathPictures().add(fileName);
- 			scannerService.updateScanner(product);
+ 			scannerService.updateProduct(product);
          }  
          return fileName;
     }
@@ -454,17 +454,17 @@ public class ScannerController {
     public @ResponseBody void changeOrderPicturesUpdate(@RequestBody List<String> selectedIds, @PathVariable("id") long id) {
     	logger.info("change order of pictures in changed scanner product");
     	
-    	Scanner product = scannerService.getScannerById(id);
+    	Scanner product = scannerService.getProductById(id);
     	product.getPathPictures().clear();
     	product.getPathPictures().addAll(selectedIds);
-    	scannerService.updateScanner(product);
+    	scannerService.updateProduct(product);
     }
     
     @RequestMapping(value="/admin/scanner/remove_picture_update/{name_picture}/{id}", method = RequestMethod.POST,consumes="application/json",
     		headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void removePicture(@PathVariable("name_picture") String namePicture, @PathVariable("id") long id) {
     	String name = namePicture.replace(":", ".");
-    	Scanner product = scannerService.getScannerById(id);
+    	Scanner product = scannerService.getProductById(id);
     	product.getPathPictures().remove(name);
     	
     	try {
@@ -484,7 +484,7 @@ public class ScannerController {
 			product.getPathPictures().add("default.jpg");
     	}
     	
-    	scannerService.updateScanner(product);
+    	scannerService.updateProduct(product);
     	
     	logger.info("Remove pictore with name = " + name + " from changed scanner product");
     }
@@ -501,10 +501,10 @@ public class ScannerController {
 			}
     		
     		logger.info("Update links to the products in left menu!");
-    		componets.updateInLeftField(scannerService.getScannerById(id), false, "scanner");
+    		componets.updateInLeftField(scannerService.getProductById(id), false, "scanner");
     		
     		logger.info("DELETE scanner with id=" + id + " from database!");
-    		scannerService.removeScanner(id);
+    		scannerService.removeProduct(id);
         
     		links.createLinksForScanners(scannerService.listShowOnSite());
     		
@@ -513,9 +513,9 @@ public class ScannerController {
     
     @RequestMapping(value="/admin/scanner/showOnSite/{id}", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void showOnSite(@PathVariable("id") long id, @RequestBody boolean value) {
-    	Scanner scanner = scannerService.getScannerById(id);
+    	Scanner scanner = scannerService.getProductById(id);
     	scanner.setShowOnSite(value);
-    	scannerService.updateScanner(scanner);
+    	scannerService.updateProduct(scanner);
     	
     	if (scanner.isShowOnSite() && scanner.isShowOnLeftSide()){
     		componets.updateInLeftField(scanner, true, "scanner");
@@ -528,23 +528,23 @@ public class ScannerController {
     
     @RequestMapping(value="/admin/scanner/setTop/{id}", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void setTop(@PathVariable("id") long id, @RequestBody boolean value) {
-    	Scanner scanner = scannerService.getScannerById(id);
+    	Scanner scanner = scannerService.getProductById(id);
     	scanner.setTop(value);
-    	scannerService.updateScanner(scanner);
+    	scannerService.updateProduct(scanner);
     }
     
     @RequestMapping(value="/admin/scanner/showOnHomePage/{id}", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void showOnHomePage(@PathVariable("id") long id, @RequestBody boolean value) {
-    	Scanner scanner = scannerService.getScannerById(id);
+    	Scanner scanner = scannerService.getProductById(id);
     	scanner.setShowOnHomePage(value);
-    	scannerService.updateScanner(scanner);
+    	scannerService.updateProduct(scanner);
     }
     
     @RequestMapping(value="/admin/scanner/showOnLeftSide/{id}", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void showOnLeftSide(@PathVariable("id") long id, @RequestBody boolean value) {
-    	Scanner scanner = scannerService.getScannerById(id);
+    	Scanner scanner = scannerService.getProductById(id);
     	scanner.setShowOnLeftSide(value);
-    	scannerService.updateScanner(scanner);
+    	scannerService.updateProduct(scanner);
     	
     	if (scanner.isShowOnSite() && scanner.isShowOnLeftSide()){
     		componets.updateInLeftField(scanner, true, "scanner");

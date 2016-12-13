@@ -73,7 +73,7 @@ public class PrinterController {
     
     @Autowired(required=true)
     @Qualifier(value="printerService")
-    public void setPrinterService(PrinterService ps){
+    public void setProductService(PrinterService ps){
         this.printerService = ps;
     }
     
@@ -87,7 +87,7 @@ public class PrinterController {
 	
 	@RequestMapping(value = "/"+ TYPE +"s", method = RequestMethod.GET)	
     public String allProducts(Model model) {
-        model.addAttribute("listProducts", componets.showSimplestArrayOfPrinter(this.printerService.listShowOnSite()));
+        model.addAttribute("listProducts", componets.makeLightWeightCollectionOfProduct(this.printerService.listShowOnSite()));
         SearchPrinters search = new SearchPrinters();
         search.setPrise0(0);
         search.setPrise1(100000);
@@ -118,7 +118,7 @@ public class PrinterController {
         search.setPrise0(0);
         search.setPrise1(100000);
         model.addAttribute("search", search);
-        model.addAttribute("listProducts", componets.showSimplestArrayOfPrinter(printerService.listSearchPrinters(search)));
+        model.addAttribute("listProducts", componets.makeLightWeightCollectionOfProduct(printerService.listSearchProducts(search)));
         model.addAttribute("type", TYPE);
         
         componets.setJSONtoModelAttribute(model, TYPE);
@@ -129,14 +129,14 @@ public class PrinterController {
 	@RequestMapping(value="/"+ TYPE +"s/search",method=RequestMethod.POST, produces = "application/json; charset=utf-8")
     public @ResponseBody ArrayList<JSONObject> showSearchProducts(@ModelAttribute(value="search") SearchPrinters search, BindingResult result ){
     	logger.info(String.format("On the /%s/search page.", TYPE));
-    	return componets.showSimplestArrayOfPrinter(printerService.listSearchPrinters(search));
+    	return componets.makeLightWeightCollectionOfProduct(printerService.listSearchProducts(search));
     }
 	
     @RequestMapping("/"+ TYPE +"/{id}")
     public String showPrinter(@PathVariable("id") long id, Model model){
     	logger.info(String.format("On /%s/%d page.", TYPE, id));
         
-        Printer product = printerService.getPrinterById(id);
+        Printer product = printerService.getProductById(id);
         model.addAttribute("product", product);
         model.addAttribute("type", TYPE);
         
@@ -145,7 +145,7 @@ public class PrinterController {
 	        
 	        //get checked USE WITH PRODUCT from admin page
 	        if(product.getIdUseWithProduct()!=null){
-	        	useWithThisProduct.addAll(useWithProductService.getUseWithProductsByIds(product.getIdUseWithProduct()));
+	        	useWithThisProduct.addAll(useWithProductService.getProductsByIds(product.getIdUseWithProduct()));
 	        }
 	        
 	        //get PAINT to product by COMPATIBLE INK in printer
@@ -164,7 +164,7 @@ public class PrinterController {
     @RequestMapping(value = "/admin/"+ TYPE +"s", method = RequestMethod.GET)	
     public String listProducts(Model model) {
 		model.addAttribute("titleOfTable", "Список загруженных принтеров");
-		model.addAttribute("listProducts", printerService.listPrinters("id"));
+		model.addAttribute("listProducts", printerService.listProducts("id"));
         logger.info(String.format("/admin/%s page.", CONCRETE_FOLDER));
         
         model.addAttribute("productType", TYPE);
@@ -181,7 +181,7 @@ public class PrinterController {
 		List<Printer> listResult = new ArrayList<Printer>();
         
         if(links.containsKey(type)){
-        	for(Printer product : printerService.listPrinters("id")){
+        	for(Printer product : printerService.listProducts("id")){
         		if(product.getTypePrinter().equals(links.get(type))){
         			listResult.add(product);
         		}
@@ -193,7 +193,7 @@ public class PrinterController {
         } else {
         	model.addAttribute("productSubType", "none");
     		model.addAttribute("titleOfTable", "Список загруженных принтеров");
-            model.addAttribute("listProducts", printerService.listPrinters("id"));
+            model.addAttribute("listProducts", printerService.listProducts("id"));
             logger.info(String.format("On /admin/%s page.", CONCRETE_FOLDER));
         }
         
@@ -213,13 +213,13 @@ public class PrinterController {
 
 		if (links.containsKey(type)) {
 
-			for (Printer product : printerService.listPrinters(value)) {
+			for (Printer product : printerService.listProducts(value)) {
 				if (product.getTypePrinter().equals(links.get(type))) 
 					list.add(product);
 			}
 
 		} else {
-			list.addAll(printerService.listPrinters(value));
+			list.addAll(printerService.listProducts(value));
 		}
 
 		return list;
@@ -245,7 +245,7 @@ public class PrinterController {
 		logger.info(String.format("/admin/%s/copy/%d page.", TYPE, id));
 		
 		logger.info(String.format("Copy all characteristic of %s.", TYPE));
-		Printer product = printerService.getPrinterById(id);
+		Printer product = printerService.getProductById(id);
 		
 		 /* copy pictures to buffer */
 		 componets.copyPicturesToBuffer( product.getPathPictures(), DIRECTORY, CONCRETE_FOLDER, id, files );
@@ -267,14 +267,14 @@ public class PrinterController {
 
 		if (result.hasErrors()) return adminFormHasError(product, model);
 
-		long id = printerService.addPrinter(product);
+		long id = printerService.addProduct(product);
 		logger.info(String.format("Create new %s! With id=%d", TYPE, id));
 
 		// create folder and add to her new pictures
 		product.getPathPictures()
 				.addAll(componets.createFolderAndWriteToItPictures(DIRECTORY, CONCRETE_FOLDER, id, files));
 
-		this.printerService.updatePrinter(product);
+		this.printerService.updateProduct(product);
 
 		files.clear();
 
@@ -293,13 +293,13 @@ public class PrinterController {
 
 		if (result.hasErrors()) return adminFormHasError(product, model);
 
-		long id = printerService.addPrinter(product);
+		long id = printerService.addProduct(product);
 		logger.info(String.format("Create new %s! With id=%d", TYPE, id));
 
 		// create folder and add to her new pictures
 		product.getPathPictures().addAll(componets.createFolderAndWriteToItPictures(DIRECTORY, CONCRETE_FOLDER, id, files));
 
-		this.printerService.updatePrinter(product);
+		this.printerService.updateProduct(product);
 
 		files.clear();
 
@@ -315,7 +315,7 @@ public class PrinterController {
     @RequestMapping("/admin/"+ TYPE +"/edit/{id}")
     public String editProduct(@PathVariable("id") long id, Model model){
     	logger.info(String.format("Begin editing %s with id=%d", TYPE, id));
-    	Printer undateProduct = printerService.getPrinterById(id);
+    	Printer undateProduct = printerService.getProductById(id);
     	
         model.addAttribute("product", undateProduct);
         model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(
@@ -334,10 +334,10 @@ public class PrinterController {
 		
 		logger.info(String.format("%s UPDATE with save, id=%d", TYPE, product.getId()));
 		
-		List<String> pathPictures = printerService.getPrinterById(product.getId()).getPathPictures();
+		List<String> pathPictures = printerService.getProductById(product.getId()).getPathPictures();
 		product.setPathPictures(pathPictures);
         
-		printerService.updatePrinter(product);
+		printerService.updateProduct(product);
         logger.info(String.format("%s with id=%d was UDPATED", TYPE, product.getId()));
 		  
 		linksForProduct.createLinksForPrinters(printerService.listShowOnSite());
@@ -356,10 +356,10 @@ public class PrinterController {
 		if (result.hasErrors()) return adminFormHasError(product, model);
 
 		logger.info(String.format("%s UPDATE id=%d", TYPE, product.getId()));
-		List<String> pathPictures = printerService.getPrinterById(product.getId()).getPathPictures();
+		List<String> pathPictures = printerService.getProductById(product.getId()).getPathPictures();
 		product.setPathPictures(pathPictures);
 
-		printerService.updatePrinter(product);
+		printerService.updateProduct(product);
 		logger.info(String.format("%s with id=%d was UDPATED", TYPE, product.getId()));
 
 		files.clear();
@@ -404,9 +404,9 @@ public class PrinterController {
     		 
     	String nameOfAddedPicture = componets.uploadPictureToExistedProduct(request, DIRECTORY, CONCRETE_FOLDER, id);
     	
- 		Printer product = printerService.getPrinterById(id);
+ 		Printer product = printerService.getProductById(id);
  		product.getPathPictures().add(nameOfAddedPicture);
- 		printerService.updatePrinter(product);
+ 		printerService.updateProduct(product);
          
        return nameOfAddedPicture;
     }
@@ -416,10 +416,10 @@ public class PrinterController {
     public @ResponseBody void changeOrderPicturesUpdate(@RequestBody List<String> selectedIds, @PathVariable("id") long id) {
     	logger.info(String.format("change order of pictures in changed %s product", TYPE));
     	
-    	Printer product = printerService.getPrinterById(id);
+    	Printer product = printerService.getProductById(id);
     	product.getPathPictures().clear();
     	product.getPathPictures().addAll(selectedIds);
-    	printerService.updatePrinter(product);
+    	printerService.updateProduct(product);
     }
     
     @RequestMapping(value="/admin/" + TYPE + "/remove_picture_update/{name_picture}/{id}", method = RequestMethod.POST,consumes="application/json",
@@ -427,7 +427,7 @@ public class PrinterController {
     public @ResponseBody void removePicture(@PathVariable("name_picture") String namePicture, @PathVariable("id") long id) {
     	
     	String name = namePicture.replace(":", ".");
-    	Printer product = printerService.getPrinterById(id);
+    	Printer product = printerService.getProductById(id);
     	product.getPathPictures().remove(name);
     	
     	componets.removePicture(name, DIRECTORY, CONCRETE_FOLDER, id);
@@ -439,7 +439,7 @@ public class PrinterController {
     	
     	logger.info(String.format("Remove pictore with name = %s from changed %s product", name, TYPE));
 
-    	printerService.updatePrinter(product);
+    	printerService.updateProduct(product);
     }
     
     @RequestMapping("/admin/" + TYPE + "/remove/{id}")
@@ -449,10 +449,10 @@ public class PrinterController {
     	componets.removeAllPricturesOfConcreteProduct(DIRECTORY, CONCRETE_FOLDER, id);
     		
     	logger.info("Update links to the products in left menu!");
-    	componets.updateInLeftField(printerService.getPrinterById(id), false, TYPE);
+    	componets.updateInLeftField(printerService.getProductById(id), false, TYPE);
     		
     	logger.info(String.format("DELETE %s with id=%d from database", TYPE, id));
-    	printerService.removePrinter(id);
+    	printerService.removeProduct(id);
         
     	linksForProduct.createLinksForPrinters(printerService.listShowOnSite());
     		
@@ -462,9 +462,9 @@ public class PrinterController {
     @RequestMapping(value="/admin/" + TYPE + "/showOnSite/{id}", method = RequestMethod.POST,consumes="application/json",
     		headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void showOnSite(@PathVariable("id") long id, @RequestBody boolean value) {
-    	Printer product = printerService.getPrinterById(id);
+    	Printer product = printerService.getProductById(id);
     	product.setShowOnSite(value);
-    	printerService.updatePrinter(product);
+    	printerService.updateProduct(product);
     	
     	componets.updateInLeftField(product, product.isShowOnSite() && product.isShowOnLeftSide() , TYPE);
     	linksForProduct.createLinksForPrinters(printerService.listShowOnSite());
@@ -473,25 +473,25 @@ public class PrinterController {
     @RequestMapping(value="/admin/" + TYPE + "/setTop/{id}", method = RequestMethod.POST,consumes="application/json",
     		headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void setTop(@PathVariable("id") long id, @RequestBody boolean value) {
-    	Printer product = printerService.getPrinterById(id);
+    	Printer product = printerService.getProductById(id);
     	product.setTop(value);
-    	printerService.updatePrinter(product);
+    	printerService.updateProduct(product);
     }
     
     @RequestMapping(value="/admin/" + TYPE + "/showOnHomePage/{id}", method = RequestMethod.POST,consumes="application/json",
     		headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void showOnHomePage(@PathVariable("id") long id, @RequestBody boolean value) {
-    	Printer product = printerService.getPrinterById(id);
+    	Printer product = printerService.getProductById(id);
     	product.setShowOnHomePage(value);
-    	printerService.updatePrinter(product);
+    	printerService.updateProduct(product);
     }
     
     @RequestMapping(value="/admin/" + TYPE + "/showOnLeftSide/{id}", method = RequestMethod.POST,consumes="application/json",
     		headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void showOnLeftSide(@PathVariable("id") long id, @RequestBody boolean value) {
-    	Printer product = printerService.getPrinterById(id);
+    	Printer product = printerService.getProductById(id);
     	product.setShowOnLeftSide(value);
-    	printerService.updatePrinter(product);
+    	printerService.updateProduct(product);
     	
     	componets.updateInLeftField(product, product.isShowOnSite() && product.isShowOnLeftSide(), TYPE);
     }

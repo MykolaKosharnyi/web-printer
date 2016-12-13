@@ -113,7 +113,7 @@ public class UseWithProductController {
         search.setPrise0(0);
         search.setPrise1(100000);
         model.addAttribute("search", search);        
-        model.addAttribute("listProducts", componets.showSimplestArrayOfUseWithProduct(useWithProductService.listSearchUseWithProducts(search)));
+        model.addAttribute("listProducts", componets.showSimplestArrayOfUseWithProduct(useWithProductService.listSearchProducts(search)));
         model.addAttribute("type", "use_with_product");
         
         logger.info("All characteristic of 'Use with product'.");
@@ -124,13 +124,13 @@ public class UseWithProductController {
     @RequestMapping(value="/use_with_products/search",method=RequestMethod.POST, produces = "application/json; charset=utf-8")
     public @ResponseBody ArrayList<JSONObject> showSearchUWPs(@ModelAttribute(value="search") SearchUseWithProducts search, BindingResult result ){
     	logger.info("On the /use_with_product/search page.");
-    	return componets.showSimplestArrayOfUseWithProduct(useWithProductService.listSearchUseWithProducts(search));
+    	return componets.showSimplestArrayOfUseWithProduct(useWithProductService.listSearchProducts(search));
     }
 	
     @RequestMapping("/use_with_product/{id}")
     public String showUWP(@PathVariable("id") long id, Model model){
     	logger.info("/use_with_product/" + id + " page.");
-        model.addAttribute("product", useWithProductService.getUseWithProductById(id));
+        model.addAttribute("product", useWithProductService.getProductById(id));
         model.addAttribute("type", "use_with_product");
         return "use_with_product";
     }
@@ -140,7 +140,7 @@ public class UseWithProductController {
 		model.addAttribute("productType", "use_with_product");
 		model.addAttribute("nameProduct", "Имя товара");
 		model.addAttribute("titleOfTable", "Список загруженного товара");
-        model.addAttribute("listProducts", useWithProductService.listUseWithProducts("id"));
+        model.addAttribute("listProducts", useWithProductService.listProducts("id"));
         model.addAttribute("title", "Используется с товаром");
         model.addAttribute("addProduct", "Добавить товар");
         model.addAttribute("productSubType", "none");
@@ -155,7 +155,7 @@ public class UseWithProductController {
 		
         if(type.equals("ink_for_inkjet")){
         	
-        	for(UseWithProduct useWithProduct : useWithProductService.listUseWithProducts("id")){
+        	for(UseWithProduct useWithProduct : useWithProductService.listProducts("id")){
         		if(useWithProduct.getTypeProduct().equals("Чернила для струйной печати")){
         			list.add(useWithProduct);
         		}
@@ -166,7 +166,7 @@ public class UseWithProductController {
     		
     	} else if(type.equals("consumables_for_digital_equipment")){
         	
-        	for(UseWithProduct useWithProduct : useWithProductService.listUseWithProducts("id")){
+        	for(UseWithProduct useWithProduct : useWithProductService.listProducts("id")){
         		if(useWithProduct.getTypeProduct().equals("Расходные материалы для цифрового оборудования")){
         			list.add(useWithProduct);
         		}
@@ -177,7 +177,7 @@ public class UseWithProductController {
              
     	} else if(type.equals("consumables_for_3D_equipment")){
         	
-        	for(UseWithProduct useWithProduct : useWithProductService.listUseWithProducts("id")){
+        	for(UseWithProduct useWithProduct : useWithProductService.listProducts("id")){
         		if(useWithProduct.getTypeProduct().equals("Расходные материалы для 3D оборудования")){
         			list.add(useWithProduct);
         		}
@@ -188,7 +188,7 @@ public class UseWithProductController {
  		
     	} else if(type.equals("products_for_maintenance")){	
         	
-        	for(UseWithProduct useWithProduct : useWithProductService.listUseWithProducts("id")){
+        	for(UseWithProduct useWithProduct : useWithProductService.listProducts("id")){
         		if(useWithProduct.getTypeProduct().equals("Товары для обслуживания")){
         			list.add(useWithProduct);
         		}
@@ -199,7 +199,7 @@ public class UseWithProductController {
 
     	} else if(type.equals("parts_and_accessories")){		
         	
-        	for(UseWithProduct useWithProduct : useWithProductService.listUseWithProducts("id")){
+        	for(UseWithProduct useWithProduct : useWithProductService.listProducts("id")){
         		if(useWithProduct.getTypeProduct().equals("Запчасти и комплектующие")){
         			list.add(useWithProduct);
         		}
@@ -211,7 +211,7 @@ public class UseWithProductController {
     	} else {
     		model.addAttribute("productSubType", "none");
     		model.addAttribute("titleOfTable", "Список загруженного товара");
-            model.addAttribute("listProducts", useWithProductService.listUseWithProducts("id"));
+            model.addAttribute("listProducts", useWithProductService.listProducts("id"));
     	}
         
         model.addAttribute("productType", "use_with_product");
@@ -229,41 +229,41 @@ public class UseWithProductController {
 		List<UseWithProduct> list = new ArrayList<UseWithProduct>();
         if(type.equals("ink_for_inkjet")){
         	
-        	for(UseWithProduct useWithProduct : useWithProductService.listUseWithProducts(value)){
+        	for(UseWithProduct useWithProduct : useWithProductService.listProducts(value)){
         		if(useWithProduct.getTypeProduct().equals("Чернила для струйной печати")){
         			list.add(useWithProduct);
         		}
         	}
     	} else if(type.equals("consumables_for_digital_equipment")){
         	
-        	for(UseWithProduct useWithProduct : useWithProductService.listUseWithProducts(value)){
+        	for(UseWithProduct useWithProduct : useWithProductService.listProducts(value)){
         		if(useWithProduct.getTypeProduct().equals("Расходные материалы для цифрового оборудования")){
         			list.add(useWithProduct);
         		}
         	}
     	} else if(type.equals("consumables_for_3D_equipment")){
         	
-        	for(UseWithProduct useWithProduct : useWithProductService.listUseWithProducts(value)){
+        	for(UseWithProduct useWithProduct : useWithProductService.listProducts(value)){
         		if(useWithProduct.getTypeProduct().equals("Расходные материалы для 3D оборудования")){
         			list.add(useWithProduct);
         		}
         	}
     	} else if(type.equals("products_for_maintenance")){	
         	
-        	for(UseWithProduct useWithProduct : useWithProductService.listUseWithProducts(value)){
+        	for(UseWithProduct useWithProduct : useWithProductService.listProducts(value)){
         		if(useWithProduct.getTypeProduct().equals("Товары для обслуживания")){
         			list.add(useWithProduct);
         		}
         	}
     	} else if(type.equals("parts_and_accessories")){		
         	
-        	for(UseWithProduct useWithProduct : useWithProductService.listUseWithProducts(value)){
+        	for(UseWithProduct useWithProduct : useWithProductService.listProducts(value)){
         		if(useWithProduct.getTypeProduct().equals("Запчасти и комплектующие")){
         			list.add(useWithProduct);
         		}
         	}
     	} else {
-    		list.addAll(useWithProductService.listUseWithProducts(value));
+    		list.addAll(useWithProductService.listProducts(value));
     	}
 
 		return list;
@@ -289,7 +289,7 @@ public class UseWithProductController {
 		logger.info("/admin/use_with_product/copy/" + id + " page.");
 		
 		 logger.info("Copy all characteristic of use_with_product.");
-		 UseWithProduct useWithProduct = useWithProductService.getUseWithProductById(id);
+		 UseWithProduct useWithProduct = useWithProductService.getProductById(id);
 		
 		 /* copy pictures to buffer */
 		 componets.copyPicturesToBuffer(useWithProduct.getPathPictures(), directory, concreteFolder, id, files);
@@ -316,7 +316,7 @@ public class UseWithProductController {
 	            return "admin/use_with_product";
 	        }
 		
-            long id = useWithProductService.addUseWithProduct(product);
+            long id = useWithProductService.addProduct(product);
             logger.info("Create new use_with_product! With id=" + id);
 
             //create folder and add to her new pictures
@@ -326,7 +326,7 @@ public class UseWithProductController {
             if(product.getTypeProduct().equals("Чернила для струйной печати"))
             	product.setPrise(0);
             
-            this.useWithProductService.updateUseWithProduct(product);
+            this.useWithProductService.updateProduct(product);
             
             files.clear();
 		  
@@ -351,7 +351,7 @@ public class UseWithProductController {
 	            return "admin/use_with_product";
 	        }
 		
-            long id = useWithProductService.addUseWithProduct(product);
+            long id = useWithProductService.addProduct(product);
             logger.info("Create new use_with_product! With id=" + id);
   
             //create folder and add to her new pictures
@@ -361,7 +361,7 @@ public class UseWithProductController {
             if(product.getTypeProduct().equals("Чернила для струйной печати"))
             	product.setPrise(0);
             
-            this.useWithProductService.updateUseWithProduct(product);
+            this.useWithProductService.updateProduct(product);
             
             files.clear();
 		  
@@ -376,7 +376,7 @@ public class UseWithProductController {
     @RequestMapping("/admin/use_with_product/edit/{id}")
     public String editUWP(@PathVariable("id") long id, Model model){
     	logger.info("Begin editing use_with_product with id=" + id);
-    	UseWithProduct undateUWP = useWithProductService.getUseWithProductById(id);
+    	UseWithProduct undateUWP = useWithProductService.getProductById(id);
     	
         model.addAttribute("product", undateUWP);
         model.addAttribute("type", "use_with_product");
@@ -399,14 +399,14 @@ public class UseWithProductController {
 		
 		logger.info("use_with_product UPDATE with save, id=" + product.getId());
 		
-		List<String> pathPictures = useWithProductService.getUseWithProductById(product.getId()).getPathPictures();
+		List<String> pathPictures = useWithProductService.getProductById(product.getId()).getPathPictures();
 		product.setPathPictures(pathPictures);
         
 		//if it is PAINT type product
         if(product.getTypeProduct().equals("Чернила для струйной печати"))
         	product.setPrise(0);
 		
-        useWithProductService.updateUseWithProduct(product);
+        useWithProductService.updateProduct(product);
         logger.info("use_with_product with id=" + product.getId() + " was UDPATED!");
 		  
 		links.createLinksForUseWithProducts(useWithProductService.listShowOnSite());
@@ -434,14 +434,14 @@ public class UseWithProductController {
 		
 		logger.info("use_with_product UPDATE id=" + product.getId());
 		
-		List<String> pathPictures = useWithProductService.getUseWithProductById(product.getId()).getPathPictures();
+		List<String> pathPictures = useWithProductService.getProductById(product.getId()).getPathPictures();
 		product.setPathPictures(pathPictures);
         
 		//if it is PAINT type product
         if(product.getTypeProduct().equals("Чернила для струйной печати"))
         	product.setPrise(0);
 		
-        useWithProductService.updateUseWithProduct(product);
+        useWithProductService.updateProduct(product);
         logger.info("use_with_product with id=" + product.getId() + " was UDPATED!");
         
 		  files.clear();
@@ -514,9 +514,9 @@ public class UseWithProductController {
  				logger.error("Don't write picture to the folder", e);
  			} 
         	 
- 			UseWithProduct product = useWithProductService.getUseWithProductById(id);
+ 			UseWithProduct product = useWithProductService.getProductById(id);
  			product.getPathPictures().add(fileName);
- 			useWithProductService.updateUseWithProduct(product);
+ 			useWithProductService.updateProduct(product);
          }  
          return fileName;
     }
@@ -526,17 +526,17 @@ public class UseWithProductController {
     public @ResponseBody void changeOrderPicturesUpdate(@RequestBody List<String> selectedIds, @PathVariable("id") long id) {
     	logger.info("change order of pictures in changed use_with_product product");
     	
-    	UseWithProduct product = useWithProductService.getUseWithProductById(id);
+    	UseWithProduct product = useWithProductService.getProductById(id);
     	product.getPathPictures().clear();
     	product.getPathPictures().addAll(selectedIds);
-    	useWithProductService.updateUseWithProduct(product);
+    	useWithProductService.updateProduct(product);
     }
     
     @RequestMapping(value="/admin/use_with_product/remove_picture_update/{name_picture}/{id}", method = RequestMethod.POST,consumes="application/json",
     		headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void removePicture(@PathVariable("name_picture") String namePicture, @PathVariable("id") long id) {
     	String name = namePicture.replace(":", ".");
-    	UseWithProduct product = useWithProductService.getUseWithProductById(id);
+    	UseWithProduct product = useWithProductService.getProductById(id);
     	product.getPathPictures().remove(name);
     	
     	try {
@@ -556,7 +556,7 @@ public class UseWithProductController {
 			product.getPathPictures().add("default.jpg");
     	}
     	
-    	useWithProductService.updateUseWithProduct(product);
+    	useWithProductService.updateProduct(product);
     	
     	logger.info("Remove pictore with name = " + name + " from changed useWithProduct product");
     }
@@ -574,10 +574,10 @@ public class UseWithProductController {
     		
     		logger.info("Update links to the products in left menu!");
     		
-    		componets.updateInLeftField(useWithProductService.getUseWithProductById(id), false);
+    		componets.updateInLeftField(useWithProductService.getProductById(id), false);
     		
     		logger.info("DELETE use_with_product with id=" + id + " from database!");
-    		useWithProductService.removeUseWithProduct(id);
+    		useWithProductService.removeProduct(id);
         
     		links.createLinksForUseWithProducts(useWithProductService.listShowOnSite());
     		
@@ -586,9 +586,9 @@ public class UseWithProductController {
     
     @RequestMapping(value="/admin/use_with_product/showOnSite/{id}", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void showOnSite(@PathVariable("id") long id, @RequestBody boolean value) {
-    	UseWithProduct useWithProduct = useWithProductService.getUseWithProductById(id);
+    	UseWithProduct useWithProduct = useWithProductService.getProductById(id);
     	useWithProduct.setShowOnSite(value);
-    	useWithProductService.updateUseWithProduct(useWithProduct);
+    	useWithProductService.updateProduct(useWithProduct);
     	
     	if (useWithProduct.isShowOnSite() && useWithProduct.isShowOnLeftSide()){
     		componets.updateInLeftField(useWithProduct, true);
@@ -601,23 +601,23 @@ public class UseWithProductController {
     
     @RequestMapping(value="/admin/use_with_product/setTop/{id}", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void setTop(@PathVariable("id") long id, @RequestBody boolean value) {
-    	UseWithProduct useWithProduct = useWithProductService.getUseWithProductById(id);
+    	UseWithProduct useWithProduct = useWithProductService.getProductById(id);
     	useWithProduct.setTop(value);
-    	useWithProductService.updateUseWithProduct(useWithProduct);
+    	useWithProductService.updateProduct(useWithProduct);
     }
     
     @RequestMapping(value="/admin/use_with_product/showOnHomePage/{id}", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void showOnHomePage(@PathVariable("id") long id, @RequestBody boolean value) {
-    	UseWithProduct useWithProduct = useWithProductService.getUseWithProductById(id);
+    	UseWithProduct useWithProduct = useWithProductService.getProductById(id);
     	useWithProduct.setShowOnHomePage(value);
-    	useWithProductService.updateUseWithProduct(useWithProduct);
+    	useWithProductService.updateProduct(useWithProduct);
     }
     
     @RequestMapping(value="/admin/use_with_product/showOnLeftSide/{id}", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void showOnLeftSide(@PathVariable("id") long id, @RequestBody boolean value) {
-    	UseWithProduct useWithProduct = useWithProductService.getUseWithProductById(id);
+    	UseWithProduct useWithProduct = useWithProductService.getProductById(id);
     	useWithProduct.setShowOnLeftSide(value);
-    	useWithProductService.updateUseWithProduct(useWithProduct);
+    	useWithProductService.updateProduct(useWithProduct);
     	
     	if (useWithProduct.isShowOnSite() && useWithProduct.isShowOnLeftSide()){
     		componets.updateInLeftField(useWithProduct, true);

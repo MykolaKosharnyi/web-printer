@@ -101,31 +101,31 @@ public class CartController {
 	private ArrayList<Option> addOption(String productType, long productId, List<String> checkedOption){
 		
 		if(productType.equals("printer")){
-			return getOption( printerService.getPrinterById(productId), checkedOption );
+			return getOption( printerService.getProductById(productId), checkedOption );
 			
 		} else if(productType.equals("3d_printer")){
-			return getOption( printer3DService.getPrinter3DById(productId), checkedOption );
+			return getOption( printer3DService.getProductById(productId), checkedOption );
 			
 		} else if(productType.equals("digital_printer")){
-			return getOption( digitalPrinterService.getPrinterById(productId), checkedOption );
+			return getOption( digitalPrinterService.getProductById(productId), checkedOption );
 			
 		} else if(productType.equals("laminator")){
-			return getOption( laminatorService.getLaminatorById(productId), checkedOption );
+			return getOption( laminatorService.getProductById(productId), checkedOption );
 			
 		} else if(productType.equals("laser")){
-			return getOption( laserService.getLaserById(productId), checkedOption );
+			return getOption( laserService.getProductById(productId), checkedOption );
 			
 		} else if(productType.equals("cutter")){
-			return getOption( cutterService.getCutterById(productId), checkedOption );
+			return getOption( cutterService.getProductById(productId), checkedOption );
 			
 		} else if(productType.equals("scanner")){
-			return getOption( scannerService.getScannerById(productId), checkedOption );
+			return getOption( scannerService.getProductById(productId), checkedOption );
 			
 		} else if(productType.equals("use_with_product")){
-			return getOption( useWithProductService.getUseWithProductById(productId), checkedOption );
+			return getOption( useWithProductService.getProductById(productId), checkedOption );
 			
 		} else if(productType.equals("rip")){
-			return getOption( ripService.getRipById(productId), checkedOption );
+			return getOption( ripService.getProductById(productId), checkedOption );
 			
 		} else {
 			return new ArrayList<Option>();
@@ -258,7 +258,7 @@ public class CartController {
 	private ArrayList<Paint> addPaint(String productType, long productId, Map<String, Integer> checkedPaint){
 		
 		if(productType.equals("use_with_product")){
-			return getPaint( useWithProductService.getUseWithProductById(productId), checkedPaint );
+			return getPaint( useWithProductService.getProductById(productId), checkedPaint );
 		} else {
 			return new ArrayList<Paint>();
 		}
@@ -345,31 +345,31 @@ public class CartController {
 	private ArrayList<Delivery> addDelivery(String productType, long productId, String checkedDelivery){
 		
 		if(productType.equals("printer")){
-			return getDelivery( printerService.getPrinterById(productId), checkedDelivery );
+			return getDelivery( printerService.getProductById(productId), checkedDelivery );
 			
 		} else if(productType.equals("3d_printer")){
-			return getDelivery( printer3DService.getPrinter3DById(productId), checkedDelivery );
+			return getDelivery( printer3DService.getProductById(productId), checkedDelivery );
 			
 		} else if(productType.equals("digital_printer")){
-			return getDelivery( digitalPrinterService.getPrinterById(productId), checkedDelivery );
+			return getDelivery( digitalPrinterService.getProductById(productId), checkedDelivery );
 			
 		} else if(productType.equals("laminator")){
-			return getDelivery( laminatorService.getLaminatorById(productId), checkedDelivery );
+			return getDelivery( laminatorService.getProductById(productId), checkedDelivery );
 			
 		} else if(productType.equals("laser")){
-			return getDelivery( laserService.getLaserById(productId), checkedDelivery );
+			return getDelivery( laserService.getProductById(productId), checkedDelivery );
 			
 		} else if(productType.equals("cutter")){
-			return getDelivery( cutterService.getCutterById(productId), checkedDelivery );
+			return getDelivery( cutterService.getProductById(productId), checkedDelivery );
 			
 		} else if(productType.equals("scanner")){
-			return getDelivery( scannerService.getScannerById(productId), checkedDelivery );
+			return getDelivery( scannerService.getProductById(productId), checkedDelivery );
 			
 		} else if(productType.equals("use_with_product")){
-			return getDelivery( useWithProductService.getUseWithProductById(productId), checkedDelivery );
+			return getDelivery( useWithProductService.getProductById(productId), checkedDelivery );
 			
 		} else if(productType.equals("rip")){
-			return getDelivery( ripService.getRipById(productId), checkedDelivery );
+			return getDelivery( ripService.getProductById(productId), checkedDelivery );
 			
 		} else {
 			return new ArrayList<Delivery>();

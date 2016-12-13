@@ -74,12 +74,12 @@ public class CutterController {
     @Autowired
     PicturesContainer files;
  
-    private CutterService cutterService;
+    private CutterService productService;
     
     @Autowired(required=true)
     @Qualifier(value="cutterService")
-    public void setPrinterService(CutterService ps){
-        this.cutterService = ps;
+    public void setProductService(CutterService ps){
+        this.productService = ps;
     }
 	
 	private UseWithProductService useWithProductService;
@@ -92,7 +92,7 @@ public class CutterController {
     
 	@RequestMapping(value = "/"+ TYPE +"s", method = RequestMethod.GET)	
     public String allProducts(Model model) {
-        model.addAttribute(ATTRIBUTE_LIST_PRODUCTS, componets.showSimplestArrayOfCutter(this.cutterService.listShowOnSite()));
+        model.addAttribute(ATTRIBUTE_LIST_PRODUCTS, componets.makeLightWeightCollectionOfProduct(this.productService.listShowOnSite()));
         SearchCutters search = new SearchCutters();
         search.setPrise0(0);
         search.setPrise1(100000);
@@ -123,7 +123,7 @@ public class CutterController {
         search.setPrise0(0);
         search.setPrise1(100000);
         model.addAttribute(ATTRIBUTE_SEARCH, search);
-        model.addAttribute(ATTRIBUTE_LIST_PRODUCTS, componets.showSimplestArrayOfCutter(cutterService.listSearchCutters(search)));
+        model.addAttribute(ATTRIBUTE_LIST_PRODUCTS, componets.makeLightWeightCollectionOfProduct(productService.listSearchProducts(search)));
         model.addAttribute(ATTRIBUTE_TYPE, TYPE);
         
         componets.setJSONtoModelAttribute(model, TYPE);
@@ -133,19 +133,19 @@ public class CutterController {
 
     @RequestMapping(value="/"+ TYPE +"s/"+ PATH_SEARCH, method=RequestMethod.POST, produces=JSON_PRODUCES)
     public @ResponseBody ArrayList<JSONObject> showSearchProducts(@ModelAttribute(value="search") SearchCutters search, BindingResult result ){
-    	logger.info(String.format("Go to the /%s/search page.", TYPE));
-    	return componets.showSimplestArrayOfCutter(cutterService.listSearchCutters(search));
+    	logger.info(String.format("Go to the /%s/%s page.", TYPE, PATH_SEARCH));
+    	return componets.makeLightWeightCollectionOfProduct(productService.listSearchProducts(search));
     }
 	
     @RequestMapping("/"+ TYPE +"/{id}")
     public String showProduct(@PathVariable("id") long id, Model model){
     	logger.info(String.format("On /%s/%d page.", TYPE, id));
         
-        Cutter product = cutterService.getCutterById(id);
+        Cutter product = productService.getProductById(id);
         model.addAttribute(ATTRIBUTE_PRODUCT, product);
         model.addAttribute(ATTRIBUTE_TYPE, TYPE);       
         model.addAttribute(ATTRIBUTE_UWP, product.getIdUseWithProduct()!=null ?
-        		componets.showSimplestArrayOfUseWithProduct(useWithProductService.getUseWithProductsByIds(product.getIdUseWithProduct())) : null);
+        		componets.showSimplestArrayOfUseWithProduct(useWithProductService.getProductsByIds(product.getIdUseWithProduct())) : null);
         
         return TYPE;
     }
@@ -153,7 +153,7 @@ public class CutterController {
 	@RequestMapping(value = "/" + PATH_ADMIN + "/"+ TYPE +"s", method = RequestMethod.GET)	
     public String listProducts(Model model) {
 		model.addAttribute(ATTRIBUTE_TITLE_OF_TABLE, parametersOnAdminProductsPage.get(ATTRIBUTE_TITLE_OF_TABLE));
-        model.addAttribute(ATTRIBUTE_LIST_PRODUCTS, cutterService.listCutters("id"));
+        model.addAttribute(ATTRIBUTE_LIST_PRODUCTS, productService.listProducts("id"));
         logger.info(String.format("/%s/%s page.", PATH_ADMIN, CONCRETE_FOLDER));
         
         model.addAttribute(ATTRIBUTE_PRODUCT_TYPE, TYPE);
@@ -170,9 +170,9 @@ public class CutterController {
 		List<Cutter> listResult = new ArrayList<Cutter>();
         
         if(links.containsKey(type)){
-        	for(Cutter cutter : cutterService.listCutters("id")){
-        		if(cutter.getTypeCutter().equals(links.get(type))){
-        			listResult.add(cutter);
+        	for(Cutter product : productService.listProducts("id")){
+        		if(product.getTypeCutter().equals(links.get(type))){
+        			listResult.add(product);
         		}
         	}
         	model.addAttribute(ATTRIBUTE_PRODUCT_SUB_TYPE, type);
@@ -182,7 +182,7 @@ public class CutterController {
         } else {
         	model.addAttribute(ATTRIBUTE_PRODUCT_SUB_TYPE, "none");
     		model.addAttribute(ATTRIBUTE_TITLE_OF_TABLE, parametersOnAdminProductsPage.get(ATTRIBUTE_TITLE_OF_TABLE));
-            model.addAttribute(ATTRIBUTE_LIST_PRODUCTS, cutterService.listCutters("id"));
+            model.addAttribute(ATTRIBUTE_LIST_PRODUCTS, productService.listProducts("id"));
             logger.info(String.format("On /%s/%s page.", PATH_ADMIN, CONCRETE_FOLDER));
         }
         
@@ -194,20 +194,20 @@ public class CutterController {
         return PATH_ADMIN +"/"+ PATH_PRODUCTS;
     }
 	
-	@RequestMapping(value="/"+ PATH_ADMIN +"/"+ TYPE +"/{type}/"+ PATH_SORTING +"/{value}", method = RequestMethod.POST,consumes=JSON_CONSUMES,headers=JSON_HEADERS)
+	@RequestMapping(value="/"+PATH_ADMIN+"/"+TYPE+"/{type}/"+PATH_SORTING+"/{value}",method=RequestMethod.POST,consumes=JSON_CONSUMES,headers=JSON_HEADERS)
     public @ResponseBody List<Cutter> sortingProductsInAdmin(@PathVariable("type") String type, @PathVariable("value") String value) {
 		
 		List<Cutter> list = new ArrayList<Cutter>();
 
 		if (links.containsKey(type)) {
 
-			for (Cutter product : cutterService.listCutters(value)) {
+			for (Cutter product : productService.listProducts(value)) {
 				if (product.getTypeCutter().equals(links.get(type))) 
 					list.add(product);
 			}
 
 		} else {
-			list.addAll(cutterService.listCutters(value));
+			list.addAll(productService.listProducts(value));
 		}
 
 		return list;
@@ -233,7 +233,7 @@ public class CutterController {
 		logger.info(String.format("/%s/%s/%s/%d page.", PATH_ADMIN, TYPE, PATH_COPY, id));
 		
 		logger.info(String.format("Copy all characteristic of %s.", TYPE));
-		Cutter product = cutterService.getCutterById(id);
+		Cutter product = productService.getProductById(id);
 		
 		 /* copy pictures to buffer */
 		 componets.copyPicturesToBuffer( product.getPathPictures(), DIRECTORY, CONCRETE_FOLDER, id, files );
@@ -255,18 +255,18 @@ public class CutterController {
 
 		if (result.hasErrors()) return adminFormHasError(product, model);
 
-		long id = cutterService.addCutter(product);
+		long id = productService.addProduct(product);
 		logger.info(String.format("Create new %s! With id=%d", TYPE, id));
 
 		// create folder and add to her new pictures
 		product.getPathPictures()
 				.addAll(componets.createFolderAndWriteToItPictures(DIRECTORY, CONCRETE_FOLDER, id, files));
 
-		this.cutterService.updateCutter(product);
+		this.productService.updateProduct(product);
 
 		files.clear();
 
-		linksForProduct.createLinksForCutters(cutterService.listShowOnSite());
+		linksForProduct.createLinksForCutters(productService.listShowOnSite());
 
 		if (product.isShowOnSite() && product.isShowOnLeftSide())
 			componets.updateInLeftField(product, true, TYPE);
@@ -281,17 +281,17 @@ public class CutterController {
 
 		if (result.hasErrors()) return adminFormHasError(product, model);
 
-		long id = cutterService.addCutter(product);
+		long id = productService.addProduct(product);
 		logger.info(String.format("Create new %s! With id=%d", TYPE, id));
 
 		// create folder and add to her new pictures
 		product.getPathPictures().addAll(componets.createFolderAndWriteToItPictures(DIRECTORY, CONCRETE_FOLDER, id, files));
 
-		this.cutterService.updateCutter(product);
+		this.productService.updateProduct(product);
 
 		files.clear();
 
-		linksForProduct.createLinksForCutters(cutterService.listShowOnSite());
+		linksForProduct.createLinksForCutters(productService.listShowOnSite());
 
 		if (product.isShowOnSite() && product.isShowOnLeftSide())
 			componets.updateInLeftField(product, true, TYPE);
@@ -304,7 +304,7 @@ public class CutterController {
     public String editProduct(@PathVariable("id") long id, Model model){
     	
     	logger.info(String.format("Begin editing %s with id=%d", TYPE, id));
-    	Cutter undateProduct = cutterService.getCutterById(id);
+    	Cutter undateProduct = productService.getProductById(id);
     	
         model.addAttribute(ATTRIBUTE_PRODUCT, undateProduct);
         model.addAttribute(ATTRIBUTE_UWP, componets.showSimplestArrayOfUseWithProduct(
@@ -323,13 +323,13 @@ public class CutterController {
 		
 		logger.info(String.format("%s UPDATE with save, id=%d", TYPE, product.getId()));
 		
-		List<String> pathPictures = cutterService.getCutterById(product.getId()).getPathPictures();
+		List<String> pathPictures = productService.getProductById(product.getId()).getPathPictures();
 		product.setPathPictures(pathPictures);
         
-		cutterService.updateCutter(product);
+		productService.updateProduct(product);
         logger.info(String.format("%s with id=%d was UDPATED", TYPE, product.getId()));
 		  
-		linksForProduct.createLinksForCutters(cutterService.listShowOnSite());
+		linksForProduct.createLinksForCutters(productService.listShowOnSite());
 	
 		if (product.isShowOnSite() && product.isShowOnLeftSide())
 	    	componets.updateInLeftField(product, true, TYPE);
@@ -345,15 +345,15 @@ public class CutterController {
 		if (result.hasErrors()) return adminFormHasError(product, model);
 
 		logger.info(String.format("%s UPDATE id=%d", TYPE, product.getId()));
-		List<String> pathPictures = cutterService.getCutterById(product.getId()).getPathPictures();
+		List<String> pathPictures = productService.getProductById(product.getId()).getPathPictures();
 		product.setPathPictures(pathPictures);
 
-		cutterService.updateCutter(product);
+		productService.updateProduct(product);
 		logger.info(String.format("%s with id=%d was UDPATED", TYPE, product.getId()));
 
 		files.clear();
 
-		linksForProduct.createLinksForCutters(cutterService.listShowOnSite());
+		linksForProduct.createLinksForCutters(productService.listShowOnSite());
 
 		if (product.isShowOnSite() && product.isShowOnLeftSide())
 			componets.updateInLeftField(product, true, TYPE);
@@ -376,8 +376,7 @@ public class CutterController {
          return componets.uploadPictureOnCreationProduct(request, files);
     }
     
-    @RequestMapping(value="/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_CHANGE_ORDER_PICTURES, method = RequestMethod.POST,consumes=JSON_CONSUMES,
-    		headers = JSON_HEADERS)
+    @RequestMapping(value="/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_CHANGE_ORDER_PICTURES, method = RequestMethod.POST,consumes=JSON_CONSUMES,headers = JSON_HEADERS)
     public @ResponseBody void changeOrderPictures(@RequestBody List<String> selectedIds) {
     	componets.changeOrderPictures(CONCRETE_FOLDER, selectedIds, files); 	  	
     }
@@ -392,9 +391,9 @@ public class CutterController {
     public @ResponseBody String uploadPicturesUpdate(MultipartHttpServletRequest request, @PathVariable("id") long id) {
     	
     	String nameOfAddedPicture = componets.uploadPictureToExistedProduct(request, DIRECTORY, CONCRETE_FOLDER, id);   	
- 		Cutter product = cutterService.getCutterById(id);
+ 		Cutter product = productService.getProductById(id);
  		product.getPathPictures().add(nameOfAddedPicture);
- 		cutterService.updateCutter(product);
+ 		productService.updateProduct(product);
          
        return nameOfAddedPicture;
     }
@@ -404,10 +403,10 @@ public class CutterController {
     public @ResponseBody void changeOrderPicturesUpdate(@RequestBody List<String> selectedIds, @PathVariable("id") long id) {
     	logger.info(String.format("change order of pictures in changed %s product", TYPE));
     	
-    	Cutter product = cutterService.getCutterById(id);
+    	Cutter product = productService.getProductById(id);
     	product.getPathPictures().clear();
     	product.getPathPictures().addAll(selectedIds);
-    	cutterService.updateCutter(product);
+    	productService.updateProduct(product);
     }
     
     @RequestMapping(value="/"+PATH_ADMIN+"/"+TYPE+"/"+PATH_REMOVE_PICTURE_UPDATE+"/{name_picture}/{id}", method = RequestMethod.POST,consumes=JSON_CONSUMES,
@@ -415,7 +414,7 @@ public class CutterController {
     public @ResponseBody void removePicture(@PathVariable("name_picture") String namePicture, @PathVariable("id") long id) {
     	
     	String name = namePicture.replace(":", ".");
-    	Cutter product = cutterService.getCutterById(id);
+    	Cutter product = productService.getProductById(id);
     	product.getPathPictures().remove(name);
     	
     	componets.removePicture(name, DIRECTORY, CONCRETE_FOLDER, id);
@@ -427,7 +426,7 @@ public class CutterController {
     	
     	logger.info(String.format("Remove pictore with name = %s from changed %s product", name, TYPE));
 
-    	cutterService.updateCutter(product);
+    	productService.updateProduct(product);
     }
     
     @RequestMapping("/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_REMOVE +"/{id}")
@@ -437,46 +436,45 @@ public class CutterController {
     	componets.removeAllPricturesOfConcreteProduct(DIRECTORY, CONCRETE_FOLDER, id);
     		
     	logger.info("Update links to the products in left menu!");
-    	componets.updateInLeftField(cutterService.getCutterById(id), false, TYPE);
+    	componets.updateInLeftField(productService.getProductById(id), false, TYPE);
     		
     	logger.info(String.format("DELETE %s with id=%d from database", TYPE, id));
-    	cutterService.removeCutter(id);
+    	productService.removeProduct(id);
         
-    	linksForProduct.createLinksForCutters(cutterService.listShowOnSite());
+    	linksForProduct.createLinksForCutters(productService.listShowOnSite());
     		
-        return "redirect:/" + PATH_ADMIN + "/" + TYPE + "s";
+        return "redirect:/"+ PATH_ADMIN + "/" + TYPE + "s";
     }  
     
-    @RequestMapping(value="/" + PATH_ADMIN +"/"+ TYPE +"/"+ PATH_SHOW_ON_SITE +"/{id}",method = RequestMethod.POST,consumes=JSON_CONSUMES,headers = JSON_HEADERS)
+    @RequestMapping(value="/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_SHOW_ON_SITE +"/{id}",method = RequestMethod.POST,consumes=JSON_CONSUMES,headers=JSON_HEADERS)
     public @ResponseBody void showOnSite(@PathVariable("id") long id, @RequestBody boolean value) {
-    	Cutter product = cutterService.getCutterById(id);
+    	Cutter product = productService.getProductById(id);
     	product.setShowOnSite(value);
-    	cutterService.updateCutter(product);
+    	productService.updateProduct(product);
     	
     	componets.updateInLeftField(product, product.isShowOnSite() && product.isShowOnLeftSide() , TYPE);
-    	linksForProduct.createLinksForCutters(cutterService.listShowOnSite());
+    	linksForProduct.createLinksForCutters(productService.listShowOnSite());
     }
     
     @RequestMapping(value="/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_SET_TOP +"/{id}",method = RequestMethod.POST,consumes=JSON_CONSUMES,headers = JSON_HEADERS)
     public @ResponseBody void setTop(@PathVariable("id") long id, @RequestBody boolean value) {
-    	Cutter product = cutterService.getCutterById(id);
+    	Cutter product = productService.getProductById(id);
     	product.setTop(value);
-    	cutterService.updateCutter(product);
+    	productService.updateProduct(product);
     }
     
-    @RequestMapping(value="/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_SHOW_ON_HOME_PAGE +"/{id}",method = RequestMethod.POST,consumes=JSON_CONSUMES,headers = JSON_HEADERS)
+    @RequestMapping(value="/"+PATH_ADMIN+"/"+TYPE+"/"+ PATH_SHOW_ON_HOME_PAGE+"/{id}",method=RequestMethod.POST,consumes=JSON_CONSUMES,headers=JSON_HEADERS)
     public @ResponseBody void showOnHomePage(@PathVariable("id") long id, @RequestBody boolean value) {
-    	Cutter product = cutterService.getCutterById(id);
+    	Cutter product = productService.getProductById(id);
     	product.setShowOnHomePage(value);
-    	cutterService.updateCutter(product);
+    	productService.updateProduct(product);
     }
     
-    @RequestMapping(value="/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_SHOW_ON_LEFT_SIDE +"/{id}",method=RequestMethod.POST,consumes=JSON_CONSUMES,headers = JSON_HEADERS)
+    @RequestMapping(value="/"+PATH_ADMIN+"/"+TYPE+"/"+PATH_SHOW_ON_LEFT_SIDE+"/{id}",method=RequestMethod.POST,consumes=JSON_CONSUMES,headers=JSON_HEADERS)
     public @ResponseBody void showOnLeftSide(@PathVariable("id") long id, @RequestBody boolean value) {
-    	Cutter product = cutterService.getCutterById(id);
+    	Cutter product = productService.getProductById(id);
     	product.setShowOnLeftSide(value);
-    	cutterService.updateCutter(product);
-    	
+    	productService.updateProduct(product);	
     	componets.updateInLeftField(product, product.isShowOnSite() && product.isShowOnLeftSide(), TYPE);
     }
    
