@@ -406,41 +406,7 @@ $(document).ready(function() {
 						.append($('<p/>').css( "font-weight", "bold" ).css( "width", "50%" ).css( "float", "left" ).text("Разрешение печати:"))
 						.append($('<div/>').css( "width", "50%" ).css( "float", "left" ).text(resultResolution))
 								)
-    		}
-			
-			
-/*
- * 
- 
- <c:if test="${type=='printer' && !empty product.chromaticity}">
-	<div style="height: 30px; margin-bottom: 5px;">
-		<p style="font-weight: bold; width: 50%; float: left;">Цветовая схема:</p>
-		<div style="float: left; width: 50%;">
-			<c:forEach var="tp" items="${product.chromaticity}" varStatus="status">  
-		
-    			<c:if test="${tp.equals('CMYK')}">
-					${tp}<c:if test="${product.chromaticityCMYK!=''}" >+${product.chromaticityCMYK}</c:if> <c:if test="${ ! status.last}" >, </c:if> 
-				</c:if>
-				
-				<c:if test="${tp.equals('CMYK x 2')}">
-					${tp}<c:if test="${product.chromaticityCMYKx2!=''}" >+${product.chromaticityCMYKx2}</c:if> <c:if test="${ ! status.last}" >, </c:if> 
-				</c:if>
-				
-				<c:if test="${tp.equals('CMYKLcLm')}">
-					${tp}<c:if test="${product.chromaticityCMYKLcLm!=''}" >+${product.chromaticityCMYKLcLm}</c:if> <c:if test="${ ! status.last}" >, </c:if> 
-				</c:if>
-				
-				<c:if test="${tp.equals('CMYKLcLmOG')}">
-					${tp}<c:if test="${product.chromaticityCMYKLcLmOG!=''}" >+${product.chromaticityCMYKLcLmOG}</c:if> <c:if test="${ ! status.last}" >, </c:if> 
-				</c:if>
-			
-			</c:forEach> 
-		</div>
-	</div>
-</c:if>	
- 
- 
- */			
+    		}	
  
 			//in this block added information about chromaticity	
 			if("${type}"=='printer' && product.chromaticity!=null){
@@ -522,11 +488,6 @@ $(document).ready(function() {
 								)
     		}
 			
-			
-			
-			
-			
-				
 									//add inner name_price_cart_block 
 									innterDiv.append(name_price_cart_block);				
 

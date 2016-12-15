@@ -175,26 +175,29 @@ public class LinksForProducts {
 	 */
 	private String getTypeJsonProduct(Set<? extends Product> products){
 		String result = null;
-		Object type = products.iterator().next();
-
-		if (type instanceof Printer) {
-			result = "printersJSON";
-		} else if (type instanceof Printer3D) {
-			result = "printers3dJSON";
-		} else if (type instanceof DigitalPrinter) {
-			result = "digital_printersJSON";
-		} else if (type instanceof Cutter) {
-			result = "cuttersJSON";
-		} else if (type instanceof Laminator) {
-			result = "laminatorsJSON";
-		} else if (type instanceof Laser) {
-			result = "laserJSON";
-		} else if (type instanceof Scanner) {
-			result = "scannersJSON";
-		} else if (type instanceof Rip) {
-			result = "ripsJSON";
-		} else if (type instanceof UseWithProduct) {
-			result = "useWithProductsJSON";
+		
+		if(products.size() > 0){
+			Object type = products.iterator().next();
+	
+			if (type instanceof Printer) {
+				result = "printersJSON";
+			} else if (type instanceof Printer3D) {
+				result = "printers3dJSON";
+			} else if (type instanceof DigitalPrinter) {
+				result = "digital_printersJSON";
+			} else if (type instanceof Cutter) {
+				result = "cuttersJSON";
+			} else if (type instanceof Laminator) {
+				result = "laminatorsJSON";
+			} else if (type instanceof Laser) {
+				result = "laserJSON";
+			} else if (type instanceof Scanner) {
+				result = "scannersJSON";
+			} else if (type instanceof Rip) {
+				result = "ripsJSON";
+			} else if (type instanceof UseWithProduct) {
+				result = "useWithProductsJSON";
+			}
 		}
 		return result;
 	}
