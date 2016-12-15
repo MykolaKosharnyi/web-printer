@@ -266,7 +266,7 @@ public class CutterController {
 
 		files.clear();
 
-		linksForProduct.createLinksForCutters(productService.listShowOnSite());
+		linksForProduct.createLinks(productService.listShowOnSite());
 
 		if (product.isShowOnSite() && product.isShowOnLeftSide())
 			componets.updateInLeftField(product, true, TYPE);
@@ -291,7 +291,7 @@ public class CutterController {
 
 		files.clear();
 
-		linksForProduct.createLinksForCutters(productService.listShowOnSite());
+		linksForProduct.createLinks(productService.listShowOnSite());
 
 		if (product.isShowOnSite() && product.isShowOnLeftSide())
 			componets.updateInLeftField(product, true, TYPE);
@@ -329,7 +329,7 @@ public class CutterController {
 		productService.updateProduct(product);
         logger.info(String.format("%s with id=%d was UDPATED", TYPE, product.getId()));
 		  
-		linksForProduct.createLinksForCutters(productService.listShowOnSite());
+		linksForProduct.createLinks(productService.listShowOnSite());
 	
 		if (product.isShowOnSite() && product.isShowOnLeftSide())
 	    	componets.updateInLeftField(product, true, TYPE);
@@ -353,7 +353,7 @@ public class CutterController {
 
 		files.clear();
 
-		linksForProduct.createLinksForCutters(productService.listShowOnSite());
+		linksForProduct.createLinks(productService.listShowOnSite());
 
 		if (product.isShowOnSite() && product.isShowOnLeftSide())
 			componets.updateInLeftField(product, true, TYPE);
@@ -441,7 +441,7 @@ public class CutterController {
     	logger.info(String.format("DELETE %s with id=%d from database", TYPE, id));
     	productService.removeProduct(id);
         
-    	linksForProduct.createLinksForCutters(productService.listShowOnSite());
+    	linksForProduct.createLinks(productService.listShowOnSite());
     		
         return "redirect:/"+ PATH_ADMIN + "/" + TYPE + "s";
     }  
@@ -453,7 +453,7 @@ public class CutterController {
     	productService.updateProduct(product);
     	
     	componets.updateInLeftField(product, product.isShowOnSite() && product.isShowOnLeftSide() , TYPE);
-    	linksForProduct.createLinksForCutters(productService.listShowOnSite());
+    	linksForProduct.createLinks(productService.listShowOnSite());
     }
     
     @RequestMapping(value="/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_SET_TOP +"/{id}",method = RequestMethod.POST,consumes=JSON_CONSUMES,headers = JSON_HEADERS)

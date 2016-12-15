@@ -278,7 +278,7 @@ public class PrinterController {
 
 		files.clear();
 
-		linksForProduct.createLinksForPrinters(printerService.listShowOnSite());
+		linksForProduct.createLinks(printerService.listShowOnSite());
 
 		if (product.isShowOnSite() && product.isShowOnLeftSide())
 			componets.updateInLeftField(product, true, TYPE);
@@ -303,7 +303,7 @@ public class PrinterController {
 
 		files.clear();
 
-		linksForProduct.createLinksForPrinters(printerService.listShowOnSite());
+		linksForProduct.createLinks(printerService.listShowOnSite());
 
 		if (product.isShowOnSite() && product.isShowOnLeftSide())
 			componets.updateInLeftField(product, true, TYPE);
@@ -340,7 +340,7 @@ public class PrinterController {
 		printerService.updateProduct(product);
         logger.info(String.format("%s with id=%d was UDPATED", TYPE, product.getId()));
 		  
-		linksForProduct.createLinksForPrinters(printerService.listShowOnSite());
+		linksForProduct.createLinks(printerService.listShowOnSite());
 	
 		if (product.isShowOnSite() && product.isShowOnLeftSide())
 	    	componets.updateInLeftField(product, true, TYPE);
@@ -364,7 +364,7 @@ public class PrinterController {
 
 		files.clear();
 
-		linksForProduct.createLinksForPrinters(printerService.listShowOnSite());
+		linksForProduct.createLinks(printerService.listShowOnSite());
 
 		if (product.isShowOnSite() && product.isShowOnLeftSide())
 			componets.updateInLeftField(product, true, TYPE);
@@ -454,7 +454,7 @@ public class PrinterController {
     	logger.info(String.format("DELETE %s with id=%d from database", TYPE, id));
     	printerService.removeProduct(id);
         
-    	linksForProduct.createLinksForPrinters(printerService.listShowOnSite());
+    	linksForProduct.createLinks(printerService.listShowOnSite());
     		
         return "redirect:/admin/" + TYPE + "s";
     }  
@@ -467,7 +467,7 @@ public class PrinterController {
     	printerService.updateProduct(product);
     	
     	componets.updateInLeftField(product, product.isShowOnSite() && product.isShowOnLeftSide() , TYPE);
-    	linksForProduct.createLinksForPrinters(printerService.listShowOnSite());
+    	linksForProduct.createLinks(printerService.listShowOnSite());
     }
     
     @RequestMapping(value="/admin/" + TYPE + "/setTop/{id}", method = RequestMethod.POST,consumes="application/json",

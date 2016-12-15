@@ -180,7 +180,7 @@ public class RipController {
             
             files.clear();
 		
-		  links.createLinksForRips(ripService.listShowOnSite());
+		  links.createLinks(ripService.listShowOnSite());
 		  
 		  if (product.isShowOnSite() && product.isShowOnLeftSide())
 			  componets.updateInLeftField(product, true);
@@ -210,7 +210,7 @@ public class RipController {
             
             files.clear();
 		  
-		  links.createLinksForRips(ripService.listShowOnSite());	
+		  links.createLinks(ripService.listShowOnSite());	
 		  if (product.isShowOnSite() && product.isShowOnLeftSide()){
 			  componets.updateInLeftField(product, true);
 	    	}
@@ -249,7 +249,7 @@ public class RipController {
         ripService.updateProduct(product);
         logger.info("rip with id=" + product.getId() + " was UDPATED!");
 		  
-		links.createLinksForRips(ripService.listShowOnSite());
+		links.createLinks(ripService.listShowOnSite());
 	
 		if (product.isShowOnSite() && product.isShowOnLeftSide()){
 			componets.updateInLeftField(product, true);
@@ -281,7 +281,7 @@ public class RipController {
         
 		  files.clear();
 		  
-		  links.createLinksForRips(ripService.listShowOnSite());
+		  links.createLinks(ripService.listShowOnSite());
 	
 		  if (product.isShowOnSite() && product.isShowOnLeftSide()){
 			  componets.updateInLeftField(product, true);
@@ -414,7 +414,7 @@ public class RipController {
     		logger.info("DELETE rip with id=" + id + " from database!");
     		ripService.removeProduct(id);
         
-    		links.createLinksForRips(ripService.listShowOnSite());
+    		links.createLinks(ripService.listShowOnSite());
     		
         return "redirect:/admin/rips";
     }  
@@ -431,7 +431,7 @@ public class RipController {
     		componets.updateInLeftField(rip, false);
     	}
     	
-    	links.createLinksForRips(ripService.listShowOnSite());
+    	links.createLinks(ripService.listShowOnSite());
     }
     
     @RequestMapping(value="/admin/rip/setTop/{id}", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")

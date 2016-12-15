@@ -281,7 +281,7 @@ public class PrinterDigitalController {
             productService.updateProduct(product);
             files.clear();
 		
-		  links.createLinksForDigitalPrinters(productService.listShowOnSite());	
+		  links.createLinks(productService.listShowOnSite());	
 		  
 		  if (product.isShowOnSite() && product.isShowOnLeftSide())
 			  componets.updateInLeftField(product, true, "digital_printer");
@@ -310,7 +310,7 @@ public class PrinterDigitalController {
             productService.updateProduct(product);
             files.clear();
 		
-		  links.createLinksForDigitalPrinters(productService.listShowOnSite());	
+		  links.createLinks(productService.listShowOnSite());	
 		  
 		  if (product.isShowOnSite() && product.isShowOnLeftSide())
 			  componets.updateInLeftField(product, true, "digital_printer");
@@ -350,7 +350,7 @@ public class PrinterDigitalController {
         
 		files.clear();
 
-		links.createLinksForDigitalPrinters(productService.listShowOnSite());	
+		links.createLinks(productService.listShowOnSite());	
 		  
 		if (product.isShowOnSite() && product.isShowOnLeftSide())
 			componets.updateInLeftField(product, true, "digital_printer");
@@ -376,7 +376,7 @@ public class PrinterDigitalController {
 
         productService.updateProduct(product);
 
-		  links.createLinksForDigitalPrinters(productService.listShowOnSite());	
+		  links.createLinks(productService.listShowOnSite());	
 		  
 		  if (product.isShowOnSite() && product.isShowOnLeftSide())
 			  componets.updateInLeftField(product, true, "digital_printer");
@@ -501,7 +501,7 @@ public class PrinterDigitalController {
 
         productService.removeProduct(id);
         
-    	links.createLinksForDigitalPrinters(productService.listShowOnSite());
+    	links.createLinks(productService.listShowOnSite());
         
         return "redirect:/admin/digital_printers";
     }
@@ -511,7 +511,7 @@ public class PrinterDigitalController {
     	DigitalPrinter printer = productService.getProductById(id);
     	printer.setShowOnSite(value);
     	productService.updateProduct(printer);
-    	links.createLinksForDigitalPrinters(productService.listShowOnSite());
+    	links.createLinks(productService.listShowOnSite());
     	
     	if (printer.isShowOnSite() && printer.isShowOnLeftSide()){
     		componets.updateInLeftField(printer, true, "digital_printer");

@@ -258,7 +258,7 @@ public class LaserController {
 
 		files.clear();
 
-		linksForProduct.createLinksForLasers(laserService.listShowOnSite());
+		linksForProduct.createLinks(laserService.listShowOnSite());
 
 		if (product.isShowOnSite() && product.isShowOnLeftSide())
 			componets.updateInLeftField(product, true, TYPE);
@@ -283,7 +283,7 @@ public class LaserController {
 
 		files.clear();
 
-		linksForProduct.createLinksForLasers(laserService.listShowOnSite());
+		linksForProduct.createLinks(laserService.listShowOnSite());
 
 		if (product.isShowOnSite() && product.isShowOnLeftSide())
 			componets.updateInLeftField(product, true, TYPE);
@@ -320,7 +320,7 @@ public class LaserController {
 		laserService.updateProduct(product);
         logger.info(String.format("%s with id=%d was UDPATED", TYPE, product.getId()));
 		  
-		linksForProduct.createLinksForLasers(laserService.listShowOnSite());
+		linksForProduct.createLinks(laserService.listShowOnSite());
 	
 		if (product.isShowOnSite() && product.isShowOnLeftSide())
 	    	componets.updateInLeftField(product, true, TYPE);
@@ -344,7 +344,7 @@ public class LaserController {
 
 		files.clear();
 
-		linksForProduct.createLinksForLasers(laserService.listShowOnSite());
+		linksForProduct.createLinks(laserService.listShowOnSite());
 
 		if (product.isShowOnSite() && product.isShowOnLeftSide())
 			componets.updateInLeftField(product, true, TYPE);
@@ -434,7 +434,7 @@ public class LaserController {
     	logger.info(String.format("DELETE %s with id=%d from database", TYPE, id));
     	laserService.removeProduct(id);
         
-    	linksForProduct.createLinksForLasers(laserService.listShowOnSite());
+    	linksForProduct.createLinks(laserService.listShowOnSite());
     		
         return "redirect:/admin/" + TYPE + "s";
     }  
@@ -447,7 +447,7 @@ public class LaserController {
     	laserService.updateProduct(laser);
     	
     	componets.updateInLeftField(laser, laser.isShowOnSite() && laser.isShowOnLeftSide() , TYPE);
-    	linksForProduct.createLinksForLasers(laserService.listShowOnSite());
+    	linksForProduct.createLinks(laserService.listShowOnSite());
     }
     
     @RequestMapping(value="/admin/" + TYPE + "/setTop/{id}", method = RequestMethod.POST,consumes="application/json",

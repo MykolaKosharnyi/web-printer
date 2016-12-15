@@ -259,7 +259,7 @@ public class Printer3DController {
 
 		files.clear();
 
-		linksForProduct.createLinksFor3DPrinters(productService.listShowOnSite());
+		linksForProduct.createLinks(productService.listShowOnSite());
 
 		if (product.isShowOnSite() && product.isShowOnLeftSide())
 			componets.updateInLeftField(product, true, TYPE);
@@ -284,7 +284,7 @@ public class Printer3DController {
 
 		files.clear();
 
-		linksForProduct.createLinksFor3DPrinters(productService.listShowOnSite());
+		linksForProduct.createLinks(productService.listShowOnSite());
 
 		if (product.isShowOnSite() && product.isShowOnLeftSide())
 			componets.updateInLeftField(product, true, TYPE);
@@ -321,7 +321,7 @@ public class Printer3DController {
 		productService.updateProduct(product);
         logger.info(String.format("%s with id=%d was UDPATED", TYPE, product.getId()));
 		  
-		linksForProduct.createLinksFor3DPrinters(productService.listShowOnSite());
+		linksForProduct.createLinks(productService.listShowOnSite());
 	
 		if (product.isShowOnSite() && product.isShowOnLeftSide())
 	    	componets.updateInLeftField(product, true, TYPE);
@@ -345,7 +345,7 @@ public class Printer3DController {
 
 		files.clear();
 
-		linksForProduct.createLinksFor3DPrinters(productService.listShowOnSite());
+		linksForProduct.createLinks(productService.listShowOnSite());
 
 		if (product.isShowOnSite() && product.isShowOnLeftSide())
 			componets.updateInLeftField(product, true, TYPE);
@@ -435,7 +435,7 @@ public class Printer3DController {
     	logger.info(String.format("DELETE %s with id=%d from database", TYPE, id));
     	productService.removeProduct(id);
         
-    	linksForProduct.createLinksFor3DPrinters(productService.listShowOnSite());
+    	linksForProduct.createLinks(productService.listShowOnSite());
     		
         return "redirect:/admin/" + TYPE + "s";
     }  
@@ -448,7 +448,7 @@ public class Printer3DController {
     	productService.updateProduct(product);
     	
     	componets.updateInLeftField(product, product.isShowOnSite() && product.isShowOnLeftSide() , TYPE);
-    	linksForProduct.createLinksFor3DPrinters(productService.listShowOnSite());
+    	linksForProduct.createLinks(productService.listShowOnSite());
     }
     
     @RequestMapping(value="/admin/" + TYPE + "/setTop/{id}", method = RequestMethod.POST,consumes="application/json",

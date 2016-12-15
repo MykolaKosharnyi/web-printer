@@ -256,7 +256,7 @@ public class LaminatorController {
 
 		files.clear();
 
-		linksForProduct.createLinksForLaminators(laminatorService.listShowOnSite());
+		linksForProduct.createLinks(laminatorService.listShowOnSite());
 
 		if (product.isShowOnSite() && product.isShowOnLeftSide())
 			componets.updateInLeftField(product, true, TYPE);
@@ -281,7 +281,7 @@ public class LaminatorController {
 
 		files.clear();
 
-		linksForProduct.createLinksForLaminators(laminatorService.listShowOnSite());
+		linksForProduct.createLinks(laminatorService.listShowOnSite());
 
 		if (product.isShowOnSite() && product.isShowOnLeftSide())
 			componets.updateInLeftField(product, true, TYPE);
@@ -318,7 +318,7 @@ public class LaminatorController {
 		laminatorService.updateProduct(product);
         logger.info(String.format("%s with id=%d was UDPATED", TYPE, product.getId()));
 		  
-        linksForProduct.createLinksForLaminators(laminatorService.listShowOnSite());
+        linksForProduct.createLinks(laminatorService.listShowOnSite());
 	
 		if (product.isShowOnSite() && product.isShowOnLeftSide())
 	    	componets.updateInLeftField(product, true, TYPE);
@@ -342,7 +342,7 @@ public class LaminatorController {
 
 		files.clear();
 
-		linksForProduct.createLinksForLaminators(laminatorService.listShowOnSite());
+		linksForProduct.createLinks(laminatorService.listShowOnSite());
 
 		if (product.isShowOnSite() && product.isShowOnLeftSide())
 			componets.updateInLeftField(product, true, TYPE);
@@ -432,7 +432,7 @@ public class LaminatorController {
     	logger.info(String.format("DELETE %s with id=%d from database", TYPE, id));
     	laminatorService.removeProduct(id);
         
-    	linksForProduct.createLinksForLaminators(laminatorService.listShowOnSite());
+    	linksForProduct.createLinks(laminatorService.listShowOnSite());
     		
         return "redirect:/admin/" + TYPE + "s";
     }
@@ -445,7 +445,7 @@ public class LaminatorController {
     	laminatorService.updateProduct(laminator);
     	
     	componets.updateInLeftField(laminator, laminator.isShowOnSite() && laminator.isShowOnLeftSide(), TYPE);
-    	linksForProduct.createLinksForLaminators(laminatorService.listShowOnSite());
+    	linksForProduct.createLinks(laminatorService.listShowOnSite());
     }
 
 	@RequestMapping(value="/admin/" + TYPE + "/setTop/{id}", method = RequestMethod.POST,consumes="application/json",

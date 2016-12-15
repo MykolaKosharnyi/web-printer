@@ -330,7 +330,7 @@ public class UseWithProductController {
             
             files.clear();
 		  
-		  links.createLinksForUseWithProducts(useWithProductService.listShowOnSite());
+		  links.createLinks(useWithProductService.listShowOnSite());
 		  
 		  if (product.isShowOnSite() && product.isShowOnLeftSide())
 			  componets.updateInLeftField(product, true);
@@ -365,7 +365,7 @@ public class UseWithProductController {
             
             files.clear();
 		  
-		  links.createLinksForUseWithProducts(useWithProductService.listShowOnSite());	
+		  links.createLinks(useWithProductService.listShowOnSite());	
 		  if (product.isShowOnSite() && product.isShowOnLeftSide()){
 			  componets.updateInLeftField(product, true);
 	    	}
@@ -409,7 +409,7 @@ public class UseWithProductController {
         useWithProductService.updateProduct(product);
         logger.info("use_with_product with id=" + product.getId() + " was UDPATED!");
 		  
-		links.createLinksForUseWithProducts(useWithProductService.listShowOnSite());
+		links.createLinks(useWithProductService.listShowOnSite());
 	
 		if (product.isShowOnSite() && product.isShowOnLeftSide()){
 			componets.updateInLeftField(product, true);
@@ -446,7 +446,7 @@ public class UseWithProductController {
         
 		  files.clear();
 		  
-		  links.createLinksForUseWithProducts(useWithProductService.listShowOnSite());
+		  links.createLinks(useWithProductService.listShowOnSite());
 	
 		  if (product.isShowOnSite() && product.isShowOnLeftSide()){
 			  componets.updateInLeftField(product, true);
@@ -579,7 +579,7 @@ public class UseWithProductController {
     		logger.info("DELETE use_with_product with id=" + id + " from database!");
     		useWithProductService.removeProduct(id);
         
-    		links.createLinksForUseWithProducts(useWithProductService.listShowOnSite());
+    		links.createLinks(useWithProductService.listShowOnSite());
     		
         return "redirect:/admin/use_with_products";
     }  
@@ -596,7 +596,7 @@ public class UseWithProductController {
     		componets.updateInLeftField(useWithProduct, false);
     	}
     	
-    	links.createLinksForUseWithProducts(useWithProductService.listShowOnSite());
+    	links.createLinks(useWithProductService.listShowOnSite());
     }
     
     @RequestMapping(value="/admin/use_with_product/setTop/{id}", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")

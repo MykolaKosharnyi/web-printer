@@ -272,7 +272,7 @@ public class ScannerController {
             
             files.clear();
 		  
-		  links.createLinksForScanners(scannerService.listShowOnSite());
+		  links.createLinks(scannerService.listShowOnSite());
 		  
 		  if (product.isShowOnSite() && product.isShowOnLeftSide())
 			  componets.updateInLeftField(product, true, "scanner");
@@ -303,7 +303,7 @@ public class ScannerController {
             
             files.clear(); 
 		  
-		  links.createLinksForScanners(scannerService.listShowOnSite());	
+		  links.createLinks(scannerService.listShowOnSite());	
 		  
 		  if (product.isShowOnSite() && product.isShowOnLeftSide())
 			  componets.updateInLeftField(product, true, "scanner");
@@ -344,7 +344,7 @@ public class ScannerController {
 		scannerService.updateProduct(product);
         logger.info("scanner with id=" + product.getId() + " was UDPATED!");
 		  
-		links.createLinksForScanners(scannerService.listShowOnSite());
+		links.createLinks(scannerService.listShowOnSite());
 	
 		if (product.isShowOnSite() && product.isShowOnLeftSide())
 			componets.updateInLeftField(product, true, "scanner");
@@ -373,7 +373,7 @@ public class ScannerController {
 			scannerService.updateProduct(product);
 			logger.info("scanner with id=" + product.getId() + " was UDPATED!");
 		  
-			links.createLinksForScanners(scannerService.listShowOnSite());
+			links.createLinks(scannerService.listShowOnSite());
 	
 			if (product.isShowOnSite() && product.isShowOnLeftSide())
 				componets.updateInLeftField(product, true, "scanner");
@@ -506,7 +506,7 @@ public class ScannerController {
     		logger.info("DELETE scanner with id=" + id + " from database!");
     		scannerService.removeProduct(id);
         
-    		links.createLinksForScanners(scannerService.listShowOnSite());
+    		links.createLinks(scannerService.listShowOnSite());
     		
         return "redirect:/admin/scanners";
     }  
@@ -523,7 +523,7 @@ public class ScannerController {
     		componets.updateInLeftField(scanner, false, "scanner");
     	}
     	
-    	links.createLinksForScanners(scannerService.listShowOnSite());
+    	links.createLinks(scannerService.listShowOnSite());
     }
     
     @RequestMapping(value="/admin/scanner/setTop/{id}", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
