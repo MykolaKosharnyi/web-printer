@@ -34,24 +34,6 @@ private static final long serialVersionUID = 3031695775597440046L;
 	@Column(name="softwareVersion", length = 10)
 	private String softwareVersion;//Версия ПО
 	
-	@Column(name="left_shares_link")
-	private String leftSharesLink;
-	
-	@Column(name="left_shares_link_color_text")
-	private String leftSharesLinkColorText = "#000000";
-	
-	@Column(name="left_shares_link_color_fone")
-	private String leftSharesLinkColorFone = "#006080";
-	
-	@Column(name="right_shares_link")
-	private String rightSharesLink;
-	
-	@Column(name="right_shares_link_color_text")
-	private String rightSharesLinkColorText = "#000000";
-	
-	@Column(name="right_shares_link_color_fone")
-	private String rightSharesLinkColorFone = "#006080";
-	
 	@Column(name="time_shares")
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern="dd.MM.yyyy")
@@ -185,54 +167,6 @@ private static final long serialVersionUID = 3031695775597440046L;
 
 	public void setSoftwareVersion(String softwareVersion) {
 		this.softwareVersion = softwareVersion;
-	}
-
-	public String getLeftSharesLink() {
-		return leftSharesLink;
-	}
-
-	public void setLeftSharesLink(String leftSharesLink) {
-		this.leftSharesLink = leftSharesLink;
-	}
-
-	public String getLeftSharesLinkColorText() {
-		return leftSharesLinkColorText;
-	}
-
-	public void setLeftSharesLinkColorText(String leftSharesLinkColorText) {
-		this.leftSharesLinkColorText = leftSharesLinkColorText;
-	}
-
-	public String getLeftSharesLinkColorFone() {
-		return leftSharesLinkColorFone;
-	}
-
-	public void setLeftSharesLinkColorFone(String leftSharesLinkColorFone) {
-		this.leftSharesLinkColorFone = leftSharesLinkColorFone;
-	}
-
-	public String getRightSharesLink() {
-		return rightSharesLink;
-	}
-
-	public void setRightSharesLink(String rightSharesLink) {
-		this.rightSharesLink = rightSharesLink;
-	}
-
-	public String getRightSharesLinkColorText() {
-		return rightSharesLinkColorText;
-	}
-
-	public void setRightSharesLinkColorText(String rightSharesLinkColorText) {
-		this.rightSharesLinkColorText = rightSharesLinkColorText;
-	}
-
-	public String getRightSharesLinkColorFone() {
-		return rightSharesLinkColorFone;
-	}
-
-	public void setRightSharesLinkColorFone(String rightSharesLinkColorFone) {
-		this.rightSharesLinkColorFone = rightSharesLinkColorFone;
 	}
 
 	public Date getTimeShares() {
@@ -426,17 +360,11 @@ private static final long serialVersionUID = 3031695775597440046L;
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((descriptionEng == null) ? 0 : descriptionEng.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((leftSharesLink == null) ? 0 : leftSharesLink.hashCode());
-		result = prime * result + ((leftSharesLinkColorFone == null) ? 0 : leftSharesLinkColorFone.hashCode());
-		result = prime * result + ((leftSharesLinkColorText == null) ? 0 : leftSharesLinkColorText.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((partNumber == null) ? 0 : partNumber.hashCode());
 		long temp;
 		temp = Double.doubleToLongBits(prise);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + ((rightSharesLink == null) ? 0 : rightSharesLink.hashCode());
-		result = prime * result + ((rightSharesLinkColorFone == null) ? 0 : rightSharesLinkColorFone.hashCode());
-		result = prime * result + ((rightSharesLinkColorText == null) ? 0 : rightSharesLinkColorText.hashCode());
 		result = prime * result + ((serviceInformation == null) ? 0 : serviceInformation.hashCode());
 		result = prime * result + (showOnHomePage ? 1231 : 1237);
 		result = prime * result + (showOnLeftSide ? 1231 : 1237);
@@ -473,21 +401,6 @@ private static final long serialVersionUID = 3031695775597440046L;
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (leftSharesLink == null) {
-			if (other.leftSharesLink != null)
-				return false;
-		} else if (!leftSharesLink.equals(other.leftSharesLink))
-			return false;
-		if (leftSharesLinkColorFone == null) {
-			if (other.leftSharesLinkColorFone != null)
-				return false;
-		} else if (!leftSharesLinkColorFone.equals(other.leftSharesLinkColorFone))
-			return false;
-		if (leftSharesLinkColorText == null) {
-			if (other.leftSharesLinkColorText != null)
-				return false;
-		} else if (!leftSharesLinkColorText.equals(other.leftSharesLinkColorText))
-			return false;
 		if (name == null) {
 			if (other.name != null)
 				return false;
@@ -499,21 +412,6 @@ private static final long serialVersionUID = 3031695775597440046L;
 		} else if (!partNumber.equals(other.partNumber))
 			return false;
 		if (Double.doubleToLongBits(prise) != Double.doubleToLongBits(other.prise))
-			return false;
-		if (rightSharesLink == null) {
-			if (other.rightSharesLink != null)
-				return false;
-		} else if (!rightSharesLink.equals(other.rightSharesLink))
-			return false;
-		if (rightSharesLinkColorFone == null) {
-			if (other.rightSharesLinkColorFone != null)
-				return false;
-		} else if (!rightSharesLinkColorFone.equals(other.rightSharesLinkColorFone))
-			return false;
-		if (rightSharesLinkColorText == null) {
-			if (other.rightSharesLinkColorText != null)
-				return false;
-		} else if (!rightSharesLinkColorText.equals(other.rightSharesLinkColorText))
 			return false;
 		if (serviceInformation == null) {
 			if (other.serviceInformation != null)
@@ -559,10 +457,7 @@ private static final long serialVersionUID = 3031695775597440046L;
 		return "Rip [id=" + id + ", partNumber=" + partNumber + ", name=" + name + ", prise=" + prise
 				+ ", typeEquipment=" + typeEquipment + ", softwareMaker=" + softwareMaker + ", softwareClass="
 				+ softwareClass + ", softwareVersion=" + softwareVersion
-				+ ", leftSharesLink=" + leftSharesLink + ", leftSharesLinkColorText=" + leftSharesLinkColorText
-				+ ", leftSharesLinkColorFone=" + leftSharesLinkColorFone + ", rightSharesLink=" + rightSharesLink
-				+ ", rightSharesLinkColorText=" + rightSharesLinkColorText + ", rightSharesLinkColorFone="
-				+ rightSharesLinkColorFone + ", timeShares=" + timeShares + ", description=" + description
+				+ ", leftSharesLink=" + ", timeShares=" + timeShares + ", description=" + description
 				+ ", descriptionEng=" + descriptionEng + ", showOnSite=" + showOnSite + ", showOnHomePage="
 				+ showOnHomePage + ", showOnLeftSide=" + showOnLeftSide + ", serviceInformation=" + serviceInformation
 				+ "]";

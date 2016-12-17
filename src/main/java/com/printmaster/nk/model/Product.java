@@ -59,6 +59,24 @@ public abstract class Product implements Serializable{
 	@Column(name="service_information", columnDefinition="TEXT")
 	protected String serviceInformation;
 	
+	@Column(name="left_shares_link")
+	protected String leftSharesLink;
+	
+	@Column(name="left_shares_link_color_text")
+	protected String leftSharesLinkColorText = "#000000";
+	
+	@Column(name="left_shares_link_color_fone")
+	protected String leftSharesLinkColorFone = "#006080";
+	
+	@Column(name="right_shares_link")
+	protected String rightSharesLink;
+	
+	@Column(name="right_shares_link_color_text")
+	protected String rightSharesLinkColorText = "#000000";
+	
+	@Column(name="right_shares_link_color_fone")
+	protected String rightSharesLinkColorFone = "#006080";		
+	
 	public Product(){}
 
 	public Long getId() {
@@ -91,6 +109,54 @@ public abstract class Product implements Serializable{
 
 	public void setPrise(double prise) {
 		this.prise = prise;
+	}
+
+	public String getLeftSharesLink() {
+		return leftSharesLink;
+	}
+
+	public void setLeftSharesLink(String leftSharesLink) {
+		this.leftSharesLink = leftSharesLink;
+	}
+
+	public String getLeftSharesLinkColorText() {
+		return leftSharesLinkColorText;
+	}
+
+	public void setLeftSharesLinkColorText(String leftSharesLinkColorText) {
+		this.leftSharesLinkColorText = leftSharesLinkColorText;
+	}
+
+	public String getLeftSharesLinkColorFone() {
+		return leftSharesLinkColorFone;
+	}
+
+	public void setLeftSharesLinkColorFone(String leftSharesLinkColorFone) {
+		this.leftSharesLinkColorFone = leftSharesLinkColorFone;
+	}
+
+	public String getRightSharesLink() {
+		return rightSharesLink;
+	}
+
+	public void setRightSharesLink(String rightSharesLink) {
+		this.rightSharesLink = rightSharesLink;
+	}
+
+	public String getRightSharesLinkColorText() {
+		return rightSharesLinkColorText;
+	}
+
+	public void setRightSharesLinkColorText(String rightSharesLinkColorText) {
+		this.rightSharesLinkColorText = rightSharesLinkColorText;
+	}
+
+	public String getRightSharesLinkColorFone() {
+		return rightSharesLinkColorFone;
+	}
+
+	public void setRightSharesLinkColorFone(String rightSharesLinkColorFone) {
+		this.rightSharesLinkColorFone = rightSharesLinkColorFone;
 	}
 
 	public boolean isShowOnSite() {

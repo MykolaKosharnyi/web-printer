@@ -48,24 +48,6 @@ public abstract class HeadProduct extends Product implements Serializable{
 	@Column(name="idUseWithProduct")
 	private long[] idUseWithProduct;
 	
-	@Column(name="left_shares_link")
-	protected String leftSharesLink;
-	
-	@Column(name="left_shares_link_color_text")
-	protected String leftSharesLinkColorText = "#000000";
-	
-	@Column(name="left_shares_link_color_fone")
-	protected String leftSharesLinkColorFone = "#006080";
-	
-	@Column(name="right_shares_link")
-	protected String rightSharesLink;
-	
-	@Column(name="right_shares_link_color_text")
-	protected String rightSharesLinkColorText = "#000000";
-	
-	@Column(name="right_shares_link_color_fone")
-	protected String rightSharesLinkColorFone = "#006080";
-	
 	@Column(name="time_shares")
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern="dd.MM.yyyy")
@@ -399,54 +381,6 @@ public abstract class HeadProduct extends Product implements Serializable{
 
 	public void setIdUseWithProduct(long[] idUseWithProduct) {
 		this.idUseWithProduct = idUseWithProduct;
-	}
-
-	public String getLeftSharesLink() {
-		return leftSharesLink;
-	}
-
-	public void setLeftSharesLink(String leftSharesLink) {
-		this.leftSharesLink = leftSharesLink;
-	}
-
-	public String getLeftSharesLinkColorText() {
-		return leftSharesLinkColorText;
-	}
-
-	public void setLeftSharesLinkColorText(String leftSharesLinkColorText) {
-		this.leftSharesLinkColorText = leftSharesLinkColorText;
-	}
-
-	public String getLeftSharesLinkColorFone() {
-		return leftSharesLinkColorFone;
-	}
-
-	public void setLeftSharesLinkColorFone(String leftSharesLinkColorFone) {
-		this.leftSharesLinkColorFone = leftSharesLinkColorFone;
-	}
-
-	public String getRightSharesLink() {
-		return rightSharesLink;
-	}
-
-	public void setRightSharesLink(String rightSharesLink) {
-		this.rightSharesLink = rightSharesLink;
-	}
-
-	public String getRightSharesLinkColorText() {
-		return rightSharesLinkColorText;
-	}
-
-	public void setRightSharesLinkColorText(String rightSharesLinkColorText) {
-		this.rightSharesLinkColorText = rightSharesLinkColorText;
-	}
-
-	public String getRightSharesLinkColorFone() {
-		return rightSharesLinkColorFone;
-	}
-
-	public void setRightSharesLinkColorFone(String rightSharesLinkColorFone) {
-		this.rightSharesLinkColorFone = rightSharesLinkColorFone;
 	}
 
 	public Date getTimeShares() {
@@ -879,9 +813,6 @@ public abstract class HeadProduct extends Product implements Serializable{
 		result = prime * result + heigth;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + Arrays.hashCode(idUseWithProduct);
-		result = prime * result + ((leftSharesLink == null) ? 0 : leftSharesLink.hashCode());
-		result = prime * result + ((leftSharesLinkColorFone == null) ? 0 : leftSharesLinkColorFone.hashCode());
-		result = prime * result + ((leftSharesLinkColorText == null) ? 0 : leftSharesLinkColorText.hashCode());
 		result = prime * result + maxPowerConsumption;
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((nameAddedOption == null) ? 0 : nameAddedOption.hashCode());
@@ -908,9 +839,6 @@ public abstract class HeadProduct extends Product implements Serializable{
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		temp = Double.doubleToLongBits(prise);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + ((rightSharesLink == null) ? 0 : rightSharesLink.hashCode());
-		result = prime * result + ((rightSharesLinkColorFone == null) ? 0 : rightSharesLinkColorFone.hashCode());
-		result = prime * result + ((rightSharesLinkColorText == null) ? 0 : rightSharesLinkColorText.hashCode());
 		result = prime * result + ((serviceInformation == null) ? 0 : serviceInformation.hashCode());
 		result = prime * result + (showOnHomePage ? 1231 : 1237);
 		result = prime * result + (showOnLeftSide ? 1231 : 1237);
@@ -1024,21 +952,6 @@ public abstract class HeadProduct extends Product implements Serializable{
 			return false;
 		if (!Arrays.equals(idUseWithProduct, other.idUseWithProduct))
 			return false;
-		if (leftSharesLink == null) {
-			if (other.leftSharesLink != null)
-				return false;
-		} else if (!leftSharesLink.equals(other.leftSharesLink))
-			return false;
-		if (leftSharesLinkColorFone == null) {
-			if (other.leftSharesLinkColorFone != null)
-				return false;
-		} else if (!leftSharesLinkColorFone.equals(other.leftSharesLinkColorFone))
-			return false;
-		if (leftSharesLinkColorText == null) {
-			if (other.leftSharesLinkColorText != null)
-				return false;
-		} else if (!leftSharesLinkColorText.equals(other.leftSharesLinkColorText))
-			return false;
 		if (maxPowerConsumption != other.maxPowerConsumption)
 			return false;
 		if (name == null) {
@@ -1089,21 +1002,6 @@ public abstract class HeadProduct extends Product implements Serializable{
 			return false;
 		if (Double.doubleToLongBits(prise) != Double.doubleToLongBits(other.prise))
 			return false;
-		if (rightSharesLink == null) {
-			if (other.rightSharesLink != null)
-				return false;
-		} else if (!rightSharesLink.equals(other.rightSharesLink))
-			return false;
-		if (rightSharesLinkColorFone == null) {
-			if (other.rightSharesLinkColorFone != null)
-				return false;
-		} else if (!rightSharesLinkColorFone.equals(other.rightSharesLinkColorFone))
-			return false;
-		if (rightSharesLinkColorText == null) {
-			if (other.rightSharesLinkColorText != null)
-				return false;
-		} else if (!rightSharesLinkColorText.equals(other.rightSharesLinkColorText))
-			return false;
 		if (serviceInformation == null) {
 			if (other.serviceInformation != null)
 				return false;
@@ -1141,10 +1039,7 @@ public abstract class HeadProduct extends Product implements Serializable{
 				+ ", previouslyUsed=" + previouslyUsed + ", equipmentManufacturer=" + equipmentManufacturer
 				+ ", weight=" + weight + ", width=" + width + ", heigth=" + heigth + ", depth=" + depth
 				+ ", maxPowerConsumption=" + maxPowerConsumption + ", description=" + description + ", descriptionEng="
-				+ descriptionEng + ", leftSharesLink=" + leftSharesLink
-				+ ", leftSharesLinkColorText=" + leftSharesLinkColorText + ", leftSharesLinkColorFone="
-				+ leftSharesLinkColorFone + ", rightSharesLink=" + rightSharesLink + ", rightSharesLinkColorText="
-				+ rightSharesLinkColorText + ", rightSharesLinkColorFone=" + rightSharesLinkColorFone + ", timeShares="
+				+ descriptionEng + ", timeShares="
 				+ timeShares + ", delivery=" + delivery + ", guarantee=" + guarantee + ", availability=" + availability
 				+ ", showOnSite=" + showOnSite + ", showOnHomePage=" + showOnHomePage + ", showOnLeftSide="
 				+ showOnLeftSide + ", serviceInformation=" + serviceInformation + "]";
