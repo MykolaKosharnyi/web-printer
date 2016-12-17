@@ -69,7 +69,7 @@ public class RipController {
 	@RequestMapping(value = "/rips", method = RequestMethod.GET)	
     public String allRips(Model model) throws UnsupportedEncodingException, FileNotFoundException, IOException, ParseException {
 		
-        model.addAttribute("listProducts", componets.showSimplestArrayOfRip(this.ripService.listShowOnSite()));
+        model.addAttribute("listProducts", componets.makeLightWeightCollectionOfProduct(this.ripService.listShowOnSite()));
         SearchRips search = new SearchRips();
         search.setPrise0(0);
         search.setPrise1(100000);
@@ -86,7 +86,7 @@ public class RipController {
     @RequestMapping(value="/rips/search",method=RequestMethod.POST, produces = "application/json; charset=utf-8")
     public @ResponseBody ArrayList<JSONObject> showSearchRips(@ModelAttribute(value="search") SearchRips search, BindingResult result ){
     	logger.info("On the /rip/search page.");
-    	return componets.showSimplestArrayOfRip(ripService.listSearchProducts(search));
+    	return componets.makeLightWeightCollectionOfProduct(ripService.listSearchProducts(search));
     }
 	
     @RequestMapping("/rip/{id}")

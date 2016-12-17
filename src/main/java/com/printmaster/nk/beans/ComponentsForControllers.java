@@ -24,6 +24,7 @@ import com.printmaster.nk.model.Laminator;
 import com.printmaster.nk.model.Laser;
 import com.printmaster.nk.model.Printer;
 import com.printmaster.nk.model.Printer3D;
+import com.printmaster.nk.model.Product;
 import com.printmaster.nk.model.HeadProduct;
 import com.printmaster.nk.model.Rip;
 import com.printmaster.nk.model.Scanner;
@@ -48,16 +49,18 @@ public class ComponentsForControllers {
 	 * @return lightweight version of input collection
 	 */
 	@SuppressWarnings("unchecked")
-	public ArrayList<JSONObject> makeLightWeightCollectionOfProduct(Set<? extends HeadProduct> set){
+	public ArrayList<JSONObject> makeLightWeightCollectionOfProduct(Set<? extends Product> set){
 		ArrayList<JSONObject> arrayResult = new ArrayList<JSONObject>();
 			
-		for (HeadProduct currentProduct : set) {
+		for (Product currentProduct : set) {
 			JSONObject curObj = new JSONObject();
 
 			standartOutPutDataOfProduct(currentProduct, curObj);
 			
 			// add characteristic for concrete type product
 			if (currentProduct instanceof Printer) {
+				curObj.put("type", "printer");
+				
 				//add property that must be output only to printer at current time(in the future to all product)
 				curObj.put("ratingOverallRating", ((Printer)currentProduct).getRatingOverallRating());
 				//type of printhead
@@ -74,57 +77,34 @@ public class ComponentsForControllers {
 				curObj.put("chromaticityCMYKLcLmOG", ((Printer)currentProduct).getChromaticityCMYKLcLmOG());	
 
 			} else if (currentProduct instanceof Printer3D) {
+				curObj.put("type", "3d_printer");
 
 			} else if (currentProduct instanceof DigitalPrinter) {
+				curObj.put("type", "digital_printer");
 
 			} else if (currentProduct instanceof Cutter) {
+				curObj.put("type", "cutter");
 
 			} else if (currentProduct instanceof Laminator) {
+				curObj.put("type", "laminator");
 
 			} else if (currentProduct instanceof Laser) {
+				curObj.put("type", "laser");
 
 			} else if (currentProduct instanceof Scanner) {
+				curObj.put("type", "scanner");
 
+			} else if (currentProduct instanceof Rip) {
+				curObj.put("type", "rip");
+
+			} else if (currentProduct instanceof UseWithProduct) {
+				curObj.put("type", "use_with_product");
 			}
+			
 			arrayResult.add(curObj);
 		}
 		return arrayResult;
 	}	
-	
-	/**
-	 * This method made every product more lightweight(without some characteristic),
-	 * it was done for make products page more lightweight (for higher speed loading).
-	 * 
-	 * @param set input collection which we need to make lightweight
-	 * @return lightweight version of input collection
-	 */
-	@SuppressWarnings("unchecked")
-	public ArrayList<JSONObject> showSimplestArrayOfRip(Set<Rip> set){
-		
-		ArrayList<JSONObject> arrayResult = new ArrayList<JSONObject>();
-		for(Rip currentProduct : set){
-			JSONObject curObj = new JSONObject();
-			
-			curObj.put("id", currentProduct.getId());
-			curObj.put("partNumber", currentProduct.getPartNumber());
-			
-			curObj.put("leftSharesLink", currentProduct.getLeftSharesLink());
-			curObj.put("leftSharesLinkColorText", currentProduct.getLeftSharesLinkColorText());
-			curObj.put("leftSharesLinkColorFone", currentProduct.getLeftSharesLinkColorFone());
-			
-			curObj.put("rightSharesLink", currentProduct.getRightSharesLink());
-			curObj.put("rightSharesLinkColorText", currentProduct.getRightSharesLinkColorText());
-			curObj.put("rightSharesLinkColorFone", currentProduct.getRightSharesLinkColorFone());
-			
-			curObj.put("prise", currentProduct.getPrise());
-			curObj.put("name", currentProduct.getName());
-			curObj.put("pathPictures", currentProduct.getPathPictures());
-			curObj.put("top", currentProduct.isTop());
-
-			arrayResult.add(curObj);
-		}
-		return arrayResult;
-	}
 	
 	/**
 	 * This method made every product more lightweight(without some characteristic),
@@ -148,77 +128,6 @@ public class ComponentsForControllers {
 			curObj.put("typeProduct", currentProduct.getTypeProduct());
 			curObj.put("top", currentProduct.isTop());
 
-			arrayResult.add(curObj);
-		}
-		return arrayResult;
-	}
-	
-	/**
-	 * Show simplest list of product (without most of characteristic), 
-	 * used in PreviouslyUsedEqvipmentDAOImpl class
-	 * 
-	 * @param set
-	 * @param type
-	 * @return
-	 */
-	@SuppressWarnings("unchecked")
-	public ArrayList<JSONObject> showSimplestArrayPUE(Set<? extends HeadProduct> set, String type){
-		
-		ArrayList<JSONObject> arrayResult = new ArrayList<JSONObject>();
-		for(HeadProduct currentProduct : set){
-			JSONObject curObj = new JSONObject();
-			
-			standartOutPutDataOfProduct(currentProduct, curObj);
-			curObj.put("type", type);
-
-			arrayResult.add(curObj);
-		}
-		return arrayResult;
-	}
-	
-	@SuppressWarnings("unchecked")
-	public ArrayList<JSONObject> simpleResultOfSearchByPhrase(Set<? extends HeadProduct> set, String type){
-		ArrayList<JSONObject> arrayResult = new ArrayList<JSONObject>();
-		for(HeadProduct currentProduct : set){
-			JSONObject curObj = new JSONObject();
-			
-			curObj.put("name", currentProduct.getName());
-			curObj.put("type", type);
-			curObj.put("id", currentProduct.getId());
-			curObj.put("pathToPicture", currentProduct.getPathPictures().get(0));
-			
-			arrayResult.add(curObj);
-		}
-		return arrayResult;
-	}
-	
-	@SuppressWarnings("unchecked")
-	public ArrayList<JSONObject> simpleResultOfSearchByPhraseRip(Set<Rip> set){
-		ArrayList<JSONObject> arrayResult = new ArrayList<JSONObject>();
-		for(Rip currentProduct : set){
-			JSONObject curObj = new JSONObject();
-			
-			curObj.put("name", currentProduct.getName());
-			curObj.put("type", "rip");
-			curObj.put("id", currentProduct.getId());
-			curObj.put("pathToPicture", currentProduct.getPathPictures().get(0));
-			
-			arrayResult.add(curObj);
-		}
-		return arrayResult;
-	}
-	
-	@SuppressWarnings("unchecked")
-	public ArrayList<JSONObject> simpleResultOfSearchByPhraseUseWithProduct(Set<UseWithProduct> set){
-		ArrayList<JSONObject> arrayResult = new ArrayList<JSONObject>();
-		for(UseWithProduct currentProduct : set){
-			JSONObject curObj = new JSONObject();
-			
-			curObj.put("name", currentProduct.getName());
-			curObj.put("type", "use_with_product");
-			curObj.put("id", currentProduct.getId());
-			curObj.put("pathToPicture", currentProduct.getPathPictures().get(0));
-			
 			arrayResult.add(curObj);
 		}
 		return arrayResult;
@@ -250,7 +159,7 @@ public class ComponentsForControllers {
 	 * @param curObj
 	 */
 	@SuppressWarnings("unchecked")
-	private void standartOutPutDataOfProduct(HeadProduct currentProduct, JSONObject curObj) {
+	private void standartOutPutDataOfProduct(Product currentProduct, JSONObject curObj) {
 		curObj.put("top", currentProduct.isTop());
 		curObj.put("id", currentProduct.getId());
 		curObj.put("partNumber", currentProduct.getPartNumber());
@@ -265,8 +174,6 @@ public class ComponentsForControllers {
 		
 		curObj.put("prise", currentProduct.getPrise());
 		curObj.put("name", currentProduct.getName());
-		curObj.put("pathPictures", currentProduct.getPathPictures());
-		
 		curObj.put("pathPictures", currentProduct.getPathPictures());
 		
 	}
