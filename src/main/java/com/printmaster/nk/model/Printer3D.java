@@ -259,6 +259,10 @@ public class Printer3D extends HeadProduct{
 		this.maximumWeightOfThePrintedModel = maximumWeightOfThePrintedModel;
 	}
 
+	public String getTypeProduct() {
+		return getTypePrinter3D();
+	}
+	
 	@Override
 	public String toString() {
 		return "Printer3D: typePrinter3D=" + typePrinter3D + ", sizePrintableAreaX=" + sizePrintableAreaX

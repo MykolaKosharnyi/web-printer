@@ -403,6 +403,10 @@ public class Laser extends HeadProduct{
 	public void setSoftware(String[] software) {
 		this.software = software;
 	}
+	
+	public String getTypeProduct() {
+		return getTypeLaser();
+	}
 
 	@Override
 	public int hashCode() {

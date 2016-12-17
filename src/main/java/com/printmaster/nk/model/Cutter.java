@@ -294,4 +294,8 @@ public class Cutter extends HeadProduct{
 		this.software = software;
 	}
 
+	public String getTypeProduct() {
+		return getTypeCutter();
+	}
+
 }

@@ -1104,6 +1104,10 @@ public class Printer extends HeadProduct{
 	public void setSecondTypeNumberOfPrintheads(int secondTypeNumberOfPrintheads) {
 		this.secondTypeNumberOfPrintheads = secondTypeNumberOfPrintheads;
 	}
+	
+	public String getTypeProduct() {
+		return getTypePrinter();
+	}
 
 	@Override
 	public String toString() {

@@ -800,4 +800,8 @@ public class DigitalPrinter extends HeadProduct{
 		this.firstPrintBW = firstPrintBW;
 	}
 	
+	public String getTypeProduct() {
+		return getTypePrinter();
+	}
+	
 }

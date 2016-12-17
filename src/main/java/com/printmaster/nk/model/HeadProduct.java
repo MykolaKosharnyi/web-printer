@@ -263,6 +263,8 @@ public abstract class HeadProduct extends Product implements Serializable{
 	
 	public HeadProduct(){}
 
+	public abstract String getTypeProduct();
+	
 	public String getAirDeliveryDescription() {
 		return airDeliveryDescription;
 	}
