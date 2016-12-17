@@ -2,12 +2,10 @@ package com.printmaster.nk.model;
 
 import java.io.Serializable;
 
-public class SearchScanners implements Serializable{
+public class SearchScanners extends SearchGeneric implements Serializable{
 
 private static final long serialVersionUID = 6702501013538481082L;
 
-private double prise0;
-private double prise1;
 private String[] typeProduct;
 private String[] previouslyUsed;
 private String[] scanningWidth;
@@ -42,20 +40,12 @@ private int depth1;
 
 public SearchScanners(){}
 
-public double getPrise0() {
-	return prise0;
+public String[] getTypeProduct() {
+	return typeProduct;
 }
 
-public void setPrise0(double prise0) {
-	this.prise0 = prise0;
-}
-
-public double getPrise1() {
-	return prise1;
-}
-
-public void setPrise1(double prise1) {
-	this.prise1 = prise1;
+public void setTypeProduct(String[] typeProduct) {
+	this.typeProduct = typeProduct;
 }
 
 public int getAveragePowerConsumption0() {
@@ -72,14 +62,6 @@ public int getAveragePowerConsumption1() {
 
 public void setAveragePowerConsumption1(int averagePowerConsumption1) {
 	this.averagePowerConsumption1 = averagePowerConsumption1;
-}
-
-public String[] getTypeProduct() {
-	return typeProduct;
-}
-
-public void setTypeProduct(String[] typeProduct) {
-	this.typeProduct = typeProduct;
 }
 
 public String[] getPreviouslyUsed() {

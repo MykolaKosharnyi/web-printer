@@ -2,11 +2,9 @@ package com.printmaster.nk.model;
 
 import java.io.Serializable;
 
-public class SearchDigitalPrinters implements Serializable{
+public class SearchDigitalPrinters extends SearchGeneric implements Serializable{
 	private static final long serialVersionUID = 6702501013538481082L;
 	
-	private double prise0;
-	private double prise1;
 	private String[] typePrinter;
 	private String[] previouslyUsed;
 	private String[] equipmentManufacturer;
@@ -95,6 +93,19 @@ public class SearchDigitalPrinters implements Serializable{
 	private double displaySize1;
 	private int averagePowerConsumption0;
 	private int averagePowerConsumption1;
+	private int maxPowerConsumption0;
+	private int maxPowerConsumption1;
+	private double weight0;
+	private double weight1;
+	private int width0;
+	private int width1;
+	private int heigth0;
+	private int heigth1;
+	private int depth0;
+	private int depth1;
+	
+	public SearchDigitalPrinters(){}
+	
 	public int getAveragePowerConsumption0() {
 		return averagePowerConsumption0;
 	}
@@ -110,19 +121,6 @@ public class SearchDigitalPrinters implements Serializable{
 	public void setAveragePowerConsumption1(int averagePowerConsumption1) {
 		this.averagePowerConsumption1 = averagePowerConsumption1;
 	}
-
-	private int maxPowerConsumption0;
-	private int maxPowerConsumption1;
-	private double weight0;
-	private double weight1;
-	private int width0;
-	private int width1;
-	private int heigth0;
-	private int heigth1;
-	private int depth0;
-	private int depth1;
-	
-	public SearchDigitalPrinters(){}
 
 	public int getSpeedPrintBW0() {
 		return speedPrintBW0;
@@ -186,19 +184,6 @@ public class SearchDigitalPrinters implements Serializable{
 
 	public void setSpeedCopyColor1(int speedCopyColor1) {
 		this.speedCopyColor1 = speedCopyColor1;
-	}
-
-	public double getPrise0() {
-		return prise0;
-	}
-	public void setPrise0(double prise0) {
-		this.prise0 = prise0;
-	}
-	public double getPrise1() {
-		return prise1;
-	}
-	public void setPrise1(double prise1) {
-		this.prise1 = prise1;
 	}
 	public String[] getPreviouslyUsed() {
 		return previouslyUsed;
@@ -743,6 +728,16 @@ public class SearchDigitalPrinters implements Serializable{
 
 	public void setDisplayInformation(String[] displayInformation) {
 		this.displayInformation = displayInformation;
+	}
+
+	@Override
+	public String[] getTypeProduct() {
+		return getTypePrinter();
+	}
+
+	@Override
+	public void setTypeProduct(String[] typeProduct) {
+		setTypePrinter(typeProduct);
 	}
 	
 }

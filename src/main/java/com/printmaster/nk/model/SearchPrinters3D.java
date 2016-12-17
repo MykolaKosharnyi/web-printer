@@ -2,12 +2,10 @@ package com.printmaster.nk.model;
 
 import java.io.Serializable;
 
-public class SearchPrinters3D implements Serializable {
+public class SearchPrinters3D extends SearchGeneric implements Serializable {
 	
 	private static final long serialVersionUID = 6702501013538481082L;
 	
-	private double prise0;
-	private double prise1;
 	private String[] typePrinter3D;
 	private int sizePrintableAreaX0;
 	private int sizePrintableAreaX1;
@@ -448,6 +446,16 @@ public class SearchPrinters3D implements Serializable {
 
 	public void setDepth1(int depth1) {
 		this.depth1 = depth1;
+	}
+
+	@Override
+	public String[] getTypeProduct() {
+		return getTypePrinter3D();
+	}
+
+	@Override
+	public void setTypeProduct(String[] typeProduct) {
+		setTypePrinter3D(typeProduct);
 	}
 
 }

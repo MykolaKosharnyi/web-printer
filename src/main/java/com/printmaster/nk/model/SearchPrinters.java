@@ -3,12 +3,10 @@ package com.printmaster.nk.model;
 import java.io.Serializable;
 import java.util.Arrays;
 
-public class SearchPrinters implements Serializable{
+public class SearchPrinters extends SearchGeneric implements Serializable{
 
 	private static final long serialVersionUID = 6702501013538481082L;
 	
-	private double prise0;
-	private double prise1;
 	private String[] typePrinter;
 	private String[] weightPrintMM;
 	private int weightPrintMMRangeFrom;
@@ -54,7 +52,7 @@ public class SearchPrinters implements Serializable{
 
 	@Override
 	public String toString() {
-		return "SearchPrinters [prise0=" + prise0 + ", prise1=" + prise1 + ", typePrinter="
+		return "SearchPrinters [typePrinter="
 				+ Arrays.toString(typePrinter) + ", weightPrintMM=" + Arrays.toString(weightPrintMM)
 				+ ", previouslyUsed=" + Arrays.toString(previouslyUsed) + ", typePrint=" + Arrays.toString(typePrint)
 				+ ", feed=" + Arrays.toString(feed) + ", chromaticity=" + Arrays.toString(chromaticity)
@@ -134,22 +132,6 @@ public class SearchPrinters implements Serializable{
 	}
 	public void setWeightPrintMM(String[] weightPrintMM) {
 		this.weightPrintMM = weightPrintMM;
-	}
-
-	public double getPrise0() {
-		return prise0;
-	}
-
-	public void setPrise0(double prise0) {
-		this.prise0 = prise0;
-	}
-
-	public double getPrise1() {
-		return prise1;
-	}
-
-	public void setPrise1(double prise1) {
-		this.prise1 = prise1;
 	}
 	
 	public String[] getTypePrinter() {
@@ -343,6 +325,16 @@ public class SearchPrinters implements Serializable{
 	}
 	public void setDepth1(int depth1) {
 		this.depth1 = depth1;
+	}
+
+	@Override
+	public String[] getTypeProduct() {
+		return getTypePrinter();
+	}
+
+	@Override
+	public void setTypeProduct(String[] typeProduct) {
+		setTypePrinter(typeProduct);
 	}
 	
 }

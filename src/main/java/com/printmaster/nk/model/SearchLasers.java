@@ -2,12 +2,10 @@ package com.printmaster.nk.model;
 
 import java.io.Serializable;
 
-public class SearchLasers implements Serializable{
+public class SearchLasers extends SearchGeneric implements Serializable{
 
 	private static final long serialVersionUID = 6702501013538481082L;
 	
-	private double prise0;
-	private double prise1;
 	private String[] typeLaser;
 	private String[] typeOfCooling;
 	private int sizeWorkAreaX0;
@@ -168,22 +166,6 @@ public class SearchLasers implements Serializable{
 
 	public void setLaserWavelength1(int laserWavelength1) {
 		this.laserWavelength1 = laserWavelength1;
-	}
-
-	public double getPrise0() {
-		return prise0;
-	}
-
-	public void setPrise0(double prise0) {
-		this.prise0 = prise0;
-	}
-
-	public double getPrise1() {
-		return prise1;
-	}
-
-	public void setPrise1(double prise1) {
-		this.prise1 = prise1;
 	}
 
 	public int getFirstPartAdjustingTheLaserPower() {
@@ -520,6 +502,16 @@ public class SearchLasers implements Serializable{
 
 	public void setDepth1(int depth1) {
 		this.depth1 = depth1;
+	}
+
+	@Override
+	public String[] getTypeProduct() {
+		return getTypeLaser();
+	}
+
+	@Override
+	public void setTypeProduct(String[] typeProduct) {
+		setTypeLaser(typeProduct);
 	}
 
 }
