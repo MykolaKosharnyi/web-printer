@@ -1,25 +1,35 @@
 /* for searching in input field */
-$(function(){
-	$( "input#search_input_by_phrase" ).change(function() {
-	
-		$('#search_area_by_phrase .result_of_search_by_phrase').remove();
-		$('#search_area_by_phrase .close_result_of_search').remove();
-		
-		searchByPhrase("all", $(this).val());
-		  
-	});
-	
-	$(document).on("click", '#search_area_by_phrase .close_result_of_search', function(){
-		$('#search_area_by_phrase .result_of_search_by_phrase').remove();
-		$('#search_area_by_phrase .close_result_of_search').remove();
-	});
-	
-});
+//$(function(){
+//	$( "input#search_input_by_phrase" ).change(function() {
+//	
+//		$('#search_area_by_phrase .result_of_search_by_phrase').remove();
+//		$('#search_area_by_phrase .close_result_of_search').remove();
+//		
+//		searchByPhrase("all", $(this).val());
+//		  
+//	});
+//	
+//	$(document).on("click", '#search_area_by_phrase .close_result_of_search', function(){
+//		$('#search_area_by_phrase .result_of_search_by_phrase').remove();
+//		$('#search_area_by_phrase .close_result_of_search').remove();
+//	});
+//	
+//});
+
+function openInNewTabWinBrowser(url) {
+	  var win = window.open(url, '_blank');
+	  win.focus();
+}
+
+
 	function searchByPhraseIncludeType(typeProduct){
-		$('#search_area_by_phrase .result_of_search_by_phrase').remove();
-		$('#search_area_by_phrase .close_result_of_search').remove();
+//boss wanted that it must work in new way
+		openInNewTabWinBrowser("/search_by_phrase?type=" + typeProduct + "&phrase=" + $( "input#search_input_by_phrase" ).val() );
 		
-		searchByPhrase( typeProduct, $( "input#search_input_by_phrase" ).val());
+//		$('#search_area_by_phrase .result_of_search_by_phrase').remove();
+//		$('#search_area_by_phrase .close_result_of_search').remove();
+//		
+//		searchByPhrase( typeProduct, $( "input#search_input_by_phrase" ).val());
 	}
 	
 	function searchByPhrase(type, phrase){
@@ -68,7 +78,7 @@ $(function(){
 	}
 
 
-/* for showing desctiption on divs wich right of big animation on home page*/
+/* for showing description on divs which right of big animation on home page*/
 $(function(){
   		$('.rigt_of_reklam_animation div').hover(function(){
     			$(this).find("p").slideDown(50);

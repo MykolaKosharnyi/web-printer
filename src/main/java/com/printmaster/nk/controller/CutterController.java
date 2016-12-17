@@ -98,7 +98,6 @@ public class CutterController {
         search.setPrise1(100000);
    
         model.addAttribute(ATTRIBUTE_SEARCH, search);
-        model.addAttribute(ATTRIBUTE_TYPE, TYPE);
         logger.info(String.format("On '../%s' page.", CONCRETE_FOLDER));
         
         componets.setJSONtoModelAttribute(model, TYPE);
@@ -124,7 +123,6 @@ public class CutterController {
         search.setPrise1(100000);
         model.addAttribute(ATTRIBUTE_SEARCH, search);
         model.addAttribute(ATTRIBUTE_LIST_PRODUCTS, componets.makeLightWeightCollectionOfProduct(productService.listSearchProducts(search)));
-        model.addAttribute(ATTRIBUTE_TYPE, TYPE);
         
         componets.setJSONtoModelAttribute(model, TYPE);
         
