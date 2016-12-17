@@ -37,9 +37,9 @@ public abstract class ProductController <T extends HeadProduct, S extends Search
 	@Autowired
 	Logger logger =  Logger.getLogger(ProductController.class);
 	
-	protected Map<String, String> links;
+	private Map<String, String> links;
 	
-	protected Map<String, String> parametersOnAdminProductsPage;
+	private Map<String, String> parametersOnAdminProductsPage;
 	
 	protected static final String DIRECTORY = "/var/www/localhost/images";
 

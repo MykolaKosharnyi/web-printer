@@ -96,7 +96,7 @@ $( function(){
 var description = $(this).find("p").first();
         if (check.css('display') == 'none') {
             check.slideDown();
-    description.css('color', '#006080');
+            description.css('color', '#006080');
             check_point.addClass('opened');
         }else{
             check.slideUp();

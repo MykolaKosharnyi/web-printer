@@ -147,7 +147,7 @@
     <definition name="previous_use_equipments" extends="base"> 
     	<put-attribute name="path" value="/WEB-INF/views/pue/path_user_previous_use_equipments.jsp" />  
         <put-attribute name="search" value="/WEB-INF/views/pue/search_previous_use_equipments.jsp" /> 
-        <put-attribute name="body" value="/WEB-INF/views/pue/previous_use_equipments.jsp" />  
+        <put-attribute name="body" value="/WEB-INF/views/products.jsp" />  
     </definition> 
     
     <definition name="rips" extends="base"> 
@@ -176,6 +176,11 @@
     	<put-attribute name="path" value="/WEB-INF/views/use_with_product/path_user_use_with_product.jsp" />    
         <put-attribute name="body" value="/WEB-INF/views/use_with_product/use_with_product.jsp" />  
     </definition>
+    
+    <definition name="search_by_phrase" extends="base"> 
+    	<put-attribute name="path" value="/WEB-INF/views/search_by_phrase/path_search_by_prase.jsp" />  
+        <put-attribute name="body" value="/WEB-INF/views/products.jsp" />  
+    </definition> 
     
     <definition name="admin_base" template="/WEB-INF/views/admin/layout_admin.jsp">  
         <put-attribute name="header" value="/WEB-INF/views/admin/admin_login_in_out.jsp" />

@@ -11,17 +11,17 @@
 					<a id="
 					
 						<c:choose>
-			   		 		<c:when test="${fn:length(product.pathPictures) > 1}">/images/${type}s/${product.id}/${product.pathPictures.get(1)}</c:when>    
-			    			<c:otherwise>/images/${type}s/${product.id}/${product.pathPictures.get(0)}</c:otherwise>
+			   		 		<c:when test="${fn:length(product.pathPictures) > 1}">/images/${product.type}s/${product.id}/${product.pathPictures.get(1)}</c:when>    
+			    			<c:otherwise>/images/${product.type}s/${product.id}/${product.pathPictures.get(0)}</c:otherwise>
 						</c:choose>
 			
 						
-						" onmouseover="" class="link" href="<c:url value='/${type}/${product.id}' />">	
-								<div class="outer_a_img"><img src="/images/${type}s/${product.id}/${product.pathPictures.get(0)}" alt=""></div>
+						" onmouseover="" class="link" href="<c:url value='/${product.type}/${product.id}' />">	
+								<div class="outer_a_img"><img src="/images/${product.type}s/${product.id}/${product.pathPictures.get(0)}" alt=""></div>
 					</a>
 		
 					<div class="name_price_cart_block">
-						<a href="<c:url value='/${type}/${product.id}' />" class="products_title">${product.name}</a>
+						<a href="<c:url value='/${product.type}/${product.id}' />" class="products_title">${product.name}</a>
 						<div class="product_price"><span style="float: left;">Цена:&nbsp;</span> 
 							<input type="hidden" name="price_value" value="${product.prise}">
 				       		<c:if test="${product.prise < 0.1}"><a href="#callback" class="fancybox">уточняйте</a></c:if>
@@ -31,11 +31,11 @@
 		           		</div>
 		
 						<i class="fa fa-cart-plus add_to_cart" aria-hidden="true" style="padding-right: 5px; top: 2px; right: 10px; position: absolute;"
-							onclick="addToCart('${type}', ${product.id}, '${product.name}', '${product.prise}', '${product.pathPictures.get(0)}');"></i>
+							onclick="addToCart('${product.type}', ${product.id}, '${product.name}', '${product.prise}', '${product.pathPictures.get(0)}');"></i>
 					</div>	
 					
 					<div class="name_price_cart_block_hidden">
-						<c:if test="${type=='printer' && product.ratingOverallRating > 0}">
+						<c:if test="${product.type=='printer' && product.ratingOverallRating > 0}">
 							<!-- Общая оценка -->
 								<div class="rating_block">
 									<p style="font-weight: bold;">Общая оценка:</p>
@@ -52,7 +52,7 @@
 						</c:if>
 						
 						<!-- type of printhead -->
-						<c:if test="${type=='printer' && !empty product.typeOfPrinthead}">							
+						<c:if test="${product.type=='printer' && !empty product.typeOfPrinthead}">							
 							<div style="height: 40px; margin-bottom: 5px;">
 								<p style="font-weight: bold; width: 50%; float: left;">Тип печатающей головки:</p>
 								<div style="float: left; width: 50%;">${product.typeOfPrinthead}</div>
@@ -60,14 +60,14 @@
 						</c:if>			
 						
 						<!-- print resolution -->
-						<c:if test="${type=='printer' && product.inputFirstPrintResolution != 0 && product.inputSecondPrintResolution != 0}">
+						<c:if test="${product.type=='printer' && product.inputFirstPrintResolution != 0 && product.inputSecondPrintResolution != 0}">
 							<div style="height: 40px; margin-bottom: 5px;">
 								<p style="font-weight: bold; width: 50%; float: left;">Разрешение печати:</p>
 								<div style="float: left; width: 50%;">${product.inputFirstPrintResolution}x${product.inputSecondPrintResolution}dpi</div>
 							</div>
 						</c:if>
                       
-                      	<c:if test="${type=='printer' && (product.inputFirstPrintResolution == 0 || product.inputSecondPrintResolution == 0) && !empty product.printResolution}">
+                      	<c:if test="${product.type=='printer' && (product.inputFirstPrintResolution == 0 || product.inputSecondPrintResolution == 0) && !empty product.printResolution}">
                       		<div style="height: 40px; margin-bottom: 5px;">
 								<p style="font-weight: bold; width: 50%; float: left;">Разрешение печати:</p>
 								<div style="float: left; width: 50%;">
@@ -78,7 +78,7 @@
 						</c:if>
 						
 						<!-- chromaticity -->
-						<c:if test="${type=='printer' && !empty product.chromaticity}">
+						<c:if test="${product.type=='printer' && !empty product.chromaticity}">
 							<div style="height: 30px; margin-bottom: 5px;">
 								<p style="font-weight: bold; width: 50%; float: left;">Цветовая схема:</p>
 								<div style="float: left; width: 50%;">
@@ -136,17 +136,17 @@
 				<a id="
 				
 				<c:choose>
-	   		 		<c:when test="${fn:length(product.pathPictures) > 1}">/images/${type}s/${product.id}/${product.pathPictures.get(1)}</c:when>    
-	    			<c:otherwise>/images/${type}s/${product.id}/${product.pathPictures.get(0)}</c:otherwise>
+	   		 		<c:when test="${fn:length(product.pathPictures) > 1}">/images/${product.type}s/${product.id}/${product.pathPictures.get(1)}</c:when>    
+	    			<c:otherwise>/images/${product.type}s/${product.id}/${product.pathPictures.get(0)}</c:otherwise>
 				</c:choose>
 	
 				
-				" onmouseover="" class="link" href="<c:url value='/${type}/${product.id}' />">	
-						<div class="outer_a_img"><img src="/images/${type}s/${product.id}/${product.pathPictures.get(0)}" alt=""></div>
+				" onmouseover="" class="link" href="<c:url value='/${product.type}/${product.id}' />">	
+						<div class="outer_a_img"><img src="/images/${product.type}s/${product.id}/${product.pathPictures.get(0)}" alt=""></div>
 				</a>
 	
 				<div class="name_price_cart_block">
-					<a href="<c:url value='/${type}/${product.id}' />" class="products_title">${product.name}</a>
+					<a href="<c:url value='/${product.type}/${product.id}' />" class="products_title">${product.name}</a>
 					<div class="product_price"><span style="float: left;">Цена:&nbsp;</span> 
 						<input type="hidden" name="price_value" value="${product.prise}">
 			       		<c:if test="${product.prise < 0.1}"><a href="#callback" class="fancybox">уточняйте</a></c:if>
@@ -156,11 +156,11 @@
 	           		</div>
 	
 					<i class="fa fa-cart-plus add_to_cart" aria-hidden="true" style="padding-right: 5px; top: 2px; right: 10px; position: absolute;"
-						onclick="addToCart('${type}', ${product.id}, '${product.name}', '${product.prise}', '${product.pathPictures.get(0)}');"></i>
+						onclick="addToCart('${product.type}', ${product.id}, '${product.name}', '${product.prise}', '${product.pathPictures.get(0)}');"></i>
 				</div>	
 				
 				<div class="name_price_cart_block_hidden">
-					<c:if test="${type=='printer' && product.ratingOverallRating > 0}">
+					<c:if test="${product.type=='printer' && product.ratingOverallRating > 0}">
 						<!-- Общая оценка -->
 							<div class="rating_block">
 								<p style="font-weight: bold;">Общая оценка:</p>
@@ -177,7 +177,7 @@
 					</c:if>
 					
 					<!-- type of printhead -->
-						<c:if test="${type=='printer' && !empty product.typeOfPrinthead}">							
+						<c:if test="${product.type=='printer' && !empty product.typeOfPrinthead}">							
 							<div style="height: 40px; margin-bottom: 5px;">
 								<p style="font-weight: bold; width: 50%; float: left;">Тип печатающей головки:</p>
 								<div style="float: left; width: 50%;">${product.typeOfPrinthead}</div>
@@ -185,14 +185,14 @@
 						</c:if>			
 						
 						<!-- print resolution -->
-						<c:if test="${type=='printer' && product.inputFirstPrintResolution != 0 && product.inputSecondPrintResolution != 0}">
+						<c:if test="${product.type=='printer' && product.inputFirstPrintResolution != 0 && product.inputSecondPrintResolution != 0}">
 							<div style="height: 40px; margin-bottom: 5px;">
 								<p style="font-weight: bold; width: 50%; float: left;">Разрешение печати:</p>
 								<div style="float: left; width: 50%;">${product.inputFirstPrintResolution}x${product.inputSecondPrintResolution}dpi</div>
 							</div>
 						</c:if>
                       
-                      	<c:if test="${type=='printer' && (product.inputFirstPrintResolution == 0 || product.inputSecondPrintResolution == 0) && !empty product.printResolution}">
+                      	<c:if test="${product.type=='printer' && (product.inputFirstPrintResolution == 0 || product.inputSecondPrintResolution == 0) && !empty product.printResolution}">
                       		<div style="height: 40px; margin-bottom: 5px;">
 								<p style="font-weight: bold; width: 50%; float: left;">Разрешение печати:</p>
 								<div style="float: left; width: 50%;">
@@ -203,7 +203,7 @@
 						</c:if>
 						
 						<!-- chromaticity -->
-						<c:if test="${type=='printer' && !empty product.chromaticity}">
+						<c:if test="${product.type=='printer' && !empty product.chromaticity}">
 							<div style="height: 30px; margin-bottom: 5px;">
 								<p style="font-weight: bold; width: 50%; float: left;">Цветовая схема:</p>
 								<div style="float: left; width: 50%;">
@@ -343,15 +343,15 @@ $(document).ready(function() {
 					slidePrice.append($('<div/>').text(checkPrise(product.prise)));
 				}
             	
-				innterDiv.append($('<a/>').attr("id", "/images/${type}s/" + product.id + "/" + checkPicture(product.pathPictures))
+				innterDiv.append($('<a/>').attr("id", "/images/${product.type}s/" + product.id + "/" + checkPicture(product.pathPictures))
    								 			 .addClass("link")
-            								 .attr("href", "/${type}/" + product.id)
-            								 .append($('<div/>').addClass("outer_a_img").append($('<img/>').attr("src", "/images/${type}s/" + product.id + "/" + product.pathPictures[0]))))
+            								 .attr("href", "/${product.type}/" + product.id)
+            								 .append($('<div/>').addClass("outer_a_img").append($('<img/>').attr("src", "/images/${product.type}s/" + product.id + "/" + product.pathPictures[0]))))
             				.append($('<div/>').addClass("name_price_cart_block")
-	                				.append($('<a/>').attr("href", "/${type}/" + product.id).addClass("products_title").text(product.name))
+	                				.append($('<a/>').attr("href", "/${product.type}/" + product.id).addClass("products_title").text(product.name))
 	    	                		.append(slidePrice)
 	    	                		.append($('<i/>').addClass("fa fa-cart-plus add_to_cart").click(function(){
-        			                			addToCart("${type}" , product.id, product.name, product.prise+'', product.pathPictures[0]);
+        			                			addToCart("${product.type}" , product.id, product.name, product.prise+'', product.pathPictures[0]);
         			                		}).css(
         			        						{
         			        							"padding-right": "5px",
@@ -362,7 +362,7 @@ $(document).ready(function() {
     			        						
         			        		var name_price_cart_block = $('<div/>').addClass('name_price_cart_block_hidden');			
         			        						
-        			        		if("${type}"=='printer' && product.ratingOverallRating > 0){	       			        			
+        			        		if("${product.type}"=='printer' && product.ratingOverallRating > 0){	       			        			
         			        			name_price_cart_block.append($('<div/>').addClass('rating_block')
         			        							.append($('<p/>').css( "font-weight", "bold" ).text("Общая оценка:"))
         			        							.append($('<div/>').css( "width", "100px" ).css( "float", "left" )
@@ -376,7 +376,7 @@ $(document).ready(function() {
         			        									)))
         			        		}
 			// in this block added information about print head		
-			if("${type}"=='printer' && product.typeOfPrinthead!=null && product.typeOfPrinthead!=""){
+			if("${product.type}"=='printer' && product.typeOfPrinthead!=null && product.typeOfPrinthead!=""){
 				name_price_cart_block.append($('<div/>').css( "height", "40px" ).css( "margin-bottom", "5px" )
 						.append($('<p/>').css( "font-weight", "bold" ).css( "width", "50%" ).css( "float", "left" ).text("Тип печатающей головки:"))
 						.append($('<div/>').css( "width", "50%" ).css( "float", "left" ).text(product.typeOfPrinthead))
@@ -384,14 +384,14 @@ $(document).ready(function() {
     		}
 
 			// in this two blocks added information about printer resolution			
-			if("${type}"=='printer' && product.inputFirstPrintResolution != 0 && product.inputSecondPrintResolution != 0){
+			if("${product.type}"=='printer' && product.inputFirstPrintResolution != 0 && product.inputSecondPrintResolution != 0){
 				name_price_cart_block.append($('<div/>').css( "height", "40px" ).css( "margin-bottom", "5px" )
 						.append($('<p/>').css( "font-weight", "bold" ).css( "width", "50%" ).css( "float", "left" ).text("Разрешение печати:"))
 						.append($('<div/>').css( "width", "50%" ).css( "float", "left" ).text(product.inputFirstPrintResolution + "x" + product.inputSecondPrintResolution + "dpi"))
 								)
     		}
 			
-			if("${type}"=='printer' && (product.inputFirstPrintResolution == 0 || product.inputSecondPrintResolution == 0) && product.printResolution!=null){
+			if("${product.type}"=='printer' && (product.inputFirstPrintResolution == 0 || product.inputSecondPrintResolution == 0) && product.printResolution!=null){
 				var resultResolution="";
 				$(product.printResolution).each(function(i, resolution) {
 					if(resultResolution==""){
@@ -409,7 +409,7 @@ $(document).ready(function() {
     		}	
  
 			//in this block added information about chromaticity	
-			if("${type}"=='printer' && product.chromaticity!=null){
+			if("${product.type}"=='printer' && product.chromaticity!=null){
 				var resultChromaticity="";
 				$(product.chromaticity).each(function(i, enty) {
 					if(resultChromaticity==""){
