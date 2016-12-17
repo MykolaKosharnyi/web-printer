@@ -40,9 +40,9 @@
 		<div class="block_search_criteria">
 			<div class="block_block_title">
 				
-						<input class="input_pue" type="checkbox" name="type" value="printer" id="printer_98">
-							<p class="p_pue" for="printer_98">Принтер</p>
-						</input>
+				<input class="input_pue" type="checkbox" name="type" value="printer" id="printer_98">
+					<p class="p_pue" for="printer_98">Принтер</p>
+				</input>
 			</div>
 			<ul class="block_check_boxes">
 				<div class="search_criteria">
