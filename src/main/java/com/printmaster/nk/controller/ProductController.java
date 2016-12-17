@@ -3,7 +3,6 @@ package com.printmaster.nk.controller;
 import static com.printmaster.nk.controller.ControllerConstants.*;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,7 +12,6 @@ import org.json.simple.JSONObject;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -24,37 +22,26 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.printmaster.nk.HomeController;
 import com.printmaster.nk.beans.ComponentsForControllers;
 import com.printmaster.nk.beans.LinksForProducts;
 import com.printmaster.nk.beans.PicturesContainer;
-import com.printmaster.nk.model.Cutter;
 import com.printmaster.nk.model.HeadProduct;
-import com.printmaster.nk.model.Printer;
-import com.printmaster.nk.model.Printer3D;
-import com.printmaster.nk.model.SearchCutters;
-import com.printmaster.nk.service.CutterService;
-import com.printmaster.nk.service.DigitalPrinterService;
-import com.printmaster.nk.service.LaminatorService;
-import com.printmaster.nk.service.LaserService;
-import com.printmaster.nk.service.PreviousUsedEqvipmentService;
-import com.printmaster.nk.service.Printer3DService;
-import com.printmaster.nk.service.PrinterService;
+import com.printmaster.nk.model.SearchGeneric;
 import com.printmaster.nk.service.ProductService;
-import com.printmaster.nk.service.RipService;
-import com.printmaster.nk.service.ScannerService;
 import com.printmaster.nk.service.UseWithProductService;
 
-public abstract class ProductController <T extends HeadProduct, S>{
+public abstract class ProductController <T extends HeadProduct, S extends SearchGeneric>{
+	protected T product;	
+	protected S searchCriteries;
 	
-	private Map<String, String> links;
-	
-	private Map<String, String> parametersOnAdminProductsPage;
-    
 	@Autowired
 	Logger logger =  Logger.getLogger(ProductController.class);
 	
-	public static final String DIRECTORY = "/var/www/localhost/images";
+	protected Map<String, String> links;
+	
+	protected Map<String, String> parametersOnAdminProductsPage;
+	
+	protected static final String DIRECTORY = "/var/www/localhost/images";
 
 	private static final String TYPE = "";
 	
@@ -69,7 +56,7 @@ public abstract class ProductController <T extends HeadProduct, S>{
     @Autowired
     PicturesContainer files;
  
-    public ProductService<T,S> productService;
+    protected ProductService<T,S> productService;
 	
 	private UseWithProductService useWithProductService;
 	
@@ -80,9 +67,10 @@ public abstract class ProductController <T extends HeadProduct, S>{
     }
     
 	@RequestMapping(value = "/"+ TYPE +"s", method = RequestMethod.GET)	
-    public String allProducts(Model model) {
+    public String allProducts(Model model) throws InstantiationException, IllegalAccessException {
         model.addAttribute(ATTRIBUTE_LIST_PRODUCTS, componets.makeLightWeightCollectionOfProduct(this.productService.listShowOnSite()));
-        S search = new S();
+        @SuppressWarnings("unchecked")
+		S search = (S) searchCriteries.getClass().newInstance();
         search.setPrise0(0);
         search.setPrise1(100000);
    
@@ -96,8 +84,9 @@ public abstract class ProductController <T extends HeadProduct, S>{
     }
 	
 	@RequestMapping(value = "/"+ TYPE +"s/{subType}", method = RequestMethod.GET)	
-    public String typeProducts(@PathVariable("subType") String subType, Model model) {
-        S search = new S();
+    public String typeProducts(@PathVariable("subType") String subType, Model model) throws InstantiationException, IllegalAccessException {
+		@SuppressWarnings("unchecked")
+		S search = (S) searchCriteries.getClass().newInstance();
         String currentType = null;
    
         if(links.containsKey(subType)){
@@ -108,7 +97,7 @@ public abstract class ProductController <T extends HeadProduct, S>{
         }
         
         String[] a = {currentType};
-        search.setTypeCutter(a);
+        search.setTypeProduct(a);
         search.setPrise0(0);
         search.setPrise1(100000);
         model.addAttribute(ATTRIBUTE_SEARCH, search);
@@ -160,7 +149,7 @@ public abstract class ProductController <T extends HeadProduct, S>{
         
         if(links.containsKey(type)){
         	for(T product : productService.listProducts("id")){
-        		if(product.getTypeCutter().equals(links.get(type))){
+        		if(product.getTypeProduct().equals(links.get(type))){
         			listResult.add(product);
         		}
         	}
@@ -191,7 +180,7 @@ public abstract class ProductController <T extends HeadProduct, S>{
 		if (links.containsKey(type)) {
 
 			for (T product : productService.listProducts(value)) {
-				if (product.getTypeCutter().equals(links.get(type))) 
+				if (product.getTypeProduct().equals(links.get(type))) 
 					list.add(product);
 			}
 
@@ -203,10 +192,10 @@ public abstract class ProductController <T extends HeadProduct, S>{
     }
 	
 	@RequestMapping(value = "/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_NEW, method = RequestMethod.GET)
-	public String addNewProduct(Model model) {
+	public String addNewProduct(Model model) throws InstantiationException, IllegalAccessException {
 		files.clear();
 		logger.info(String.format("/%s/%s/%s page.", PATH_ADMIN, PATH_NEW, TYPE));
-		model.addAttribute(ATTRIBUTE_PRODUCT, new T());
+		model.addAttribute(ATTRIBUTE_PRODUCT, product.getClass().newInstance());
 		
 		componets.setJSONtoModelAttribute(model, TYPE);
 		
