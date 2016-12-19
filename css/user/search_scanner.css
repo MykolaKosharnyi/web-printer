@@ -1,6 +1,6 @@
             .amount-prise0,
             .amount-prise1{
-                width: 51px;
+                width: 60px;
             }
 
 .amount-softwareResolution0,
@@ -23,7 +23,7 @@
 			.amount-averagePowerConsumption1,
             .amount-max_power_consumption0,
             .amount-max_power_consumption1{
-                width: 35px;
+                width: 51px;
             }
 
             .amount-weight0,
@@ -31,9 +31,9 @@
                 width: 35px;
             }
 
-	    .amount-width0,
+	    	.amount-width0,
             .amount-width1,
-	    .amount-heigth0,
+	    	.amount-heigth0,
             .amount-heigth1,
             .amount-depth0,
             .amount-depth1{

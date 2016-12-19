@@ -574,7 +574,7 @@ p.p_pue{
 	border-radius: 5px 5px 5px 5px;
 	height: auto;
 	padding: 0px 10px;
-	width: 80%;
+	width: 100%;
 	margin: 0px;
 }	
 	
@@ -597,6 +597,7 @@ p.p_pue{
 
 		.products .product_price{
 			color: #92A5A6;
+			margin-top: 5px;
 		}
 
 		.products_title{margin-bottom: 5px;}

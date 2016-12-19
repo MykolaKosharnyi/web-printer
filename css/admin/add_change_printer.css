@@ -8,13 +8,13 @@
             }
 
 input.speed_print_pass{width: 33px; text-align: center;}
-input.option{width: 94px; text-align: center;}
+
 
 	.amount-speed-print{
-		width: 30px;
+		width: 35px;
 	}
             .amount-max_power_consumption{
-                width: 35px;
+                width: 70px;
             }
 
             .amount-weight{

@@ -447,6 +447,21 @@ input.quantity_paint{
 	width: 30px;
 }
 
+.delivery .delivery_notes{
+	font-style:italic;
+	margin: 10px;
+	border-top: 1px solid black;
+	padding-top: 5px;
+	margin-bottom: 5px;
+}
+
+.delivery .delivery_notes p{
+	color:red;
+	width: auto;
+	float: left;
+	margin: 0px 10px;
+}
+
 /*---- second part of product page ----*/
 	#tabs_product{
         position: relative;

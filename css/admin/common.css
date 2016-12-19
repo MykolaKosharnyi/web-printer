@@ -418,6 +418,9 @@ p.paint_option{
 		width: 100px;
 	}
 	
+	input.option{width: 94px; text-align: center;}
+
+	.characteristic .option_description,
 	.product_option .option_description{
 		width: 100%;
 		margin-top: 5px;
