@@ -83,12 +83,7 @@
 <!-- include cart on pages -->
 <jsp:include page="modal_cart_window.jsp" />
 
-
-
-
-
-
-
+<!-- modal window for showing where office on map -->
 <div id="myAdress" class="modal fade">
     <div class="modal-dialog" style="width:600px;height: auto;">
         <div class="modal-content">
@@ -105,16 +100,6 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
-
-
-
 
 <!--[if lt IE 9]>
 	<script src="libs/html5shiv/es5-shim.min.js"></script>
