@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.json.simple.JSONArray;
@@ -16,11 +17,15 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.client.RestTemplate;
 
 import com.printmaster.nk.beans.Cart;
 
@@ -96,11 +101,31 @@ public class LinksAdvise {
 	
 			try {
 				JSONObject jsonObject = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/constant.json"), "UTF-8"));
+				addDollarAndEuroValue(jsonObject);
 				model.addAttribute("constants", jsonObject);
 			} catch (IOException | ParseException e) {
 				e.printStackTrace();
 			}
     }
+	
+	@SuppressWarnings("unchecked")
+	private void addDollarAndEuroValue(JSONObject jsonObject){
+		RestTemplate restTemplate = new RestTemplate();
+		
+		ResponseEntity<List<CurrencyInfo>> infoResponse =
+		        restTemplate.exchange("https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5", 
+		        		HttpMethod.GET, null, new ParameterizedTypeReference<List<CurrencyInfo>>() {});
+//		List<CurrencyInfo> infoAboutCurrency = infoResponse.getBody();
+		
+		for(CurrencyInfo curency : infoResponse.getBody()){
+			if(curency.getCcy().equals("USD")){
+				jsonObject.put("dollar_in_grivna", curency.getSale());
+			} else if(curency.getCcy().equals("EUR")){
+				jsonObject.put("euro_in_grivna", curency.getSale());
+			}
+		}
+		//CurrencyInfo quote = restTemplate.getForObject("https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5", CurrencyInfo.class);
+	}
 	
 	@InitBinder
     public void initBinder(WebDataBinder binder) {
