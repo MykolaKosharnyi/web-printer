@@ -53,12 +53,14 @@
     	<param-value>UTF-8</param-value>
 	</context-param>  
 	
-	<!-- Loads Spring Security config file -->
+	<!-- Loads Spring Security config file, quartz-context -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/spring/security.xml</param-value>
+		<param-value> 
+			/WEB-INF/spring/security.xml  
+		</param-value>
 	</context-param>
-
+	
 	<!-- Spring Security -->
 	<filter>
 		<filter-name>springSecurityFilterChain</filter-name>

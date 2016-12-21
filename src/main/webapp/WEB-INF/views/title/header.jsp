@@ -116,7 +116,7 @@
 						</script>
 			
 							<c:if test="${pageContext.request.userPrincipal.name != null}">
-								<li><a href="#">Вы вошли как: ${pageContext.request.userPrincipal.name}</a></li>
+								<li><a href="<c:url value='/user' />">Вы вошли как: ${pageContext.request.userPrincipal.name}</a></li>
 								<li><a href="javascript:formSubmit()">Выход</a></li>
 							</c:if>
 							<c:if test="${pageContext.request.userPrincipal.name == null}">
