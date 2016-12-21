@@ -1,82 +1,13 @@
+
 /* for searching in input field */
-//$(function(){
-//	$( "input#search_input_by_phrase" ).change(function() {
-//	
-//		$('#search_area_by_phrase .result_of_search_by_phrase').remove();
-//		$('#search_area_by_phrase .close_result_of_search').remove();
-//		
-//		searchByPhrase("all", $(this).val());
-//		  
-//	});
-//	
-//	$(document).on("click", '#search_area_by_phrase .close_result_of_search', function(){
-//		$('#search_area_by_phrase .result_of_search_by_phrase').remove();
-//		$('#search_area_by_phrase .close_result_of_search').remove();
-//	});
-//	
-//});
-
-function openInNewTabWinBrowser(url) {
-	  var win = window.open(url, '_blank');
-	  win.focus();
+function searchByPhraseIncludeType(typeProduct){
+	openInNewTabWinBrowser("/search_by_phrase?type=" + typeProduct + "&phrase=" + $( "input#search_input_by_phrase" ).val() );
 }
-
-
-	function searchByPhraseIncludeType(typeProduct){
-//boss wanted that it must work in new way
-		openInNewTabWinBrowser("/search_by_phrase?type=" + typeProduct + "&phrase=" + $( "input#search_input_by_phrase" ).val() );
-		
-//		$('#search_area_by_phrase .result_of_search_by_phrase').remove();
-//		$('#search_area_by_phrase .close_result_of_search').remove();
-//		
-//		searchByPhrase( typeProduct, $( "input#search_input_by_phrase" ).val());
-	}
 	
-	function searchByPhrase(type, phrase){
-		var dataToSend = {
-			'type':type,
-			'phrase':phrase
-		};
-		
-		$.ajax({
-			  type: 'POST',
-			  url: "/search_by_phrase",
-			  data: JSON.stringify(dataToSend),
-			  beforeSend: function(xhr) {
-		            xhr.setRequestHeader("Accept", "application/json");
-		            xhr.setRequestHeader("Content-Type", "application/json");
-		        }
-			  }).done(function(result){
-				  if(result.length > 0){
-					  $(result).each(function(i, product) {
-						  if( $('#search_area_by_phrase').find( ".result_of_search_by_phrase" ).length == 0 ){
-								$('#search_area_by_phrase').append($('<div/>').addClass('result_of_search_by_phrase').append(createResultOfSearchByPhrase(product)))
-									.append($('<span/>').addClass('close_result_of_search').append($('<i/>').addClass('fa fa-close')));
-							} else {
-								$('#search_area_by_phrase .result_of_search_by_phrase').append(createResultOfSearchByPhrase(product));
-							}
-					  });
-				  } else {
-					  $('#search_area_by_phrase')
-					  		  .append($('<div/>').addClass('result_of_search_by_phrase')
-					  				  .append($('<span/>').addClass('no_search_result').text("Поиск за словом/фразой не дал результата.")))
-							  .append($('<span/>').addClass('close_result_of_search').append($('<i/>').addClass('fa fa-close')));
-				  }
-				  
-				});
-	}
-	
-	function createResultOfSearchByPhrase(product){
-		var result = $('<div/>').addClass('result_of_search');
-		result.append($('<a/>').attr("href", "/" + product.type + "/" + product.id)
-				.append($('<img/>').attr("src", "/images/" + product.type + "s/" + product.id + "/" + product.pathToPicture))
-				.append($('<span/>').addClass('name_searched_product').text(product.name))
-				/*.append($('<span/>').addClass('price_searched_product').text("10 000"))*/);
-		/*result.text(text);*/
-		
-		return result;
-	}
-
+function openInNewTabWinBrowser(url) {
+	var win = window.open(url, '_blank');
+	win.focus();
+}
 
 /* for showing description on divs which right of big animation on home page*/
 $(function(){

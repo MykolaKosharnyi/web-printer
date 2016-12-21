@@ -54,8 +54,8 @@ public class LoaderValueCurrency {
 		
 		try {
 			jsonFile = (JSONObject)new JSONParser().
-    					parse(new InputStreamReader(new FileInputStream(pathToFile), "UTF-8"));
-
+    					parse(new InputStreamReader(new FileInputStream(pathToFile), "UTF-8"));	
+			
 			if(dollar > 0)
 				jsonFile.put("dollar_in_grivna", dollar);
 			
