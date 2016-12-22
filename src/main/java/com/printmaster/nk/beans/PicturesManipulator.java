@@ -139,6 +139,10 @@ public class PicturesManipulator {
     }
 	
 	public String uploadPictureToExistedProduct(MultipartHttpServletRequest request, String directory, String concreteFolder, long id) {
+		return uploadPicture(request, directory, concreteFolder, Long.toString(id));
+	}
+	
+	public String uploadPicture(MultipartHttpServletRequest request, String directory, String concreteFolder, String subject) {
 		logger.info("upload new picture");
 
 		Iterator<String> itr = request.getFileNames();
@@ -152,7 +156,7 @@ public class PicturesManipulator {
 
 			try {
 				FileCopyUtils.copy(mpf.getBytes(), new FileOutputStream(directory + File.separator + concreteFolder
-						+ File.separator + id + File.separator + fileName));
+						+ File.separator + subject + File.separator + fileName));
 			} catch (IOException e) {
 				logger.error("Don't write picture to the folder", e);
 			}
@@ -162,10 +166,14 @@ public class PicturesManipulator {
 	}
 	
     public void removePicture(String name, String directory, String concreteFolder, long id){
+    	removePicture( name,  directory,  concreteFolder,  Long.toString(id));
+    }
+    
+    public void removePicture(String name, String directory, String concreteFolder, String subjectFolder){
     	try {
-    		FileUtils.forceDelete(new File(directory + File.separator + concreteFolder + File.separator + id + File.separator + name));
+    		FileUtils.forceDelete(new File(directory + File.separator + concreteFolder + File.separator + subjectFolder + File.separator + name));
 		} catch (IOException e) {
-			logger.error(String.format("Can't delete picture from %s folder, with id = %d, with name = %s", concreteFolder, id, name), e);
+			logger.error(String.format("Can't delete picture from %s folder, in concrete = %d, with name = %s", concreteFolder, subjectFolder, name), e);
 		} 
     }
 	

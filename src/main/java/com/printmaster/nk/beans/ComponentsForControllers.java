@@ -388,6 +388,13 @@ public class ComponentsForControllers {
 	}
 	
 	/**
+	 * Uploading picture to concrete folder on server
+	 */
+	public String uploadPicture(MultipartHttpServletRequest request, String directory, String concreteFolder, String subject) {
+		return picturesManipulator.uploadPicture(request, directory, concreteFolder, subject);
+	}
+	
+	/**
 	 * Remove picture from concrete product
 	 * 
 	 * @param name
@@ -397,6 +404,10 @@ public class ComponentsForControllers {
 	 */
     public void removePicture(String name, String directory, String concreteFolder, long id){
     	picturesManipulator.removePicture(name, directory, concreteFolder, id);
+    }  
+    
+    public void removePicture(String name, String directory, String concreteFolder, String concrete){
+    	picturesManipulator.removePicture(name, directory, concreteFolder, concrete);
     }
     
     /**
