@@ -8,8 +8,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.io.Writer;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import org.apache.commons.io.FileUtils;
@@ -18,6 +21,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -30,22 +34,147 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.printmaster.nk.beans.ComponentsForControllers;
+
 @Controller
 public class PicturesHomePageController {
 
 	private Logger logger = Logger.getLogger(PicturesHomePageController.class);
 	
     private String directory = "/var/www/localhost/images";
-//	private String directory = "D:/images";
 	
-	private String path = "/var/www/localhost/home.json";
-//	private String path = "D:/images/home.json";
+	private static final String PATH_TO_JSON_FILE = "/var/www/localhost/home.json";
 	
     @RequestMapping(value="/admin/pictures", method=RequestMethod.GET)
 	public ModelAndView addNewPrinter() {
 		logger.info("/admin/pictures page.");
 	    return new ModelAndView("admin/pictures");
 	}
+    
+    @Autowired
+    ComponentsForControllers componets;
+    
+    
+    private class RowPicturesInformation{
+		//private String nameRow;
+		private List<PictureInformation> picturesInfo;
+		
+		public RowPicturesInformation(List<PictureInformation> subTypesInfo) {
+			this.picturesInfo = subTypesInfo;
+		}
+
+		public List<PictureInformation> getPicturesInfo() {
+			return picturesInfo;
+		}
+
+		public void setPicturesInfo(List<PictureInformation> picturesInfo) {
+			this.picturesInfo = picturesInfo;
+		}
+
+
+		@Override
+		public int hashCode() {
+			final int prime = 31;
+			int result = 1;
+			result = prime * result + getOuterType().hashCode();
+			result = prime * result + ((picturesInfo == null) ? 0 : picturesInfo.hashCode());
+			return result;
+		}
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			RowPicturesInformation other = (RowPicturesInformation) obj;
+			if (!getOuterType().equals(other.getOuterType()))
+				return false;
+			if (picturesInfo == null) {
+				if (other.picturesInfo != null)
+					return false;
+			} else if (!picturesInfo.equals(other.picturesInfo))
+				return false;
+			return true;
+		}
+		private PicturesHomePageController getOuterType() {
+			return PicturesHomePageController.this;
+		}
+	}
+	
+	private class PictureInformation{
+		private String position;
+		private String headOfPage;
+		private String nameOfJsonObject;
+
+		public PictureInformation(String nameSubType, String headOfPage, String nameOfJsonArray) {
+			this.position = nameSubType;
+			this.headOfPage = headOfPage;
+			this.nameOfJsonObject = nameOfJsonArray;
+		}
+		
+		public PictureInformation(String nameSubType) {
+			this.position = nameSubType;
+		}
+
+		public String getPosition() {
+			return position;
+		}
+
+		public void setPosition(String position) {
+			this.position = position;
+		}
+
+		public String getHeadOfPage() {
+			return headOfPage;
+		}
+
+		public void setHeadOfPage(String headOfPage) {
+			this.headOfPage = headOfPage;
+		}
+
+		public String getNameOfJsonObject() {
+			return nameOfJsonObject;
+		}
+
+		public void setNameOfJsonObject(String nameOfJsonObject) {
+			this.nameOfJsonObject = nameOfJsonObject;
+		}
+
+		@Override
+		public int hashCode() {
+			final int prime = 31;
+			int result = 1;
+			result = prime * result + getOuterType().hashCode();
+			result = prime * result + ((position == null) ? 0 : position.hashCode());
+			return result;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			PictureInformation other = (PictureInformation) obj;
+			if (!getOuterType().equals(other.getOuterType()))
+				return false;
+			if (position == null) {
+				if (other.position != null)
+					return false;
+			} else if (!position.equals(other.position))
+				return false;
+			return true;
+		}
+
+		private PicturesHomePageController getOuterType() {
+			return PicturesHomePageController.this;
+		}
+	}
+    
     
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////    
     
@@ -56,90 +185,73 @@ public class PicturesHomePageController {
 		public ModelAndView showBigReklamAnimation(Model model) {
 		logger.info("/admin/pictures/big_animation_reklam page.");
 
-		JSONParser parser = new JSONParser();
-		try {
-			JSONObject obj = (JSONObject) parser.parse(new InputStreamReader(new FileInputStream(path), "UTF-8"));
-			JSONObject home = (JSONObject) obj.get("homeJSON");
+		JSONObject home = (JSONObject) getJsonPicturesLinksContainer().get("homeJSON");
 
-			model.addAttribute("headOfPage", "Изменение изображений центральной рекламы на главном меню");
-			model.addAttribute("listPictures", (JSONArray) home.get("listPicturesOfCentralReklam"));
+		model.addAttribute("headOfPage", "Изменение изображений центральной рекламы на главном меню");
+		model.addAttribute("listPictures", (JSONArray) home.get("listPicturesOfCentralReklam"));
 
-		} catch (FileNotFoundException e1) {
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		} catch (ParseException e1) {
-			e1.printStackTrace();
-		}
 		return new ModelAndView("admin/pictures/big_animation_reklam");
 	}
 
+	/**
+     * @return JSONObject which contain all links for pictures on home page.
+     */
+    private JSONObject getJsonPicturesLinksContainer(){
+    	JSONParser parser = new JSONParser();
+    	
+    	JSONObject result = null;
+		try {
+			result = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream(PATH_TO_JSON_FILE), "UTF-8"));
+		} catch (IOException | ParseException e) {
+			e.printStackTrace();
+		}
+    	
+    	return result;
+    }
+	
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value="/admin/pictures/central_reklam/upload_pictures", method = RequestMethod.POST)
     	public @ResponseBody String uploadPictureCentralReklam(MultipartHttpServletRequest request) {
     	
     	logger.info("upload new picture to central reklam on home page"); 	
-    
-        Iterator<String> itr =  request.getFileNames();
-        MultipartFile mpf = null;
-        String fileName = null;
 
-        while(itr.hasNext()){
-            mpf = request.getFile(itr.next()); 
-    		fileName = new Random().nextInt(10000000) + "" + mpf.getOriginalFilename().substring(mpf.getOriginalFilename().lastIndexOf("."))/*last part is file extension*/; 
+        String fileName = componets.uploadPicture(request, directory, "home", "big_reklam");
 
-			try {
-				FileCopyUtils.copy(mpf.getBytes(), new FileOutputStream(directory + File.separator + "home" + 
-			File.separator + "big_reklam" + File.separator + fileName));
+			JSONObject obj = getJsonPicturesLinksContainer();
 
-			} catch (IOException e) {
-				logger.error("Don't write picture to the folder", e);
-			} 
-        }
-		JSONParser parser = new JSONParser();
-		
-		try {
-			JSONObject obj = (JSONObject) parser.parse(new InputStreamReader(new FileInputStream(path), "UTF-8"));
+			JSONObject homeJSON = (obj.get("homeJSON") != null) ? (JSONObject) obj.get("homeJSON"): new JSONObject();
 
-			JSONObject homeJSON = null;
-			if (obj.get("homeJSON") != null) {
-				homeJSON = (JSONObject) obj.get("homeJSON");
-			} else {
-				homeJSON = new JSONObject();
-			}
-
-			JSONArray listPicturesOfCentralReklam = null;
-			// check if these subdirectories has pictures
-			if (homeJSON.get("listPicturesOfCentralReklam") != null) {
-				listPicturesOfCentralReklam = (JSONArray) homeJSON.get("listPicturesOfCentralReklam");
-				homeJSON.remove("listPicturesOfCentralReklam");
-			} else {
-				listPicturesOfCentralReklam = new JSONArray();
-			}
+			// check if these sub-directories has pictures
+			JSONArray listPicturesOfCentralReklam =  (homeJSON.get("listPicturesOfCentralReklam") != null) ? 
+					(JSONArray) homeJSON.get("listPicturesOfCentralReklam") : new JSONArray();
 
 			listPicturesOfCentralReklam.add(fileName);
 			homeJSON.put("listPicturesOfCentralReklam", listPicturesOfCentralReklam);
 
-			if (obj.get("homeJSON") != null)
-				obj.remove("homeJSON");
-
 			obj.put("homeJSON", homeJSON);
 
-			Writer out = new PrintWriter(path, "UTF-8");
+			writeResultInLocalFile(obj);
+			     
+         return fileName;
+    }	
+	
+	/**
+     * @param obj input JSONObject which we wrote to file in concrete directory.
+     */
+	private void writeResultInLocalFile(JSONObject obj) {
+		try {
+			
+			Writer out = new PrintWriter(PATH_TO_JSON_FILE, "UTF-8");
 			out.write(obj.toJSONString());
 			out.flush();
 			out.close();
-
+			
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
 		} catch (IOException e1) {
 			e1.printStackTrace();
-		} catch (ParseException e1) {
-			e1.printStackTrace();
 		}
-        
-         return fileName;
-    }	
+	}
 	
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/admin/pictures/central_reklam/change_order_pictures", method = RequestMethod.POST, consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
@@ -147,41 +259,19 @@ public class PicturesHomePageController {
 
 		logger.info("change order pictures in central rekalam");
 
-		JSONParser parser = new JSONParser();
+		JSONObject obj = getJsonPicturesLinksContainer();
 
-		try {
-			JSONObject obj = (JSONObject) parser.parse(new InputStreamReader(new FileInputStream(path), "UTF-8"));
+		JSONObject homeJSON = (JSONObject) obj.get("homeJSON");
 
-			JSONObject homeJSON = (JSONObject) obj.get("homeJSON");
+		JSONArray listPicturesOfCentralReklam = new JSONArray();
 
-			JSONArray listPicturesOfCentralReklam = null;
-			// check if these subdirectories has pictures
-			if (homeJSON.get("listPicturesOfCentralReklam") != null) {
-				homeJSON.remove("listPicturesOfCentralReklam");
-			}
-			listPicturesOfCentralReklam = new JSONArray();
+		for (String fileName : selectedIds)
+			listPicturesOfCentralReklam.add(fileName);
+		homeJSON.put("listPicturesOfCentralReklam", listPicturesOfCentralReklam);
 
-			for (String fileName : selectedIds)
-				listPicturesOfCentralReklam.add(fileName);
-			homeJSON.put("listPicturesOfCentralReklam", listPicturesOfCentralReklam);
+		obj.put("homeJSON", homeJSON);
 
-			if (obj.get("homeJSON") != null)
-				obj.remove("homeJSON");
-
-			obj.put("homeJSON", homeJSON);
-
-			Writer out = new PrintWriter(path, "UTF-8");
-			out.write(obj.toJSONString());
-			out.flush();
-			out.close();
-
-		} catch (FileNotFoundException e1) {
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		} catch (ParseException e1) {
-			e1.printStackTrace();
-		}
+		writeResultInLocalFile(obj);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -190,46 +280,21 @@ public class PicturesHomePageController {
 
 		String namePicture = name.replace(":", ".");
 		logger.info("delete picture in home page, from central big reklam");
+		
+		componets.removePicture(namePicture, directory, "home", "big_reklam"); 
 
-		try {
-			FileUtils.forceDelete(new File(directory + File.separator + "home" + File.separator + "big_reklam"
-					+ File.separator + namePicture));
+		JSONObject obj = getJsonPicturesLinksContainer();
 
-		} catch (IOException e) {
-			logger.error("Can't delete picture from the folder", e);
-		}
+		JSONObject homeJSON = (JSONObject) obj.get("homeJSON");
 
-		JSONParser parser = new JSONParser();
+		JSONArray listPicturesOfCentralReklam = (JSONArray) homeJSON.get("listPicturesOfCentralReklam");
 
-		try {
-			JSONObject obj = (JSONObject) parser.parse(new InputStreamReader(new FileInputStream(path), "UTF-8"));
+		listPicturesOfCentralReklam.remove(namePicture);
+		homeJSON.put("listPicturesOfCentralReklam", listPicturesOfCentralReklam);
 
-			JSONObject homeJSON = (JSONObject) obj.get("homeJSON");
+		obj.put("homeJSON", homeJSON);
 
-			JSONArray listPicturesOfCentralReklam = (JSONArray) homeJSON.get("listPicturesOfCentralReklam");
-			homeJSON.remove("listPicturesOfCentralReklam");
-
-			listPicturesOfCentralReklam.remove(namePicture);
-			homeJSON.put("listPicturesOfCentralReklam", listPicturesOfCentralReklam);
-
-			if (obj.get("homeJSON") != null)
-				obj.remove("homeJSON");
-
-			obj.put("homeJSON", homeJSON);
-
-			Writer out = new PrintWriter(path, "UTF-8");
-			out.write(obj.toJSONString());
-			out.flush();
-			out.close();
-
-		} catch (FileNotFoundException e1) {
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		} catch (ParseException e1) {
-			e1.printStackTrace();
-		}
-
+		writeResultInLocalFile(obj);
 	}
 	
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -244,7 +309,7 @@ public class PicturesHomePageController {
 	    	
 	    	JSONParser parser = new JSONParser();
 	    	try {
-	    		JSONObject obj = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream(path), "UTF-8"));
+	    		JSONObject obj = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream(PATH_TO_JSON_FILE), "UTF-8"));
 			
 	    		JSONObject home = (JSONObject) obj.get("homeJSON");
 	    		
@@ -288,7 +353,7 @@ public class PicturesHomePageController {
 		 JSONParser parser = new JSONParser();
 			
 			try {
-				JSONObject obj = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream(path), "UTF-8"));
+				JSONObject obj = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream(PATH_TO_JSON_FILE), "UTF-8"));
 					
 					JSONObject homeJSON = null;
 					if( obj.get("homeJSON") != null ){
@@ -361,7 +426,7 @@ public class PicturesHomePageController {
 					
 				obj.put("homeJSON", homeJSON);
 				
-				Writer out = new PrintWriter(path, "UTF-8");
+				Writer out = new PrintWriter(PATH_TO_JSON_FILE, "UTF-8");
 				out.write(obj.toJSONString());
 				out.flush();
 				out.close();
@@ -402,7 +467,7 @@ public class PicturesHomePageController {
 			JSONParser parser = new JSONParser();
 			
 			try {
-				JSONObject obj = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream(path), "UTF-8"));
+				JSONObject obj = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream(PATH_TO_JSON_FILE), "UTF-8"));
 					
 					JSONObject homeJSON = null;
 					if( obj.get("homeJSON") != null ){
@@ -491,7 +556,7 @@ public class PicturesHomePageController {
 					
 				obj.put("homeJSON", homeJSON);
 				
-				Writer out = new PrintWriter(path, "UTF-8");
+				Writer out = new PrintWriter(PATH_TO_JSON_FILE, "UTF-8");
 				out.write(obj.toJSONString());
 				out.flush();
 				out.close();
@@ -521,7 +586,7 @@ public class PicturesHomePageController {
 			JSONParser parser = new JSONParser();
 			
 			try {
-				JSONObject obj = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream(path), "UTF-8"));
+				JSONObject obj = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream(PATH_TO_JSON_FILE), "UTF-8"));
 					
 					JSONObject homeJSON = (JSONObject) obj.get("homeJSON");		
 
@@ -598,7 +663,7 @@ public class PicturesHomePageController {
 					
 				obj.put("homeJSON", homeJSON);
 				
-				Writer out = new PrintWriter(path, "UTF-8");
+				Writer out = new PrintWriter(PATH_TO_JSON_FILE, "UTF-8");
 				out.write(obj.toJSONString());
 				out.flush();
 				out.close();
@@ -634,7 +699,7 @@ public class PicturesHomePageController {
 			JSONParser parser = new JSONParser();
 			
 			try {
-				JSONObject obj = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream(path), "UTF-8"));
+				JSONObject obj = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream(PATH_TO_JSON_FILE), "UTF-8"));
 					
 					JSONObject homeJSON = (JSONObject) obj.get("homeJSON");
 
@@ -684,7 +749,7 @@ public class PicturesHomePageController {
 					
 				obj.put("homeJSON", homeJSON);
 				
-				Writer out = new PrintWriter(path, "UTF-8");
+				Writer out = new PrintWriter(PATH_TO_JSON_FILE, "UTF-8");
 				out.write(obj.toJSONString());
 				out.flush();
 				out.close();
@@ -709,7 +774,7 @@ public class PicturesHomePageController {
 	    	
 	    	JSONParser parser = new JSONParser();
 	    	try {
-	    		JSONObject obj = (JSONObject) parser.parse(new InputStreamReader(new FileInputStream(path), "UTF-8"));
+	    		JSONObject obj = (JSONObject) parser.parse(new InputStreamReader(new FileInputStream(PATH_TO_JSON_FILE), "UTF-8"));
 				JSONObject home = (JSONObject) obj.get("homeJSON");
 			
 			if (typeProduct.equals("printer_block")) {
@@ -804,7 +869,7 @@ public class PicturesHomePageController {
 			JSONParser parser = new JSONParser();
 			
 			try {
-				JSONObject obj = (JSONObject) parser.parse(new InputStreamReader(new FileInputStream(path), "UTF-8"));
+				JSONObject obj = (JSONObject) parser.parse(new InputStreamReader(new FileInputStream(PATH_TO_JSON_FILE), "UTF-8"));
 
 				JSONObject homeJSON = null;
 				if (obj.get("homeJSON") != null) {
@@ -937,7 +1002,7 @@ public class PicturesHomePageController {
 
 				obj.put("homeJSON", homeJSON);
 
-				Writer out = new PrintWriter(path, "UTF-8");
+				Writer out = new PrintWriter(PATH_TO_JSON_FILE, "UTF-8");
 				out.write(obj.toJSONString());
 				out.flush();
 				out.close();
@@ -963,7 +1028,7 @@ public class PicturesHomePageController {
 			JSONParser parser = new JSONParser();
 
 			try {
-				JSONObject obj = (JSONObject) parser.parse(new InputStreamReader(new FileInputStream(path), "UTF-8"));
+				JSONObject obj = (JSONObject) parser.parse(new InputStreamReader(new FileInputStream(PATH_TO_JSON_FILE), "UTF-8"));
 
 				JSONObject homeJSON = (JSONObject) obj.get("homeJSON");
 
@@ -1088,7 +1153,7 @@ public class PicturesHomePageController {
 
 				obj.put("homeJSON", homeJSON);
 
-				Writer out = new PrintWriter(path, "UTF-8");
+				Writer out = new PrintWriter(PATH_TO_JSON_FILE, "UTF-8");
 				out.write(obj.toJSONString());
 				out.flush();
 				out.close();
@@ -1121,7 +1186,7 @@ public class PicturesHomePageController {
 			JSONParser parser = new JSONParser();
 
 			try {
-				JSONObject obj = (JSONObject) parser.parse(new InputStreamReader(new FileInputStream(path), "UTF-8"));
+				JSONObject obj = (JSONObject) parser.parse(new InputStreamReader(new FileInputStream(PATH_TO_JSON_FILE), "UTF-8"));
 
 				JSONObject homeJSON = (JSONObject) obj.get("homeJSON");
 
@@ -1204,7 +1269,7 @@ public class PicturesHomePageController {
 
 				obj.put("homeJSON", homeJSON);
 
-				Writer out = new PrintWriter(path, "UTF-8");
+				Writer out = new PrintWriter(PATH_TO_JSON_FILE, "UTF-8");
 				out.write(obj.toJSONString());
 				out.flush();
 				out.close();
@@ -1221,6 +1286,76 @@ public class PicturesHomePageController {
 	    
 	    
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	    
+	    
+	    Map<String, RowPicturesInformation> picturesInTopProductSection = new HashMap<String, RowPicturesInformation>(){
+			private static final long serialVersionUID = 1L;
+			{
+				put("printer_top", new RowPicturesInformation(
+						Arrays.asList(
+								new PictureInformation("1", "Изменение картинки отображения над подразделом принтеров №1", "list_printer_top1"),
+								new PictureInformation("2", "Изменение картинки отображения над подразделом принтеров №2", "list_printer_top2"),
+								new PictureInformation("3", "Изменение картинки отображения над подразделом принтеров №3", "list_printer_top3")
+							)));
+				
+				put("digital_printer_top", new RowPicturesInformation(
+						Arrays.asList(
+								new PictureInformation("1", "Изменение картинки отображения над подразделом цыфровых принтеров №1", "list_digital_printer_top1"),
+								new PictureInformation("2", "Изменение картинки отображения над подразделом цыфровых принтеров №2", "list_digital_printer_top2"),
+								new PictureInformation("3", "Изменение картинки отображения над подразделом цыфровых принтеров №3", "list_digital_printer_top3")
+							)));
+				
+				put("laser_top", new RowPicturesInformation(
+						Arrays.asList(
+								new PictureInformation("1", "Изменение картинки отображения над подразделом лазеров №1", "list_laser_top1"),
+								new PictureInformation("2", "Изменение картинки отображения над подразделом лазеров №2", "list_laser_top2"),
+								new PictureInformation("3", "Изменение картинки отображения над подразделом лазеров №3", "list_laser_top3")
+							)));
+				
+				put("scaner_top", new RowPicturesInformation(
+						Arrays.asList(
+								new PictureInformation("1", "Изменение картинки отображения над подразделом сканеров №1", "list_scaner_top1"),
+								new PictureInformation("2", "Изменение картинки отображения над подразделом сканеров №2", "list_scaner_top2"),
+								new PictureInformation("3", "Изменение картинки отображения над подразделом сканеров №3", "list_scaner_top3")
+							)));
+
+				put("rip_top", new RowPicturesInformation(
+						Arrays.asList(
+								new PictureInformation("1", "Изменение картинки отображения над подразделом ПО №1", "list_rip_top1"),
+								new PictureInformation("2", "Изменение картинки отображения над подразделом ПО №2", "list_rip_top2"),
+								new PictureInformation("3", "Изменение картинки отображения над подразделом ПО №3", "list_rip_top3")
+							)));
+				
+				put("3d_printer_top", new RowPicturesInformation(
+						Arrays.asList(
+								new PictureInformation("1", "Изменение картинки отображения над подразделом 3D принтеров №1", "list_3d_printer_top1"),
+								new PictureInformation("2", "Изменение картинки отображения над подразделом 3D принтеров №2", "list_3d_printer_top2")
+							)));
+			
+				put("laminator_top", new RowPicturesInformation(
+						Arrays.asList(
+								new PictureInformation("1", "Изменение картинки отображения над подразделом ламинаторов №1", "list_laminator_top1"),
+								new PictureInformation("2", "Изменение картинки отображения над подразделом ламинаторов №2", "list_laminator_top2")
+							)));
+				
+				put("cutter_top", new RowPicturesInformation(
+						Arrays.asList(
+								new PictureInformation("1", "Изменение картинки отображения над подразделом фрезеров №1", "list_cutter_top1"),
+								new PictureInformation("2", "Изменение картинки отображения над подразделом фрезеров №2", "list_cutter_top2")
+							)));
+				
+				put("previously_used_top", new RowPicturesInformation(
+						Arrays.asList(
+								new PictureInformation("1", "Изменение картинки отображения над подразделом б/у товаров №1", "list_previously_used_top1"),
+								new PictureInformation("2", "Изменение картинки отображения над подразделом б/у товаров №2", "list_previously_used_top2")
+							)));
+				
+			}
+		};
+	    
+	    
+	    
+	    
 
 	/**
 	 * block with three big pictures
@@ -1228,135 +1363,26 @@ public class PicturesHomePageController {
 	    @RequestMapping(value="/admin/pictures/three_big_pictures/{inTopOfTypeProduct}/{position}", method = RequestMethod.GET)
 	    public ModelAndView showThreeBigPictures(Model model, @PathVariable("inTopOfTypeProduct") String inTopOfTypeProduct,
 	    							 @PathVariable("position") String position){
-	    	
-	    	JSONParser parser = new JSONParser();
-	    	try {
-	    		JSONObject obj = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream(path), "UTF-8"));
-			
-	    	if(inTopOfTypeProduct.equals("printer_top")){
-	    		JSONObject homeJSON = (JSONObject) obj.get("homeJSON");
-	    		
-				if(position.equals("1")){
+
+			JSONObject homeJSON = (JSONObject) getJsonPicturesLinksContainer().get("homeJSON");
+	
+			if (picturesInTopProductSection.containsKey(inTopOfTypeProduct)) {
+	
+				List<PictureInformation> pictures = picturesInTopProductSection.get(inTopOfTypeProduct).getPicturesInfo();
+	
+				if (pictures.contains(new PictureInformation(position))) {
+	
+					PictureInformation picture = pictures.get(pictures.indexOf(new PictureInformation(position)));
+	
 					model.addAttribute("directory", inTopOfTypeProduct);
 					model.addAttribute("subDirectory", position);
-					model.addAttribute("headOfPage", "Изменение картинки отображения над подразделом принтеров №1");
-					model.addAttribute("listPictures", (JSONObject) homeJSON.get("list_printer_top1"));
-					
-	        	} else if(position.equals("2")){
-	        		model.addAttribute("directory", inTopOfTypeProduct);
-					model.addAttribute("subDirectory", position);
-					model.addAttribute("headOfPage", "Изменение картинки отображения над подразделом принтеров №2");
-	        		model.addAttribute("listPictures", (JSONObject) homeJSON.get("list_printer_top2"));
-	        		
-	        	} else if(position.equals("3")){
-	        		model.addAttribute("directory", inTopOfTypeProduct);
-					model.addAttribute("subDirectory", position);
-					model.addAttribute("headOfPage", "Изменение картинки отображения над подразделом принтеров №3");
-	        		model.addAttribute("listPictures", (JSONObject) homeJSON.get("list_printer_top3"));
-	        		
-	        	} 
-			
-			} else if(inTopOfTypeProduct.equals("digital_printer_top")){
-				JSONObject homeJSON = (JSONObject) obj.get("homeJSON");
-				
-				if(position.equals("1")){
-					model.addAttribute("directory", inTopOfTypeProduct);
-					model.addAttribute("subDirectory", position);
-					model.addAttribute("headOfPage", "Изменение картинки отображения над подразделом цыфровых принтеров №1");
-					model.addAttribute("listPictures", (JSONObject) homeJSON.get("list_digital_printer_top1"));
-					
-	        	} else if(position.equals("2")){
-	        		model.addAttribute("directory", inTopOfTypeProduct);
-					model.addAttribute("subDirectory", position);
-					model.addAttribute("headOfPage", "Изменение картинки отображения над подразделом цыфровых принтеров №2");
-	        		model.addAttribute("listPictures", (JSONObject) homeJSON.get("list_digital_printer_top2"));
-	        		
-	        	} else if(position.equals("3")){
-	        		model.addAttribute("directory", inTopOfTypeProduct);
-					model.addAttribute("subDirectory", position);
-					model.addAttribute("headOfPage", "Изменение картинки отображения над подразделом цыфровых принтеров №3");
-	        		model.addAttribute("listPictures", (JSONObject) homeJSON.get("list_digital_printer_top3"));
-	        		
-	        	} 
-				
-			} else if(inTopOfTypeProduct.equals("laser_top")){
-				JSONObject homeJSON = (JSONObject) obj.get("homeJSON");
-				
-				if(position.equals("1")){
-					model.addAttribute("directory", inTopOfTypeProduct);
-					model.addAttribute("subDirectory", position);
-					model.addAttribute("headOfPage", "Изменение картинки отображения над подразделом лазеров №1");
-					model.addAttribute("listPictures", (JSONObject) homeJSON.get("list_laser_top1"));
-					
-	        	} else if(position.equals("2")){
-	        		model.addAttribute("directory", inTopOfTypeProduct);
-					model.addAttribute("subDirectory", position);
-					model.addAttribute("headOfPage", "Изменение картинки отображения над подразделом лазеров №2");
-	        		model.addAttribute("listPictures", (JSONObject) homeJSON.get("list_laser_top2"));
-	        		
-	        	} else if(position.equals("3")){
-	        		model.addAttribute("directory", inTopOfTypeProduct);
-					model.addAttribute("subDirectory", position);
-					model.addAttribute("headOfPage", "Изменение картинки отображения над подразделом лазеров №3");
-	        		model.addAttribute("listPictures", (JSONObject) homeJSON.get("list_laser_top3"));
-	        		
-	        	}
-				
-			} else if(inTopOfTypeProduct.equals("scaner_top")){
-				JSONObject homeJSON = (JSONObject) obj.get("homeJSON");
-				
-				if(position.equals("1")){
-					model.addAttribute("directory", inTopOfTypeProduct);
-					model.addAttribute("subDirectory", position);
-					model.addAttribute("headOfPage", "Изменение картинки отображения над подразделом сканеров №1");
-					model.addAttribute("listPictures", (JSONObject) homeJSON.get("list_scaner_top1"));
-					
-	        	} else if(position.equals("2")){
-	        		model.addAttribute("directory", inTopOfTypeProduct);
-					model.addAttribute("subDirectory", position);
-					model.addAttribute("headOfPage", "Изменение картинки отображения над подразделом сканеров №2");
-	        		model.addAttribute("listPictures", (JSONObject) homeJSON.get("list_scaner_top2"));
-	        		
-	        	} else if(position.equals("3")){
-	        		model.addAttribute("directory", inTopOfTypeProduct);
-					model.addAttribute("subDirectory", position);
-					model.addAttribute("headOfPage", "Изменение картинки отображения над подразделом сканеров №3");
-	        		model.addAttribute("listPictures", (JSONObject) homeJSON.get("list_scaner_top3"));
-	        		
-	        	}
-				
-			} else if(inTopOfTypeProduct.equals("rip_top")){
-				JSONObject homeJSON = (JSONObject) obj.get("homeJSON");
-				
-				if(position.equals("1")){
-					model.addAttribute("directory", inTopOfTypeProduct);
-					model.addAttribute("subDirectory", position);
-					model.addAttribute("headOfPage", "Изменение картинки отображения над подразделом ПО №1");
-					model.addAttribute("listPictures", (JSONObject) homeJSON.get("list_rip_top1"));
-					
-	        	} else if(position.equals("2")){
-	        		model.addAttribute("directory", inTopOfTypeProduct);
-					model.addAttribute("subDirectory", position);
-					model.addAttribute("headOfPage", "Изменение картинки отображения над подразделом ПО №2");
-	        		model.addAttribute("listPictures", (JSONObject) homeJSON.get("list_rip_top2"));
-	        		
-	        	} else if(position.equals("3")){
-	        		model.addAttribute("directory", inTopOfTypeProduct);
-					model.addAttribute("subDirectory", position);
-					model.addAttribute("headOfPage", "Изменение картинки отображения над подразделом ПО №3");
-	        		model.addAttribute("listPictures", (JSONObject) homeJSON.get("list_rip_top3"));
-	        		
-	        	} 
-			} 
-	   
-		} catch (FileNotFoundException e1) {
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		} catch (ParseException e1) {
-			e1.printStackTrace();
-		}	   
-	    	return new ModelAndView("admin/pictures/three_big_pictures");
+					model.addAttribute("headOfPage", picture.headOfPage);
+					model.addAttribute("listPictures", (JSONObject) homeJSON.get(picture.getNameOfJsonObject()));
+	
+				}
+			}
+	
+			return new ModelAndView("admin/pictures/three_big_pictures");
 	    }
 	    
 	    @SuppressWarnings("unchecked")
@@ -1369,7 +1395,7 @@ public class PicturesHomePageController {
 		 JSONParser parser = new JSONParser();
 			
 			try {
-				JSONObject obj = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream(path), "UTF-8"));
+				JSONObject obj = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream(PATH_TO_JSON_FILE), "UTF-8"));
 					
 					JSONObject homeJSON = null;
 					if( obj.get("homeJSON") != null ){
@@ -1686,7 +1712,7 @@ public class PicturesHomePageController {
 					
 				obj.put("homeJSON", homeJSON);
 				
-				Writer out = new PrintWriter(path, "UTF-8");
+				Writer out = new PrintWriter(PATH_TO_JSON_FILE, "UTF-8");
 				out.write(obj.toJSONString());
 				out.flush();
 				out.close();
@@ -1729,7 +1755,7 @@ public class PicturesHomePageController {
 			JSONParser parser = new JSONParser();
 			
 			try {
-				JSONObject obj = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream(path), "UTF-8"));
+				JSONObject obj = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream(PATH_TO_JSON_FILE), "UTF-8"));
 			
 				JSONObject homeJSON = null;
 				if( obj.get("homeJSON") != null ){
@@ -2110,7 +2136,7 @@ public class PicturesHomePageController {
 				
 				obj.put("homeJSON", homeJSON);
 				
-				Writer out = new PrintWriter(path, "UTF-8");
+				Writer out = new PrintWriter(PATH_TO_JSON_FILE, "UTF-8");
 				out.write(obj.toJSONString());
 				out.flush();
 				out.close();
@@ -2141,7 +2167,7 @@ public class PicturesHomePageController {
 			JSONParser parser = new JSONParser();
 			
 			try {
-				JSONObject obj = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream(path), "UTF-8"));
+				JSONObject obj = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream(PATH_TO_JSON_FILE), "UTF-8"));
 					
 					JSONObject homeJSON = (JSONObject) obj.get("homeJSON");		
 
@@ -2501,7 +2527,7 @@ public class PicturesHomePageController {
 					
 				obj.put("homeJSON", homeJSON);
 				
-				Writer out = new PrintWriter(path, "UTF-8");
+				Writer out = new PrintWriter(PATH_TO_JSON_FILE, "UTF-8");
 				out.write(obj.toJSONString());
 				out.flush();
 				out.close();
@@ -2538,7 +2564,7 @@ public class PicturesHomePageController {
 			JSONParser parser = new JSONParser();
 			
 			try {
-				JSONObject obj = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream(path), "UTF-8"));
+				JSONObject obj = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream(PATH_TO_JSON_FILE), "UTF-8"));
 					
 					JSONObject homeJSON = (JSONObject) obj.get("homeJSON");
 					
@@ -2763,7 +2789,7 @@ public class PicturesHomePageController {
 					
 				obj.put("homeJSON", homeJSON);
 				
-				Writer out = new PrintWriter(path, "UTF-8");
+				Writer out = new PrintWriter(PATH_TO_JSON_FILE, "UTF-8");
 				out.write(obj.toJSONString());
 				out.flush();
 				out.close();
@@ -2787,84 +2813,24 @@ public class PicturesHomePageController {
 	    public ModelAndView showTwoNarrowPictures(Model model, @PathVariable("inTopOfTypeProduct") String inTopOfTypeProduct,
 	    							 @PathVariable("position") String position){
 	    	
-	    	JSONParser parser = new JSONParser();
-	    	try {
-	    		JSONObject obj = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream(path), "UTF-8"));
-				JSONObject homeJSON = (JSONObject) obj.get("homeJSON");
-				
-	    	if(inTopOfTypeProduct.equals("3d_printer_top")){
-	    		
-				if(position.equals("1")){
+	    	JSONObject homeJSON = (JSONObject) getJsonPicturesLinksContainer().get("homeJSON");
+	    	
+			if (picturesInTopProductSection.containsKey(inTopOfTypeProduct)) {
+	
+				List<PictureInformation> pictures = picturesInTopProductSection.get(inTopOfTypeProduct).getPicturesInfo();
+	
+				if (pictures.contains(new PictureInformation(position))) {
+	
+					PictureInformation picture = pictures.get(pictures.indexOf(new PictureInformation(position)));
+	
 					model.addAttribute("directory", inTopOfTypeProduct);
 					model.addAttribute("subDirectory", position);
-					model.addAttribute("headOfPage", "Изменение картинки отображения над подразделом 3D принтеров №1");
-					model.addAttribute("listPictures", (JSONObject) homeJSON.get("list_3d_printer_top1"));
-					
-	        	} else if(position.equals("2")){
-	        		model.addAttribute("directory", inTopOfTypeProduct);
-					model.addAttribute("subDirectory", position);
-					model.addAttribute("headOfPage", "Изменение картинки отображения над подразделом 3D принтеров №2");
-	        		model.addAttribute("listPictures", (JSONObject) homeJSON.get("list_3d_printer_top2"));
-	        		
-	        	}  
-			
-			} else if(inTopOfTypeProduct.equals("laminator_top")){
-				
-				if(position.equals("1")){
-					model.addAttribute("directory", inTopOfTypeProduct);
-					model.addAttribute("subDirectory", position);
-					model.addAttribute("headOfPage", "Изменение картинки отображения над подразделом ламинаторов №1");
-					model.addAttribute("listPictures", (JSONObject) homeJSON.get("list_laminator_top1"));
-					
-	        	} else if(position.equals("2")){
-	        		model.addAttribute("directory", inTopOfTypeProduct);
-					model.addAttribute("subDirectory", position);
-					model.addAttribute("headOfPage", "Изменение картинки отображения над подразделом ламинаторов №2");
-	        		model.addAttribute("listPictures", (JSONObject) homeJSON.get("list_laminator_top2"));
-	        		
-	        	} 
-				
-			} else if(inTopOfTypeProduct.equals("cutter_top")){
-				
-				if(position.equals("1")){
-					model.addAttribute("directory", inTopOfTypeProduct);
-					model.addAttribute("subDirectory", position);
-					model.addAttribute("headOfPage", "Изменение картинки отображения над подразделом фрезеров №1");
-					model.addAttribute("listPictures", (JSONObject) homeJSON.get("list_cutter_top1"));
-					
-	        	} else if(position.equals("2")){
-	        		model.addAttribute("directory", inTopOfTypeProduct);
-					model.addAttribute("subDirectory", position);
-					model.addAttribute("headOfPage", "Изменение картинки отображения над подразделом фрезеров №2");
-	        		model.addAttribute("listPictures", (JSONObject) homeJSON.get("list_cutter_top2"));
-	        		
-	        	}
-				
-			} else if(inTopOfTypeProduct.equals("previously_used_top")){
-				
-				if(position.equals("1")){
-					model.addAttribute("directory", inTopOfTypeProduct);
-					model.addAttribute("subDirectory", position);
-					model.addAttribute("headOfPage", "Изменение картинки отображения над подразделом б/у товаров №1");
-					model.addAttribute("listPictures", (JSONObject) homeJSON.get("list_previously_used_top1"));
-					
-	        	} else if(position.equals("2")){
-	        		model.addAttribute("directory", inTopOfTypeProduct);
-					model.addAttribute("subDirectory", position);
-					model.addAttribute("headOfPage", "Изменение картинки отображения над подразделом б/у товаров №2");
-	        		model.addAttribute("listPictures", (JSONObject) homeJSON.get("list_previously_used_top2"));
-	        		
-	        	} 
-				
+					model.addAttribute("headOfPage", picture.headOfPage);
+					model.addAttribute("listPictures", (JSONObject) homeJSON.get(picture.getNameOfJsonObject()));
+	
+				}
 			}
-	   
-		} catch (FileNotFoundException e1) {
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		} catch (ParseException e1) {
-			e1.printStackTrace();
-		}	   
+			
 	    	return new ModelAndView("admin/pictures/two_narrow_pictures");
 	    }
 	 
@@ -2878,7 +2844,7 @@ public class PicturesHomePageController {
 		 JSONParser parser = new JSONParser();
 			
 			try {
-				JSONObject obj = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream(path), "UTF-8"));
+				JSONObject obj = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream(PATH_TO_JSON_FILE), "UTF-8"));
 					
 					JSONObject homeJSON = null;
 					if( obj.get("homeJSON") != null ){
@@ -3062,7 +3028,7 @@ public class PicturesHomePageController {
 					
 				obj.put("homeJSON", homeJSON);
 				
-				Writer out = new PrintWriter(path, "UTF-8");
+				Writer out = new PrintWriter(PATH_TO_JSON_FILE, "UTF-8");
 				out.write(obj.toJSONString());
 				out.flush();
 				out.close();
@@ -3105,7 +3071,7 @@ public class PicturesHomePageController {
 			JSONParser parser = new JSONParser();
 			
 			try {
-				JSONObject obj = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream(path), "UTF-8"));
+				JSONObject obj = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream(PATH_TO_JSON_FILE), "UTF-8"));
 			
 				JSONObject homeJSON = null;
 				if( obj.get("homeJSON") != null ){
@@ -3321,7 +3287,7 @@ public class PicturesHomePageController {
 				
 				obj.put("homeJSON", homeJSON);
 				
-				Writer out = new PrintWriter(path, "UTF-8");
+				Writer out = new PrintWriter(PATH_TO_JSON_FILE, "UTF-8");
 				out.write(obj.toJSONString());
 				out.flush();
 				out.close();
@@ -3352,7 +3318,7 @@ public class PicturesHomePageController {
 			JSONParser parser = new JSONParser();
 			
 			try {
-				JSONObject obj = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream(path), "UTF-8"));
+				JSONObject obj = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream(PATH_TO_JSON_FILE), "UTF-8"));
 					
 					JSONObject homeJSON = (JSONObject) obj.get("homeJSON");		
 
@@ -3554,7 +3520,7 @@ public class PicturesHomePageController {
 					
 				obj.put("homeJSON", homeJSON);
 				
-				Writer out = new PrintWriter(path, "UTF-8");
+				Writer out = new PrintWriter(PATH_TO_JSON_FILE, "UTF-8");
 				out.write(obj.toJSONString());
 				out.flush();
 				out.close();
@@ -3591,7 +3557,7 @@ public class PicturesHomePageController {
 			JSONParser parser = new JSONParser();
 			
 			try {
-				JSONObject obj = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream(path), "UTF-8"));
+				JSONObject obj = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream(PATH_TO_JSON_FILE), "UTF-8"));
 					
 					JSONObject homeJSON = (JSONObject) obj.get("homeJSON");
 					
@@ -3722,7 +3688,7 @@ public class PicturesHomePageController {
 					
 				obj.put("homeJSON", homeJSON);
 				
-				Writer out = new PrintWriter(path, "UTF-8");
+				Writer out = new PrintWriter(PATH_TO_JSON_FILE, "UTF-8");
 				out.write(obj.toJSONString());
 				out.flush();
 				out.close();
