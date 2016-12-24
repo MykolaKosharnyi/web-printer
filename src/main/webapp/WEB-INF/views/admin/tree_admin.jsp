@@ -1075,39 +1075,39 @@
             	<ul class="Container">
             		<li class="Node ExpandLeaf">
             			<div class="Expand"></div>
-            			<div class="Content"><a href="<c:url value='/admin/pictures/menu/printers/dissolving' />">Картинка сольвентных принтеров</a></div>
+            			<div class="Content"><a href="<c:url value='/admin/pictures/menu/printers/dissolving' />">Изображение сольвентных принтеров</a></div>
           			</li>
           			<li class="Node ExpandLeaf">
             			<div class="Expand"></div>
-            			<div class="Content"><a href="<c:url value='/admin/pictures/menu/printers/ecosolvent' />">Картинка экосольвентных принтеров</a></div>
+            			<div class="Content"><a href="<c:url value='/admin/pictures/menu/printers/ecosolvent' />">Изображение экосольвентных принтеров</a></div>
           			</li>
           			<li class="Node ExpandLeaf">
             			<div class="Expand"></div>
-            			<div class="Content"><a href="<c:url value='/admin/pictures/menu/printers/UV_roll' />">Картинка UV рулонных принтеров</a></div>
+            			<div class="Content"><a href="<c:url value='/admin/pictures/menu/printers/UV_roll' />">Изображение UV рулонных принтеров</a></div>
           			</li>
           			<li class="Node ExpandLeaf">
             			<div class="Expand"></div>
-            			<div class="Content"><a href="<c:url value='/admin/pictures/menu/printers/UV_flatbed' />">Картинка UV плоскопечатных принтеров</a></div>
+            			<div class="Content"><a href="<c:url value='/admin/pictures/menu/printers/UV_flatbed' />">Изображение UV плоскопечатных принтеров</a></div>
           			</li>
           			<li class="Node ExpandLeaf">
             			<div class="Expand"></div>
-            			<div class="Content"><a href="<c:url value='/admin/pictures/menu/printers/sublimation' />">Картинка сублимационных принтеров</a></div>
+            			<div class="Content"><a href="<c:url value='/admin/pictures/menu/printers/sublimation' />">Изображение сублимационных принтеров</a></div>
           			</li>
           			<li class="Node ExpandLeaf">
             			<div class="Expand"></div>
-            			<div class="Content"><a href="<c:url value='/admin/pictures/menu/printers/textile' />">Картинка текстильных принтеров</a></div>
+            			<div class="Content"><a href="<c:url value='/admin/pictures/menu/printers/textile' />">Изображение текстильных принтеров</a></div>
           			</li>
           			<li class="Node ExpandLeaf">
             			<div class="Expand"></div>
-            			<div class="Content"><a href="<c:url value='/admin/pictures/menu/printers/water_pigment' />">Картинка водных/пигментных принтеров</a></div>
+            			<div class="Content"><a href="<c:url value='/admin/pictures/menu/printers/water_pigment' />">Изображение водных/пигментных принтеров</a></div>
           			</li>
           			<li class="Node ExpandLeaf">
             			<div class="Expand"></div>
-            			<div class="Content"><a href="<c:url value='/admin/pictures/menu/printers/digital' />">Картинка цифровых принтеров</a></div>
+            			<div class="Content"><a href="<c:url value='/admin/pictures/menu/printers/digital' />">Изображение цифровых принтеров</a></div>
           			</li>
           			<li class="Node ExpandLeaf IsLast">
             			<div class="Expand"></div>
-            			<div class="Content"><a href="<c:url value='/admin/pictures/menu/printers/SAPR-GIS' />">Картинка САПР/ГИС принтеров</a></div>
+            			<div class="Content"><a href="<c:url value='/admin/pictures/menu/printers/SAPR-GIS' />">Изображение САПР/ГИС принтеров</a></div>
           			</li>
             	</ul>
           	</li>	
@@ -1118,31 +1118,31 @@
             	<ul class="Container">
             		<li class="Node ExpandLeaf">
             			<div class="Expand"></div>
-            			<div class="Content"><a href="<c:url value='/admin/pictures/menu/printers3d/FDM-extruder' />">Картинка экструдных FDM принтеров</a></div>
+            			<div class="Content"><a href="<c:url value='/admin/pictures/menu/printers3d/FDM-extruder' />">Изображение экструдных FDM принтеров</a></div>
           			</li>
           			<li class="Node ExpandLeaf">
             			<div class="Expand"></div>
-            			<div class="Content"><a href="<c:url value='/admin/pictures/menu/printers3d/photo_printing_polyjet' />">Картинка фото печать Polyjet</a></div>
+            			<div class="Content"><a href="<c:url value='/admin/pictures/menu/printers3d/photo_printing_polyjet' />">Изображение фото печать Polyjet</a></div>
           			</li>
           			<li class="Node ExpandLeaf">
             			<div class="Expand"></div>
-            			<div class="Content"><a href="<c:url value='/admin/pictures/menu/printers3d/laser_sintering_LENS' />">Картинка 3D принтеры лазерного спекания LENS</a></div>
+            			<div class="Content"><a href="<c:url value='/admin/pictures/menu/printers3d/laser_sintering_LENS' />">Изображение 3D принтеры лазерного спекания LENS</a></div>
           			</li>
           			<li class="Node ExpandLeaf">
             			<div class="Expand"></div>
-            			<div class="Content"><a href="<c:url value='/admin/pictures/menu/printers3d/lamination_LOM' />">Картинка ламинации LOM</a></div>
+            			<div class="Content"><a href="<c:url value='/admin/pictures/menu/printers3d/lamination_LOM' />">Изображение ламинации LOM</a></div>
           			</li>
           			<li class="Node ExpandLeaf">
             			<div class="Expand"></div>
-            			<div class="Content"><a href="<c:url value='/admin/pictures/menu/printers3d/stereolithography_SL' />">Картинка стереолитография SL</a></div>
+            			<div class="Content"><a href="<c:url value='/admin/pictures/menu/printers3d/stereolithography_SL' />">Изображение стереолитография SL</a></div>
           			</li>
           			<li class="Node ExpandLeaf">
             			<div class="Expand"></div>
-            			<div class="Content"><a href="<c:url value='/admin/pictures/menu/printers3d/laser_sintering_LS' />">Картинка лазерное спекание LS </a></div>
+            			<div class="Content"><a href="<c:url value='/admin/pictures/menu/printers3d/laser_sintering_LS' />">Изображение лазерное спекание LS </a></div>
           			</li>
           			<li class="Node ExpandLeaf IsLast">
             			<div class="Expand"></div>
-            			<div class="Content"><a href="<c:url value='/admin/pictures/menu/printers3d/powder_bonding_3DP' />">Картинка порошкового склеивания 3DP</a></div>
+            			<div class="Content"><a href="<c:url value='/admin/pictures/menu/printers3d/powder_bonding_3DP' />">Изображение порошкового склеивания 3DP</a></div>
           			</li>
             	</ul>
           	</li>
@@ -1153,15 +1153,15 @@
             	<ul class="Container">
             		<li class="Node ExpandLeaf">
             			<div class="Expand"></div>
-            			<div class="Content"><a href="<c:url value='/admin/pictures/menu/digital_printers/full_color_laser_printers' />">Картинка 'Полноцветные лазерные принтеры'</a></div>
+            			<div class="Content"><a href="<c:url value='/admin/pictures/menu/digital_printers/full_color_laser_printers' />">Изображение 'Полноцветные лазерные принтеры'</a></div>
           			</li>
           			<li class="Node ExpandLeaf">
             			<div class="Expand"></div>
-            			<div class="Content"><a href="<c:url value='/admin/pictures/menu/digital_printers/monochrome_laser_printers' />">Картинка 'Монохромные лазерные принтеры'</a></div>
+            			<div class="Content"><a href="<c:url value='/admin/pictures/menu/digital_printers/monochrome_laser_printers' />">Изображение 'Монохромные лазерные принтеры'</a></div>
           			</li>
           			<li class="Node ExpandLeaf IsLast">
             			<div class="Expand"></div>
-            			<div class="Content"><a href="<c:url value='/admin/pictures/menu/digital_printers/full-color_inkjet_printers' />">Картинка 'Полноцветные струйные принтеры'</a></div>
+            			<div class="Content"><a href="<c:url value='/admin/pictures/menu/digital_printers/full-color_inkjet_printers' />">Изображение 'Полноцветные струйные принтеры'</a></div>
           			</li>
             	</ul>
           	</li>	
@@ -1172,19 +1172,19 @@
             	<ul class="Container">
             		<li class="Node ExpandLeaf">
             			<div class="Expand"></div>
-            			<div class="Content"><a href="<c:url value='/admin/pictures/menu/laminator/hot_lamination' />">Картинка горячего ламинирования</a></div>
+            			<div class="Content"><a href="<c:url value='/admin/pictures/menu/laminator/hot_lamination' />">Изображение горячего ламинирования</a></div>
           			</li>
           			<li class="Node ExpandLeaf">
             			<div class="Expand"></div>
-            			<div class="Content"><a href="<c:url value='/admin/pictures/menu/laminator/cold_laminating' />">Картинка холодного ламинирования</a></div>
+            			<div class="Content"><a href="<c:url value='/admin/pictures/menu/laminator/cold_laminating' />">Изображение холодного ламинирования</a></div>
           			</li>
           			<li class="Node ExpandLeaf">
             			<div class="Expand"></div>
-            			<div class="Content"><a href="<c:url value='/admin/pictures/menu/laminator/liquid' />">Картинка жидкостных ламинаторов</a></div>
+            			<div class="Content"><a href="<c:url value='/admin/pictures/menu/laminator/liquid' />">Изображение жидкостных ламинаторов</a></div>
           			</li>
           			<li class="Node ExpandLeaf IsLast">
             			<div class="Expand"></div>
-            			<div class="Content"><a href="<c:url value='/admin/pictures/menu/laminator/flatbed_laminating_machine' />">Картинка планшетных ламинаторов</a></div>
+            			<div class="Content"><a href="<c:url value='/admin/pictures/menu/laminator/flatbed_laminating_machine' />">Изображение планшетных ламинаторов</a></div>
           			</li>
             	</ul>
           	</li>

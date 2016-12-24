@@ -42,6 +42,8 @@ public class PicturesHomePageController {
 	private Logger logger = Logger.getLogger(PicturesHomePageController.class);
 	
     private String directory = "/var/www/localhost/images";
+    
+    private static final String CONCRETE_FOLDER = "home";
 	
 	private static final String PATH_TO_JSON_FILE = "/var/www/localhost/home.json";
 	
@@ -52,8 +54,7 @@ public class PicturesHomePageController {
 	}
     
     @Autowired
-    ComponentsForControllers componets;
-    
+    ComponentsForControllers componets;   
     
     private class RowPicturesInformation{
 		//private String nameRow;
@@ -1291,2415 +1292,418 @@ public class PicturesHomePageController {
 	    Map<String, RowPicturesInformation> picturesInTopProductSection = new HashMap<String, RowPicturesInformation>(){
 			private static final long serialVersionUID = 1L;
 			{
+				final String standartPhrase = "Изменение картинки отображения над подразделом ";
 				put("printer_top", new RowPicturesInformation(
 						Arrays.asList(
-								new PictureInformation("1", "Изменение картинки отображения над подразделом принтеров №1", "list_printer_top1"),
-								new PictureInformation("2", "Изменение картинки отображения над подразделом принтеров №2", "list_printer_top2"),
-								new PictureInformation("3", "Изменение картинки отображения над подразделом принтеров №3", "list_printer_top3")
+								new PictureInformation("1", standartPhrase + "принтеров №1", "list_printer_top1"),
+								new PictureInformation("2", standartPhrase + "принтеров №2", "list_printer_top2"),
+								new PictureInformation("3", standartPhrase + "принтеров №3", "list_printer_top3")
 							)));
 				
 				put("digital_printer_top", new RowPicturesInformation(
 						Arrays.asList(
-								new PictureInformation("1", "Изменение картинки отображения над подразделом цыфровых принтеров №1", "list_digital_printer_top1"),
-								new PictureInformation("2", "Изменение картинки отображения над подразделом цыфровых принтеров №2", "list_digital_printer_top2"),
-								new PictureInformation("3", "Изменение картинки отображения над подразделом цыфровых принтеров №3", "list_digital_printer_top3")
+								new PictureInformation("1", standartPhrase + "цыфровых принтеров №1", "list_digital_printer_top1"),
+								new PictureInformation("2", standartPhrase + "цыфровых принтеров №2", "list_digital_printer_top2"),
+								new PictureInformation("3", standartPhrase + "цыфровых принтеров №3", "list_digital_printer_top3")
 							)));
 				
 				put("laser_top", new RowPicturesInformation(
 						Arrays.asList(
-								new PictureInformation("1", "Изменение картинки отображения над подразделом лазеров №1", "list_laser_top1"),
-								new PictureInformation("2", "Изменение картинки отображения над подразделом лазеров №2", "list_laser_top2"),
-								new PictureInformation("3", "Изменение картинки отображения над подразделом лазеров №3", "list_laser_top3")
+								new PictureInformation("1", standartPhrase + "лазеров №1", "list_laser_top1"),
+								new PictureInformation("2", standartPhrase + "лазеров №2", "list_laser_top2"),
+								new PictureInformation("3", standartPhrase + "лазеров №3", "list_laser_top3")
 							)));
 				
 				put("scaner_top", new RowPicturesInformation(
 						Arrays.asList(
-								new PictureInformation("1", "Изменение картинки отображения над подразделом сканеров №1", "list_scaner_top1"),
-								new PictureInformation("2", "Изменение картинки отображения над подразделом сканеров №2", "list_scaner_top2"),
-								new PictureInformation("3", "Изменение картинки отображения над подразделом сканеров №3", "list_scaner_top3")
+								new PictureInformation("1", standartPhrase + "сканеров №1", "list_scaner_top1"),
+								new PictureInformation("2", standartPhrase + "сканеров №2", "list_scaner_top2"),
+								new PictureInformation("3", standartPhrase + "сканеров №3", "list_scaner_top3")
 							)));
 
 				put("rip_top", new RowPicturesInformation(
 						Arrays.asList(
-								new PictureInformation("1", "Изменение картинки отображения над подразделом ПО №1", "list_rip_top1"),
-								new PictureInformation("2", "Изменение картинки отображения над подразделом ПО №2", "list_rip_top2"),
-								new PictureInformation("3", "Изменение картинки отображения над подразделом ПО №3", "list_rip_top3")
+								new PictureInformation("1", standartPhrase + "ПО №1", "list_rip_top1"),
+								new PictureInformation("2", standartPhrase + "ПО №2", "list_rip_top2"),
+								new PictureInformation("3", standartPhrase + "ПО №3", "list_rip_top3")
 							)));
 				
 				put("3d_printer_top", new RowPicturesInformation(
 						Arrays.asList(
-								new PictureInformation("1", "Изменение картинки отображения над подразделом 3D принтеров №1", "list_3d_printer_top1"),
-								new PictureInformation("2", "Изменение картинки отображения над подразделом 3D принтеров №2", "list_3d_printer_top2")
+								new PictureInformation("1", standartPhrase + "3D принтеров №1", "list_3d_printer_top1"),
+								new PictureInformation("2", standartPhrase + "3D принтеров №2", "list_3d_printer_top2")
 							)));
 			
 				put("laminator_top", new RowPicturesInformation(
 						Arrays.asList(
-								new PictureInformation("1", "Изменение картинки отображения над подразделом ламинаторов №1", "list_laminator_top1"),
-								new PictureInformation("2", "Изменение картинки отображения над подразделом ламинаторов №2", "list_laminator_top2")
+								new PictureInformation("1", standartPhrase + "ламинаторов №1", "list_laminator_top1"),
+								new PictureInformation("2", standartPhrase + "ламинаторов №2", "list_laminator_top2")
 							)));
 				
 				put("cutter_top", new RowPicturesInformation(
 						Arrays.asList(
-								new PictureInformation("1", "Изменение картинки отображения над подразделом фрезеров №1", "list_cutter_top1"),
-								new PictureInformation("2", "Изменение картинки отображения над подразделом фрезеров №2", "list_cutter_top2")
+								new PictureInformation("1", standartPhrase + "фрезеров №1", "list_cutter_top1"),
+								new PictureInformation("2", standartPhrase + "фрезеров №2", "list_cutter_top2")
 							)));
 				
 				put("previously_used_top", new RowPicturesInformation(
 						Arrays.asList(
-								new PictureInformation("1", "Изменение картинки отображения над подразделом б/у товаров №1", "list_previously_used_top1"),
-								new PictureInformation("2", "Изменение картинки отображения над подразделом б/у товаров №2", "list_previously_used_top2")
+								new PictureInformation("1", standartPhrase + "б/у товаров №1", "list_previously_used_top1"),
+								new PictureInformation("2", standartPhrase + "б/у товаров №2", "list_previously_used_top2")
 							)));
 				
 			}
-		};
-	    
-	    
-	    
+		}; 
 	    
 
 	/**
 	 * block with three big pictures
 	 */
-	    @RequestMapping(value="/admin/pictures/three_big_pictures/{inTopOfTypeProduct}/{position}", method = RequestMethod.GET)
-	    public ModelAndView showThreeBigPictures(Model model, @PathVariable("inTopOfTypeProduct") String inTopOfTypeProduct,
-	    							 @PathVariable("position") String position){
+	@RequestMapping(value = "/admin/pictures/three_big_pictures/{inTopOfTypeProduct}/{position}", method = RequestMethod.GET)
+	public ModelAndView showThreeBigPictures(Model model, @PathVariable("inTopOfTypeProduct") String inTopOfTypeProduct,
+			@PathVariable("position") String position) {
 
-			JSONObject homeJSON = (JSONObject) getJsonPicturesLinksContainer().get("homeJSON");
-	
-			if (picturesInTopProductSection.containsKey(inTopOfTypeProduct)) {
-	
-				List<PictureInformation> pictures = picturesInTopProductSection.get(inTopOfTypeProduct).getPicturesInfo();
-	
-				if (pictures.contains(new PictureInformation(position))) {
-	
-					PictureInformation picture = pictures.get(pictures.indexOf(new PictureInformation(position)));
-	
-					model.addAttribute("directory", inTopOfTypeProduct);
-					model.addAttribute("subDirectory", position);
-					model.addAttribute("headOfPage", picture.headOfPage);
-					model.addAttribute("listPictures", (JSONObject) homeJSON.get(picture.getNameOfJsonObject()));
-	
-				}
+		JSONObject homeJSON = (JSONObject) getJsonPicturesLinksContainer().get("homeJSON");
+
+		if (picturesInTopProductSection.containsKey(inTopOfTypeProduct)) {
+
+			List<PictureInformation> pictures = picturesInTopProductSection.get(inTopOfTypeProduct).getPicturesInfo();
+
+			if (pictures.contains(new PictureInformation(position))) {
+
+				PictureInformation picture = pictures.get(pictures.indexOf(new PictureInformation(position)));
+
+				model.addAttribute("directory", inTopOfTypeProduct);
+				model.addAttribute("subDirectory", position);
+				model.addAttribute("headOfPage", picture.headOfPage);
+				model.addAttribute("listPictures", (JSONObject) homeJSON.get(picture.getNameOfJsonObject()));
+
 			}
-	
-			return new ModelAndView("admin/pictures/three_big_pictures");
-	    }
-	    
-	    @SuppressWarnings("unchecked")
-		@RequestMapping(value="/admin/pictures/three_big_pictures/{inTopOfTypeProduct}/{position}/save_description/{href}",
-	    		method = RequestMethod.POST)
-	    public @ResponseBody void saveHrefPictureOnThreeBigPictures(@PathVariable("inTopOfTypeProduct") String inTopOfTypeProduct,
-	    		@PathVariable("position") String position,
-	    		@PathVariable("href") String href) {
-		
-		 JSONParser parser = new JSONParser();
-			
-			try {
-				JSONObject obj = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream(PATH_TO_JSON_FILE), "UTF-8"));
-					
-					JSONObject homeJSON = null;
-					if( obj.get("homeJSON") != null ){
-						homeJSON = (JSONObject) obj.get("homeJSON");
-						} else {
-							homeJSON = new JSONObject();
-						}
+		}
 
-					if(inTopOfTypeProduct.equals("printer_top")){
-						
-						if(position.equals("1")){
-							JSONObject list_printer_top1 = null;
-							if(homeJSON.get("list_printer_top1") != null){
-								list_printer_top1 = (JSONObject) homeJSON.get("list_printer_top1");
-								homeJSON.remove("list_printer_top1");
-							} else {
-								list_printer_top1 = new JSONObject();
-							}
-							
-							if(list_printer_top1.get("href") != null){
-								list_printer_top1.remove("href");
-								list_printer_top1.put("href", href);
-							} else {
-								list_printer_top1.put("href", href);
-							}
-							
-							homeJSON.put("list_printer_top1", list_printer_top1);
-							
-			        	} else if(position.equals("2")){
-			        		JSONObject list_printer_top2 = null;
-							if(homeJSON.get("list_printer_top2") != null){
-								list_printer_top2 = (JSONObject) homeJSON.get("list_printer_top2");
-								homeJSON.remove("list_printer_top2");
-							} else {
-								list_printer_top2 = new JSONObject();
-							}
-							
-							if(list_printer_top2.get("href") != null){
-								list_printer_top2.remove("href");
-								list_printer_top2.put("href", href);
-							} else {
-								list_printer_top2.put("href", href);
-							}
-							
-							homeJSON.put("list_printer_top2", list_printer_top2);
-			        		
-			        	} else if(position.equals("3")){
-			        		JSONObject list_printer_top3 = null;
-							if(homeJSON.get("list_printer_top3") != null){
-								list_printer_top3 = (JSONObject) homeJSON.get("list_printer_top3");
-								homeJSON.remove("list_printer_top3");
-							} else {
-								list_printer_top3 = new JSONObject();
-							}
-							
-							if(list_printer_top3.get("href") != null){
-								list_printer_top3.remove("href");
-								list_printer_top3.put("href", href);
-							} else {
-								list_printer_top3.put("href", href);
-							}
-							
-							homeJSON.put("list_printer_top3", list_printer_top3);
-			        		
-			        	} 
-					
-					} else if(inTopOfTypeProduct.equals("digital_printer_top")){
-						
-						if(position.equals("1")){
-							
-							JSONObject list_digital_printer_top1 = null;
-							if(homeJSON.get("list_digital_printer_top1") != null){
-								list_digital_printer_top1 = (JSONObject) homeJSON.get("list_digital_printer_top1");
-								homeJSON.remove("list_digital_printer_top1");
-							} else {
-								list_digital_printer_top1 = new JSONObject();
-							}
-							
-							if(list_digital_printer_top1.get("href") != null){
-								list_digital_printer_top1.remove("href");
-								list_digital_printer_top1.put("href", href);
-							} else {
-								list_digital_printer_top1.put("href", href);
-							}
-							
-							homeJSON.put("list_digital_printer_top1", list_digital_printer_top1);
-							
-			        	} else if(position.equals("2")){
-			        		
-			        		JSONObject list_digital_printer_top2 = null;
-							if(homeJSON.get("list_digital_printer_top2") != null){
-								list_digital_printer_top2 = (JSONObject) homeJSON.get("list_digital_printer_top2");
-								homeJSON.remove("list_digital_printer_top2");
-							} else {
-								list_digital_printer_top2 = new JSONObject();
-							}
-							
-							if(list_digital_printer_top2.get("href") != null){
-								list_digital_printer_top2.remove("href");
-								list_digital_printer_top2.put("href", href);
-							} else {
-								list_digital_printer_top2.put("href", href);
-							}
-							
-							homeJSON.put("list_digital_printer_top2", list_digital_printer_top2);
-			        		
-			        	} else if(position.equals("3")){
-			        		
-			        		JSONObject list_digital_printer_top3 = null;
-							if(homeJSON.get("list_digital_printer_top3") != null){
-								list_digital_printer_top3 = (JSONObject) homeJSON.get("list_digital_printer_top3");
-								homeJSON.remove("list_digital_printer_top3");
-							} else {
-								list_digital_printer_top3 = new JSONObject();
-							}
-							
-							if(list_digital_printer_top3.get("href") != null){
-								list_digital_printer_top3.remove("href");
-								list_digital_printer_top3.put("href", href);
-							} else {
-								list_digital_printer_top3.put("href", href);
-							}
-							
-							homeJSON.put("list_digital_printer_top3", list_digital_printer_top3);
-			        		
-			        	} 
-						
-					} else if(inTopOfTypeProduct.equals("laser_top")){
-						
-						if(position.equals("1")){
-	
-							JSONObject list_laser_top1 = null;
-							if(homeJSON.get("list_laser_top1") != null){
-								list_laser_top1 = (JSONObject) homeJSON.get("list_laser_top1");
-								homeJSON.remove("list_laser_top1");
-							} else {
-								list_laser_top1 = new JSONObject();
-							}
-							
-							if(list_laser_top1.get("href") != null){
-								list_laser_top1.remove("href");
-								list_laser_top1.put("href", href);
-							} else {
-								list_laser_top1.put("href", href);
-							}
-							
-							homeJSON.put("list_laser_top1", list_laser_top1);
-							
-			        	} else if(position.equals("2")){
-			        		
-			        		JSONObject list_laser_top2 = null;
-							if(homeJSON.get("list_laser_top2") != null){
-								list_laser_top2 = (JSONObject) homeJSON.get("list_laser_top2");
-								homeJSON.remove("list_laser_top2");
-							} else {
-								list_laser_top2 = new JSONObject();
-							}
-							
-							if(list_laser_top2.get("href") != null){
-								list_laser_top2.remove("href");
-								list_laser_top2.put("href", href);
-							} else {
-								list_laser_top2.put("href", href);
-							}
-							
-							homeJSON.put("list_laser_top2", list_laser_top2);
-			        		
-			        	} else if(position.equals("3")){
-			        		
-			        		JSONObject list_laser_top3 = null;
-							if(homeJSON.get("list_laser_top3") != null){
-								list_laser_top3 = (JSONObject) homeJSON.get("list_laser_top3");
-								homeJSON.remove("list_laser_top3");
-							} else {
-								list_laser_top3 = new JSONObject();
-							}
-							
-							if(list_laser_top3.get("href") != null){
-								list_laser_top3.remove("href");
-								list_laser_top3.put("href", href);
-							} else {
-								list_laser_top3.put("href", href);
-							}
-							
-							homeJSON.put("list_laser_top3", list_laser_top3);
-			        		
-			        	}
-						
-					} else if(inTopOfTypeProduct.equals("scaner_top")){
-						
-						if(position.equals("1")){
-							
-							JSONObject list_scaner_top1 = null;
-							if(homeJSON.get("list_scaner_top1") != null){
-								list_scaner_top1 = (JSONObject) homeJSON.get("list_scaner_top1");
-								homeJSON.remove("list_scaner_top1");
-							} else {
-								list_scaner_top1 = new JSONObject();
-							}
-							
-							if(list_scaner_top1.get("href") != null){
-								list_scaner_top1.remove("href");
-								list_scaner_top1.put("href", href);
-							} else {
-								list_scaner_top1.put("href", href);
-							}
-							
-							homeJSON.put("list_scaner_top1", list_scaner_top1);
-							
-			        	} else if(position.equals("2")){
-			        		
-			        		JSONObject list_scaner_top2 = null;
-							if(homeJSON.get("list_scaner_top2") != null){
-								list_scaner_top2 = (JSONObject) homeJSON.get("list_scaner_top2");
-								homeJSON.remove("list_scaner_top2");
-							} else {
-								list_scaner_top2 = new JSONObject();
-							}
-							
-							if(list_scaner_top2.get("href") != null){
-								list_scaner_top2.remove("href");
-								list_scaner_top2.put("href", href);
-							} else {
-								list_scaner_top2.put("href", href);
-							}
-							
-							homeJSON.put("list_scaner_top2", list_scaner_top2);
-			        		
-			        	} else if(position.equals("3")){
-			        		
-			        		JSONObject list_scaner_top3 = null;
-							if(homeJSON.get("list_scaner_top3") != null){
-								list_scaner_top3 = (JSONObject) homeJSON.get("list_scaner_top3");
-								homeJSON.remove("list_scaner_top3");
-							} else {
-								list_scaner_top3 = new JSONObject();
-							}
-							
-							if(list_scaner_top3.get("href") != null){
-								list_scaner_top3.remove("href");
-								list_scaner_top3.put("href", href);
-							} else {
-								list_scaner_top3.put("href", href);
-							}
-							
-							homeJSON.put("list_scaner_top3", list_scaner_top3);
-			        		
-			        	}
-						
-					} else if(inTopOfTypeProduct.equals("rip_top")){
-						
-						if(position.equals("1")){
-							
-							JSONObject list_rip_top1 = null;
-							if(homeJSON.get("list_rip_top1") != null){
-								list_rip_top1 = (JSONObject) homeJSON.get("list_rip_top1");
-								homeJSON.remove("list_rip_top1");
-							} else {
-								list_rip_top1 = new JSONObject();
-							}
-							
-							if(list_rip_top1.get("href") != null){
-								list_rip_top1.remove("href");
-								list_rip_top1.put("href", href);
-							} else {
-								list_rip_top1.put("href", href);
-							}
-							
-							homeJSON.put("list_rip_top1", list_rip_top1);
-							
-			        	} else if(position.equals("2")){
-			        		
-			        		JSONObject list_rip_top2 = null;
-							if(homeJSON.get("list_rip_top2") != null){
-								list_rip_top2 = (JSONObject) homeJSON.get("list_rip_top2");
-								homeJSON.remove("list_rip_top2");
-							} else {
-								list_rip_top2 = new JSONObject();
-							}
-							
-							if(list_rip_top2.get("href") != null){
-								list_rip_top2.remove("href");
-								list_rip_top2.put("href", href);
-							} else {
-								list_rip_top2.put("href", href);
-							}
-							
-							homeJSON.put("list_rip_top2", list_rip_top2);
-			        		
-			        	} else if(position.equals("3")){
-			        		
-			        		JSONObject list_rip_top3 = null;
-							if(homeJSON.get("list_rip_top3") != null){
-								list_rip_top3 = (JSONObject) homeJSON.get("list_rip_top3");
-								homeJSON.remove("list_rip_top3");
-							} else {
-								list_rip_top3 = new JSONObject();
-							}
-							
-							if(list_rip_top3.get("href") != null){
-								list_rip_top3.remove("href");
-								list_rip_top3.put("href", href);
-							} else {
-								list_rip_top3.put("href", href);
-							}
-							
-							homeJSON.put("list_rip_top3", list_rip_top3);
-			        		
-			        	} 
-					}
+		return new ModelAndView("admin/pictures/three_big_pictures");
+	}
 
-					if( obj.get("homeJSON") != null )
-						obj.remove("homeJSON");
-					
-				obj.put("homeJSON", homeJSON);
-				
-				Writer out = new PrintWriter(PATH_TO_JSON_FILE, "UTF-8");
-				out.write(obj.toJSONString());
-				out.flush();
-				out.close();
-				
-			} catch (FileNotFoundException e1) {
-				e1.printStackTrace();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			} catch (ParseException e1) {
-				e1.printStackTrace();
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "/admin/pictures/three_big_pictures/{inTopOfTypeProduct}/{position}/save_description/{href}", method = RequestMethod.POST)
+	public @ResponseBody void saveHrefPictureOnThreeBigPictures(
+			@PathVariable("inTopOfTypeProduct") String inTopOfTypeProduct, @PathVariable("position") String position,
+			@PathVariable("href") String href) {
+
+		JSONObject obj = getJsonPicturesLinksContainer();
+
+		JSONObject homeJSON = (obj.get("homeJSON") != null) ? (JSONObject) obj.get("homeJSON") : new JSONObject();
+
+		if (picturesInTopProductSection.containsKey(inTopOfTypeProduct)) {
+
+			List<PictureInformation> pictures = picturesInTopProductSection.get(inTopOfTypeProduct).getPicturesInfo();
+
+			if (pictures.contains(new PictureInformation(position))) {
+
+				PictureInformation picture = pictures.get(pictures.indexOf(new PictureInformation(position)));
+
+				JSONObject pictureInfo = (homeJSON.get(picture.getNameOfJsonObject()) != null)
+						? (JSONObject) homeJSON.get(picture.getNameOfJsonObject()) : new JSONObject();
+
+				pictureInfo.put("href", href);
+
+				homeJSON.put(picture.getNameOfJsonObject(), pictureInfo);
 			}
-	 }
+		}
 
-	    @SuppressWarnings("unchecked")
-		@RequestMapping(value="/admin/pictures/three_big_pictures/{inTopOfTypeProduct}/{position}/upload_pictures",
-	    		method = RequestMethod.POST)
-	    public @ResponseBody String uploadPicturesOnThreeBigPictures(MultipartHttpServletRequest request,
-	    	   @PathVariable("inTopOfTypeProduct") String inTopOfTypeProduct,
-			   @PathVariable("position") String position) {
-	    	
-	    	logger.info("upload new picture to the one of thee big pictures on home page"); 	
-	    
-	        Iterator<String> itr =  request.getFileNames();
-	        MultipartFile mpf = null;
-	        String fileName = null;
+		obj.put("homeJSON", homeJSON);
 
-	        while(itr.hasNext()){
-	            mpf = request.getFile(itr.next()); 
-	    		fileName = new Random().nextInt(10000000) + "" + mpf.getOriginalFilename().substring(mpf.getOriginalFilename().lastIndexOf("."))/*last part is file extension*/; 
+		writeResultInLocalFile(obj);
+	}
 
-				try {
-					FileCopyUtils.copy(mpf.getBytes(), new FileOutputStream(directory + File.separator + "home" 
-				+ File.separator + "three_big_pictures" + File.separator
-				+ inTopOfTypeProduct + File.separator + position + File.separator + fileName));
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "/admin/pictures/three_big_pictures/{inTopOfTypeProduct}/{position}/upload_pictures", method = RequestMethod.POST)
+	public @ResponseBody String uploadPicturesOnThreeBigPictures(MultipartHttpServletRequest request,
+			@PathVariable("inTopOfTypeProduct") String inTopOfTypeProduct, @PathVariable("position") String position) {
 
-				} catch (IOException e) {
-					logger.error("Don't write picture to the folder", e);
-				} 
-	          	
-			JSONParser parser = new JSONParser();
-			
-			try {
-				JSONObject obj = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream(PATH_TO_JSON_FILE), "UTF-8"));
-			
-				JSONObject homeJSON = null;
-				if( obj.get("homeJSON") != null ){
-					homeJSON = (JSONObject) obj.get("homeJSON");
-					} else {
-						homeJSON = new JSONObject();
-					}
-				
-				if(inTopOfTypeProduct.equals("printer_top")){
-		    		
-					if(position.equals("1")){
-						
-						JSONObject list_printer_top1 = null;
-						//check if these subdirectories has pictures
-						if(homeJSON.get("list_printer_top1") != null){
-							list_printer_top1 = (JSONObject) homeJSON.get("list_printer_top1");
-							homeJSON.remove("list_printer_top1");
-						} else {
-							list_printer_top1 = new JSONObject();
-						}
-						
-						JSONArray fileNameArray = null;
-						if(list_printer_top1.get("fileNameArray") != null){
-							fileNameArray = (JSONArray) list_printer_top1.get("fileNameArray");
-							list_printer_top1.remove("fileNameArray");
-						} else {
-							fileNameArray = new JSONArray();
-						}
-						
-						fileNameArray.add(fileName);
+		logger.info("upload new picture to the one of thee big pictures on home page");
 
-						list_printer_top1.put("fileNameArray", fileNameArray);
-						homeJSON.put("list_printer_top1", list_printer_top1);
-						
-		        	} else if(position.equals("2")){
-		        		
-		        		JSONObject list_printer_top2 = null;
-						if(homeJSON.get("list_printer_top2") != null){
-							list_printer_top2 = (JSONObject) homeJSON.get("list_printer_top2");
-							homeJSON.remove("list_printer_top2");
-						} else {
-							list_printer_top2 = new JSONObject();
-						}
-						
-						JSONArray fileNameArray = null;
-						if(list_printer_top2.get("fileNameArray") != null){
-							fileNameArray = (JSONArray) list_printer_top2.get("fileNameArray");
-							list_printer_top2.remove("fileNameArray");
-						} else {
-							fileNameArray = new JSONArray();
-						}
-						
-						fileNameArray.add(fileName);
+		String fileName = componets.uploadPicture(request, directory, CONCRETE_FOLDER,
+				"three_big_pictures" + File.separator + inTopOfTypeProduct + File.separator + position);
 
-						list_printer_top2.put("fileNameArray", fileNameArray);
-						homeJSON.put("list_printer_top2", list_printer_top2);
-		        		
-		        	} else if(position.equals("3")){
-		        		
-		        		JSONObject list_printer_top3 = null;
-						if(homeJSON.get("list_printer_top3") != null){
-							list_printer_top3 = (JSONObject) homeJSON.get("list_printer_top3");
-							homeJSON.remove("list_printer_top3");
-						} else {
-							list_printer_top3 = new JSONObject();
-						}
-						
-						JSONArray fileNameArray = null;
-						if(list_printer_top3.get("fileNameArray") != null){
-							fileNameArray = (JSONArray) list_printer_top3.get("fileNameArray");
-							list_printer_top3.remove("fileNameArray");
-						} else {
-							fileNameArray = new JSONArray();
-						}
-						
-						fileNameArray.add(fileName);
+		JSONObject obj = getJsonPicturesLinksContainer();
+		JSONObject homeJSON = (obj.get("homeJSON") != null) ? (JSONObject) obj.get("homeJSON") : new JSONObject();
 
-						list_printer_top3.put("fileNameArray", fileNameArray);
-						homeJSON.put("list_printer_top3", list_printer_top3);
-		        		
-		        	} 
-				
-				} else if(inTopOfTypeProduct.equals("digital_printer_top")){
-					
-					if(position.equals("1")){
-						
-						JSONObject list_digital_printer_top1 = null;
-						if(homeJSON.get("list_digital_printer_top1") != null){
-							list_digital_printer_top1 = (JSONObject) homeJSON.get("list_digital_printer_top1");
-							homeJSON.remove("list_digital_printer_top1");
-						} else {
-							list_digital_printer_top1 = new JSONObject();
-						}
-						
-						JSONArray fileNameArray = null;
-						if(list_digital_printer_top1.get("fileNameArray") != null){
-							fileNameArray = (JSONArray) list_digital_printer_top1.get("fileNameArray");
-							list_digital_printer_top1.remove("fileNameArray");
-						} else {
-							fileNameArray = new JSONArray();
-						}
-						
-						fileNameArray.add(fileName);
+		if (picturesInTopProductSection.containsKey(inTopOfTypeProduct)) {
 
-						list_digital_printer_top1.put("fileNameArray", fileNameArray);
-						homeJSON.put("list_digital_printer_top1", list_digital_printer_top1);
-						
-		        	} else if(position.equals("2")){
-		        		
-		        		JSONObject list_digital_printer_top2 = null;
-						if(homeJSON.get("list_digital_printer_top2") != null){
-							list_digital_printer_top2 = (JSONObject) homeJSON.get("list_digital_printer_top2");
-							homeJSON.remove("list_digital_printer_top2");
-						} else {
-							list_digital_printer_top2 = new JSONObject();
-						}
-						
-						JSONArray fileNameArray = null;
-						if(list_digital_printer_top2.get("fileNameArray") != null){
-							fileNameArray = (JSONArray) list_digital_printer_top2.get("fileNameArray");
-							list_digital_printer_top2.remove("fileNameArray");
-						} else {
-							fileNameArray = new JSONArray();
-						}
-						
-						fileNameArray.add(fileName);
+			List<PictureInformation> pictures = picturesInTopProductSection.get(inTopOfTypeProduct).getPicturesInfo();
 
-						list_digital_printer_top2.put("fileNameArray", fileNameArray);
-						homeJSON.put("list_digital_printer_top2", list_digital_printer_top2);
-		        		
-		        	} else if(position.equals("3")){
-		        		
-		        		JSONObject list_digital_printer_top3 = null;
-						if(homeJSON.get("list_digital_printer_top3") != null){
-							list_digital_printer_top3 = (JSONObject) homeJSON.get("list_digital_printer_top3");
-							homeJSON.remove("list_digital_printer_top3");
-						} else {
-							list_digital_printer_top3 = new JSONObject();
-						}
-						
-						JSONArray fileNameArray = null;
-						if(list_digital_printer_top3.get("fileNameArray") != null){
-							fileNameArray = (JSONArray) list_digital_printer_top3.get("fileNameArray");
-							list_digital_printer_top3.remove("fileNameArray");
-						} else {
-							fileNameArray = new JSONArray();
-						}
-						
-						fileNameArray.add(fileName);
+			if (pictures.contains(new PictureInformation(position))) {
 
-						list_digital_printer_top3.put("fileNameArray", fileNameArray);
-						homeJSON.put("list_digital_printer_top3", list_digital_printer_top3);
-		        		
-		        	} 
-					
-				} else if(inTopOfTypeProduct.equals("laser_top")){
-					
-					if(position.equals("1")){
-						
-						JSONObject list_laser_top1 = null;
-						if(homeJSON.get("list_laser_top1") != null){
-							list_laser_top1 = (JSONObject) homeJSON.get("list_laser_top1");
-							homeJSON.remove("list_laser_top1");
-						} else {
-							list_laser_top1 = new JSONObject();
-						}
-						
-						JSONArray fileNameArray = null;
-						if(list_laser_top1.get("fileNameArray") != null){
-							fileNameArray = (JSONArray) list_laser_top1.get("fileNameArray");
-							list_laser_top1.remove("fileNameArray");
-						} else {
-							fileNameArray = new JSONArray();
-						}
-						
-						fileNameArray.add(fileName);
+				PictureInformation picture = pictures.get(pictures.indexOf(new PictureInformation(position)));
 
-						list_laser_top1.put("fileNameArray", fileNameArray);
-						homeJSON.put("list_laser_top1", list_laser_top1);
-						
-		        	} else if(position.equals("2")){
-		        		
-		        		JSONObject list_laser_top2 = null;
-						if(homeJSON.get("list_laser_top2") != null){
-							list_laser_top2 = (JSONObject) homeJSON.get("list_laser_top2");
-							homeJSON.remove("list_laser_top2");
-						} else {
-							list_laser_top2 = new JSONObject();
-						}
-						
-						JSONArray fileNameArray = null;
-						if(list_laser_top2.get("fileNameArray") != null){
-							fileNameArray = (JSONArray) list_laser_top2.get("fileNameArray");
-							list_laser_top2.remove("fileNameArray");
-						} else {
-							fileNameArray = new JSONArray();
-						}
-						
-						fileNameArray.add(fileName);
+				JSONObject pictureInfo = (homeJSON.get(picture.getNameOfJsonObject()) != null)
+						? (JSONObject) homeJSON.get(picture.getNameOfJsonObject()) : new JSONObject();
 
-						list_laser_top2.put("fileNameArray", fileNameArray);
-						homeJSON.put("list_laser_top2", list_laser_top2);
-		        		
-		        	} else if(position.equals("3")){
-		        		
-		        		JSONObject list_laser_top3 = null;
-						if(homeJSON.get("list_laser_top3") != null){
-							list_laser_top3 = (JSONObject) homeJSON.get("list_laser_top3");
-							homeJSON.remove("list_laser_top3");
-						} else {
-							list_laser_top3 = new JSONObject();
-						}
-						
-						JSONArray fileNameArray = null;
-						if(list_laser_top3.get("fileNameArray") != null){
-							fileNameArray = (JSONArray) list_laser_top3.get("fileNameArray");
-							list_laser_top3.remove("fileNameArray");
-						} else {
-							fileNameArray = new JSONArray();
-						}
-						
-						fileNameArray.add(fileName);
+				JSONArray fileNameArray = (pictureInfo.get("fileNameArray") != null)
+						? (JSONArray) pictureInfo.get("fileNameArray") : new JSONArray();
+				fileNameArray.add(fileName);
 
-						list_laser_top3.put("fileNameArray", fileNameArray);
-						homeJSON.put("list_laser_top3", list_laser_top3);
-		        		
-		        	}
-					
-				} else if(inTopOfTypeProduct.equals("scaner_top")){
-					
-					if(position.equals("1")){
-						
-						JSONObject list_scaner_top1 = null;
-						if(homeJSON.get("list_scaner_top1") != null){
-							list_scaner_top1 = (JSONObject) homeJSON.get("list_scaner_top1");
-							homeJSON.remove("list_scaner_top1");
-						} else {
-							list_scaner_top1 = new JSONObject();
-						}
-						
-						JSONArray fileNameArray = null;
-						if(list_scaner_top1.get("fileNameArray") != null){
-							fileNameArray = (JSONArray) list_scaner_top1.get("fileNameArray");
-							list_scaner_top1.remove("fileNameArray");
-						} else {
-							fileNameArray = new JSONArray();
-						}
-						
-						fileNameArray.add(fileName);
-
-						list_scaner_top1.put("fileNameArray", fileNameArray);
-						homeJSON.put("list_scaner_top1", list_scaner_top1);
-						
-		        	} else if(position.equals("2")){
-		        		
-		        		JSONObject list_scaner_top2 = null;
-						if(homeJSON.get("list_scaner_top2") != null){
-							list_scaner_top2 = (JSONObject) homeJSON.get("list_scaner_top2");
-							homeJSON.remove("list_scaner_top2");
-						} else {
-							list_scaner_top2 = new JSONObject();
-						}
-						
-						JSONArray fileNameArray = null;
-						if(list_scaner_top2.get("fileNameArray") != null){
-							fileNameArray = (JSONArray) list_scaner_top2.get("fileNameArray");
-							list_scaner_top2.remove("fileNameArray");
-						} else {
-							fileNameArray = new JSONArray();
-						}
-						
-						fileNameArray.add(fileName);
-
-						list_scaner_top2.put("fileNameArray", fileNameArray);
-						homeJSON.put("list_scaner_top2", list_scaner_top2);
-		        		
-		        	} else if(position.equals("3")){
-		        		
-		        		JSONObject list_scaner_top3 = null;
-						if(homeJSON.get("list_scaner_top3") != null){
-							list_scaner_top3 = (JSONObject) homeJSON.get("list_scaner_top3");
-							homeJSON.remove("list_scaner_top3");
-						} else {
-							list_scaner_top3 = new JSONObject();
-						}
-						
-						JSONArray fileNameArray = null;
-						if(list_scaner_top3.get("fileNameArray") != null){
-							fileNameArray = (JSONArray) list_scaner_top3.get("fileNameArray");
-							list_scaner_top3.remove("fileNameArray");
-						} else {
-							fileNameArray = new JSONArray();
-						}
-						
-						fileNameArray.add(fileName);
-
-						list_scaner_top3.put("fileNameArray", fileNameArray);
-						homeJSON.put("list_scaner_top3", list_scaner_top3);
-		        		
-		        	}
-					
-				} else if(inTopOfTypeProduct.equals("rip_top")){
-					
-					if(position.equals("1")){
-						
-						JSONObject list_rip_top1 = null;
-						if(homeJSON.get("list_rip_top1") != null){
-							list_rip_top1 = (JSONObject) homeJSON.get("list_rip_top1");
-							homeJSON.remove("list_rip_top1");
-						} else {
-							list_rip_top1 = new JSONObject();
-						}
-						
-						JSONArray fileNameArray = null;
-						if(list_rip_top1.get("fileNameArray") != null){
-							fileNameArray = (JSONArray) list_rip_top1.get("fileNameArray");
-							list_rip_top1.remove("fileNameArray");
-						} else {
-							fileNameArray = new JSONArray();
-						}
-						
-						fileNameArray.add(fileName);
-
-						list_rip_top1.put("fileNameArray", fileNameArray);
-						homeJSON.put("list_rip_top1", list_rip_top1);
-						
-		        	} else if(position.equals("2")){
-		        		
-		        		JSONObject list_rip_top2 = null;
-						if(homeJSON.get("list_rip_top2") != null){
-							list_rip_top2 = (JSONObject) homeJSON.get("list_rip_top2");
-							homeJSON.remove("list_rip_top2");
-						} else {
-							list_rip_top2 = new JSONObject();
-						}
-						
-						JSONArray fileNameArray = null;
-						if(list_rip_top2.get("fileNameArray") != null){
-							fileNameArray = (JSONArray) list_rip_top2.get("fileNameArray");
-							list_rip_top2.remove("fileNameArray");
-						} else {
-							fileNameArray = new JSONArray();
-						}
-						
-						fileNameArray.add(fileName);
-
-						list_rip_top2.put("fileNameArray", fileNameArray);
-						homeJSON.put("list_rip_top2", list_rip_top2);
-		        		
-		        	} else if(position.equals("3")){
-		        		
-		        		JSONObject list_rip_top3 = null;
-						if(homeJSON.get("list_rip_top3") != null){
-							list_rip_top3 = (JSONObject) homeJSON.get("list_rip_top3");
-							homeJSON.remove("list_rip_top3");
-						} else {
-							list_rip_top3 = new JSONObject();
-						}
-						
-						JSONArray fileNameArray = null;
-						if(list_rip_top3.get("fileNameArray") != null){
-							fileNameArray = (JSONArray) list_rip_top3.get("fileNameArray");
-							list_rip_top3.remove("fileNameArray");
-						} else {
-							fileNameArray = new JSONArray();
-						}
-						
-						fileNameArray.add(fileName);
-
-						list_rip_top3.put("fileNameArray", fileNameArray);
-						homeJSON.put("list_rip_top3", list_rip_top3);
-		        		
-		        	} 
-				}
-				
-				if( obj.get("homeJSON") != null )
-					obj.remove("homeJSON");
-				
-				obj.put("homeJSON", homeJSON);
-				
-				Writer out = new PrintWriter(PATH_TO_JSON_FILE, "UTF-8");
-				out.write(obj.toJSONString());
-				out.flush();
-				out.close();
-				
-			} catch (FileNotFoundException e1) {
-				e1.printStackTrace();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			} catch (ParseException e1) {
-				e1.printStackTrace();
-			}	
-	        }
-	         return fileName;
-	    }
-
-	    @SuppressWarnings("unchecked")
-		@RequestMapping(value="/admin/pictures/three_big_pictures/{inTopOfTypeProduct}/{position}/change_order_pictures",
-						method = RequestMethod.POST,
-						consumes="application/json",
-						headers = "content-type=application/x-www-form-urlencoded")
-	    public @ResponseBody void changeOrderPicturesHomeThreeBigPictures(
-	    		@RequestBody List<String> selectedIds,
-	    		@PathVariable("inTopOfTypeProduct") String inTopOfTypeProduct,
-				@PathVariable("position") String position) {
-	    	
-	    	logger.info("change order pictures in three big pictures, home"); 	
-
-			JSONParser parser = new JSONParser();
-			
-			try {
-				JSONObject obj = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream(PATH_TO_JSON_FILE), "UTF-8"));
-					
-					JSONObject homeJSON = (JSONObject) obj.get("homeJSON");		
-
-					if(inTopOfTypeProduct.equals("printer_top")){
-			    		
-						if(position.equals("1")){
-							
-							JSONObject list_printer_top1 = null;
-							
-							if(homeJSON.get("list_printer_top1") != null){
-								list_printer_top1 = (JSONObject) homeJSON.get("list_printer_top1");
-								homeJSON.remove("list_printer_top1");
-							} else {
-								list_printer_top1 = new JSONObject();
-							}
-							
-							if(list_printer_top1.get("fileNameArray") != null){
-								list_printer_top1.remove("fileNameArray");
-							} 
-							
-							JSONArray fileNameArray = new JSONArray();
-							
-							for(String fileName: selectedIds)
-								fileNameArray.add(fileName);
-							list_printer_top1.put("fileNameArray", fileNameArray);
-							homeJSON.put("list_printer_top1", list_printer_top1);
-							
-			        	} else if(position.equals("2")){
-			        		
-			        		JSONObject list_printer_top2 = null;
-							
-							if(homeJSON.get("list_printer_top2") != null){
-								list_printer_top2 = (JSONObject) homeJSON.get("list_printer_top2");
-								homeJSON.remove("list_printer_top2");
-							} else {
-								list_printer_top2 = new JSONObject();
-							}
-							
-							if(list_printer_top2.get("fileNameArray") != null){
-								list_printer_top2.remove("fileNameArray");
-							} 
-							
-							JSONArray fileNameArray = new JSONArray();
-							
-							for(String fileName: selectedIds)
-								fileNameArray.add(fileName);
-							list_printer_top2.put("fileNameArray", fileNameArray);
-							homeJSON.put("list_printer_top2", list_printer_top2);
-			        		
-			        	} else if(position.equals("3")){
-			        		
-			        		JSONObject list_printer_top3 = null;
-							
-							if(homeJSON.get("list_printer_top3") != null){
-								list_printer_top3 = (JSONObject) homeJSON.get("list_printer_top3");
-								homeJSON.remove("list_printer_top3");
-							} else {
-								list_printer_top3 = new JSONObject();
-							}
-							
-							if(list_printer_top3.get("fileNameArray") != null){
-								list_printer_top3.remove("fileNameArray");
-							} 
-							
-							JSONArray fileNameArray = new JSONArray();
-							
-							for(String fileName: selectedIds)
-								fileNameArray.add(fileName);
-							list_printer_top3.put("fileNameArray", fileNameArray);
-							homeJSON.put("list_printer_top3", list_printer_top3);
-			        		
-			        	} 
-					
-					} else if(inTopOfTypeProduct.equals("digital_printer_top")){
-						
-						if(position.equals("1")){
-							
-							JSONObject list_digital_printer_top1 = null;
-							
-							if(homeJSON.get("list_digital_printer_top1") != null){
-								list_digital_printer_top1 = (JSONObject) homeJSON.get("list_digital_printer_top1");
-								homeJSON.remove("list_digital_printer_top1");
-							} else {
-								list_digital_printer_top1 = new JSONObject();
-							}
-							
-							if(list_digital_printer_top1.get("fileNameArray") != null){
-								list_digital_printer_top1.remove("fileNameArray");
-							} 
-							
-							JSONArray fileNameArray = new JSONArray();
-							
-							for(String fileName: selectedIds)
-								fileNameArray.add(fileName);
-							list_digital_printer_top1.put("fileNameArray", fileNameArray);
-							homeJSON.put("list_digital_printer_top1", list_digital_printer_top1);
-							
-			        	} else if(position.equals("2")){
-			        		
-			        		JSONObject list_digital_printer_top2 = null;
-							
-							if(homeJSON.get("list_digital_printer_top2") != null){
-								list_digital_printer_top2 = (JSONObject) homeJSON.get("list_digital_printer_top2");
-								homeJSON.remove("list_digital_printer_top2");
-							} else {
-								list_digital_printer_top2 = new JSONObject();
-							}
-							
-							if(list_digital_printer_top2.get("fileNameArray") != null){
-								list_digital_printer_top2.remove("fileNameArray");
-							} 
-							
-							JSONArray fileNameArray = new JSONArray();
-							
-							for(String fileName: selectedIds)
-								fileNameArray.add(fileName);
-							list_digital_printer_top2.put("fileNameArray", fileNameArray);
-							homeJSON.put("list_digital_printer_top2", list_digital_printer_top2);
-			        		
-			        	} else if(position.equals("3")){
-			        		
-			        		JSONObject list_digital_printer_top3 = null;
-							
-							if(homeJSON.get("list_digital_printer_top3") != null){
-								list_digital_printer_top3 = (JSONObject) homeJSON.get("list_digital_printer_top3");
-								homeJSON.remove("list_digital_printer_top3");
-							} else {
-								list_digital_printer_top3 = new JSONObject();
-							}
-							
-							if(list_digital_printer_top3.get("fileNameArray") != null){
-								list_digital_printer_top3.remove("fileNameArray");
-							} 
-							
-							JSONArray fileNameArray = new JSONArray();
-							
-							for(String fileName: selectedIds)
-								fileNameArray.add(fileName);
-							list_digital_printer_top3.put("fileNameArray", fileNameArray);
-							homeJSON.put("list_digital_printer_top3", list_digital_printer_top3);
-			        		
-			        	} 
-						
-					} else if(inTopOfTypeProduct.equals("laser_top")){
-						
-						if(position.equals("1")){
-							
-							JSONObject list_laser_top1 = null;
-							
-							if(homeJSON.get("list_laser_top1") != null){
-								list_laser_top1 = (JSONObject) homeJSON.get("list_laser_top1");
-								homeJSON.remove("list_laser_top1");
-							} else {
-								list_laser_top1 = new JSONObject();
-							}
-							
-							if(list_laser_top1.get("fileNameArray") != null){
-								list_laser_top1.remove("fileNameArray");
-							} 
-							
-							JSONArray fileNameArray = new JSONArray();
-							
-							for(String fileName: selectedIds)
-								fileNameArray.add(fileName);
-							list_laser_top1.put("fileNameArray", fileNameArray);
-							homeJSON.put("list_laser_top1", list_laser_top1);
-							
-			        	} else if(position.equals("2")){
-			        		
-			        		JSONObject list_laser_top2 = null;
-							
-							if(homeJSON.get("list_laser_top2") != null){
-								list_laser_top2 = (JSONObject) homeJSON.get("list_laser_top2");
-								homeJSON.remove("list_laser_top2");
-							} else {
-								list_laser_top2 = new JSONObject();
-							}
-							
-							if(list_laser_top2.get("fileNameArray") != null){
-								list_laser_top2.remove("fileNameArray");
-							} 
-							
-							JSONArray fileNameArray = new JSONArray();
-							
-							for(String fileName: selectedIds)
-								fileNameArray.add(fileName);
-							list_laser_top2.put("fileNameArray", fileNameArray);
-							homeJSON.put("list_laser_top2", list_laser_top2);
-			        		
-			        	} else if(position.equals("3")){
-			        		
-			        		JSONObject list_laser_top3 = null;
-							
-							if(homeJSON.get("list_laser_top3") != null){
-								list_laser_top3 = (JSONObject) homeJSON.get("list_laser_top3");
-								homeJSON.remove("list_laser_top3");
-							} else {
-								list_laser_top3 = new JSONObject();
-							}
-							
-							if(list_laser_top3.get("fileNameArray") != null){
-								list_laser_top3.remove("fileNameArray");
-							} 
-							
-							JSONArray fileNameArray = new JSONArray();
-							
-							for(String fileName: selectedIds)
-								fileNameArray.add(fileName);
-							list_laser_top3.put("fileNameArray", fileNameArray);
-							homeJSON.put("list_laser_top3", list_laser_top3);
-			        		
-			        	}
-						
-					} else if(inTopOfTypeProduct.equals("scaner_top")){
-						
-						if(position.equals("1")){
-							
-							JSONObject list_scaner_top1 = null;
-							
-							if(homeJSON.get("list_scaner_top1") != null){
-								list_scaner_top1 = (JSONObject) homeJSON.get("list_scaner_top1");
-								homeJSON.remove("list_scaner_top1");
-							} else {
-								list_scaner_top1 = new JSONObject();
-							}
-							
-							if(list_scaner_top1.get("fileNameArray") != null){
-								list_scaner_top1.remove("fileNameArray");
-							} 
-							
-							JSONArray fileNameArray = new JSONArray();
-							
-							for(String fileName: selectedIds)
-								fileNameArray.add(fileName);
-							list_scaner_top1.put("fileNameArray", fileNameArray);
-							homeJSON.put("list_scaner_top1", list_scaner_top1);
-							
-			        	} else if(position.equals("2")){
-			        		
-			        		JSONObject list_scaner_top2 = null;
-							
-							if(homeJSON.get("list_scaner_top2") != null){
-								list_scaner_top2 = (JSONObject) homeJSON.get("list_scaner_top2");
-								homeJSON.remove("list_scaner_top2");
-							} else {
-								list_scaner_top2 = new JSONObject();
-							}
-							
-							if(list_scaner_top2.get("fileNameArray") != null){
-								list_scaner_top2.remove("fileNameArray");
-							} 
-							
-							JSONArray fileNameArray = new JSONArray();
-							
-							for(String fileName: selectedIds)
-								fileNameArray.add(fileName);
-							list_scaner_top2.put("fileNameArray", fileNameArray);
-							homeJSON.put("list_scaner_top2", list_scaner_top2);
-			        		
-			        	} else if(position.equals("3")){
-			        		
-			        		JSONObject list_scaner_top3 = null;
-							
-							if(homeJSON.get("list_scaner_top3") != null){
-								list_scaner_top3 = (JSONObject) homeJSON.get("list_scaner_top3");
-								homeJSON.remove("list_scaner_top3");
-							} else {
-								list_scaner_top3 = new JSONObject();
-							}
-							
-							if(list_scaner_top3.get("fileNameArray") != null){
-								list_scaner_top3.remove("fileNameArray");
-							} 
-							
-							JSONArray fileNameArray = new JSONArray();
-							
-							for(String fileName: selectedIds)
-								fileNameArray.add(fileName);
-							list_scaner_top3.put("fileNameArray", fileNameArray);
-							homeJSON.put("list_scaner_top3", list_scaner_top3);
-			        		
-			        	}
-						
-					} else if(inTopOfTypeProduct.equals("rip_top")){
-						
-						if(position.equals("1")){
-							
-							JSONObject list_rip_top1 = null;
-							
-							if(homeJSON.get("list_rip_top1") != null){
-								list_rip_top1 = (JSONObject) homeJSON.get("list_rip_top1");
-								homeJSON.remove("list_rip_top1");
-							} else {
-								list_rip_top1 = new JSONObject();
-							}
-							
-							if(list_rip_top1.get("fileNameArray") != null){
-								list_rip_top1.remove("fileNameArray");
-							} 
-							
-							JSONArray fileNameArray = new JSONArray();
-							
-							for(String fileName: selectedIds)
-								fileNameArray.add(fileName);
-							list_rip_top1.put("fileNameArray", fileNameArray);
-							homeJSON.put("list_rip_top1", list_rip_top1);
-							
-			        	} else if(position.equals("2")){
-			        		
-			        		JSONObject list_rip_top2 = null;
-							
-							if(homeJSON.get("list_rip_top2") != null){
-								list_rip_top2 = (JSONObject) homeJSON.get("list_rip_top2");
-								homeJSON.remove("list_rip_top2");
-							} else {
-								list_rip_top2 = new JSONObject();
-							}
-							
-							if(list_rip_top2.get("fileNameArray") != null){
-								list_rip_top2.remove("fileNameArray");
-							} 
-							
-							JSONArray fileNameArray = new JSONArray();
-							
-							for(String fileName: selectedIds)
-								fileNameArray.add(fileName);
-							list_rip_top2.put("fileNameArray", fileNameArray);
-							homeJSON.put("list_rip_top2", list_rip_top2);
-			        		
-			        	} else if(position.equals("3")){
-			        		
-			        		JSONObject list_rip_top3 = null;
-							
-							if(homeJSON.get("list_rip_top3") != null){
-								list_rip_top3 = (JSONObject) homeJSON.get("list_rip_top3");
-								homeJSON.remove("list_rip_top3");
-							} else {
-								list_rip_top3 = new JSONObject();
-							}
-							
-							if(list_rip_top3.get("fileNameArray") != null){
-								list_rip_top3.remove("fileNameArray");
-							} 
-							
-							JSONArray fileNameArray = new JSONArray();
-							
-							for(String fileName: selectedIds)
-								fileNameArray.add(fileName);
-							list_rip_top3.put("fileNameArray", fileNameArray);
-							homeJSON.put("list_rip_top3", list_rip_top3);
-			        		
-			        	} 
-					} 
-
-					if( obj.get("homeJSON") != null )
-						obj.remove("homeJSON");
-					
-				obj.put("homeJSON", homeJSON);
-				
-				Writer out = new PrintWriter(PATH_TO_JSON_FILE, "UTF-8");
-				out.write(obj.toJSONString());
-				out.flush();
-				out.close();
-				
-			} catch (FileNotFoundException e1) {
-				e1.printStackTrace();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			} catch (ParseException e1) {
-				e1.printStackTrace();
-			}  	
-	    }
-
-	    @SuppressWarnings("unchecked")
-		@RequestMapping(value="/admin/pictures/three_big_pictures/{inTopOfTypeProduct}/{position}/remove_picture/{name_picture}",
-						method = RequestMethod.POST,consumes="application/json",
-						headers = "content-type=application/x-www-form-urlencoded")
-	    public @ResponseBody void removePicturesThreeBigPictures(@PathVariable("name_picture") String name,
-	    		@PathVariable("inTopOfTypeProduct") String inTopOfTypeProduct,
-				@PathVariable("position") String position) {
-
-	    	String namePicture = name.replace(":", ".");
-	    	logger.info("delete picture in home, from: 'three big pictures', in top of type product: " + inTopOfTypeProduct); 	
-
-	    	try {
-	    		FileUtils.forceDelete(new File(directory + File.separator + "home" + 
-	    				File.separator + "three_big_pictures" + File.separator + inTopOfTypeProduct
-	    				+ File.separator + position + File.separator + namePicture));
-	    		
-			} catch (IOException e) {
-				logger.error("Can't delete picture from the folder", e);
-			} 
-	    	
-			JSONParser parser = new JSONParser();
-			
-			try {
-				JSONObject obj = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream(PATH_TO_JSON_FILE), "UTF-8"));
-					
-					JSONObject homeJSON = (JSONObject) obj.get("homeJSON");
-					
-					if(inTopOfTypeProduct.equals("printer_top")){
-			    		
-						if(position.equals("1")){
-							
-							JSONObject list_printer_top1 = (JSONObject) homeJSON.get("list_printer_top1");
-							homeJSON.remove("list_printer_top1");
-							
-							JSONArray fileNameArray = (JSONArray) list_printer_top1.get("fileNameArray");
-							list_printer_top1.remove("fileNameArray");
-							
-							fileNameArray.remove(namePicture);
-
-							list_printer_top1.put("fileNameArray", fileNameArray);
-							homeJSON.put("list_printer_top1", list_printer_top1);
-							
-			        	} else if(position.equals("2")){
-			        		
-			        		JSONObject list_printer_top2 = (JSONObject) homeJSON.get("list_printer_top2");
-							homeJSON.remove("list_printer_top2");
-							
-							JSONArray fileNameArray = (JSONArray) list_printer_top2.get("fileNameArray");
-							list_printer_top2.remove("fileNameArray");
-							
-							fileNameArray.remove(namePicture);
-
-							list_printer_top2.put("fileNameArray", fileNameArray);
-							homeJSON.put("list_printer_top2", list_printer_top2);
-			        		
-			        	} else if(position.equals("3")){
-			        		
-			        		JSONObject list_printer_top3 = (JSONObject) homeJSON.get("list_printer_top3");
-							homeJSON.remove("list_printer_top3");
-							
-							JSONArray fileNameArray = (JSONArray) list_printer_top3.get("fileNameArray");
-							list_printer_top3.remove("fileNameArray");
-							
-							fileNameArray.remove(namePicture);
-
-							list_printer_top3.put("fileNameArray", fileNameArray);
-							homeJSON.put("list_printer_top3", list_printer_top3);
-			        		
-			        	} 
-					
-					} else if(inTopOfTypeProduct.equals("digital_printer_top")){
-						
-						if(position.equals("1")){
-							
-							JSONObject list_digital_printer_top1 = (JSONObject) homeJSON.get("list_digital_printer_top1");
-							homeJSON.remove("list_digital_printer_top1");
-							
-							JSONArray fileNameArray = (JSONArray) list_digital_printer_top1.get("fileNameArray");
-							list_digital_printer_top1.remove("fileNameArray");
-							
-							fileNameArray.remove(namePicture);
-
-							list_digital_printer_top1.put("fileNameArray", fileNameArray);
-							homeJSON.put("list_digital_printer_top1", list_digital_printer_top1);
-							
-			        	} else if(position.equals("2")){
-			        		
-			        		JSONObject list_digital_printer_top2 = (JSONObject) homeJSON.get("list_digital_printer_top2");
-							homeJSON.remove("list_digital_printer_top2");
-							
-							JSONArray fileNameArray = (JSONArray) list_digital_printer_top2.get("fileNameArray");
-							list_digital_printer_top2.remove("fileNameArray");
-							
-							fileNameArray.remove(namePicture);
-
-							list_digital_printer_top2.put("fileNameArray", fileNameArray);
-							homeJSON.put("list_digital_printer_top2", list_digital_printer_top2);
-			        		
-			        	} else if(position.equals("3")){
-			        		
-			        		JSONObject list_digital_printer_top3 = (JSONObject) homeJSON.get("list_digital_printer_top3");
-							homeJSON.remove("list_digital_printer_top3");
-							
-							JSONArray fileNameArray = (JSONArray) list_digital_printer_top3.get("fileNameArray");
-							list_digital_printer_top3.remove("fileNameArray");
-							
-							fileNameArray.remove(namePicture);
-
-							list_digital_printer_top3.put("fileNameArray", fileNameArray);
-							homeJSON.put("list_digital_printer_top3", list_digital_printer_top3);
-			        		
-			        	} 
-						
-					} else if(inTopOfTypeProduct.equals("laser_top")){
-						
-						if(position.equals("1")){
-							
-							JSONObject list_laser_top1 = (JSONObject) homeJSON.get("list_laser_top1");
-							homeJSON.remove("list_laser_top1");
-							
-							JSONArray fileNameArray = (JSONArray) list_laser_top1.get("fileNameArray");
-							list_laser_top1.remove("fileNameArray");
-							
-							fileNameArray.remove(namePicture);
-
-							list_laser_top1.put("fileNameArray", fileNameArray);
-							homeJSON.put("list_laser_top1", list_laser_top1);
-							
-			        	} else if(position.equals("2")){
-			        		
-			        		JSONObject list_laser_top2 = (JSONObject) homeJSON.get("list_laser_top2");
-							homeJSON.remove("list_laser_top2");
-							
-							JSONArray fileNameArray = (JSONArray) list_laser_top2.get("fileNameArray");
-							list_laser_top2.remove("fileNameArray");
-							
-							fileNameArray.remove(namePicture);
-
-							list_laser_top2.put("fileNameArray", fileNameArray);
-							homeJSON.put("list_laser_top2", list_laser_top2);
-			        		
-			        	} else if(position.equals("3")){
-			        		
-			        		JSONObject list_laser_top3 = (JSONObject) homeJSON.get("list_laser_top3");
-							homeJSON.remove("list_laser_top3");
-							
-							JSONArray fileNameArray = (JSONArray) list_laser_top3.get("fileNameArray");
-							list_laser_top3.remove("fileNameArray");
-							
-							fileNameArray.remove(namePicture);
-
-							list_laser_top3.put("fileNameArray", fileNameArray);
-							homeJSON.put("list_laser_top3", list_laser_top3);
-			        		
-			        	}
-						
-					} else if(inTopOfTypeProduct.equals("scaner_top")){
-						
-						if(position.equals("1")){
-							
-							JSONObject list_scaner_top1 = (JSONObject) homeJSON.get("list_scaner_top1");
-							homeJSON.remove("list_scaner_top1");
-							
-							JSONArray fileNameArray = (JSONArray) list_scaner_top1.get("fileNameArray");
-							list_scaner_top1.remove("fileNameArray");
-							
-							fileNameArray.remove(namePicture);
-
-							list_scaner_top1.put("fileNameArray", fileNameArray);
-							homeJSON.put("list_scaner_top1", list_scaner_top1);
-							
-			        	} else if(position.equals("2")){
-			        		
-			        		JSONObject list_scaner_top2 = (JSONObject) homeJSON.get("list_scaner_top2");
-							homeJSON.remove("list_scaner_top2");
-							
-							JSONArray fileNameArray = (JSONArray) list_scaner_top2.get("fileNameArray");
-							list_scaner_top2.remove("fileNameArray");
-							
-							fileNameArray.remove(namePicture);
-
-							list_scaner_top2.put("fileNameArray", fileNameArray);
-							homeJSON.put("list_scaner_top2", list_scaner_top2);
-			        		
-			        	} else if(position.equals("3")){
-			        		
-			        		JSONObject list_scaner_top3 = (JSONObject) homeJSON.get("list_scaner_top3");
-							homeJSON.remove("list_scaner_top3");
-							
-							JSONArray fileNameArray = (JSONArray) list_scaner_top3.get("fileNameArray");
-							list_scaner_top3.remove("fileNameArray");
-							
-							fileNameArray.remove(namePicture);
-
-							list_scaner_top3.put("fileNameArray", fileNameArray);
-							homeJSON.put("list_scaner_top3", list_scaner_top3);
-			        		
-			        	}
-						
-					} else if(inTopOfTypeProduct.equals("rip_top")){
-						
-						if(position.equals("1")){
-							
-							JSONObject list_rip_top1 = (JSONObject) homeJSON.get("list_rip_top1");
-							homeJSON.remove("list_rip_top1");
-							
-							JSONArray fileNameArray = (JSONArray) list_rip_top1.get("fileNameArray");
-							list_rip_top1.remove("fileNameArray");
-							
-							fileNameArray.remove(namePicture);
-
-							list_rip_top1.put("fileNameArray", fileNameArray);
-							homeJSON.put("list_rip_top1", list_rip_top1);
-							
-			        	} else if(position.equals("2")){
-			        		
-			        		JSONObject list_rip_top2 = (JSONObject) homeJSON.get("list_rip_top2");
-							homeJSON.remove("list_rip_top2");
-							
-							JSONArray fileNameArray = (JSONArray) list_rip_top2.get("fileNameArray");
-							list_rip_top2.remove("fileNameArray");
-							
-							fileNameArray.remove(namePicture);
-
-							list_rip_top2.put("fileNameArray", fileNameArray);
-							homeJSON.put("list_rip_top2", list_rip_top2);
-			        		
-			        	} else if(position.equals("3")){
-			        		
-			        		JSONObject list_rip_top3 = (JSONObject) homeJSON.get("list_rip_top3");
-							homeJSON.remove("list_rip_top3");
-							
-							JSONArray fileNameArray = (JSONArray) list_rip_top3.get("fileNameArray");
-							list_rip_top3.remove("fileNameArray");
-							
-							fileNameArray.remove(namePicture);
-
-							list_rip_top3.put("fileNameArray", fileNameArray);
-							homeJSON.put("list_rip_top3", list_rip_top3);
-			        		
-			        	} 
-					} 
-					
-					if( obj.get("homeJSON") != null )
-						obj.remove("homeJSON");
-					
-				obj.put("homeJSON", homeJSON);
-				
-				Writer out = new PrintWriter(PATH_TO_JSON_FILE, "UTF-8");
-				out.write(obj.toJSONString());
-				out.flush();
-				out.close();
-				
-			} catch (FileNotFoundException e1) {
-				e1.printStackTrace();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			} catch (ParseException e1) {
-				e1.printStackTrace();
+				pictureInfo.put("fileNameArray", fileNameArray);
+				homeJSON.put(picture.getNameOfJsonObject(), pictureInfo);
 			}
-			
-	    }
+		}
+
+		obj.put("homeJSON", homeJSON);
+		writeResultInLocalFile(obj);
+
+		return fileName;
+	}
+
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "/admin/pictures/three_big_pictures/{inTopOfTypeProduct}/{position}/change_order_pictures", 
+	method = RequestMethod.POST, consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
+	public @ResponseBody void changeOrderPicturesHomeThreeBigPictures(@RequestBody List<String> selectedIds,
+			@PathVariable("inTopOfTypeProduct") String inTopOfTypeProduct, @PathVariable("position") String position) {
+
+		logger.info("change order pictures in three big pictures, home");
+
+		JSONObject obj = getJsonPicturesLinksContainer();
+		JSONObject homeJSON = (obj.get("homeJSON") != null) ? (JSONObject) obj.get("homeJSON") : new JSONObject();
+
+		if (picturesInTopProductSection.containsKey(inTopOfTypeProduct)) {
+
+			List<PictureInformation> pictures = picturesInTopProductSection.get(inTopOfTypeProduct).getPicturesInfo();
+
+			if (pictures.contains(new PictureInformation(position))) {
+
+				PictureInformation picture = pictures.get(pictures.indexOf(new PictureInformation(position)));
+
+				JSONObject pictureInfo = (homeJSON.get(picture.getNameOfJsonObject()) != null)
+						? (JSONObject) homeJSON.get(picture.getNameOfJsonObject()) : new JSONObject();
+
+				JSONArray fileNameArray = new JSONArray();
+				for (String fileName : selectedIds)
+					fileNameArray.add(fileName);
+
+				pictureInfo.put("fileNameArray", fileNameArray);
+				homeJSON.put(picture.getNameOfJsonObject(), pictureInfo);
+			}
+		}
+
+		obj.put("homeJSON", homeJSON);
+		writeResultInLocalFile(obj);
+	}
+
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "/admin/pictures/three_big_pictures/{inTopOfTypeProduct}/{position}/remove_picture/{name_picture}", 
+	method = RequestMethod.POST, consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
+	public @ResponseBody void removePicturesThreeBigPictures(@PathVariable("name_picture") String name,
+			@PathVariable("inTopOfTypeProduct") String inTopOfTypeProduct, @PathVariable("position") String position) {
+
+		String namePicture = name.replace(":", ".");
+		logger.info("delete picture in home, from: 'three big pictures', in top of type product: " + inTopOfTypeProduct);
+
+		componets.removePicture(namePicture, directory, CONCRETE_FOLDER,
+				"three_big_pictures" + File.separator + inTopOfTypeProduct + File.separator + position);
+
+		JSONObject obj = getJsonPicturesLinksContainer();
+		JSONObject homeJSON = (obj.get("homeJSON") != null) ? (JSONObject) obj.get("homeJSON") : new JSONObject();
+
+		if (picturesInTopProductSection.containsKey(inTopOfTypeProduct)) {
+
+			List<PictureInformation> pictures = picturesInTopProductSection.get(inTopOfTypeProduct).getPicturesInfo();
+
+			if (pictures.contains(new PictureInformation(position))) {
+
+				PictureInformation picture = pictures.get(pictures.indexOf(new PictureInformation(position)));
+
+				JSONObject pictureInfo = (homeJSON.get(picture.getNameOfJsonObject()) != null)
+						? (JSONObject) homeJSON.get(picture.getNameOfJsonObject()) : new JSONObject();
+
+				JSONArray fileNameArray = (pictureInfo.get("fileNameArray") != null)
+						? (JSONArray) pictureInfo.get("fileNameArray") : new JSONArray();
+
+				fileNameArray.remove(namePicture);
+
+				pictureInfo.put("fileNameArray", fileNameArray);
+				homeJSON.put(picture.getNameOfJsonObject(), pictureInfo);
+			}
+		}
+
+		obj.put("homeJSON", homeJSON);
+		writeResultInLocalFile(obj);
+	}
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	/**
 	 * block with two narrow pictures
 	 */
-	    @RequestMapping(value="/admin/pictures/two_narrow_pictures/{inTopOfTypeProduct}/{position}", method = RequestMethod.GET)
-	    public ModelAndView showTwoNarrowPictures(Model model, @PathVariable("inTopOfTypeProduct") String inTopOfTypeProduct,
-	    							 @PathVariable("position") String position){
-	    	
-	    	JSONObject homeJSON = (JSONObject) getJsonPicturesLinksContainer().get("homeJSON");
-	    	
-			if (picturesInTopProductSection.containsKey(inTopOfTypeProduct)) {
-	
-				List<PictureInformation> pictures = picturesInTopProductSection.get(inTopOfTypeProduct).getPicturesInfo();
-	
-				if (pictures.contains(new PictureInformation(position))) {
-	
-					PictureInformation picture = pictures.get(pictures.indexOf(new PictureInformation(position)));
-	
-					model.addAttribute("directory", inTopOfTypeProduct);
-					model.addAttribute("subDirectory", position);
-					model.addAttribute("headOfPage", picture.headOfPage);
-					model.addAttribute("listPictures", (JSONObject) homeJSON.get(picture.getNameOfJsonObject()));
-	
-				}
+	@RequestMapping(value = "/admin/pictures/two_narrow_pictures/{inTopOfTypeProduct}/{position}", method = RequestMethod.GET)
+	public ModelAndView showTwoNarrowPictures(Model model,
+			@PathVariable("inTopOfTypeProduct") String inTopOfTypeProduct, @PathVariable("position") String position) {
+
+		JSONObject homeJSON = (JSONObject) getJsonPicturesLinksContainer().get("homeJSON");
+
+		if (picturesInTopProductSection.containsKey(inTopOfTypeProduct)) {
+
+			List<PictureInformation> pictures = picturesInTopProductSection.get(inTopOfTypeProduct).getPicturesInfo();
+
+			if (pictures.contains(new PictureInformation(position))) {
+
+				PictureInformation picture = pictures.get(pictures.indexOf(new PictureInformation(position)));
+
+				model.addAttribute("directory", inTopOfTypeProduct);
+				model.addAttribute("subDirectory", position);
+				model.addAttribute("headOfPage", picture.headOfPage);
+				model.addAttribute("listPictures", (JSONObject) homeJSON.get(picture.getNameOfJsonObject()));
+
 			}
-			
-	    	return new ModelAndView("admin/pictures/two_narrow_pictures");
-	    }
+		}
+
+		return new ModelAndView("admin/pictures/two_narrow_pictures");
+	}
 	 
-	    @SuppressWarnings("unchecked")
-		@RequestMapping(value="/admin/pictures/two_narrow_pictures/{inTopOfTypeProduct}/{position}/save_description/{href}",
-	    		method = RequestMethod.POST)
-	    public @ResponseBody void saveHrefPictureOnTwoNarrowPictures(@PathVariable("inTopOfTypeProduct") String inTopOfTypeProduct,
-	    	   @PathVariable("position") String position,
-	    	   @PathVariable("href") String href) {
-		
-		 JSONParser parser = new JSONParser();
-			
-			try {
-				JSONObject obj = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream(PATH_TO_JSON_FILE), "UTF-8"));
-					
-					JSONObject homeJSON = null;
-					if( obj.get("homeJSON") != null ){
-						homeJSON = (JSONObject) obj.get("homeJSON");
-						} else {
-							homeJSON = new JSONObject();
-						}
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "/admin/pictures/two_narrow_pictures/{inTopOfTypeProduct}/{position}/save_description/{href}", method = RequestMethod.POST)
+	public @ResponseBody void saveHrefPictureOnTwoNarrowPictures(
+			@PathVariable("inTopOfTypeProduct") String inTopOfTypeProduct, @PathVariable("position") String position,
+			@PathVariable("href") String href) {
 
-					if(inTopOfTypeProduct.equals("3d_printer_top")){
-						
-						if(position.equals("1")){
-							
-							JSONObject list_3d_printer_top1 = null;
-							if(homeJSON.get("list_3d_printer_top1") != null){
-								list_3d_printer_top1 = (JSONObject) homeJSON.get("list_3d_printer_top1");
-								homeJSON.remove("list_3d_printer_top1");
-							} else {
-								list_3d_printer_top1 = new JSONObject();
-							}
-							
-							if(list_3d_printer_top1.get("href") != null){
-								list_3d_printer_top1.remove("href");
-								list_3d_printer_top1.put("href", href);
-							} else {
-								list_3d_printer_top1.put("href", href);
-							}
-							
-							homeJSON.put("list_3d_printer_top1", list_3d_printer_top1);
-							
-			        	} else if(position.equals("2")){
-			        		
-			        		JSONObject list_3d_printer_top2 = null;
-							if(homeJSON.get("list_3d_printer_top2") != null){
-								list_3d_printer_top2 = (JSONObject) homeJSON.get("list_3d_printer_top2");
-								homeJSON.remove("list_3d_printer_top2");
-							} else {
-								list_3d_printer_top2 = new JSONObject();
-							}
-							
-							if(list_3d_printer_top2.get("href") != null){
-								list_3d_printer_top2.remove("href");
-								list_3d_printer_top2.put("href", href);
-							} else {
-								list_3d_printer_top2.put("href", href);
-							}
-							
-							homeJSON.put("list_3d_printer_top2", list_3d_printer_top2);
-			        		
-			        	}
-					
-					} else if(inTopOfTypeProduct.equals("laminator_top")){
-						
-						if(position.equals("1")){
-							
-							JSONObject list_laminator_top1 = null;
-							if(homeJSON.get("list_laminator_top1") != null){
-								list_laminator_top1 = (JSONObject) homeJSON.get("list_laminator_top1");
-								homeJSON.remove("list_laminator_top1");
-							} else {
-								list_laminator_top1 = new JSONObject();
-							}
-							
-							if(list_laminator_top1.get("href") != null){
-								list_laminator_top1.remove("href");
-								list_laminator_top1.put("href", href);
-							} else {
-								list_laminator_top1.put("href", href);
-							}
-							
-							homeJSON.put("list_laminator_top1", list_laminator_top1);
-							
-			        	} else if(position.equals("2")){
-			        		
-			        		JSONObject list_laminator_top2 = null;
-							if(homeJSON.get("list_laminator_top2") != null){
-								list_laminator_top2 = (JSONObject) homeJSON.get("list_laminator_top2");
-								homeJSON.remove("list_laminator_top2");
-							} else {
-								list_laminator_top2 = new JSONObject();
-							}
-							
-							if(list_laminator_top2.get("href") != null){
-								list_laminator_top2.remove("href");
-								list_laminator_top2.put("href", href);
-							} else {
-								list_laminator_top2.put("href", href);
-							}
-							
-							homeJSON.put("list_laminator_top2", list_laminator_top2);
-			        		
-			        	}
-						
-					} else if(inTopOfTypeProduct.equals("cutter_top")){
-						
-						if(position.equals("1")){
-	
-							JSONObject list_cutter_top1 = null;
-							if(homeJSON.get("list_cutter_top1") != null){
-								list_cutter_top1 = (JSONObject) homeJSON.get("list_cutter_top1");
-								homeJSON.remove("list_cutter_top1");
-							} else {
-								list_cutter_top1 = new JSONObject();
-							}
-							
-							if(list_cutter_top1.get("href") != null){
-								list_cutter_top1.remove("href");
-								list_cutter_top1.put("href", href);
-							} else {
-								list_cutter_top1.put("href", href);
-							}
-							
-							homeJSON.put("list_cutter_top1", list_cutter_top1);
-							
-			        	} else if(position.equals("2")){
-			        		
-			        		JSONObject list_cutter_top2 = null;
-							if(homeJSON.get("list_cutter_top2") != null){
-								list_cutter_top2 = (JSONObject) homeJSON.get("list_cutter_top2");
-								homeJSON.remove("list_cutter_top2");
-							} else {
-								list_cutter_top2 = new JSONObject();
-							}
-							
-							if(list_cutter_top2.get("href") != null){
-								list_cutter_top2.remove("href");
-								list_cutter_top2.put("href", href);
-							} else {
-								list_cutter_top2.put("href", href);
-							}
-							
-							homeJSON.put("list_cutter_top2", list_cutter_top2);
-			        		
-			        	}
-						
-					} else if(inTopOfTypeProduct.equals("previously_used_top")){
-						
-						if(position.equals("1")){
-							
-							JSONObject list_previously_used_top1 = null;
-							if(homeJSON.get("list_previously_used_top1") != null){
-								list_previously_used_top1 = (JSONObject) homeJSON.get("list_previously_used_top1");
-								homeJSON.remove("list_previously_used_top1");
-							} else {
-								list_previously_used_top1 = new JSONObject();
-							}
-							
-							if(list_previously_used_top1.get("href") != null){
-								list_previously_used_top1.remove("href");
-								list_previously_used_top1.put("href", href);
-							} else {
-								list_previously_used_top1.put("href", href);
-							}
-							
-							homeJSON.put("list_previously_used_top1", list_previously_used_top1);
-							
-			        	} else if(position.equals("2")){
-			        		
-			        		JSONObject list_previously_used_top2 = null;
-							if(homeJSON.get("list_previously_used_top2") != null){
-								list_previously_used_top2 = (JSONObject) homeJSON.get("list_previously_used_top2");
-								homeJSON.remove("list_previously_used_top2");
-							} else {
-								list_previously_used_top2 = new JSONObject();
-							}
-							
-							if(list_previously_used_top2.get("href") != null){
-								list_previously_used_top2.remove("href");
-								list_previously_used_top2.put("href", href);
-							} else {
-								list_previously_used_top2.put("href", href);
-							}
-							
-							homeJSON.put("list_previously_used_top2", list_previously_used_top2);
-			        		
-			        	}
-						
-					}
+		JSONObject obj = getJsonPicturesLinksContainer();
 
-					if( obj.get("homeJSON") != null )
-						obj.remove("homeJSON");
-					
-				obj.put("homeJSON", homeJSON);
-				
-				Writer out = new PrintWriter(PATH_TO_JSON_FILE, "UTF-8");
-				out.write(obj.toJSONString());
-				out.flush();
-				out.close();
-				
-			} catch (FileNotFoundException e1) {
-				e1.printStackTrace();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			} catch (ParseException e1) {
-				e1.printStackTrace();
+		JSONObject homeJSON = (obj.get("homeJSON") != null) ? (JSONObject) obj.get("homeJSON") : new JSONObject();
+
+		if (picturesInTopProductSection.containsKey(inTopOfTypeProduct)) {
+
+			List<PictureInformation> pictures = picturesInTopProductSection.get(inTopOfTypeProduct).getPicturesInfo();
+
+			if (pictures.contains(new PictureInformation(position))) {
+
+				PictureInformation picture = pictures.get(pictures.indexOf(new PictureInformation(position)));
+
+				JSONObject pictureInfo = (homeJSON.get(picture.getNameOfJsonObject()) != null)
+						? (JSONObject) homeJSON.get(picture.getNameOfJsonObject()) : new JSONObject();
+
+				pictureInfo.put("href", href);
+
+				homeJSON.put(picture.getNameOfJsonObject(), pictureInfo);
 			}
-	 }
+		}
 
-	    @SuppressWarnings("unchecked")
-		@RequestMapping(value="/admin/pictures/two_narrow_pictures/{inTopOfTypeProduct}/{position}/upload_pictures",
-	    		method = RequestMethod.POST)
-	    public @ResponseBody String uploadPicturesOnTwoNarrowPictures(MultipartHttpServletRequest request,
-	    	   @PathVariable("inTopOfTypeProduct") String inTopOfTypeProduct,
-			   @PathVariable("position") String position) {
-	    	
-	    	logger.info("upload new picture to the one of two narrows pictures on home page"); 	
-	    
-	        Iterator<String> itr =  request.getFileNames();
-	        MultipartFile mpf = null;
-	        String fileName = null;
+		obj.put("homeJSON", homeJSON);
 
-	        while(itr.hasNext()){
-	            mpf = request.getFile(itr.next()); 
-	    		fileName = new Random().nextInt(10000000) + "" + mpf.getOriginalFilename().substring(mpf.getOriginalFilename().lastIndexOf("."))/*last part is file extension*/; 
+		writeResultInLocalFile(obj);
+	}
 
-				try {
-					FileCopyUtils.copy(mpf.getBytes(), new FileOutputStream(directory + File.separator + "home" 
-				+ File.separator + "two_narrow_pictures" + File.separator
-				+ inTopOfTypeProduct + File.separator + position + File.separator + fileName));
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "/admin/pictures/two_narrow_pictures/{inTopOfTypeProduct}/{position}/upload_pictures", method = RequestMethod.POST)
+	public @ResponseBody String uploadPicturesOnTwoNarrowPictures(MultipartHttpServletRequest request,
+			@PathVariable("inTopOfTypeProduct") String inTopOfTypeProduct, @PathVariable("position") String position) {
 
-				} catch (IOException e) {
-					logger.error("Don't write picture to the folder", e);
-				} 
-	          	
-			JSONParser parser = new JSONParser();
-			
-			try {
-				JSONObject obj = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream(PATH_TO_JSON_FILE), "UTF-8"));
-			
-				JSONObject homeJSON = null;
-				if( obj.get("homeJSON") != null ){
-					homeJSON = (JSONObject) obj.get("homeJSON");
-					} else {
-						homeJSON = new JSONObject();
-					}
-				
-				if(inTopOfTypeProduct.equals("3d_printer_top")){
-		    		
-					if(position.equals("1")){
-						
-						JSONObject list_3d_printer_top1 = null;
-						//check if these subdirectories has pictures
-						if(homeJSON.get("list_3d_printer_top1") != null){
-							list_3d_printer_top1 = (JSONObject) homeJSON.get("list_3d_printer_top1");
-							homeJSON.remove("list_3d_printer_top1");
-						} else {
-							list_3d_printer_top1 = new JSONObject();
-						}
-						
-						JSONArray fileNameArray = null;
-						if(list_3d_printer_top1.get("fileNameArray") != null){
-							fileNameArray = (JSONArray) list_3d_printer_top1.get("fileNameArray");
-							list_3d_printer_top1.remove("fileNameArray");
-						} else {
-							fileNameArray = new JSONArray();
-						}
-						
-						fileNameArray.add(fileName);
+		logger.info("upload new picture to the one of two narrows pictures on home page");
 
-						list_3d_printer_top1.put("fileNameArray", fileNameArray);
-						homeJSON.put("list_3d_printer_top1", list_3d_printer_top1);
-						
-		        	} else if(position.equals("2")){
-		        		
-		        		JSONObject list_3d_printer_top2 = null;
-						if(homeJSON.get("list_3d_printer_top2") != null){
-							list_3d_printer_top2 = (JSONObject) homeJSON.get("list_3d_printer_top2");
-							homeJSON.remove("list_3d_printer_top2");
-						} else {
-							list_3d_printer_top2 = new JSONObject();
-						}
-						
-						JSONArray fileNameArray = null;
-						if(list_3d_printer_top2.get("fileNameArray") != null){
-							fileNameArray = (JSONArray) list_3d_printer_top2.get("fileNameArray");
-							list_3d_printer_top2.remove("fileNameArray");
-						} else {
-							fileNameArray = new JSONArray();
-						}
-						
-						fileNameArray.add(fileName);
+		String fileName = componets.uploadPicture(request, directory, CONCRETE_FOLDER,
+				"two_narrow_pictures" + File.separator + inTopOfTypeProduct + File.separator + position);
 
-						list_3d_printer_top2.put("fileNameArray", fileNameArray);
-						homeJSON.put("list_3d_printer_top2", list_3d_printer_top2);
-		        		
-		        	}
-				
-				} else if(inTopOfTypeProduct.equals("laminator_top")){
-					
-					if(position.equals("1")){
-						
-						JSONObject list_laminator_top1 = null;
-						if(homeJSON.get("list_laminator_top1") != null){
-							list_laminator_top1 = (JSONObject) homeJSON.get("list_laminator_top1");
-							homeJSON.remove("list_laminator_top1");
-						} else {
-							list_laminator_top1 = new JSONObject();
-						}
-						
-						JSONArray fileNameArray = null;
-						if(list_laminator_top1.get("fileNameArray") != null){
-							fileNameArray = (JSONArray) list_laminator_top1.get("fileNameArray");
-							list_laminator_top1.remove("fileNameArray");
-						} else {
-							fileNameArray = new JSONArray();
-						}
-						
-						fileNameArray.add(fileName);
+		JSONObject obj = getJsonPicturesLinksContainer();
+		JSONObject homeJSON = (obj.get("homeJSON") != null) ? (JSONObject) obj.get("homeJSON") : new JSONObject();
 
-						list_laminator_top1.put("fileNameArray", fileNameArray);
-						homeJSON.put("list_laminator_top1", list_laminator_top1);
-						
-		        	} else if(position.equals("2")){
-		        		
-		        		JSONObject list_laminator_top2 = null;
-						if(homeJSON.get("list_laminator_top2") != null){
-							list_laminator_top2 = (JSONObject) homeJSON.get("list_laminator_top2");
-							homeJSON.remove("list_laminator_top2");
-						} else {
-							list_laminator_top2 = new JSONObject();
-						}
-						
-						JSONArray fileNameArray = null;
-						if(list_laminator_top2.get("fileNameArray") != null){
-							fileNameArray = (JSONArray) list_laminator_top2.get("fileNameArray");
-							list_laminator_top2.remove("fileNameArray");
-						} else {
-							fileNameArray = new JSONArray();
-						}
-						
-						fileNameArray.add(fileName);
+		if (picturesInTopProductSection.containsKey(inTopOfTypeProduct)) {
 
-						list_laminator_top2.put("fileNameArray", fileNameArray);
-						homeJSON.put("list_laminator_top2", list_laminator_top2);
-		        		
-		        	} 
-					
-				} else if(inTopOfTypeProduct.equals("cutter_top")){
-					
-					if(position.equals("1")){
-						
-						JSONObject list_cutter_top1 = null;
-						if(homeJSON.get("list_cutter_top1") != null){
-							list_cutter_top1 = (JSONObject) homeJSON.get("list_cutter_top1");
-							homeJSON.remove("list_cutter_top1");
-						} else {
-							list_cutter_top1 = new JSONObject();
-						}
-						
-						JSONArray fileNameArray = null;
-						if(list_cutter_top1.get("fileNameArray") != null){
-							fileNameArray = (JSONArray) list_cutter_top1.get("fileNameArray");
-							list_cutter_top1.remove("fileNameArray");
-						} else {
-							fileNameArray = new JSONArray();
-						}
-						
-						fileNameArray.add(fileName);
+			List<PictureInformation> pictures = picturesInTopProductSection.get(inTopOfTypeProduct).getPicturesInfo();
 
-						list_cutter_top1.put("fileNameArray", fileNameArray);
-						homeJSON.put("list_cutter_top1", list_cutter_top1);
-						
-		        	} else if(position.equals("2")){
-		        		
-		        		JSONObject list_cutter_top2 = null;
-						if(homeJSON.get("list_cutter_top2") != null){
-							list_cutter_top2 = (JSONObject) homeJSON.get("list_cutter_top2");
-							homeJSON.remove("list_cutter_top2");
-						} else {
-							list_cutter_top2 = new JSONObject();
-						}
-						
-						JSONArray fileNameArray = null;
-						if(list_cutter_top2.get("fileNameArray") != null){
-							fileNameArray = (JSONArray) list_cutter_top2.get("fileNameArray");
-							list_cutter_top2.remove("fileNameArray");
-						} else {
-							fileNameArray = new JSONArray();
-						}
-						
-						fileNameArray.add(fileName);
+			if (pictures.contains(new PictureInformation(position))) {
 
-						list_cutter_top2.put("fileNameArray", fileNameArray);
-						homeJSON.put("list_cutter_top2", list_cutter_top2);
-		        		
-		        	}
-					
-				} else if(inTopOfTypeProduct.equals("previously_used_top")){
-					
-					if(position.equals("1")){
-						
-						JSONObject list_previously_used_top1 = null;
-						if(homeJSON.get("list_previously_used_top1") != null){
-							list_previously_used_top1 = (JSONObject) homeJSON.get("list_previously_used_top1");
-							homeJSON.remove("list_previously_used_top1");
-						} else {
-							list_previously_used_top1 = new JSONObject();
-						}
-						
-						JSONArray fileNameArray = null;
-						if(list_previously_used_top1.get("fileNameArray") != null){
-							fileNameArray = (JSONArray) list_previously_used_top1.get("fileNameArray");
-							list_previously_used_top1.remove("fileNameArray");
-						} else {
-							fileNameArray = new JSONArray();
-						}
-						
-						fileNameArray.add(fileName);
+				PictureInformation picture = pictures.get(pictures.indexOf(new PictureInformation(position)));
 
-						list_previously_used_top1.put("fileNameArray", fileNameArray);
-						homeJSON.put("list_previously_used_top1", list_previously_used_top1);
-						
-		        	} else if(position.equals("2")){
-		        		
-		        		JSONObject list_previously_used_top2 = null;
-						if(homeJSON.get("list_previously_used_top2") != null){
-							list_previously_used_top2 = (JSONObject) homeJSON.get("list_previously_used_top2");
-							homeJSON.remove("list_previously_used_top2");
-						} else {
-							list_previously_used_top2 = new JSONObject();
-						}
-						
-						JSONArray fileNameArray = null;
-						if(list_previously_used_top2.get("fileNameArray") != null){
-							fileNameArray = (JSONArray) list_previously_used_top2.get("fileNameArray");
-							list_previously_used_top2.remove("fileNameArray");
-						} else {
-							fileNameArray = new JSONArray();
-						}
-						
-						fileNameArray.add(fileName);
+				JSONObject pictureInfo = (homeJSON.get(picture.getNameOfJsonObject()) != null)
+						? (JSONObject) homeJSON.get(picture.getNameOfJsonObject()) : new JSONObject();
 
-						list_previously_used_top2.put("fileNameArray", fileNameArray);
-						homeJSON.put("list_previously_used_top2", list_previously_used_top2);
-		        		
-		        	}	
-				}
-				
-				if( obj.get("homeJSON") != null )
-					obj.remove("homeJSON");
-				
-				obj.put("homeJSON", homeJSON);
-				
-				Writer out = new PrintWriter(PATH_TO_JSON_FILE, "UTF-8");
-				out.write(obj.toJSONString());
-				out.flush();
-				out.close();
-				
-			} catch (FileNotFoundException e1) {
-				e1.printStackTrace();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			} catch (ParseException e1) {
-				e1.printStackTrace();
-			}	
-	        }
-	         return fileName;
-	    }
+				JSONArray fileNameArray = (pictureInfo.get("fileNameArray") != null)
+						? (JSONArray) pictureInfo.get("fileNameArray") : new JSONArray();
+				fileNameArray.add(fileName);
 
-	    @SuppressWarnings("unchecked")
-		@RequestMapping(value="/admin/pictures/two_narrow_pictures/{inTopOfTypeProduct}/{position}/change_order_pictures",
-						method = RequestMethod.POST,
-						consumes="application/json",
-						headers = "content-type=application/x-www-form-urlencoded")
-	    public @ResponseBody void changeOrderPicturesHomeTwoNarrowPictures(
-	    		@RequestBody List<String> selectedIds,
-	    		@PathVariable("inTopOfTypeProduct") String inTopOfTypeProduct,
-				@PathVariable("position") String position) {
-	    	
-	    	logger.info("change order pictures in two narrow pictures, home"); 	
-
-			JSONParser parser = new JSONParser();
-			
-			try {
-				JSONObject obj = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream(PATH_TO_JSON_FILE), "UTF-8"));
-					
-					JSONObject homeJSON = (JSONObject) obj.get("homeJSON");		
-
-					if(inTopOfTypeProduct.equals("3d_printer_top")){
-			    		
-						if(position.equals("1")){
-							
-							JSONObject list_3d_printer_top1 = null;
-							
-							if(homeJSON.get("list_3d_printer_top1") != null){
-								list_3d_printer_top1 = (JSONObject) homeJSON.get("list_3d_printer_top1");
-								homeJSON.remove("list_3d_printer_top1");
-							} else {
-								list_3d_printer_top1 = new JSONObject();
-							}
-							
-							if(list_3d_printer_top1.get("fileNameArray") != null){
-								list_3d_printer_top1.remove("fileNameArray");
-							} 
-							
-							JSONArray fileNameArray = new JSONArray();
-							
-							for(String fileName: selectedIds)
-								fileNameArray.add(fileName);
-							list_3d_printer_top1.put("fileNameArray", fileNameArray);
-							homeJSON.put("list_3d_printer_top1", list_3d_printer_top1);
-							
-			        	} else if(position.equals("2")){
-			        		
-			        		JSONObject list_3d_printer_top2 = null;
-							
-							if(homeJSON.get("list_3d_printer_top1") != null){
-								list_3d_printer_top2 = (JSONObject) homeJSON.get("list_3d_printer_top1");
-								homeJSON.remove("list_3d_printer_top1");
-							} else {
-								list_3d_printer_top2 = new JSONObject();
-							}
-							
-							if(list_3d_printer_top2.get("fileNameArray") != null){
-								list_3d_printer_top2.remove("fileNameArray");
-							} 
-							
-							JSONArray fileNameArray = new JSONArray();
-							
-							for(String fileName: selectedIds)
-								fileNameArray.add(fileName);
-							list_3d_printer_top2.put("fileNameArray", fileNameArray);
-							homeJSON.put("list_3d_printer_top1", list_3d_printer_top2);
-			        		
-			        	}
-					
-					} else if(inTopOfTypeProduct.equals("laminator_top")){
-						
-						if(position.equals("1")){
-							
-							JSONObject list_laminator_top1 = null;
-							
-							if(homeJSON.get("list_laminator_top1") != null){
-								list_laminator_top1 = (JSONObject) homeJSON.get("list_laminator_top1");
-								homeJSON.remove("list_laminator_top1");
-							} else {
-								list_laminator_top1 = new JSONObject();
-							}
-							
-							if(list_laminator_top1.get("fileNameArray") != null){
-								list_laminator_top1.remove("fileNameArray");
-							} 
-							
-							JSONArray fileNameArray = new JSONArray();
-							
-							for(String fileName: selectedIds)
-								fileNameArray.add(fileName);
-							list_laminator_top1.put("fileNameArray", fileNameArray);
-							homeJSON.put("list_laminator_top1", list_laminator_top1);
-							
-			        	} else if(position.equals("2")){
-			        		
-			        		JSONObject list_laminator_top2 = null;
-							
-							if(homeJSON.get("list_laminator_top2") != null){
-								list_laminator_top2 = (JSONObject) homeJSON.get("list_laminator_top2");
-								homeJSON.remove("list_laminator_top2");
-							} else {
-								list_laminator_top2 = new JSONObject();
-							}
-							
-							if(list_laminator_top2.get("fileNameArray") != null){
-								list_laminator_top2.remove("fileNameArray");
-							} 
-							
-							JSONArray fileNameArray = new JSONArray();
-							
-							for(String fileName: selectedIds)
-								fileNameArray.add(fileName);
-							list_laminator_top2.put("fileNameArray", fileNameArray);
-							homeJSON.put("list_laminator_top2", list_laminator_top2);
-			        		
-			        	}
-						
-					} else if(inTopOfTypeProduct.equals("cutter_top")){
-						
-						if(position.equals("1")){
-							
-							JSONObject list_cutter_top1 = null;
-							
-							if(homeJSON.get("list_cutter_top1") != null){
-								list_cutter_top1 = (JSONObject) homeJSON.get("list_cutter_top1");
-								homeJSON.remove("list_cutter_top1");
-							} else {
-								list_cutter_top1 = new JSONObject();
-							}
-							
-							if(list_cutter_top1.get("fileNameArray") != null){
-								list_cutter_top1.remove("fileNameArray");
-							} 
-							
-							JSONArray fileNameArray = new JSONArray();
-							
-							for(String fileName: selectedIds)
-								fileNameArray.add(fileName);
-							list_cutter_top1.put("fileNameArray", fileNameArray);
-							homeJSON.put("list_cutter_top1", list_cutter_top1);
-							
-			        	} else if(position.equals("2")){
-			        		
-			        		JSONObject list_cutter_top2 = null;
-							
-							if(homeJSON.get("list_cutter_top2") != null){
-								list_cutter_top2 = (JSONObject) homeJSON.get("list_cutter_top2");
-								homeJSON.remove("list_cutter_top2");
-							} else {
-								list_cutter_top2 = new JSONObject();
-							}
-							
-							if(list_cutter_top2.get("fileNameArray") != null){
-								list_cutter_top2.remove("fileNameArray");
-							} 
-							
-							JSONArray fileNameArray = new JSONArray();
-							
-							for(String fileName: selectedIds)
-								fileNameArray.add(fileName);
-							list_cutter_top2.put("fileNameArray", fileNameArray);
-							homeJSON.put("list_cutter_top2", list_cutter_top2);
-			        		
-			        	}
-						
-					} else if(inTopOfTypeProduct.equals("previously_used_top")){
-						
-						if(position.equals("1")){
-							
-							JSONObject list_previously_used_top1 = null;
-							
-							if(homeJSON.get("list_previously_used_top1") != null){
-								list_previously_used_top1 = (JSONObject) homeJSON.get("list_previously_used_top1");
-								homeJSON.remove("list_previously_used_top1");
-							} else {
-								list_previously_used_top1 = new JSONObject();
-							}
-							
-							if(list_previously_used_top1.get("fileNameArray") != null){
-								list_previously_used_top1.remove("fileNameArray");
-							} 
-							
-							JSONArray fileNameArray = new JSONArray();
-							
-							for(String fileName: selectedIds)
-								fileNameArray.add(fileName);
-							list_previously_used_top1.put("fileNameArray", fileNameArray);
-							homeJSON.put("list_previously_used_top1", list_previously_used_top1);
-							
-			        	} else if(position.equals("2")){
-			        		
-			        		JSONObject list_previously_used_top2 = null;
-							
-							if(homeJSON.get("list_previously_used_top2") != null){
-								list_previously_used_top2 = (JSONObject) homeJSON.get("list_previously_used_top2");
-								homeJSON.remove("list_previously_used_top2");
-							} else {
-								list_previously_used_top2 = new JSONObject();
-							}
-							
-							if(list_previously_used_top2.get("fileNameArray") != null){
-								list_previously_used_top2.remove("fileNameArray");
-							} 
-							
-							JSONArray fileNameArray = new JSONArray();
-							
-							for(String fileName: selectedIds)
-								fileNameArray.add(fileName);
-							list_previously_used_top2.put("fileNameArray", fileNameArray);
-							homeJSON.put("list_previously_used_top2", list_previously_used_top2);
-			        		
-			        	}
-					} 
-
-					if( obj.get("homeJSON") != null )
-						obj.remove("homeJSON");
-					
-				obj.put("homeJSON", homeJSON);
-				
-				Writer out = new PrintWriter(PATH_TO_JSON_FILE, "UTF-8");
-				out.write(obj.toJSONString());
-				out.flush();
-				out.close();
-				
-			} catch (FileNotFoundException e1) {
-				e1.printStackTrace();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			} catch (ParseException e1) {
-				e1.printStackTrace();
-			}  	
-	    }
-
-	    @SuppressWarnings("unchecked")
-		@RequestMapping(value="/admin/pictures/two_narrow_pictures/{inTopOfTypeProduct}/{position}/remove_picture/{name_picture}",
-						method = RequestMethod.POST,consumes="application/json",
-						headers = "content-type=application/x-www-form-urlencoded")
-	    public @ResponseBody void removePicturesTwoNarrowPictures(@PathVariable("name_picture") String name,
-	    		@PathVariable("inTopOfTypeProduct") String inTopOfTypeProduct,
-				@PathVariable("position") String position) {
-
-	    	String namePicture = name.replace(":", ".");
-	    	logger.info("delete picture in home, from: 'two narrow pictures', in top of type product: " + inTopOfTypeProduct); 	
-
-	    	try {
-	    		FileUtils.forceDelete(new File(directory + File.separator + "home" + 
-	    				File.separator + "two_narrow_pictures" + File.separator + inTopOfTypeProduct
-	    				+ File.separator + position + File.separator + namePicture));
-	    		
-			} catch (IOException e) {
-				logger.error("Can't delete picture from the folder", e);
-			} 
-	    	
-			JSONParser parser = new JSONParser();
-			
-			try {
-				JSONObject obj = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream(PATH_TO_JSON_FILE), "UTF-8"));
-					
-					JSONObject homeJSON = (JSONObject) obj.get("homeJSON");
-					
-					if(inTopOfTypeProduct.equals("3d_printer_top")){
-			    		
-						if(position.equals("1")){
-							
-							JSONObject list_3d_printer_top1 = (JSONObject) homeJSON.get("list_3d_printer_top1");
-							homeJSON.remove("list_3d_printer_top1");
-							
-							JSONArray fileNameArray = (JSONArray) list_3d_printer_top1.get("fileNameArray");
-							list_3d_printer_top1.remove("fileNameArray");
-							
-							fileNameArray.remove(namePicture);
-
-							list_3d_printer_top1.put("fileNameArray", fileNameArray);
-							homeJSON.put("list_3d_printer_top1", list_3d_printer_top1);
-							
-			        	} else if(position.equals("2")){
-			        		
-			        		JSONObject list_3d_printer_top2 = (JSONObject) homeJSON.get("list_3d_printer_top2");
-							homeJSON.remove("list_3d_printer_top2");
-							
-							JSONArray fileNameArray = (JSONArray) list_3d_printer_top2.get("fileNameArray");
-							list_3d_printer_top2.remove("fileNameArray");
-							
-							fileNameArray.remove(namePicture);
-
-							list_3d_printer_top2.put("fileNameArray", fileNameArray);
-							homeJSON.put("list_3d_printer_top2", list_3d_printer_top2);
-			        		
-			        	}
-					
-					} else if(inTopOfTypeProduct.equals("laminator_top")){
-						
-						if(position.equals("1")){
-							
-							JSONObject list_laminator_top1 = (JSONObject) homeJSON.get("list_laminator_top1");
-							homeJSON.remove("list_laminator_top1");
-							
-							JSONArray fileNameArray = (JSONArray) list_laminator_top1.get("fileNameArray");
-							list_laminator_top1.remove("fileNameArray");
-							
-							fileNameArray.remove(namePicture);
-
-							list_laminator_top1.put("fileNameArray", fileNameArray);
-							homeJSON.put("list_laminator_top1", list_laminator_top1);
-							
-			        	} else if(position.equals("2")){
-			        		
-			        		JSONObject list_laminator_top2 = (JSONObject) homeJSON.get("list_laminator_top2");
-							homeJSON.remove("list_laminator_top2");
-							
-							JSONArray fileNameArray = (JSONArray) list_laminator_top2.get("fileNameArray");
-							list_laminator_top2.remove("fileNameArray");
-							
-							fileNameArray.remove(namePicture);
-
-							list_laminator_top2.put("fileNameArray", fileNameArray);
-							homeJSON.put("list_laminator_top2", list_laminator_top2);
-			        		
-			        	} 
-						
-					} else if(inTopOfTypeProduct.equals("cutter_top")){
-						
-						if(position.equals("1")){
-							
-							JSONObject list_cutter_top1 = (JSONObject) homeJSON.get("list_cutter_top1");
-							homeJSON.remove("list_cutter_top1");
-							
-							JSONArray fileNameArray = (JSONArray) list_cutter_top1.get("fileNameArray");
-							list_cutter_top1.remove("fileNameArray");
-							
-							fileNameArray.remove(namePicture);
-
-							list_cutter_top1.put("fileNameArray", fileNameArray);
-							homeJSON.put("list_cutter_top1", list_cutter_top1);
-							
-			        	} else if(position.equals("2")){
-			        		
-			        		JSONObject list_cutter_top2 = (JSONObject) homeJSON.get("list_cutter_top2");
-							homeJSON.remove("list_cutter_top2");
-							
-							JSONArray fileNameArray = (JSONArray) list_cutter_top2.get("fileNameArray");
-							list_cutter_top2.remove("fileNameArray");
-							
-							fileNameArray.remove(namePicture);
-
-							list_cutter_top2.put("fileNameArray", fileNameArray);
-							homeJSON.put("list_cutter_top2", list_cutter_top2);
-			        		
-			        	}
-						
-					} else if(inTopOfTypeProduct.equals("previously_used_top")){
-						
-						if(position.equals("1")){
-							
-							JSONObject list_previously_used_top1 = (JSONObject) homeJSON.get("list_previously_used_top1");
-							homeJSON.remove("list_previously_used_top1");
-							
-							JSONArray fileNameArray = (JSONArray) list_previously_used_top1.get("fileNameArray");
-							list_previously_used_top1.remove("fileNameArray");
-							
-							fileNameArray.remove(namePicture);
-
-							list_previously_used_top1.put("fileNameArray", fileNameArray);
-							homeJSON.put("list_previously_used_top1", list_previously_used_top1);
-							
-			        	} else if(position.equals("2")){
-			        		
-			        		JSONObject list_previously_used_top2 = (JSONObject) homeJSON.get("list_previously_used_top2");
-							homeJSON.remove("list_previously_used_top2");
-							
-							JSONArray fileNameArray = (JSONArray) list_previously_used_top2.get("fileNameArray");
-							list_previously_used_top2.remove("fileNameArray");
-							
-							fileNameArray.remove(namePicture);
-
-							list_previously_used_top2.put("fileNameArray", fileNameArray);
-							homeJSON.put("list_previously_used_top2", list_previously_used_top2);
-			        		
-			        	}
-						
-					} 
-					
-					if( obj.get("homeJSON") != null )
-						obj.remove("homeJSON");
-					
-				obj.put("homeJSON", homeJSON);
-				
-				Writer out = new PrintWriter(PATH_TO_JSON_FILE, "UTF-8");
-				out.write(obj.toJSONString());
-				out.flush();
-				out.close();
-				
-			} catch (FileNotFoundException e1) {
-				e1.printStackTrace();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			} catch (ParseException e1) {
-				e1.printStackTrace();
+				pictureInfo.put("fileNameArray", fileNameArray);
+				homeJSON.put(picture.getNameOfJsonObject(), pictureInfo);
 			}
-			
-	    }
+		}
+
+		obj.put("homeJSON", homeJSON);
+		writeResultInLocalFile(obj);
+
+		return fileName;
+	}
+
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "/admin/pictures/two_narrow_pictures/{inTopOfTypeProduct}/{position}/change_order_pictures", 
+	method = RequestMethod.POST, consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
+	public @ResponseBody void changeOrderPicturesHomeTwoNarrowPictures(@RequestBody List<String> selectedIds,
+			@PathVariable("inTopOfTypeProduct") String inTopOfTypeProduct, @PathVariable("position") String position) {
+
+		logger.info("change order pictures in two narrow pictures, home");
+
+		JSONObject obj = getJsonPicturesLinksContainer();
+		JSONObject homeJSON = (obj.get("homeJSON") != null) ? (JSONObject) obj.get("homeJSON") : new JSONObject();
+
+		if (picturesInTopProductSection.containsKey(inTopOfTypeProduct)) {
+
+			List<PictureInformation> pictures = picturesInTopProductSection.get(inTopOfTypeProduct).getPicturesInfo();
+
+			if (pictures.contains(new PictureInformation(position))) {
+
+				PictureInformation picture = pictures.get(pictures.indexOf(new PictureInformation(position)));
+
+				JSONObject pictureInfo = (homeJSON.get(picture.getNameOfJsonObject()) != null)
+						? (JSONObject) homeJSON.get(picture.getNameOfJsonObject()) : new JSONObject();
+
+				JSONArray fileNameArray = new JSONArray();
+				for (String fileName : selectedIds)
+					fileNameArray.add(fileName);
+
+				pictureInfo.put("fileNameArray", fileNameArray);
+				homeJSON.put(picture.getNameOfJsonObject(), pictureInfo);
+			}
+		}
+
+		obj.put("homeJSON", homeJSON);
+		writeResultInLocalFile(obj);
+	}
+
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "/admin/pictures/two_narrow_pictures/{inTopOfTypeProduct}/{position}/remove_picture/{name_picture}", 
+	method = RequestMethod.POST, consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
+	public @ResponseBody void removePicturesTwoNarrowPictures(@PathVariable("name_picture") String name,
+			@PathVariable("inTopOfTypeProduct") String inTopOfTypeProduct, @PathVariable("position") String position) {
+
+		String namePicture = name.replace(":", ".");
+		logger.info(
+				"delete picture in home, from: 'two narrow pictures', in top of type product: " + inTopOfTypeProduct);
+
+		componets.removePicture(namePicture, directory, CONCRETE_FOLDER,
+				"two_narrow_pictures" + File.separator + inTopOfTypeProduct + File.separator + position);
+
+		JSONObject obj = getJsonPicturesLinksContainer();
+		JSONObject homeJSON = (obj.get("homeJSON") != null) ? (JSONObject) obj.get("homeJSON") : new JSONObject();
+
+		if (picturesInTopProductSection.containsKey(inTopOfTypeProduct)) {
+
+			List<PictureInformation> pictures = picturesInTopProductSection.get(inTopOfTypeProduct).getPicturesInfo();
+
+			if (pictures.contains(new PictureInformation(position))) {
+
+				PictureInformation picture = pictures.get(pictures.indexOf(new PictureInformation(position)));
+
+				JSONObject pictureInfo = (homeJSON.get(picture.getNameOfJsonObject()) != null)
+						? (JSONObject) homeJSON.get(picture.getNameOfJsonObject()) : new JSONObject();
+
+				JSONArray fileNameArray = (pictureInfo.get("fileNameArray") != null)
+						? (JSONArray) pictureInfo.get("fileNameArray") : new JSONArray();
+
+				fileNameArray.remove(namePicture);
+
+				pictureInfo.put("fileNameArray", fileNameArray);
+				homeJSON.put(picture.getNameOfJsonObject(), pictureInfo);
+			}
+		}
+
+		obj.put("homeJSON", homeJSON);
+		writeResultInLocalFile(obj);
+	}
 }
