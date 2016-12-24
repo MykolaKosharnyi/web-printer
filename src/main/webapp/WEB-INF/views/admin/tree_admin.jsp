@@ -1178,9 +1178,13 @@
             			<div class="Expand"></div>
             			<div class="Content"><a href="<c:url value='/admin/pictures/menu/laminator/cold_laminating' />">Картинка холодного ламинирования</a></div>
           			</li>
-          			<li class="Node ExpandLeaf IsLast">
+          			<li class="Node ExpandLeaf">
             			<div class="Expand"></div>
             			<div class="Content"><a href="<c:url value='/admin/pictures/menu/laminator/liquid' />">Картинка жидкостных ламинаторов</a></div>
+          			</li>
+          			<li class="Node ExpandLeaf IsLast">
+            			<div class="Expand"></div>
+            			<div class="Content"><a href="<c:url value='/admin/pictures/menu/laminator/flatbed_laminating_machine' />">Картинка планшетных ламинаторов</a></div>
           			</li>
             	</ul>
           	</li>

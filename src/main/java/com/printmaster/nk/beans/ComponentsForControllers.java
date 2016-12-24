@@ -253,7 +253,7 @@ public class ComponentsForControllers {
     
     /**
      * Adding to model json file with characteristic of this type product
-     * @param model in which added json file of this type of pruduct
+     * @param model in which added json file of this type of product
      * @param typeOfProduct
      */
     public void setJSONtoModelAttribute(Model model, String typeOfProduct){
@@ -266,32 +266,32 @@ public class ComponentsForControllers {
 				logger.error("Error in read " + typeOfProduct + ".json file", e); 
 			}
     		
-    	}if(typeOfProduct.equals("rip")){// rip has JSONArray in his structure
+    	} else if(typeOfProduct.equals("rip")){// rip has JSONArray in his structure
     		
     		try {
-    			model.addAttribute(typeOfProduct , (JSONArray)new JSONParser().
-    						parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/" + typeOfProduct + ".json"), "UTF-8")));
-    			} catch (IOException | ParseException e) {
-    				logger.error("Error in read " + typeOfProduct + ".json file", e); 
-    			}
+    			model.addAttribute(typeOfProduct , (JSONArray)new JSONParser()
+    					.parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/" + typeOfProduct + ".json"), "UTF-8")));
+    		} catch (IOException | ParseException e) {
+    			logger.error("Error in read " + typeOfProduct + ".json file", e); 
+    		}
     		
-    	}if(typeOfProduct.equals("3d_printer")){//bad naming of attribute in 3d printers
+    	} else if(typeOfProduct.equals("3d_printer")){//bad naming of attribute in 3d printers
     		
     		try {
-    			model.addAttribute("printer" , (JSONObject)new JSONParser().
-    						parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/" + typeOfProduct + ".json"), "UTF-8")));
-    			} catch (IOException | ParseException e) {
-    				logger.error("Error in read " + typeOfProduct + ".json file", e); 
-    			}
+    			model.addAttribute("printer" , (JSONObject)new JSONParser()
+    					.parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/" + typeOfProduct + ".json"), "UTF-8")));
+    		} catch (IOException | ParseException e) {
+    			logger.error("Error in read " + typeOfProduct + ".json file", e); 
+    		}
     		
     	} else {
     		
     		try {
-    			model.addAttribute(typeOfProduct , (JSONObject)new JSONParser().
-    						parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/" + typeOfProduct + ".json"), "UTF-8")));
-    			} catch (IOException | ParseException e) {
-    				logger.error("Error in read " + typeOfProduct + ".json file", e); 
-    			}
+    			model.addAttribute(typeOfProduct , (JSONObject)new JSONParser()
+    					.parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/" + typeOfProduct + ".json"), "UTF-8")));
+    		} catch (IOException | ParseException e) {
+    			logger.error("Error in read " + typeOfProduct + ".json file", e); 
+    		}
     		
     	}
 	}
@@ -304,7 +304,6 @@ public class ComponentsForControllers {
 	@SuppressWarnings("unchecked")
 	private JSONObject sortEquipment(JSONObject corectedJSONObject){
 		JSONArray arrayToSort = (JSONArray) corectedJSONObject.get("equipment_manufacturer");
-		corectedJSONObject.remove("equipment_manufacturer");
 
 		Collections.sort(arrayToSort);
 		
