@@ -3,19 +3,16 @@ package com.printmaster.nk.controller;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.io.Writer;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -24,13 +21,11 @@ import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -41,10 +36,8 @@ public class PicturesHomePageController {
 
 	private Logger logger = Logger.getLogger(PicturesHomePageController.class);
 	
-    private String directory = "/var/www/localhost/images";
-    
+    private static final String DIRECTORY = "/var/www/localhost/images";
     private static final String CONCRETE_FOLDER = "home";
-	
 	private static final String PATH_TO_JSON_FILE = "/var/www/localhost/home.json";
 	
     @RequestMapping(value="/admin/pictures", method=RequestMethod.GET)
@@ -56,22 +49,16 @@ public class PicturesHomePageController {
     @Autowired
     ComponentsForControllers componets;   
     
-    private class RowPicturesInformation{
-		//private String nameRow;
+    private class BlockPicturesInformation{
 		private List<PictureInformation> picturesInfo;
 		
-		public RowPicturesInformation(List<PictureInformation> subTypesInfo) {
+		public BlockPicturesInformation(List<PictureInformation> subTypesInfo) {
 			this.picturesInfo = subTypesInfo;
 		}
 
 		public List<PictureInformation> getPicturesInfo() {
 			return picturesInfo;
 		}
-
-		public void setPicturesInfo(List<PictureInformation> picturesInfo) {
-			this.picturesInfo = picturesInfo;
-		}
-
 
 		@Override
 		public int hashCode() {
@@ -89,7 +76,7 @@ public class PicturesHomePageController {
 				return false;
 			if (getClass() != obj.getClass())
 				return false;
-			RowPicturesInformation other = (RowPicturesInformation) obj;
+			BlockPicturesInformation other = (BlockPicturesInformation) obj;
 			if (!getOuterType().equals(other.getOuterType()))
 				return false;
 			if (picturesInfo == null) {
@@ -119,28 +106,12 @@ public class PicturesHomePageController {
 			this.position = nameSubType;
 		}
 
-		public String getPosition() {
-			return position;
-		}
-
-		public void setPosition(String position) {
-			this.position = position;
-		}
-
 		public String getHeadOfPage() {
 			return headOfPage;
 		}
 
-		public void setHeadOfPage(String headOfPage) {
-			this.headOfPage = headOfPage;
-		}
-
 		public String getNameOfJsonObject() {
 			return nameOfJsonObject;
-		}
-
-		public void setNameOfJsonObject(String nameOfJsonObject) {
-			this.nameOfJsonObject = nameOfJsonObject;
 		}
 
 		@Override
@@ -175,7 +146,6 @@ public class PicturesHomePageController {
 			return PicturesHomePageController.this;
 		}
 	}
-    
     
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////    
     
@@ -216,7 +186,7 @@ public class PicturesHomePageController {
     	
     	logger.info("upload new picture to central reklam on home page"); 	
 
-        String fileName = componets.uploadPicture(request, directory, "home", "big_reklam");
+        String fileName = componets.uploadPicture(request, DIRECTORY, "home", "big_reklam");
 
 			JSONObject obj = getJsonPicturesLinksContainer();
 
@@ -282,7 +252,7 @@ public class PicturesHomePageController {
 		String namePicture = name.replace(":", ".");
 		logger.info("delete picture in home page, from central big reklam");
 		
-		componets.removePicture(namePicture, directory, "home", "big_reklam"); 
+		componets.removePicture(namePicture, DIRECTORY, "home", "big_reklam"); 
 
 		JSONObject obj = getJsonPicturesLinksContainer();
 
@@ -300,1053 +270,349 @@ public class PicturesHomePageController {
 	
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
+	List<PictureInformation> rightOfReklamPictures = new ArrayList<PictureInformation>(){
+		private static final long serialVersionUID = 1L;
+		{
+			add(new PictureInformation("1", "Изменение отображения верхней картинки справа от рекламы", "listPicturesRightOfReklam1"));
+			add(new PictureInformation("2", "Изменение отображения центральной картинки справа от рекламы", "listPicturesRightOfReklam2"));
+			add(new PictureInformation("3", "Изменение отображения нижней картинки справа от рекламы", "listPicturesRightOfReklam3"));
+		}
+	};
+	
 	/**
 	 * 	right of big reklam 
 	 * */
-	 @RequestMapping(value="/admin/pictures/right_of_reklam/{position}", method = RequestMethod.GET)
-	    public ModelAndView showOnRightOfBigReclam(Model model, @PathVariable("position") String position){
-	    	
-	    	String pathToPage = "admin";
-	    	
-	    	JSONParser parser = new JSONParser();
-	    	try {
-	    		JSONObject obj = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream(PATH_TO_JSON_FILE), "UTF-8"));
-			
-	    		JSONObject home = (JSONObject) obj.get("homeJSON");
-	    		
-				if(position.equals("1")){
-					model.addAttribute("subDirectory", position);
-					model.addAttribute("headOfPage", "Изменение отображения верхней картинки справа от рекламы");
-					model.addAttribute("listPictures", (JSONObject) home.get("listPicturesRightOfReklam1"));
-					pathToPage = "admin/pictures/right_of_reklam";
-					
-	        	} else if(position.equals("2")){
-					model.addAttribute("subDirectory", position);
-					model.addAttribute("headOfPage", "Изменение отображения центральной картинки справа от рекламы");
-	        		model.addAttribute("listPictures", (JSONObject) home.get("listPicturesRightOfReklam2"));
-	        		pathToPage = "admin/pictures/right_of_reklam";
-	        		
-	        	} else if(position.equals("3")){
-					model.addAttribute("subDirectory", position);
-					model.addAttribute("headOfPage", "Изменение отображения нижней картинки справа от рекламы");
-	        		model.addAttribute("listPictures", (JSONObject) home.get("listPicturesRightOfReklam3"));
-	        		pathToPage = "admin/pictures/right_of_reklam";
-	        		
-	        	}
-	   
-		} catch (FileNotFoundException e1) {
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		} catch (ParseException e1) {
-			e1.printStackTrace();
-		}	   
-	    	return new ModelAndView(pathToPage);
-	    }
+	@RequestMapping(value = "/admin/pictures/right_of_reklam/{position}", method = RequestMethod.GET)
+	public ModelAndView showOnRightOfBigReclam(Model model, @PathVariable("position") String position) {
+
+		String pathToPage = "admin";
+
+		JSONObject obj = getJsonPicturesLinksContainer();
+		JSONObject home = (JSONObject) obj.get("homeJSON");
+
+		PictureInformation checkedPicture = new PictureInformation(position);
+		if (rightOfReklamPictures.contains(checkedPicture)) {
+			PictureInformation picture = rightOfReklamPictures.get(rightOfReklamPictures.indexOf(checkedPicture));
+
+			model.addAttribute("subDirectory", position);
+			model.addAttribute("headOfPage", picture.getHeadOfPage());
+			model.addAttribute("listPictures", (JSONObject) home.get(picture.getNameOfJsonObject()));
+			pathToPage = "admin/pictures/right_of_reklam";
+		}
+
+		return new ModelAndView(pathToPage);
+	}
 	 
-	 @SuppressWarnings("unchecked")
-		@RequestMapping(value="/admin/pictures/right_of_reklam/{position}/save_description/{description}",
-	    		method = RequestMethod.POST)
-	    public @ResponseBody void saveDescriptionPicturesOnRightOfBigReclam(
-	    		@PathVariable("position") String position,
-	    		@PathVariable("description") String description) {
-		
-		 JSONParser parser = new JSONParser();
-			
-			try {
-				JSONObject obj = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream(PATH_TO_JSON_FILE), "UTF-8"));
-					
-					JSONObject homeJSON = null;
-					if( obj.get("homeJSON") != null ){
-						homeJSON = (JSONObject) obj.get("homeJSON");
-						} else {
-							homeJSON = new JSONObject();
-						}
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "/admin/pictures/right_of_reklam/{position}/save_description/{description}", method = RequestMethod.POST)
+	public @ResponseBody void saveDescriptionPicturesOnRightOfBigReclam(@PathVariable("position") String position,
+			@PathVariable("description") String description) {
 
-					if(position.equals("1")){
-						
-						JSONObject listPicturesRightOfReklam1 = null;
-						if(homeJSON.get("listPicturesRightOfReklam1") != null){
-							listPicturesRightOfReklam1 = (JSONObject) homeJSON.get("listPicturesRightOfReklam1");
-							homeJSON.remove("listPicturesRightOfReklam1");
-						} else {
-							listPicturesRightOfReklam1 = new JSONObject();
-						}
-						
-						if(listPicturesRightOfReklam1.get("description") != null){
-							listPicturesRightOfReklam1.remove("description");
-							listPicturesRightOfReklam1.put("description", description);
-						} else {
-							listPicturesRightOfReklam1.put("description", description);
-						}
-						
-						homeJSON.put("listPicturesRightOfReklam1", listPicturesRightOfReklam1);
-						
-		        	} else if(position.equals("2")){
-		        		
-		        		JSONObject listPicturesRightOfReklam2 = null;
-						if(homeJSON.get("listPicturesRightOfReklam2") != null){
-							listPicturesRightOfReklam2 = (JSONObject) homeJSON.get("listPicturesRightOfReklam2");
-							homeJSON.remove("listPicturesRightOfReklam2");
-						} else {
-							listPicturesRightOfReklam2 = new JSONObject();
-						}
-						
-						if(listPicturesRightOfReklam2.get("description") != null){
-							listPicturesRightOfReklam2.remove("description");
-							listPicturesRightOfReklam2.put("description", description);
-						} else {
-							listPicturesRightOfReklam2.put("description", description);
-						}
-						
-						homeJSON.put("listPicturesRightOfReklam2", listPicturesRightOfReklam2);
-						
-		        	} else if(position.equals("3")){
-		        		
-		        		JSONObject listPicturesRightOfReklam3 = null;
-						if(homeJSON.get("listPicturesRightOfReklam3") != null){
-							listPicturesRightOfReklam3 = (JSONObject) homeJSON.get("listPicturesRightOfReklam3");
-							homeJSON.remove("listPicturesRightOfReklam3");
-						} else {
-							listPicturesRightOfReklam3 = new JSONObject();
-						}
-						
-						if(listPicturesRightOfReklam3.get("description") != null){
-							listPicturesRightOfReklam3.remove("description");
-							listPicturesRightOfReklam3.put("description", description);
-						} else {
-							listPicturesRightOfReklam3.put("description", description);
-						}
-						
-						homeJSON.put("listPicturesRightOfReklam3", listPicturesRightOfReklam3);
-						
-		        	}
+		JSONObject obj = getJsonPicturesLinksContainer();
+		JSONObject homeJSON = (JSONObject) obj.get("homeJSON");
 
-					if( obj.get("homeJSON") != null )
-						obj.remove("homeJSON");
-					
-				obj.put("homeJSON", homeJSON);
-				
-				Writer out = new PrintWriter(PATH_TO_JSON_FILE, "UTF-8");
-				out.write(obj.toJSONString());
-				out.flush();
-				out.close();
-				
-			} catch (FileNotFoundException e1) {
-				e1.printStackTrace();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			} catch (ParseException e1) {
-				e1.printStackTrace();
-			}
-	 }
+		PictureInformation checkedPicture = new PictureInformation(position);
+		if (rightOfReklamPictures.contains(checkedPicture)) {
+			PictureInformation picture = rightOfReklamPictures.get(rightOfReklamPictures.indexOf(checkedPicture));
+
+			JSONObject pictureInformation = (homeJSON.get(picture.getNameOfJsonObject()) != null)
+					? (JSONObject) homeJSON.get(picture.getNameOfJsonObject()) : new JSONObject();
+
+			pictureInformation.put("description", description);
+
+			homeJSON.put(picture.getNameOfJsonObject(), pictureInformation);
+		}
+
+		obj.put("homeJSON", homeJSON);
+		writeResultInLocalFile(obj);
+	}
 	 
-	 @SuppressWarnings("unchecked")
-		@RequestMapping(value="/admin/pictures/right_of_reklam/{position}/upload_pictures",
-	    		method = RequestMethod.POST)
-	    public @ResponseBody String uploadPicturesRightOFBigReclam(MultipartHttpServletRequest request,
-	    		@PathVariable("position") String position) {
-	    	
-	    	logger.info("upload new picture to the right of big reklam on home page"); 	
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "/admin/pictures/right_of_reklam/{position}/upload_pictures", method = RequestMethod.POST)
+	public @ResponseBody String uploadPicturesRightOFBigReclam(MultipartHttpServletRequest request,
+			@PathVariable("position") String position) {
+
+		logger.info("upload new picture to the right of big reklam on home page");
+
+		String fileName = componets.uploadPicture(request, DIRECTORY, CONCRETE_FOLDER, "right_of_reklam" + File.separator + position);
+
+		JSONObject obj = getJsonPicturesLinksContainer();
+		JSONObject homeJSON = (JSONObject) obj.get("homeJSON");
+
+		// add new pictures to the end
+		PictureInformation checkedPicture = new PictureInformation(position);
+		if (rightOfReklamPictures.contains(checkedPicture)) {
+			PictureInformation picture = rightOfReklamPictures.get(rightOfReklamPictures.indexOf(checkedPicture));
+
+			JSONObject pictureInformation = (homeJSON.get(picture.getNameOfJsonObject()) != null)
+					? (JSONObject) homeJSON.get(picture.getNameOfJsonObject()) : new JSONObject();
+
+			JSONArray fileNameArray = (pictureInformation.get("fileNameArray") != null)
+					? (JSONArray) pictureInformation.get("fileNameArray") : new JSONArray();
+
+			fileNameArray.add(fileName);
+
+			pictureInformation.put("fileNameArray", fileNameArray);
+
+			homeJSON.put(picture.getNameOfJsonObject(), pictureInformation);
+		}
+
+		obj.put("homeJSON", homeJSON);
+		writeResultInLocalFile(obj);
+
+		return fileName;
+	}
 	    
-	        Iterator<String> itr =  request.getFileNames();
-	        MultipartFile mpf = null;
-	        String fileName = null;
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "/admin/pictures/right_of_reklam/{position}/change_order_pictures", method = RequestMethod.POST, 
+	consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
+	public @ResponseBody void changeOrderPicturesRightOfBigReclam(@RequestBody List<String> selectedIds,
+			@PathVariable("position") String position) {
 
-	        while(itr.hasNext()){
-	            mpf = request.getFile(itr.next()); 
-	    		fileName = new Random().nextInt(10000000) + "" + mpf.getOriginalFilename().substring(mpf.getOriginalFilename().lastIndexOf("."))/*last part is file extension*/; 
+		logger.info("change order pictures in left of reklam");
 
-				try {
-					FileCopyUtils.copy(mpf.getBytes(), new FileOutputStream(directory + File.separator + "home" + 
-				File.separator + "right_of_reklam" + File.separator + position + File.separator + fileName));
+		JSONObject obj = getJsonPicturesLinksContainer();
+		JSONObject homeJSON = (JSONObject) obj.get("homeJSON");
 
-				} catch (IOException e) {
-					logger.error("Don't write picture to the folder", e);
-				} 
-	        }
-			JSONParser parser = new JSONParser();
-			
-			try {
-				JSONObject obj = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream(PATH_TO_JSON_FILE), "UTF-8"));
-					
-					JSONObject homeJSON = null;
-					if( obj.get("homeJSON") != null ){
-						homeJSON = (JSONObject) obj.get("homeJSON");
-						} else {
-							homeJSON = new JSONObject();
-						}
+		PictureInformation checkedPicture = new PictureInformation(position);
+		if (rightOfReklamPictures.contains(checkedPicture)) {
+			PictureInformation picture = rightOfReklamPictures.get(rightOfReklamPictures.indexOf(checkedPicture));
 
-					//add new pictures to the and
-					if(position.equals("1")){
-						
-						JSONObject listPicturesRightOfReklam1 = null;
-						//check if these subdirectories has pictures
-						if(homeJSON.get("listPicturesRightOfReklam1") != null){
-							listPicturesRightOfReklam1 = (JSONObject) homeJSON.get("listPicturesRightOfReklam1");
-							homeJSON.remove("listPicturesRightOfReklam1");
-						} else {
-							listPicturesRightOfReklam1 = new JSONObject();
-						}
-						
-						JSONArray fileNameArray = null;
-						if(listPicturesRightOfReklam1.get("fileNameArray") != null){
-							fileNameArray = (JSONArray) listPicturesRightOfReklam1.get("fileNameArray");
-							listPicturesRightOfReklam1.remove("fileNameArray");
-						} else {
-							fileNameArray = new JSONArray();
-						}
-						
-						fileNameArray.add(fileName);
+			JSONObject pictureInformation = (homeJSON.get(picture.getNameOfJsonObject()) != null)
+					? (JSONObject) homeJSON.get(picture.getNameOfJsonObject()) : new JSONObject();
 
-						listPicturesRightOfReklam1.put("fileNameArray", fileNameArray);
-						homeJSON.put("listPicturesRightOfReklam1", listPicturesRightOfReklam1);
-						
-		        	} else if(position.equals("2")){
-		        		
-		        		JSONObject listPicturesRightOfReklam2 = null;
-						//check if these subdirectories has pictures
-						if(homeJSON.get("listPicturesRightOfReklam2") != null){
-							listPicturesRightOfReklam2 = (JSONObject) homeJSON.get("listPicturesRightOfReklam2");
-							homeJSON.remove("listPicturesRightOfReklam2");
-						} else {
-							listPicturesRightOfReklam2 = new JSONObject();
-						}
-						
-						JSONArray fileNameArray = null;
-						if(listPicturesRightOfReklam2.get("fileNameArray") != null){
-							fileNameArray = (JSONArray) listPicturesRightOfReklam2.get("fileNameArray");
-							listPicturesRightOfReklam2.remove("fileNameArray");
-						} else {
-							fileNameArray = new JSONArray();
-						}
-						
-						fileNameArray.add(fileName);
+			JSONArray fileNameArray = new JSONArray();
 
-						listPicturesRightOfReklam2.put("fileNameArray", fileNameArray);
-						homeJSON.put("listPicturesRightOfReklam2", listPicturesRightOfReklam2);
-						
-		        	} else if(position.equals("3")){
-		        		
-		        		JSONObject listPicturesRightOfReklam3 = null;
-						//check if these subdirectories has pictures
-						if(homeJSON.get("listPicturesRightOfReklam3") != null){
-							listPicturesRightOfReklam3 = (JSONObject) homeJSON.get("listPicturesRightOfReklam3");
-							homeJSON.remove("listPicturesRightOfReklam3");
-						} else {
-							listPicturesRightOfReklam3 = new JSONObject();
-						}
-						
-						JSONArray fileNameArray = null;
-						if(listPicturesRightOfReklam3.get("fileNameArray") != null){
-							fileNameArray = (JSONArray) listPicturesRightOfReklam3.get("fileNameArray");
-							listPicturesRightOfReklam3.remove("fileNameArray");
-						} else {
-							fileNameArray = new JSONArray();
-						}
-						
-						fileNameArray.add(fileName);
+			for (String fileName : selectedIds)
+				fileNameArray.add(fileName);
 
-						listPicturesRightOfReklam3.put("fileNameArray", fileNameArray);
-						homeJSON.put("listPicturesRightOfReklam3", listPicturesRightOfReklam3);
-						
-		        	}
+			pictureInformation.put("fileNameArray", fileNameArray);
 
-					if( obj.get("homeJSON") != null )
-						obj.remove("homeJSON");
-					
-				obj.put("homeJSON", homeJSON);
-				
-				Writer out = new PrintWriter(PATH_TO_JSON_FILE, "UTF-8");
-				out.write(obj.toJSONString());
-				out.flush();
-				out.close();
-				
-			} catch (FileNotFoundException e1) {
-				e1.printStackTrace();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			} catch (ParseException e1) {
-				e1.printStackTrace();
-			}	
-	        
-	         return fileName;
-	    }
+			homeJSON.put(picture.getNameOfJsonObject(), pictureInformation);
+		}
+
+		obj.put("homeJSON", homeJSON);
+		writeResultInLocalFile(obj);
+	}
 	    
-	    @SuppressWarnings("unchecked")
-		@RequestMapping(value="/admin/pictures/right_of_reklam/{position}/change_order_pictures",
-						method = RequestMethod.POST,
-						consumes="application/json",
-						headers = "content-type=application/x-www-form-urlencoded")
-	    public @ResponseBody void changeOrderPicturesRightOfBigReclam(
-	    		@RequestBody List<String> selectedIds,
-	    		@PathVariable("position") String position) {
-	    	
-	    	logger.info("change order pictures in left of reklam"); 	
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "/admin/pictures/right_of_reklam/{position}/remove_picture/{name_picture}", 
+	method = RequestMethod.POST, consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
+	public @ResponseBody void removePicturesRightOfBigReclam(@PathVariable("name_picture") String name,
+			@PathVariable("position") String position) {
 
-			JSONParser parser = new JSONParser();
-			
-			try {
-				JSONObject obj = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream(PATH_TO_JSON_FILE), "UTF-8"));
-					
-					JSONObject homeJSON = (JSONObject) obj.get("homeJSON");		
+		String namePicture = name.replace(":", ".");
+		logger.info("delete picture in menu, from: right_of_reklam, in subType: " + position);
 
-					if(position.equals("1")){
-						
-						JSONObject listPicturesRightOfReklam1 = null;
-						
-						if(homeJSON.get("listPicturesRightOfReklam1") != null){
-							listPicturesRightOfReklam1 = (JSONObject) homeJSON.get("listPicturesRightOfReklam1");
-							homeJSON.remove("listPicturesRightOfReklam1");
-						} else {
-							listPicturesRightOfReklam1 = new JSONObject();
-						}
-						
-						if(listPicturesRightOfReklam1.get("fileNameArray") != null){
-							listPicturesRightOfReklam1.remove("fileNameArray");
-						} 
-						
-						JSONArray fileNameArray = new JSONArray();
-						
-						for(String fileName: selectedIds)
-							fileNameArray.add(fileName);
-						listPicturesRightOfReklam1.put("fileNameArray", fileNameArray);
-						homeJSON.put("listPicturesRightOfReklam1", listPicturesRightOfReklam1);
-						
-		        	} else if(position.equals("2")){
-		        		
-		        		JSONObject listPicturesRightOfReklam2 = null;
-						
-						if(homeJSON.get("listPicturesRightOfReklam2") != null){
-							listPicturesRightOfReklam2 = (JSONObject) homeJSON.get("listPicturesRightOfReklam2");
-							homeJSON.remove("listPicturesRightOfReklam2");
-						} else {
-							listPicturesRightOfReklam2 = new JSONObject();
-						}
-						
-						if(listPicturesRightOfReklam2.get("fileNameArray") != null){
-							listPicturesRightOfReklam2.remove("fileNameArray");
-						} 
-						
-						JSONArray fileNameArray = new JSONArray();
-						
-						for(String fileName: selectedIds)
-							fileNameArray.add(fileName);
-						listPicturesRightOfReklam2.put("fileNameArray", fileNameArray);
-						homeJSON.put("listPicturesRightOfReklam2", listPicturesRightOfReklam2);
-						
-		        	} else if(position.equals("3")){
-		        		
-		        		JSONObject listPicturesRightOfReklam3 = null;
-						
-						if(homeJSON.get("listPicturesRightOfReklam3") != null){
-							listPicturesRightOfReklam3 = (JSONObject) homeJSON.get("listPicturesRightOfReklam3");
-							homeJSON.remove("listPicturesRightOfReklam3");
-						} else {
-							listPicturesRightOfReklam3 = new JSONObject();
-						}
-						
-						if(listPicturesRightOfReklam3.get("fileNameArray") != null){
-							listPicturesRightOfReklam3.remove("fileNameArray");
-						} 
-						
-						JSONArray fileNameArray = new JSONArray();
-						
-						for(String fileName: selectedIds)
-							fileNameArray.add(fileName);
-						listPicturesRightOfReklam3.put("fileNameArray", fileNameArray);
-						homeJSON.put("listPicturesRightOfReklam3", listPicturesRightOfReklam3);
-						
-		        	}
+		componets.removePicture(namePicture, DIRECTORY, CONCRETE_FOLDER, "right_of_reklam" + File.separator + position);
 
-					if( obj.get("homeJSON") != null )
-						obj.remove("homeJSON");
-					
-				obj.put("homeJSON", homeJSON);
-				
-				Writer out = new PrintWriter(PATH_TO_JSON_FILE, "UTF-8");
-				out.write(obj.toJSONString());
-				out.flush();
-				out.close();
-				
-			} catch (FileNotFoundException e1) {
-				e1.printStackTrace();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			} catch (ParseException e1) {
-				e1.printStackTrace();
-			}  	
-	    }
-	    
-	    @SuppressWarnings("unchecked")
-		@RequestMapping(value="/admin/pictures/right_of_reklam/{position}/remove_picture/{name_picture}",
-						method = RequestMethod.POST,consumes="application/json",
-						headers = "content-type=application/x-www-form-urlencoded")
-	    public @ResponseBody void removePicturesRightOfBigReclam(@PathVariable("name_picture") String name,
-	    		@PathVariable("position") String position) {
+		JSONObject obj = getJsonPicturesLinksContainer();
+		JSONObject homeJSON = (JSONObject) obj.get("homeJSON");
 
-	    	String namePicture = name.replace(":", ".");
-	    	logger.info("delete picture in menu, from: right_of_reklam, in subType: " + position); 	
+		PictureInformation checkedPicture = new PictureInformation(position);
+		if (rightOfReklamPictures.contains(checkedPicture)) {
+			PictureInformation picture = rightOfReklamPictures.get(rightOfReklamPictures.indexOf(checkedPicture));
 
-	    	try {
-	    		FileUtils.forceDelete(new File(directory + File.separator + "home" + 
-	    				File.separator + "right_of_reklam" + File.separator + position
-	    				+ File.separator + namePicture));
-	    		
-			} catch (IOException e) {
-				logger.error("Can't delete picture from the folder", e);
-			} 
-	    	
-			JSONParser parser = new JSONParser();
-			
-			try {
-				JSONObject obj = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream(PATH_TO_JSON_FILE), "UTF-8"));
-					
-					JSONObject homeJSON = (JSONObject) obj.get("homeJSON");
+			JSONObject pictureInformation = (homeJSON.get(picture.getNameOfJsonObject()) != null)
+					? (JSONObject) homeJSON.get(picture.getNameOfJsonObject()) : new JSONObject();
 
-					if(position.equals("1")){
-						
-						JSONObject listPicturesRightOfReklam1 = (JSONObject) homeJSON.get("listPicturesRightOfReklam1");
-						homeJSON.remove("listPicturesRightOfReklam1");
-						
-						JSONArray fileNameArray = (JSONArray) listPicturesRightOfReklam1.get("fileNameArray");
-						listPicturesRightOfReklam1.remove("fileNameArray");
-						
-						fileNameArray.remove(namePicture);
+			JSONArray fileNameArray = (pictureInformation.get("fileNameArray") != null)
+					? (JSONArray) pictureInformation.get("fileNameArray") : new JSONArray();
 
-						listPicturesRightOfReklam1.put("fileNameArray", fileNameArray);
-						homeJSON.put("listPicturesRightOfReklam1", listPicturesRightOfReklam1);
-						
-		        	} else if(position.equals("2")){
-		        		
-		        		JSONObject listPicturesRightOfReklam2 = (JSONObject) homeJSON.get("listPicturesRightOfReklam2");
-						homeJSON.remove("listPicturesRightOfReklam2");
-						
-						JSONArray fileNameArray = (JSONArray) listPicturesRightOfReklam2.get("fileNameArray");
-						listPicturesRightOfReklam2.remove("fileNameArray");
-						
-						fileNameArray.remove(namePicture);
+			fileNameArray.remove(namePicture);
 
-						listPicturesRightOfReklam2.put("fileNameArray", fileNameArray);
-						homeJSON.put("listPicturesRightOfReklam2", listPicturesRightOfReklam2);
-						
-		        	} else if(position.equals("3")){
-		        		
-		        		JSONObject listPicturesRightOfReklam3 = (JSONObject) homeJSON.get("listPicturesRightOfReklam3");
-						homeJSON.remove("listPicturesRightOfReklam3");
-						
-						JSONArray fileNameArray = (JSONArray) listPicturesRightOfReklam3.get("fileNameArray");
-						listPicturesRightOfReklam3.remove("fileNameArray");
-						
-						fileNameArray.remove(namePicture);
+			pictureInformation.put("fileNameArray", fileNameArray);
 
-						listPicturesRightOfReklam3.put("fileNameArray", fileNameArray);
-						homeJSON.put("listPicturesRightOfReklam3", listPicturesRightOfReklam3);
-						
-		        	}
+			homeJSON.put(picture.getNameOfJsonObject(), pictureInformation);
+		}
 
-					if( obj.get("homeJSON") != null )
-						obj.remove("homeJSON");
-					
-				obj.put("homeJSON", homeJSON);
-				
-				Writer out = new PrintWriter(PATH_TO_JSON_FILE, "UTF-8");
-				out.write(obj.toJSONString());
-				out.flush();
-				out.close();
-				
-			} catch (FileNotFoundException e1) {
-				e1.printStackTrace();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			} catch (ParseException e1) {
-				e1.printStackTrace();
-			}
-			
-	    }
+		obj.put("homeJSON", homeJSON);
+		writeResultInLocalFile(obj);
+	}
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 	/**
 	 * pictures at the right of each products block
 	 */
-	    @RequestMapping(value="/admin/pictures/home_products_block/{typeProduct}", method = RequestMethod.GET)
-	    public ModelAndView showHomeProductsBlock(Model model, @PathVariable("typeProduct") String typeProduct){
-	    	
-	    	JSONParser parser = new JSONParser();
-	    	try {
-	    		JSONObject obj = (JSONObject) parser.parse(new InputStreamReader(new FileInputStream(PATH_TO_JSON_FILE), "UTF-8"));
-				JSONObject home = (JSONObject) obj.get("homeJSON");
-			
-			if (typeProduct.equals("printer_block")) {
-
-				model.addAttribute("directory", typeProduct);
-				model.addAttribute("headOfPage", "Изменение изображения справа в блоке принтеров на главном меню");
-				model.addAttribute("listPictures", (JSONArray) home.get("list_printer_block"));
-
-			} else if (typeProduct.equals("3d_printer_block")) {
-				
-				model.addAttribute("directory", typeProduct);
-				model.addAttribute("headOfPage", "Изменение изображения справа в блоке 3Д принтеров на главном меню");
-				model.addAttribute("listPictures", (JSONArray) home.get("list_3d_printer_block"));
-
-			} else if(typeProduct.equals("digital_printer_block")){
-				
-				model.addAttribute("directory", typeProduct);
-				model.addAttribute("headOfPage", "Изменение изображения справа в блоке цыфровых принтеров на главном меню");
-				model.addAttribute("listPictures", (JSONArray) home.get("list_digital_printer_block"));
-				
-			} else if(typeProduct.equals("laminator_block")){
-				
-				model.addAttribute("directory", typeProduct);
-				model.addAttribute("headOfPage", "Изменение изображения справа в блоке ламинаторов на главном меню");
-				model.addAttribute("listPictures", (JSONArray) home.get("list_laminator_block"));
-				
-			} else if(typeProduct.equals("laser_block")){
-				
-				model.addAttribute("directory", typeProduct);
-				model.addAttribute("headOfPage", "Изменение изображения справа в блоке лазеров на главном меню");
-				model.addAttribute("listPictures", (JSONArray) home.get("list_laser_block"));
-				
-			} else if(typeProduct.equals("cutter_block")){
-				
-				model.addAttribute("directory", typeProduct);
-				model.addAttribute("headOfPage", "Изменение изображения справа в блоке фрезеров на главном меню");
-				model.addAttribute("listPictures", (JSONArray) home.get("list_cutter_block"));
-				
-			} else if(typeProduct.equals("scaner_block")){
-				
-				model.addAttribute("directory", typeProduct);
-				model.addAttribute("headOfPage", "Изменение изображения справа в блоке сканеров на главном меню");
-				model.addAttribute("listPictures", (JSONArray) home.get("list_scaner_block"));
-				
-			} else if(typeProduct.equals("previously_used_block")){
-				
-				model.addAttribute("directory", typeProduct);
-				model.addAttribute("headOfPage", "Изменение изображения справа в блоке б/у товаров на главном меню");
-				model.addAttribute("listPictures", (JSONArray) home.get("list_previously_used_block"));
-				
-			} else if(typeProduct.equals("rip_block")){
-				
-				model.addAttribute("directory", typeProduct);
-				model.addAttribute("headOfPage", "Изменение изображения справа в блоке ПО на главном меню");
-				model.addAttribute("listPictures", (JSONArray) home.get("list_rip_block"));
-				
-			}
-	   
-		} catch (FileNotFoundException e1) {
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		} catch (ParseException e1) {
-			e1.printStackTrace();
-		}	   
-	    	return new ModelAndView("admin/pictures/right_in_product_block");
-	    }
-	    
-	    @SuppressWarnings("unchecked")
-		@RequestMapping(value="/admin/pictures/home_products_block/{typeProduct}/upload_pictures", method = RequestMethod.POST)
-	    public @ResponseBody String uploadPicturesToHomeProductsBlock(MultipartHttpServletRequest request,
-	        	   @PathVariable("typeProduct") String typeProduct) {
-	    	
-	    	logger.info("upload new picture to products block on home page"); 	
-	    
-	        Iterator<String> itr =  request.getFileNames();
-	        MultipartFile mpf = null;
-	        String fileName = null;
-
-	        while(itr.hasNext()){
-	            mpf = request.getFile(itr.next()); 
-	    		fileName = new Random().nextInt(10000000) + "" + mpf.getOriginalFilename().substring(mpf.getOriginalFilename().lastIndexOf("."))/*last part is file extension*/; 
-
-				try {
-					FileCopyUtils.copy(mpf.getBytes(), new FileOutputStream(directory + File.separator + "home" + 
-				File.separator + "product_block" + File.separator + typeProduct + File.separator + fileName));
-
-				} catch (IOException e) {
-					logger.error("Don't write picture to the folder", e);
-				} 
-	        }
-			JSONParser parser = new JSONParser();
-			
-			try {
-				JSONObject obj = (JSONObject) parser.parse(new InputStreamReader(new FileInputStream(PATH_TO_JSON_FILE), "UTF-8"));
-
-				JSONObject homeJSON = null;
-				if (obj.get("homeJSON") != null) {
-					homeJSON = (JSONObject) obj.get("homeJSON");
-				} else {
-					homeJSON = new JSONObject();
-				}
-
-				if (typeProduct.equals("printer_block")) {
-					
-					JSONArray list_printer_block = null;
-					if (homeJSON.get("list_printer_block") != null) {
-						list_printer_block = (JSONArray) homeJSON.get("list_printer_block");
-						homeJSON.remove("list_printer_block");
-					} else {
-						list_printer_block = new JSONArray();
-					}
-
-					list_printer_block.add(fileName);
-					homeJSON.put("list_printer_block", list_printer_block);
-
-				} else if (typeProduct.equals("3d_printer_block")) {
-					
-					JSONArray list_3d_printer_block = null;
-					if (homeJSON.get("list_3d_printer_block") != null) {
-						list_3d_printer_block = (JSONArray) homeJSON.get("list_3d_printer_block");
-						homeJSON.remove("list_3d_printer_block");
-					} else {
-						list_3d_printer_block = new JSONArray();
-					}
-
-					list_3d_printer_block.add(fileName);
-					homeJSON.put("list_3d_printer_block", list_3d_printer_block);
-
-				} else if(typeProduct.equals("digital_printer_block")){
-					
-					JSONArray list_digital_printer_block = null;
-					if (homeJSON.get("list_digital_printer_block") != null) {
-						list_digital_printer_block = (JSONArray) homeJSON.get("list_digital_printer_block");
-						homeJSON.remove("list_digital_printer_block");
-					} else {
-						list_digital_printer_block = new JSONArray();
-					}
-
-					list_digital_printer_block.add(fileName);
-					homeJSON.put("list_digital_printer_block", list_digital_printer_block);
-					
-				} else if(typeProduct.equals("laminator_block")){
-					
-					JSONArray list_laminator_block = null;
-					if (homeJSON.get("list_laminator_block") != null) {
-						list_laminator_block = (JSONArray) homeJSON.get("list_laminator_block");
-						homeJSON.remove("list_laminator_block");
-					} else {
-						list_laminator_block = new JSONArray();
-					}
-
-					list_laminator_block.add(fileName);
-					homeJSON.put("list_laminator_block", list_laminator_block);
-					
-				} else if(typeProduct.equals("laser_block")){
-					
-					JSONArray list_laser_block = null;
-					if (homeJSON.get("list_laser_block") != null) {
-						list_laser_block = (JSONArray) homeJSON.get("list_laser_block");
-						homeJSON.remove("list_laser_block");
-					} else {
-						list_laser_block = new JSONArray();
-					}
-
-					list_laser_block.add(fileName);
-					homeJSON.put("list_laser_block", list_laser_block);
-					
-				} else if(typeProduct.equals("cutter_block")){
-					
-					JSONArray list_cutter_block = null;
-					if (homeJSON.get("list_cutter_block") != null) {
-						list_cutter_block = (JSONArray) homeJSON.get("list_cutter_block");
-						homeJSON.remove("list_cutter_block");
-					} else {
-						list_cutter_block = new JSONArray();
-					}
-
-					list_cutter_block.add(fileName);
-					homeJSON.put("list_cutter_block", list_cutter_block);
-					
-				} else if(typeProduct.equals("scaner_block")){
-					
-					JSONArray list_scaner_block = null;
-					if (homeJSON.get("list_scaner_block") != null) {
-						list_scaner_block = (JSONArray) homeJSON.get("list_scaner_block");
-						homeJSON.remove("list_scaner_block");
-					} else {
-						list_scaner_block = new JSONArray();
-					}
-
-					list_scaner_block.add(fileName);
-					homeJSON.put("list_scaner_block", list_scaner_block);
-					
-				} else if(typeProduct.equals("previously_used_block")){
-					
-					JSONArray list_previously_used_block = null;
-					if (homeJSON.get("list_previously_used_block") != null) {
-						list_previously_used_block = (JSONArray) homeJSON.get("list_previously_used_block");
-						homeJSON.remove("list_previously_used_block");
-					} else {
-						list_previously_used_block = new JSONArray();
-					}
-
-					list_previously_used_block.add(fileName);
-					homeJSON.put("list_previously_used_block", list_previously_used_block);
-					
-				} else if(typeProduct.equals("rip_block")){
-					
-					JSONArray list_rip_block = null;
-					if (homeJSON.get("list_rip_block") != null) {
-						list_rip_block = (JSONArray) homeJSON.get("list_rip_block");
-						homeJSON.remove("list_rip_block");
-					} else {
-						list_rip_block = new JSONArray();
-					}
-
-					list_rip_block.add(fileName);
-					homeJSON.put("list_rip_block", list_rip_block);
-					
-				}
-
-				if (obj.get("homeJSON") != null)
-					obj.remove("homeJSON");
-
-				obj.put("homeJSON", homeJSON);
-
-				Writer out = new PrintWriter(PATH_TO_JSON_FILE, "UTF-8");
-				out.write(obj.toJSONString());
-				out.flush();
-				out.close();
-
-			} catch (FileNotFoundException e1) {
-				e1.printStackTrace();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			} catch (ParseException e1) {
-				e1.printStackTrace();
-			}
-	        
-	         return fileName;
-	    }
-	    
-	    @SuppressWarnings("unchecked")
-		@RequestMapping(value = "/admin/pictures/home_products_block/{typeProduct}/change_order_pictures", method = RequestMethod.POST, consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
-		public @ResponseBody void changeOrderPicturesHomeProductsBlock(@RequestBody List<String> selectedIds, 
-					@PathVariable("typeProduct") String typeProduct) {
-
-			logger.info("change order pictures in central rekalam");
-
-			JSONParser parser = new JSONParser();
-
-			try {
-				JSONObject obj = (JSONObject) parser.parse(new InputStreamReader(new FileInputStream(PATH_TO_JSON_FILE), "UTF-8"));
-
-				JSONObject homeJSON = (JSONObject) obj.get("homeJSON");
-
-				if (typeProduct.equals("printer_block")) {
-					
-					JSONArray list_printer_block = null;
-					// check if these subdirectories has pictures
-					if (homeJSON.get("list_printer_block") != null) {
-						homeJSON.remove("list_printer_block");
-					}
-					list_printer_block = new JSONArray();
-
-					for (String fileName : selectedIds)
-						list_printer_block.add(fileName);
-					homeJSON.put("list_printer_block", list_printer_block);
-
-				} else if (typeProduct.equals("3d_printer_block")) {
-					
-					JSONArray list_3d_printer_block = null;
-					// check if these subdirectories has pictures
-					if (homeJSON.get("list_3d_printer_block") != null) {
-						homeJSON.remove("list_3d_printer_block");
-					}
-					list_3d_printer_block = new JSONArray();
-
-					for (String fileName : selectedIds)
-						list_3d_printer_block.add(fileName);
-					homeJSON.put("list_3d_printer_block", list_3d_printer_block);
-
-				} else if(typeProduct.equals("digital_printer_block")){
-					
-					JSONArray list_digital_printer_block = null;
-					// check if these subdirectories has pictures
-					if (homeJSON.get("list_digital_printer_block") != null) {
-						homeJSON.remove("list_digital_printer_block");
-					}
-					list_digital_printer_block = new JSONArray();
-
-					for (String fileName : selectedIds)
-						list_digital_printer_block.add(fileName);
-					homeJSON.put("list_digital_printer_block", list_digital_printer_block);
-					
-				} else if(typeProduct.equals("laminator_block")){
-					
-					JSONArray list_laminator_block = null;
-					// check if these subdirectories has pictures
-					if (homeJSON.get("list_laminator_block") != null) {
-						homeJSON.remove("list_laminator_block");
-					}
-					list_laminator_block = new JSONArray();
-
-					for (String fileName : selectedIds)
-						list_laminator_block.add(fileName);
-					homeJSON.put("list_laminator_block", list_laminator_block);
-					
-				} else if(typeProduct.equals("laser_block")){
-					
-					JSONArray list_laser_block = null;
-					// check if these subdirectories has pictures
-					if (homeJSON.get("list_laser_block") != null) {
-						homeJSON.remove("list_laser_block");
-					}
-					list_laser_block = new JSONArray();
-
-					for (String fileName : selectedIds)
-						list_laser_block.add(fileName);
-					homeJSON.put("list_laser_block", list_laser_block);
-					
-				} else if(typeProduct.equals("cutter_block")){
-					
-					JSONArray list_cutter_block = null;
-					// check if these subdirectories has pictures
-					if (homeJSON.get("list_cutter_block") != null) {
-						homeJSON.remove("list_cutter_block");
-					}
-					list_cutter_block = new JSONArray();
-
-					for (String fileName : selectedIds)
-						list_cutter_block.add(fileName);
-					homeJSON.put("list_cutter_block", list_cutter_block);
-					
-				} else if(typeProduct.equals("scaner_block")){
-					
-					JSONArray list_scaner_block = null;
-					if (homeJSON.get("list_scaner_block") != null) {
-						homeJSON.remove("list_scaner_block");
-					}
-					list_scaner_block = new JSONArray();
-
-					for (String fileName : selectedIds)
-						list_scaner_block.add(fileName);
-					homeJSON.put("list_scaner_block", list_scaner_block);
-					
-				} else if(typeProduct.equals("previously_used_block")){
-					
-					JSONArray list_previously_used_block = null;
-					if (homeJSON.get("list_previously_used_block") != null) {
-						homeJSON.remove("list_previously_used_block");
-					}
-					list_previously_used_block = new JSONArray();
-
-					for (String fileName : selectedIds)
-						list_previously_used_block.add(fileName);
-					homeJSON.put("list_previously_used_block", list_previously_used_block);
-					
-				} else if(typeProduct.equals("rip_block")){
-					
-					JSONArray list_rip_block = null;
-					if (homeJSON.get("list_rip_block") != null) {
-						homeJSON.remove("list_rip_block");
-					}
-					list_rip_block = new JSONArray();
-
-					for (String fileName : selectedIds)
-						list_rip_block.add(fileName);
-					homeJSON.put("list_rip_block", list_rip_block);
-					
-				}
-
-				if (obj.get("homeJSON") != null)
-					obj.remove("homeJSON");
-
-				obj.put("homeJSON", homeJSON);
-
-				Writer out = new PrintWriter(PATH_TO_JSON_FILE, "UTF-8");
-				out.write(obj.toJSONString());
-				out.flush();
-				out.close();
-
-			} catch (FileNotFoundException e1) {
-				e1.printStackTrace();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			} catch (ParseException e1) {
-				e1.printStackTrace();
-			}
+	
+	Map<String, PictureInformation> picturesRightInProductBlock = new HashMap<String, PictureInformation>(){
+		private static final long serialVersionUID = 1L;
+		{
+			put("printer_block", new PictureInformation("", "Изменение изображения справа в блоке принтеров на главном меню", "list_printer_block"));
+			put("3d_printer_block", new PictureInformation("", "Изменение изображения справа в блоке 3Д принтеров на главном меню", "list_3d_printer_block"));
+			put("digital_printer_block", new PictureInformation("", "Изменение изображения справа в блоке цыфровых принтеров на главном меню", 
+					"list_digital_printer_block"));
+			put("laminator_block", new PictureInformation("", "Изменение изображения справа в блоке ламинаторов на главном меню", "list_laminator_block"));
+			put("laser_block", new PictureInformation("", "Изменение изображения справа в блоке лазеров на главном меню", "list_laser_block"));
+			put("cutter_block", new PictureInformation("", "Изменение изображения справа в блоке фрезеров на главном меню", "list_cutter_block"));
+			put("scaner_block", new PictureInformation("", "Изменение изображения справа в блоке сканеров на главном меню", "list_scaner_block"));
+			put("previously_used_block", new PictureInformation("", "Изменение изображения справа в блоке б/у товаров на главном меню", 
+					"list_previously_used_block"));
+			put("rip_block", new PictureInformation("", "Изменение изображения справа в блоке ПО на главном меню", "list_rip_block"));			
 		}
-	    
-	    @SuppressWarnings("unchecked")
-		@RequestMapping(value = "/admin/pictures/home_products_block/{typeProduct}/remove_picture/{name_picture}", method = RequestMethod.POST, consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
-		public @ResponseBody void removePicturesHomeProductBlocks(@PathVariable("name_picture") String name,
-				   @PathVariable("typeProduct") String typeProduct) {
+	};
+	
+	@RequestMapping(value = "/admin/pictures/home_products_block/{typeProduct}", method = RequestMethod.GET)
+	public ModelAndView showHomeProductsBlock(Model model, @PathVariable("typeProduct") String typeProduct) {
 
-			String namePicture = name.replace(":", ".");
-			logger.info("delete picture in home page, from product block");
+		JSONObject obj = getJsonPicturesLinksContainer();
+		JSONObject home = (JSONObject) obj.get("homeJSON");
 
-			try {
-				FileUtils.forceDelete(new File(directory + File.separator + "home" + File.separator + "product_block"
-						+ File.separator + typeProduct + File.separator + namePicture));
+		if (picturesRightInProductBlock.containsKey(typeProduct)) {
+			PictureInformation pictureInfo = picturesRightInProductBlock.get(typeProduct);
 
-			} catch (IOException e) {
-				logger.error("Can't delete picture from the folder", e);
-			}
-
-			JSONParser parser = new JSONParser();
-
-			try {
-				JSONObject obj = (JSONObject) parser.parse(new InputStreamReader(new FileInputStream(PATH_TO_JSON_FILE), "UTF-8"));
-
-				JSONObject homeJSON = (JSONObject) obj.get("homeJSON");
-
-				if (typeProduct.equals("printer_block")) {
-					
-					JSONArray list_printer_block = (JSONArray) homeJSON.get("list_printer_block");
-					homeJSON.remove("list_printer_block");
-
-					list_printer_block.remove(namePicture);
-					homeJSON.put("list_printer_block", list_printer_block);
-
-				} else if (typeProduct.equals("3d_printer_block")) {
-					
-					JSONArray list_3d_printer_block = (JSONArray) homeJSON.get("list_3d_printer_block");
-					homeJSON.remove("list_3d_printer_block");
-
-					list_3d_printer_block.remove(namePicture);
-					homeJSON.put("list_3d_printer_block", list_3d_printer_block);
-
-				} else if(typeProduct.equals("digital_printer_block")){
-					
-					JSONArray list_digital_printer_block = (JSONArray) homeJSON.get("list_digital_printer_block");
-					homeJSON.remove("list_digital_printer_block");
-
-					list_digital_printer_block.remove(namePicture);
-					homeJSON.put("list_digital_printer_block", list_digital_printer_block);
-					
-				} else if(typeProduct.equals("laminator_block")){
-					
-					JSONArray list_laminator_block = (JSONArray) homeJSON.get("list_laminator_block");
-					homeJSON.remove("list_laminator_block");
-
-					list_laminator_block.remove(namePicture);
-					homeJSON.put("list_laminator_block", list_laminator_block);
-					
-				} else if(typeProduct.equals("laser_block")){
-					
-					JSONArray list_laser_block = (JSONArray) homeJSON.get("list_laser_block");
-					homeJSON.remove("list_laser_block");
-
-					list_laser_block.remove(namePicture);
-					homeJSON.put("list_laser_block", list_laser_block);
-					
-				} else if(typeProduct.equals("cutter_block")){
-					
-					JSONArray list_cutter_block = (JSONArray) homeJSON.get("list_cutter_block");
-					homeJSON.remove("list_cutter_block");
-
-					list_cutter_block.remove(namePicture);
-					homeJSON.put("list_cutter_block", list_cutter_block);
-					
-				} else if(typeProduct.equals("scaner_block")){
-					
-					JSONArray list_scaner_block = (JSONArray) homeJSON.get("list_scaner_block");
-					homeJSON.remove("list_scaner_block");
-
-					list_scaner_block.remove(namePicture);
-					homeJSON.put("list_scaner_block", list_scaner_block);
-					
-				} else if(typeProduct.equals("previously_used_block")){
-					
-					JSONArray list_previously_used_block = (JSONArray) homeJSON.get("list_previously_used_block");
-					homeJSON.remove("list_previously_used_block");
-
-					list_previously_used_block.remove(namePicture);
-					homeJSON.put("list_previously_used_block", list_previously_used_block);
-					
-				} else if(typeProduct.equals("rip_block")){
-					
-					JSONArray list_rip_block = (JSONArray) homeJSON.get("list_rip_block");
-					homeJSON.remove("list_rip_block");
-
-					list_rip_block.remove(namePicture);
-					homeJSON.put("list_rip_block", list_rip_block);
-					
-				}
-
-				if (obj.get("homeJSON") != null)
-					obj.remove("homeJSON");
-
-				obj.put("homeJSON", homeJSON);
-
-				Writer out = new PrintWriter(PATH_TO_JSON_FILE, "UTF-8");
-				out.write(obj.toJSONString());
-				out.flush();
-				out.close();
-
-			} catch (FileNotFoundException e1) {
-				e1.printStackTrace();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			} catch (ParseException e1) {
-				e1.printStackTrace();
-			}
-
+			model.addAttribute("directory", typeProduct);
+			model.addAttribute("headOfPage", pictureInfo.getHeadOfPage());
+			model.addAttribute("listPictures", (JSONArray) home.get(pictureInfo.getNameOfJsonObject()));
 		}
+
+		return new ModelAndView("admin/pictures/right_in_product_block");
+	}
+	    
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "/admin/pictures/home_products_block/{typeProduct}/upload_pictures", method = RequestMethod.POST)
+	public @ResponseBody String uploadPicturesToHomeProductsBlock(MultipartHttpServletRequest request,
+			@PathVariable("typeProduct") String typeProduct) {
+
+		logger.info("upload new picture to products block on home page");
+
+		String fileName = componets.uploadPicture(request, DIRECTORY, CONCRETE_FOLDER, "product_block" + File.separator + typeProduct);
+
+		JSONObject obj = getJsonPicturesLinksContainer();
+		JSONObject homeJSON = (JSONObject) obj.get("homeJSON");
+
+		if (picturesRightInProductBlock.containsKey(typeProduct)) {
+			PictureInformation pictureInfo = picturesRightInProductBlock.get(typeProduct);
+
+			JSONArray listPictures = (homeJSON.get(pictureInfo.getNameOfJsonObject()) != null)
+					? (JSONArray) homeJSON.get(pictureInfo.getNameOfJsonObject()) : new JSONArray();
+
+			listPictures.add(fileName);
+			homeJSON.put(pictureInfo.getNameOfJsonObject(), listPictures);
+		}
+
+		obj.put("homeJSON", homeJSON);
+		writeResultInLocalFile(obj);
+
+		return fileName;
+	}
+	    
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "/admin/pictures/home_products_block/{typeProduct}/change_order_pictures", 
+	method = RequestMethod.POST, consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
+	public @ResponseBody void changeOrderPicturesHomeProductsBlock(@RequestBody List<String> selectedIds,
+			@PathVariable("typeProduct") String typeProduct) {
+
+		logger.info("change order pictures in central rekalam");
+
+		JSONObject obj = getJsonPicturesLinksContainer();
+		JSONObject homeJSON = (JSONObject) obj.get("homeJSON");
+
+		if (picturesRightInProductBlock.containsKey(typeProduct)) {
+			PictureInformation pictureInfo = picturesRightInProductBlock.get(typeProduct);
+
+			JSONArray listPictures = new JSONArray();
+
+			for (String fileName : selectedIds)
+				listPictures.add(fileName);
+
+			homeJSON.put(pictureInfo.getNameOfJsonObject(), listPictures);
+		}
+
+		obj.put("homeJSON", homeJSON);
+		writeResultInLocalFile(obj);
+	}
+	    
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "/admin/pictures/home_products_block/{typeProduct}/remove_picture/{name_picture}", 
+	method = RequestMethod.POST, consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
+	public @ResponseBody void removePicturesHomeProductBlocks(@PathVariable("name_picture") String name,
+			@PathVariable("typeProduct") String typeProduct) {
+
+		String namePicture = name.replace(":", ".");
+		logger.info("delete picture in home page, from product block");
+
+		componets.removePicture(namePicture, DIRECTORY, CONCRETE_FOLDER,
+				"product_block" + File.separator + typeProduct);
+
+		JSONObject obj = getJsonPicturesLinksContainer();
+		JSONObject homeJSON = (JSONObject) obj.get("homeJSON");
+
+		if (picturesRightInProductBlock.containsKey(typeProduct)) {
+			PictureInformation pictureInfo = picturesRightInProductBlock.get(typeProduct);
+
+			JSONArray listPictures = (homeJSON.get(pictureInfo.getNameOfJsonObject()) != null)
+					? (JSONArray) homeJSON.get(pictureInfo.getNameOfJsonObject()) : new JSONArray();
+
+			listPictures.remove(namePicture);
+			homeJSON.put(pictureInfo.getNameOfJsonObject(), listPictures);
+		}
+
+		obj.put("homeJSON", homeJSON);
+		writeResultInLocalFile(obj);
+	}
 	    
 	    
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	    
-	    
-	    Map<String, RowPicturesInformation> picturesInTopProductSection = new HashMap<String, RowPicturesInformation>(){
+	    	    
+	    Map<String, BlockPicturesInformation> picturesInTopProductSection = new HashMap<String, BlockPicturesInformation>(){
 			private static final long serialVersionUID = 1L;
 			{
 				final String standartPhrase = "Изменение картинки отображения над подразделом ";
-				put("printer_top", new RowPicturesInformation(
+				put("printer_top", new BlockPicturesInformation(
 						Arrays.asList(
 								new PictureInformation("1", standartPhrase + "принтеров №1", "list_printer_top1"),
 								new PictureInformation("2", standartPhrase + "принтеров №2", "list_printer_top2"),
 								new PictureInformation("3", standartPhrase + "принтеров №3", "list_printer_top3")
 							)));
 				
-				put("digital_printer_top", new RowPicturesInformation(
+				put("digital_printer_top", new BlockPicturesInformation(
 						Arrays.asList(
 								new PictureInformation("1", standartPhrase + "цыфровых принтеров №1", "list_digital_printer_top1"),
 								new PictureInformation("2", standartPhrase + "цыфровых принтеров №2", "list_digital_printer_top2"),
 								new PictureInformation("3", standartPhrase + "цыфровых принтеров №3", "list_digital_printer_top3")
 							)));
 				
-				put("laser_top", new RowPicturesInformation(
+				put("laser_top", new BlockPicturesInformation(
 						Arrays.asList(
 								new PictureInformation("1", standartPhrase + "лазеров №1", "list_laser_top1"),
 								new PictureInformation("2", standartPhrase + "лазеров №2", "list_laser_top2"),
 								new PictureInformation("3", standartPhrase + "лазеров №3", "list_laser_top3")
 							)));
 				
-				put("scaner_top", new RowPicturesInformation(
+				put("scaner_top", new BlockPicturesInformation(
 						Arrays.asList(
 								new PictureInformation("1", standartPhrase + "сканеров №1", "list_scaner_top1"),
 								new PictureInformation("2", standartPhrase + "сканеров №2", "list_scaner_top2"),
 								new PictureInformation("3", standartPhrase + "сканеров №3", "list_scaner_top3")
 							)));
 
-				put("rip_top", new RowPicturesInformation(
+				put("rip_top", new BlockPicturesInformation(
 						Arrays.asList(
 								new PictureInformation("1", standartPhrase + "ПО №1", "list_rip_top1"),
 								new PictureInformation("2", standartPhrase + "ПО №2", "list_rip_top2"),
 								new PictureInformation("3", standartPhrase + "ПО №3", "list_rip_top3")
 							)));
 				
-				put("3d_printer_top", new RowPicturesInformation(
+				put("3d_printer_top", new BlockPicturesInformation(
 						Arrays.asList(
 								new PictureInformation("1", standartPhrase + "3D принтеров №1", "list_3d_printer_top1"),
 								new PictureInformation("2", standartPhrase + "3D принтеров №2", "list_3d_printer_top2")
 							)));
 			
-				put("laminator_top", new RowPicturesInformation(
+				put("laminator_top", new BlockPicturesInformation(
 						Arrays.asList(
 								new PictureInformation("1", standartPhrase + "ламинаторов №1", "list_laminator_top1"),
 								new PictureInformation("2", standartPhrase + "ламинаторов №2", "list_laminator_top2")
 							)));
 				
-				put("cutter_top", new RowPicturesInformation(
+				put("cutter_top", new BlockPicturesInformation(
 						Arrays.asList(
 								new PictureInformation("1", standartPhrase + "фрезеров №1", "list_cutter_top1"),
 								new PictureInformation("2", standartPhrase + "фрезеров №2", "list_cutter_top2")
 							)));
 				
-				put("previously_used_top", new RowPicturesInformation(
+				put("previously_used_top", new BlockPicturesInformation(
 						Arrays.asList(
 								new PictureInformation("1", standartPhrase + "б/у товаров №1", "list_previously_used_top1"),
 								new PictureInformation("2", standartPhrase + "б/у товаров №2", "list_previously_used_top2")
@@ -1355,7 +621,6 @@ public class PicturesHomePageController {
 			}
 		}; 
 	    
-
 	/**
 	 * block with three big pictures
 	 */
@@ -1423,7 +688,7 @@ public class PicturesHomePageController {
 
 		logger.info("upload new picture to the one of thee big pictures on home page");
 
-		String fileName = componets.uploadPicture(request, directory, CONCRETE_FOLDER,
+		String fileName = componets.uploadPicture(request, DIRECTORY, CONCRETE_FOLDER,
 				"three_big_pictures" + File.separator + inTopOfTypeProduct + File.separator + position);
 
 		JSONObject obj = getJsonPicturesLinksContainer();
@@ -1499,7 +764,7 @@ public class PicturesHomePageController {
 		String namePicture = name.replace(":", ".");
 		logger.info("delete picture in home, from: 'three big pictures', in top of type product: " + inTopOfTypeProduct);
 
-		componets.removePicture(namePicture, directory, CONCRETE_FOLDER,
+		componets.removePicture(namePicture, DIRECTORY, CONCRETE_FOLDER,
 				"three_big_pictures" + File.separator + inTopOfTypeProduct + File.separator + position);
 
 		JSONObject obj = getJsonPicturesLinksContainer();
@@ -1599,7 +864,7 @@ public class PicturesHomePageController {
 
 		logger.info("upload new picture to the one of two narrows pictures on home page");
 
-		String fileName = componets.uploadPicture(request, directory, CONCRETE_FOLDER,
+		String fileName = componets.uploadPicture(request, DIRECTORY, CONCRETE_FOLDER,
 				"two_narrow_pictures" + File.separator + inTopOfTypeProduct + File.separator + position);
 
 		JSONObject obj = getJsonPicturesLinksContainer();
@@ -1676,7 +941,7 @@ public class PicturesHomePageController {
 		logger.info(
 				"delete picture in home, from: 'two narrow pictures', in top of type product: " + inTopOfTypeProduct);
 
-		componets.removePicture(namePicture, directory, CONCRETE_FOLDER,
+		componets.removePicture(namePicture, DIRECTORY, CONCRETE_FOLDER,
 				"two_narrow_pictures" + File.separator + inTopOfTypeProduct + File.separator + position);
 
 		JSONObject obj = getJsonPicturesLinksContainer();
