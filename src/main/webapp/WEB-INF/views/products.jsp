@@ -343,15 +343,15 @@ $(document).ready(function() {
 					slidePrice.append($('<div/>').text(checkPrise(product.prise)));
 				}
             	
-				innterDiv.append($('<a/>').attr("id", "/images/${product.type}s/" + product.id + "/" + checkPicture(product.pathPictures))
+				innterDiv.append($('<a/>').attr("id", "/images/" + product.type + "s/" + product.id + "/" + checkPicture(product.pathPictures))
    								 			 .addClass("link")
-            								 .attr("href", "/${product.type}/" + product.id)
-            								 .append($('<div/>').addClass("outer_a_img").append($('<img/>').attr("src", "/images/${product.type}s/" + product.id + "/" + product.pathPictures[0]))))
+            								 .attr("href", "/" + product.type + "/" + product.id)
+            								 .append($('<div/>').addClass("outer_a_img").append($('<img/>').attr("src", "/images/" + product.type + "s/" + product.id + "/" + product.pathPictures[0]))))
             				.append($('<div/>').addClass("name_price_cart_block")
-	                				.append($('<a/>').attr("href", "/${product.type}/" + product.id).addClass("products_title").text(product.name))
+	                				.append($('<a/>').attr("href", "/" + product.type + "/" + product.id).addClass("products_title").text(product.name))
 	    	                		.append(slidePrice)
 	    	                		.append($('<i/>').addClass("fa fa-cart-plus add_to_cart").click(function(){
-        			                			addToCart("${product.type}" , product.id, product.name, product.prise+'', product.pathPictures[0]);
+        			                			addToCart(product.type, product.id, product.name, product.prise+'', product.pathPictures[0]);
         			                		}).css(
         			        						{
         			        							"padding-right": "5px",
@@ -362,7 +362,7 @@ $(document).ready(function() {
     			        						
         			        		var name_price_cart_block = $('<div/>').addClass('name_price_cart_block_hidden');			
         			        						
-        			        		if("${product.type}"=='printer' && product.ratingOverallRating > 0){	       			        			
+        			        		if(product.type=='printer' && product.ratingOverallRating > 0){	       			        			
         			        			name_price_cart_block.append($('<div/>').addClass('rating_block')
         			        							.append($('<p/>').css( "font-weight", "bold" ).text("Общая оценка:"))
         			        							.append($('<div/>').css( "width", "100px" ).css( "float", "left" )
@@ -376,7 +376,7 @@ $(document).ready(function() {
         			        									)))
         			        		}
 			// in this block added information about print head		
-			if("${product.type}"=='printer' && product.typeOfPrinthead!=null && product.typeOfPrinthead!=""){
+			if(product.type=='printer' && product.typeOfPrinthead!=null && product.typeOfPrinthead!=""){
 				name_price_cart_block.append($('<div/>').css( "height", "40px" ).css( "margin-bottom", "5px" )
 						.append($('<p/>').css( "font-weight", "bold" ).css( "width", "50%" ).css( "float", "left" ).text("Тип печатающей головки:"))
 						.append($('<div/>').css( "width", "50%" ).css( "float", "left" ).text(product.typeOfPrinthead))
@@ -384,14 +384,14 @@ $(document).ready(function() {
     		}
 
 			// in this two blocks added information about printer resolution			
-			if("${product.type}"=='printer' && product.inputFirstPrintResolution != 0 && product.inputSecondPrintResolution != 0){
+			if(product.type=='printer' && product.inputFirstPrintResolution != 0 && product.inputSecondPrintResolution != 0){
 				name_price_cart_block.append($('<div/>').css( "height", "40px" ).css( "margin-bottom", "5px" )
 						.append($('<p/>').css( "font-weight", "bold" ).css( "width", "50%" ).css( "float", "left" ).text("Разрешение печати:"))
 						.append($('<div/>').css( "width", "50%" ).css( "float", "left" ).text(product.inputFirstPrintResolution + "x" + product.inputSecondPrintResolution + "dpi"))
 								)
     		}
 			
-			if("${product.type}"=='printer' && (product.inputFirstPrintResolution == 0 || product.inputSecondPrintResolution == 0) && product.printResolution!=null){
+			if(product.type=='printer' && (product.inputFirstPrintResolution == 0 || product.inputSecondPrintResolution == 0) && product.printResolution!=null){
 				var resultResolution="";
 				$(product.printResolution).each(function(i, resolution) {
 					if(resultResolution==""){
@@ -409,7 +409,7 @@ $(document).ready(function() {
     		}	
  
 			//in this block added information about chromaticity	
-			if("${product.type}"=='printer' && product.chromaticity!=null){
+			if(product.type=='printer' && product.chromaticity!=null){
 				var resultChromaticity="";
 				$(product.chromaticity).each(function(i, enty) {
 					if(resultChromaticity==""){
