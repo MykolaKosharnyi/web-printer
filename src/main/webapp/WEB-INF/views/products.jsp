@@ -192,7 +192,8 @@
 							</div>
 						</c:if>
                       
-                      	<c:if test="${product.type=='printer' && (product.inputFirstPrintResolution == 0 || product.inputSecondPrintResolution == 0) && !empty product.printResolution}">
+                      	<c:if test="${product.type=='printer' && (product.inputFirstPrintResolution == 0 || product.inputSecondPrintResolution == 0) &&
+                      	 !empty product.printResolution}">
                       		<div style="height: 40px; margin-bottom: 5px;">
 								<p style="font-weight: bold; width: 50%; float: left;">Разрешение печати:</p>
 								<div style="float: left; width: 50%;">
@@ -391,7 +392,8 @@ $(document).ready(function() {
 								)
     		}
 			
-			if(product.type=='printer' && (product.inputFirstPrintResolution == 0 || product.inputSecondPrintResolution == 0) && product.printResolution!=null){
+			if(product.type=='printer' && (product.inputFirstPrintResolution == 0 || product.inputSecondPrintResolution == 0) && 
+					product.printResolution!=null && product.printResolution.length>0){
 				var resultResolution="";
 				$(product.printResolution).each(function(i, resolution) {
 					if(resultResolution==""){

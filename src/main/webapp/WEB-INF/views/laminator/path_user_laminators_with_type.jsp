@@ -21,6 +21,10 @@
 				<p><spring:message code="head.laminator.liquid"/></p>
 				<title><spring:message code="head.laminator.liquid"/></title>
 			</c:when>
+			<c:when test="${tp.equals('Планшетный ламинатор')}">
+				<p><spring:message code="head.laminator.flatbed_laminating_machine"/></p>
+				<title><spring:message code="head.laminator.flatbed_laminating_machine"/></title>
+			</c:when>
 		</c:choose>
 	</c:forEach>
 </div>
