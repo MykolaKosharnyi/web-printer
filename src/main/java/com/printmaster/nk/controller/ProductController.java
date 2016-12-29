@@ -25,28 +25,55 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.printmaster.nk.beans.ComponentsForControllers;
 import com.printmaster.nk.beans.LinksForProducts;
 import com.printmaster.nk.beans.PicturesContainer;
+import com.printmaster.nk.model.Cutter;
+import com.printmaster.nk.model.DigitalPrinter;
 import com.printmaster.nk.model.HeadProduct;
+import com.printmaster.nk.model.Laminator;
+import com.printmaster.nk.model.Laser;
+import com.printmaster.nk.model.Printer;
+import com.printmaster.nk.model.Printer3D;
+import com.printmaster.nk.model.Scanner;
 import com.printmaster.nk.model.SearchGeneric;
 import com.printmaster.nk.service.ProductService;
 import com.printmaster.nk.service.UseWithProductService;
 
 public abstract class ProductController <T extends HeadProduct, S extends SearchGeneric>{
-	protected T product;	
-	protected S searchCriteries;
-	
-	@Autowired
-	Logger logger =  Logger.getLogger(ProductController.class);
+	private T product;	
+	private S searchCriteries;
+	private Logger logger =  Logger.getLogger(ProductController.class);
 	
 	private Map<String, String> links;
-	
 	private Map<String, String> parametersOnAdminProductsPage;
 	
-	protected static final String DIRECTORY = "/var/www/localhost/images";
-
-	private static final String TYPE = "";
+	private static final String DIRECTORY = "/var/www/localhost/images";
+	private final String TYPE = ""/*getTypeUrl()*/;
+	private final String CONCRETE_FOLDER = TYPE + "s";
 	
-	private static final String CONCRETE_FOLDER = TYPE + "s";
+	private String getTypeUrl(){	
+		if (product instanceof Printer) {
+			return "printer";
+			
+		} else if (product instanceof Printer3D) {
+			return "3d_printer";
 
+		} else if (product instanceof DigitalPrinter) {
+			return "digital_printer";
+
+		} else if (product instanceof Cutter) {
+			return "cutter";
+
+		} else if (product instanceof Laminator) {
+			return "laminator";
+			
+		} else if (product instanceof Laser) {
+			return "laser";
+			
+		} else if (product instanceof Scanner) {
+			return "scanner";
+		} 
+		return "printer";
+	}
+	
 	@Autowired
 	private LinksForProducts linksForProduct;
 	
@@ -57,6 +84,8 @@ public abstract class ProductController <T extends HeadProduct, S extends Search
     PicturesContainer files;
  
     protected ProductService<T,S> productService;
+    
+    public abstract void setProductService(ProductService<T,S> productService);
 	
 	private UseWithProductService useWithProductService;
 	

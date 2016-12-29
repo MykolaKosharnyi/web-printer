@@ -231,7 +231,6 @@ public class PicturesHomePageController {
 		logger.info("change order pictures in central rekalam");
 
 		JSONObject obj = getJsonPicturesLinksContainer();
-
 		JSONObject homeJSON = (JSONObject) obj.get("homeJSON");
 
 		JSONArray listPicturesOfCentralReklam = new JSONArray();
@@ -241,7 +240,6 @@ public class PicturesHomePageController {
 		homeJSON.put("listPicturesOfCentralReklam", listPicturesOfCentralReklam);
 
 		obj.put("homeJSON", homeJSON);
-
 		writeResultInLocalFile(obj);
 	}
 	
@@ -255,7 +253,6 @@ public class PicturesHomePageController {
 		componets.removePicture(namePicture, DIRECTORY, "home", "big_reklam"); 
 
 		JSONObject obj = getJsonPicturesLinksContainer();
-
 		JSONObject homeJSON = (JSONObject) obj.get("homeJSON");
 
 		JSONArray listPicturesOfCentralReklam = (JSONArray) homeJSON.get("listPicturesOfCentralReklam");
@@ -264,7 +261,6 @@ public class PicturesHomePageController {
 		homeJSON.put("listPicturesOfCentralReklam", listPicturesOfCentralReklam);
 
 		obj.put("homeJSON", homeJSON);
-
 		writeResultInLocalFile(obj);
 	}
 	
@@ -656,7 +652,6 @@ public class PicturesHomePageController {
 			@PathVariable("href") String href) {
 
 		JSONObject obj = getJsonPicturesLinksContainer();
-
 		JSONObject homeJSON = (obj.get("homeJSON") != null) ? (JSONObject) obj.get("homeJSON") : new JSONObject();
 
 		if (picturesInTopProductSection.containsKey(inTopOfTypeProduct)) {
@@ -677,7 +672,6 @@ public class PicturesHomePageController {
 		}
 
 		obj.put("homeJSON", homeJSON);
-
 		writeResultInLocalFile(obj);
 	}
 
@@ -832,7 +826,6 @@ public class PicturesHomePageController {
 			@PathVariable("href") String href) {
 
 		JSONObject obj = getJsonPicturesLinksContainer();
-
 		JSONObject homeJSON = (obj.get("homeJSON") != null) ? (JSONObject) obj.get("homeJSON") : new JSONObject();
 
 		if (picturesInTopProductSection.containsKey(inTopOfTypeProduct)) {
@@ -853,7 +846,6 @@ public class PicturesHomePageController {
 		}
 
 		obj.put("homeJSON", homeJSON);
-
 		writeResultInLocalFile(obj);
 	}
 
