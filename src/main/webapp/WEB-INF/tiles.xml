@@ -5,7 +5,8 @@
 <tiles-definitions>  
     <definition name="base" template="/WEB-INF/views/title/layout.jsp">  
         <put-attribute name="header" value="/WEB-INF/views/title/header.jsp" />
-        <put-attribute name="path" value="" />   
+        <put-attribute name="path" value="" /> 
+        <put-attribute name="user-menu" value="" />          
         <put-attribute name="left-menu" value="/WEB-INF/views/title/left-menu.jsp" />
         <put-attribute name="search" value="" />   
         <put-attribute name="reklam" value="/WEB-INF/views/title/reklam.jsp" /> 
@@ -28,7 +29,8 @@
     </definition>  
     
     <definition name="user" extends="base"> 
-    	<put-attribute name="path" value="/WEB-INF/views/user/path_user.jsp" />  
+    	<put-attribute name="path" value="/WEB-INF/views/user/path_user.jsp" /> 
+    	<put-attribute name="user-menu" value="/WEB-INF/views/user/user-menu.jsp" />   
         <put-attribute name="body" value="/WEB-INF/views/user/user.jsp" />  
     </definition>  
   

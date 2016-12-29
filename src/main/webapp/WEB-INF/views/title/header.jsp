@@ -9,7 +9,7 @@
 						<div class="top_information"><i class="fa fa-phone"></i> (044)-274-22-99</div>
 						<div class="top_information"><i class="fa fa-phone"></i> (044)-405-96-11</div>
 						<div class="top_information"><i class="fa fa-phone"></i> (044)-405-96-88</div>
-						<div class="top_information" data-toggle="modal" data-target="#myAdress">
+						<div class="top_information map_top_information" data-toggle="modal" data-target="#myAdress">
 							<i class="fa fa-map-marker"></i> г. Киев, ул. В.Покотыла, д. 7/2</div>
 						<div class="top_information"><i class="fa fa-envelope-o"></i> office@forprint.net.ua</div>
 						<div class="top_information" style="float:right;">

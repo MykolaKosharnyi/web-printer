@@ -66,6 +66,7 @@
 			<div class="row">
 				<div class="left_field">
 					<tiles:insertAttribute name="left-menu" />
+					<tiles:insertAttribute name="user-menu" />
 					<tiles:insertAttribute name="search" />
 					<tiles:insertAttribute name="reklam" />
 				</div>		
