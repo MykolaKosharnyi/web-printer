@@ -10,14 +10,13 @@ function openInNewTabWinBrowser(url) {
 }
 
 /* for showing description on divs which right of big animation on home page*/
-$(function(){
-  		$('.rigt_of_reklam_animation div').hover(function(){
-    			$(this).find("p").slideDown(50);
-   		},
-   		function(){
-    			$(this).find("p").slideUp(100);
-   		});
- 	});
+$(function() {
+	$('.rigt_of_reklam_animation div').hover(function() {
+		$(this).find("p").slideDown(50);
+	}, function() {
+		$(this).find("p").slideUp(100);
+	});
+});
 
 
 /* Чтобы безопасность пропускала AJAX */

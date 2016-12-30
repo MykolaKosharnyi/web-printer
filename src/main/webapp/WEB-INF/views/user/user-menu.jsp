@@ -7,7 +7,7 @@
 }
 
 .user_menu a {
-	margin: 3px 0px;
+	margin: 5px 0px;
 	padding: 10px;
 	border: 1px grey solid;
 	background: #8eff5c;
@@ -17,7 +17,7 @@
 	font: 15px "RobotoRegular";
 	font-style: italic;
 	transition:0.5s;
-	box-shadow: 0 0 2px #006080;
+	box-shadow: 0 0 1px #006080;
 }
 
 .user_menu a:first-child {
