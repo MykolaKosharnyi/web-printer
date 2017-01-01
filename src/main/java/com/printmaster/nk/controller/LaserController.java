@@ -1,5 +1,7 @@
 package com.printmaster.nk.controller;
 
+import static com.printmaster.nk.controller.ControllerConstants.*;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -34,9 +36,7 @@ import com.printmaster.nk.service.UseWithProductService;
 public class LaserController {
 	
 	private Map<String, String> links = new HashMap<String, String>(){
-
 		private static final long serialVersionUID = 6020303266276652199L;
-
 	{
 		put("CO2_gas_lasers", "Газовые лазеры СО2");
 	    put("solid_state_lasers", "Твердотельные лазеры");
@@ -44,6 +44,15 @@ public class LaserController {
 	    put("diode_pumped", "С диодной накачкой");
 	    put("fiber_lasers", "Оптоволоконные лазеры");
 	    put("plasma_lasers", "Плазменные лазеры");	    
+	}};
+	
+	private Map<String, String> parametersOnAdminProductsPage = new HashMap<String, String>(){
+		private static final long serialVersionUID = 6020303266276652199L;
+	{
+		put(ATTRIBUTE_TITLE_OF_TABLE, "Список загруженных лазеров");
+	    put(ATTRIBUTE_NAME_PRODUCT, "Имя лазера");
+	    put(ATTRIBUTE_TITLE, "Лазера");
+	    put(ATTRIBUTE_ADD_PRODUCT, "Добавить лазер");
 	}};
 	
 	private Logger logger = Logger.getLogger(LaserController.class);
@@ -63,12 +72,12 @@ public class LaserController {
     @Autowired
     PicturesContainer files;
  
-    private LaserService laserService;
+    private LaserService productService;
     
     @Autowired(required=true)
     @Qualifier(value="laserService")
     public void setPrinterService(LaserService ps){
-        this.laserService = ps;
+        this.productService = ps;
     }
     
     private UseWithProductService useWithProductService;
@@ -81,13 +90,12 @@ public class LaserController {
 
 	@RequestMapping(value = "/"+ TYPE +"s", method = RequestMethod.GET)	
     public String allProducts(Model model) {
-        model.addAttribute("listProducts", componets.makeLightWeightCollectionOfProduct(this.laserService.listShowOnSite()));
+        model.addAttribute(ATTRIBUTE_LIST_PRODUCTS, componets.makeLightWeightCollectionOfProduct(this.productService.listShowOnSite()));
         SearchLasers search = new SearchLasers();
         search.setPrise0(0);
         search.setPrise1(100000);
    
-        model.addAttribute("search", search);
-        model.addAttribute("type", TYPE);
+        model.addAttribute(ATTRIBUTE_SEARCH, search);
         logger.info(String.format("On '../%s' page.", CONCRETE_FOLDER));
         
         componets.setJSONtoModelAttribute(model, TYPE);
@@ -95,319 +103,314 @@ public class LaserController {
         return TYPE + "s";
     }
 	
-	@RequestMapping(value = "/"+ TYPE +"s/{type}", method = RequestMethod.GET)	
-    public String typeProducts(@PathVariable("type") String type, Model model) {
-        SearchLasers search = new SearchLasers();
+	@RequestMapping(value = "/"+ TYPE +"s/{subType}", method = RequestMethod.GET)	
+    public String typeProducts(@PathVariable("subType") String subType, Model model) {
+		SearchLasers search = new SearchLasers();
         String currentType = null;
    
-        if(links.containsKey(type)){
-        	currentType = links.get(type);
-        	logger.info(String.format("On the /%s/%s page.", CONCRETE_FOLDER, type));
+        if(links.containsKey(subType)){
+        	currentType = links.get(subType);
+        	logger.info(String.format("On the /%s/%s page.", CONCRETE_FOLDER, subType));
         } else {
         	return "redirect:/";
         }
         
         String[] a = {currentType};
-        search.setTypeLaser(a);
+        search.setTypeProduct(a);
         search.setPrise0(0);
         search.setPrise1(100000);
-        model.addAttribute("search", search);
-        model.addAttribute("listProducts", componets.makeLightWeightCollectionOfProduct(laserService.listSearchProducts(search)));
-        model.addAttribute("type", TYPE);
+        model.addAttribute(ATTRIBUTE_SEARCH, search);
+        model.addAttribute(ATTRIBUTE_LIST_PRODUCTS, componets.makeLightWeightCollectionOfProduct(productService.listSearchProducts(search)));
         
         componets.setJSONtoModelAttribute(model, TYPE);
         
-        return TYPE +"s/" + type ;
+        return TYPE +"s/" + subType ;
     }
 
-    @RequestMapping(value="/"+ TYPE +"s/search",method=RequestMethod.POST, produces = "application/json; charset=utf-8")
+    @RequestMapping(value="/"+ TYPE +"s/"+ PATH_SEARCH, method=RequestMethod.POST, produces=JSON_PRODUCES)
     public @ResponseBody ArrayList<JSONObject> showSearchProducts(@ModelAttribute(value="search") SearchLasers search, BindingResult result ){
-    	logger.info(String.format("On the /%s/search page.", TYPE));
-    	return componets.makeLightWeightCollectionOfProduct(laserService.listSearchProducts(search));
+    	logger.info(String.format("Go to the /%s/%s page.", TYPE, PATH_SEARCH));
+    	return componets.makeLightWeightCollectionOfProduct(productService.listSearchProducts(search));
     }
 	
     @RequestMapping("/"+ TYPE +"/{id}")
     public String showProduct(@PathVariable("id") long id, Model model){
     	logger.info(String.format("On /%s/%d page.", TYPE, id));
         
-        Laser product = laserService.getProductById(id);
-        model.addAttribute("product", product);
-        model.addAttribute("type", TYPE);
-        
-        model.addAttribute("uwp", product.getIdUseWithProduct()!=null ?
-        		componets.showSimplestArrayOfUseWithProduct(
-        				useWithProductService.getProductsByIds(product.getIdUseWithProduct())) : null);
+        Laser product = productService.getProductById(id);
+        model.addAttribute(ATTRIBUTE_PRODUCT, product);
+        model.addAttribute(ATTRIBUTE_TYPE, TYPE);       
+        model.addAttribute(ATTRIBUTE_UWP, product.getIdUseWithProduct()!=null ?
+        		componets.showSimplestArrayOfUseWithProduct(useWithProductService.getProductsByIds(product.getIdUseWithProduct())) : null);
         
         return TYPE;
     }
     
-	@RequestMapping(value = "/admin/"+ TYPE +"s", method = RequestMethod.GET)	
+	@RequestMapping(value = "/" + PATH_ADMIN + "/"+ TYPE +"s", method = RequestMethod.GET)	
     public String listProducts(Model model) {
-		model.addAttribute("titleOfTable", "Список загруженных лазеров");
-        model.addAttribute("listProducts", laserService.listProducts("id"));
-        logger.info(String.format("/admin/%s page.", CONCRETE_FOLDER));
+		model.addAttribute(ATTRIBUTE_TITLE_OF_TABLE, parametersOnAdminProductsPage.get(ATTRIBUTE_TITLE_OF_TABLE));
+        model.addAttribute(ATTRIBUTE_LIST_PRODUCTS, productService.listProducts("id"));
+        logger.info(String.format("/%s/%s page.", PATH_ADMIN, CONCRETE_FOLDER));
         
-        model.addAttribute("productType", TYPE);
-		model.addAttribute("nameProduct", "Имя лазера");
-        model.addAttribute("title", "Лазера");
-        model.addAttribute("addProduct", "Добавить лазер");
-        model.addAttribute("productSubType", "none");
-        return "admin/products";
+        model.addAttribute(ATTRIBUTE_PRODUCT_TYPE, TYPE);
+		model.addAttribute(ATTRIBUTE_NAME_PRODUCT, parametersOnAdminProductsPage.get(ATTRIBUTE_NAME_PRODUCT));
+        model.addAttribute(ATTRIBUTE_TITLE, parametersOnAdminProductsPage.get(ATTRIBUTE_TITLE));
+        model.addAttribute(ATTRIBUTE_ADD_PRODUCT, parametersOnAdminProductsPage.get(ATTRIBUTE_ADD_PRODUCT));
+        model.addAttribute(ATTRIBUTE_PRODUCT_SUB_TYPE, "none");
+        return PATH_ADMIN +"/"+ PATH_PRODUCTS;
     }
 	
-	@RequestMapping(value = "/admin/"+ TYPE +"s/{type}", method = RequestMethod.GET)	
+	@RequestMapping(value = "/" + PATH_ADMIN + "/"+ TYPE +"s/{type}", method = RequestMethod.GET)	
     public String listConcreteTypeProducts(@PathVariable("type") String type, Model model) {
 		
 		List<Laser> listResult = new ArrayList<Laser>();
         
         if(links.containsKey(type)){
-        	for(Laser laser : laserService.listProducts("id")){
-        		if(laser.getTypeLaser().equals(links.get(type))){
-        			listResult.add(laser);
+        	for(Laser product : productService.listProducts("id")){
+        		if(product.getTypeProduct().equals(links.get(type))){
+        			listResult.add(product);
         		}
         	}
-        	model.addAttribute("productSubType", type);
-        	model.addAttribute("titleOfTable", "Список загруженных лазеров " + links.get(type).toLowerCase());
-            model.addAttribute("listProducts", listResult);
-            logger.info(String.format("On /admin/%s/%s page.", CONCRETE_FOLDER, type));
+        	model.addAttribute(ATTRIBUTE_PRODUCT_SUB_TYPE, type);
+        	model.addAttribute(ATTRIBUTE_TITLE_OF_TABLE, parametersOnAdminProductsPage.get(ATTRIBUTE_TITLE_OF_TABLE) + " " + links.get(type).toLowerCase());
+            model.addAttribute(ATTRIBUTE_LIST_PRODUCTS, listResult);
+            logger.info(String.format("On /%s/%s/%s page.", PATH_ADMIN, CONCRETE_FOLDER, type));
         } else {
-        	model.addAttribute("productSubType", "none");
-    		model.addAttribute("titleOfTable", "Список загруженных лазеров");
-            model.addAttribute("listProducts", laserService.listProducts("id"));
-            logger.info(String.format("On /admin/%s page.", CONCRETE_FOLDER));
+        	model.addAttribute(ATTRIBUTE_PRODUCT_SUB_TYPE, "none");
+    		model.addAttribute(ATTRIBUTE_TITLE_OF_TABLE, parametersOnAdminProductsPage.get(ATTRIBUTE_TITLE_OF_TABLE));
+            model.addAttribute(ATTRIBUTE_LIST_PRODUCTS, productService.listProducts("id"));
+            logger.info(String.format("On /%s/%s page.", PATH_ADMIN, CONCRETE_FOLDER));
         }
         
-        model.addAttribute("productType", TYPE);
-		model.addAttribute("nameProduct", "Имя лазера");
-        model.addAttribute("title", "Лазера");
-        model.addAttribute("addProduct", "Добавить лазер");
+        model.addAttribute(ATTRIBUTE_PRODUCT_TYPE, TYPE);
+		model.addAttribute(ATTRIBUTE_NAME_PRODUCT, parametersOnAdminProductsPage.get(ATTRIBUTE_NAME_PRODUCT));
+        model.addAttribute(ATTRIBUTE_TITLE, parametersOnAdminProductsPage.get(ATTRIBUTE_TITLE));
+        model.addAttribute(ATTRIBUTE_ADD_PRODUCT, parametersOnAdminProductsPage.get(ATTRIBUTE_ADD_PRODUCT));
         
-        return "admin/products";
+        return PATH_ADMIN +"/"+ PATH_PRODUCTS;
     }
 	
-	@RequestMapping(value="/admin/"+ TYPE +"/{type}/sorting/{value}", method = RequestMethod.POST,consumes="application/json",
-    		headers = "content-type=application/x-www-form-urlencoded")
+	@RequestMapping(value="/"+PATH_ADMIN+"/"+TYPE+"/{type}/"+PATH_SORTING+"/{value}",method=RequestMethod.POST,consumes=JSON_CONSUMES,headers=JSON_HEADERS)
     public @ResponseBody List<Laser> sortingProductsInAdmin(@PathVariable("type") String type, @PathVariable("value") String value) {
 		
 		List<Laser> list = new ArrayList<Laser>();
 
 		if (links.containsKey(type)) {
 
-			for (Laser laser : laserService.listProducts(value)) {
-				if (laser.getTypeLaser().equals(links.get(type))) 
-					list.add(laser);
+			for (Laser product : productService.listProducts(value)) {
+				if (product.getTypeProduct().equals(links.get(type))) 
+					list.add(product);
 			}
 
 		} else {
-			list.addAll(laserService.listProducts(value));
+			list.addAll(productService.listProducts(value));
 		}
 
 		return list;
     }
 	
-	@RequestMapping(value = "/admin/"+ TYPE +"/new", method = RequestMethod.GET)
+	@RequestMapping(value = "/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_NEW, method = RequestMethod.GET)
 	public String addNewProduct(Model model) {
 		files.clear();
-		logger.info(String.format("/admin/%s/new page.", TYPE));
-		model.addAttribute("product", new Laser());
+		logger.info(String.format("/%s/%s/%s page.", PATH_ADMIN, PATH_NEW, TYPE));
+		model.addAttribute(ATTRIBUTE_PRODUCT, new Laser());
 		
 		componets.setJSONtoModelAttribute(model, TYPE);
 		
-		model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
-		model.addAttribute("type", TYPE);
-		model.addAttribute("productId", 0);
-	    return "admin/"+ TYPE;
+		model.addAttribute(ATTRIBUTE_UWP, componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+		model.addAttribute(ATTRIBUTE_TYPE, TYPE);
+		model.addAttribute(ATTRIBUTE_PRODUCT_ID, 0);
+	    return PATH_ADMIN + "/"+ TYPE;
 	}
 	
-	@RequestMapping(value = "/admin/"+ TYPE +"/copy/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_COPY +"/{id}", method = RequestMethod.GET)
 	public String copyProduct(@PathVariable("id") long id, Model model) {
 		files.clear();
-		logger.info(String.format("/admin/%s/copy/%d page.", TYPE, id));
+		logger.info(String.format("/%s/%s/%s/%d page.", PATH_ADMIN, TYPE, PATH_COPY, id));
 		
 		logger.info(String.format("Copy all characteristic of %s.", TYPE));
-		Laser laser = laserService.getProductById(id);
+		Laser product = productService.getProductById(id);
 		
 		 /* copy pictures to buffer */
-		 componets.copyPicturesToBuffer( laser.getPathPictures(), DIRECTORY, CONCRETE_FOLDER, id, files );
+		 componets.copyPicturesToBuffer( product.getPathPictures(), DIRECTORY, CONCRETE_FOLDER, id, files );
 		
 		 /* set null to id because we must get create new product operation */
-	     laser.setId(null);
-		 model.addAttribute("product", laser);
-		 model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
-		 model.addAttribute("type", TYPE);
-		 model.addAttribute("productId", id);
+	     product.setId(null);
+		 model.addAttribute(ATTRIBUTE_PRODUCT, product);
+		 model.addAttribute(ATTRIBUTE_UWP, componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+		 model.addAttribute(ATTRIBUTE_TYPE, TYPE);
+		 model.addAttribute(ATTRIBUTE_PRODUCT_ID, id);
 		 
 		 componets.setJSONtoModelAttribute(model, TYPE);
-	    return "admin/"+ TYPE +"";
+	    return PATH_ADMIN +"/"+ TYPE;
 	}
      
-	@RequestMapping(value = "/admin/"+ TYPE +"/add", method = RequestMethod.POST) 
-	public String handleFormUpload(@ModelAttribute("product") @Valid Laser product,
+	@RequestMapping(value = "/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_ADD, method = RequestMethod.POST) 
+	public String handleFormUpload(@ModelAttribute(MODEL_ATTRIBUTE_PRODUCT) @Valid Laser product,
 			BindingResult result, Model model){
 
 		if (result.hasErrors()) return adminFormHasError(product, model);
 
-		long id = laserService.addProduct(product);
+		long id = productService.addProduct(product);
 		logger.info(String.format("Create new %s! With id=%d", TYPE, id));
 
 		// create folder and add to her new pictures
 		product.getPathPictures()
 				.addAll(componets.createFolderAndWriteToItPictures(DIRECTORY, CONCRETE_FOLDER, id, files));
 
-		this.laserService.updateProduct(product);
+		this.productService.updateProduct(product);
 
 		files.clear();
 
-		linksForProduct.createLinks(laserService.listShowOnSite());
+		linksForProduct.createLinks(productService.listShowOnSite());
 
 		if (product.isShowOnSite() && product.isShowOnLeftSide())
 			componets.updateInLeftField(product, true, TYPE);
 
 		logger.info("Update links to the products in left menu!");
-		return "redirect:/admin/"+ TYPE +"s";
+		return "redirect:/" + PATH_ADMIN + "/"+ TYPE +"s";
 	}
 	
-	@RequestMapping(value = "/admin/"+ TYPE +"/save_add", method = RequestMethod.POST) 
-	public String handleFormUploadSave(@ModelAttribute("product") @Valid Laser product,
+	@RequestMapping(value = "/" + PATH_ADMIN +"/"+ TYPE +"/"+ PATH_SAVE_ADD, method = RequestMethod.POST) 
+	public String handleFormUploadSave(@ModelAttribute(MODEL_ATTRIBUTE_PRODUCT) @Valid Laser product,
 			BindingResult result, Model model){
 
 		if (result.hasErrors()) return adminFormHasError(product, model);
 
-		long id = laserService.addProduct(product);
+		long id = productService.addProduct(product);
 		logger.info(String.format("Create new %s! With id=%d", TYPE, id));
 
 		// create folder and add to her new pictures
 		product.getPathPictures().addAll(componets.createFolderAndWriteToItPictures(DIRECTORY, CONCRETE_FOLDER, id, files));
 
-		this.laserService.updateProduct(product);
+		this.productService.updateProduct(product);
 
 		files.clear();
 
-		linksForProduct.createLinks(laserService.listShowOnSite());
+		linksForProduct.createLinks(productService.listShowOnSite());
 
 		if (product.isShowOnSite() && product.isShowOnLeftSide())
 			componets.updateInLeftField(product, true, TYPE);
 
 		logger.info("Update links to the products in left menu!");
-		return "redirect:/admin/" + TYPE + "/edit/" + id;
+		return "redirect:/" + PATH_ADMIN + "/" + TYPE + "/"+ PATH_EDIT +"/" + id;
 	}
 	
-    @RequestMapping("/admin/"+ TYPE +"/edit/{id}")
+    @RequestMapping("/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_EDIT +"/{id}")
     public String editProduct(@PathVariable("id") long id, Model model){
-    	logger.info(String.format("Begin editing %s with id=%d", TYPE, id));
-    	Laser undateLaser = laserService.getProductById(id);
     	
-        model.addAttribute("product", undateLaser);
-        model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(
+    	logger.info(String.format("Begin editing %s with id=%d", TYPE, id));
+    	Laser undateProduct = productService.getProductById(id);
+    	
+        model.addAttribute(ATTRIBUTE_PRODUCT, undateProduct);
+        model.addAttribute(ATTRIBUTE_UWP, componets.showSimplestArrayOfUseWithProduct(
         		useWithProductService.listShowOnSite()));
-        model.addAttribute("type", TYPE);
+        model.addAttribute(ATTRIBUTE_TYPE, TYPE);
         componets.setJSONtoModelAttribute(model, TYPE);
         
-        return "admin/" + TYPE;
+        return PATH_ADMIN + "/" + TYPE;
     }
 	
-	@RequestMapping(value = "/admin/" + TYPE + "/save_update", method = RequestMethod.POST) 
-	public String updateSaveProduct(@ModelAttribute("product") @Valid Laser product,
+	@RequestMapping(value = "/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_SAVE_UPDATE, method = RequestMethod.POST) 
+	public String updateSaveProduct(@ModelAttribute(MODEL_ATTRIBUTE_PRODUCT) @Valid Laser product,
 			BindingResult result, Model model){
 		
 		if (result.hasErrors()) return adminFormHasError(product, model);
 		
 		logger.info(String.format("%s UPDATE with save, id=%d", TYPE, product.getId()));
 		
-		List<String> pathPictures = laserService.getProductById(product.getId()).getPathPictures();
+		List<String> pathPictures = productService.getProductById(product.getId()).getPathPictures();
 		product.setPathPictures(pathPictures);
         
-		laserService.updateProduct(product);
+		productService.updateProduct(product);
         logger.info(String.format("%s with id=%d was UDPATED", TYPE, product.getId()));
 		  
-		linksForProduct.createLinks(laserService.listShowOnSite());
+		linksForProduct.createLinks(productService.listShowOnSite());
 	
 		if (product.isShowOnSite() && product.isShowOnLeftSide())
 	    	componets.updateInLeftField(product, true, TYPE);
 		  
 		logger.info("Update links to the products in left menu!");
-		return "redirect:/admin/" + TYPE + "/edit/" + product.getId();
+		return "redirect:/" + PATH_ADMIN + "/" + TYPE + "/"+ PATH_EDIT +"/" + product.getId();
 	}
 	
-	@RequestMapping(value = "/admin/" + TYPE + "/update", method = RequestMethod.POST) 
-	public String updateProduct(@ModelAttribute("product") @Valid Laser product,
+	@RequestMapping(value = "/" + PATH_ADMIN +"/"+ TYPE +"/"+ PATH_UPDATE, method = RequestMethod.POST) 
+	public String updateProduct(@ModelAttribute(MODEL_ATTRIBUTE_PRODUCT) @Valid Laser product,
 			BindingResult result, Model model){
 		
 		if (result.hasErrors()) return adminFormHasError(product, model);
 
 		logger.info(String.format("%s UPDATE id=%d", TYPE, product.getId()));
-		List<String> pathPictures = laserService.getProductById(product.getId()).getPathPictures();
+		List<String> pathPictures = productService.getProductById(product.getId()).getPathPictures();
 		product.setPathPictures(pathPictures);
 
-		laserService.updateProduct(product);
+		productService.updateProduct(product);
 		logger.info(String.format("%s with id=%d was UDPATED", TYPE, product.getId()));
 
 		files.clear();
 
-		linksForProduct.createLinks(laserService.listShowOnSite());
+		linksForProduct.createLinks(productService.listShowOnSite());
 
 		if (product.isShowOnSite() && product.isShowOnLeftSide())
 			componets.updateInLeftField(product, true, TYPE);
 
 		logger.info("Update links to the products in left menu!");
-		return "redirect:/admin/" + TYPE + "s";
+		return "redirect:/" + PATH_ADMIN +"/"+ TYPE + "s";
 	}
 	
 	private String adminFormHasError(Laser product, Model model){
-		model.addAttribute("product", product);
-		model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
-		model.addAttribute("type", TYPE);
+		model.addAttribute(ATTRIBUTE_PRODUCT, product);
+		model.addAttribute(ATTRIBUTE_UWP, componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+		model.addAttribute(ATTRIBUTE_TYPE, TYPE);
 		
 		componets.setJSONtoModelAttribute(model, TYPE);
-        return "admin/" + TYPE;
+        return PATH_ADMIN + "/" + TYPE;
 	}
 	
-    @RequestMapping(value="/admin/" + TYPE + "/upload_pictures", method = RequestMethod.POST)
+    @RequestMapping(value="/" + PATH_ADMIN + "/" + TYPE + "/"+ PATH_UPLOAD_PICTURES, method = RequestMethod.POST)
     public @ResponseBody String uploadPictures(MultipartHttpServletRequest request) {
          return componets.uploadPictureOnCreationProduct(request, files);
     }
     
-    @RequestMapping(value="/admin/" + TYPE + "/change_order_pictures", method = RequestMethod.POST,consumes="application/json",
-    		headers = "content-type=application/x-www-form-urlencoded")
+    @RequestMapping(value="/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_CHANGE_ORDER_PICTURES, method = RequestMethod.POST,consumes=JSON_CONSUMES,headers = JSON_HEADERS)
     public @ResponseBody void changeOrderPictures(@RequestBody List<String> selectedIds) {
     	componets.changeOrderPictures(CONCRETE_FOLDER, selectedIds, files); 	  	
     }
     
-    @RequestMapping(value="/admin/" + TYPE + "/remove_picture/{name_picture}", method = RequestMethod.POST,consumes="application/json",
-    		headers = "content-type=application/x-www-form-urlencoded")
+    @RequestMapping(value="/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_REMOVE_PICTURE +"/{name_picture}", method = RequestMethod.POST,consumes=JSON_CONSUMES,
+    		headers = JSON_HEADERS)
     public @ResponseBody void removePicture(@PathVariable("name_picture") String namePicture) {
     	componets.removePictureFromPicturesContainer(CONCRETE_FOLDER, namePicture, files);
     }
     
-    @RequestMapping(value="/admin/" + TYPE + "/upload_pictures_update/{id}", method = RequestMethod.POST)
+    @RequestMapping(value="/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_UPLOAD_PICTURES_UPDATE +"/{id}", method = RequestMethod.POST)
     public @ResponseBody String uploadPicturesUpdate(MultipartHttpServletRequest request, @PathVariable("id") long id) {
-    		 
-    	String nameOfAddedPicture = componets.uploadPictureToExistedProduct(request, DIRECTORY, CONCRETE_FOLDER, id);
     	
- 		Laser product = laserService.getProductById(id);
+    	String nameOfAddedPicture = componets.uploadPictureToExistedProduct(request, DIRECTORY, CONCRETE_FOLDER, id);   	
+    	Laser product = productService.getProductById(id);
  		product.getPathPictures().add(nameOfAddedPicture);
- 		laserService.updateProduct(product);
+ 		productService.updateProduct(product);
          
        return nameOfAddedPicture;
     }
     
-    @RequestMapping(value="/admin/" + TYPE + "/change_order_pictures_update/{id}", method = RequestMethod.POST,consumes="application/json",
-    		headers = "content-type=application/x-www-form-urlencoded")
+    @RequestMapping(value="/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_CHANGE_ORDER_PICTURES_UPDATE +"/{id}", method = RequestMethod.POST,consumes=JSON_CONSUMES,
+    		headers = JSON_HEADERS)
     public @ResponseBody void changeOrderPicturesUpdate(@RequestBody List<String> selectedIds, @PathVariable("id") long id) {
     	logger.info(String.format("change order of pictures in changed %s product", TYPE));
     	
-    	Laser product = laserService.getProductById(id);
+    	Laser product = productService.getProductById(id);
     	product.getPathPictures().clear();
     	product.getPathPictures().addAll(selectedIds);
-    	laserService.updateProduct(product);
+    	productService.updateProduct(product);
     }
     
-    @RequestMapping(value="/admin/" + TYPE + "/remove_picture_update/{name_picture}/{id}", method = RequestMethod.POST,consumes="application/json",
-    		headers = "content-type=application/x-www-form-urlencoded")
+    @RequestMapping(value="/"+PATH_ADMIN+"/"+TYPE+"/"+PATH_REMOVE_PICTURE_UPDATE+"/{name_picture}/{id}", method = RequestMethod.POST,consumes=JSON_CONSUMES,
+    		headers = JSON_HEADERS)
     public @ResponseBody void removePicture(@PathVariable("name_picture") String namePicture, @PathVariable("id") long id) {
     	
     	String name = namePicture.replace(":", ".");
-    	Laser product = laserService.getProductById(id);
+    	Laser product = productService.getProductById(id);
     	product.getPathPictures().remove(name);
     	
     	componets.removePicture(name, DIRECTORY, CONCRETE_FOLDER, id);
@@ -419,60 +422,55 @@ public class LaserController {
     	
     	logger.info(String.format("Remove pictore with name = %s from changed %s product", name, TYPE));
 
-    	laserService.updateProduct(product);
+    	productService.updateProduct(product);
     }
     
-    @RequestMapping("/admin/" + TYPE + "/remove/{id}")
+    @RequestMapping("/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_REMOVE +"/{id}")
     public String removeProduct(@PathVariable("id") long id){
     	logger.info(String.format("Start deleting %s from database, id=%d", TYPE, id));
     	
     	componets.removeAllPricturesOfConcreteProduct(DIRECTORY, CONCRETE_FOLDER, id);
     		
     	logger.info("Update links to the products in left menu!");
-    	componets.updateInLeftField(laserService.getProductById(id), false, TYPE);
+    	componets.updateInLeftField(productService.getProductById(id), false, TYPE);
     		
     	logger.info(String.format("DELETE %s with id=%d from database", TYPE, id));
-    	laserService.removeProduct(id);
+    	productService.removeProduct(id);
         
-    	linksForProduct.createLinks(laserService.listShowOnSite());
+    	linksForProduct.createLinks(productService.listShowOnSite());
     		
-        return "redirect:/admin/" + TYPE + "s";
+        return "redirect:/"+ PATH_ADMIN + "/" + TYPE + "s";
     }  
     
-    @RequestMapping(value="/admin/" + TYPE + "/showOnSite/{id}", method = RequestMethod.POST,consumes="application/json",
-    		headers = "content-type=application/x-www-form-urlencoded")
+    @RequestMapping(value="/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_SHOW_ON_SITE +"/{id}",method = RequestMethod.POST,consumes=JSON_CONSUMES,headers=JSON_HEADERS)
     public @ResponseBody void showOnSite(@PathVariable("id") long id, @RequestBody boolean value) {
-    	Laser laser = laserService.getProductById(id);
-    	laser.setShowOnSite(value);
-    	laserService.updateProduct(laser);
+    	Laser product = productService.getProductById(id);
+    	product.setShowOnSite(value);
+    	productService.updateProduct(product);
     	
-    	componets.updateInLeftField(laser, laser.isShowOnSite() && laser.isShowOnLeftSide() , TYPE);
-    	linksForProduct.createLinks(laserService.listShowOnSite());
+    	componets.updateInLeftField(product, product.isShowOnSite() && product.isShowOnLeftSide() , TYPE);
+    	linksForProduct.createLinks(productService.listShowOnSite());
     }
     
-    @RequestMapping(value="/admin/" + TYPE + "/setTop/{id}", method = RequestMethod.POST,consumes="application/json",
-    		headers = "content-type=application/x-www-form-urlencoded")
+    @RequestMapping(value="/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_SET_TOP +"/{id}",method = RequestMethod.POST,consumes=JSON_CONSUMES,headers = JSON_HEADERS)
     public @ResponseBody void setTop(@PathVariable("id") long id, @RequestBody boolean value) {
-    	Laser laser = laserService.getProductById(id);
-    	laser.setTop(value);
-    	laserService.updateProduct(laser);
+    	Laser product = productService.getProductById(id);
+    	product.setTop(value);
+    	productService.updateProduct(product);
     }
     
-    @RequestMapping(value="/admin/" + TYPE + "/showOnHomePage/{id}", method = RequestMethod.POST,consumes="application/json",
-    		headers = "content-type=application/x-www-form-urlencoded")
+    @RequestMapping(value="/"+PATH_ADMIN+"/"+TYPE+"/"+ PATH_SHOW_ON_HOME_PAGE+"/{id}",method=RequestMethod.POST,consumes=JSON_CONSUMES,headers=JSON_HEADERS)
     public @ResponseBody void showOnHomePage(@PathVariable("id") long id, @RequestBody boolean value) {
-    	Laser laser = laserService.getProductById(id);
-    	laser.setShowOnHomePage(value);
-    	laserService.updateProduct(laser);
+    	Laser product = productService.getProductById(id);
+    	product.setShowOnHomePage(value);
+    	productService.updateProduct(product);
     }
     
-    @RequestMapping(value="/admin/" + TYPE + "/showOnLeftSide/{id}", method = RequestMethod.POST,consumes="application/json",
-    		headers = "content-type=application/x-www-form-urlencoded")
+    @RequestMapping(value="/"+PATH_ADMIN+"/"+TYPE+"/"+PATH_SHOW_ON_LEFT_SIDE+"/{id}",method=RequestMethod.POST,consumes=JSON_CONSUMES,headers=JSON_HEADERS)
     public @ResponseBody void showOnLeftSide(@PathVariable("id") long id, @RequestBody boolean value) {
-    	Laser laser = laserService.getProductById(id);
-    	laser.setShowOnLeftSide(value);
-    	laserService.updateProduct(laser);
-    	
-    	componets.updateInLeftField(laser, laser.isShowOnSite() && laser.isShowOnLeftSide(), TYPE);
+    	Laser product = productService.getProductById(id);
+    	product.setShowOnLeftSide(value);
+    	productService.updateProduct(product);	
+    	componets.updateInLeftField(product, product.isShowOnSite() && product.isShowOnLeftSide(), TYPE);
     }
 }

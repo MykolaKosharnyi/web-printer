@@ -27,9 +27,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.printmaster.nk.beans.ComponentsForControllers;
 import com.printmaster.nk.beans.LinksForProducts;
 import com.printmaster.nk.beans.PicturesContainer;
-import com.printmaster.nk.model.Cutter;
 import com.printmaster.nk.model.Laminator;
-import com.printmaster.nk.model.SearchCutters;
 import com.printmaster.nk.model.SearchLaminators;
 import com.printmaster.nk.service.LaminatorService;
 import com.printmaster.nk.service.UseWithProductService;
@@ -91,7 +89,7 @@ public class LaminatorController {
 	@RequestMapping(value = "/"+ TYPE +"s", method = RequestMethod.GET)	
     public String allProducts(Model model) {
         model.addAttribute(ATTRIBUTE_LIST_PRODUCTS, componets.makeLightWeightCollectionOfProduct(this.productService.listShowOnSite()));
-        SearchCutters search = new SearchCutters();
+        SearchLaminators search = new SearchLaminators();
         search.setPrise0(0);
         search.setPrise1(100000);
    
@@ -213,7 +211,7 @@ public class LaminatorController {
 	public String addNewProduct(Model model) {
 		files.clear();
 		logger.info(String.format("/%s/%s/%s page.", PATH_ADMIN, PATH_NEW, TYPE));
-		model.addAttribute(ATTRIBUTE_PRODUCT, new Cutter());
+		model.addAttribute(ATTRIBUTE_PRODUCT, new Laminator());
 		
 		componets.setJSONtoModelAttribute(model, TYPE);
 		
