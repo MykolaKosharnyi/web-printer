@@ -178,7 +178,7 @@ public class ComponentsForControllers {
 		
 	}
 		
-    public void updateInLeftField(HeadProduct product, boolean isShow, String typeProduct){
+    public void updateInLeftField(Product product, boolean isShow, String typeProduct){
 		
     	ReklamProduct reklamProduct = new ReklamProduct();
         reklamProduct.setType(typeProduct);
@@ -205,52 +205,6 @@ public class ComponentsForControllers {
              
     }
     
-    public void updateInLeftField(Rip product, boolean isShow){
-		
-    	ReklamProduct reklamProduct = new ReklamProduct();
-        reklamProduct.setType("rip");
-        reklamProduct.setId(product.getId());
-        reklamProduct.setPartNumber(product.getPartNumber());
-        
-        reklamProduct.setLeftSharesLink(product.getLeftSharesLink());
-        reklamProduct.setLeftSharesLinkColorText(product.getLeftSharesLinkColorText());
-        reklamProduct.setLeftSharesLinkColorFone(product.getLeftSharesLinkColorFone());
-        
-        reklamProduct.setRightSharesLink(product.getRightSharesLink());
-        reklamProduct.setRightSharesLinkColorText(product.getRightSharesLinkColorText());
-        reklamProduct.setRightSharesLinkColorFone(product.getRightSharesLinkColorFone());
-        
-        reklamProduct.setPathToPicture(product.getPathPictures().get(0));
-        reklamProduct.setNameProduct(product.getName());
-        reklamProduct.setPriceProduct(product.getPrise());       
- 	
-        if(isShow){
-        	reklam.addReklam(reklamProduct); 
-        } else {
-        	reklam.deleteReklam(reklamProduct);
-        }
-             
-    }
-    
-    public void updateInLeftField(UseWithProduct product, boolean isShow){
-		
-    	ReklamProduct reklamProduct = new ReklamProduct();
-        reklamProduct.setType("use_with_product");
-        reklamProduct.setId(product.getId());
-        reklamProduct.setPartNumber(product.getPartNumber());
-        
-        reklamProduct.setPathToPicture(product.getPathPictures().get(0));
-        reklamProduct.setNameProduct(product.getName());
-        reklamProduct.setPriceProduct(product.getPrise());       
- 	
-        if(isShow){
-        	reklam.addReklam(reklamProduct); 
-        } else {
-        	reklam.deleteReklam(reklamProduct);
-        }
-             
-    }
-    
     /**
      * Adding to model json file with characteristic of this type product
      * @param model in which added json file of this type of product
@@ -260,8 +214,8 @@ public class ComponentsForControllers {
     	if(typeOfProduct.equals("printer")){//separate for printers because they need to sort by equipment
     		
     		try {
-				model.addAttribute("printer", sortEquipment((JSONObject)new JSONParser()
-						.parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/printer.json"), "UTF-8"))));
+				model.addAttribute(typeOfProduct, sortEquipment((JSONObject)new JSONParser()
+						.parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/" + typeOfProduct + ".json"), "UTF-8"))));
 			} catch (IOException | ParseException e) {
 				logger.error("Error in read " + typeOfProduct + ".json file", e); 
 			}

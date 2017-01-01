@@ -34,7 +34,6 @@ public class PreviousUsedEqvipmentController {
 	        this.pueService = ps;
 	    }
  
-	
 	@RequestMapping(value = "/previous_use_equipments", method = RequestMethod.GET)	
     public String allProduct(Model model) {
 		

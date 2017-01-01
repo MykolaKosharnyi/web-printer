@@ -35,10 +35,8 @@ public class PicturesMenuController {
 	
 	private Logger logger = Logger.getLogger(PicturesMenuController.class);
 	
-	private final static String DIRECTORY = "/var/www/localhost/images";
-	
+	private final static String DIRECTORY = "/var/www/localhost/images";	
 	private final static String CONCRETE_FOLDER = "menu";
-	
 	private final static String PATH_TO_JSON_FILE = "/var/www/localhost" + File.separator + "pictures_head_menu.json";
 	
 	@Autowired
