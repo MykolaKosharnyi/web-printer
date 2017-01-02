@@ -1,24 +1,20 @@
 package com.printmaster.nk.controller;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.nio.file.Files;
+import static com.printmaster.nk.controller.ControllerConstants.*;
+
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Random;
+import java.util.Map;
 
 import javax.validation.Valid;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,11 +22,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.printmaster.nk.beans.ComponentsForControllers;
-import com.printmaster.nk.beans.FileMeta;
 import com.printmaster.nk.beans.LinksForProducts;
 import com.printmaster.nk.beans.PicturesContainer;
 import com.printmaster.nk.model.SearchUseWithProducts;
@@ -40,13 +34,33 @@ import com.printmaster.nk.service.UseWithProductService;
 @Controller
 public class UseWithProductController {
 	
+	private Map<String, String> links = new HashMap<String, String>(){
+		private static final long serialVersionUID = 6020303266276652199L;
+	{
+	    put("ink_for_inkjet", "Чернила для струйной печати");
+	    put("consumables_for_digital_equipment", "Расходные материалы для цифрового оборудования");
+	    put("consumables_for_3D_equipment", "Расходные материалы для 3D оборудования");
+	    put("products_for_maintenance", "Товары для обслуживания");
+	    put("parts_and_accessories", "Запчасти и комплектующие");
+	}};
+	
+	private Map<String, String> parametersOnAdminProductsPage = new HashMap<String, String>(){
+		private static final long serialVersionUID = 6020303266276652199L;
+	{
+		put(ATTRIBUTE_TITLE_OF_TABLE, "Список загруженного товара");
+	    put(ATTRIBUTE_NAME_PRODUCT, "Имя товара");
+	    put(ATTRIBUTE_TITLE, "Используется с товаром");
+	    put(ATTRIBUTE_ADD_PRODUCT, "Добавить товар");
+	}};
+	
 	private Logger logger = Logger.getLogger(UseWithProductController.class);
 	
-	private String directory = "/var/www/localhost/images";
-	private String concreteFolder = "use_with_products";
+	private final static String DIRECTORY = "/var/www/localhost/images";
+	private static final String TYPE = "use_with_product";
+	private final static String CONCRETE_FOLDER = TYPE + "s";
 	
 	@Autowired
-	private LinksForProducts links;
+	private LinksForProducts linksForProduct;
 
     @Autowired
     PicturesContainer files;
@@ -61,470 +75,327 @@ public class UseWithProductController {
     public void setUseWithProductService(UseWithProductService ps){
         this.useWithProductService = ps;
     }
-	
-	@RequestMapping(value = "/use_with_products", method = RequestMethod.GET)	
-    public String allUWP(Model model) {
-		
-        model.addAttribute("listProducts", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+
+	@RequestMapping(value = "/"+ TYPE +"s", method = RequestMethod.GET)	
+    public String allProducts(Model model) {
+        model.addAttribute(ATTRIBUTE_LIST_PRODUCTS, componets.makeLightWeightCollectionOfProduct(this.useWithProductService.listShowOnSite()));
         SearchUseWithProducts search = new SearchUseWithProducts();
         search.setPrise0(0);
         search.setPrise1(100000);
    
-        model.addAttribute("search", search);
-        model.addAttribute("type", "use_with_product");
-        logger.info("On '../use_with_products' page.");
+        model.addAttribute(ATTRIBUTE_SEARCH, search);
+        logger.info(String.format("On '../%s' page.", CONCRETE_FOLDER));
         
-        logger.info("All characteristic of 'Use with product'.");
-        componets.setJSONtoModelAttribute(model, "use_with_product");
-        return "use_with_products";
+        componets.setJSONtoModelAttribute(model, TYPE);
+        
+        return TYPE + "s";
     }
 	
-	@RequestMapping(value = "/use_with_products/{type}", method = RequestMethod.GET)	
-    public String typeUWPs(@PathVariable("type") String type, Model model) {
-        SearchUseWithProducts search = new SearchUseWithProducts();
+	@RequestMapping(value = "/"+ TYPE +"s/{subType}", method = RequestMethod.GET)	
+    public String typeProducts(@PathVariable("subType") String subType, Model model) {
+		SearchUseWithProducts search = new SearchUseWithProducts();
         String currentType = null;
-
-        	if(type.equals("ink_for_inkjet")){
-        		currentType = "Чернила для струйной печати";
-        		logger.info("On the /use_with_product/" + type + " page.");
-        		
-        	} else if(type.equals("consumables_for_digital_equipment")){
-        		currentType = "Расходные материалы для цифрового оборудования";
-        		logger.info("On the /use_with_product/" + type + " page.");
-        		
-        	} else if(type.equals("consumables_for_3D_equipment")){
-        		currentType = "Расходные материалы для 3D оборудования";
-        		logger.info("On the /use_with_product/" + type + " page.");
-        		
-        	} else if(type.equals("products_for_maintenance")){
-        		currentType = "Товары для обслуживания";
-        		logger.info("On the /use_with_product/" + type + " page.");
-        		
-        	} else if(type.equals("parts_and_accessories")){
-        		currentType = "Запчасти и комплектующие";
-        		logger.info("On the /use_with_product/" + type + " page.");
-        		
-        	} else {
-        		return "redirect:/";
-        	}
+   
+        if(links.containsKey(subType)){
+        	currentType = links.get(subType);
+        	logger.info(String.format("On the /%s/%s page.", CONCRETE_FOLDER, subType));
+        } else {
+        	return "redirect:/";
+        }
         
         String[] a = {currentType};
         search.setTypeProduct(a);
         search.setPrise0(0);
         search.setPrise1(100000);
-        model.addAttribute("search", search);        
-        model.addAttribute("listProducts", componets.showSimplestArrayOfUseWithProduct(useWithProductService.listSearchProducts(search)));
-        model.addAttribute("type", "use_with_product");
+        model.addAttribute(ATTRIBUTE_SEARCH, search);
+        model.addAttribute(ATTRIBUTE_LIST_PRODUCTS, componets.makeLightWeightCollectionOfProduct(useWithProductService.listSearchProducts(search)));
         
-        logger.info("All characteristic of 'Use with product'.");
-        componets.setJSONtoModelAttribute(model, "use_with_product");
-        return "use_with_products/" + type ;
-    }
-
-    @RequestMapping(value="/use_with_products/search",method=RequestMethod.POST, produces = "application/json; charset=utf-8")
-    public @ResponseBody ArrayList<JSONObject> showSearchUWPs(@ModelAttribute(value="search") SearchUseWithProducts search, BindingResult result ){
-    	logger.info("On the /use_with_product/search page.");
-    	return componets.showSimplestArrayOfUseWithProduct(useWithProductService.listSearchProducts(search));
-    }
-	
-    @RequestMapping("/use_with_product/{id}")
-    public String showUWP(@PathVariable("id") long id, Model model){
-    	logger.info("/use_with_product/" + id + " page.");
-        model.addAttribute("product", useWithProductService.getProductById(id));
-        model.addAttribute("type", "use_with_product");
-        return "use_with_product";
+        componets.setJSONtoModelAttribute(model, TYPE);
+        
+        return TYPE +"s/" + subType ;
     }
     
-	@RequestMapping(value = "/admin/use_with_products", method = RequestMethod.GET)	
-    public String listUWPs(Model model){
-		model.addAttribute("productType", "use_with_product");
-		model.addAttribute("nameProduct", "Имя товара");
-		model.addAttribute("titleOfTable", "Список загруженного товара");
-        model.addAttribute("listProducts", useWithProductService.listProducts("id"));
-        model.addAttribute("title", "Используется с товаром");
-        model.addAttribute("addProduct", "Добавить товар");
-        model.addAttribute("productSubType", "none");
-        logger.info("/admin/use_with_products page.");
-        return "admin/products";
+    @RequestMapping(value="/"+ TYPE +"s/"+ PATH_SEARCH, method=RequestMethod.POST, produces=JSON_PRODUCES)
+    public @ResponseBody ArrayList<JSONObject> showSearchProducts(@ModelAttribute(value="search") SearchUseWithProducts search, BindingResult result ){
+    	logger.info(String.format("Go to the /%s/%s page.", TYPE, PATH_SEARCH));
+    	return componets.makeLightWeightCollectionOfProduct(useWithProductService.listSearchProducts(search));
+    }
+
+    @RequestMapping("/"+ TYPE +"/{id}")
+    public String showProduct(@PathVariable("id") long id, Model model){
+    	logger.info(String.format("On /%s/%d page.", TYPE, id));
+        
+    	UseWithProduct product = useWithProductService.getProductById(id);
+        model.addAttribute(ATTRIBUTE_PRODUCT, product);
+        model.addAttribute(ATTRIBUTE_TYPE, TYPE);       
+        
+        return TYPE;
     }
 	
-	@RequestMapping(value = "/admin/use_with_products/{type}", method = RequestMethod.GET)	
-    public String listConcreteTypeUWPs(@PathVariable("type") String type, Model model) {
+	@RequestMapping(value = "/" + PATH_ADMIN + "/"+ TYPE +"s", method = RequestMethod.GET)	
+    public String listProducts(Model model) {
+		model.addAttribute(ATTRIBUTE_TITLE_OF_TABLE, parametersOnAdminProductsPage.get(ATTRIBUTE_TITLE_OF_TABLE));
+        model.addAttribute(ATTRIBUTE_LIST_PRODUCTS, useWithProductService.listProducts("id"));
+        logger.info(String.format("/%s/%s page.", PATH_ADMIN, CONCRETE_FOLDER));
         
-		List<UseWithProduct> list = new ArrayList<UseWithProduct>();
-		
-        if(type.equals("ink_for_inkjet")){
-        	
-        	for(UseWithProduct useWithProduct : useWithProductService.listProducts("id")){
-        		if(useWithProduct.getTypeProduct().equals("Чернила для струйной печати")){
-        			list.add(useWithProduct);
-        		}
-        	}
-        	model.addAttribute("productSubType", "ink_for_inkjet");
-        	model.addAttribute("titleOfTable", "Чернила для струйной печати");
-            model.addAttribute("listProducts", list);
-    		
-    	} else if(type.equals("consumables_for_digital_equipment")){
-        	
-        	for(UseWithProduct useWithProduct : useWithProductService.listProducts("id")){
-        		if(useWithProduct.getTypeProduct().equals("Расходные материалы для цифрового оборудования")){
-        			list.add(useWithProduct);
-        		}
-        	}
-        	model.addAttribute("productSubType", "consumables_for_digital_equipment");
-        	model.addAttribute("titleOfTable", "Расходные материалы для цифрового оборудования");
-        	model.addAttribute("listProducts", list);
-             
-    	} else if(type.equals("consumables_for_3D_equipment")){
-        	
-        	for(UseWithProduct useWithProduct : useWithProductService.listProducts("id")){
-        		if(useWithProduct.getTypeProduct().equals("Расходные материалы для 3D оборудования")){
-        			list.add(useWithProduct);
-        		}
-        	}
-        	model.addAttribute("productSubType", "consumables_for_3D_equipment");
-        	model.addAttribute("titleOfTable", "Расходные материалы для 3D оборудования");
-        	model.addAttribute("listProducts", list);
- 		
-    	} else if(type.equals("products_for_maintenance")){	
-        	
-        	for(UseWithProduct useWithProduct : useWithProductService.listProducts("id")){
-        		if(useWithProduct.getTypeProduct().equals("Товары для обслуживания")){
-        			list.add(useWithProduct);
-        		}
-        	}
-        	model.addAttribute("productSubType", "products_for_maintenance");
-        	model.addAttribute("titleOfTable", "Товары для обслуживания");
-        	model.addAttribute("listProducts", list);
-
-    	} else if(type.equals("parts_and_accessories")){		
-        	
-        	for(UseWithProduct useWithProduct : useWithProductService.listProducts("id")){
-        		if(useWithProduct.getTypeProduct().equals("Запчасти и комплектующие")){
-        			list.add(useWithProduct);
-        		}
-        	}
-        	model.addAttribute("productSubType", "parts_and_accessories");
-        	model.addAttribute("titleOfTable", "Запчасти и комплектующие");
-        	model.addAttribute("listProducts", list);
-
-    	} else {
-    		model.addAttribute("productSubType", "none");
-    		model.addAttribute("titleOfTable", "Список загруженного товара");
-            model.addAttribute("listProducts", useWithProductService.listProducts("id"));
-    	}
-        
-        model.addAttribute("productType", "use_with_product");
-        model.addAttribute("nameProduct", "Имя товара");
-		model.addAttribute("title", "Используется с товаром");
-        model.addAttribute("addProduct", "Добавить товар");
-        
-        return "admin/products";
+        model.addAttribute(ATTRIBUTE_PRODUCT_TYPE, TYPE);
+		model.addAttribute(ATTRIBUTE_NAME_PRODUCT, parametersOnAdminProductsPage.get(ATTRIBUTE_NAME_PRODUCT));
+        model.addAttribute(ATTRIBUTE_TITLE, parametersOnAdminProductsPage.get(ATTRIBUTE_TITLE));
+        model.addAttribute(ATTRIBUTE_ADD_PRODUCT, parametersOnAdminProductsPage.get(ATTRIBUTE_ADD_PRODUCT));
+        model.addAttribute(ATTRIBUTE_PRODUCT_SUB_TYPE, "none");
+        return PATH_ADMIN +"/"+ PATH_PRODUCTS;
     }
 	
-	@RequestMapping(value="/admin/use_with_product/{type}/sorting/{value}", method = RequestMethod.POST,consumes="application/json",
-    		headers = "content-type=application/x-www-form-urlencoded")
-    public @ResponseBody List<UseWithProduct> sortingProductsInAdmin(@PathVariable("type") String type,@PathVariable("value") String value) {
+	@RequestMapping(value = "/" + PATH_ADMIN + "/"+ TYPE +"s/{type}", method = RequestMethod.GET)	
+    public String listConcreteTypeProducts(@PathVariable("type") String type, Model model) {
+		
+		List<UseWithProduct> listResult = new ArrayList<UseWithProduct>();
+        
+        if(links.containsKey(type)){
+        	for(UseWithProduct product : useWithProductService.listProducts("id")){
+        		if(product.getTypeProduct().equals(links.get(type))){
+        			listResult.add(product);
+        		}
+        	}
+        	model.addAttribute(ATTRIBUTE_PRODUCT_SUB_TYPE, type);
+        	model.addAttribute(ATTRIBUTE_TITLE_OF_TABLE, links.get(type));
+            model.addAttribute(ATTRIBUTE_LIST_PRODUCTS, listResult);
+            logger.info(String.format("On /%s/%s/%s page.", PATH_ADMIN, CONCRETE_FOLDER, type));
+        } else {
+        	model.addAttribute(ATTRIBUTE_PRODUCT_SUB_TYPE, "none");
+    		model.addAttribute(ATTRIBUTE_TITLE_OF_TABLE, parametersOnAdminProductsPage.get(ATTRIBUTE_TITLE_OF_TABLE));
+            model.addAttribute(ATTRIBUTE_LIST_PRODUCTS, useWithProductService.listProducts("id"));
+            logger.info(String.format("On /%s/%s page.", PATH_ADMIN, CONCRETE_FOLDER));
+        }
+        
+        model.addAttribute(ATTRIBUTE_PRODUCT_TYPE, TYPE);
+		model.addAttribute(ATTRIBUTE_NAME_PRODUCT, parametersOnAdminProductsPage.get(ATTRIBUTE_NAME_PRODUCT));
+        model.addAttribute(ATTRIBUTE_TITLE, parametersOnAdminProductsPage.get(ATTRIBUTE_TITLE));
+        model.addAttribute(ATTRIBUTE_ADD_PRODUCT, parametersOnAdminProductsPage.get(ATTRIBUTE_ADD_PRODUCT));
+        
+        return PATH_ADMIN +"/"+ PATH_PRODUCTS;
+    }
+	
+	@RequestMapping(value="/"+PATH_ADMIN+"/"+TYPE+"/{type}/"+PATH_SORTING+"/{value}",method=RequestMethod.POST,consumes=JSON_CONSUMES,headers=JSON_HEADERS)
+    public @ResponseBody List<UseWithProduct> sortingProductsInAdmin(@PathVariable("type") String type, @PathVariable("value") String value) {
 		
 		List<UseWithProduct> list = new ArrayList<UseWithProduct>();
-        if(type.equals("ink_for_inkjet")){
-        	
-        	for(UseWithProduct useWithProduct : useWithProductService.listProducts(value)){
-        		if(useWithProduct.getTypeProduct().equals("Чернила для струйной печати")){
-        			list.add(useWithProduct);
-        		}
-        	}
-    	} else if(type.equals("consumables_for_digital_equipment")){
-        	
-        	for(UseWithProduct useWithProduct : useWithProductService.listProducts(value)){
-        		if(useWithProduct.getTypeProduct().equals("Расходные материалы для цифрового оборудования")){
-        			list.add(useWithProduct);
-        		}
-        	}
-    	} else if(type.equals("consumables_for_3D_equipment")){
-        	
-        	for(UseWithProduct useWithProduct : useWithProductService.listProducts(value)){
-        		if(useWithProduct.getTypeProduct().equals("Расходные материалы для 3D оборудования")){
-        			list.add(useWithProduct);
-        		}
-        	}
-    	} else if(type.equals("products_for_maintenance")){	
-        	
-        	for(UseWithProduct useWithProduct : useWithProductService.listProducts(value)){
-        		if(useWithProduct.getTypeProduct().equals("Товары для обслуживания")){
-        			list.add(useWithProduct);
-        		}
-        	}
-    	} else if(type.equals("parts_and_accessories")){		
-        	
-        	for(UseWithProduct useWithProduct : useWithProductService.listProducts(value)){
-        		if(useWithProduct.getTypeProduct().equals("Запчасти и комплектующие")){
-        			list.add(useWithProduct);
-        		}
-        	}
-    	} else {
-    		list.addAll(useWithProductService.listProducts(value));
-    	}
+
+		if (links.containsKey(type)) {
+
+			for (UseWithProduct product : useWithProductService.listProducts(value)) {
+				if (product.getTypeProduct().equals(links.get(type))) 
+					list.add(product);
+			}
+
+		} else {
+			list.addAll(useWithProductService.listProducts(value));
+		}
 
 		return list;
     }
 	
-	@RequestMapping(value = "/admin/use_with_product/new", method = RequestMethod.GET)
-	public String addNewUWP(Model model) {
+	@RequestMapping(value = "/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_NEW, method = RequestMethod.GET)
+	public String addNewProduct(Model model) {
 		files.clear();
-		logger.info("/admin/use_with_product/new page.");
+		logger.info(String.format("/%s/%s/%s page.", PATH_ADMIN, PATH_NEW, TYPE));
+		model.addAttribute(ATTRIBUTE_PRODUCT, new UseWithProduct());
 		
-		 logger.info("All characteristic of use_with_product.");
-		 model.addAttribute("product", new UseWithProduct());
-		 model.addAttribute("type", "use_with_product");
-		 model.addAttribute("productId", 0);
-		 
-		 componets.setJSONtoModelAttribute(model, "use_with_product");
-	    return "admin/use_with_product";
+		componets.setJSONtoModelAttribute(model, TYPE);
+
+		model.addAttribute(ATTRIBUTE_TYPE, TYPE);
+		model.addAttribute(ATTRIBUTE_PRODUCT_ID, 0);
+	    return PATH_ADMIN + "/"+ TYPE;
 	}
-	
-	@RequestMapping(value = "/admin/use_with_product/copy/{id}", method = RequestMethod.GET)
+
+	@RequestMapping(value = "/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_COPY +"/{id}", method = RequestMethod.GET)
 	public String copyProduct(@PathVariable("id") long id, Model model) {
 		files.clear();
-		logger.info("/admin/use_with_product/copy/" + id + " page.");
+		logger.info(String.format("/%s/%s/%s/%d page.", PATH_ADMIN, TYPE, PATH_COPY, id));
 		
-		 logger.info("Copy all characteristic of use_with_product.");
-		 UseWithProduct useWithProduct = useWithProductService.getProductById(id);
+		logger.info(String.format("Copy all characteristic of %s.", TYPE));
+		UseWithProduct product = useWithProductService.getProductById(id);
 		
 		 /* copy pictures to buffer */
-		 componets.copyPicturesToBuffer(useWithProduct.getPathPictures(), directory, concreteFolder, id, files);
+		 componets.copyPicturesToBuffer( product.getPathPictures(), DIRECTORY, CONCRETE_FOLDER, id, files );
 		
 		 /* set null to id because we must get create new product operation */
-	     useWithProduct.setId(null);
-		 model.addAttribute("product", useWithProduct);
-		 model.addAttribute("type", "use_with_product");
-		 model.addAttribute("productId", id);
+	     product.setId(null);
+		 model.addAttribute(ATTRIBUTE_PRODUCT, product);
+		 model.addAttribute(ATTRIBUTE_TYPE, TYPE);
+		 model.addAttribute(ATTRIBUTE_PRODUCT_ID, id);
 		 
-		 componets.setJSONtoModelAttribute(model, "use_with_product");
-	    return "admin/use_with_product";
-	}
-     
-	@RequestMapping(value = "/admin/use_with_product/add", method = RequestMethod.POST) 
-	public String handleFormUpload(@ModelAttribute("product") @Valid UseWithProduct product,
-			BindingResult result, Model model) throws IOException{
-
-			if (result.hasErrors()) {
-				model.addAttribute("product", product);
-				model.addAttribute("type", "use_with_product");
-				componets.setJSONtoModelAttribute(model, "use_with_product");
-				
-	            return "admin/use_with_product";
-	        }
-		
-            long id = useWithProductService.addProduct(product);
-            logger.info("Create new use_with_product! With id=" + id);
-
-            //create folder and add to her new pictures
-            product.getPathPictures().addAll(componets.createFolderAndWriteToItPictures(directory, concreteFolder, id, files));
-			
-            //if it is PAINT type product
-            if(product.getTypeProduct().equals("Чернила для струйной печати"))
-            	product.setPrise(0);
-            
-            this.useWithProductService.updateProduct(product);
-            
-            files.clear();
-		  
-		  links.createLinks(useWithProductService.listShowOnSite());
-		  
-		  if (product.isShowOnSite() && product.isShowOnLeftSide())
-			  componets.updateInLeftField(product, true);
-	    	
-		  logger.info("Update links to the products in left menu!");
-	   return "redirect:/admin/use_with_products";
-	}
+		 componets.setJSONtoModelAttribute(model, TYPE);
+	    return PATH_ADMIN +"/"+ TYPE;
+	}	
 	
-	@RequestMapping(value = "/admin/use_with_product/save_add", method = RequestMethod.POST) 
-	public String handleFormUploadSave(@ModelAttribute("product") @Valid UseWithProduct product,
-			BindingResult result, Model model) throws IOException{
+	@RequestMapping(value = "/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_ADD, method = RequestMethod.POST) 
+	public String handleFormUpload(@ModelAttribute(MODEL_ATTRIBUTE_PRODUCT) @Valid UseWithProduct product,
+			BindingResult result, Model model){
 
-			if (result.hasErrors()) {
-				model.addAttribute("product", product);
-				model.addAttribute("type", "use_with_product");
-				componets.setJSONtoModelAttribute(model, "use_with_product");
-				
-	            return "admin/use_with_product";
-	        }
+		if (result.hasErrors()) return adminFormHasError(product, model);
+
+		long id = useWithProductService.addProduct(product);
+		logger.info(String.format("Create new %s! With id=%d", TYPE, id));
+
+		// create folder and add to her new pictures
+		product.getPathPictures()
+				.addAll(componets.createFolderAndWriteToItPictures(DIRECTORY, CONCRETE_FOLDER, id, files));
 		
-            long id = useWithProductService.addProduct(product);
-            logger.info("Create new use_with_product! With id=" + id);
-  
-            //create folder and add to her new pictures
-            product.getPathPictures().addAll(componets.createFolderAndWriteToItPictures(directory, concreteFolder, id, files));
-			
-            //if it is PAINT type product
-            if(product.getTypeProduct().equals("Чернила для струйной печати"))
-            	product.setPrise(0);
-            
-            this.useWithProductService.updateProduct(product);
-            
-            files.clear();
-		  
-		  links.createLinks(useWithProductService.listShowOnSite());	
-		  if (product.isShowOnSite() && product.isShowOnLeftSide()){
-			  componets.updateInLeftField(product, true);
-	    	}
-		  logger.info("Update links to the products in left menu!");
-	   return "redirect:/admin/use_with_product/edit/" + id;
+        //if it is PAINT type product
+        if(product.getTypeProduct().equals("Чернила для струйной печати"))
+        	product.setPrise(0);
+
+		this.useWithProductService.updateProduct(product);
+
+		files.clear();
+
+		linksForProduct.createLinks(useWithProductService.listShowOnSite());
+
+		if (product.isShowOnSite() && product.isShowOnLeftSide())
+			componets.updateInLeftField(product, true, TYPE);
+
+		logger.info("Update links to the products in left menu!");
+		return "redirect:/" + PATH_ADMIN + "/"+ TYPE +"s";
 	}
-	
-    @RequestMapping("/admin/use_with_product/edit/{id}")
-    public String editUWP(@PathVariable("id") long id, Model model){
-    	logger.info("Begin editing use_with_product with id=" + id);
-    	UseWithProduct undateUWP = useWithProductService.getProductById(id);
-    	
-        model.addAttribute("product", undateUWP);
-        model.addAttribute("type", "use_with_product");
-        
-        componets.setJSONtoModelAttribute(model, "use_with_product");
-        return "admin/use_with_product";
-    }
-	
-	@RequestMapping(value = "/admin/use_with_product/save_update", method = RequestMethod.POST) 
-	public String updateSavePrUWP(@ModelAttribute("product") @Valid UseWithProduct product,
-			BindingResult result, Model model) throws IOException{
+
+	@RequestMapping(value = "/" + PATH_ADMIN +"/"+ TYPE +"/"+ PATH_SAVE_ADD, method = RequestMethod.POST) 
+	public String handleFormUploadSave(@ModelAttribute(MODEL_ATTRIBUTE_PRODUCT) @Valid UseWithProduct product,
+			BindingResult result, Model model){
+
+		if (result.hasErrors()) return adminFormHasError(product, model);
+
+		long id = useWithProductService.addProduct(product);
+		logger.info(String.format("Create new %s! With id=%d", TYPE, id));
+
+		// create folder and add to her new pictures
+		product.getPathPictures().addAll(componets.createFolderAndWriteToItPictures(DIRECTORY, CONCRETE_FOLDER, id, files));
 		
-		if (result.hasErrors()) {
-			model.addAttribute("product", product);
-			model.addAttribute("type", "use_with_product");
-			componets.setJSONtoModelAttribute(model, "use_with_product");
-			
-            return "admin/use_with_product";
-        }
-		
-		logger.info("use_with_product UPDATE with save, id=" + product.getId());
-		
-		List<String> pathPictures = useWithProductService.getProductById(product.getId()).getPathPictures();
-		product.setPathPictures(pathPictures);
-        
 		//if it is PAINT type product
         if(product.getTypeProduct().equals("Чернила для струйной печати"))
         	product.setPrise(0);
-		
-        useWithProductService.updateProduct(product);
-        logger.info("use_with_product with id=" + product.getId() + " was UDPATED!");
-		  
-		links.createLinks(useWithProductService.listShowOnSite());
+
+		this.useWithProductService.updateProduct(product);
+
+		files.clear();
+
+		linksForProduct.createLinks(useWithProductService.listShowOnSite());
+
+		if (product.isShowOnSite() && product.isShowOnLeftSide())
+			componets.updateInLeftField(product, true, TYPE);
+
+		logger.info("Update links to the products in left menu!");
+		return "redirect:/" + PATH_ADMIN + "/" + TYPE + "/"+ PATH_EDIT +"/" + id;
+	}
 	
-		if (product.isShowOnSite() && product.isShowOnLeftSide()){
-			componets.updateInLeftField(product, true);
-	    }
+    @RequestMapping("/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_EDIT +"/{id}")
+    public String editProduct(@PathVariable("id") long id, Model model){
+    	
+    	logger.info(String.format("Begin editing %s with id=%d", TYPE, id));
+    	UseWithProduct undateProduct = useWithProductService.getProductById(id);
+    	
+        model.addAttribute(ATTRIBUTE_PRODUCT, undateProduct);
+        model.addAttribute(ATTRIBUTE_TYPE, TYPE);
+        componets.setJSONtoModelAttribute(model, TYPE);
+        
+        return PATH_ADMIN + "/" + TYPE;
+    }
+	
+	@RequestMapping(value = "/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_SAVE_UPDATE, method = RequestMethod.POST) 
+	public String updateSaveProduct(@ModelAttribute(MODEL_ATTRIBUTE_PRODUCT) @Valid UseWithProduct product,
+			BindingResult result, Model model){
+		
+		if (result.hasErrors()) return adminFormHasError(product, model);
+		
+		logger.info(String.format("%s UPDATE with save, id=%d", TYPE, product.getId()));
+		
+		List<String> pathPictures = useWithProductService.getProductById(product.getId()).getPathPictures();
+		product.setPathPictures(pathPictures);
+		
+		//if it is PAINT type product
+        if(product.getTypeProduct().equals("Чернила для струйной печати"))
+        	product.setPrise(0);
+        
+		useWithProductService.updateProduct(product);
+        logger.info(String.format("%s with id=%d was UDPATED", TYPE, product.getId()));
+		  
+		linksForProduct.createLinks(useWithProductService.listShowOnSite());
+	
+		if (product.isShowOnSite() && product.isShowOnLeftSide())
+	    	componets.updateInLeftField(product, true, TYPE);
 		  
 		logger.info("Update links to the products in left menu!");
-		return "redirect:/admin/use_with_product/edit/" + product.getId();
+		return "redirect:/" + PATH_ADMIN + "/" + TYPE + "/"+ PATH_EDIT +"/" + product.getId();
 	}
 	
-	@RequestMapping(value = "/admin/use_with_product/update", method = RequestMethod.POST) 
-	public String updateUseWithProduct(@ModelAttribute("product") @Valid UseWithProduct product,
-			BindingResult result, Model model) throws IOException{
+	
+	@RequestMapping(value = "/" + PATH_ADMIN +"/"+ TYPE +"/"+ PATH_UPDATE, method = RequestMethod.POST) 
+	public String updateProduct(@ModelAttribute(MODEL_ATTRIBUTE_PRODUCT) @Valid UseWithProduct product,
+			BindingResult result, Model model){
 		
-		if (result.hasErrors()) {
-			model.addAttribute("product", product);
-			model.addAttribute("type", "use_with_product");
-			
-			componets.setJSONtoModelAttribute(model, "use_with_product");
-			
-            return "admin/use_with_product";
-        }
-		
-		logger.info("use_with_product UPDATE id=" + product.getId());
-		
+		if (result.hasErrors()) return adminFormHasError(product, model);
+
+		logger.info(String.format("%s UPDATE id=%d", TYPE, product.getId()));
 		List<String> pathPictures = useWithProductService.getProductById(product.getId()).getPathPictures();
 		product.setPathPictures(pathPictures);
-        
+		
 		//if it is PAINT type product
         if(product.getTypeProduct().equals("Чернила для струйной печати"))
         	product.setPrise(0);
-		
-        useWithProductService.updateProduct(product);
-        logger.info("use_with_product with id=" + product.getId() + " was UDPATED!");
-        
-		  files.clear();
-		  
-		  links.createLinks(useWithProductService.listShowOnSite());
-	
-		  if (product.isShowOnSite() && product.isShowOnLeftSide()){
-			  componets.updateInLeftField(product, true);
-	    	}
-		  
-		  logger.info("Update links to the products in left menu!");
-	   return "redirect:/admin/use_with_products";
+
+		useWithProductService.updateProduct(product);
+		logger.info(String.format("%s with id=%d was UDPATED", TYPE, product.getId()));
+
+		files.clear();
+
+		linksForProduct.createLinks(useWithProductService.listShowOnSite());
+
+		if (product.isShowOnSite() && product.isShowOnLeftSide())
+			componets.updateInLeftField(product, true, TYPE);
+
+		logger.info("Update links to the products in left menu!");
+		return "redirect:/" + PATH_ADMIN +"/"+ TYPE + "s";
 	}
 	
-    @RequestMapping(value="/admin/use_with_product/upload_pictures", method = RequestMethod.POST)
+	private String adminFormHasError(UseWithProduct product, Model model){
+		model.addAttribute(ATTRIBUTE_PRODUCT, product);
+		model.addAttribute(ATTRIBUTE_TYPE, TYPE);
+		
+		componets.setJSONtoModelAttribute(model, TYPE);
+        return PATH_ADMIN + "/" + TYPE;
+	}
+    
+    @RequestMapping(value="/" + PATH_ADMIN + "/" + TYPE + "/"+ PATH_UPLOAD_PICTURES, method = RequestMethod.POST)
     public @ResponseBody String uploadPictures(MultipartHttpServletRequest request) {
-    	logger.info("upload new picture");
-        
-         Iterator<String> itr =  request.getFileNames();
-         MultipartFile mpf = null;
-         String fileName = null;
-
-         while(itr.hasNext()){
-             mpf = request.getFile(itr.next()); 
-             
-             FileMeta fileMeta = new FileMeta();
-     		
-     		 fileName = files.size() + new Random().nextInt(1000) + "" + mpf.getOriginalFilename().substring(mpf.getOriginalFilename().lastIndexOf("."))/*last part is file extension*/; 
-             fileMeta.setFileName(fileName);
-
-             try {
-                fileMeta.setBytes(mpf.getBytes());
-                logger.info("WRITED new picture to the FILEMETA.");
-            } catch (IOException e) {
-                logger.error("WRITTING picture to the FILEMETA has a problem: ",e);
-            }
-             
-             logger.info("pictute added to the FILEMETA successful - " + fileMeta.getFileName());
-             files.add(fileMeta);
-         }  
-         return fileName;
+         return componets.uploadPictureOnCreationProduct(request, files);
     }
-    
-    @RequestMapping(value="/admin/use_with_product/change_order_pictures", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
+
+    @RequestMapping(value="/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_CHANGE_ORDER_PICTURES, method = RequestMethod.POST,consumes=JSON_CONSUMES,headers = JSON_HEADERS)
     public @ResponseBody void changeOrderPictures(@RequestBody List<String> selectedIds) {
-    	componets.changeOrderPictures(concreteFolder, selectedIds, files); 	
+    	componets.changeOrderPictures(CONCRETE_FOLDER, selectedIds, files); 	  	
     }
     
-    @RequestMapping(value="/admin/use_with_product/remove_picture/{name_picture}", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
+    @RequestMapping(value="/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_REMOVE_PICTURE +"/{name_picture}", method = RequestMethod.POST,consumes=JSON_CONSUMES,
+    		headers = JSON_HEADERS)
     public @ResponseBody void removePicture(@PathVariable("name_picture") String namePicture) {
-    	componets.removePictureFromPicturesContainer(concreteFolder, namePicture, files);	
+    	componets.removePictureFromPicturesContainer(CONCRETE_FOLDER, namePicture, files);
     }
     
-    @RequestMapping(value="/admin/use_with_product/upload_pictures_update/{id}", method = RequestMethod.POST)
+    @RequestMapping(value="/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_UPLOAD_PICTURES_UPDATE +"/{id}", method = RequestMethod.POST)
     public @ResponseBody String uploadPicturesUpdate(MultipartHttpServletRequest request, @PathVariable("id") long id) {
-    	logger.info("upload new picture");
-        
-         Iterator<String> itr =  request.getFileNames();
-         MultipartFile mpf = null;
-         String fileName = null;
-
-         while(itr.hasNext()){
-        	mpf = request.getFile(itr.next()); 
-     		fileName = new Random().nextInt(10000000) + "" + mpf.getOriginalFilename().substring(mpf.getOriginalFilename().lastIndexOf("."))/*last part is file extension*/; 
-
- 			try {
- 				FileCopyUtils.copy(mpf.getBytes(), new FileOutputStream(directory + File.separator + concreteFolder
-	    				+ File.separator + id + File.separator + fileName));
- 			} catch (IOException e) {
- 				logger.error("Don't write picture to the folder", e);
- 			} 
-        	 
- 			UseWithProduct product = useWithProductService.getProductById(id);
- 			product.getPathPictures().add(fileName);
- 			useWithProductService.updateProduct(product);
-         }  
-         return fileName;
+    	
+    	String nameOfAddedPicture = componets.uploadPictureToExistedProduct(request, DIRECTORY, CONCRETE_FOLDER, id);   	
+    	UseWithProduct product = useWithProductService.getProductById(id);
+ 		product.getPathPictures().add(nameOfAddedPicture);
+ 		useWithProductService.updateProduct(product);
+         
+       return nameOfAddedPicture;
     }
     
-    @RequestMapping(value="/admin/use_with_product/change_order_pictures_update/{id}", method = RequestMethod.POST,consumes="application/json",
-    		headers = "content-type=application/x-www-form-urlencoded")
+    @RequestMapping(value="/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_CHANGE_ORDER_PICTURES_UPDATE +"/{id}", method = RequestMethod.POST,consumes=JSON_CONSUMES,
+    		headers = JSON_HEADERS)
     public @ResponseBody void changeOrderPicturesUpdate(@RequestBody List<String> selectedIds, @PathVariable("id") long id) {
-    	logger.info("change order of pictures in changed use_with_product product");
+    	logger.info(String.format("change order of pictures in changed %s product", TYPE));
     	
     	UseWithProduct product = useWithProductService.getProductById(id);
     	product.getPathPictures().clear();
@@ -532,98 +403,72 @@ public class UseWithProductController {
     	useWithProductService.updateProduct(product);
     }
     
-    @RequestMapping(value="/admin/use_with_product/remove_picture_update/{name_picture}/{id}", method = RequestMethod.POST,consumes="application/json",
-    		headers = "content-type=application/x-www-form-urlencoded")
+    @RequestMapping(value="/"+PATH_ADMIN+"/"+TYPE+"/"+PATH_REMOVE_PICTURE_UPDATE+"/{name_picture}/{id}", method = RequestMethod.POST,consumes=JSON_CONSUMES,
+    		headers = JSON_HEADERS)
     public @ResponseBody void removePicture(@PathVariable("name_picture") String namePicture, @PathVariable("id") long id) {
+    	
     	String name = namePicture.replace(":", ".");
     	UseWithProduct product = useWithProductService.getProductById(id);
     	product.getPathPictures().remove(name);
     	
-    	try {
-    		FileUtils.forceDelete(new File(directory + File.separator + concreteFolder+ File.separator + id + File.separator + name));
-		} catch (IOException e) {
-			logger.error("Can't delete picture from the folder", e);
-		} 
+    	componets.removePicture(name, DIRECTORY, CONCRETE_FOLDER, id);
     	
     	if(product.getPathPictures().size()==0){
-    		File fi = new File(directory + File.separator + "default.jpg");
-			try {
-				FileCopyUtils.copy(Files.readAllBytes(fi.toPath()), new FileOutputStream(
-						directory + File.separator + concreteFolder + File.separator + product.getId() + File.separator + "default.jpg"));
-			} catch (IOException e) {
-				logger.error("Can't update path of the default picture to useWithProduct with id=" + product.getId(), e);
-			}
+    		componets.loadDefaultPicture(DIRECTORY, CONCRETE_FOLDER, product.getId());
 			product.getPathPictures().add("default.jpg");
     	}
     	
+    	logger.info(String.format("Remove pictore with name = %s from changed %s product", name, TYPE));
+
+    	useWithProductService.updateProduct(product);
+    }
+    
+    @RequestMapping("/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_REMOVE +"/{id}")
+    public String removeProduct(@PathVariable("id") long id){
+    	logger.info(String.format("Start deleting %s from database, id=%d", TYPE, id));
+    	
+    	componets.removeAllPricturesOfConcreteProduct(DIRECTORY, CONCRETE_FOLDER, id);
+    		
+    	logger.info("Update links to the products in left menu!");
+    	componets.updateInLeftField(useWithProductService.getProductById(id), false, TYPE);
+    		
+    	logger.info(String.format("DELETE %s with id=%d from database", TYPE, id));
+    	useWithProductService.removeProduct(id);
+        
+    	linksForProduct.createLinks(useWithProductService.listShowOnSite());
+    		
+        return "redirect:/"+ PATH_ADMIN + "/" + TYPE + "s";
+    }
+    
+    @RequestMapping(value="/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_SHOW_ON_SITE +"/{id}",method = RequestMethod.POST,consumes=JSON_CONSUMES,headers=JSON_HEADERS)
+    public @ResponseBody void showOnSite(@PathVariable("id") long id, @RequestBody boolean value) {
+    	UseWithProduct product = useWithProductService.getProductById(id);
+    	product.setShowOnSite(value);
     	useWithProductService.updateProduct(product);
     	
-    	logger.info("Remove pictore with name = " + name + " from changed useWithProduct product");
+    	componets.updateInLeftField(product, product.isShowOnSite() && product.isShowOnLeftSide() , TYPE);
+    	linksForProduct.createLinks(useWithProductService.listShowOnSite());
     }
     
-    @RequestMapping("/admin/use_with_product/remove/{id}")
-    public String removeUseWithProduct(@PathVariable("id") long id){
-    		logger.info("Start deleting use_with_product from database, id=" + id);
-    		try {
-    			FileUtils.deleteDirectory(new File(directory + File.separator + 
-						concreteFolder + File.separator + id));
-    			logger.info("deleted all pictures and pictures directory of this use_with_product");
-			} catch (IOException e) {
-				logger.error("Deleting all pictures from this use_with_product has a problem: ", e);
-			}
-    		
-    		logger.info("Update links to the products in left menu!");
-    		
-    		componets.updateInLeftField(useWithProductService.getProductById(id), false);
-    		
-    		logger.info("DELETE use_with_product with id=" + id + " from database!");
-    		useWithProductService.removeProduct(id);
-        
-    		links.createLinks(useWithProductService.listShowOnSite());
-    		
-        return "redirect:/admin/use_with_products";
-    }  
-    
-    @RequestMapping(value="/admin/use_with_product/showOnSite/{id}", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
-    public @ResponseBody void showOnSite(@PathVariable("id") long id, @RequestBody boolean value) {
-    	UseWithProduct useWithProduct = useWithProductService.getProductById(id);
-    	useWithProduct.setShowOnSite(value);
-    	useWithProductService.updateProduct(useWithProduct);
-    	
-    	if (useWithProduct.isShowOnSite() && useWithProduct.isShowOnLeftSide()){
-    		componets.updateInLeftField(useWithProduct, true);
-    	} else {
-    		componets.updateInLeftField(useWithProduct, false);
-    	}
-    	
-    	links.createLinks(useWithProductService.listShowOnSite());
-    }
-    
-    @RequestMapping(value="/admin/use_with_product/setTop/{id}", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
+    @RequestMapping(value="/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_SET_TOP +"/{id}",method = RequestMethod.POST,consumes=JSON_CONSUMES,headers = JSON_HEADERS)
     public @ResponseBody void setTop(@PathVariable("id") long id, @RequestBody boolean value) {
-    	UseWithProduct useWithProduct = useWithProductService.getProductById(id);
-    	useWithProduct.setTop(value);
-    	useWithProductService.updateProduct(useWithProduct);
+    	UseWithProduct product = useWithProductService.getProductById(id);
+    	product.setTop(value);
+    	useWithProductService.updateProduct(product);
     }
     
-    @RequestMapping(value="/admin/use_with_product/showOnHomePage/{id}", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
+    @RequestMapping(value="/"+PATH_ADMIN+"/"+TYPE+"/"+ PATH_SHOW_ON_HOME_PAGE+"/{id}",method=RequestMethod.POST,consumes=JSON_CONSUMES,headers=JSON_HEADERS)
     public @ResponseBody void showOnHomePage(@PathVariable("id") long id, @RequestBody boolean value) {
-    	UseWithProduct useWithProduct = useWithProductService.getProductById(id);
-    	useWithProduct.setShowOnHomePage(value);
-    	useWithProductService.updateProduct(useWithProduct);
+    	UseWithProduct product = useWithProductService.getProductById(id);
+    	product.setShowOnHomePage(value);
+    	useWithProductService.updateProduct(product);
     }
     
-    @RequestMapping(value="/admin/use_with_product/showOnLeftSide/{id}", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
+    @RequestMapping(value="/"+PATH_ADMIN+"/"+TYPE+"/"+PATH_SHOW_ON_LEFT_SIDE+"/{id}",method=RequestMethod.POST,consumes=JSON_CONSUMES,headers=JSON_HEADERS)
     public @ResponseBody void showOnLeftSide(@PathVariable("id") long id, @RequestBody boolean value) {
-    	UseWithProduct useWithProduct = useWithProductService.getProductById(id);
-    	useWithProduct.setShowOnLeftSide(value);
-    	useWithProductService.updateProduct(useWithProduct);
-    	
-    	if (useWithProduct.isShowOnSite() && useWithProduct.isShowOnLeftSide()){
-    		componets.updateInLeftField(useWithProduct, true);
-    	} else {
-    		componets.updateInLeftField(useWithProduct, false);
-    	}
-    		
+    	UseWithProduct product = useWithProductService.getProductById(id);
+    	product.setShowOnLeftSide(value);
+    	useWithProductService.updateProduct(product);	
+    	componets.updateInLeftField(product, product.isShowOnSite() && product.isShowOnLeftSide(), TYPE);
     }
 }

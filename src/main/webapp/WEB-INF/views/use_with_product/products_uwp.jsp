@@ -10,18 +10,18 @@
 					<a id="
 					
 						<c:choose>
-			   		 		<c:when test="${fn:length(product.pathPictures) > 1}">/images/${type}s/${product.id}/${product.pathPictures.get(1)}</c:when>    
-			    			<c:otherwise>/images/${type}s/${product.id}/${product.pathPictures.get(0)}</c:otherwise>
+			   		 		<c:when test="${fn:length(product.pathPictures) > 1}">/images/${product.type}s/${product.id}/${product.pathPictures.get(1)}</c:when>    
+			    			<c:otherwise>/images/${product.type}s/${product.id}/${product.pathPictures.get(0)}</c:otherwise>
 						</c:choose>
 			
 						
-						" onmouseover="" class="link" href="<c:url value='/${type}/${product.id}' />">	
-								<div class="outer_a_img"><img src="/images/${type}s/${product.id}/${product.pathPictures.get(0)}" alt=""></div>
+						" onmouseover="" class="link" href="<c:url value='/${product.type}/${product.id}' />">	
+								<div class="outer_a_img"><img src="/images/${product.type}s/${product.id}/${product.pathPictures.get(0)}" alt=""></div>
 					</a>
 		
 					<div class="name_price_cart_block">
 						<c:if test="${product.typeProduct!='Чернила для струйной печати'}">
-							<a href="<c:url value='/${type}/${product.id}' />" class="products_title">${product.name}</a>
+							<a href="<c:url value='/${product.type}/${product.id}' />" class="products_title">${product.name}</a>
 							<div class="product_price"><span style="float: left;">Цена:&nbsp;</span> 
 								<input type="hidden" name="price_value" value="${product.prise}">
 				       			<c:if test="${product.prise < 0.1}"><a href="#callback" class="fancybox">уточняйте</a></c:if>
@@ -31,16 +31,16 @@
 		           			</div>
 		           		</c:if>
 		           		<c:if test="${product.typeProduct=='Чернила для струйной печати'}">
-		           			<a style="white-space: normal; overflow: unset;" href="<c:url value='/${type}/${product.id}' />" class="products_title">${product.name}</a>
+		           			<a style="white-space: normal; overflow: unset;" href="<c:url value='/${product.type}/${product.id}' />" class="products_title">${product.name}</a>
 		           			<p class="products_price"></p>
 		           		</c:if>
 		
 						<i class="fa fa-cart-plus add_to_cart" aria-hidden="true" style="padding-right: 5px; top: 2px; right: 10px; position: absolute;"
-							onclick="addToCart('${type}', ${product.id}, '${product.name}', '${product.prise}', '${product.pathPictures.get(0)}');"></i>
+							onclick="addToCart('${product.type}', ${product.id}, '${product.name}', '${product.prise}', '${product.pathPictures.get(0)}');"></i>
 					</div>	
 					
 					<div class="name_price_cart_block_hidden">
-						<c:if test="${type=='printer' && product.ratingOverallRating > 0}">
+						<c:if test="${product.type=='printer' && product.ratingOverallRating > 0}">
 							<!-- Общая оценка -->
 								<div class="rating_block">
 									<p style="font-weight: bold;">Общая оценка:</p>
@@ -86,18 +86,18 @@
 				<a id="
 				
 				<c:choose>
-	   		 		<c:when test="${fn:length(product.pathPictures) > 1}">/images/${type}s/${product.id}/${product.pathPictures.get(1)}</c:when>    
-	    			<c:otherwise>/images/${type}s/${product.id}/${product.pathPictures.get(0)}</c:otherwise>
+	   		 		<c:when test="${fn:length(product.pathPictures) > 1}">/images/${product.type}s/${product.id}/${product.pathPictures.get(1)}</c:when>    
+	    			<c:otherwise>/images/${product.type}s/${product.id}/${product.pathPictures.get(0)}</c:otherwise>
 				</c:choose>
 	
 				
-				" onmouseover="" class="link" href="<c:url value='/${type}/${product.id}' />">	
-						<div class="outer_a_img"><img src="/images/${type}s/${product.id}/${product.pathPictures.get(0)}" alt=""></div>
+				" onmouseover="" class="link" href="<c:url value='/${product.type}/${product.id}' />">	
+						<div class="outer_a_img"><img src="/images/${product.type}s/${product.id}/${product.pathPictures.get(0)}" alt=""></div>
 				</a>
 	
 				<div class="name_price_cart_block">
 					<c:if test="${product.typeProduct!='Чернила для струйной печати'}">
-						<a href="<c:url value='/${type}/${product.id}' />" class="products_title">${product.name}</a>
+						<a href="<c:url value='/${product.type}/${product.id}' />" class="products_title">${product.name}</a>
 						<div class="product_price"><span style="float: left;">Цена:&nbsp;</span> 
 							<input type="hidden" name="price_value" value="${product.prise}">
 				       		<c:if test="${product.prise < 0.1}"><a href="#callback" class="fancybox">уточняйте</a></c:if>
@@ -107,16 +107,16 @@
 		           		</div>
 	           		</c:if>
 	           		<c:if test="${product.typeProduct=='Чернила для струйной печати'}">
-	           			<a style="white-space: normal; overflow: unset;" href="<c:url value='/${type}/${product.id}' />" class="products_title">${product.name}</a>
+	           			<a style="white-space: normal; overflow: unset;" href="<c:url value='/${product.type}/${product.id}' />" class="products_title">${product.name}</a>
 	           			<p class="products_price"></p>
 	           		</c:if>
 	
 					<i class="fa fa-cart-plus add_to_cart" aria-hidden="true" style="padding-right: 5px; top: 2px; right: 10px; position: absolute;"
-						onclick="addToCart('${type}', ${product.id}, '${product.name}', '${product.prise}', '${product.pathPictures.get(0)}');"></i>
+						onclick="addToCart('${product.type}', ${product.id}, '${product.name}', '${product.prise}', '${product.pathPictures.get(0)}');"></i>
 				</div>	
 				
 				<div class="name_price_cart_block_hidden">
-					<c:if test="${type=='printer' && product.ratingOverallRating > 0}">
+					<c:if test="${product.type=='printer' && product.ratingOverallRating > 0}">
 						<!-- Общая оценка -->
 							<div class="rating_block">
 								<p style="font-weight: bold;">Общая оценка:</p>

@@ -99,6 +99,7 @@ public class ComponentsForControllers {
 
 			} else if (currentProduct instanceof UseWithProduct) {
 				curObj.put("type", "use_with_product");
+				curObj.put("typeProduct", ((UseWithProduct) currentProduct).getTypeProduct());
 			}
 			
 			arrayResult.add(curObj);
