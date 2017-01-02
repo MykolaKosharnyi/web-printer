@@ -1,24 +1,20 @@
 package com.printmaster.nk.controller;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.nio.file.Files;
+import static com.printmaster.nk.controller.ControllerConstants.*;
+
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Random;
+import java.util.Map;
 
 import javax.validation.Valid;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,11 +22,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.printmaster.nk.beans.ComponentsForControllers;
-import com.printmaster.nk.beans.FileMeta;
 import com.printmaster.nk.beans.LinksForProducts;
 import com.printmaster.nk.beans.PicturesContainer;
 import com.printmaster.nk.model.Scanner;
@@ -41,14 +35,30 @@ import com.printmaster.nk.service.UseWithProductService;
 @Controller
 public class ScannerController {
 	
+	private Map<String, String> links = new HashMap<String, String>(){
+		private static final long serialVersionUID = 6020303266276652199L;
+	{
+		put("large_format_scanners", "Широкоформатные сканеры");
+	    put("3d_scanners", "3D Сканеры");   
+	}};
+	
+	private Map<String, String> parametersOnAdminProductsPage = new HashMap<String, String>(){
+		private static final long serialVersionUID = 6020303266276652199L;
+	{
+		put(ATTRIBUTE_TITLE_OF_TABLE, "Список загруженных сканеров");
+	    put(ATTRIBUTE_NAME_PRODUCT, "Имя сканера");
+	    put(ATTRIBUTE_TITLE, "Сканеры");
+	    put(ATTRIBUTE_ADD_PRODUCT, "Добавить сканер");
+	}};
+	
 	private Logger logger = Logger.getLogger(ScannerController.class);
 	
-	private String directory = "/var/www/localhost/images";
-
-	private String concreteFolder = "scanners";
+	private static final String DIRECTORY = "/var/www/localhost/images";
+	private static final String TYPE = "scanner";
+	private static final String CONCRETE_FOLDER = TYPE + "s";
 	
 	@Autowired
-	private LinksForProducts links;
+	private LinksForProducts linksForProduct;
 	
 	@Autowired
     ComponentsForControllers componets;
@@ -56,12 +66,12 @@ public class ScannerController {
     @Autowired
     PicturesContainer files;
  
-    private ScannerService scannerService;
+    private ScannerService productService;
     
     @Autowired(required=true)
     @Qualifier(value="scannerService")
     public void setScanerService(ScannerService ps){
-        this.scannerService = ps;
+        this.productService = ps;
     }
     
     private UseWithProductService useWithProductService;
@@ -72,485 +82,389 @@ public class ScannerController {
         this.useWithProductService = ps;
     }
 
-	@RequestMapping(value = "/scanners", method = RequestMethod.GET)	
-    public String allScanners(Model model) {
-        model.addAttribute("listProducts", componets.makeLightWeightCollectionOfProduct(this.scannerService.listShowOnSite()));
+	@RequestMapping(value = "/"+ TYPE +"s", method = RequestMethod.GET)	
+    public String allProducts(Model model) {
+        model.addAttribute(ATTRIBUTE_LIST_PRODUCTS, componets.makeLightWeightCollectionOfProduct(this.productService.listShowOnSite()));
         SearchScanners search = new SearchScanners();
         search.setPrise0(0);
         search.setPrise1(100000);
    
-        model.addAttribute("search", search);
-        model.addAttribute("type", "scanner");
-        logger.info("On '../scanners' page.");
+        model.addAttribute(ATTRIBUTE_SEARCH, search);
+        logger.info(String.format("On '../%s' page.", CONCRETE_FOLDER));
         
-        componets.setJSONtoModelAttribute(model, "scanner");
-        return "scanners";
+        componets.setJSONtoModelAttribute(model, TYPE);
+        
+        return TYPE + "s";
     }
 	
-	@RequestMapping(value = "/scanners/{type}", method = RequestMethod.GET)	
-    public String typeScanners(@PathVariable("type") String type, Model model) {
-        SearchScanners search = new SearchScanners();
+	@RequestMapping(value = "/"+ TYPE +"s/{subType}", method = RequestMethod.GET)	
+    public String typeProducts(@PathVariable("subType") String subType, Model model) {
+		SearchScanners search = new SearchScanners();
         String currentType = null;
-        
-        	if(type.equals("large_format_scanners")){
-        		currentType = "Широкоформатные сканеры";
-        		logger.info("On the /scanners/" + type + " page.");
-        		
-        	} else if(type.equals("3d_scanners")){
-        		currentType = "3D Сканеры";
-        		logger.info("On the /scanners/" + type + " page.");
-        	} else {
-        		return "redirect:/";
-        	}
+   
+        if(links.containsKey(subType)){
+        	currentType = links.get(subType);
+        	logger.info(String.format("On the /%s/%s page.", CONCRETE_FOLDER, subType));
+        } else {
+        	return "redirect:/";
+        }
         
         String[] a = {currentType};
         search.setTypeProduct(a);
         search.setPrise0(0);
         search.setPrise1(100000);
-        model.addAttribute("search", search);
-        model.addAttribute("listProducts", componets.makeLightWeightCollectionOfProduct(scannerService.listSearchProducts(search)));
-        model.addAttribute("type", "scanner");
+        model.addAttribute(ATTRIBUTE_SEARCH, search);
+        model.addAttribute(ATTRIBUTE_LIST_PRODUCTS, componets.makeLightWeightCollectionOfProduct(productService.listSearchProducts(search)));
         
-        componets.setJSONtoModelAttribute(model, "scanner");
-        return "scanners/" + type ;
+        componets.setJSONtoModelAttribute(model, TYPE);
+        
+        return TYPE +"s/" + subType ;
     }
 
-    @RequestMapping(value="/scanners/search",method=RequestMethod.POST, produces = "application/json; charset=utf-8")
-    public @ResponseBody ArrayList<JSONObject> showSearchScanners(@ModelAttribute(value="search") SearchScanners search, BindingResult result ){
-    	logger.info("On the /scanner/search page.");
-    	return componets.makeLightWeightCollectionOfProduct(scannerService.listSearchProducts(search));
+    @RequestMapping(value="/"+ TYPE +"s/"+ PATH_SEARCH, method=RequestMethod.POST, produces=JSON_PRODUCES)
+    public @ResponseBody ArrayList<JSONObject> showSearchProducts(@ModelAttribute(value="search") SearchScanners search, BindingResult result ){
+    	logger.info(String.format("Go to the /%s/%s page.", TYPE, PATH_SEARCH));
+    	return componets.makeLightWeightCollectionOfProduct(productService.listSearchProducts(search));
     }
 	
-    @RequestMapping("/scanner/{id}")
-    public String showScanner(@PathVariable("id") long id, Model model){
-    	logger.info("/scanner/" + id + " page.");
-    	Scanner product = scannerService.getProductById(id);
-        model.addAttribute("product", product);
-        model.addAttribute("type", "scanner");
-        if(product.getIdUseWithProduct()!=null){
-        	model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(useWithProductService.getProductsByIds(product.getIdUseWithProduct())));
-        } else {
-        	model.addAttribute("uwp", null);
-        }
+    @RequestMapping("/"+ TYPE +"/{id}")
+    public String showProduct(@PathVariable("id") long id, Model model){
+    	logger.info(String.format("On /%s/%d page.", TYPE, id));
         
-        return "scanner";
+    	Scanner product = productService.getProductById(id);
+        model.addAttribute(ATTRIBUTE_PRODUCT, product);
+        model.addAttribute(ATTRIBUTE_TYPE, TYPE);       
+        model.addAttribute(ATTRIBUTE_UWP, product.getIdUseWithProduct()!=null ?
+        		componets.showSimplestArrayOfUseWithProduct(useWithProductService.getProductsByIds(product.getIdUseWithProduct())) : null);
+        
+        return TYPE;
     }
     
-	@RequestMapping(value = "/admin/scanners", method = RequestMethod.GET)	
-    public String listScanners(Model model) {
-		model.addAttribute("titleOfTable", "Список загруженных сканеров");
-        model.addAttribute("listProducts", scannerService.listProducts("id"));
-
-        model.addAttribute("productType", "scanner");
-        model.addAttribute("nameProduct", "Имя сканера");
-        model.addAttribute("title", "Сканеры");
-        model.addAttribute("addProduct", "Добавить сканер");
-        model.addAttribute("productSubType", "none");
-        logger.info("/admin/scanners page.");
-        return "admin/products";
+	@RequestMapping(value = "/" + PATH_ADMIN + "/"+ TYPE +"s", method = RequestMethod.GET)	
+    public String listProducts(Model model) {
+		model.addAttribute(ATTRIBUTE_TITLE_OF_TABLE, parametersOnAdminProductsPage.get(ATTRIBUTE_TITLE_OF_TABLE));
+        model.addAttribute(ATTRIBUTE_LIST_PRODUCTS, productService.listProducts("id"));
+        logger.info(String.format("/%s/%s page.", PATH_ADMIN, CONCRETE_FOLDER));
+        
+        model.addAttribute(ATTRIBUTE_PRODUCT_TYPE, TYPE);
+		model.addAttribute(ATTRIBUTE_NAME_PRODUCT, parametersOnAdminProductsPage.get(ATTRIBUTE_NAME_PRODUCT));
+        model.addAttribute(ATTRIBUTE_TITLE, parametersOnAdminProductsPage.get(ATTRIBUTE_TITLE));
+        model.addAttribute(ATTRIBUTE_ADD_PRODUCT, parametersOnAdminProductsPage.get(ATTRIBUTE_ADD_PRODUCT));
+        model.addAttribute(ATTRIBUTE_PRODUCT_SUB_TYPE, "none");
+        return PATH_ADMIN +"/"+ PATH_PRODUCTS;
     }
 	
-	@RequestMapping(value = "/admin/scanners/{type}", method = RequestMethod.GET)	
-    public String listConcreteTypeScanners(@PathVariable("type") String type, Model model) {
-
-		List<Scanner> list = new ArrayList<Scanner>();
-        if(type.equals("large_format_scanners")){
-        	for(Scanner scanner : scannerService.listProducts("id")){
-        		if(scanner.getTypeProduct().equals("Широкоформатные сканеры")){
-        			list.add(scanner);
+	@RequestMapping(value = "/" + PATH_ADMIN + "/"+ TYPE +"s/{type}", method = RequestMethod.GET)	
+    public String listConcreteTypeProducts(@PathVariable("type") String type, Model model) {
+		
+		List<Scanner> listResult = new ArrayList<Scanner>();
+        
+        if(links.containsKey(type)){
+        	for(Scanner product : productService.listProducts("id")){
+        		if(product.getTypeProduct().equals(links.get(type))){
+        			listResult.add(product);
         		}
         	}
-        	model.addAttribute("productSubType", "large_format_scanners");
-        	model.addAttribute("titleOfTable", "Список загруженных широкоформатных сканеров");
-            model.addAttribute("listProducts", list);
-            logger.info("On /admin/scanners/large_format_scanners page.");
-    		
-    	} else if(type.equals("3d_scanners")){
-        	for(Scanner scanner : scannerService.listProducts("id")){
-        		if(scanner.getTypeProduct().equals("3D Сканеры")){
-        			list.add(scanner);
-        		}
-        	}
-        	model.addAttribute("productSubType", "3d_scanners");
-        	model.addAttribute("titleOfTable", "Список загруженных 3D сканеров");
-            model.addAttribute("listProducts", list);
-            logger.info("On /admin/scanners/3d_scanners page.");
-            
-    	} else {
-    		model.addAttribute("productSubType", "none");
-    		model.addAttribute("titleOfTable", "Список загруженных сканеров");
-            model.addAttribute("listProducts", scannerService.listProducts("id"));
-            logger.info("/admin/scanners page.");
-    	}
-        model.addAttribute("productType", "scanner");
-        model.addAttribute("nameProduct", "Имя сканера");
-        model.addAttribute("title", "Сканеры");
-        model.addAttribute("addProduct", "Добавить сканер");
-        return "admin/products";
+        	model.addAttribute(ATTRIBUTE_PRODUCT_SUB_TYPE, type);
+        	model.addAttribute(ATTRIBUTE_TITLE_OF_TABLE, parametersOnAdminProductsPage.get(ATTRIBUTE_TITLE_OF_TABLE) + " " + links.get(type).toLowerCase());
+            model.addAttribute(ATTRIBUTE_LIST_PRODUCTS, listResult);
+            logger.info(String.format("On /%s/%s/%s page.", PATH_ADMIN, CONCRETE_FOLDER, type));
+        } else {
+        	model.addAttribute(ATTRIBUTE_PRODUCT_SUB_TYPE, "none");
+    		model.addAttribute(ATTRIBUTE_TITLE_OF_TABLE, parametersOnAdminProductsPage.get(ATTRIBUTE_TITLE_OF_TABLE));
+            model.addAttribute(ATTRIBUTE_LIST_PRODUCTS, productService.listProducts("id"));
+            logger.info(String.format("On /%s/%s page.", PATH_ADMIN, CONCRETE_FOLDER));
+        }
+        
+        model.addAttribute(ATTRIBUTE_PRODUCT_TYPE, TYPE);
+		model.addAttribute(ATTRIBUTE_NAME_PRODUCT, parametersOnAdminProductsPage.get(ATTRIBUTE_NAME_PRODUCT));
+        model.addAttribute(ATTRIBUTE_TITLE, parametersOnAdminProductsPage.get(ATTRIBUTE_TITLE));
+        model.addAttribute(ATTRIBUTE_ADD_PRODUCT, parametersOnAdminProductsPage.get(ATTRIBUTE_ADD_PRODUCT));
+        
+        return PATH_ADMIN +"/"+ PATH_PRODUCTS;
     }
 	
-	@RequestMapping(value="/admin/scanner/{type}/sorting/{value}", method = RequestMethod.POST,consumes="application/json",
-    		headers = "content-type=application/x-www-form-urlencoded")
-    public @ResponseBody List<Scanner> sortingProductsInAdmin(@PathVariable("type") String type,@PathVariable("value") String value) {
+	@RequestMapping(value="/"+PATH_ADMIN+"/"+TYPE+"/{type}/"+PATH_SORTING+"/{value}",method=RequestMethod.POST,consumes=JSON_CONSUMES,headers=JSON_HEADERS)
+    public @ResponseBody List<Scanner> sortingProductsInAdmin(@PathVariable("type") String type, @PathVariable("value") String value) {
 		
 		List<Scanner> list = new ArrayList<Scanner>();
-        if(type.equals("large_format_scanners")){
-        	for(Scanner scanner : scannerService.listProducts(value)){
-        		if(scanner.getTypeProduct().equals("Широкоформатные сканеры")){
-        			list.add(scanner);
-        		}
-        	}
-    		
-    	} else if(type.equals("3d_scanners")){
-        	for(Scanner scanner : scannerService.listProducts(value)){
-        		if(scanner.getTypeProduct().equals("3D Сканеры")){
-        			list.add(scanner);
-        		}
-        	}
-            
-    	} else {
-    		list.addAll(scannerService.listProducts(value));
-    	}
+
+		if (links.containsKey(type)) {
+
+			for (Scanner product : productService.listProducts(value)) {
+				if (product.getTypeProduct().equals(links.get(type))) 
+					list.add(product);
+			}
+
+		} else {
+			list.addAll(productService.listProducts(value));
+		}
 
 		return list;
     }
 	
-	@RequestMapping(value = "/admin/scanner/new", method = RequestMethod.GET)
-	public String addNewScanner(Model model) {
+	@RequestMapping(value = "/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_NEW, method = RequestMethod.GET)
+	public String addNewProduct(Model model) {
 		files.clear();
-		logger.info("/admin/scanner/new page.");
-		model.addAttribute("product", new Scanner());
-		model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
-		model.addAttribute("type", "scanner");
-		model.addAttribute("productId", 0);
+		logger.info(String.format("/%s/%s/%s page.", PATH_ADMIN, PATH_NEW, TYPE));
+		model.addAttribute(ATTRIBUTE_PRODUCT, new Scanner());
 		
-		componets.setJSONtoModelAttribute(model, "scanner");
-	    return "admin/scanner";
+		componets.setJSONtoModelAttribute(model, TYPE);
+		
+		model.addAttribute(ATTRIBUTE_UWP, componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+		model.addAttribute(ATTRIBUTE_TYPE, TYPE);
+		model.addAttribute(ATTRIBUTE_PRODUCT_ID, 0);
+	    return PATH_ADMIN + "/"+ TYPE;
 	}
-     
-	@RequestMapping(value = "/admin/scanner/copy/{id}", method = RequestMethod.GET)
-	public String copyScanner(@PathVariable("id") long id, Model model) {
+	
+	@RequestMapping(value = "/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_COPY +"/{id}", method = RequestMethod.GET)
+	public String copyProduct(@PathVariable("id") long id, Model model) {
 		files.clear();
-		logger.info("/admin/scanner/copy/" + id + " page.");
+		logger.info(String.format("/%s/%s/%s/%d page.", PATH_ADMIN, TYPE, PATH_COPY, id));
 		
-		 logger.info("Copy all characteristic of scanner.");
-		 Scanner scanner = scannerService.getProductById(id);
+		logger.info(String.format("Copy all characteristic of %s.", TYPE));
+		Scanner product = productService.getProductById(id);
 		
 		 /* copy pictures to buffer */
-		 componets.copyPicturesToBuffer(scanner.getPathPictures(), directory, concreteFolder, id, files);
+		 componets.copyPicturesToBuffer( product.getPathPictures(), DIRECTORY, CONCRETE_FOLDER, id, files );
 		
 		 /* set null to id because we must get create new product operation */
-	     scanner.setId(null);
-		 model.addAttribute("product", scanner);
-		 model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
-		 model.addAttribute("type", "scanner");
-		 model.addAttribute("productId", id);
+	     product.setId(null);
+		 model.addAttribute(ATTRIBUTE_PRODUCT, product);
+		 model.addAttribute(ATTRIBUTE_UWP, componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+		 model.addAttribute(ATTRIBUTE_TYPE, TYPE);
+		 model.addAttribute(ATTRIBUTE_PRODUCT_ID, id);
 		 
-		 componets.setJSONtoModelAttribute(model, "scanner");
-	    return "admin/scanner";
+		 componets.setJSONtoModelAttribute(model, TYPE);
+	    return PATH_ADMIN +"/"+ TYPE;
 	}
-	
-	@RequestMapping(value = "/admin/scanner/add", method = RequestMethod.POST) 
-	public String handleFormUpload(@ModelAttribute("product") @Valid  Scanner product,
-			BindingResult result, Model model) throws IOException{
-			
-			if (result.hasErrors()) {
-				model.addAttribute("product", product);
-				model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
-				model.addAttribute("type", "scanner");
-				componets.setJSONtoModelAttribute(model, "scanner");
-	            return "admin/scanner";
-	        }
+     
+	@RequestMapping(value = "/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_ADD, method = RequestMethod.POST) 
+	public String handleFormUpload(@ModelAttribute(MODEL_ATTRIBUTE_PRODUCT) @Valid Scanner product,
+			BindingResult result, Model model){
 
-            long id = scannerService.addProduct(product);
-            logger.info("Create new scanner! With id=" + id);
-  
-            //create folder and add to her new pictures
-            product.getPathPictures().addAll(componets.createFolderAndWriteToItPictures(directory, concreteFolder, id, files));
-			
-            this.scannerService.updateProduct(product);
-            
-            files.clear();
-		  
-		  links.createLinks(scannerService.listShowOnSite());
-		  
-		  if (product.isShowOnSite() && product.isShowOnLeftSide())
-			  componets.updateInLeftField(product, true, "scanner");
-	    	
-		  logger.info("Update links to the products in left menu!");
-	   return "redirect:/admin/scanners";
-	}
-	
-	@RequestMapping(value = "/admin/scanner/save_add", method = RequestMethod.POST) 
-	public String handleFormUploadSave(@ModelAttribute("product") @Valid Scanner product,
-			BindingResult result, Model model) throws IOException{
+		if (result.hasErrors()) return adminFormHasError(product, model);
 
-			if (result.hasErrors()) {
-				model.addAttribute("product", product);
-				model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
-				model.addAttribute("type", "scanner");
-				componets.setJSONtoModelAttribute(model, "scanner");
-	            return "admin/scanner";
-	        }
-		
-            long id = scannerService.addProduct(product);
-            logger.info("Create new scanner! With id=" + id);
-  
-            //create folder and add to her new pictures
-            product.getPathPictures().addAll(componets.createFolderAndWriteToItPictures(directory, concreteFolder, id, files));
-			
-            this.scannerService.updateProduct(product);
-            
-            files.clear(); 
-		  
-		  links.createLinks(scannerService.listShowOnSite());	
-		  
-		  if (product.isShowOnSite() && product.isShowOnLeftSide())
-			  componets.updateInLeftField(product, true, "scanner");
-	    	
-		  logger.info("Update links to the products in left menu!");
-	   return "redirect:/admin/scanner/edit/" + id;
+		long id = productService.addProduct(product);
+		logger.info(String.format("Create new %s! With id=%d", TYPE, id));
+
+		// create folder and add to her new pictures
+		product.getPathPictures()
+				.addAll(componets.createFolderAndWriteToItPictures(DIRECTORY, CONCRETE_FOLDER, id, files));
+
+		this.productService.updateProduct(product);
+
+		files.clear();
+
+		linksForProduct.createLinks(productService.listShowOnSite());
+
+		if (product.isShowOnSite() && product.isShowOnLeftSide())
+			componets.updateInLeftField(product, true, TYPE);
+
+		logger.info("Update links to the products in left menu!");
+		return "redirect:/" + PATH_ADMIN + "/"+ TYPE +"s";
 	}
 	
-    @RequestMapping("/admin/scanner/edit/{id}")
-    public String editScanner(@PathVariable("id") long id, Model model){
-    	logger.info("Begin editing scanner with id=" + id);
-    	Scanner undateScanner = scannerService.getProductById(id);
+	@RequestMapping(value = "/" + PATH_ADMIN +"/"+ TYPE +"/"+ PATH_SAVE_ADD, method = RequestMethod.POST) 
+	public String handleFormUploadSave(@ModelAttribute(MODEL_ATTRIBUTE_PRODUCT) @Valid Scanner product,
+			BindingResult result, Model model){
+
+		if (result.hasErrors()) return adminFormHasError(product, model);
+
+		long id = productService.addProduct(product);
+		logger.info(String.format("Create new %s! With id=%d", TYPE, id));
+
+		// create folder and add to her new pictures
+		product.getPathPictures().addAll(componets.createFolderAndWriteToItPictures(DIRECTORY, CONCRETE_FOLDER, id, files));
+
+		this.productService.updateProduct(product);
+
+		files.clear();
+
+		linksForProduct.createLinks(productService.listShowOnSite());
+
+		if (product.isShowOnSite() && product.isShowOnLeftSide())
+			componets.updateInLeftField(product, true, TYPE);
+
+		logger.info("Update links to the products in left menu!");
+		return "redirect:/" + PATH_ADMIN + "/" + TYPE + "/"+ PATH_EDIT +"/" + id;
+	}
+	
+    @RequestMapping("/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_EDIT +"/{id}")
+    public String editProduct(@PathVariable("id") long id, Model model){
     	
-        model.addAttribute("product", undateScanner);
-        model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
-        model.addAttribute("type", "scanner");
-        componets.setJSONtoModelAttribute(model, "scanner");
-        return "admin/scanner";
+    	logger.info(String.format("Begin editing %s with id=%d", TYPE, id));
+    	Scanner undateProduct = productService.getProductById(id);
+    	
+        model.addAttribute(ATTRIBUTE_PRODUCT, undateProduct);
+        model.addAttribute(ATTRIBUTE_UWP, componets.showSimplestArrayOfUseWithProduct(
+        		useWithProductService.listShowOnSite()));
+        model.addAttribute(ATTRIBUTE_TYPE, TYPE);
+        componets.setJSONtoModelAttribute(model, TYPE);
+        
+        return PATH_ADMIN + "/" + TYPE;
     }
 	
-	@RequestMapping(value = "/admin/scanner/save_update", method = RequestMethod.POST) 
-	public String updateSaveScanner(@ModelAttribute("product") @Valid Scanner product,
-			BindingResult result, Model model) throws IOException{
+	@RequestMapping(value = "/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_SAVE_UPDATE, method = RequestMethod.POST) 
+	public String updateSaveProduct(@ModelAttribute(MODEL_ATTRIBUTE_PRODUCT) @Valid Scanner product,
+			BindingResult result, Model model){
 		
-		if (result.hasErrors()) {
-			model.addAttribute("product", product);
-			model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
-			model.addAttribute("type", "scanner");
-			componets.setJSONtoModelAttribute(model, "scanner");
-            return "admin/scanner";
-        }
+		if (result.hasErrors()) return adminFormHasError(product, model);
 		
-		logger.info("scanner UPDATE with save, id=" + product.getId());
-        
-		List<String> pathPictures = scannerService.getProductById(product.getId()).getPathPictures();
+		logger.info(String.format("%s UPDATE with save, id=%d", TYPE, product.getId()));
+		
+		List<String> pathPictures = productService.getProductById(product.getId()).getPathPictures();
 		product.setPathPictures(pathPictures);
-		
-		scannerService.updateProduct(product);
-        logger.info("scanner with id=" + product.getId() + " was UDPATED!");
+        
+		productService.updateProduct(product);
+        logger.info(String.format("%s with id=%d was UDPATED", TYPE, product.getId()));
 		  
-		links.createLinks(scannerService.listShowOnSite());
+		linksForProduct.createLinks(productService.listShowOnSite());
 	
 		if (product.isShowOnSite() && product.isShowOnLeftSide())
-			componets.updateInLeftField(product, true, "scanner");
+	    	componets.updateInLeftField(product, true, TYPE);
 		  
 		logger.info("Update links to the products in left menu!");
-		return "redirect:/admin/scanner/edit/" + product.getId();
+		return "redirect:/" + PATH_ADMIN + "/" + TYPE + "/"+ PATH_EDIT +"/" + product.getId();
 	}
 	
-	@RequestMapping(value = "/admin/scanner/update", method = RequestMethod.POST) 
-	public String updateScanner(@ModelAttribute("product") @Valid Scanner product,
-			BindingResult result, Model model) throws IOException{
+	@RequestMapping(value = "/" + PATH_ADMIN +"/"+ TYPE +"/"+ PATH_UPDATE, method = RequestMethod.POST) 
+	public String updateProduct(@ModelAttribute(MODEL_ATTRIBUTE_PRODUCT) @Valid Scanner product,
+			BindingResult result, Model model){
 		
-		if (result.hasErrors()) {
-			model.addAttribute("product", product);
-			model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
-			model.addAttribute("type", "scanner");
-			componets.setJSONtoModelAttribute(model, "scanner");
-            return "admin/scanner";
-        }
-		
-			logger.info("scanner UPDATE id=" + product.getId());
-        
-			List<String> pathPictures = scannerService.getProductById(product.getId()).getPathPictures();
-			product.setPathPictures(pathPictures);
-			
-			scannerService.updateProduct(product);
-			logger.info("scanner with id=" + product.getId() + " was UDPATED!");
-		  
-			links.createLinks(scannerService.listShowOnSite());
-	
-			if (product.isShowOnSite() && product.isShowOnLeftSide())
-				componets.updateInLeftField(product, true, "scanner");
-		  
-			logger.info("Update links to the products in left menu!");
-	   return "redirect:/admin/scanners";
+		if (result.hasErrors()) return adminFormHasError(product, model);
+
+		logger.info(String.format("%s UPDATE id=%d", TYPE, product.getId()));
+		List<String> pathPictures = productService.getProductById(product.getId()).getPathPictures();
+		product.setPathPictures(pathPictures);
+
+		productService.updateProduct(product);
+		logger.info(String.format("%s with id=%d was UDPATED", TYPE, product.getId()));
+
+		files.clear();
+
+		linksForProduct.createLinks(productService.listShowOnSite());
+
+		if (product.isShowOnSite() && product.isShowOnLeftSide())
+			componets.updateInLeftField(product, true, TYPE);
+
+		logger.info("Update links to the products in left menu!");
+		return "redirect:/" + PATH_ADMIN +"/"+ TYPE + "s";
 	}
 	
-    @RequestMapping(value="/admin/scanner/upload_pictures", method = RequestMethod.POST)
+	private String adminFormHasError(Scanner product, Model model){
+		model.addAttribute(ATTRIBUTE_PRODUCT, product);
+		model.addAttribute(ATTRIBUTE_UWP, componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+		model.addAttribute(ATTRIBUTE_TYPE, TYPE);
+		
+		componets.setJSONtoModelAttribute(model, TYPE);
+        return PATH_ADMIN + "/" + TYPE;
+	}
+	
+    @RequestMapping(value="/" + PATH_ADMIN + "/" + TYPE + "/"+ PATH_UPLOAD_PICTURES, method = RequestMethod.POST)
     public @ResponseBody String uploadPictures(MultipartHttpServletRequest request) {
-    	logger.info("upload new picture");
-        
-         Iterator<String> itr =  request.getFileNames();
-         MultipartFile mpf = null;
-         String fileName = null;
-
-         while(itr.hasNext()){
-             mpf = request.getFile(itr.next()); 
-             
-             FileMeta fileMeta = new FileMeta();
-     		
-     		 fileName = files.size() + new Random().nextInt(10000000) + "" + mpf.getOriginalFilename().substring(mpf.getOriginalFilename().lastIndexOf("."))/*last part is file extension*/; 
-             fileMeta.setFileName(fileName);
-
-             try {
-                fileMeta.setBytes(mpf.getBytes());
-                logger.info("WRITED new picture to the FILEMETA.");
-            } catch (IOException e) {
-                logger.error("WRITTING picture to the FILEMETA has a problem: ",e);
-            }
-             
-             logger.info("pictute added to the FILEMETA successful - " + fileMeta.getFileName());
-             files.add(fileMeta);
-         }  
-         return fileName;
+         return componets.uploadPictureOnCreationProduct(request, files);
     }
     
-    @RequestMapping(value="/admin/scanner/change_order_pictures", method = RequestMethod.POST,consumes="application/json",
-    		headers = "content-type=application/x-www-form-urlencoded")
+    @RequestMapping(value="/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_CHANGE_ORDER_PICTURES, method = RequestMethod.POST,consumes=JSON_CONSUMES,headers = JSON_HEADERS)
     public @ResponseBody void changeOrderPictures(@RequestBody List<String> selectedIds) {
-    	componets.changeOrderPictures(concreteFolder, selectedIds, files);   	  	
+    	componets.changeOrderPictures(CONCRETE_FOLDER, selectedIds, files); 	  	
     }
     
-    @RequestMapping(value="/admin/scanner/remove_picture/{name_picture}", method = RequestMethod.POST,consumes="application/json",
-    		headers = "content-type=application/x-www-form-urlencoded")
+    @RequestMapping(value="/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_REMOVE_PICTURE +"/{name_picture}", method = RequestMethod.POST,consumes=JSON_CONSUMES,
+    		headers = JSON_HEADERS)
     public @ResponseBody void removePicture(@PathVariable("name_picture") String namePicture) {
-    	componets.removePictureFromPicturesContainer(concreteFolder, namePicture, files);
+    	componets.removePictureFromPicturesContainer(CONCRETE_FOLDER, namePicture, files);
     }
     
-    @RequestMapping(value="/admin/scanner/upload_pictures_update/{id}", method = RequestMethod.POST)
+    @RequestMapping(value="/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_UPLOAD_PICTURES_UPDATE +"/{id}", method = RequestMethod.POST)
     public @ResponseBody String uploadPicturesUpdate(MultipartHttpServletRequest request, @PathVariable("id") long id) {
-    	logger.info("upload new picture");
-        
-         Iterator<String> itr =  request.getFileNames();
-         MultipartFile mpf = null;
-         String fileName = null;
-
-         while(itr.hasNext()){
-        	mpf = request.getFile(itr.next()); 
-     		fileName = new Random().nextInt(10000000) + "" + mpf.getOriginalFilename().substring(mpf.getOriginalFilename().lastIndexOf("."))/*last part is file extension*/; 
-
- 			try {
- 				FileCopyUtils.copy(mpf.getBytes(), new FileOutputStream(directory + File.separator + concreteFolder
-	    				+ File.separator + id + File.separator + fileName));
- 			} catch (IOException e) {
- 				logger.error("Don't write picture to the folder", e);
- 			} 
-        	 
- 			Scanner product = scannerService.getProductById(id);
- 			product.getPathPictures().add(fileName);
- 			scannerService.updateProduct(product);
-         }  
-         return fileName;
+    	
+    	String nameOfAddedPicture = componets.uploadPictureToExistedProduct(request, DIRECTORY, CONCRETE_FOLDER, id);   	
+    	Scanner product = productService.getProductById(id);
+ 		product.getPathPictures().add(nameOfAddedPicture);
+ 		productService.updateProduct(product);
+         
+       return nameOfAddedPicture;
     }
     
-    @RequestMapping(value="/admin/scanner/change_order_pictures_update/{id}", method = RequestMethod.POST,consumes="application/json",
-    		headers = "content-type=application/x-www-form-urlencoded")
+    @RequestMapping(value="/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_CHANGE_ORDER_PICTURES_UPDATE +"/{id}", method = RequestMethod.POST,consumes=JSON_CONSUMES,
+    		headers = JSON_HEADERS)
     public @ResponseBody void changeOrderPicturesUpdate(@RequestBody List<String> selectedIds, @PathVariable("id") long id) {
-    	logger.info("change order of pictures in changed scanner product");
+    	logger.info(String.format("change order of pictures in changed %s product", TYPE));
     	
-    	Scanner product = scannerService.getProductById(id);
+    	Scanner product = productService.getProductById(id);
     	product.getPathPictures().clear();
     	product.getPathPictures().addAll(selectedIds);
-    	scannerService.updateProduct(product);
+    	productService.updateProduct(product);
     }
     
-    @RequestMapping(value="/admin/scanner/remove_picture_update/{name_picture}/{id}", method = RequestMethod.POST,consumes="application/json",
-    		headers = "content-type=application/x-www-form-urlencoded")
+    @RequestMapping(value="/"+PATH_ADMIN+"/"+TYPE+"/"+PATH_REMOVE_PICTURE_UPDATE+"/{name_picture}/{id}", method = RequestMethod.POST,consumes=JSON_CONSUMES,
+    		headers = JSON_HEADERS)
     public @ResponseBody void removePicture(@PathVariable("name_picture") String namePicture, @PathVariable("id") long id) {
+    	
     	String name = namePicture.replace(":", ".");
-    	Scanner product = scannerService.getProductById(id);
+    	Scanner product = productService.getProductById(id);
     	product.getPathPictures().remove(name);
     	
-    	try {
-    		FileUtils.forceDelete(new File(directory + File.separator + concreteFolder+ File.separator + id + File.separator + name));
-		} catch (IOException e) {
-			logger.error("Can't delete picture from the folder", e);
-		} 
+    	componets.removePicture(name, DIRECTORY, CONCRETE_FOLDER, id);
     	
     	if(product.getPathPictures().size()==0){
-    		File fi = new File(directory + File.separator + "default.jpg");
-			try {
-				FileCopyUtils.copy(Files.readAllBytes(fi.toPath()), new FileOutputStream(
-						directory + File.separator + concreteFolder + File.separator + product.getId() + File.separator + "default.jpg"));
-			} catch (IOException e) {
-				logger.error("Can't update path of the default picture to scannanner with id=" + product.getId(), e);
-			}
+    		componets.loadDefaultPicture(DIRECTORY, CONCRETE_FOLDER, product.getId());
 			product.getPathPictures().add("default.jpg");
     	}
     	
-    	scannerService.updateProduct(product);
-    	
-    	logger.info("Remove pictore with name = " + name + " from changed scanner product");
+    	logger.info(String.format("Remove pictore with name = %s from changed %s product", name, TYPE));
+
+    	productService.updateProduct(product);
     }
     
-    @RequestMapping("/admin/scanner/remove/{id}")
-    public String removeLaminator(@PathVariable("id") long id){
-    		logger.info("Start deleting scanner from database, id=" + id);
-    		try {
-    			FileUtils.deleteDirectory(new File(directory + File.separator + 
-						concreteFolder + File.separator + id));
-    			logger.info("deleted all pictures and pictures directory of this scanner");
-			} catch (IOException e) {
-				logger.error("Deleting all pictures from this scanner has a problem: ", e);
-			}
+    @RequestMapping("/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_REMOVE +"/{id}")
+    public String removeProduct(@PathVariable("id") long id){
+    	logger.info(String.format("Start deleting %s from database, id=%d", TYPE, id));
+    	
+    	componets.removeAllPricturesOfConcreteProduct(DIRECTORY, CONCRETE_FOLDER, id);
     		
-    		logger.info("Update links to the products in left menu!");
-    		componets.updateInLeftField(scannerService.getProductById(id), false, "scanner");
+    	logger.info("Update links to the products in left menu!");
+    	componets.updateInLeftField(productService.getProductById(id), false, TYPE);
     		
-    		logger.info("DELETE scanner with id=" + id + " from database!");
-    		scannerService.removeProduct(id);
+    	logger.info(String.format("DELETE %s with id=%d from database", TYPE, id));
+    	productService.removeProduct(id);
         
-    		links.createLinks(scannerService.listShowOnSite());
+    	linksForProduct.createLinks(productService.listShowOnSite());
     		
-        return "redirect:/admin/scanners";
+        return "redirect:/"+ PATH_ADMIN + "/" + TYPE + "s";
     }  
     
-    @RequestMapping(value="/admin/scanner/showOnSite/{id}", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
+    @RequestMapping(value="/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_SHOW_ON_SITE +"/{id}",method = RequestMethod.POST,consumes=JSON_CONSUMES,headers=JSON_HEADERS)
     public @ResponseBody void showOnSite(@PathVariable("id") long id, @RequestBody boolean value) {
-    	Scanner scanner = scannerService.getProductById(id);
-    	scanner.setShowOnSite(value);
-    	scannerService.updateProduct(scanner);
+    	Scanner product = productService.getProductById(id);
+    	product.setShowOnSite(value);
+    	productService.updateProduct(product);
     	
-    	if (scanner.isShowOnSite() && scanner.isShowOnLeftSide()){
-    		componets.updateInLeftField(scanner, true, "scanner");
-    	} else {
-    		componets.updateInLeftField(scanner, false, "scanner");
-    	}
-    	
-    	links.createLinks(scannerService.listShowOnSite());
+    	componets.updateInLeftField(product, product.isShowOnSite() && product.isShowOnLeftSide() , TYPE);
+    	linksForProduct.createLinks(productService.listShowOnSite());
     }
     
-    @RequestMapping(value="/admin/scanner/setTop/{id}", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
+    @RequestMapping(value="/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_SET_TOP +"/{id}",method = RequestMethod.POST,consumes=JSON_CONSUMES,headers = JSON_HEADERS)
     public @ResponseBody void setTop(@PathVariable("id") long id, @RequestBody boolean value) {
-    	Scanner scanner = scannerService.getProductById(id);
-    	scanner.setTop(value);
-    	scannerService.updateProduct(scanner);
+    	Scanner product = productService.getProductById(id);
+    	product.setTop(value);
+    	productService.updateProduct(product);
     }
     
-    @RequestMapping(value="/admin/scanner/showOnHomePage/{id}", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
+    @RequestMapping(value="/"+PATH_ADMIN+"/"+TYPE+"/"+ PATH_SHOW_ON_HOME_PAGE+"/{id}",method=RequestMethod.POST,consumes=JSON_CONSUMES,headers=JSON_HEADERS)
     public @ResponseBody void showOnHomePage(@PathVariable("id") long id, @RequestBody boolean value) {
-    	Scanner scanner = scannerService.getProductById(id);
-    	scanner.setShowOnHomePage(value);
-    	scannerService.updateProduct(scanner);
+    	Scanner product = productService.getProductById(id);
+    	product.setShowOnHomePage(value);
+    	productService.updateProduct(product);
     }
     
-    @RequestMapping(value="/admin/scanner/showOnLeftSide/{id}", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
+    @RequestMapping(value="/"+PATH_ADMIN+"/"+TYPE+"/"+PATH_SHOW_ON_LEFT_SIDE+"/{id}",method=RequestMethod.POST,consumes=JSON_CONSUMES,headers=JSON_HEADERS)
     public @ResponseBody void showOnLeftSide(@PathVariable("id") long id, @RequestBody boolean value) {
-    	Scanner scanner = scannerService.getProductById(id);
-    	scanner.setShowOnLeftSide(value);
-    	scannerService.updateProduct(scanner);
-    	
-    	if (scanner.isShowOnSite() && scanner.isShowOnLeftSide()){
-    		componets.updateInLeftField(scanner, true, "scanner");
-    	} else {
-    		componets.updateInLeftField(scanner, false, "scanner");
-    	}
-    		
+    	Scanner product = productService.getProductById(id);
+    	product.setShowOnLeftSide(value);
+    	productService.updateProduct(product);	
+    	componets.updateInLeftField(product, product.isShowOnSite() && product.isShowOnLeftSide(), TYPE);
     }
 }
