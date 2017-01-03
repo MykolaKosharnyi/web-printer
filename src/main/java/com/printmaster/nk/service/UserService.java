@@ -6,7 +6,7 @@ import com.printmaster.nk.model.User;
 
 public interface UserService {
 	
-	public void save(User user);
+	public long save(User user);
     public void updateUser(User user);
     public User findByUserName(String username);
     public List<User> listUsers();

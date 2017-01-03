@@ -24,11 +24,11 @@ public class UserDAOImpl implements UserDAO{
     }
 	
     @Override
-	public void save(User user) {
+	public long save(User user) {
         Session session = this.sessionFactory.getCurrentSession();
-        session.save(user);
+        long id = (Long) session.save(user);
         logger.info("User saved successfully, User details: " + user);
-
+        return id;
 	}
     
     @Override

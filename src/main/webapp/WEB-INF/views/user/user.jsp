@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
 <style>
 .menu {
@@ -63,8 +64,18 @@
 	<div class="photo_and_information_about_user">
 		<div class="col-md-3">
 			<div class="user_image">
-				<img src="/images/user_image.png" alt="alt" />
-				<div class="new_user_picture_loader">Загрузить новое изображение</div>
+				<c:if test="${empty user.nameUserPicture}">
+					<img id="image" src="/images/user_image.png" alt="alt" />
+				</c:if>
+				<c:if test="${!empty user.nameUserPicture}">
+					<img id="image" src="/images/users/${user.id}/${user.nameUserPicture}" alt="alt" />
+				</c:if>
+				
+				<form:form method="POST" commandName="load_new_user_picture" action="/upload_new_picture/user/${user.id}"
+				 enctype="multipart/form-data">
+					<input id="user_load_picture" type="file" name="files" accept="image/*" style="display:none">
+					<div class="new_user_picture_loader">Загрузить новое изображение</div>
+				</form:form>
 			</div>
 		</div>
 		<div class="col-md-9">
@@ -180,11 +191,46 @@
 </div>
 
 <script>
+
 	$(function() {
 		$('.user_image').hover(function() {
 			$(this).find(".new_user_picture_loader").slideDown(500);
-		}, function() {
+			
+			//setTimeout(function() {   //calls click event after a certain time
+			//	$(".new_user_picture_loader").slideUp(500);
+			//}, 3000);
+		},
+		function() {
 			$(this).find(".new_user_picture_loader").slideUp(500);
 		});
 	});
+	
+	$('.new_user_picture_loader').click(function(){ $('#user_load_picture').trigger('click'); });
+
+	//for loading new user picture
+	document.getElementById("user_load_picture").onchange = function() {
+		//before showing user, load new picture on server
+		$('#load_new_user_picture').ajaxForm({
+			type : 'post',
+/*			success: function(result){
+				$(".new_user_picture_loader").text(result);
+			},*/
+			 error: function(XMLHttpRequest, textStatus, errorThrown) {
+			     alert("some error");
+			     console.log(XMLHttpRequest.statusText);
+			     console.log(textStatus);
+			     console.log(errorThrown);
+			  }
+		}).submit();
+
+		var reader = new FileReader();
+
+		reader.onload = function(e) {
+			// get loaded data and render thumbnail.
+			document.getElementById("image").src = e.target.result;
+		};
+
+		// read the image file as a data URL.
+		reader.readAsDataURL(this.files[0]);
+	};
 </script>

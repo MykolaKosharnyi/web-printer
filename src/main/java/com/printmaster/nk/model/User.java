@@ -58,7 +58,26 @@ public class User implements Serializable{
 	@Column(name="role")
     private String role;
 	
+	@Column(name="nameUserPicture")
+	private String nameUserPicture;
+	
 	public User(){
+	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public String getNameUserPicture() {
+		return nameUserPicture;
+	}
+
+	public void setNameUserPicture(String nameUserPicture) {
+		this.nameUserPicture = nameUserPicture;
 	}
 
 	public Long getId() {

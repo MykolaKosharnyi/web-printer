@@ -197,4 +197,12 @@ public class PicturesManipulator {
 		}
     }
 
+	public void createDirectoryForPictures(String directory, String concreteFolder, long id) {
+		if(new File(directory + File.separator + concreteFolder + File.separator + id).mkdir()){
+        	logger.info(String.format("Create new folder for %s with id=%d.", concreteFolder, id));        	
+        } else {
+        	logger.error(String.format("Don't create new %s folder!", concreteFolder));
+        }
+	}
+
 }

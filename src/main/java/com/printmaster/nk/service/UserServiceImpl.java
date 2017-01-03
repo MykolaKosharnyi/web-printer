@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional
-	public void save(User user) {
+	public long save(User user) {
 		String encodedPassword = passwordEncoder.encode(user.getPassword());
 		user.setPassword(encodedPassword);
 		//Role role = roleService.getById(1);
@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService {
 		//role.setId((long)1);
 		//role.setName("ROLE_USER");
         user.setRole("ROLE_USER");
-        userDAO.save(user);
+       return userDAO.save(user);
 	}
 
 	@Override

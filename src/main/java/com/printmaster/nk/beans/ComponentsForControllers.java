@@ -385,4 +385,15 @@ public class ComponentsForControllers {
     public void removeAllPricturesOfConcreteProduct(String directory, String concreteFolder, long id){
     	picturesManipulator.removeAllPricturesOfConcreteProduct(directory, concreteFolder, id);
     }
+    
+    /**
+     * Create directory for keeping pictures concrete product/user
+     * 
+     * @param directory
+     * @param concreteFolder
+     * @param id
+     */
+    public void createDirectoryForPictures(String directory, String concreteFolder, long id){
+    	picturesManipulator.createDirectoryForPictures(directory, concreteFolder, id);
+    }
 }
