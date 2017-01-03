@@ -25,7 +25,7 @@
 	<!-- <script src="<%=request.getContextPath()%>/products/ckeditor/ckeditor.js"></script>
    <script src="<%=request.getContextPath()%>/products/tinyfck/tiny_mce.js"></script>  -->
     
-<script src="<%=request.getContextPath()%>/products/tiny_mce/tinymce.min.js"></script>
+	<script src="<%=request.getContextPath()%>/products/tiny_mce/tinymce.min.js"></script>
 	<script src="<%=request.getContextPath()%>/resources/js/admin/common.js"></script>
 </head>
 <body>

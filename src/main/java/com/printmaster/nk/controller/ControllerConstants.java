@@ -43,4 +43,14 @@ interface ControllerConstants {
 	String ATTRIBUTE_UWP = "uwp";
 	String ATTRIBUTE_PRODUCT_ID = "productId";
 	
+	//name of product
+
+	String PRINTER = "printer";
+	String PRINTER_3D = "3d_printer";
+	String DIGITAL_PRINTER = "digital_printer";
+	String CUTTER = "cutter";
+	String LAMINATOR = "laminator";
+	String LASER = "laser";
+	String SCANNER = "scanner";
+
 }

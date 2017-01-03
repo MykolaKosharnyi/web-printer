@@ -35,9 +35,7 @@ import static com.printmaster.nk.controller.ControllerConstants.*;
 public class CutterController {
 	
 	private Map<String, String> links = new HashMap<String, String>(){
-
 		private static final long serialVersionUID = 6020303266276652199L;
-
 	{
 		put("for_wood", "Для обработки дерева");
 	    put("for_the_treatment_of_metal", "Для обработки металла");
@@ -45,9 +43,7 @@ public class CutterController {
 	}};
 	
 	private Map<String, String> parametersOnAdminProductsPage = new HashMap<String, String>(){
-
 		private static final long serialVersionUID = 6020303266276652199L;
-
 	{
 		put(ATTRIBUTE_TITLE_OF_TABLE, "Список загруженных граверов/фрезеров");
 	    put(ATTRIBUTE_NAME_PRODUCT, "Имя гравера/фрезера");
@@ -58,12 +54,8 @@ public class CutterController {
 	private Logger logger = Logger.getLogger(CutterController.class);
 	
 	private static final String DIRECTORY = "/var/www/localhost/images";
-
 	private static final String TYPE = "cutter";
-	
 	private static final String CONCRETE_FOLDER = TYPE + "s";
-	
-	//private static final String ADMIN_PATH = ControllerConstants.ADMIN_PATH;
 	
 	@Autowired
 	private LinksForProducts linksForProduct;
@@ -118,7 +110,7 @@ public class CutterController {
         }
         
         String[] a = {currentType};
-        search.setTypeCutter(a);
+        search.setTypeProduct(a);
         search.setPrise0(0);
         search.setPrise1(100000);
         model.addAttribute(ATTRIBUTE_SEARCH, search);
@@ -169,7 +161,7 @@ public class CutterController {
         
         if(links.containsKey(type)){
         	for(Cutter product : productService.listProducts("id")){
-        		if(product.getTypeCutter().equals(links.get(type))){
+        		if(product.getTypeProduct().equals(links.get(type))){
         			listResult.add(product);
         		}
         	}
@@ -200,7 +192,7 @@ public class CutterController {
 		if (links.containsKey(type)) {
 
 			for (Cutter product : productService.listProducts(value)) {
-				if (product.getTypeCutter().equals(links.get(type))) 
+				if (product.getTypeProduct().equals(links.get(type))) 
 					list.add(product);
 			}
 

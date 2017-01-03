@@ -47,31 +47,31 @@ public abstract class ProductController <T extends HeadProduct, S extends Search
 	
 	private static final String DIRECTORY = "/var/www/localhost/images";
 	private final String TYPE = ""/*getTypeUrl()*/;
-	private final String CONCRETE_FOLDER = TYPE + "s";
+	private final String CONCRETE_FOLDER = getTypeUrl() + "s";
 	
 	private String getTypeUrl(){	
 		if (product instanceof Printer) {
-			return "printer";
+			return PRINTER;
 			
 		} else if (product instanceof Printer3D) {
-			return "3d_printer";
+			return PRINTER_3D;
 
 		} else if (product instanceof DigitalPrinter) {
-			return "digital_printer";
+			return DIGITAL_PRINTER;
 
 		} else if (product instanceof Cutter) {
-			return "cutter";
+			return CUTTER;
 
 		} else if (product instanceof Laminator) {
-			return "laminator";
+			return LAMINATOR;
 			
 		} else if (product instanceof Laser) {
-			return "laser";
+			return LASER;
 			
 		} else if (product instanceof Scanner) {
-			return "scanner";
+			return SCANNER;
 		} 
-		return "printer";
+		return PRINTER;
 	}
 	
 	@Autowired
@@ -94,7 +94,7 @@ public abstract class ProductController <T extends HeadProduct, S extends Search
     public void setUseWithProductService(UseWithProductService ps){
         this.useWithProductService = ps;
     }
-    
+    	
 	@RequestMapping(value = "/"+ TYPE +"s", method = RequestMethod.GET)	
     public String allProducts(Model model) throws InstantiationException, IllegalAccessException {
         model.addAttribute(ATTRIBUTE_LIST_PRODUCTS, componets.makeLightWeightCollectionOfProduct(this.productService.listShowOnSite()));

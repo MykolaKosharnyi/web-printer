@@ -37,9 +37,7 @@ import com.printmaster.nk.service.UseWithProductService;
 public class PrinterController {
 	
 	private Map<String, String> links = new HashMap<String, String>(){
-
 		private static final long serialVersionUID = 6020303266276652199L;
-
 	{
 		put("dissolving", "Сольвентный");
 	    put("ecosolvent", "Экосольвентный");
