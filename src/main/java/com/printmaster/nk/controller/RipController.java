@@ -46,11 +46,12 @@ public class RipController {
 	
 	private Logger logger = Logger.getLogger(RipController.class);
 	
-	private String directory = "/var/www/localhost/images";
-	private String concreteFolder = "rips";
+	private final static String DIRECTORY = "/var/www/localhost/images";
+	private static final String TYPE = "rip";
+	private static final String CONCRETE_FOLDER = TYPE + "s";
 
 	@Autowired
-	private LinksForProducts links;
+	private LinksForProducts linksForProduct;
 
     @Autowired
     PicturesContainer files;
@@ -146,7 +147,7 @@ public class RipController {
 		 Rip rip = ripService.getProductById(id);
 		
 		 /* copy pictures to buffer */
-		 componets.copyPicturesToBuffer(rip.getPathPictures(), directory, concreteFolder, id, files);
+		 componets.copyPicturesToBuffer(rip.getPathPictures(), DIRECTORY, CONCRETE_FOLDER, id, files);
 		
 		 /* set null to id because we must get create new product operation */
 	     rip.setId(null);
@@ -174,16 +175,16 @@ public class RipController {
             logger.info("Create new RIP! With id=" + id);
 
             //create folder and add to her new pictures
-            product.getPathPictures().addAll(componets.createFolderAndWriteToItPictures(directory, concreteFolder, id, files));
+            product.getPathPictures().addAll(componets.createFolderAndWriteToItPictures(DIRECTORY, CONCRETE_FOLDER, id, files));
 			
             this.ripService.updateProduct(product);
             
             files.clear();
 		
-		  links.createLinks(ripService.listShowOnSite());
+		  linksForProduct.createLinks(ripService.listShowOnSite());
 		  
 		  if (product.isShowOnSite() && product.isShowOnLeftSide())
-			  componets.updateInLeftField(product, true);
+			  componets.updateInLeftField(product, true, TYPE);
 	    	
 		  logger.info("Update links to the products in left menu!");
 	   return "redirect:/admin/rips";
@@ -204,15 +205,15 @@ public class RipController {
             logger.info("Create new rip! With id=" + id);
   
             //create folder and add to her new pictures
-            product.getPathPictures().addAll(componets.createFolderAndWriteToItPictures(directory, concreteFolder, id, files));
+            product.getPathPictures().addAll(componets.createFolderAndWriteToItPictures(DIRECTORY, CONCRETE_FOLDER, id, files));
 			
             this.ripService.updateProduct(product);
             
             files.clear();
 		  
-		  links.createLinks(ripService.listShowOnSite());	
+		  linksForProduct.createLinks(ripService.listShowOnSite());	
 		  if (product.isShowOnSite() && product.isShowOnLeftSide()){
-			  componets.updateInLeftField(product, true);
+			  componets.updateInLeftField(product, true, TYPE);
 	    	}
 		  logger.info("Update links to the products in left menu!");
 	   return "redirect:/admin/rip/edit/" + id;
@@ -249,10 +250,10 @@ public class RipController {
         ripService.updateProduct(product);
         logger.info("rip with id=" + product.getId() + " was UDPATED!");
 		  
-		links.createLinks(ripService.listShowOnSite());
+		linksForProduct.createLinks(ripService.listShowOnSite());
 	
 		if (product.isShowOnSite() && product.isShowOnLeftSide()){
-			componets.updateInLeftField(product, true);
+			componets.updateInLeftField(product, true, TYPE);
 	    }
 		  
 		logger.info("Update links to the products in left menu!");
@@ -281,10 +282,10 @@ public class RipController {
         
 		  files.clear();
 		  
-		  links.createLinks(ripService.listShowOnSite());
+		  linksForProduct.createLinks(ripService.listShowOnSite());
 	
 		  if (product.isShowOnSite() && product.isShowOnLeftSide()){
-			  componets.updateInLeftField(product, true);
+			  componets.updateInLeftField(product, true, TYPE);
 	    	}
 		  
 		  logger.info("Update links to the products in left menu!");
@@ -322,12 +323,12 @@ public class RipController {
     
     @RequestMapping(value="/admin/rip/change_order_pictures", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void changeOrderPictures(@RequestBody List<String> selectedIds) {
-    	componets.changeOrderPictures(concreteFolder, selectedIds, files);	  	
+    	componets.changeOrderPictures(CONCRETE_FOLDER, selectedIds, files);	  	
     }
     
     @RequestMapping(value="/admin/rip/remove_picture/{name_picture}", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void removePicture(@PathVariable("name_picture") String namePicture) {
-    	componets.removePictureFromPicturesContainer(concreteFolder, namePicture, files);
+    	componets.removePictureFromPicturesContainer(CONCRETE_FOLDER, namePicture, files);
     }
     
     @RequestMapping(value="/admin/rip/upload_pictures_update/{id}", method = RequestMethod.POST)
@@ -343,7 +344,7 @@ public class RipController {
      		fileName = new Random().nextInt(10000000) + "" + mpf.getOriginalFilename().substring(mpf.getOriginalFilename().lastIndexOf("."))/*last part is file extension*/; 
 
  			try {
- 				FileCopyUtils.copy(mpf.getBytes(), new FileOutputStream(directory + File.separator + concreteFolder
+ 				FileCopyUtils.copy(mpf.getBytes(), new FileOutputStream(DIRECTORY + File.separator + CONCRETE_FOLDER
 	    				+ File.separator + id + File.separator + fileName));
  			} catch (IOException e) {
  				logger.error("Don't write picture to the folder", e);
@@ -375,16 +376,16 @@ public class RipController {
     	product.getPathPictures().remove(name);
     	
     	try {
-    		FileUtils.forceDelete(new File(directory + File.separator + concreteFolder+ File.separator + id + File.separator + name));
+    		FileUtils.forceDelete(new File(DIRECTORY + File.separator + CONCRETE_FOLDER+ File.separator + id + File.separator + name));
 		} catch (IOException e) {
 			logger.error("Can't delete picture from the folder", e);
 		} 
     	
     	if(product.getPathPictures().size()==0){
-    		File fi = new File(directory + File.separator + "default.jpg");
+    		File fi = new File(DIRECTORY + File.separator + "default.jpg");
 			try {
 				FileCopyUtils.copy(Files.readAllBytes(fi.toPath()), new FileOutputStream(
-						directory + File.separator + concreteFolder + File.separator + product.getId() + File.separator + "default.jpg"));
+						DIRECTORY + File.separator + CONCRETE_FOLDER + File.separator + product.getId() + File.separator + "default.jpg"));
 			} catch (IOException e) {
 				logger.error("Can't update path of the default picture to rip with id=" + product.getId(), e);
 			}
@@ -400,8 +401,8 @@ public class RipController {
     public String removeRip(@PathVariable("id") long id){
     		logger.info("Start deleting rip from database, id=" + id);
     		try {
-    			FileUtils.deleteDirectory(new File(directory + File.separator + 
-						concreteFolder + File.separator + id));
+    			FileUtils.deleteDirectory(new File(DIRECTORY + File.separator + 
+						CONCRETE_FOLDER + File.separator + id));
     			logger.info("deleted all pictures and pictures directory of this rip");
 			} catch (IOException e) {
 				logger.error("Deleting all pictures from this rip has a problem: ", e);
@@ -409,12 +410,12 @@ public class RipController {
     		
     		logger.info("Update links to the products in left menu!");
     		
-    		componets.updateInLeftField(ripService.getProductById(id), false);
+    		componets.updateInLeftField(ripService.getProductById(id), false, TYPE);
     		
     		logger.info("DELETE rip with id=" + id + " from database!");
     		ripService.removeProduct(id);
         
-    		links.createLinks(ripService.listShowOnSite());
+    		linksForProduct.createLinks(ripService.listShowOnSite());
     		
         return "redirect:/admin/rips";
     }  
@@ -425,13 +426,9 @@ public class RipController {
     	rip.setShowOnSite(value);
     	ripService.updateProduct(rip);
     	
-    	if (rip.isShowOnSite() && rip.isShowOnLeftSide()){
-    		componets.updateInLeftField(rip, true);
-    	} else {
-    		componets.updateInLeftField(rip, false);
-    	}
+    	componets.updateInLeftField(rip, (rip.isShowOnSite() && rip.isShowOnLeftSide()), TYPE);
     	
-    	links.createLinks(ripService.listShowOnSite());
+    	linksForProduct.createLinks(ripService.listShowOnSite());
     }
     
     @RequestMapping(value="/admin/rip/setTop/{id}", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
@@ -454,11 +451,6 @@ public class RipController {
     	rip.setShowOnLeftSide(value);
     	ripService.updateProduct(rip);
     	
-    	if (rip.isShowOnSite() && rip.isShowOnLeftSide()){
-    		componets.updateInLeftField(rip, true);
-    	} else {
-    		componets.updateInLeftField(rip, false);
-    	}
-    		
+    	componets.updateInLeftField(rip, (rip.isShowOnSite() && rip.isShowOnLeftSide()), TYPE);		
     }
 }
