@@ -1058,6 +1058,11 @@
 	<div class="Content"><a href="<c:url value='/admin/constants' />">КОНСТАНТЫ</a></div>
 </li>
 
+<li class="Node IsRoot ExpandLeaf">
+	<div class="Expand"></div>
+	<div class="Content"><a href="<c:url value='/admin/users' />">СПИСОК ПОЛЬЗОВАТЕЛЕЙ</a></div>
+</li>
+
 <li class="Node IsRoot ExpandClosed IsLast">
     <div class="Expand"></div>
     <div class="Content">Изображения</a></div>

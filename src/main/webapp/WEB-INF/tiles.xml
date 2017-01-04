@@ -241,6 +241,10 @@
     <definition name="admin/pictures" extends="admin_base">
     	<put-attribute name="body" value="/WEB-INF/views/admin/pictures.jsp" />  
     </definition>
+    
+    <definition name="admin/users" extends="admin_base">
+    	<put-attribute name="body" value="/WEB-INF/views/admin/users.jsp" />  
+    </definition>
 
 	<!-- CHANGE PICTURES IN MENU -->    
 	<definition name="admin/pictures/menu/*/*" extends="admin_base">    

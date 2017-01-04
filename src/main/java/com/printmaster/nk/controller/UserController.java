@@ -1,5 +1,7 @@
 package com.printmaster.nk.controller;
 
+import static com.printmaster.nk.controller.ControllerConstants.*;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,7 @@ import com.printmaster.nk.validator.UserValidator;
 public class UserController {
 	
 	private static final String DIRECTORY = "/var/www/localhost/images";
+	private static final String TYPE = "user";
 	private static final String CONCRETE_FOLDER = "users";
 	
 	@Autowired
@@ -162,4 +165,10 @@ public class UserController {
  		userService.updateUser(user);
     }
 
+	@RequestMapping(value = "/"+ PATH_ADMIN +"/"+ TYPE +"s", method = RequestMethod.GET)
+	public String getAllUsersOnAdmin(Model model) {
+		model.addAttribute("userList", userService.listUsers());
+	    return PATH_ADMIN + "/"+ TYPE + "s";
+	}
+    
 }
