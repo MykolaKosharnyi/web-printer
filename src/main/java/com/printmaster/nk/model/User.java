@@ -2,6 +2,8 @@ package com.printmaster.nk.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.*;
 
@@ -55,6 +57,15 @@ public class User implements Serializable{
 //        joinColumns = {@JoinColumn(name="user_id", referencedColumnName="id")},
 //        inverseJoinColumns = {@JoinColumn(name="role_id", referencedColumnName="id")}
 //    )
+	
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name = "user_comment", 
+		joinColumns = {
+				@JoinColumn(name = "USER_ID", nullable = false) },
+		inverseJoinColumns = { 
+				@JoinColumn(name = "COMMENT_ID", nullable = false) })
+	private Set<Comment> comments = new HashSet<Comment>(0);
+	
 	@Column(name="role")
     private String role;
 	

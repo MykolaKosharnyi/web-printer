@@ -13,8 +13,7 @@
 						<c:choose>
 			   		 		<c:when test="${fn:length(product.pathPictures) > 1}">/images/${product.type}s/${product.id}/${product.pathPictures.get(1)}</c:when>    
 			    			<c:otherwise>/images/${product.type}s/${product.id}/${product.pathPictures.get(0)}</c:otherwise>
-						</c:choose>
-			
+						</c:choose>	
 						
 						" onmouseover="" class="link" href="<c:url value='/${product.type}/${product.id}' />">	
 								<div class="outer_a_img"><img src="/images/${product.type}s/${product.id}/${product.pathPictures.get(0)}" alt=""></div>
@@ -37,18 +36,18 @@
 					<div class="name_price_cart_block_hidden">
 						<c:if test="${product.type=='printer' && product.ratingOverallRating > 0}">
 							<!-- Общая оценка -->
-								<div class="rating_block">
-									<p style="font-weight: bold;">Общая оценка:</p>
-									<div style="width: 100px; float: left;">
-										<ul class="rating_average clearfix">
-											<li class="current" style="width: ${product.ratingOverallRating * 20}%;"><span class="star1" title="Плохо"></span></li>
-											<li><span class="star2" title="Ниже среднего" ></span></li>
-											<li><span class="star3" title="Средне" ></span></li>
-											<li><span class="star4" title="Хорошо"  ></span></li>
-											<li><span class="star5" title="Очень хорошо" ></span></li>
-										</ul>
-									</div>
+							<div class="rating_block">
+								<p style="font-weight: bold;">Общая оценка:</p>
+								<div style="width: 100px; float: left;">
+									<ul class="rating_average clearfix">
+										<li class="current" style="width: ${product.ratingOverallRating * 20}%;"><span class="star1" title="Плохо"></span></li>
+										<li><span class="star2" title="Ниже среднего" ></span></li>
+										<li><span class="star3" title="Средне" ></span></li>
+										<li><span class="star4" title="Хорошо"  ></span></li>
+										<li><span class="star5" title="Очень хорошо" ></span></li>
+									</ul>
 								</div>
+							</div>
 						</c:if>
 						
 						<!-- type of printhead -->
@@ -122,6 +121,7 @@
 							</div>
 						</div>
 					</c:if>
+					
 				</div>
 			</div>
 		</c:if>
@@ -139,8 +139,7 @@
 	   		 		<c:when test="${fn:length(product.pathPictures) > 1}">/images/${product.type}s/${product.id}/${product.pathPictures.get(1)}</c:when>    
 	    			<c:otherwise>/images/${product.type}s/${product.id}/${product.pathPictures.get(0)}</c:otherwise>
 				</c:choose>
-	
-				
+					
 				" onmouseover="" class="link" href="<c:url value='/${product.type}/${product.id}' />">	
 						<div class="outer_a_img"><img src="/images/${product.type}s/${product.id}/${product.pathPictures.get(0)}" alt=""></div>
 				</a>
