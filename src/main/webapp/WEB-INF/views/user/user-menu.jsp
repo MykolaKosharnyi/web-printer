@@ -32,7 +32,6 @@
 
 <div class="user_menu">
 	<a href="<c:url value='/' />">Мой кабинет</a>
-	<a href="<c:url value='/' />">Мой кабинет</a>
 	<a href="<c:url value='/' />">Личные данные</a>
 	<a href="<c:url value='/' />">Корзина</a>
 	<a href="<c:url value='/' />">Мои заказы</a>

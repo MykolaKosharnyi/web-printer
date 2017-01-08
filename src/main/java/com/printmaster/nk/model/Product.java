@@ -2,9 +2,7 @@ package com.printmaster.nk.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -13,7 +11,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.OneToMany;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -80,9 +77,6 @@ public abstract class Product implements Serializable{
 	@Column(name="right_shares_link_color_fone")
 	protected String rightSharesLinkColorFone = "#006080";	
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "comment")
-	protected Set<Comment> comments = new HashSet<Comment>(0);
-	
 	public Product(){}
 
 	public Long getId() {
@@ -91,14 +85,6 @@ public abstract class Product implements Serializable{
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public Set<Comment> getComments() {
-		return comments;
-	}
-
-	public void setComments(Set<Comment> comments) {
-		this.comments = comments;
 	}
 
 	public String getPartNumber() {
