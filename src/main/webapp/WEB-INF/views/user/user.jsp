@@ -195,32 +195,33 @@
 	$(function() {
 		$('.user_image').hover(function() {
 			$(this).find(".new_user_picture_loader").slideDown(500);
-			
+
 			//setTimeout(function() {   //calls click event after a certain time
 			//	$(".new_user_picture_loader").slideUp(500);
 			//}, 3000);
-		},
-		function() {
+		}, function() {
 			$(this).find(".new_user_picture_loader").slideUp(500);
 		});
 	});
-	
-	$('.new_user_picture_loader').click(function(){ $('#user_load_picture').trigger('click'); });
+
+	$('.new_user_picture_loader').click(function() {
+		$('#user_load_picture').trigger('click');
+	});
 
 	//for loading new user picture
 	document.getElementById("user_load_picture").onchange = function() {
 		//before showing user, load new picture on server
 		$('#load_new_user_picture').ajaxForm({
 			type : 'post',
-/*			success: function(result){
-				$(".new_user_picture_loader").text(result);
-			},*/
-			 error: function(XMLHttpRequest, textStatus, errorThrown) {
-			     alert("some error");
-			     console.log(XMLHttpRequest.statusText);
-			     console.log(textStatus);
-			     console.log(errorThrown);
-			  }
+			/*			success: function(result){
+			 $(".new_user_picture_loader").text(result);
+			 },*/
+			error : function(XMLHttpRequest, textStatus, errorThrown) {
+				alert("some error");
+				console.log(XMLHttpRequest.statusText);
+				console.log(textStatus);
+				console.log(errorThrown);
+			}
 		}).submit();
 
 		var reader = new FileReader();

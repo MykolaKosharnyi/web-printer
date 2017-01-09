@@ -2,6 +2,9 @@ package com.printmaster.nk.controller;
 
 import static com.printmaster.nk.controller.ControllerConstants.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -52,8 +56,12 @@ public class UserController {
 
 	@RequestMapping(value = "/user", method = RequestMethod.GET)
     public String user(Model model) {
-		
-    	Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    	model.addAttribute("user", getUser());
+        return "user";
+    }
+	
+	private User getUser(){
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     	
     	String username = null;
     	if (principal instanceof UserDetails) {
@@ -61,11 +69,8 @@ public class UserController {
     	} else {
     		username = (String) principal;
     	}
-    	
-    	model.addAttribute("user", userService.findByUserName(username));
-    	
-        return "user";
-    }
+    	return userService.findByUserName(username);
+	}
 	
 	@RequestMapping(value="/ask/product", method = RequestMethod.POST, consumes="application/json",
 			headers = "content-type=application/x-www-form-urlencoded")
@@ -169,6 +174,36 @@ public class UserController {
 	public String getAllUsersOnAdmin(Model model) {
 		model.addAttribute("userList", userService.listUsers());
 	    return PATH_ADMIN + "/"+ TYPE + "s";
+	}
+	
+	@RequestMapping(value = "/user/subscription", method = RequestMethod.GET)
+	public String subscriptionGET(Model model) {
+		List<String> listSubscription = new ArrayList<>();
+		listSubscription.add("принтеры");
+		listSubscription.add("3Д принтеры");
+		listSubscription.add("цифровое оборудование");
+		listSubscription.add("ламинаторы");
+		listSubscription.add("лазеры");
+		listSubscription.add("фрезеры");
+		listSubscription.add("сканеры");
+		listSubscription.add("б/у оборудование");
+		listSubscription.add("ПО");
+		listSubscription.add("сопутствующие товары");
+		
+		model.addAttribute("listSubscription", listSubscription);
+		model.addAttribute("user", getUser());
+	    return "user/subscription";
+	}
+	
+	@RequestMapping(value = "/user/subscription", method = RequestMethod.POST,consumes="application/json",
+    		headers = "content-type=application/x-www-form-urlencoded")
+	public @ResponseBody String[] subscriptionPOST(@RequestBody List<String> subscriptionFromForm) {
+		User user = getUser();
+		String[] newSubscription = new String[subscriptionFromForm.size()];
+		newSubscription = subscriptionFromForm.toArray(newSubscription);
+		user.setSubscription(newSubscription);
+		userService.updateUser(user);
+		return newSubscription;
 	}
     
 }

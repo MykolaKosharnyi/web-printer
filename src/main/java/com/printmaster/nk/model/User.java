@@ -65,10 +65,18 @@ public class User implements Serializable{
 	@Column(name="nameUserPicture")
 	private String nameUserPicture;
 	
-	@Column(name="feed")
-	private String[] feed;
+	@Column(name="subscription")
+	private String[] subscription;
 	
 	public User(){}
+
+	public String[] getSubscription() {
+		return subscription;
+	}
+
+	public void setSubscription(String[] subscription) {
+		this.subscription = subscription;
+	}
 
 	public boolean isEnabled() {
 		return enabled;

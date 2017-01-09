@@ -33,6 +33,12 @@
     	<put-attribute name="user-menu" value="/WEB-INF/views/user/user-menu.jsp" />   
         <put-attribute name="body" value="/WEB-INF/views/user/user.jsp" />  
     </definition>  
+    
+    <definition name="user/subscription" extends="base"> 
+    	<put-attribute name="path" value="/WEB-INF/views/user/path_user_subscription.jsp" /> 
+    	<put-attribute name="user-menu" value="/WEB-INF/views/user/user-menu.jsp" />   
+        <put-attribute name="body" value="/WEB-INF/views/user/subscription.jsp" />  
+    </definition>  
   
     <definition name="printers" extends="base"> 
     	<put-attribute name="path" value="/WEB-INF/views/printer/path_user_printers.jsp" />  

@@ -37,5 +37,5 @@
 	<a href="<c:url value='/' />">Мои заказы</a>
 	<a href="<c:url value='/' />">Мои отзывы</a>
 	<a href="<c:url value='/' />">Просмотренные товары</a>
-	<a href="<c:url value='/' />">Рассылки</a>
+	<a href="<c:url value='/user/subscription' />"><spring:message code="path.user.subscription"/></a>
 </div>
