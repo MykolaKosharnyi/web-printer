@@ -39,6 +39,22 @@ public class UserController {
 	private static final String TYPE = "user";
 	private static final String CONCRETE_FOLDER = "users";
 	
+	List<String> listSubscription = new ArrayList<String>(){
+		private static final long serialVersionUID = 1L;
+		{
+			add("принтеры");
+			add("3Д принтеры");
+			add("цифровое оборудование");
+			add("ламинаторы");
+			add("лазеры");
+			add("фрезеры");
+			add("сканеры");
+			add("б/у оборудование");
+			add("ПО");
+			add("сопутствующие товары");
+		}
+	};
+	
 	@Autowired
     private MailSender mailSender;
 	
@@ -153,19 +169,19 @@ public class UserController {
   	  return model;
   	}
   	
-    @RequestMapping(value="/upload_new_picture/user/{id}", method = RequestMethod.POST)
-    public @ResponseBody void uploadPicturesUpdate(MultipartHttpServletRequest request, @PathVariable("id") long id) {
+    @RequestMapping(value="/upload_new_picture/user", method = RequestMethod.POST)
+    public @ResponseBody void uploadPicturesUpdate(MultipartHttpServletRequest request) {
     	
- 		User user = userService.getUserById(id);
+ 		User user = getUser();
  		
  		//delete old picture
  		String oldPicture = user.getNameUserPicture();
  		if (oldPicture != null && !oldPicture.isEmpty()) {
- 			componets.removePicture(user.getNameUserPicture(), DIRECTORY, CONCRETE_FOLDER, id);
+ 			componets.removePicture(user.getNameUserPicture(), DIRECTORY, CONCRETE_FOLDER, user.getId());
  		}
  		
  		//load and set new picture
- 		String nameOfAddedPicture = componets.uploadPictureToExistedProduct(request, DIRECTORY, CONCRETE_FOLDER, id);
+ 		String nameOfAddedPicture = componets.uploadPictureToExistedProduct(request, DIRECTORY, CONCRETE_FOLDER, user.getId());
  		user.setNameUserPicture(nameOfAddedPicture);
  		userService.updateUser(user);
     }
@@ -178,18 +194,6 @@ public class UserController {
 	
 	@RequestMapping(value = "/user/subscription", method = RequestMethod.GET)
 	public String subscriptionGET(Model model) {
-		List<String> listSubscription = new ArrayList<>();
-		listSubscription.add("принтеры");
-		listSubscription.add("3Д принтеры");
-		listSubscription.add("цифровое оборудование");
-		listSubscription.add("ламинаторы");
-		listSubscription.add("лазеры");
-		listSubscription.add("фрезеры");
-		listSubscription.add("сканеры");
-		listSubscription.add("б/у оборудование");
-		listSubscription.add("ПО");
-		listSubscription.add("сопутствующие товары");
-		
 		model.addAttribute("listSubscription", listSubscription);
 		model.addAttribute("user", getUser());
 	    return "user/subscription";
@@ -197,14 +201,10 @@ public class UserController {
 	
 	@RequestMapping(value = "/user/subscription", method = RequestMethod.POST,consumes="application/json",
     		headers = "content-type=application/x-www-form-urlencoded")
-	public @ResponseBody String[] subscriptionPOST(@RequestBody String[] subscriptionFromForm) {
+	public @ResponseBody void subscriptionPOST(@RequestBody String[] subscriptionFromForm) {
 		User user = getUser();
-//		String[] newSubscription = new String[subscriptionFromForm.size()];
-//		newSubscription = subscriptionFromForm.toArray(newSubscription);
-//		user.setSubscription(newSubscription);
 		user.setSubscription(subscriptionFromForm);
 		userService.updateUser(user);
-		return subscriptionFromForm;
 	}
     
 }

@@ -4,6 +4,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
+<title><spring:message code="path.user.subscription"/></title>
+
 <style>
 #user label{
 	font-size: 18px;
@@ -22,7 +24,7 @@
 }
 </style>
 
-	<table class="table" id="user">
+	<table class="table table-hover" id="user">
 		<c:forEach var="subscr" items="${listSubscription}" varStatus="status">
 			<tr>
 				<td>
@@ -40,7 +42,33 @@
 	
 <script>
 
+$(document).ready(function() {
+	
+	$("#user input:checked").each(function(){
+		$(this).parent("label").parent("div.checkbox").parent("td").css({
+			'color':'#006080',
+			'background':'#b5d9f0'
+		});	
+	});
+	
+});
+
+
 $("#user input[type=checkbox]").click(function() {
+	
+	//set color and background
+	if($(this).is(':checked')){
+		$(this).parent("label").parent("div.checkbox").parent("td").css({
+			'color':'#006080',
+			'background':'#b5d9f0'
+		});	
+	}else{
+		$(this).parent("label").parent("div.checkbox").parent("td").css({
+			'color':'black',
+			'background':'white'
+		});	
+	}
+	
 	var result = new Array();
 
 	$("#user input:checked").each(function(){

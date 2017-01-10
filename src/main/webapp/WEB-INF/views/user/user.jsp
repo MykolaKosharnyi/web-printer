@@ -68,7 +68,7 @@
 					<img id="image" src="/images/users/${user.id}/${user.nameUserPicture}" alt="alt" />
 				</c:if>
 				
-				<form:form method="POST" commandName="load_new_user_picture" action="/upload_new_picture/user/${user.id}"
+				<form:form method="POST" commandName="load_new_user_picture" action="/upload_new_picture/user"
 				 enctype="multipart/form-data">
 					<input id="user_load_picture" type="file" name="files" accept="image/*" style="display:none">
 					<div class="new_user_picture_loader">Загрузить новое изображение</div>
