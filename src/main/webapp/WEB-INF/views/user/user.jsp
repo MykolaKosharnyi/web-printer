@@ -5,9 +5,6 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
 <style>
-.menu {
-	display: none;
-}
 
 .admin_link {
 	border: 1px solid rgb(0, 96, 128);

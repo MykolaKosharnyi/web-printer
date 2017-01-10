@@ -197,13 +197,14 @@ public class UserController {
 	
 	@RequestMapping(value = "/user/subscription", method = RequestMethod.POST,consumes="application/json",
     		headers = "content-type=application/x-www-form-urlencoded")
-	public @ResponseBody String[] subscriptionPOST(@RequestBody List<String> subscriptionFromForm) {
+	public @ResponseBody String[] subscriptionPOST(@RequestBody String[] subscriptionFromForm) {
 		User user = getUser();
-		String[] newSubscription = new String[subscriptionFromForm.size()];
-		newSubscription = subscriptionFromForm.toArray(newSubscription);
-		user.setSubscription(newSubscription);
+//		String[] newSubscription = new String[subscriptionFromForm.size()];
+//		newSubscription = subscriptionFromForm.toArray(newSubscription);
+//		user.setSubscription(newSubscription);
+		user.setSubscription(subscriptionFromForm);
 		userService.updateUser(user);
-		return newSubscription;
+		return subscriptionFromForm;
 	}
     
 }

@@ -4,13 +4,31 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
+<style>
+#user label{
+	font-size: 18px;
+}
+
+#user tr:first-child td{
+	border-top: none;
+}
+
+#user .checkbox{
+	margin:0px;
+}
+
+#user .checkbox label input[type=checkbox]{
+	margin-top: 7px;
+}
+</style>
+
 	<table class="table" id="user">
 		<c:forEach var="subscr" items="${listSubscription}" varStatus="status">
 			<tr>
 				<td>
 					<div class="checkbox">
-						<label> <input type="checkbox" name="subscription"
-							<c:forEach items="${user.subscription}" var="tp"><c:if test="${tp eq subscr}">checked</c:if></c:forEach>>
+						<label> <input type="checkbox" name="subscription" value="${subscr}"
+							<c:forEach items="${user.subscription}" var="tp"> <c:if test="${subscr eq tp}">checked</c:if> </c:forEach> >
 							${subscr}
 						</label>
 					</div>
@@ -18,37 +36,33 @@
 			</tr>
 		</c:forEach>
 	</table>
+	<div id="result_post"></div>
 	
 <script>
-$(document).on("click", '#user .checkbox tbody tr td label', function(){
+
+$("#user input[type=checkbox]").click(function() {
 	var result = new Array();
-//	$("#user div.checkbox input:checked").each(function(){
-//		result.push($(this).val());	
-//	});
-	
-	result.push("принтеры ");	
-	result.push("3Д принтеры ");
-	result.push("ламинаторы ");
+
+	$("#user input:checked").each(function(){
+		result.push($(this).val());	
+	});
+
+	var cur = $(this).val();
 	
 	$.ajax({
 		  type: 'POST',
 		  url: "/user/subscription",
 		  data: JSON.stringify(result),
 		  contentType: "application/json; charset=utf-8",
-          dataType: "json",
-          error : function(XMLHttpRequest, textStatus, errorThrown) {
-				alert("some error");
-				console.log(XMLHttpRequest.statusText);
-				console.log(textStatus);
-				console.log(errorThrown);
-			}
-	}).done(function() {
-	    alert( "success" );
+          dataType: "json"
+	})/*.done(function(data) {
+	   // alert( "success" );
+		//$("#result_post").text(data);
 	  })
 	  .fail(function() {
-	    alert( "error" );
-	  });
-
-});
+	 //   alert( "error, when click on:" + cur );
+	  })*/;
+	
+	});
 
 </script>

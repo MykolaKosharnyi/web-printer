@@ -2,6 +2,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <style>
+.menu {
+	display: none;
+}
+
 .user_menu {
 	width: 100%;
 }
@@ -31,9 +35,9 @@
 </style>
 
 <div class="user_menu">
-	<a href="<c:url value='/' />">Мой кабинет</a>
+	<a href="<c:url value='/user' />">Мой кабинет</a>
 	<a href="<c:url value='/' />">Личные данные</a>
-	<a href="<c:url value='/' />">Корзина</a>
+	<a href="#myModal" data-toggle="modal">Корзина</a>
 	<a href="<c:url value='/' />">Мои заказы</a>
 	<a href="<c:url value='/' />">Мои отзывы</a>
 	<a href="<c:url value='/' />">Просмотренные товары</a>
