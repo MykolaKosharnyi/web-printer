@@ -189,51 +189,51 @@
 			</ul>
 		</div>
 		<div class="block_search_criteria">
-				<div class="block_block_title">
-					<i></i>
-					<p>Тип печатающей головки</p>
-				</div>
-				<ul class="block_check_boxes">
+			<div class="block_block_title">
+				<i></i>
+				<p>Тип печатающей головки</p>
+			</div>
+			<ul class="block_check_boxes">
 				
-					<c:forEach items="${printer.type_of_printhead}" var="item">
+				<c:forEach items="${printer.type_of_printhead}" var="item">
 						
-						<div class="search_criteria">
-							<div class="block_title">
-								<i></i>
-								<p>${item.name}</p>
-							</div>
-							<ul class="check_boxes">
+					<div class="search_criteria">
+						<div class="block_title">
+							<i></i>
+							<p>${item.name}</p>
+						</div>
+						<ul class="check_boxes">
 								
-								<c:forEach items="${item.values}" var="value">
-									<c:if test="${value.getClass().simpleName != 'String'}">
-										<div class="outer_type_print_head">
+							<c:forEach items="${item.values}" var="value">
+								<c:if test="${value.getClass().simpleName != 'String'}">
+									<div class="outer_type_print_head">
 											
-											<input class="check_print_head" type="checkbox" name="typeOfPrintheadSeries" value="${value.series}"
-											 id="${value.series}_${item.name}">
-											<label class="print_series" for="${value.series}_${item.name}">${value.series}</label></input>
+										<input class="check_print_head" type="checkbox" name="typeOfPrintheadSeries" value="${value.series}"
+											id="${value.series}_${item.name}">
+										<label class="print_series" for="${value.series}_${item.name}">${value.series}</label></input>
 												
 											
-											<div class="inner_block_print_head" style="display: none; left:10px; position: relative;">
-												<form:checkboxes items="${value.values}" path="typeOfPrinthead" element="li" />
-											</div>
-										
+										<div class="inner_block_print_head" style="display: none; left:10px; position: relative;">
+											<form:checkboxes items="${value.values}" path="typeOfPrinthead" element="li" />
 										</div>
-									</c:if>
 										
-									<c:if test="${value.getClass().simpleName == 'String'}">
-										<li>
-											<input type="checkbox" name="typeOfPrinthead" value="${value}"
-											 id="${value}_${item.name}"><label for="${value}_${item.name}">${value}</label></input>
-										</li>
-									</c:if>
-		  						</c:forEach>
+									</div>
+								</c:if>
+										
+								<c:if test="${value.getClass().simpleName == 'String'}">
+									<li>
+										<input type="checkbox" name="typeOfPrinthead" value="${value}"
+											id="${value}_${item.name}"><label for="${value}_${item.name}">${value}</label></input>
+									</li>
+								</c:if>
+		  					</c:forEach>
 		  						
-							</ul>
-						</div>				
+						</ul>
+					</div>				
 						
-		  			</c:forEach>
-				</ul>
-			</div>
+		  		</c:forEach>
+			</ul>
+		</div>
 		<div class="block_search_criteria">
 			<div class="block_block_title">
 				<i></i>

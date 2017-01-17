@@ -100,8 +100,8 @@
 
 
 
-<div class="categories_of_goods">
-<div class="row">
+		<div class="categories_of_goods">
+		<div class="row">
 
                 <div class="col-md-3 col-lg-3" style="padding: 0px;">
                   <div class="list-group">
@@ -124,10 +124,8 @@
                             
                             <a href="<c:url value='/printers/SAPR-GIS' />" class="list-group-item"><spring:message code="head.printer.SAPR-GIS"/></a>
                   </div>
-                </div>
+                </div>			
 
-			
-<%--
               <div class="col-md-9 col-lg-9">
                 <div class="row">
                   <div class="sider_container">
@@ -168,16 +166,16 @@
                 </div>
               </div>
               
-                <h:home_section_of_product type="printer" arrayOfProduct="${printers}"/>--%>
+ <%--               <h:home_section_of_product type="printer" arrayOfProduct="${printers}"/>
               
              <jsp:include page="home_section_of_product.jsp" flush="true">
 			     <jsp:param name="type" value="printer"/>
 			     <jsp:param name="arrayOfProduct" value="${printers}" />
-			</jsp:include>
-             
+			</jsp:include>           
+--%>
 
             </div>
-</div>
+		</div>
 </c:if>
 
 

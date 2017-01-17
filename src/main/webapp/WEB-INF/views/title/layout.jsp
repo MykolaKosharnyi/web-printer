@@ -93,9 +93,7 @@
                 <h4 class="modal-title">Офис на карте</h4>
             </div>
             <div class="modal-body" >
-                
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2541.9341001895555!2d30.383658021157956!3d50.42369943624072!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40d4cb928d1b99ff%3A0x32c8f63e129a5eca!2z0LLRg9C70LjRhtGPINCS0L7Qu9C-0LTQuNC80LjRgNCwINCf0L7QutC-0YLQuNC70LAsIDcvMiwg0JrQuNGX0LI!5e0!3m2!1suk!2sua!4v1480292202676" style="border:0; width: 100%; height:420px;" ></iframe>
-
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d635.477901903038!2d30.384235388132957!3d50.42411849871069!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40d4cb928eb049e1%3A0x8fac369d19f70638!2sKartvelishvili+St%2C+7%2C+Kyiv%2C+Ukraine!5e0!3m2!1sen!2sua!4v1484153860942" style="border:0; width: 100%; height:420px;" ></iframe>
             </div>
 
         </div>
