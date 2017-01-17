@@ -127,7 +127,7 @@
                 </div>
 
 			
-
+<%--
               <div class="col-md-9 col-lg-9">
                 <div class="row">
                   <div class="sider_container">
@@ -168,7 +168,13 @@
                 </div>
               </div>
               
-             <%--  <h:home_section_of_product type="printer" arrayOfProduct="${printers}"/>--%>
+                <h:home_section_of_product type="printer" arrayOfProduct="${printers}"/>--%>
+              
+             <jsp:include page="home_section_of_product.jsp" flush="true">
+			     <jsp:param name="type" value="printer"/>
+			     <jsp:param name="arrayOfProduct" value="${printers}" />
+			</jsp:include>
+             
 
             </div>
 </div>
