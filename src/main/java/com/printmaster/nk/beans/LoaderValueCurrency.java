@@ -35,9 +35,9 @@ public class LoaderValueCurrency {
 			
 			for(CurrencyInfo curency : infoResponse.getBody()){
 				if(curency.getCcy().equals("USD")){
-					dollar = curency.getBuy();
+					dollar = curency.getSale();
 				} else if(curency.getCcy().equals("EUR")){
-					euro = curency.getBuy();
+					euro = curency.getSale();
 				}
 			}
 		} catch(Exception ex){}

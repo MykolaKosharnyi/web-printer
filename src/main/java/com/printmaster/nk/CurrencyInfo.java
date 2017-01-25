@@ -5,7 +5,7 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CurrencyInfo {
 	private String ccy;
-	private double buy;
+	private double sale;
 	
 	public CurrencyInfo(){}
 
@@ -17,13 +17,11 @@ public class CurrencyInfo {
 		this.ccy = ccy;
 	}
 
-	public double getBuy() {
-		return buy;
+	public double getSale() {
+		return sale;
 	}
 
-	public void setBuy(double buy) {
-		this.buy = buy;
+	public void setSale(double sale) {
+		this.sale = sale;
 	}
-
-	
 }
