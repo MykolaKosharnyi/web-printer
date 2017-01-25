@@ -382,27 +382,35 @@ public class CartController {
 		double size = product.getDeliveryWidth() * product.getDeliveryHeight() * product.getDeliveryDepth();
 		double weigth = product.getDeliveryWeight();
 		
-		if(product.isAirDeliveryPriceSize() ||  product.isAirDeliveryPriceWeight()){
-			result.add(returnDelivery("Авиа", size * constants.getConstants().get("price_avia_size"),
-					weigth * constants.getConstants().get("price_avia_weight"), product.getAirDeliveryDescription(),
+		if(product.isAirDeliveryPriceSize() || product.isAirDeliveryPriceWeight()){
+			result.add(returnDelivery("Авиа",
+					(product.isAirDeliveryPriceSize()) ? size * constants.getConstants().get("price_avia_size"):0,
+					(product.isAirDeliveryPriceWeight()) ? weigth * constants.getConstants().get("price_avia_weight"):0,
+					product.getAirDeliveryDescription(),
 					checkedDelivery));
 		}
 		
 		if(product.isSeaDeliveryPriceSize() || product.isSeaDeliveryPriceWeight()){
-			result.add(returnDelivery("Морем", size * constants.getConstants().get("price_sea_size"),
-					weigth * constants.getConstants().get("price_sea_weight"), product.getSeaDeliveryDescription(),
+			result.add(returnDelivery("Морем", 
+					(product.isSeaDeliveryPriceSize()) ? size * constants.getConstants().get("price_sea_size"):0,					
+					(product.isSeaDeliveryPriceWeight()) ? weigth * constants.getConstants().get("price_sea_weight"):0, 
+					product.getSeaDeliveryDescription(),
 					checkedDelivery));
 		}
 		
 		if(product.isUkraineDeliveryPriceSize() || product.isUkraineDeliveryPriceWeight()){
-			result.add(returnDelivery("По Украине", size * constants.getConstants().get("price_ukraine_size"),
-					weigth * constants.getConstants().get("price_ukraine_weight"), product.getUkraineDeliveryDescription()
-					, checkedDelivery));
+			result.add(returnDelivery("По Украине", 
+					(product.isUkraineDeliveryPriceSize()) ? size * constants.getConstants().get("price_ukraine_size"):0,
+					(product.isUkraineDeliveryPriceWeight()) ? weigth * constants.getConstants().get("price_ukraine_weight"):0, 
+					product.getUkraineDeliveryDescription(), 
+					checkedDelivery));
 		}
 		
 		if(product.isKyivDeliveryPriceSize() || product.isKyivDeliveryPriceWeight()){
-			result.add(returnDelivery("По Киеву", size * constants.getConstants().get("price_kyiv_size"),
-					weigth * constants.getConstants().get("price_kyiv_weight"), product.getKyivDeliveryDescription(),
+			result.add(returnDelivery("По Киеву", 
+					(product.isKyivDeliveryPriceSize()) ? size * constants.getConstants().get("price_kyiv_size"):0,
+					(product.isKyivDeliveryPriceWeight()) ? weigth * constants.getConstants().get("price_kyiv_weight"):0, 
+					product.getKyivDeliveryDescription(),
 					checkedDelivery));
 		}
 		
@@ -432,14 +440,19 @@ public class CartController {
 		double weigth = product.getDeliveryWeight();
 		
 		if(product.isUkraineDeliveryPriceSize() || product.isUkraineDeliveryPriceWeight()){
-			result.add(returnDelivery("По Украине", size * constants.getConstants().get("price_ukraine_size"),
-					weigth * constants.getConstants().get("price_ukraine_weight"), product.getUkraineDeliveryDescription()
-					, checkedDelivery));
+			result.add(returnDelivery("По Украине", 
+					(product.isUkraineDeliveryPriceSize()) ? size * constants.getConstants().get("price_ukraine_size"):0,
+					(product.isUkraineDeliveryPriceWeight()) ? weigth * constants.getConstants().get("price_ukraine_weight"):0, 
+					product.getUkraineDeliveryDescription(), 
+					checkedDelivery));
 		}
 		
 		if(product.isKyivDeliveryPriceSize() || product.isKyivDeliveryPriceWeight()){
-			result.add(returnDelivery("По Киеву", size * constants.getConstants().get("price_kyiv_size"),
-					weigth * constants.getConstants().get("price_kyiv_weight"), product.getKyivDeliveryDescription(), checkedDelivery));
+			result.add(returnDelivery("По Киеву", 
+					(product.isKyivDeliveryPriceSize()) ? size * constants.getConstants().get("price_kyiv_size"):0,
+					(product.isKyivDeliveryPriceWeight()) ? weigth * constants.getConstants().get("price_kyiv_weight"):0, 
+					product.getKyivDeliveryDescription(), 
+					checkedDelivery));
 		}
 		
 		return result;
@@ -452,14 +465,18 @@ public class CartController {
 		double weigth = product.getDeliveryWeight();
 		
 		if(product.isUkraineDeliveryPriceSize() || product.isUkraineDeliveryPriceWeight()){
-			result.add(returnDelivery("По Украине", size * constants.getConstants().get("price_ukraine_size"),
-					weigth * constants.getConstants().get("price_ukraine_weight"), product.getUkraineDeliveryDescription(),
+			result.add(returnDelivery("По Украине", 
+					(product.isUkraineDeliveryPriceSize()) ? size * constants.getConstants().get("price_ukraine_size"):0,
+					(product.isUkraineDeliveryPriceWeight()) ? weigth * constants.getConstants().get("price_ukraine_weight"):0, 
+					product.getUkraineDeliveryDescription(),
 					checkedDelivery));
 		}
 		
 		if(product.isKyivDeliveryPriceSize() || product.isKyivDeliveryPriceWeight()){
-			result.add(returnDelivery("По Киеву", size * constants.getConstants().get("price_kyiv_size"),
-					weigth * constants.getConstants().get("price_kyiv_weight"), product.getKyivDeliveryDescription(),
+			result.add(returnDelivery("По Киеву", 
+					(product.isKyivDeliveryPriceSize()) ? size * constants.getConstants().get("price_kyiv_size"):0,
+					(product.isKyivDeliveryPriceWeight()) ? weigth * constants.getConstants().get("price_kyiv_weight"):0, 
+					product.getKyivDeliveryDescription(),
 					checkedDelivery));
 		}
 		
