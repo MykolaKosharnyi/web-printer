@@ -59,6 +59,7 @@
 				<beans:value>com.printmaster.nk.model.User</beans:value>
                 <beans:value>com.printmaster.nk.model.Role</beans:value>
                 <beans:value>com.printmaster.nk.model.Comment</beans:value>
+                <beans:value>com.printmaster.nk.model.MailSendingMessage</beans:value>               
                 
             </beans:list>
         </beans:property>

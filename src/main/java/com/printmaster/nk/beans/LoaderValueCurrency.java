@@ -29,15 +29,15 @@ public class LoaderValueCurrency {
 			RestTemplate restTemplate = new RestTemplate();
 			
 			ResponseEntity<List<CurrencyInfo>> infoResponse =
-			        restTemplate.exchange("https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5", 
+			        restTemplate.exchange("https://api.privatbank.ua/p24api/pubinfo?exchange&json&coursid=11", 
 			        		HttpMethod.GET, null, new ParameterizedTypeReference<List<CurrencyInfo>>() {});
 			
 			
 			for(CurrencyInfo curency : infoResponse.getBody()){
 				if(curency.getCcy().equals("USD")){
-					dollar = curency.getSale();
+					dollar = curency.getBuy();
 				} else if(curency.getCcy().equals("EUR")){
-					euro = curency.getSale();
+					euro = curency.getBuy();
 				}
 			}
 		} catch(Exception ex){}
