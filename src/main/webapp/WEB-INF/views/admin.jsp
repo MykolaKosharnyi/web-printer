@@ -24,7 +24,7 @@
 	    <a href="<c:url value='/admin/rips' />">ПО</a>
 	    <a href="<c:url value='/admin/use_with_products' />">Cопутствующие товары</a>
 		<a href="<c:url value='/admin/users' />" style="background: lightgreen;">Пользователи</a>
-	    <a href="<c:url value='/admin' />" style="background: lightpink;">Рассылки</a>	
+	    <a href="<c:url value='/admin/all_sended_messages' />" style="background: lightpink;">Рассылки</a>	
 	    <a href="<c:url value='/admin/pictures' />">Изменение изображений главного меню/домашней страницы</a>
 	    <a href="<c:url value='/admin/video_on_home_page' />">Видео на главной странице</a>
 	    <a href="<c:url value='/admin/constants' />">КОНСТАНТЫ</a>    

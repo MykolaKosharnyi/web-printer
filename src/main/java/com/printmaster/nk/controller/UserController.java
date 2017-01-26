@@ -18,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,7 +27,9 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.printmaster.nk.beans.ComponentsForControllers;
+import com.printmaster.nk.model.MailSendingMessage;
 import com.printmaster.nk.model.User;
+import com.printmaster.nk.service.MailSendingService;
 import com.printmaster.nk.service.UserService;
 import com.printmaster.nk.service.user.SecurityService;
 import com.printmaster.nk.validator.UserValidator;
@@ -68,6 +71,9 @@ public class UserController {
     
 	@Autowired
     ComponentsForControllers componets;
+	
+	@Autowired
+	MailSendingService mailSendingService;
 
 	@RequestMapping(value = "/user", method = RequestMethod.GET)
     public String user(Model model) {
@@ -204,6 +210,24 @@ public class UserController {
 		User user = getUser();
 		user.setSubscription(subscriptionFromForm);
 		userService.updateUser(user);
+	}
+	
+	@RequestMapping(value = "/admin/all_sended_messages", method = RequestMethod.GET)
+	public String getAllSendedMessages(Model model) {
+		model.addAttribute("allMessages", mailSendingService.getAll());
+	    return "admin/all_sended_messages";
+	}
+	
+	@RequestMapping(value = "/admin/message/new", method = RequestMethod.GET)
+	public String getCreateNewMessage(Model model) {
+		model.addAttribute("mailMessage", new MailSendingMessage());
+	    return "admin/message";
+	}
+	
+	@RequestMapping(value = "/admin/message/{id}", method = RequestMethod.GET)
+	public String getCreateNewMessage(@PathVariable("id") long id, Model model) {
+		model.addAttribute("mailMessage", mailSendingService.getById(id));
+	    return "admin/message";
 	}
     
 }

@@ -251,6 +251,14 @@
     <definition name="admin/users" extends="admin_base">
     	<put-attribute name="body" value="/WEB-INF/views/admin/users.jsp" />  
     </definition>
+    
+    <definition name="admin/message" extends="admin_base">
+    	<put-attribute name="body" value="/WEB-INF/views/admin/mail_sending/mail.jsp" />  
+    </definition>
+    
+    <definition name="admin/all_sended_messages" extends="admin_base">
+    	<put-attribute name="body" value="/WEB-INF/views/admin/mail_sending/mails.jsp" />  
+    </definition>
 
 	<!-- CHANGE PICTURES IN MENU -->    
 	<definition name="admin/pictures/menu/*/*" extends="admin_base">    
