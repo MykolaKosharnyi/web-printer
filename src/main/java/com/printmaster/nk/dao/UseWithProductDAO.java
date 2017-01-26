@@ -6,16 +6,15 @@ import com.printmaster.nk.model.SearchUseWithProducts;
 import com.printmaster.nk.model.UseWithProduct;
 
 public interface UseWithProductDAO {
-
-	public long addProduct(UseWithProduct p);
-    public void updateProduct(UseWithProduct p);
-    public Set<UseWithProduct> listProducts(String sortCriteria);
-    public Set<UseWithProduct> listShowOnSite();
-    public Set<UseWithProduct> listShowOnHomePage();
-    public Set<UseWithProduct> listSearchProducts(SearchUseWithProducts searchProductCriteria);
-    public Set<UseWithProduct> listSearchByPhrase(String phrase);
-    public UseWithProduct getProductById(long id);
-    public Set<UseWithProduct> getProductsByIds(long[] p);
-    public void removeProduct(long id);
-    public Set<UseWithProduct> getPrintersByTypeInk(String[] typeInk);
+	long addProduct(UseWithProduct p);
+    void updateProduct(UseWithProduct p);
+    Set<UseWithProduct> listProducts(String sortCriteria);
+    Set<UseWithProduct> listShowOnSite();
+    Set<UseWithProduct> listShowOnHomePage();
+    Set<UseWithProduct> listSearchProducts(SearchUseWithProducts searchProductCriteria);
+    Set<UseWithProduct> listSearchByPhrase(String phrase);
+    UseWithProduct getProductById(long id);
+    Set<UseWithProduct> getProductsByIds(long[] p);
+    void removeProduct(long id);
+    Set<UseWithProduct> getPrintersByTypeInk(String[] typeInk);
 }
