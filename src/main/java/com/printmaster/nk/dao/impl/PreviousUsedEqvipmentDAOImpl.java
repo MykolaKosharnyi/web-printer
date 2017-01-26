@@ -1,4 +1,4 @@
-package com.printmaster.nk.dao;
+package com.printmaster.nk.dao.impl;
 
 import java.util.ArrayList;
 import java.util.HashSet;

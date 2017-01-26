@@ -1,4 +1,4 @@
-package com.printmaster.nk.dao;
+package com.printmaster.nk.dao.impl;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -17,6 +17,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.printmaster.nk.model.UseWithProduct;
+import com.printmaster.nk.dao.UseWithProductDAO;
 import com.printmaster.nk.model.Cutter;
 import com.printmaster.nk.model.DigitalPrinter;
 import com.printmaster.nk.model.Laminator;

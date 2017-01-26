@@ -1,4 +1,4 @@
-package com.printmaster.nk.dao;
+package com.printmaster.nk.dao.impl;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -24,6 +24,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Repository;
 
+import com.printmaster.nk.dao.ProductDAO;
 import com.printmaster.nk.model.Printer;
 import com.printmaster.nk.model.SearchPrinters;
 
