@@ -22,7 +22,7 @@
 <body>	
 	<div id="product">
 		<a href="<c:url value='/admin/message/new' />">Создать новое сообщение рассылки</a>
-	</div>	
+	
 	<h3>Таблица раннее созданных рассылок</h3>
 	
 	<c:if test="${!empty allMessages}">
@@ -63,5 +63,6 @@
 			</c:forEach>
 		</table>
 	</c:if>
+	</div>	
 </body>
 </html>

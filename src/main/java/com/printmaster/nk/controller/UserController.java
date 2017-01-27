@@ -221,12 +221,14 @@ public class UserController {
 	@RequestMapping(value = "/admin/message/new", method = RequestMethod.GET)
 	public String getCreateNewMessage(Model model) {
 		model.addAttribute("mailMessage", new MailSendingMessage());
+		model.addAttribute("listSubscription", listSubscription);
 	    return "admin/message";
 	}
 	
 	@RequestMapping(value = "/admin/message/{id}", method = RequestMethod.GET)
 	public String getCreateNewMessage(@PathVariable("id") long id, Model model) {
 		model.addAttribute("mailMessage", mailSendingService.getById(id));
+		model.addAttribute("listSubscription", listSubscription);
 	    return "admin/message";
 	}
     

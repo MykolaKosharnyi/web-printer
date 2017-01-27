@@ -121,8 +121,8 @@
             $( ".amount-depth" ).val($( ".slider-range-depth" ).slider( "value"));
               
             $( ".amount-depth" ).change(function() {
-            $(".slider-range-depth").slider('value', this.value);
-                });
+            	$(".slider-range-depth").slider('value', this.value);
+            });
               
           });
        
