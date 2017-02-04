@@ -30,111 +30,52 @@ public class VideoCaruoselHomePageController {
 
 	private Logger logger = Logger.getLogger(VideoCaruoselHomePageController.class);
 	
-	private JSONObject obj = null;
-	private String pathToJSONFile = "/var/www/localhost/home.json";
-	
+	private static final String PATH_TO_JSON_FILE = "/var/www/localhost/home.json";
 	private static final String LIST_VIDEO = "listVideo"; 
+	private static final String PATH_PARAMETER = "path";
+	private static final String PATH_DESCRIPTION = "description";
     
     @RequestMapping(value="/"+PATH_ADMIN+"/video_on_home_page", method = RequestMethod.GET)
     public String showMenu(Model model){
-    	
-    	JSONParser parser = new JSONParser();
-
-			try {
-				obj = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream(pathToJSONFile), "UTF-8"));
-				model.addAttribute(LIST_VIDEO, (JSONArray) obj.get(LIST_VIDEO));
-			} catch (IOException | ParseException  e) {
-				e.printStackTrace();
-			}
-   
+		model.addAttribute(LIST_VIDEO, getJsonArrayOfVideo());
     	return "admin/video_on_home_page";
     }
     
     @SuppressWarnings("unchecked")
 	@RequestMapping(value="/"+PATH_ADMIN+"/video_on_home_page/upload_video/{pathVideo}/{description}", method = RequestMethod.POST,consumes=JSON_CONSUMES,
 		headers = JSON_HEADERS)
-    public @ResponseBody String uploadPicturesMenu(@PathVariable("pathVideo") String pathVideo, @PathVariable("description") String description) {
-    	logger.info("upload new video.");
-		JSONParser parser = new JSONParser();
-		
-		try {
-			obj = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream(pathToJSONFile), "UTF-8"));
-			
-			JSONArray arrayOfVideo = null;
-			if( obj.get(LIST_VIDEO) != null ){
-				arrayOfVideo = (JSONArray) obj.get(LIST_VIDEO);
-				obj.remove(LIST_VIDEO);
-			} else {
-				arrayOfVideo = new JSONArray();
-			}
-			
-			//add transformation DESCRIPTION into correct form
-			String str = "word";
-			str = str.replace('>', '/');
-			JSONObject video = new JSONObject();
-			video.put("path", pathVideo);
-			video.put("description", description.replace('^', '.').replace('>', '/'));
-			arrayOfVideo.add(video);
+    public @ResponseBody String uploadPicturesMenu(@PathVariable("pathVideo") String pathVideo, @PathVariable(PATH_DESCRIPTION) String description) {
+		JSONArray arrayOfVideo = getJsonArrayOfVideo();
 
-			obj.put(LIST_VIDEO, arrayOfVideo);
-			
-			Writer out = new PrintWriter(pathToJSONFile, "UTF-8");
-			out.write(obj.toJSONString());
-			out.flush();
-			out.close();
-			
-		} catch (ParseException e) {
-			e.printStackTrace();	
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-        
-         return "rlxjuG9YHkM";
+		// add transformation DESCRIPTION into correct form
+		String str = "word";
+		str = str.replace('>', '/');
+		JSONObject video = new JSONObject();
+		video.put(PATH_PARAMETER, pathVideo);
+		video.put(PATH_DESCRIPTION, description.replace('^', '.').replace('>', '/'));
+		arrayOfVideo.add(video);
+
+		saveJsonArray(arrayOfVideo);
+		logger.info("upload new video.");
+		return "rlxjuG9YHkM";
     }
     
     @SuppressWarnings("unchecked")
 	@RequestMapping(value="/"+PATH_ADMIN+"/video_on_home_page/change_order_video", method = RequestMethod.POST,consumes=JSON_CONSUMES,
 		headers = JSON_HEADERS)
     public @ResponseBody void changeOrderVideos(@RequestBody List<String> videoOrder) {
-    	logger.info("change order of video");
-    	
-    	JSONParser parser = new JSONParser();
-		
-			try {
-			obj = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream(pathToJSONFile), "UTF-8"));
-			
-			JSONArray arrayOfVideo = (JSONArray) obj.get(LIST_VIDEO);			
-			JSONArray sortedArrayOfVideo = new JSONArray();
-			
-			for(String videoPath : videoOrder){
-				JSONObject video = new JSONObject();
-				video.put("path", videoPath);
-				video.put("description", findDescription(arrayOfVideo, videoPath));
-				sortedArrayOfVideo.add(video);
-			}
-		
-			obj.remove(LIST_VIDEO);
-			obj.put(LIST_VIDEO, sortedArrayOfVideo);
-			
+		JSONArray arrayOfVideo = getJsonArrayOfVideo();
+		JSONArray sortedArrayOfVideo = new JSONArray();
 
-				Writer out = new PrintWriter(pathToJSONFile, "UTF-8");
-				out.write(obj.toJSONString());
-				out.flush();
-				out.close();
-				
-			} catch (ParseException e) {
-				e.printStackTrace();	
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			} catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}  	
+		for (String videoPath : videoOrder) {
+			JSONObject video = new JSONObject();
+			video.put(PATH_PARAMETER, videoPath);
+			video.put(PATH_DESCRIPTION, findDescription(arrayOfVideo, videoPath));
+			sortedArrayOfVideo.add(video);
+		}
+
+		saveJsonArray(sortedArrayOfVideo);
+		logger.info("change order of video");
     }
     
     @SuppressWarnings("rawtypes")
@@ -143,53 +84,53 @@ public class VideoCaruoselHomePageController {
     	Iterator it = arrayOfVideo.iterator();
     	while(it.hasNext()){
     		JSONObject video = (JSONObject) it.next();
-    		if(video.get("path").equals(videoPath)){
-    			result = (String) video.get("description");
+    		if(video.get(PATH_PARAMETER).equals(videoPath)){
+    			result = (String) video.get(PATH_DESCRIPTION);
     			break;
     		}
     	}
     	return result;
     }
     
-    
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({ "rawtypes" })
 	@RequestMapping(value="/"+PATH_ADMIN+"/video_on_home_page/remove_video/{path}", method = RequestMethod.POST,consumes=JSON_CONSUMES,
 		headers = JSON_HEADERS)
-    public @ResponseBody void removeVideo(@PathVariable("path") String pathVideo) {
-
-    	logger.info("remove video from home page carousel"); 	
-
-    	JSONParser parser = new JSONParser();
-		
-		try {
-			obj = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream(pathToJSONFile), "UTF-8"));
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		
-		JSONArray arrayOfVideo = (JSONArray) obj.get(LIST_VIDEO);			
+    public @ResponseBody void removeVideo(@PathVariable(PATH_PARAMETER) String pathVideo) {
+		JSONArray arrayOfVideo = getJsonArrayOfVideo();			
 		
 		Iterator it = arrayOfVideo.iterator();
     	while(it.hasNext()){
     		JSONObject video = (JSONObject) it.next();
-    		if(video.get("path").equals(pathVideo)){
+    		if(video.get(PATH_PARAMETER).equals(pathVideo)){
     			it.remove();
     			break;
     		}
     	}
-		
-		obj.remove(LIST_VIDEO);
-		obj.put(LIST_VIDEO, arrayOfVideo);
-		
+		saveJsonArray(arrayOfVideo);
+		logger.info("remove video from home page carousel"); 
+    }
+	
+	private JSONArray getJsonArrayOfVideo(){
+		return (JSONArray) getHomeJSON().get(LIST_VIDEO);
+    }
+    
+    private JSONObject getHomeJSON(){
+    	try(InputStreamReader reader = new InputStreamReader(new FileInputStream(PATH_TO_JSON_FILE), "UTF-8")) {
+			JSONParser parser = new JSONParser();
+			return (JSONObject)parser.parse(reader);
+		} catch (IOException | ParseException  e) {
+			throw new RuntimeException(e);
+		}
+    }
+    
+    @SuppressWarnings("unchecked")
+	private void saveJsonArray(JSONArray array){
+    	JSONObject homeJSON = getHomeJSON();    	
+    	homeJSON.put(LIST_VIDEO, array);
+
 		try {
-			Writer out = new PrintWriter(pathToJSONFile, "UTF-8");
-			out.write(obj.toJSONString());
+			Writer out = new PrintWriter(PATH_TO_JSON_FILE, "UTF-8");
+			out.write(homeJSON.toJSONString());
 			out.flush();
 			out.close();
 		} catch (FileNotFoundException e) {
@@ -198,7 +139,7 @@ public class VideoCaruoselHomePageController {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
+		}	
     }
 	
 }
