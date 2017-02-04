@@ -1,41 +1,42 @@
-package com.printmaster.nk.service;
+package com.printmaster.nk.service.impl;
 
 import java.util.Set;
 
 import org.springframework.transaction.annotation.Transactional;
 
 import com.printmaster.nk.dao.ProductDAO;
-import com.printmaster.nk.model.Rip;
-import com.printmaster.nk.model.SearchRips;
+import com.printmaster.nk.model.Laser;
+import com.printmaster.nk.model.SearchLasers;
+import com.printmaster.nk.service.LaserService;
 
-public class RipServiceImpl implements RipService {
-	private ProductDAO<Rip, SearchRips> productDAO;
+public class LaserServiceImpl implements LaserService {
+	private ProductDAO<Laser, SearchLasers> productDAO;
 	
-	public void setProductDAO(ProductDAO<Rip,SearchRips> productDAO) {
+	public void setProductDAO(ProductDAO<Laser,SearchLasers> productDAO) {
         this.productDAO = productDAO;
     }
  
     @Override
     @Transactional
-    public long addProduct(Rip p) {
+    public long addProduct(Laser p) {
         return this.productDAO.addProduct(p);
     }
  
     @Override
     @Transactional
-    public void updateProduct(Rip p) {
+    public void updateProduct(Laser p) {
         this.productDAO.updateProduct(p);
     }
  
     @Override
     @Transactional
-    public Set<Rip> listProducts(String sortCriteria) {
+    public Set<Laser> listProducts(String sortCriteria) {
         return this.productDAO.listProducts(sortCriteria);
     }
  
     @Override
     @Transactional
-    public Rip getProductById(long id) {
+    public Laser getProductById(long id) {
         return this.productDAO.getProductById(id);
     }
  
@@ -47,25 +48,25 @@ public class RipServiceImpl implements RipService {
 
 	@Override
 	@Transactional
-	public Set<Rip> listSearchProducts(SearchRips searchRips) {
-		return this.productDAO.listSearchProducts(searchRips);
+	public Set<Laser> listSearchProducts(SearchLasers searchLasers) {
+		return this.productDAO.listSearchProducts(searchLasers);
 	}
 
 	@Override
 	@Transactional
-	public Set<Rip> listShowOnSite() {
+	public Set<Laser> listShowOnSite() {
 		return this.productDAO.listShowOnSite();
 	}
 
 	@Override
 	@Transactional
-	public Set<Rip> listShowOnHomePage() {
+	public Set<Laser> listShowOnHomePage() {
 		return this.productDAO.listShowOnHomePage();
 	}
 
 	@Override
 	@Transactional
-	public Set<Rip> listSearchByPhrase(String phrase) {
+	public Set<Laser> listSearchByPhrase(String phrase) {
 		return this.productDAO.listSearchByPhrase(phrase);
 	}
 

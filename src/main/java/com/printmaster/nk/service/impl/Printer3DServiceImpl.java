@@ -1,4 +1,4 @@
-package com.printmaster.nk.service;
+package com.printmaster.nk.service.impl;
 
 import java.util.Set;
 
@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.printmaster.nk.dao.ProductDAO;
 import com.printmaster.nk.model.Printer3D;
 import com.printmaster.nk.model.SearchPrinters3D;
+import com.printmaster.nk.service.Printer3DService;
 
 @Service
 public class Printer3DServiceImpl implements Printer3DService {

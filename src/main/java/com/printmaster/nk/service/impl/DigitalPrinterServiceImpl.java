@@ -1,4 +1,4 @@
-package com.printmaster.nk.service;
+package com.printmaster.nk.service.impl;
 
 import java.util.Set;
 
@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.printmaster.nk.dao.ProductDAO;
 import com.printmaster.nk.model.DigitalPrinter;
 import com.printmaster.nk.model.SearchDigitalPrinters;
+import com.printmaster.nk.service.DigitalPrinterService;
 
 public class DigitalPrinterServiceImpl implements DigitalPrinterService {
 	private ProductDAO<DigitalPrinter, SearchDigitalPrinters> productDAO;

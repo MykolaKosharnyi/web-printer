@@ -1,4 +1,4 @@
-package com.printmaster.nk.service.user;
+package com.printmaster.nk.service;
 
 public interface SecurityService {
     String findLoggedInUsername();

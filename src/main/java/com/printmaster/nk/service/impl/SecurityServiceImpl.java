@@ -1,4 +1,4 @@
-package com.printmaster.nk.service.user;
+package com.printmaster.nk.service.impl;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -18,6 +18,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.printmaster.nk.service.SecurityService;
 import com.printmaster.nk.service.UserService;
 
 /**

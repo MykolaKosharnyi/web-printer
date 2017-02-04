@@ -1,41 +1,42 @@
-package com.printmaster.nk.service;
+package com.printmaster.nk.service.impl;
 
 import java.util.Set;
 
 import org.springframework.transaction.annotation.Transactional;
 
 import com.printmaster.nk.dao.ProductDAO;
-import com.printmaster.nk.model.Laser;
-import com.printmaster.nk.model.SearchLasers;
+import com.printmaster.nk.model.Laminator;
+import com.printmaster.nk.model.SearchLaminators;
+import com.printmaster.nk.service.LaminatorService;
 
-public class LaserServiceImpl implements LaserService {
-	private ProductDAO<Laser, SearchLasers> productDAO;
+public class LaminatorServiceImpl implements LaminatorService {
+	private ProductDAO<Laminator, SearchLaminators> productDAO;
 	
-	public void setProductDAO(ProductDAO<Laser,SearchLasers> productDAO) {
+	public void setProductDAO(ProductDAO<Laminator,SearchLaminators> productDAO) {
         this.productDAO = productDAO;
     }
  
     @Override
     @Transactional
-    public long addProduct(Laser p) {
+    public long addProduct(Laminator p) {
         return this.productDAO.addProduct(p);
     }
  
     @Override
     @Transactional
-    public void updateProduct(Laser p) {
+    public void updateProduct(Laminator p) {
         this.productDAO.updateProduct(p);
     }
  
     @Override
     @Transactional
-    public Set<Laser> listProducts(String sortCriteria) {
+    public Set<Laminator> listProducts(String sortCriteria) {
         return this.productDAO.listProducts(sortCriteria);
     }
  
     @Override
     @Transactional
-    public Laser getProductById(long id) {
+    public Laminator getProductById(long id) {
         return this.productDAO.getProductById(id);
     }
  
@@ -47,25 +48,25 @@ public class LaserServiceImpl implements LaserService {
 
 	@Override
 	@Transactional
-	public Set<Laser> listSearchProducts(SearchLasers searchLasers) {
-		return this.productDAO.listSearchProducts(searchLasers);
+	public Set<Laminator> listSearchProducts(SearchLaminators searchLaminators) {
+		return this.productDAO.listSearchProducts(searchLaminators);
 	}
 
 	@Override
 	@Transactional
-	public Set<Laser> listShowOnSite() {
+	public Set<Laminator> listShowOnSite() {
 		return this.productDAO.listShowOnSite();
 	}
 
 	@Override
 	@Transactional
-	public Set<Laser> listShowOnHomePage() {
+	public Set<Laminator> listShowOnHomePage() {
 		return this.productDAO.listShowOnHomePage();
 	}
 
 	@Override
 	@Transactional
-	public Set<Laser> listSearchByPhrase(String phrase) {
+	public Set<Laminator> listSearchByPhrase(String phrase) {
 		return this.productDAO.listSearchByPhrase(phrase);
 	}
 

@@ -1,4 +1,4 @@
-package com.printmaster.nk.service;
+package com.printmaster.nk.service.impl;
 
 import java.util.ArrayList;
 
@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.printmaster.nk.dao.impl.PreviousUsedEqvipmentDAOImpl;
 import com.printmaster.nk.model.SearchPUE;
+import com.printmaster.nk.service.PreviousUsedEqvipmentService;
 
 public class PreviousUsedEqvipmentServiceImpl implements PreviousUsedEqvipmentService {
 	

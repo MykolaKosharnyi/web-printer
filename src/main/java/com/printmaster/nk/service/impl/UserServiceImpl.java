@@ -1,4 +1,4 @@
-package com.printmaster.nk.service;
+package com.printmaster.nk.service.impl;
 
 import java.util.List;
 
@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.printmaster.nk.dao.UserDAO;
 import com.printmaster.nk.model.Role;
 import com.printmaster.nk.model.User;
+import com.printmaster.nk.service.UserService;
 
 @Service
 @Transactional

@@ -1,41 +1,42 @@
-package com.printmaster.nk.service;
+package com.printmaster.nk.service.impl;
 
 import java.util.Set;
 
 import org.springframework.transaction.annotation.Transactional;
 
 import com.printmaster.nk.dao.ProductDAO;
-import com.printmaster.nk.model.Cutter;
-import com.printmaster.nk.model.SearchCutters;
+import com.printmaster.nk.model.Rip;
+import com.printmaster.nk.model.SearchRips;
+import com.printmaster.nk.service.RipService;
 
-public class CutterServiceImpl implements CutterService {
-	private ProductDAO<Cutter, SearchCutters> productDAO;
+public class RipServiceImpl implements RipService {
+	private ProductDAO<Rip, SearchRips> productDAO;
 	
-	public void setProductDAO(ProductDAO<Cutter,SearchCutters> productDAO) {
+	public void setProductDAO(ProductDAO<Rip,SearchRips> productDAO) {
         this.productDAO = productDAO;
     }
-
+ 
     @Override
     @Transactional
-    public long addProduct(Cutter p) {
+    public long addProduct(Rip p) {
         return this.productDAO.addProduct(p);
     }
  
     @Override
     @Transactional
-    public void updateProduct(Cutter p) {
+    public void updateProduct(Rip p) {
         this.productDAO.updateProduct(p);
     }
  
     @Override
     @Transactional
-    public Set<Cutter> listProducts(String sortCriteria) {
+    public Set<Rip> listProducts(String sortCriteria) {
         return this.productDAO.listProducts(sortCriteria);
     }
  
     @Override
     @Transactional
-    public Cutter getProductById(long id) {
+    public Rip getProductById(long id) {
         return this.productDAO.getProductById(id);
     }
  
@@ -47,25 +48,25 @@ public class CutterServiceImpl implements CutterService {
 
 	@Override
 	@Transactional
-	public Set<Cutter> listSearchProducts(SearchCutters searchCutters) {
-		return this.productDAO.listSearchProducts(searchCutters);
+	public Set<Rip> listSearchProducts(SearchRips searchRips) {
+		return this.productDAO.listSearchProducts(searchRips);
 	}
 
 	@Override
 	@Transactional
-	public Set<Cutter> listShowOnSite() {
+	public Set<Rip> listShowOnSite() {
 		return this.productDAO.listShowOnSite();
 	}
 
 	@Override
 	@Transactional
-	public Set<Cutter> listShowOnHomePage() {
+	public Set<Rip> listShowOnHomePage() {
 		return this.productDAO.listShowOnHomePage();
 	}
 
 	@Override
 	@Transactional
-	public Set<Cutter> listSearchByPhrase(String phrase) {
+	public Set<Rip> listSearchByPhrase(String phrase) {
 		return this.productDAO.listSearchByPhrase(phrase);
 	}
 

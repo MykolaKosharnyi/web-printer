@@ -1,41 +1,42 @@
-package com.printmaster.nk.service;
+package com.printmaster.nk.service.impl;
 
 import java.util.Set;
 
 import org.springframework.transaction.annotation.Transactional;
 
 import com.printmaster.nk.dao.ProductDAO;
-import com.printmaster.nk.model.Laminator;
-import com.printmaster.nk.model.SearchLaminators;
+import com.printmaster.nk.model.Cutter;
+import com.printmaster.nk.model.SearchCutters;
+import com.printmaster.nk.service.CutterService;
 
-public class LaminatorServiceImpl implements LaminatorService {
-	private ProductDAO<Laminator, SearchLaminators> productDAO;
+public class CutterServiceImpl implements CutterService {
+	private ProductDAO<Cutter, SearchCutters> productDAO;
 	
-	public void setProductDAO(ProductDAO<Laminator,SearchLaminators> productDAO) {
+	public void setProductDAO(ProductDAO<Cutter,SearchCutters> productDAO) {
         this.productDAO = productDAO;
     }
- 
+
     @Override
     @Transactional
-    public long addProduct(Laminator p) {
+    public long addProduct(Cutter p) {
         return this.productDAO.addProduct(p);
     }
  
     @Override
     @Transactional
-    public void updateProduct(Laminator p) {
+    public void updateProduct(Cutter p) {
         this.productDAO.updateProduct(p);
     }
  
     @Override
     @Transactional
-    public Set<Laminator> listProducts(String sortCriteria) {
+    public Set<Cutter> listProducts(String sortCriteria) {
         return this.productDAO.listProducts(sortCriteria);
     }
  
     @Override
     @Transactional
-    public Laminator getProductById(long id) {
+    public Cutter getProductById(long id) {
         return this.productDAO.getProductById(id);
     }
  
@@ -47,25 +48,25 @@ public class LaminatorServiceImpl implements LaminatorService {
 
 	@Override
 	@Transactional
-	public Set<Laminator> listSearchProducts(SearchLaminators searchLaminators) {
-		return this.productDAO.listSearchProducts(searchLaminators);
+	public Set<Cutter> listSearchProducts(SearchCutters searchCutters) {
+		return this.productDAO.listSearchProducts(searchCutters);
 	}
 
 	@Override
 	@Transactional
-	public Set<Laminator> listShowOnSite() {
+	public Set<Cutter> listShowOnSite() {
 		return this.productDAO.listShowOnSite();
 	}
 
 	@Override
 	@Transactional
-	public Set<Laminator> listShowOnHomePage() {
+	public Set<Cutter> listShowOnHomePage() {
 		return this.productDAO.listShowOnHomePage();
 	}
 
 	@Override
 	@Transactional
-	public Set<Laminator> listSearchByPhrase(String phrase) {
+	public Set<Cutter> listSearchByPhrase(String phrase) {
 		return this.productDAO.listSearchByPhrase(phrase);
 	}
 

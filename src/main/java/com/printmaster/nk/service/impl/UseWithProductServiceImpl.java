@@ -1,4 +1,4 @@
-package com.printmaster.nk.service;
+package com.printmaster.nk.service.impl;
 
 import java.util.Set;
 
@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.printmaster.nk.dao.UseWithProductDAO;
 import com.printmaster.nk.model.SearchUseWithProducts;
 import com.printmaster.nk.model.UseWithProduct;
+import com.printmaster.nk.service.UseWithProductService;
 
 public class UseWithProductServiceImpl implements UseWithProductService {
 	private UseWithProductDAO productDAO;
