@@ -78,84 +78,84 @@
 	<beans:bean id="userDAO" class="com.printmaster.nk.dao.impl.UserDAOImpl">
         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
     </beans:bean>
-    <beans:bean id="userService" class="com.printmaster.nk.service.UserServiceImpl">
+    <beans:bean id="userService" class="com.printmaster.nk.service.impl.UserServiceImpl">
         <beans:property name="userDAO" ref="userDAO"></beans:property>
     </beans:bean>
     
     <beans:bean id="roleDAO" class="com.printmaster.nk.dao.impl.RoleDAOImpl">
         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
     </beans:bean>
-    <beans:bean id="roleService" class="com.printmaster.nk.service.RoleServiceImpl">
+    <beans:bean id="roleService" class="com.printmaster.nk.service.impl.RoleServiceImpl">
         <beans:property name="roleDAO" ref="roleDAO"></beans:property>
     </beans:bean>
     
     <beans:bean id="printerDAO" class="com.printmaster.nk.dao.impl.PrinterDAOImpl">
         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
     </beans:bean>
-    <beans:bean id="printerService" class="com.printmaster.nk.service.PrinterServiceImpl">
+    <beans:bean id="printerService" class="com.printmaster.nk.service.impl.PrinterServiceImpl">
         <beans:property name="productDAO" ref="printerDAO"></beans:property>
     </beans:bean>
     
     <beans:bean id="printer3dDAO" class="com.printmaster.nk.dao.impl.Printer3dDAOImpl">
         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
     </beans:bean>
-    <beans:bean id="printer3DService" class="com.printmaster.nk.service.Printer3DServiceImpl">
+    <beans:bean id="printer3DService" class="com.printmaster.nk.service.impl.Printer3DServiceImpl">
         <beans:property name="productDAO" ref="printer3dDAO"></beans:property>
     </beans:bean>
     
     <beans:bean id="digitalPrinterDAO" class="com.printmaster.nk.dao.impl.DigitalPrinterDAOImpl">
         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
     </beans:bean>
-    <beans:bean id="digitalPrinterService" class="com.printmaster.nk.service.DigitalPrinterServiceImpl">
+    <beans:bean id="digitalPrinterService" class="com.printmaster.nk.service.impl.DigitalPrinterServiceImpl">
         <beans:property name="productDAO" ref="digitalPrinterDAO"></beans:property>
     </beans:bean>
     
     <beans:bean id="laserDAO" class="com.printmaster.nk.dao.impl.LaserDAOImpl">
         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
     </beans:bean>
-    <beans:bean id="laserService" class="com.printmaster.nk.service.LaserServiceImpl">
+    <beans:bean id="laserService" class="com.printmaster.nk.service.impl.LaserServiceImpl">
         <beans:property name="productDAO" ref="laserDAO"></beans:property>
     </beans:bean>
     
     <beans:bean id="cutterDAO" class="com.printmaster.nk.dao.impl.CutterDAOImpl">
         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
     </beans:bean>
-    <beans:bean id="cutterService" class="com.printmaster.nk.service.CutterServiceImpl">
+    <beans:bean id="cutterService" class="com.printmaster.nk.service.impl.CutterServiceImpl">
         <beans:property name="productDAO" ref="cutterDAO"></beans:property>
     </beans:bean>
     
     <beans:bean id="laminatorDAO" class="com.printmaster.nk.dao.impl.LaminatorDAOImpl">
         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
     </beans:bean>
-    <beans:bean id="laminatorService" class="com.printmaster.nk.service.LaminatorServiceImpl">
+    <beans:bean id="laminatorService" class="com.printmaster.nk.service.impl.LaminatorServiceImpl">
         <beans:property name="productDAO" ref="laminatorDAO"></beans:property>
     </beans:bean>
     
     <beans:bean id="scannerDAO" class="com.printmaster.nk.dao.impl.ScannerDAOImpl">
         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
     </beans:bean>
-    <beans:bean id="scannerService" class="com.printmaster.nk.service.ScannerServiceImpl">
+    <beans:bean id="scannerService" class="com.printmaster.nk.service.impl.ScannerServiceImpl">
         <beans:property name="productDAO" ref="scannerDAO"></beans:property>
     </beans:bean>
     
     <beans:bean id="pueDAO" class="com.printmaster.nk.dao.impl.PreviousUsedEqvipmentDAOImpl">
         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" /> 
     </beans:bean>
-    <beans:bean id="pueService" class="com.printmaster.nk.service.PreviousUsedEqvipmentServiceImpl">
+    <beans:bean id="pueService" class="com.printmaster.nk.service.impl.PreviousUsedEqvipmentServiceImpl">
         <beans:property name="productDAO" ref="pueDAO"></beans:property>
     </beans:bean>
     
     <beans:bean id="ripDAO" class="com.printmaster.nk.dao.impl.RipDAOImpl">
         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
     </beans:bean>
-    <beans:bean id="ripService" class="com.printmaster.nk.service.RipServiceImpl">
+    <beans:bean id="ripService" class="com.printmaster.nk.service.impl.RipServiceImpl">
         <beans:property name="productDAO" ref="ripDAO"></beans:property>
     </beans:bean>
     
     <beans:bean id="uwpDAO" class="com.printmaster.nk.dao.impl.UseWithProductDAOImpl">
         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
     </beans:bean>
-    <beans:bean id="useWithProductService" class="com.printmaster.nk.service.UseWithProductServiceImpl">
+    <beans:bean id="useWithProductService" class="com.printmaster.nk.service.impl.UseWithProductServiceImpl">
         <beans:property name="productDAO" ref="uwpDAO"></beans:property>
     </beans:bean>
     
