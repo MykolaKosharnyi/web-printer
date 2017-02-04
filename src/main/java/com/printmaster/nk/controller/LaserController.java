@@ -1,6 +1,6 @@
 package com.printmaster.nk.controller;
 
-import static com.printmaster.nk.controller.ControllerConstants.*;
+import static com.printmaster.nk.controller.ConstUsedInContr.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -57,11 +57,8 @@ public class LaserController {
 	
 	private Logger logger = Logger.getLogger(LaserController.class);
 	
-	private static final String DIRECTORY = "/var/www/localhost/images";
-	
-	private static final String TYPE = "laser";
-
-	private static final String CONCRETE_FOLDER = TYPE + "s";
+	private static final String TYPE = LASER;
+	private static final String CONCRETE_FOLDER = LASER + "s";
 	
 	@Autowired
 	private LinksForProducts linksForProduct;

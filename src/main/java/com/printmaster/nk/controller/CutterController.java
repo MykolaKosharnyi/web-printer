@@ -29,7 +29,7 @@ import com.printmaster.nk.model.Cutter;
 import com.printmaster.nk.model.SearchCutters;
 import com.printmaster.nk.service.CutterService;
 import com.printmaster.nk.service.UseWithProductService;
-import static com.printmaster.nk.controller.ControllerConstants.*;
+import static com.printmaster.nk.controller.ConstUsedInContr.*;
 
 @Controller
 public class CutterController {
@@ -53,9 +53,8 @@ public class CutterController {
     
 	private Logger logger = Logger.getLogger(CutterController.class);
 	
-	private static final String DIRECTORY = "/var/www/localhost/images";
-	private static final String TYPE = "cutter";
-	private static final String CONCRETE_FOLDER = TYPE + "s";
+	private static final String TYPE = CUTTER;
+	private static final String CONCRETE_FOLDER = CUTTER + "s";
 	
 	@Autowired
 	private LinksForProducts linksForProduct;

@@ -1,6 +1,6 @@
 package com.printmaster.nk.controller;
 
-import static com.printmaster.nk.controller.ControllerConstants.*;
+import static com.printmaster.nk.controller.ConstUsedInContr.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -55,11 +55,8 @@ public class LaminatorController {
 	
 	private Logger logger = Logger.getLogger(LaminatorController.class);
 	
-	private static final String DIRECTORY = "/var/www/localhost/images";
-	
-	private static final String TYPE = "laminator";
-
-	private static final String CONCRETE_FOLDER = TYPE + "s";
+	private static final String TYPE = LAMINATOR;
+	private static final String CONCRETE_FOLDER = LAMINATOR + "s";
 	
 	@Autowired
 	private LinksForProducts linksForProduct;

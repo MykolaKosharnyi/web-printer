@@ -1,6 +1,6 @@
 package com.printmaster.nk.controller;
 
-import static com.printmaster.nk.controller.ControllerConstants.*;
+import static com.printmaster.nk.controller.ConstUsedInContr.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -54,9 +54,8 @@ public class PrinterDigitalController {
 	
 	private Logger logger = Logger.getLogger(PrinterDigitalController.class);
 	
-	private final static String DIRECTORY = "/var/www/localhost/images";
-	private static final String TYPE = "digital_printer";
-	private static final String CONCRETE_FOLDER = TYPE + "s";
+	private static final String TYPE = DIGITAL_PRINTER;
+	private static final String CONCRETE_FOLDER = DIGITAL_PRINTER + "s";
 	
 	@Autowired
 	private LinksForProducts linksForProduct;

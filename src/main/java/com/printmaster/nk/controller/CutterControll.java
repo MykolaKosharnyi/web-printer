@@ -1,9 +1,9 @@
 package com.printmaster.nk.controller;
 
-import static com.printmaster.nk.controller.ControllerConstants.ATTRIBUTE_ADD_PRODUCT;
-import static com.printmaster.nk.controller.ControllerConstants.ATTRIBUTE_NAME_PRODUCT;
-import static com.printmaster.nk.controller.ControllerConstants.ATTRIBUTE_TITLE;
-import static com.printmaster.nk.controller.ControllerConstants.ATTRIBUTE_TITLE_OF_TABLE;
+import static com.printmaster.nk.controller.ConstUsedInContr.ATTRIBUTE_ADD_PRODUCT;
+import static com.printmaster.nk.controller.ConstUsedInContr.ATTRIBUTE_NAME_PRODUCT;
+import static com.printmaster.nk.controller.ConstUsedInContr.ATTRIBUTE_TITLE;
+import static com.printmaster.nk.controller.ConstUsedInContr.ATTRIBUTE_TITLE_OF_TABLE;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,6 +1,6 @@
 package com.printmaster.nk.controller;
 
-import static com.printmaster.nk.controller.ControllerConstants.*;
+import static com.printmaster.nk.controller.ConstUsedInContr.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -57,12 +57,9 @@ public class Printer3DController {
 	}};
 	
 	private Logger logger = Logger.getLogger(Printer3DController.class);
-	
-	private static final String DIRECTORY = "/var/www/localhost/images";
 
-	private static final String TYPE = "3d_printer";
-	
-	private static final String CONCRETE_FOLDER = TYPE + "s";
+	private static final String TYPE = PRINTER_3D;	
+	private static final String CONCRETE_FOLDER = PRINTER_3D + "s";
 	
 	@Autowired
 	private LinksForProducts linksForProduct;

@@ -1,6 +1,6 @@
 package com.printmaster.nk.controller;
 
-import static com.printmaster.nk.controller.ControllerConstants.*;
+import static com.printmaster.nk.controller.ConstUsedInContr.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -55,9 +55,8 @@ public class UseWithProductController {
 	
 	private Logger logger = Logger.getLogger(UseWithProductController.class);
 	
-	private final static String DIRECTORY = "/var/www/localhost/images";
-	private static final String TYPE = "use_with_product";
-	private final static String CONCRETE_FOLDER = TYPE + "s";
+	private static final String TYPE = USE_WITH_PRODUCT;
+	private final static String CONCRETE_FOLDER = USE_WITH_PRODUCT + "s";
 	
 	@Autowired
 	private LinksForProducts linksForProduct;

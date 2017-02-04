@@ -1,15 +1,8 @@
 package com.printmaster.nk.controller;
 
-import static com.printmaster.nk.controller.ControllerConstants.*;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
+import static com.printmaster.nk.controller.ConstUsedInContr.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.MailSender;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,39 +19,17 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.printmaster.nk.beans.ComponentsForControllers;
-import com.printmaster.nk.model.MailSendingMessage;
 import com.printmaster.nk.model.User;
-import com.printmaster.nk.service.MailSendingService;
+import com.printmaster.nk.service.SecurityService;
 import com.printmaster.nk.service.UserService;
-import com.printmaster.nk.service.user.SecurityService;
 import com.printmaster.nk.validator.UserValidator;
 
 @Controller
 public class UserController {
 	
-	private static final String DIRECTORY = "/var/www/localhost/images";
 	private static final String TYPE = "user";
 	private static final String CONCRETE_FOLDER = "users";
-	
-	List<String> listSubscription = new ArrayList<String>(){
-		private static final long serialVersionUID = 1L;
-		{
-			add("принтеры");
-			add("3Д принтеры");
-			add("цифровое оборудование");
-			add("ламинаторы");
-			add("лазеры");
-			add("фрезеры");
-			add("сканеры");
-			add("б/у оборудование");
-			add("ПО");
-			add("сопутствующие товары");
-		}
-	};
-	
-	@Autowired
-    private MailSender mailSender;
-	
+
 	@Autowired
     private UserService userService;
 
@@ -71,9 +41,6 @@ public class UserController {
     
 	@Autowired
     ComponentsForControllers componets;
-	
-	@Autowired
-	MailSendingService mailSendingService;
 
 	@RequestMapping(value = "/user", method = RequestMethod.GET)
     public String user(Model model) {
@@ -92,25 +59,6 @@ public class UserController {
     	}
     	return userService.findByUserName(username);
 	}
-	
-	@RequestMapping(value="/ask/product", method = RequestMethod.POST, consumes="application/json",
-			headers = "content-type=application/x-www-form-urlencoded")
-    public @ResponseBody void askProductPage(HttpServletRequest request) {
-
-        String recipientAddress = request.getParameter("recipient");
-        String subject = request.getParameter("subject");
-        String message = request.getParameter("message");
-         
-        // creates a simple e-mail object
-        SimpleMailMessage email = new SimpleMailMessage();
-        email.setTo(recipientAddress);
-        email.setSubject(subject);
-        email.setText(message);
-         
-        // sends the e-mail
-        mailSender.send(email);
-
-    }
     
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(Model model, String error, String logout) {
@@ -210,26 +158,6 @@ public class UserController {
 		User user = getUser();
 		user.setSubscription(subscriptionFromForm);
 		userService.updateUser(user);
-	}
-	
-	@RequestMapping(value = "/admin/all_sended_messages", method = RequestMethod.GET)
-	public String getAllSendedMessages(Model model) {
-		model.addAttribute("allMessages", mailSendingService.getAll());
-	    return "admin/all_sended_messages";
-	}
-	
-	@RequestMapping(value = "/admin/message/new", method = RequestMethod.GET)
-	public String getCreateNewMessage(Model model) {
-		model.addAttribute("mailMessage", new MailSendingMessage());
-		model.addAttribute("listSubscription", listSubscription);
-	    return "admin/message";
-	}
-	
-	@RequestMapping(value = "/admin/message/{id}", method = RequestMethod.GET)
-	public String getCreateNewMessage(@PathVariable("id") long id, Model model) {
-		model.addAttribute("mailMessage", mailSendingService.getById(id));
-		model.addAttribute("listSubscription", listSubscription);
-	    return "admin/message";
 	}
     
 }

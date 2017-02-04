@@ -1,6 +1,11 @@
 package com.printmaster.nk.controller;
 
-interface ControllerConstants {
+import java.util.ArrayList;
+import java.util.List;
+
+interface ConstUsedInContr {
+	String DIRECTORY = "/var/www/localhost/images";
+	
 	String PATH_ADMIN = "admin";
 	String PATH_SHOW_ON_LEFT_SIDE = "showOnLeftSide";
 	String PATH_SHOW_ON_HOME_PAGE = "showOnHomePage";
@@ -52,5 +57,21 @@ interface ControllerConstants {
 	String LAMINATOR = "laminator";
 	String LASER = "laser";
 	String SCANNER = "scanner";
+	String USE_WITH_PRODUCT = "use_with_product";
 
+	List<String> listSubscription = new ArrayList<String>(){
+		private static final long serialVersionUID = 1L;
+		{
+			add("принтеры");
+			add("3Д принтеры");
+			add("цифровое оборудование");
+			add("ламинаторы");
+			add("лазеры");
+			add("фрезеры");
+			add("сканеры");
+			add("б/у оборудование");
+			add("ПО");
+			add("сопутствующие товары");
+		}
+	};
 }

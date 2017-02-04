@@ -1,6 +1,6 @@
 package com.printmaster.nk.controller;
 
-import static com.printmaster.nk.controller.ControllerConstants.*;
+import static com.printmaster.nk.controller.ConstUsedInContr.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +45,6 @@ public abstract class ProductController <T extends HeadProduct, S extends Search
 	private Map<String, String> links;
 	private Map<String, String> parametersOnAdminProductsPage;
 	
-	private static final String DIRECTORY = "/var/www/localhost/images";
 	private final String TYPE = ""/*getTypeUrl()*/;
 	private final String CONCRETE_FOLDER = getTypeUrl() + "s";
 	

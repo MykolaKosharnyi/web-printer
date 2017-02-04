@@ -1,6 +1,6 @@
 package com.printmaster.nk.controller;
 
-import static com.printmaster.nk.controller.ControllerConstants.*;
+import static com.printmaster.nk.controller.ConstUsedInContr.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -53,9 +53,8 @@ public class ScannerController {
 	
 	private Logger logger = Logger.getLogger(ScannerController.class);
 	
-	private static final String DIRECTORY = "/var/www/localhost/images";
-	private static final String TYPE = "scanner";
-	private static final String CONCRETE_FOLDER = TYPE + "s";
+	private static final String TYPE = SCANNER;
+	private static final String CONCRETE_FOLDER = SCANNER + "s";
 	
 	@Autowired
 	private LinksForProducts linksForProduct;
