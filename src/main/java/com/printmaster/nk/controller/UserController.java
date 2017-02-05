@@ -2,6 +2,7 @@ package com.printmaster.nk.controller;
 
 import static com.printmaster.nk.controller.ConstUsedInContr.*;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,6 +28,8 @@ import com.printmaster.nk.validator.UserValidator;
 
 @Controller
 public class UserController {
+	
+	private Logger logger = Logger.getLogger(UserController.class);
 	
 	private static final String TYPE = "user";
 	private static final String CONCRETE_FOLDER = "users";
@@ -138,12 +142,6 @@ public class UserController {
  		user.setNameUserPicture(nameOfAddedPicture);
  		userService.updateUser(user);
     }
-
-	@RequestMapping(value = "/"+ PATH_ADMIN +"/"+ TYPE +"s", method = RequestMethod.GET)
-	public String getAllUsersOnAdmin(Model model) {
-		model.addAttribute("userList", userService.listUsers());
-	    return PATH_ADMIN + "/"+ TYPE + "s";
-	}
 	
 	@RequestMapping(value = "/user/subscription", method = RequestMethod.GET)
 	public String subscriptionGET(Model model) {
@@ -152,12 +150,30 @@ public class UserController {
 	    return "user/subscription";
 	}
 	
-	@RequestMapping(value = "/user/subscription", method = RequestMethod.POST,consumes="application/json",
-    		headers = "content-type=application/x-www-form-urlencoded")
+	@RequestMapping(value = "/user/subscription", method = RequestMethod.POST,consumes=JSON_CONSUMES,
+    		headers = JSON_HEADERS)
 	public @ResponseBody void subscriptionPOST(@RequestBody String[] subscriptionFromForm) {
 		User user = getUser();
 		user.setSubscription(subscriptionFromForm);
 		userService.updateUser(user);
 	}
+	
+	@RequestMapping(value = "/"+ PATH_ADMIN +"/"+ TYPE +"s", method = RequestMethod.GET)
+	public String getAllUsersOnAdmin(Model model) {
+		model.addAttribute("userList", userService.listUsers());
+	    return PATH_ADMIN + "/"+ TYPE + "s";
+	}
+	
+	@RequestMapping("/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_REMOVE +"/{id}")
+    public String removeUser(@PathVariable("id") long id){
+    	logger.info(String.format("Start deleting %s from database, id=%d", TYPE, id));
+    	
+    	componets.removeAllPricturesOfConcreteProduct(DIRECTORY, CONCRETE_FOLDER, id);
+    		
+    	logger.info(String.format("DELETE %s with id=%d from database", TYPE, id));
+    	userService.removeUser(id);
+    		
+        return "redirect:/"+ PATH_ADMIN + "/" + TYPE + "s";
+    }
     
 }
