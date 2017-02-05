@@ -8,7 +8,7 @@ a:visited {
 
 body { 
     width: 100%;
-    font: 1em/1.4em sans-serif;
+    /*font: 1em/1.4em sans-serif;*/
     padding: 0;
     margin: 0;
 	background-attachment: fixed;
@@ -83,7 +83,7 @@ body {
 /*--- ДЕРЕВО ПЕРЕХОДОВ ---*/
 #tree_links{
     padding: 5px;
-    position: relative;
+    position: absolute;
     float: left;
     width: 300px;
     height: auto;
@@ -139,6 +139,11 @@ body {
 .Content {
     min-height: 18px;
     margin-left:18px;
+}
+
+.Content, .Content a{
+	max-width: 225px;
+	display: block;
 }
 
 * html  .Content {
@@ -739,7 +744,7 @@ p.paint_option{
 .tg td {
 	font-family: Arial, sans-serif;
 	font-size: 14px;
-	/*padding: 10px 5px;*/
+	padding:5px;
 	border-style: solid;
 	border-width: 1px;
 	overflow: hidden;

@@ -49,9 +49,8 @@ a:hover {
 	font-size: 17px;
 }
 
-.top_information:hover,
+.map_top_information:hover,
 .top_information a:hover{color: rgb(157, 241, 251); }
-.top_information:last-of-type:hover{color: inherit; }
 
 .top_information:first-of-type{margin-left: 0px;}
 .top_information:last-of-type{
@@ -535,11 +534,6 @@ section.ord1er  {
 	height: 320px;
 	margin: 5px;
 	/*border-bottom: 1px blue solid;*/
-}
-
-.bold_user_description{
-	font-weight: bold;
-	line-height: 25px;
 }
 /*---------------*/
 .user_block_products{
