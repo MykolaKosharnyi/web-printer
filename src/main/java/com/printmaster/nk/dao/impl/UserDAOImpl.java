@@ -16,7 +16,7 @@ import com.printmaster.nk.model.entity.User;
 @Repository
 public class UserDAOImpl implements UserDAO{
 
-	 private Logger logger = Logger.getLogger(UserDAOImpl.class);
+	private Logger logger = Logger.getLogger(UserDAOImpl.class);
     
     private SessionFactory sessionFactory;
      

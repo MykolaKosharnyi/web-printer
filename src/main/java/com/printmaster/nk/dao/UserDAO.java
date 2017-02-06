@@ -6,8 +6,8 @@ import com.printmaster.nk.model.entity.User;
 
 public interface UserDAO {
 	long save(User user);
-	User findByUserName(String username);
-    void updateUser(User user);
+	void updateUser(User user);
+	User findByUserName(String username);    
     List<User> listUsers();
     User getUserById(long id);
     void removeUser(long id);

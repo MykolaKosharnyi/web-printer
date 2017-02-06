@@ -32,6 +32,7 @@
                 <beans:value>com.printmaster.nk.model.Rip</beans:value>
                 <beans:value>com.printmaster.nk.model.UseWithProduct</beans:value>
 				<beans:value>com.printmaster.nk.model.User</beans:value>
+				<beans:value>com.printmaster.nk.model.UserAddByAdmin</beans:value>
                 <beans:value>com.printmaster.nk.model.Role</beans:value>
                 <beans:value>com.printmaster.nk.model.Comment</beans:value>
                 <beans:value>com.printmaster.nk.model.MailSendingMessage</beans:value>               
@@ -55,6 +56,13 @@
     </beans:bean>
     <beans:bean id="userService" class="com.printmaster.nk.service.impl.UserServiceImpl">
         <beans:property name="userDAO" ref="userDAO"></beans:property>
+    </beans:bean>
+    
+    <beans:bean id="userAddByAdminDAO" class="com.printmaster.nk.dao.impl.UserAddByAdminDAOImpl">
+        <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+    </beans:bean>
+    <beans:bean id="userAddByAdminService" class="com.printmaster.nk.service.impl.UserAddByAdminServiceImpl">
+        <beans:property name="userAddByAdminDAO" ref="userAddByAdminDAO"></beans:property>
     </beans:bean>
     
     <beans:bean id="roleDAO" class="com.printmaster.nk.dao.impl.RoleDAOImpl">
