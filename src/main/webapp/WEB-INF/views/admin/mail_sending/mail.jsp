@@ -32,13 +32,18 @@
 </c:if>
 <c:if test="${!empty mailMessage.id}">
 	<title>
-		<spring:message text="Изменение писька рассылки с id = ${mailMessage.id}" />
+		<spring:message text="Изменение письма рассылки с id = ${mailMessage.id}" />
 	</title>
 </c:if>
 </head>
 <body>
 	<div id="product">
 		<form class="form-horizontal" style="padding: 10px 0px;">
+		
+			<c:if test="${!empty mailMessage.id}">
+				<input type="hidden" name="id" value="${mailMessage.id}">	
+			</c:if>
+			
 		  <div class="form-group">
 			<label for="title_message" class="col-sm-2 control-label">Заголовок:</label>
 			<div class="col-sm-10">
