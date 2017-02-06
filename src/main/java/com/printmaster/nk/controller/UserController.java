@@ -2,6 +2,8 @@ package com.printmaster.nk.controller;
 
 import static com.printmaster.nk.controller.ConstUsedInContr.*;
 
+import javax.validation.Valid;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -21,6 +23,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.printmaster.nk.beans.ComponentsForControllers;
+import com.printmaster.nk.model.Laminator;
 import com.printmaster.nk.model.User;
 import com.printmaster.nk.service.SecurityService;
 import com.printmaster.nk.service.UserService;
@@ -175,5 +178,42 @@ public class UserController {
     		
         return "redirect:/"+ PATH_ADMIN + "/" + TYPE + "s";
     }
+	
+	/**
+	 * for displaying new add user page
+	 */
+	@RequestMapping(value = "/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_NEW, method = RequestMethod.GET)
+	public String createNewUser(Model model) {
+		model.addAttribute("user", new User());
+	    return PATH_ADMIN + "/"+ TYPE;
+	}
+	
+	@RequestMapping(value = "/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_CREATE, method = RequestMethod.POST) 
+	public String handleFormUpload(@ModelAttribute(MODEL_ATTRIBUTE_PRODUCT) @Valid User product,
+			BindingResult result, Model model){
+
+//		if (result.hasErrors()){
+//			return adminFormHasError(product, model);
+//		}
+//
+//		long id = productService.addProduct(product);
+//		logger.info(String.format("Create new %s! With id=%d", TYPE, id));
+//
+//		// create folder and add to her new pictures
+//		product.getPathPictures()
+//				.addAll(componets.createFolderAndWriteToItPictures(DIRECTORY, CONCRETE_FOLDER, id, files));
+//
+//		this.productService.updateProduct(product);
+//
+//		files.clear();
+//
+//		linksForProduct.createLinks(productService.listShowOnSite());
+//
+//		if (product.isShowOnSite() && product.isShowOnLeftSide())
+//			componets.updateInLeftField(product, true, TYPE);
+
+		logger.info("Update links to the products in left menu!");
+		return "redirect:/" + PATH_ADMIN + "/"+ TYPE +"s";
+	}
     
 }

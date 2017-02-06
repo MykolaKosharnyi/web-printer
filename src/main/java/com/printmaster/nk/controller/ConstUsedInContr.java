@@ -14,6 +14,7 @@ interface ConstUsedInContr {
 	String PATH_REMOVE = "remove";
 	String PATH_REMOVE_PICTURE_UPDATE = "remove_picture_update";
 	String PATH_CHANGE_ORDER_PICTURES_UPDATE = "change_order_pictures_update";
+	String PATH_CREATE = "create";
 	String PATH_UPLOAD_PICTURES_UPDATE = "upload_pictures_update";
 	String PATH_REMOVE_PICTURE = "remove_picture";
 	String PATH_CHANGE_ORDER_PICTURES = "change_order_pictures";

@@ -5,7 +5,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page session="true"%>
 
+<title>Список пользователей</title>
 <div id="product">
+	<a href="<c:url value='/admin/user/new' />">Добавить нового пользователя в базу данных</a>
 	<br>
 	<h3>Список пользователей</h3>
 
@@ -18,8 +20,6 @@
 				<th>Фамилия</th>
 				<th>Телефон</th>
 				<th>Почта</th>
-				<th>Компания</th>
-				<th>Дата рождения</th>
 				<th>Дата регистрации</th>
 				<th>Удалить</th>
 			</tr>
@@ -59,11 +59,7 @@
 					<td width="120px" <c:if test="${user.role == 'ROLE_ADMIN'}">style="background: #ffd6d6;"</c:if>>${user.lastname}</td>
 					<td width="120px" <c:if test="${user.role == 'ROLE_ADMIN'}">style="background: #ffd6d6;"</c:if>>${user.telephone}</td>
 					<td width="120px" <c:if test="${user.role == 'ROLE_ADMIN'}">style="background: #ffd6d6;"</c:if>>${user.email}</td>
-					<td width="120px" <c:if test="${user.role == 'ROLE_ADMIN'}">style="background: #ffd6d6;"</c:if>>${user.company}</td>
 					
-					<td width="120px" <c:if test="${user.role == 'ROLE_ADMIN'}">style="background: #ffd6d6;"</c:if>>
-						<fmt:formatDate type="date" dateStyle="long" timeStyle="short" value="${user.dateOfBirthDay}" />
-					</td>
 					<td width="120px" <c:if test="${user.role == 'ROLE_ADMIN'}">style="background: #ffd6d6;"</c:if>>
 						<fmt:formatDate type="date" dateStyle="long" timeStyle="short" value="${user.timeRegistration}" />
 					</td>
