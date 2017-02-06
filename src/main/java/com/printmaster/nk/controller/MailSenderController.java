@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.printmaster.nk.model.MailSendingMessage;
+import com.printmaster.nk.model.entity.MailSendingMessage;
 import com.printmaster.nk.service.MailSendingService;
 
 import static com.printmaster.nk.controller.ConstUsedInContr.*;

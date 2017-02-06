@@ -9,7 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import com.printmaster.nk.dao.MailSendingDAO;
-import com.printmaster.nk.model.MailSendingMessage;
+import com.printmaster.nk.model.entity.MailSendingMessage;
 
 public class MailSendingDAOImpl implements MailSendingDAO {
 	

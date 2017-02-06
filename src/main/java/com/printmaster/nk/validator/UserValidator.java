@@ -6,7 +6,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import com.printmaster.nk.model.User;
+import com.printmaster.nk.model.entity.User;
 import com.printmaster.nk.service.UserService;
 
 @Component

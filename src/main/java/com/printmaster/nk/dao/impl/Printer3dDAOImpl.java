@@ -16,8 +16,8 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.printmaster.nk.dao.ProductDAO;
-import com.printmaster.nk.model.Printer3D;
-import com.printmaster.nk.model.SearchPrinters3D;
+import com.printmaster.nk.model.entity.Printer3D;
+import com.printmaster.nk.model.entity.search.SearchPrinters3D;
 
 @Repository
 public class Printer3dDAOImpl implements ProductDAO<Printer3D, SearchPrinters3D> {

@@ -7,7 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import com.printmaster.nk.dao.RoleDAO;
-import com.printmaster.nk.model.Role;
+import com.printmaster.nk.model.entity.Role;
 
 public class RoleDAOImpl implements RoleDAO{
 

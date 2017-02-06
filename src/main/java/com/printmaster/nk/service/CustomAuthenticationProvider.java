@@ -16,7 +16,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import com.printmaster.nk.model.User;
+import com.printmaster.nk.model.entity.User;
  
 /**
  * A custom authentication manager that allows access if the user details

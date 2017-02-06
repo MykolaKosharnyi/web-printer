@@ -37,8 +37,8 @@ import com.printmaster.nk.beans.ComponentsForControllers;
 import com.printmaster.nk.beans.FileMeta;
 import com.printmaster.nk.beans.LinksForProducts;
 import com.printmaster.nk.beans.PicturesContainer;
-import com.printmaster.nk.model.Rip;
-import com.printmaster.nk.model.SearchRips;
+import com.printmaster.nk.model.entity.Rip;
+import com.printmaster.nk.model.entity.search.SearchRips;
 import com.printmaster.nk.service.RipService;
 
 @Controller

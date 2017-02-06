@@ -2,7 +2,7 @@ package com.printmaster.nk.dao;
 
 import java.util.List;
 
-import com.printmaster.nk.model.User;
+import com.printmaster.nk.model.entity.User;
 
 public interface UserDAO {
 	long save(User user);

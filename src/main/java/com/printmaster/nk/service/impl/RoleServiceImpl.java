@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.printmaster.nk.dao.RoleDAO;
-import com.printmaster.nk.model.Role;
+import com.printmaster.nk.model.entity.Role;
 import com.printmaster.nk.service.RoleService;
 
 public class RoleServiceImpl implements RoleService {

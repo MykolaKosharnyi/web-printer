@@ -50,7 +50,7 @@ public class SecurityServiceImpl implements SecurityService {
     public void autologin(String username, String password) {   
     
     	// Init a database user object
-    	com.printmaster.nk.model.User user =  userService.findByUserName(username);
+    	com.printmaster.nk.model.entity.User user =  userService.findByUserName(username);
 
     	  // Compare passwords
     	  // Make sure to encode the password first before comparing

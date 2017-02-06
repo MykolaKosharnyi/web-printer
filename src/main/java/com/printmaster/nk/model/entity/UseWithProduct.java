@@ -1,46 +1,32 @@
-package com.printmaster.nk.model;
+package com.printmaster.nk.model.entity;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name="rip")
-public class Rip extends Product implements Serializable {
-	
-private static final long serialVersionUID = 3031695775597440046L;
+@Table(name="use_with_product")
+public class UseWithProduct extends Product implements Serializable{
 
-	@NotEmpty
-	@Column(name="typeEquipment")
-	private String typeEquipment;//Тип оборудования
+	private static final long serialVersionUID = 3031695775597440046L;	
 	
 	@NotEmpty
-	@Column(name="softwareMaker")
-	private String softwareMaker;//Производитель ПО
+	@Column(name="typeProduct")//Тип продукта
+	private String typeProduct;
 	
-	@NotEmpty
-	@Column(name="softwareClass")
-	private String softwareClass;//Класс ПО
+	@Column(name="typeInk")
+	private String typeInk; 
 	
-	@Column(name="softwareVersion", length = 10)
-	private String softwareVersion;//Версия ПО
+	@Column(name="availability")
+	protected String availability;
 	
-	@Column(name="time_shares")
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern="dd.MM.yyyy")
-	private Date timeShares;
-	
-	@Column(name="timeSharesText", columnDefinition="TEXT")
-	protected String timeSharesText;
+	@Column(name="availabilitySpecialCase")
+	protected String availabilitySpecialCase;
 	
 	@Column(name="optionInstallation", columnDefinition="Decimal(10,2) default '0.00'")
 	protected double optionInstallation;
@@ -85,42 +71,113 @@ private static final long serialVersionUID = 3031695775597440046L;
 	@Size(max = 50)
 	@Column(name="descriptionAddedOption3")
 	protected String descriptionOptionAddedOption3;
+	//@ManyToMany(fetch = FetchType.LAZY, mappedBy = "useWithProduct")
+	//private Set<Cutter> useWithProduct = new HashSet<Cutter>(0);
 	
 	//Option for delivery	
 	@Column(name="deliveryWidth", columnDefinition="Decimal(10,2) default '0.00'")
 	protected double deliveryWidth;
-					
+				
 	@Column(name="deliveryHeight", columnDefinition="Decimal(10,2) default '0.00'")
 	protected double deliveryHeight;
-					
+				
 	@Column(name="deliveryDepth", columnDefinition="Decimal(10,2) default '0.00'")
 	protected double deliveryDepth;	
-			
+		
 	@Column(name="deliveryWeight", columnDefinition="Decimal(10,2) default '0.00'")
 	protected double deliveryWeight;
-			
+		
 	//on Ukraine		
 	@Column(name="ukraineDeliveryPriceSize", nullable = false, columnDefinition = "bit default 0")
 	protected boolean ukraineDeliveryPriceSize;
-					
+				
 	@Column(name="ukraineDeliveryPriceWeight", nullable = false, columnDefinition = "bit default 0")
 	protected boolean ukraineDeliveryPriceWeight;
 	
 	@Column(name="ukraineDeliveryDescription")
 	protected String ukraineDeliveryDescription;
-			
+		
 	//on Kyiv
 	@Column(name="kyivDeliveryPriceSize", nullable = false, columnDefinition = "bit default 0")
 	protected boolean kyivDeliveryPriceSize;
-				
+			
 	@Column(name="kyivDeliveryPriceWeight", nullable = false, columnDefinition = "bit default 0")
 	protected boolean kyivDeliveryPriceWeight;
 	
 	@Column(name="kyivDeliveryDescription")
 	protected String kyivDeliveryDescription;
 	
-	public Rip(){}
+	/* FOR PAINT OPTION SECTION */
+	@Column(name="cyanPaint", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double cyanPaint;//Cyan
+	
+	@Column(name="magentaPaint", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double magentaPaint;//Magenta
 
+	@Column(name="yellowPaint", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double yellowPaint;//Yellow
+	
+	@Column(name="blackPaint", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double blackPaint;//Black
+	
+	@Column(name="lightCyanPaint", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double lightCyanPaint;//Light Cyan
+	
+	@Column(name="lightMagentaPaint", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double lightMagentaPaint;//Light Magenta
+	
+	@Column(name="solventPaint", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double solventPaint;//Solvent
+	
+	@Column(name="matteBlackPaint", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double matteBlackPaint;//Matte black
+	
+	@Column(name="grayPaint", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double grayPaint;//Gray
+	
+	@Column(name="orangePaint", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double orangePaint;//Orange
+	
+	@Column(name="greenPaint", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double greenPaint;//Green
+	
+	@Column(name="variant1NamePaint")
+	protected String variant1NamePaint;//Name paint first custom variant
+	
+	@Column(name="variant1Paint", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double variant1Paint;//First custom variant
+	
+	@Column(name="variant2NamePaint")
+	protected String variant2NamePaint;//Name paint second custom variant
+	
+	@Column(name="variant2Paint", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double variant2Paint;//Second custom variant
+	
+	@Column(name="variant3NamePaint")
+	protected String variant3NamePaint;//Name paint third custom variant
+	
+	@Column(name="variant3Paint", columnDefinition="Decimal(10,2) default '0.00'")
+	protected double variant3Paint;//Third custom variant
+	
+	//insurance
+	//1. Страхование груза международная перевозка
+	//2. Страхование груза по Украине
+	@Column(name="insuranceInternationalTransport", nullable = false, columnDefinition = "bit default 0")
+	protected boolean insuranceInternationalTransport;
+	
+	@Size(max = 50)
+	@Column(name="descriptionInsuranceInternationalTransport")
+	protected String descriptionInsuranceInternationalTransport;
+		
+	@Column(name="insuranceUkraineTransport", nullable = false, columnDefinition = "bit default 0")
+	protected boolean insuranceUkraineTransport;
+	
+	@Size(max = 50)
+	@Column(name="descriptionInsuranceUkraineTransport")
+	protected String descriptionInsuranceUkraineTransport;
+	
+	public UseWithProduct(){}
+	
 	public String getUkraineDeliveryDescription() {
 		return ukraineDeliveryDescription;
 	}
@@ -137,52 +194,36 @@ private static final long serialVersionUID = 3031695775597440046L;
 		this.kyivDeliveryDescription = kyivDeliveryDescription;
 	}
 
-	public String getTypeEquipment() {
-		return typeEquipment;
+	public String getTypeProduct() {
+		return typeProduct;
 	}
 
-	public void setTypeEquipment(String typeEquipment) {
-		this.typeEquipment = typeEquipment;
+	public void setTypeProduct(String typeProduct) {
+		this.typeProduct = typeProduct;
 	}
 
-	public String getSoftwareMaker() {
-		return softwareMaker;
+	public String getTypeInk() {
+		return typeInk;
 	}
 
-	public void setSoftwareMaker(String softwareMaker) {
-		this.softwareMaker = softwareMaker;
+	public void setTypeInk(String typeInk) {
+		this.typeInk = typeInk;
 	}
 
-	public String getSoftwareClass() {
-		return softwareClass;
+	public String getAvailability() {
+		return availability;
 	}
 
-	public void setSoftwareClass(String softwareClass) {
-		this.softwareClass = softwareClass;
+	public void setAvailability(String availability) {
+		this.availability = availability;
 	}
 
-	public String getSoftwareVersion() {
-		return softwareVersion;
+	public String getAvailabilitySpecialCase() {
+		return availabilitySpecialCase;
 	}
 
-	public void setSoftwareVersion(String softwareVersion) {
-		this.softwareVersion = softwareVersion;
-	}
-
-	public Date getTimeShares() {
-		return timeShares;
-	}
-
-	public void setTimeShares(Date timeShares) {
-		this.timeShares = timeShares;
-	}
-
-	public String getTimeSharesText() {
-		return timeSharesText;
-	}
-
-	public void setTimeSharesText(String timeSharesText) {
-		this.timeSharesText = timeSharesText;
+	public void setAvailabilitySpecialCase(String availabilitySpecialCase) {
+		this.availabilitySpecialCase = availabilitySpecialCase;
 	}
 
 	public double getOptionInstallation() {
@@ -353,27 +394,183 @@ private static final long serialVersionUID = 3031695775597440046L;
 		this.kyivDeliveryPriceWeight = kyivDeliveryPriceWeight;
 	}
 
+	public double getCyanPaint() {
+		return cyanPaint;
+	}
+
+	public void setCyanPaint(double cyanPaint) {
+		this.cyanPaint = cyanPaint;
+	}
+
+	public double getMagentaPaint() {
+		return magentaPaint;
+	}
+
+	public void setMagentaPaint(double magentaPaint) {
+		this.magentaPaint = magentaPaint;
+	}
+
+	public double getYellowPaint() {
+		return yellowPaint;
+	}
+
+	public void setYellowPaint(double yellowPaint) {
+		this.yellowPaint = yellowPaint;
+	}
+
+	public double getBlackPaint() {
+		return blackPaint;
+	}
+
+	public void setBlackPaint(double blackPaint) {
+		this.blackPaint = blackPaint;
+	}
+
+	public double getLightCyanPaint() {
+		return lightCyanPaint;
+	}
+
+	public void setLightCyanPaint(double lightCyanPaint) {
+		this.lightCyanPaint = lightCyanPaint;
+	}
+
+	public double getLightMagentaPaint() {
+		return lightMagentaPaint;
+	}
+
+	public void setLightMagentaPaint(double lightMagentaPaint) {
+		this.lightMagentaPaint = lightMagentaPaint;
+	}
+
+	public double getSolventPaint() {
+		return solventPaint;
+	}
+
+	public void setSolventPaint(double solventPaint) {
+		this.solventPaint = solventPaint;
+	}
+
+	public double getMatteBlackPaint() {
+		return matteBlackPaint;
+	}
+
+	public void setMatteBlackPaint(double matteBlackPaint) {
+		this.matteBlackPaint = matteBlackPaint;
+	}
+
+	public double getGrayPaint() {
+		return grayPaint;
+	}
+
+	public void setGrayPaint(double grayPaint) {
+		this.grayPaint = grayPaint;
+	}
+
+	public double getOrangePaint() {
+		return orangePaint;
+	}
+
+	public void setOrangePaint(double orangePaint) {
+		this.orangePaint = orangePaint;
+	}
+
+	public double getGreenPaint() {
+		return greenPaint;
+	}
+
+	public void setGreenPaint(double greenPaint) {
+		this.greenPaint = greenPaint;
+	}
+
+	public String getVariant1NamePaint() {
+		return variant1NamePaint;
+	}
+
+	public void setVariant1NamePaint(String variant1NamePaint) {
+		this.variant1NamePaint = variant1NamePaint;
+	}
+
+	public double getVariant1Paint() {
+		return variant1Paint;
+	}
+
+	public void setVariant1Paint(double variant1Paint) {
+		this.variant1Paint = variant1Paint;
+	}
+
+	public String getVariant2NamePaint() {
+		return variant2NamePaint;
+	}
+
+	public void setVariant2NamePaint(String variant2NamePaint) {
+		this.variant2NamePaint = variant2NamePaint;
+	}
+
+	public double getVariant2Paint() {
+		return variant2Paint;
+	}
+
+	public void setVariant2Paint(double variant2Paint) {
+		this.variant2Paint = variant2Paint;
+	}
+
+	public String getVariant3NamePaint() {
+		return variant3NamePaint;
+	}
+
+	public void setVariant3NamePaint(String variant3NamePaint) {
+		this.variant3NamePaint = variant3NamePaint;
+	}
+
+	public double getVariant3Paint() {
+		return variant3Paint;
+	}
+
+	public void setVariant3Paint(double variant3Paint) {
+		this.variant3Paint = variant3Paint;
+	}
+
+	public String getDescriptionInsuranceInternationalTransport() {
+		return descriptionInsuranceInternationalTransport;
+	}
+
+	public void setDescriptionInsuranceInternationalTransport(String descriptionInsuranceInternationalTransport) {
+		this.descriptionInsuranceInternationalTransport = descriptionInsuranceInternationalTransport;
+	}
+
+	public String getDescriptionInsuranceUkraineTransport() {
+		return descriptionInsuranceUkraineTransport;
+	}
+
+	public void setDescriptionInsuranceUkraineTransport(String descriptionInsuranceUkraineTransport) {
+		this.descriptionInsuranceUkraineTransport = descriptionInsuranceUkraineTransport;
+	}
+
+	public boolean isInsuranceInternationalTransport() {
+		return insuranceInternationalTransport;
+	}
+
+	public void setInsuranceInternationalTransport(boolean insuranceInternationalTransport) {
+		this.insuranceInternationalTransport = insuranceInternationalTransport;
+	}
+
+	public boolean isInsuranceUkraineTransport() {
+		return insuranceUkraineTransport;
+	}
+
+	public void setInsuranceUkraineTransport(boolean insuranceUkraineTransport) {
+		this.insuranceUkraineTransport = insuranceUkraineTransport;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((description == null) ? 0 : description.hashCode());
-		result = prime * result + ((descriptionEng == null) ? 0 : descriptionEng.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((partNumber == null) ? 0 : partNumber.hashCode());
 		long temp;
 		temp = Double.doubleToLongBits(prise);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + ((serviceInformation == null) ? 0 : serviceInformation.hashCode());
-		result = prime * result + (showOnHomePage ? 1231 : 1237);
-		result = prime * result + (showOnLeftSide ? 1231 : 1237);
-		result = prime * result + (showOnSite ? 1231 : 1237);
-		result = prime * result + ((softwareClass == null) ? 0 : softwareClass.hashCode());
-		result = prime * result + ((softwareMaker == null) ? 0 : softwareMaker.hashCode());
-		result = prime * result + ((softwareVersion == null) ? 0 : softwareVersion.hashCode());
-		result = prime * result + ((timeShares == null) ? 0 : timeShares.hashCode());
-		result = prime * result + ((typeEquipment == null) ? 0 : typeEquipment.hashCode());
 		return result;
 	}
 
@@ -385,17 +582,7 @@ private static final long serialVersionUID = 3031695775597440046L;
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Rip other = (Rip) obj;
-		if (description == null) {
-			if (other.description != null)
-				return false;
-		} else if (!description.equals(other.description))
-			return false;
-		if (descriptionEng == null) {
-			if (other.descriptionEng != null)
-				return false;
-		} else if (!descriptionEng.equals(other.descriptionEng))
-			return false;
+		UseWithProduct other = (UseWithProduct) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -406,61 +593,9 @@ private static final long serialVersionUID = 3031695775597440046L;
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
-		if (partNumber == null) {
-			if (other.partNumber != null)
-				return false;
-		} else if (!partNumber.equals(other.partNumber))
-			return false;
 		if (Double.doubleToLongBits(prise) != Double.doubleToLongBits(other.prise))
 			return false;
-		if (serviceInformation == null) {
-			if (other.serviceInformation != null)
-				return false;
-		} else if (!serviceInformation.equals(other.serviceInformation))
-			return false;
-		if (showOnHomePage != other.showOnHomePage)
-			return false;
-		if (showOnLeftSide != other.showOnLeftSide)
-			return false;
-		if (showOnSite != other.showOnSite)
-			return false;
-		if (softwareClass == null) {
-			if (other.softwareClass != null)
-				return false;
-		} else if (!softwareClass.equals(other.softwareClass))
-			return false;
-		if (softwareMaker == null) {
-			if (other.softwareMaker != null)
-				return false;
-		} else if (!softwareMaker.equals(other.softwareMaker))
-			return false;
-		if (softwareVersion == null) {
-			if (other.softwareVersion != null)
-				return false;
-		} else if (!softwareVersion.equals(other.softwareVersion))
-			return false;
-		if (timeShares == null) {
-			if (other.timeShares != null)
-				return false;
-		} else if (!timeShares.equals(other.timeShares))
-			return false;
-		if (typeEquipment == null) {
-			if (other.typeEquipment != null)
-				return false;
-		} else if (!typeEquipment.equals(other.typeEquipment))
-			return false;
 		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "Rip [id=" + id + ", partNumber=" + partNumber + ", name=" + name + ", prise=" + prise
-				+ ", typeEquipment=" + typeEquipment + ", softwareMaker=" + softwareMaker + ", softwareClass="
-				+ softwareClass + ", softwareVersion=" + softwareVersion
-				+ ", leftSharesLink=" + ", timeShares=" + timeShares + ", description=" + description
-				+ ", descriptionEng=" + descriptionEng + ", showOnSite=" + showOnSite + ", showOnHomePage="
-				+ showOnHomePage + ", showOnLeftSide=" + showOnLeftSide + ", serviceInformation=" + serviceInformation
-				+ "]";
 	}
 	
 }

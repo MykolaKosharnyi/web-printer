@@ -15,8 +15,8 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import com.printmaster.nk.dao.ProductDAO;
-import com.printmaster.nk.model.DigitalPrinter;
-import com.printmaster.nk.model.SearchDigitalPrinters;
+import com.printmaster.nk.model.entity.DigitalPrinter;
+import com.printmaster.nk.model.entity.search.SearchDigitalPrinters;
 
 public class DigitalPrinterDAOImpl implements ProductDAO<DigitalPrinter, SearchDigitalPrinters> {
 	private Logger logger = Logger.getLogger(DigitalPrinterDAOImpl.class);

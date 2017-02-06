@@ -16,8 +16,8 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.printmaster.nk.dao.ProductDAO;
-import com.printmaster.nk.model.Scanner;
-import com.printmaster.nk.model.SearchScanners;
+import com.printmaster.nk.model.entity.Scanner;
+import com.printmaster.nk.model.entity.search.SearchScanners;
 
 @Repository
 public class ScannerDAOImpl implements ProductDAO<Scanner, SearchScanners>{

@@ -13,14 +13,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.printmaster.nk.beans.ComponentsForControllers;
-import com.printmaster.nk.model.Cutter;
-import com.printmaster.nk.model.DigitalPrinter;
-import com.printmaster.nk.model.Laminator;
-import com.printmaster.nk.model.Laser;
-import com.printmaster.nk.model.Printer;
-import com.printmaster.nk.model.Printer3D;
-import com.printmaster.nk.model.Scanner;
-import com.printmaster.nk.model.SearchPUE;
+import com.printmaster.nk.model.entity.Cutter;
+import com.printmaster.nk.model.entity.DigitalPrinter;
+import com.printmaster.nk.model.entity.Laminator;
+import com.printmaster.nk.model.entity.Laser;
+import com.printmaster.nk.model.entity.Printer;
+import com.printmaster.nk.model.entity.Printer3D;
+import com.printmaster.nk.model.entity.Scanner;
+import com.printmaster.nk.model.entity.search.SearchPUE;
 
 @Repository
 public class PreviousUsedEqvipmentDAOImpl {

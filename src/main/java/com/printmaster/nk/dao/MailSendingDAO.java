@@ -2,7 +2,7 @@ package com.printmaster.nk.dao;
 
 import java.util.List;
 
-import com.printmaster.nk.model.MailSendingMessage;
+import com.printmaster.nk.model.entity.MailSendingMessage;
 
 public interface MailSendingDAO {
 	long save(MailSendingMessage mailMessage);

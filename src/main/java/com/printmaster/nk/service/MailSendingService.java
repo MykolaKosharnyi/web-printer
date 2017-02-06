@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.printmaster.nk.dao.MailSendingDAO;
-import com.printmaster.nk.model.MailSendingMessage;
+import com.printmaster.nk.model.entity.MailSendingMessage;
 
 public class MailSendingService {
 	private MailSendingDAO mailSendingDAO;

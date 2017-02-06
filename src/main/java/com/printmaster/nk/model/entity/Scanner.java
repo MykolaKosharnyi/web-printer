@@ -1,4 +1,4 @@
-package com.printmaster.nk.model;
+package com.printmaster.nk.model.entity;
 
 import java.util.Arrays;
 

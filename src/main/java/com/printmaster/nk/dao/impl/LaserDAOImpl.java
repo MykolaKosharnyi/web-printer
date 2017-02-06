@@ -16,8 +16,8 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.printmaster.nk.dao.ProductDAO;
-import com.printmaster.nk.model.Laser;
-import com.printmaster.nk.model.SearchLasers;
+import com.printmaster.nk.model.entity.Laser;
+import com.printmaster.nk.model.entity.search.SearchLasers;
 
 @Repository
 public class LaserDAOImpl implements ProductDAO<Laser, SearchLasers>{

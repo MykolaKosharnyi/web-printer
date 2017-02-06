@@ -5,8 +5,8 @@ import java.util.Set;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.printmaster.nk.dao.ProductDAO;
-import com.printmaster.nk.model.Cutter;
-import com.printmaster.nk.model.SearchCutters;
+import com.printmaster.nk.model.entity.Cutter;
+import com.printmaster.nk.model.entity.search.SearchCutters;
 import com.printmaster.nk.service.CutterService;
 
 public class CutterServiceImpl implements CutterService {

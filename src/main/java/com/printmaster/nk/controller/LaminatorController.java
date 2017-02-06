@@ -27,8 +27,8 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.printmaster.nk.beans.ComponentsForControllers;
 import com.printmaster.nk.beans.LinksForProducts;
 import com.printmaster.nk.beans.PicturesContainer;
-import com.printmaster.nk.model.Laminator;
-import com.printmaster.nk.model.SearchLaminators;
+import com.printmaster.nk.model.entity.Laminator;
+import com.printmaster.nk.model.entity.search.SearchLaminators;
 import com.printmaster.nk.service.LaminatorService;
 import com.printmaster.nk.service.UseWithProductService;
 

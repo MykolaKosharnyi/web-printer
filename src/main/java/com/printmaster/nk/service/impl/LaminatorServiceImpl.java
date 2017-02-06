@@ -5,8 +5,8 @@ import java.util.Set;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.printmaster.nk.dao.ProductDAO;
-import com.printmaster.nk.model.Laminator;
-import com.printmaster.nk.model.SearchLaminators;
+import com.printmaster.nk.model.entity.Laminator;
+import com.printmaster.nk.model.entity.search.SearchLaminators;
 import com.printmaster.nk.service.LaminatorService;
 
 public class LaminatorServiceImpl implements LaminatorService {

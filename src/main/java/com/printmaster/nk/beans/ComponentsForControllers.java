@@ -18,17 +18,17 @@ import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.printmaster.nk.model.Cutter;
-import com.printmaster.nk.model.DigitalPrinter;
-import com.printmaster.nk.model.Laminator;
-import com.printmaster.nk.model.Laser;
-import com.printmaster.nk.model.Printer;
-import com.printmaster.nk.model.Printer3D;
-import com.printmaster.nk.model.Product;
-import com.printmaster.nk.model.HeadProduct;
-import com.printmaster.nk.model.Rip;
-import com.printmaster.nk.model.Scanner;
-import com.printmaster.nk.model.UseWithProduct;
+import com.printmaster.nk.model.entity.Cutter;
+import com.printmaster.nk.model.entity.DigitalPrinter;
+import com.printmaster.nk.model.entity.HeadProduct;
+import com.printmaster.nk.model.entity.Laminator;
+import com.printmaster.nk.model.entity.Laser;
+import com.printmaster.nk.model.entity.Printer;
+import com.printmaster.nk.model.entity.Printer3D;
+import com.printmaster.nk.model.entity.Product;
+import com.printmaster.nk.model.entity.Rip;
+import com.printmaster.nk.model.entity.Scanner;
+import com.printmaster.nk.model.entity.UseWithProduct;
 
 @Component
 public class ComponentsForControllers {

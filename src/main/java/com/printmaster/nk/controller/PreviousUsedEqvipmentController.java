@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.printmaster.nk.model.SearchPUE;
+import com.printmaster.nk.model.entity.search.SearchPUE;
 import com.printmaster.nk.service.PreviousUsedEqvipmentService;
 
 @Controller

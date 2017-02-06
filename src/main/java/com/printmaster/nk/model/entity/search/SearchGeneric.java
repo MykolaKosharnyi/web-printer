@@ -1,4 +1,4 @@
-package com.printmaster.nk.model;
+package com.printmaster.nk.model.entity.search;
 
 public abstract class SearchGeneric {
 	

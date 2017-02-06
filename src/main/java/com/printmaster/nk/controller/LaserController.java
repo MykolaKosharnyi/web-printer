@@ -27,8 +27,8 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.printmaster.nk.beans.ComponentsForControllers;
 import com.printmaster.nk.beans.LinksForProducts;
 import com.printmaster.nk.beans.PicturesContainer;
-import com.printmaster.nk.model.Laser;
-import com.printmaster.nk.model.SearchLasers;
+import com.printmaster.nk.model.entity.Laser;
+import com.printmaster.nk.model.entity.search.SearchLasers;
 import com.printmaster.nk.service.LaserService;
 import com.printmaster.nk.service.UseWithProductService;
 

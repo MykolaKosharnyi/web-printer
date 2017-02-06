@@ -11,7 +11,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.printmaster.nk.dao.UserDAO;
-import com.printmaster.nk.model.User;
+import com.printmaster.nk.model.entity.User;
 
 @Repository
 public class UserDAOImpl implements UserDAO{

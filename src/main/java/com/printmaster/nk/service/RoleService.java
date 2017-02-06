@@ -2,7 +2,7 @@ package com.printmaster.nk.service;
 
 import java.util.List;
 
-import com.printmaster.nk.model.Role;
+import com.printmaster.nk.model.entity.Role;
 
 public interface RoleService {
 	public long save(Role role);

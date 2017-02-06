@@ -27,9 +27,9 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.printmaster.nk.beans.ComponentsForControllers;
 import com.printmaster.nk.beans.LinksForProducts;
 import com.printmaster.nk.beans.PicturesContainer;
-import com.printmaster.nk.model.Printer;
-import com.printmaster.nk.model.SearchPrinters;
-import com.printmaster.nk.model.UseWithProduct;
+import com.printmaster.nk.model.entity.Printer;
+import com.printmaster.nk.model.entity.UseWithProduct;
+import com.printmaster.nk.model.entity.search.SearchPrinters;
 import com.printmaster.nk.service.PrinterService;
 import com.printmaster.nk.service.UseWithProductService;
 

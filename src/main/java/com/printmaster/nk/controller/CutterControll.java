@@ -12,8 +12,8 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
-import com.printmaster.nk.model.Cutter;
-import com.printmaster.nk.model.SearchCutters;
+import com.printmaster.nk.model.entity.Cutter;
+import com.printmaster.nk.model.entity.search.SearchCutters;
 import com.printmaster.nk.service.ProductService;
 
 public class CutterControll extends ProductController<Cutter, SearchCutters> {
