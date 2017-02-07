@@ -138,17 +138,10 @@
 						<input type="color" name="rightSharesLinkColorFone" value="${product.rightSharesLinkColorFone}"/>
 					</div>
 				</div>
-				<div class="characteristic">
-					<div class="block_title">
-						<i></i>
-						<p>Таймер на акции, в формате "дд.мм.гггг"</p>
-						<form:errors path="timeShares" cssClass="error"></form:errors>
-					</div>
-					<div class="check_boxes">
-						<input type="text" class= "date" name = "timeShares" 
-						value = "<fmt:formatDate value="${product.timeShares}" pattern="dd.MM.yyyy" />"/>
-					</div>
-				</div>
+				
+				<!-- import time shares action -->
+				<jsp:include page="product/time_shares.jsp" />
+				
 				<div class="characteristic">
 					<div class="block_title">
 						<i></i>
