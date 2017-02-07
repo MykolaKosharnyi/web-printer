@@ -14,10 +14,10 @@ import com.printmaster.nk.service.UserAddByAdminService;
 public class UserAddByAdminServiceImpl implements UserAddByAdminService {
 
     private UserAddByAdminDAO userAddByAdminDAO;
-    
-    public void setUserDAO(UserAddByAdminDAO userAddByAdminDAO) {
-        this.userAddByAdminDAO = userAddByAdminDAO;
-    }
+
+	public void setUserAddByAdminDAO(UserAddByAdminDAO userAddByAdminDAO) {
+		this.userAddByAdminDAO = userAddByAdminDAO;
+	}
 
 	@Override
 	@Transactional

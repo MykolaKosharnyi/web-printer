@@ -23,9 +23,10 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.printmaster.nk.beans.ComponentsForControllers;
-import com.printmaster.nk.model.Laminator;
-import com.printmaster.nk.model.User;
+import com.printmaster.nk.model.entity.User;
+import com.printmaster.nk.model.entity.UserAddByAdmin;
 import com.printmaster.nk.service.SecurityService;
+import com.printmaster.nk.service.UserAddByAdminService;
 import com.printmaster.nk.service.UserService;
 import com.printmaster.nk.validator.UserValidator;
 
@@ -39,6 +40,9 @@ public class UserController {
 
 	@Autowired
     private UserService userService;
+	
+	@Autowired
+	private UserAddByAdminService userAddByAdminService;
 
     @Autowired
     private SecurityService securityService;
@@ -164,6 +168,7 @@ public class UserController {
 	@RequestMapping(value = "/"+ PATH_ADMIN +"/"+ TYPE +"s", method = RequestMethod.GET)
 	public String getAllUsersOnAdmin(Model model) {
 		model.addAttribute("userList", userService.listUsers());
+		model.addAttribute("user_add_by_admin_List", userAddByAdminService.listUsers());	
 	    return PATH_ADMIN + "/"+ TYPE + "s";
 	}
 	
@@ -179,40 +184,63 @@ public class UserController {
         return "redirect:/"+ PATH_ADMIN + "/" + TYPE + "s";
     }
 	
+	@RequestMapping("/"+ PATH_ADMIN +"/user_add_by_admin/"+ PATH_REMOVE +"/{id}")
+    public String removeUserAddByAdmin(@PathVariable("id") long id){
+		userAddByAdminService.removeUser(id);   		
+        return "redirect:/"+ PATH_ADMIN + "/" + TYPE + "s";
+    }
+	
+	/**
+	 * For editing registered Use and added by Admin
+	 */
+//	@RequestMapping(value = "/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_EDIT+"/{id}", method = RequestMethod.GET)
+//	public String editUser(Model model,@PathVariable("id") long id) {
+//		model.addAttribute("user", userService.getUserById(id));
+//	    return PATH_ADMIN + "/"+ TYPE;
+//	}
+	
+	@RequestMapping(value = "/"+ PATH_ADMIN +"/user_add_by_admin/"+ PATH_EDIT+"/{id}", method = RequestMethod.GET)
+	public String editUserAddByAdmin(Model model,@PathVariable("id") long id) {
+		model.addAttribute("user", userAddByAdminService.getUserById(id));
+		model.addAttribute("listSubscription", listSubscription);
+	    return PATH_ADMIN + "/"+ TYPE;
+	}
+	
 	/**
 	 * for displaying new add user page
 	 */
 	@RequestMapping(value = "/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_NEW, method = RequestMethod.GET)
-	public String createNewUser(Model model) {
-		model.addAttribute("user", new User());
+	public String goToPageNewUser(Model model) {
+		model.addAttribute("user", new UserAddByAdmin());
+		model.addAttribute("listSubscription", listSubscription);
 	    return PATH_ADMIN + "/"+ TYPE;
 	}
 	
 	@RequestMapping(value = "/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_CREATE, method = RequestMethod.POST) 
-	public String handleFormUpload(@ModelAttribute(MODEL_ATTRIBUTE_PRODUCT) @Valid User product,
+	public String saveUserAddByAdmin(@ModelAttribute("user") @Valid UserAddByAdmin product,
 			BindingResult result, Model model){
 
-//		if (result.hasErrors()){
-//			return adminFormHasError(product, model);
-//		}
-//
-//		long id = productService.addProduct(product);
-//		logger.info(String.format("Create new %s! With id=%d", TYPE, id));
-//
-//		// create folder and add to her new pictures
-//		product.getPathPictures()
-//				.addAll(componets.createFolderAndWriteToItPictures(DIRECTORY, CONCRETE_FOLDER, id, files));
-//
-//		this.productService.updateProduct(product);
-//
-//		files.clear();
-//
-//		linksForProduct.createLinks(productService.listShowOnSite());
-//
-//		if (product.isShowOnSite() && product.isShowOnLeftSide())
-//			componets.updateInLeftField(product, true, TYPE);
+		if (result.hasErrors()){
+			model.addAttribute("user", product);
+			model.addAttribute("listSubscription", listSubscription);
+		    return PATH_ADMIN + "/"+ TYPE;
+		}
+		
+		userAddByAdminService.save(product);
+		return "redirect:/" + PATH_ADMIN + "/"+ TYPE +"s";
+	}
+	
+	@RequestMapping(value = "/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_UPDATE, method = RequestMethod.POST) 
+	public String changeUserAddByAdmin(@ModelAttribute("user") @Valid UserAddByAdmin product,
+			BindingResult result, Model model){
 
-		logger.info("Update links to the products in left menu!");
+		if (result.hasErrors()){
+			model.addAttribute("user", product);
+			model.addAttribute("listSubscription", listSubscription);
+		    return PATH_ADMIN + "/"+ TYPE;
+		}
+		
+		userAddByAdminService.updateUser(product);
 		return "redirect:/" + PATH_ADMIN + "/"+ TYPE +"s";
 	}
     

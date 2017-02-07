@@ -22,20 +22,20 @@
         <beans:property name="dataSource" ref="dataSource" />
         <beans:property name="annotatedClasses">
             <beans:list>
-                <beans:value>com.printmaster.nk.model.Printer</beans:value>
-                <beans:value>com.printmaster.nk.model.Printer3D</beans:value>
-                <beans:value>com.printmaster.nk.model.DigitalPrinter</beans:value>
-                <beans:value>com.printmaster.nk.model.Laser</beans:value>
-                <beans:value>com.printmaster.nk.model.Cutter</beans:value>
-                <beans:value>com.printmaster.nk.model.Laminator</beans:value>
-                <beans:value>com.printmaster.nk.model.Scanner</beans:value>
-                <beans:value>com.printmaster.nk.model.Rip</beans:value>
-                <beans:value>com.printmaster.nk.model.UseWithProduct</beans:value>
-				<beans:value>com.printmaster.nk.model.User</beans:value>
-				<beans:value>com.printmaster.nk.model.UserAddByAdmin</beans:value>
-                <beans:value>com.printmaster.nk.model.Role</beans:value>
-                <beans:value>com.printmaster.nk.model.Comment</beans:value>
-                <beans:value>com.printmaster.nk.model.MailSendingMessage</beans:value>               
+                <beans:value>com.printmaster.nk.model.entity.Printer</beans:value>
+                <beans:value>com.printmaster.nk.model.entity.Printer3D</beans:value>
+                <beans:value>com.printmaster.nk.model.entity.DigitalPrinter</beans:value>
+                <beans:value>com.printmaster.nk.model.entity.Laser</beans:value>
+                <beans:value>com.printmaster.nk.model.entity.Cutter</beans:value>
+                <beans:value>com.printmaster.nk.model.entity.Laminator</beans:value>
+                <beans:value>com.printmaster.nk.model.entity.Scanner</beans:value>
+                <beans:value>com.printmaster.nk.model.entity.Rip</beans:value>
+                <beans:value>com.printmaster.nk.model.entity.UseWithProduct</beans:value>
+				<beans:value>com.printmaster.nk.model.entity.User</beans:value>
+				<beans:value>com.printmaster.nk.model.entity.UserAddByAdmin</beans:value>
+                <beans:value>com.printmaster.nk.model.entity.Role</beans:value>
+                <beans:value>com.printmaster.nk.model.entity.Comment</beans:value>
+                <beans:value>com.printmaster.nk.model.entity.MailSendingMessage</beans:value>               
                 
             </beans:list>
         </beans:property>

@@ -14,9 +14,9 @@ import com.printmaster.nk.dao.UserAddByAdminDAO;
 import com.printmaster.nk.model.entity.UserAddByAdmin;
 
 @Repository
-public class UserAddByAdminImpl implements UserAddByAdminDAO{
+public class UserAddByAdminDAOImpl implements UserAddByAdminDAO{
 
-	private Logger logger = Logger.getLogger(UserAddByAdminImpl.class);
+	private Logger logger = Logger.getLogger(UserAddByAdminDAOImpl.class);
 
 	private SessionFactory sessionFactory;
 

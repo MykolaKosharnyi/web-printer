@@ -9,7 +9,7 @@
 <div id="product">
 	<a href="<c:url value='/admin/user/new' />">Добавить нового пользователя в базу данных</a>
 	<br>
-	<h3>Список пользователей</h3>
+	<h3>Список зарегистрированных пользователей</h3>
 
 		<table class="tg">
 			<tr>
@@ -74,6 +74,45 @@
 				</tr>
 			</c:forEach>
 		</table>
+		
+		
+		<h3>Список добавленных пользователей</h3>
+
+		<table class="tg">
+			<tr>
+				<th>ID</th>
+				<th>Имя</th>
+				<th>Фамилия</th>
+				<th>Телефон</th>
+				<th>Почта</th>
+				<th>Дата регистрации</th>
+				<th>Удалить</th>
+			</tr>
+			
+			<c:forEach items="${user_add_by_admin_List}" var="user">
+				<tr id="${user.id}" class="output_pruduct">
+					<td width="40px">${user.id}</td>
+					<td width="120px">
+						<a href="<c:url value='/admin/user_add_by_admin/edit/${user.id}' />">${user.firstName}</a>
+					</td>
+					<td width="120px">
+						<a href="<c:url value='/admin/user_add_by_admin/edit/${user.id}' />">${user.lastname}</a>
+					</td>
+					<td width="120px">${user.telephone}</td>
+					<td width="120px">${user.email}</td>
+					
+					<td width="120px">
+						<fmt:formatDate type="date" dateStyle="long" timeStyle="short" value="${user.timeRegistration}" />
+					</td>
+	           			           		
+					<td width="60px">						
+						<a href="<c:url value='/admin/user_add_by_admin/remove/${user.id}' />"><i class="fa fa-trash-o remove" aria-hidden="true"></i></a>
+					</td>
+					
+				</tr>
+			</c:forEach>
+		</table>
+		
 </div>
 
 <script type="text/javascript">
