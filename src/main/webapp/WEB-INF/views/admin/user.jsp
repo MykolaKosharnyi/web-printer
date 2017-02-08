@@ -11,7 +11,6 @@
     <meta name="_csrf_header" content="${_csrf.headerName}"/>
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="stylesheet" href="/css/admin/add_change_printer.css">
 	<script src="<%=request.getContextPath()%>/resources/js/admin/add_change_printer.js"></script>
 
 
@@ -19,10 +18,6 @@
 	<script src="/css/admin/datepicker/bootstrap-datetimepicker.min.js"></script>
 
 <style type="text/css">
-.bootstrap-datetimepicker-widget ul{
-	padding: 0px;
-}
-
 ul.list_without_dots input{
 	margin-right: 5px;
 }
@@ -53,7 +48,9 @@ ul.list_without_dots input{
 		<form:form class="form-horizontal" style="padding: 10px 0px;" commandName="user" action="${addAction}" method="post">
 		
 			<c:if test="${!empty user.id}">
-				<input type="hidden" name="id" value="${user.id}">	
+				<input type="hidden" name="id" value="${user.id}">
+				<input type="hidden" name="timeRegistration" 
+					value="<fmt:formatDate value="${user.timeRegistration}" pattern="dd/MM/yyyy hh:mm:ss" />">	
 			</c:if>
 		
 		  <div class="form-group">
@@ -66,6 +63,18 @@ ul.list_without_dots input{
 			<label for="lastname" class="col-sm-2 control-label">Фамилия:</label>
 			<div class="col-sm-10">
 			  <form:input path="lastname" class="form-control" value="${user.lastname}"/>
+			</div>
+		  </div>
+		  <div class="form-group">
+			<label for="county" class="col-sm-2 control-label">Страна:</label>
+			<div class="col-sm-10">
+			  <form:input path="county" class="form-control" value="${user.county}"/>
+			</div>
+		  </div>
+		  <div class="form-group">
+			<label for="city" class="col-sm-2 control-label">Город:</label>
+			<div class="col-sm-10">
+			  <form:input path="city" class="form-control" value="${user.city}"/>
 			</div>
 		  </div>
 		  <div class="form-group">
@@ -90,12 +99,20 @@ ul.list_without_dots input{
 			<label for="date_sending" class="col-sm-2 control-label">День рождения:</label>
 			<div class="col-sm-10">
 				<div id="datetimepicker" class="input-group input-append date" style="height: 25px;">
-					<input data-format="dd/MM/yyyy hh:mm:ss" name="dateOfBirthDay" value="${user.dateOfBirthDay}"
-					 class="form-control" type="datetime"></input>
+					<input data-format="dd/MM/yyyy hh:mm:ss" name="dateOfBirthDay" value="<fmt:formatDate value="${user.dateOfBirthDay}" pattern="dd/MM/yyyy hh:mm:ss" />"
+					 class="form-control" type="text"></input>
 					<span class="add-on input-group-addon">
 					  <span class="glyphicon glyphicon-calendar"></span>
 					</span>
 				</div>
+			</div>
+		  </div>
+		  <div class="form-group">
+			<label class="col-sm-2 control-label">Сфера деятельности:</label>
+			<div class="col-sm-10">
+				<ul class="list_without_dots" style="list-style-type: none; padding: 0px;">
+					<form:checkboxes items="${listScopeOfActivities}" path="scopeOfActivities" element="li"/>
+				</ul>
 			</div>
 		  </div>
 		  <div class="form-group">

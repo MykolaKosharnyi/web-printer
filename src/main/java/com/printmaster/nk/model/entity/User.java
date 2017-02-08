@@ -1,7 +1,9 @@
 package com.printmaster.nk.model.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -24,6 +26,12 @@ public class User implements Serializable{
 	
 	@Column(name="lastname")
 	private String lastname;
+	
+	@Column(name="county")
+	private String county;
+	
+	@Column(name="city")
+	private String city;
 	
 	@Column(name="password")
 	private String password;
@@ -67,6 +75,10 @@ public class User implements Serializable{
 	
 	@Column(name="subscription")
 	private String[] subscription;
+	
+	@ElementCollection(fetch = FetchType.EAGER)
+	@Column(name="scopeOfActivities")
+	private List<String> scopeOfActivities = new ArrayList<String>();
 	
 	public User(){}
 
@@ -195,6 +207,34 @@ public class User implements Serializable{
 		return "User [id=" + id + ", firstName=" + firstName + ", lastname=" + lastname + ", telephone=" + telephone
 				+ ", company=" + company + ", email=" + email + ", dateOfBirthDay=" + dateOfBirthDay
 				+ ", timeRegistration=" + timeRegistration + "]";
+	}
+
+	public String getCounty() {
+		return county;
+	}
+
+	public void setCounty(String county) {
+		this.county = county;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public List<String> getScopeOfActivities() {
+		return scopeOfActivities;
+	}
+
+	public void setScopeOfActivities(List<String> scopeOfActivities) {
+		this.scopeOfActivities = scopeOfActivities;
 	}
 
 }

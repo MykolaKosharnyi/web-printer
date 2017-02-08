@@ -75,4 +75,14 @@ interface ConstUsedInContr {
 			add("сопутствующие товары");
 		}
 	};
+	
+	List<String> listScopeOfActivities = new ArrayList<String>(){
+		private static final long serialVersionUID = 1L;
+		{
+			add("цифровая печать");
+			add("широкоформатный печать");
+			add("наружная реклама");
+			add("САПР/ГИС");
+		}
+	};
 }

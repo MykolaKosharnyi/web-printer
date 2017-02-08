@@ -13,15 +13,15 @@
 
 		<table class="tg">
 			<tr>
-				<th>ID</th>
-				<th>Логин</th>
-				<th>Изображение</th>
-				<th>Имя</th>
-				<th>Фамилия</th>
-				<th>Телефон</th>
-				<th>Почта</th>
-				<th>Дата регистрации</th>
-				<th>Удалить</th>
+				<th class="text-center">ID</th>
+				<th class="text-center">Логин</th>
+				<th class="text-center">Изображение</th>
+				<th class="text-center">Имя</th>
+				<th class="text-center">Фамилия</th>
+				<th class="text-center">Телефон</th>
+				<th class="text-center">Почта</th>
+				<th class="text-center">Дата регистрации</th>
+				<th class="text-center">Удалить</th>
 			</tr>
 			
 			<!-- fixed header 
@@ -80,13 +80,13 @@
 
 		<table class="tg">
 			<tr>
-				<th>ID</th>
-				<th>Имя</th>
-				<th>Фамилия</th>
-				<th>Телефон</th>
-				<th>Почта</th>
-				<th>Дата регистрации</th>
-				<th>Удалить</th>
+				<th class="text-center">ID</th>
+				<th class="text-center">Имя</th>
+				<th class="text-center">Фамилия</th>
+				<th class="text-center">Телефон</th>
+				<th class="text-center">Почта</th>
+				<th class="text-center">Дата регистрации</th>
+				<th class="text-center">Удалить</th>
 			</tr>
 			
 			<c:forEach items="${user_add_by_admin_List}" var="user">

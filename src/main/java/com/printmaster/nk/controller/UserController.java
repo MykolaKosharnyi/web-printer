@@ -203,6 +203,7 @@ public class UserController {
 	public String editUserAddByAdmin(Model model,@PathVariable("id") long id) {
 		model.addAttribute("user", userAddByAdminService.getUserById(id));
 		model.addAttribute("listSubscription", listSubscription);
+		model.addAttribute("listScopeOfActivities", listScopeOfActivities);
 	    return PATH_ADMIN + "/"+ TYPE;
 	}
 	
@@ -213,6 +214,7 @@ public class UserController {
 	public String goToPageNewUser(Model model) {
 		model.addAttribute("user", new UserAddByAdmin());
 		model.addAttribute("listSubscription", listSubscription);
+		model.addAttribute("listScopeOfActivities", listScopeOfActivities);
 	    return PATH_ADMIN + "/"+ TYPE;
 	}
 	
@@ -223,6 +225,7 @@ public class UserController {
 		if (result.hasErrors()){
 			model.addAttribute("user", product);
 			model.addAttribute("listSubscription", listSubscription);
+			model.addAttribute("listScopeOfActivities", listScopeOfActivities);
 		    return PATH_ADMIN + "/"+ TYPE;
 		}
 		
@@ -237,6 +240,7 @@ public class UserController {
 		if (result.hasErrors()){
 			model.addAttribute("user", product);
 			model.addAttribute("listSubscription", listSubscription);
+			model.addAttribute("listScopeOfActivities", listScopeOfActivities);
 		    return PATH_ADMIN + "/"+ TYPE;
 		}
 		

@@ -1,10 +1,14 @@
 package com.printmaster.nk.model.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,6 +32,12 @@ public class UserAddByAdmin implements Serializable{
 	@Column(name="lastname")
 	private String lastname;
 	
+	@Column(name="county")
+	private String county;
+	
+	@Column(name="city")
+	private String city;
+	
 	@Column(nullable = false, columnDefinition = "bit default 1")
 	private boolean enabled;
 	
@@ -47,8 +57,13 @@ public class UserAddByAdmin implements Serializable{
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date timeRegistration = new Date();
 	
+	@ElementCollection(fetch = FetchType.EAGER)
 	@Column(name="subscription")
-	private String[] subscription;
+	private List<String> subscription = new ArrayList<String>();
+	
+	@ElementCollection(fetch = FetchType.EAGER)
+	@Column(name="scopeOfActivities")
+	private List<String> scopeOfActivities = new ArrayList<String>();
 	
 	public UserAddByAdmin(){}
 
@@ -124,16 +139,40 @@ public class UserAddByAdmin implements Serializable{
 		this.timeRegistration = timeRegistration;
 	}
 
-	public String[] getSubscription() {
+	public List<String> getSubscription() {
 		return subscription;
 	}
 
-	public void setSubscription(String[] subscription) {
+	public void setSubscription(List<String> subscription) {
 		this.subscription = subscription;
 	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public String getCounty() {
+		return county;
+	}
+
+	public void setCounty(String county) {
+		this.county = county;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public List<String> getScopeOfActivities() {
+		return scopeOfActivities;
+	}
+
+	public void setScopeOfActivities(List<String> scopeOfActivities) {
+		this.scopeOfActivities = scopeOfActivities;
 	}
 	
 }
