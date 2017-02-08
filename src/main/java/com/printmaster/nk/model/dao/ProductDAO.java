@@ -1,4 +1,4 @@
-package com.printmaster.nk.dao;
+package com.printmaster.nk.model.dao;
 
 import java.util.Set;
 

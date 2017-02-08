@@ -5,7 +5,7 @@ import java.util.Set;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.printmaster.nk.dao.ProductDAO;
+import com.printmaster.nk.model.dao.ProductDAO;
 import com.printmaster.nk.model.entity.Printer3D;
 import com.printmaster.nk.model.entity.search.SearchPrinters3D;
 import com.printmaster.nk.service.Printer3DService;

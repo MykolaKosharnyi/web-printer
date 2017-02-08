@@ -1,4 +1,4 @@
-package com.printmaster.nk.dao.impl;
+package com.printmaster.nk.model.dao.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +8,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-import com.printmaster.nk.dao.MailSendingDAO;
+import com.printmaster.nk.model.dao.MailSendingDAO;
 import com.printmaster.nk.model.entity.MailSendingMessage;
 
 public class MailSendingDAOImpl implements MailSendingDAO {

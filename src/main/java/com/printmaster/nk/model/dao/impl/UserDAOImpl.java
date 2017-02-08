@@ -1,4 +1,4 @@
-package com.printmaster.nk.dao.impl;
+package com.printmaster.nk.model.dao.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
-import com.printmaster.nk.dao.UserDAO;
+import com.printmaster.nk.model.dao.UserDAO;
 import com.printmaster.nk.model.entity.User;
 
 @Repository

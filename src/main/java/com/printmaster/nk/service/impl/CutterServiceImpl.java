@@ -4,7 +4,7 @@ import java.util.Set;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import com.printmaster.nk.dao.ProductDAO;
+import com.printmaster.nk.model.dao.ProductDAO;
 import com.printmaster.nk.model.entity.Cutter;
 import com.printmaster.nk.model.entity.search.SearchCutters;
 import com.printmaster.nk.service.CutterService;

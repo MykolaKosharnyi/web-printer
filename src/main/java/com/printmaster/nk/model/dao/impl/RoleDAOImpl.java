@@ -1,4 +1,4 @@
-package com.printmaster.nk.dao.impl;
+package com.printmaster.nk.model.dao.impl;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-import com.printmaster.nk.dao.RoleDAO;
+import com.printmaster.nk.model.dao.RoleDAO;
 import com.printmaster.nk.model.entity.Role;
 
 public class RoleDAOImpl implements RoleDAO{

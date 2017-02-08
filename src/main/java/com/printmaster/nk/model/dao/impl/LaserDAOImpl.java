@@ -1,4 +1,4 @@
-package com.printmaster.nk.dao.impl;
+package com.printmaster.nk.model.dao.impl;
 
 import java.util.HashSet;
 import java.util.Iterator;
@@ -15,7 +15,7 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
-import com.printmaster.nk.dao.ProductDAO;
+import com.printmaster.nk.model.dao.ProductDAO;
 import com.printmaster.nk.model.entity.Laser;
 import com.printmaster.nk.model.entity.search.SearchLasers;
 

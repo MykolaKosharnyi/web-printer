@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.printmaster.nk.dao.UserAddByAdminDAO;
+import com.printmaster.nk.model.dao.UserAddByAdminDAO;
 import com.printmaster.nk.model.entity.UserAddByAdmin;
 import com.printmaster.nk.service.UserAddByAdminService;
 
