@@ -39,7 +39,7 @@ import com.printmaster.nk.beans.LinksForProducts;
 import com.printmaster.nk.beans.PicturesContainer;
 import com.printmaster.nk.model.entity.Rip;
 import com.printmaster.nk.model.entity.search.SearchRips;
-import com.printmaster.nk.service.RipService;
+import com.printmaster.nk.model.service.RipService;
 
 @Controller
 public class RipController {

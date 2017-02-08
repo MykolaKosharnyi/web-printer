@@ -29,8 +29,8 @@ import com.printmaster.nk.beans.LinksForProducts;
 import com.printmaster.nk.beans.PicturesContainer;
 import com.printmaster.nk.model.entity.Scanner;
 import com.printmaster.nk.model.entity.search.SearchScanners;
-import com.printmaster.nk.service.ScannerService;
-import com.printmaster.nk.service.UseWithProductService;
+import com.printmaster.nk.model.service.ScannerService;
+import com.printmaster.nk.model.service.UseWithProductService;
 
 @Controller
 public class ScannerController {

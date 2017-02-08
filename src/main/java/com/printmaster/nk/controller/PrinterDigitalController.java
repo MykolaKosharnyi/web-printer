@@ -29,8 +29,8 @@ import com.printmaster.nk.beans.LinksForProducts;
 import com.printmaster.nk.beans.PicturesContainer;
 import com.printmaster.nk.model.entity.DigitalPrinter;
 import com.printmaster.nk.model.entity.search.SearchDigitalPrinters;
-import com.printmaster.nk.service.DigitalPrinterService;
-import com.printmaster.nk.service.UseWithProductService;
+import com.printmaster.nk.model.service.DigitalPrinterService;
+import com.printmaster.nk.model.service.UseWithProductService;
 
 @Controller
 public class PrinterDigitalController {

@@ -30,8 +30,8 @@ import com.printmaster.nk.beans.PicturesContainer;
 import com.printmaster.nk.model.entity.Printer;
 import com.printmaster.nk.model.entity.UseWithProduct;
 import com.printmaster.nk.model.entity.search.SearchPrinters;
-import com.printmaster.nk.service.PrinterService;
-import com.printmaster.nk.service.UseWithProductService;
+import com.printmaster.nk.model.service.PrinterService;
+import com.printmaster.nk.model.service.UseWithProductService;
 
 @Controller
 public class PrinterController {

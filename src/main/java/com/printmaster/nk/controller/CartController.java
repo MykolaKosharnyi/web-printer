@@ -25,15 +25,15 @@ import com.printmaster.nk.model.entity.HeadProduct;
 import com.printmaster.nk.model.entity.Option;
 import com.printmaster.nk.model.entity.Rip;
 import com.printmaster.nk.model.entity.UseWithProduct;
-import com.printmaster.nk.service.CutterService;
-import com.printmaster.nk.service.DigitalPrinterService;
-import com.printmaster.nk.service.LaminatorService;
-import com.printmaster.nk.service.LaserService;
-import com.printmaster.nk.service.Printer3DService;
-import com.printmaster.nk.service.PrinterService;
-import com.printmaster.nk.service.RipService;
-import com.printmaster.nk.service.ScannerService;
-import com.printmaster.nk.service.UseWithProductService;
+import com.printmaster.nk.model.service.CutterService;
+import com.printmaster.nk.model.service.DigitalPrinterService;
+import com.printmaster.nk.model.service.LaminatorService;
+import com.printmaster.nk.model.service.LaserService;
+import com.printmaster.nk.model.service.Printer3DService;
+import com.printmaster.nk.model.service.PrinterService;
+import com.printmaster.nk.model.service.RipService;
+import com.printmaster.nk.model.service.ScannerService;
+import com.printmaster.nk.model.service.UseWithProductService;
 
 @Controller
 public class CartController {

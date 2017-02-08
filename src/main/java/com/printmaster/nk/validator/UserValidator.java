@@ -7,7 +7,7 @@ import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import com.printmaster.nk.model.entity.User;
-import com.printmaster.nk.service.UserService;
+import com.printmaster.nk.model.service.UserService;
 
 @Component
 public class UserValidator implements Validator {

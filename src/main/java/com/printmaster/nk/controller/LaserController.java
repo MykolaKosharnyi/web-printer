@@ -29,8 +29,8 @@ import com.printmaster.nk.beans.LinksForProducts;
 import com.printmaster.nk.beans.PicturesContainer;
 import com.printmaster.nk.model.entity.Laser;
 import com.printmaster.nk.model.entity.search.SearchLasers;
-import com.printmaster.nk.service.LaserService;
-import com.printmaster.nk.service.UseWithProductService;
+import com.printmaster.nk.model.service.LaserService;
+import com.printmaster.nk.model.service.UseWithProductService;
 
 @Controller
 public class LaserController {

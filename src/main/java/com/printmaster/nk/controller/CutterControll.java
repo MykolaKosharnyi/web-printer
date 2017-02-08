@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 
 import com.printmaster.nk.model.entity.Cutter;
 import com.printmaster.nk.model.entity.search.SearchCutters;
-import com.printmaster.nk.service.ProductService;
+import com.printmaster.nk.model.service.ProductService;
 
 public class CutterControll extends ProductController<Cutter, SearchCutters> {
 	

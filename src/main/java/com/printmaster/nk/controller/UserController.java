@@ -25,9 +25,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.printmaster.nk.beans.ComponentsForControllers;
 import com.printmaster.nk.model.entity.User;
 import com.printmaster.nk.model.entity.UserAddByAdmin;
-import com.printmaster.nk.service.SecurityService;
-import com.printmaster.nk.service.UserAddByAdminService;
-import com.printmaster.nk.service.UserService;
+import com.printmaster.nk.model.service.SecurityService;
+import com.printmaster.nk.model.service.UserAddByAdminService;
+import com.printmaster.nk.model.service.UserService;
 import com.printmaster.nk.validator.UserValidator;
 
 @Controller

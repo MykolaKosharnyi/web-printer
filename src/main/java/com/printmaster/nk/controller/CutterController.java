@@ -27,8 +27,9 @@ import com.printmaster.nk.beans.LinksForProducts;
 import com.printmaster.nk.beans.PicturesContainer;
 import com.printmaster.nk.model.entity.Cutter;
 import com.printmaster.nk.model.entity.search.SearchCutters;
-import com.printmaster.nk.service.CutterService;
-import com.printmaster.nk.service.UseWithProductService;
+import com.printmaster.nk.model.service.CutterService;
+import com.printmaster.nk.model.service.UseWithProductService;
+
 import static com.printmaster.nk.controller.ConstUsedInContr.*;
 
 @Controller

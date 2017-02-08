@@ -34,8 +34,8 @@ import com.printmaster.nk.model.entity.Printer;
 import com.printmaster.nk.model.entity.Printer3D;
 import com.printmaster.nk.model.entity.Scanner;
 import com.printmaster.nk.model.entity.search.SearchGeneric;
-import com.printmaster.nk.service.ProductService;
-import com.printmaster.nk.service.UseWithProductService;
+import com.printmaster.nk.model.service.ProductService;
+import com.printmaster.nk.model.service.UseWithProductService;
 
 public abstract class ProductController <T extends HeadProduct, S extends SearchGeneric>{
 	private T product;	
