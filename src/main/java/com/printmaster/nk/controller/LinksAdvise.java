@@ -1,4 +1,4 @@
-package com.printmaster.nk;
+package com.printmaster.nk.controller;
 
 import java.io.File;
 import java.io.FileInputStream;

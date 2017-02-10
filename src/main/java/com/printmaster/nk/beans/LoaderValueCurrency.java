@@ -16,7 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-import com.printmaster.nk.CurrencyInfo;
+import com.printmaster.nk.controller.CurrencyInfo;
 
 @Component("loaderValueCurrency")
 public class LoaderValueCurrency {

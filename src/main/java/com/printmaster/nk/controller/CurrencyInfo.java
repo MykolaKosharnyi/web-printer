@@ -1,4 +1,4 @@
-package com.printmaster.nk;
+package com.printmaster.nk.controller;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
