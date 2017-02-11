@@ -5,6 +5,8 @@ import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,6 +18,7 @@ import com.printmaster.nk.model.service.MailSendingService;
 import static com.printmaster.nk.controller.ConstUsedInContr.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 @Controller
 public class MailSenderController {
@@ -56,6 +59,20 @@ public class MailSenderController {
 		model.addAttribute("mailMessage", new MailSendingMessage());
 		model.addAttribute("listSubscription", listSubscription);
 	    return "admin/message";
+	}
+	
+	@RequestMapping(value = "/"+ PATH_ADMIN +"/message/"+ PATH_CREATE, method = RequestMethod.POST) 
+	public String saveUserAddByAdmin(@ModelAttribute("mailMessage") @Valid MailSendingMessage mailMessage,
+			BindingResult result, Model model){
+
+		if (result.hasErrors()){
+			model.addAttribute("mailMessage", mailMessage);
+			model.addAttribute("listSubscription", listSubscription);
+		    return "admin/message";
+		}
+		
+		mailSendingService.save(mailMessage);
+		return "redirect:/admin/all_sended_messages";
 	}
 	
 	@RequestMapping(value = "/admin/message/{id}", method = RequestMethod.GET)
