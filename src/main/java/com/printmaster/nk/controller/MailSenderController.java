@@ -17,6 +17,8 @@ import com.printmaster.nk.model.service.MailSendingService;
 
 import static com.printmaster.nk.controller.ConstUsedInContr.*;
 
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -72,6 +74,21 @@ public class MailSenderController {
 		}
 		
 		mailSendingService.save(mailMessage);
+		return "redirect:/admin/all_sended_messages";
+	}
+	
+	@RequestMapping(value = "/"+ PATH_ADMIN +"/message/"+ PATH_UPDATE, method = RequestMethod.POST) 
+	public String changeUserAddByAdmin(@ModelAttribute("mailMessage") @Valid MailSendingMessage mailMessage,
+			BindingResult result, Model model){
+
+		if (result.hasErrors()){
+			model.addAttribute("mailMessage", mailMessage);
+			model.addAttribute("listSubscription", listSubscription);
+		    return "admin/message";
+		}
+		
+		mailMessage.setDateLastChanging(new Date());
+		mailSendingService.update(mailMessage);
 		return "redirect:/admin/all_sended_messages";
 	}
 	

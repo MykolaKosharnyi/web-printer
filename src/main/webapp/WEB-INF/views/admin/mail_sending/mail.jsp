@@ -54,8 +54,6 @@
 				<input type="hidden" name="id" value="${mailMessage.id}">	
 				<input type="hidden" name="dateCreation" 
 					value="<fmt:formatDate value="${mailMessage.dateCreation}" pattern="dd/MM/yyyy hh:mm:ss" />">
-				<input type="hidden" name="dateLastChanging" 
-					value="<fmt:formatDate value="${mailMessage.dateLastChanging}" pattern="dd/MM/yyyy hh:mm:ss" />">
 			</c:if>
 			
 		  <div class="form-group">
@@ -90,10 +88,21 @@
 				</div>
 			</div>
 		  </div>
+		  <div class="form-group">
+			<label class="col-sm-2 control-label">Статус:</label>
+			<div class="col-sm-10">
+				<ul class="list_without_dots" style="list-style-type: none; padding: 0px;">
+					<form:radiobuttons items="${mailMessage.getStatusesOfSending()}" path="status" element="li"/>
+				</ul>
+			</div>
+		  </div>
 
 		  <div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">
-			  <button type="submit" class="btn btn-primary">Отправить</button>
+			  <button type="submit" class="btn btn-primary">
+			  	<c:if test="${empty mailMessage.id}">Сохранить</c:if>
+			  	<c:if test="${!empty mailMessage.id}">Изменить</c:if>
+			  </button>
 			</div>
 		  </div>
 

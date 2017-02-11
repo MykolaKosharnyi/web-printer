@@ -28,15 +28,15 @@
 	<c:if test="${!empty allMessages}">
 		<table class="tg">
 			<tr>
-				<th style="width:40px;">ID</th>
-				<th style="width:120px;">Заголовок сообщения</th>
-				<th style="width:200px;">Время заполнения формы</th>
-				<th style="width:100px;">Время последнего изменения формы</th>
-				<th style="width:100px;">Время отправки формы</th>
-				<th style="width:60px;">Статус</th>
-				<th style="width:60px;">Копировать сообщение</th>
-				<th style="width:60px;">Отмена рассылки</th>			
-				<th style="width:60px;">Удалить</th>
+				<th class="text-center">ID</th>
+				<th class="text-center">Заголовок сообщения</th>
+				<th class="text-center">Время заполнения формы</th>
+				<th class="text-center">Время последнего изменения формы</th>
+				<th class="text-center">Время отправки формы</th>
+				<th class="text-center">Статус</th>
+				<th class="text-center">Копировать сообщение</th>
+				<th class="text-center">Отмена рассылки</th>			
+				<th class="text-center">Удалить</th>
 			</tr>
 
 			<c:forEach items="${allMessages}" var="message">
@@ -44,15 +44,15 @@
 					<td>${message.id}</td>
 					<td><a href="<c:url value='/admin/message/${message.id}' />">${message.title}</a></td>
 					<td>
-						<fmt:formatDate type="date" dateStyle="long" timeStyle="short" 
+						<fmt:formatDate type="both" dateStyle="long" timeStyle="short" 
 								value="${message.dateCreation}" />
 					</td>
 					<td>
-						<fmt:formatDate type="date" dateStyle="long" timeStyle="short" 
+						<fmt:formatDate type="both" dateStyle="long" timeStyle="short" 
 								value="${message.dateLastChanging}" />
 					</td> 
 					<td>
-						<fmt:formatDate type="date" dateStyle="long" timeStyle="short" 
+						<fmt:formatDate type="both" dateStyle="long" timeStyle="short" 
 								value="${message.dateSending}" />
 					</td>
 					<td>${message.status.toString()}</td>

@@ -1,8 +1,10 @@
 package com.printmaster.nk.model.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -47,6 +49,14 @@ public class MailSendingMessage implements Serializable{
 	
 	public static enum StatusOfSending{
 		SENDED, WAITING, CANCELED
+	}
+	
+	public List<String> getStatusesOfSending(){
+		List<String> result = new ArrayList<>();
+		for(StatusOfSending status : StatusOfSending.values()){
+			result.add(status.toString());
+		}
+		return result;
 	}
 	
 	public MailSendingMessage(){}
