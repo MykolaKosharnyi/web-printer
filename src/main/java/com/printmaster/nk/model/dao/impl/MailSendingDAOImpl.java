@@ -1,6 +1,7 @@
 package com.printmaster.nk.model.dao.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -10,6 +11,7 @@ import org.hibernate.SessionFactory;
 
 import com.printmaster.nk.model.dao.MailSendingDAO;
 import com.printmaster.nk.model.entity.MailSendingMessage;
+import com.printmaster.nk.model.entity.MailSendingMessage.StatusOfSending;
 
 public class MailSendingDAOImpl implements MailSendingDAO {
 	
@@ -24,6 +26,7 @@ public class MailSendingDAOImpl implements MailSendingDAO {
 	@Override
 	public long save(MailSendingMessage mailMessage) {
 		Session session = this.sessionFactory.getCurrentSession();
+		mailMessage.setStatus(StatusOfSending.WAITING);
         long id = (Long) session.save(mailMessage);
         logger.info("MailSendindMessage saved successfully, details = " + mailMessage);
         return id;
@@ -53,6 +56,7 @@ public class MailSendingDAOImpl implements MailSendingDAO {
 	@Override
 	public void update(MailSendingMessage mailMessage) {
 		Session session = this.sessionFactory.getCurrentSession();
+		mailMessage.setDateLastChanging(new Date());
         session.update(mailMessage);
         logger.info("MailSendingMessage updated successfully, details = " + mailMessage);
 	}

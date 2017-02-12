@@ -55,9 +55,30 @@
 						<fmt:formatDate type="both" dateStyle="long" timeStyle="short" 
 								value="${message.dateSending}" />
 					</td>
-					<td>${message.status.toString()}</td>
+
+					<c:if test="${message.status.toString() eq 'WAITING'}">					
+						<td><button type="button" class="btn btn-warning">Oжидание отправки</button></td>
+					</c:if>
+					<c:if test="${message.status.toString() eq 'SENDED'}">						
+						<td><button type="button" class="btn btn-success">Отправлено</button></td>
+					</c:if>
+					<c:if test="${message.status.toString() eq 'CANCELED'}">						
+						<td><button type="button" class="btn btn-danger">Рассылка отменена</button></td>
+					</c:if>
+
 					<td width="60px"><a href="<c:url value='/admin/message/copy/${message.id}' />"><i class="fa fa-clone clone" aria-hidden="true"></i></a></td>
-					<td width="60px"><a href="<c:url value='/admin/message/deny/${message.id}' />"><i class="fa fa-ban" aria-hidden="true"></i></a></td>		
+					<td width="60px">						
+						<c:choose>
+						    <c:when test="${message.status.toString() eq 'WAITING'}">
+						    	<a href="<c:url value='/admin/message/deny/${message.id}' />">
+									<i class="fa fa-ban" aria-hidden="true"></i>
+								</a>						       
+						    </c:when>
+						    <c:otherwise>
+						        <i class="fa fa-ban" aria-hidden="true" style="color:grey;"></i>
+						    </c:otherwise>
+						</c:choose>
+					</td>		
 					<td width="60px"><a href="<c:url value='/admin/message/remove/${message.id}' />"><i class="fa fa-trash-o remove" aria-hidden="true"></i></a></td>
 				</tr>
 			</c:forEach>

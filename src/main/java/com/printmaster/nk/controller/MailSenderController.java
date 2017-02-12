@@ -17,8 +17,6 @@ import com.printmaster.nk.model.service.MailSendingService;
 
 import static com.printmaster.nk.controller.ConstUsedInContr.*;
 
-import java.util.Date;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -58,21 +56,15 @@ public class MailSenderController {
 	
 	@RequestMapping(value = "/admin/message/new", method = RequestMethod.GET)
 	public String getCreateNewMessage(Model model) {
-		model.addAttribute("mailMessage", new MailSendingMessage());
-		model.addAttribute("listSubscription", listSubscription);
-	    return "admin/message";
+		return putMessagePageParameters(model, new MailSendingMessage());
 	}
 	
 	@RequestMapping(value = "/"+ PATH_ADMIN +"/message/"+ PATH_CREATE, method = RequestMethod.POST) 
 	public String saveUserAddByAdmin(@ModelAttribute("mailMessage") @Valid MailSendingMessage mailMessage,
 			BindingResult result, Model model){
-
 		if (result.hasErrors()){
-			model.addAttribute("mailMessage", mailMessage);
-			model.addAttribute("listSubscription", listSubscription);
-		    return "admin/message";
-		}
-		
+			return putMessagePageParameters(model, mailMessage);
+		}		
 		mailSendingService.save(mailMessage);
 		return "redirect:/admin/all_sended_messages";
 	}
@@ -80,22 +72,40 @@ public class MailSenderController {
 	@RequestMapping(value = "/"+ PATH_ADMIN +"/message/"+ PATH_UPDATE, method = RequestMethod.POST) 
 	public String changeUserAddByAdmin(@ModelAttribute("mailMessage") @Valid MailSendingMessage mailMessage,
 			BindingResult result, Model model){
-
 		if (result.hasErrors()){
-			model.addAttribute("mailMessage", mailMessage);
-			model.addAttribute("listSubscription", listSubscription);
-		    return "admin/message";
-		}
-		
-		mailMessage.setDateLastChanging(new Date());
+		    return putMessagePageParameters(model, mailMessage);
+		}		
 		mailSendingService.update(mailMessage);
 		return "redirect:/admin/all_sended_messages";
 	}
 	
 	@RequestMapping(value = "/admin/message/{id}", method = RequestMethod.GET)
 	public String getCreateNewMessage(@PathVariable("id") long id, Model model) {
-		model.addAttribute("mailMessage", mailSendingService.getById(id));
+	    return putMessagePageParameters(model, mailSendingService.getById(id));
+	}
+	
+	@RequestMapping(value = "/admin/message/deny/{id}", method = RequestMethod.GET)
+	public String denyMessage(@PathVariable("id") long id, Model model) {
+		mailSendingService.denyMassage(id);
+		return "redirect:/admin/all_sended_messages";
+	}
+	
+	@RequestMapping(value = "/admin/message/copy/{id}", method = RequestMethod.GET)
+	public String copyMessage(@PathVariable("id") long id, Model model) {
+		MailSendingMessage result = mailSendingService.copyMassage(id);
+		result.setId(0l);
+		return putMessagePageParameters(model, result);
+	}
+	
+	@RequestMapping(value = "/admin/message/remove/{id}", method = RequestMethod.GET)
+	public String removeMessage(@PathVariable("id") long id, Model model) {
+		mailSendingService.delete(id);
+		return "redirect:/admin/all_sended_messages";
+	}
+	
+	private String putMessagePageParameters(Model model, MailSendingMessage mailMessage){
+		model.addAttribute("mailMessage", mailMessage);
 		model.addAttribute("listSubscription", listSubscription);
-	    return "admin/message";
+		return "admin/message";
 	}
 }
