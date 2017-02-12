@@ -19,18 +19,17 @@
 	<script src="/css/admin/datepicker/bootstrap-datetimepicker.min.js"></script>
 
 <style type="text/css">
-.bootstrap-datetimepicker-widget ul{
-	padding: 0px;
-}
-
+	.bootstrap-datetimepicker-widget ul{
+		padding: 0px;
+	}
 </style>
 
-<c:if test="${mailMessage.id==0}">
+<c:if test="${empty mailMessage.id || mailMessage.id==0}">
 	<title>
 		<spring:message text="Добавление нового письма рассылки" />
 	</title>
 </c:if>
-<c:if test="${mailMessage.id!=0}">
+<c:if test="${!empty mailMessage.id && mailMessage.id!=0}">
 	<title>
 		<spring:message text="Изменение письма рассылки с id = ${mailMessage.id}" />
 	</title>
@@ -39,18 +38,18 @@
 <body>
 	<div id="product">
 	
-		<c:if test="${mailMessage.id==0}">
+		<c:if test="${empty mailMessage.id || mailMessage.id==0}">
 			<c:url var="addAction" value="/admin/message/create"></c:url>
 		</c:if>
 	
-		<c:if test="${mailMessage.id!=0}">
+		<c:if test="${!empty mailMessage.id && mailMessage.id!=0}">
 			<c:url var="addAction" value="/admin/message/update"></c:url>
 		</c:if>
 	
 		<form:form class="form-horizontal" style="padding: 10px 0px;"  commandName="mailMessage"
 		 action="${addAction}" method="post">
 		
-			<c:if test="${mailMessage.id!=0}">
+			<c:if test="${!empty mailMessage.id && mailMessage.id!=0}">
 				<input type="hidden" name="id" value="${mailMessage.id}">	
 				<input type="hidden" name="status" value="${mailMessage.status}">
 				<input type="hidden" name="dateCreation" 
@@ -93,8 +92,8 @@
 		  <div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">
 			  <button type="submit" class="btn btn-primary">
-			  	<c:if test="${mailMessage.id==0}">Сохранить</c:if>
-			  	<c:if test="${mailMessage.id!=0}">Изменить</c:if>
+			  	<c:if test="${empty mailMessage.id || mailMessage.id==0}">Сохранить</c:if>
+			  	<c:if test="${!empty mailMessage.id && mailMessage.id!=0}">Изменить</c:if>
 			  </button>
 			</div>
 		  </div>
