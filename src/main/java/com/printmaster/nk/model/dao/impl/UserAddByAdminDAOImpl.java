@@ -7,6 +7,8 @@ import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.CriteriaSpecification;
+import org.hibernate.criterion.Junction;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
@@ -84,5 +86,32 @@ public class UserAddByAdminDAOImpl implements UserAddByAdminDAO{
 		} else {
 			return null;
 		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<UserAddByAdmin> getUserBySubscription(String[] subscriptionTypes) {
+		Session session = this.sessionFactory.getCurrentSession();
+		Criteria cr = session.createCriteria(UserAddByAdmin.class, "user");
+		cr.createAlias("user.subscription", "subscription");
+		
+		if(subscriptionTypes!= null){
+			Junction subscriptionGroup = Restrictions.disjunction();
+			for(String subscription : subscriptionTypes){
+				subscriptionGroup.add(Restrictions.eq("subscription",subscription));
+			}
+			cr.add(subscriptionGroup);
+		}
+		
+		cr.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+		
+		
+//		
+//		Criteria c = session.createCriteria(Owner.class, "owner");
+//		c.createAlias("owner.cats", "cat");
+//		c.add(Restrictions.eq("cat.eyeColor", "blue");
+//		c.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+		
+		return cr.list();
 	}
 }

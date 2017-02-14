@@ -4,14 +4,29 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
  
     <!-- For times when you just need to invoke a method on a specific object -->
-    <beans:bean id="simpleJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+    <beans:bean id="currencyJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
         <beans:property name="targetObject" ref="loaderValueCurrency" />
         <beans:property name="targetMethod" value="loadCurrency" />
     </beans:bean>
  
     <!-- Run the job every 2 hours with initial delay of 30 seconds -->
-    <beans:bean id="simpleTrigger"  class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
-        <beans:property name="jobDetail" ref="simpleJobDetail" />
+    <beans:bean id="currencyTrigger"  class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+        <beans:property name="jobDetail" ref="currencyJob" />
+        <beans:property name="startDelay" value="#{1000*30}" />
+        <beans:property name="repeatInterval" value="#{1000*60*60*2}" />
+    </beans:bean>
+    
+    <beans:bean name="mailSendingJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <beans:property name="jobClass" value="com.printmaster.nk.beans.EmailSendingJob" />
+        <beans:property name="jobDataMap">
+            <beans:map>
+                <beans:entry key="mailSendingService" value-ref="mailSendingService" />
+            </beans:map>
+        </beans:property>
+    </beans:bean>
+    
+    <beans:bean id="mailSendingTrigger"  class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+        <beans:property name="jobDetail" ref="mailSendingJobDetail" />
         <beans:property name="startDelay" value="#{1000*30}" />
         <beans:property name="repeatInterval" value="#{1000*60*60*2}" />
     </beans:bean>
@@ -20,13 +35,15 @@
     <beans:bean  class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
         <beans:property name="jobDetails">
             <beans:list>
-                <beans:ref bean="simpleJobDetail" />
+                <beans:ref bean="currencyJob" />
+                <beans:ref bean="mailSendingJobDetail" />
             </beans:list>
         </beans:property>
  
         <beans:property name="triggers">
             <beans:list>
-                <beans:ref bean="simpleTrigger" />
+                <beans:ref bean="currencyTrigger" />
+                <beans:ref bean="mailSendingTrigger" />
             </beans:list>
         </beans:property>
     </beans:bean>

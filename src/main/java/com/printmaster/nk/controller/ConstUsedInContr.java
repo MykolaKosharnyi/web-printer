@@ -79,10 +79,11 @@ interface ConstUsedInContr {
 	List<String> listScopeOfActivities = new ArrayList<String>(){
 		private static final long serialVersionUID = 1L;
 		{
-			add("цифровая печать");
-			add("широкоформатный печать");
-			add("наружная реклама");
+			add("Цифровая печать");
+			add("Широкоформатная печать");
+			add("Наружная реклама");
 			add("САПР/ГИС");
+			add("Другое");
 		}
 	};
 }

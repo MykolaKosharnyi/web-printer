@@ -54,4 +54,9 @@ public class UserAddByAdminServiceImpl implements UserAddByAdminService {
 	public UserAddByAdmin findByUserName(String username) {
 		return this.userAddByAdminDAO.findByUserName(username);
 	}
+
+	@Override
+	public List<UserAddByAdmin> getUserBySubscription(String[] subscriptionTypes) {
+		return this.userAddByAdminDAO.getUserBySubscription(subscriptionTypes);
+	}
 }

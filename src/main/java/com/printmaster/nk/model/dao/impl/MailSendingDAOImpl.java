@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 
 import com.printmaster.nk.model.dao.MailSendingDAO;
 import com.printmaster.nk.model.entity.MailSendingMessage;
@@ -69,6 +70,18 @@ public class MailSendingDAOImpl implements MailSendingDAO {
             session.delete(msm);
         }
         logger.info("MailSendingMessage deleted successfully, details = " + msm);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<MailSendingMessage> getMessagesReadySend() {
+		Session session = this.sessionFactory.getCurrentSession();
+		Criteria cr = session.createCriteria(MailSendingMessage.class);
+		
+		cr.add(Restrictions.eq("status", StatusOfSending.WAITING));
+		cr.add(Restrictions.le("dateSending", new Date()));
+				
+		return new ArrayList<MailSendingMessage>(cr.list());
 	}
 
 }

@@ -61,4 +61,9 @@ public class MailSendingServiceImpl implements MailSendingService{
 //		result.setId(0l); at this point Hibernate exception
 		return result;
 	}
+
+	@Override
+	public List<MailSendingMessage> getMessagesReadySend() {
+		return mailSendingDAO.getMessagesReadySend();
+	}
 }

@@ -8,6 +8,7 @@ public interface MailSendingService {
 	void denyMassage(long id);
 	MailSendingMessage copyMassage(long id);
     long save(MailSendingMessage mailMessage);    
+    List<MailSendingMessage> getMessagesReadySend();
     MailSendingMessage getById(long id);
     List<MailSendingMessage> getAll();
     void update(MailSendingMessage mailMessage);
