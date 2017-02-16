@@ -63,6 +63,7 @@ public class MailSendingServiceImpl implements MailSendingService{
 	}
 
 	@Override
+	@Transactional
 	public List<MailSendingMessage> getMessagesReadySend() {
 		return mailSendingDAO.getMessagesReadySend();
 	}

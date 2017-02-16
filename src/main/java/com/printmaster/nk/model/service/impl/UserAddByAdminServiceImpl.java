@@ -56,6 +56,7 @@ public class UserAddByAdminServiceImpl implements UserAddByAdminService {
 	}
 
 	@Override
+	@Transactional
 	public List<UserAddByAdmin> getUserBySubscription(String[] subscriptionTypes) {
 		return this.userAddByAdminDAO.getUserBySubscription(subscriptionTypes);
 	}

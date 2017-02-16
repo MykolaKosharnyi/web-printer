@@ -46,12 +46,8 @@ public class MailSendingDAOImpl implements MailSendingDAO {
 	public List<MailSendingMessage> getAll() {
 		Session session = this.sessionFactory.getCurrentSession();
 		Criteria cr = session.createCriteria(MailSendingMessage.class);
-		
-		List<MailSendingMessage> result = new ArrayList<MailSendingMessage>(cr.list());
-        for(MailSendingMessage p : result){
-            logger.info("MailSendingMessage list::"+p);
-        }
-        return result;
+
+        return new ArrayList<MailSendingMessage>(cr.list());
 	}
 
 	@Override
@@ -72,7 +68,7 @@ public class MailSendingDAOImpl implements MailSendingDAO {
         logger.info("MailSendingMessage deleted successfully, details = " + msm);
 	}
 
-	@SuppressWarnings("unchecked")
+
 	@Override
 	public List<MailSendingMessage> getMessagesReadySend() {
 		Session session = this.sessionFactory.getCurrentSession();

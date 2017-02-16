@@ -39,6 +39,7 @@ public class MailSenderController {
          
         // creates a simple e-mail object
         SimpleMailMessage email = new SimpleMailMessage();
+        email.setFrom("noreplay@forprint.net.ua");
         email.setTo(recipientAddress);
         email.setSubject(subject);
         email.setText(message);
@@ -49,7 +50,7 @@ public class MailSenderController {
     }
 
 	@RequestMapping(value = "/admin/all_sended_messages", method = RequestMethod.GET)
-	public String getAllSendedMessages(Model model) {
+	public String getAllSendedMessages(Model model) {			
 		model.addAttribute("allMessages", mailSendingService.getAll());
 	    return "admin/all_sended_messages";
 	}

@@ -13,6 +13,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.printmaster.nk.model.dao.UserAddByAdminDAO;
+import com.printmaster.nk.model.entity.MailSendingMessage;
 import com.printmaster.nk.model.entity.UserAddByAdmin;
 
 @Repository
@@ -47,9 +48,6 @@ public class UserAddByAdminDAOImpl implements UserAddByAdminDAO{
 		Session session = this.sessionFactory.getCurrentSession();
 		@SuppressWarnings("unchecked")
 		List<UserAddByAdmin> userList = session.createQuery("from UserAddByAdmin").list();
-		for (UserAddByAdmin user : userList) {
-			logger.info("UserAddByAdmin List::" + user);
-		}
 		return userList;
 	}
 
@@ -92,18 +90,18 @@ public class UserAddByAdminDAOImpl implements UserAddByAdminDAO{
 	@Override
 	public List<UserAddByAdmin> getUserBySubscription(String[] subscriptionTypes) {
 		Session session = this.sessionFactory.getCurrentSession();
-		Criteria cr = session.createCriteria(UserAddByAdmin.class, "user");
-		cr.createAlias("user.subscription", "subscription");
-		
-		if(subscriptionTypes!= null){
-			Junction subscriptionGroup = Restrictions.disjunction();
-			for(String subscription : subscriptionTypes){
-				subscriptionGroup.add(Restrictions.eq("subscription",subscription));
-			}
-			cr.add(subscriptionGroup);
-		}
-		
-		cr.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+//		Criteria cr = session.createCriteria(UserAddByAdmin.class, "user");
+//		cr.createAlias("user.subscription", "subscription");
+//		
+//		if(subscriptionTypes!= null){
+//			Junction subscriptionGroup = Restrictions.disjunction();
+//			for(String subscription : subscriptionTypes){
+//				subscriptionGroup.add(Restrictions.eq("subscription",subscription));
+//			}
+//			cr.add(subscriptionGroup);
+//		}
+//		
+//		cr.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 		
 		
 //		
@@ -112,6 +110,6 @@ public class UserAddByAdminDAOImpl implements UserAddByAdminDAO{
 //		c.add(Restrictions.eq("cat.eyeColor", "blue");
 //		c.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 		
-		return cr.list();
+		return session.createQuery("from UserAddByAdmin").list();		
 	}
 }
