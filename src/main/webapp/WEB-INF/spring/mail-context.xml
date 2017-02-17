@@ -6,6 +6,7 @@
 <!-- Production implementation of the JavaMailSender interface, supporting 
 		both JavaMail MimeMessages and Spring SimpleMailMessages -->
 	<beans:bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<beans:property name="defaultEncoding" value="UTF-8"/>
 		<beans:property name="host" value="${mail.host}" />
 		<beans:property name="port" value="${mail.port}" />
 		<beans:property name="username" value="${mail.username}" />

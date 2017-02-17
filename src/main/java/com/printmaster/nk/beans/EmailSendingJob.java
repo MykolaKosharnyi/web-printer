@@ -2,13 +2,22 @@ package com.printmaster.nk.beans;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
+
+import javax.mail.Address;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 import org.springframework.stereotype.Component;
 
@@ -25,7 +34,7 @@ public class EmailSendingJob{
 	private MailSendingService mailSendingService;
 	
 	@Autowired
-    private MailSender mailSender;
+    private JavaMailSenderImpl mailSender;
 	
 	@Autowired
     private UserAddByAdminService userAddByAdminService;
@@ -38,14 +47,18 @@ public class EmailSendingJob{
 				sendEmail(message);
 			}
 		} catch(Exception ex){
-			SimpleMailMessage email = new SimpleMailMessage();
-			email.setFrom("noreplay@forprint.net.ua");
-			email.setTo("nikolay.kosharniy@gmail.com");
-			email.setSubject("Error!");
-			email.setText(getStackTrace(ex));
-
-			mailSender.send(email);
+			exceptionMailSender(ex);
 		}
+	}
+	
+	private void exceptionMailSender(Exception ex){
+		SimpleMailMessage email = new SimpleMailMessage();
+		email.setFrom("noreplay@forprint.net.ua");
+		email.setTo("nikolay.kosharniy@gmail.com");
+		email.setSubject("Error!");
+		email.setText(getStackTrace(ex));
+
+		mailSender.send(email);
 	}
 	
 	private String getStackTrace(final Throwable throwable) {
@@ -62,13 +75,31 @@ public class EmailSendingJob{
 		List<UserAddByAdmin> usersList = userAddByAdminService.getUserBySubscription(message.getSubscription());
 		
 		for(UserAddByAdmin user : usersList){
-			SimpleMailMessage email = new SimpleMailMessage();
-			email.setFrom("noreplay@forprint.net.ua");
-			email.setTo( user.getEmail() );
-			email.setSubject(subject);
-			email.setText(messageBody);
+//			SimpleMailMessage email = new SimpleMailMessage();
+//			email.setFrom("noreplay@forprint.net.ua");
+//			email.setTo( user.getEmail() );
+//			email.setSubject(subject);
+//			email.setText(messageBody);	
+			
+			MimeMessage msg = mailSender.createMimeMessage();
 
-			mailSender.send(email);
+			try {
+				Address adresFrom = new InternetAddress("noreplay@forprint.net.ua", "e-machine.com.ua");
+				Address adresTO = new InternetAddress(user.getEmail());
+		        
+		        msg.setContent("Mail contect", "text/plain");
+		        msg.setFrom(adresFrom);
+		        msg.setRecipient(Message.RecipientType.TO, adresTO );
+
+		        msg.setSubject(subject, "UTF-8");
+		        
+		        String encodingOptions = "text/html; charset=UTF-8";
+		        msg.setContent(messageBody, encodingOptions);
+			} catch (UnsupportedEncodingException | MessagingException e) {
+				exceptionMailSender(e);
+			}
+
+			mailSender.send(msg);
 		}
 		
 //		message.setStatus(StatusOfSending.SENDED);
@@ -79,7 +110,7 @@ public class EmailSendingJob{
 		this.mailSendingService = mailSendingService;
 	}
 
-	public void setMailSender(MailSender mailSender) {
+	public void setMailSender(JavaMailSenderImpl mailSender) {
 		this.mailSender = mailSender;
 	}
 

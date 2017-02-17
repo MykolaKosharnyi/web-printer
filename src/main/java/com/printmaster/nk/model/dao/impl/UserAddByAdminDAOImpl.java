@@ -103,13 +103,26 @@ public class UserAddByAdminDAOImpl implements UserAddByAdminDAO{
 //		
 //		cr.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 		
-		
-//		
+			
 //		Criteria c = session.createCriteria(Owner.class, "owner");
 //		c.createAlias("owner.cats", "cat");
 //		c.add(Restrictions.eq("cat.eyeColor", "blue");
 //		c.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+		StringBuilder subscriptionsBuffer = new StringBuilder();
 		
-		return session.createQuery("from UserAddByAdmin").list();		
+		for(int i = 0; i < subscriptionTypes.length; i++){			
+			subscriptionsBuffer.append("'")
+				.append(subscriptionTypes[i])
+				.append("'");
+			if(i!=(subscriptionTypes.length-1)){
+				subscriptionsBuffer.append(",");
+			}
+		}
+		
+		String query =	String.format("select distinct user from UserAddByAdmin user "+
+				"join user.subscription subscription "+
+				"where subscription in (%s)", subscriptionsBuffer.toString());
+		
+		return session.createQuery(query).list();		
 	}
 }
