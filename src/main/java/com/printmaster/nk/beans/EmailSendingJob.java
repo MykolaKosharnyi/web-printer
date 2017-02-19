@@ -75,26 +75,22 @@ public class EmailSendingJob{
 		List<UserAddByAdmin> usersList = userAddByAdminService.getUserBySubscription(message.getSubscription());
 		
 		for(UserAddByAdmin user : usersList){
-//			SimpleMailMessage email = new SimpleMailMessage();
-//			email.setFrom("noreplay@forprint.net.ua");
-//			email.setTo( user.getEmail() );
-//			email.setSubject(subject);
-//			email.setText(messageBody);	
-			
+
 			MimeMessage msg = mailSender.createMimeMessage();
 
 			try {
 				Address adresFrom = new InternetAddress("noreplay@forprint.net.ua", "e-machine.com.ua");
 				Address adresTO = new InternetAddress(user.getEmail());
 		        
-		        msg.setContent("Mail contect", "text/plain");
+		        msg.setContent("Mail contect", "text/html");
 		        msg.setFrom(adresFrom);
 		        msg.setRecipient(Message.RecipientType.TO, adresTO );
 
 		        msg.setSubject(subject, "UTF-8");
 		        
-		        String encodingOptions = "text/html; charset=UTF-8";
-		        msg.setContent(messageBody, encodingOptions);
+		       // String encodingOptions = "text/html; charset=UTF-8";
+		       // msg.setContent(messageBody, encodingOptions);
+		        msg.setText(messageBody, "UTF-8", "html");
 			} catch (UnsupportedEncodingException | MessagingException e) {
 				exceptionMailSender(e);
 			}
@@ -102,8 +98,8 @@ public class EmailSendingJob{
 			mailSender.send(msg);
 		}
 		
-//		message.setStatus(StatusOfSending.SENDED);
-//		mailSendingService.update(message);
+		message.setStatus(StatusOfSending.SENDED);
+		mailSendingService.update(message);
 	}
 	
 	public void setMailSendingService(MailSendingService mailSendingService) {

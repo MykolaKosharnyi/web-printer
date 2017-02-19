@@ -121,7 +121,7 @@
 							</c:if>
 							<c:if test="${pageContext.request.userPrincipal.name == null}">
 								<li><a href="<c:url value='/login' />">Войти</a></li>
-    							<li><a href="<c:url value='/registration' />">Зарегестрироваться</a></li>
+    							<li><a href="<c:url value='/registration' />">Зарегистрироваться</a></li>
 							</c:if>
     							<%--<li role="separator" class="divider"></li>
     							<li><a href="#">Еще что-то</a></li> --%>
