@@ -14,6 +14,11 @@
 	<a href="<c:url value='/admin/${productType}/new' />">${addProduct}</a>
 	<br>
 	<h3>${titleOfTable}</h3>
+	
+	<c:if test="${productType == 'printer'}">
+		<a href="<c:url value='/admin/${productType}/equipment_manufacturer' />">Добавление/Изменение производителей принтеров</a>
+	</c:if>
+	
 	<div style="right:0px;position: relative;">
 		Сортировка 
 		<select id="sorting_parameter">

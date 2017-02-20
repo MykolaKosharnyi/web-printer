@@ -493,4 +493,18 @@ public class PrinterController {
     	
     	componets.updateInLeftField(product, product.isShowOnSite() && product.isShowOnLeftSide(), TYPE);
     }
+    
+    @RequestMapping(value = "/admin/"+ TYPE +"/equipment_manufacturer", method = RequestMethod.GET)
+	public String changeEquipmentManufacturer(Model model) {
+		files.clear();
+		logger.info(String.format("/admin/%s/new page.", TYPE));
+		model.addAttribute("product", new Printer());
+		
+		componets.setJSONtoModelAttribute(model, TYPE);
+		
+		model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
+		model.addAttribute("type", TYPE);
+		model.addAttribute("productId", 0);
+	    return "admin/"+ TYPE +"/equipment_manufacturer";
+	}
 }
