@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -495,16 +496,14 @@ public class PrinterController {
     }
     
     @RequestMapping(value = "/admin/"+ TYPE +"/equipment_manufacturer", method = RequestMethod.GET)
-	public String changeEquipmentManufacturer(Model model) {
-		files.clear();
-		logger.info(String.format("/admin/%s/new page.", TYPE));
-		model.addAttribute("product", new Printer());
-		
-		componets.setJSONtoModelAttribute(model, TYPE);
-		
-		model.addAttribute("uwp", componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
-		model.addAttribute("type", TYPE);
-		model.addAttribute("productId", 0);
+	public String equipmentManufacturer(Model model) {
+    	componets.setJSONtoModelAttributeForChanging(model, TYPE);
 	    return "admin/"+ TYPE +"/equipment_manufacturer";
+	}
+    
+    @RequestMapping(value = "/admin/"+ TYPE +"/equipment_manufacturer", method = RequestMethod.POST)
+	public String changeEquipmentManufacturer(@RequestParam(value = "equipment_manufacturer") List<String> manufacturers) {
+    	componets.setNewValueOfParameter(TYPE, "equipment_manufacturer", manufacturers);
+	    return "redirect:/admin/"+ TYPE +"/equipment_manufacturer";
 	}
 }

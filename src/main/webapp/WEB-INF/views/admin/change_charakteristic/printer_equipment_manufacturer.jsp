@@ -20,7 +20,24 @@
 <body>
 	<div id="product">
 		
-		
+		<h3>Изменение вывода производителей для принтеров</h3>
+	
+		<c:url var="change_equipment_manufacturer" value="/admin/printer/equipment_manufacturer"></c:url>
+	
+		<form class="form-horizontal" style="padding: 10px 0px;" action="${change_equipment_manufacturer}" method="post">	
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+			<c:forEach items="${printer.equipment_manufacturer}" var="equipment">
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" <c:if test="${ equipment.show eq true }">checked</c:if>
+					       name="equipment_manufacturer" value="${ equipment.name }"> ${ equipment.name }
+					</label>
+				</div>	
+			</c:forEach>
+			
+			<button type="submit" class="btn btn-default" style="margin: 20px;">Сохранить</button>
+		</form>
+
 	</div>
 </body>
 </html>

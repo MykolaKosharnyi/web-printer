@@ -1,10 +1,16 @@
 package com.printmaster.nk.beans;
 
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -213,43 +219,108 @@ public class ComponentsForControllers {
      */
     public void setJSONtoModelAttribute(Model model, String typeOfProduct){
     	if(typeOfProduct.equals("printer")){//separate for printers because they need to sort by equipment
-    		
-    		try {
-				model.addAttribute(typeOfProduct, sortEquipment((JSONObject)new JSONParser()
-						.parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/" + typeOfProduct + ".json"), "UTF-8"))));
-			} catch (IOException | ParseException e) {
-				logger.error("Error in read " + typeOfProduct + ".json file", e); 
-			}
-    		
+			model.addAttribute(typeOfProduct, sortEquipment(jsonObjectParser(typeOfProduct))); 
+			
     	} else if(typeOfProduct.equals("rip")){// rip has JSONArray in his structure
-    		
-    		try {
-    			model.addAttribute(typeOfProduct , (JSONArray)new JSONParser()
-    					.parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/" + typeOfProduct + ".json"), "UTF-8")));
-    		} catch (IOException | ParseException e) {
-    			logger.error("Error in read " + typeOfProduct + ".json file", e); 
-    		}
+    		model.addAttribute(typeOfProduct , jsonArrayParser(typeOfProduct));		
     		
     	} else if(typeOfProduct.equals("3d_printer")){//bad naming of attribute in 3d printers
-    		
-    		try {
-    			model.addAttribute("printer" , (JSONObject)new JSONParser()
-    					.parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/" + typeOfProduct + ".json"), "UTF-8")));
-    		} catch (IOException | ParseException e) {
-    			logger.error("Error in read " + typeOfProduct + ".json file", e); 
-    		}
+    		model.addAttribute("printer" , jsonObjectParser(typeOfProduct));  
     		
     	} else {
-    		
-    		try {
-    			model.addAttribute(typeOfProduct , (JSONObject)new JSONParser()
-    					.parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/" + typeOfProduct + ".json"), "UTF-8")));
-    		} catch (IOException | ParseException e) {
-    			logger.error("Error in read " + typeOfProduct + ".json file", e); 
-    		}
-    		
+    		model.addAttribute(typeOfProduct , jsonObjectParser(typeOfProduct));   		
     	}
 	}
+    
+    /**
+     * This method for getting JSON's of products characteristic for change them
+     * @param model
+     * @param typeOfProduct
+     */
+    public void setJSONtoModelAttributeForChanging(Model model, String typeOfProduct){
+    	if(typeOfProduct.equals("printer")){//separate for printers because they need to sort by equipment
+			model.addAttribute(typeOfProduct, jsonObjectParser(typeOfProduct));  
+			
+    	} else if(typeOfProduct.equals("rip")){// rip has JSONArray in his structure
+    		model.addAttribute(typeOfProduct , jsonArrayParser(typeOfProduct));		
+    		
+    	} else if(typeOfProduct.equals("3d_printer")){//bad naming of attribute in 3d printers
+    		model.addAttribute("printer" , jsonObjectParser(typeOfProduct));  
+    		
+    	} else {
+    		model.addAttribute(typeOfProduct , jsonObjectParser(typeOfProduct));   		
+    	}
+	}
+    
+    private JSONObject jsonObjectParser(String typeOfProduct){
+    	try {
+			return (JSONObject)new JSONParser()
+					.parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/" + typeOfProduct + ".json"), "UTF-8"));
+		} catch (IOException | ParseException e) {
+			logger.error("Error in read " + typeOfProduct + ".json file", e);
+			throw new RuntimeException(e);
+		}
+    }
+    
+    private JSONArray jsonArrayParser(String typeOfProduct){
+    	try {
+			return (JSONArray)new JSONParser()
+					.parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/" + typeOfProduct + ".json"), "UTF-8"));
+		} catch (IOException | ParseException e) {
+			logger.error("Error in read " + typeOfProduct + ".json file", e);
+			throw new RuntimeException(e);
+		}
+    }
+    
+    public void setNewValueOfParameter(String typeProduct, String nameParameter, List<String> values){
+
+    	if(typeProduct.equals("rip")){
+    		 jsonArrayParser(typeProduct);		
+    		
+    	} else {
+    		JSONObject jsonWithCharakteristic = jsonObjectParser(typeProduct);   
+    		setNewParameters(jsonWithCharakteristic, nameParameter, values);
+    		saveObject(jsonWithCharakteristic, typeProduct);
+    	}
+    }
+    
+    @SuppressWarnings("unchecked")
+	private JSONObject setNewParameters(JSONObject changedObject, String nameParameter, List<String> values){
+    	JSONArray arrayParameters = (JSONArray) changedObject.get(nameParameter);
+    	
+    	Iterator<JSONObject> iterator = arrayParameters.iterator();
+		while(iterator.hasNext()){
+			JSONObject current = iterator.next();
+			current.put("show", values.contains(current.get("name")));
+		}
+		
+		 Collections.sort(arrayParameters, new Comparator<JSONObject>(){
+			@Override
+			public int compare(JSONObject o1, JSONObject o2) {
+				return ((String) o1.get("name")).toLowerCase().compareTo(((String) o2.get("name")).toLowerCase());
+			}
+		});
+		
+    	changedObject.put(nameParameter, arrayParameters);
+    	return changedObject;
+    }
+    
+    /**
+     * @param obj input JSONObject which we wrote to file in concrete directory.
+     */
+    private void saveObject(JSONObject jsonWithCharakteristic, String typeProduct){
+    	try {
+			Writer out = new PrintWriter("/var/www/localhost/products/" + typeProduct + ".json", "UTF-8");
+			out.write(jsonWithCharakteristic.toJSONString());
+			out.flush();
+			out.close();
+			
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+    }
     
     /**
      * Sort equipment manufacturer of PRINTER product
@@ -259,10 +330,19 @@ public class ComponentsForControllers {
 	@SuppressWarnings("unchecked")
 	private JSONObject sortEquipment(JSONObject corectedJSONObject){
 		JSONArray arrayToSort = (JSONArray) corectedJSONObject.get("equipment_manufacturer");
-
-		Collections.sort(arrayToSort);
+		JSONArray sortedArray = new JSONArray();
 		
-		corectedJSONObject.put("equipment_manufacturer", arrayToSort);
+		Iterator<JSONObject> iterator = arrayToSort.iterator();
+		while(iterator.hasNext()){
+			JSONObject current = iterator.next();
+			if( (boolean)current.get("show") ){
+				sortedArray.add(current.get("name"));
+			}
+		}
+
+		Collections.sort(sortedArray);
+		
+		corectedJSONObject.put("equipment_manufacturer", sortedArray);
 		return corectedJSONObject;
 	}
 	
