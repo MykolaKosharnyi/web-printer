@@ -504,7 +504,7 @@ public class PrinterController {
     
     @RequestMapping(value = "/admin/"+ TYPE +"/equipment_manufacturer", method = RequestMethod.POST)
 	public String changeEquipmentManufacturer(@RequestParam(value = "equipment_manufacturer") List<String> manufacturers) {
-    	componets.setNewValueOfParameter(TYPE, "equipment_manufacturer", manufacturers);
+    	componets.showValueOfParameter(TYPE, "equipment_manufacturer", manufacturers);
 	    return "redirect:/admin/"+ TYPE +"/equipment_manufacturer";
 	}
     
@@ -516,4 +516,10 @@ public class PrinterController {
     	result.put("result", componets.isParameterRepeated(TYPE, "equipment_manufacturer", name));
     	return result;
     }
+    
+    @RequestMapping(value = "/admin/"+ TYPE +"/add_equipment_manufacturer", method = RequestMethod.POST)
+	public String addquipmentManufacturer(@RequestParam(value = "new_equipment") String manufacturer) {
+    	componets.setNewValueOfParameter(TYPE, "equipment_manufacturer", manufacturer);
+	    return "redirect:/admin/"+ TYPE +"/equipment_manufacturer";
+	}
 }

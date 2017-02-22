@@ -32,17 +32,21 @@
 	<div id="product">
 		
 		<hr>
-			<h4>Добавление нового производителя</h4>
-
-<div class="form-group has-feedback">
-  <input type="text" class="form-control" id="new_equipment">
-  <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-  <p class="bg-success info_of_adding">Введенное значение удовлетворяет требованиям (нет повторения)!</p>
-  <p class="bg-danger info_of_adding">Есть повторение с раннее введенным производителем!</p>
-</div>		
-
-	<button class="btn btn-default">Добавить производителя</button>
+		<h4>Добавление нового производителя</h4>
 			
+		<c:url var="add_equipment_manufacturer" value="/admin/printer/add_equipment_manufacturer"></c:url>
+		<form class="form-horizontal" style="padding: 0px 10px;" action="${add_equipment_manufacturer}" method="post">
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+
+			<div class="form-group has-feedback">
+			  <input type="text" class="form-control" name="new_equipment" id="new_equipment">
+			  <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+			  <p class="bg-success info_of_adding">Введенное значение удовлетворяет требованиям (нет повторения)!</p>
+			  <p class="bg-danger info_of_adding">Есть повторение с раннее введенным производителем!</p>
+			</div>		
+
+			<button class="btn btn-default" disabled>Добавить производителя</button>
+		</form>			
 		
 		<hr>
 			<h4>Изменение вывода производителей для принтеров</h4>
@@ -83,11 +87,13 @@
 			        		ourElement.parent('div').find('span').removeClass('glyphicon-remove').addClass('glyphicon-ok');
 			        		ourElement.parent('div').find('.bg-success').css('display','block');
 			        		ourElement.parent('div').find('.bg-danger').css('display','none');
+			        		ourElement.parent('div').parent('form').find('button').removeProp('disabled');
 						} else {
 							ourElement.parent('div').removeClass('has-success').addClass('has-error');
 							ourElement.parent('div').find('span').removeClass('glyphicon-ok').addClass('glyphicon-remove');
 							ourElement.parent('div').find('.bg-success').css('display','none');
 							ourElement.parent('div').find('.bg-danger').css('display','block');
+							ourElement.parent('div').parent('form').find('button').prop("disabled", true);
 						}
 			        },
 				  error: function(xhr, status, error) {

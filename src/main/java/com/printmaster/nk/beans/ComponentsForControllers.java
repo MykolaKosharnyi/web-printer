@@ -300,20 +300,32 @@ public class ComponentsForControllers {
     	return isNoRepead;
     }
     
-    public void setNewValueOfParameter(String typeProduct, String nameParameter, List<String> values){
+    public void showValueOfParameter(String typeProduct, String nameParameter, List<String> values){
 
     	if(typeProduct.equals("rip")){
     		 jsonArrayParser(typeProduct);		
     		
     	} else {
     		JSONObject jsonWithCharakteristic = jsonObjectParser(typeProduct);   
-    		setNewParameters(jsonWithCharakteristic, nameParameter, values);
+    		setParametersToShow(jsonWithCharakteristic, nameParameter, values);
+    		saveObject(jsonWithCharakteristic, typeProduct);
+    	}
+    }
+    
+    public void setNewValueOfParameter(String typeProduct, String nameParameter, String value){
+
+    	if(typeProduct.equals("rip")){
+    		 jsonArrayParser(typeProduct);		
+    		
+    	} else {
+    		JSONObject jsonWithCharakteristic = jsonObjectParser(typeProduct);   
+    		setNewParameters(jsonWithCharakteristic, nameParameter, value);
     		saveObject(jsonWithCharakteristic, typeProduct);
     	}
     }
     
     @SuppressWarnings("unchecked")
-	private JSONObject setNewParameters(JSONObject changedObject, String nameParameter, List<String> values){
+	private JSONObject setParametersToShow(JSONObject changedObject, String nameParameter, List<String> values){
     	JSONArray arrayParameters = (JSONArray) changedObject.get(nameParameter);
     	
     	Iterator<JSONObject> iterator = arrayParameters.iterator();
@@ -321,6 +333,26 @@ public class ComponentsForControllers {
 			JSONObject current = iterator.next();
 			current.put("show", values.contains(current.get("name")));
 		}
+		
+		 Collections.sort(arrayParameters, new Comparator<JSONObject>(){
+			@Override
+			public int compare(JSONObject o1, JSONObject o2) {
+				return ((String) o1.get("name")).toLowerCase().compareTo(((String) o2.get("name")).toLowerCase());
+			}
+		});
+		
+    	changedObject.put(nameParameter, arrayParameters);
+    	return changedObject;
+    }
+    
+    @SuppressWarnings("unchecked")
+	private JSONObject setNewParameters(JSONObject changedObject, String nameParameter, String value){
+    	JSONArray arrayParameters = (JSONArray) changedObject.get(nameParameter);
+    	
+    	JSONObject newValue = new JSONObject();
+    	newValue.put("name", value);
+    	newValue.put("show", true);
+    	arrayParameters.add(newValue);
 		
 		 Collections.sort(arrayParameters, new Comparator<JSONObject>(){
 			@Override
