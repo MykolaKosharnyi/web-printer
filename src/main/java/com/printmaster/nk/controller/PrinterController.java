@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -506,4 +507,13 @@ public class PrinterController {
     	componets.setNewValueOfParameter(TYPE, "equipment_manufacturer", manufacturers);
 	    return "redirect:/admin/"+ TYPE +"/equipment_manufacturer";
 	}
+    
+    @SuppressWarnings("unchecked")
+	@RequestMapping(value="/admin/"+ TYPE +"/check_name_manufacture", method = RequestMethod.POST,
+    		produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.TEXT_PLAIN_VALUE)
+    public @ResponseBody JSONObject checkManufacture(@RequestBody String name) {
+    	JSONObject result = new JSONObject();
+    	result.put("result", componets.isParameterRepeated(TYPE, "equipment_manufacturer", name));
+    	return result;
+    }
 }

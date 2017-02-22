@@ -1,6 +1,5 @@
 package com.printmaster.nk.beans;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -270,6 +269,35 @@ public class ComponentsForControllers {
 			logger.error("Error in read " + typeOfProduct + ".json file", e);
 			throw new RuntimeException(e);
 		}
+    }
+    
+    public boolean isParameterRepeated(String typeProduct, String nameParameter, String nameToCheck){
+    	boolean isNoRepead = true;
+    	
+    	String check = nameToCheck.trim();
+//    	if(check.equals("")){
+//    		return false;
+//    	}
+    	
+    	if(typeProduct.equals("rip")){
+   		 jsonArrayParser(typeProduct);		
+   		
+	   	} else {
+	   		JSONObject jsonWithCharakteristic = jsonObjectParser(typeProduct);   
+	   		JSONArray arrayParameters = (JSONArray) jsonWithCharakteristic.get(nameParameter);
+	   		
+	   		@SuppressWarnings("unchecked")
+			Iterator<JSONObject> iterator = arrayParameters.iterator();
+			while(iterator.hasNext()){
+				JSONObject current = iterator.next();
+				if(current.get("name").toString().equalsIgnoreCase(check)){
+					isNoRepead= false;
+					break;
+				}
+			}
+	   	}
+    	
+    	return isNoRepead;
     }
     
     public void setNewValueOfParameter(String typeProduct, String nameParameter, List<String> values){
