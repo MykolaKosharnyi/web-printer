@@ -49,14 +49,6 @@ public class MailSendingMessage implements Serializable{
 		SENDED, WAITING, CANCELED
 	}
 	
-//	public List<String> getStatusesOfSending(){
-//		List<String> result = new ArrayList<>();
-//		for(StatusOfSending status : StatusOfSending.values()){
-//			result.add(status.toString());
-//		}
-//		return result;
-//	}
-	
 	public MailSendingMessage(){}
 
 	public Long getId() {

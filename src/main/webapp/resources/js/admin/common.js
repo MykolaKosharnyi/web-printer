@@ -2,6 +2,7 @@ tinymce.init({
 					selector : "#serviceInformation, #timeSharesText, #descriptionEng, #description",
 					theme : "modern",
 					language : "ru",
+					fullPage: true,
 					height: 400,
 					plugins : [
 							"advlist autolink lists link image charmap print preview hr anchor pagebreak",

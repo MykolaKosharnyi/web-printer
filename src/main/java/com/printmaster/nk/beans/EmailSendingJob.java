@@ -90,7 +90,7 @@ public class EmailSendingJob{
 		        
 		       // String encodingOptions = "text/html; charset=UTF-8";
 		       // msg.setContent(messageBody, encodingOptions);
-		        msg.setText(messageBody, "UTF-8", "html");
+		        msg.setText(messageBody.replace("../..", "http://e-machine.com.ua"), "UTF-8", "html");
 			} catch (UnsupportedEncodingException | MessagingException e) {
 				exceptionMailSender(e);
 			}

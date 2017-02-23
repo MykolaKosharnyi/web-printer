@@ -275,9 +275,9 @@ public class ComponentsForControllers {
     	boolean isNoRepead = true;
     	
     	String check = nameToCheck.trim();
-//    	if(check.equals("")){
-//    		return false;
-//    	}
+    	if(check.equals("")){
+    		return false;
+    	}
     	
     	if(typeProduct.equals("rip")){
    		 jsonArrayParser(typeProduct);		
