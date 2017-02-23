@@ -8,7 +8,7 @@
 
 <style>
 #user label{
-	font-size: 18px;
+	font-size: 16px;
 }
 
 #user tr:first-child td{
@@ -20,25 +20,33 @@
 }
 
 #user .checkbox label input[type=checkbox]{
-	margin-top: 7px;
+	margin-top: 4px;
 }
 </style>
 
-	<table class="table table-hover" id="user">
-		<c:forEach var="subscr" items="${listSubscription}" varStatus="status">
+<table class="table table-hover" id="user">
+	<c:forEach var="subscr" items="${listSubscription}">
+
+		<tr>
+			<td><h3>${subscr.key}</h3></td>
+		</tr>
+
+		<c:forEach var="val" items="${subscr.value}">
 			<tr>
 				<td>
 					<div class="checkbox">
-						<label> <input type="checkbox" name="subscription" value="${subscr}"
-							<c:forEach items="${user.subscription}" var="tp"> <c:if test="${subscr eq tp}">checked</c:if> </c:forEach> >
-							${subscr}
+						<label> <input type="checkbox" name="subscription" value="${val}"
+							<c:forEach items="${user.subscription}" var="tp"> <c:if test="${val eq tp}">checked</c:if> </c:forEach>>
+							${val}
 						</label>
 					</div>
 				</td>
 			</tr>
 		</c:forEach>
-	</table>
-	<div id="result_post"></div>
+
+	</c:forEach>
+</table>
+<div id="result_post"></div>
 	
 <script>
 

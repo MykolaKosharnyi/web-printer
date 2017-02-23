@@ -5,7 +5,7 @@ import java.util.List;
 import com.printmaster.nk.model.entity.UserAddByAdmin;
 
 public interface UserAddByAdminService {
-	List<UserAddByAdmin> getUserBySubscription(String[] subscriptionTypes);
+	List<UserAddByAdmin> getUserBySubscription(List<String> subscriptionTypes);
 	long save(UserAddByAdmin user);
     void updateUser(UserAddByAdmin user);
     UserAddByAdmin findByUserName(String username);

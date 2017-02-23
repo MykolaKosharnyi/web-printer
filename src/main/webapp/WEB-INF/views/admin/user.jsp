@@ -117,12 +117,23 @@ ul.list_without_dots input{
 		  </div>
 		  <div class="form-group">
 			<label class="col-sm-2 control-label">Подписки:</label>
-			<div class="col-sm-10">
-				<ul class="list_without_dots" style="list-style-type: none; padding: 0px;">
-					<form:checkboxes items="${listSubscription}" path="subscription" element="li"/>
-				</ul>
+				<div class="col-sm-10">
+					<c:forEach var="subscr" items="${listSubscription}">
+
+						<h4>${subscr.key}</h4>
+						<c:forEach var="val" items="${subscr.value}">
+							<div class="checkbox">
+								<label> <input type="checkbox" name="subscription"
+									value="${val}"
+									<c:forEach items="${user.subscription}" var="tp"> <c:if test="${val eq tp}">checked</c:if> </c:forEach>>
+									${val}
+								</label>
+							</div>
+						</c:forEach>
+
+					</c:forEach>
+				</div>
 			</div>
-		  </div>
 		  
 		  <div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">

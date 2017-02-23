@@ -1,6 +1,7 @@
 package com.printmaster.nk.model.dao.impl;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -85,15 +86,16 @@ public class UserAddByAdminDAOImpl implements UserAddByAdminDAO{
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<UserAddByAdmin> getUserBySubscription(String[] subscriptionTypes) {
+	public List<UserAddByAdmin> getUserBySubscription(List<String> subscriptionTypes) {
 		Session session = this.sessionFactory.getCurrentSession();
 		StringBuilder subscriptionsBuffer = new StringBuilder();
 		
-		for(int i = 0; i < subscriptionTypes.length; i++){			
+		Iterator<String> iterator = subscriptionTypes.iterator();
+		while(iterator.hasNext()){
 			subscriptionsBuffer.append("'")
-				.append(subscriptionTypes[i])
-				.append("'");
-			if(i!=(subscriptionTypes.length-1)){
+			.append(iterator.next())
+			.append("'");
+			if(iterator.hasNext()){
 				subscriptionsBuffer.append(",");
 			}
 		}

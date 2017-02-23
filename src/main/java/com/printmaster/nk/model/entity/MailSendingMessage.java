@@ -1,11 +1,14 @@
 package com.printmaster.nk.model.entity;
 
 import java.io.Serializable;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,8 +32,9 @@ public class MailSendingMessage implements Serializable{
 	@Column(name="message", columnDefinition="TEXT")
 	private String message;
 	
+	@ElementCollection(fetch = FetchType.EAGER)
 	@Column(name="subscription")
-	private String[] subscription;
+	private List<String> subscription = new ArrayList<String>();
 	
 	@Column(name="dateCreation")
 	@Temporal(TemporalType.TIMESTAMP)
@@ -75,14 +79,6 @@ public class MailSendingMessage implements Serializable{
 		this.message = message;
 	}
 
-	public String[] getSubscription() {
-		return subscription;
-	}
-
-	public void setSubscription(String[] subscription) {
-		this.subscription = subscription;
-	}
-
 	public Date getDateCreation() {
 		return dateCreation;
 	}
@@ -119,9 +115,17 @@ public class MailSendingMessage implements Serializable{
 		return serialVersionUID;
 	}
 
+	public List<String> getSubscription() {
+		return subscription;
+	}
+
+	public void setSubscription(List<String> subscription) {
+		this.subscription = subscription;
+	}
+
 	@Override
 	public String toString() {
-		return "MailSendingMessage [id=" + id + ", title=" + title + ", subscription=" + Arrays.toString(subscription)
+		return "MailSendingMessage [id=" + id + ", title=" + title 
 				+ ", dateCreation=" + dateCreation + ", dateSending=" + dateSending + ", dateLastChanging="
 				+ dateLastChanging + ", status=" + status + "]";
 	}

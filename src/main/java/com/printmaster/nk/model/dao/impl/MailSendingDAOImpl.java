@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.Restrictions;
 
 import com.printmaster.nk.model.dao.MailSendingDAO;
@@ -47,6 +48,7 @@ public class MailSendingDAOImpl implements MailSendingDAO {
 		Session session = this.sessionFactory.getCurrentSession();
 		Criteria cr = session.createCriteria(MailSendingMessage.class);
 
+		cr.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
         return new ArrayList<MailSendingMessage>(cr.list());
 	}
 

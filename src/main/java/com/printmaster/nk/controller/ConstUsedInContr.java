@@ -1,7 +1,9 @@
 package com.printmaster.nk.controller;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 interface ConstUsedInContr {
 	String DIRECTORY = "/var/www/localhost/images";
@@ -60,7 +62,7 @@ interface ConstUsedInContr {
 	String SCANNER = "scanner";
 	String USE_WITH_PRODUCT = "use_with_product";
 
-	List<String> listSubscription = new ArrayList<String>(){
+	List<String> listSubscription2 = new ArrayList<String>(){
 		private static final long serialVersionUID = 1L;
 		{
 			add("принтеры");
@@ -73,6 +75,119 @@ interface ConstUsedInContr {
 			add("б/у оборудование");
 			add("ПО");
 			add("сопутствующие товары");
+		}
+	};
+	
+	Map<String, List<String>> listSubscription = new LinkedHashMap<String, List<String>>(){
+		private static final long serialVersionUID = 1L;
+		{
+			put("Принтеры", new ArrayList<String>(){
+				private static final long serialVersionUID = 1L;
+				{
+					add("Сольвентные");
+					add("Экосольвентные");
+					add("UV рулонные");
+					add("UV плоскопечатные");
+					add("Сублимационные");
+					add("Текстильные");
+					add("Водные/Пигментные");
+					add("САПР/ГИС");
+				}
+			});
+			
+			put("3Д принтеры", new ArrayList<String>(){
+				private static final long serialVersionUID = 1L;
+				{
+					add("Экструдные FDM ");
+					add("Фото печать Polyjet");
+				    add("Лазерного спекания LENS");
+				    add("Ламинации LOM");
+				    add("Стереолитографии SL");
+				    add("Лазерного спекания LS");
+				    add("Порошкового склеивания 3DP");
+				}
+			});
+			
+			put("Цифровое оборудование", new ArrayList<String>(){
+				private static final long serialVersionUID = 1L;
+				{
+					add("Полноцветное лазерное оборудование");
+					add("Монохромное лазерное оборудование");
+					add("Полноцветное струйное оборудование");
+				}
+			});
+			
+			put("Ламинаторы", new ArrayList<String>(){
+				private static final long serialVersionUID = 1L;
+				{
+					add("Горячего ламинирования");
+					add("Холодного ламинирования");
+					add("Жидкостные");
+					add("Планшетный ламинатор");
+				}
+			});
+			
+			put("Лазеры", new ArrayList<String>(){
+				private static final long serialVersionUID = 1L;
+				{
+					add("Газовые лазеры СО2");
+					add("Твердотельные лазеры");
+					add("Для обработки метала");
+					add("С диодной накачкой");
+					add("Оптоволоконные лазеры");
+					add("Плазменные лазеры");	
+				}
+			});
+			
+			put("Фрезеры", new ArrayList<String>(){
+				private static final long serialVersionUID = 1L;
+				{
+					add("Для обработки дерева");
+					add("Для обработки металла");
+					add("Для обработки камня");	
+				}
+			});
+			
+			put("Сканеры", new ArrayList<String>(){
+				private static final long serialVersionUID = 1L;
+				{
+					add("Широкоформатные сканеры");
+					add("3D Сканеры");  
+				}
+			});
+			
+			put("Б/у оборудование", new ArrayList<String>(){
+				private static final long serialVersionUID = 1L;
+				{
+					add("Сольвентные принтеры");
+					add("Экосольвентные принтеры");
+					add("UV рулонные принтеры");
+					add("UV плоскопечатные принтеры");
+					add("Сублимационные принтеры");
+					add("Текстильные принтеры");
+					add("Водные/Пигментные принтеры");
+					add("САПР/ГИС принтеры");
+				}
+			});
+			
+			put("ПО", new ArrayList<String>(){
+				private static final long serialVersionUID = 1L;
+				{
+					add("ПО");
+				}
+			});
+			
+			put("Сопутствующие товары", new ArrayList<String>(){
+				private static final long serialVersionUID = 1L;
+				{
+					add("Чернила для струйной печати");
+					add("Расходные материалы для цифрового оборудования");
+					add("Расходные материалы для 3D оборудования");
+					add("Товары для обслуживания");
+					add("Запчасти и комплектующие");
+				}
+			});
+			
 		}
 	};
 	
