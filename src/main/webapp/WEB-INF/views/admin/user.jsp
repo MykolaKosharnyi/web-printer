@@ -96,6 +96,18 @@ ul.list_without_dots input{
 			</div>
 		  </div>
 		  <div class="form-group">
+			<label for="email2" class="col-sm-2 control-label">E-mail2:</label>
+			<div class="col-sm-10">
+			  <form:input path="email2" class="form-control" value="${user.email2}"/>
+			</div>
+		  </div>
+		  <div class="form-group">
+			<label for="email3" class="col-sm-2 control-label">E-mail3:</label>
+			<div class="col-sm-10">
+			  <form:input path="email3" class="form-control" value="${user.email3}"/>
+			</div>
+		  </div>
+		  <div class="form-group">
 			<label for="date_sending" class="col-sm-2 control-label">День рождения:</label>
 			<div class="col-sm-10">
 				<div id="datetimepicker" class="input-group input-append date" style="height: 25px;">

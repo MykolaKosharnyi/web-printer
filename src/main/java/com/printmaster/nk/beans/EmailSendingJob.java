@@ -77,14 +77,29 @@ public class EmailSendingJob{
 		for(UserAddByAdmin user : usersList){
 
 			MimeMessage msg = mailSender.createMimeMessage();
+			
+			StringBuilder mailsConcat = new StringBuilder();
+			mailsConcat.append(user.getEmail());
+			
+			if(user.getEmail2()!=null && !user.getEmail2().isEmpty()){
+				mailsConcat.append(",");
+				mailsConcat.append(user.getEmail2());
+			}
+			
+			if(user.getEmail3()!=null && !user.getEmail3().isEmpty()){
+				mailsConcat.append(",");
+				mailsConcat.append(user.getEmail3());
+			}
 
 			try {
 				Address adresFrom = new InternetAddress("noreplay@forprint.net.ua", "e-machine.com.ua");
-				Address adresTO = new InternetAddress(user.getEmail());
+//				Address adresTO = new InternetAddress(user.getEmail());
 		        
 		        msg.setContent("Mail contect", "text/html");
 		        msg.setFrom(adresFrom);
-		        msg.setRecipient(Message.RecipientType.TO, adresTO );
+//		        msg.setRecipient(Message.RecipientType.TO, adresTO );
+//		        msg.setRecipients(type, addresses);
+		        msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(mailsConcat.toString()));
 
 		        msg.setSubject(subject, "UTF-8");
 		        

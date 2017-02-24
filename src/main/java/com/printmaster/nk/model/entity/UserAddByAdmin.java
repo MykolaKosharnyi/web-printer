@@ -50,6 +50,12 @@ public class UserAddByAdmin implements Serializable{
 	@Column(name="email", unique = true)
 	private String email;
 	
+	@Column(name="email2")
+	private String email2;
+	
+	@Column(name="email3")
+	private String email3;
+	
 	@Column(name="date_of_birth_bay")
 	private Date dateOfBirthDay;
 	
@@ -173,6 +179,22 @@ public class UserAddByAdmin implements Serializable{
 
 	public void setScopeOfActivities(List<String> scopeOfActivities) {
 		this.scopeOfActivities = scopeOfActivities;
+	}
+
+	public String getEmail2() {
+		return email2;
+	}
+
+	public void setEmail2(String email2) {
+		this.email2 = email2;
+	}
+
+	public String getEmail3() {
+		return email3;
+	}
+
+	public void setEmail3(String email3) {
+		this.email3 = email3;
 	}
 	
 }

@@ -76,9 +76,10 @@ public class MailSendingDAOImpl implements MailSendingDAO {
 		Session session = this.sessionFactory.getCurrentSession();
 		Criteria cr = session.createCriteria(MailSendingMessage.class);
 		
-//		cr.add(Restrictions.eq("id", 3l));
+//		cr.add(Restrictions.eq("id", 4l));
 		cr.add(Restrictions.eq("status", StatusOfSending.WAITING));
 		cr.add(Restrictions.le("dateSending", new Date()));
+		cr.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 				
 		return new ArrayList<MailSendingMessage>(cr.list());
 	}

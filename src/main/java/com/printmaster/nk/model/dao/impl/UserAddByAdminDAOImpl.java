@@ -101,7 +101,7 @@ public class UserAddByAdminDAOImpl implements UserAddByAdminDAO{
 		}
 		
 		String query =	String.format("select distinct user from UserAddByAdmin user "+
-				"join user.subscription subscription "+
+				"inner join user.subscription subscription "+
 				"where subscription in (%s)", subscriptionsBuffer.toString());
 		
 		return session.createQuery(query).list();		
