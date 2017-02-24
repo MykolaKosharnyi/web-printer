@@ -65,6 +65,9 @@
 					<c:if test="${message.status.toString() eq 'CANCELED'}">						
 						<td><button type="button" class="btn btn-danger">Рассылка отменена</button></td>
 					</c:if>
+					<c:if test="${message.status.toString() eq 'MODIFICATION_PROCESS'}">						
+						<td><button type="button" class="btn btn-info">Режим модификации</button></td>
+					</c:if>
 
 					<td width="60px"><a href="<c:url value='/admin/message/copy/${message.id}' />"><i class="fa fa-clone clone" aria-hidden="true"></i></a></td>
 					<td width="60px">						

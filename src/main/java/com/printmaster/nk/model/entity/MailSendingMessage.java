@@ -50,7 +50,7 @@ public class MailSendingMessage implements Serializable{
 	private StatusOfSending status;
 	
 	public static enum StatusOfSending{
-		SENDED, WAITING, CANCELED
+		SENDED, WAITING, CANCELED, MODIFICATION_PROCESS
 	}
 	
 	public MailSendingMessage(){}

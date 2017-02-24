@@ -100,13 +100,37 @@
 				</div>
 			</div>
 		  </div>
+		  
+		  <c:if test="${mailMessage.status.toString() eq 'WAITING' ||
+			  		 mailMessage.status.toString() eq 'MODIFICATION_PROCESS'}">
+			  <div class="form-group">
+				<label for="date_sending" class="col-sm-2 control-label">Статус:</label>
+				<div class="col-sm-10">
+					<c:if test="${mailMessage.status.toString() eq 'WAITING'}">
+			  		 	<button type="button" id="status_button" class="btn btn-warning">Oжидание отправки</button>
+			  		 </c:if>
+					
+					<c:if test="${mailMessage.status.toString() eq 'MODIFICATION_PROCESS'}">
+			  		 	<button type="button" id="status_button" class="btn btn-info">Режим модификации</button>
+			  		 </c:if>
+				</div>
+			  </div>
+		  </c:if>
 
 		  <div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">
-			  <button type="submit" class="btn btn-primary">
-			  	<c:if test="${empty mailMessage.id || mailMessage.id==0}">Сохранить</c:if>
-			  	<c:if test="${!empty mailMessage.id && mailMessage.id!=0}">Изменить</c:if>
-			  </button>
+			  
+			  	<c:if test="${empty mailMessage.id || mailMessage.id==0}">
+			  		<button type="submit" class="btn btn-primary">Сохранить</button>
+			  	</c:if>
+			  	
+			  	<c:if test="${!empty mailMessage.id && mailMessage.id!=0}">
+			  		<c:if test="${mailMessage.status.toString() eq 'WAITING' ||
+			  		 mailMessage.status.toString() eq 'MODIFICATION_PROCESS'}">
+			  			<button type="submit" class="btn btn-primary">Изменить</button>
+			  		</c:if>
+			  	</c:if>
+			  
 			</div>
 		  </div>
 
@@ -123,6 +147,19 @@
 				pickTime: true,
 				pickDate: true,
 				startDate: new Date()
+			});
+		});
+    
+		$(function() {
+			$('#status_button').click(function(){
+				
+				if($(this).hasClass("btn-warning")){
+					$(this).removeClass("btn-warning").addClass("btn-info").html('Режим модификации');
+					$("input[name='status']").val("MODIFICATION_PROCESS");
+				} else {
+					$(this).removeClass("btn-info").addClass("btn-warning").html('Oжидание отправки');
+					$("input[name='status']").val("WAITING");
+				}
 			});
 		});
 	</script>

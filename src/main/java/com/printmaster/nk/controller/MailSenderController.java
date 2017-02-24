@@ -1,7 +1,6 @@
 package com.printmaster.nk.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,18 +12,29 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.printmaster.nk.model.entity.MailSendingMessage;
+import com.printmaster.nk.model.entity.MailSendingMessage.StatusOfSending;
 import com.printmaster.nk.model.service.MailSendingService;
 
 import static com.printmaster.nk.controller.ConstUsedInContr.*;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.io.UnsupportedEncodingException;
+
+import javax.mail.Address;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 @Controller
 public class MailSenderController {
 	
 	@Autowired
-    private MailSender mailSender;
+    private JavaMailSenderImpl mailSender;
 	
 	@Autowired
 	private MailSendingService mailSendingService;
@@ -77,7 +87,50 @@ public class MailSenderController {
 		    return putMessagePageParameters(model, mailMessage);
 		}		
 		mailSendingService.update(mailMessage);
+		if(mailMessage.getStatus().equals(StatusOfSending.MODIFICATION_PROCESS)){
+			sendMessageToCheck(mailMessage);
+		}
 		return "redirect:/admin/all_sended_messages";
+	}
+	
+	private void sendMessageToCheck(MailSendingMessage mailMessage){
+		String subject = mailMessage.getTitle();
+		String messageBody = mailMessage.getMessage();
+		
+		MimeMessage msg = mailSender.createMimeMessage();
+
+		try {
+			Address adresFrom = new InternetAddress("noreplay@forprint.net.ua", "e-machine.com.ua");
+	        
+	        msg.setContent("Mail contect", "text/html");
+	        msg.setFrom(adresFrom);
+	        msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("alise@forprint.net.ua,nikolay.kosharniy@gmail.com"));
+
+	        msg.setSubject(subject, "UTF-8");
+	       
+	        msg.setText(messageBody.replace("../..", "http://e-machine.com.ua"), "UTF-8", "html");
+		} catch (UnsupportedEncodingException | MessagingException e) {
+			exceptionMailSender(e);
+		}
+
+		mailSender.send(msg);
+	}
+	
+	private void exceptionMailSender(Exception ex){
+		SimpleMailMessage email = new SimpleMailMessage();
+		email.setFrom("noreplay@forprint.net.ua");
+		email.setTo("nikolay.kosharniy@gmail.com");
+		email.setSubject("Error!");
+		email.setText(getStackTrace(ex));
+
+		mailSender.send(email);
+	}
+	
+	private String getStackTrace(final Throwable throwable) {
+	     final StringWriter sw = new StringWriter();
+	     final PrintWriter pw = new PrintWriter(sw, true);
+	     throwable.printStackTrace(pw);
+	     return sw.getBuffer().toString();
 	}
 	
 	@RequestMapping(value = "/admin/message/{id}", method = RequestMethod.GET)
