@@ -39,6 +39,9 @@ public class MailSenderController {
 	@Autowired
 	private MailSendingService mailSendingService;
 	
+	private final static String HOST_EMAIL = "noreplay@forprint.net.ua";
+	private final static String ADMIN_EMAIL = "nikolay.kosharniy@gmail.com";
+	
 	@RequestMapping(value="/ask/product", method = RequestMethod.POST, consumes=JSON_CONSUMES,
 			headers = JSON_HEADERS)
     public @ResponseBody void askProductPage(HttpServletRequest request) {
@@ -49,7 +52,7 @@ public class MailSenderController {
          
         // creates a simple e-mail object
         SimpleMailMessage email = new SimpleMailMessage();
-        email.setFrom("noreplay@forprint.net.ua");
+        email.setFrom(HOST_EMAIL);
         email.setTo(recipientAddress);
         email.setSubject(subject);
         email.setText(message);
@@ -100,7 +103,7 @@ public class MailSenderController {
 		MimeMessage msg = mailSender.createMimeMessage();
 
 		try {
-			Address adresFrom = new InternetAddress("noreplay@forprint.net.ua", "e-machine.com.ua");
+			Address adresFrom = new InternetAddress(HOST_EMAIL, "e-machine.com.ua");
 	        
 	        msg.setContent("Mail contect", "text/html");
 	        msg.setFrom(adresFrom);
@@ -118,8 +121,8 @@ public class MailSenderController {
 	
 	private void exceptionMailSender(Exception ex){
 		SimpleMailMessage email = new SimpleMailMessage();
-		email.setFrom("noreplay@forprint.net.ua");
-		email.setTo("nikolay.kosharniy@gmail.com");
+		email.setFrom(HOST_EMAIL);
+		email.setTo(ADMIN_EMAIL);
 		email.setSubject("Error!");
 		email.setText(getStackTrace(ex));
 
