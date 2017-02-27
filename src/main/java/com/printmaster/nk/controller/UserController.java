@@ -2,6 +2,8 @@ package com.printmaster.nk.controller;
 
 import static com.printmaster.nk.controller.ConstUsedInContr.*;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
@@ -159,7 +161,7 @@ public class UserController {
 	
 	@RequestMapping(value = "/user/subscription", method = RequestMethod.POST,consumes=JSON_CONSUMES,
     		headers = JSON_HEADERS)
-	public @ResponseBody void subscriptionPOST(@RequestBody String[] subscriptionFromForm) {
+	public @ResponseBody void subscriptionPOST(@RequestBody List<String> subscriptionFromForm) {
 		User user = getUser();
 		user.setSubscription(subscriptionFromForm);
 		userService.updateUser(user);

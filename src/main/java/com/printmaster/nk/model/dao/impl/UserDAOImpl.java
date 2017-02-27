@@ -68,22 +68,6 @@ public class UserDAOImpl implements UserDAO{
         }
         logger.info("User deleted successfully, User details=" + user);	
 	}
-
-//	@Override
-//	public User findByUsername(String username) {
-//		User result = null;
-//		Iterator<User> iterator = listUsers().iterator();
-//		
-//		while(iterator.hasNext()){
-//			User current = iterator.next();
-//			if(current.getUsername().equals(username)){
-//				result = current;
-//				break;
-//			}
-//		}
-//		
-//		return result;
-//	}
 	
 	@SuppressWarnings("unchecked")
 	@Override

@@ -7,6 +7,9 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 @Entity
 @Table(name="user")
 public class User implements Serializable{
@@ -58,37 +61,22 @@ public class User implements Serializable{
 	@Transient
 	private String passwordConfirm;
 	
-//	@OneToOne(cascade=CascadeType.ALL)
-//    @JoinTable(name="user_roles",
-//        joinColumns = {@JoinColumn(name="user_id", referencedColumnName="id")},
-//        inverseJoinColumns = {@JoinColumn(name="role_id", referencedColumnName="id")}
-//    )
-	
-/*	@OneToMany(fetch = FetchType.LAZY, mappedBy = "comment")
-	protected Set<Comment> comments = new HashSet<Comment>(0);*/
-	
 	@Column(name="role")
     private String role;
 	
 	@Column(name="nameUserPicture")
 	private String nameUserPicture;
 	
+	@ElementCollection(fetch = FetchType.EAGER)
 	@Column(name="subscription")
-	private String[] subscription;
+	@Fetch(value = FetchMode.SUBSELECT)
+	private List<String> subscription = new ArrayList<String>();
 	
 	@ElementCollection(fetch = FetchType.EAGER)
 	@Column(name="scopeOfActivities")
 	private List<String> scopeOfActivities = new ArrayList<String>();
 	
 	public User(){}
-
-	public String[] getSubscription() {
-		return subscription;
-	}
-
-	public void setSubscription(String[] subscription) {
-		this.subscription = subscription;
-	}
 
 	public boolean isEnabled() {
 		return enabled;
@@ -235,6 +223,14 @@ public class User implements Serializable{
 
 	public void setScopeOfActivities(List<String> scopeOfActivities) {
 		this.scopeOfActivities = scopeOfActivities;
+	}
+
+	public List<String> getSubscription() {
+		return subscription;
+	}
+
+	public void setSubscription(List<String> subscription) {
+		this.subscription = subscription;
 	}
 
 }
