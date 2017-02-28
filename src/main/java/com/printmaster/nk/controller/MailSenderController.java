@@ -151,6 +151,7 @@ public class MailSenderController {
 	public String copyMessage(@PathVariable("id") long id, Model model) {
 		MailSendingMessage result = mailSendingService.copyMassage(id);
 		result.setId(0l);
+		result.setStatus(null);
 		return putMessagePageParameters(model, result);
 	}
 	

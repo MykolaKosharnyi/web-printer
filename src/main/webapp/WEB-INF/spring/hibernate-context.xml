@@ -148,5 +148,12 @@
     <beans:bean id="mailSendingService" class="com.printmaster.nk.model.service.impl.MailSendingServiceImpl">
         <beans:property name="mailSendingDAO" ref="mailSendingDAO"></beans:property>
     </beans:bean>
+    
+    <beans:bean id="commentDAO" class="com.printmaster.nk.model.dao.impl.CommentDAOImpl">
+        <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+    </beans:bean>
+    <beans:bean id="commentService" class="com.printmaster.nk.model.service.impl.CommentServiceImpl">
+        <beans:property name="commentDAO" ref="commentDAO"></beans:property>
+    </beans:bean>
  
 </beans:beans>

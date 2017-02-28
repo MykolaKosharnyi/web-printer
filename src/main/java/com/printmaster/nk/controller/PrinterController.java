@@ -32,6 +32,7 @@ import com.printmaster.nk.beans.PicturesContainer;
 import com.printmaster.nk.model.entity.Printer;
 import com.printmaster.nk.model.entity.UseWithProduct;
 import com.printmaster.nk.model.entity.search.SearchPrinters;
+import com.printmaster.nk.model.service.CommentService;
 import com.printmaster.nk.model.service.PrinterService;
 import com.printmaster.nk.model.service.UseWithProductService;
 
@@ -78,6 +79,9 @@ public class PrinterController {
     }
     
     private UseWithProductService useWithProductService;
+    
+    @Autowired
+	private CommentService commentService;
 	
 	@Autowired(required=true)
     @Qualifier(value="useWithProductService")
@@ -139,6 +143,7 @@ public class PrinterController {
         Printer product = printerService.getProductById(id);
         model.addAttribute("product", product);
         model.addAttribute("type", TYPE);
+        model.addAttribute("comments", commentService.getAllForProduct(TYPE, id));
         
         if(product.getIdUseWithProduct()!=null || product.getCompatibleInk()!=null){
 	        Set<UseWithProduct> useWithThisProduct = new LinkedHashSet<UseWithProduct>();

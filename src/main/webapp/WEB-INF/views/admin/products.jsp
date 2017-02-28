@@ -120,7 +120,7 @@
 			  url: "/admin/${productType}/${productSubType}/sorting/" + value,
 			  contentType: "application/json; charset=utf-8",
               dataType: "json"
-			  }).done(function( data ) {
+			  }).done(function(data) {
 				  $('.output_pruduct').remove();
 				  
 				  $(data).each(function(i, product) {

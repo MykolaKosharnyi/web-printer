@@ -171,7 +171,7 @@
     			success: function(result){
     				li.id = result;
     			}
-    			}).submit();
+    		}).submit();
 
     		if (typeof FileReader !== "undefined"
     				&& (/image/i).test(file.type)) {
