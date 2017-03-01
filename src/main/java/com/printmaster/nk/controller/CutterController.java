@@ -25,8 +25,10 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.printmaster.nk.beans.ComponentsForControllers;
 import com.printmaster.nk.beans.LinksForProducts;
 import com.printmaster.nk.beans.PicturesContainer;
+import com.printmaster.nk.model.entity.Comment;
 import com.printmaster.nk.model.entity.Cutter;
 import com.printmaster.nk.model.entity.search.SearchCutters;
+import com.printmaster.nk.model.service.CommentService;
 import com.printmaster.nk.model.service.CutterService;
 import com.printmaster.nk.model.service.UseWithProductService;
 
@@ -65,6 +67,9 @@ public class CutterController {
 
     @Autowired
     PicturesContainer files;
+    
+    @Autowired
+	private CommentService commentService;
  
     private CutterService productService;
     
@@ -137,6 +142,8 @@ public class CutterController {
         model.addAttribute(ATTRIBUTE_UWP, product.getIdUseWithProduct()!=null ?
         		componets.showSimplestArrayOfUseWithProduct(useWithProductService.getProductsByIds(product.getIdUseWithProduct())) : null);
         
+        model.addAttribute("comments", commentService.getAllForProduct(TYPE, id));
+        model.addAttribute("addComment", new Comment());
         return TYPE;
     }
     

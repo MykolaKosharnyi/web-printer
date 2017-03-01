@@ -37,8 +37,10 @@ import com.printmaster.nk.beans.ComponentsForControllers;
 import com.printmaster.nk.beans.FileMeta;
 import com.printmaster.nk.beans.LinksForProducts;
 import com.printmaster.nk.beans.PicturesContainer;
+import com.printmaster.nk.model.entity.Comment;
 import com.printmaster.nk.model.entity.Rip;
 import com.printmaster.nk.model.entity.search.SearchRips;
+import com.printmaster.nk.model.service.CommentService;
 import com.printmaster.nk.model.service.RipService;
 
 @Controller
@@ -58,6 +60,9 @@ public class RipController {
     
     @Autowired
     ComponentsForControllers componets;
+    
+    @Autowired
+	private CommentService commentService;
  
     private RipService ripService;
     
@@ -95,6 +100,8 @@ public class RipController {
     	logger.info("/rip/" + id + " page.");
         model.addAttribute("product", ripService.getProductById(id));
         model.addAttribute("type", "rip");
+        model.addAttribute("comments", commentService.getAllForProduct(TYPE, id));
+        model.addAttribute("addComment", new Comment());
         return "rip";
     }
     

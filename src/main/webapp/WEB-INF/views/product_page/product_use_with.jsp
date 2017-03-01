@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<div>
+<div id="use_with_product_block">
 	<c:if test="${!empty uwp}">			  
 		<c:forEach items="${uwp}" var="uwProduct">
 			<div class="use_with_product">

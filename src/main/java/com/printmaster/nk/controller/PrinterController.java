@@ -29,6 +29,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.printmaster.nk.beans.ComponentsForControllers;
 import com.printmaster.nk.beans.LinksForProducts;
 import com.printmaster.nk.beans.PicturesContainer;
+import com.printmaster.nk.model.entity.Comment;
 import com.printmaster.nk.model.entity.Printer;
 import com.printmaster.nk.model.entity.UseWithProduct;
 import com.printmaster.nk.model.entity.search.SearchPrinters;
@@ -144,6 +145,7 @@ public class PrinterController {
         model.addAttribute("product", product);
         model.addAttribute("type", TYPE);
         model.addAttribute("comments", commentService.getAllForProduct(TYPE, id));
+        model.addAttribute("addComment", new Comment());
         
         if(product.getIdUseWithProduct()!=null || product.getCompatibleInk()!=null){
 	        Set<UseWithProduct> useWithThisProduct = new LinkedHashSet<UseWithProduct>();

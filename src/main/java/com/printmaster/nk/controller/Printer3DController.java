@@ -27,8 +27,10 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.printmaster.nk.beans.ComponentsForControllers;
 import com.printmaster.nk.beans.LinksForProducts;
 import com.printmaster.nk.beans.PicturesContainer;
+import com.printmaster.nk.model.entity.Comment;
 import com.printmaster.nk.model.entity.Printer3D;
 import com.printmaster.nk.model.entity.search.SearchPrinters3D;
+import com.printmaster.nk.model.service.CommentService;
 import com.printmaster.nk.model.service.Printer3DService;
 import com.printmaster.nk.model.service.UseWithProductService;
 
@@ -66,6 +68,9 @@ public class Printer3DController {
 	
 	@Autowired
     ComponentsForControllers componets;
+	
+	@Autowired
+	private CommentService commentService;
 	
     private Printer3DService productService;
 
@@ -140,7 +145,8 @@ public class Printer3DController {
         model.addAttribute(ATTRIBUTE_TYPE, TYPE);       
         model.addAttribute(ATTRIBUTE_UWP, product.getIdUseWithProduct()!=null ?
         		componets.showSimplestArrayOfUseWithProduct(useWithProductService.getProductsByIds(product.getIdUseWithProduct())) : null);
-        
+        model.addAttribute("comments", commentService.getAllForProduct(TYPE, id));
+        model.addAttribute("addComment", new Comment());
         return TYPE;
     }
     

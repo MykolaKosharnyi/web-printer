@@ -29,6 +29,15 @@ public class Comment implements Serializable{
 	@Column(name="message", columnDefinition="TEXT")
 	private String message;
 	
+	@Column(name="nameUser")
+	private String nameUser;
+	
+	@Column(name="secondName")
+	private String secondName;
+	
+	@Column(name="pathUserPicture")
+	private String pathUserPicture;
+	
 	@Column(name="userId")
 	private long userId;
 	
@@ -39,6 +48,30 @@ public class Comment implements Serializable{
 	private long productId;
 	
 	public Comment(){}
+
+	public String getNameUser() {
+		return nameUser;
+	}
+
+	public void setNameUser(String nameUser) {
+		this.nameUser = nameUser;
+	}
+
+	public String getSecondName() {
+		return secondName;
+	}
+
+	public void setSecondName(String secondName) {
+		this.secondName = secondName;
+	}
+
+	public String getPathUserPicture() {
+		return pathUserPicture;
+	}
+
+	public void setPathUserPicture(String pathUserPicture) {
+		this.pathUserPicture = pathUserPicture;
+	}
 
 	public Long getId() {
 		return id;

@@ -27,8 +27,10 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.printmaster.nk.beans.ComponentsForControllers;
 import com.printmaster.nk.beans.LinksForProducts;
 import com.printmaster.nk.beans.PicturesContainer;
+import com.printmaster.nk.model.entity.Comment;
 import com.printmaster.nk.model.entity.UseWithProduct;
 import com.printmaster.nk.model.entity.search.SearchUseWithProducts;
+import com.printmaster.nk.model.service.CommentService;
 import com.printmaster.nk.model.service.UseWithProductService;
 
 @Controller
@@ -66,6 +68,9 @@ public class UseWithProductController {
     
     @Autowired
     ComponentsForControllers componets;
+    
+    @Autowired
+	private CommentService commentService;
  
     private UseWithProductService useWithProductService;
     
@@ -126,7 +131,9 @@ public class UseWithProductController {
         
     	UseWithProduct product = useWithProductService.getProductById(id);
         model.addAttribute(ATTRIBUTE_PRODUCT, product);
-        model.addAttribute(ATTRIBUTE_TYPE, TYPE);       
+        model.addAttribute(ATTRIBUTE_TYPE, TYPE); 
+        model.addAttribute("comments", commentService.getAllForProduct(TYPE, id));
+        model.addAttribute("addComment", new Comment());
         
         return TYPE;
     }

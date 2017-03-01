@@ -27,8 +27,10 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.printmaster.nk.beans.ComponentsForControllers;
 import com.printmaster.nk.beans.LinksForProducts;
 import com.printmaster.nk.beans.PicturesContainer;
+import com.printmaster.nk.model.entity.Comment;
 import com.printmaster.nk.model.entity.DigitalPrinter;
 import com.printmaster.nk.model.entity.search.SearchDigitalPrinters;
+import com.printmaster.nk.model.service.CommentService;
 import com.printmaster.nk.model.service.DigitalPrinterService;
 import com.printmaster.nk.model.service.UseWithProductService;
 
@@ -67,6 +69,9 @@ public class PrinterDigitalController {
     PicturesContainer files;
 
     private DigitalPrinterService productService;
+    
+    @Autowired
+	private CommentService commentService;
     
     @Autowired(required=true)
     @Qualifier(value="digitalPrinterService")
@@ -136,7 +141,8 @@ public class PrinterDigitalController {
         model.addAttribute(ATTRIBUTE_TYPE, TYPE);       
         model.addAttribute(ATTRIBUTE_UWP, product.getIdUseWithProduct()!=null ?
         		componets.showSimplestArrayOfUseWithProduct(useWithProductService.getProductsByIds(product.getIdUseWithProduct())) : null);
-        
+        model.addAttribute("comments", commentService.getAllForProduct(TYPE, id));
+        model.addAttribute("addComment", new Comment());
         return TYPE;
     }
     
