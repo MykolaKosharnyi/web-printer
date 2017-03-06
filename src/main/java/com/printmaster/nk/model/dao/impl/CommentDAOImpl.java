@@ -21,10 +21,9 @@ public class CommentDAOImpl implements CommentDAO{
     }
 
 	@Override
-	public void add(Comment comment) {
+	public long add(Comment comment) {
 		Session session = this.sessionFactory.getCurrentSession();
-         session.save(comment);
-
+         return (Long) session.save(comment);    
 	}
 
 	@Override
@@ -67,6 +66,14 @@ public class CommentDAOImpl implements CommentDAO{
 		Criteria cr = session.createCriteria(Comment.class);
 		cr.add(Restrictions.eq("userId", id));
 		return cr.list();
+	}
+
+	@Override
+	public Comment findById(long id) {
+		Session session = this.sessionFactory.getCurrentSession();
+		Criteria cr = session.createCriteria(Comment.class);
+		cr.add(Restrictions.eq("id", id));
+		return (Comment) cr.uniqueResult();
 	}
 
 }

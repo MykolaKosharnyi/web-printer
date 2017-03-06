@@ -35,8 +35,7 @@ public class CommentServiceImpl implements CommentService{
 		comment.setPathUserPicture(userLivedComment.getNameUserPicture());
 		comment.setNameUser(userLivedComment.getFirstName());
 		comment.setSecondName(userLivedComment.getLastname());
-		
-		//commentDAO.add(comment);
+		comment.setId( commentDAO.add(comment) );
 	}
 	
 	private User getUser(){
@@ -59,8 +58,20 @@ public class CommentServiceImpl implements CommentService{
 
 	@Override
 	@Transactional
-	public void delete(long id) {
-		commentDAO.delete(id);
+	public boolean delete(long id) {
+		
+		if(checkCommentBelongCurrentUser(id)){
+			commentDAO.delete(id);
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
+	
+	private boolean checkCommentBelongCurrentUser(long id){
+		Comment comment = commentDAO.findById(id);
+		return new Long(comment.getUserId()).equals(new Long(getUser().getId()));
 	}
 
 	@Override
