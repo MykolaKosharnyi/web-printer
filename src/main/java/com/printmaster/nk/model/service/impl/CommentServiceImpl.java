@@ -92,4 +92,10 @@ public class CommentServiceImpl implements CommentService{
 		return commentDAO.getAllForUser(id);
 	}
 
+	@Override
+	@Transactional
+	public Comment findById(long id) {
+		return commentDAO.findById(id);
+	}
+
 }
