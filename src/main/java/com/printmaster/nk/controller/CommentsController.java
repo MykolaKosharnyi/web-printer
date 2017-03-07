@@ -17,6 +17,7 @@ import org.springframework.http.MediaType;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,6 +38,12 @@ public class CommentsController {
 	
 	private final static String HOST_EMAIL = "noreplay@forprint.net.ua";
 	private final static String ADMIN_EMAIL = "nikolay.kosharniy@gmail.com";
+	
+	@RequestMapping(value="/admin/comments", method = RequestMethod.GET)
+    public String allComments(Model model) {	
+		model.addAttribute("comments", commentService.getAllComments());
+    	return "admin/comments";
+    }
 	
 	@RequestMapping(value="/comment/add", method = RequestMethod.POST)
     public @ResponseBody Comment addNewComment(@ModelAttribute("addComment") @Valid Comment comment) {	

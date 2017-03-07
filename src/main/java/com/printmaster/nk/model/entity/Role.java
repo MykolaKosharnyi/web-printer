@@ -19,7 +19,7 @@ public class Role implements Serializable{
     
     @Column(name="name")
     private String name;
-    
+       
 //    @OneToMany(cascade=CascadeType.ALL)
 //    @JoinTable(name="user_roles", 
 //        joinColumns = {@JoinColumn(name="role_id", referencedColumnName="id")},
