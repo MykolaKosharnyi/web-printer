@@ -16,17 +16,7 @@
 	<title>
 		<spring:message text="Изменение вывода производителей для принтеров" />
 	</title>
-	
-	<style type="text/css">
-		
-		.info_of_adding{
-			border-radius: 5px;
-			margin: 5px 0px;
-			padding: 5px;
-			font-weight:bold;
-			display:none;
-		}
-	</style>
+
 </head>
 <body>
 	<div id="product">
@@ -76,6 +66,8 @@
 
 			var ourElement = $(this);
 			var dataToSend = $(this).val();
+			
+			if(dataToSend.trim()!=""){
 			$.ajax({
 				  type: 'post',
 				  url: "/admin/printer/check_name_manufacture",
@@ -100,6 +92,13 @@
 					  alert('Request Status: ' + xhr.status + ' Status Text: ' + xhr.statusText + ' ' + xhr.responseText);
 				  }
 				});
+		} else {
+			ourElement.parent('div').find('.bg-success').css('display','none');
+			ourElement.parent('div').find('.bg-danger').css('display','none');
+			ourElement.parent('div').removeClass('has-error').removeClass('has-success');
+			ourElement.parent('div').find('span').removeClass('glyphicon-ok').removeClass('glyphicon-remove');
+			ourElement.parent('div').parent('form').find('button').prop("disabled", true);
+		}
 
 		});
 	});
