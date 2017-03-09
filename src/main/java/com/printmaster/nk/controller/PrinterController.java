@@ -525,7 +525,7 @@ public class PrinterController {
     }
     
     @RequestMapping(value = "/admin/"+ TYPE +"/add_equipment_manufacturer", method = RequestMethod.POST)
-	public String addquipmentManufacturer(@RequestParam(value = "new_equipment") String manufacturer) {
+	public String addEquipmentManufacturer(@RequestParam(value = "new_equipment") String manufacturer) {
     	componets.setNewValueOfParameter(TYPE, "equipment_manufacturer", manufacturer);
 	    return "redirect:/admin/"+ TYPE +"/equipment_manufacturer";
 	}

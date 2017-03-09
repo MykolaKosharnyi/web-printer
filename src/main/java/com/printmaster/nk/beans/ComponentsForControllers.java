@@ -251,7 +251,7 @@ public class ComponentsForControllers {
     	}
 	}
     
-    private JSONObject jsonObjectParser(String typeOfProduct){
+    public JSONObject jsonObjectParser(String typeOfProduct){
     	try {
 			return (JSONObject)new JSONParser()
 					.parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/" + typeOfProduct + ".json"), "UTF-8"));
@@ -261,7 +261,7 @@ public class ComponentsForControllers {
 		}
     }
     
-    private JSONArray jsonArrayParser(String typeOfProduct){
+    public JSONArray jsonArrayParser(String typeOfProduct){
     	try {
 			return (JSONArray)new JSONParser()
 					.parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/" + typeOfProduct + ".json"), "UTF-8"));
@@ -275,9 +275,6 @@ public class ComponentsForControllers {
     	boolean isNoRepead = true;
     	
     	String check = nameToCheck.trim();
-    	if(check.equals("")){
-    		return false;
-    	}
     	
     	if(typeProduct.equals("rip")){
    		 jsonArrayParser(typeProduct);		
@@ -368,7 +365,21 @@ public class ComponentsForControllers {
     /**
      * @param obj input JSONObject which we wrote to file in concrete directory.
      */
-    private void saveObject(JSONObject jsonWithCharakteristic, String typeProduct){
+    public void saveObject(JSONObject jsonWithCharakteristic, String typeProduct){
+    	try {
+			Writer out = new PrintWriter("/var/www/localhost/products/" + typeProduct + ".json", "UTF-8");
+			out.write(jsonWithCharakteristic.toJSONString());
+			out.flush();
+			out.close();
+			
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+    }
+    
+    public void saveObject(JSONArray jsonWithCharakteristic, String typeProduct){
     	try {
 			Writer out = new PrintWriter("/var/www/localhost/products/" + typeProduct + ".json", "UTF-8");
 			out.write(jsonWithCharakteristic.toJSONString());
