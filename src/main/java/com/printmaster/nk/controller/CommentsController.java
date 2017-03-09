@@ -19,6 +19,7 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -44,6 +45,18 @@ public class CommentsController {
 		model.addAttribute("comments", commentService.getAllComments());
     	return "admin/comments";
     }
+	
+	@RequestMapping(value="/admin/comment/remove/{id}", method = RequestMethod.GET)
+    public String removeProduct(@PathVariable("id") long id){
+		commentService.delete(id);	
+        return "redirect:/admin/comments";
+    }  
+	
+	@RequestMapping(value="/admin/change_comment_recipient_notification", method = RequestMethod.GET)
+    public String changeCommentRecipientNotification(Model model){
+		
+        return "admin/change_comment_recipient_notification";
+    } 
 	
 	@RequestMapping(value="/comment/add", method = RequestMethod.POST)
     public @ResponseBody Comment addNewComment(@ModelAttribute("addComment") @Valid Comment comment) {	

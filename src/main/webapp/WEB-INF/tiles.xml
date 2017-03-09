@@ -295,18 +295,22 @@
     </definition>
     
     <!-- CHANGE VIDEOS IN HOME PAGE -->    
-     <definition name="admin/video_on_home_page" extends="admin_base">    
+    <definition name="admin/video_on_home_page" extends="admin_base">    
         <put-attribute name="body" value="/WEB-INF/views/admin/video_on_home_page.jsp" />  
     </definition>
     
     <!-- CHANGE CONSTANTS -->    
-     <definition name="admin/constants" extends="admin_base">    
+    <definition name="admin/constants" extends="admin_base">    
         <put-attribute name="body" value="/WEB-INF/views/admin/constants.jsp" />  
     </definition>
     
     <!-- COMMENTS FOR PRODUCT -->
     <definition name="admin/comments" extends="admin_base">    
-        <put-attribute name="body" value="/WEB-INF/views/admin/comments.jsp" />  
+        <put-attribute name="body" value="/WEB-INF/views/admin/comment/comments.jsp" />  
+    </definition>
+    
+    <definition name="admin/change_comment_recipient_notification" extends="admin_base">    
+        <put-attribute name="body" value="/WEB-INF/views/admin/comment/change_comment_recipient_notification.jsp" />  
     </definition>
     
 </tiles-definitions>  
