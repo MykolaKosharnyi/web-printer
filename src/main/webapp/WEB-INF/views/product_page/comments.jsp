@@ -49,6 +49,8 @@
 
 	function addUserComment(){
 		
+		var dataToSend = $("form#addComment").find("textarea#message").val().trim();
+		if(dataToSend!="")
 		$('form#addComment').ajaxForm({
 			type: 'post',
 			success: function(comment){

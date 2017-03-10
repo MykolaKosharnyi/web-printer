@@ -4,7 +4,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.Collections;
-import java.util.Comparator;
+import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -63,7 +63,7 @@ public class CommentsController {
     }
 	
 	@RequestMapping(value="/admin/comment/remove/{id}", method = RequestMethod.GET)
-    public String removeProduct(@PathVariable("id") long id){
+    public String removeComment(@PathVariable("id") long id){
 		commentService.delete(id);	
         return "redirect:/admin/comments";
     }  
@@ -150,11 +150,12 @@ public class CommentsController {
     public @ResponseBody JSONObject deleteComment(@RequestBody String data) {	
 		Long id = Long.parseLong(data);
     	JSONObject result = new JSONObject();
+    	Comment commentWichWillBeDeleted = commentService.findById(id);
     	boolean isDeleted = commentService.delete(id);
     	result.put("result", isDeleted);
     	
     	if(isDeleted){
-    		observeSendedMessage("Удален комментарий", getCommentBody(commentService.findById(id)));
+    		observeSendedMessage("Удален комментарий", getCommentBody( commentWichWillBeDeleted ));
     	}
     	
     	return result;
@@ -163,19 +164,25 @@ public class CommentsController {
 	private void observeSendedMessage(String subject, String messageBody){
 		
 		MimeMessage msg = mailSender.createMimeMessage();
+		
+		JSONArray array = componets.jsonArrayParser(USERS_JSON_FILE_NAME);
+		@SuppressWarnings("unchecked")
+		Iterator<String> iterator = array.iterator();
+		
+		while(iterator.hasNext()){
+			try {
+				Address adresFrom = new InternetAddress(HOST_EMAIL, "e-machine.com.ua");
+		        
+		        msg.setContent("Mail contect", "text/html");
+		        msg.setFrom(adresFrom);
+		        msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(iterator.next()));
 
-		try {
-			Address adresFrom = new InternetAddress(HOST_EMAIL, "e-machine.com.ua");
-	        
-	        msg.setContent("Mail contect", "text/html");
-	        msg.setFrom(adresFrom);
-	        msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("elvis_patriot@ukr.net,nikolay.kosharniy@gmail.com"));
-
-	        msg.setSubject(subject, "UTF-8");
-	       
-	        msg.setText(messageBody.replace("../..", "http://e-machine.com.ua"), "UTF-8", "html");
-		} catch (UnsupportedEncodingException | MessagingException e) {
-			exceptionMailSender(e);
+		        msg.setSubject(subject, "UTF-8");
+		       
+		        msg.setText(messageBody.replace("../..", "http://e-machine.com.ua"), "UTF-8", "html");
+			} catch (UnsupportedEncodingException | MessagingException e) {
+				exceptionMailSender(e);
+			}
 		}
 
 		mailSender.send(msg);
