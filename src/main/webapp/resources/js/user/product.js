@@ -1,5 +1,5 @@
 (function($){				
-    jQuery.fn.lightTabs = function(options){
+    jQuery.fn.lightTabs = function(option){
         
         var createTabs = function(){
             tabs = this;
@@ -12,7 +12,7 @@
                 $(tabs).children("ul").children("li").eq(i).addClass("active");
             }
             
-            showPage(0);				
+            showPage(option);				
             
             $(tabs).children("ul").children("li").each(function(index, element){
                 $(element).attr("data-page", i);
@@ -29,7 +29,19 @@
 })(jQuery);
 
 $(document).ready(function(){
-    $("#tabs_product").lightTabs();
+
+	var QueryString = function () {
+		  var query_string = {"option":0};
+		  var query = window.location.search.substring(1);
+
+		    var pair = query.split("=");
+		    query_string[pair[0]] = decodeURIComponent(pair[1]);		    
+		  
+		  return query_string;
+		}();
+	
+	
+    $("#tabs_product").lightTabs(QueryString.option);
     setNewHeightOfPicturesBlock();
     
     $('.small_pictures a').on('click', function(e) {

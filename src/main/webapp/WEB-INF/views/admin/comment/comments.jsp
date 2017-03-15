@@ -38,7 +38,7 @@
 			<c:forEach items="${comments}" var="comment">
 				<tr id="${comment.id}" class="output_pruduct">
 					<td>${comment.id}</td>
-					<td><a href="javascript:openInNewTabWinBrowser('/${comment.productType}/${comment.productId}')">${comment.message}</a></td>
+					<td><a href="javascript:openInNewTabWinBrowser('/${comment.productType}/${comment.productId}?option=2')">${comment.message}</a></td>
 					<td>${comment.nameUser} ${comment.secondName}</td>
 
 					<td>

@@ -32,9 +32,9 @@ $( function() {
            $("#full_menu i").click(function(){
                if ( $(".menu").css('display') == 'none' ) {
                      $(".menu").slideDown(1500);
-                      } else {
+                  } else {
                      $(".menu").slideUp(1500);
-                     }
+                  }
               });
         } ); 
 
