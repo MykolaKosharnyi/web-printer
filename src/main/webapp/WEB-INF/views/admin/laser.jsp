@@ -34,7 +34,7 @@
 		</c:if>
 			
 		<c:if test="${!empty product.id}">
-			<label  id="head_of_page"><spring:message text="Изменение ${product.name}, код товара: ${product.partNumber} " /></label>
+			<label id="head_of_page"><spring:message text="Изменение ${product.name}, код товара: ${product.partNumber} " /></label>
 			<c:url var="addAction" value="/admin/${type}/update" ></c:url>
 		</c:if>
 		
@@ -55,7 +55,7 @@
 			</c:if>
 			
 			<c:if test="${!empty product.id}">
-				<input type="hidden" name="id" value="${product.id}">
+				<jsp:include page="product/hidden_characteristic.jsp" />
 			</c:if>
 		</div>
 			<div class="product_characteristic">

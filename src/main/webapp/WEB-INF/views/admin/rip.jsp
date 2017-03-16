@@ -55,7 +55,7 @@
 			</c:if>
 			
 			<c:if test="${!empty product.id}">
-					<input type="hidden" name="id" value="${product.id}">
+				<jsp:include page="product/hidden_characteristic.jsp" />
 			</c:if>
 		</div>
 			<div class="product_characteristic">
