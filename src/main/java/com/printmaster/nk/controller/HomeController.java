@@ -1,18 +1,11 @@
 package com.printmaster.nk.controller;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,28 +73,16 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
+		logger.info("Home page! The client locale is {}.", locale);
 		
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
 		
-		String formattedDate = dateFormat.format(date);
+		String formattedDate = dateFormat.format(date);		
 		
-		JSONParser parser = new JSONParser();
-		
-		try {
-			JSONObject homeJSON = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream("/var/www/localhost/home.json"), "UTF-8"));
-			model.addAttribute("homeJSON", (JSONObject) homeJSON.get("homeJSON"));
-			model.addAttribute("listVideo", (JSONArray) homeJSON.get("listVideo"));
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+		JSONObject homeJSON = componets.jsonObjectParser("home");
+		model.addAttribute("homeJSON", (JSONObject) homeJSON.get("homeJSON"));
+		model.addAttribute("listVideo", (JSONArray) homeJSON.get("listVideo"));		
 		
 		model.addAttribute("printers", componets.makeLightWeightCollectionOfProduct(printerService.listShowOnHomePage()));
 		model.addAttribute("printers3D", componets.makeLightWeightCollectionOfProduct(printer3DService.listShowOnHomePage()));  

@@ -30,7 +30,7 @@ public class VideoCaruoselHomePageController {
 
 	private Logger logger = Logger.getLogger(VideoCaruoselHomePageController.class);
 	
-	private static final String PATH_TO_JSON_FILE = "/var/www/localhost/home.json";
+	private static final String PATH_TO_JSON_FILE = "/var/www/localhost/products/home.json";
 	private static final String LIST_VIDEO = "listVideo"; 
 	private static final String PATH_PARAMETER = "path";
 	private static final String PATH_DESCRIPTION = "description";

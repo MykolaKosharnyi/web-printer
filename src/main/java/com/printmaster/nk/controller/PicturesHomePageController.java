@@ -1,12 +1,6 @@
 package com.printmaster.nk.controller;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -16,8 +10,6 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,7 +30,7 @@ public class PicturesHomePageController {
 	
     private static final String DIRECTORY = "/var/www/localhost/images";
     private static final String CONCRETE_FOLDER = "home";
-	private static final String PATH_TO_JSON_FILE = "/var/www/localhost/home.json";
+	private static final String NAME_JSON_FILE = "home";
 	
     @RequestMapping(value="/admin/pictures", method=RequestMethod.GET)
 	public ModelAndView addNewPrinter() {
@@ -168,16 +160,7 @@ public class PicturesHomePageController {
      * @return JSONObject which contain all links for pictures on home page.
      */
     private JSONObject getJsonPicturesLinksContainer(){
-    	JSONParser parser = new JSONParser();
-    	
-    	JSONObject result = null;
-		try {
-			result = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream(PATH_TO_JSON_FILE), "UTF-8"));
-		} catch (IOException | ParseException e) {
-			e.printStackTrace();
-		}
-    	
-    	return result;
+    	return componets.jsonObjectParser(NAME_JSON_FILE);
     }
 	
 	@SuppressWarnings("unchecked")
@@ -210,18 +193,7 @@ public class PicturesHomePageController {
      * @param obj input JSONObject which we wrote to file in concrete directory.
      */
 	private void writeResultInLocalFile(JSONObject obj) {
-		try {
-			
-			Writer out = new PrintWriter(PATH_TO_JSON_FILE, "UTF-8");
-			out.write(obj.toJSONString());
-			out.flush();
-			out.close();
-			
-		} catch (FileNotFoundException e1) {
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
+		componets.saveObject(obj, NAME_JSON_FILE);
 	}
 	
 	@SuppressWarnings("unchecked")
