@@ -1,20 +1,12 @@
 package com.printmaster.nk.controller;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-import java.io.Writer;
 import java.util.Iterator;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.printmaster.nk.beans.ComponentsForControllers;
+
 import static com.printmaster.nk.controller.ConstUsedInContr.*;
 
 @Controller
@@ -30,10 +24,13 @@ public class VideoCaruoselHomePageController {
 
 	private Logger logger = Logger.getLogger(VideoCaruoselHomePageController.class);
 	
-	private static final String PATH_TO_JSON_FILE = "/var/www/localhost/products/home.json";
+	private static final String NAME_JSON_FILE = "home";
 	private static final String LIST_VIDEO = "listVideo"; 
 	private static final String PATH_PARAMETER = "path";
 	private static final String PATH_DESCRIPTION = "description";
+	
+	@Autowired
+    ComponentsForControllers componets;
     
     @RequestMapping(value="/"+PATH_ADMIN+"/video_on_home_page", method = RequestMethod.GET)
     public String showMenu(Model model){
@@ -115,12 +112,7 @@ public class VideoCaruoselHomePageController {
     }
     
     private JSONObject getHomeJSON(){
-    	try(InputStreamReader reader = new InputStreamReader(new FileInputStream(PATH_TO_JSON_FILE), "UTF-8")) {
-			JSONParser parser = new JSONParser();
-			return (JSONObject)parser.parse(reader);
-		} catch (IOException | ParseException  e) {
-			throw new RuntimeException(e);
-		}
+    	return componets.jsonObjectParser(NAME_JSON_FILE);
     }
     
     @SuppressWarnings("unchecked")
@@ -128,18 +120,7 @@ public class VideoCaruoselHomePageController {
     	JSONObject homeJSON = getHomeJSON();    	
     	homeJSON.put(LIST_VIDEO, array);
 
-		try {
-			Writer out = new PrintWriter(PATH_TO_JSON_FILE, "UTF-8");
-			out.write(homeJSON.toJSONString());
-			out.flush();
-			out.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}	
+    	componets.saveObject(homeJSON, NAME_JSON_FILE); 	
     }
 	
 }
