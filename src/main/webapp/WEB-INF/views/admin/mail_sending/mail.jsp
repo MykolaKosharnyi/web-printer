@@ -22,6 +22,15 @@
 	.bootstrap-datetimepicker-widget ul{
 		padding: 0px;
 	}
+	
+	.block_concrete_subsctiption{
+		width: 25%;
+		float: left;
+	}
+	
+	.head_name_of_block_subscription{
+		cursor: pointer;
+	}
 </style>
 
 <c:if test="${empty mailMessage.id || mailMessage.id==0}">
@@ -46,79 +55,10 @@
 			<c:url var="addAction" value="/admin/message/update"></c:url>
 		</c:if>
 	
-		<form:form class="form-horizontal" style="padding: 10px 0px;"  commandName="mailMessage"
+		<form:form style="padding: 10px 0px;"  commandName="mailMessage"
 		 action="${addAction}" method="post">
-		
-			<c:if test="${!empty mailMessage.id && mailMessage.id!=0}">
-				<input type="hidden" name="id" value="${mailMessage.id}">	
-				<input type="hidden" name="status" value="${mailMessage.status}">
-				<input type="hidden" name="dateCreation" 
-					value="<fmt:formatDate value="${mailMessage.dateCreation}" pattern="dd/MM/yyyy hh:mm:ss" />">
-			</c:if>
-			
-		  <div class="form-group">
-			<label for="title" class="col-sm-2 control-label">Заголовок:</label>
-			<div class="col-sm-10">
-			  <form:input path="title" class="form-control" placeholder="Заголовок письма" value="${mailMessage.title}"/>
-			</div>
-		  </div>
-		  <div class="form-group">
-			<label for="message" class="col-sm-2 control-label">Основная часть:</label>
-			<div class="col-sm-10">
-				<form:textarea path="message" class="form-control" id="description" value="${mailMessage.message}"/>
-			</div>
-		  </div>
-		  <div class="form-group">
-			<label class="col-sm-2 control-label">Подписчики:</label>
-			<div class="col-sm-10">
-				<c:forEach var="subscr" items="${listSubscription}">
-
-						<h4>${subscr.key}</h4>
-						<c:forEach var="val" items="${subscr.value}">
-							<div class="checkbox">
-								<label> <input type="checkbox" name="subscription"
-									value="${val}"
-									<c:forEach items="${mailMessage.subscription}" var="tp"> <c:if test="${val eq tp}">checked</c:if> </c:forEach>>
-									${val}
-								</label>
-							</div>
-						</c:forEach>
-
-				</c:forEach>
-			
-			</div>
-		  </div>
-		  <div class="form-group">
-			<label for="date_sending" class="col-sm-2 control-label">Время рассылки:</label>
-			<div class="col-sm-10">
-				<div id="datetimepicker" class="input-group input-append date" style="height: 25px;">
-					<input data-format="dd/MM/yyyy hh:mm:ss" name="dateSending" value="<fmt:formatDate value="${mailMessage.dateSending}" pattern="dd/MM/yyyy hh:mm:ss" />"
-					 class="form-control" type="text"></input>
-					<span class="add-on input-group-addon">
-					  <span class="glyphicon glyphicon-calendar"></span>
-					</span>
-				</div>
-			</div>
-		  </div>
-		  
-		  <c:if test="${mailMessage.status.toString() eq 'WAITING' ||
-			  		 mailMessage.status.toString() eq 'MODIFICATION_PROCESS'}">
-			  <div class="form-group">
-				<label for="date_sending" class="col-sm-2 control-label">Статус:</label>
-				<div class="col-sm-10">
-					<c:if test="${mailMessage.status.toString() eq 'WAITING'}">
-			  		 	<button type="button" id="status_button" class="btn btn-warning">Oжидание отправки</button>
-			  		 </c:if>
-					
-					<c:if test="${mailMessage.status.toString() eq 'MODIFICATION_PROCESS'}">
-			  		 	<button type="button" id="status_button" class="btn btn-info">Режим модификации</button>
-			  		 </c:if>
-				</div>
-			  </div>
-		  </c:if>
-
-		  <div class="form-group">
-			<div class="col-sm-offset-2 col-sm-10">
+		 
+		 <div class="form-group">
 			  
 			  	<c:if test="${empty mailMessage.id || mailMessage.id==0}">
 			  		<button type="submit" class="btn btn-primary">Сохранить</button>
@@ -130,8 +70,77 @@
 			  			<button type="submit" class="btn btn-primary">Изменить</button>
 			  		</c:if>
 			  	</c:if>
+		  </div>
+		
+			<c:if test="${!empty mailMessage.id && mailMessage.id!=0}">
+				<input type="hidden" name="id" value="${mailMessage.id}">	
+				<input type="hidden" name="status" value="${mailMessage.status}">
+				<input type="hidden" name="dateCreation" 
+					value="<fmt:formatDate value="${mailMessage.dateCreation}" pattern="dd/MM/yyyy hh:mm:ss" />">
+			</c:if>
+			
+		  <div class="form-group">
+			<label for="title">Заголовок:</label>
+			<form:input path="title" class="form-control" placeholder="Заголовок письма" value="${mailMessage.title}"/>
+		  </div>
+		  <div class="form-group">
+			<label for="message">Основная часть:</label>
+			<form:textarea path="message" class="form-control" id="description" value="${mailMessage.message}"/>
+		  </div>
+		  <div class="form-group">
+			<label style="display: block;">Подписчики:</label>
+				<c:forEach var="subscr" items="${listSubscription}">
+					<div class="block_concrete_subsctiption">
+						<h4 class="head_name_of_block_subscription">${subscr.key}</h4>
+						<c:forEach var="val" items="${subscr.value}">
+							<div class="checkbox">
+								<label> <input type="checkbox" name="subscription"
+									value="${val}"
+									<c:forEach items="${mailMessage.subscription}" var="tp"> <c:if test="${val eq tp}">checked</c:if> </c:forEach>>
+									${val}
+								</label>
+							</div>
+						</c:forEach>
+					</div>
+				</c:forEach>
+		  </div>
+		  <div class="form-group">
+			<label for="date_sending" >Время рассылки:</label>
+				<div id="datetimepicker" class="input-group input-append date" style="height: 25px;">
+					<input data-format="dd/MM/yyyy hh:mm:ss" name="dateSending" value="<fmt:formatDate value="${mailMessage.dateSending}" pattern="dd/MM/yyyy hh:mm:ss" />"
+					 class="form-control" type="text"></input>
+					<span class="add-on input-group-addon">
+					  <span class="glyphicon glyphicon-calendar"></span>
+					</span>
+				</div>
+		  </div>
+		  
+		  <c:if test="${mailMessage.status.toString() eq 'WAITING' ||
+			  		 mailMessage.status.toString() eq 'MODIFICATION_PROCESS'}">
+			  <div class="form-group">
+				<label for="date_sending">Статус:</label>
+					<c:if test="${mailMessage.status.toString() eq 'WAITING'}">
+			  		 	<button type="button" id="status_button" class="btn btn-warning">Oжидание отправки</button>
+			  		 </c:if>
+					
+					<c:if test="${mailMessage.status.toString() eq 'MODIFICATION_PROCESS'}">
+			  		 	<button type="button" id="status_button" class="btn btn-info">Режим модификации</button>
+			  		</c:if>
+			  </div>
+		  </c:if>
+
+		  <div class="form-group">
 			  
-			</div>
+			  	<c:if test="${empty mailMessage.id || mailMessage.id==0}">
+			  		<button type="submit" class="btn btn-primary">Сохранить</button>
+			  	</c:if>
+			  	
+			  	<c:if test="${!empty mailMessage.id && mailMessage.id!=0}">
+			  		<c:if test="${mailMessage.status.toString() eq 'WAITING' ||
+			  		 mailMessage.status.toString() eq 'MODIFICATION_PROCESS'}">
+			  			<button type="submit" class="btn btn-primary">Изменить</button>
+			  		</c:if>
+			  	</c:if>
 		  </div>
 
 		</form:form>
@@ -151,6 +160,17 @@
 		});
     
 		$(function() {
+			$('.head_name_of_block_subscription').click(function(){
+				if($(this).hasClass("all-checked")){
+					$(this).removeClass("all-checked");
+					$(this).parent('.block_concrete_subsctiption').find('input[type=checkbox]').prop('checked', false);
+				}else{
+					$(this).addClass("all-checked");
+					$(this).parent('.block_concrete_subsctiption').find('input[type=checkbox]').prop('checked', true);
+				}
+
+			});
+			
 			$('#status_button').click(function(){
 				
 				if($(this).hasClass("btn-warning")){
