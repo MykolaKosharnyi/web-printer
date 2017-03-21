@@ -294,7 +294,7 @@ border-radius: 5px;
 }
 
 .option_product_with_price .total_price{
-	min-width: 150px;
+	min-width: 160px;
 	margin-bottom: 0px;
 }
 
@@ -473,16 +473,28 @@ input.quantity_paint{
     	
         .product #tabs_product div{
         	position: relative;
-            width: inherit;
+            /*width: inherit;*/
         }
 
-	    #tabs_product div div{
+
+        .product #tabs_product div #output_description,
+		.product #tabs_product div .descriptions,
+		.product #tabs_product div #comments_block,
+		.product #tabs_product div #use_with_product_block{
 			font: 1.1em "Book Antiqua" sans-serif;
 			/*margin-left:15px;*/
 			margin-top:10px;
 			margin-bottom:10px;
 			width: 100%;
-            }
+         }
+
+    .product #tabs_product div #output_description p,
+	.product #tabs_product div .descriptions p,
+	.product #tabs_product div #use_with_product_block p{
+		margin:0px;
+		text-indent: 1.5em;
+    	text-align: justify;
+    }
 
 		#tabs_product div div.use_with_product{
 			width: 337px;
@@ -506,12 +518,6 @@ input.quantity_paint{
 		box-shadow: 0 0 40px #006080;
 		z-index: 91;
 }
-
-	#tabs_product div div p{
-		margin:0px;
-		text-indent: 1.5em;
-    	text-align: justify;
-    }
 
 div.use_with_product a.link{
 	position: relative;
@@ -581,7 +587,8 @@ div.use_with_product a.link img{
                 height: auto;
                 width: auto;
                 top: 0;
-                float: left;
+                /*float: left;*/
+				margin: 0 auto;
             }
 
            #tabs_product > div caption{
@@ -635,3 +642,43 @@ div.use_with_product a.link img{
             width: 100%;
             text-align:none;
         }
+
+/*comments block*/
+#tabs_product div .users_comment{
+	display: table;
+	border: 1px solid #006080;
+	margin: 10px 0px;
+	padding: 5px;
+	border-radius: 10px;
+	position: relative;
+	width: 100%;
+}
+
+#tabs_product div .users_comment:hover .remove_comment,
+#tabs_product div .users_comment:hover .edit_comment{
+	display:block;
+}
+
+.product #tabs_product div .remove_comment,
+.product #tabs_product div .edit_comment{
+	position: absolute;
+	right: 15px;
+	top: 15px;
+	font-size: 18px;
+	color: #006080;	
+	z-index: 1;
+	cursor: pointer;
+	display:none;
+}
+
+.product #tabs_product div .edit_comment{
+	right: 45px;
+}
+
+.product #tabs_product div .remove_comment:hover{
+	color: red;
+}
+
+.product #tabs_product div .edit_comment:hover{
+	color: green;
+}

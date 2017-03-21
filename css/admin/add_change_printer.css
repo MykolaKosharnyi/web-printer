@@ -26,3 +26,7 @@ input.speed_print_pass{width: 33px; text-align: center;}
             .amount-depth{
                 width:43px;
             }
+
+.bootstrap-datetimepicker-widget ul{
+	padding: 0px;
+}

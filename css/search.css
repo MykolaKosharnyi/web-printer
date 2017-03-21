@@ -676,3 +676,53 @@ height: auto;
 padding: 7px 35px;
 min-height: 23px;
 }   
+
+/* for product in top */
+.ribbon-top-search-wrapper-left,
+.ribbon-top-search-wrapper-right{
+	width: 130px;
+	height: 130px;
+	overflow: hidden;
+	position: absolute;
+	top: -3px;
+	cursor: pointer;
+	display: table;
+	padding: 10px;
+}
+
+.ribbon-top-search-wrapper-left{
+	left: -3px;
+	border-radius: 200px 50px 200px 50px;
+}
+
+.ribbon-top-search-wrapper-right{
+	right: -3px;
+	border-radius: 50px 200px 50px 200px;
+}
+
+.ribbon-top-search-left,
+.ribbon-top-search-right{
+	font: bold 12px Sans-Serif;
+	text-align: center;
+	position: relative;
+	z-index: 10;
+	display: table-cell;
+	vertical-align: middle;
+	padding: 5px;
+}
+
+.ribbon-top-search-left{
+	-moz-transform: rotate(-45deg);
+	-webkit-transform: rotate(-45deg);
+	-o-transform: rotate(-45deg);
+	-ms-transform: rotate(-45deg);
+	transform: rotate(-45deg);
+}
+
+.ribbon-top-search-right{
+	-moz-transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+	-o-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	transform: rotate(45deg);
+}

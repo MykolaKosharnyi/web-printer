@@ -107,16 +107,16 @@
 					</div>	
 		
 					<c:if test="${!empty product.leftSharesLink}">
-						<div class="ribbon-search-wrapper-left">
-							<div class="ribbon-search-left" style="color:${product.leftSharesLinkColorText}; background:${product.leftSharesLinkColorFone};">
+						<div class="ribbon-top-search-wrapper-left" style="color:${product.leftSharesLinkColorText}; background:${product.leftSharesLinkColorFone};">
+							<div class="ribbon-top-search-left">
 								${product.leftSharesLink}
 							</div>
 						</div>
 					</c:if>
 					
 					<c:if test="${!empty product.rightSharesLink}">
-						<div class="ribbon-search-wrapper-right">
-							<div class="ribbon-search-right" style="color:${product.rightSharesLinkColorText}; background:${product.rightSharesLinkColorFone};">
+						<div class="ribbon-top-search-wrapper-right" style="color:${product.rightSharesLinkColorText}; background:${product.rightSharesLinkColorFone};">
+							<div class="ribbon-top-search-right">
 								${product.rightSharesLink}
 							</div>
 						</div>

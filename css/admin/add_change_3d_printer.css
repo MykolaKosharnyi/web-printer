@@ -28,3 +28,7 @@
             .amount-depth{
                 width:43px;
             }
+
+.bootstrap-datetimepicker-widget ul{
+	padding: 0px;
+}
