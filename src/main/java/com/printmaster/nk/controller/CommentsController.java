@@ -1,26 +1,15 @@
 package com.printmaster.nk.controller;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.io.UnsupportedEncodingException;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.mail.Address;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import javax.validation.Valid;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -32,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.printmaster.nk.beans.ComponentsForControllers;
+import com.printmaster.nk.components.MailSendingComponent;
 import com.printmaster.nk.model.entity.Comment;
 import com.printmaster.nk.model.service.CommentService;
 
@@ -42,7 +32,7 @@ public class CommentsController {
 	private CommentService commentService;
 	
 	@Autowired
-    private JavaMailSenderImpl mailSender;
+	MailSendingComponent mailSendingComponent;
 	
 	@Autowired
     ComponentsForControllers componets;
@@ -52,10 +42,7 @@ public class CommentsController {
 			+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 	
 	private final static String USERS_JSON_FILE_NAME = "user_mail_receiver";
-	
-	private final static String HOST_EMAIL = "noreplay@forprint.net.ua";
-	private final static String ADMIN_EMAIL = "nikolay.kosharniy@gmail.com";
-	
+
 	@RequestMapping(value="/admin/comments", method = RequestMethod.GET)
     public String allComments(Model model) {	
 		model.addAttribute("comments", commentService.getAllComments());
@@ -127,8 +114,27 @@ public class CommentsController {
 	@RequestMapping(value="/comment/add", method = RequestMethod.POST)
     public @ResponseBody Comment addNewComment(@ModelAttribute("addComment") @Valid Comment comment) {	
 		commentService.add(comment);
-		observeSendedMessage("Добавлен новый комментарий", getCommentBody(comment));
+		mailSendingComponent.observeRecipients("Добавлен новый комментарий", getCommentBody(comment), 
+				componets.jsonArrayParser(USERS_JSON_FILE_NAME));
     	return comment;
+    }
+	
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value="/comment/delete", method = RequestMethod.POST,
+    		produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.TEXT_PLAIN_VALUE)
+    public @ResponseBody JSONObject deleteComment(@RequestBody String data) {	
+		Long id = Long.parseLong(data);
+    	JSONObject result = new JSONObject();
+    	Comment commentWichWillBeDeleted = commentService.findById(id);
+    	boolean isDeleted = commentService.delete(id);
+    	result.put("result", isDeleted);
+    	
+    	if(isDeleted){
+    		mailSendingComponent.observeRecipients("Удален комментарий", getCommentBody( commentWichWillBeDeleted ),
+    				componets.jsonArrayParser(USERS_JSON_FILE_NAME));
+    	}
+    	
+    	return result;
     }
 	
 	private String getCommentBody(Comment comment){
@@ -143,66 +149,5 @@ public class CommentsController {
 				comment.getUserId()));
 		return result.toString();
 	}
-	
-	@SuppressWarnings("unchecked")
-	@RequestMapping(value="/comment/delete", method = RequestMethod.POST,
-    		produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.TEXT_PLAIN_VALUE)
-    public @ResponseBody JSONObject deleteComment(@RequestBody String data) {	
-		Long id = Long.parseLong(data);
-    	JSONObject result = new JSONObject();
-    	Comment commentWichWillBeDeleted = commentService.findById(id);
-    	boolean isDeleted = commentService.delete(id);
-    	result.put("result", isDeleted);
-    	
-    	if(isDeleted){
-    		observeSendedMessage("Удален комментарий", getCommentBody( commentWichWillBeDeleted ));
-    	}
-    	
-    	return result;
-    }
-	
-	private void observeSendedMessage(String subject, String messageBody){
-		
-		MimeMessage msg = mailSender.createMimeMessage();
-		
-		JSONArray array = componets.jsonArrayParser(USERS_JSON_FILE_NAME);
-		@SuppressWarnings("unchecked")
-		Iterator<String> iterator = array.iterator();
-		
-		while(iterator.hasNext()){
-			try {
-				Address adresFrom = new InternetAddress(HOST_EMAIL, "e-machine.com.ua");
-		        
-		        msg.setContent("Mail contect", "text/html");
-		        msg.setFrom(adresFrom);
-		        msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(iterator.next()));
 
-		        msg.setSubject(subject, "UTF-8");
-		       
-		        msg.setText(messageBody.replace("../..", "http://e-machine.com.ua"), "UTF-8", "html");
-			} catch (UnsupportedEncodingException | MessagingException e) {
-				exceptionMailSender(e);
-			}
-		}
-
-		mailSender.send(msg);
-	}
-	
-	private void exceptionMailSender(Exception ex){
-		SimpleMailMessage email = new SimpleMailMessage();
-		email.setFrom(HOST_EMAIL);
-		email.setTo(ADMIN_EMAIL);
-		email.setSubject("Error!");
-		email.setText(getStackTrace(ex));
-
-		mailSender.send(email);
-	}
-	
-	private String getStackTrace(final Throwable throwable) {
-	     final StringWriter sw = new StringWriter();
-	     final PrintWriter pw = new PrintWriter(sw, true);
-	     throwable.printStackTrace(pw);
-	     return sw.getBuffer().toString();
-	}
-	
 }
