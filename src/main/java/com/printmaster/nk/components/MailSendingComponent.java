@@ -33,27 +33,34 @@ public class MailSendingComponent {
 	
 	public void observeRecipients(String subject, String messageBody, JSONArray recipientsFromJSON){
 		
-		MimeMessage msg = mailSender.createMimeMessage();
-
 		@SuppressWarnings("unchecked")
 		Iterator<String> iterator = recipientsFromJSON.iterator();
 		
 		while(iterator.hasNext()){
-			try {
-				Address adresFrom = new InternetAddress(HOST_EMAIL, "e-machine.com.ua");
+			sendMessageTemplate(subject, messageBody, iterator.next());
+		}	
+	}
+	
+	public void observeRecipients(String subject, String messageBody, String concatenatedInStringRecipiets){
+		sendMessageTemplate(subject, messageBody, concatenatedInStringRecipiets);		
+	}
+	
+	private void sendMessageTemplate(String subject, String messageBody, String recipiets){
+		MimeMessage msg = mailSender.createMimeMessage();
+
+		try {
+			Address adresFrom = new InternetAddress(HOST_EMAIL, "e-machine.com.ua");
 		        
-		        msg.setContent("Mail contect", "text/html");
-		        msg.setFrom(adresFrom);
-		        msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(iterator.next()));
+		    msg.setContent("Mail contect", "text/html");
+		    msg.setFrom(adresFrom);
+		    msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipiets));
 
-		        msg.setSubject(subject, "UTF-8");
-		       
-		        msg.setText(messageBody.replace("../..", "http://e-machine.com.ua"), "UTF-8", "html");
-			} catch (UnsupportedEncodingException | MessagingException e) {
-				exceptionMailSender(e);
-			}
+		    msg.setSubject(subject, "UTF-8");	       
+		    msg.setText(messageBody.replace("../..", "http://e-machine.com.ua"), "UTF-8", "html");
+		    
+		} catch (UnsupportedEncodingException | MessagingException e) {
+			exceptionMailSender(e);
 		}
-
 		mailSender.send(msg);
 	}
 	
