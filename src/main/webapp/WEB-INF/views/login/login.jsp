@@ -20,6 +20,11 @@
                 <spring:message code='login.password' var="loginPassword"/>
             	<input name="password" type="password" class="form-control" placeholder="${loginPassword}"/>
             </div>
+            <div class="input-group input-sm">
+                <input id="remember_me" name="_spring_security_remember_me" type="checkbox" 
+                	style="display: block; float: left; margin-left: 30px;"/>
+				<label for="remember_me" style="margin-top: 2px; margin-left: 10px;"><spring:message code="login.remember.me"/></label>
+            </div>
             <span>${error}</span>
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
