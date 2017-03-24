@@ -37,9 +37,8 @@ public class MailSendingComponent {
 	private final static String HOST_EMAIL = "noreplay@forprint.net.ua";
 	private final static String ADMIN_EMAIL = "nikolay.kosharniy@gmail.com";
 	
+	@SuppressWarnings("unchecked")
 	public void observeRecipients(String subject, String messageBody, JSONArray recipientsFromJSON){
-		
-		@SuppressWarnings("unchecked")
 		Iterator<String> iterator = recipientsFromJSON.iterator();
 		
 		while(iterator.hasNext()){
@@ -70,6 +69,10 @@ public class MailSendingComponent {
 		mailSender.send(msg);
 	}
 	
+	/**
+	 * Send message with error to admin
+	 * @param ex from place where we get error
+	 */
 	private void exceptionMailSender(Exception ex){
 		SimpleMailMessage email = new SimpleMailMessage();
 		email.setFrom(HOST_EMAIL);
@@ -80,6 +83,11 @@ public class MailSendingComponent {
 		mailSender.send(email);
 	}
 	
+	/**
+	 * Get all stack trace about error which we get during work
+	 * @param throwable from which we get output message
+	 * @return all stack trace where we get error
+	 */
 	private String getStackTrace(final Throwable throwable) {
 	     final StringWriter sw = new StringWriter();
 	     final PrintWriter pw = new PrintWriter(sw, true);

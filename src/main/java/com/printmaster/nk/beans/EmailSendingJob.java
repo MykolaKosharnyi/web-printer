@@ -1,21 +1,11 @@
 package com.printmaster.nk.beans;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.io.UnsupportedEncodingException;
 import java.util.List;
 
-import javax.mail.Address;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Component;
 
+import com.printmaster.nk.components.MailSendingComponent;
 import com.printmaster.nk.model.entity.MailSendingMessage;
 import com.printmaster.nk.model.entity.MailSendingMessage.StatusOfSending;
 import com.printmaster.nk.model.entity.UserAddByAdmin;
@@ -29,69 +19,25 @@ public class EmailSendingJob{
 	private MailSendingService mailSendingService;
 	
 	@Autowired
-    private JavaMailSenderImpl mailSender;
+    private UserAddByAdminService userAddByAdminService;
 	
 	@Autowired
-    private UserAddByAdminService userAddByAdminService;
-
-	private final static String HOST_EMAIL = "noreplay@forprint.net.ua";
-	private final static String ADMIN_EMAIL = "nikolay.kosharniy@gmail.com";
+	MailSendingComponent mailSendingComponent;
 
 	public void executeInternal() {
-		try{
-			for(MailSendingMessage message : mailSendingService.getMessagesReadySend()){
-				sendEmail(message);
-			}
-		} catch(Exception ex){
-			exceptionMailSender(ex);
+		for(MailSendingMessage message : mailSendingService.getMessagesReadySend()){
+			sendEmail(message);
 		}
 	}
-	
-	/**
-	 * Send message with error to admin
-	 * @param ex from place where we get error
-	 */
-	private void exceptionMailSender(Exception ex){
-		SimpleMailMessage email = new SimpleMailMessage();
-		email.setFrom(HOST_EMAIL);
-		email.setTo(ADMIN_EMAIL);
-		email.setSubject("Error!");
-		email.setText(getStackTrace(ex));
 
-		mailSender.send(email);
-	}
-	
-	/**
-	 * Get all stack trace about error which we get during work
-	 * @param throwable from which we get output message
-	 * @return all stack trace where we get error
-	 */
-	private String getStackTrace(final Throwable throwable) {
-	     final StringWriter sw = new StringWriter();
-	     final PrintWriter pw = new PrintWriter(sw, true);
-	     throwable.printStackTrace(pw);
-	     return sw.getBuffer().toString();
-	}
-
-	private void sendEmail(MailSendingMessage message) throws UnsupportedEncodingException, MessagingException {
+	private void sendEmail(MailSendingMessage message) {
 		String subject = message.getTitle();
 		String messageBody = message.getMessage();
 
 		List<UserAddByAdmin> usersList = userAddByAdminService.getUserBySubscription(message.getSubscription());
 
-		for (UserAddByAdmin user : usersList) {
-
-			MimeMessage msg = mailSender.createMimeMessage();
-
-			Address adresFrom = new InternetAddress(HOST_EMAIL, "e-machine.com.ua");
-
-			msg.setContent("Mail contect", "text/html");
-			msg.setFrom(adresFrom);
-			msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(getConcatedEmails(user)));
-			msg.setSubject(subject, "UTF-8");
-			msg.setText(messageBody.replace("../..", "http://e-machine.com.ua"), "UTF-8", "html");
-
-			mailSender.send(msg);
+		for (UserAddByAdmin user : usersList) {			
+			mailSendingComponent.observeRecipients(subject, messageBody, getConcatedEmails(user));
 		}
 		
 		message.setStatus(StatusOfSending.SENDED);
