@@ -1,6 +1,8 @@
 package com.printmaster.nk.model.service.impl;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,44 +22,59 @@ public class UserAddByAdminServiceImpl implements UserAddByAdminService {
 	}
 
 	@Override
-	@Transactional
 	public long save(UserAddByAdmin user) {
        return userAddByAdminDAO.save(user);
 	}
 
 	@Override
-	@Transactional
 	public void updateUser(UserAddByAdmin user) {
 		this.userAddByAdminDAO.updateUser(user);
 	}
 
 	@Override
-	@Transactional
 	public List<UserAddByAdmin> listUsers() {
 		return this.userAddByAdminDAO.listUsers();
 	}
 
 	@Override
-	@Transactional
 	public UserAddByAdmin getUserById(long id) {
 		return this.userAddByAdminDAO.getUserById(id);
 	}
 
 	@Override
-	@Transactional
 	public void removeUser(long id) {
 		this.userAddByAdminDAO.removeUser(id);
 	}
 
 	@Override
-	@Transactional
 	public UserAddByAdmin findByUserName(String username) {
 		return this.userAddByAdminDAO.findByUserName(username);
 	}
 
 	@Override
-	@Transactional
 	public List<UserAddByAdmin> getUserBySubscription(List<String> subscriptionTypes) {
 		return this.userAddByAdminDAO.getUserBySubscription(subscriptionTypes);
 	}
+
+	@Override
+	public boolean isEmailAlreadyExist(String emailToCheck) {
+		return isEmailCorrect(emailToCheck) && userAddByAdminDAO.isEmailAlreadyExist(emailToCheck);
+	}
+	
+	private static final String EMAIL_PATTERN =
+			"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+			+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+	/**
+	 * Validate email with regular expression
+	 *
+	 * @param email for validation
+	 * @return true valid email, false invalid email
+	 */
+	private boolean isEmailCorrect(String email){
+		String result = email.trim();
+		Pattern pattern = Pattern.compile(EMAIL_PATTERN);
+		Matcher matcher = pattern.matcher(result);
+		return matcher.matches();
+	}
+	
 }

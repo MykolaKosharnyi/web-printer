@@ -53,7 +53,7 @@ public class MailSenderController {
     }
 
 	@RequestMapping(value = "/admin/all_sended_messages", method = RequestMethod.GET)
-	public String getAllSendedMessages(Model model) {			
+	public String getAllSendedMessages(Model model){			
 		model.addAttribute("allMessages", mailSendingService.getAll());
 	    return "admin/all_sended_messages";
 	}
@@ -118,7 +118,10 @@ public class MailSenderController {
 		return "admin/message";
 	}
 	
-	/*  Part for adding mails recipients  */
+	
+	
+	/*-------------------------  Part for adding mails recipients ----------------------------------------- */
+	
 	@RequestMapping(value="/admin/change_comment_recipient_notification", method = RequestMethod.GET)
     public String changeCommentRecipientNotification(Model model){
 		model.addAttribute("emails", componets.jsonArrayParser(USERS_JSON_FILE_NAME));

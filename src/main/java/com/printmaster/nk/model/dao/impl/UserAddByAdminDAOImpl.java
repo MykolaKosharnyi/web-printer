@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Junction;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
@@ -105,5 +106,21 @@ public class UserAddByAdminDAOImpl implements UserAddByAdminDAO{
 				"where subscription in (%s)", subscriptionsBuffer.toString());
 		
 		return session.createQuery(query).list();		
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public boolean isEmailAlreadyExist(String emailToCheck) {
+		Session session = this.sessionFactory.getCurrentSession();
+		Criteria cr = session.createCriteria(UserAddByAdmin.class);
+		
+		Junction emailGroup = Restrictions.disjunction();
+		emailGroup.add(Restrictions.eq("email", emailToCheck));
+		emailGroup.add(Restrictions.eq("email2", emailToCheck));
+		emailGroup.add(Restrictions.eq("email3", emailToCheck));
+		cr.add(emailGroup);
+
+		ArrayList<UserAddByAdmin> result = new ArrayList<UserAddByAdmin>(cr.list());
+		return result.size() == 0 ? true : false;
 	}
 }

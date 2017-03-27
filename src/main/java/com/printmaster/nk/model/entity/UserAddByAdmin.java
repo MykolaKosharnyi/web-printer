@@ -16,6 +16,9 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 @Entity
 @Table(name="user_add_by_admin")
 public class UserAddByAdmin implements Serializable{
@@ -65,10 +68,12 @@ public class UserAddByAdmin implements Serializable{
 	
 	@ElementCollection(fetch = FetchType.EAGER)
 	@Column(name="subscription")
+	@Fetch(value = FetchMode.SUBSELECT)
 	private List<String> subscription = new ArrayList<String>();
 	
 	@ElementCollection(fetch = FetchType.EAGER)
 	@Column(name="scopeOfActivities")
+	@Fetch(value = FetchMode.SUBSELECT)
 	private List<String> scopeOfActivities = new ArrayList<String>();
 	
 	public UserAddByAdmin(){}

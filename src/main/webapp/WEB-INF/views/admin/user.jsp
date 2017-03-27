@@ -82,7 +82,7 @@
 		  <div class="form-group">
 			<label for="telephone" class="col-sm-2 control-label">Номер телефона:</label>
 			<div class="col-sm-10">
-			  <form:input path="telephone" class="form-control" value="${user.telephone}" placeholder="+38(099) 999-99-99"/>
+			  <form:input path="telephone" class="form-control" value="${user.telephone}" placeholder="+38(099) 99-99-999"/>
 			</div>
 		  </div>
 		  <div class="form-group">
@@ -95,18 +95,24 @@
 			<label for="email" class="col-sm-2 control-label">E-mail:</label>
 			<div class="col-sm-10">
 			  <form:input path="email" class="form-control" value="${user.email}"/>
+			  <p class="bg-success info_of_adding">Введенное значение удовлетворяет требованиям!</p>
+			  <p class="bg-danger info_of_adding">Есть повторение с раннее введенным e-mail или он не корректен!</p>
 			</div>
 		  </div>
 		  <div class="form-group">
-			<label for="email2" class="col-sm-2 control-label">E-mail2:</label>
+			<label for="email2" class="col-sm-2 control-label">E-mail (2):</label>
 			<div class="col-sm-10">
 			  <form:input path="email2" class="form-control" value="${user.email2}"/>
+			  <p class="bg-success info_of_adding">Введенное значение удовлетворяет требованиям!</p>
+			  <p class="bg-danger info_of_adding">Есть повторение с раннее введенным e-mail или он не корректен!</p>
 			</div>
 		  </div>
 		  <div class="form-group">
-			<label for="email3" class="col-sm-2 control-label">E-mail3:</label>
+			<label for="email3" class="col-sm-2 control-label">E-mail (3):</label>
 			<div class="col-sm-10">
 			  <form:input path="email3" class="form-control" value="${user.email3}"/>
+			  <p class="bg-success info_of_adding">Введенное значение удовлетворяет требованиям!</p>
+			  <p class="bg-danger info_of_adding">Есть повторение с раннее введенным e-mail или он не корректен!</p>
 			</div>
 		  </div>
 		  <div class="form-group">
@@ -176,9 +182,50 @@
 		/*
 		http://gnatkovsky.com.ua/maska-vvoda-nomera-telefona.html
 		*/
-		   jQuery(function($){
+		jQuery(function($){
 		   $("#telephone").mask("+38(099) 99-99-999");
-		   });
+		});
+    
+			$(function() {
+				$("#email, #email2, #email3").keyup(function() {
+
+					var ourElement = $(this);
+					var dataToSend = $(this).val();
+					
+					if(dataToSend.trim()!=""){
+					$.ajax({
+						  type: 'post',
+						  url: "/admin/user_add_by_admin/check_email",
+						  contentType: "text/plain; charset=utf-8",
+						  data: dataToSend,			        
+					        success: function (data) {
+					        	if(data.result){
+					        		ourElement.parent('div').removeClass('has-error').addClass('has-success');
+					        		ourElement.parent('div').find('.bg-success').css('display','block');
+					        		ourElement.parent('div').find('.bg-danger').css('display','none');
+					        		ourElement.parent('div').parent('form').find('button').removeProp('disabled');
+								} else {
+									ourElement.parent('div').removeClass('has-success').addClass('has-error');
+									ourElement.parent('div').find('.bg-success').css('display','none');
+									ourElement.parent('div').find('.bg-danger').css('display','block');
+									ourElement.parent('div').parent('form').find('button').prop("disabled", true);
+								}
+					        },
+						  error: function(xhr, status, error) {
+							  alert('Request Status: ' + xhr.status + ' Status Text: ' + xhr.statusText + ' ' + xhr.responseText);
+						  }
+						});
+
+					} else {
+						ourElement.parent('div').find('.bg-success').css('display','none');
+						ourElement.parent('div').find('.bg-danger').css('display','none');
+						ourElement.parent('div').removeClass('has-error').removeClass('has-success');
+						ourElement.parent('div').parent('form').find('button').prop("disabled", true);
+					}
+					
+				});
+			});
+    
 	</script>
 
 </body>

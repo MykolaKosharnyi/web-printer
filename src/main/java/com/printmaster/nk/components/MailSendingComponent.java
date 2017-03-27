@@ -94,6 +94,10 @@ public class MailSendingComponent {
 	     throwable.printStackTrace(pw);
 	     return sw.getBuffer().toString();
 	}
+
+	public boolean checkEmail(JSONArray array, String email){		
+		return !isParameterRepeated(array, email) && isEmailCorrect(email);
+	}
 	
 	/**
 	 * Validate email with regular expression
@@ -106,10 +110,6 @@ public class MailSendingComponent {
 		Pattern pattern = Pattern.compile(EMAIL_PATTERN);
 		Matcher matcher = pattern.matcher(result);
 		return matcher.matches();
-	}
-	
-	public boolean checkEmail(JSONArray array, String email){		
-		return !isParameterRepeated(array, email) && isEmailCorrect(email);
 	}
 	
 	private boolean isParameterRepeated(JSONArray array, String email){

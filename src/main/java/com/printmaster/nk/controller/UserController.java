@@ -7,7 +7,10 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -249,5 +252,14 @@ public class UserController {
 		userAddByAdminService.updateUser(product);
 		return "redirect:/" + PATH_ADMIN + "/"+ TYPE +"s";
 	}
+	
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value="/admin/user_add_by_admin/check_email", method = RequestMethod.POST,
+    		produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.TEXT_PLAIN_VALUE)
+    public @ResponseBody JSONObject checkEmail(@RequestBody String email) {
+    	JSONObject result = new JSONObject();
+    	result.put("result", userAddByAdminService.isEmailAlreadyExist(email));
+    	return result;
+    }
     
 }

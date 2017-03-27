@@ -12,4 +12,5 @@ public interface UserAddByAdminDAO {
     List<UserAddByAdmin> listUsers();
     UserAddByAdmin getUserById(long id);
     void removeUser(long id);
+    boolean isEmailAlreadyExist(String emailToCheck);
 }
