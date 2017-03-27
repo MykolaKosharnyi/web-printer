@@ -107,16 +107,16 @@
 					</div>	
 		
 					<c:if test="${!empty product.leftSharesLink}">
-						<div class="ribbon-top-search-wrapper-left" style="color:${product.leftSharesLinkColorText}; background:${product.leftSharesLinkColorFone};">
-							<div class="ribbon-top-search-left">
+						<div class="ribbon-search-wrapper-left" style="color:${product.leftSharesLinkColorText}; background:${product.leftSharesLinkColorFone};">
+							<div class="ribbon-search-left">
 								${product.leftSharesLink}
 							</div>
 						</div>
 					</c:if>
 					
 					<c:if test="${!empty product.rightSharesLink}">
-						<div class="ribbon-top-search-wrapper-right" style="color:${product.rightSharesLinkColorText}; background:${product.rightSharesLinkColorFone};">
-							<div class="ribbon-top-search-right">
+						<div class="ribbon-search-wrapper-right" style="color:${product.rightSharesLinkColorText}; background:${product.rightSharesLinkColorFone};">
+							<div class="ribbon-search-right">
 								${product.rightSharesLink}
 							</div>
 						</div>
@@ -232,16 +232,16 @@
 				</div>	
 	
 				<c:if test="${!empty product.leftSharesLink}">
-					<div class="ribbon-search-wrapper-left">
-						<div class="ribbon-search-left" style="color:${product.leftSharesLinkColorText}; background:${product.leftSharesLinkColorFone};">
+					<div class="ribbon-search-wrapper-left" style="color:${product.leftSharesLinkColorText}; background:${product.leftSharesLinkColorFone};">
+						<div class="ribbon-search-left">
 							${product.leftSharesLink}
 						</div>
 					</div>
 				</c:if>
 				
 				<c:if test="${!empty product.rightSharesLink}">
-					<div class="ribbon-search-wrapper-right">
-						<div class="ribbon-search-right" style="color:${product.rightSharesLinkColorText}; background:${product.rightSharesLinkColorFone};">
+					<div class="ribbon-search-wrapper-right" style="color:${product.rightSharesLinkColorText}; background:${product.rightSharesLinkColorFone};">
+						<div class="ribbon-search-right">
 							${product.rightSharesLink}
 						</div>
 					</div>
@@ -494,20 +494,16 @@ $(document).ready(function() {
 
 	                				if(product.leftSharesLink!=null && product.leftSharesLink!=""){
 	                					innterDiv.append($('<div/>').addClass("ribbon-search-wrapper-left")
-	                										.append($('<div/>').addClass("ribbon-search-left")
-	                														   .text(product.leftSharesLink)
-	                														   .css( "color", product.leftSharesLinkColorText )
-	                														   .css( "background", product.leftSharesLinkColorFone )
-	                														   ))
+	                								.css( "color", product.leftSharesLinkColorText )
+												    .css( "background", product.leftSharesLinkColorFone )
+	                								.append($('<div/>').addClass("ribbon-search-left").text(product.leftSharesLink)))
 	                				}
 	                	        	
 	                	        	if(product.rightSharesLink!=null && product.rightSharesLink!=""){
 	                	        		innterDiv.append($('<div/>').addClass("ribbon-search-wrapper-right")
-	                										.append($('<div/>').addClass("ribbon-search-right")
-	                														   .text(product.rightSharesLink)
-	                														   .css( "color", product.rightSharesLinkColorText )
-	                														   .css( "background", product.rightSharesLinkColorFone )
-	                														   ))
+	                	        					.css( "color", product.rightSharesLinkColorText )
+												    .css( "background", product.rightSharesLinkColorFone )
+	                								.append($('<div/>').addClass("ribbon-search-right").text(product.rightSharesLink)))
 	                				}
 	                	        	
 	            outerDiv.append(innterDiv);   	        	
