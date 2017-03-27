@@ -16,11 +16,13 @@
 
     <link href="/css/admin/datepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
 	<script src="/css/admin/datepicker/bootstrap-datetimepicker.min.js"></script>
+	
+	<script src="<%=request.getContextPath()%>/resources/js/admin/maskinput.js"></script>
 
 <style type="text/css">
-ul.list_without_dots input{
-	margin-right: 5px;
-}
+	ul.list_without_dots input{
+		margin-right: 5px;
+	}
 
 </style>
 
@@ -80,7 +82,7 @@ ul.list_without_dots input{
 		  <div class="form-group">
 			<label for="telephone" class="col-sm-2 control-label">Номер телефона:</label>
 			<div class="col-sm-10">
-			  <form:input path="telephone" class="form-control" value="${user.telephone}"/>
+			  <form:input path="telephone" class="form-control" value="${user.telephone}" placeholder="+38(099) 999-99-99"/>
 			</div>
 		  </div>
 		  <div class="form-group">
@@ -160,9 +162,9 @@ ul.list_without_dots input{
 	</div>
 
     <script type="text/javascript">
-    /*
-    http://tarruda.github.io/bootstrap-datetimepicker/
-    */
+	    /*
+	    http://tarruda.github.io/bootstrap-datetimepicker/
+	    */
 		$(function() {
 			$('#datetimepicker').datetimepicker({
 				language: 'ru',
@@ -170,6 +172,13 @@ ul.list_without_dots input{
 				pickDate: true
 			});
 		});
+    
+		/*
+		http://gnatkovsky.com.ua/maska-vvoda-nomera-telefona.html
+		*/
+		   jQuery(function($){
+		   $("#telephone").mask("+38(099) 99-99-999");
+		   });
 	</script>
 
 </body>

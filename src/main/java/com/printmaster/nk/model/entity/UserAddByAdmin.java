@@ -42,7 +42,7 @@ public class UserAddByAdmin implements Serializable{
 	private boolean enabled;
 	
 	@Column(name="telephone")
-	private int telephone;
+	private String telephone;
 	
 	@Column(name="company")
 	private String company;
@@ -105,11 +105,11 @@ public class UserAddByAdmin implements Serializable{
 		this.enabled = enabled;
 	}
 
-	public int getTelephone() {
+	public String getTelephone() {
 		return telephone;
 	}
 
-	public void setTelephone(int telephone) {
+	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
 
