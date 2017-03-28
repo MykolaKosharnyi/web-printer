@@ -47,6 +47,7 @@ public class SearchPrinters extends SearchGeneric implements Serializable{
 	private int heigth1;
 	private int depth0;
 	private int depth1;
+	private String[] printingExtension;
 	
 	public SearchPrinters() {}
 
@@ -71,6 +72,14 @@ public class SearchPrinters extends SearchGeneric implements Serializable{
 				+ ", heigth0=" + heigth0 + ", heigth1=" + heigth1 + ", depth0=" + depth0 + ", depth1=" + depth1 + "]";
 	}
 	
+	public String[] getPrintingExtension() {
+		return printingExtension;
+	}
+
+	public void setPrintingExtension(String[] printingExtension) {
+		this.printingExtension = printingExtension;
+	}
+
 	public int getWeightPrintMMRangeFrom() {
 		return weightPrintMMRangeFrom;
 	}

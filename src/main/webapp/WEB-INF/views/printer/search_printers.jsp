@@ -113,6 +113,15 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
+				<p>Расширение печати</p>
+			</div>
+			<ul class="check_boxes">
+				<form:checkboxes items="${printer.printing_extension}" path="printingExtension" element="li" />
+			</ul>
+		</div>
+		<div class="search_criteria">
+			<div class="block_title">
+				<i></i>
 				<p>Тип печати</p>
 			</div>
 			<ul class="check_boxes">			

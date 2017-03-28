@@ -193,6 +193,14 @@ public class PrinterDAOImpl extends ProductDaoTemplate<Printer, SearchPrinters> 
 		cr.add(equipmentManufacturerGroup);
 		}
 		
+		if(searchPrinters.getPrintingExtension()!= null){
+			Junction printingExtensionGroup = Restrictions.disjunction();
+			for(String printingExtension : searchPrinters.getPrintingExtension()){
+				printingExtensionGroup.add(Restrictions.eq("printingExtension",printingExtension));
+			}
+			cr.add(printingExtensionGroup);
+		}
+		
 		if(searchPrinters.getMaximumMediaThickness60_0()!=searchPrinters.getMaximumMediaThickness60_1() ||
 		   searchPrinters.getMaximumMediaThickness500_0()!=searchPrinters.getMaximumMediaThickness500_1()){
 			Junction maximumMediaThicknessGroup = Restrictions.disjunction();

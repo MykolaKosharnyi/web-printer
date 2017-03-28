@@ -167,6 +167,15 @@
 				<div class="characteristic">
 					<div class="block_title">
 						<i></i>
+						<p>Расширение печати, мм</p>
+					</div>
+					<ul class="check_boxes">
+						<form:radiobuttons items="${printer.printing_extension}" path="printingExtension" element="li"/>
+					</ul>
+				</div>
+				<div class="characteristic">
+					<div class="block_title">
+						<i></i>
 						<p>Состояние оборудования</p>
 					</div>
 					<ul class="check_boxes">					

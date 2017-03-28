@@ -425,6 +425,10 @@
                        <c:if test="${(product.inputFirstWeightPrintMM == 0) && product.weightPrintMM > 0}">
    							<tr><td>Ширина печати:</td><td>${product.weightPrintMM} мм</td></tr>
 					   </c:if>
+					   
+					   <c:if test="${!empty product.printing_extension}">
+   							<tr><td>Расширение печати:</td><td>${product.printing_extension} мм</td></tr>
+					   </c:if>
                        
                        <c:if test="${!empty product.previouslyUsed}">
    							<tr><td>Состояние оборудования:</td><td>${product.previouslyUsed}</td></tr>

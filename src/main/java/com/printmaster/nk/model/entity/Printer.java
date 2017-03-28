@@ -303,8 +303,20 @@ public class Printer extends HeadProduct{
 	@Column(name="ratingCostOfPrinting", nullable = false, columnDefinition = "int default 0")//Себестоимость печати
 	private int ratingCostOfPrinting;
 	
+	//Расширение печати
+	@Column(name="printingExtension")
+	private String printingExtension;
+	
 	public Printer() {
 		super();
+	}
+
+	public String getPrintingExtension() {
+		return printingExtension;
+	}
+
+	public void setPrintingExtension(String printingExtension) {
+		this.printingExtension = printingExtension;
 	}
 
 	public int getRatingPrintQuality() {
