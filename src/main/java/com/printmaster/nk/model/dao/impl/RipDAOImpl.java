@@ -5,15 +5,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.criterion.MatchMode;
-import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -21,24 +18,20 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Repository;
 
-import com.printmaster.nk.model.dao.ProductDAO;
 import com.printmaster.nk.model.entity.Rip;
 import com.printmaster.nk.model.entity.search.SearchRips;
 
 @Repository
-public class RipDAOImpl implements ProductDAO<Rip, SearchRips> {
-
+public class RipDAOImpl extends ProductDaoTemplate<Rip, SearchRips> {
 	private Logger logger = Logger.getLogger(RipDAOImpl.class);
-
-	private SessionFactory sessionFactory;
-
-	public void setSessionFactory(SessionFactory sf) {
-		this.sessionFactory = sf;
+	
+	public RipDAOImpl() {
+		super(Rip.class);
 	}
 
 	@Override
 	public long addProduct(Rip c) {
-		Session session = this.sessionFactory.getCurrentSession();
+		Session session = getSessionFactory().getCurrentSession();
 		long id = (Long) session.save(c);
 		logger.info("Rip saved successfully, Rip Details=" + c);
 		return id;
@@ -47,7 +40,7 @@ public class RipDAOImpl implements ProductDAO<Rip, SearchRips> {
     @SuppressWarnings("unchecked")
 	@Override
 	public Set<Rip> listSearchByPhrase(String phrase) {
-		Session session = this.sessionFactory.getCurrentSession();
+		Session session = getSessionFactory().getCurrentSession();
 		Criteria cr = session.createCriteria(Rip.class);
 		
 		cr.add(Restrictions.eq("showOnSite", true));
@@ -58,24 +51,14 @@ public class RipDAOImpl implements ProductDAO<Rip, SearchRips> {
 	
 	@Override
 	public void updateProduct(Rip c) {
-		Session session = this.sessionFactory.getCurrentSession();
+		Session session = getSessionFactory().getCurrentSession();
 		session.update(c);
 		logger.info("Rip updated successfully, Rip Details=" + c);
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	@Override
-	public Set<Rip> listProducts(String sortCriteria) {
-		Session session = this.sessionFactory.getCurrentSession();
-		Criteria cr = session.createCriteria(Rip.class);
-		cr.addOrder(Order.asc(sortCriteria));
-		Set<Rip> ripList = new LinkedHashSet(cr.list());
-		return ripList;
-	}
-
 	@Override
 	public Rip getProductById(long id) {
-		Session session = this.sessionFactory.getCurrentSession();
+		Session session = getSessionFactory().getCurrentSession();
 		Rip c = (Rip) session.load(Rip.class, new Long(id));
 		logger.info("Rip loaded successfully, Rip details=" + c);
 		return c;
@@ -83,7 +66,7 @@ public class RipDAOImpl implements ProductDAO<Rip, SearchRips> {
 
 	@Override
 	public void removeProduct(long id) {
-		Session session = this.sessionFactory.getCurrentSession();
+		Session session = getSessionFactory().getCurrentSession();
 		Rip c = (Rip) session.load(Rip.class, new Long(id));
 		if (null != c) {
 			session.delete(c);
@@ -94,7 +77,7 @@ public class RipDAOImpl implements ProductDAO<Rip, SearchRips> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public Set<Rip> listSearchProducts(SearchRips searchRips) {
-		Session session = this.sessionFactory.getCurrentSession();
+		Session session = getSessionFactory().getCurrentSession();
 		Criteria cr = session.createCriteria(Rip.class);
 
 		JSONArray usedDate = null;
@@ -265,7 +248,7 @@ public class RipDAOImpl implements ProductDAO<Rip, SearchRips> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public Set<Rip> listShowOnSite() {
-		Session session = this.sessionFactory.getCurrentSession();
+		Session session = getSessionFactory().getCurrentSession();
 		Criteria cr = session.createCriteria(Rip.class);
 		cr.add(Restrictions.eq("showOnSite", true));
 
@@ -279,7 +262,7 @@ public class RipDAOImpl implements ProductDAO<Rip, SearchRips> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public Set<Rip> listShowOnHomePage() {
-		Session session = this.sessionFactory.getCurrentSession();
+		Session session = getSessionFactory().getCurrentSession();
 		Criteria cr = session.createCriteria(Rip.class);
 		cr.add(Restrictions.eq("showOnSite", true));
 		cr.add(Restrictions.eq("showOnHomePage", true));

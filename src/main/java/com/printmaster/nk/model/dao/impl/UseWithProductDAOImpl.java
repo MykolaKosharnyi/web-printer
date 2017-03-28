@@ -28,7 +28,7 @@ import com.printmaster.nk.model.entity.UseWithProduct;
 import com.printmaster.nk.model.entity.search.SearchUseWithProducts;
 
 @Repository
-public class UseWithProductDAOImpl  implements UseWithProductDAO{
+public class UseWithProductDAOImpl implements UseWithProductDAO{
 
 	 private Logger logger = Logger.getLogger(UseWithProductDAOImpl.class);
 	 
@@ -70,7 +70,13 @@ public class UseWithProductDAOImpl  implements UseWithProductDAO{
 	    public Set<UseWithProduct> listProducts(String sortCriteria) {
 	        Session session = this.sessionFactory.getCurrentSession();
 	        Criteria cr = session.createCriteria(UseWithProduct.class);
-			cr.addOrder(Order.asc(sortCriteria));
+	        
+	        if("id".equals(sortCriteria) || "prise".equals(sortCriteria) || "top".equals(sortCriteria)){		
+				cr.addOrder(Order.desc(sortCriteria));
+			} else {
+				cr.addOrder(Order.asc(sortCriteria));
+			}
+	        
 			Set<UseWithProduct> useWithProductList = new LinkedHashSet(cr.list());
 	        return useWithProductList;
 	    }

@@ -1,38 +1,32 @@
 package com.printmaster.nk.model.dao.impl;
 
 import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Junction;
 import org.hibernate.criterion.MatchMode;
-import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
-import com.printmaster.nk.model.dao.ProductDAO;
 import com.printmaster.nk.model.entity.Laminator;
 import com.printmaster.nk.model.entity.search.SearchLaminators;
 
 @Repository
-public class LaminatorDAOImpl implements ProductDAO<Laminator, SearchLaminators>{
+public class LaminatorDAOImpl extends ProductDaoTemplate<Laminator, SearchLaminators>{
 
-	 private Logger logger = Logger.getLogger(LaminatorDAOImpl.class);
-	 
-	    private SessionFactory sessionFactory;
-	     
-	    public void setSessionFactory(SessionFactory sf){
-	        this.sessionFactory = sf;
-	    }
-	 
+	private Logger logger = Logger.getLogger(LaminatorDAOImpl.class);
+	
+	 public LaminatorDAOImpl() {
+		super(Laminator.class);
+	}
+
 	    @SuppressWarnings("unchecked")
 		@Override
 		public Set<Laminator> listSearchByPhrase(String phrase) {
-			Session session = this.sessionFactory.getCurrentSession();
+			Session session = getSessionFactory().getCurrentSession();
 			Criteria cr = session.createCriteria(Laminator.class);
 			
 			cr.add(Restrictions.eq("showOnSite", true));
@@ -43,7 +37,7 @@ public class LaminatorDAOImpl implements ProductDAO<Laminator, SearchLaminators>
 	    
 	    @Override
 	    public long addProduct(Laminator l) {
-	        Session session = this.sessionFactory.getCurrentSession();
+	        Session session = getSessionFactory().getCurrentSession();
 	        long id = (Long) session.save(l);
 	        logger.info("Laminator saved successfully, Laminator Details=" + l);
 	        return id;
@@ -51,24 +45,14 @@ public class LaminatorDAOImpl implements ProductDAO<Laminator, SearchLaminators>
 	 
 	    @Override
 	    public void updateProduct(Laminator l) {
-	        Session session = this.sessionFactory.getCurrentSession();
+	        Session session = getSessionFactory().getCurrentSession();
 	        session.update(l);
 	        logger.info("Laminator updated successfully, Laminator Details=" + l);
 	    }
 	 
-	    @SuppressWarnings({ "unchecked", "rawtypes" })
-	    @Override
-	    public Set<Laminator> listProducts(String sortCriteria) {
-	        Session session = this.sessionFactory.getCurrentSession();
-			Criteria cr = session.createCriteria(Laminator.class);
-			cr.addOrder(Order.asc(sortCriteria));
-			Set<Laminator> laminatorList = new LinkedHashSet(cr.list());
-	        return laminatorList;
-	    }
-	 
 	    @Override
 	    public Laminator getProductById(long id) {
-	        Session session = this.sessionFactory.getCurrentSession();      
+	        Session session = getSessionFactory().getCurrentSession();      
 	        Laminator l = (Laminator) session.load(Laminator.class, new Long(id));
 	        logger.info("Laminator loaded successfully, Laminator details=" + l);
 	        return l;
@@ -76,7 +60,7 @@ public class LaminatorDAOImpl implements ProductDAO<Laminator, SearchLaminators>
 	 
 	    @Override
 	    public void removeProduct(long id) {
-	        Session session = this.sessionFactory.getCurrentSession();
+	        Session session = getSessionFactory().getCurrentSession();
 	        Laminator l = (Laminator) session.load(Laminator.class, new Long(id));
 	        if(null != l){
 	            session.delete(l);
@@ -87,7 +71,7 @@ public class LaminatorDAOImpl implements ProductDAO<Laminator, SearchLaminators>
 		@SuppressWarnings("unchecked")
 		@Override
 		public Set<Laminator> listSearchProducts(SearchLaminators searchLaminators) {
-			Session session = this.sessionFactory.getCurrentSession();
+			Session session = getSessionFactory().getCurrentSession();
 			Criteria cr = session.createCriteria(Laminator.class);
 			
 			if(searchLaminators.getPrise0()!=searchLaminators.getPrise1()){
@@ -191,7 +175,7 @@ public class LaminatorDAOImpl implements ProductDAO<Laminator, SearchLaminators>
 		@SuppressWarnings("unchecked")
 		@Override
 		public Set<Laminator> listShowOnSite() {
-			Session session = this.sessionFactory.getCurrentSession();
+			Session session = getSessionFactory().getCurrentSession();
 			Criteria cr = session.createCriteria(Laminator.class);
 			cr.add(Restrictions.eq("showOnSite", true));
 			
@@ -205,7 +189,7 @@ public class LaminatorDAOImpl implements ProductDAO<Laminator, SearchLaminators>
 		@SuppressWarnings("unchecked")
 		@Override
 		public Set<Laminator> listShowOnHomePage() {
-			Session session = this.sessionFactory.getCurrentSession();
+			Session session = getSessionFactory().getCurrentSession();
 			Criteria cr = session.createCriteria(Laminator.class);
 			cr.add(Restrictions.eq("showOnSite", true));
 			cr.add(Restrictions.eq("showOnHomePage", true));

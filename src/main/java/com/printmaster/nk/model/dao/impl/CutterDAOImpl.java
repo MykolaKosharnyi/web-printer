@@ -2,37 +2,31 @@ package com.printmaster.nk.model.dao.impl;
 
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Junction;
 import org.hibernate.criterion.MatchMode;
-import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
-import com.printmaster.nk.model.dao.ProductDAO;
 import com.printmaster.nk.model.entity.Cutter;
 import com.printmaster.nk.model.entity.search.SearchCutters;
 
 @Repository
-public class CutterDAOImpl implements ProductDAO<Cutter, SearchCutters>{
+public class CutterDAOImpl extends ProductDaoTemplate<Cutter, SearchCutters>{
 
-	 private Logger logger = Logger.getLogger(CutterDAOImpl.class);
-	 
-	    private SessionFactory sessionFactory;
-	     
-	    public void setSessionFactory(SessionFactory sf){
-	        this.sessionFactory = sf;
-	    }
-	 
+	private Logger logger = Logger.getLogger(CutterDAOImpl.class);
+	
+	 public CutterDAOImpl() {
+		super(Cutter.class);
+	}
+
 	    @Override
 	    public long addProduct(Cutter c) {
-	        Session session = this.sessionFactory.getCurrentSession();
+	        Session session = getSessionFactory().getCurrentSession();
 	        long id = (Long) session.save(c);
 	        logger.info("Cutter saved successfully, Cutter Details=" + c);
 	        return id;
@@ -40,24 +34,14 @@ public class CutterDAOImpl implements ProductDAO<Cutter, SearchCutters>{
 	 
 	    @Override
 	    public void updateProduct(Cutter c) {
-	        Session session = this.sessionFactory.getCurrentSession();
+	        Session session = getSessionFactory().getCurrentSession();
 	        session.update(c);
 	        logger.info("Cutter updated successfully, Cutter Details="+c);
 	    }
 	 
-	    @SuppressWarnings({ "unchecked", "rawtypes" })
-	    @Override
-	    public Set<Cutter> listProducts(String sortCriteria) {
-	        Session session = this.sessionFactory.getCurrentSession();
-			Criteria cr = session.createCriteria(Cutter.class);
-			cr.addOrder(Order.asc(sortCriteria));
-			Set<Cutter> cutterList = new LinkedHashSet(cr.list());
-	        return cutterList;
-	    }
-	 
 	    @Override
 	    public Cutter getProductById(long id) {
-	        Session session = this.sessionFactory.getCurrentSession();      
+	        Session session = getSessionFactory().getCurrentSession();      
 	        Cutter c = (Cutter) session.load(Cutter.class, new Long(id));
 	        logger.info("Cutter loaded successfully, Cutter details=" + c);
 	        return c;
@@ -65,7 +49,7 @@ public class CutterDAOImpl implements ProductDAO<Cutter, SearchCutters>{
 	 
 	    @Override
 	    public void removeProduct(long id) {
-	        Session session = this.sessionFactory.getCurrentSession();
+	        Session session = getSessionFactory().getCurrentSession();
 	        Cutter c = (Cutter) session.load(Cutter.class, new Long(id));
 	        if(null != c){
 	            session.delete(c);
@@ -76,7 +60,7 @@ public class CutterDAOImpl implements ProductDAO<Cutter, SearchCutters>{
 		@SuppressWarnings("unchecked")
 		@Override
 		public Set<Cutter> listSearchProducts(SearchCutters searchCutters) {
-			Session session = this.sessionFactory.getCurrentSession();
+			Session session = getSessionFactory().getCurrentSession();
 			Criteria cr = session.createCriteria(Cutter.class);
 			
 			if(searchCutters.getPrise0()!=searchCutters.getPrise1()){
@@ -237,7 +221,7 @@ public class CutterDAOImpl implements ProductDAO<Cutter, SearchCutters>{
 		@SuppressWarnings("unchecked")
 		@Override
 		public Set<Cutter> listShowOnSite() {
-			Session session = this.sessionFactory.getCurrentSession();
+			Session session = getSessionFactory().getCurrentSession();
 			Criteria cr = session.createCriteria(Cutter.class);
 			cr.add(Restrictions.eq("showOnSite", true));
 			
@@ -251,7 +235,7 @@ public class CutterDAOImpl implements ProductDAO<Cutter, SearchCutters>{
 		@SuppressWarnings("unchecked")
 		@Override
 		public Set<Cutter> listShowOnHomePage() {
-			Session session = this.sessionFactory.getCurrentSession();
+			Session session = getSessionFactory().getCurrentSession();
 			Criteria cr = session.createCriteria(Cutter.class);
 			cr.add(Restrictions.eq("showOnSite", true));
 			cr.add(Restrictions.eq("showOnHomePage", true));
@@ -266,7 +250,7 @@ public class CutterDAOImpl implements ProductDAO<Cutter, SearchCutters>{
 		@SuppressWarnings("unchecked")
 		@Override
 		public Set<Cutter> listSearchByPhrase(String phrase) {
-			Session session = this.sessionFactory.getCurrentSession();
+			Session session = getSessionFactory().getCurrentSession();
 			Criteria cr = session.createCriteria(Cutter.class);
 			
 			cr.add(Restrictions.eq("showOnSite", true));

@@ -7,16 +7,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Junction;
 import org.hibernate.criterion.MatchMode;
-import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -24,25 +21,22 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Repository;
 
-import com.printmaster.nk.model.dao.ProductDAO;
 import com.printmaster.nk.model.entity.Printer;
 import com.printmaster.nk.model.entity.search.SearchPrinters;
 
 @Repository
-public class PrinterDAOImpl implements ProductDAO<Printer, SearchPrinters> {
+public class PrinterDAOImpl extends ProductDaoTemplate<Printer, SearchPrinters> {
      
-    private Logger logger = Logger.getLogger(PrinterDAOImpl.class);
- 
-    private SessionFactory sessionFactory;
-     
-    public void setSessionFactory(SessionFactory sf){
-        this.sessionFactory = sf;
-    }
+    public PrinterDAOImpl() {
+		super(Printer.class);
+	}
+
+	private Logger logger = Logger.getLogger(PrinterDAOImpl.class);
  
     @SuppressWarnings("unchecked")
 	@Override
 	public Set<Printer> listSearchByPhrase(String phrase) {
-		Session session = this.sessionFactory.getCurrentSession();
+		Session session = getSessionFactory().getCurrentSession();
 		Criteria cr = session.createCriteria(Printer.class);
 		
 		cr.add(Restrictions.eq("showOnSite", true));
@@ -61,7 +55,7 @@ public class PrinterDAOImpl implements ProductDAO<Printer, SearchPrinters> {
     
     @Override
     public long addProduct(Printer p) {
-        Session session = this.sessionFactory.getCurrentSession();
+        Session session = getSessionFactory().getCurrentSession();
         long id = (Long) session.save(p);
         logger.info("Printer saved successfully, Printer Details="+p);
         return id;
@@ -69,24 +63,14 @@ public class PrinterDAOImpl implements ProductDAO<Printer, SearchPrinters> {
  
     @Override
     public void updateProduct(Printer p) {
-        Session session = this.sessionFactory.getCurrentSession();
+        Session session = getSessionFactory().getCurrentSession();
         session.update(p);
         logger.info("Printer updated successfully, Printer Details=" + p);
     }
  
-    @SuppressWarnings({ "unchecked", "rawtypes" })
-    @Override
-    public Set<Printer> listProducts(String sortCriteria) {
-    	Session session = this.sessionFactory.getCurrentSession();   	
-		Criteria cr = session.createCriteria(Printer.class);
-		cr.addOrder(Order.asc(sortCriteria));
-		Set<Printer> printerList = new LinkedHashSet(cr.list());
-        return printerList;
-    }
- 
     @Override
     public Printer getProductById(long id) {
-        Session session = this.sessionFactory.getCurrentSession();      
+        Session session = getSessionFactory().getCurrentSession();      
         Printer p = (Printer) session.load(Printer.class, new Long(id));
         logger.info("Printer loaded successfully, Printer details="+p);
         return p;
@@ -94,7 +78,7 @@ public class PrinterDAOImpl implements ProductDAO<Printer, SearchPrinters> {
  
     @Override
     public void removeProduct(long id) {
-        Session session = this.sessionFactory.getCurrentSession();
+        Session session = getSessionFactory().getCurrentSession();
         Printer p = (Printer) session.load(Printer.class, new Long(id));
         if(null != p){
             session.delete(p);
@@ -105,7 +89,7 @@ public class PrinterDAOImpl implements ProductDAO<Printer, SearchPrinters> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public Set<Printer> listSearchProducts(SearchPrinters searchPrinters) {
-		Session session = this.sessionFactory.getCurrentSession();
+		Session session = getSessionFactory().getCurrentSession();
 		Criteria cr = session.createCriteria(Printer.class);
 		
 		if(searchPrinters.getPrise0()!=searchPrinters.getPrise1()){
@@ -460,7 +444,7 @@ public class PrinterDAOImpl implements ProductDAO<Printer, SearchPrinters> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public Set<Printer> listShowOnSite() {
-		Session session = this.sessionFactory.getCurrentSession();
+		Session session = getSessionFactory().getCurrentSession();
 		Criteria cr = session.createCriteria(Printer.class);
 		cr.add(Restrictions.eq("showOnSite", true));
 		
@@ -475,7 +459,7 @@ public class PrinterDAOImpl implements ProductDAO<Printer, SearchPrinters> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public Set<Printer> listShowOnHomePage() {
-		Session session = this.sessionFactory.getCurrentSession();
+		Session session = getSessionFactory().getCurrentSession();
 		Criteria cr = session.createCriteria(Printer.class);
 		cr.add(Restrictions.eq("showOnSite", true));
 		cr.add(Restrictions.eq("showOnHomePage", true));

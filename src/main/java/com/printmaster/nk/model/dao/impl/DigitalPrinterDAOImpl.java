@@ -2,34 +2,28 @@ package com.printmaster.nk.model.dao.impl;
 
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Junction;
 import org.hibernate.criterion.MatchMode;
-import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
-import com.printmaster.nk.model.dao.ProductDAO;
 import com.printmaster.nk.model.entity.DigitalPrinter;
 import com.printmaster.nk.model.entity.search.SearchDigitalPrinters;
 
-public class DigitalPrinterDAOImpl implements ProductDAO<DigitalPrinter, SearchDigitalPrinters> {
-	private Logger logger = Logger.getLogger(DigitalPrinterDAOImpl.class);
-	 
-    private SessionFactory sessionFactory;
-     
-    public void setSessionFactory(SessionFactory sf){
-        this.sessionFactory = sf;
-    }
- 
+public class DigitalPrinterDAOImpl extends ProductDaoTemplate<DigitalPrinter, SearchDigitalPrinters> {
+	private Logger logger = Logger.getLogger(DigitalPrinterDAOImpl.class); 
+
+	public DigitalPrinterDAOImpl() {
+		super(DigitalPrinter.class);
+	}
+
     @Override
     public long addProduct(DigitalPrinter p) {
-        Session session = this.sessionFactory.getCurrentSession();
+        Session session = getSessionFactory().getCurrentSession();
         long id = (Long) session.save(p);
         logger.info("Printer saved successfully, Printer Details="+p);
         return id;
@@ -37,24 +31,14 @@ public class DigitalPrinterDAOImpl implements ProductDAO<DigitalPrinter, SearchD
  
     @Override
     public void updateProduct(DigitalPrinter p) {
-        Session session = this.sessionFactory.getCurrentSession();
+        Session session = getSessionFactory().getCurrentSession();
         session.update(p);
         logger.info("Printer updated successfully, Printer Details="+p);
     }
  
-    @SuppressWarnings({ "unchecked", "rawtypes" })
-    @Override
-    public Set<DigitalPrinter> listProducts(String sortCriteria) {
-        Session session = this.sessionFactory.getCurrentSession();
-		Criteria cr = session.createCriteria(DigitalPrinter.class);
-		cr.addOrder(Order.asc(sortCriteria));
-		Set<DigitalPrinter> printerList = new LinkedHashSet(cr.list());
-        return printerList;
-    }
- 
     @Override
     public DigitalPrinter getProductById(long id) {
-        Session session = this.sessionFactory.getCurrentSession();      
+        Session session = getSessionFactory().getCurrentSession();      
         DigitalPrinter p = (DigitalPrinter) session.load(DigitalPrinter.class, new Long(id));
         logger.info("Printer loaded successfully, Printer details="+p);
         return p;
@@ -62,7 +46,7 @@ public class DigitalPrinterDAOImpl implements ProductDAO<DigitalPrinter, SearchD
  
     @Override
     public void removeProduct(long id) {
-        Session session = this.sessionFactory.getCurrentSession();
+        Session session = getSessionFactory().getCurrentSession();
         DigitalPrinter p = (DigitalPrinter) session.load(DigitalPrinter.class, new Long(id));
         if(null != p){
             session.delete(p);
@@ -73,7 +57,7 @@ public class DigitalPrinterDAOImpl implements ProductDAO<DigitalPrinter, SearchD
 	@SuppressWarnings("unchecked")
 	@Override
 	public Set<DigitalPrinter> listSearchProducts(SearchDigitalPrinters searchPrinters) {
-		Session session = this.sessionFactory.getCurrentSession();
+		Session session = getSessionFactory().getCurrentSession();
 		Criteria cr = session.createCriteria(DigitalPrinter.class);
 		
 		if(searchPrinters.getPrise0()!=searchPrinters.getPrise1()){
@@ -533,7 +517,7 @@ public class DigitalPrinterDAOImpl implements ProductDAO<DigitalPrinter, SearchD
 	@SuppressWarnings("unchecked")
 	@Override
 	public Set<DigitalPrinter> listShowOnSite() {
-		Session session = this.sessionFactory.getCurrentSession();
+		Session session = getSessionFactory().getCurrentSession();
 		Criteria cr = session.createCriteria(DigitalPrinter.class);
 		cr.add(Restrictions.eq("showOnSite", true));
 		
@@ -547,7 +531,7 @@ public class DigitalPrinterDAOImpl implements ProductDAO<DigitalPrinter, SearchD
 	@SuppressWarnings("unchecked")
 	@Override
 	public Set<DigitalPrinter> listShowOnHomePage() {
-		Session session = this.sessionFactory.getCurrentSession();
+		Session session = getSessionFactory().getCurrentSession();
 		Criteria cr = session.createCriteria(DigitalPrinter.class);
 		cr.add(Restrictions.eq("showOnSite", true));
 		cr.add(Restrictions.eq("showOnHomePage", true));
@@ -562,7 +546,7 @@ public class DigitalPrinterDAOImpl implements ProductDAO<DigitalPrinter, SearchD
 	@SuppressWarnings("unchecked")
 	@Override
 	public Set<DigitalPrinter> listSearchByPhrase(String phrase) {
-		Session session = this.sessionFactory.getCurrentSession();
+		Session session = getSessionFactory().getCurrentSession();
 		Criteria cr = session.createCriteria(DigitalPrinter.class);
 		
 		cr.add(Restrictions.eq("showOnSite", true));

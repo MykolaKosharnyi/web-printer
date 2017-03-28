@@ -2,38 +2,31 @@ package com.printmaster.nk.model.dao.impl;
 
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Junction;
 import org.hibernate.criterion.MatchMode;
-import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
-import com.printmaster.nk.model.dao.ProductDAO;
 import com.printmaster.nk.model.entity.Printer3D;
 import com.printmaster.nk.model.entity.search.SearchPrinters3D;
 
 @Repository
-public class Printer3dDAOImpl implements ProductDAO<Printer3D, SearchPrinters3D> {
-     
-	 private Logger logger = Logger.getLogger(Printer3dDAOImpl.class);
- 
-    private SessionFactory sessionFactory;
-     
-    public void setSessionFactory(SessionFactory sf){
-        this.sessionFactory = sf;
-    }
- 
+public class Printer3dDAOImpl extends ProductDaoTemplate<Printer3D, SearchPrinters3D> {
+	private Logger logger = Logger.getLogger(Printer3dDAOImpl.class);
+	
+	 public Printer3dDAOImpl() {
+		super(Printer3D.class);
+	}
+
     @SuppressWarnings("unchecked")
 	@Override
 	public Set<Printer3D> listSearchByPhrase(String phrase) {
-		Session session = this.sessionFactory.getCurrentSession();
+		Session session = getSessionFactory().getCurrentSession();
 		Criteria cr = session.createCriteria(Printer3D.class);
 		
 		cr.add(Restrictions.eq("showOnSite", true));
@@ -44,7 +37,7 @@ public class Printer3dDAOImpl implements ProductDAO<Printer3D, SearchPrinters3D>
     
     @Override
     public long addProduct(Printer3D p) {
-        Session session = this.sessionFactory.getCurrentSession();
+        Session session = getSessionFactory().getCurrentSession();
        long id = (Long) session.save(p);
         logger.info("Printer3D saved successfully, Printer Details="+p);
         return id;
@@ -52,30 +45,14 @@ public class Printer3dDAOImpl implements ProductDAO<Printer3D, SearchPrinters3D>
  
     @Override
     public void updateProduct(Printer3D p) {
-        Session session = this.sessionFactory.getCurrentSession();
+        Session session = getSessionFactory().getCurrentSession();
         session.update(p);
         logger.info("Printer3D updated successfully, Printer Details="+p);
     }
  
-    @SuppressWarnings({ "unchecked", "rawtypes" })
-    @Override
-    public Set<Printer3D> listProducts(String sortCriteria) {
-        Session session = this.sessionFactory.getCurrentSession();
-		Criteria cr = session.createCriteria(Printer3D.class);
-		
-		if("id".equals(sortCriteria) || "prise".equals(sortCriteria) || "top".equals(sortCriteria)){		
-			cr.addOrder(Order.desc(sortCriteria));
-		} else {
-			cr.addOrder(Order.asc(sortCriteria));
-		}
-		
-		Set<Printer3D> printerList = new LinkedHashSet(cr.list());
-        return printerList;
-    }
- 
     @Override
     public Printer3D getProductById(long id) {
-        Session session = this.sessionFactory.getCurrentSession();      
+        Session session = getSessionFactory().getCurrentSession();      
         Printer3D p = (Printer3D) session.load(Printer3D.class, new Long(id));
         logger.info("Printer3D loaded successfully, Printer3D details="+p);
         return p;
@@ -83,7 +60,7 @@ public class Printer3dDAOImpl implements ProductDAO<Printer3D, SearchPrinters3D>
  
     @Override
     public void removeProduct(long id) {
-        Session session = this.sessionFactory.getCurrentSession();
+        Session session = getSessionFactory().getCurrentSession();
         Printer3D p = (Printer3D) session.load(Printer3D.class, new Long(id));
         if(null != p){
             session.delete(p);
@@ -94,7 +71,7 @@ public class Printer3dDAOImpl implements ProductDAO<Printer3D, SearchPrinters3D>
 	@SuppressWarnings("unchecked")
 	@Override
 	public Set<Printer3D> listSearchProducts(SearchPrinters3D searchPrinters) {
-		Session session = this.sessionFactory.getCurrentSession();
+		Session session = getSessionFactory().getCurrentSession();
 		Criteria cr = session.createCriteria(Printer3D.class);
 		
 		if(searchPrinters.getPrise0()!=searchPrinters.getPrise1()){
@@ -332,7 +309,7 @@ public class Printer3dDAOImpl implements ProductDAO<Printer3D, SearchPrinters3D>
 	@SuppressWarnings("unchecked")
 	@Override
 	public Set<Printer3D> listShowOnSite() {
-		Session session = this.sessionFactory.getCurrentSession();
+		Session session = getSessionFactory().getCurrentSession();
 		Criteria cr = session.createCriteria(Printer3D.class);
 		cr.add(Restrictions.eq("showOnSite", true));
 		
@@ -346,7 +323,7 @@ public class Printer3dDAOImpl implements ProductDAO<Printer3D, SearchPrinters3D>
 	@SuppressWarnings("unchecked")
 	@Override
 	public Set<Printer3D> listShowOnHomePage() {
-		Session session = this.sessionFactory.getCurrentSession();
+		Session session = getSessionFactory().getCurrentSession();
 		Criteria cr = session.createCriteria(Printer3D.class);
 		cr.add(Restrictions.eq("showOnSite", true));
 		cr.add(Restrictions.eq("showOnHomePage", true));

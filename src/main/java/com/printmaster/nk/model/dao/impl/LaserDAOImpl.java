@@ -2,38 +2,31 @@ package com.printmaster.nk.model.dao.impl;
 
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Junction;
 import org.hibernate.criterion.MatchMode;
-import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
-import com.printmaster.nk.model.dao.ProductDAO;
 import com.printmaster.nk.model.entity.Laser;
 import com.printmaster.nk.model.entity.search.SearchLasers;
 
 @Repository
-public class LaserDAOImpl implements ProductDAO<Laser, SearchLasers>{
+public class LaserDAOImpl extends ProductDaoTemplate<Laser, SearchLasers>{
+	private Logger logger = Logger.getLogger(LaserDAOImpl.class);
+	
+	 public LaserDAOImpl() {
+		super(Laser.class);
+	}
 
-	 private Logger logger = Logger.getLogger(LaserDAOImpl.class);
-	 
-	    private SessionFactory sessionFactory;
-	     
-	    public void setSessionFactory(SessionFactory sf){
-	        this.sessionFactory = sf;
-	    }
-	 
 	    @SuppressWarnings("unchecked")
 		@Override
 		public Set<Laser> listSearchByPhrase(String phrase) {
-			Session session = this.sessionFactory.getCurrentSession();
+			Session session = getSessionFactory().getCurrentSession();
 			Criteria cr = session.createCriteria(Laser.class);
 			
 			cr.add(Restrictions.eq("showOnSite", true));
@@ -44,7 +37,7 @@ public class LaserDAOImpl implements ProductDAO<Laser, SearchLasers>{
 	    
 	    @Override
 	    public long addProduct(Laser l) {
-	        Session session = this.sessionFactory.getCurrentSession();
+	        Session session = getSessionFactory().getCurrentSession();
 	        long id = (Long) session.save(l);
 	        logger.info("Laser saved successfully, Laser Details=" + l);
 	        return id;
@@ -52,24 +45,14 @@ public class LaserDAOImpl implements ProductDAO<Laser, SearchLasers>{
 	 
 	    @Override
 	    public void updateProduct(Laser l) {
-	        Session session = this.sessionFactory.getCurrentSession();
+	        Session session = getSessionFactory().getCurrentSession();
 	        session.update(l);
 	        logger.info("Laser updated successfully, Laser Details="+l);
 	    }
 	 
-	    @SuppressWarnings({ "unchecked", "rawtypes" })
-	    @Override
-	    public Set<Laser> listProducts(String sortCriteria) {
-	        Session session = this.sessionFactory.getCurrentSession();
-			Criteria cr = session.createCriteria(Laser.class);
-			cr.addOrder(Order.asc(sortCriteria));
-			Set<Laser> laserList = new LinkedHashSet(cr.list());
-	        return laserList;
-	    }
-	 
 	    @Override
 	    public Laser getProductById(long id) {
-	        Session session = this.sessionFactory.getCurrentSession();      
+	        Session session = getSessionFactory().getCurrentSession();      
 	        Laser l = (Laser) session.load(Laser.class, new Long(id));
 	        logger.info("Laser loaded successfully, Laser details=" + l);
 	        return l;
@@ -77,7 +60,7 @@ public class LaserDAOImpl implements ProductDAO<Laser, SearchLasers>{
 	 
 	    @Override
 	    public void removeProduct(long id) {
-	        Session session = this.sessionFactory.getCurrentSession();
+	        Session session = getSessionFactory().getCurrentSession();
 	        Laser l = (Laser) session.load(Laser.class, new Long(id));
 	        if(null != l){
 	            session.delete(l);
@@ -88,7 +71,7 @@ public class LaserDAOImpl implements ProductDAO<Laser, SearchLasers>{
 		@SuppressWarnings("unchecked")
 		@Override
 		public Set<Laser> listSearchProducts(SearchLasers searchLasers) {
-			Session session = this.sessionFactory.getCurrentSession();
+			Session session = getSessionFactory().getCurrentSession();
 			Criteria cr = session.createCriteria(Laser.class);
 			
 			if(searchLasers.getPrise0()!=searchLasers.getPrise1()){
@@ -348,7 +331,7 @@ public class LaserDAOImpl implements ProductDAO<Laser, SearchLasers>{
 		@SuppressWarnings("unchecked")
 		@Override
 		public Set<Laser> listShowOnSite() {
-			Session session = this.sessionFactory.getCurrentSession();
+			Session session = getSessionFactory().getCurrentSession();
 			Criteria cr = session.createCriteria(Laser.class);
 			cr.add(Restrictions.eq("showOnSite", true));
 			
@@ -362,7 +345,7 @@ public class LaserDAOImpl implements ProductDAO<Laser, SearchLasers>{
 		@SuppressWarnings("unchecked")
 		@Override
 		public Set<Laser> listShowOnHomePage() {
-			Session session = this.sessionFactory.getCurrentSession();
+			Session session = getSessionFactory().getCurrentSession();
 			Criteria cr = session.createCriteria(Laser.class);
 			cr.add(Restrictions.eq("showOnSite", true));
 			cr.add(Restrictions.eq("showOnHomePage", true));
