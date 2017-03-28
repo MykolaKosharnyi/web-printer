@@ -60,15 +60,10 @@ public class ScannerDAOImpl implements ProductDAO<Scanner, SearchScanners>{
 	    @SuppressWarnings({ "unchecked", "rawtypes" })
 	    @Override
 	    public Set<Scanner> listProducts(String sortCriteria) {
-	        Session session = this.sessionFactory.getCurrentSession();
-	        
+	        Session session = this.sessionFactory.getCurrentSession();	        
 			Criteria cr = session.createCriteria(Scanner.class);
-			cr.addOrder( Order.desc(sortCriteria));
-	        Set<Scanner> scannerList = new LinkedHashSet(cr.list());
-	        
-	        for(Scanner s : scannerList){
-	            logger.info("Scanner List::" + s);
-	        }
+			cr.addOrder(Order.asc(sortCriteria));
+	        Set<Scanner> scannerList = new LinkedHashSet(cr.list());	      
 	        return scannerList;
 	    }
 	 

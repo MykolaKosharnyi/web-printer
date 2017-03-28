@@ -56,17 +56,13 @@ public class LaminatorDAOImpl implements ProductDAO<Laminator, SearchLaminators>
 	        logger.info("Laminator updated successfully, Laminator Details=" + l);
 	    }
 	 
-	    @SuppressWarnings("unchecked")
+	    @SuppressWarnings({ "unchecked", "rawtypes" })
 	    @Override
 	    public Set<Laminator> listProducts(String sortCriteria) {
 	        Session session = this.sessionFactory.getCurrentSession();
 			Criteria cr = session.createCriteria(Laminator.class);
-			cr.addOrder( Order.desc(sortCriteria));
-	        @SuppressWarnings("rawtypes")
+			cr.addOrder(Order.asc(sortCriteria));
 			Set<Laminator> laminatorList = new LinkedHashSet(cr.list());
-	        for(Laminator l : laminatorList){
-	            logger.info("Laminator List::" + l);
-	        }
 	        return laminatorList;
 	    }
 	 

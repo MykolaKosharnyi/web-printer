@@ -57,17 +57,13 @@ public class LaserDAOImpl implements ProductDAO<Laser, SearchLasers>{
 	        logger.info("Laser updated successfully, Laser Details="+l);
 	    }
 	 
-	    @SuppressWarnings("unchecked")
+	    @SuppressWarnings({ "unchecked", "rawtypes" })
 	    @Override
 	    public Set<Laser> listProducts(String sortCriteria) {
 	        Session session = this.sessionFactory.getCurrentSession();
 			Criteria cr = session.createCriteria(Laser.class);
-			cr.addOrder( Order.desc(sortCriteria));
-	        @SuppressWarnings("rawtypes")
+			cr.addOrder(Order.asc(sortCriteria));
 			Set<Laser> laserList = new LinkedHashSet(cr.list());
-	        for(Laser l : laserList){
-	            logger.info("Laser List::" + l);
-	        }
 	        return laserList;
 	    }
 	 

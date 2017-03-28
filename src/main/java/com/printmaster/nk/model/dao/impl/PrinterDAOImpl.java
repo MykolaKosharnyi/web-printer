@@ -74,19 +74,13 @@ public class PrinterDAOImpl implements ProductDAO<Printer, SearchPrinters> {
         logger.info("Printer updated successfully, Printer Details=" + p);
     }
  
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     @Override
     public Set<Printer> listProducts(String sortCriteria) {
-    	Session session = this.sessionFactory.getCurrentSession();
-    	
+    	Session session = this.sessionFactory.getCurrentSession();   	
 		Criteria cr = session.createCriteria(Printer.class);
-		cr.addOrder( Order.desc(sortCriteria));
-        @SuppressWarnings("rawtypes")
+		cr.addOrder(Order.asc(sortCriteria));
 		Set<Printer> printerList = new LinkedHashSet(cr.list());
-        
-        for(Printer p : printerList){
-            logger.info("Printer List::" + p);
-        }
         return printerList;
     }
  

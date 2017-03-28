@@ -68,11 +68,8 @@ public class RipDAOImpl implements ProductDAO<Rip, SearchRips> {
 	public Set<Rip> listProducts(String sortCriteria) {
 		Session session = this.sessionFactory.getCurrentSession();
 		Criteria cr = session.createCriteria(Rip.class);
-		cr.addOrder( Order.desc(sortCriteria));
+		cr.addOrder(Order.asc(sortCriteria));
 		Set<Rip> ripList = new LinkedHashSet(cr.list());
-		for (Rip c : ripList) {
-			logger.info("Rip List::" + c);
-		}
 		return ripList;
 	}
 

@@ -197,12 +197,10 @@ public class CutterController {
 		List<Cutter> list = new ArrayList<Cutter>();
 
 		if (links.containsKey(type)) {
-
 			for (Cutter product : productService.listProducts(value)) {
 				if (product.getTypeProduct().equals(links.get(type))) 
 					list.add(product);
 			}
-
 		} else {
 			list.addAll(productService.listProducts(value));
 		}

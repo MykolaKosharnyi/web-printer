@@ -50,11 +50,8 @@ public class CutterDAOImpl implements ProductDAO<Cutter, SearchCutters>{
 	    public Set<Cutter> listProducts(String sortCriteria) {
 	        Session session = this.sessionFactory.getCurrentSession();
 			Criteria cr = session.createCriteria(Cutter.class);
-			cr.addOrder( Order.desc(sortCriteria));
+			cr.addOrder(Order.asc(sortCriteria));
 			Set<Cutter> cutterList = new LinkedHashSet(cr.list());
-	        for(Cutter c : cutterList){
-	            logger.info("Cutter List::" + c);
-	        }
 	        return cutterList;
 	    }
 	 

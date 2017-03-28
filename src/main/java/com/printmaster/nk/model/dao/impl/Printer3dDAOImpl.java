@@ -57,17 +57,19 @@ public class Printer3dDAOImpl implements ProductDAO<Printer3D, SearchPrinters3D>
         logger.info("Printer3D updated successfully, Printer Details="+p);
     }
  
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     @Override
     public Set<Printer3D> listProducts(String sortCriteria) {
         Session session = this.sessionFactory.getCurrentSession();
 		Criteria cr = session.createCriteria(Printer3D.class);
-		cr.addOrder( Order.desc(sortCriteria));
-        @SuppressWarnings("rawtypes")
+		
+		if("id".equals(sortCriteria) || "prise".equals(sortCriteria) || "top".equals(sortCriteria)){		
+			cr.addOrder(Order.desc(sortCriteria));
+		} else {
+			cr.addOrder(Order.asc(sortCriteria));
+		}
+		
 		Set<Printer3D> printerList = new LinkedHashSet(cr.list());
-        for(Printer3D p : printerList){
-            logger.info("Printer3D List::"+p);
-        }
         return printerList;
     }
  

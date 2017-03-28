@@ -26,6 +26,9 @@
 	    	<option value="name">по имени</option>
 	    	<option value="prise">по цене</option>
 	    	<option value="top">топ вверх</option>
+	    	<c:if test="${productType != 'use_with_product' && productType != 'rip'}">
+				<option value="equipmentManufacturer">по производителю</option>
+			</c:if>	    	
   		</select>
   	</div>
 	<c:if test="${!empty listProducts}">
@@ -33,6 +36,9 @@
 			<tr>
 				<th style="width:40px;">ID</th>
 				<th style="width:120px;">${nameProduct}</th>
+				<c:if test="${productType != 'use_with_product' && productType != 'rip'}">
+					<th style="width:200px;">Производитель</th>
+				</c:if>	 
 				<th style="width:200px;">Изображение</th>
 				<th style="width:100px;">Цена</th>
 				<th style="width:60px;">Топ</th>
@@ -52,6 +58,9 @@
     			background-color:white;">
 				<th style="width:35px;">ID</th>
 				<th style="width:130px;">${nameProduct}</th>
+				<c:if test="${productType != 'use_with_product' && productType != 'rip'}">
+					<th style="width:200px;">Производитель</th>
+				</c:if>	
 				<th style="width:214px;">Изображение</th>
 				<th style="width:101px;">Цена</th>
 				<th style="width:53px;">Топ</th>
@@ -66,6 +75,9 @@
 				<tr id="${product.id}" class="output_pruduct">
 					<td width="40px">${product.id}</td>
 					<td width="120px"><a href="<c:url value='/admin/${productType}/edit/${product.id}' />">${product.name}</a></td>
+					<c:if test="${productType != 'use_with_product' && productType != 'rip'}">
+						<td width="40px">${product.equipmentManufacturer}</td>
+					</c:if>	
 					<td width="200px">
 						<a href="<c:url value='/admin/${productType}/edit/${product.id}' />">
 							<img src="/images/${productType}s/${product.id}/${product.pathPictures.get(0)}" alt="">
@@ -162,7 +174,12 @@
 	                		   .append($('<td/>').css("width","120px")
 	                				   .append($('<a/>')
 	                						   .attr("href", "/admin/${productType}/edit/" + product.id).text(product.name)))
-	                		   .append($('<td/>').css("width","200px")
+	                	var productType = '${productType}';
+	                	if(productType != 'use_with_product' && productType != 'rip'){
+	                		outerTR.append($('<td/>').css("width","40px").text(product.equipmentManufacturer))
+	                	}
+	                						   
+	                   outerTR.append($('<td/>').css("width","200px")
 	                				   .append($('<a/>').attr("href", "/admin/${productType}/edit/" + product.id)
 	                				   .append($('<img/>').attr("src", "/images/${productType}s/" + product.id + "/" + product.pathPictures[0]))))
 	                		   .append($('<td/>').css("width","100px").text(checkPrise(product.prise)))

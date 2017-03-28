@@ -70,11 +70,8 @@ public class UseWithProductDAOImpl  implements UseWithProductDAO{
 	    public Set<UseWithProduct> listProducts(String sortCriteria) {
 	        Session session = this.sessionFactory.getCurrentSession();
 	        Criteria cr = session.createCriteria(UseWithProduct.class);
-			cr.addOrder( Order.desc(sortCriteria));
+			cr.addOrder(Order.asc(sortCriteria));
 			Set<UseWithProduct> useWithProductList = new LinkedHashSet(cr.list());
-	        for(UseWithProduct c : useWithProductList){
-	            logger.info("UseWithProduct List::" + c);
-	        }
 	        return useWithProductList;
 	    }
 	 
