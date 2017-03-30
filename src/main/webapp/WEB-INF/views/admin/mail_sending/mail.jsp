@@ -83,10 +83,44 @@
 			<label for="title">Заголовок:</label>
 			<form:input path="title" class="form-control" placeholder="Заголовок письма" value="${mailMessage.title}"/>
 		  </div>
+		  
+		  <div class="form-group">
+			<label for="message">Header of message:</label>
+				<div class="radio" style="background: #006080; padding: 10px; border-radius: 10px;">
+				  <label>
+				    <input type="radio" class="radio_mail_option" name="headOption" id="headOption" value="option1" style="padding: 5px; border-radius: 10px;" checked>
+				    <div style="background:white; display: block; padding: 10px; border-radius: 10px;">${mailMessage.message}</div>
+				  </label>
+				</div>
+				<div class="radio" style="padding: 10px; border-radius: 10px;">
+				  <label>
+				    <input type="radio" class="radio_mail_option" name="headOption" id="headOption" value="option2" style="padding: 5px; border-radius: 10px;">
+				    <div style="background:white; display: block; padding: 10px; border-radius: 10px;">${mailMessage.message}</div>
+				  </label>
+				</div>
+		  </div>
+		  
 		  <div class="form-group">
 			<label for="message">Основная часть:</label>
 			<form:textarea path="message" class="form-control" id="description" value="${mailMessage.message}"/>
 		  </div>
+		  
+		  <div class="form-group">
+			<label for="message">Footer of message:</label>
+				<div class="radio" style="background: #006080; padding: 10px; border-radius: 10px;">
+				  <label>
+				    <input type="radio" class="radio_mail_option" name="footerOption" id="headOption" value="option1" style="padding: 5px; border-radius: 10px;" checked>
+				    <div style="background:white; display: block; padding: 10px; border-radius: 10px;">${mailMessage.message}</div>
+				  </label>
+				</div>
+				<div class="radio" style="padding: 10px; border-radius: 10px;">
+				  <label>
+				    <input type="radio" class="radio_mail_option" name="footerOption" id="headOption" value="option2" style="padding: 5px; border-radius: 10px;">
+				    <div style="background:white; display: block; padding: 10px; border-radius: 10px;">${mailMessage.message}</div>
+				  </label>
+				</div>
+		  </div>
+		  
 		  <div class="form-group">
 			<label style="display: block;">Подписчики:</label>
 				<c:forEach var="subscr" items="${listSubscription}">
@@ -157,9 +191,18 @@
 				pickDate: true,
 				startDate: new Date()
 			});
-		});
-    
-		$(function() {
+			
+			$('.radio_mail_option').on( "click", function() {
+				$('.radio_mail_option').each(function(i, option){
+					if(option.checked){
+						$(this).parent('label').parent('div.radio').css('background', '#006080');
+					} else {
+						$(this).parent('label').parent('div.radio').css('background', 'transparent');
+					}
+				});
+			});
+			
+
 			$('.head_name_of_block_subscription').click(function(){
 				if($(this).hasClass("all-checked")){
 					$(this).removeClass("all-checked");

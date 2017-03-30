@@ -426,8 +426,8 @@
    							<tr><td>Ширина печати:</td><td>${product.weightPrintMM} мм</td></tr>
 					   </c:if>
 					   
-					   <c:if test="${!empty product.printing_extension}">
-   							<tr><td>Расширение печати:</td><td>${product.printing_extension} мм</td></tr>
+					   <c:if test="${!empty product.printingExtension}">
+   							<tr><td>Расширение печати:</td><td>${product.printingExtension} мм</td></tr>
 					   </c:if>
                        
                        <c:if test="${!empty product.previouslyUsed}">
