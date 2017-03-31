@@ -249,34 +249,5 @@ public class ScannerDAOImpl extends ProductDaoTemplate<Scanner, SearchScanners>{
 			
 	        return result;
 		}
-
-		@SuppressWarnings("unchecked")
-		@Override
-		public Set<Scanner> listShowOnSite() {
-			Session session = getSessionFactory().getCurrentSession();
-			Criteria cr = session.createCriteria(Scanner.class);
-			cr.add(Restrictions.eq("showOnSite", true));
-			
-			HashSet<Scanner> result = new HashSet<Scanner>(cr.list());
-	        for(Scanner s : result){
-	            logger.info("Scanner List::" + s);
-	        }
-	        return result;
-		}
-
-		@SuppressWarnings("unchecked")
-		@Override
-		public Set<Scanner> listShowOnHomePage() {
-			Session session = getSessionFactory().getCurrentSession();
-			Criteria cr = session.createCriteria(Scanner.class);
-			cr.add(Restrictions.eq("showOnSite", true));
-			cr.add(Restrictions.eq("showOnHomePage", true));
-			
-			HashSet<Scanner> result = new HashSet<Scanner>(cr.list());
-	        for(Scanner s : result){
-	            logger.info("Scanner list::" + s);
-	        }
-	        return result;
-		}
 	
 }

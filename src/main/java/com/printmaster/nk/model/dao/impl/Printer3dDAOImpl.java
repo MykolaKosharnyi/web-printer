@@ -305,35 +305,6 @@ public class Printer3dDAOImpl extends ProductDaoTemplate<Printer3D, SearchPrinte
 		}
         return result;
 	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public Set<Printer3D> listShowOnSite() {
-		Session session = getSessionFactory().getCurrentSession();
-		Criteria cr = session.createCriteria(Printer3D.class);
-		cr.add(Restrictions.eq("showOnSite", true));
-		
-		HashSet<Printer3D> result = new HashSet<Printer3D>(cr.list());
-        for(Printer3D p : result){
-            logger.info("Printer3D List::" + p);
-        }
-        return result;
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public Set<Printer3D> listShowOnHomePage() {
-		Session session = getSessionFactory().getCurrentSession();
-		Criteria cr = session.createCriteria(Printer3D.class);
-		cr.add(Restrictions.eq("showOnSite", true));
-		cr.add(Restrictions.eq("showOnHomePage", true));
-		
-		HashSet<Printer3D> result = new HashSet<Printer3D>(cr.list());
-        for(Printer3D p : result){
-            logger.info("Printer3D List::" + p);
-        }
-        return result;
-	}
  
 }
 

@@ -444,39 +444,7 @@ public class PrinterDAOImpl extends ProductDaoTemplate<Printer, SearchPrinters> 
 			}
 		}
 
-			
-		
 		return printHeadArray;
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public Set<Printer> listShowOnSite() {
-		Session session = getSessionFactory().getCurrentSession();
-		Criteria cr = session.createCriteria(Printer.class);
-		cr.add(Restrictions.eq("showOnSite", true));
-		
-		HashSet<Printer> result = new HashSet<Printer>(cr.list());
-        for(Printer p : result){
-            logger.info("Printer List::"+p);
-        }
-        
-        return result;
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public Set<Printer> listShowOnHomePage() {
-		Session session = getSessionFactory().getCurrentSession();
-		Criteria cr = session.createCriteria(Printer.class);
-		cr.add(Restrictions.eq("showOnSite", true));
-		cr.add(Restrictions.eq("showOnHomePage", true));
-		
-		HashSet<Printer> result = new HashSet<Printer>(cr.list());
-        for(Printer p : result){
-            logger.info("Printer List::"+p);
-        }
-        return result;
 	}
  
 }

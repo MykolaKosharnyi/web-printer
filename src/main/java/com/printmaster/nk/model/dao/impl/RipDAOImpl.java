@@ -244,34 +244,5 @@ public class RipDAOImpl extends ProductDaoTemplate<Rip, SearchRips> {
 
 		return (countSuitableSoftware <= 0) ? true:false;
 	}
-	
-	@SuppressWarnings("unchecked")
-	@Override
-	public Set<Rip> listShowOnSite() {
-		Session session = getSessionFactory().getCurrentSession();
-		Criteria cr = session.createCriteria(Rip.class);
-		cr.add(Restrictions.eq("showOnSite", true));
-
-		HashSet<Rip> result = new HashSet<Rip>(cr.list());
-		for (Rip c : result) {
-			logger.info("Rip List::" + c);
-		}
-		return result;
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public Set<Rip> listShowOnHomePage() {
-		Session session = getSessionFactory().getCurrentSession();
-		Criteria cr = session.createCriteria(Rip.class);
-		cr.add(Restrictions.eq("showOnSite", true));
-		cr.add(Restrictions.eq("showOnHomePage", true));
-
-		HashSet<Rip> result = new HashSet<Rip>(cr.list());
-		for (Rip c : result) {
-			logger.info("Rip list::" + c);
-		}
-		return result;
-	}
 
 }

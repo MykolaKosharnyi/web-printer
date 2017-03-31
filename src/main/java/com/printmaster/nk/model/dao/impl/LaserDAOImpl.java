@@ -328,33 +328,4 @@ public class LaserDAOImpl extends ProductDaoTemplate<Laser, SearchLasers>{
 	        return result;
 		}
 
-		@SuppressWarnings("unchecked")
-		@Override
-		public Set<Laser> listShowOnSite() {
-			Session session = getSessionFactory().getCurrentSession();
-			Criteria cr = session.createCriteria(Laser.class);
-			cr.add(Restrictions.eq("showOnSite", true));
-			
-			HashSet<Laser> result = new HashSet<Laser>(cr.list());
-	        for(Laser l : result){
-	            logger.info("Laser List::" + l);
-	        }
-	        return result;
-		}
-
-		@SuppressWarnings("unchecked")
-		@Override
-		public Set<Laser> listShowOnHomePage() {
-			Session session = getSessionFactory().getCurrentSession();
-			Criteria cr = session.createCriteria(Laser.class);
-			cr.add(Restrictions.eq("showOnSite", true));
-			cr.add(Restrictions.eq("showOnHomePage", true));
-			
-			HashSet<Laser> result = new HashSet<Laser>(cr.list());
-	        for(Laser l : result){
-	            logger.info("Laser list::" + l);
-	        }
-	        return result;
-		}
-	
 }

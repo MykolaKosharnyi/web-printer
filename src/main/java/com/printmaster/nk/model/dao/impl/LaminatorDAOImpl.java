@@ -171,34 +171,5 @@ public class LaminatorDAOImpl extends ProductDaoTemplate<Laminator, SearchLamina
 			
 	        return result;
 		}
-
-		@SuppressWarnings("unchecked")
-		@Override
-		public Set<Laminator> listShowOnSite() {
-			Session session = getSessionFactory().getCurrentSession();
-			Criteria cr = session.createCriteria(Laminator.class);
-			cr.add(Restrictions.eq("showOnSite", true));
-			
-			HashSet<Laminator> result = new HashSet<Laminator>(cr.list());
-	        for(Laminator l : result){
-	            logger.info("Laminator List::" + l);
-	        }
-	        return result;
-		}
-
-		@SuppressWarnings("unchecked")
-		@Override
-		public Set<Laminator> listShowOnHomePage() {
-			Session session = getSessionFactory().getCurrentSession();
-			Criteria cr = session.createCriteria(Laminator.class);
-			cr.add(Restrictions.eq("showOnSite", true));
-			cr.add(Restrictions.eq("showOnHomePage", true));
-			
-			HashSet<Laminator> result = new HashSet<Laminator>(cr.list());
-	        for(Laminator l : result){
-	            logger.info("Laminator list::" + l);
-	        }
-	        return result;
-		}
 	
 }

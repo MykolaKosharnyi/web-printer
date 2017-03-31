@@ -220,35 +220,6 @@ public class CutterDAOImpl extends ProductDaoTemplate<Cutter, SearchCutters>{
 
 		@SuppressWarnings("unchecked")
 		@Override
-		public Set<Cutter> listShowOnSite() {
-			Session session = getSessionFactory().getCurrentSession();
-			Criteria cr = session.createCriteria(Cutter.class);
-			cr.add(Restrictions.eq("showOnSite", true));
-			
-			HashSet<Cutter> result = new HashSet<Cutter>(cr.list());
-	        for(Cutter c : result){
-	            logger.info("Cutter List::" + c);
-	        }
-	        return result;
-		}
-
-		@SuppressWarnings("unchecked")
-		@Override
-		public Set<Cutter> listShowOnHomePage() {
-			Session session = getSessionFactory().getCurrentSession();
-			Criteria cr = session.createCriteria(Cutter.class);
-			cr.add(Restrictions.eq("showOnSite", true));
-			cr.add(Restrictions.eq("showOnHomePage", true));
-			
-			HashSet<Cutter> result = new HashSet<Cutter>(cr.list());
-	        for(Cutter c : result){
-	            logger.info("Cutter list::" + c);
-	        }
-	        return result;
-		}
-
-		@SuppressWarnings("unchecked")
-		@Override
 		public Set<Cutter> listSearchByPhrase(String phrase) {
 			Session session = getSessionFactory().getCurrentSession();
 			Criteria cr = session.createCriteria(Cutter.class);

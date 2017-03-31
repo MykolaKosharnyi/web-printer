@@ -513,35 +513,6 @@ public class DigitalPrinterDAOImpl extends ProductDaoTemplate<DigitalPrinter, Se
 		
         return result;
 	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public Set<DigitalPrinter> listShowOnSite() {
-		Session session = getSessionFactory().getCurrentSession();
-		Criteria cr = session.createCriteria(DigitalPrinter.class);
-		cr.add(Restrictions.eq("showOnSite", true));
-		
-		HashSet<DigitalPrinter> result = new HashSet<DigitalPrinter>(cr.list());
-        for(DigitalPrinter p : result){
-            logger.info("Printer List::"+p);
-        }
-        return result;
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public Set<DigitalPrinter> listShowOnHomePage() {
-		Session session = getSessionFactory().getCurrentSession();
-		Criteria cr = session.createCriteria(DigitalPrinter.class);
-		cr.add(Restrictions.eq("showOnSite", true));
-		cr.add(Restrictions.eq("showOnHomePage", true));
-		
-		HashSet<DigitalPrinter> result = new HashSet<DigitalPrinter>(cr.list());
-        for(DigitalPrinter p : result){
-            logger.info("Printer List::"+p);
-        }
-        return result;
-	}
  
 	@SuppressWarnings("unchecked")
 	@Override
