@@ -4,10 +4,14 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="mail_message_option")
 public class MailSendingMessageOption implements Serializable{
 	private static final long serialVersionUID = 3031695775597440046L;
 
@@ -16,8 +20,8 @@ public class MailSendingMessageOption implements Serializable{
 	@Column(name="id")
 	private int id;
 	
-	@Column(name="showOnSite")
-	private boolean showOnSite;
+	@Column(name="showOnMailLetter")
+	private boolean showOnMailLetter;
 	
 	@Column(name="text", columnDefinition="TEXT")
 	private String text;
@@ -40,14 +44,6 @@ public class MailSendingMessageOption implements Serializable{
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public boolean isShowOnSite() {
-		return showOnSite;
-	}
-
-	public void setShowOnSite(boolean showOnSite) {
-		this.showOnSite = showOnSite;
 	}
 
 	public String getText() {
@@ -76,6 +72,14 @@ public class MailSendingMessageOption implements Serializable{
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public boolean isShowOnMailLetter() {
+		return showOnMailLetter;
+	}
+
+	public void setShowOnMailLetter(boolean showOnMailLetter) {
+		this.showOnMailLetter = showOnMailLetter;
 	}
 	
 }

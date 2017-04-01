@@ -163,18 +163,17 @@
 			  </div>
 		  </c:if>
 
-		  <div class="form-group">
-			  
-			  	<c:if test="${empty mailMessage.id || mailMessage.id==0}">
-			  		<button type="submit" class="btn btn-primary">Сохранить</button>
-			  	</c:if>
+		  <div class="form-group">			  
+		  	<c:if test="${empty mailMessage.id || mailMessage.id==0}">
+				<button type="submit" class="btn btn-primary">Сохранить</button>
+			</c:if>
 			  	
-			  	<c:if test="${!empty mailMessage.id && mailMessage.id!=0}">
-			  		<c:if test="${mailMessage.status.toString() eq 'WAITING' ||
+			<c:if test="${!empty mailMessage.id && mailMessage.id!=0}">
+				<c:if test="${mailMessage.status.toString() eq 'WAITING' ||
 			  		 mailMessage.status.toString() eq 'MODIFICATION_PROCESS'}">
 			  			<button type="submit" class="btn btn-primary">Изменить</button>
-			  		</c:if>
 			  	</c:if>
+			</c:if>
 		  </div>
 
 		</form:form>

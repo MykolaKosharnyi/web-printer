@@ -19,6 +19,8 @@ import com.printmaster.nk.beans.ComponentsForControllers;
 import com.printmaster.nk.components.MailSendingComponent;
 import com.printmaster.nk.model.entity.MailSendingMessage;
 import com.printmaster.nk.model.entity.MailSendingMessage.StatusOfSending;
+import com.printmaster.nk.model.entity.MailSendingMessageOption;
+import com.printmaster.nk.model.service.MailSendingOptionService;
 import com.printmaster.nk.model.service.MailSendingService;
 
 import static com.printmaster.nk.controller.ConstUsedInContr.*;
@@ -36,6 +38,9 @@ public class MailSenderController {
 	
 	@Autowired
 	MailSendingComponent mailSendingComponent;
+	
+	@Autowired
+	MailSendingOptionService mailSendingOptionService;
 	
 	@Autowired
     ComponentsForControllers componets;
@@ -59,7 +64,7 @@ public class MailSenderController {
 	}
 	
 	@RequestMapping(value = "/admin/message/new", method = RequestMethod.GET)
-	public String getCreateNewMessage(Model model) {
+	public String getCreateNewMessage(Model model){
 		return putMessagePageParameters(model, new MailSendingMessage());
 	}
 	
@@ -118,7 +123,60 @@ public class MailSenderController {
 		return "admin/message";
 	}
 	
+	/*------ Mail sending option -------*/
+	@RequestMapping(value = "/admin/message/options", method = RequestMethod.GET)
+	public String allOptions(Model model) {
+		model.addAttribute("options", mailSendingOptionService.allMessageOption());
+		return "admin/message/options";
+	}
 	
+	@RequestMapping(value = "/admin/message/option/new", method = RequestMethod.GET)
+	public String createNewMailOption(Model model) {
+		model.addAttribute("option", new MailSendingMessageOption());
+		return "admin/message/option";
+	}
+	
+	@RequestMapping(value = "/admin/message/option/new", method = RequestMethod.POST) 
+	public String createNewMailOption(@ModelAttribute("option") @Valid MailSendingMessageOption mailSendingMessageOption,
+			BindingResult result, Model model){
+		if (result.hasErrors()){
+			model.addAttribute("option", mailSendingMessageOption);
+		    return "admin/message/option";
+		}		
+		mailSendingOptionService.createSendingOption(mailSendingMessageOption);
+		return "redirect:/admin/message/options";
+	}
+	
+	@RequestMapping(value = "/admin/message/option/{id}", method = RequestMethod.GET)
+	public String getMailOption(@PathVariable("id") int id, Model model) {
+		model.addAttribute("option", mailSendingOptionService.getById(id));
+		return "admin/message/option";
+	}
+	
+	@RequestMapping(value = "/admin/message/option", method = RequestMethod.POST)
+	public String editMailOption(@ModelAttribute("option") @Valid MailSendingMessageOption mailSendingMessageOption,
+			BindingResult result, Model model) {
+		if (result.hasErrors()){
+			model.addAttribute("option", mailSendingMessageOption);
+		    return "admin/message/option";
+		}
+		mailSendingOptionService.updateSendingOption(mailSendingMessageOption);
+		return "redirect:/admin/message/options";
+	}
+	
+	@RequestMapping(value = "/admin/message/option/remove/{id}", method = RequestMethod.GET)
+	public String removeMailOption(@PathVariable("id") int id, Model model) {
+		mailSendingOptionService.removeMessageOption(id);
+		return "redirect:/admin/message/options";
+	}
+	
+	@RequestMapping(value="/admin/message/option/showOnMailLetter/{id}",
+			method = RequestMethod.POST,consumes=JSON_CONSUMES,headers = JSON_HEADERS)
+    public @ResponseBody void setShowOnMailLetter(@PathVariable("id") int id, @RequestBody boolean value) {
+		MailSendingMessageOption option = mailSendingOptionService.getById(id);
+		option.setShowOnMailLetter(value);
+		mailSendingOptionService.updateSendingOption(option);
+    }
 	
 	/*-------------------------  Part for adding mails recipients ----------------------------------------- */
 	

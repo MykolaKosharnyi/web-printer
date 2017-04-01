@@ -33,7 +33,7 @@ public class MailSendingOptionDAOImpl implements MailSendingOptionDAO {
 	public void setShowing(int id, boolean showing) {
 		Session session = this.sessionFactory.getCurrentSession();
 		MailSendingMessageOption option = (MailSendingMessageOption) session.load(MailSendingMessageOption.class, new Integer(id));
-		option.setShowOnSite(showing);
+		option.setShowOnMailLetter(showing);
 		session.update(option);
 	}
 
@@ -50,6 +50,12 @@ public class MailSendingOptionDAOImpl implements MailSendingOptionDAO {
         if(null != option){
             session.delete(option);
         }
+	}
+
+	@Override
+	public MailSendingMessageOption getById(int id) {
+		Session session = this.sessionFactory.getCurrentSession();      
+		return (MailSendingMessageOption) session.load(MailSendingMessageOption.class, new Integer(id));
 	}
 
 }

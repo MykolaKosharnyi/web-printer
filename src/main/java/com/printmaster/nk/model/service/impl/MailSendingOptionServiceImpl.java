@@ -13,9 +13,14 @@ import com.printmaster.nk.model.service.MailSendingOptionService;
 public class MailSendingOptionServiceImpl implements MailSendingOptionService {
 
 	private MailSendingOptionDAO mailSendingOptionDAO;
-	
+
+	public void setMailSendingOptionDAO(MailSendingOptionDAO mailSendingOptionDAO) {
+		this.mailSendingOptionDAO = mailSendingOptionDAO;
+	}
+
 	@Override
 	public void createSendingOption(MailSendingMessageOption mailSendingMessageOption) {
+		mailSendingMessageOption.setDateLastChanging(new Date());
 		mailSendingOptionDAO.createSendingOption(mailSendingMessageOption);
 	}
 
@@ -38,6 +43,11 @@ public class MailSendingOptionServiceImpl implements MailSendingOptionService {
 	@Override
 	public void removeMessageOption(int id) {
 		mailSendingOptionDAO.removeMessageOption(id);
+	}
+
+	@Override
+	public MailSendingMessageOption getById(int id) {
+		return mailSendingOptionDAO.getById(id);
 	}
 
 }
