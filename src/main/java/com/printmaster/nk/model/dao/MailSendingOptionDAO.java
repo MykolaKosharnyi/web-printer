@@ -11,4 +11,6 @@ public interface MailSendingOptionDAO {
 	void setShowing(int id, boolean showing);
 	void updateSendingOption(MailSendingMessageOption mailSendingMessageOption);
 	void removeMessageOption(int id);
+	List<MailSendingMessageOption> messageOptionForHead();
+	List<MailSendingMessageOption> messageOptionForFooter();
 }

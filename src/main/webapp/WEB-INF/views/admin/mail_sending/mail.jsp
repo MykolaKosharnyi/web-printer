@@ -83,43 +83,48 @@
 			<label for="title">Заголовок:</label>
 			<form:input path="title" class="form-control" placeholder="Заголовок письма" value="${mailMessage.title}"/>
 		  </div>
-		  
-		  <div class="form-group">
-			<label for="message">Header of message:</label>
-				<div class="radio" style="background: #006080; padding: 10px; border-radius: 10px;">
-				  <label>
-				    <input type="radio" class="radio_mail_option" name="headOption" id="headOption" value="option1" style="padding: 5px; border-radius: 10px;" checked>
-				    <div style="background:white; display: block; padding: 10px; border-radius: 10px;">${mailMessage.message}</div>
-				  </label>
+
+			<c:if test="${!empty listHeaderOption}">
+				<div class="form-group">
+					<label for="message">Header of message:</label>
+					
+					<c:forEach items="${listHeaderOption}" var="headerOption" varStatus="status">
+						<div class="radio" style="<c:if test="${mailMessage.headerOption==0 && status.first}">background: #006080;</c:if>
+						<c:if test="${mailMessage.headerOption!=0 && mailMessage.headerOption==headerOption.id}">background: #006080;</c:if> padding: 10px; border-radius: 10px;">
+							<label> <input type="radio" class="radio_mail_option"
+								name=headerOption value="${headerOption.id}"
+								style="padding: 5px; border-radius: 10px;" <c:if test="${mailMessage.headerOption==0 && status.first}">checked</c:if>
+						<c:if test="${mailMessage.headerOption!=0 && mailMessage.headerOption==headerOption.id}">checked</c:if>>
+								<div style="background: white; display: block; padding: 10px; border-radius: 10px;">${headerOption.text}</div>
+							</label>
+						</div>
+					</c:forEach>
 				</div>
-				<div class="radio" style="padding: 10px; border-radius: 10px;">
-				  <label>
-				    <input type="radio" class="radio_mail_option" name="headOption" id="headOption" value="option2" style="padding: 5px; border-radius: 10px;">
-				    <div style="background:white; display: block; padding: 10px; border-radius: 10px;">${mailMessage.message}</div>
-				  </label>
-				</div>
-		  </div>
+			</c:if>
+			
 		  
 		  <div class="form-group">
 			<label for="message">Основная часть:</label>
 			<form:textarea path="message" class="form-control" id="description" value="${mailMessage.message}"/>
 		  </div>
 		  
-		  <div class="form-group">
-			<label for="message">Footer of message:</label>
-				<div class="radio" style="background: #006080; padding: 10px; border-radius: 10px;">
-				  <label>
-				    <input type="radio" class="radio_mail_option" name="footerOption" id="headOption" value="option1" style="padding: 5px; border-radius: 10px;" checked>
-				    <div style="background:white; display: block; padding: 10px; border-radius: 10px;">${mailMessage.message}</div>
-				  </label>
+			<c:if test="${!empty listFooterOption}">
+				<div class="form-group">
+					<label for="message">Footer of message:</label>
+					
+					<c:forEach items="${listFooterOption}" var="footerOption" varStatus="status">
+						<div class="radio" style="<c:if test="${mailMessage.footerOption==0 && status.first}">background: #006080;</c:if>
+						<c:if test="${mailMessage.footerOption!=0 && mailMessage.footerOption==footerOption.id}">background: #006080;</c:if> padding: 10px; border-radius: 10px;">
+							<label> <input type="radio" class="radio_mail_option"
+								name="footerOption" value="${footerOption.id}"
+								style="padding: 5px; border-radius: 10px;" <c:if test="${mailMessage.footerOption==0 && status.first}">checked</c:if>
+						<c:if test="${mailMessage.footerOption!=0 && mailMessage.footerOption==footerOption.id}">checked</c:if>>
+								<div style="background: white; display: block; padding: 10px; border-radius: 10px;">${footerOption.text}</div>
+							</label>
+						</div>
+					</c:forEach>
 				</div>
-				<div class="radio" style="padding: 10px; border-radius: 10px;">
-				  <label>
-				    <input type="radio" class="radio_mail_option" name="footerOption" id="headOption" value="option2" style="padding: 5px; border-radius: 10px;">
-				    <div style="background:white; display: block; padding: 10px; border-radius: 10px;">${mailMessage.message}</div>
-				  </label>
-				</div>
-		  </div>
+			</c:if>		  
 		  
 		  <div class="form-group">
 			<label style="display: block;">Подписчики:</label>

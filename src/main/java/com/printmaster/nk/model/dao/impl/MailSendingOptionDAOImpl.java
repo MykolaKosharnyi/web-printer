@@ -67,4 +67,23 @@ public class MailSendingOptionDAOImpl implements MailSendingOptionDAO {
         }
 	}
 
+	@Override
+	public List<MailSendingMessageOption> messageOptionForHead() {
+        return messageOptionTemplate(MailSendingMessageOption.OptionType.HEADER);
+	}
+	
+	@Override
+	public List<MailSendingMessageOption> messageOptionForFooter() {
+		return messageOptionTemplate(MailSendingMessageOption.OptionType.FOOTER);
+	}
+	
+	@SuppressWarnings("unchecked")
+	private List<MailSendingMessageOption> messageOptionTemplate(MailSendingMessageOption.OptionType optionType){
+		Session session = this.sessionFactory.getCurrentSession();
+		Criteria cr = session.createCriteria(MailSendingMessageOption.class);	
+		cr.add(Restrictions.eq("showOnMailLetter", true));	
+		cr.add(Restrictions.eq("optionType", optionType));
+        return new ArrayList<MailSendingMessageOption>(cr.list());
+	}
+
 }

@@ -50,4 +50,14 @@ public class MailSendingOptionServiceImpl implements MailSendingOptionService {
 		mailSendingOptionDAO.removeMessageOption(id);
 	}
 
+	@Override
+	public List<MailSendingMessageOption> messageOptionForHead() {
+		return mailSendingOptionDAO.messageOptionForHead();
+	}
+
+	@Override
+	public List<MailSendingMessageOption> messageOptionForFooter() {
+		return mailSendingOptionDAO.messageOptionForFooter();
+	}
+
 }

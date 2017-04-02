@@ -120,6 +120,8 @@ public class MailSenderController {
 	private String putMessagePageParameters(Model model, MailSendingMessage mailMessage){
 		model.addAttribute("mailMessage", mailMessage);
 		model.addAttribute("listSubscription", listSubscription);
+		model.addAttribute("listHeaderOption", mailSendingOptionService.messageOptionForHead());
+		model.addAttribute("listFooterOption", mailSendingOptionService.messageOptionForFooter());
 		return "admin/message";
 	}
 	
@@ -150,15 +152,6 @@ public class MailSenderController {
 	@RequestMapping(value = "/admin/message/option/{id}", method = RequestMethod.GET)
 	public String getMailOption(@PathVariable("id") int id, Model model) {
 		model.addAttribute("option", mailSendingOptionService.getById(id));
-		
-//		MailSendingMessageOption option0 = mailSendingOptionService.getById(id);
-//		
-//		if(option0!=null ){
-//			MailSendingMessageOption option = new MailSendingMessageOption();
-//			option.setId(id);
-//			option.setOptionType(MailSendingMessageOption.OptionType.HEADER);
-//			model.addAttribute("option", option);
-//		}
 		return "admin/message/option";
 	}
 	

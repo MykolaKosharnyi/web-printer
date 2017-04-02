@@ -53,7 +53,29 @@ public class MailSendingMessage implements Serializable{
 		SENDED, WAITING, CANCELED, MODIFICATION_PROCESS
 	}
 	
+	@Column(name="headerOption", nullable = false, columnDefinition = "int default 0")
+	private int headerOption = 0;
+	
+	@Column(name="footerOption", nullable = false, columnDefinition = "int default 0")
+	private int footerOption = 0;
+	
 	public MailSendingMessage(){}
+
+	public int getHeaderOption() {
+		return headerOption;
+	}
+
+	public void setHeaderOption(int headerOption) {
+		this.headerOption = headerOption;
+	}
+
+	public int getFooterOption() {
+		return footerOption;
+	}
+
+	public void setFooterOption(int footerOption) {
+		this.footerOption = footerOption;
+	}
 
 	public Long getId() {
 		return id;
