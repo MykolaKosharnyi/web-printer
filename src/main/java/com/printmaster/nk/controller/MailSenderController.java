@@ -150,6 +150,15 @@ public class MailSenderController {
 	@RequestMapping(value = "/admin/message/option/{id}", method = RequestMethod.GET)
 	public String getMailOption(@PathVariable("id") int id, Model model) {
 		model.addAttribute("option", mailSendingOptionService.getById(id));
+		
+//		MailSendingMessageOption option0 = mailSendingOptionService.getById(id);
+//		
+//		if(option0!=null ){
+//			MailSendingMessageOption option = new MailSendingMessageOption();
+//			option.setId(id);
+//			option.setOptionType(MailSendingMessageOption.OptionType.HEADER);
+//			model.addAttribute("option", option);
+//		}
 		return "admin/message/option";
 	}
 	
@@ -173,9 +182,7 @@ public class MailSenderController {
 	@RequestMapping(value="/admin/message/option/showOnMailLetter/{id}",
 			method = RequestMethod.POST,consumes=JSON_CONSUMES,headers = JSON_HEADERS)
     public @ResponseBody void setShowOnMailLetter(@PathVariable("id") int id, @RequestBody boolean value) {
-		MailSendingMessageOption option = mailSendingOptionService.getById(id);
-		option.setShowOnMailLetter(value);
-		mailSendingOptionService.updateSendingOption(option);
+		mailSendingOptionService.setShowing(id, value);
     }
 	
 	/*-------------------------  Part for adding mails recipients ----------------------------------------- */

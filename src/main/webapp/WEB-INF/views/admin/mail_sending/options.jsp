@@ -37,7 +37,7 @@
 
 			<c:forEach items="${options}" var="option">
 				<tr>
-					<td>${option.id}</td>					
+					<td><a href="<c:url value='/admin/message/option/${option.id}' />">${option.id}</a></td>					
 					<c:if test="${option.optionType.toString() eq 'HEADER'}">
 						<td><a class="btn btn-warning" href="<c:url value='/admin/message/option/${option.id}' />">HEADER</a></td>
 					</c:if>
@@ -46,18 +46,25 @@
 						<td><a class="btn btn-info" href="<c:url value='/admin/message/option/${option.id}' />">FOOTER</a></td>
 					</c:if>
 					
-					<td><input type="checkbox" name="showOnMailLetter" onclick="setShowOnMailForm('${productType}', ${product.id}, this);"
+					<td><input type="checkbox" name="showOnMailLetter" onclick="setShowOnMailForm(${option.id}, this);"
 					 	<c:if test="${option.showOnMailLetter}">checked</c:if> /></td>
 					
 					<td>
-						<fmt:formatDate type="both" dateStyle="long" timeStyle="short" value="${option.dateLastChanging}" />
+						<a href="<c:url value='/admin/message/option/${option.id}' />">
+							<fmt:formatDate type="both" dateStyle="long" timeStyle="short" value="${option.dateLastChanging}" />
+						</a>
 					</td> 
 	
 					<td><a href="<c:url value='/admin/message/option/remove/${option.id}' />"><i class="fa fa-trash-o remove" aria-hidden="true"></i></a></td>
 				</tr>
 				<tr>
 					<td colspan="5">
-						 <div style="background:white; display: block; padding: 10px; border-radius: 10px;">${option.text}</div>
+						 <div style="background:white; display: block; padding: 10px; border-radius: 10px; text-align: left;">${option.text}</div>
+					</td>
+				</tr>				
+				<tr>
+					<td colspan="5">
+						 <br style="margin: 10px 0px;">
 					</td>
 				</tr>
 			</c:forEach>
@@ -66,7 +73,7 @@
 	</div>	
 	
 	<script type="text/javascript">
-		function setShowOnMailForm(type, id, element){		
+		function setShowOnMailForm(id, element){		
 			$.ajax({
 				type: 'post',
 				url: "/admin/message/option/showOnMailLetter/" + id,

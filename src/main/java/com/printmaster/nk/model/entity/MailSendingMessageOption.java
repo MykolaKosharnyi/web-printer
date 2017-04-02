@@ -13,15 +13,15 @@ import javax.persistence.Table;
 @Entity
 @Table(name="mail_message_option")
 public class MailSendingMessageOption implements Serializable{
-	private static final long serialVersionUID = 3031695775597440046L;
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="id")
 	private int id;
 	
-	@Column(name="showOnMailLetter")
-	private boolean showOnMailLetter;
+	@Column(name="showOnMailLetter", columnDefinition = "bit default 1")
+	private boolean showOnMailLetter = true;
 	
 	@Column(name="text", columnDefinition="TEXT")
 	private String text;
@@ -68,10 +68,6 @@ public class MailSendingMessageOption implements Serializable{
 
 	public void setOptionType(OptionType optionType) {
 		this.optionType = optionType;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
 	}
 
 	public boolean isShowOnMailLetter() {

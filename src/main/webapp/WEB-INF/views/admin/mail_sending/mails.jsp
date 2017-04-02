@@ -22,7 +22,8 @@
 <body>	
 	<div id="product">
 		<a href="<c:url value='/admin/message/new' />">Создать новое сообщение рассылки</a>
-		<a href="<c:url value='/admin/message/options' />">Опции для письма (header/footer of letter)</a>
+		<br>
+		<a href="<c:url value='/admin/message/options' />">Опции для письма (header/footer)</a>
 	
 	<h3>Таблица раннее созданных рассылок</h3>
 	

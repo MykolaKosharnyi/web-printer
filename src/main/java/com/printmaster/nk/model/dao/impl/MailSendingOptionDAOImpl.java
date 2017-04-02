@@ -1,9 +1,13 @@
 package com.printmaster.nk.model.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 
 import com.printmaster.nk.model.dao.MailSendingOptionDAO;
 import com.printmaster.nk.model.entity.MailSendingMessageOption;
@@ -16,6 +20,15 @@ public class MailSendingOptionDAOImpl implements MailSendingOptionDAO {
     }
 	
 	@Override
+	public MailSendingMessageOption getById(int id) {
+		Session session = this.sessionFactory.getCurrentSession();      
+		
+		Criteria cr = session.createCriteria(MailSendingMessageOption.class);	
+		cr.add(Restrictions.eq("id", id));		
+		return (MailSendingMessageOption) cr.uniqueResult();
+	}
+    
+	@Override
 	public int createSendingOption(MailSendingMessageOption mailSendingMessageOption) {
 		Session session = this.sessionFactory.getCurrentSession();
         int id = (Integer) session.save(mailSendingMessageOption);
@@ -26,7 +39,9 @@ public class MailSendingOptionDAOImpl implements MailSendingOptionDAO {
 	@Override
 	public List<MailSendingMessageOption> allMessageOption() {
 		Session session = this.sessionFactory.getCurrentSession();
-        return session.createQuery("from MailSendingMessageOption").list();
+		Criteria cr = session.createCriteria(MailSendingMessageOption.class);	
+		cr.addOrder(Order.asc("optionType"));		
+        return new ArrayList<MailSendingMessageOption>(cr.list());
 	}
 
 	@Override
@@ -50,12 +65,6 @@ public class MailSendingOptionDAOImpl implements MailSendingOptionDAO {
         if(null != option){
             session.delete(option);
         }
-	}
-
-	@Override
-	public MailSendingMessageOption getById(int id) {
-		Session session = this.sessionFactory.getCurrentSession();      
-		return (MailSendingMessageOption) session.load(MailSendingMessageOption.class, new Integer(id));
 	}
 
 }

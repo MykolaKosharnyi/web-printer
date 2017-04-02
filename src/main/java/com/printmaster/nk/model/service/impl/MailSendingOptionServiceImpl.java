@@ -14,6 +14,11 @@ public class MailSendingOptionServiceImpl implements MailSendingOptionService {
 
 	private MailSendingOptionDAO mailSendingOptionDAO;
 
+	@Override
+	public MailSendingMessageOption getById(int id) {
+		return mailSendingOptionDAO.getById(id);
+	}
+	
 	public void setMailSendingOptionDAO(MailSendingOptionDAO mailSendingOptionDAO) {
 		this.mailSendingOptionDAO = mailSendingOptionDAO;
 	}
@@ -43,11 +48,6 @@ public class MailSendingOptionServiceImpl implements MailSendingOptionService {
 	@Override
 	public void removeMessageOption(int id) {
 		mailSendingOptionDAO.removeMessageOption(id);
-	}
-
-	@Override
-	public MailSendingMessageOption getById(int id) {
-		return mailSendingOptionDAO.getById(id);
 	}
 
 }
