@@ -14,6 +14,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
@@ -42,6 +43,15 @@ public class MailSendingComponent {
 	private final static String HOST_EMAIL = "noreplay@forprint.net.ua";
 	private final static String ADMIN_EMAIL = "nikolay.kosharniy@gmail.com";
 	
+	public final static String JSON_FILE_NAME_USER_MAIL_RECEIVER = "user_mail_receiver";
+	public final static String NOTIFICATION_COMMENT = "comment";
+	public final static String NOTIFICATION_MAIL_UPDATING = "mail_sending";
+	
+	public JSONArray getRecipients(String typeNotification){
+		JSONObject objectWithReceivers = componets.jsonObjectParser(JSON_FILE_NAME_USER_MAIL_RECEIVER);
+		return (JSONArray) objectWithReceivers.get(typeNotification);
+	}
+	
 	@SuppressWarnings("unchecked")
 	public void observeRecipients(String subject, String messageBody, JSONArray recipientsFromJSON){
 		Iterator<String> iterator = recipientsFromJSON.iterator();
@@ -51,7 +61,24 @@ public class MailSendingComponent {
 		}	
 	}
 	
+	@SuppressWarnings("unchecked")
+	public void observeRecipients(MailSendingMessage mailMessage, JSONArray recipientsFromJSON){
+		Iterator<String> iterator = recipientsFromJSON.iterator();
+		
+		while(iterator.hasNext()){
+			sendMessageTemplate(mailMessage.getTitle(), createMessageBody(mailMessage), iterator.next());
+		}	
+	}
+	
 	public void observeRecipients(MailSendingMessage mailMessage, String concatenatedInStringRecipiets){
+		sendMessageTemplate(mailMessage.getTitle(), createMessageBody(mailMessage), concatenatedInStringRecipiets);		
+	}
+	
+	public void observeRecipients(String subject, String messageBody, String concatenatedInStringRecipiets){
+		sendMessageTemplate(subject, messageBody, concatenatedInStringRecipiets);		
+	}
+	
+	private String createMessageBody(MailSendingMessage mailMessage){
 		StringBuilder messageBody = new StringBuilder();
 		if(mailMessage.getHeaderOption()!=0){
 			messageBody.append(mailSendingOptionService.getById(mailMessage.getHeaderOption()));
@@ -62,12 +89,7 @@ public class MailSendingComponent {
 		if(mailMessage.getFooterOption()!=0){
 			messageBody.append(mailSendingOptionService.getById(mailMessage.getFooterOption()));
 		}
-		
-		sendMessageTemplate(mailMessage.getTitle(), messageBody.toString(), concatenatedInStringRecipiets);		
-	}
-	
-	public void observeRecipients(String subject, String messageBody, String concatenatedInStringRecipiets){
-		sendMessageTemplate(subject, messageBody, concatenatedInStringRecipiets);		
+		return messageBody.toString();
 	}
 	
 	private void sendMessageTemplate(String subject, String messageBody, String recipiets){
@@ -84,6 +106,8 @@ public class MailSendingComponent {
 		    msg.setText(messageBody.replace("../..", "http://e-machine.com.ua"), "UTF-8", "html");
 		    
 		} catch (UnsupportedEncodingException | MessagingException e) {
+			exceptionMailSender(e);
+		} catch (Exception e){
 			exceptionMailSender(e);
 		}
 		mailSender.send(msg);

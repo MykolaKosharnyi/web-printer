@@ -208,7 +208,6 @@ public class ComponentsForControllers {
         } else {
         	reklam.deleteReklam(reklamProduct);
         }
-             
     }
     
     /**

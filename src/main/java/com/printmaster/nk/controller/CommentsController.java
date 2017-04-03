@@ -30,8 +30,6 @@ public class CommentsController {
 	
 	@Autowired
     ComponentsForControllers componets;
-	
-	private final static String USERS_JSON_FILE_NAME = "user_mail_receiver";
 
 	@RequestMapping(value="/admin/comments", method = RequestMethod.GET)
     public String allComments(Model model) {	
@@ -49,7 +47,7 @@ public class CommentsController {
     public @ResponseBody Comment addNewComment(@ModelAttribute("addComment") @Valid Comment comment) {	
 		commentService.add(comment);
 		mailSendingComponent.observeRecipients("Добавлен новый комментарий", getCommentBody(comment), 
-				componets.jsonArrayParser(USERS_JSON_FILE_NAME));
+				mailSendingComponent.getRecipients(MailSendingComponent.NOTIFICATION_COMMENT));
     	return comment;
     }
 	
@@ -65,11 +63,11 @@ public class CommentsController {
     	
     	if(isDeleted){
     		mailSendingComponent.observeRecipients("Удален комментарий", getCommentBody( commentWichWillBeDeleted ),
-    				componets.jsonArrayParser(USERS_JSON_FILE_NAME));
+    				mailSendingComponent.getRecipients(MailSendingComponent.NOTIFICATION_COMMENT));
     	}
     	return result;
     }
-	
+
 	private String getCommentBody(Comment comment){
 		StringBuilder result = new StringBuilder();
 		result.append("Содержимое:");

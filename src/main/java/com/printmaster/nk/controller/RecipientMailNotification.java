@@ -27,18 +27,17 @@ public class RecipientMailNotification {
 	@Autowired
 	MailSendingComponent mailSendingComponent;
 	
-	private final static String JSON_FILE_NAME_USER_MAIL_RECEIVER = "user_mail_receiver";
-	
 	@RequestMapping(value="/admin/recipient_notification/{typeNotification}", method = RequestMethod.GET)
     public String changeRecipientNotification(@PathVariable("typeNotification") String typeNotification,
     		Model model){
-		JSONObject objectWithReceivers = componets.jsonObjectParser(JSON_FILE_NAME_USER_MAIL_RECEIVER);
-		JSONArray array = (JSONArray) objectWithReceivers.get(typeNotification);
+		JSONArray array = mailSendingComponent.getRecipients(typeNotification);
 		model.addAttribute("emails", array);
 		model.addAttribute("typeNotification", typeNotification);
 		
-		if("comment".equals(typeNotification)){
+		if(MailSendingComponent.NOTIFICATION_COMMENT.equals(typeNotification)){
 			model.addAttribute("headerOfNotification", "Подписчики на добавление комментов к товару");
+		} else if(MailSendingComponent.NOTIFICATION_MAIL_UPDATING.equals(typeNotification)){
+			model.addAttribute("headerOfNotification", "Подписчики на получение чернового варианта письма");
 		}
 		
         return "admin/recipient_notification";
@@ -48,12 +47,12 @@ public class RecipientMailNotification {
 	@RequestMapping(value = "/admin/recipient_notification/add/{typeNotification}", method = RequestMethod.POST)
 	public String addRecipientNotificationEmail(@PathVariable("typeNotification") String typeNotification,
 			@RequestParam(value = "new_email") String email) {
-		JSONObject objectWithReceivers = componets.jsonObjectParser(JSON_FILE_NAME_USER_MAIL_RECEIVER);
+		JSONObject objectWithReceivers = componets.jsonObjectParser(MailSendingComponent.JSON_FILE_NAME_USER_MAIL_RECEIVER);
 		JSONArray array = (JSONArray) objectWithReceivers.get(typeNotification);
 		array.add(email);	
 		Collections.sort(array);
 		objectWithReceivers.put(typeNotification, array);
-		componets.saveObject(objectWithReceivers, JSON_FILE_NAME_USER_MAIL_RECEIVER);
+		componets.saveObject(objectWithReceivers, MailSendingComponent.JSON_FILE_NAME_USER_MAIL_RECEIVER);
 	    return "redirect:/admin/recipient_notification/" + typeNotification;
 	}
 	
@@ -62,11 +61,11 @@ public class RecipientMailNotification {
     		consumes = MediaType.TEXT_PLAIN_VALUE)
 	public @ResponseBody void removeRecipientNotificationEmail(@PathVariable("typeNotification") String typeNotification,
 			@RequestBody String email) {
-		JSONObject objectWithReceivers = componets.jsonObjectParser(JSON_FILE_NAME_USER_MAIL_RECEIVER);
+		JSONObject objectWithReceivers = componets.jsonObjectParser(MailSendingComponent.JSON_FILE_NAME_USER_MAIL_RECEIVER);
 		JSONArray array = (JSONArray) objectWithReceivers.get(typeNotification);
 		array.remove(email);	
 		objectWithReceivers.put(typeNotification, array);
-		componets.saveObject(objectWithReceivers, JSON_FILE_NAME_USER_MAIL_RECEIVER);
+		componets.saveObject(objectWithReceivers, MailSendingComponent.JSON_FILE_NAME_USER_MAIL_RECEIVER);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -75,8 +74,7 @@ public class RecipientMailNotification {
     public @ResponseBody JSONObject checkEmail(@PathVariable("typeNotification") String typeNotification,
     		@RequestBody String email) {
     	JSONObject result = new JSONObject();
-    	JSONObject objectWithReceivers = componets.jsonObjectParser(JSON_FILE_NAME_USER_MAIL_RECEIVER);
-    	JSONArray array = (JSONArray) objectWithReceivers.get(typeNotification);
+    	JSONArray array = mailSendingComponent.getRecipients(typeNotification);
     	result.put("result", mailSendingComponent.checkEmail(array, email));
     	return result;
     }

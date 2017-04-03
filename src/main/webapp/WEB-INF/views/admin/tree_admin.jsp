@@ -1065,7 +1065,7 @@
 
 <li class="Node IsRoot ExpandLeaf">
 	<div class="Expand"></div>
-	<div class="Content"><a href="<c:url value='/admin/comments' />">Оставленные комментарии</a></div>
+	<div class="Content"><a href="<c:url value='/admin/comments' />">ОСТАВЛЕННЫЕ КОММЕНТАРИИ</a></div>
 </li>
 
 <li class="Node IsRoot ExpandLeaf">

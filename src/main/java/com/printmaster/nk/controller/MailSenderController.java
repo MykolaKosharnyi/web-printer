@@ -35,7 +35,7 @@ public class MailSenderController {
 	@Autowired
 	MailSendingOptionService mailSendingOptionService;
 	
-	private final static String RECIPIENT_WHEN_MESSAGE_UPDATED = "alise@forprint.net.ua,nikolay.kosharniy@gmail.com";
+//	private final static String RECIPIENT_WHEN_MESSAGE_UPDATED = "alise@forprint.net.ua,nikolay.kosharniy@gmail.com";
 	private final static String RECIPIENT_WHEN_ASKING_ABOUT_PRODUCT = "alise@forprint.net.ua,nikolay.kosharniy@gmail.com";
 	
 	@RequestMapping(value="/ask/product", method = RequestMethod.POST, consumes=JSON_CONSUMES, headers = JSON_HEADERS)
@@ -75,7 +75,8 @@ public class MailSenderController {
 		}		
 		mailSendingService.update(mailMessage);
 		if(mailMessage.getStatus().equals(StatusOfSending.MODIFICATION_PROCESS)){
-			mailSendingComponent.observeRecipients(mailMessage, RECIPIENT_WHEN_MESSAGE_UPDATED);
+			mailSendingComponent.observeRecipients(mailMessage,
+					mailSendingComponent.getRecipients(MailSendingComponent.NOTIFICATION_MAIL_UPDATING));
 		}
 		return "redirect:/admin/all_sended_messages";
 	}
