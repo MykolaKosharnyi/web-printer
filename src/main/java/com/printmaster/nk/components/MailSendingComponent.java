@@ -20,6 +20,8 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Component;
 
 import com.printmaster.nk.beans.ComponentsForControllers;
+import com.printmaster.nk.model.entity.MailSendingMessage;
+import com.printmaster.nk.model.service.MailSendingOptionService;
 
 @Component
 public class MailSendingComponent {
@@ -29,6 +31,9 @@ public class MailSendingComponent {
 	
 	@Autowired
     private JavaMailSenderImpl mailSender;
+	
+	@Autowired
+	MailSendingOptionService mailSendingOptionService;
 	
 	private static final String EMAIL_PATTERN =
 			"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
@@ -44,6 +49,21 @@ public class MailSendingComponent {
 		while(iterator.hasNext()){
 			sendMessageTemplate(subject, messageBody, iterator.next());
 		}	
+	}
+	
+	public void observeRecipients(MailSendingMessage mailMessage, String concatenatedInStringRecipiets){
+		StringBuilder messageBody = new StringBuilder();
+		if(mailMessage.getHeaderOption()!=0){
+			messageBody.append(mailSendingOptionService.getById(mailMessage.getHeaderOption()));
+		}
+		
+		messageBody.append(mailMessage.getMessage());
+		
+		if(mailMessage.getFooterOption()!=0){
+			messageBody.append(mailSendingOptionService.getById(mailMessage.getFooterOption()));
+		}
+		
+		sendMessageTemplate(mailMessage.getTitle(), messageBody.toString(), concatenatedInStringRecipiets);		
 	}
 	
 	public void observeRecipients(String subject, String messageBody, String concatenatedInStringRecipiets){

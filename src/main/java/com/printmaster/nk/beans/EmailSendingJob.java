@@ -31,13 +31,9 @@ public class EmailSendingJob{
 	}
 
 	private void sendEmail(MailSendingMessage message) {
-		String subject = message.getTitle();
-		String messageBody = message.getMessage();
-
 		List<UserAddByAdmin> usersList = userAddByAdminService.getUserBySubscription(message.getSubscription());
-
 		for (UserAddByAdmin user : usersList) {			
-			mailSendingComponent.observeRecipients(subject, messageBody, getConcatedEmails(user));
+			mailSendingComponent.observeRecipients(message, getConcatedEmails(user));
 		}
 		
 		message.setStatus(StatusOfSending.SENDED);
