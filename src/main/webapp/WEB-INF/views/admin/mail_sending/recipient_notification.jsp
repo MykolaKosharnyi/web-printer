@@ -15,7 +15,7 @@
 	<script src="<%=request.getContextPath()%>/resources/js/admin/add_change_printer.js"></script>
 
 	<title>
-		<spring:message text="Подписчики на добавление комментов к товару" />
+		<spring:message text="${headerOfNotification}" />
 	</title>
 
 	<style>
@@ -37,7 +37,7 @@
 </head>
 <body>
 	<div id="product">
-		<h3><spring:message text="Подписчики на добавление комментов к товару" /></h3>
+		<h3><spring:message text="${headerOfNotification}" /></h3>
 		<div class="early_added_mails">
 			<ol>
 				<c:forEach items="${emails}" var="email">				
@@ -51,7 +51,7 @@
 		<hr/>
 		
 		
-		<c:url var="add_email" value="/admin/comments/add_recipient_notification"></c:url>
+		<c:url var="add_email" value="/admin/recipient_notification/add/${typeNotification}"></c:url>
 		<form class="form-horizontal" style="padding: 0px 10px;" action="${add_email}" method="post">
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
@@ -71,7 +71,7 @@
     	var parent = $(this).parent('li');
     	$.ajax({
 			  type: 'post',
-			  url: "/admin/comments/remove_recipient_notification",
+			  url: "/admin/recipient_notification/remove/${typeNotification}",
 			  contentType: "text/plain; charset=utf-8",
 			  data: parent.find("div.email_block_recipient").text(),			        
 		        success: function () {
@@ -92,7 +92,7 @@
 			if(dataToSend.trim()!=""){
 			$.ajax({
 				  type: 'post',
-				  url: "/admin/comments/check_email",
+				  url: "/admin/recipient_notification/check_email/${typeNotification}",
 				  contentType: "text/plain; charset=utf-8",
 				  data: dataToSend,			        
 			        success: function (data) {

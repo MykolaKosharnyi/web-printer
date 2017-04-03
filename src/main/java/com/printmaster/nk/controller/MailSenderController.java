@@ -1,9 +1,6 @@
 package com.printmaster.nk.controller;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -12,10 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.printmaster.nk.beans.ComponentsForControllers;
 import com.printmaster.nk.components.MailSendingComponent;
 import com.printmaster.nk.model.entity.MailSendingMessage;
 import com.printmaster.nk.model.entity.MailSendingMessage.StatusOfSending;
@@ -24,8 +19,6 @@ import com.printmaster.nk.model.service.MailSendingOptionService;
 import com.printmaster.nk.model.service.MailSendingService;
 
 import static com.printmaster.nk.controller.ConstUsedInContr.*;
-
-import java.util.Collections;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -42,12 +35,8 @@ public class MailSenderController {
 	@Autowired
 	MailSendingOptionService mailSendingOptionService;
 	
-	@Autowired
-    ComponentsForControllers componets;
-	
 	private final static String RECIPIENT_WHEN_MESSAGE_UPDATED = "alise@forprint.net.ua,nikolay.kosharniy@gmail.com";
 	private final static String RECIPIENT_WHEN_ASKING_ABOUT_PRODUCT = "alise@forprint.net.ua,nikolay.kosharniy@gmail.com";
-	private final static String USERS_JSON_FILE_NAME = "user_mail_receiver";
 	
 	@RequestMapping(value="/ask/product", method = RequestMethod.POST, consumes=JSON_CONSUMES, headers = JSON_HEADERS)
     public @ResponseBody void askProductPage(HttpServletRequest request) {
@@ -86,8 +75,7 @@ public class MailSenderController {
 		}		
 		mailSendingService.update(mailMessage);
 		if(mailMessage.getStatus().equals(StatusOfSending.MODIFICATION_PROCESS)){
-			mailSendingComponent.observeRecipients(mailMessage.getTitle(), mailMessage.getMessage(),
-					RECIPIENT_WHEN_MESSAGE_UPDATED);
+			mailSendingComponent.observeRecipients(mailMessage, RECIPIENT_WHEN_MESSAGE_UPDATED);
 		}
 		return "redirect:/admin/all_sended_messages";
 	}
@@ -177,40 +165,5 @@ public class MailSenderController {
     public @ResponseBody void setShowOnMailLetter(@PathVariable("id") int id, @RequestBody boolean value) {
 		mailSendingOptionService.setShowing(id, value);
     }
-	
-	/*-------------------------  Part for adding mails recipients ----------------------------------------- */
-	
-	@RequestMapping(value="/admin/change_comment_recipient_notification", method = RequestMethod.GET)
-    public String changeCommentRecipientNotification(Model model){
-		model.addAttribute("emails", componets.jsonArrayParser(USERS_JSON_FILE_NAME));
-        return "admin/change_comment_recipient_notification";
-    } 
-	
-	@SuppressWarnings("unchecked")
-	@RequestMapping(value = "/admin/comments/add_recipient_notification", method = RequestMethod.POST)
-	public String addRecipientNotificationEmail(@RequestParam(value = "new_email") String email) {
-		JSONArray array = componets.jsonArrayParser(USERS_JSON_FILE_NAME);
-		array.add(email);	
-		Collections.sort(array);
-		componets.saveObject(array, USERS_JSON_FILE_NAME);
-	    return "redirect:/admin/change_comment_recipient_notification";
-	}
-	
-	@RequestMapping(value = "/admin/comments/remove_recipient_notification", method = RequestMethod.POST,
-    		consumes = MediaType.TEXT_PLAIN_VALUE)
-	public @ResponseBody void removeRecipientNotificationEmail(@RequestBody String email) {
-		JSONArray array = componets.jsonArrayParser(USERS_JSON_FILE_NAME);
-		array.remove(email);	
-		componets.saveObject(array, USERS_JSON_FILE_NAME);
-	}
-	
-	@SuppressWarnings("unchecked")
-	@RequestMapping(value="/admin/comments/check_email", method = RequestMethod.POST,
-    		produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.TEXT_PLAIN_VALUE)
-    public @ResponseBody JSONObject checkEmailC(@RequestBody String email) {
-    	JSONObject result = new JSONObject();
-    	JSONArray array = componets.jsonArrayParser(USERS_JSON_FILE_NAME);
-    	result.put("result", mailSendingComponent.checkEmail(array, email));
-    	return result;
-    }
+
 }

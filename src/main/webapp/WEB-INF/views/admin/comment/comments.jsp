@@ -21,7 +21,7 @@
 </head>
 <body>	
 	<div id="product">
-		<a href="<c:url value='/admin/change_comment_recipient_notification' />">Список e-mail, получающих уведомления когда кто-то оставит комментарий на сайте</a>
+		<a href="<c:url value='/admin/recipient_notification/comment' />">Список e-mail, получающих уведомления когда кто-то оставит комментарий на сайте</a>
 	
 	<h3>Таблица оставленных комментариев</h3>
 	

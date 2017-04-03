@@ -317,8 +317,8 @@
         <put-attribute name="body" value="/WEB-INF/views/admin/comment/comments.jsp" />  
     </definition>
     
-    <definition name="admin/change_comment_recipient_notification" extends="admin_base">    
-        <put-attribute name="body" value="/WEB-INF/views/admin/comment/change_comment_recipient_notification.jsp" />  
+    <definition name="admin/recipient_notification" extends="admin_base">    
+        <put-attribute name="body" value="/WEB-INF/views/admin/mail_sending/recipient_notification.jsp" />  
     </definition>
     
 </tiles-definitions>  
