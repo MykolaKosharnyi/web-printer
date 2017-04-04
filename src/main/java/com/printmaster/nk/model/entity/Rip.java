@@ -45,14 +45,14 @@ private static final long serialVersionUID = 3031695775597440046L;
 	@Column(name="optionInstallation", columnDefinition="Decimal(10,2) default '0.00'")
 	protected double optionInstallation;
 	
-	@Size(max = 50)
+	@Size(max = 100)
 	@Column(name="descriptionInstallation")
 	protected String descriptionOptionInstallation;
 	
 	@Column(name="optionVAT", columnDefinition="Decimal(10,2) default '1.20'")
 	protected double optionVAT;
 	
-	@Size(max = 50)
+	@Size(max = 100)
 	@Column(name="descriptionVAT")
 	protected String descriptionOptionVAT;
 	
@@ -62,7 +62,7 @@ private static final long serialVersionUID = 3031695775597440046L;
 	@Column(name="priceAddedOption", columnDefinition="Decimal(10,2) default '0.00'")
 	protected double priceAddedOption;
 	
-	@Size(max = 50)
+	@Size(max = 100)
 	@Column(name="descriptionAddedOption")
 	protected String descriptionOptionAddedOption;
 	
@@ -72,7 +72,7 @@ private static final long serialVersionUID = 3031695775597440046L;
 	@Column(name="priceAddedOption2", columnDefinition="Decimal(10,2) default '0.00'")
 	protected double priceAddedOption2;
 	
-	@Size(max = 50)
+	@Size(max = 100)
 	@Column(name="descriptionAddedOption2")
 	protected String descriptionOptionAddedOption2;
 	
@@ -82,7 +82,7 @@ private static final long serialVersionUID = 3031695775597440046L;
 	@Column(name="priceAddedOption3", columnDefinition="Decimal(10,2) default '0.00'")
 	protected double priceAddedOption3;
 	
-	@Size(max = 50)
+	@Size(max = 100)
 	@Column(name="descriptionAddedOption3")
 	protected String descriptionOptionAddedOption3;
 	

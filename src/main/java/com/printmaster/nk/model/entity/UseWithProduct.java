@@ -31,14 +31,14 @@ public class UseWithProduct extends Product implements Serializable{
 	@Column(name="optionInstallation", columnDefinition="Decimal(10,2) default '0.00'")
 	protected double optionInstallation;
 	
-	@Size(max = 50)
+	@Size(max = 100)
 	@Column(name="descriptionInstallation")
 	protected String descriptionOptionInstallation;
 	
 	@Column(name="optionVAT", columnDefinition="Decimal(10,2) default '1.20'")
 	protected double optionVAT;
 	
-	@Size(max = 50)
+	@Size(max = 100)
 	@Column(name="descriptionVAT")
 	protected String descriptionOptionVAT;
 	
@@ -48,7 +48,7 @@ public class UseWithProduct extends Product implements Serializable{
 	@Column(name="priceAddedOption", columnDefinition="Decimal(10,2) default '0.00'")
 	protected double priceAddedOption;
 	
-	@Size(max = 50)
+	@Size(max = 100)
 	@Column(name="descriptionAddedOption")
 	protected String descriptionOptionAddedOption;
 	
@@ -58,7 +58,7 @@ public class UseWithProduct extends Product implements Serializable{
 	@Column(name="priceAddedOption2", columnDefinition="Decimal(10,2) default '0.00'")
 	protected double priceAddedOption2;
 	
-	@Size(max = 50)
+	@Size(max = 100)
 	@Column(name="descriptionAddedOption2")
 	protected String descriptionOptionAddedOption2;
 	
@@ -68,7 +68,7 @@ public class UseWithProduct extends Product implements Serializable{
 	@Column(name="priceAddedOption3", columnDefinition="Decimal(10,2) default '0.00'")
 	protected double priceAddedOption3;
 	
-	@Size(max = 50)
+	@Size(max = 100)
 	@Column(name="descriptionAddedOption3")
 	protected String descriptionOptionAddedOption3;
 	//@ManyToMany(fetch = FetchType.LAZY, mappedBy = "useWithProduct")
@@ -165,14 +165,14 @@ public class UseWithProduct extends Product implements Serializable{
 	@Column(name="insuranceInternationalTransport", nullable = false, columnDefinition = "bit default 0")
 	protected boolean insuranceInternationalTransport;
 	
-	@Size(max = 50)
+	@Size(max = 100)
 	@Column(name="descriptionInsuranceInternationalTransport")
 	protected String descriptionInsuranceInternationalTransport;
 		
 	@Column(name="insuranceUkraineTransport", nullable = false, columnDefinition = "bit default 0")
 	protected boolean insuranceUkraineTransport;
 	
-	@Size(max = 50)
+	@Size(max = 100)
 	@Column(name="descriptionInsuranceUkraineTransport")
 	protected String descriptionInsuranceUkraineTransport;
 	
