@@ -3,7 +3,6 @@ package com.printmaster.nk.model.dao.impl;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Junction;
@@ -16,8 +15,6 @@ import com.printmaster.nk.model.entity.search.SearchLaminators;
 
 @Repository
 public class LaminatorDAOImpl extends ProductDaoTemplate<Laminator, SearchLaminators>{
-
-	private Logger logger = Logger.getLogger(LaminatorDAOImpl.class);
 	
 	 public LaminatorDAOImpl() {
 		super(Laminator.class);
@@ -34,39 +31,6 @@ public class LaminatorDAOImpl extends ProductDaoTemplate<Laminator, SearchLamina
 			
 			return new HashSet<Laminator>(cr.list());
 		}
-	    
-	    @Override
-	    public long addProduct(Laminator l) {
-	        Session session = getSessionFactory().getCurrentSession();
-	        long id = (Long) session.save(l);
-	        logger.info("Laminator saved successfully, Laminator Details=" + l);
-	        return id;
-	    }
-	 
-	    @Override
-	    public void updateProduct(Laminator l) {
-	        Session session = getSessionFactory().getCurrentSession();
-	        session.update(l);
-	        logger.info("Laminator updated successfully, Laminator Details=" + l);
-	    }
-	 
-	    @Override
-	    public Laminator getProductById(long id) {
-	        Session session = getSessionFactory().getCurrentSession();      
-	        Laminator l = (Laminator) session.load(Laminator.class, new Long(id));
-	        logger.info("Laminator loaded successfully, Laminator details=" + l);
-	        return l;
-	    }
-	 
-	    @Override
-	    public void removeProduct(long id) {
-	        Session session = getSessionFactory().getCurrentSession();
-	        Laminator l = (Laminator) session.load(Laminator.class, new Long(id));
-	        if(null != l){
-	            session.delete(l);
-	        }
-	        logger.info("Laminator deleted successfully, Laminator details=" + l);
-	    }
 
 		@SuppressWarnings("unchecked")
 		@Override

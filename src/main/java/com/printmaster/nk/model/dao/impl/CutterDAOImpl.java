@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Junction;
@@ -17,46 +16,11 @@ import com.printmaster.nk.model.entity.search.SearchCutters;
 
 @Repository
 public class CutterDAOImpl extends ProductDaoTemplate<Cutter, SearchCutters>{
-
-	private Logger logger = Logger.getLogger(CutterDAOImpl.class);
 	
 	 public CutterDAOImpl() {
 		super(Cutter.class);
 	}
-
-	    @Override
-	    public long addProduct(Cutter c) {
-	        Session session = getSessionFactory().getCurrentSession();
-	        long id = (Long) session.save(c);
-	        logger.info("Cutter saved successfully, Cutter Details=" + c);
-	        return id;
-	    }
 	 
-	    @Override
-	    public void updateProduct(Cutter c) {
-	        Session session = getSessionFactory().getCurrentSession();
-	        session.update(c);
-	        logger.info("Cutter updated successfully, Cutter Details="+c);
-	    }
-	 
-	    @Override
-	    public Cutter getProductById(long id) {
-	        Session session = getSessionFactory().getCurrentSession();      
-	        Cutter c = (Cutter) session.load(Cutter.class, new Long(id));
-	        logger.info("Cutter loaded successfully, Cutter details=" + c);
-	        return c;
-	    }
-	 
-	    @Override
-	    public void removeProduct(long id) {
-	        Session session = getSessionFactory().getCurrentSession();
-	        Cutter c = (Cutter) session.load(Cutter.class, new Long(id));
-	        if(null != c){
-	            session.delete(c);
-	        }
-	        logger.info("Cutter deleted successfully, Cutter details=" + c);
-	    }
-
 		@SuppressWarnings("unchecked")
 		@Override
 		public Set<Cutter> listSearchProducts(SearchCutters searchCutters) {

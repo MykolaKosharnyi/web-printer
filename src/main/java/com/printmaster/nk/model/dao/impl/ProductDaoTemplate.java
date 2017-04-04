@@ -29,6 +29,37 @@ public abstract class ProductDaoTemplate<T, SC> implements ProductDAO<T, SC>{
     	this.productType = cls;
     }
 
+    @Override
+    public long addProduct(T t) {
+        Session session = getSessionFactory().getCurrentSession();
+        long id = (Long) session.save(t);
+        return id;
+    }
+ 
+    @Override
+    public void updateProduct(T t) {
+        Session session = getSessionFactory().getCurrentSession();
+        session.update(t);
+    }
+ 
+    @SuppressWarnings("unchecked")
+	@Override
+    public T getProductById(long id) {
+        Session session = getSessionFactory().getCurrentSession();      
+        T t = (T) session.load(productType, new Long(id));
+        return t;
+    }
+ 
+    @SuppressWarnings("unchecked")
+	@Override
+    public void removeProduct(long id) {
+        Session session = getSessionFactory().getCurrentSession();
+        T t = (T) session.load(productType, new Long(id));
+        if(null != t){
+            session.delete(t);
+        }
+    }
+    
 	@SuppressWarnings({ "unchecked", "rawtypes" })
     @Override
     public Set<T> listProducts(String sortCriteria) {

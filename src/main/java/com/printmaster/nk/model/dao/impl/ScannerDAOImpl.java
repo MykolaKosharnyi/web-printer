@@ -17,7 +17,6 @@ import com.printmaster.nk.model.entity.search.SearchScanners;
 
 @Repository
 public class ScannerDAOImpl extends ProductDaoTemplate<Scanner, SearchScanners>{
-	private Logger logger = Logger.getLogger(ScannerDAOImpl.class);
 	
 	public ScannerDAOImpl() {
 		super(Scanner.class);
@@ -34,39 +33,6 @@ public class ScannerDAOImpl extends ProductDaoTemplate<Scanner, SearchScanners>{
 			
 			return new HashSet<Scanner>(cr.list());
 		}
-	    
-	    @Override
-	    public long addProduct(Scanner s) {
-	        Session session = getSessionFactory().getCurrentSession();
-	        long id = (Long) session.save(s);
-	        logger.info("Scanner saved successfully, Scanner Details=" + s);
-	        return id;
-	    }
-	 
-	    @Override
-	    public void updateProduct(Scanner s) {
-	        Session session = getSessionFactory().getCurrentSession();
-	        session.update(s);
-	        logger.info("Scanner updated successfully, Scanner Details="+s);
-	    }
-	 
-	    @Override
-	    public Scanner getProductById(long id) {
-	        Session session = getSessionFactory().getCurrentSession();      
-	        Scanner s = (Scanner) session.load(Scanner.class, new Long(id));
-	        logger.info("Scanner loaded successfully, Scanner details=" + s);
-	        return s;
-	    }
-	 
-	    @Override
-	    public void removeProduct(long id) {
-	        Session session = getSessionFactory().getCurrentSession();
-	        Scanner s = (Scanner) session.load(Scanner.class, new Long(id));
-	        if(null != s){
-	            session.delete(s);
-	        }
-	        logger.info("Scanner deleted successfully, Scanner details=" + s);
-	    }
 
 		@SuppressWarnings("unchecked")
 		@Override

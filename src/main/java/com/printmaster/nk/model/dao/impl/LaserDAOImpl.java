@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Junction;
@@ -17,7 +16,6 @@ import com.printmaster.nk.model.entity.search.SearchLasers;
 
 @Repository
 public class LaserDAOImpl extends ProductDaoTemplate<Laser, SearchLasers>{
-	private Logger logger = Logger.getLogger(LaserDAOImpl.class);
 	
 	 public LaserDAOImpl() {
 		super(Laser.class);
@@ -33,40 +31,7 @@ public class LaserDAOImpl extends ProductDaoTemplate<Laser, SearchLasers>{
 			cr.add(Restrictions.like("name", phrase, MatchMode.ANYWHERE));
 			
 			return new HashSet<Laser>(cr.list());
-		}
-	    
-	    @Override
-	    public long addProduct(Laser l) {
-	        Session session = getSessionFactory().getCurrentSession();
-	        long id = (Long) session.save(l);
-	        logger.info("Laser saved successfully, Laser Details=" + l);
-	        return id;
-	    }
-	 
-	    @Override
-	    public void updateProduct(Laser l) {
-	        Session session = getSessionFactory().getCurrentSession();
-	        session.update(l);
-	        logger.info("Laser updated successfully, Laser Details="+l);
-	    }
-	 
-	    @Override
-	    public Laser getProductById(long id) {
-	        Session session = getSessionFactory().getCurrentSession();      
-	        Laser l = (Laser) session.load(Laser.class, new Long(id));
-	        logger.info("Laser loaded successfully, Laser details=" + l);
-	        return l;
-	    }
-	 
-	    @Override
-	    public void removeProduct(long id) {
-	        Session session = getSessionFactory().getCurrentSession();
-	        Laser l = (Laser) session.load(Laser.class, new Long(id));
-	        if(null != l){
-	            session.delete(l);
-	        }
-	        logger.info("Laser deleted successfully, laser details=" + l);
-	    }
+		}	 
 
 		@SuppressWarnings("unchecked")
 		@Override

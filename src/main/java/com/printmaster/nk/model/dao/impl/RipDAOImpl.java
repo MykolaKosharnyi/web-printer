@@ -7,7 +7,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.MatchMode;
@@ -23,18 +22,9 @@ import com.printmaster.nk.model.entity.search.SearchRips;
 
 @Repository
 public class RipDAOImpl extends ProductDaoTemplate<Rip, SearchRips> {
-	private Logger logger = Logger.getLogger(RipDAOImpl.class);
 	
 	public RipDAOImpl() {
 		super(Rip.class);
-	}
-
-	@Override
-	public long addProduct(Rip c) {
-		Session session = getSessionFactory().getCurrentSession();
-		long id = (Long) session.save(c);
-		logger.info("Rip saved successfully, Rip Details=" + c);
-		return id;
 	}
 
     @SuppressWarnings("unchecked")
@@ -49,31 +39,6 @@ public class RipDAOImpl extends ProductDaoTemplate<Rip, SearchRips> {
 		return new HashSet<Rip>(cr.list());
 	}
 	
-	@Override
-	public void updateProduct(Rip c) {
-		Session session = getSessionFactory().getCurrentSession();
-		session.update(c);
-		logger.info("Rip updated successfully, Rip Details=" + c);
-	}
-
-	@Override
-	public Rip getProductById(long id) {
-		Session session = getSessionFactory().getCurrentSession();
-		Rip c = (Rip) session.load(Rip.class, new Long(id));
-		logger.info("Rip loaded successfully, Rip details=" + c);
-		return c;
-	}
-
-	@Override
-	public void removeProduct(long id) {
-		Session session = getSessionFactory().getCurrentSession();
-		Rip c = (Rip) session.load(Rip.class, new Long(id));
-		if (null != c) {
-			session.delete(c);
-		}
-		logger.info("Rip deleted successfully, Rip details=" + c);
-	}
-
 	@SuppressWarnings("unchecked")
 	@Override
 	public Set<Rip> listSearchProducts(SearchRips searchRips) {

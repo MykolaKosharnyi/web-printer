@@ -9,7 +9,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Junction;
@@ -30,8 +29,6 @@ public class PrinterDAOImpl extends ProductDaoTemplate<Printer, SearchPrinters> 
     public PrinterDAOImpl() {
 		super(Printer.class);
 	}
-
-	private Logger logger = Logger.getLogger(PrinterDAOImpl.class);
  
     @SuppressWarnings("unchecked")
 	@Override
@@ -52,39 +49,6 @@ public class PrinterDAOImpl extends ProductDaoTemplate<Printer, SearchPrinters> 
 		
 		return new HashSet<Printer>(cr.list());
 	}
-    
-    @Override
-    public long addProduct(Printer p) {
-        Session session = getSessionFactory().getCurrentSession();
-        long id = (Long) session.save(p);
-        logger.info("Printer saved successfully, Printer Details="+p);
-        return id;
-    }
- 
-    @Override
-    public void updateProduct(Printer p) {
-        Session session = getSessionFactory().getCurrentSession();
-        session.update(p);
-        logger.info("Printer updated successfully, Printer Details=" + p);
-    }
- 
-    @Override
-    public Printer getProductById(long id) {
-        Session session = getSessionFactory().getCurrentSession();      
-        Printer p = (Printer) session.load(Printer.class, new Long(id));
-        logger.info("Printer loaded successfully, Printer details="+p);
-        return p;
-    }
- 
-    @Override
-    public void removeProduct(long id) {
-        Session session = getSessionFactory().getCurrentSession();
-        Printer p = (Printer) session.load(Printer.class, new Long(id));
-        if(null != p){
-            session.delete(p);
-        }
-        logger.info("Printer deleted successfully, printer details="+p);
-    }
 
 	@SuppressWarnings("unchecked")
 	@Override

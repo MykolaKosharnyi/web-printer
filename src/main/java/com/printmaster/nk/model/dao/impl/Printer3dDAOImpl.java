@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Junction;
@@ -17,7 +16,6 @@ import com.printmaster.nk.model.entity.search.SearchPrinters3D;
 
 @Repository
 public class Printer3dDAOImpl extends ProductDaoTemplate<Printer3D, SearchPrinters3D> {
-	private Logger logger = Logger.getLogger(Printer3dDAOImpl.class);
 	
 	 public Printer3dDAOImpl() {
 		super(Printer3D.class);
@@ -34,39 +32,6 @@ public class Printer3dDAOImpl extends ProductDaoTemplate<Printer3D, SearchPrinte
 		
 		return new HashSet<Printer3D>(cr.list());
 	}
-    
-    @Override
-    public long addProduct(Printer3D p) {
-        Session session = getSessionFactory().getCurrentSession();
-       long id = (Long) session.save(p);
-        logger.info("Printer3D saved successfully, Printer Details="+p);
-        return id;
-    }
- 
-    @Override
-    public void updateProduct(Printer3D p) {
-        Session session = getSessionFactory().getCurrentSession();
-        session.update(p);
-        logger.info("Printer3D updated successfully, Printer Details="+p);
-    }
- 
-    @Override
-    public Printer3D getProductById(long id) {
-        Session session = getSessionFactory().getCurrentSession();      
-        Printer3D p = (Printer3D) session.load(Printer3D.class, new Long(id));
-        logger.info("Printer3D loaded successfully, Printer3D details="+p);
-        return p;
-    }
- 
-    @Override
-    public void removeProduct(long id) {
-        Session session = getSessionFactory().getCurrentSession();
-        Printer3D p = (Printer3D) session.load(Printer3D.class, new Long(id));
-        if(null != p){
-            session.delete(p);
-        }
-        logger.info("Printer3D deleted successfully, printer_3d details="+p);
-    }
 
 	@SuppressWarnings("unchecked")
 	@Override
