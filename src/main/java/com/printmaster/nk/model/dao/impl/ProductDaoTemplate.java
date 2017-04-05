@@ -31,21 +31,21 @@ public abstract class ProductDaoTemplate<T, SC> implements ProductDAO<T, SC>{
 
     @Override
     public long addProduct(T t) {
-        Session session = getSessionFactory().getCurrentSession();
+        Session session = this.sessionFactory.getCurrentSession();
         long id = (Long) session.save(t);
         return id;
     }
  
     @Override
     public void updateProduct(T t) {
-        Session session = getSessionFactory().getCurrentSession();
+        Session session = this.sessionFactory.getCurrentSession();
         session.update(t);
     }
  
     @SuppressWarnings("unchecked")
 	@Override
     public T getProductById(long id) {
-        Session session = getSessionFactory().getCurrentSession();      
+        Session session = this.sessionFactory.getCurrentSession();      
         T t = (T) session.load(productType, new Long(id));
         return t;
     }
@@ -53,7 +53,7 @@ public abstract class ProductDaoTemplate<T, SC> implements ProductDAO<T, SC>{
     @SuppressWarnings("unchecked")
 	@Override
     public void removeProduct(long id) {
-        Session session = getSessionFactory().getCurrentSession();
+        Session session = this.sessionFactory.getCurrentSession();
         T t = (T) session.load(productType, new Long(id));
         if(null != t){
             session.delete(t);
