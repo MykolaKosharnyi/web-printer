@@ -1,17 +1,19 @@
-package com.printmaster.nk.controller;
+package com.printmaster.nk.controller.product;
 
 import static com.printmaster.nk.controller.ConstUsedInContr.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.validation.Valid;
 
-import org.json.simple.JSONObject;
 import org.apache.log4j.Logger;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -25,53 +27,40 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.printmaster.nk.beans.ComponentsForControllers;
 import com.printmaster.nk.beans.LinksForProducts;
 import com.printmaster.nk.beans.PicturesContainer;
-import com.printmaster.nk.model.entity.Cutter;
-import com.printmaster.nk.model.entity.DigitalPrinter;
-import com.printmaster.nk.model.entity.HeadProduct;
-import com.printmaster.nk.model.entity.Laminator;
+import com.printmaster.nk.model.entity.Comment;
 import com.printmaster.nk.model.entity.Laser;
-import com.printmaster.nk.model.entity.Printer;
-import com.printmaster.nk.model.entity.Printer3D;
-import com.printmaster.nk.model.entity.Scanner;
-import com.printmaster.nk.model.entity.search.SearchGeneric;
-import com.printmaster.nk.model.service.ProductService;
+import com.printmaster.nk.model.entity.search.SearchLasers;
+import com.printmaster.nk.model.service.CommentService;
+import com.printmaster.nk.model.service.LaserService;
 import com.printmaster.nk.model.service.UseWithProductService;
 
-public abstract class ProductController <T extends HeadProduct, S extends SearchGeneric>{
-	private T product;	
-	private S searchCriteries;
-	private Logger logger =  Logger.getLogger(ProductController.class);
+@Controller
+public class LaserController {
 	
-	private Map<String, String> links;
-	private Map<String, String> parametersOnAdminProductsPage;
+	private Map<String, String> links = new HashMap<String, String>(){
+		private static final long serialVersionUID = 6020303266276652199L;
+	{
+		put("CO2_gas_lasers", "Газовые лазеры СО2");
+	    put("solid_state_lasers", "Твердотельные лазеры");
+	    put("for_the_treatment_of_metal", "Для обработки метала");
+	    put("diode_pumped", "С диодной накачкой");
+	    put("fiber_lasers", "Оптоволоконные лазеры");
+	    put("plasma_lasers", "Плазменные лазеры");	    
+	}};
 	
-	private final String TYPE = ""/*getTypeUrl()*/;
-	private final String CONCRETE_FOLDER = getTypeUrl() + "s";
+	private Map<String, String> parametersOnAdminProductsPage = new HashMap<String, String>(){
+		private static final long serialVersionUID = 6020303266276652199L;
+	{
+		put(ATTRIBUTE_TITLE_OF_TABLE, "Список загруженных лазеров");
+	    put(ATTRIBUTE_NAME_PRODUCT, "Имя лазера");
+	    put(ATTRIBUTE_TITLE, "Лазера");
+	    put(ATTRIBUTE_ADD_PRODUCT, "Добавить лазер");
+	}};
 	
-	private String getTypeUrl(){	
-		if (product instanceof Printer) {
-			return PRINTER;
-			
-		} else if (product instanceof Printer3D) {
-			return PRINTER_3D;
-
-		} else if (product instanceof DigitalPrinter) {
-			return DIGITAL_PRINTER;
-
-		} else if (product instanceof Cutter) {
-			return CUTTER;
-
-		} else if (product instanceof Laminator) {
-			return LAMINATOR;
-			
-		} else if (product instanceof Laser) {
-			return LASER;
-			
-		} else if (product instanceof Scanner) {
-			return SCANNER;
-		} 
-		return PRINTER;
-	}
+	private Logger logger = Logger.getLogger(LaserController.class);
+	
+	private static final String TYPE = LASER;
+	private static final String CONCRETE_FOLDER = LASER + "s";
 	
 	@Autowired
 	private LinksForProducts linksForProduct;
@@ -81,24 +70,30 @@ public abstract class ProductController <T extends HeadProduct, S extends Search
 
     @Autowired
     PicturesContainer files;
- 
-    protected ProductService<T,S> productService;
     
-    public abstract void setProductService(ProductService<T,S> productService);
-	
-	private UseWithProductService useWithProductService;
+    @Autowired
+	private CommentService commentService;
+ 
+    private LaserService productService;
+    
+    @Autowired(required=true)
+    @Qualifier(value="laserService")
+    public void setPrinterService(LaserService ps){
+        this.productService = ps;
+    }
+    
+    private UseWithProductService useWithProductService;
 	
 	@Autowired(required=true)
     @Qualifier(value="useWithProductService")
     public void setUseWithProductService(UseWithProductService ps){
         this.useWithProductService = ps;
     }
-    	
+
 	@RequestMapping(value = "/"+ TYPE +"s", method = RequestMethod.GET)	
-    public String allProducts(Model model) throws InstantiationException, IllegalAccessException {
+    public String allProducts(Model model) {
         model.addAttribute(ATTRIBUTE_LIST_PRODUCTS, componets.makeLightWeightCollectionOfProduct(this.productService.listShowOnSite()));
-        @SuppressWarnings("unchecked")
-		S search = (S) searchCriteries.getClass().newInstance();
+        SearchLasers search = new SearchLasers();
         search.setPrise0(0);
         search.setPrise1(100000);
    
@@ -111,9 +106,8 @@ public abstract class ProductController <T extends HeadProduct, S extends Search
     }
 	
 	@RequestMapping(value = "/"+ TYPE +"s/{subType}", method = RequestMethod.GET)	
-    public String typeProducts(@PathVariable("subType") String subType, Model model) throws InstantiationException, IllegalAccessException {
-		@SuppressWarnings("unchecked")
-		S search = (S) searchCriteries.getClass().newInstance();
+    public String typeProducts(@PathVariable("subType") String subType, Model model) {
+		SearchLasers search = new SearchLasers();
         String currentType = null;
    
         if(links.containsKey(subType)){
@@ -136,7 +130,7 @@ public abstract class ProductController <T extends HeadProduct, S extends Search
     }
 
     @RequestMapping(value="/"+ TYPE +"s/"+ PATH_SEARCH, method=RequestMethod.POST, produces=JSON_PRODUCES)
-    public @ResponseBody ArrayList<JSONObject> showSearchProducts(@ModelAttribute(value="search") S search, BindingResult result ){
+    public @ResponseBody ArrayList<JSONObject> showSearchProducts(@ModelAttribute(value="search") SearchLasers search, BindingResult result ){
     	logger.info(String.format("Go to the /%s/%s page.", TYPE, PATH_SEARCH));
     	return componets.makeLightWeightCollectionOfProduct(productService.listSearchProducts(search));
     }
@@ -145,12 +139,13 @@ public abstract class ProductController <T extends HeadProduct, S extends Search
     public String showProduct(@PathVariable("id") long id, Model model){
     	logger.info(String.format("On /%s/%d page.", TYPE, id));
         
-        T product = productService.getProductById(id);
+        Laser product = productService.getProductById(id);
         model.addAttribute(ATTRIBUTE_PRODUCT, product);
         model.addAttribute(ATTRIBUTE_TYPE, TYPE);       
         model.addAttribute(ATTRIBUTE_UWP, product.getIdUseWithProduct()!=null ?
         		componets.showSimplestArrayOfUseWithProduct(useWithProductService.getProductsByIds(product.getIdUseWithProduct())) : null);
-        
+        model.addAttribute("comments", commentService.getAllForProduct(TYPE, id));
+        model.addAttribute("addComment", new Comment());
         return TYPE;
     }
     
@@ -171,10 +166,10 @@ public abstract class ProductController <T extends HeadProduct, S extends Search
 	@RequestMapping(value = "/" + PATH_ADMIN + "/"+ TYPE +"s/{type}", method = RequestMethod.GET)	
     public String listConcreteTypeProducts(@PathVariable("type") String type, Model model) {
 		
-		List<T> listResult = new ArrayList<T>();
+		List<Laser> listResult = new ArrayList<Laser>();
         
         if(links.containsKey(type)){
-        	for(T product : productService.listProducts("id")){
+        	for(Laser product : productService.listProducts("id")){
         		if(product.getTypeProduct().equals(links.get(type))){
         			listResult.add(product);
         		}
@@ -199,13 +194,13 @@ public abstract class ProductController <T extends HeadProduct, S extends Search
     }
 	
 	@RequestMapping(value="/"+PATH_ADMIN+"/"+TYPE+"/{type}/"+PATH_SORTING+"/{value}",method=RequestMethod.POST,consumes=JSON_CONSUMES,headers=JSON_HEADERS)
-    public @ResponseBody List<T> sortingProductsInAdmin(@PathVariable("type") String type, @PathVariable("value") String value) {
+    public @ResponseBody List<Laser> sortingProductsInAdmin(@PathVariable("type") String type, @PathVariable("value") String value) {
 		
-		List<T> list = new ArrayList<T>();
+		List<Laser> list = new ArrayList<Laser>();
 
 		if (links.containsKey(type)) {
 
-			for (T product : productService.listProducts(value)) {
+			for (Laser product : productService.listProducts(value)) {
 				if (product.getTypeProduct().equals(links.get(type))) 
 					list.add(product);
 			}
@@ -218,10 +213,10 @@ public abstract class ProductController <T extends HeadProduct, S extends Search
     }
 	
 	@RequestMapping(value = "/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_NEW, method = RequestMethod.GET)
-	public String addNewProduct(Model model) throws InstantiationException, IllegalAccessException {
+	public String addNewProduct(Model model) {
 		files.clear();
 		logger.info(String.format("/%s/%s/%s page.", PATH_ADMIN, PATH_NEW, TYPE));
-		model.addAttribute(ATTRIBUTE_PRODUCT, product.getClass().newInstance());
+		model.addAttribute(ATTRIBUTE_PRODUCT, new Laser());
 		
 		componets.setJSONtoModelAttribute(model, TYPE);
 		
@@ -237,7 +232,7 @@ public abstract class ProductController <T extends HeadProduct, S extends Search
 		logger.info(String.format("/%s/%s/%s/%d page.", PATH_ADMIN, TYPE, PATH_COPY, id));
 		
 		logger.info(String.format("Copy all characteristic of %s.", TYPE));
-		T product = productService.getProductById(id);
+		Laser product = productService.getProductById(id);
 		
 		 /* copy pictures to buffer */
 		 componets.copyPicturesToBuffer( product.getPathPictures(), DIRECTORY, CONCRETE_FOLDER, id, files );
@@ -254,7 +249,7 @@ public abstract class ProductController <T extends HeadProduct, S extends Search
 	}
      
 	@RequestMapping(value = "/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_ADD, method = RequestMethod.POST) 
-	public String handleFormUpload(@ModelAttribute(MODEL_ATTRIBUTE_PRODUCT) @Valid T product,
+	public String handleFormUpload(@ModelAttribute(MODEL_ATTRIBUTE_PRODUCT) @Valid Laser product,
 			BindingResult result, Model model){
 
 		if (result.hasErrors()) return adminFormHasError(product, model);
@@ -280,7 +275,7 @@ public abstract class ProductController <T extends HeadProduct, S extends Search
 	}
 	
 	@RequestMapping(value = "/" + PATH_ADMIN +"/"+ TYPE +"/"+ PATH_SAVE_ADD, method = RequestMethod.POST) 
-	public String handleFormUploadSave(@ModelAttribute(MODEL_ATTRIBUTE_PRODUCT) @Valid T product,
+	public String handleFormUploadSave(@ModelAttribute(MODEL_ATTRIBUTE_PRODUCT) @Valid Laser product,
 			BindingResult result, Model model){
 
 		if (result.hasErrors()) return adminFormHasError(product, model);
@@ -308,7 +303,7 @@ public abstract class ProductController <T extends HeadProduct, S extends Search
     public String editProduct(@PathVariable("id") long id, Model model){
     	
     	logger.info(String.format("Begin editing %s with id=%d", TYPE, id));
-    	T undateProduct = productService.getProductById(id);
+    	Laser undateProduct = productService.getProductById(id);
     	
         model.addAttribute(ATTRIBUTE_PRODUCT, undateProduct);
         model.addAttribute(ATTRIBUTE_UWP, componets.showSimplestArrayOfUseWithProduct(
@@ -320,7 +315,7 @@ public abstract class ProductController <T extends HeadProduct, S extends Search
     }
 	
 	@RequestMapping(value = "/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_SAVE_UPDATE, method = RequestMethod.POST) 
-	public String updateSaveProduct(@ModelAttribute(MODEL_ATTRIBUTE_PRODUCT) @Valid T product,
+	public String updateSaveProduct(@ModelAttribute(MODEL_ATTRIBUTE_PRODUCT) @Valid Laser product,
 			BindingResult result, Model model){
 		
 		if (result.hasErrors()) return adminFormHasError(product, model);
@@ -343,7 +338,7 @@ public abstract class ProductController <T extends HeadProduct, S extends Search
 	}
 	
 	@RequestMapping(value = "/" + PATH_ADMIN +"/"+ TYPE +"/"+ PATH_UPDATE, method = RequestMethod.POST) 
-	public String updateProduct(@ModelAttribute(MODEL_ATTRIBUTE_PRODUCT) @Valid T product,
+	public String updateProduct(@ModelAttribute(MODEL_ATTRIBUTE_PRODUCT) @Valid Laser product,
 			BindingResult result, Model model){
 		
 		if (result.hasErrors()) return adminFormHasError(product, model);
@@ -366,7 +361,7 @@ public abstract class ProductController <T extends HeadProduct, S extends Search
 		return "redirect:/" + PATH_ADMIN +"/"+ TYPE + "s";
 	}
 	
-	private String adminFormHasError(T product, Model model){
+	private String adminFormHasError(Laser product, Model model){
 		model.addAttribute(ATTRIBUTE_PRODUCT, product);
 		model.addAttribute(ATTRIBUTE_UWP, componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
 		model.addAttribute(ATTRIBUTE_TYPE, TYPE);
@@ -395,7 +390,7 @@ public abstract class ProductController <T extends HeadProduct, S extends Search
     public @ResponseBody String uploadPicturesUpdate(MultipartHttpServletRequest request, @PathVariable("id") long id) {
     	
     	String nameOfAddedPicture = componets.uploadPictureToExistedProduct(request, DIRECTORY, CONCRETE_FOLDER, id);   	
- 		T product = productService.getProductById(id);
+    	Laser product = productService.getProductById(id);
  		product.getPathPictures().add(nameOfAddedPicture);
  		productService.updateProduct(product);
          
@@ -407,7 +402,7 @@ public abstract class ProductController <T extends HeadProduct, S extends Search
     public @ResponseBody void changeOrderPicturesUpdate(@RequestBody List<String> selectedIds, @PathVariable("id") long id) {
     	logger.info(String.format("change order of pictures in changed %s product", TYPE));
     	
-    	T product = productService.getProductById(id);
+    	Laser product = productService.getProductById(id);
     	product.getPathPictures().clear();
     	product.getPathPictures().addAll(selectedIds);
     	productService.updateProduct(product);
@@ -418,7 +413,7 @@ public abstract class ProductController <T extends HeadProduct, S extends Search
     public @ResponseBody void removePicture(@PathVariable("name_picture") String namePicture, @PathVariable("id") long id) {
     	
     	String name = namePicture.replace(":", ".");
-    	T product = productService.getProductById(id);
+    	Laser product = productService.getProductById(id);
     	product.getPathPictures().remove(name);
     	
     	componets.removePicture(name, DIRECTORY, CONCRETE_FOLDER, id);
@@ -452,7 +447,7 @@ public abstract class ProductController <T extends HeadProduct, S extends Search
     
     @RequestMapping(value="/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_SHOW_ON_SITE +"/{id}",method = RequestMethod.POST,consumes=JSON_CONSUMES,headers=JSON_HEADERS)
     public @ResponseBody void showOnSite(@PathVariable("id") long id, @RequestBody boolean value) {
-    	T product = productService.getProductById(id);
+    	Laser product = productService.getProductById(id);
     	product.setShowOnSite(value);
     	productService.updateProduct(product);
     	
@@ -462,21 +457,21 @@ public abstract class ProductController <T extends HeadProduct, S extends Search
     
     @RequestMapping(value="/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_SET_TOP +"/{id}",method = RequestMethod.POST,consumes=JSON_CONSUMES,headers = JSON_HEADERS)
     public @ResponseBody void setTop(@PathVariable("id") long id, @RequestBody boolean value) {
-    	T product = productService.getProductById(id);
+    	Laser product = productService.getProductById(id);
     	product.setTop(value);
     	productService.updateProduct(product);
     }
     
     @RequestMapping(value="/"+PATH_ADMIN+"/"+TYPE+"/"+ PATH_SHOW_ON_HOME_PAGE+"/{id}",method=RequestMethod.POST,consumes=JSON_CONSUMES,headers=JSON_HEADERS)
     public @ResponseBody void showOnHomePage(@PathVariable("id") long id, @RequestBody boolean value) {
-    	T product = productService.getProductById(id);
+    	Laser product = productService.getProductById(id);
     	product.setShowOnHomePage(value);
     	productService.updateProduct(product);
     }
     
     @RequestMapping(value="/"+PATH_ADMIN+"/"+TYPE+"/"+PATH_SHOW_ON_LEFT_SIDE+"/{id}",method=RequestMethod.POST,consumes=JSON_CONSUMES,headers=JSON_HEADERS)
     public @ResponseBody void showOnLeftSide(@PathVariable("id") long id, @RequestBody boolean value) {
-    	T product = productService.getProductById(id);
+    	Laser product = productService.getProductById(id);
     	product.setShowOnLeftSide(value);
     	productService.updateProduct(product);	
     	componets.updateInLeftField(product, product.isShowOnSite() && product.isShowOnLeftSide(), TYPE);

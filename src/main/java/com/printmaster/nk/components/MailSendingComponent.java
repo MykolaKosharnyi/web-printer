@@ -81,13 +81,13 @@ public class MailSendingComponent {
 	private String createMessageBody(MailSendingMessage mailMessage){
 		StringBuilder messageBody = new StringBuilder();
 		if(mailMessage.getHeaderOption()!=0){
-			messageBody.append(mailSendingOptionService.getById(mailMessage.getHeaderOption()));
+			messageBody.append(mailSendingOptionService.getById(mailMessage.getHeaderOption()).getText());
 		}
 		
 		messageBody.append(mailMessage.getMessage());
 		
 		if(mailMessage.getFooterOption()!=0){
-			messageBody.append(mailSendingOptionService.getById(mailMessage.getFooterOption()));
+			messageBody.append(mailSendingOptionService.getById(mailMessage.getFooterOption()).getText());
 		}
 		return messageBody.toString();
 	}

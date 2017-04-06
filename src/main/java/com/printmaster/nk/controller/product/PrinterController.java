@@ -1,4 +1,4 @@
-package com.printmaster.nk.controller;
+package com.printmaster.nk.controller.product;
 
 import java.util.ArrayList;
 import java.util.HashMap;

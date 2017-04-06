@@ -1,4 +1,4 @@
-package com.printmaster.nk.controller;
+package com.printmaster.nk.controller.product;
 
 import static com.printmaster.nk.controller.ConstUsedInContr.*;
 

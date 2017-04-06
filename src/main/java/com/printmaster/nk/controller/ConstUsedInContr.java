@@ -5,7 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-interface ConstUsedInContr {
+public interface ConstUsedInContr {
 	String DIRECTORY = "/var/www/localhost/images";
 	
 	String PATH_ADMIN = "admin";

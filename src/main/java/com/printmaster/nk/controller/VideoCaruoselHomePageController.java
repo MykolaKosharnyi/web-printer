@@ -1,5 +1,7 @@
 package com.printmaster.nk.controller;
 
+import static com.printmaster.nk.controller.ConstUsedInContr.*;
+
 import java.util.Iterator;
 import java.util.List;
 
@@ -16,8 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.printmaster.nk.beans.ComponentsForControllers;
-
-import static com.printmaster.nk.controller.ConstUsedInContr.*;
 
 @Controller
 public class VideoCaruoselHomePageController {

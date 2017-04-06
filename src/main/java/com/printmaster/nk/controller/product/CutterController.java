@@ -1,4 +1,4 @@
-package com.printmaster.nk.controller;
+package com.printmaster.nk.controller.product;
 
 import static com.printmaster.nk.controller.ConstUsedInContr.*;
 
@@ -28,35 +28,36 @@ import com.printmaster.nk.beans.ComponentsForControllers;
 import com.printmaster.nk.beans.LinksForProducts;
 import com.printmaster.nk.beans.PicturesContainer;
 import com.printmaster.nk.model.entity.Comment;
-import com.printmaster.nk.model.entity.Scanner;
-import com.printmaster.nk.model.entity.search.SearchScanners;
+import com.printmaster.nk.model.entity.Cutter;
+import com.printmaster.nk.model.entity.search.SearchCutters;
 import com.printmaster.nk.model.service.CommentService;
-import com.printmaster.nk.model.service.ScannerService;
+import com.printmaster.nk.model.service.CutterService;
 import com.printmaster.nk.model.service.UseWithProductService;
 
 @Controller
-public class ScannerController {
+public class CutterController {
 	
 	private Map<String, String> links = new HashMap<String, String>(){
 		private static final long serialVersionUID = 6020303266276652199L;
 	{
-		put("large_format_scanners", "Широкоформатные сканеры");
-	    put("3d_scanners", "3D Сканеры");   
+		put("for_wood", "Для обработки дерева");
+	    put("for_the_treatment_of_metal", "Для обработки металла");
+	    put("stone_processing", "Для обработки камня");
 	}};
 	
 	private Map<String, String> parametersOnAdminProductsPage = new HashMap<String, String>(){
 		private static final long serialVersionUID = 6020303266276652199L;
 	{
-		put(ATTRIBUTE_TITLE_OF_TABLE, "Список загруженных сканеров");
-	    put(ATTRIBUTE_NAME_PRODUCT, "Имя сканера");
-	    put(ATTRIBUTE_TITLE, "Сканеры");
-	    put(ATTRIBUTE_ADD_PRODUCT, "Добавить сканер");
+		put(ATTRIBUTE_TITLE_OF_TABLE, "Список загруженных граверов/фрезеров");
+	    put(ATTRIBUTE_NAME_PRODUCT, "Имя гравера/фрезера");
+	    put(ATTRIBUTE_TITLE, "Гравера/фрезера");
+	    put(ATTRIBUTE_ADD_PRODUCT, "Добавить гравер/фрезер");
 	}};
+    
+	private Logger logger = Logger.getLogger(CutterController.class);
 	
-	private Logger logger = Logger.getLogger(ScannerController.class);
-	
-	private static final String TYPE = SCANNER;
-	private static final String CONCRETE_FOLDER = SCANNER + "s";
+	private static final String TYPE = CUTTER;
+	private static final String CONCRETE_FOLDER = CUTTER + "s";
 	
 	@Autowired
 	private LinksForProducts linksForProduct;
@@ -70,26 +71,26 @@ public class ScannerController {
     @Autowired
 	private CommentService commentService;
  
-    private ScannerService productService;
+    private CutterService productService;
     
     @Autowired(required=true)
-    @Qualifier(value="scannerService")
-    public void setScanerService(ScannerService ps){
+    @Qualifier(value="cutterService")
+    public void setProductService(CutterService ps){
         this.productService = ps;
     }
-    
-    private UseWithProductService useWithProductService;
+	
+	private UseWithProductService useWithProductService;
 	
 	@Autowired(required=true)
     @Qualifier(value="useWithProductService")
     public void setUseWithProductService(UseWithProductService ps){
         this.useWithProductService = ps;
     }
-
+    
 	@RequestMapping(value = "/"+ TYPE +"s", method = RequestMethod.GET)	
     public String allProducts(Model model) {
         model.addAttribute(ATTRIBUTE_LIST_PRODUCTS, componets.makeLightWeightCollectionOfProduct(this.productService.listShowOnSite()));
-        SearchScanners search = new SearchScanners();
+        SearchCutters search = new SearchCutters();
         search.setPrise0(0);
         search.setPrise1(100000);
    
@@ -103,7 +104,7 @@ public class ScannerController {
 	
 	@RequestMapping(value = "/"+ TYPE +"s/{subType}", method = RequestMethod.GET)	
     public String typeProducts(@PathVariable("subType") String subType, Model model) {
-		SearchScanners search = new SearchScanners();
+        SearchCutters search = new SearchCutters();
         String currentType = null;
    
         if(links.containsKey(subType)){
@@ -126,7 +127,7 @@ public class ScannerController {
     }
 
     @RequestMapping(value="/"+ TYPE +"s/"+ PATH_SEARCH, method=RequestMethod.POST, produces=JSON_PRODUCES)
-    public @ResponseBody ArrayList<JSONObject> showSearchProducts(@ModelAttribute(value="search") SearchScanners search, BindingResult result ){
+    public @ResponseBody ArrayList<JSONObject> showSearchProducts(@ModelAttribute(value="search") SearchCutters search, BindingResult result ){
     	logger.info(String.format("Go to the /%s/%s page.", TYPE, PATH_SEARCH));
     	return componets.makeLightWeightCollectionOfProduct(productService.listSearchProducts(search));
     }
@@ -135,11 +136,12 @@ public class ScannerController {
     public String showProduct(@PathVariable("id") long id, Model model){
     	logger.info(String.format("On /%s/%d page.", TYPE, id));
         
-    	Scanner product = productService.getProductById(id);
+        Cutter product = productService.getProductById(id);
         model.addAttribute(ATTRIBUTE_PRODUCT, product);
         model.addAttribute(ATTRIBUTE_TYPE, TYPE);       
         model.addAttribute(ATTRIBUTE_UWP, product.getIdUseWithProduct()!=null ?
         		componets.showSimplestArrayOfUseWithProduct(useWithProductService.getProductsByIds(product.getIdUseWithProduct())) : null);
+        
         model.addAttribute("comments", commentService.getAllForProduct(TYPE, id));
         model.addAttribute("addComment", new Comment());
         return TYPE;
@@ -162,10 +164,10 @@ public class ScannerController {
 	@RequestMapping(value = "/" + PATH_ADMIN + "/"+ TYPE +"s/{type}", method = RequestMethod.GET)	
     public String listConcreteTypeProducts(@PathVariable("type") String type, Model model) {
 		
-		List<Scanner> listResult = new ArrayList<Scanner>();
+		List<Cutter> listResult = new ArrayList<Cutter>();
         
         if(links.containsKey(type)){
-        	for(Scanner product : productService.listProducts("id")){
+        	for(Cutter product : productService.listProducts("id")){
         		if(product.getTypeProduct().equals(links.get(type))){
         			listResult.add(product);
         		}
@@ -190,17 +192,15 @@ public class ScannerController {
     }
 	
 	@RequestMapping(value="/"+PATH_ADMIN+"/"+TYPE+"/{type}/"+PATH_SORTING+"/{value}",method=RequestMethod.POST,consumes=JSON_CONSUMES,headers=JSON_HEADERS)
-    public @ResponseBody List<Scanner> sortingProductsInAdmin(@PathVariable("type") String type, @PathVariable("value") String value) {
+    public @ResponseBody List<Cutter> sortingProductsInAdmin(@PathVariable("type") String type, @PathVariable("value") String value) {
 		
-		List<Scanner> list = new ArrayList<Scanner>();
+		List<Cutter> list = new ArrayList<Cutter>();
 
 		if (links.containsKey(type)) {
-
-			for (Scanner product : productService.listProducts(value)) {
+			for (Cutter product : productService.listProducts(value)) {
 				if (product.getTypeProduct().equals(links.get(type))) 
 					list.add(product);
 			}
-
 		} else {
 			list.addAll(productService.listProducts(value));
 		}
@@ -212,7 +212,7 @@ public class ScannerController {
 	public String addNewProduct(Model model) {
 		files.clear();
 		logger.info(String.format("/%s/%s/%s page.", PATH_ADMIN, PATH_NEW, TYPE));
-		model.addAttribute(ATTRIBUTE_PRODUCT, new Scanner());
+		model.addAttribute(ATTRIBUTE_PRODUCT, new Cutter());
 		
 		componets.setJSONtoModelAttribute(model, TYPE);
 		
@@ -228,7 +228,7 @@ public class ScannerController {
 		logger.info(String.format("/%s/%s/%s/%d page.", PATH_ADMIN, TYPE, PATH_COPY, id));
 		
 		logger.info(String.format("Copy all characteristic of %s.", TYPE));
-		Scanner product = productService.getProductById(id);
+		Cutter product = productService.getProductById(id);
 		
 		 /* copy pictures to buffer */
 		 componets.copyPicturesToBuffer( product.getPathPictures(), DIRECTORY, CONCRETE_FOLDER, id, files );
@@ -245,7 +245,7 @@ public class ScannerController {
 	}
      
 	@RequestMapping(value = "/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_ADD, method = RequestMethod.POST) 
-	public String handleFormUpload(@ModelAttribute(MODEL_ATTRIBUTE_PRODUCT) @Valid Scanner product,
+	public String handleFormUpload(@ModelAttribute(MODEL_ATTRIBUTE_PRODUCT) @Valid Cutter product,
 			BindingResult result, Model model){
 
 		if (result.hasErrors()) return adminFormHasError(product, model);
@@ -271,7 +271,7 @@ public class ScannerController {
 	}
 	
 	@RequestMapping(value = "/" + PATH_ADMIN +"/"+ TYPE +"/"+ PATH_SAVE_ADD, method = RequestMethod.POST) 
-	public String handleFormUploadSave(@ModelAttribute(MODEL_ATTRIBUTE_PRODUCT) @Valid Scanner product,
+	public String handleFormUploadSave(@ModelAttribute(MODEL_ATTRIBUTE_PRODUCT) @Valid Cutter product,
 			BindingResult result, Model model){
 
 		if (result.hasErrors()) return adminFormHasError(product, model);
@@ -299,7 +299,7 @@ public class ScannerController {
     public String editProduct(@PathVariable("id") long id, Model model){
     	
     	logger.info(String.format("Begin editing %s with id=%d", TYPE, id));
-    	Scanner undateProduct = productService.getProductById(id);
+    	Cutter undateProduct = productService.getProductById(id);
     	
         model.addAttribute(ATTRIBUTE_PRODUCT, undateProduct);
         model.addAttribute(ATTRIBUTE_UWP, componets.showSimplestArrayOfUseWithProduct(
@@ -311,7 +311,7 @@ public class ScannerController {
     }
 	
 	@RequestMapping(value = "/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_SAVE_UPDATE, method = RequestMethod.POST) 
-	public String updateSaveProduct(@ModelAttribute(MODEL_ATTRIBUTE_PRODUCT) @Valid Scanner product,
+	public String updateSaveProduct(@ModelAttribute(MODEL_ATTRIBUTE_PRODUCT) @Valid Cutter product,
 			BindingResult result, Model model){
 		
 		if (result.hasErrors()) return adminFormHasError(product, model);
@@ -334,7 +334,7 @@ public class ScannerController {
 	}
 	
 	@RequestMapping(value = "/" + PATH_ADMIN +"/"+ TYPE +"/"+ PATH_UPDATE, method = RequestMethod.POST) 
-	public String updateProduct(@ModelAttribute(MODEL_ATTRIBUTE_PRODUCT) @Valid Scanner product,
+	public String updateProduct(@ModelAttribute(MODEL_ATTRIBUTE_PRODUCT) @Valid Cutter product,
 			BindingResult result, Model model){
 		
 		if (result.hasErrors()) return adminFormHasError(product, model);
@@ -357,7 +357,7 @@ public class ScannerController {
 		return "redirect:/" + PATH_ADMIN +"/"+ TYPE + "s";
 	}
 	
-	private String adminFormHasError(Scanner product, Model model){
+	private String adminFormHasError(Cutter product, Model model){
 		model.addAttribute(ATTRIBUTE_PRODUCT, product);
 		model.addAttribute(ATTRIBUTE_UWP, componets.showSimplestArrayOfUseWithProduct(this.useWithProductService.listShowOnSite()));
 		model.addAttribute(ATTRIBUTE_TYPE, TYPE);
@@ -386,7 +386,7 @@ public class ScannerController {
     public @ResponseBody String uploadPicturesUpdate(MultipartHttpServletRequest request, @PathVariable("id") long id) {
     	
     	String nameOfAddedPicture = componets.uploadPictureToExistedProduct(request, DIRECTORY, CONCRETE_FOLDER, id);   	
-    	Scanner product = productService.getProductById(id);
+ 		Cutter product = productService.getProductById(id);
  		product.getPathPictures().add(nameOfAddedPicture);
  		productService.updateProduct(product);
          
@@ -398,7 +398,7 @@ public class ScannerController {
     public @ResponseBody void changeOrderPicturesUpdate(@RequestBody List<String> selectedIds, @PathVariable("id") long id) {
     	logger.info(String.format("change order of pictures in changed %s product", TYPE));
     	
-    	Scanner product = productService.getProductById(id);
+    	Cutter product = productService.getProductById(id);
     	product.getPathPictures().clear();
     	product.getPathPictures().addAll(selectedIds);
     	productService.updateProduct(product);
@@ -409,7 +409,7 @@ public class ScannerController {
     public @ResponseBody void removePicture(@PathVariable("name_picture") String namePicture, @PathVariable("id") long id) {
     	
     	String name = namePicture.replace(":", ".");
-    	Scanner product = productService.getProductById(id);
+    	Cutter product = productService.getProductById(id);
     	product.getPathPictures().remove(name);
     	
     	componets.removePicture(name, DIRECTORY, CONCRETE_FOLDER, id);
@@ -443,7 +443,7 @@ public class ScannerController {
     
     @RequestMapping(value="/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_SHOW_ON_SITE +"/{id}",method = RequestMethod.POST,consumes=JSON_CONSUMES,headers=JSON_HEADERS)
     public @ResponseBody void showOnSite(@PathVariable("id") long id, @RequestBody boolean value) {
-    	Scanner product = productService.getProductById(id);
+    	Cutter product = productService.getProductById(id);
     	product.setShowOnSite(value);
     	productService.updateProduct(product);
     	
@@ -453,23 +453,24 @@ public class ScannerController {
     
     @RequestMapping(value="/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_SET_TOP +"/{id}",method = RequestMethod.POST,consumes=JSON_CONSUMES,headers = JSON_HEADERS)
     public @ResponseBody void setTop(@PathVariable("id") long id, @RequestBody boolean value) {
-    	Scanner product = productService.getProductById(id);
+    	Cutter product = productService.getProductById(id);
     	product.setTop(value);
     	productService.updateProduct(product);
     }
     
     @RequestMapping(value="/"+PATH_ADMIN+"/"+TYPE+"/"+ PATH_SHOW_ON_HOME_PAGE+"/{id}",method=RequestMethod.POST,consumes=JSON_CONSUMES,headers=JSON_HEADERS)
     public @ResponseBody void showOnHomePage(@PathVariable("id") long id, @RequestBody boolean value) {
-    	Scanner product = productService.getProductById(id);
+    	Cutter product = productService.getProductById(id);
     	product.setShowOnHomePage(value);
     	productService.updateProduct(product);
     }
     
     @RequestMapping(value="/"+PATH_ADMIN+"/"+TYPE+"/"+PATH_SHOW_ON_LEFT_SIDE+"/{id}",method=RequestMethod.POST,consumes=JSON_CONSUMES,headers=JSON_HEADERS)
     public @ResponseBody void showOnLeftSide(@PathVariable("id") long id, @RequestBody boolean value) {
-    	Scanner product = productService.getProductById(id);
+    	Cutter product = productService.getProductById(id);
     	product.setShowOnLeftSide(value);
     	productService.updateProduct(product);	
     	componets.updateInLeftField(product, product.isShowOnSite() && product.isShowOnLeftSide(), TYPE);
     }
+   
 }
