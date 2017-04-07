@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <header class="top_header">
 		<div class="header_topline">
 			<div class="container">
@@ -125,8 +126,23 @@
 							</c:if>
     							<%--<li role="separator" class="divider"></li>
     							<li><a href="#">Еще что-то</a></li> --%>
-    							</ul>
-    						</div>
+    						</ul>
+    					</div>
+    					
+    					<div class="btn-group" style="margin-left: 7px; padding-top: 7px; margin-bottom: -7px;">
+	    					<table class="table table-bordered" style="margin: 0px;">
+	    						<tr>
+	    							<td style="padding: 3px 8px;">1 <i class="fa fa-usd"></i></td>
+	    							<td style="padding: 3px 8px;"><fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${ constants.dollar_in_grivna }" /> грн.</td>
+	    							
+	    						</tr>
+	    						<tr>
+	    							<td style="padding: 3px 8px;">1 <i class="fa fa-eur"></i></td>
+	    							<td style="padding: 3px 8px;"><fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${ constants.euro_in_grivna }" /> грн.</td>
+	    							
+	    						</tr>
+	    					</table>
+    					</div>
     					
     					   <!-- Button trigger modal -->
 						<button class="btn btn-primary btn-lg cart-modal-window" data-toggle="modal" data-target="#myModal">
