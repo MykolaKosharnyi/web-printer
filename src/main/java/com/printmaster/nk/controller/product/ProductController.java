@@ -25,6 +25,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.printmaster.nk.beans.ComponentsForControllers;
 import com.printmaster.nk.beans.LinksForProducts;
 import com.printmaster.nk.beans.PicturesContainer;
+import com.printmaster.nk.model.dao.impl.TypeProductContainer;
 import com.printmaster.nk.model.entity.Cutter;
 import com.printmaster.nk.model.entity.DigitalPrinter;
 import com.printmaster.nk.model.entity.HeadProduct;
@@ -38,36 +39,43 @@ import com.printmaster.nk.model.service.ProductService;
 import com.printmaster.nk.model.service.UseWithProductService;
 
 public abstract class ProductController <T extends HeadProduct, S extends SearchGeneric>{
-	private T product;	
+	private Class<T> productType;
+	
+//	private T product;	
 	private S searchCriteries;
 	private Logger logger =  Logger.getLogger(ProductController.class);
 	
 	private Map<String, String> links;
 	private Map<String, String> parametersOnAdminProductsPage;
 	
-	private final String TYPE = ""/*getTypeUrl()*/;
+	private final String TYPE = "";
 	private final String CONCRETE_FOLDER = getTypeUrl() + "s";
 	
+	public ProductController(Class<T> cls){
+		this.productType=cls;
+		//TYPE = getTypeUrl();
+	}
+	
 	private String getTypeUrl(){	
-		if (product instanceof Printer) {
+		if (productType.equals(Printer.class)) {
 			return PRINTER;
 			
-		} else if (product instanceof Printer3D) {
+		} else if (productType.equals(Printer3D.class)) {
 			return PRINTER_3D;
 
-		} else if (product instanceof DigitalPrinter) {
+		} else if (productType.equals(DigitalPrinter.class)) {
 			return DIGITAL_PRINTER;
 
-		} else if (product instanceof Cutter) {
+		} else if (productType.equals(Cutter.class)) {
 			return CUTTER;
 
-		} else if (product instanceof Laminator) {
+		} else if (productType.equals(Laminator.class)) {
 			return LAMINATOR;
 			
-		} else if (product instanceof Laser) {
+		} else if (productType.equals(Laser.class)) {
 			return LASER;
 			
-		} else if (product instanceof Scanner) {
+		} else if (productType.equals(Scanner.class)) {
 			return SCANNER;
 		} 
 		return PRINTER;
@@ -221,7 +229,7 @@ public abstract class ProductController <T extends HeadProduct, S extends Search
 	public String addNewProduct(Model model) throws InstantiationException, IllegalAccessException {
 		files.clear();
 		logger.info(String.format("/%s/%s/%s page.", PATH_ADMIN, PATH_NEW, TYPE));
-		model.addAttribute(ATTRIBUTE_PRODUCT, product.getClass().newInstance());
+		model.addAttribute(ATTRIBUTE_PRODUCT, productType.getClass().newInstance());
 		
 		componets.setJSONtoModelAttribute(model, TYPE);
 		

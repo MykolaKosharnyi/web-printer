@@ -8,7 +8,6 @@ import static com.printmaster.nk.controller.ConstUsedInContr.ATTRIBUTE_TITLE_OF_
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
@@ -34,9 +33,10 @@ public class CutterControll extends ProductController<Cutter, SearchCutters> {
 	    put(ATTRIBUTE_TITLE, "Гравера/фрезера");
 	    put(ATTRIBUTE_ADD_PRODUCT, "Добавить гравер/фрезер");
 	}};
-    
-	private Logger logger = Logger.getLogger(CutterController.class);
-	
+
+	public CutterControll() {
+		super(Cutter.class);
+	}
 
     @Autowired(required=true)
     @Qualifier(value="cutterService")

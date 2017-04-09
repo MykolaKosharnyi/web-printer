@@ -56,8 +56,8 @@ public class CutterController {
     
 	private Logger logger = Logger.getLogger(CutterController.class);
 	
-	private static final String TYPE = CUTTER;
-	private static final String CONCRETE_FOLDER = CUTTER + "s";
+	private final String TYPE = CUTTER;
+	private final String CONCRETE_FOLDER = CUTTER + "s";
 	
 	@Autowired
 	private LinksForProducts linksForProduct;
