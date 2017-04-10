@@ -7,13 +7,13 @@
 <!DOCTYPE>
 <html>
 <head>
+
 	<meta name="_csrf" content="${_csrf.token}"/>
     <meta name="_csrf_header" content="${_csrf.headerName}"/>
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="/css/admin/add_change_printer.css">
 	<script src="<%=request.getContextPath()%>/resources/js/admin/add_change_printer.js"></script>
-
 
     <link href="/css/admin/datepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
 	<script src="/css/admin/datepicker/bootstrap-datetimepicker.min.js"></script>
@@ -70,6 +70,8 @@
 			  			<button type="submit" class="btn btn-primary">Изменить</button>
 			  		</c:if>
 			  	</c:if>
+			  	
+			  	<a class="btn btn-success" href="javascript:void(0)" onclick="getBlackVersion();">Получить черновой вариант письма</a>
 		  </div>
 		
 			<c:if test="${!empty mailMessage.id && mailMessage.id!=0}">
@@ -166,6 +168,7 @@
 			  		 	<button type="button" id="status_button" class="btn btn-info">Режим модификации</button>
 			  		</c:if>
 			  </div>
+			  
 		  </c:if>
 
 		  <div class="form-group">			  
@@ -179,6 +182,7 @@
 			  			<button type="submit" class="btn btn-primary">Изменить</button>
 			  	</c:if>
 			</c:if>
+			<a class="btn btn-success" href="javascript:void(0)" onclick="getBlackVersion();">Получить черновой вариант письма</a>
 		  </div>
 
 		</form:form>
@@ -228,7 +232,32 @@
 					$("input[name='status']").val("WAITING");
 				}
 			});
+
 		});
+    
+    function getBlackVersion(){
+    	var outerForm = $("form#mailMessage");
+
+    	var letter = {
+    			"id": new Number("${mailMessage.id}"),
+    			"status":"${mailMessage.status}",
+    			"subscription":[],
+    			"dateCreation": null,
+    			"dateSending": null,
+    			"dateLastChanging": null,
+    			"title":outerForm.find("input#title").val(),
+    			"message":outerForm.find("textarea#description").val(),
+    			"headerOption": new Number("${mailMessage.headerOption}") == 0 ? 0:outerForm.find('input[name=headerOption]:checked').val(),
+    			"footerOption": new Number("${mailMessage.footerOption}") == 0 ? 0:outerForm.find('input[name=footerOption]:checked').val()
+    	};
+    	$.ajax({
+			type: 'post',
+			url: "/admin/message/black_version_of_letter",
+			data: JSON.stringify(letter),
+			contentType: "application/json; charset=utf-8",		
+			dataType: "json"
+		});	
+    }
 
 	</script>
 

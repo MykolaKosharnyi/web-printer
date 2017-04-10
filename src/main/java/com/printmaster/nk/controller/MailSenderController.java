@@ -1,6 +1,7 @@
 package com.printmaster.nk.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.printmaster.nk.components.MailSendingComponent;
 import com.printmaster.nk.model.entity.MailSendingMessage;
-import com.printmaster.nk.model.entity.MailSendingMessage.StatusOfSending;
 import com.printmaster.nk.model.entity.MailSendingMessageOption;
 import com.printmaster.nk.model.service.MailSendingOptionService;
 import com.printmaster.nk.model.service.MailSendingService;
@@ -34,6 +34,8 @@ public class MailSenderController {
 	
 	@Autowired
 	MailSendingOptionService mailSendingOptionService;
+	
+	public final static String LABEL_CHECK_MAIL = " (черновой вариант)";
 	
 //	private final static String RECIPIENT_WHEN_MESSAGE_UPDATED = "alise@forprint.net.ua,nikolay.kosharniy@gmail.com";
 	private final static String RECIPIENT_WHEN_ASKING_ABOUT_PRODUCT = "alise@forprint.net.ua,nikolay.kosharniy@gmail.com";
@@ -58,7 +60,7 @@ public class MailSenderController {
 	}
 	
 	@RequestMapping(value = "/"+ PATH_ADMIN +"/message/"+ PATH_CREATE, method = RequestMethod.POST) 
-	public String saveUserAddByAdmin(@ModelAttribute("mailMessage") @Valid MailSendingMessage mailMessage,
+	public String createMessage(@ModelAttribute("mailMessage") @Valid MailSendingMessage mailMessage,
 			BindingResult result, Model model){
 		if (result.hasErrors()){
 			return putMessagePageParameters(model, mailMessage);
@@ -68,19 +70,23 @@ public class MailSenderController {
 	}
 	
 	@RequestMapping(value = "/"+ PATH_ADMIN +"/message/"+ PATH_UPDATE, method = RequestMethod.POST) 
-	public String changeUserAddByAdmin(@ModelAttribute("mailMessage") @Valid MailSendingMessage mailMessage,
+	public String updateMessage(@ModelAttribute("mailMessage") @Valid MailSendingMessage mailMessage,
 			BindingResult result, Model model){
 		if (result.hasErrors()){
 		    return putMessagePageParameters(model, mailMessage);
 		}		
 		mailSendingService.update(mailMessage);
-		if(mailMessage.getStatus().equals(StatusOfSending.MODIFICATION_PROCESS)){
-			mailSendingComponent.observeRecipients(mailMessage,
-					mailSendingComponent.getRecipients(MailSendingComponent.NOTIFICATION_MAIL_UPDATING));
-		}
 		return "redirect:/admin/all_sended_messages";
 	}
 	
+	@RequestMapping(value = "/admin/message/get_black_version_of_letter", method = RequestMethod.POST,
+			consumes = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody void sendBlackVersion(@RequestBody MailSendingMessage mailMessage) {
+		mailMessage.setTitle(mailMessage.getTitle() + LABEL_CHECK_MAIL);
+		mailSendingComponent.observeRecipients(mailMessage,
+				mailSendingComponent.getRecipients(MailSendingComponent.NOTIFICATION_MAIL_UPDATING));
+	}
+
 	@RequestMapping(value = "/admin/message/{id}", method = RequestMethod.GET)
 	public String getCreateNewMessage(@PathVariable("id") long id, Model model) {
 	    return putMessagePageParameters(model, mailSendingService.getById(id));
