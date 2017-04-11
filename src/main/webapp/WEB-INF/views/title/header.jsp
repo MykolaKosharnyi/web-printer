@@ -129,16 +129,16 @@
     						</ul>
     					</div>
     					
-    					<div class="btn-group" style="margin-left: 7px; padding-top: 7px; margin-bottom: -7px;">
-	    					<table class="table table-bordered" style="margin: 0px;">
+    					<div class="btn-group" style="padding-top: 7px; margin-bottom: -7px;">
+	    					<table class="table" style="margin: 0px; font-size: 13px;">
 	    						<tr>
-	    							<td style="padding: 3px 8px;">1 <i class="fa fa-usd"></i></td>
-	    							<td style="padding: 3px 8px;"><fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${ constants.dollar_in_grivna }" /> грн.</td>
+	    							<td style="padding: 3px 6px; border-top:none;">1 <i class="fa fa-usd"></i></td>
+	    							<td style="padding: 3px 6px;border-top:none;"><fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${ constants.dollar_in_grivna }" /> грн.</td>
 	    							
 	    						</tr>
 	    						<tr>
-	    							<td style="padding: 3px 8px;">1 <i class="fa fa-eur"></i></td>
-	    							<td style="padding: 3px 8px;"><fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${ constants.euro_in_grivna }" /> грн.</td>
+	    							<td style="padding: 3px 6px;">1 <i class="fa fa-eur"></i></td>
+	    							<td style="padding: 3px 6px;"><fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${ constants.euro_in_grivna }" /> грн.</td>
 	    							
 	    						</tr>
 	    					</table>

@@ -29,6 +29,7 @@ tinymce.init({
 	                "Verdana=verdana,geneva;"+
 	                "Webdings=webdings;"+
 	                "Wingdings=wingdings,zapf dingbats",
+	                images_upload_url: '/CKFinderJava/getFiles',
 					templates : [ {
 						title : 'Test template 1',
 						content : 'Test 1'

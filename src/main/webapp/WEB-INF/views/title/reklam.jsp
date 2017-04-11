@@ -30,16 +30,16 @@
 				</div>
 				
 				<c:if test="${!empty value.leftSharesLink}">
-					<div class="ribbon-wrapper-left">
-						<div class="ribbon-left" style="color:${value.leftSharesLinkColorText}; background:${value.leftSharesLinkColorFone};">
+					<div class="ribbon-wrapper-left" style="color:${value.leftSharesLinkColorText}; background:${value.leftSharesLinkColorFone};">
+						<div class="ribbon-left">
 							${value.leftSharesLink}
 						</div>
 					</div>
 				</c:if>
 					
 				<c:if test="${!empty value.rightSharesLink}">
-					<div class="ribbon-wrapper-right">
-						<div class="ribbon-right" style="color:${value.rightSharesLinkColorText}; background:${value.rightSharesLinkColorFone};">
+					<div class="ribbon-wrapper-right" style="color:${value.rightSharesLinkColorText}; background:${value.rightSharesLinkColorFone};">
+						<div class="ribbon-right">
 							${value.rightSharesLink}
 						</div>
 					</div>
