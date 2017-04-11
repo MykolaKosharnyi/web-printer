@@ -619,90 +619,33 @@ p.p_pue{
 		-moz-box-shadow: none;
 		box-shadow: none;
        }
-
-.ribbon-search-wrapper-right {
-  width: 178px;
-  height: 178px;
-  overflow: hidden;
-  position: absolute;
-  top: -3px;
-  right: -3px;
-  cursor: pointer;
-}
-
-.ribbon-search-wrapper-left {
-  width: 178px;
-	height: 178px;
-	overflow: hidden;
-	position: absolute;
-	top: -3px;
-	left: -3px;
-	cursor: pointer;
-}
-
-.ribbon-search-right {
-  font: bold 12px Sans-Serif;
-  text-align: center;
--moz-transform: rotate(45deg);
--webkit-transform: rotate(45deg);
--o-transform: rotate(45deg);
--ms-transform: rotate(45deg);
-transform: rotate(45deg);
-  position: relative;
-  right: 15px;
-  top: 50px;
-padding: 7px 35px;
-height: auto;
-width: 242px;
-z-index: 10;
-padding: 7px 35px;
-min-height: 23px;
-}   
-
-.ribbon-search-left {
-font: bold 12px Sans-Serif;
-text-align: center;
--moz-transform: rotate(-45deg);
--webkit-transform: rotate(-45deg);
--o-transform: rotate(-45deg);
--ms-transform: rotate(-45deg);
-transform: rotate(-45deg);
-position: relative;
-left: -50px;
-top: 50px;
-width: 242px;
-z-index: 10;
-height: auto;
-padding: 7px 35px;
-min-height: 23px;
-}   
-
-/* for product in top */
-.ribbon-top-search-wrapper-left,
-.ribbon-top-search-wrapper-right{
+/* RIBBONS ON PRODUCT */
+.ribbon-search-wrapper-left,
+.ribbon-search-wrapper-right{
 	width: 130px;
 	height: 130px;
 	overflow: hidden;
 	position: absolute;
-	top: -3px;
+	top: -4px;
 	cursor: pointer;
 	display: table;
-	padding: 10px;
+	padding: 0px;
+	opacity: 0.8;
+	transform: rotate(15deg);
+	border-radius: 130px 70px;
 }
 
-.ribbon-top-search-wrapper-left{
-	left: -3px;
-	border-radius: 200px 50px 200px 50px;
+.ribbon-search-wrapper-left{
+	left: 5px;
 }
 
-.ribbon-top-search-wrapper-right{
-	right: -3px;
-	border-radius: 50px 200px 50px 200px;
+.ribbon-search-wrapper-right{
+	right: 5px;
 }
 
-.ribbon-top-search-left,
-.ribbon-top-search-right{
-	font: bold 12px Sans-Serif;
+.ribbon-search-left,
+.ribbon-search-right{
+	font: bold 15px Sans-Serif;
 	text-align: center;
 	position: relative;
 	z-index: 10;
@@ -711,18 +654,11 @@ min-height: 23px;
 	padding: 5px;
 }
 
-.ribbon-top-search-left{
+.ribbon-search-left,
+.ribbon-search-right{
 	-moz-transform: rotate(-45deg);
 	-webkit-transform: rotate(-45deg);
 	-o-transform: rotate(-45deg);
 	-ms-transform: rotate(-45deg);
 	transform: rotate(-45deg);
-}
-
-.ribbon-top-search-right{
-	-moz-transform: rotate(45deg);
-	-webkit-transform: rotate(45deg);
-	-o-transform: rotate(45deg);
-	-ms-transform: rotate(45deg);
-	transform: rotate(45deg);
 }
