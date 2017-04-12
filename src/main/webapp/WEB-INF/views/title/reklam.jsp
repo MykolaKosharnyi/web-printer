@@ -16,7 +16,7 @@
 					<div class="product_price">
 			    		<span style="float:left; margin-right: 5px;">Цена:</span>
 			    		<c:if test="${value.priceProduct < 0.1}">
-			    			<a href="#callback_reklam" class="fancybox">уточняйте</a>
+			    			<a href="javascript:openModalProposalPrise('${value.type}', ${value.id}, '${value.nameProduct}', '${value.pathToPicture}')">уточняйте</a>
 			    		</c:if>
 			    		<c:if test="${value.priceProduct >= 0.1}">
 			    			<input type="hidden" value="${value.priceProduct}">
