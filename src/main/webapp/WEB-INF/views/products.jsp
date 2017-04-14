@@ -23,7 +23,7 @@
 						<a href="<c:url value='/${product.type}/${product.id}' />" class="products_title">${product.name}</a>
 						<div class="product_price"><span style="float: left;">Цена:&nbsp;</span> 
 							<input type="hidden" name="price_value" value="${product.prise}">
-				       		<c:if test="${product.prise < 0.1}"><a href="#callback" class="fancybox">уточняйте</a></c:if>
+				       		<c:if test="${product.prise < 0.1}"><a href="javascript:openModalProposalPrise('${product.type}', ${product.id}, '${product.name}', '${product.pathPictures.get(0)}')">уточняйте</a></c:if>
 							<c:if test="${!(product.prise < 0.1)}">
 								<div></div>
 							</c:if>
@@ -148,7 +148,7 @@
 					<a href="<c:url value='/${product.type}/${product.id}' />" class="products_title">${product.name}</a>
 					<div class="product_price"><span style="float: left;">Цена:&nbsp;</span> 
 						<input type="hidden" name="price_value" value="${product.prise}">
-			       		<c:if test="${product.prise < 0.1}"><a href="#callback" class="fancybox">уточняйте</a></c:if>
+			       		<c:if test="${product.prise < 0.1}"><a href="javascript:openModalProposalPrise('${product.type}', ${product.id}, '${product.name}', '${product.pathPictures.get(0)}')">уточняйте</a></c:if>
 						<c:if test="${!(product.prise < 0.1)}">					
 		   					<div></div>
 						</c:if>
@@ -337,7 +337,7 @@ $(document).ready(function() {
 							"margin-right": "5px"
 						}));
 				if(product.prise < 0.1){
-					slidePrice.append($('<a/>').attr("href","#callback_reklam").addClass('fancybox').text("\u0443\u0442\u043E\u0447\u043D\u044F\u0439\u0442\u0435"));
+					slidePrice.append($('<a/>').attr("href","javascript:openModalProposalPrise('" + product.type +"', " + product.id +", '" + product.name +"', '" + product.pathPictures[0] +"')").text("\u0443\u0442\u043E\u0447\u043D\u044F\u0439\u0442\u0435"));
 				} else {
 					slidePrice.append($('<input/>').attr("type", "hidden").val(product.prise));
 					slidePrice.append($('<div/>').text(checkPrise(product.prise)));

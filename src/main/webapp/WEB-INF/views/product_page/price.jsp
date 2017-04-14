@@ -5,7 +5,7 @@
 <tr>
 	<td>Цена:</td>
 	<td>
-		<c:if test="${product.prise < 0.1}"><a href="#callback" class="fancybox">уточняйте</a></c:if>
+		<c:if test="${product.prise < 0.1}"><a href="javascript:openModalProposalPrise('${type}', ${product.id}, '${product.name}', '${product.pathPictures.get(0)}')">уточняйте</a></c:if>
 		<c:if test="${!(product.prise < 0.1)}">						
 			<div class="product_price">
 				<input name="price_value" value="${product.prise}" type="hidden">				
