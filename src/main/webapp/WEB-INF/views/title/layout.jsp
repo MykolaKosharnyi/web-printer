@@ -123,6 +123,7 @@
 	<script src="<%=request.getContextPath()%>/resources/libs/countdown/jquery.countdown-ru.js"></script>
 	<script src="<%=request.getContextPath()%>/resources/libs/landing-nav/navigation.js"></script>
 	<script src="<%=request.getContextPath()%>/resources/js/js.cookie.js"></script>
+	<script src="<%=request.getContextPath()%>/resources/js/admin/maskinput.js"></script>
 	
 	<script src="<%=request.getContextPath()%>/resources/js/cart.js"></script>
 	<script src="<%=request.getContextPath()%>/resources/js/common.js"></script>
@@ -134,6 +135,86 @@
 <jsp:include page="callback_proposal_price.jsp" />	
 	
 <script type="text/javascript">
+
+/*
+http://gnatkovsky.com.ua/maska-vvoda-nomera-telefona.html
+*/
+jQuery(function($){
+   $("#proposal_price_phone_number").mask("+38(099) 99-99-999");
+});
+
+$(function() {
+	
+	$("#proposal_price_button").click(function(){
+		
+		var hasEmptyFields = false;
+		$('#callback_proposal_price').find('div.modal-dialog').find("div.modal-content").find("div.modal-body")
+			.find("div.form-group").find("input[type=text]").each(function(){
+				if($(this).val().trim()==""){
+					$(this).parent("div").find(".info_of_empty_field").css("display","block");
+					$(this).parent('div').removeClass('has-success').addClass('has-error');	
+					hasEmptyFields = true;
+				} else {
+					// this if for e-mail checking
+					if($(this).is( "#email_in_proposal" ) && $(this).parent('div').hasClass('has-error')){
+						hasEmptyFields = true;
+					} else {
+						
+						$(this).parent('div').removeClass('has-error').addClass('has-success');	
+					}
+					$(this).parent("div").find(".info_of_empty_field").css("display","none");
+					
+				}
+		});
+		
+		if(!hasEmptyFields){
+			
+			
+			
+			 $('#callback_proposal_price').modal('hide');
+			 $("#sended_proposal_alert").css("display","block").delay(5000).fadeOut("slow");
+		}
+		
+	});
+	
+	$("#email_in_proposal").keyup(function() {
+
+		var ourElement = $(this);
+		var dataToSend = $(this).val();
+		
+		if(dataToSend.trim()!=""){
+		$.ajax({
+			  type: 'post',
+			  url: "/check_email",
+			  contentType: "text/plain; charset=utf-8",
+			  data: dataToSend,			        
+		        success: function (data) {
+		        	if(data.result){
+		        		ourElement.parent('div').removeClass('has-error').addClass('has-success');		        		
+		        		ourElement.parent('div').find('.info_of_checking_email').css('display','none');
+		        		ourElement.parent('div').find('.bg-success').css('display','block');
+					} else {
+						ourElement.parent('div').removeClass('has-success').addClass('has-error');						
+						ourElement.parent('div').find('.info_of_checking_email').css('display','block');
+						ourElement.parent('div').find('.bg-success').css('display','none');
+					}
+		        },
+			  error: function(xhr, status, error) {
+				  alert('Request Status: ' + xhr.status + ' Status Text: ' + xhr.statusText + ' ' + xhr.responseText);
+			  }
+			});
+		
+			ourElement.parent("div").find(".info_of_empty_field").css("display","none");
+
+		} else {
+			ourElement.parent('div').find('.bg-success').css('display','none');
+			ourElement.parent('div').find('.bg-danger').css('display','none');
+			ourElement.parent('div').removeClass('has-success').addClass('has-error');
+			ourElement.parent("div").find(".info_of_empty_field").css("display","block");
+		}
+		
+	});
+});
 
 function openModalProposalPrise(type, idProduct, nameProduct, pathToPicture){
 	var proposalBlock = $('#callback_proposal_price');

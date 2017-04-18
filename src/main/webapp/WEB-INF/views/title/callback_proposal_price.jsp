@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <div id="callback_proposal_price" class="modal fade">
-	<div class="modal-dialog" style="width:300px;">
+	<div class="modal-dialog" style="width:400px;">
 		<div class="modal-content">
 			<div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -26,18 +26,26 @@
 						<input type="hidden" name="logined" value="false"></input>
 
 						<div class="form-group">
-							<label style="font-size: 13px; margin: 5px;">Введите имя:</label>
+							<span style="color: red; top: -2px; position: relative;">*</span><label style="font-size: 13px; margin: 5px;">Введите имя:</label>
 							<input type="text" class="form-control" name="name"></input>
+							<p class="bg-danger info_of_empty_field">Поле должно быть заполнено.</p>
 						</div>
 
 						<div class="form-group">
+							<span style="color: red; top: -2px; position: relative;">*</span>
 							<label style="font-size: 13px; margin: 5px;">Введите e-mail:</label>
-							<input type="email" class="form-control" name="email"></input>
+							<input type="text" class="form-control" name="email" id="email_in_proposal"></input>
+							<p class="bg-danger info_of_empty_field">Поле должно быть заполнено.</p>
+							<p class="bg-success info_of_checking_email">Введенный e-mail корректен!</p>
+			  				<p class="bg-danger info_of_checking_email">E-mail не корректен!</p>
 						</div>
 
 						<div class="form-group">
+							<span style="color: red; top: -2px; position: relative;">*</span>						
 							<label style="font-size: 13px; margin: 5px;">Введите номер телефона:</label>
-							<input type="text" class="form-control" name="phonenumber"></input>
+							<input type="text" id="proposal_price_phone_number" placeholder="+38(099) 99-99-999"
+							 class="form-control" name="phonenumber"></input>
+							<p class="bg-danger info_of_empty_field">Поле должно быть заполнено.</p>
 						</div>
 						
 						<div class="form-group">
@@ -45,7 +53,7 @@
 						</div>
 					</c:if>
 					
-					<div id="proposal_product_link" class="form-group">
+					<div id="proposal_product_link" class="form-group" style="height: 73px;">
 						<input type="hidden" name="typeProduct" value=""></input>
 						<input type="hidden" name="idProduct" value=""></input>
 						<img src="" class="col-sm-6 img-rounded" />
@@ -55,19 +63,29 @@
 					</div>
 					
 					<div class="form-group">
+						<span style="color: red; top: -2px; position: relative;">*</span>
 						<label style="font-size: 13px; margin: 5px;">Ваша цена за товар:</label> 
 						<input type="text" class="form-control" name="price"></input>
+						<p class="bg-danger info_of_empty_field">Поле должно быть заполнено.</p>
 					</div>			
 					
 					<div class="form-group">
 						<label style="font-size: 13px; margin: 5px;">Сопроводительный текст:</label> 
 						<textarea rows="3" cols="1" name="description" class="form-control"></textarea>
 					</div>		
+					
+					<div class="form-group">
+						<div class="especial_notes"><p>*</p>Обязательные поля для заполнения.</div>
+					</div>	
 			</div>
             <div class="modal-footer">
-            	<button class="btn btn-success">Уточнить</button>
+            	<button class="btn btn-success" id="proposal_price_button">Уточнить</button>
 				<button class="btn btn-danger button-close" data-dismiss="modal">Закрыть</button>
             </div>
 		</div>
 	</div>	
 </div>	
+
+<div class="alert alert-success" id="sended_proposal_alert" role="alert">
+  <label>Спасибо за ответ, скоро мы с Вами звяжемся.</label>
+</div>

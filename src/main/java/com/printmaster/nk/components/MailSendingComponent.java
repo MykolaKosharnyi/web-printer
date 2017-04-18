@@ -143,6 +143,10 @@ public class MailSendingComponent {
 		return !isParameterRepeated(array, email) && isEmailCorrect(email);
 	}
 	
+	public boolean checkEmail(String email){		
+		return isEmailCorrect(email);
+	}
+	
 	/**
 	 * Validate email with regular expression
 	 *

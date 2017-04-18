@@ -9,13 +9,17 @@ import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.printmaster.nk.beans.ComponentsForControllers;
+import com.printmaster.nk.components.MailSendingComponent;
 import com.printmaster.nk.model.service.CutterService;
 import com.printmaster.nk.model.service.DigitalPrinterService;
 import com.printmaster.nk.model.service.LaminatorService;
@@ -65,6 +69,9 @@ public class HomeController {
 	
 	@Autowired
     ComponentsForControllers componets;
+	
+	@Autowired
+	MailSendingComponent mailSendingComponent;
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
@@ -148,4 +155,13 @@ public class HomeController {
 		logger.debug("Searching by phase done successful!");
 		return "search_by_phrase";
 	}
+	
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value="/check_email", method = RequestMethod.POST,
+    		produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.TEXT_PLAIN_VALUE)
+    public @ResponseBody JSONObject checkEmail(@RequestBody String email) {
+    	JSONObject result = new JSONObject();
+    	result.put("result", mailSendingComponent.checkEmail(email));
+    	return result;
+    }
 }
