@@ -168,13 +168,20 @@ $(function() {
 		});
 		
 		if(!hasEmptyFields){
-			
-			
-			
-			 $('#callback_proposal_price').modal('hide');
-			 $("#sended_proposal_alert").css("display","block").delay(5000).fadeOut("slow");
+			$.ajax({
+				  type: 'post',
+				  url: "/check_email",
+				  contentType: "text/plain; charset=utf-8",
+				  data: dataToSend,			        
+			      success: function () {
+				  	$('#callback_proposal_price').modal('hide');
+					$("#sended_proposal_alert").css("display","block").delay(5000).fadeOut("slow");
+			      },
+				  error: function(xhr, status, error) {
+					  alert('Request Status: ' + xhr.status + ' Status Text: ' + xhr.statusText + ' ' + xhr.responseText);
+				  }
+				});
 		}
-		
 	});
 	
 	$("#email_in_proposal").keyup(function() {
