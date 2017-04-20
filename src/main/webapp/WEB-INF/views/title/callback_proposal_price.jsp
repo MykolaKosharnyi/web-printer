@@ -5,15 +5,8 @@
 	<div class="modal-dialog" style="width:400px;">
 		<div class="modal-content">
 			<div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                
-                <c:if test="${pageContext.request.userPrincipal.name != null}">
-					<h5 class="modal-title">Пожалуйста оставьте цену за товар, через некоторое время мы с вами свяжемся</h5>
-				</c:if>
-                
-                <c:if test="${pageContext.request.userPrincipal.name == null}">
-					<h5 class="modal-title">Пожалуйста оставьте Ваши координаты и цену за товар, через некоторое время мы с вами свяжемся</h5>
-				</c:if>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>              
+					<h5 class="modal-title">Заполните, пожалуйста,  форму  для обратной связи.</h5>
                 
             </div>
             <div class="modal-body" style="padding: 5px 5px 0px 5px;">
@@ -26,14 +19,14 @@
 						<input type="hidden" name="logined" value="false"></input>
 
 						<div class="form-group">
-							<span style="color: red; top: -2px; position: relative;">*</span><label style="font-size: 13px; margin: 5px;">Введите имя:</label>
+							<span style="color: red; top: -2px; position: relative;">*</span><label style="font-size: 13px; margin: 5px;"> Имя:</label>
 							<input type="text" class="form-control" name="name"></input>
 							<p class="bg-danger info_of_empty_field">Поле должно быть заполнено.</p>
 						</div>
 
 						<div class="form-group">
 							<span style="color: red; top: -2px; position: relative;">*</span>
-							<label style="font-size: 13px; margin: 5px;">Введите e-mail:</label>
+							<label style="font-size: 13px; margin: 5px;">E-mail:</label>
 							<input type="text" class="form-control" name="email" id="email_in_proposal"></input>
 							<p class="bg-danger info_of_empty_field">Поле должно быть заполнено.</p>
 							<p class="bg-success info_of_checking_email">Введенный e-mail корректен!</p>
@@ -42,7 +35,7 @@
 
 						<div class="form-group">
 							<span style="color: red; top: -2px; position: relative;">*</span>						
-							<label style="font-size: 13px; margin: 5px;">Введите номер телефона:</label>
+							<label style="font-size: 13px; margin: 5px;">Телефон:</label>
 							<input type="text" id="proposal_price_phone_number" placeholder="+38(099) 99-99-999"
 							 class="form-control" name="phonenumber"></input>
 							<p class="bg-danger info_of_empty_field">Поле должно быть заполнено.</p>
@@ -63,8 +56,10 @@
 					</div>
 					
 					<div class="form-group">
-						<span style="color: red; top: -2px; position: relative;">*</span>
-						<label style="font-size: 13px; margin: 5px;">Ваша цена за товар:</label> 
+						<span style="color: red; top: -84px; position: relative;">*</span>
+						<label style="font-size: 13px; margin: 5px; width: 95%;">Стоимость  данной новой модели необходимо  уточнить у производителя (владельца). 
+						Это займет некоторое время. Мы в кратчайшие сроки  по Вашему запросу это выясним и свяжемся с Вами. 
+						Торг на эту модель уместен. Пожалуйста  укажите стоимость за которую  готовы   приобрести:</label> 
 						<input type="text" class="form-control" name="price"></input>
 						<p class="bg-danger info_of_empty_field">Поле должно быть заполнено.</p>
 					</div>			
