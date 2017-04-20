@@ -3,12 +3,14 @@ package com.printmaster.nk.model.service.impl;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.printmaster.nk.model.dao.MailSendingOptionDAO;
 import com.printmaster.nk.model.entity.MailSendingMessageOption;
 import com.printmaster.nk.model.service.MailSendingOptionService;
 
+@Service
 @Transactional
 public class MailSendingOptionServiceImpl implements MailSendingOptionService {
 

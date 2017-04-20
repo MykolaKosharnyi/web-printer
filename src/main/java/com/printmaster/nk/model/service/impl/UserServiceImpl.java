@@ -28,7 +28,6 @@ public class UserServiceImpl implements UserService {
     private BCryptPasswordEncoder passwordEncoder;
 
 	@Override
-	@Transactional
 	public long save(User user) {
 		String encodedPassword = passwordEncoder.encode(user.getPassword());
 		user.setPassword(encodedPassword);
@@ -41,31 +40,26 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	@Transactional
 	public void updateUser(User user) {
 		this.userDAO.updateUser(user);
 	}
 
 	@Override
-	@Transactional
 	public List<User> listUsers() {
 		return this.userDAO.listUsers();
 	}
 
 	@Override
-	@Transactional
 	public User getUserById(long id) {
 		return this.userDAO.getUserById(id);
 	}
 
 	@Override
-	@Transactional
 	public void removeUser(long id) {
 		this.userDAO.removeUser(id);
 	}
 
 	@Override
-	@Transactional
 	public User findByUserName(String username) {
 		return this.userDAO.findByUserName(username);
 	}
