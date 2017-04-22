@@ -168,11 +168,35 @@ $(function() {
 		});
 		
 		if(!hasEmptyFields){
+			
+			var outerForm = $('#callback_proposal_price').find('div.modal-dialog').find("div.modal-content").find("div.modal-body").find("div.form-group");
+
+			var logined = outerForm.parent("div.modal-body").find("input[name=logined]").val() == "true" ;
+			var name = logined ? "" : outerForm.find("input[name=name]").val();
+			var phoneNumber = logined ? "" : outerForm.find("input[name=phonenumber]").val();
+			var email = logined ? "" : outerForm.find("input[name=email]").val();
+			
+	    	var proposal = {
+	    			"id":null,
+	    			"logined":logined,
+	    			"name":name,
+	    			"phoneNumber": phoneNumber,
+	    			"email": email,
+	    			"idUser": new Number(0),	    			
+	    			"typeProduct":outerForm.find("input[name=typeProduct]").val(),
+	    			"idProduct":outerForm.find("input[name=idProduct]").val(),
+	    			"price":outerForm.find("input[name=price]").val(),
+	    			"description":outerForm.find("textarea[name=description]").val(),
+	    			"typeProposal":"SPECIFY",
+	    			"dateCreation": null
+	    	};
+	    	
 			$.ajax({
 				  type: 'post',
-				  url: "/check_email",
-				  contentType: "text/plain; charset=utf-8",
-				  data: dataToSend,			        
+				  url: "/send_proposal",
+				  data: JSON.stringify(proposal),
+				  contentType: "application/json; charset=utf-8",		
+				  dataType: "json",		        
 			      success: function () {
 				  	$('#callback_proposal_price').modal('hide');
 					$("#sended_proposal_alert").css("display","block").delay(5000).fadeOut("slow");

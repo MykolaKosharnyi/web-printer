@@ -36,7 +36,8 @@
                 <beans:value>com.printmaster.nk.model.entity.Role</beans:value>
                 <beans:value>com.printmaster.nk.model.entity.Comment</beans:value>
                 <beans:value>com.printmaster.nk.model.entity.MailSendingMessage</beans:value>    
-                <beans:value>com.printmaster.nk.model.entity.MailSendingMessageOption</beans:value>           
+                <beans:value>com.printmaster.nk.model.entity.MailSendingMessageOption</beans:value>  
+                <beans:value>com.printmaster.nk.model.entity.UserProposal</beans:value>         
                 
             </beans:list>
         </beans:property>
@@ -163,6 +164,13 @@
     </beans:bean>
     <beans:bean id="commentService" class="com.printmaster.nk.model.service.impl.CommentServiceImpl">
         <beans:property name="commentDAO" ref="commentDAO"></beans:property>
+    </beans:bean>
+    
+    <beans:bean id="userProposalDAO" class="com.printmaster.nk.model.dao.impl.UserProposalDAOImpl">
+        <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+    </beans:bean>
+    <beans:bean id="userProposalService" class="com.printmaster.nk.model.service.impl.UserProposalServiceImpl">
+        <beans:property name="userProposalDAO" ref="userProposalDAO"></beans:property>
     </beans:bean>
  
 </beans:beans>

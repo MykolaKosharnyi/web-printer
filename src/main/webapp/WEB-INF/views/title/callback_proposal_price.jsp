@@ -6,8 +6,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>              
-					<h5 class="modal-title">Заполните, пожалуйста,  форму  для обратной связи.</h5>
-                
+				<h5 class="modal-title">Заполните, пожалуйста,  форму  для обратной связи.</h5>
             </div>
             <div class="modal-body" style="padding: 5px 5px 0px 5px;">
 

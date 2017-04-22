@@ -14,7 +14,7 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="users_proposal")
-public class UsersProposal implements Serializable{
+public class UserProposal implements Serializable{
 	
 	private static final long serialVersionUID = 3031695775597440046L;
 
@@ -32,7 +32,10 @@ public class UsersProposal implements Serializable{
 	@Column(name="phoneNumber")
 	private String phoneNumber;
 	
-	@Column(name="idUser")
+	@Column(name="email")
+	private String email;
+	
+	@Column(name="idUser", nullable = false, columnDefinition = "bigint default 0")
 	private long idUser;
 	
 	@Column(name="typeProduct")
@@ -59,7 +62,7 @@ public class UsersProposal implements Serializable{
 		SPECIFY/*уточняйте*/, SUGGEST_YOUR_PRICE/*Предложить свою цену*/
 	}
 	
-	public UsersProposal(){}
+	public UserProposal(){}
 
 	public long getId() {
 		return id;
@@ -151,6 +154,14 @@ public class UsersProposal implements Serializable{
 
 	public void setDateCreation(Date dateCreation) {
 		this.dateCreation = dateCreation;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 }

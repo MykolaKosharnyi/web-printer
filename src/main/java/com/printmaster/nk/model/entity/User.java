@@ -43,7 +43,7 @@ public class User implements Serializable{
 	private boolean enabled;
 	
 	@Column(name="telephone")
-	private int telephone;
+	private String telephone;
 	
 	@Column(name="company")
 	private String company;
@@ -158,11 +158,11 @@ public class User implements Serializable{
 		this.lastname = lastname;
 	}
 
-	public int getTelephone() {
+	public String getTelephone() {
 		return telephone;
 	}
 
-	public void setTelephone(int telephone) {
+	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
 

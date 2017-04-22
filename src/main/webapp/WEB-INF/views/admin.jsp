@@ -29,6 +29,7 @@
 	    <a href="<c:url value='/admin/pictures' />">Изменение изображений главного меню/домашней страницы</a>
 	    <a href="<c:url value='/admin/video_on_home_page' />">Видео на главной странице</a>
 	    <a href="<c:url value='/admin/constants' />">КОНСТАНТЫ</a>    
+	    <a href="<c:url value='/admin/recipient_notification/user_proposal_price' />">Емейлы на которые приходят запросы "уточняте"</a> 
     </div>
 </div>
 </body>
