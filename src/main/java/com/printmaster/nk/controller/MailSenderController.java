@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.printmaster.nk.components.MailSendingComponent;
+import com.printmaster.nk.components.RecipientNotification;
 import com.printmaster.nk.model.entity.MailSendingMessage;
 import com.printmaster.nk.model.entity.MailSendingMessageOption;
 import com.printmaster.nk.model.service.MailSendingOptionService;
@@ -38,15 +39,15 @@ public class MailSenderController {
 	public final static String LABEL_CHECK_MAIL = " (черновой вариант)";
 	
 //	private final static String RECIPIENT_WHEN_MESSAGE_UPDATED = "alise@forprint.net.ua,nikolay.kosharniy@gmail.com";
-	private final static String RECIPIENT_WHEN_ASKING_ABOUT_PRODUCT = "alise@forprint.net.ua,nikolay.kosharniy@gmail.com";
+//	private final static String RECIPIENT_WHEN_ASKING_ABOUT_PRODUCT = "alise@forprint.net.ua,nikolay.kosharniy@gmail.com";
 	
-	@RequestMapping(value="/ask/product", method = RequestMethod.POST, consumes=JSON_CONSUMES, headers = JSON_HEADERS)
-    public @ResponseBody void askProductPage(HttpServletRequest request) {
-		String subject = request.getParameter("subject");
-        String message = request.getParameter("message");
-        
-		mailSendingComponent.observeRecipients(subject, message, RECIPIENT_WHEN_ASKING_ABOUT_PRODUCT);
-    }
+//	@RequestMapping(value="/ask/product", method = RequestMethod.POST, consumes=JSON_CONSUMES, headers = JSON_HEADERS)
+//    public @ResponseBody void askProductPage(HttpServletRequest request) {
+//		String subject = request.getParameter("subject");
+//        String message = request.getParameter("message");
+//        
+//		mailSendingComponent.observeRecipients(subject, message, RECIPIENT_WHEN_ASKING_ABOUT_PRODUCT);
+//    }
 
 	@RequestMapping(value = "/admin/all_sended_messages", method = RequestMethod.GET)
 	public String getAllSendedMessages(Model model){			
@@ -84,7 +85,7 @@ public class MailSenderController {
 	public @ResponseBody void sendBlackVersion(@RequestBody MailSendingMessage mailMessage) {
 		mailMessage.setTitle(mailMessage.getTitle() + LABEL_CHECK_MAIL);
 		mailSendingComponent.observeRecipients(mailMessage,
-				mailSendingComponent.getRecipients(MailSendingComponent.NOTIFICATION_MAIL_UPDATING));
+				mailSendingComponent.getRecipients(RecipientNotification.NOTIFICATION_MAIL_UPDATING.getTypeNotification()));
 	}
 
 	@RequestMapping(value = "/admin/message/{id}", method = RequestMethod.GET)

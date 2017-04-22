@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.printmaster.nk.beans.ComponentsForControllers;
 import com.printmaster.nk.components.MailSendingComponent;
+import com.printmaster.nk.components.RecipientNotification;
 
 @Controller
 public class RecipientMailNotification {
@@ -33,12 +34,21 @@ public class RecipientMailNotification {
 		JSONArray array = mailSendingComponent.getRecipients(typeNotification);
 		model.addAttribute("emails", array);
 		model.addAttribute("typeNotification", typeNotification);
+//		
+//		if(MailSendingComponent.NOTIFICATION_COMMENT.equals(typeNotification)){
+//			model.addAttribute("headerOfNotification", "Подписчики на добавление комментов к товару");
+//		} else if(MailSendingComponent.NOTIFICATION_MAIL_UPDATING.equals(typeNotification)){
+//			model.addAttribute("headerOfNotification", "Подписчики на получение чернового варианта письма");
+//		}
+//		
 		
-		if(MailSendingComponent.NOTIFICATION_COMMENT.equals(typeNotification)){
-			model.addAttribute("headerOfNotification", "Подписчики на добавление комментов к товару");
-		} else if(MailSendingComponent.NOTIFICATION_MAIL_UPDATING.equals(typeNotification)){
-			model.addAttribute("headerOfNotification", "Подписчики на получение чернового варианта письма");
+				
+		for(RecipientNotification value: RecipientNotification.values()){
+			if(value.getTypeNotification().equals(typeNotification)){
+				model.addAttribute("headerOfNotification", value.getHeaderOfNotification());
+			}
 		}
+		
 		
         return "admin/recipient_notification";
     } 

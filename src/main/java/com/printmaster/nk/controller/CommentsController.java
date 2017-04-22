@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.printmaster.nk.beans.ComponentsForControllers;
 import com.printmaster.nk.components.MailSendingComponent;
+import com.printmaster.nk.components.RecipientNotification;
 import com.printmaster.nk.model.entity.Comment;
 import com.printmaster.nk.model.service.CommentService;
 
@@ -47,7 +48,7 @@ public class CommentsController {
     public @ResponseBody Comment addNewComment(@ModelAttribute("addComment") @Valid Comment comment) {	
 		commentService.add(comment);
 		mailSendingComponent.observeRecipients("Добавлен новый комментарий", getCommentBody(comment), 
-				mailSendingComponent.getRecipients(MailSendingComponent.NOTIFICATION_COMMENT));
+				mailSendingComponent.getRecipients(RecipientNotification.NOTIFICATION_COMMENT.getTypeNotification()));
     	return comment;
     }
 	
@@ -63,7 +64,7 @@ public class CommentsController {
     	
     	if(isDeleted){
     		mailSendingComponent.observeRecipients("Удален комментарий", getCommentBody( commentWichWillBeDeleted ),
-    				mailSendingComponent.getRecipients(MailSendingComponent.NOTIFICATION_COMMENT));
+    				mailSendingComponent.getRecipients(RecipientNotification.NOTIFICATION_COMMENT.getTypeNotification()));
     	}
     	return result;
     }

@@ -44,8 +44,9 @@ public class MailSendingComponent {
 	private final static String ADMIN_EMAIL = "nikolay.kosharniy@gmail.com";
 	
 	public final static String JSON_FILE_NAME_USER_MAIL_RECEIVER = "user_mail_receiver";
-	public final static String NOTIFICATION_COMMENT = "comment";
-	public final static String NOTIFICATION_MAIL_UPDATING = "mail_sending";
+//	public final static String NOTIFICATION_COMMENT = "comment";
+//	public final static String NOTIFICATION_MAIL_UPDATING = "mail_sending";
+//	public final static String USER_PROPOSAL_PRICE = "user_proposal_price";
 	
 	public JSONArray getRecipients(String typeNotification){
 		JSONObject objectWithReceivers = componets.jsonObjectParser(JSON_FILE_NAME_USER_MAIL_RECEIVER);
