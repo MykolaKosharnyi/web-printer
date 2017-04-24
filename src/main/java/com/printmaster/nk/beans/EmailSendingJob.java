@@ -26,18 +26,24 @@ public class EmailSendingJob{
 
 	public void executeInternal() {
 		for(MailSendingMessage message : mailSendingService.getMessagesReadySend()){
-			sendEmail(message);
+			try{
+				sendEmail(message);
+			} catch (Exception ex){
+				mailSendingComponent.exceptionMailSender(ex);
+			}	
 		}
 	}
 
 	private void sendEmail(MailSendingMessage message) {
-		List<UserAddByAdmin> usersList = userAddByAdminService.getUserBySubscription(message.getSubscription());
-		for (UserAddByAdmin user : usersList) {			
-			mailSendingComponent.observeRecipients(message, getConcatedEmails(user));
-		}
-		
-		message.setStatus(StatusOfSending.SENDED);
-		mailSendingService.update(message);
+		if(!message.getSubscription().isEmpty()){
+			List<UserAddByAdmin> usersList = userAddByAdminService.getUserBySubscription(message.getSubscription());
+			for (UserAddByAdmin user : usersList) {			
+				mailSendingComponent.observeRecipients(message, getConcatedEmails(user));
+			}
+			
+			message.setStatus(StatusOfSending.SENDED);
+			mailSendingService.update(message);
+		}		
 	}
 	
 	/**
