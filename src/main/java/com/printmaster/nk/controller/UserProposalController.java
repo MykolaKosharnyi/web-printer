@@ -41,8 +41,8 @@ public class UserProposalController {
 			}
 		} 
 		
-//		long idOfProposal = userProposalService.create(userProposal);
-//		userProposal.setId(idOfProposal);
+		long idOfProposal = userProposalService.create(userProposal);
+		userProposal.setId(idOfProposal);
 		
 		mailSendingComponent.observeRecipients("Отправлен запрос на уточнение цены", createProposalBody(userProposal), 
 				mailSendingComponent.getRecipients(RecipientNotification.NOTIFICATION_PROPOSAL_PRICE.getTypeNotification()));

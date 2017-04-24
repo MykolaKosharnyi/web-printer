@@ -1,5 +1,6 @@
 package com.printmaster.nk.model.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -27,6 +28,7 @@ public class UserProposalServiceImpl implements UserProposalService {
 
 	@Override
 	public long create(UserProposal userProposal) {
+		userProposal.setDateCreation(new Date());
 		return userProposalDAO.create(userProposal);
 	}
 

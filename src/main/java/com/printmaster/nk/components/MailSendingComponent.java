@@ -118,7 +118,7 @@ public class MailSendingComponent {
 	 * Send message with error to admin
 	 * @param ex from place where we get error
 	 */
-	private void exceptionMailSender(Exception ex){
+	public void exceptionMailSender(Exception ex){
 		SimpleMailMessage email = new SimpleMailMessage();
 		email.setFrom(HOST_EMAIL);
 		email.setTo(ADMIN_EMAIL);

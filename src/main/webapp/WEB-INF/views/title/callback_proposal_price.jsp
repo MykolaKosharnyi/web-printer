@@ -6,7 +6,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>              
-				<h5 class="modal-title">Заполните, пожалуйста,  форму  для обратной связи.</h5>
+				<h5 class="modal-title">Форма обратной связи</h5>
             </div>
             <div class="modal-body" style="padding: 5px 5px 0px 5px;">
 
@@ -55,21 +55,19 @@
 					</div>
 					
 					<div class="form-group">
-						<span style="color: red; top: -84px; position: relative;">*</span>
-						<label style="font-size: 13px; margin: 5px; width: 95%;">Стоимость  данной новой модели необходимо  уточнить у производителя (владельца). 
-						Это займет некоторое время. Мы в кратчайшие сроки  по Вашему запросу это выясним и свяжемся с Вами. 
-						Торг на эту модель уместен. Пожалуйста  укажите стоимость за которую  готовы   приобрести:</label> 
-						<input type="text" class="form-control" name="price"></input>
-						<p class="bg-danger info_of_empty_field">Поле должно быть заполнено.</p>
+						<label style="font-size: 13px; margin: 5px; width: 95%;">Если Вам  интересно данное оборудование отправьте  запрос для просчета  актуальной стоимости.
+</label> 
 					</div>			
 					
 					<div class="form-group">
-						<label style="font-size: 13px; margin: 5px;">Сопроводительный текст:</label> 
+						<span style="color: red; top: -2px; position: relative;">*</span>
+						<label style="font-size: 13px; margin: 5px;">Примечание:</label> 
 						<textarea rows="3" cols="1" name="description" class="form-control"></textarea>
+						<p class="bg-danger info_of_empty_field">Поле должно быть заполнено.</p>
 					</div>		
 					
 					<div class="form-group">
-						<div class="especial_notes"><p>*</p>Обязательные поля для заполнения.</div>
+						<div class="especial_notes"><p>*</p>Обязательные поля для заполнения:</div>
 					</div>	
 			</div>
             <div class="modal-footer">

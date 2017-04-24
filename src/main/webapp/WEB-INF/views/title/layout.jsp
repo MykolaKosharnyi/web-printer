@@ -149,7 +149,7 @@ $(function() {
 		
 		var hasEmptyFields = false;
 		$('#callback_proposal_price').find('div.modal-dialog').find("div.modal-content").find("div.modal-body")
-			.find("div.form-group").find("input[type=text]").each(function(){
+			.find("div.form-group").find("input[type=text], textarea[name=description]").each(function(){
 				if($(this).val().trim()==""){
 					$(this).parent("div").find(".info_of_empty_field").css("display","block");
 					$(this).parent('div').removeClass('has-success').addClass('has-error');	
@@ -195,8 +195,7 @@ $(function() {
 				  type: 'post',
 				  url: "/send_proposal",
 				  data: JSON.stringify(proposal),
-				  contentType: "application/json; charset=utf-8",		
-				  dataType: "json",		        
+				  contentType: "application/json; charset=utf-8",			        
 			      success: function () {
 				  	$('#callback_proposal_price').modal('hide');
 					$("#sended_proposal_alert").css("display","block").delay(5000).fadeOut("slow");
