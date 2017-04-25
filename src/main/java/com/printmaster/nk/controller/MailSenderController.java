@@ -84,8 +84,14 @@ public class MailSenderController {
 			consumes = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody void sendBlackVersion(@RequestBody MailSendingMessage mailMessage) {
 		mailMessage.setTitle(mailMessage.getTitle() + LABEL_CHECK_MAIL);
-		mailSendingComponent.observeRecipients(mailMessage,
-				mailSendingComponent.getRecipients(RecipientNotification.NOTIFICATION_MAIL_UPDATING.getTypeNotification()));
+		
+		try{
+			mailSendingComponent.observeRecipients(mailMessage,
+					mailSendingComponent.getRecipients(RecipientNotification.NOTIFICATION_MAIL_UPDATING.getTypeNotification()));
+		} catch(Exception ex){
+			mailSendingComponent.exceptionMailSender(ex);
+		}
+		
 	}
 
 	@RequestMapping(value = "/admin/message/{id}", method = RequestMethod.GET)

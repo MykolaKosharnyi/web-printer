@@ -1,5 +1,6 @@
 package com.printmaster.nk.model.dao.impl;
 
+import java.lang.invoke.MethodHandles;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
@@ -30,7 +31,7 @@ import com.printmaster.nk.model.entity.search.SearchUseWithProducts;
 @Repository
 public class UseWithProductDAOImpl implements UseWithProductDAO{
 
-	 private Logger logger = Logger.getLogger(UseWithProductDAOImpl.class);
+	 private Logger logger = Logger.getLogger(MethodHandles.lookup().lookupClass());
 	 
 	    private SessionFactory sessionFactory;
 	     

@@ -252,10 +252,15 @@
     	};
     	$.ajax({
 			type: 'post',
-			url: "/admin/message/black_version_of_letter",
+			url: "/admin/message/get_black_version_of_letter",
 			data: JSON.stringify(letter),
 			contentType: "application/json; charset=utf-8",		
-			dataType: "json"
+			success: function () {
+				alert('Ожидайте получения чернового варианта');
+		      },
+			error: function(xhr, status, error) {
+				alert('Request Status: ' + xhr.status + ' Status Text: ' + xhr.statusText + ' ' + xhr.responseText);
+			}
 		});	
     }
 

@@ -67,7 +67,7 @@
 					</div>		
 					
 					<div class="form-group">
-						<div class="especial_notes"><p>*</p>Обязательные поля для заполнения:</div>
+						<div class="especial_notes"><p>*</p>Обязательные поля для заполнения</div>
 					</div>	
 			</div>
             <div class="modal-footer">

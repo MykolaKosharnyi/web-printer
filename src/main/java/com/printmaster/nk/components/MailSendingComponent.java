@@ -103,8 +103,10 @@ public class MailSendingComponent {
 		    msg.setFrom(adresFrom);
 		    msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipiets));
 
-		    msg.setSubject(subject, "UTF-8");	       
-		    msg.setText(messageBody.replace("../..", "http://e-machine.com.ua"), "UTF-8", "html");
+		    msg.setSubject(subject, "UTF-8");	
+		    messageBody = messageBody.replace("../../..", "http://e-machine.com.ua")
+		    		.replace("../..", "http://e-machine.com.ua");
+		    msg.setText(messageBody, "UTF-8", "html");
 		    
 		} catch (UnsupportedEncodingException | MessagingException e) {
 			exceptionMailSender(e);

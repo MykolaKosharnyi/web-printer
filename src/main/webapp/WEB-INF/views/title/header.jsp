@@ -14,9 +14,10 @@
 							<i class="fa fa-map-marker"></i> г. Киев, ул. В.Покотыла, д. 7/2</div>
 						<div class="top_information"><i class="fa fa-envelope-o"></i> office@forprint.net.ua</div>
 						<div class="top_information" style="float:right;">
-							<a href="#"><i class="fa fa-vk"></i></a>
-							<a href="#"><i class="fa fa-facebook-square"></i></a>
-							<a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+							<a href="https://www.youtube.com/channel/UCg5OBQp5r2Kwz3S6P0N45fA"><i class="fa fa-youtube"></i></a>
+							<a href="https://vk.com/id313797505"><i class="fa fa-vk"></i></a>
+							<a href="https://www.facebook.com/profile.php?id=100009816581722"><i class="fa fa-facebook-square"></i></a>
+							<a href="https://plus.google.com/+Print-masterNetUa"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
 						</div>
 
 					</div>
