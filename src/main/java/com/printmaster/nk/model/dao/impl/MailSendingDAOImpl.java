@@ -71,6 +71,7 @@ public class MailSendingDAOImpl implements MailSendingDAO {
 	}
 
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<MailSendingMessage> getMessagesReadySend() {
 		Session session = this.sessionFactory.getCurrentSession();

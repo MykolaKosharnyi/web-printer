@@ -5,6 +5,8 @@ import org.springframework.http.MediaType;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -44,9 +46,34 @@ public class UserProposalController {
 		long idOfProposal = userProposalService.create(userProposal);
 		userProposal.setId(idOfProposal);
 		
-		mailSendingComponent.observeRecipients("Отправлен запрос на уточнение цены", createProposalBody(userProposal), 
-				mailSendingComponent.getRecipients(RecipientNotification.NOTIFICATION_PROPOSAL_PRICE.getTypeNotification()));
+		sendMessageWithProposal(userProposal);		
     }
+	
+	@RequestMapping(value = "/admin/user_proposals", method = RequestMethod.GET)	
+    public String allProposals(Model model) {
+        model.addAttribute("proposals", userProposalService.listUserProposal());
+        return "admin/user_proposals";
+    }
+	
+	@RequestMapping(value = "/admin/user_proposals/remove/{id}", method = RequestMethod.GET)
+    public String removeProposal(@PathVariable("id") long id){
+		userProposalService.delete(id);
+        return "redirect:/admin/user_proposals";
+    } 
+	
+	private void sendMessageWithProposal(UserProposal userProposal){
+		String headerOfSendedMessage = null;
+		switch(userProposal.getTypeProposal()){
+		case SPECIFY:
+			headerOfSendedMessage = "Отправлен запрос на уточнение цены";
+			break;
+		case SUGGEST_YOUR_PRICE:
+			headerOfSendedMessage = "Пользователь готов купить товар за...";
+			break;
+		}
+		mailSendingComponent.observeRecipients(headerOfSendedMessage, createProposalBody(userProposal), 
+				mailSendingComponent.getRecipients(RecipientNotification.NOTIFICATION_PROPOSAL_PRICE.getTypeNotification()));
+	}
 	
 	private String createProposalBody(UserProposal userProposal){
 		StringBuilder result = new StringBuilder();

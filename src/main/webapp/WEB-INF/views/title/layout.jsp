@@ -187,7 +187,7 @@ $(function() {
 	    			"idProduct":outerForm.find("input[name=idProduct]").val(),
 	    			"price":outerForm.find("input[name=price]").val(),
 	    			"description":outerForm.find("textarea[name=description]").val(),
-	    			"typeProposal":"SPECIFY",
+	    			"typeProposal":outerForm.find("input[name=typeProposal]").val(),
 	    			"dateCreation": null
 	    	};
 	    	
@@ -246,20 +246,29 @@ $(function() {
 	});
 });
 
+function openModalProposalSuggestPrise(type, idProduct, nameProduct, pathToPicture){
+	proposalPriceBlock(type, idProduct, nameProduct, pathToPicture, "SUGGEST_YOUR_PRICE");
+}
+
 function openModalProposalPrise(type, idProduct, nameProduct, pathToPicture){
+	proposalPriceBlock(type, idProduct, nameProduct, pathToPicture, "SPECIFY");
+} 
+
+function proposalPriceBlock(type, idProduct, nameProduct, pathToPicture, typeProposal){
 	var proposalBlock = $('#callback_proposal_price');
 	var proposalProduct = $('#callback_proposal_price').find("#proposal_product_link");
 	proposalProduct.find("img").attr("src", "/images/" + type + "s/" + idProduct + "/" + pathToPicture);
 	proposalProduct.find("a").attr("href", type + "/" + idProduct).text(nameProduct);
 	proposalProduct.find("input[name=typeProduct]").val(type);
 	proposalProduct.find("input[name=idProduct]").val(idProduct);
+	proposalProduct.find("input[name=typeProposal]").val(typeProposal);
 	
 	//clear input fields
 	proposalBlock.find("input[name=price]").val('');
 	proposalBlock.find("textarea[name=description]").val('');
 	
     $('#callback_proposal_price').modal();
-} 
+}
 
 function checkPrise(num){
 	if(num > 0.1){

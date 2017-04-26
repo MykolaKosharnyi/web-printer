@@ -321,4 +321,9 @@
         <put-attribute name="body" value="/WEB-INF/views/admin/mail_sending/recipient_notification.jsp" />  
     </definition>
     
+    <!-- SHOW ALL USERS PROPOSAL -->
+    <definition name="admin/user_proposals" extends="admin_base">    
+        <put-attribute name="body" value="/WEB-INF/views/admin/user_proposals.jsp" />  
+    </definition>
+    
 </tiles-definitions>  

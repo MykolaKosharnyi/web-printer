@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.printmaster.nk.model.dao.UserProposalDAO;
 import com.printmaster.nk.model.entity.UserProposal;
-import com.printmaster.nk.model.entity.UserProposal.TypeProposal;
 import com.printmaster.nk.model.service.UserProposalService;
 
 @Service
@@ -38,8 +37,8 @@ public class UserProposalServiceImpl implements UserProposalService {
 	}
 
 	@Override
-	public List<UserProposal> listUserProposal(TypeProposal typeProposal) {
-		return userProposalDAO.listUserProposal(typeProposal);
+	public List<UserProposal> listUserProposal() {
+		return userProposalDAO.listUserProposal();
 	}
 
 }

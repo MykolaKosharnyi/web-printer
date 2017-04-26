@@ -21,7 +21,6 @@ import com.printmaster.nk.model.service.MailSendingService;
 
 import static com.printmaster.nk.controller.ConstUsedInContr.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @Controller
@@ -37,17 +36,6 @@ public class MailSenderController {
 	MailSendingOptionService mailSendingOptionService;
 	
 	public final static String LABEL_CHECK_MAIL = " (черновой вариант)";
-	
-//	private final static String RECIPIENT_WHEN_MESSAGE_UPDATED = "alise@forprint.net.ua,nikolay.kosharniy@gmail.com";
-//	private final static String RECIPIENT_WHEN_ASKING_ABOUT_PRODUCT = "alise@forprint.net.ua,nikolay.kosharniy@gmail.com";
-	
-//	@RequestMapping(value="/ask/product", method = RequestMethod.POST, consumes=JSON_CONSUMES, headers = JSON_HEADERS)
-//    public @ResponseBody void askProductPage(HttpServletRequest request) {
-//		String subject = request.getParameter("subject");
-//        String message = request.getParameter("message");
-//        
-//		mailSendingComponent.observeRecipients(subject, message, RECIPIENT_WHEN_ASKING_ABOUT_PRODUCT);
-//    }
 
 	@RequestMapping(value = "/admin/all_sended_messages", method = RequestMethod.GET)
 	public String getAllSendedMessages(Model model){			
@@ -91,7 +79,6 @@ public class MailSenderController {
 		} catch(Exception ex){
 			mailSendingComponent.exceptionMailSender(ex);
 		}
-		
 	}
 
 	@RequestMapping(value = "/admin/message/{id}", method = RequestMethod.GET)

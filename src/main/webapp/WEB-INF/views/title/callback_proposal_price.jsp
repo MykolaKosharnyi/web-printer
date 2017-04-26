@@ -48,6 +48,7 @@
 					<div id="proposal_product_link" class="form-group" style="height: 77px;">
 						<input type="hidden" name="typeProduct" value=""></input>
 						<input type="hidden" name="idProduct" value=""></input>
+						<input type="hidden" name="typeProposal" value=""></input>
 						<img src="" class="col-sm-6 img-rounded" />
 						<div class="col-sm-6" style="font-size: 14px;">
 							<a href=""></a>

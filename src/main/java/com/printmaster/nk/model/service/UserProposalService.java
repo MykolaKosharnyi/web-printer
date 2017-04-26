@@ -8,5 +8,5 @@ public interface UserProposalService {
 	UserProposal getById(long id);
 	long create(UserProposal userProposal);
 	void delete(long id);
-	List<UserProposal> listUserProposal(UserProposal.TypeProposal typeProposal);
+	List<UserProposal> listUserProposal();
 }

@@ -6,12 +6,11 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.Order;
 import org.springframework.stereotype.Repository;
 
 import com.printmaster.nk.model.dao.UserProposalDAO;
 import com.printmaster.nk.model.entity.UserProposal;
-import com.printmaster.nk.model.entity.UserProposal.TypeProposal;
 
 @Repository
 public class UserProposalDAOImpl implements UserProposalDAO{
@@ -45,10 +44,10 @@ public class UserProposalDAOImpl implements UserProposalDAO{
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<UserProposal> listUserProposal(TypeProposal typeProposal) {
+	public List<UserProposal> listUserProposal() {
 		Session session = this.sessionFactory.getCurrentSession();
 		Criteria cr = session.createCriteria(UserProposal.class);	
-		cr.add(Restrictions.eq("typeProposal", typeProposal));				
+		cr.addOrder(Order.desc("typeProposal"));				
 		return new ArrayList<UserProposal>(cr.list());
 	}
 

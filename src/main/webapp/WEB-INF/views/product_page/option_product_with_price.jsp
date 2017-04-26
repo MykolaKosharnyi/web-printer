@@ -357,7 +357,7 @@
 	
 		<tr>
 	        <td colspan="3">
-	        	<button class="btn btn-success" onclick="openModalProposalPrise('${type}', ${product.id}, '${product.name}', '${product.pathPictures.get(0)}')">Готовы купить за</button>
+	        	<button class="btn btn-success" onclick="openModalProposalSuggestPrise('${type}', ${product.id}, '${product.name}', '${product.pathPictures.get(0)}')">Готовы купить за</button>
 	        </td>
 		</tr>
 

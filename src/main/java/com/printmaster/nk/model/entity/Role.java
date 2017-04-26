@@ -2,10 +2,7 @@ package com.printmaster.nk.model.entity;
 
 import javax.persistence.*;
 
-import com.printmaster.nk.model.entity.User;
-
 import java.io.Serializable;
-import java.util.Set;
 
 @Entity
 @Table(name = "roles")
