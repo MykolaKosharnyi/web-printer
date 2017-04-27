@@ -246,6 +246,10 @@ $(function() {
 	});
 });
 
+function openModalInaccuracyInDescription(type, idProduct, nameProduct, pathToPicture){
+	proposalPriceBlock(type, idProduct, nameProduct, pathToPicture, "INACCURACY_IN_DESCRIPTION");
+}
+
 function openModalProposalSuggestPrise(type, idProduct, nameProduct, pathToPicture){
 	proposalPriceBlock(type, idProduct, nameProduct, pathToPicture, "SUGGEST_YOUR_PRICE");
 }

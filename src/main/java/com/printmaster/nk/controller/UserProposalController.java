@@ -70,6 +70,10 @@ public class UserProposalController {
 		case SUGGEST_YOUR_PRICE:
 			headerOfSendedMessage = "Пользователь готов купить товар за...";
 			break;
+		case INACCURACY_IN_DESCRIPTION:
+			headerOfSendedMessage = "Пользователь нашел неточность в описании товара";
+			break;
+			
 		}
 		mailSendingComponent.observeRecipients(headerOfSendedMessage, createProposalBody(userProposal), 
 				mailSendingComponent.getRecipients(RecipientNotification.NOTIFICATION_PROPOSAL_PRICE.getTypeNotification()));
@@ -77,10 +81,10 @@ public class UserProposalController {
 	
 	private String createProposalBody(UserProposal userProposal){
 		StringBuilder result = new StringBuilder();
-		result.append("Предложенная цена: ");
-		result.append(userProposal.getPrice());
-		result.append("<br/>");
-		result.append("<br/>");
+//		result.append("Предложенная цена: ");
+//		result.append(userProposal.getPrice());
+//		result.append("<br/>");
+//		result.append("<br/>");
 		
 		if(userProposal.getDescription()!=null && userProposal.getDescription().trim()!=""){
 			result.append("Описание к цене: ");
