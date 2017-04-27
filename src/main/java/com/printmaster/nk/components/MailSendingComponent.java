@@ -106,7 +106,7 @@ public class MailSendingComponent {
 		    msg.setSubject(subject, "UTF-8");	
 		    messageBody = messageBody.replace("../../..", "http://e-machine.com.ua")
 		    		.replace("../..", "http://e-machine.com.ua");
-		    msg.setText(messageBody, "UTF-8", "html");
+		    msg.setText(createWrapperForBodyMessage(messageBody), "UTF-8", "html");
 		    
 		} catch (UnsupportedEncodingException | MessagingException e) {
 			exceptionMailSender(e);
@@ -114,6 +114,14 @@ public class MailSendingComponent {
 			exceptionMailSender(e);
 		}
 		mailSender.send(msg);
+	}
+	
+	private String createWrapperForBodyMessage(String messageBody){
+		StringBuilder result = new StringBuilder();
+		result.append("<div style='display: block; margin: 0px auto; max-width: 700px; width: inherit;'>");
+		result.append(messageBody);
+		result.append("</div>");
+		return result.toString();
 	}
 	
 	/**
