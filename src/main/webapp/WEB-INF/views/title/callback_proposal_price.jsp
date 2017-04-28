@@ -56,8 +56,7 @@
 					</div>
 					
 					<div class="form-group">
-						<label style="font-size: 13px; margin: 5px; width: 95%;">Если Вам  интересно данное оборудование отправьте  запрос для просчета  актуальной стоимости.
-</label> 
+						<label id="modal_description_title" style="font-size: 13px; margin: 5px; width: 95%;"></label> 
 					</div>			
 					
 					<div class="form-group">

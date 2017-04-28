@@ -247,18 +247,21 @@ $(function() {
 });
 
 function openModalInaccuracyInDescription(type, idProduct, nameProduct, pathToPicture){
-	proposalPriceBlock(type, idProduct, nameProduct, pathToPicture, "INACCURACY_IN_DESCRIPTION");
+	var descriptionLabel = "Опишите, пожалуйста, неточность.";
+	proposalPriceBlock(type, idProduct, nameProduct, pathToPicture, "INACCURACY_IN_DESCRIPTION", descriptionLabel);
 }
 
 function openModalProposalSuggestPrise(type, idProduct, nameProduct, pathToPicture){
-	proposalPriceBlock(type, idProduct, nameProduct, pathToPicture, "SUGGEST_YOUR_PRICE");
+	var descriptionLabel = "Предложите, пожалуйста, свою цену.";
+	proposalPriceBlock(type, idProduct, nameProduct, pathToPicture, "SUGGEST_YOUR_PRICE", descriptionLabel);
 }
 
 function openModalProposalPrise(type, idProduct, nameProduct, pathToPicture){
-	proposalPriceBlock(type, idProduct, nameProduct, pathToPicture, "SPECIFY");
+	var descriptionLabel = "Если Вам интересно данное оборудование отправьте запрос для просчета актуальной стоимости.";
+	proposalPriceBlock(type, idProduct, nameProduct, pathToPicture, "SPECIFY", descriptionLabel);
 } 
 
-function proposalPriceBlock(type, idProduct, nameProduct, pathToPicture, typeProposal){
+function proposalPriceBlock(type, idProduct, nameProduct, pathToPicture, typeProposal,descriptionLabel){
 	var proposalBlock = $('#callback_proposal_price');
 	var proposalProduct = $('#callback_proposal_price').find("#proposal_product_link");
 	proposalProduct.find("img").attr("src", "/images/" + type + "s/" + idProduct + "/" + pathToPicture);
@@ -270,6 +273,9 @@ function proposalPriceBlock(type, idProduct, nameProduct, pathToPicture, typePro
 	//clear input fields
 	proposalBlock.find("input[name=price]").val('');
 	proposalBlock.find("textarea[name=description]").val('');
+	
+	//for description under textarea description // wow:)))
+	proposalBlock.find("label#modal_description_title").text(descriptionLabel);
 	
     $('#callback_proposal_price').modal();
 }
