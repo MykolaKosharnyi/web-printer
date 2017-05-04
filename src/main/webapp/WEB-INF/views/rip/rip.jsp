@@ -48,9 +48,8 @@
                     <li>Описание</li>
                     <li>Технические характеристики</li>
                     <li>Отзывы</li>
+                    <li>Уточнение описания</li>
                     
-                    <!-- import inaccuracy description button -->
-				    <jsp:include page="../product_page/inaccuracy_description_button.jsp" />
                 </ul>
                 <div>
                     <div id="output_description">${product.description}</div>
@@ -82,6 +81,9 @@
                     
                     <!-- comments to this product -->
                     <jsp:include page="../product_page/comments.jsp" />
+                    
+                    <!-- import inaccuracy description -->
+				    <jsp:include page="../product_page/inaccuracy_description.jsp" /> 
 
                 </div>            
             </div> 

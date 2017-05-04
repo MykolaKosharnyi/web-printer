@@ -48,21 +48,23 @@
                 <ul id="sub_tabs_product">
                     <li>Описание</li>
                     <li>Отзывы</li>
-                    
-                    <!-- import inaccuracy description button -->
-				    <jsp:include page="../product_page/inaccuracy_description_button.jsp" />
+                    <li>Уточнение описания</li>
+                   
                 </ul>
                 <div>
                     <div id="output_description">${product.description}</div>
                     
                     <!-- comments to this product -->
                     <jsp:include page="../product_page/comments.jsp" />
+                    
+                    <!-- import inaccuracy description -->
+					<jsp:include page="../product_page/inaccuracy_description.jsp" /> 
                 </div>            
             </div> 
 </div>
 
 	<!-- code of javaScript in the end -->
 	<jsp:include page="../product_page/callback_ask_and_javascript_code.jsp" />
-
+	
 </body>
 </html>

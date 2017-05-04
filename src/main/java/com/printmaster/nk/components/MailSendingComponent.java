@@ -118,7 +118,7 @@ public class MailSendingComponent {
 	
 	private String createWrapperForBodyMessage(String messageBody){
 		StringBuilder result = new StringBuilder();
-		result.append("<div style='display: block; margin: 0px auto; max-width: 350px; width: inherit;'>");
+		result.append("<div style='display: block; margin: 0px auto; max-width: 1000px; width: inherit;'>");
 		result.append(messageBody);
 		result.append("</div>");
 		return result.toString();
