@@ -70,10 +70,6 @@
 						<c:if test="${proposal.typeProposal.toString() eq 'SUGGEST_YOUR_PRICE'}">						
 							<td><button type="button" class="btn btn-info">Готовы купить за</button></td>
 						</c:if>
-						
-						<c:if test="${proposal.typeProposal.toString() eq 'INACCURACY_IN_DESCRIPTION'}">						
-							<td><button type="button" class="btn btn-danger">Неточность в описании</button></td>
-						</c:if>
 		
 						<td width="60px"><a href="<c:url value='/admin/user_proposals/remove/${proposal.id}' />"><i class="fa fa-trash-o remove" aria-hidden="true"></i></a></td>
 					</tr>

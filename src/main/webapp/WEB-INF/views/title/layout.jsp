@@ -246,11 +246,6 @@ $(function() {
 	});
 });
 
-function openModalInaccuracyInDescription(type, idProduct, nameProduct, pathToPicture){
-	var descriptionLabel = "Опишите, пожалуйста, неточность.";
-	proposalPriceBlock(type, idProduct, nameProduct, pathToPicture, "INACCURACY_IN_DESCRIPTION", descriptionLabel);
-}
-
 function openModalProposalSuggestPrise(type, idProduct, nameProduct, pathToPicture){
 	var descriptionLabel = "Предложите, пожалуйста, свою цену.";
 	proposalPriceBlock(type, idProduct, nameProduct, pathToPicture, "SUGGEST_YOUR_PRICE", descriptionLabel);

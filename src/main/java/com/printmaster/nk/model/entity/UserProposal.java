@@ -59,7 +59,7 @@ public class UserProposal implements Serializable{
 	private Date dateCreation = new Date();
 	
 	public static enum TypeProposal{
-		SPECIFY/*уточняйте*/, SUGGEST_YOUR_PRICE/*Предложить свою цену*/, INACCURACY_IN_DESCRIPTION/*Неточтость в описании*/
+		SPECIFY/*уточняйте*/, SUGGEST_YOUR_PRICE/*Предложить свою цену*/
 	}
 	
 	public UserProposal(){}
