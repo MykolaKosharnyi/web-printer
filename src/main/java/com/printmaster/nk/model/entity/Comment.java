@@ -5,6 +5,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -47,7 +49,23 @@ public class Comment implements Serializable{
 	@Column(name="productId")
 	private long productId;
 	
+	@Column(length = 40, columnDefinition = "varchar(40) default 'COMMENT'")
+	@Enumerated(value = EnumType.STRING)
+	private TypeComment typeComment = TypeComment.COMMENT;
+	
+	public static enum TypeComment{
+		COMMENT, INACCURACY_IN_DESCRIPTION
+	}
+	
 	public Comment(){}
+
+	public TypeComment getTypeComment() {
+		return typeComment;
+	}
+
+	public void setTypeComment(TypeComment typeComment) {
+		this.typeComment = typeComment;
+	}
 
 	public String getNameUser() {
 		return nameUser;

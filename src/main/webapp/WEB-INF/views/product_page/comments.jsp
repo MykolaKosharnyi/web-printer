@@ -3,27 +3,28 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
-
 <div id="comments_block">
 
 	<c:forEach items="${comments}" var="comment">
-		<div class="users_comment">
-			<c:if test="${pageContext.request.userPrincipal.name != null}">
-				<input type="hidden" name="commentId" value="${comment.id}">
-				<div class="remove_comment"><i class="fa fa-trash-o" aria-hidden="true"></i></div>
-				<div class="edit_comment"><i class="fa fa-pencil"></i></div>
-			</c:if>
-				
-			<img src="/images/users/${comment.userId}/${comment.pathUserPicture}" class="col-sm-2 img-circle" />
-			<div class="col-sm-10">
-				<h5 style="margin: 5px;">${comment.nameUser} ${comment.secondName}, <small><fmt:formatDate type="both" dateStyle="long" timeStyle="short" 
-								value="${comment.dateWriting}" /></small></h5>
-				<blockquote>
-					<p style="text-indent: 0em;">${comment.message}</p>
-				</blockquote>
-
+		<c:if test="${comment.typeComment.toString() eq 'COMMENT'}">
+			<div class="users_comment">
+				<c:if test="${pageContext.request.userPrincipal.name != null}">
+					<input type="hidden" name="commentId" value="${comment.id}">
+					<div class="remove_comment"><i class="fa fa-trash-o" aria-hidden="true"></i></div>
+					<div class="edit_comment"><i class="fa fa-pencil"></i></div>
+				</c:if>
+					
+				<img src="/images/users/${comment.userId}/${comment.pathUserPicture}" class="col-sm-2 img-circle" />
+				<div class="col-sm-10">
+					<h5 style="margin: 5px;">${comment.nameUser} ${comment.secondName}, <small><fmt:formatDate type="both" dateStyle="long" timeStyle="short" 
+									value="${comment.dateWriting}" /></small></h5>
+					<blockquote>
+						<p style="text-indent: 0em;">${comment.message}</p>
+					</blockquote>
+	
+				</div>
 			</div>
-		</div>
+		</c:if>
 	</c:forEach>
 	
 	<c:if test="${pageContext.request.userPrincipal.name != null}">
@@ -31,9 +32,10 @@
 		<form:form class="form-horizontal" commandName="addComment" action="${addCommentLink}" method="post">
 			<input type="hidden" name="productType" value="${type}">
 			<input type="hidden" name="productId" value="${product.id}">
+			<input type="hidden" name="typeComment" value="COMMENT">
 		
 			<form:textarea path="message" class="form-control" rows="3" placeholder="Здесь Вы можете оставить свой отзыв..."/>
-			<a class="btn btn-success" href="javascript:void(0)" onclick="addUserComment();" style="margin: 10px;">Добавить комментарий</a>
+			<a href="javascript:void(0)" class="btn btn-success" onclick="addUserComment();" style="margin: 10px;">Добавить комментарий</a>
 		</form:form>
 	</c:if>
 	<c:if test="${pageContext.request.userPrincipal.name == null}">
@@ -49,9 +51,9 @@
 
 	function addUserComment(){
 		
-		var dataToSend = $("form#addComment").find("textarea#message").val().trim();
+		var dataToSend = $("#comments_block form#addComment").find("textarea#message").val().trim();
 		if(dataToSend!="")
-		$('form#addComment').ajaxForm({
+		$('#comments_block form#addComment').ajaxForm({
 			type: 'post',
 			success: function(comment){
 				 $('<div/>').addClass('users_comment')

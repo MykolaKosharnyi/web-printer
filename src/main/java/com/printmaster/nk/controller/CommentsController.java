@@ -47,8 +47,18 @@ public class CommentsController {
 	@RequestMapping(value="/comment/add", method = RequestMethod.POST)
     public @ResponseBody Comment addNewComment(@ModelAttribute("addComment") @Valid Comment comment) {	
 		commentService.add(comment);
-		mailSendingComponent.observeRecipients("Добавлен новый комментарий", getCommentBody(comment), 
-				mailSendingComponent.getRecipients(RecipientNotification.NOTIFICATION_COMMENT.getTypeNotification()));
+		
+		switch(comment.getTypeComment()){
+		case COMMENT:
+			mailSendingComponent.observeRecipients("Добавлен новый комментарий", getCommentBody(comment), 
+					mailSendingComponent.getRecipients(RecipientNotification.NOTIFICATION_COMMENT.getTypeNotification()));
+			break;
+		case INACCURACY_IN_DESCRIPTION:
+			mailSendingComponent.observeRecipients("Добавлен новый комментарий по уточнению описания", getCommentBody(comment), 
+					mailSendingComponent.getRecipients(RecipientNotification.NOTIFICATION_INACCURACY.getTypeNotification()));
+			break;
+		}
+		
     	return comment;
     }
 	
@@ -63,8 +73,18 @@ public class CommentsController {
     	result.put("result", isDeleted);
     	
     	if(isDeleted){
-    		mailSendingComponent.observeRecipients("Удален комментарий", getCommentBody( commentWichWillBeDeleted ),
-    				mailSendingComponent.getRecipients(RecipientNotification.NOTIFICATION_COMMENT.getTypeNotification()));
+    		switch(commentWichWillBeDeleted.getTypeComment()){
+			case COMMENT:
+				mailSendingComponent.observeRecipients("Удален комментарий", getCommentBody( commentWichWillBeDeleted ),
+	    				mailSendingComponent.getRecipients(RecipientNotification.NOTIFICATION_COMMENT.getTypeNotification()));
+				break;
+			case INACCURACY_IN_DESCRIPTION:
+				mailSendingComponent.observeRecipients("Удален комментарий по уточнению описания", getCommentBody( commentWichWillBeDeleted ),
+	    				mailSendingComponent.getRecipients(RecipientNotification.NOTIFICATION_INACCURACY.getTypeNotification()));
+				break;
+    		}
+    		
+    		
     	}
     	return result;
     }
