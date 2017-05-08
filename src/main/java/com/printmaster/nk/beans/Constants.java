@@ -1,6 +1,19 @@
 package com.printmaster.nk.beans;
 
 public class Constants {
+	
+	public static final String DOLLAR_IN_GRIVNA = "dollar_in_grivna";
+	public static final String EURO_IN_GRIVNA = "euro_in_grivna";
+	public static final String PRICE_AVIA_SIZE = "price_avia_size";
+	public static final String PRICE_AVIA_WEIGHT = "price_avia_weight";
+	public static final String PRICE_SEA_SIZE = "price_sea_size";
+	public static final String PRICE_SEA_WEIGHT = "price_sea_weight";
+	public static final String PRICE_UKRAINE_SIZE = "price_ukraine_size";
+	public static final String PRICE_UKRAINE_WEIGHT = "price_ukraine_weight";
+	public static final String PRICE_KYIV_SIZE = "price_kyiv_size";
+	public static final String PRICE_KYIV_WEIGHT = "price_kyiv_weight";
+	public static final String PERCENT_INSURANCE_UKRAINE = "percent_insurance_ukraine";
+	public static final String PERCENT_INSURANCE_INTERNATIONAL = "percent_insurance_international";
 
 	private double dollarInGrivna;
 	private double euroInGrivna;
