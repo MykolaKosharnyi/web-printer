@@ -11,9 +11,9 @@
         <div class="form-group ${error != null ? 'has-error' : ''}">
             <span>${message}</span>
             <div class="input-group input-sm">
-                <label class="input-group-addon" for="username"><i class="fa fa-user"></i></label>
+                <label class="input-group-addon" for="email"><i class="fa fa-user"></i></label>
                 <spring:message code='login.login' var="loginLogin"/>
-            	<input name="username" type="text" class="form-control" placeholder="${loginLogin}" autofocus/>
+            	<input name="email" type="text" class="form-control" placeholder="${loginLogin}" autofocus/>
             </div>
             <div class="input-group input-sm">
                 <label class="input-group-addon" for="password"><i class="fa fa-lock"></i></label> 

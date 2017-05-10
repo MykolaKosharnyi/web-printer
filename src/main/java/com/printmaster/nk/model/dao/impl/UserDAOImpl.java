@@ -71,11 +71,11 @@ public class UserDAOImpl implements UserDAO{
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public User findByUserName(String username) {
+	public User findByEmail(String email) {
 		Session session = this.sessionFactory.getCurrentSession();
 		Criteria cr = session.createCriteria(User.class);
 		
-		cr.add(Restrictions.eq("username", username));
+		cr.add(Restrictions.eq("email", email));
 		
 		ArrayList<User> result = new ArrayList<User>(cr.list());
 		

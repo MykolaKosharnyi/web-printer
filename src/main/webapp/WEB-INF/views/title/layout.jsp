@@ -140,7 +140,7 @@
 http://gnatkovsky.com.ua/maska-vvoda-nomera-telefona.html
 */
 jQuery(function($){
-   $("#proposal_price_phone_number").mask("+38(099) 99-99-999");
+   $("#proposal_price_phone_number, #telephone").mask("+38(099) 99-99-999");
 });
 
 $(function() {
@@ -244,6 +244,46 @@ $(function() {
 		}
 		
 	});
+	
+	
+	$("#email").keyup(function() {
+
+		var parentElement = $(this).parent('div').parent('div');
+		var dataToSend = $(this).val();
+		
+		if(dataToSend.trim()!=""){
+		$.ajax({
+			  type: 'post',
+			  url: "/check_email",
+			  contentType: "text/plain; charset=utf-8",
+			  data: dataToSend,			        
+		        success: function (data) {
+		        	if(data.result){
+		        		parentElement.removeClass('has-error').addClass('has-success');		        		
+		        		parentElement.find('.info_of_checking_email').css('display','none');
+		        		parentElement.find('.bg-success').css('display','block');
+					} else {
+						parentElement.removeClass('has-success').addClass('has-error');						
+						parentElement.find('.info_of_checking_email').css('display','block');
+						parentElement.find('.bg-success').css('display','none');
+					}
+		        },
+			  error: function(xhr, status, error) {
+				  alert('Request Status: ' + xhr.status + ' Status Text: ' + xhr.statusText + ' ' + xhr.responseText);
+			  }
+			});
+		
+		parentElement.find(".info_of_empty_field").css("display","none");
+
+		} else {
+			parentElement.find('.bg-success').css('display','none');
+			parentElement.find('.bg-danger').css('display','none');
+			parentElement.removeClass('has-success').addClass('has-error');
+			parentElement.find(".info_of_empty_field").css("display","block");
+		}
+		
+	});
+	
 });
 
 function openModalProposalSuggestPrise(type, idProduct, nameProduct, pathToPicture){
@@ -313,6 +353,37 @@ function convernPriceToString(num){
 	  }   
 	  return str.indexOf(" ") == 0 ? str.substring(1) : str;
 }
+
+
+$(function() {
+	$("#submit_registration_button").click(function(){
+		
+		var hasEmptyFields = false;
+		$('div.login-container').find("form#userForm").find("div.form-group")
+			.find('div.neccessary_for_registration').find("input[type=text], input[type=password]").each(function(){
+				if($(this).val().trim()==""){
+					$(this).parent("div").parent("div").find(".info_of_empty_field").css("display","block");
+					$(this).parent('div').parent("div").removeClass('has-success').addClass('has-error');	
+					hasEmptyFields = true;
+				} else {
+					// this if for e-mail checking
+					if($(this).is( "#email" ) && $(this).parent('div').parent('div').hasClass('has-error')){
+						hasEmptyFields = true;
+					} else {
+						
+						$(this).parent('div').parent('div').removeClass('has-error').addClass('has-success');	
+					}
+					$(this).parent("div").parent('div').find(".info_of_empty_field").css("display","none");
+					
+				}
+		});
+		
+		if(!hasEmptyFields){			    			
+			$('div.login-container').find("form#userForm").submit();
+		}
+	});
+});
+
 
 </script>
 </body>

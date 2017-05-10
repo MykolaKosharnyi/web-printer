@@ -12,7 +12,7 @@ import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ConstServer {
+public class ConstantService {
 	
 	private String pathToFile = "/var/www/localhost/products/constant.json";
 	
@@ -56,10 +56,10 @@ public class ConstServer {
 			jsonFile.put(Constants.PERCENT_INSURANCE_UKRAINE, constants.getPercentInsuranceUkraine());				
 			jsonFile.put(Constants.PERCENT_INSURANCE_INTERNATIONAL, constants.getPercentInsuranceInternational());
 		
-		Writer out = new PrintWriter(pathToFile, "UTF-8");
-		out.write(jsonFile.toJSONString());
-		out.flush();
-		out.close();
+			Writer out = new PrintWriter(pathToFile, "UTF-8");
+			out.write(jsonFile.toJSONString());
+			out.flush();
+			out.close();
 		
 		} catch (IOException e) {}
 	}

@@ -132,6 +132,6 @@ public class UserProposalController {
     	} else {
     		username = (String) principal;
     	}
-    	return userService.findByUserName(username);
+    	return userService.findByEmail(username);
 	}
 }

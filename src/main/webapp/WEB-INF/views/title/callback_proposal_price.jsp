@@ -79,5 +79,5 @@
 </div>	
 
 <div class="alert alert-success" id="sended_proposal_alert" role="alert">
-  <label>Спасибо за ответ, скоро мы с Вами звяжемся.</label>
+  <label>Спасибо за запрос, скоро мы с Вами звяжемся.</label>
 </div>

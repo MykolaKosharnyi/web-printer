@@ -49,7 +49,7 @@ public class CommentServiceImpl implements CommentService{
     	} else {
     		username = (String) principal;
     	}
-    	return userService.findByUserName(username);
+    	return userService.findByEmail(username);
 	}
 
 	@Override

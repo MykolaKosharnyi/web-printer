@@ -82,10 +82,6 @@
 				</c:if>
 
 				<table class="table table-striped user_table">
-					<tr>
-						<td>Никнейм</td>
-						<td>${user.username}</td>
-					</tr>
 
 					<c:if test="${!empty user.firstName}">
 						<tr>
@@ -108,7 +104,7 @@
 						</tr>
 					</c:if>
 
-					<c:if test="${ user.telephone != 0 }">
+					<c:if test="${!empty user.telephone }">
 						<tr>
 							<td>Номер телефона</td>
 							<td>${user.telephone}</td>

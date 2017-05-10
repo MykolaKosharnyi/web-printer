@@ -14,7 +14,6 @@
 		<table class="tg">
 			<tr>
 				<th class="text-center">ID</th>
-				<th class="text-center">Логин</th>
 				<th class="text-center">Изображение</th>
 				<th class="text-center">Имя</th>
 				<th class="text-center">Фамилия</th>
@@ -48,14 +47,13 @@
 				<tr id="${user.id}" class="output_pruduct">
 					<td width="40px" <c:if test="${user.role == 'ROLE_ADMIN'}">style="background: #ffd6d6;"</c:if>>${user.id}</td>
 					<td width="120px" <c:if test="${user.role == 'ROLE_ADMIN'}">style="background: #ffd6d6;"</c:if>>
-						<a href="<c:url value='/admin/user/edit/${user.id}' />">${user.username}</a>
-					</td>
-					<td width="120px" <c:if test="${user.role == 'ROLE_ADMIN'}">style="background: #ffd6d6;"</c:if>>
 						<a href="<c:url value='/admin/user/edit/${user.id}' />">
 							<img style="width: 150px;" src="/images/users/${user.id}/${user.nameUserPicture}" alt="">
 						</a>
 					</td>
-					<td width="120px" <c:if test="${user.role == 'ROLE_ADMIN'}">style="background: #ffd6d6;"</c:if>>${user.firstName}</td>
+					<td width="120px" <c:if test="${user.role == 'ROLE_ADMIN'}">style="background: #ffd6d6;"</c:if>>
+						<a href="<c:url value='/admin/user/edit/${user.id}' />">${user.firstName}</a>
+					</td>
 					<td width="120px" <c:if test="${user.role == 'ROLE_ADMIN'}">style="background: #ffd6d6;"</c:if>>${user.lastname}</td>
 					<td width="120px" <c:if test="${user.role == 'ROLE_ADMIN'}">style="background: #ffd6d6;"</c:if>>${user.telephone}</td>
 					<td width="120px" <c:if test="${user.role == 'ROLE_ADMIN'}">style="background: #ffd6d6;"</c:if>>${user.email}</td>

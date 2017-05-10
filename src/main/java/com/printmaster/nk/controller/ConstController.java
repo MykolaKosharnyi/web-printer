@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.printmaster.nk.beans.ConstServer;
+import com.printmaster.nk.beans.ConstantService;
 import com.printmaster.nk.beans.Constants;
 
 @Controller
 public class ConstController {
 	
 	@Autowired
-	private ConstServer constantsService;
+	private ConstantService constantsService;
 	
 	@RequestMapping(value = "/admin/constants", method = RequestMethod.GET)
 	public String getConstants(Model model){

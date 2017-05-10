@@ -47,17 +47,17 @@ public class SecurityServiceImpl implements SecurityService {
     }
 
     @Override
-    public void autologin(String username, String password) {   
+    public void autologin(String email, String password) {   
     
     	// Init a database user object
-    	com.printmaster.nk.model.entity.User user =  userService.findByUserName(username);
+    	com.printmaster.nk.model.entity.User user =  userService.findByEmail(email);
 
     	  // Compare passwords
     	  // Make sure to encode the password first before comparing
     	  if (  passwordEncoder.matches(password, user.getPassword()) ) {
     		  logger.debug("User details are good and ready to go");
     		  Authentication auth = 
-            		  new UsernamePasswordAuthenticationToken(user.getUsername(), password, buildUserAuthority(user.getRole()));
+            		  new UsernamePasswordAuthenticationToken(user.getEmail(), password, buildUserAuthority(user.getRole()));
 
             		SecurityContextHolder.getContext().setAuthentication(auth);
     		  

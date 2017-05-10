@@ -72,7 +72,7 @@ public class UserController {
     	} else {
     		username = (String) principal;
     	}
-    	return userService.findByUserName(username);
+    	return userService.findByEmail(username);
 	}
     
     @RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -105,7 +105,7 @@ public class UserController {
         String password = userForm.getPassword();
         long id = userService.save(userForm);
 
-        securityService.autologin(userForm.getUsername(), password);
+        securityService.autologin(userForm.getEmail(), password);
         
         //create folder on service for keeping user's pictures
         componets.createDirectoryForPictures(DIRECTORY, CONCRETE_FOLDER, id);

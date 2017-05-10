@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.printmaster.nk.beans.Cart;
-import com.printmaster.nk.beans.ConstServer;
+import com.printmaster.nk.beans.ConstantService;
 import com.printmaster.nk.beans.Constants;
 import com.printmaster.nk.beans.Delivery;
 import com.printmaster.nk.beans.Paint;
@@ -45,7 +45,7 @@ public class CartController {
 	Cart cart;
 	
 	@Autowired
-	private ConstServer constants;
+	private ConstantService constants;
 	
 	@Autowired
 	private PrinterService printerService;

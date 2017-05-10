@@ -44,7 +44,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 		  logger.debug("Performing custom authentication");
 		  
 		   // Retrieve user details from database
-		  User user = userService.findByUserName(authentication.getName());
+		  User user = userService.findByEmail(authentication.getName());
 		  
 		  if( user == null ){
 			  logger.error("User does not exists!");

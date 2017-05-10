@@ -21,9 +21,6 @@ public class User implements Serializable{
 	@Column(name="id")
 	private Long id;
 	
-	@Column(name="username", unique = true)
-	private String username;
-	
 	@Column(name="firstname")
 	private String firstName;
 	
@@ -100,14 +97,6 @@ public class User implements Serializable{
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
 	}
 
 	public String getPasswordConfirm() {
