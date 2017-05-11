@@ -213,7 +213,7 @@ $(function() {
 		var dataToSend = $(this).val();
 		
 		if(dataToSend.trim()!=""){
-		$.ajax({
+			$.ajax({
 			  type: 'post',
 			  url: "/check_email",
 			  contentType: "text/plain; charset=utf-8",
@@ -252,7 +252,7 @@ $(function() {
 		var dataToSend = $(this).val();
 		
 		if(dataToSend.trim()!=""){
-		$.ajax({
+			$.ajax({
 			  type: 'post',
 			  url: "/check_email",
 			  contentType: "text/plain; charset=utf-8",
@@ -273,7 +273,7 @@ $(function() {
 			  }
 			});
 		
-		parentElement.find(".info_of_empty_field").css("display","none");
+			parentElement.find(".info_of_empty_field").css("display","none");
 
 		} else {
 			parentElement.find('.bg-success').css('display','none');

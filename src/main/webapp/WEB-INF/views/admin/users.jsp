@@ -17,7 +17,7 @@
 				<th class="text-center">Изображение</th>
 				<th class="text-center">Имя</th>
 				<th class="text-center">Фамилия</th>
-				<th class="text-center">Телефон</th>
+				<th class="text-center" style="min-width: 128px;">Телефон</th>
 				<th class="text-center">Почта</th>
 				<th class="text-center">Дата регистрации</th>
 				<th class="text-center">Удалить</th>

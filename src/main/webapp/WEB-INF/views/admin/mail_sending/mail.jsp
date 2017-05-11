@@ -105,8 +105,9 @@
 			</c:if>
 			
 		  
-		  <div class="form-group">
+		  <div class="form-group">		  	
 			<label for="message">Основная часть:</label>
+			<a class="btn btn-success" href="javascript:void(0)" onclick="getPictureFromModalWindow();">Добавить изображение(на этапе разработки)</a>
 			<form:textarea path="message" class="form-control" id="description" value="${mailMessage.message}"/>
 		  </div>
 		  
