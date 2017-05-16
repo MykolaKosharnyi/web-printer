@@ -38,10 +38,4 @@
 	<jsp:include page="pictures/pictures_modal_window.jsp" />
 </body>
 
-<script>
-function getPictureFromModalWindow(){
-	$('#pictures_modal_window').modal('show');
-}
-</script>
-
 </html>

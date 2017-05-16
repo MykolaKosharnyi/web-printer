@@ -55,7 +55,7 @@
 			<c:url var="addAction" value="/admin/message/update"></c:url>
 		</c:if>
 	
-		<form:form style="padding: 10px 0px;"  commandName="mailMessage"
+		<form:form style="padding: 10px 0px;" commandName="mailMessage"
 		 action="${addAction}" method="post">
 		 
 		 <div class="form-group">
