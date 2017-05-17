@@ -21,25 +21,11 @@
         <beans:property name="targetMethod" value="executeInternal" />
     </beans:bean>
     
-    <!-- 
-    <beans:bean name="mailSendingJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
-        <beans:property name="jobClass" value="com.printmaster.nk.beans.EmailSendingJob" />
-        <beans:property name="jobDataMap">
-            <beans:map>
-                <beans:entry key="mailSendingService" value-ref="mailSendingService" />
-                <beans:entry key="mailSender" value="org.springframework.mail.MailSender" />
-                <beans:entry key="userAddByAdminService" value-ref="userAddByAdminService" />
-            </beans:map>
-        </beans:property>
-        <beans:property name="durability" value="true" />
-    </beans:bean>
-     -->
-    
     <!-- run job every 10 minutes -->
     <beans:bean id="mailSendingTrigger"  class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
         <beans:property name="jobDetail" ref="mailSendingJobDetail" />
-        <beans:property name="startDelay" value="#{1000}" />
-        <beans:property name="repeatInterval" value="#{1000*60*60*4}" />
+        <beans:property name="startDelay" value="#{1000*60*2}" />
+        <beans:property name="repeatInterval" value="#{1000*60*10}" />
     </beans:bean>
  
     <!-- Scheduler factory bean to glue together jobDetails and triggers to Configure Quartz Scheduler -->

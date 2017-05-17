@@ -1,5 +1,6 @@
 package com.printmaster.nk.beans;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,20 +26,20 @@ public class EmailSendingJob{
 	MailSendingComponent mailSendingComponent;
 
 	public void executeInternal() {
-		for(MailSendingMessage message : mailSendingService.getMessagesReadySend()){
-			try{
-				sendEmail(message);
-			} catch (Exception ex){
-				mailSendingComponent.exceptionMailSender(ex);
-			}	
+		for(MailSendingMessage message : mailSendingService.getMessagesReadySend()){			
+			sendEmail(message);			
 		}
 	}
 
 	private void sendEmail(MailSendingMessage message) {
 		if(!message.getSubscription().isEmpty()){
 			List<UserAddByAdmin> usersList = userAddByAdminService.getUserBySubscription(message.getSubscription());
-			for (UserAddByAdmin user : usersList) {			
-				mailSendingComponent.observeRecipients(message, getConcatedEmails(user));
+			for (UserAddByAdmin user : usersList) {	
+				try{
+					mailSendingComponent.observeRecipients(message, getConcatedEmails(user));
+				} catch (Exception ex){
+					mailSendingComponent.exceptionMailSender(ex);
+				}	
 			}
 			
 			message.setStatus(StatusOfSending.SENDED);
@@ -62,14 +63,27 @@ public class EmailSendingJob{
 	 */
 	private String getConcatedEmails(String... emails){
 		StringBuilder result = new StringBuilder();
-		for(int i=0; i<emails.length; i++){
-			if(emails[i]!=null && !emails[i].isEmpty()){
-				result.append(emails[i]);
-				if(i!=emails.length-1){//check if not last element
+		List<String> cleanEmailList = getNotEmptyEmailList(emails);
+		
+		for(int i=0; i<cleanEmailList.size(); i++){
+			if(cleanEmailList.get(i)!=null && !cleanEmailList.get(i).isEmpty()){
+				result.append(cleanEmailList.get(i));
+				if(i!=cleanEmailList.size()-1){//check if not last element
 					result.append(",");
 				}
 			}
 		}
 		return result.toString();
+	}
+	
+	private List<String> getNotEmptyEmailList(String... emails){
+		List<String> result = new ArrayList<>();
+		
+		for(int i=0; i<emails.length; i++){
+			if(emails[i]!=null && !emails[i].isEmpty()){
+				result.add(emails[i]);
+			}
+		}
+		return result;
 	}
 }
