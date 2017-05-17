@@ -2,6 +2,8 @@ package com.printmaster.nk.controller;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.json.simple.JSONArray;
@@ -55,6 +57,14 @@ public class PicturesInDescriptionController {
 			}
 			result.add(object);
 		}  	
+		
+		Collections.sort(result, new Comparator<JSONObject>(){
+			@Override
+			public int compare(JSONObject o1, JSONObject o2) {
+				return ((Boolean) o2.get("isDirectory")).compareTo((Boolean) o1.get("isDirectory"));
+			}
+		});
+		
     	return result;
     }
 }

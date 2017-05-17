@@ -37,13 +37,25 @@ function getPictureFromModalWindow(){
 	    	  var modalBody = $('#pictures_modal_window').find(".modal-dialog .modal-content .modal-body");
 	    	  var formGroup = $("<div/>").addClass("form-group");
 	    	  var countOfElements = 0;
+	    	  
 	    	  $(files).each(function(index, file){
-	    		  formGroup.append($('<div/>').addClass("file_pictures_modal_window").text(file.name));
+	    		  
+ 				var filePicture;
+	    		  
+	    		  if(file.isDirectory){
+	    			  filePicture = $("<i/>").addClass("fa fa-folder-open");
+	    		  } else {
+	    			  filePicture = $("<img/>").attr("src", "/images/" + file.name);
+	    		  }
+
+	    		  formGroup.append($('<div/>').addClass("file_pictures_modal_window")
+	    				  .append(filePicture)
+	    				  .append(file.name));
 	    		  countOfElements++;
 	  			});
 	    	  
 	    	 var heightOfPicturesFile = $( "#pictures_modal_window .file_pictures_modal_window" ).height();
-	    	  modalBody.append(formGroup.css({'height': (countOfElements/4) * 50 + 25 + 'px'}));
+	    	  modalBody.append(formGroup.css({'height': (countOfElements/4) * 160 + 'px'}));
 	      },
 		  error: function(xhr, status, error) {
 			  alert('Request Status: ' + xhr.status + ' Status Text: ' + xhr.statusText + ' ' + xhr.responseText);
