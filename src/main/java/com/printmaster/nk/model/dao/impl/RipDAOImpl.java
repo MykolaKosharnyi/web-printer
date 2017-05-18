@@ -45,29 +45,21 @@ public class RipDAOImpl extends ProductDaoTemplate<Rip, SearchRips> {
 		Session session = getSessionFactory().getCurrentSession();
 		Criteria cr = session.createCriteria(Rip.class);
 
-		JSONArray usedDate = null;
-		try {
-			usedDate = (JSONArray) new JSONParser()
-					.parse(new InputStreamReader(new FileInputStream("/var/www/localhost/images/rip.json"), "UTF-8"));
-		} catch (IOException | ParseException e) {
-			e.printStackTrace();
-		}
-
 		if (searchRips.getPrise0() != searchRips.getPrise1()) {
 			cr.add(Restrictions.between("prise", searchRips.getPrise0(), searchRips.getPrise1()));
 		}
 
 		cr.add(Restrictions.eq("showOnSite", true));
 
-		return deleteUncheckedRip(new HashSet<Rip>(cr.list()), usedDate, searchRips);
+		return deleteUncheckedRip(new HashSet<Rip>(cr.list()), searchRips);
 	}
 
-	private HashSet<Rip> deleteUncheckedRip(HashSet<Rip> result, JSONArray usedDate, SearchRips searchRips){
+	private HashSet<Rip> deleteUncheckedRip(HashSet<Rip> result, SearchRips searchRips){
 		//get all program product with which can showed to consumer
 		Iterator<Rip> itRip = result.iterator();
 
 		while (itRip.hasNext()) {
-			if ((!checkByTypeEquipmentLevel(itRip.next(), usedDate, searchRips)))
+			if ((!checkByTypeEquipmentLevel(itRip.next(), searchRips)))
 				itRip.remove();
 		}
 		return result;
@@ -77,11 +69,10 @@ public class RipDAOImpl extends ProductDaoTemplate<Rip, SearchRips> {
 	 * Check program product to search criteria (begin from type equipment level)
 	 * 
 	 * @param currentRip given to check
-	 * @param usedDate date about program product in rip.json
 	 * @param searchRips criteria to search program product
 	 * @return true if currentRip required searchRips criteria
 	 */
-	private boolean checkByTypeEquipmentLevel(Rip currentRip, JSONArray usedDate, SearchRips searchRips){
+	private boolean checkByTypeEquipmentLevel(Rip currentRip, SearchRips searchRips){
 		boolean isRipWeNeed = false;
 
 		// check if user checked any of TYPE EQUIPMENT if don't so out all
@@ -90,7 +81,7 @@ public class RipDAOImpl extends ProductDaoTemplate<Rip, SearchRips> {
 
 			for (String typeEquipment : searchRips.getTypeEquipment()) 
 				if (currentRip.getTypeEquipment().equals(typeEquipment))
-					return checkBySoftwareMakerLevel(currentRip, usedDate, searchRips, isRipWeNeed, typeEquipment);
+					return checkBySoftwareMakerLevel(currentRip, searchRips, isRipWeNeed, typeEquipment);
 
 		} else {
 			return true;
@@ -102,15 +93,23 @@ public class RipDAOImpl extends ProductDaoTemplate<Rip, SearchRips> {
 	 * Check program product to search criteria (work on software maker level)
 	 * 
 	 * @param currentRip given to check
-	 * @param usedDate  date about program product in rip.json
 	 * @param searchRips criteria to search program product
 	 * @param isRipWeNeed default value (if given product don't respond given criteria so delete this product)
 	 * @param typeEquipment concrete checked equipment from searchRips
 	 * @return true if currentRip required searchRips criteria
 	 */
 	@SuppressWarnings("unchecked")
-	private boolean checkBySoftwareMakerLevel(Rip currentRip, JSONArray usedDate, SearchRips searchRips,
+	private boolean checkBySoftwareMakerLevel(Rip currentRip, SearchRips searchRips,
 			boolean isRipWeNeed, String typeEquipment) {
+		
+		JSONArray usedDate = null;
+		try {
+			usedDate = (JSONArray) new JSONParser()
+					.parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/rip.json"), "UTF-8"));
+		} catch (IOException | ParseException e) {
+			e.printStackTrace();
+		}		
+		
 		if ( (searchRips.getSoftwareMaker() != null) && (searchRips.getSoftwareMaker().length > 0) ) {
 
 			Iterator<JSONObject> typeEquipmetnJson = usedDate.iterator();
@@ -144,7 +143,6 @@ public class RipDAOImpl extends ProductDaoTemplate<Rip, SearchRips> {
 
 	/**
 	 * Check program product to search criteria (work on software class level)
-	 * 
 	 * @param currentRip given to check
 	 * @param searchRips criteria to search program product
 	 * @param isRipWeNeed default value (if given product don't respond given criteria so delete this product)
@@ -171,7 +169,6 @@ public class RipDAOImpl extends ProductDaoTemplate<Rip, SearchRips> {
 
 	/**
 	 * Checking if software classes was checked for this concrete software maker
-	 * 
 	 * @param searchRips
 	 * @param arraySoftClass
 	 * @return if nothing checked than add this product
