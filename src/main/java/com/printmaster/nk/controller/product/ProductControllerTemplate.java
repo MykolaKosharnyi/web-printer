@@ -17,8 +17,10 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.printmaster.nk.beans.ComponentsForControllers;
 import com.printmaster.nk.beans.LinksForProducts;
 import com.printmaster.nk.beans.PicturesContainer;
+import com.printmaster.nk.model.entity.Comment;
 import com.printmaster.nk.model.entity.HeadProduct;
 import com.printmaster.nk.model.entity.search.SearchGeneric;
+import com.printmaster.nk.model.service.CommentService;
 import com.printmaster.nk.model.service.ProductService;
 import com.printmaster.nk.model.service.UseWithProductService;
 
@@ -36,6 +38,9 @@ public abstract class ProductControllerTemplate <T extends HeadProduct, S extend
 
     @Autowired
     private PicturesContainer files;
+    
+    @Autowired
+	private CommentService commentService;
 
 	private UseWithProductService useWithProductService;
 	
@@ -115,6 +120,9 @@ public abstract class ProductControllerTemplate <T extends HeadProduct, S extend
         model.addAttribute(ATTRIBUTE_TYPE, getTYPE());       
         model.addAttribute(ATTRIBUTE_UWP, product.getIdUseWithProduct()!=null ?
         		componets.showSimplestArrayOfUseWithProduct(useWithProductService.getProductsByIds(product.getIdUseWithProduct())) : null);
+        
+        model.addAttribute("comments", commentService.getAllForProduct(getTYPE(), id));
+        model.addAttribute("addComment", new Comment());
         
         return getTYPE();
     }
