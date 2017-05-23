@@ -44,7 +44,17 @@ public class PicturesInDescriptionController {
             produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody JSONArray getDirectoryWithFiles(@PathVariable("concreteFolder") String concreteFolder){
     	JSONArray result = new JSONArray();
-    	File folder = new File(ROOT_PATH_TO_PICTURES/* + concreteFolder*/);
+    	
+    	File folder = ("root_path".equals(concreteFolder)) ? new File(ROOT_PATH_TO_PICTURES):
+    			new File(ROOT_PATH_TO_PICTURES + File.separator + concreteFolder.replace(":", File.separator));
+    	
+//    	if("root_path".equals(concreteFolder)){
+//    		folder = new File(ROOT_PATH_TO_PICTURES);
+//    	} else {
+//    		String newPathConcreteFolder = concreteFolder.replace(":", File.pathSeparator);
+//    		folder = new File(ROOT_PATH_TO_PICTURES + File.pathSeparator + newPathConcreteFolder);
+//    	}
+    	
     	File[] listOfFiles = folder.listFiles();
     	
 		for (int i = 0; i < listOfFiles.length; i++) {
