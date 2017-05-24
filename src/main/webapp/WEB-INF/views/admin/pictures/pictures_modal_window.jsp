@@ -8,9 +8,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>              
 				<h5 class="modal-title">Управление изображениями</h5>
             </div>
-            <div class="modal-body" style="padding: 5px 5px 0px 5px;">	
-            
-            	<input type="hidden" id="current_path_modal_pictures" value="root_path"/>
+            <div class="modal-body" style="padding: 5px 5px 0px 5px;">	       
 					
 				<div class="form-group path_to_pictures">
 					<ol class="breadcrumb">
@@ -47,13 +45,19 @@ function getPictureFromModalWindow(){
 	$('#pictures_modal_window').modal('show');
 	
 	var modalBody = $('#pictures_modal_window').find(".modal-dialog .modal-content .modal-body");
-	var rootPath = pathPictureDirectoriesInModalWindow[pathPictureDirectoriesInModalWindow.length-1]["path"];
+	var rootPath = getPathOfModalPicturesDirectories();
 	
 	$.ajax({
 		  type: 'post',
 		  url: "/pictures_in_description/" + rootPath,
 		  contentType: "application/json; charset=utf-8",			        
 	      success: function (files) {
+	    	  
+	    	  //load new path to pictures
+	    	  createNewPathToPicturesInModalWindow();
+	    	  
+	    	//remove old pictures
+	    	  $('#pictures_modal_window').find(".modal-dialog .modal-content .modal-body .modal_current_group_of_pictures").remove();
 	    	  
 	    	  var formGroup = $("<div/>").addClass("form-group modal_current_group_of_pictures");
 	    	  var countOfElements = 0;
@@ -65,7 +69,7 @@ function getPictureFromModalWindow(){
 	    		  if(file.isDirectory){
 	    			  filePicture = $("<i/>").addClass("fa fa-folder-open modal_pictures_directory");
 	    		  } else {
-	    			  filePicture = $("<img/>").attr("src", "/images/" + file.name);
+	    			  filePicture = $("<img/>").attr("src", "/images" + getPathOfModalPicturesDirectoriesWithSlash() + file.name);
 	    		  }
 
 	    		  formGroup.append($('<div/>').addClass("file_pictures_modal_window")
@@ -75,7 +79,7 @@ function getPictureFromModalWindow(){
 	  			});
 	    	  
 	    	 var heightOfPicturesFile = $( "#pictures_modal_window .file_pictures_modal_window" ).height();
-	    	  modalBody.append(formGroup.css({'height': (countOfElements/4) * 160 + 'px'}));
+	    	  modalBody.append(formGroup.css({'height': (countOfElements/4) * 150 + 100 + 'px'}));
 	      },
 		  error: function(xhr, status, error) {
 			  alert('Request Status: ' + xhr.status + ' Status Text: ' + xhr.statusText + ' ' + xhr.responseText);
@@ -83,24 +87,62 @@ function getPictureFromModalWindow(){
 		});
 }
 
+function createNewPathToPicturesInModalWindow(){
+	var pathKeeper = $("#pictures_modal_window .modal-dialog .modal-content .modal-body .path_to_pictures ol.breadcrumb");
+	
+	//remove old child element
+	pathKeeper.find('li').remove();
+	
+	var sizeOfArray = pathPictureDirectoriesInModalWindow.length;
+	for (var i = 0; i < sizeOfArray; i++) {
+		if(i!=sizeOfArray-1){
+			pathKeeper.append($('<li/>').append($('<a/>').attr("href","javascript:void(0)")
+						.click(function() {getPictureFromModalWindowByPathToDirectory(i)})
+						.text(pathPictureDirectoriesInModalWindow[i]["name_presentation"])));
+		} else {
+			pathKeeper.append($('<li/>').addClass("active")
+					.text(pathPictureDirectoriesInModalWindow[i]["name_presentation"]));
+		}
+	}
+}
+
+function getPathOfModalPicturesDirectories(){
+	pathPictureDirectoriesInModalWindow[pathPictureDirectoriesInModalWindow.length-1]["path"];
+	
+	var sizeOfArray = pathPictureDirectoriesInModalWindow.length;
+
+	if(sizeOfArray==1){
+		return "root_path";
+	} else {
+		var result = "";
+		for (var i = 1; i < sizeOfArray; i++) {
+		    result+=pathPictureDirectoriesInModalWindow[i]["path"];
+		    if(i!=sizeOfArray-1){
+		    	result+=":";
+		    }
+		}
+		return result;
+	}
+}
+
+function getPathOfModalPicturesDirectoriesWithSlash(){
+	pathPictureDirectoriesInModalWindow[pathPictureDirectoriesInModalWindow.length-1]["path"];
+	
+	var sizeOfArray = pathPictureDirectoriesInModalWindow.length;
+
+	var result = "/";
+	if(sizeOfArray > 0)
+	for (var i = 1; i < sizeOfArray; i++) {
+		result += pathPictureDirectoriesInModalWindow[i]["path"] + "/";
+	}
+	return result;
+}
+
 $(document).on("dblclick", '#pictures_modal_window .file_pictures_modal_window', function(){
 	  var endOfPath = $(this).find("div.name_of_picture_file").text();
 	  
-	  pathPictureDirectoriesInModalWindow.push({path:endOfPath, name_presentation:endOfPath});
+	  pathPictureDirectoriesInModalWindow.push({'path':endOfPath, 'name_presentation':endOfPath});
 	  
-	  //remove old pictures
-	  $('#pictures_modal_window').find(".modal-dialog .modal-content .modal-body .modal_current_group_of_pictures").remove();
-	  
-	  //set new photos path
-/*	  var picturesDirectory = $('#pictures_modal_window').find(".modal-dialog .modal-content .modal-body").find("input#current_path_modal_pictures");
-	  
-	  if("root_path"==picturesDirectory.val()){
-		  picturesDirectory.val(endOfPath);
-	  } else {
-		  var oldPicturesPath = picturesDirectory.val();
-		  picturesDirectory.val(oldPicturesPath + ":" + endOfPath);
-	  }
-*/	  
 	  // load pictures from new path
 	  getPictureFromModalWindow();
 });

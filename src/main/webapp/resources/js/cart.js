@@ -393,7 +393,7 @@ function createTRInTableForProduct(product){
 		});
 	}
 
-$(document).on("keydown", '"#cart input.quantity"', function(e){
+$(document).on("keydown", '#cart input.quantity', function(e){
 /*$("#cart input.quantity").keydown(function (e) {*/
     // Allow: backspace, delete.
     if ($.inArray(e.keyCode, [46, 8]) !== -1 ||
