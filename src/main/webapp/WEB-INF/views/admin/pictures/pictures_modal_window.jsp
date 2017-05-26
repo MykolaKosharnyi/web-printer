@@ -97,7 +97,7 @@ function createNewPathToPicturesInModalWindow(){
 	for (var i = 0; i < sizeOfArray; i++) {
 		if(i!=sizeOfArray-1){
 			pathKeeper.append($('<li/>').append($('<a/>').attr("href","javascript:void(0)")
-						.click(function() {getPictureFromModalWindowByPathToDirectory(i)})
+						.attr("onclick","getPictureFromModalWindowByPathToDirectory(" + i + ");")
 						.text(pathPictureDirectoriesInModalWindow[i]["name_presentation"])));
 		} else {
 			pathKeeper.append($('<li/>').addClass("active")

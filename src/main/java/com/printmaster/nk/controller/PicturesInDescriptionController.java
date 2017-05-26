@@ -1,16 +1,13 @@
 package com.printmaster.nk.controller;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,24 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class PicturesInDescriptionController {
 
 	private static final String ROOT_PATH_TO_PICTURES = "/var/www/localhost/images";
-	
-//	@RequestMapping(value = "/pictures_in_description", method = RequestMethod.GET)	
-    public String getFilesInImages(Model model) {
-    	File folder = new File(ROOT_PATH_TO_PICTURES);
-    	File[] listOfFiles = folder.listFiles();
-    	
-    	List<String> listOfFolders = new ArrayList<>();
-    	List<String> listOfPictures = new ArrayList<>();
-
-    	    for (int i = 0; i < listOfFiles.length; i++) {
-    	      if (listOfFiles[i].isFile()) {
-    	    	  listOfPictures.add(listOfFiles[i].getName());
-    	      } else if (listOfFiles[i].isDirectory()) {
-    	    	  listOfFolders.add(listOfFiles[i].getName());
-    	      }
-    	    }
-        return "s";
-    }
     
     @SuppressWarnings("unchecked")
 	@RequestMapping(value = "/pictures_in_description/{concreteFolder}", method = RequestMethod.POST, 
@@ -47,13 +26,6 @@ public class PicturesInDescriptionController {
     	
     	File folder = ("root_path".equals(concreteFolder)) ? new File(ROOT_PATH_TO_PICTURES):
     			new File(ROOT_PATH_TO_PICTURES + File.separator + concreteFolder.replace(":", File.separator));
-    	
-//    	if("root_path".equals(concreteFolder)){
-//    		folder = new File(ROOT_PATH_TO_PICTURES);
-//    	} else {
-//    		String newPathConcreteFolder = concreteFolder.replace(":", File.pathSeparator);
-//    		folder = new File(ROOT_PATH_TO_PICTURES + File.pathSeparator + newPathConcreteFolder);
-//    	}
     	
     	File[] listOfFiles = folder.listFiles();
     	
