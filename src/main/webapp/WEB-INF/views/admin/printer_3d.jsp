@@ -30,18 +30,25 @@
 	
 	<div id="product">
 	
-			<c:if test="${empty product.id}">
-					<label id="head_of_page"><spring:message text="Добавление нового 3D принтера" /></label>
-					<c:url var="addAction" value="/admin/${type}/add" ></c:url>
+		<c:if test="${empty product.id}">
+			<label id="head_of_page"><spring:message text="Добавление нового 3D принтера" /></label>
+			<c:url var="addAction" value="/admin/${type}/add" ></c:url>
+		</c:if>
+
+		<c:if test="${!empty product.id}">
+			<label id="head_of_page"><spring:message text="Изменение: ${product.name}" /></label>
+
+			<c:if test="${!empty product.partNumber}">
+				<div>
+					<div style="font-weight: bold; float: left; padding-right: 15px;">Код товара:</div>${product.partNumber}
+				</div>
 			</c:if>
-			
-			<c:if test="${!empty product.id}">
-					<label id="head_of_page"><spring:message text="Изменение ${product.name}, код товара: ${product.partNumber} " /></label>
-					<jsp:include page="product/last_changing.jsp" />
-					<c:url var="addAction" value="/admin/${type}/update" ></c:url>
-			</c:if>
-			
-			<jsp:include page="product/pictures.jsp" />
+
+			<jsp:include page="product/last_changing.jsp" />
+			<c:url var="addAction" value="/admin/${type}/update"></c:url>
+		</c:if>
+
+		<jsp:include page="product/pictures.jsp" />
 
 	<form:form method="POST" commandName="product" action="${addAction}">
 		<div class="save_button_keeper">	

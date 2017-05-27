@@ -358,6 +358,7 @@
                 <c:if test="${!empty product.partNumber}">
                 	<div id="name_product_head_description">Код товара: ${product.partNumber}</div>
 				</c:if>
+					
 					<div class="outer_table_in_head">
 	                    <table id="table_in_head">
 	                       <caption></caption> 

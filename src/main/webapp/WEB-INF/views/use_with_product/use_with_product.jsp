@@ -22,7 +22,11 @@
                 <div class="descriptions">			
 				
                 	<div id="name_product_head_description">${product.name}</div>
-                	<div id="name_product_head_description">Код товара: ${product.partNumber}</div>
+                	
+                	<c:if test="${!empty product.partNumber}">
+   						<div id="name_product_head_description">Код товара: ${product.partNumber}</div>
+					</c:if>
+                	
                     <table id="table_in_head">
                        <caption></caption> 
                                           

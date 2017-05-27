@@ -33,7 +33,14 @@
 		</c:if>
 			
 		<c:if test="${!empty product.id}">
-			<label id="head_of_page"><spring:message text="Изменение ${product.name}, код товара: ${product.partNumber} " /></label>
+			<label id="head_of_page"><spring:message text="Изменение: ${product.name}" /></label>
+				
+			<c:if test="${!empty product.partNumber}">	
+				<div>
+					<div style="font-weight:bold; float: left; padding-right: 15px;">Код товара: </div>${product.partNumber}
+				</div>
+			</c:if>
+				
 			<jsp:include page="product/last_changing.jsp" />
 			<c:url var="addAction" value="/admin/${type}/update" ></c:url>
 		</c:if>

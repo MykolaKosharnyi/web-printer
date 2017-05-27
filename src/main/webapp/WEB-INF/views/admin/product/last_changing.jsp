@@ -4,7 +4,7 @@
 <%@page session="true"%>
 
 <c:if test="${!empty product.dateLastChanging}">						
-	Время последнего изменения: <fmt:formatDate type="both" dateStyle="long" timeStyle="short" value="${product.dateLastChanging}" />
+	<div style="font-weight:bold; float: left; padding-right: 10px;">Время последнего изменения:</div> <fmt:formatDate type="both" dateStyle="long" timeStyle="short" value="${product.dateLastChanging}" />
 </c:if>
 
 
