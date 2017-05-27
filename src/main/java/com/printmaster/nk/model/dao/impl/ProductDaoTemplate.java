@@ -1,5 +1,6 @@
 package com.printmaster.nk.model.dao.impl;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -11,8 +12,9 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import com.printmaster.nk.model.dao.ProductDAO;
+import com.printmaster.nk.model.entity.Product;
 
-public abstract class ProductDaoTemplate<T, SC> implements ProductDAO<T, SC>{
+public abstract class ProductDaoTemplate<T extends Product, SC> implements ProductDAO<T, SC>{
 	private Class<T> productType;
 	
     private SessionFactory sessionFactory;
@@ -39,6 +41,7 @@ public abstract class ProductDaoTemplate<T, SC> implements ProductDAO<T, SC>{
     @Override
     public void updateProduct(T t) {
         Session session = this.sessionFactory.getCurrentSession();
+        t.setDateLastChanging(new Date());
         session.update(t);
     }
  

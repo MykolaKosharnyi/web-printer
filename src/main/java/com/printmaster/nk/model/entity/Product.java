@@ -2,6 +2,7 @@ package com.printmaster.nk.model.entity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -77,6 +78,9 @@ public abstract class Product implements Serializable{
 	@Column(name="right_shares_link_color_fone")
 	protected String rightSharesLinkColorFone = "#006080";	
 	
+	@Column(name="dateLastChanging")
+	private Date dateLastChanging;
+	
 	public Product(){}
 
 	public Long getId() {
@@ -85,6 +89,14 @@ public abstract class Product implements Serializable{
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public Date getDateLastChanging() {
+		return dateLastChanging;
+	}
+
+	public void setDateLastChanging(Date dateLastChanging) {
+		this.dateLastChanging = dateLastChanging;
 	}
 
 	public String getPartNumber() {

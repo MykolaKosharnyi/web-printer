@@ -2,7 +2,9 @@ package com.printmaster.nk.model.dao;
 
 import java.util.Set;
 
-public interface ProductDAO<P,C> {//P - product, C - criteria for with we will be searching product
+import com.printmaster.nk.model.entity.Product;
+
+public interface ProductDAO<P extends Product,C> {//P - product, C - criteria for with we will be searching product
 	long addProduct(P p);
     void updateProduct(P p);
     Set<P> listProducts(String sortCriteria);
