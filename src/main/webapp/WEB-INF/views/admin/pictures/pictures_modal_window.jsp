@@ -12,9 +12,7 @@
 					
 				<div class="form-group path_to_pictures">
 					<ol class="breadcrumb">
-					  <li><a href="javascript:void(0)" onclick="getPictureFromModalWindowByPathToDirectory(0);">Корневой каталог</a></li>
-					  <li><a href="#">Library</a></li>
-					  <li class="active">Data</li>
+
 					</ol>
 				</div>		
 					
@@ -68,13 +66,25 @@ function getPictureFromModalWindow(){
 	    		  
 	    		  if(file.isDirectory){
 	    			  filePicture = $("<i/>").addClass("fa fa-folder-open modal_pictures_directory");
+	    			  
+	    			  formGroup.append($('<div/>').addClass("file_pictures_modal_window directory_pictures_modal_window")
+		    				  .append(filePicture)
+		    				  .append($('<div/>').addClass("name_of_picture_file").text(file.name)));
 	    		  } else {
-	    			  filePicture = $("<img/>").attr("src", "/images" + getPathOfModalPicturesDirectoriesWithSlash() + file.name);
+	    			  var pathToPicture = getPathOfModalPicturesDirectoriesWithSlash();
+	    			  filePicture = $("<img/>").attr("src", "/images/" + pathToPicture + file.name);
+	    			  
+	    			  formGroup.append($('<div/>').addClass("file_pictures_modal_window")
+		    				  .append(filePicture)
+		    				  .append($('<div/>').addClass("name_of_picture_file").text(file.name))
+		    				  .attr("data-toggle","tooltip")
+		    				  .attr("data-placement","top")
+		    				  .attr("title","Чтобы добавить адрес картинки в буффер просто кликните по ней")
+		    				  .attr("onclick","copyToClipboardModalWindow('http://e-machine.com.ua/images/" + pathToPicture + file.name + "');")
+		    				  
+	    			  );
 	    		  }
 
-	    		  formGroup.append($('<div/>').addClass("file_pictures_modal_window")
-	    				  .append(filePicture)
-	    				  .append($('<div/>').addClass("name_of_picture_file").text(file.name)));
 	    		  countOfElements++;
 	  			});
 	    	  
@@ -107,7 +117,6 @@ function createNewPathToPicturesInModalWindow(){
 }
 
 function getPathOfModalPicturesDirectories(){
-	pathPictureDirectoriesInModalWindow[pathPictureDirectoriesInModalWindow.length-1]["path"];
 	
 	var sizeOfArray = pathPictureDirectoriesInModalWindow.length;
 
@@ -126,19 +135,27 @@ function getPathOfModalPicturesDirectories(){
 }
 
 function getPathOfModalPicturesDirectoriesWithSlash(){
-	pathPictureDirectoriesInModalWindow[pathPictureDirectoriesInModalWindow.length-1]["path"];
-	
 	var sizeOfArray = pathPictureDirectoriesInModalWindow.length;
 
-	var result = "/";
-	if(sizeOfArray > 0)
-	for (var i = 1; i < sizeOfArray; i++) {
-		result += pathPictureDirectoriesInModalWindow[i]["path"] + "/";
+	var result = "";
+	if(sizeOfArray > 1){
+		for (var i = 1; i < sizeOfArray; i++) {
+			result += pathPictureDirectoriesInModalWindow[i]["path"] + "/";
+		}
 	}
+	
 	return result;
 }
 
-$(document).on("dblclick", '#pictures_modal_window .file_pictures_modal_window', function(){
+function copyToClipboardModalWindow(path) {
+	var $temp = $("<input>");
+	$("body").append($temp);
+	$temp.val("" + path).select();
+	document.execCommand("copy");
+	$temp.remove();
+}
+
+$(document).on("dblclick", '#pictures_modal_window .directory_pictures_modal_window', function(){
 	  var endOfPath = $(this).find("div.name_of_picture_file").text();
 	  
 	  pathPictureDirectoriesInModalWindow.push({'path':endOfPath, 'name_presentation':endOfPath});
@@ -146,4 +163,6 @@ $(document).on("dblclick", '#pictures_modal_window .file_pictures_modal_window',
 	  // load pictures from new path
 	  getPictureFromModalWindow();
 });
+
+
 </script>
