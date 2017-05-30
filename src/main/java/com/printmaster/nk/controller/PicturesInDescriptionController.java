@@ -9,6 +9,7 @@ import org.json.simple.JSONObject;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -48,5 +49,24 @@ public class PicturesInDescriptionController {
 		});
 		
     	return result;
+    }
+    
+
+	@RequestMapping(value = "/create_directory_pictures_in_description/{concreteFolder}", method = RequestMethod.POST, 
+            produces = {"application/json; charset=UTF-8","*/*;charset=UTF-8"}, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody String createNewDirectory(@PathVariable("concreteFolder") String concreteFolder, @RequestBody String folderName){
+ 
+		String allPath = ("root_path".equals(concreteFolder)) ? ROOT_PATH_TO_PICTURES:
+			ROOT_PATH_TO_PICTURES + File.separator + concreteFolder.replace(":", File.separator);
+		
+		if(folderName.charAt(0)=='"' && folderName.charAt(folderName.length()-1)=='"'){
+			folderName = folderName.substring(1, folderName.length()-1);
+		}
+		
+		if(new File(allPath + File.separator + folderName).mkdir()){
+			return "{\"msg\":\"Директория успешно создана!\"}";       	
+        } else {
+        	return "{\"msg\":\"Не удалось создать директорию!\"}";
+        }
     }
 }

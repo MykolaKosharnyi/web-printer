@@ -1,5 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<meta charset='utf-8'>
 
 <div id="pictures_modal_window" class="modal fade">
 	<div class="modal-dialog" style="width:800px;">
@@ -18,10 +19,10 @@
 					
 			</div>
             <div class="modal-footer">
-            	<button class="btn btn-success">Добавить изображение</button>
-            	<button class="btn btn-success">Добавить директорию</button>
-            	<button class="btn btn-warning">Удалить изображение</button>
-            	<button class="btn btn-warning">Удалить директорию</button>
+            	<button class="btn btn-success" onclick="">Добавить изображение</button>
+            	<button class="btn btn-success" onclick="addNewDirectoryModalWindow()">Добавить директорию</button>
+            	<button class="btn btn-warning" onclick="">Удалить изображение</button>
+            	<button class="btn btn-warning" onclick="">Удалить директорию</button>
             </div>
 		</div>
 	</div>	
@@ -54,7 +55,7 @@ function getPictureFromModalWindow(){
 	    	  //load new path to pictures
 	    	  createNewPathToPicturesInModalWindow();
 	    	  
-	    	//remove old pictures
+	    	  //remove old pictures
 	    	  $('#pictures_modal_window').find(".modal-dialog .modal-content .modal-body .modal_current_group_of_pictures").remove();
 	    	  
 	    	  var formGroup = $("<div/>").addClass("form-group modal_current_group_of_pictures");
@@ -89,7 +90,7 @@ function getPictureFromModalWindow(){
 	  			});
 	    	  
 	    	 var heightOfPicturesFile = $( "#pictures_modal_window .file_pictures_modal_window" ).height();
-	    	  modalBody.append(formGroup.css({'height': (countOfElements/4) * 150 + 100 + 'px'}));
+	    	  modalBody.append(formGroup.css({'height': parseInt(countOfElements/4) * 155 + 200 + 'px'}));
 	      },
 		  error: function(xhr, status, error) {
 			  alert('Request Status: ' + xhr.status + ' Status Text: ' + xhr.statusText + ' ' + xhr.responseText);
@@ -163,6 +164,55 @@ $(document).on("dblclick", '#pictures_modal_window .directory_pictures_modal_win
 	  // load pictures from new path
 	  getPictureFromModalWindow();
 });
+
+//
+function addNewDirectoryModalWindow(){
+	var formGroup = $('#pictures_modal_window').find(".modal-dialog .modal-content .modal-body .modal_current_group_of_pictures");
+	
+	var filePicture = $("<i/>").addClass("fa fa-folder-open modal_pictures_directory");
+	
+	var countOfElements = formGroup.find('.file_pictures_modal_window').length;
+	
+	formGroup.append($('<div/>').addClass("file_pictures_modal_window")
+			  	.append(filePicture)
+			  	.append($('<div/>').addClass("name_of_picture_file").append($('<input/>')
+			  			.attr("type","text")
+			  			.val("New folder")			  
+			  			.keypress(function(e){picturesModalWindowSaveNameOnFolder(e,$(this))})
+			  			.focus()
+			  			)))
+			  .css({'height': parseInt(countOfElements/4) * 155 + 200 + 'px'});
+}
+
+function picturesModalWindowSaveNameOnFolder(typeOfKey,element){
+	
+	 var key = typeOfKey.which;
+	 if(key == 13)  // the enter key code
+	  {
+		var parent = element.parent('.name_of_picture_file');
+		var textInInput = element.val();
+		parent.empty();
+		parent.text(textInInput);
+		parent.parent(".file_pictures_modal_window").addClass("directory_pictures_modal_window");
+		
+		var rootPath = getPathOfModalPicturesDirectories();
+		$.ajax({
+			  type: 'post',
+			  url: "/create_directory_pictures_in_description/" + rootPath,
+			  contentType: "application/json; charset=utf-8",		
+			  data:JSON.stringify(textInInput),
+		      success: function (data) {	    	  
+		    	  alert(data.msg);
+		    	  getPictureFromModalWindow();
+		      },
+			  error: function(xhr, status, error) {
+				  alert('Request Status: ' + xhr.status + ' Status Text: ' + xhr.statusText + ' ' + xhr.responseText);
+			  }
+			});
+		
+	    return false;  
+	  }
+}
 
 
 </script>
