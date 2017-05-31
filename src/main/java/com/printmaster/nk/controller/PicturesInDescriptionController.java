@@ -1,18 +1,24 @@
 package com.printmaster.nk.controller;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 @Controller
 public class PicturesInDescriptionController {
@@ -69,4 +75,32 @@ public class PicturesInDescriptionController {
         	return "{\"msg\":\"Не удалось создать директорию!\"}";
         }
     }
+	
+	@RequestMapping(value="/load_new_picture_to_modal_window/{concreteFolder}", method = RequestMethod.POST,
+			produces = {"*/*;charset=UTF-8"})
+	public @ResponseBody String uploadPicture(MultipartHttpServletRequest request,
+			@PathVariable("concreteFolder") String concreteFolder) {
+		String result = null;
+		
+		String allPath = ("root_path".equals(concreteFolder)) ? ROOT_PATH_TO_PICTURES:
+			ROOT_PATH_TO_PICTURES + File.separator + concreteFolder.replace(":", File.separator);
+		
+		Iterator<String> itr = request.getFileNames();
+		MultipartFile mpf = null;
+		String fileName = null;
+
+		while (itr.hasNext()) {
+			mpf = request.getFile(itr.next());
+			fileName = System.currentTimeMillis() + "" + mpf.getOriginalFilename().substring(mpf.getOriginalFilename()
+							.lastIndexOf("."))/* last part is file extension */;
+
+			try {
+				FileCopyUtils.copy(mpf.getBytes(), new FileOutputStream(allPath + File.separator + fileName));
+				result = "Изображение успешно загружено!";   
+			} catch (IOException e) {
+				result = "Не удалось загрузить изображение!";
+			}
+		}
+		return result;
+	}
 }
