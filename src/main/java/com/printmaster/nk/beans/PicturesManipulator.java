@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
@@ -122,7 +121,7 @@ public class PicturesManipulator {
             
             FileMeta fileMeta = new FileMeta();
     		
-    		fileName = files.size() + new Random().nextInt(1000000) + "" + mpf.getOriginalFilename().substring(mpf.getOriginalFilename().lastIndexOf("."))/*last part is file extension*/; 
+    		fileName = System.currentTimeMillis() + "" + mpf.getOriginalFilename().substring(mpf.getOriginalFilename().lastIndexOf("."))/*last part is file extension*/; 
             fileMeta.setFileName(fileName);
 
             try {
@@ -151,7 +150,7 @@ public class PicturesManipulator {
 
 		while (itr.hasNext()) {
 			mpf = request.getFile(itr.next());
-			fileName = new Random().nextInt(10000000) + "" + mpf.getOriginalFilename().substring(mpf.getOriginalFilename()
+			fileName = System.currentTimeMillis() + "" + mpf.getOriginalFilename().substring(mpf.getOriginalFilename()
 							.lastIndexOf("."))/* last part is file extension */;
 
 			try {

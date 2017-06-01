@@ -181,15 +181,15 @@ function addNewDirectoryModalWindow(){
 	
 	var countOfElements = formGroup.find('.file_pictures_modal_window').length;
 	
-	formGroup.append($('<div/>').addClass("file_pictures_modal_window")
+	formGroup.css({'height': Math.ceil((countOfElements + 1)/4) * 160 + 'px'})
+		.append($('<div/>').addClass("file_pictures_modal_window")
 			  	.append(filePicture)
 			  	.append($('<div/>').addClass("name_of_picture_file").append($('<input/>')
 			  			.attr("type","text")
 			  			.val("New folder")			  
 			  			.keypress(function(e){picturesModalWindowSaveNameOnFolder(e,$(this))})
 			  			.focus()
-			  			)))
-			  .css({'height': Math.ceil(countOfElements/4) * 160 + 'px'});
+			  			)));
 }
 
 function picturesModalWindowSaveNameOnFolder(typeOfKey,element){

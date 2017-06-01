@@ -288,15 +288,15 @@ $(function() {
 
 function openModalProposalSuggestPrise(type, idProduct, nameProduct, pathToPicture){
 	var descriptionLabel = "Предложите, пожалуйста, свою цену.";
-	proposalPriceBlock(type, idProduct, nameProduct, pathToPicture, "SUGGEST_YOUR_PRICE", descriptionLabel);
+	proposalPriceBlock(type, idProduct, nameProduct, pathToPicture, "SUGGEST_YOUR_PRICE", descriptionLabel, "Отправить");
 }
 
 function openModalProposalPrise(type, idProduct, nameProduct, pathToPicture){
 	var descriptionLabel = "Если Вам интересно данное оборудование отправьте запрос для просчета актуальной стоимости.";
-	proposalPriceBlock(type, idProduct, nameProduct, pathToPicture, "SPECIFY", descriptionLabel);
+	proposalPriceBlock(type, idProduct, nameProduct, pathToPicture, "SPECIFY", descriptionLabel, "Уточнить");
 } 
 
-function proposalPriceBlock(type, idProduct, nameProduct, pathToPicture, typeProposal,descriptionLabel){
+function proposalPriceBlock(type, idProduct, nameProduct, pathToPicture, typeProposal,descriptionLabel, textOnButton){
 	var proposalBlock = $('#callback_proposal_price');
 	var proposalProduct = $('#callback_proposal_price').find("#proposal_product_link");
 	proposalProduct.find("img").attr("src", "/images/" + type + "s/" + idProduct + "/" + pathToPicture);
@@ -311,6 +311,8 @@ function proposalPriceBlock(type, idProduct, nameProduct, pathToPicture, typePro
 	
 	//for description under textarea description // wow:)))
 	proposalBlock.find("label#modal_description_title").text(descriptionLabel);
+	
+	proposalBlock.find("button#proposal_price_button").text(textOnButton);
 	
     $('#callback_proposal_price').modal();
 }
