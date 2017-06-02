@@ -22,8 +22,7 @@
             <div class="modal-footer">          
             	<button class="btn btn-success" onclick="picturesModalWindowSaveNewPicture()">Добавить изображение</button>
             	<button class="btn btn-success" onclick="addNewDirectoryModalWindow()">Добавить директорию</button>
-            	<button class="btn btn-warning" onclick="">Удалить изображение</button>
-            	<button class="btn btn-warning" onclick="">Удалить директорию</button>
+            	<button class="btn btn-danger" onclick="deletePictureElementFromModalWindow()">Удалить елемент</button>
             </div>
 		</div>
 	</div>	
@@ -71,26 +70,22 @@ function getPictureFromModalWindow(){
 	    	  
 	    	  $(files).each(function(index, file){
 	    		  
- 				var filePicture;
-	    		  
 	    		  if(file.isDirectory){
-	    			  filePicture = $("<i/>").addClass("fa fa-folder-open modal_pictures_directory");
+	    			  var filePicture = $("<i/>").addClass("fa fa-folder-open modal_pictures_directory");
 	    			  
 	    			  formGroup.append($('<div/>').addClass("file_pictures_modal_window directory_pictures_modal_window")
 		    				  .append(filePicture)
 		    				  .append($('<div/>').addClass("name_of_picture_file").text(file.name)));
 	    		  } else {
 	    			  var pathToPicture = getPathOfModalPicturesDirectoriesWithSlash();
-	    			  filePicture = $("<img/>").attr("src", "/images/" + pathToPicture + file.name);
+	    			  var filePicture = $("<img/>").attr("src", "/images/description/" + pathToPicture + file.name);
 	    			  
-	    			  formGroup.append($('<div/>').addClass("file_pictures_modal_window")
+	    			  formGroup.append($('<div/>').addClass("file_pictures_modal_window actually_picture_in_modal_window")
 		    				  .append(filePicture)
 		    				  .append($('<div/>').addClass("name_of_picture_file").text(file.name))
 		    				  .attr("data-toggle","tooltip")
 		    				  .attr("data-placement","top")
-		    				  .attr("title","Чтобы добавить адрес картинки в буффер просто кликните по ней")
-		    				  .attr("onclick","copyToClipboardModalWindow('http://e-machine.com.ua/images/" + pathToPicture + file.name + "');")
-		    				  
+		    				  .attr("title","Чтобы добавить адрес картинки в буффер два раза кликните по ней")
 	    			  );
 	    		  }
 
@@ -157,11 +152,11 @@ function getPathOfModalPicturesDirectoriesWithSlash(){
 }
 
 function copyToClipboardModalWindow(path) {
-	var $temp = $("<input>");
-	$("body").append($temp);
-	$temp.val("" + path).select();
-	document.execCommand("copy");
-	$temp.remove();
+	  var $temp = $("<input>");
+	  $("body").append($temp);
+	  $temp.val(path).select();
+	  document.execCommand("copy");
+	  $temp.remove();
 }
 
 $(document).on("dblclick", '#pictures_modal_window .directory_pictures_modal_window', function(){
@@ -171,6 +166,18 @@ $(document).on("dblclick", '#pictures_modal_window .directory_pictures_modal_win
 	  
 	  // load pictures from new path
 	  getPictureFromModalWindow();
+});
+
+$(document).on("dblclick", '#pictures_modal_window .actually_picture_in_modal_window', function(){
+	  var endOfPath = $(this).find("div.name_of_picture_file").text();
+	  
+	  var pathToPicture = getPathOfModalPicturesDirectoriesWithSlash();
+	  
+	  var allPath = "http://e-machine.com.ua/images/description/" + pathToPicture + endOfPath;
+	  
+	  copyToClipboardModalWindow(allPath);
+	  
+	  alert("Путь к изображению: " + allPath);
 });
 
 //
@@ -188,7 +195,6 @@ function addNewDirectoryModalWindow(){
 			  			.attr("type","text")
 			  			.val("New folder")			  
 			  			.keypress(function(e){picturesModalWindowSaveNameOnFolder(e,$(this))})
-			  			.focus()
 			  			)));
 }
 
@@ -229,7 +235,7 @@ $("input#load_new_picture_in_modal_window_button").change(function () {
 			success: function(result){
 				$("#load_new_picture_in_modal_window_button").val("");	
 				getPictureFromModalWindow();
-				alert(result);
+				//alert(result);
 			}
 		}).submit();	
 	}
@@ -239,5 +245,36 @@ function picturesModalWindowSaveNewPicture(){
 	$('#load_new_picture_in_modal_window_button').trigger('click');
 }
 
+//deleting element
+function deletePictureElementFromModalWindow(){
+	
+	var rootPath = getPathOfModalPicturesDirectories();
+	var elementToDelete = $("#pictures_modal_window #selectedElementInModalWindow").find(".name_of_picture_file").text();
+	$.ajax({
+		  type: 'post',
+		  url: "/delete_element_pictures_in_description/" + rootPath,
+		  contentType: "application/json; charset=utf-8",		
+		  data:JSON.stringify(elementToDelete),
+	      success: function (data) {	    	  
+	    	  alert(data.msg);
+	    	  getPictureFromModalWindow();
+	      },
+		  error: function(xhr, status, error) {
+			  alert('Request Status: ' + xhr.status + ' Status Text: ' + xhr.statusText + ' ' + xhr.responseText);
+		  }
+		});
+}
+
+$(document).on("click", '#pictures_modal_window .file_pictures_modal_window', function(){
+	//set backgroud only to this element
+	$("#pictures_modal_window .file_pictures_modal_window").each(function(){
+		$(this).css("background","#FFFFFF");
+		$(this).removeAttr('id');
+	});
+	$(this).css("background","#006080");
+	$(this).attr("id","selectedElementInModalWindow");
+	
+	
+});
 
 </script>

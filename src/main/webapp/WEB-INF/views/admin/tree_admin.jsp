@@ -1479,4 +1479,6 @@
   </li>
   
 </ul>
+
+<a class="btn btn-success" href="javascript:void(0)" onclick="getPictureFromModalWindow();" style="margin: 10px;">Добавить изображение</a>
 </div>

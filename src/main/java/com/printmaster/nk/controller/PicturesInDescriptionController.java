@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 
+import org.apache.commons.io.FileUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.http.MediaType;
@@ -23,7 +24,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 @Controller
 public class PicturesInDescriptionController {
 
-	private static final String ROOT_PATH_TO_PICTURES = "/var/www/localhost/images";
+	private static final String ROOT_PATH_TO_PICTURES = "/var/www/localhost/images/description";
     
     @SuppressWarnings("unchecked")
 	@RequestMapping(value = "/pictures_in_description/{concreteFolder}", method = RequestMethod.POST, 
@@ -76,8 +77,7 @@ public class PicturesInDescriptionController {
         }
     }
 	
-	@RequestMapping(value="/load_new_picture_to_modal_window/{concreteFolder}", method = RequestMethod.POST,
-			produces = {"*/*;charset=UTF-8"})
+	@RequestMapping(value="/load_new_picture_to_modal_window/{concreteFolder}", method = RequestMethod.POST)
 	public @ResponseBody String uploadPicture(MultipartHttpServletRequest request,
 			@PathVariable("concreteFolder") String concreteFolder) {
 		String result = null;
@@ -103,4 +103,35 @@ public class PicturesInDescriptionController {
 		}
 		return result;
 	}
+	
+	@RequestMapping(value = "/delete_element_pictures_in_description/{concreteElement}", method = RequestMethod.POST, 
+            produces = {"application/json; charset=UTF-8","*/*;charset=UTF-8"}, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody String deleteElement(@PathVariable("concreteElement") String concreteElement, @RequestBody String elementName){
+ 
+		String allPath = ("root_path".equals(concreteElement)) ? ROOT_PATH_TO_PICTURES:
+			ROOT_PATH_TO_PICTURES + File.separator + concreteElement.replace(":", File.separator);
+		
+		if(elementName.charAt(0)=='"' && elementName.charAt(elementName.length()-1)=='"'){
+			elementName = elementName.substring(1, elementName.length()-1);
+		}
+		
+		String result = null;
+		if(elementName.indexOf(".")!=-1){
+			try {
+	    		FileUtils.forceDelete(new File(allPath + File.separator + elementName));
+	    		result = "{\"msg\":\"Елемент успешно удален!\"}";
+			} catch (IOException e) {
+				result = "{\"msg\":\"Не удалось удалить выбранный елемент!\"}";
+			} 
+		} else {
+			try {
+	    		FileUtils.deleteDirectory(new File(allPath + File.separator + elementName));
+	    		result = "{\"msg\":\"Елемент успешно удален!\"}";
+			} catch (IOException e) {
+				result = "{\"msg\":\"Не удалось удалить выбранный елемент!\"}";
+			}
+		}
+		
+		return result;  
+    }
 }
