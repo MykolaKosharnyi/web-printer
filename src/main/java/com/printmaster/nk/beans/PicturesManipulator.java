@@ -26,36 +26,38 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 public class PicturesManipulator {
 	
 	private Logger logger = Logger.getLogger(PicturesManipulator.class);
+	private final static String NAME_DEFAULT_PICTURE = "default.jpg";
 	
-	public void copyPicturesToBuffer(List<String> pictures, String directory,
-    		String concreteFolder, long id, PicturesContainer files){
-		 FileMeta fm = null;
-	    	for(String path : pictures){
-	    		fm = new FileMeta();
-	    		fm.setFileName(path);
-	    		
-	    		try {
-	    			File fi = new File(directory + File.separator + 
-	    					concreteFolder + File.separator + id + File.separator + path);
-	    			fm.setBytes(Files.readAllBytes(fi.toPath()));
-	    			logger.info(String.format("Load pictures from %s folder, with id=%d to the FILEMETA.", directory, id));
-				} catch (IOException e) {
-					logger.error(String.format("Can't load pistures from %s folder, with id=%d to the FILEMETA", directory, id), e);
-				}
-	    		files.add(fm);
-	    	}
+	public void copyPicturesToBuffer(List<String> pictures, String directory, String concreteFolder, long id, PicturesContainer files) {
+		FileMeta fm = null;
+		for (String path : pictures) {
+			fm = new FileMeta();
+			fm.setFileName(path);
+
+			try {
+				File fi = new File(directory + File.separator + concreteFolder + File.separator + id + File.separator + path);
+				fm.setBytes(Files.readAllBytes(fi.toPath()));
+				logger.info(String.format("Load pictures from %s folder, with id=%d to the FILEMETA.", directory, id));
+			} catch (IOException e) {
+				logger.error(String.format("Can't load pistures from %s folder, with id=%d to the FILEMETA", directory, id),e);
+			}
+			files.add(fm);
+		}
+	}
+	
+	public void createDirectoryForPictures(String directory, String concreteFolder, long id) {
+		if(new File(directory + File.separator + concreteFolder + File.separator + id).mkdir()){
+        	logger.info(String.format("Create new folder for %s with id=%d.", concreteFolder, id));        	
+        } else {
+        	logger.error(String.format("Don't create new %s folder!", concreteFolder));
+        }
 	}
 	
     public List<String> createFolderAndWriteToItPictures(String directory, String concreteFolder, long id, PicturesContainer files){
 		
     	List<String> pictures = new ArrayList<String>();
 		
-		if(new File(directory + File.separator + 
-        		concreteFolder + File.separator + id).mkdir()){
-        	logger.info(String.format("Load pictures from %s folder, with id=%d to the FILEMETA.", directory, id));        	
-        } else {
-        	logger.error(String.format("Don't create new %s folder!", directory));
-        }
+    	createDirectoryForPictures(directory, concreteFolder, id);
         
 		if (files != null && files.size()!=0) {
 			for (FileMeta fm : files.getFiles()) {
@@ -70,20 +72,26 @@ public class PicturesManipulator {
 				}
 			}
 		} else {
-    		try {
-    			File fi = new File(directory + File.separator + "default.jpg");
-    			FileCopyUtils.copy(Files.readAllBytes(fi.toPath()), new FileOutputStream(directory + File.separator + 
-    					concreteFolder + File.separator + id + File.separator + "default.jpg"));
-    			pictures.add("default.jpg");
-    			logger.info(String.format("User didn't add any picture to the %s with id=%d, so picture of the product will has name 'default.jpg' ",
-    					directory, id));
-			} catch (IOException e) {
-				logger.error(String.format("Can't add path of the default picture to %s with id=%d", directory, id), e);
-			}
+			loadDefaultPicture(directory, concreteFolder, id);
+    		pictures.add(NAME_DEFAULT_PICTURE);
 		}
 		
 		return pictures;
 	}
+    
+    public String loadDefaultPicture(String directory, String concreteFolder, long id){
+    	File fi = new File(directory + File.separator + NAME_DEFAULT_PICTURE);
+		try {
+			FileCopyUtils.copy(Files.readAllBytes(fi.toPath()), new FileOutputStream(
+					directory + File.separator + concreteFolder + File.separator + id + File.separator + NAME_DEFAULT_PICTURE));
+			logger.info(String.format("User didn't add any picture to the %s with id=%d, so picture of the product will has name '%s' ",
+					directory, id, NAME_DEFAULT_PICTURE));		
+		} catch (IOException e) {
+			logger.error(String.format("Can't load the default picture to %s folder, with id = %d", concreteFolder, id), e);
+		}
+		
+		return NAME_DEFAULT_PICTURE;
+    }
 	
     public void changeOrderPictures(String type, List<String> selectedIds, PicturesContainer files){
     	logger.info(String.format("change order of pictures in %s section, in FILEMETA", type));    
@@ -121,7 +129,7 @@ public class PicturesManipulator {
             
             FileMeta fileMeta = new FileMeta();
     		
-    		fileName = System.currentTimeMillis() + "" + mpf.getOriginalFilename().substring(mpf.getOriginalFilename().lastIndexOf("."))/*last part is file extension*/; 
+    		fileName = createNameForLoadedPicture(mpf);
             fileMeta.setFileName(fileName);
 
             try {
@@ -150,8 +158,7 @@ public class PicturesManipulator {
 
 		while (itr.hasNext()) {
 			mpf = request.getFile(itr.next());
-			fileName = System.currentTimeMillis() + "" + mpf.getOriginalFilename().substring(mpf.getOriginalFilename()
-							.lastIndexOf("."))/* last part is file extension */;
+			fileName = createNameForLoadedPicture(mpf);
 
 			try {
 				FileCopyUtils.copy(mpf.getBytes(), new FileOutputStream(directory + File.separator + concreteFolder
@@ -176,16 +183,6 @@ public class PicturesManipulator {
 		} 
     }
 	
-    public void loadDefaultPicture(String directory, String concreteFolder, long id){
-    	File fi = new File(directory + File.separator + "default.jpg");
-		try {
-			FileCopyUtils.copy(Files.readAllBytes(fi.toPath()), new FileOutputStream(
-					directory + File.separator + concreteFolder + File.separator + id + File.separator + "default.jpg"));
-		} catch (IOException e) {
-			logger.error(String.format("Can't load the default picture to %s folder, with id = %d", concreteFolder, id), e);
-		}
-    }
-	
     public void removeAllPricturesOfConcreteProduct(String directory, String concreteFolder, long id){
     	try {
     		FileUtils.deleteDirectory(new File(directory + File.separator + 
@@ -196,12 +193,9 @@ public class PicturesManipulator {
 		}
     }
 
-	public void createDirectoryForPictures(String directory, String concreteFolder, long id) {
-		if(new File(directory + File.separator + concreteFolder + File.separator + id).mkdir()){
-        	logger.info(String.format("Create new folder for %s with id=%d.", concreteFolder, id));        	
-        } else {
-        	logger.error(String.format("Don't create new %s folder!", concreteFolder));
-        }
-	}
+    private String createNameForLoadedPicture(MultipartFile mpf){
+    	String extentionOfFile = mpf.getOriginalFilename().substring(mpf.getOriginalFilename().lastIndexOf("."))/*last part of file extension*/;
+    	return System.currentTimeMillis() + "" + extentionOfFile;
+    }
 
 }

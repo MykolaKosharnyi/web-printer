@@ -521,8 +521,8 @@ public class ComponentsForControllers {
      * @param concreteFolder
      * @param id
      */
-    public void loadDefaultPicture(String directory, String concreteFolder, long id){
-    	picturesManipulator.loadDefaultPicture(directory, concreteFolder, id);
+    public String loadDefaultPicture(String directory, String concreteFolder, long id){
+    	return picturesManipulator.loadDefaultPicture(directory, concreteFolder, id);
     }
     
     /**

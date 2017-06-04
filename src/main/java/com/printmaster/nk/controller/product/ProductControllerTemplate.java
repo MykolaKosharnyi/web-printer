@@ -376,8 +376,8 @@ public abstract class ProductControllerTemplate <T extends HeadProduct, S extend
     	componets.removePicture(name, DIRECTORY, getCONCRETE_FOLDER(), id);
     	
     	if(product.getPathPictures().size()==0){
-    		componets.loadDefaultPicture(DIRECTORY, getCONCRETE_FOLDER(), product.getId());
-			product.getPathPictures().add("default.jpg");
+    		String nameOfDefaultPicture = componets.loadDefaultPicture(DIRECTORY, getCONCRETE_FOLDER(), product.getId());
+			product.getPathPictures().add(nameOfDefaultPicture);
     	}
     	
     	logger.info(String.format("Remove pictore with name = %s from changed %s product", name, getTYPE()));
