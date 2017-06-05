@@ -480,6 +480,7 @@ input.quantity_paint{
         .product #tabs_product div #output_description,
 		.product #tabs_product div .descriptions,
 		.product #tabs_product div #comments_block,
+		.product #tabs_product div #comments_inaccuracy_block,
 		.product #tabs_product div #use_with_product_block{
 			font: 1.1em "Book Antiqua" sans-serif;
 			/*margin-left:15px;*/
@@ -588,7 +589,7 @@ div.use_with_product a.link img{
                 width: auto;
                 top: 0;
                 /*float: left;*/
-				margin: 0 auto;
+				/*margin: 0 auto;*/
             }
 
            #tabs_product > div caption{

@@ -908,3 +908,44 @@ section.ord1er  {
 	left: 80px;
 }
 /*-- average raiting END --*/
+
+/* show information when cheking e-mail */
+		.info_of_checking_email,
+		.info_of_empty_field{
+			border-radius: 5px;
+			margin: 5px 0px;
+			padding: 5px;
+			font-weight:bold;
+			display:none;
+		}
+
+/* notes */
+.especial_notes {
+    font-style: italic;
+    margin: 10px;
+    border-top: 1px solid black;
+    padding-top: 5px;
+    margin-bottom: 5px;
+}
+
+.especial_notes p {
+    color: red;
+    width: auto;
+    float: left;
+    margin: 0px 10px;
+}
+
+#sended_proposal_alert {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  display: none;
+  z-index: 100;
+}
+
+#sended_proposal_alert label{
+	display: table-cell; 
+	font-size: 12px;
+}

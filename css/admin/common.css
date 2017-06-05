@@ -897,3 +897,50 @@ hr{
 			font-weight:bold;
 			display:none;
 		}
+
+.file_pictures_modal_window{
+	display:block;
+	width:177px;
+	height:140px;
+	margin:10px;
+	float: left;
+	cursor: pointer;
+	text-align: center;
+	border-radius: 5px;
+}
+
+.file_pictures_modal_window:hover{
+	background:#006080;	
+	color: white;
+}
+
+.file_pictures_modal_window:hover input,
+.file_pictures_modal_window:hover .name_of_picture_file{
+	color: black;
+}
+
+.file_pictures_modal_window i{
+	height: 100px;
+	color: #006080;
+	background: white;
+	font-size: 105px;
+	display: block;
+	text-align: center;
+	margin: 5px;
+}
+
+.file_pictures_modal_window img{
+	height: 100px;
+	color: #006080;
+	background: white;
+	font-size: 105px;
+	display: block;
+	text-align: center;
+	width: 120px;
+	margin: 5px auto;
+}
+
+.file_pictures_modal_window p{
+	background:blue;
+}
+
