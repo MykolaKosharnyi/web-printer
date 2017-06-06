@@ -93,8 +93,19 @@ public class CommentsController {
 		StringBuilder result = new StringBuilder();
 		result.append("Содержимое:");
 		result.append("<<");
-		result.append(String.format("<a href='http://e-machine.com.ua/%s/%s'>%s</a>", comment.getProductType(),
-				comment.getProductId(),comment.getMessage()));
+		
+		String optionTabOnPage = "";
+		switch(comment.getTypeComment()){
+			case COMMENT:
+				optionTabOnPage = "?option=2";
+				break;
+			case INACCURACY_IN_DESCRIPTION:
+				optionTabOnPage = "?option=4";
+				break;
+		}
+
+		result.append(String.format("<a href='http://e-machine.com.ua/%s/%s%s'>%s</a>", comment.getProductType(),
+				comment.getProductId(), optionTabOnPage, comment.getMessage()));
 		result.append(">>");
 		result.append("<br/>");
 		result.append(String.format("Прокомментировал: %s %s, id=%d.", comment.getSecondName(), comment.getNameUser(),
