@@ -1,12 +1,14 @@
 package com.printmaster.nk.beans;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.printmaster.nk.components.MailSendingComponent;
+import com.printmaster.nk.components.RecipientNotification;
 import com.printmaster.nk.model.entity.MailSendingMessage;
 import com.printmaster.nk.model.entity.MailSendingMessage.StatusOfSending;
 import com.printmaster.nk.model.entity.UserAddByAdmin;
@@ -33,18 +35,60 @@ public class EmailSendingJob{
 
 	private void sendEmail(MailSendingMessage message) {
 		if(!message.getSubscription().isEmpty()){
+			int quantityOfPeopleWhoGetMessage = 0;
+			List<String> emailsListWhoNotGetMessage = new ArrayList<>();
+			
 			List<UserAddByAdmin> usersList = userAddByAdminService.getUserBySubscription(message.getSubscription());
 			for (UserAddByAdmin user : usersList) {	
 				try{
 					mailSendingComponent.observeRecipients(message, getConcatedEmails(user));
+					quantityOfPeopleWhoGetMessage++;
 				} catch (Exception ex){
 					mailSendingComponent.exceptionMailSender(ex);
+					emailsListWhoNotGetMessage.add(getConcatedEmails(user));
 				}	
 			}
+			
+			sendReportAboutMailSending(message, quantityOfPeopleWhoGetMessage, emailsListWhoNotGetMessage);
 			
 			message.setStatus(StatusOfSending.SENDED);
 			mailSendingService.update(message);
 		}		
+	}
+	
+	private void sendReportAboutMailSending(MailSendingMessage message, int quantityOfPeopleWhoGetMessage,
+			List<String> emailsListWhoNotGetMessage){
+		
+		try{
+			mailSendingComponent.observeRecipients("Отчет об рассылке сообщения, c id=" + message.getId(), 
+					createReport(quantityOfPeopleWhoGetMessage, emailsListWhoNotGetMessage),
+					mailSendingComponent.getRecipients(RecipientNotification.NOTIFICATION_REPORT_ABOUT_MAIL_SENDING.getTypeNotification()));
+		} catch(Exception ex){
+			mailSendingComponent.exceptionMailSender(ex);
+		}
+		
+	}
+	
+	private String createReport(int quantityOfPeopleWhoGetMessage, List<String> emailsListWhoNotGetMessage){
+		StringBuilder result = new StringBuilder();
+		result.append(String.format("Отчет: %d добавленных пользователей успешно получили письма.", quantityOfPeopleWhoGetMessage));
+		if(emailsListWhoNotGetMessage.size() > 0){
+			result.append("<br/>");
+			result.append("<br/>");
+			
+			result.append("Електронные адреса при отправке сообщения на которые произошла ошибка:");
+			result.append("<br/>");
+			
+			int index = 0;
+			for(Iterator<String> iterator = emailsListWhoNotGetMessage.iterator(); iterator.hasNext();){
+				result.append(index + ". ").append(iterator.next()).append(";");
+				if(iterator.hasNext()){
+					result.append("<br/>");
+				}
+			}
+		}
+		
+		return result.toString();
 	}
 	
 	/**

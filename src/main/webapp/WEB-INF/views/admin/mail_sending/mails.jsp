@@ -26,6 +26,8 @@
 		<a href="<c:url value='/admin/message/options' />">Опции для письма (header/footer)</a>
 		<br>
 		<a href="<c:url value='/admin/recipient_notification/mail_sending' />">Список e-mail, получающих уведомления когда нужно получить письмо в черновом виде</a>
+		<br>
+		<a href="<c:url value='/admin/recipient_notification/report_about_mail_sending' />">Список e-mail, получающих отчеты о рассылках</a>
 	
 	<h3>Таблица раннее созданных рассылок</h3>
 	
