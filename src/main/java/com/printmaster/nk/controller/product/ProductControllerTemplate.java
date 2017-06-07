@@ -60,8 +60,12 @@ public abstract class ProductControllerTemplate <T extends HeadProduct, S extend
     public void setUseWithProductService(UseWithProductService ps){
         this.useWithProductService = ps;
     }
-	
-    public String allProductsTemplate(Model model){
+
+    public UseWithProductService getUseWithProductService() {
+		return useWithProductService;
+	}
+
+	public String allProductsTemplate(Model model){
         model.addAttribute(ATTRIBUTE_LIST_PRODUCTS, componets.makeLightWeightCollectionOfProduct(getProductService().listShowOnSite()));
         
 		try {

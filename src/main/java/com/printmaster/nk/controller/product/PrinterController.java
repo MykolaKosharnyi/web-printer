@@ -1,34 +1,6 @@
 package com.printmaster.nk.controller.product;
 
-import static com.printmaster.nk.controller.ConstUsedInContr.ATTRIBUTE_ADD_PRODUCT;
-import static com.printmaster.nk.controller.ConstUsedInContr.ATTRIBUTE_NAME_PRODUCT;
-import static com.printmaster.nk.controller.ConstUsedInContr.ATTRIBUTE_TITLE;
-import static com.printmaster.nk.controller.ConstUsedInContr.ATTRIBUTE_TITLE_OF_TABLE;
-import static com.printmaster.nk.controller.ConstUsedInContr.JSON_CONSUMES;
-import static com.printmaster.nk.controller.ConstUsedInContr.JSON_HEADERS;
-import static com.printmaster.nk.controller.ConstUsedInContr.JSON_PRODUCES;
-import static com.printmaster.nk.controller.ConstUsedInContr.MODEL_ATTRIBUTE_PRODUCT;
-import static com.printmaster.nk.controller.ConstUsedInContr.PATH_ADD;
-import static com.printmaster.nk.controller.ConstUsedInContr.PATH_ADMIN;
-import static com.printmaster.nk.controller.ConstUsedInContr.PATH_CHANGE_ORDER_PICTURES;
-import static com.printmaster.nk.controller.ConstUsedInContr.PATH_CHANGE_ORDER_PICTURES_UPDATE;
-import static com.printmaster.nk.controller.ConstUsedInContr.PATH_COPY;
-import static com.printmaster.nk.controller.ConstUsedInContr.PATH_EDIT;
-import static com.printmaster.nk.controller.ConstUsedInContr.PATH_NEW;
-import static com.printmaster.nk.controller.ConstUsedInContr.PATH_REMOVE;
-import static com.printmaster.nk.controller.ConstUsedInContr.PATH_REMOVE_PICTURE;
-import static com.printmaster.nk.controller.ConstUsedInContr.PATH_REMOVE_PICTURE_UPDATE;
-import static com.printmaster.nk.controller.ConstUsedInContr.PATH_SAVE_ADD;
-import static com.printmaster.nk.controller.ConstUsedInContr.PATH_SAVE_UPDATE;
-import static com.printmaster.nk.controller.ConstUsedInContr.PATH_SEARCH;
-import static com.printmaster.nk.controller.ConstUsedInContr.PATH_SET_TOP;
-import static com.printmaster.nk.controller.ConstUsedInContr.PATH_SHOW_ON_HOME_PAGE;
-import static com.printmaster.nk.controller.ConstUsedInContr.PATH_SHOW_ON_LEFT_SIDE;
-import static com.printmaster.nk.controller.ConstUsedInContr.PATH_SHOW_ON_SITE;
-import static com.printmaster.nk.controller.ConstUsedInContr.PATH_SORTING;
-import static com.printmaster.nk.controller.ConstUsedInContr.PATH_UPDATE;
-import static com.printmaster.nk.controller.ConstUsedInContr.PATH_UPLOAD_PICTURES;
-import static com.printmaster.nk.controller.ConstUsedInContr.PATH_UPLOAD_PICTURES_UPDATE;
+import static com.printmaster.nk.controller.ConstUsedInContr.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -57,17 +29,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.printmaster.nk.beans.ComponentsForControllers;
-import com.printmaster.nk.beans.PicturesContainer;
 import com.printmaster.nk.model.entity.Comment;
 import com.printmaster.nk.model.entity.Printer;
 import com.printmaster.nk.model.entity.UseWithProduct;
 import com.printmaster.nk.model.entity.search.SearchPrinters;
 import com.printmaster.nk.model.service.CommentService;
 import com.printmaster.nk.model.service.PrinterService;
-import com.printmaster.nk.model.service.UseWithProductService;
 
 @Controller
-public class PrinterController  extends ProductControllerTemplate<Printer, SearchPrinters>{
+public class PrinterController extends ProductControllerTemplate<Printer, SearchPrinters>{
 	
 	private static final String TYPE = "printer";
 	private static final String CONCRETE_FOLDER = TYPE + "s";
@@ -138,23 +108,14 @@ public class PrinterController  extends ProductControllerTemplate<Printer, Searc
 	
 	
 	private Logger logger = Logger.getLogger(this.getClass());
-	
-    @Autowired
-    PicturesContainer files;
     
     @Autowired
     ComponentsForControllers componets;
 
-    private UseWithProductService useWithProductService;
-    
     @Autowired
 	private CommentService commentService;
 	
-	@Autowired(required=true)
-    @Qualifier(value="useWithProductService")
-    public void setUseWithProductService(UseWithProductService ps){
-        this.useWithProductService = ps;
-    }
+
 	
 	
 	
@@ -193,12 +154,12 @@ public class PrinterController  extends ProductControllerTemplate<Printer, Searc
 	        
 	        //get checked USE WITH PRODUCT from admin page
 	        if(product.getIdUseWithProduct()!=null){
-	        	useWithThisProduct.addAll(useWithProductService.getProductsByIds(product.getIdUseWithProduct()));
+	        	useWithThisProduct.addAll(getUseWithProductService().getProductsByIds(product.getIdUseWithProduct()));
 	        }
 	        
 	        //get PAINT to product by COMPATIBLE INK in printer
 	        if(product.getCompatibleInk()!=null){
-	        	useWithThisProduct.addAll(useWithProductService.getPrintersByTypeInk(product.getCompatibleInk()));
+	        	useWithThisProduct.addAll(getUseWithProductService().getPrintersByTypeInk(product.getCompatibleInk()));
 	        }
 	  
 	        model.addAttribute("uwp", useWithThisProduct);
