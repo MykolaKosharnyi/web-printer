@@ -73,6 +73,9 @@ public class CommentServiceImpl implements CommentService{
 	
 	private boolean checkCommentBelongCurrentUser(long id){
 		Comment comment = commentDAO.findById(id);
+		if(getUser().getRole().equals("ROLE_ADMIN")){
+			return true;
+		}
 		return new Long(comment.getUserId()).equals(new Long(getUser().getId()));
 	}
 
