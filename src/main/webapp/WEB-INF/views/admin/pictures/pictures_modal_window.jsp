@@ -22,7 +22,8 @@
             <div class="modal-footer">          
             	<button class="btn btn-success" onclick="picturesModalWindowSaveNewPicture()">Добавить изображение</button>
             	<button class="btn btn-success" onclick="addNewDirectoryModalWindow()">Добавить директорию</button>
-            	<button class="btn btn-danger" onclick="deletePictureElementFromModalWindow()">Удалить елемент</button>
+            	<button class="btn btn-danger" id="delete_element_in_modal_picture_window"
+            		 onclick="deletePictureElementFromModalWindow()">Удалить елемент</button>
             </div>
 		</div>
 	</div>	
@@ -50,6 +51,9 @@ function getPictureFromModalWindow(){
 	
 	var modalBody = $('#pictures_modal_window').find(".modal-dialog .modal-content .modal-body");
 	var rootPath = getPathOfModalPicturesDirectories();
+	
+	//disable delete button
+	$("#pictures_modal_window button#delete_element_in_modal_picture_window").addClass("disabled");
 	
 	$("form#load_new_picture_in_modal_window").attr("action","/load_new_picture_to_modal_window/" + rootPath);
 	
@@ -250,6 +254,9 @@ function deletePictureElementFromModalWindow(){
 	
 	var rootPath = getPathOfModalPicturesDirectories();
 	var elementToDelete = $("#pictures_modal_window #selectedElementInModalWindow").find(".name_of_picture_file").text();
+	
+
+	if(elementToDelete.length > 0){
 	$.ajax({
 		  type: 'post',
 		  url: "/delete_element_pictures_in_description/" + rootPath,
@@ -263,6 +270,9 @@ function deletePictureElementFromModalWindow(){
 			  alert('Request Status: ' + xhr.status + ' Status Text: ' + xhr.statusText + ' ' + xhr.responseText);
 		  }
 		});
+	} else {
+		alert("Выбрете, пожалуйста елемент для удаления!");
+	}
 }
 
 $(document).on("click", '#pictures_modal_window .file_pictures_modal_window', function(){
@@ -273,6 +283,9 @@ $(document).on("click", '#pictures_modal_window .file_pictures_modal_window', fu
 	});
 	$(this).css("background","#006080");
 	$(this).attr("id","selectedElementInModalWindow");
+	
+	//make able delete button
+	$("#pictures_modal_window button#delete_element_in_modal_picture_window").removeClass("disabled");
 	
 	
 });
