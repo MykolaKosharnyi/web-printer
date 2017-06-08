@@ -134,4 +134,34 @@ public class PicturesInDescriptionController {
 		
 		return result;  
     }
+	
+	@RequestMapping(value = "/rename_element_pictures_in_description/{pathToElement}/{oldName}", method = RequestMethod.POST, 
+            produces = {"application/json; charset=UTF-8","*/*;charset=UTF-8"}, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody String renameElement(@PathVariable("pathToElement") String pathToElement,
+    		@PathVariable("oldName") String oldName, @RequestBody String newName){
+ 
+		String result = null;
+		
+		String allPath = ("root_path".equals(pathToElement)) ? ROOT_PATH_TO_PICTURES:
+			ROOT_PATH_TO_PICTURES + File.separator + pathToElement.replace(":", File.separator);
+		
+		if(newName.charAt(0)=='"' && newName.charAt(newName.length()-1)=='"'){
+			newName = newName.substring(1, newName.length()-1);
+		}
+		
+		// File (or directory) with old name
+		File oldFileName = new File(allPath + File.separator + oldName);
+
+		// File (or directory) with new name
+		File newFileName = new File(allPath + File.separator + newName);
+
+		// Rename file (or directory)
+		if(oldFileName.renameTo(newFileName)){
+			result = "{\"msg\":\"Елемент успешно переименован!\"}";
+		} else {
+			result = "{\"msg\":\"Не удалось переименовать выбранный елемент!\"}";
+		}
+		
+		return result;  
+    }
 }

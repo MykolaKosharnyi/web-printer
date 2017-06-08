@@ -22,6 +22,8 @@
             <div class="modal-footer">          
             	<button class="btn btn-success" onclick="picturesModalWindowSaveNewPicture()">Добавить изображение</button>
             	<button class="btn btn-success" onclick="addNewDirectoryModalWindow()">Добавить директорию</button>
+            	<button class="btn btn-warning" id="rename_element_in_modal_picture_window"
+            		 onclick="renamePicturesElementModalWindow()">Переименовать директорию</button>
             	<button class="btn btn-danger" id="delete_element_in_modal_picture_window"
             		 onclick="deletePictureElementFromModalWindow()">Удалить елемент</button>
             </div>
@@ -52,8 +54,9 @@ function getPictureFromModalWindow(){
 	var modalBody = $('#pictures_modal_window').find(".modal-dialog .modal-content .modal-body");
 	var rootPath = getPathOfModalPicturesDirectories();
 	
-	//disable delete button
+	//disable rename and delete buttons
 	$("#pictures_modal_window button#delete_element_in_modal_picture_window").addClass("disabled");
+	$("#pictures_modal_window button#rename_element_in_modal_picture_window").addClass("disabled");
 	
 	$("form#load_new_picture_in_modal_window").attr("action","/load_new_picture_to_modal_window/" + rootPath);
 	
@@ -284,10 +287,55 @@ $(document).on("click", '#pictures_modal_window .file_pictures_modal_window', fu
 	$(this).css("background","#006080");
 	$(this).attr("id","selectedElementInModalWindow");
 	
-	//make able delete button
+	//make able rename and delete buttons
 	$("#pictures_modal_window button#delete_element_in_modal_picture_window").removeClass("disabled");
-	
+	if($(this).hasClass("directory_pictures_modal_window")){
+		$("#pictures_modal_window button#rename_element_in_modal_picture_window").removeClass("disabled");
+	} else {
+		$("#pictures_modal_window button#rename_element_in_modal_picture_window").addClass("disabled");
+	}
 	
 });
+
+//rename directory
+function renamePicturesElementModalWindow(){
+	if($("#pictures_modal_window #selectedElementInModalWindow").hasClass("directory_pictures_modal_window")){
+
+		var elementToRename = $("#pictures_modal_window #selectedElementInModalWindow").find(".name_of_picture_file");
+		var actualName = elementToRename.text();
+		
+		elementToRename.text("").append($('<input/>')
+	  			.attr("type","text")
+	  			.val(actualName)			  
+	  			.keypress(function(e){picturesModalWindowRenameElement(e, $(this), actualName)})
+	  			);
+	}
+}
+
+function picturesModalWindowRenameElement(typeOfKey,element, oldName){
+	
+	 var key = typeOfKey.which;
+	 if(key == 13)  // the enter key code
+	  {
+		var newNameOfElement = element.val();		
+		var rootPath = getPathOfModalPicturesDirectories();		
+		
+			$.ajax({
+				  type: 'post',
+				  url: "/rename_element_pictures_in_description/" + rootPath + "/" + oldName,
+				  contentType: "application/json; charset=utf-8",		
+				  data:JSON.stringify(newNameOfElement),
+			      success: function (data) {	    	  
+			    	  alert(data.msg);
+			    	  getPictureFromModalWindow();
+			      },
+				  error: function(xhr, status, error) {
+					  alert('Request Status: ' + xhr.status + ' Status Text: ' + xhr.statusText + ' ' + xhr.responseText);
+				  }
+				});
+		
+	    return false;  
+	  }
+}
 
 </script>
