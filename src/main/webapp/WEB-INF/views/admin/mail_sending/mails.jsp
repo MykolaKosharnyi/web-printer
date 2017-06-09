@@ -12,7 +12,6 @@
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="/css/admin/add_change_printer.css">
-	<script src="<%=request.getContextPath()%>/resources/js/admin/add_change_printer.js"></script>
 
 	<title>
 		<spring:message text="Список рассылок" />

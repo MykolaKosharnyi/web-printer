@@ -25,34 +25,23 @@
 		}
 	</style>
 
-	<c:if test="${empty user.id}">
-		<title>
-			<spring:message text="Добавление нового пользователя" />
-		</title>
-	</c:if>
-	<c:if test="${!empty user.id}">
-		<title>
-			<spring:message text="Изменение пользователя с id = ${user.id}" />
-		</title>
-	</c:if>
+	<title>
+		<spring:message text="Изменение данных зарегистрированного пользователя с id = ${user.id}" />
+	</title>
 </head>
 <body>
 <div id="product">
-	<c:if test="${empty user.id}">
-		<c:url var="addAction" value="/admin/user/create"></c:url>
-	</c:if>
 
-	<c:if test="${!empty user.id}">
-		<c:url var="addAction" value="/admin/user/update"></c:url>
-	</c:if>
+	<c:url var="addAction" value="/admin/registered_user/update"></c:url>
 
 		<form:form class="form-horizontal" style="padding: 10px 0px;" commandName="user" action="${addAction}" method="post">
 		
-			<c:if test="${!empty user.id}">
-				<input type="hidden" name="id" value="${user.id}">
-				<input type="hidden" name="timeRegistration" 
+			<input type="hidden" name="id" value="${user.id}">
+			<input type="hidden" name="password" value="${user.password}">
+			<input type="hidden" name="role" value="${user.role}">
+			<input type="hidden" name="nameUserPicture" value="${user.nameUserPicture}">
+			<input type="hidden" name="timeRegistration" 
 					value="<fmt:formatDate value="${user.timeRegistration}" pattern="dd/MM/yyyy hh:mm:ss" />">	
-			</c:if>
 		
 		  <div class="form-group">
 			<label for="firstName" class="col-sm-2 control-label">Имя:</label>
@@ -94,22 +83,6 @@
 			<label for="email" class="col-sm-2 control-label">E-mail:</label>
 			<div class="col-sm-10">
 			  <form:input path="email" class="form-control" value="${user.email}"/>
-			  <p class="bg-success info_of_adding">Введенное значение удовлетворяет требованиям!</p>
-			  <p class="bg-danger info_of_adding">Есть повторение с раннее введенным e-mail или он не корректен!</p>
-			</div>
-		  </div>
-		  <div class="form-group">
-			<label for="email2" class="col-sm-2 control-label">E-mail (2):</label>
-			<div class="col-sm-10">
-			  <form:input path="email2" class="form-control" value="${user.email2}"/>
-			  <p class="bg-success info_of_adding">Введенное значение удовлетворяет требованиям!</p>
-			  <p class="bg-danger info_of_adding">Есть повторение с раннее введенным e-mail или он не корректен!</p>
-			</div>
-		  </div>
-		  <div class="form-group">
-			<label for="email3" class="col-sm-2 control-label">E-mail (3):</label>
-			<div class="col-sm-10">
-			  <form:input path="email3" class="form-control" value="${user.email3}"/>
 			  <p class="bg-success info_of_adding">Введенное значение удовлетворяет требованиям!</p>
 			  <p class="bg-danger info_of_adding">Есть повторение с раннее введенным e-mail или он не корректен!</p>
 			</div>

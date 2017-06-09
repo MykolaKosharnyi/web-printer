@@ -260,6 +260,10 @@
     	<put-attribute name="body" value="/WEB-INF/views/admin/user.jsp" />  
     </definition>
     
+    <definition name="admin/registered_user" extends="admin_base">
+    	<put-attribute name="body" value="/WEB-INF/views/admin/user_registered.jsp" />  
+    </definition>
+    
     <definition name="admin/message" extends="admin_base">
     	<put-attribute name="body" value="/WEB-INF/views/admin/mail_sending/mail.jsp" />  
     </definition>

@@ -252,6 +252,29 @@ public class UserController {
 		return "redirect:/" + PATH_ADMIN + "/"+ TYPE +"s";
 	}
 	
+	@RequestMapping(value = "/"+ PATH_ADMIN +"/registered_user/"+ PATH_UPDATE, method = RequestMethod.POST) 
+	public String changeRegisteredUserByAdmin(@ModelAttribute("user") @Valid User product,
+			BindingResult result, Model model){
+
+		if (result.hasErrors()){
+			model.addAttribute("user", product);
+			model.addAttribute("listSubscription", listSubscription);
+			model.addAttribute("listScopeOfActivities", listScopeOfActivities);
+		    return PATH_ADMIN + "/registered_user";
+		}
+		
+		userService.updateUser(product);
+		return "redirect:/" + PATH_ADMIN + "/"+ TYPE +"s";
+	}
+	
+	@RequestMapping(value = "/"+ PATH_ADMIN +"/registered_user/"+ PATH_EDIT+"/{id}", method = RequestMethod.GET)
+	public String editRegisteredUserByAdmin(Model model,@PathVariable("id") long id) {
+		model.addAttribute("user", userService.getUserById(id));
+		model.addAttribute("listSubscription", listSubscription);
+		model.addAttribute("listScopeOfActivities", listScopeOfActivities);
+	    return PATH_ADMIN + "/registered_user";
+	}
+	
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value="/admin/user_add_by_admin/check_email", method = RequestMethod.POST,
     		produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.TEXT_PLAIN_VALUE)
