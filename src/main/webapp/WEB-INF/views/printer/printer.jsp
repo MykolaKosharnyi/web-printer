@@ -404,7 +404,9 @@
             
                 </ul>
                 <div>
-                    <div id="output_description">${product.description}</div>
+                    
+                    <!-- description on concrete language to this product -->
+                    <jsp:include page="../product_page/description.jsp" />
                     
                     <div class="descriptions">
 					<table>
@@ -740,7 +742,7 @@
 						</c:if>
   
                   </table>
-                  </div>
+                  	</div>
                     
                     <!-- comments to this product -->
                     <jsp:include page="../product_page/comments.jsp" />
