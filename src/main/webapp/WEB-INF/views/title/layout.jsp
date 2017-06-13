@@ -47,6 +47,15 @@
 <link rel="stylesheet" href="/css/flipclock.css">
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
 -->
+<c:set var="localeCode" scope = "session" value="${pageContext.response.locale}" />
+
+<%!
+public String getDescriptionByLocale(String locale){
+String getLocale = getContext().getResponce().getLocale();
+return null;
+}
+
+%>
 
 </head>
 <body>

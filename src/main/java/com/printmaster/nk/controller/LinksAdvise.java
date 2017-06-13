@@ -101,6 +101,19 @@ public class LinksAdvise {
 			}
     }
 	
+	@ModelAttribute
+    public void descriptionOfLabel(Model model) {
+		logger.info("Description of label.");
+		JSONParser parser = new JSONParser();
+	
+			try {
+				JSONObject jsonObject = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/descriptions_printer.json"), "UTF-8"));
+				model.addAttribute("descriptions_printer", jsonObject);
+			} catch (IOException | ParseException e) {
+				e.printStackTrace();
+			}
+    }
+	
 	@InitBinder
     public void initBinder(WebDataBinder binder) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");

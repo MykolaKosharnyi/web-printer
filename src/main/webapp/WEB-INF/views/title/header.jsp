@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix = "custom" uri = "/WEB-INF/custom.tld"%>
 <header class="top_header">
 		<div class="header_topline">
 			<div class="container">
@@ -11,7 +12,7 @@
 						<div class="top_information"><i class="fa fa-phone"></i> (044)-405-96-11</div>
 						<div class="top_information"><i class="fa fa-phone"></i> (044)-405-96-88</div>
 						<div class="top_information map_top_information" data-toggle="modal" data-target="#myAdress">
-							<i class="fa fa-map-marker"></i> г. Киев, ул. В.Покотыла, д. 7/2</div>
+							<i class="fa fa-map-marker"></i><spring:message code="head.adress_of_office"/></div>
 						<div class="top_information"><i class="fa fa-envelope-o"></i> office@forprint.net.ua</div>
 						<div class="top_information" style="float:right;">
 							<a href="https://www.youtube.com/channel/UCg5OBQp5r2Kwz3S6P0N45fA"><i class="fa fa-youtube"></i></a>							
@@ -31,14 +32,16 @@
 						
 
 						<div class="btn-group">
-  							<button type="button" class="btn btn-primary" style="margin-left:15px;">Стоимость в:</button>
+  							<button type="button" class="btn btn-primary" style="margin-left:15px;"><spring:message code="head.price_in_button"/></button>
   							<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     								<span class="caret"></span>
     								<span class="sr-only">Toggle Dropdown</span>
   							</button>
   							<ul class="dropdown-menu">
-    								<li><a href="javascript:convertPriceOnSite('dollar', ${ constants.dollar_in_grivna })"><i class="fa fa-usd"></i> ( ${ constants.dollar_in_grivna } грн. )</a></li>
-    								<li><a href="javascript:convertPriceOnSite('euro', ${ constants.euro_in_grivna })"><i class="fa fa-eur"></i> ( ${ constants.euro_in_grivna } грн. )</a></li>
+    								<li><a href="javascript:convertPriceOnSite('dollar', ${ constants.dollar_in_grivna })">
+    								<i class="fa fa-usd"></i> ( ${ constants.dollar_in_grivna } <spring:message code="head.short_grivna_name"/> )</a></li>
+    								<li><a href="javascript:convertPriceOnSite('euro', ${ constants.euro_in_grivna })">
+    								<i class="fa fa-eur"></i> ( ${ constants.euro_in_grivna } <spring:message code="head.short_grivna_name"/> )</a></li>
     								<li><a href="javascript:convertPriceOnSite('grinva', 1)">&#8372;, UAH</a></li>
     							</ul>
     						</div>
@@ -54,10 +57,29 @@
 						  	<div class="input-group-btn">
 						    	<div class="btn-group">
 								  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								    Поиск <span class="caret"></span>
+								    <spring:message code="head.login.search_button"/> <span class="caret"></span>
 								  </button>
 								  <ul class="dropdown-menu">
-								    <li><a href="javascript:searchByPhraseIncludeType('printer')">Принтеры</a></li>
+								    <li><a href="javascript:searchByPhraseIncludeType('printer')">
+								    
+								   	<custom:getDescriptionByLocale locate = "${localeCode}" description="${descriptions_printer.printer}"/>
+								    
+								    
+								    <c:choose>
+         
+							         <c:when test = "${localeCode == 'en' && !empty descriptions_printer.printer.en}">
+							            ${descriptions_printer.printer.en}
+							         </c:when>
+							         
+							         <c:when test = "${localeCode == 'ru'}">
+							            ${descriptions_printer.printer.ru}
+							         </c:when>
+							         
+							         <c:otherwise>
+							            ${descriptions_printer.printer.ru}
+							         </c:otherwise>
+							      </c:choose>
+								    </a></li>
 								    <li><a href="javascript:searchByPhraseIncludeType('3d_printer')">3Д принтеры</a></li>
 								    <li><a href="javascript:searchByPhraseIncludeType('digital_printer')">Цыфровые принтеры</a></li>
 								    <li><a href="javascript:searchByPhraseIncludeType('laminator')">Ламинаторы</a></li>
@@ -117,12 +139,12 @@
 						</script>
 			
 							<c:if test="${pageContext.request.userPrincipal.name != null}">
-								<li><a href="<c:url value='/user' />">Вы вошли как: ${pageContext.request.userPrincipal.name}</a></li>
-								<li><a href="javascript:formSubmit()">Выход</a></li>
+								<li><a href="<c:url value='/user' />"><spring:message code="head.login.you_enter_like"/> ${pageContext.request.userPrincipal.name}</a></li>
+								<li><a href="javascript:formSubmit()"><spring:message code="head.login.exit_url"/></a></li>
 							</c:if>
 							<c:if test="${pageContext.request.userPrincipal.name == null}">
-								<li><a href="<c:url value='/login' />">Войти</a></li>
-    							<li><a href="<c:url value='/registration' />">Зарегистрироваться</a></li>
+								<li><a href="<c:url value='/login' />"><spring:message code="head.login.enter_url"/></a></li>
+    							<li><a href="<c:url value='/registration' />"><spring:message code="head.login.registration"/></a></li>
 							</c:if>
     							<%--<li role="separator" class="divider"></li>
     							<li><a href="#">Еще что-то</a></li> --%>
@@ -133,12 +155,16 @@
 	    					<table class="table" style="margin: 0px; font-size: 13px;">
 	    						<tr>
 	    							<td style="padding: 3px 6px; border-top:none;">1 <i class="fa fa-usd"></i></td>
-	    							<td style="padding: 3px 6px;border-top:none;"><fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${ constants.dollar_in_grivna }" /> грн.</td>
+	    							<td style="padding: 3px 6px;border-top:none;">
+	    								<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${ constants.dollar_in_grivna }" /> 
+	    								<spring:message code="head.short_grivna_name"/></td>
 	    							
 	    						</tr>
 	    						<tr>
 	    							<td style="padding: 3px 6px;">1 <i class="fa fa-eur"></i></td>
-	    							<td style="padding: 3px 6px;"><fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${ constants.euro_in_grivna }" /> грн.</td>
+	    							<td style="padding: 3px 6px;">
+	    								<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${ constants.euro_in_grivna }" />
+	    								 <spring:message code="head.short_grivna_name"/></td>
 	    							
 	    						</tr>
 	    					</table>
