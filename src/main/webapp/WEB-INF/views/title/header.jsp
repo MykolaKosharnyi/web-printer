@@ -61,35 +61,36 @@
 								  </button>
 								  <ul class="dropdown-menu">
 								    <li><a href="javascript:searchByPhraseIncludeType('printer')">
-								    
-								   	<custom:getDescriptionByLocale locate = "${localeCode}" description="${descriptions_printer.printer}"/>
-								    
-								    
-								    <c:choose>
-         
-							         <c:when test = "${localeCode == 'en' && !empty descriptions_printer.printer.en}">
-							            ${descriptions_printer.printer.en}
-							         </c:when>
-							         
-							         <c:when test = "${localeCode == 'ru'}">
-							            ${descriptions_printer.printer.ru}
-							         </c:when>
-							         
-							         <c:otherwise>
-							            ${descriptions_printer.printer.ru}
-							         </c:otherwise>
-							      </c:choose>
+								   		<custom:getDescriptionByLocale description="${descriptions_printer.printers}"/>
 								    </a></li>
-								    <li><a href="javascript:searchByPhraseIncludeType('3d_printer')">3Д принтеры</a></li>
-								    <li><a href="javascript:searchByPhraseIncludeType('digital_printer')">Цыфровые принтеры</a></li>
-								    <li><a href="javascript:searchByPhraseIncludeType('laminator')">Ламинаторы</a></li>
-								    <li><a href="javascript:searchByPhraseIncludeType('laser')">Лазеры</a></li>
-								    <li><a href="javascript:searchByPhraseIncludeType('cutter')">Фрезеры</a></li>
-								    <li><a href="javascript:searchByPhraseIncludeType('scanner')">Сканеры</a></li>
-								    <li><a href="javascript:searchByPhraseIncludeType('rip')">ПО</a></li>
-								    <li><a href="javascript:searchByPhraseIncludeType('use_with_product')">Сопутствующие товары</a></li>
+								    
+								    <li><a href="javascript:searchByPhraseIncludeType('3d_printer')">
+								    <custom:getDescriptionByLocale description="${descriptions_printer.printers_3d}"/></a></li>
+								   		
+								    <li><a href="javascript:searchByPhraseIncludeType('digital_printer')">
+								    <custom:getDescriptionByLocale description="${descriptions_printer.digital_printers}"/></a></li>
+								   		
+								    <li><a href="javascript:searchByPhraseIncludeType('laminator')">
+								    <custom:getDescriptionByLocale description="${descriptions_printer.laminators}"/></a></li>
+								   		
+								    <li><a href="javascript:searchByPhraseIncludeType('laser')">
+								    <custom:getDescriptionByLocale description="${descriptions_printer.lasers}"/></a></li>
+								   		
+								    <li><a href="javascript:searchByPhraseIncludeType('cutter')">
+								    <custom:getDescriptionByLocale description="${descriptions_printer.cutters}"/></a></li>
+								   		
+								    <li><a href="javascript:searchByPhraseIncludeType('scanner')">
+								    <custom:getDescriptionByLocale description="${descriptions_printer.scanners}"/></a></li>
+								   		
+								    <li><a href="javascript:searchByPhraseIncludeType('rip')">
+								    <custom:getDescriptionByLocale description="${descriptions_printer.rips}"/></a></li>
+								   		
+								    <li><a href="javascript:searchByPhraseIncludeType('use_with_product')">
+								    <custom:getDescriptionByLocale description="${descriptions_printer.useWithProducts}"/>
+								    </a></li>
 								    <li role="separator" class="divider"></li>
-								    <li><a href="javascript:searchByPhraseIncludeType('all')">По всех разделах</a></li>
+								    <li><a href="javascript:searchByPhraseIncludeType('all')">
+								    <custom:getDescriptionByLocale description="${descriptions_printer.search_all_sections}"/></a></li>
 								  </ul>
 								</div>
 							</div>

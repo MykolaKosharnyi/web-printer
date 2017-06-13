@@ -11,11 +11,6 @@
 		<body-content>empty</body-content>
 		
 		<attribute>
-			<name>locate</name>
-			<required>true</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
 			<name>description</name>
 			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>

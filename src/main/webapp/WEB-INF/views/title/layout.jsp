@@ -12,7 +12,7 @@
 <html lang="ru">
 <!--<![endif]-->
 <head>
-<meta charset="utf-8" />
+	<meta charset="utf-8" />
 	<meta name="_csrf" content="${_csrf.token}"/>
 	<meta name="_csrf_header" content="${_csrf.headerName}"/>
 
@@ -48,14 +48,6 @@
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
 -->
 <c:set var="localeCode" scope = "session" value="${pageContext.response.locale}" />
-
-<%!
-public String getDescriptionByLocale(String locale){
-String getLocale = getContext().getResponce().getLocale();
-return null;
-}
-
-%>
 
 </head>
 <body>

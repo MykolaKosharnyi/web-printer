@@ -8,12 +8,7 @@ import javax.servlet.jsp.*;
 import java.io.*;
 
 public class DescriptionByLocaleTag extends SimpleTagSupport {
-	private String locate;
 	private JSONObject description;
-	
-	public void setLocate(String locate) {
-		this.locate = locate;
-	}
 
 	public void setDescription(JSONObject description) {
 		this.description = description;
@@ -24,9 +19,14 @@ public class DescriptionByLocaleTag extends SimpleTagSupport {
 	public void doTag() throws JspException, IOException {
 		String result = null;
 		
+		String locate = getJspContext().findAttribute("localeCode").toString();
 		
+		if(locate.equals("en") && !description.get("en").toString().isEmpty()){
+			result = description.get("en").toString();
+		} else {
+			result = description.get("ru").toString();
+		}
 
-		/* Use message from attribute */
 		JspWriter out = getJspContext().getOut();
 		out.println(result);
 
