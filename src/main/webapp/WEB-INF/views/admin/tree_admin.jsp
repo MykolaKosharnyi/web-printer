@@ -1055,6 +1055,16 @@
 
 <li class="Node IsRoot ExpandLeaf">
 	<div class="Expand"></div>
+	<div class="Content"><a href="<c:url value='/admin/user_proposals' />">Список присланных вопросов на уточнение</a></div>
+</li>
+
+<li class="Node IsRoot ExpandLeaf">
+	<div class="Expand"></div>
+	<div class="Content"><a href="<c:url value='/admin/internationalizations' />">Интернационализация</a></div>
+</li>
+
+<li class="Node IsRoot ExpandLeaf">
+	<div class="Expand"></div>
 	<div class="Content"><a href="<c:url value='/admin/constants' />">КОНСТАНТЫ</a></div>
 </li>
 

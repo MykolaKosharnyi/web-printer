@@ -2,12 +2,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <div id="output_description">
-	<c:set var="localeCode" value="${pageContext.response.locale}" />
-					   
-	<c:if test="${localeCode == 'en'}">
-		${product.descriptionEng}
-	</c:if>
-	<c:if test="${localeCode == 'ru'}">
-		${product.description}
-	</c:if>
+	<c:choose>   
+         <c:when test = "${localeCode == 'en' && !empty product.descriptionEng}">
+            ${product.descriptionEng}
+         </c:when>
+         
+         <c:when test = "${localeCode == 'ru'}">
+            ${product.description}
+         </c:when>
+         
+         <c:otherwise>
+            ${product.description}
+         </c:otherwise>
+	</c:choose>
 </div>

@@ -61,36 +61,46 @@
 								  </button>
 								  <ul class="dropdown-menu">
 								    <li><a href="javascript:searchByPhraseIncludeType('printer')">
-								   		<custom:getDescriptionByLocale description="${descriptions_printer.printers}"/>
+								   		<custom:getDescriptionByLocale description="${descriptions.printers}"/>
 								    </a></li>
 								    
 								    <li><a href="javascript:searchByPhraseIncludeType('3d_printer')">
-								    <custom:getDescriptionByLocale description="${descriptions_printer.printers_3d}"/></a></li>
+								    	<custom:getDescriptionByLocale description="${descriptions.printers_3d}"/>
+								    </a></li>
 								   		
 								    <li><a href="javascript:searchByPhraseIncludeType('digital_printer')">
-								    <custom:getDescriptionByLocale description="${descriptions_printer.digital_printers}"/></a></li>
+								    	<custom:getDescriptionByLocale description="${descriptions.digital_printers}"/>
+								    </a></li>
 								   		
 								    <li><a href="javascript:searchByPhraseIncludeType('laminator')">
-								    <custom:getDescriptionByLocale description="${descriptions_printer.laminators}"/></a></li>
+								    	<custom:getDescriptionByLocale description="${descriptions.laminators}"/>
+								    </a></li>
 								   		
 								    <li><a href="javascript:searchByPhraseIncludeType('laser')">
-								    <custom:getDescriptionByLocale description="${descriptions_printer.lasers}"/></a></li>
+								    	<custom:getDescriptionByLocale description="${descriptions.lasers}"/>
+								    </a></li>
 								   		
 								    <li><a href="javascript:searchByPhraseIncludeType('cutter')">
-								    <custom:getDescriptionByLocale description="${descriptions_printer.cutters}"/></a></li>
+								    	<custom:getDescriptionByLocale description="${descriptions.cutters}"/>
+								    </a></li>
 								   		
 								    <li><a href="javascript:searchByPhraseIncludeType('scanner')">
-								    <custom:getDescriptionByLocale description="${descriptions_printer.scanners}"/></a></li>
+								    	<custom:getDescriptionByLocale description="${descriptions.scanners}"/>
+								    </a></li>
 								   		
 								    <li><a href="javascript:searchByPhraseIncludeType('rip')">
-								    <custom:getDescriptionByLocale description="${descriptions_printer.rips}"/></a></li>
+								    	<custom:getDescriptionByLocale description="${descriptions.rips}"/>
+								    </a></li>
 								   		
 								    <li><a href="javascript:searchByPhraseIncludeType('use_with_product')">
-								    <custom:getDescriptionByLocale description="${descriptions_printer.useWithProducts}"/>
+								    	<custom:getDescriptionByLocale description="${descriptions.useWithProducts}"/>
 								    </a></li>
+								    
 								    <li role="separator" class="divider"></li>
+								    
 								    <li><a href="javascript:searchByPhraseIncludeType('all')">
-								    <custom:getDescriptionByLocale description="${descriptions_printer.search_all_sections}"/></a></li>
+								    	<custom:getDescriptionByLocale description="${descriptions.search_all_sections}"/>
+								    </a></li>
 								  </ul>
 								</div>
 							</div>
@@ -198,217 +208,217 @@
             <ul>
             
             <!-- PRINTERS -->
-            	<li><a href="<c:url value='/printers' />"><spring:message code="head.printer"/></a>
+            	<li><a href="<c:url value='/printers' />"><custom:getDescriptionByLocale description="${descriptions.printers}"/></a>
                 	<div class="head_menu_point_1">
                     	<div class="head_menu_point_element">
                         	<a href="<c:url value='/printers/dissolving' />">
                             <img src="/images/menu/printers/${picturesInHeadMenu.printersJSON.listPicturesDissolvingPrinters[0]}" alt="" >
-                            <p><spring:message code="head.printer.dissolving"/></p></a>
+                            <p><custom:getDescriptionByLocale description="${descriptions.printer_dissolving}"/></p></a>
                         </div>
                         <div class="head_menu_point_element">
                         	<a href="<c:url value='/printers/ecosolvent' />">
                         	<img src="/images/menu/printers/${picturesInHeadMenu.printersJSON.listPicturesEcosolventPrinters[0]}" alt="">
-                        	<p><spring:message code="head.printer.ecosolvent"/></p></a>
+                        	<p><custom:getDescriptionByLocale description="${descriptions.printer_ecosolvent}"/></p></a>
                         </div>
                         <div class="head_menu_point_element">
                         	<a href="<c:url value='/printers/UV_roll' />">
                         	<img src="/images/menu/printers/${picturesInHeadMenu.printersJSON.listPicturesUvRollPrinters[0]}" alt="" >
-                        	<p><spring:message code="head.printer.uv_roll"/></p></a>
+                        	<p><custom:getDescriptionByLocale description="${descriptions.printer_uv_roll}"/></p></a>
                         </div>                                       
                         <div class="head_menu_point_element">
                             <a href="<c:url value='/printers/UV_flatbed' />">
                             <img src="/images/menu/printers/${picturesInHeadMenu.printersJSON.listPicturesUvFlatbedPrinters[0]}" alt="" >
-                            <p><spring:message code="head.printer.flatbed"/></p></a>
+                            <p><custom:getDescriptionByLocale description="${descriptions.printer_flatbed}"/></p></a>
                         </div>
                         <div class="head_menu_point_element">
                             <a href="<c:url value='/printers/sublimation' />">
                             <img src="/images/menu/printers/${picturesInHeadMenu.printersJSON.listPicturesSublimationPrinters[0]}" src="" alt="" >
-                            <p><spring:message code="head.printer.sublimation"/></p></a>
+                            <p><custom:getDescriptionByLocale description="${descriptions.printer_sublimation}"/></p></a>
                         </div>
                         <div class="head_menu_point_element">
                             <a href="<c:url value='/printers/textile' />">
                             <img src="/images/menu/printers/${picturesInHeadMenu.printersJSON.listPicturesTextilePrinters[0]}" alt="" >
-                            <p><spring:message code="head.printer.textile"/></p></a>
+                            <p><custom:getDescriptionByLocale description="${descriptions.printer_textile}"/></p></a>
                         </div>
                         <div class="head_menu_point_element">
                             <a href="<c:url value='/printers/water_pigment' />">
                             <img src="/images/menu/printers/${picturesInHeadMenu.printersJSON.listPicturesWaterPigmentPrinters[0]}" alt="" >
-                            <p><spring:message code="head.printer.water_pigment"/></p></a>
+                            <p><custom:getDescriptionByLocale description="${descriptions.printer_water_pigment}"/></p></a>
                         </div>
                         <div class="head_menu_point_element">
                             <a href="<c:url value='/printers/SAPR-GIS' />">
                             <img src="/images/menu/printers/${picturesInHeadMenu.printersJSON.listPictures_SAPR_GIS_Printers[0]}" alt="" >
-                            <p><spring:message code="head.printer.SAPR-GIS"/></p></a>
+                            <p><custom:getDescriptionByLocale description="${descriptions.printer_SAPR_GIS}"/></p></a>
                         </div>
 					</div>
 				</li>
 				
             <!-- 3D PRINTERS -->
-                <li><a href="<c:url value='/3d_printers' />"><spring:message code="head.3dprinter"/></a>
+                <li><a href="<c:url value='/3d_printers' />"><custom:getDescriptionByLocale description="${descriptions.printers_3d}"/></a>
                 	<div class="head_menu_point_2">
                     	<div class="head_menu_point_element">
                     	<a href="<c:url value='/3d_printers/FDM-extruder' />">
                     	<img src="/images/menu/printers3d/${picturesInHeadMenu.printers3dJSON.list_3dPrintersFDM_Extruder[0]}" alt="" >
-                    	<p><spring:message code="head.3dprinter.FDM-extruder"/></p></a>
+                    	<p><custom:getDescriptionByLocale description="${descriptions.printers_3d_FDM_extruder}"/></p></a>
                 	</div>
                 	<div class="head_menu_point_element">
                 		<a href="<c:url value='/3d_printers/photo_printing_polyjet' />">
                 		<img src="/images/menu/printers3d/${picturesInHeadMenu.printers3dJSON.list_3d_printers_photo_printing_polyjet[0]}" alt="" >
-                		<p><spring:message code="head.3dprinter.photo_printing_polyjet"/></p></a>
+                		<p><custom:getDescriptionByLocale description="${descriptions.printers_3d_photo_printing_polyjet}"/></p></a>
                 	</div>
                 	<div class="head_menu_point_element">
                 		<a href="<c:url value='/3d_printers/laser_sintering_LENS' />">
                     	<img src="/images/menu/printers3d/${picturesInHeadMenu.printers3dJSON.list_3d_printers_laser_sintering_LENS[0]}" alt="" >
-                    	<p><spring:message code="head.3dprinter.laser_sintering_LENS"/></p></a>
+                    	<p><custom:getDescriptionByLocale description="${descriptions.printers_3d_laser_sintering_LENS}"/></p></a>
                 	</div>
                 	<div class="head_menu_point_element">
                 		<a href="<c:url value='/3d_printers/lamination_LOM' />">
                 		<img src="/images/menu/printers3d/${picturesInHeadMenu.printers3dJSON.list_3d_printers_lamination_LOM[0]}" alt="" >
-                		<p><spring:message code="head.3dprinter.lamination_LOM"/></p></a>
+                		<p><custom:getDescriptionByLocale description="${descriptions.printers_3d_lamination_LOM}"/></p></a>
                 	</div>
                 	<div class="head_menu_point_element">
                 		<a href="<c:url value='/3d_printers/stereolithography_SL' />">
                 		<img src="/images/menu/printers3d/${picturesInHeadMenu.printers3dJSON.list_3d_printers_stereolithography_SL[0]}" alt="" >
-                		<p><spring:message code="head.3dprinter.stereolithography_SL"/></p></a>
+                		<p><custom:getDescriptionByLocale description="${descriptions.printers_3d_stereolithography_SL}"/></p></a>
                 	</div>
                 	<div class="head_menu_point_element">
                 		<a href="<c:url value='/3d_printers/laser_sintering_LS' />">
                 		<img src="/images/menu/printers3d/${picturesInHeadMenu.printers3dJSON.list_3d_printers_laser_sintering_LS[0]}" alt="" >
-                		<p><spring:message code="head.3dprinter.laser_sintering_LS"/></p></a>
+                		<p><custom:getDescriptionByLocale description="${descriptions.printers_3d_laser_sintering_LS}"/></p></a>
                 	</div>
                 	<div class="head_menu_point_element">
                 		<a href="<c:url value='/3d_printers/powder_bonding_3DP' />">
                 		<img src="/images/menu/printers3d/${picturesInHeadMenu.printers3dJSON.list_3d_printers_powder_bonding_3DP[0]}" alt="" >
-                    	<p><spring:message code="head.3dprinter.powder_bonding_3DP"/></p></a>
+                    	<p><custom:getDescriptionByLocale description="${descriptions.printers_3d_powder_bonding_3DP}"/></p></a>
                 	</div>                                      
             	</div>
 			</li>
 			
 			<!-- Пункт меню 3 цыфровые принтера-->
-            <li><a href="<c:url value='/digital_printers' />"><spring:message code="head.digital_printer"/></a>
+            <li><a href="<c:url value='/digital_printers' />"><custom:getDescriptionByLocale description="${descriptions.digital_printers}"/></a>
             	<div class="head_menu_point_3">
                 	<div class="head_menu_point_element">
                     	<a href="<c:url value='/digital_printers/full_color_laser_printers' />">
                         	<img src="/images/menu/digital_printers/${picturesInHeadMenu.digital_printersJSON.list_full_color_laser_printers[0]}" alt="" >
-                        	<p><spring:message code="head.digital_printer.full_color_laser_printers"/></p>
+                        	<p><custom:getDescriptionByLocale description="${descriptions.digital_printers_full_color_laser_printers}"/></p>
                         </a>
                    	</div>
                     <div class="head_menu_point_element">
                     	<a href="<c:url value='/digital_printers/monochrome_laser_printers' />">
                     		<img src="/images/menu/digital_printers/${picturesInHeadMenu.digital_printersJSON.list_monochrome_laser_printers[0]}" alt="" >
-                    		<p><spring:message code="head.digital_printer.monochrome_laser_printers"/></p>
+                    		<p><custom:getDescriptionByLocale description="${descriptions.digital_printers_monochrome_laser_printers}"/></p>
                     	</a>
                     </div>
                     <div class="head_menu_point_element">
                     	<a href="<c:url value='/digital_printers/full-color_inkjet_printers' />">
                     		<img src="/images/menu/digital_printers/${picturesInHeadMenu.digital_printersJSON.list_full_color_inkjet_printers[0]}" alt="" >
-                    		<p><spring:message code="head.digital_printer.full_color_inkjet_printers"/></p>
+                    		<p><custom:getDescriptionByLocale description="${descriptions.digital_printers_full_color_inkjet_printers}"/></p>
                     	</a>
                     </div>                                                                            
 				</div>
 			</li>
 			
 		<!-- Пункт меню 4 Ламинирование-->
-            <li><a href="<c:url value='/laminators' />"><spring:message code="head.laminator"/></a>
+            <li><a href="<c:url value='/laminators' />"><custom:getDescriptionByLocale description="${descriptions.laminators}"/></a>
             	<div class="head_menu_point_34">
                 	<div class="head_menu_point_element">
                     	<a href="<c:url value='/laminators/hot_lamination' />">
                         <img src="/images/menu/laminator/${picturesInHeadMenu.laminatorJSON.list_hot_lamination[0]}" alt="" >
-                        <p><spring:message code="head.laminator.hot_lamination"/></p></a>
+                        <p><custom:getDescriptionByLocale description="${descriptions.laminators_hot_lamination}"/></p></a>
                    	</div>
                     <div class="head_menu_point_element">
                     	<a href="<c:url value='/laminators/cold_laminating' />">
                     	<img src="/images/menu/laminator/${picturesInHeadMenu.laminatorJSON.list_cold_laminating[0]}" alt="" >
-                    	<p><spring:message code="head.laminator.cold_laminating"/></p></a>
+                    	<p><custom:getDescriptionByLocale description="${descriptions.laminators_cold_laminating}"/></p></a>
                     </div>
                     <div class="head_menu_point_element">
                     	<a href="<c:url value='/laminators/liquid' />">
                     	<img src="/images/menu/laminator/${picturesInHeadMenu.laminatorJSON.list_liquid[0]}" alt="" >
-                    	<p><spring:message code="head.laminator.liquid"/></p></a>
+                    	<p><custom:getDescriptionByLocale description="${descriptions.laminators_liquid}"/></p></a>
                     </div>     
                     <div class="head_menu_point_element">
                     	<a href="<c:url value='/laminators/flatbed_laminating_machine' />">
                     	<img src="/images/menu/laminator/${picturesInHeadMenu.laminatorJSON.list_flatbed_laminating_machine[0]}" alt="" >
-                    	<p><spring:message code="head.laminator.flatbed_laminating_machine"/></p></a>
+                    	<p><custom:getDescriptionByLocale description="${descriptions.laminators_flatbed_laminating_machine}"/></p></a>
                     </div>                                                                       
 				</div>
 			</li>
 			
 		<!-- Пункт меню 5 Лазеры-->
-            <li><a href="<c:url value='/lasers' />"><spring:message code="head.laser"/></a>
+            <li><a href="<c:url value='/lasers' />"><custom:getDescriptionByLocale description="${descriptions.lasers}"/></a>
             	<div class="head_menu_point_4">
             		<div class="head_menu_point_element">
                     	<a href="<c:url value='/lasers/CO2_gas_lasers' />">
                     	<img src="/images/menu/laser/${picturesInHeadMenu.laserJSON.list_CO2_gas_lasers[0]}" alt="" >
-                    	<p><spring:message code="head.laser.CO2_gas_lasers"/></p></a>
+                    	<p><custom:getDescriptionByLocale description="${descriptions.lasers_CO2_gas_lasers}"/></p></a>
                 	</div>
                 	<div class="head_menu_point_element">
                 		<a href="<c:url value='/lasers/solid_state_lasers' />">
                     	<img src="/images/menu/laser/${picturesInHeadMenu.laserJSON.list_solid_state_lasers[0]}" alt="" >
-                    	<p><spring:message code="head.laser.solid_state_lasers"/></p></a>
+                    	<p><custom:getDescriptionByLocale description="${descriptions.lasers_solid_state_lasers}"/></p></a>
                 	</div>     
                 	<div class="head_menu_point_element">
                 		<a href="<c:url value='/lasers/for_the_treatment_of_metal' />">
                     	<img src="/images/menu/laser/${picturesInHeadMenu.laserJSON.list_for_the_treatment_of_metal[0]}" alt="" >
-                    	<p><spring:message code="head.laser.for_the_treatment_of_metal"/></p></a>
+                    	<p><custom:getDescriptionByLocale description="${descriptions.lasers_for_the_treatment_of_metal}"/></p></a>
                 	</div>
                 	<div class="head_menu_point_element">
                 		<a href="<c:url value='/lasers/diode_pumped' />">
                     	<img src="/images/menu/laser/${picturesInHeadMenu.laserJSON.list_diode_pumped[0]}" alt="" >
-                    	<p><spring:message code="head.laser.diode_pumped"/></p></a>
+                    	<p><custom:getDescriptionByLocale description="${descriptions.lasers_diode_pumped}"/></p></a>
                 	</div>  
                 	<div class="head_menu_point_element">
                 		<a href="<c:url value='/lasers/fiber_lasers' />">
                     	<img src="/images/menu/laser/${picturesInHeadMenu.laserJSON.list_fiber_lasers[0]}" alt="" >
-                    	<p><spring:message code="head.laser.fiber_lasers"/></p></a>
+                    	<p><custom:getDescriptionByLocale description="${descriptions.lasers_fiber_lasers}"/></p></a>
                 	</div>
                 	<div class="head_menu_point_element">
                 		<a href="<c:url value='/lasers/plasma_lasers' />">
                     	<img src="/images/menu/laser/${picturesInHeadMenu.laserJSON.list_plasma_lasers[0]}" alt="" >
-                    	<p><spring:message code="head.laser.plasma_lasers"/></p></a>
+                    	<p><custom:getDescriptionByLocale description="${descriptions.lasers_plasma_lasers}"/></p></a>
                 	</div>                               
                </div>
 			</li>
 			
 		<!-- Пункт меню 6 Фрезеры -->
-        	<li><a href="<c:url value='/cutters' />"><spring:message code="head.cutter"/></a>
+        	<li><a href="<c:url value='/cutters' />"><custom:getDescriptionByLocale description="${descriptions.cutters}"/></a>
             	<div class="head_menu_point_5">
                 	<div class="head_menu_point_element">
                     	<a href="<c:url value='/cutters/for_wood' />">
                         	<img src="/images/menu/cutter/${picturesInHeadMenu.cutterJSON.list_for_wood[0]}" alt="" >
-                        <p><spring:message code="head.cutter.for_wood"/></p></a>
+                        <p><custom:getDescriptionByLocale description="${descriptions.cutters_for_wood}"/></p></a>
                     </div>
                     <div class="head_menu_point_element">
                     	<a href="<c:url value='/cutters/for_the_treatment_of_metal' />">
                     		<img src="/images/menu/cutter/${picturesInHeadMenu.cutterJSON.list_for_the_treatment_of_metal[0]}" alt="" >
-                    	<p><spring:message code="head.cutter.for_the_treatment_of_metal"/></p></a>
+                    	<p><custom:getDescriptionByLocale description="${descriptions.cutters_for_the_treatment_of_metal}"/></p></a>
                     </div>
                     <div class="head_menu_point_element">
                     	<a href="<c:url value='/cutters/stone_processing' />">
                         	<img src="/images/menu/cutter/${picturesInHeadMenu.cutterJSON.list_stone_processing[0]}" alt="" >
-                        <p><spring:message code="head.cutter.stone_processing"/></p></a>
+                        <p><custom:getDescriptionByLocale description="${descriptions.cutters_stone_processing}"/></p></a>
                     </div>                                                                            
-                    </div>
+            	</div>
 			</li>
 				
 			<!-- Пункт меню 7 Сканеры-->
-                <li><a href="<c:url value='/scanners' />"><spring:message code="head.scanner"/></a>
+                <li><a href="<c:url value='/scanners' />"><custom:getDescriptionByLocale description="${descriptions.scanners}"/></a>
                 	<div class="head_menu_point_6">
                     	<div class="head_menu_point_element">
                         	<a href="<c:url value='/scanners/large_format_scanners' />">
                         	<img src="/images/menu/scanner/${picturesInHeadMenu.scannerJSON.list_large_format_scanners[0]}" alt="" >
-                            <p><spring:message code="head.scanner.large_format_scanners"/></p></a>
+                            <p><custom:getDescriptionByLocale description="${descriptions.scanners_large_format_scanners}"/></p></a>
                         </div>
                         <div class="head_menu_point_element">
                         	<a href="<c:url value='/scanners/3d_scanners' />">
                         	<img src="/images/menu/scanner/${picturesInHeadMenu.scannerJSON.list_3d_scanners[0]}" alt="" >
-                            <p><spring:message code="head.scanner.3d_scanners"/></p></a>
+                            <p><custom:getDescriptionByLocale description="${descriptions.scanners_3d_scanners}"/></p></a>
                         </div>
                     </div>
 				</li>
 				
 			<!-- Пункт меню 8 Бывшего употребления-->
-				<li><a href="<c:url value='/previous_use_equipments' />"><spring:message code="head.previouslyUsed"/></a>
+				<li><a href="<c:url value='/previous_use_equipments' />"><custom:getDescriptionByLocale description="${descriptions.previouslyUsed}"/></a>
 					<!--  <div class="head_menu_point_7">
                     	<div class="head_menu_point_element">
                         	<a href="#">
@@ -424,7 +434,7 @@
 				</li>
 				
 			<!-- Пункт меню 9 ПО rip-->
-                <li><a href="<c:url value='/rips' />"><spring:message code="head.rip"/></a></li>
+                <li><a href="<c:url value='/rips' />"><custom:getDescriptionByLocale description="${descriptions.rips}"/></a></li>
 
 			</ul><!-- Конец списка -->
 		</div><!-- Конец блока #mainmenu -->

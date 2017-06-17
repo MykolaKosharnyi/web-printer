@@ -107,8 +107,8 @@ public class LinksAdvise {
 		JSONParser parser = new JSONParser();
 	
 			try {
-				JSONObject jsonObject = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/descriptions_printer.json"), "UTF-8"));
-				model.addAttribute("descriptions_printer", jsonObject);
+				JSONObject jsonObject = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/descriptions_common.json"), "UTF-8"));
+				model.addAttribute("descriptions", jsonObject);
 			} catch (IOException | ParseException e) {
 				e.printStackTrace();
 			}

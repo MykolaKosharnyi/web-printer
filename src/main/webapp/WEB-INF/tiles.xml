@@ -335,4 +335,8 @@
         <put-attribute name="body" value="/WEB-INF/views/admin/internationalization.jsp" />  
     </definition>
     
+    <definition name="admin/internationalizations" extends="admin_base">    
+        <put-attribute name="body" value="/WEB-INF/views/admin/internationalizations.jsp" />  
+    </definition>
+    
 </tiles-definitions>  
