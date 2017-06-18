@@ -125,55 +125,10 @@
                             <a href="<c:url value='/printers/SAPR-GIS' />" class="list-group-item"><spring:message code="head.printer.SAPR-GIS"/></a>
                   </div>
                 </div>			
-
-              <div class="col-md-9 col-lg-9">
-                <div class="row">
-                  <div class="sider_container">
-                     <div class="next_button_printer"><i class="fa fa-angle-right"></i></div>
-                     <div class="pause_button_printer" style="display: none;"><i class="fa fa-pause" aria-hidden="true"></i></div>
-			         <div class="play_button_printer"><i class="fa fa-play" aria-hidden="true"></i></div>
-                     <div class="prev_button_printer"><i class="fa fa-angle-left"></i></div>
-                     <div class="carousel_printer">
-                        <c:forEach items="${printers}" var="product">
-                              <div class="slide-item">
-                                  <a class="slider_image" href="<c:url value='/printer/${product.id}' />">
-                                  	<div class="outer_a_img"><img src="/images/printers/${product.id}/${product.pathPictures.get(0)}" alt="" /></div>
-                                  </a>
-                                  
-                                  
-                                  <div class="name_price_cart_block">
-                                               
-                                      <a href="<c:url value='/printer/${product.id}' />" class="slide-title">${product.name}</a>         
-                                                                    
-	                                  <div class="product_price"><span style="float: left;">Цена:&nbsp;</span> 
-										<input type="hidden" name="price_value" value="${product.prise}">
-							       		<c:if test="${product.prise < 0.1}"><a 
-							       		href="javascript:openModalProposalPrise('printer', ${product.id}, '${product.name}', '${product.pathPictures.get(0)}')">уточняйте</a></c:if>
-										<c:if test="${!(product.prise < 0.1)}">					
-						   					<div></div>
-										</c:if>
-					           		 </div>
-					           		 
-					           		 <i class="fa fa-cart-plus add_to_cart" aria-hidden="true" 
-					           		 	style="padding-right: 5px; top: 3px; right: 5px; position: absolute; font-size: 40px;"
-									onclick="addToCart('printer', ${product.id}, '${product.name}', '${product.prise}','${product.pathPictures.get(0)}');"></i>
-					
-								</div>
-
-                              </div>
-                     	</c:forEach>
-                     </div>
-                  </div>
-                </div>
-              </div>
-              
- <%--               <h:home_section_of_product type="printer" arrayOfProduct="${printers}"/>
-              
-             <jsp:include page="home_section_of_product.jsp" flush="true">
-			     <jsp:param name="type" value="printer"/>
-			     <jsp:param name="arrayOfProduct" value="${printers}" />
-			</jsp:include>           
---%>
+                       
+		         <jsp:include page="home_section_of_product.jsp">
+					 <jsp:param name="type" value="printer"/>
+				</jsp:include>           
 
             </div>
 		</div>
@@ -237,45 +192,9 @@
                   </div>
                 </div>
 
-              <div class="col-md-9 col-lg-9">
-                <div class="row">
-                  <div class="sider_container">
-                     <div class="next_button_printer_3d"><i class="fa fa-angle-right"></i></div>
-                     <div class="pause_button_printer_3d" style="display: none;"><i class="fa fa-pause" aria-hidden="true"></i></div>
-			         <div class="play_button_printer_3d"><i class="fa fa-play" aria-hidden="true"></i></div>
-                     <div class="prev_button_printer_3d"><i class="fa fa-angle-left"></i></div>
-                     <div class="carousel_printer_3d">
-                        <c:forEach items="${printers3D}" var="product">
-                              <div class="slide-item">
-                                  <a class="slider_image" href="<c:url value='/3d_printer/${product.id}' />">
-                                  	<div class="outer_a_img"><img src="/images/3d_printers/${product.id}/${product.pathPictures.get(0)}" alt="" /></div>
-                                  </a>
-                                  
-                                  <div class="name_price_cart_block">
-                                               
-                                      <a href="<c:url value='/3d_printer/${product.id}' />" class="slide-title">${product.name}</a>         
-                                                                    
-	                                  <div class="product_price"><span style="float: left;">Цена:&nbsp;</span> 
-										<input type="hidden" name="price_value" value="${product.prise}">
-							       		<c:if test="${product.prise < 0.1}"><a 
-							       		href="javascript:openModalProposalPrise('3d_printer', ${product.id}, '${product.name}', '${product.pathPictures.get(0)}')">уточняйте</a></c:if>
-										<c:if test="${!(product.prise < 0.1)}">					
-						   					<div></div>
-										</c:if>
-					           		 </div>
-					           		 
-					           		 <i class="fa fa-cart-plus add_to_cart" aria-hidden="true" 
-					           		 	style="padding-right: 5px; top: 3px; right: 5px; position: absolute; font-size: 40px;"
-									onclick="addToCart('3d_printer', ${product.id}, '${product.name}', '${product.prise}','${product.pathPictures.get(0)}');"></i>
-					
-								</div>
-
-                              </div>
-                          </c:forEach>
-                     </div>
-                  </div>
-                </div>
-              </div>
+		         <jsp:include page="home_section_of_product.jsp">
+					 <jsp:param name="type" value="3d_printer"/>
+				</jsp:include>  
 
             </div>
 </div>
@@ -325,45 +244,9 @@
                   </div>
                 </div>
 
-              <div class="col-md-9 col-lg-9">
-                <div class="row">
-                  <div class="sider_container">
-                     <div class="next_button_printer_d"><i class="fa fa-angle-right"></i></div>
-                     <div class="pause_button_printer_d" style="display: none;"><i class="fa fa-pause" aria-hidden="true"></i></div>
-			         <div class="play_button_printer_d"><i class="fa fa-play" aria-hidden="true"></i></div>
-                     <div class="prev_button_printer_d"><i class="fa fa-angle-left"></i></div>
-                     <div class="carousel_printer_d">
-                        <c:forEach items="${digitalPrinters}" var="product">
-                              <div class="slide-item">
-                                  <a class="slider_image" href="<c:url value='/digital_printer/${product.id}' />">
-                                  	<div class="outer_a_img"><img src="/images/digital_printers/${product.id}/${product.pathPictures.get(0)}" alt="" /></div>
-                                  </a>
-                                  
-                                  <div class="name_price_cart_block">
-                                               
-                                      <a href="<c:url value='/digital_printer/${product.id}' />" class="slide-title">${product.name}</a>         
-                                                                    
-	                                  <div class="product_price"><span style="float: left;">Цена:&nbsp;</span> 
-										<input type="hidden" name="price_value" value="${product.prise}">
-							       		<c:if test="${product.prise < 0.1}"><a 
-							       		href="javascript:openModalProposalPrise('digital_printer', ${product.id}, '${product.name}', '${product.pathPictures.get(0)}')">уточняйте</a></c:if>
-										<c:if test="${!(product.prise < 0.1)}">					
-						   					<div></div>
-										</c:if>
-					           		 </div>
-					           		 
-					           		 <i class="fa fa-cart-plus add_to_cart" aria-hidden="true" 
-					           		 	style="padding-right: 5px; top: 3px; right: 5px; position: absolute; font-size: 40px;"
-									onclick="addToCart('digital_printer', ${product.id}, '${product.name}', '${product.prise}','${product.pathPictures.get(0)}');"></i>
-					
-								</div>
-
-                              </div>
-                          </c:forEach>
-                     </div>
-                  </div>
-                </div>
-              </div>
+				<jsp:include page="home_section_of_product.jsp">
+					 <jsp:param name="type" value="digital_printer"/>
+				</jsp:include> 
 
             </div>
 </div>
@@ -390,7 +273,7 @@
             </div>        
 
             <div class="categories_of_goods">
-<div class="row">
+			  <div class="row">
 
                 <div class="col-md-3" style="padding: 0px;">
                   <div class="list-group">
@@ -411,47 +294,9 @@
                   </div>
                 </div>
 
-              <div class="col-md-9 col-lg-9">
-                <div class="row">
-                  <div class="sider_container">
-                     <div class="next_button_laminator"><i class="fa fa-angle-right"></i></div>
-                     <div class="pause_button_laminator" style="display: none;"><i class="fa fa-pause" aria-hidden="true"></i></div>
-			         <div class="play_button_laminator"><i class="fa fa-play" aria-hidden="true"></i></div>
-                     <div class="prev_button_laminator"><i class="fa fa-angle-left"></i></div>
-                     <div class="carousel_laminator">
-                         <c:forEach items="${laminators}" var="product">
-                              <div class="slide-item">
-                                  <a class="slider_image" href="<c:url value='/laminator/${product.id}' />">
-                                  	<div class="outer_a_img"><img src="/images/laminators/${product.id}/${product.pathPictures.get(0)}" alt="" /></div>
-                                  </a>
-                                  
-                                  <div class="name_price_cart_block">
-                                               
-                                      <a href="<c:url value='/laminator/${product.id}' />" class="slide-title">${product.name}</a>         
-                                                                    
-	                                  <div class="product_price"><span style="float: left;">Цена:&nbsp;</span> 
-										<input type="hidden" name="price_value" value="${product.prise}">
-							       		<c:if test="${product.prise < 0.1}"><a 
-							       		href="javascript:openModalProposalPrise('laminator', ${product.id}, '${product.name}', '${product.pathPictures.get(0)}')">уточняйте</a></c:if>
-										<c:if test="${!(product.prise < 0.1)}">					
-						   					<div></div>
-										</c:if>
-					           		 </div>
-					           		 
-					           		 <i class="fa fa-cart-plus add_to_cart" aria-hidden="true" 
-					           		 	style="padding-right: 5px; top: 3px; right: 5px; position: absolute; font-size: 40px;"
-									onclick="addToCart('laminator', ${product.id}, '${product.name}', '${product.prise}','${product.pathPictures.get(0)}');"></i>
-					
-								</div>
-
-                              </div>
-                          </c:forEach>
-
-
-                     </div>
-                  </div>
-                </div>
-              </div>
+              	<jsp:include page="home_section_of_product.jsp">
+					 <jsp:param name="type" value="laminator"/>
+				</jsp:include> 
 
             </div>
 </div>
@@ -512,46 +357,9 @@
                   </div>
                 </div>
 
-              <div class="col-md-9 col-lg-9">
-                <div class="row">
-                  <div class="sider_container">
-                     <div class="next_button_laser"><i class="fa fa-angle-right"></i></div>
-                     <div class="pause_button_laser" style="display: none;"><i class="fa fa-pause" aria-hidden="true"></i></div>
-			         <div class="play_button_laser"><i class="fa fa-play" aria-hidden="true"></i></div>
-                     <div class="prev_button_laser"><i class="fa fa-angle-left"></i></div>
-                     <div class="carousel_laser">
-                        <c:forEach items="${lasers}" var="product">
-                              <div class="slide-item">
-                                  <a class="slider_image" href="<c:url value='/laser/${product.id}' />">
-                                  	<div class="outer_a_img"><img src="/images/lasers/${product.id}/${product.pathPictures.get(0)}" alt="" /></div>
-                                  </a>
-                                  
-                                  <div class="name_price_cart_block">
-                                               
-                                      <a href="<c:url value='/laser/${product.id}' />" class="slide-title">${product.name}</a>         
-                                                                    
-	                                  <div class="product_price"><span style="float: left;">Цена:&nbsp;</span> 
-										<input type="hidden" name="price_value" value="${product.prise}">
-							       		<c:if test="${product.prise < 0.1}"><a 
-							       		href="javascript:openModalProposalPrise('laser', ${product.id}, '${product.name}', '${product.pathPictures.get(0)}')">уточняйте</a></c:if>
-										<c:if test="${!(product.prise < 0.1)}">					
-						   					<div></div>
-										</c:if>
-					           		 </div>
-					           		 
-					           		 <i class="fa fa-cart-plus add_to_cart" aria-hidden="true" 
-					           		 	style="padding-right: 5px; top: 3px; right: 5px; position: absolute; font-size: 40px;"
-									onclick="addToCart('laser', ${product.id}, '${product.name}', '${product.prise}','${product.pathPictures.get(0)}');"></i>
-					
-								</div>
-								
-                              </div>
-                          </c:forEach>
-
-                     </div>
-                  </div>
-                </div>
-              </div>
+              <jsp:include page="home_section_of_product.jsp">
+				<jsp:param name="type" value="laser"/>
+			  </jsp:include> 
               
             </div>
 </div>
@@ -597,47 +405,9 @@
                   </div>
                 </div>
 
-              <div class="col-md-9 col-lg-9">
-                <div class="row">
-                  <div class="sider_container">
-                     <div class="next_button_cutter"><i class="fa fa-angle-right"></i></div>
-                     <div class="pause_button_cutter" style="display: none;"><i class="fa fa-pause" aria-hidden="true"></i></div>
-			         <div class="play_button_cutter"><i class="fa fa-play" aria-hidden="true"></i></div>
-                     <div class="prev_button_cutter"><i class="fa fa-angle-left"></i></div>
-                     <div class="carousel_cutter">
-                        <c:forEach items="${cutters}" var="product">
-                              <div class="slide-item">
-                                  <a class="slider_image" href="<c:url value='/cutter/${product.id}' />">
-                                  	<div class="outer_a_img"><img src="/images/cutters/${product.id}/${product.pathPictures.get(0)}" alt="" /></div>
-                                  </a>
-                                  
-                                  <div class="name_price_cart_block">
-                                               
-                                      <a href="<c:url value='/cutter/${product.id}' />" class="slide-title">${product.name}</a>         
-                                                                    
-	                                  <div class="product_price"><span style="float: left;">Цена:&nbsp;</span> 
-										<input type="hidden" name="price_value" value="${product.prise}">
-							       		<c:if test="${product.prise < 0.1}"><a 
-							       		href="javascript:openModalProposalPrise('cutter', ${product.id}, '${product.name}', '${product.pathPictures.get(0)}')">уточняйте</a></c:if>
-										<c:if test="${!(product.prise < 0.1)}">					
-						   					<div></div>
-										</c:if>
-					           		 </div>
-					           		 
-					           		 <i class="fa fa-cart-plus add_to_cart" aria-hidden="true" 
-					           		 	style="padding-right: 5px; top: 3px; right: 5px; position: absolute; font-size: 40px;"
-									onclick="addToCart('cutter', ${product.id}, '${product.name}', '${product.prise}','${product.pathPictures.get(0)}');"></i>
-					
-								</div>
-                            
-                              </div>
-                          </c:forEach>
-
-
-                     </div>
-                  </div>
-                </div>
-              </div>
+              <jsp:include page="home_section_of_product.jsp">
+				<jsp:param name="type" value="cutter"/>
+			  </jsp:include>
 
             </div>
 </div>
@@ -686,46 +456,9 @@
                   </div>
                 </div>
 
-              <div class="col-md-9 col-lg-9">
-                <div class="row">
-                  <div class="sider_container">
-                     <div class="next_button_scaner"><i class="fa fa-angle-right"></i></div>
-                     <div class="pause_button_scaner" style="display: none;"><i class="fa fa-pause" aria-hidden="true"></i></div>
-			         <div class="play_button_scaner"><i class="fa fa-play" aria-hidden="true"></i></div>
-                     <div class="prev_button_scaner"><i class="fa fa-angle-left"></i></div>
-                     <div class="carousel_scaner">
-                        <c:forEach items="${scanners}" var="product">
-                              <div class="slide-item">
-                                  <a class="slider_image" href="<c:url value='/scanner/${product.id}' />">
-                                  	<div class="outer_a_img"><img src="/images/scanners/${product.id}/${product.pathPictures.get(0)}" alt="" /></div>
-                                  </a>
-                                  
-                                  <div class="name_price_cart_block">
-                                               
-                                      <a href="<c:url value='/scanner/${product.id}' />" class="slide-title">${product.name}</a>         
-                                                                    
-	                                  <div class="product_price"><span style="float: left;">Цена:&nbsp;</span> 
-										<input type="hidden" name="price_value" value="${product.prise}">
-							       		<c:if test="${product.prise < 0.1}"><a 
-							       		href="javascript:openModalProposalPrise('scanner', ${product.id}, '${product.name}', '${product.pathPictures.get(0)}')">уточняйте</a></c:if>
-										<c:if test="${!(product.prise < 0.1)}">					
-						   					<div></div>
-										</c:if>
-					           		 </div>
-					           		 
-					           		 <i class="fa fa-cart-plus add_to_cart" aria-hidden="true" 
-					           		 	style="padding-right: 5px; top: 3px; right: 5px; position: absolute; font-size: 40px;"
-									onclick="addToCart('scanner', ${product.id}, '${product.name}', '${product.prise}','${product.pathPictures.get(0)}');"></i>
-					
-								</div>
-
-                              </div>
-                          </c:forEach>
-
-                     </div>
-                  </div>
-                </div>
-              </div>
+              <jsp:include page="home_section_of_product.jsp">
+				<jsp:param name="type" value="scanner"/>
+			  </jsp:include>
 
             </div>
 </div>
@@ -853,47 +586,9 @@
                   </div>
                 </div>
 
-              <div class="col-md-9 col-lg-9">
-                <div class="row">
-                  <div class="sider_container">
-                     <div class="next_button_rip"><i class="fa fa-angle-right"></i></div>
-                     <div class="pause_button_rip" style="display: none;"><i class="fa fa-pause" aria-hidden="true"></i></div>
-			         <div class="play_button_rip"><i class="fa fa-play" aria-hidden="true"></i></div>
-                     <div class="prev_button_rip"><i class="fa fa-angle-left"></i></div>
-                     <div class="carousel_rip">
-                        <c:forEach items="${rips}" var="product">
-                              <div class="slide-item">
-                                  <a class="slider_image" href="<c:url value='/rip/${product.id}' />">
-                                  	<div class="outer_a_img"><img src="/images/rips/${product.id}/${product.pathPictures.get(0)}" alt="" /></div>
-                                  </a>
-                                  
-                                  <div class="name_price_cart_block">
-                                               
-                                      <a href="<c:url value='/rip/${product.id}' />" class="slide-title">${product.name}</a>         
-                                                                    
-	                                  <div class="product_price"><span style="float: left;">Цена:&nbsp;</span> 
-										<input type="hidden" name="price_value" value="${product.prise}">
-							       		<c:if test="${product.prise < 0.1}"><a 
-							       		href="javascript:openModalProposalPrise('rip', ${product.id}, '${product.name}', '${product.pathPictures.get(0)}')">уточняйте</a></c:if>
-										<c:if test="${!(product.prise < 0.1)}">					
-						   					<div></div>
-										</c:if>
-					           		 </div>
-					           		 
-					           		 <i class="fa fa-cart-plus add_to_cart" aria-hidden="true" 
-					           		 	style="padding-right: 5px; top: 3px; right: 5px; position: absolute; font-size: 40px;"
-									onclick="addToCart('rip', ${product.id}, '${product.name}', '${product.prise}','${product.pathPictures.get(0)}');"></i>
-					
-								</div>
-
-                              </div>
-                          </c:forEach>
-
-
-                     </div>
-                  </div>
-                </div>
-              </div>
+              <jsp:include page="home_section_of_product.jsp">
+				<jsp:param name="type" value="rip"/>
+			  </jsp:include>
 
             </div>
 </div>

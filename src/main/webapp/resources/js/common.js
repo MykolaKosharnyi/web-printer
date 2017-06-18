@@ -162,7 +162,7 @@ $(document).ready(function() {
 
 
 	//Каруселька для 3D принтеров
-	var owl_printer_3d = $(".carousel_printer_3d");
+	var owl_printer_3d = $(".carousel_3d_printer");
 	owl_printer_3d.owlCarousel({
 		items : 3,
 		autoHeight : false,
@@ -180,22 +180,22 @@ $(document).ready(function() {
 		}
 		e.preventDefault();
 	});
-	$(".next_button_printer_3d").click(function() {
+	$(".next_button_3d_printer").click(function() {
 		owl_printer_3d.trigger("owl.next");
 	});
-	$(".prev_button_printer_3d").click(function() {
+	$(".prev_button_3d_printer").click(function() {
 		owl_printer_3d.trigger("owl.prev");
 	});
 	
-	$('.play_button_printer_3d').on('click',function(){
+	$('.play_button_3d_printer').on('click',function(){
 		owl_printer_3d.trigger('owl.play',4000);
 	    $(this).css('display','none');
-		$('.pause_button_printer_3d').css('display','block');
+		$('.pause_button_3d_printer').css('display','block');
 	});
-	$('.pause_button_printer_3d').on('click',function(){
+	$('.pause_button_3d_printer').on('click',function(){
 		owl_printer_3d.trigger('owl.stop');
 	    $(this).css('display','none');
-		$('.play_button_printer_3d').css('display','block');
+		$('.play_button_3d_printer').css('display','block');
 	});
 
 	//Каруселька для цыфровых принтеров
