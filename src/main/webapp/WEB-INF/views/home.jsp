@@ -4,6 +4,7 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix = "custom" uri = "/WEB-INF/custom.tld"%>
 <!DOCTYPE>
 <html lang="ru">
 <head>
@@ -106,23 +107,31 @@
                 <div class="col-md-3 col-lg-3" style="padding: 0px;">
                   <div class="list-group">
                     <a href="<c:url value='/printers' />" class="list-group-item active">
-                      <spring:message code="head.printer"/>
+                      <custom:getDescriptionByLocale description="${descriptions.printers}"/>
                     </a>
-                    <a href="<c:url value='/printers/dissolving' />" class="list-group-item"><spring:message code="head.printer.dissolving"/></a>
+                    <a href="<c:url value='/printers/dissolving' />" class="list-group-item">
+                    	<custom:getDescriptionByLocale description="${descriptions.printer_dissolving}"/></a>
 
-                            <a href="<c:url value='/printers/ecosolvent' />" class="list-group-item"><spring:message code="head.printer.ecosolvent"/></a>
+                            <a href="<c:url value='/printers/ecosolvent' />" class="list-group-item">
+                            <custom:getDescriptionByLocale description="${descriptions.printer_ecosolvent}"/></a>
 
-                            <a href="<c:url value='/printers/UV_roll' />" class="list-group-item"><spring:message code="head.printer.uv_roll"/></a>
+                            <a href="<c:url value='/printers/UV_roll' />" class="list-group-item">
+                            <custom:getDescriptionByLocale description="${descriptions.printer_uv_roll}"/></a>
 
-                            <a href="<c:url value='/printers/UV_flatbed' />" class="list-group-item"><spring:message code="head.printer.flatbed"/></a>
+                            <a href="<c:url value='/printers/UV_flatbed' />" class="list-group-item">
+                            <custom:getDescriptionByLocale description="${descriptions.printer_flatbed}"/></a>
 
-                            <a href="<c:url value='/printers/sublimation' />" class="list-group-item"><spring:message code="head.printer.sublimation"/></a>
+                            <a href="<c:url value='/printers/sublimation' />" class="list-group-item">
+                            <custom:getDescriptionByLocale description="${descriptions.printer_sublimation}"/></a>
 
-                            <a href="<c:url value='/printers/textile' />" class="list-group-item"><spring:message code="head.printer.textile"/></a>
+                            <a href="<c:url value='/printers/textile' />" class="list-group-item">
+                            <custom:getDescriptionByLocale description="${descriptions.printer_textile}"/></a>
                             
-                            <a href="<c:url value='/printers/water_pigment' />" class="list-group-item"><spring:message code="head.printer.water_pigment"/></a>
+                            <a href="<c:url value='/printers/water_pigment' />" class="list-group-item">
+                            <custom:getDescriptionByLocale description="${descriptions.printer_water_pigment}"/></a>
                             
-                            <a href="<c:url value='/printers/SAPR-GIS' />" class="list-group-item"><spring:message code="head.printer.SAPR-GIS"/></a>
+                            <a href="<c:url value='/printers/SAPR-GIS' />" class="list-group-item">
+                            <custom:getDescriptionByLocale description="${descriptions.printer_SAPR_GIS}"/></a>
                   </div>
                 </div>			
                        
@@ -167,28 +176,28 @@
                   <div class="list-group">
 
                     <a href="<c:url value='/3d_printers' />" class="list-group-item active">
-                      <spring:message code="head.3dprinter"/>
+                      <custom:getDescriptionByLocale description="${descriptions.printers_3d}"/>
                     </a>
                             <a href="<c:url value='/3d_printers/FDM-extruder' />" class="list-group-item">
-                            <spring:message code="head.3dprinter.FDM-extruder"/></a>
+                            <custom:getDescriptionByLocale description="${descriptions.printers_3d_FDM_extruder}"/></a>
 
                             <a href="<c:url value='/3d_printers/photo_printing_polyjet' />" class="list-group-item">
-                            <spring:message code="head.3dprinter.photo_printing_polyjet"/></a>
+                            <custom:getDescriptionByLocale description="${descriptions.printers_3d_photo_printing_polyjet}"/></a>
 
                             <a href="<c:url value='/3d_printers/laser_sintering_LENS' />" class="list-group-item">
-                            <spring:message code="head.3dprinter.laser_sintering_LENS"/></a>
+                            <custom:getDescriptionByLocale description="${descriptions.printers_3d_laser_sintering_LENS}"/></a>
 
                             <a href="<c:url value='/3d_printers/lamination_LOM' />" class="list-group-item">
-                            <spring:message code="head.3dprinter.lamination_LOM"/></a>
+                            <custom:getDescriptionByLocale description="${descriptions.printers_3d_lamination_LOM}"/></a>
 
                             <a href="<c:url value='/3d_printers/stereolithography_SL' />" class="list-group-item">
-                            <spring:message code="head.3dprinter.stereolithography_SL"/></a>
+                            <custom:getDescriptionByLocale description="${descriptions.printers_3d_stereolithography_SL}"/></a>
 
                             <a href="<c:url value='/3d_printers/laser_sintering_LS' />" class="list-group-item">
-                            <spring:message code="head.3dprinter.laser_sintering_LS"/></a>
+                            <custom:getDescriptionByLocale description="${descriptions.printers_3d_laser_sintering_LS}"/></a>
                             
                             <a href="<c:url value='/3d_printers/powder_bonding_3DP' />" class="list-group-item">
-                            <spring:message code="head.3dprinter.powder_bonding_3DP"/></a>
+                            <custom:getDescriptionByLocale description="${descriptions.printers_3d_powder_bonding_3DP}"/></a>
                   </div>
                 </div>
 
@@ -231,16 +240,17 @@
                 <div class="col-md-3" style="padding: 0px;">
                   <div class="list-group">
 
-                     <a href="<c:url value='/digital_printers' />" class="list-group-item active"><spring:message code="head.digital_printer"/></a>
+                     <a href="<c:url value='/digital_printers' />" class="list-group-item active">
+                     <custom:getDescriptionByLocale description="${descriptions.digital_printers}"/></a>
 
                             <a href="<c:url value='/digital_printers/full_color_laser_printers' />" class="list-group-item">
-                            <spring:message code="head.digital_printer.full_color_laser_printers"/></a>
+                            <custom:getDescriptionByLocale description="${descriptions.digital_printers_full_color_laser_printers}"/></a>
 
                             <a href="<c:url value='/digital_printers/monochrome_laser_printers' />" class="list-group-item">
-                            <spring:message code="head.digital_printer.monochrome_laser_printers"/></a>
+                            <custom:getDescriptionByLocale description="${descriptions.digital_printers_monochrome_laser_printers}"/></a>
 
                             <a href="<c:url value='/digital_printers/full-color_inkjet_printers' />" class="list-group-item">
-                            <spring:message code="head.digital_printer.full_color_inkjet_printers"/></a>
+                            <custom:getDescriptionByLocale description="${descriptions.digital_printers_full_color_inkjet_printers}"/></a>
                   </div>
                 </div>
 
@@ -278,19 +288,20 @@
                 <div class="col-md-3" style="padding: 0px;">
                   <div class="list-group">
 
-                     <a href="<c:url value='/laminators' />" class="list-group-item active"><spring:message code="head.laminator"/></a>
+                     <a href="<c:url value='/laminators' />" class="list-group-item active">
+                     <custom:getDescriptionByLocale description="${descriptions.laminators}"/></a>
 
                             <a href="<c:url value='/laminators/hot_lamination' />" class="list-group-item">
-                            <spring:message code="head.laminator.hot_lamination"/></a>
+                            <custom:getDescriptionByLocale description="${descriptions.laminators_hot_lamination}"/></a>
 
                             <a href="<c:url value='/laminators/cold_laminating' />" class="list-group-item">
-                            <spring:message code="head.laminator.cold_laminating"/></a>
+                            <custom:getDescriptionByLocale description="${descriptions.laminators_cold_laminating}"/></a>
 
                             <a href="<c:url value='/laminators/liquid' />" class="list-group-item">
-                            <spring:message code="head.laminator.liquid"/></a>
+                            <custom:getDescriptionByLocale description="${descriptions.laminators_liquid}"/></a>
                             
                             <a href="<c:url value='/laminators/flatbed_laminating_machine' />" class="list-group-item">
-                            <spring:message code="head.laminator.flatbed_laminating_machine"/></a>
+                            <custom:getDescriptionByLocale description="${descriptions.laminators_flatbed_laminating_machine}"/></a>
                   </div>
                 </div>
 
@@ -335,25 +346,26 @@
                 <div class="col-md-3" style="padding: 0px;">
                   <div class="list-group">
 
-                     <a href="<c:url value='/lasers' />" class="list-group-item active"><spring:message code="head.laser"/></a>
+                     <a href="<c:url value='/lasers' />" class="list-group-item active">
+                     <custom:getDescriptionByLocale description="${descriptions.lasers}"/></a>
 
                             <a href="<c:url value='/lasers/CO2_gas_lasers' />" class="list-group-item">
-                            <spring:message code="head.laser.CO2_gas_lasers"/></a>
+                            <custom:getDescriptionByLocale description="${descriptions.lasers_CO2_gas_lasers}"/></a>
 
                             <a href="<c:url value='/lasers/solid_state_lasers' />" class="list-group-item">
-                            <spring:message code="head.laser.solid_state_lasers"/></a>
+                            <custom:getDescriptionByLocale description="${descriptions.lasers_solid_state_lasers}"/></a>
 
                             <a href="<c:url value='/lasers/for_the_treatment_of_metal' />" class="list-group-item">
-                            <spring:message code="head.laser.for_the_treatment_of_metal"/></a>
+                            <custom:getDescriptionByLocale description="${descriptions.lasers_for_the_treatment_of_metal}"/></a>
 
                             <a href="<c:url value='/lasers/diode_pumped' />" class="list-group-item">
-                            <spring:message code="head.laser.diode_pumped"/></a>
+                            <custom:getDescriptionByLocale description="${descriptions.lasers_diode_pumped}"/></a>
                             
                             <a href="<c:url value='/lasers/fiber_lasers' />" class="list-group-item">
-                            <spring:message code="head.laser.fiber_lasers"/></a>
+                            <custom:getDescriptionByLocale description="${descriptions.lasers_fiber_lasers}"/></a>
                             
                             <a href="<c:url value='/lasers/plasma_lasers' />" class="list-group-item">
-                            <spring:message code="head.laser.plasma_lasers"/></a>
+                            <custom:getDescriptionByLocale description="${descriptions.lasers_plasma_lasers}"/></a>
                   </div>
                 </div>
 
@@ -392,16 +404,16 @@
                   <div class="list-group">
 
                      <a href="<c:url value='/cutters' />" class="list-group-item active">
-                     <spring:message code="head.cutter"/></a>
+                     <custom:getDescriptionByLocale description="${descriptions.cutters}"/></a>
 
                             <a href="<c:url value='/cutters/for_wood' />" class="list-group-item">
-                            <spring:message code="head.cutter.for_wood"/></a>
+                            <custom:getDescriptionByLocale description="${descriptions.cutters_for_wood}"/></a>
 
                             <a href="<c:url value='/cutters/for_the_treatment_of_metal' />" class="list-group-item">
-                            <spring:message code="head.cutter.for_the_treatment_of_metal"/></a>
+                            <custom:getDescriptionByLocale description="${descriptions.cutters_for_the_treatment_of_metal}"/></a>
 
                             <a href="<c:url value='/cutters/stone_processing' />" class="list-group-item">
-                            <spring:message code="head.cutter.stone_processing"/></a>
+                            <custom:getDescriptionByLocale description="${descriptions.cutters_stone_processing}"/></a>
                   </div>
                 </div>
 
@@ -445,13 +457,13 @@
                 <div class="col-md-3" style="padding: 0px;">
                   <div class="list-group">
 
-                     <a href="<c:url value='/scanners' />" class="list-group-item active"><spring:message code="head.scanner"/></a>
+                     <a href="<c:url value='/scanners' />" class="list-group-item active"><custom:getDescriptionByLocale description="${descriptions.scanners}"/></a>
 
                             <a href="<c:url value='/scanners/large_format_scanners' />" class="list-group-item">
-                            <spring:message code="head.scanner.large_format_scanners"/></a>
+                            <custom:getDescriptionByLocale description="${descriptions.scanners_large_format_scanners}"/></a>
                             
                             <a href="<c:url value='/scanners/3d_scanners' />" class="list-group-item">
-                            <spring:message code="head.scanner.3d_scanners"/></a>
+                            <custom:getDescriptionByLocale description="${descriptions.scanners_3d_scanners}"/></a>
 
                   </div>
                 </div>
@@ -493,7 +505,7 @@
                 <div class="col-md-3" style="padding: 0px;">
                   <div class="list-group">
 
-                     <a href="<c:url value='/previous_use_equipments' />" class="list-group-item active"><spring:message code="head.previouslyUsed"/></a>
+                     <a href="<c:url value='/previous_use_equipments' />" class="list-group-item active"><custom:getDescriptionByLocale description="${descriptions.previouslyUsed}"/></a>
 
                         <!--     <a href="#" class="list-group-item"><spring:message code="head.previouslyUsed.solvent_equipment"/></a>
 
@@ -581,7 +593,7 @@
                 <div class="col-md-3" style="padding: 0px;">
                   <div class="list-group">
 
-                     <a href="<c:url value='/rips' />" class="list-group-item active"><spring:message code="head.rip"/></a>
+                     <a href="<c:url value='/rips' />" class="list-group-item active"><custom:getDescriptionByLocale description="${descriptions.rips}"/></a>
 
                   </div>
                 </div>
