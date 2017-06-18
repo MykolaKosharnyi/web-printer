@@ -199,7 +199,7 @@ $(document).ready(function() {
 	});
 
 	//Каруселька для цыфровых принтеров
-	var owl_printer_d = $(".carousel_printer_d");
+	var owl_printer_d = $(".carousel_digital_printer");
 	owl_printer_d.owlCarousel({
 		items : 3,
 		autoHeight : false,
@@ -217,22 +217,22 @@ $(document).ready(function() {
 		}
 		e.preventDefault();
 	});
-	$(".next_button_printer_d").click(function() {
+	$(".next_button_digital_printer").click(function() {
 		owl_printer_d.trigger("owl.next");
 	});
-	$(".prev_button_printer_d").click(function() {
+	$(".prev_button_digital_printer").click(function() {
 		owl_printer_d.trigger("owl.prev");
 	});
 	
-	$('.play_button_printer_d').on('click',function(){
+	$('.play_button_digital_printer').on('click',function(){
 		owl_printer_d.trigger('owl.play',4000);
 	    $(this).css('display','none');
-		$('.pause_button_printer_d').css('display','block');
+		$('.pause_button_digital_printer').css('display','block');
 	});
-	$('.pause_button_printer_d').on('click',function(){
+	$('.pause_button_digital_printer').on('click',function(){
 		owl_printer_d.trigger('owl.stop');
 	    $(this).css('display','none');
-		$('.play_button_printer_d').css('display','block');
+		$('.play_button_digital_printer').css('display','block');
 	});
 
 //Каруселька for laminator
@@ -346,8 +346,8 @@ $(document).ready(function() {
 		$('.play_button_cutter').css('display','block');
 	});
 
-//Каруселька for scaner
-	var owl_scaner = $(".carousel_scaner");
+//Каруселька for scanner
+	var owl_scaner = $(".carousel_scanner");
 	owl_scaner.owlCarousel({
 		items : 3,
 		autoHeight : false,
@@ -365,22 +365,22 @@ $(document).ready(function() {
 		}
 		e.preventDefault();
 	});
-	$(".next_button_scaner").click(function() {
+	$(".next_button_scanner").click(function() {
 		owl_scaner.trigger("owl.next");
 	});
-	$(".prev_button_scaner").click(function() {
+	$(".prev_button_scanner").click(function() {
 		owl_scaner.trigger("owl.prev");
 	});
 	
-	$('.play_button_scaner').on('click',function(){
+	$('.play_button_scanner').on('click',function(){
 		owl_scaner.trigger('owl.play',4000);
 	    $(this).css('display','none');
-		$('.pause_button_scaner').css('display','block');
+		$('.pause_button_scanner').css('display','block');
 	});
-	$('.pause_button_scaner').on('click',function(){
+	$('.pause_button_scanner').on('click',function(){
 		owl_scaner.trigger('owl.stop');
 	    $(this).css('display','none');
-		$('.play_button_scaner').css('display','block');
+		$('.play_button_scanner').css('display','block');
 	});
 
 //Каруселька for previously_used
