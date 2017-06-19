@@ -1,9 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-<title><spring:message code="head.digital_printer"/></title>
+<%@ taglib prefix = "custom" uri = "/WEB-INF/custom.tld"%>
+<title><custom:getDescriptionByLocale description="${descriptions.digital_printers}"/></title>
 <div id="navigation">
-	<a href="<c:url value='/' />"><spring:message code="path.head_page"/></a>
+	<a href="<c:url value='/' />"><custom:getDescriptionByLocale description="${descriptions.path_head_page}"/></a>
 	<span><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span>
-	<p><spring:message code="head.digital_printer"/></p>
+	<p><custom:getDescriptionByLocale description="${descriptions.digital_printers}"/></p>
 </div>

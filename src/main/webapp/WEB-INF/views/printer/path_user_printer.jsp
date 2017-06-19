@@ -1,37 +1,37 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib prefix = "custom" uri = "/WEB-INF/custom.tld"%>
 <div id="navigation">
 
-	 <a href="<c:url value='/' />"><spring:message code="path.head_page"/></a>
+	 <a href="<c:url value='/' />"><custom:getDescriptionByLocale description="${descriptions.path_head_page}"/></a>
 	 <span><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span>
-	 <a href="<c:url value='/printers' />"><spring:message code="head.printer"/></a>
+	 <a href="<c:url value='/printers' />"><custom:getDescriptionByLocale description="${descriptions.printers}"/></a>
 	 <span><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span>
 	<c:forEach items="${product.typePrinter}" var="tp">
 		<c:choose>
 			<c:when test="${product.typePrinter.equals('Сольвентный')}">
-				<a href="<c:url value='/printers/dissolving' />"><spring:message code="head.printer.dissolving"/></a>
+				<a href="<c:url value='/printers/dissolving' />"><custom:getDescriptionByLocale description="${descriptions.printer_dissolving}"/></a>
 			</c:when>
 			<c:when test="${product.typePrinter.equals('Экосольвентный')}">
-				<a href="<c:url value='/printers/ecosolvent' />"><spring:message code="head.printer.ecosolvent"/></a>
+				<a href="<c:url value='/printers/ecosolvent' />"><custom:getDescriptionByLocale description="${descriptions.printer_ecosolvent}"/></a>
 			</c:when>
 			<c:when test="${product.typePrinter.equals('UV рулонный')}">
-				<a href="<c:url value='/printers/UV_roll' />"><spring:message code="head.printer.uv_roll"/></a>
+				<a href="<c:url value='/printers/UV_roll' />"><custom:getDescriptionByLocale description="${descriptions.printer_uv_roll}"/></a>
 			</c:when>
 			<c:when test="${product.typePrinter.equals('UV плоскопечатный')}">
-				<a href="<c:url value='/printers/UV_flatbed' />"><spring:message code="head.printer.flatbed"/></a>
+				<a href="<c:url value='/printers/UV_flatbed' />"><custom:getDescriptionByLocale description="${descriptions.printer_flatbed}"/></a>
 			</c:when>
 			<c:when test="${product.typePrinter.equals('Сублимационный')}">
-				<a href="<c:url value='/printers/sublimation' />"><spring:message code="head.printer.sublimation"/></a>
+				<a href="<c:url value='/printers/sublimation' />"><custom:getDescriptionByLocale description="${descriptions.printer_sublimation}"/></a>
 			</c:when>
 			<c:when test="${product.typePrinter.equals('Текстильный')}">
-				<a href="<c:url value='/printers/textile' />"><spring:message code="head.printer.textile"/></a>
+				<a href="<c:url value='/printers/textile' />"><custom:getDescriptionByLocale description="${descriptions.printer_textile}"/></a>
 			</c:when>
 			<c:when test="${product.typePrinter.equals('Водный/Пигментный')}">
-				<a href="<c:url value='/printers/water_pigment' />"><spring:message code="head.printer.water_pigment"/></a>
+				<a href="<c:url value='/printers/water_pigment' />"><custom:getDescriptionByLocale description="${descriptions.printer_water_pigment}"/></a>
 			</c:when>
 			<c:when test="${product.typePrinter.equals('САПР/ГИС')}">
-				<a href="<c:url value='/printers/SAPR-GIS' />"><spring:message code="head.printer.SAPR-GIS"/></a>
+				<a href="<c:url value='/printers/SAPR-GIS' />"><custom:getDescriptionByLocale description="${descriptions.printer_SAPR_GIS}"/></a>
 			</c:when>
 		</c:choose>
 	</c:forEach>

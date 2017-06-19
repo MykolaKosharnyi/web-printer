@@ -1,45 +1,45 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib prefix = "custom" uri = "/WEB-INF/custom.tld"%>
 <div id="navigation">
-	<a href="<c:url value='/' />"><spring:message code="path.head_page"/></a>
+	<a href="<c:url value='/' />"><custom:getDescriptionByLocale description="${descriptions.path_head_page}"/></a>
 	<span><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span>
-	<a href="<c:url value='/printers' />"><spring:message code="head.printer"/></a>
+	<a href="<c:url value='/printers' />"><custom:getDescriptionByLocale description="${descriptions.printers}"/></a>
 	<span><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span>
 	
 	<c:forEach items="${search.typePrinter}" var="tp">
 		<c:choose>
 			<c:when test="${tp.equals('Сольвентный')}">
-				<p><spring:message code="head.printer.dissolving"/></p>
-				<title><spring:message code="head.printer.dissolving"/></title>
+				<p><custom:getDescriptionByLocale description="${descriptions.printer_dissolving}"/></p>
+				<title><custom:getDescriptionByLocale description="${descriptions.printer_dissolving}"/></title>
 			</c:when>
 			<c:when test="${tp.equals('Экосольвентный')}">
-				<p><spring:message code="head.printer.ecosolvent"/></p>
-				<title><spring:message code="head.printer.ecosolvent"/></title>
+				<p><custom:getDescriptionByLocale description="${descriptions.printer_ecosolvent}"/></p>
+				<title><custom:getDescriptionByLocale description="${descriptions.printer_ecosolvent}"/></title>
 			</c:when>
 			<c:when test="${tp.equals('UV рулонный')}">
-				<p><spring:message code="head.printer.uv_roll"/></p>
-				<title><spring:message code="head.printer.uv_roll"/></title>
+				<p><custom:getDescriptionByLocale description="${descriptions.printer_uv_roll}"/></p>
+				<title><custom:getDescriptionByLocale description="${descriptions.printer_uv_roll}"/></title>
 			</c:when>
 			<c:when test="${tp.equals('UV плоскопечатный')}">
-				<p><spring:message code="head.printer.flatbed"/></p>
-				<title><spring:message code="head.printer.flatbed"/></title>
+				<p><custom:getDescriptionByLocale description="${descriptions.printer_flatbed}"/></p>
+				<title><custom:getDescriptionByLocale description="${descriptions.printer_flatbed}"/></title>
 			</c:when>
 			<c:when test="${tp.equals('Сублимационный')}">
-				<p><spring:message code="head.printer.sublimation"/></p>
-				<title><spring:message code="head.printer.sublimation"/></title>
+				<p><custom:getDescriptionByLocale description="${descriptions.printer_sublimation}"/></p>
+				<title><custom:getDescriptionByLocale description="${descriptions.printer_sublimation}"/></title>
 			</c:when>
 			<c:when test="${tp.equals('Текстильный')}">
-				<p><spring:message code="head.printer.textile"/></p>
-				<title><spring:message code="head.printer.textile"/></title>
+				<p><custom:getDescriptionByLocale description="${descriptions.printer_textile}"/></p>
+				<title><custom:getDescriptionByLocale description="${descriptions.printer_textile}"/></title>
 			</c:when>
 			<c:when test="${tp.equals('Водный/Пигментный')}">
-				<p><spring:message code="head.printer.water_pigment"/></p>
-				<title><spring:message code="head.printer.water_pigment"/></title>
+				<p><custom:getDescriptionByLocale description="${descriptions.printer_water_pigment}"/></p>
+				<title><custom:getDescriptionByLocale description="${descriptions.printer_water_pigment}"/></title>
 			</c:when>
 			<c:when test="${tp.equals('САПР/ГИС')}">
-				<p><spring:message code="head.printer.SAPR-GIS"/></p>
-				<title><spring:message code="head.printer.SAPR-GIS"/></title>
+				<p><custom:getDescriptionByLocale description="${descriptions.printer_SAPR_GIS}"/></p>
+				<title><custom:getDescriptionByLocale description="${descriptions.printer_SAPR_GIS}"/></title>
 			</c:when>
 		</c:choose>
 	</c:forEach>
