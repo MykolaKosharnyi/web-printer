@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="custom" uri="/WEB-INF/custom.tld"%>
 
 <div class="col-md-9 col-lg-9">
 	<div class="row">
@@ -56,9 +57,10 @@
 						<div class="name_price_cart_block">                                               
 							<a href="<c:url value='/${param.type}/${product.id}' />" class="slide-title">${product.name}</a>         
                                                                     
-							<div class="product_price"><span style="float: left;">Цена:&nbsp;</span> 
+							<div class="product_price"><span style="float: left; margin-right: 5px;"><custom:getDescriptionByLocale description="${descriptions.price}"/></span> 
 								<input type="hidden" name="price_value" value="${product.prise}">
-							    <c:if test="${product.prise < 0.1}"><a href="#callback" class="fancybox">уточняйте</a></c:if>
+							    <c:if test="${product.prise < 0.1}">
+							    	<a href="#callback" class="fancybox"><custom:getDescriptionByLocale description="${descriptions.specify}"/></a></c:if>
 								<c:if test="${!(product.prise < 0.1)}">					
 						   			<div></div>
 								</c:if>

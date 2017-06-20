@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix = "custom" uri = "/WEB-INF/custom.tld"%>
 
 	<div id="reklam">
 		
@@ -14,9 +15,10 @@
 					<a href="/${value.type}/${value.id}" class="slide-title">${value.nameProduct}</a>
 					
 					<div class="product_price">
-			    		<span style="float:left; margin-right: 5px;">Цена:</span>
+			    		<span style="float:left; margin-right: 5px;"><custom:getDescriptionByLocale description="${descriptions.price}"/></span>
 			    		<c:if test="${value.priceProduct < 0.1}">
-			    			<a href="javascript:openModalProposalPrise('${value.type}', ${value.id}, '${value.nameProduct}', '${value.pathToPicture}')">уточняйте</a>
+			    			<a href="javascript:openModalProposalPrise('${value.type}', ${value.id}, '${value.nameProduct}', '${value.pathToPicture}')">
+			    			<custom:getDescriptionByLocale description="${descriptions.specify}"/></a>
 			    		</c:if>
 			    		<c:if test="${value.priceProduct >= 0.1}">
 			    			<input type="hidden" value="${value.priceProduct}">
@@ -26,7 +28,7 @@
 		    		
 		    		<a class="reklam_add_to_cart"
 		    		 onclick="addToCart('${ value.type}', '${value.id}', '${value.nameProduct}', '${value.priceProduct}', '${value.pathToPicture}');"
-		    		 >Добавить в корзину</a>
+		    		 ><custom:getDescriptionByLocale description="${descriptions.add_to_basket}"/></a>
 				</div>
 				
 				<c:if test="${!empty value.leftSharesLink}">

@@ -288,13 +288,13 @@ $(function() {
 });
 
 function openModalProposalSuggestPrise(type, idProduct, nameProduct, pathToPicture){
-	var descriptionLabel = "Предложите, пожалуйста, свою цену.";
-	proposalPriceBlock(type, idProduct, nameProduct, pathToPicture, "SUGGEST_YOUR_PRICE", descriptionLabel, "Отправить");
+	var descriptionLabel = getDescriptionByLocale("feedback_form_suggest_price_title");
+	proposalPriceBlock(type, idProduct, nameProduct, pathToPicture, "SUGGEST_YOUR_PRICE", descriptionLabel, getDescriptionByLocale("feedback_form_send"));
 }
 
 function openModalProposalPrise(type, idProduct, nameProduct, pathToPicture){
-	var descriptionLabel = "Если Вам интересно данное оборудование отправьте запрос для просчета актуальной стоимости.";
-	proposalPriceBlock(type, idProduct, nameProduct, pathToPicture, "SPECIFY", descriptionLabel, "Уточнить");
+	var descriptionLabel = getDescriptionByLocale("feedback_form_proposal_price_title");
+	proposalPriceBlock(type, idProduct, nameProduct, pathToPicture, "SPECIFY", descriptionLabel, getDescriptionByLocale("feedback_form_clarify"));
 } 
 
 function proposalPriceBlock(type, idProduct, nameProduct, pathToPicture, typeProposal,descriptionLabel, textOnButton){
@@ -339,8 +339,14 @@ function checkPrise(num){
 		  }
 
 	} else {
-		return "\u0443\u0442\u043E\u0447\u043D\u044F\u0439\u0442\u0435";
+		return getDescriptionByLocale("specify");
 	}
+}
+
+function getDescriptionByLocale(descripiton){
+	var locale = "${localeCode}";
+	var descriptionFile = ${descriptions};
+	return descriptionFile[descripiton][locale];
 }
 
 function convernPriceToString(num){

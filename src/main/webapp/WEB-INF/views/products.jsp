@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix = "custom" uri = "/WEB-INF/custom.tld"%>
 
 <div id="top_result_of_search">
 	<c:forEach items="${listProducts}" var="product">
@@ -21,9 +22,10 @@
 		
 					<div class="name_price_cart_block">
 						<a href="<c:url value='/${product.type}/${product.id}' />" class="products_title">${product.name}</a>
-						<div class="product_price"><span style="float: left;">Цена:&nbsp;</span> 
+						<div class="product_price"><span style="float: left; margin-right: 5px;"><custom:getDescriptionByLocale description="${descriptions.price}"/></span> 
 							<input type="hidden" name="price_value" value="${product.prise}">
-				       		<c:if test="${product.prise < 0.1}"><a href="javascript:openModalProposalPrise('${product.type}', ${product.id}, '${product.name}', '${product.pathPictures.get(0)}')">уточняйте</a></c:if>
+				       		<c:if test="${product.prise < 0.1}"><a href="javascript:openModalProposalPrise('${product.type}', ${product.id}, '${product.name}', '${product.pathPictures.get(0)}')">
+				       		<custom:getDescriptionByLocale description="${descriptions.specify}"/></a></c:if>
 							<c:if test="${!(product.prise < 0.1)}">
 								<div></div>
 							</c:if>
@@ -37,14 +39,15 @@
 						<c:if test="${product.type=='printer' && product.ratingOverallRating > 0}">
 							<!-- Общая оценка -->
 							<div class="rating_block">
-								<p style="font-weight: bold;">Общая оценка:</p>
+								<p style="font-weight: bold;"><custom:getDescriptionByLocale description="${descriptions.overall_rating}"/></p>
 								<div style="width: 100px; float: left;">
 									<ul class="rating_average clearfix">
-										<li class="current" style="width: ${product.ratingOverallRating * 20}%;"><span class="star1" title="Плохо"></span></li>
-										<li><span class="star2" title="Ниже среднего" ></span></li>
-										<li><span class="star3" title="Средне" ></span></li>
-										<li><span class="star4" title="Хорошо"  ></span></li>
-										<li><span class="star5" title="Очень хорошо" ></span></li>
+										<li class="current" style="width: ${product.ratingOverallRating * 20}%;"><span class="star1"
+										 title="<custom:getDescriptionByLocale description='${descriptions.overall_rating_bad}'/>"></span></li>
+										<li><span class="star2" title="<custom:getDescriptionByLocale description='${descriptions.overall_rating_below_the_average}'/>" ></span></li>
+										<li><span class="star3" title="<custom:getDescriptionByLocale description='${descriptions.overall_rating_medium}'/>" ></span></li>
+										<li><span class="star4" title="<custom:getDescriptionByLocale description='${descriptions.overall_rating_good}'/>"  ></span></li>
+										<li><span class="star5" title="<custom:getDescriptionByLocale description='${descriptions.overall_rating_very_good}'/>" ></span></li>
 									</ul>
 								</div>
 							</div>
@@ -53,7 +56,7 @@
 						<!-- type of printhead -->
 						<c:if test="${product.type=='printer' && !empty product.typeOfPrinthead}">							
 							<div style="height: 40px; margin-bottom: 5px;">
-								<p style="font-weight: bold; width: 50%; float: left;">Тип печатающей головки:</p>
+								<p style="font-weight: bold; width: 50%; float: left;"><custom:getDescriptionByLocale description="${descriptions.print_head_type}"/></p>
 								<div style="float: left; width: 50%;">${product.typeOfPrinthead}</div>
 							</div>
 						</c:if>			
@@ -61,14 +64,14 @@
 						<!-- print resolution -->
 						<c:if test="${product.type=='printer' && product.inputFirstPrintResolution != 0 && product.inputSecondPrintResolution != 0}">
 							<div style="height: 40px; margin-bottom: 5px;">
-								<p style="font-weight: bold; width: 50%; float: left;">Разрешение печати:</p>
+								<p style="font-weight: bold; width: 50%; float: left;"><custom:getDescriptionByLocale description="${descriptions.print_resolution}"/></p>
 								<div style="float: left; width: 50%;">${product.inputFirstPrintResolution}x${product.inputSecondPrintResolution}dpi</div>
 							</div>
 						</c:if>
                       
                       	<c:if test="${product.type=='printer' && (product.inputFirstPrintResolution == 0 || product.inputSecondPrintResolution == 0) && !empty product.printResolution}">
                       		<div style="height: 40px; margin-bottom: 5px;">
-								<p style="font-weight: bold; width: 50%; float: left;">Разрешение печати:</p>
+								<p style="font-weight: bold; width: 50%; float: left;"><custom:getDescriptionByLocale description="${descriptions.print_resolution}"/></p>
 								<div style="float: left; width: 50%;">
 									<c:forEach var="tp" items="${product.printResolution}" varStatus="status">  
 	    								${tp}<c:if test="${ ! status.last}" >, </c:if>  
@@ -79,7 +82,7 @@
 						<!-- chromaticity -->
 						<c:if test="${product.type=='printer' && !empty product.chromaticity}">
 							<div style="height: 30px; margin-bottom: 5px;">
-								<p style="font-weight: bold; width: 50%; float: left;">Цветовая схема:</p>
+								<p style="font-weight: bold; width: 50%; float: left;"><custom:getDescriptionByLocale description="${descriptions.color_scheme}"/></p>
 								<div style="float: left; width: 50%;">
 									<c:forEach var="tp" items="${product.chromaticity}" varStatus="status">  
 		                   		
@@ -146,9 +149,10 @@
 	
 				<div class="name_price_cart_block">
 					<a href="<c:url value='/${product.type}/${product.id}' />" class="products_title">${product.name}</a>
-					<div class="product_price"><span style="float: left;">Цена:&nbsp;</span> 
+					<div class="product_price"><span style="float: left; margin-right: 5px;"><custom:getDescriptionByLocale description="${descriptions.price}"/></span> 
 						<input type="hidden" name="price_value" value="${product.prise}">
-			       		<c:if test="${product.prise < 0.1}"><a href="javascript:openModalProposalPrise('${product.type}', ${product.id}, '${product.name}', '${product.pathPictures.get(0)}')">уточняйте</a></c:if>
+			       		<c:if test="${product.prise < 0.1}"><a href="javascript:openModalProposalPrise('${product.type}', ${product.id}, '${product.name}', '${product.pathPictures.get(0)}')">
+			       		<custom:getDescriptionByLocale description="${descriptions.specify}"/></a></c:if>
 						<c:if test="${!(product.prise < 0.1)}">					
 		   					<div></div>
 						</c:if>
@@ -160,25 +164,26 @@
 				
 				<div class="name_price_cart_block_hidden">
 					<c:if test="${product.type=='printer' && product.ratingOverallRating > 0}">
-						<!-- Общая оценка -->
+							<!-- Общая оценка -->
 							<div class="rating_block">
-								<p style="font-weight: bold;">Общая оценка:</p>
+								<p style="font-weight: bold;"><custom:getDescriptionByLocale description="${descriptions.overall_rating}"/></p>
 								<div style="width: 100px; float: left;">
 									<ul class="rating_average clearfix">
-										<li class="current" style="width: ${product.ratingOverallRating * 20}%;"><span class="star1" title="Плохо"></span></li>
-										<li><span class="star2" title="Ниже среднего" ></span></li>
-										<li><span class="star3" title="Средне" ></span></li>
-										<li><span class="star4" title="Хорошо"  ></span></li>
-										<li><span class="star5" title="Очень хорошо" ></span></li>
+										<li class="current" style="width: ${product.ratingOverallRating * 20}%;"><span class="star1"
+										 title="<custom:getDescriptionByLocale description='${descriptions.overall_rating_bad}'/>"></span></li>
+										<li><span class="star2" title="<custom:getDescriptionByLocale description='${descriptions.overall_rating_below_the_average}'/>" ></span></li>
+										<li><span class="star3" title="<custom:getDescriptionByLocale description='${descriptions.overall_rating_medium}'/>" ></span></li>
+										<li><span class="star4" title="<custom:getDescriptionByLocale description='${descriptions.overall_rating_good}'/>"  ></span></li>
+										<li><span class="star5" title="<custom:getDescriptionByLocale description='${descriptions.overall_rating_very_good}'/>" ></span></li>
 									</ul>
 								</div>
 							</div>
-					</c:if>
+						</c:if>
 					
 					<!-- type of printhead -->
 						<c:if test="${product.type=='printer' && !empty product.typeOfPrinthead}">							
 							<div style="height: 40px; margin-bottom: 5px;">
-								<p style="font-weight: bold; width: 50%; float: left;">Тип печатающей головки:</p>
+								<p style="font-weight: bold; width: 50%; float: left;"><custom:getDescriptionByLocale description="${descriptions.print_head_type}"/></p>
 								<div style="float: left; width: 50%;">${product.typeOfPrinthead}</div>
 							</div>
 						</c:if>			
@@ -186,15 +191,14 @@
 						<!-- print resolution -->
 						<c:if test="${product.type=='printer' && product.inputFirstPrintResolution != 0 && product.inputSecondPrintResolution != 0}">
 							<div style="height: 40px; margin-bottom: 5px;">
-								<p style="font-weight: bold; width: 50%; float: left;">Разрешение печати:</p>
+								<p style="font-weight: bold; width: 50%; float: left;"><custom:getDescriptionByLocale description="${descriptions.print_resolution}"/></p>
 								<div style="float: left; width: 50%;">${product.inputFirstPrintResolution}x${product.inputSecondPrintResolution}dpi</div>
 							</div>
 						</c:if>
                       
-                      	<c:if test="${product.type=='printer' && (product.inputFirstPrintResolution == 0 || product.inputSecondPrintResolution == 0) &&
-                      	 !empty product.printResolution}">
+                      	<c:if test="${product.type=='printer' && (product.inputFirstPrintResolution == 0 || product.inputSecondPrintResolution == 0) && !empty product.printResolution}">
                       		<div style="height: 40px; margin-bottom: 5px;">
-								<p style="font-weight: bold; width: 50%; float: left;">Разрешение печати:</p>
+								<p style="font-weight: bold; width: 50%; float: left;"><custom:getDescriptionByLocale description="${descriptions.print_resolution}"/></p>
 								<div style="float: left; width: 50%;">
 									<c:forEach var="tp" items="${product.printResolution}" varStatus="status">  
 	    								${tp}<c:if test="${ ! status.last}" >, </c:if>  
@@ -205,7 +209,7 @@
 						<!-- chromaticity -->
 						<c:if test="${product.type=='printer' && !empty product.chromaticity}">
 							<div style="height: 30px; margin-bottom: 5px;">
-								<p style="font-weight: bold; width: 50%; float: left;">Цветовая схема:</p>
+								<p style="font-weight: bold; width: 50%; float: left;"><custom:getDescriptionByLocale description="${descriptions.color_scheme}"/></p>
 								<div style="float: left; width: 50%;">
 									<c:forEach var="tp" items="${product.chromaticity}" varStatus="status">  
 		                   		
@@ -257,8 +261,8 @@ jQuery(document).ready(function($) {
 	var topResult = $('#top_result_of_search');
 	
 	if(topResult.find('.products').length > 0){
-    	topResult.prepend($('<div/>').addClass('top_result_title').text("Топ Продаж"));
-    	topResult.append($('<div/>').addClass('top_result_title').text("Топ Продаж"));
+    	topResult.prepend($('<div/>').addClass('top_result_title').text(getDescriptionByLocale("top_sales")));
+    	topResult.append($('<div/>').addClass('top_result_title').text(getDescriptionByLocale("top_sales")));
     	topResult.height( Math.ceil(topResult.find('.products').length/3 ) * (topResult.find('.products').first().height() + 6 ) +
     		topResult.find('.top_result_title').outerHeight(true)*2);
     	topResult.css("margin-bottom","12px");
@@ -331,13 +335,13 @@ $(document).ready(function() {
             	var outerDiv = $('<div/>').addClass("products");
             	var innterDiv = $('<div/>').addClass('inner_div_product');
 
-            	var slidePrice = $('<div/>').addClass("product_price").append($('<span/>').text("Цена:").css(
+            	var slidePrice = $('<div/>').addClass("product_price").append($('<span/>').text(getDescriptionByLocale("price")).css(
 						{
 							"float":"left",
 							"margin-right": "5px"
 						}));
 				if(product.prise < 0.1){
-					slidePrice.append($('<a/>').attr("href","javascript:openModalProposalPrise('" + product.type +"', " + product.id +", '" + product.name +"', '" + product.pathPictures[0] +"')").text("\u0443\u0442\u043E\u0447\u043D\u044F\u0439\u0442\u0435"));
+					slidePrice.append($('<a/>').attr("href","javascript:openModalProposalPrise('" + product.type +"', " + product.id +", '" + product.name +"', '" + product.pathPictures[0] +"')").text(getDescriptionByLocale("specify")));
 				} else {
 					slidePrice.append($('<input/>').attr("type", "hidden").val(product.prise));
 					slidePrice.append($('<div/>').text(checkPrise(product.prise)));
@@ -361,32 +365,33 @@ $(document).ready(function() {
         			        						})))	  
     			        						
         			        		var name_price_cart_block = $('<div/>').addClass('name_price_cart_block_hidden');			
-        			        						
+
         			        		if(product.type=='printer' && product.ratingOverallRating > 0){	       			        			
         			        			name_price_cart_block.append($('<div/>').addClass('rating_block')
-        			        							.append($('<p/>').css( "font-weight", "bold" ).text("Общая оценка:"))
+        			        							.append($('<p/>').css( "font-weight", "bold" ).text(getDescriptionByLocale("overall_rating")))
         			        							.append($('<div/>').css( "width", "100px" ).css( "float", "left" )
         			        									.append($('<ul/>').addClass('rating_average clearfix')
         			        											.append($('<li/>').addClass('current').css( "width", product.ratingOverallRating * 20 + "%" )
-        			        													.append($('<span/>').addClass('star1').attr("title", "Плохо")))
-        			        											.append($('<li/>').append($('<span/>').addClass('star2').attr("title", "Ниже среднего")))
-        			        											.append($('<li/>').append($('<span/>').addClass('star3').attr("title", "Средне")))
-        			        											.append($('<li/>').append($('<span/>').addClass('star4').attr("title", "Хорошо")))
-        			        											.append($('<li/>').append($('<span/>').addClass('star4').attr("title", "Очень хорошо")))
+        			        													.append($('<span/>').addClass('star1').attr("title", getDescriptionByLocale("overall_rating_bad"))))
+        			        											.append($('<li/>').append($('<span/>').addClass('star2').attr("title", getDescriptionByLocale("overall_rating_below_the_average"))))
+        			        											.append($('<li/>').append($('<span/>').addClass('star3').attr("title", getDescriptionByLocale("overall_rating_medium"))))
+        			        											.append($('<li/>').append($('<span/>').addClass('star4').attr("title", getDescriptionByLocale("overall_rating_good"))))
+        			        											.append($('<li/>').append($('<span/>').addClass('star4').attr("title", getDescriptionByLocale("overall_rating_very_good"))))
         			        									)))
         			        		}
+        			   
 			// in this block added information about print head		
 			if(product.type=='printer' && product.typeOfPrinthead!=null && product.typeOfPrinthead!=""){
 				name_price_cart_block.append($('<div/>').css( "height", "40px" ).css( "margin-bottom", "5px" )
-						.append($('<p/>').css( "font-weight", "bold" ).css( "width", "50%" ).css( "float", "left" ).text("Тип печатающей головки:"))
+						.append($('<p/>').css( "font-weight", "bold" ).css( "width", "50%" ).css( "float", "left" ).text(getDescriptionByLocale("print_head_type")))
 						.append($('<div/>').css( "width", "50%" ).css( "float", "left" ).text(product.typeOfPrinthead))
 								)
     		}
-
+			
 			// in this two blocks added information about printer resolution			
 			if(product.type=='printer' && product.inputFirstPrintResolution != 0 && product.inputSecondPrintResolution != 0){
 				name_price_cart_block.append($('<div/>').css( "height", "40px" ).css( "margin-bottom", "5px" )
-						.append($('<p/>').css( "font-weight", "bold" ).css( "width", "50%" ).css( "float", "left" ).text("Разрешение печати:"))
+						.append($('<p/>').css( "font-weight", "bold" ).css( "width", "50%" ).css( "float", "left" ).text(getDescriptionByLocale("print_resolution")))
 						.append($('<div/>').css( "width", "50%" ).css( "float", "left" ).text(product.inputFirstPrintResolution + "x" + product.inputSecondPrintResolution + "dpi"))
 								)
     		}
@@ -404,11 +409,11 @@ $(document).ready(function() {
 				})
 
 				name_price_cart_block.append($('<div/>').css( "height", "40px" ).css( "margin-bottom", "5px" )
-						.append($('<p/>').css( "font-weight", "bold" ).css( "width", "50%" ).css( "float", "left" ).text("Разрешение печати:"))
+						.append($('<p/>').css( "font-weight", "bold" ).css( "width", "50%" ).css( "float", "left" ).text(getDescriptionByLocale("print_resolution")))
 						.append($('<div/>').css( "width", "50%" ).css( "float", "left" ).text(resultResolution))
 								)
     		}	
- 
+
 			//in this block added information about chromaticity	
 			if(product.type=='printer' && product.chromaticity!=null){
 				var resultChromaticity="";
@@ -484,7 +489,7 @@ $(document).ready(function() {
 				});
 
 				name_price_cart_block.append($('<div/>').css( "height", "30px" ).css( "margin-bottom", "5px" )
-						.append($('<p/>').css( "font-weight", "bold" ).css( "width", "50%" ).css( "float", "left" ).text("Цветовая схема:"))
+						.append($('<p/>').css( "font-weight", "bold" ).css( "width", "50%" ).css( "float", "left" ).text(getDescriptionByLocale("color_scheme")))
 						.append($('<div/>').css( "width", "50%" ).css( "float", "left" ).text(resultChromaticity))
 								)
     		}
@@ -518,8 +523,8 @@ $(document).ready(function() {
             
             var topResult = $('#top_result_of_search');
             if(topResult.find('.products').length > 0){
-            	topResult.prepend($('<div/>').addClass('top_result_title').text("Топ Продаж"));
-            	topResult.append($('<div/>').addClass('top_result_title').text("Топ Продаж"));
+            	topResult.prepend($('<div/>').addClass('top_result_title').text(getDescriptionByLocale("top_sales")));
+            	topResult.append($('<div/>').addClass('top_result_title').text(getDescriptionByLocale("top_sales")));
             	topResult.height( Math.ceil(topResult.find('.products').length/3 ) * (topResult.find('.products').first().height() + 6 ) +
             			topResult.find('.top_result_title').outerHeight(true)*2);
             	topResult.css("margin-bottom","12px");
