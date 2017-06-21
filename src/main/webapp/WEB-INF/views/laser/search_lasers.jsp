@@ -27,15 +27,15 @@
 				<i class="opened"></i>
 				<p>Цена</p>
 			</div>
-			<ul class="check_boxes" style="display: block;">
+			<div class="check_boxes" style="display: block;">
 				<div class="text_output">
 					<p>$</p>
 					<form:input path="prise0" class="amount-prise0" value="${search.prise0}" />
 					<p>&nbsp;-&nbsp; $</p>
 					<form:input path="prise1" class="amount-prise1" value="${search.prise1}" />
 				</div>
-				<div class="slider-range-prise"/>
-			</ul>
+				<div class="slider-range-prise"></div>
+			</div>
 		</div>
 		<div class="search_criteria">
 			<div class="block_title">
@@ -60,7 +60,7 @@
 				<i></i>
 				<p>Размер рабочей области</p>
 			</div>
-			<ul class="check_boxes">
+			<div class="check_boxes">
 				<p style="float: none; margin: 10px auto 0px;"> По оси Х:</p>
 				<div class="text_output">
 					<form:input path="sizeWorkAreaX0" class="amount-sizeWorkAreaX0" value="${search.sizeWorkAreaX0}"/>
@@ -87,7 +87,7 @@
 					<p>&nbsp;мм</p>
 				</div>
 					<div class="slider-range-sizeWorkAreaZ"></div>
-			</ul>
+			</div>
 		</div>
 		<div class="search_criteria">
 			<div class="block_title">
@@ -121,113 +121,113 @@
 				<i></i>
 				<p>Максимальное разрешение, DPI</p>
 			</div>
-			<ul class="check_boxes">
+			<div class="check_boxes">
 				<div class="text_output">
 					<form:input path="maximumResolution0" class="amount-maximumResolution0" value="${search.maximumResolution0}" />
 					<p>&nbsp;-&nbsp;</p>
 					<form:input path="maximumResolution1" class="amount-maximumResolution1" value="${search.maximumResolution1}" />
 				</div>
-					<div class="slider-range-maximumResolution"></div>
-			</ul>
+				<div class="slider-range-maximumResolution"></div>
+			</div>
 		</div>
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
 				<p>Регулировка мощности лазера, %</p>
 			</div>
-			<ul class="check_boxes">
+			<div class="check_boxes">
 				<div class="text_output">
 					<form:input path="firstPartAdjustingTheLaserPower" class="amount-firstPartAdjustingTheLaserPower" value="${search.firstPartAdjustingTheLaserPower}" />
 					<p>&nbsp;-&nbsp;</p>
 					<form:input path="secondPartAdjustingTheLaserPower" class="amount-secondPartAdjustingTheLaserPower" value="${search.secondPartAdjustingTheLaserPower}" />
 				</div>
-					<div class="slider-range-adjustingTheLaserPower"></div>
-			</ul>
+				<div class="slider-range-adjustingTheLaserPower"></div>
+			</div>
 		</div>
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
 				<p>Мощность лазера</p>
 			</div>
-			<ul class="check_boxes">
+			<div class="check_boxes">
 				<div class="text_output">
 					<form:input path="powerOfLaser0" class="amount-powerOfLaser0" value="${search.powerOfLaser0}" />
 					<p>&nbsp;Вт -&nbsp;</p>
 					<form:input path="powerOfLaser1" class="amount-powerOfLaser1" value="${search.powerOfLaser1}" />
 					<p>&nbsp;Вт</p>
 				</div>
-					<div class="slider-range-powerOfLaser"></div>
-			</ul>
+				<div class="slider-range-powerOfLaser"></div>
+			</div>
 		</div>
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
 				<p>Длинна волны лазера, nm</p>
 			</div>
-			<ul class="check_boxes">
+			<div class="check_boxes">
 				<div class="text_output">
 					<form:input path="laserWavelength0" class="amount-laserWavelength0" value="${search.laserWavelength0}" />
 					<p>&nbsp;-&nbsp;</p>
 					<form:input path="laserWavelength1" class="amount-laserWavelength1" value="${search.laserWavelength1}" />
 				</div>
-					<div class="slider-range-laserWavelength"></div>
-			</ul>
+				<div class="slider-range-laserWavelength"></div>
+			</div>
 		</div>
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
 				<p>Импульс лазера, Hz</p>
 			</div>
-			<ul class="check_boxes">
+			<div class="check_boxes">
 				<div class="text_output">
 					<form:input path="laserPulse0" class="amount-laserPulse0" value="${search.laserPulse0}" />
 					<p>&nbsp;-&nbsp;</p>
 					<form:input path="laserPulse1" class="amount-laserPulse1" value="${search.laserPulse1}" />
 				</div>
-					<div class="slider-range-laserPulse"></div>
-			</ul>
+				<div class="slider-range-laserPulse"></div>
+			</div>
 		</div>
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
 				<p>Диаметр лазера, мм</p>
 			</div>
-			<ul class="check_boxes">
+			<div class="check_boxes">
 				<div class="text_output">
 					<form:input path="theDiameterOfTheLaser0" class="amount-theDiameterOfTheLaser0" value="${search.theDiameterOfTheLaser0}" />
 					<p>&nbsp;-&nbsp;</p>
 					<form:input path="theDiameterOfTheLaser1" class="amount-theDiameterOfTheLaser1" value="${search.theDiameterOfTheLaser1}" />
 				</div>
-					<div class="slider-range-theDiameterOfTheLaser"></div>
-			</ul>
+				<div class="slider-range-theDiameterOfTheLaser"></div>
+			</div>
 		</div>
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
 				<p>Глубина гравировки, мм</p>
 			</div>
-			<ul class="check_boxes">
+			<div class="check_boxes">
 				<div class="text_output">
 					<form:input path="engravingDepth0" class="amount-engravingDepth0" value="${search.engravingDepth0}" />
 					<p>&nbsp;-&nbsp;</p>
 					<form:input path="engravingDepth1" class="amount-engravingDepth1" value="${search.engravingDepth1}" />
 				</div>
-					<div class="slider-range-engravingDepth"></div>
-			</ul>
+				<div class="slider-range-engravingDepth"></div>
+			</div>
 		</div>
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
 				<p>Ресурс лазера, часов</p>
 			</div>
-			<ul class="check_boxes">
+			<div class="check_boxes">
 				<div class="text_output">
 					<form:input path="laserSource0" class="amount-laserSource0" value="${search.laserSource0}" />
 					<p>&nbsp;-&nbsp;</p>
 					<form:input path="laserSource1" class="amount-laserSource1" value="${search.laserSource1}" />
 				</div>
-					<div class="slider-range-laserSource"></div>
-			</ul>
+				<div class="slider-range-laserSource"></div>
+			</div>
 		</div>
 		<div class="search_criteria">
 			<div class="block_title">
@@ -252,70 +252,70 @@
 				<i></i>
 				<p>Механическое разрешение, мкм/шаг</p>
 			</div>
-			<ul class="check_boxes">
+			<div class="check_boxes">
 				<div class="text_output">
 					<form:input path="mechanicalResolution0" class="amount-mechanicalResolution0" value="${search.mechanicalResolution0}" />
 					<p>&nbsp;-&nbsp;</p>
 					<form:input path="mechanicalResolution1" class="amount-mechanicalResolution1" value="${search.mechanicalResolution1}" />
 				</div>
-					<div class="slider-range-mechanicalResolution"></div>
-			</ul>
+				<div class="slider-range-mechanicalResolution"></div>
+			</div>
 		</div>
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
 				<p>Программное разрешение, мкм/шаг</p>
 			</div>
-			<ul class="check_boxes">
+			<div class="check_boxes">
 				<div class="text_output">
 					<form:input path="softwareResolution0" class="amount-softwareResolution0" value="${search.softwareResolution0}" />
 					<p>&nbsp;-&nbsp;</p>
 					<form:input path="softwareResolution1" class="amount-softwareResolution1" value="${search.softwareResolution1}" />
 				</div>
-					<div class="slider-range-softwareResolution"></div>
-			</ul>
+				<div class="slider-range-softwareResolution"></div>
+			</div>
 		</div>
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
 				<p>Минимальная толщина реза, мкм</p>
 			</div>
-			<ul class="check_boxes">
+			<div class="check_boxes">
 				<div class="text_output">
 					<form:input path="minimumThicknessOfCut0" class="amount-minimumThicknessOfCut0" value="${search.minimumThicknessOfCut0}" />
 					<p>&nbsp;-&nbsp;</p>
 					<form:input path="minimumThicknessOfCut1" class="amount-minimumThicknessOfCut1" value="${search.minimumThicknessOfCut1}" />
 				</div>
-					<div class="slider-range-minimumThicknessOfCut"></div>
-			</ul>
+				<div class="slider-range-minimumThicknessOfCut"></div>
+			</div>
 		</div>
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
 				<p>Скорость гравировки, мм/мин</p>
 			</div>
-			<ul class="check_boxes">
+			<div class="check_boxes">
 				<div class="text_output">
 					<form:input path="engravingSpeed0" class="amount-engravingSpeed0" value="${search.engravingSpeed0}" />
 					<p>&nbsp;-&nbsp;</p>
 					<form:input path="engravingSpeed1" class="amount-engravingSpeed1" value="${search.engravingSpeed1}" />
 				</div>
-					<div class="slider-range-engravingSpeed"></div>
-			</ul>
+				<div class="slider-range-engravingSpeed"></div>
+			</div>
 		</div>
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
 				<p>Скорость резки, мм/мин</p>
 			</div>
-			<ul class="check_boxes">
+			<div class="check_boxes">
 				<div class="text_output">
 					<form:input path="cuttingSpeed0" class="amount-cuttingSpeed0" value="${search.cuttingSpeed0}" />
 					<p>&nbsp;-&nbsp;</p>
 					<form:input path="cuttingSpeed1" class="amount-cuttingSpeed1" value="${search.cuttingSpeed1}" />
 				</div>
-					<div class="slider-range-cuttingSpeed"></div>
-			</ul>
+				<div class="slider-range-cuttingSpeed"></div>
+			</div>
 		</div>
 		<div class="search_criteria">
 			<div class="block_title">
@@ -358,58 +358,58 @@
 				<i></i>
 				<p>Общие характеристики</p>
 			</div>
-			<ul class="block_check_boxes">
+			<div class="block_check_boxes">
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
 						<p>Средняя потребляемая мощность</p>
 					</div>
-					<ul class="check_boxes">
+					<div class="check_boxes">
 						<div class="text_output">
 							<form:input path="averagePowerConsumption0" class="amount-averagePowerConsumption0" value="${search.averagePowerConsumption0}" />
 							<p>&nbsp;Вт -&nbsp;</p>
 							<form:input path="averagePowerConsumption1" class="amount-averagePowerConsumption1" value="${search.averagePowerConsumption1}" />
 							<p>&nbsp;Вт</p>
 						</div>
-							<div class="slider-range-averagePowerConsumption"></div>
-					</ul>
+						<div class="slider-range-averagePowerConsumption"></div>
+					</div>
 				</div>
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
 						<p>Максимальная потребляемая мощность</p>
 					</div>
-					<ul class="check_boxes">
+					<div class="check_boxes">
 						<div class="text_output">
 							<form:input path="maxPowerConsumption0" class="amount-max_power_consumption0" value="${search.maxPowerConsumption0}" />
 							<p>&nbsp;Вт -&nbsp;</p>
 							<form:input path="maxPowerConsumption1" class="amount-max_power_consumption1" value="${search.maxPowerConsumption1}" />
 							<p>&nbsp;Вт</p>
 						</div>
-							<div class="slider-range-max_power_consumption"></div>
-					</ul>
+						<div class="slider-range-max_power_consumption"></div>
+					</div>
 				</div>
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
 						<p>Вес</p>
 					</div>
-					<ul class="check_boxes">
+					<div class="check_boxes">
 						<div class="text_output">
 							<form:input path="weight0" class="amount-weight0" value="${search.weight0}" />
 							<p>&nbsp;кг -&nbsp;</p>
 							<form:input path="weight1" class="amount-weight1" value="${search.weight1}" />
 							<p>&nbsp;кг</p>
 						</div>
-							<div class="slider-range-weight"></div>
-					</ul>
+						<div class="slider-range-weight"></div>
+					</div>
 				</div>
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
 						<p>Ширина</p>
 					</div>
-					<ul class="check_boxes">
+					<div class="check_boxes">
 						<div class="text_output">
 							<form:input path="width0" class="amount-width0" value="${search.width0}" />
 							<p>&nbsp;мм -&nbsp;</p>
@@ -417,39 +417,39 @@
 							<p>&nbsp;мм</p>
 						</div>
 						<div class="slider-range-width"></div>
-					</ul>
+					</div>
 				</div>
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
 						<p>Высота</p>
 					</div>
-					<ul class="check_boxes">
+					<div class="check_boxes">
 						<div class="text_output">
 							<form:input path="heigth0" class="amount-heigth0" value="${search.heigth0}" />
 							<p>&nbsp;мм -&nbsp;</p>
 							<form:input path="heigth1" class="amount-heigth1" value="${search.heigth1}" />
 							<p>&nbsp;мм</p>
 						</div>
-							<div class="slider-range-heigth"></div>
-					</ul>
+						<div class="slider-range-heigth"></div>
+					</div>
 				</div>
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
 						<p>Глубина</p>
 					</div>
-					<ul class="check_boxes">
+					<div class="check_boxes">
 						<div class="text_output">
 							<form:input path="depth0" class="amount-depth0" value="${search.depth0}" />
 							<p>&nbsp;мм -&nbsp;</p>
 							<form:input path="depth1" class="amount-depth1" value="${search.depth1}" />
 							<p>&nbsp;мм</p>
 						</div>
-							<div class="slider-range-depth"></div>
-					</ul>
+						<div class="slider-range-depth"></div>
+					</div>
 				</div>
-			</ul>
+			</div>
 		</div>
 		
 			<a class="accept" href="javascript:void(0)" onclick="$('#search').submit();">ПРИМЕНИТЬ</a>

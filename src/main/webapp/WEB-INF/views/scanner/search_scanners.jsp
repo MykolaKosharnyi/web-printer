@@ -27,15 +27,15 @@
 				<i class="opened"></i>
 				<p>Цена</p>
 			</div>
-			<ul class="check_boxes" style="display: block;">
+			<div class="check_boxes" style="display: block;">
 				<div class="text_output">
 					<p>$</p>
 					<form:input path="prise0" class="amount-prise0" value="${search.prise0}" />
 					<p>&nbsp;-&nbsp; $</p>
 					<form:input path="prise1" class="amount-prise1" value="${search.prise1}" />
 				</div>
-				<div class="slider-range-prise"/>
-			</ul>
+				<div class="slider-range-prise"></div>
+			</div>
 		</div>
 		<div class="search_criteria">
 			<div class="block_title">
@@ -51,7 +51,7 @@
 				<i></i>
 				<p>Ширина сканирования</p>
 			</div>
-			<ul class="check_boxes">
+			<div class="check_boxes">
 				<div id="tabs">
 					<ul>
 						<li>миллиметр</li>
@@ -90,7 +90,7 @@
 						  -->
 					</div>
 				</div>
-			</ul>
+			</div>
 		</div>
 		<div class="search_criteria">
 			<div class="block_title">
@@ -160,28 +160,28 @@
 				<i></i>
 				<p>Программное разрешение, dpi</p>
 			</div>
-			<ul class="check_boxes">
+			<div class="check_boxes">
 				<div class="text_output">
 					<form:input path="softwareResolution0" class="amount-softwareResolution0" value="${search.softwareResolution0}" />
 					<p>&nbsp;-&nbsp;</p>
 					<form:input path="softwareResolution1" class="amount-softwareResolution1" value="${search.softwareResolution1}" />
 				</div>
-					<div class="slider-range-softwareResolution"></div>
-			</ul>
+				<div class="slider-range-softwareResolution"></div>
+			</div>
 		</div>
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
 				<p>Скорость сканирования, м.кв./ч.</p>
 			</div>
-			<ul class="check_boxes">
+			<div class="check_boxes">
 				<div class="text_output">
 					<form:input path="scanSpeed0" class="amount-scanSpeed0" value="${search.scanSpeed0}" />
 					<p>&nbsp;-&nbsp;</p>
 					<form:input path="scanSpeed1" class="amount-scanSpeed1" value="${search.scanSpeed1}" />
 				</div>
-					<div class="slider-range-scanSpeed"></div>
-			</ul>
+				<div class="slider-range-scanSpeed"></div>
+			</div>
 		</div>
 		<div class="search_criteria">
 			<div class="block_title">
@@ -206,14 +206,14 @@
 				<i></i>
 				<p>Максимальная толщина  носителя, мм</p>
 			</div>
-			<ul class="check_boxes">
+			<div class="check_boxes">
 				<div class="text_output">
 					<form:input path="theMaximumThicknessOfTheCarrier0" class="amount-theMaximumThicknessOfTheCarrier0" value="${search.theMaximumThicknessOfTheCarrier0}" />
 					<p>&nbsp;-&nbsp;</p>
 					<form:input path="theMaximumThicknessOfTheCarrier1" class="amount-theMaximumThicknessOfTheCarrier1" value="${search.theMaximumThicknessOfTheCarrier1}" />
 				</div>
-					<div class="slider-range-theMaximumThicknessOfTheCarrier"></div>
-			</ul>
+				<div class="slider-range-theMaximumThicknessOfTheCarrier"></div>
+			</div>
 		</div>
 		<div class="search_criteria">
 			<div class="block_title">
@@ -238,58 +238,58 @@
 				<i></i>
 				<p>Общие характеристики</p>
 			</div>
-			<ul class="block_check_boxes">
+			<div class="block_check_boxes">
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
 						<p>Средняя потребляемая мощность</p>
 					</div>
-					<ul class="check_boxes">
+					<div class="check_boxes">
 						<div class="text_output">
 							<form:input path="averagePowerConsumption0" class="amount-averagePowerConsumption0" value="${search.averagePowerConsumption0}" />
 							<p>&nbsp;Вт -&nbsp;</p>
 							<form:input path="averagePowerConsumption1" class="amount-averagePowerConsumption1" value="${search.averagePowerConsumption1}" />
 							<p>&nbsp;Вт</p>
 						</div>
-							<div class="slider-range-averagePowerConsumption"></div>
-					</ul>
+						<div class="slider-range-averagePowerConsumption"></div>
+					</div>
 				</div>
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
 						<p>Максимальная потребляемая мощность</p>
 					</div>
-					<ul class="check_boxes">
+					<div class="check_boxes">
 						<div class="text_output">
 							<form:input path="maxPowerConsumption0" class="amount-max_power_consumption0" value="${search.maxPowerConsumption0}" />
 							<p>&nbsp;Вт -&nbsp;</p>
 							<form:input path="maxPowerConsumption1" class="amount-max_power_consumption1" value="${search.maxPowerConsumption1}" />
 							<p>&nbsp;Вт</p>
 						</div>
-							<div class="slider-range-max_power_consumption"></div>
-					</ul>
+						<div class="slider-range-max_power_consumption"></div>
+					</div>
 				</div>
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
 						<p>Вес</p>
 					</div>
-					<ul class="check_boxes">
+					<div class="check_boxes">
 						<div class="text_output">
 							<form:input path="weight0" class="amount-weight0" value="${search.weight0}" />
 							<p>&nbsp;кг -&nbsp;</p>
 							<form:input path="weight1" class="amount-weight1" value="${search.weight1}" />
 							<p>&nbsp;кг</p>
 						</div>
-							<div class="slider-range-weight"></div>
-					</ul>
+						<div class="slider-range-weight"></div>
+					</div>
 				</div>
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
 						<p>Ширина</p>
 					</div>
-					<ul class="check_boxes">
+					<div class="check_boxes">
 						<div class="text_output">
 							<form:input path="width0" class="amount-width0" value="${search.width0}" />
 							<p>&nbsp;мм -&nbsp;</p>
@@ -297,39 +297,39 @@
 							<p>&nbsp;мм</p>
 						</div>
 						<div class="slider-range-width"></div>
-					</ul>
+					</div>
 				</div>
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
 						<p>Высота</p>
 					</div>
-					<ul class="check_boxes">
+					<div class="check_boxes">
 						<div class="text_output">
 							<form:input path="heigth0" class="amount-heigth0" value="${search.heigth0}" />
 							<p>&nbsp;мм -&nbsp;</p>
 							<form:input path="heigth1" class="amount-heigth1" value="${search.heigth1}" />
 							<p>&nbsp;мм</p>
 						</div>
-							<div class="slider-range-heigth"></div>
-					</ul>
+						<div class="slider-range-heigth"></div>
+					</div>
 				</div>
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
 						<p>Глубина</p>
 					</div>
-					<ul class="check_boxes">
+					<div class="check_boxes">
 						<div class="text_output">
 							<form:input path="depth0" class="amount-depth0" value="${search.depth0}" />
 							<p>&nbsp;мм -&nbsp;</p>
 							<form:input path="depth1" class="amount-depth1" value="${search.depth1}" />
 							<p>&nbsp;мм</p>
 						</div>
-							<div class="slider-range-depth"></div>
-					</ul>
+						<div class="slider-range-depth"></div>
+					</div>
 				</div>
-			</ul>
+			</div>
 		</div>
 			<a class="accept" href="javascript:void(0)" onclick="$('#search').submit();">
 				ПРИМЕНИТЬ

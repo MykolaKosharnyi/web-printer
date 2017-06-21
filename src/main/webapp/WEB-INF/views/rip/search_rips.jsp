@@ -26,15 +26,15 @@
 				<i class="opened"></i>
 				<p>Цена</p>
 			</div>
-			<ul class="check_boxes" style="display: block;">
+			<div class="check_boxes" style="display: block;">
 				<div class="text_output">
 					<p>$</p>
 					<form:input path="prise0" class="amount-prise0" value="${search.prise0}" />
 					<p>&nbsp;-&nbsp; $</p>
 					<form:input path="prise1" class="amount-prise1" value="${search.prise1}" />
 				</div>
-				<div class="slider-range-prise"/>
-			</ul>
+				<div class="slider-range-prise"></div>
+			</div>
 		</div>
 
 

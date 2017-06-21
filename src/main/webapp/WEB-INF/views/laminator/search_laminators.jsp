@@ -27,15 +27,15 @@
 				<i class="opened"></i>
 				<p>Цена</p>
 			</div>
-			<ul class="check_boxes" style="display: block;">
+			<div class="check_boxes" style="display: block;">
 				<div class="text_output">
 					<p>$</p>
 					<form:input path="prise0" class="amount-prise0" value="${search.prise0}" />
 					<p>&nbsp;-&nbsp; $</p>
 					<form:input path="prise1" class="amount-prise1" value="${search.prise1}" />
 				</div>
-				<div class="slider-range-prise"/>
-			</ul>
+				<div class="slider-range-prise"></div>
+			</div>
 		</div>
 		<div class="search_criteria">
 			<div class="block_title">
@@ -51,7 +51,7 @@
 				<i></i>
 				<p>Ширина ламинирования</p>
 			</div>
-			<ul class="check_boxes">
+			<div class="check_boxes">
 				<div id="tabs">
 					<ul>
 						<li>миллиметр</li>
@@ -90,7 +90,7 @@
 						  -->
 					</div>
 				</div>
-			</ul>
+			</div>
 		</div>
 		<div class="search_criteria">
 			<div class="block_title">
@@ -115,84 +115,84 @@
 				<i></i>
 				<p>Количество валов</p>
 			</div>
-			<ul class="check_boxes">
+			<div class="check_boxes">
 				<div class="text_output">
 					<form:input path="numberOfShafts0" class="amount-numberOfShafts0" value="${search.numberOfShafts0}" />
 					<p>&nbsp;-&nbsp;</p>
 					<form:input path="numberOfShafts1" class="amount-numberOfShafts1" value="${search.numberOfShafts1}" />
 				</div>
 					<div class="slider-range-numberOfShafts"></div>
-			</ul>
+			</div>
 		</div>
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
 				<p>Диаметр вала, мм</p>
 			</div>
-			<ul class="check_boxes">
+			<div class="check_boxes">
 				<div class="text_output">
 					<form:input path="shaftDiameter0" class="amount-shaftDiameter0" value="${search.shaftDiameter0}" />
 					<p>&nbsp;-&nbsp;</p>
 					<form:input path="shaftDiameter1" class="amount-shaftDiameter1" value="${search.shaftDiameter1}" />
 				</div>
-					<div class="slider-range-shaftDiameter"></div>
-			</ul>
+				<div class="slider-range-shaftDiameter"></div>
+			</div>
 		</div>
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
 				<p>Толщина пленки, мкм</p>
 			</div>
-			<ul class="check_boxes">
+			<div class="check_boxes">
 				<div class="text_output">
 					<form:input path="filmThickness0" class="amount-filmThickness0" value="${search.filmThickness0}" />
 					<p>&nbsp;-&nbsp;</p>
 					<form:input path="filmThickness1" class="amount-filmThickness1" value="${search.filmThickness1}" />
 				</div>
-					<div class="slider-range-filmThickness"></div>
-			</ul>
+				<div class="slider-range-filmThickness"></div>
+			</div>
 		</div>
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
 				<p>Время разогрева, мин</p>
 			</div>
-			<ul class="check_boxes">
+			<div class="check_boxes">
 				<div class="text_output">
 					<form:input path="warmUpTime0" class="amount-warmUpTime0" value="${search.warmUpTime0}" />
 					<p>&nbsp;-&nbsp;</p>
 					<form:input path="warmUpTime1" class="amount-warmUpTime1" value="${search.warmUpTime1}" />
 				</div>
-					<div class="slider-range-warmUpTime"></div>
-			</ul>
+				<div class="slider-range-warmUpTime"></div>
+			</div>
 		</div>
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
 				<p>Температура ламинации, С</p>
 			</div>
-			<ul class="check_boxes">
+			<div class="check_boxes">
 				<div class="text_output">
 					<form:input path="laminationTemperature0" class="amount-laminationTemperature0" value="${search.laminationTemperature0}" />
 					<p>&nbsp;-&nbsp;</p>
 					<form:input path="laminationTemperature1" class="amount-laminationTemperature1" value="${search.laminationTemperature1}" />
 				</div>
 					<div class="slider-range-laminationTemperature"></div>
-			</ul>
+			</div>
 		</div>
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
 				<p>Скорость ламинирования, мм/с</p>
 			</div>
-			<ul class="check_boxes">
+			<div class="check_boxes">
 				<div class="text_output">
 					<form:input path="laminatingSpeed0" class="amount-laminatingSpeed0" value="${search.laminatingSpeed0}" />
 					<p>&nbsp;-&nbsp;</p>
 					<form:input path="laminatingSpeed1" class="amount-laminatingSpeed1" value="${search.laminatingSpeed1}" />
 				</div>
 					<div class="slider-range-laminatingSpeed"></div>
-			</ul>
+			</div>
 		</div>		
 		<div class="search_criteria">
 			<div class="block_title">
@@ -208,43 +208,43 @@
 				<i></i>
 				<p>Общие характеристики</p>
 			</div>
-			<ul class="block_check_boxes">
+			<div class="block_check_boxes">
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
 						<p>Средняя потребляемая мощность</p>
 					</div>
-					<ul class="check_boxes">
+					<div class="check_boxes">
 						<div class="text_output">
 							<form:input path="averagePowerConsumption0" class="amount-averagePowerConsumption0" value="${search.averagePowerConsumption0}" />
 							<p>&nbsp;Вт -&nbsp;</p>
 							<form:input path="averagePowerConsumption1" class="amount-averagePowerConsumption1" value="${search.averagePowerConsumption1}" />
 							<p>&nbsp;Вт</p>
 						</div>
-							<div class="slider-range-averagePowerConsumption"></div>
-					</ul>
+						<div class="slider-range-averagePowerConsumption"></div>
+					</div>
 				</div>
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
 						<p>Максимальная потребляемая мощность</p>
 					</div>
-					<ul class="check_boxes">
+					<div class="check_boxes">
 						<div class="text_output">
 							<form:input path="maxPowerConsumption0" class="amount-max_power_consumption0" value="${search.maxPowerConsumption0}" />
 							<p>&nbsp;Вт -&nbsp;</p>
 							<form:input path="maxPowerConsumption1" class="amount-max_power_consumption1" value="${search.maxPowerConsumption1}" />
 							<p>&nbsp;Вт</p>
 						</div>
-							<div class="slider-range-max_power_consumption"></div>
-					</ul>
+						<div class="slider-range-max_power_consumption"></div>
+					</div>
 				</div>
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
 						<p>Вес</p>
 					</div>
-					<ul class="check_boxes">
+					<div class="check_boxes">
 						<div class="text_output">
 							<form:input path="weight0" class="amount-weight0" value="${search.weight0}" />
 							<p>&nbsp;кг -&nbsp;</p>
@@ -252,14 +252,14 @@
 							<p>&nbsp;кг</p>
 						</div>
 							<div class="slider-range-weight"></div>
-					</ul>
+					</div>
 				</div>
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
 						<p>Ширина</p>
 					</div>
-					<ul class="check_boxes">
+					<div class="check_boxes">
 						<div class="text_output">
 							<form:input path="width0" class="amount-width0" value="${search.width0}" />
 							<p>&nbsp;мм -&nbsp;</p>
@@ -267,14 +267,14 @@
 							<p>&nbsp;мм</p>
 						</div>
 						<div class="slider-range-width"></div>
-					</ul>
+					</div>
 				</div>
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
 						<p>Высота</p>
 					</div>
-					<ul class="check_boxes">
+					<div class="check_boxes">
 						<div class="text_output">
 							<form:input path="heigth0" class="amount-heigth0" value="${search.heigth0}" />
 							<p>&nbsp;мм -&nbsp;</p>
@@ -282,14 +282,14 @@
 							<p>&nbsp;мм</p>
 						</div>
 							<div class="slider-range-heigth"></div>
-					</ul>
+					</div>
 				</div>
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
 						<p>Глубина</p>
 					</div>
-					<ul class="check_boxes">
+					<div class="check_boxes">
 						<div class="text_output">
 							<form:input path="depth0" class="amount-depth0" value="${search.depth0}" />
 							<p>&nbsp;мм -&nbsp;</p>
@@ -297,9 +297,9 @@
 							<p>&nbsp;мм</p>
 						</div>
 							<div class="slider-range-depth"></div>
-					</ul>
+					</div>
 				</div>
-			</ul>
+			</div>
 		</div>
 			<a class="accept" href="javascript:void(0)" onclick="$('#search').submit();">
 				ПРИМЕНИТЬ

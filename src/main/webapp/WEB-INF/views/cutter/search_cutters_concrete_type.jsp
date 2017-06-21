@@ -33,15 +33,15 @@
 				<i class="opened"></i>
 				<p>Цена</p>
 			</div>
-			<ul class="check_boxes" style="display: block;">
+			<div class="check_boxes" style="display: block;">
 				<div class="text_output">
 					<p>$</p>
 					<form:input path="prise0" class="amount-prise0" value="${search.prise0}" />
 					<p>&nbsp;-&nbsp; $</p>
 					<form:input path="prise1" class="amount-prise1" value="${search.prise1}" />
 				</div>
-				<div class="slider-range-prise"/>
-			</ul>
+				<div class="slider-range-prise"></div>
+			</div>
 		</div>
 		<div class="search_criteria" style="display: none;">
 			<div class="block_title">
@@ -66,7 +66,7 @@
 				<i></i>
 				<p>Размер рабочей области</p>
 			</div>
-			<ul class="check_boxes">
+			<div class="check_boxes">
 				<p style="float: none; margin: 10px auto 0px;"> По оси Х:</p>
 				<div class="text_output">
 					<form:input path="sizeWorkAreaX0" class="amount-sizeWorkAreaX0" value="${search.sizeWorkAreaX0}"/>
@@ -93,7 +93,7 @@
 					<p>&nbsp;мм</p>
 				</div>
 					<div class="slider-range-sizeWorkAreaZ"></div>
-			</ul>
+			</div>
 		</div>
 		<div class="search_criteria">
 			<div class="block_title">
@@ -127,70 +127,70 @@
 				<i></i>
 				<p>Механическое разрешение, мкм/шаг</p>
 			</div>
-			<ul class="check_boxes">
+			<div class="check_boxes">
 				<div class="text_output">
 					<form:input path="mechanicalResolution0" class="amount-mechanicalResolution0" value="${search.mechanicalResolution0}" />
 					<p>&nbsp;-&nbsp;</p>
 					<form:input path="mechanicalResolution1" class="amount-mechanicalResolution1" value="${search.mechanicalResolution1}" />
 				</div>
 					<div class="slider-range-mechanicalResolution"></div>
-			</ul>
+			</div>
 		</div>
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
 				<p>Программное разрешение, мкм/шаг</p>
 			</div>
-			<ul class="check_boxes">
+			<div class="check_boxes">
 				<div class="text_output">
 					<form:input path="softwareResolution0" class="amount-softwareResolution0" value="${search.softwareResolution0}" />
 					<p>&nbsp;-&nbsp;</p>
 					<form:input path="softwareResolution1" class="amount-softwareResolution1" value="${search.softwareResolution1}" />
 				</div>
-					<div class="slider-range-softwareResolution"></div>
-			</ul>
+				<div class="slider-range-softwareResolution"></div>
+			</div>
 		</div>
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
 				<p>Частота вращения шпинделя, об/мин</p>
 			</div>
-			<ul class="check_boxes">
+			<div class="check_boxes">
 				<div class="text_output">
 					<form:input path="frequencySpindle0" class="amount-frequencySpindle0" value="${search.frequencySpindle0}" />
 					<p>&nbsp;-&nbsp;</p>
 					<form:input path="frequencySpindle1" class="amount-frequencySpindle1" value="${search.frequencySpindle1}" />
 				</div>
-					<div class="slider-range-frequencySpindle"></div>
-			</ul>
+				<div class="slider-range-frequencySpindle"></div>
+			</div>
 		</div>
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
 				<p>Скорость обработки(XY), мм/с</p>
 			</div>
-			<ul class="check_boxes">
+			<div class="check_boxes">
 				<div class="text_output">
 					<form:input path="processingSpeedXY0" class="amount-processingSpeedXY0" value="${search.processingSpeedXY0}" />
 					<p>&nbsp;-&nbsp;</p>
 					<form:input path="processingSpeedXY1" class="amount-processingSpeedXY1" value="${search.processingSpeedXY1}" />
 				</div>
-					<div class="slider-range-processingSpeedXY"></div>
-			</ul>
+				<div class="slider-range-processingSpeedXY"></div>
+			</div>
 		</div>
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
 				<p>Скорость обработки(Z), мм/с</p>
 			</div>
-			<ul class="check_boxes">
+			<div class="check_boxes">
 				<div class="text_output">
 					<form:input path="processingSpeedZ0" class="amount-processingSpeedZ0" value="${search.processingSpeedZ0}" />
 					<p>&nbsp;-&nbsp;</p>
 					<form:input path="processingSpeedZ1" class="amount-processingSpeedZ1" value="${search.processingSpeedZ1}" />
 				</div>
-					<div class="slider-range-processingSpeedZ"></div>
-			</ul>
+				<div class="slider-range-processingSpeedZ"></div>
+			</div>
 		</div>
 		<div class="search_criteria">
 			<div class="block_title">
@@ -233,58 +233,58 @@
 				<i></i>
 				<p>Общие характеристики</p>
 			</div>
-			<ul class="block_check_boxes">
+			<div class="block_check_boxes">
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
 						<p>Средняя потребляемая мощность</p>
 					</div>
-					<ul class="check_boxes">
+					<div class="check_boxes">
 						<div class="text_output">
 							<form:input path="averagePowerConsumption0" class="amount-averagePowerConsumption0" value="${search.averagePowerConsumption0}" />
 							<p>&nbsp;Вт -&nbsp;</p>
 							<form:input path="averagePowerConsumption1" class="amount-averagePowerConsumption1" value="${search.averagePowerConsumption1}" />
 							<p>&nbsp;Вт</p>
 						</div>
-							<div class="slider-range-averagePowerConsumption"></div>
-					</ul>
+						<div class="slider-range-averagePowerConsumption"></div>
+					</div>
 				</div>
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
 						<p>Максимальная потребляемая мощность</p>
 					</div>
-					<ul class="check_boxes">
+					<div class="check_boxes">
 						<div class="text_output">
 							<form:input path="maxPowerConsumption0" class="amount-max_power_consumption0" value="${search.maxPowerConsumption0}" />
 							<p>&nbsp;Вт -&nbsp;</p>
 							<form:input path="maxPowerConsumption1" class="amount-max_power_consumption1" value="${search.maxPowerConsumption1}" />
 							<p>&nbsp;Вт</p>
 						</div>
-							<div class="slider-range-max_power_consumption"></div>
-					</ul>
+						<div class="slider-range-max_power_consumption"></div>
+					</div>
 				</div>
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
 						<p>Вес</p>
 					</div>
-					<ul class="check_boxes">
+					<div class="check_boxes">
 						<div class="text_output">
 							<form:input path="weight0" class="amount-weight0" value="${search.weight0}" />
 							<p>&nbsp;кг -&nbsp;</p>
 							<form:input path="weight1" class="amount-weight1" value="${search.weight1}" />
 							<p>&nbsp;кг</p>
 						</div>
-							<div class="slider-range-weight"></div>
-					</ul>
+						<div class="slider-range-weight"></div>
+					</div>
 				</div>
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
 						<p>Ширина</p>
 					</div>
-					<ul class="check_boxes">
+					<div class="check_boxes">
 						<div class="text_output">
 							<form:input path="width0" class="amount-width0" value="${search.width0}" />
 							<p>&nbsp;мм -&nbsp;</p>
@@ -292,29 +292,29 @@
 							<p>&nbsp;мм</p>
 						</div>
 						<div class="slider-range-width"></div>
-					</ul>
+					</div>
 				</div>
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
 						<p>Высота</p>
 					</div>
-					<ul class="check_boxes">
+					<div class="check_boxes">
 						<div class="text_output">
 							<form:input path="heigth0" class="amount-heigth0" value="${search.heigth0}" />
 							<p>&nbsp;мм -&nbsp;</p>
 							<form:input path="heigth1" class="amount-heigth1" value="${search.heigth1}" />
 							<p>&nbsp;мм</p>
 						</div>
-							<div class="slider-range-heigth"></div>
-					</ul>
+						<div class="slider-range-heigth"></div>
+					</div>
 				</div>
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
 						<p>Глубина</p>
 					</div>
-					<ul class="check_boxes">
+					<div class="check_boxes">
 						<div class="text_output">
 							<form:input path="depth0" class="amount-depth0" value="${search.depth0}" />
 							<p>&nbsp;мм -&nbsp;</p>
@@ -322,9 +322,9 @@
 							<p>&nbsp;мм</p>
 						</div>
 							<div class="slider-range-depth"></div>
-					</ul>
+					</div>
 				</div>
-			</ul>
+			</div>
 		</div>
 		
 			<a class="accept" href="javascript:void(0)" onclick="$('#search').submit();">ПРИМЕНИТЬ</a>

@@ -27,7 +27,7 @@
 					
 					<tr>
 						<td><label>${item.value.ru}</label></td>
-						<td><input name="${item.key}" type="text" class="form-control" value="${item.value.en}"/></td>
+						<td><input name="${item.key}" type="text" class="form-control" value="${item.value.en}" style="min-width: 500px;"/></td>
 					</tr>
 				</c:forEach>
 			</table>
