@@ -42,21 +42,9 @@
 			
 	<div id="search_product">
 	<form:form method="POST" commandName="search" action="/3d_printers/search">
-		<div class="search_criteria">
-			<div class="block_title">
-				<i class="opened"></i>
-				<p>Цена</p>
-			</div>
-			<div class="check_boxes" style="display: block;">
-				<div class="text_output">
-					<p>$</p>
-					<form:input path="prise0" class="amount-prise0" value="${search.prise0}" />
-					<p>-&nbsp; $</p>
-					<form:input path="prise1" class="amount-prise1" value="${search.prise1}" />
-				</div>
-				<div class="slider-range-prise"></div>
-			</div>
-		</div>
+	
+		<jsp:include page="../search/price.jsp" />
+
 		<div class="search_criteria" style="display: none;">
 			<div class="block_title">
 				<i></i>

@@ -505,11 +505,8 @@
                 <div class="col-md-3" style="padding: 0px;">
                   <div class="list-group">
 
-                     <a href="<c:url value='/previous_use_equipments' />" class="list-group-item active"><custom:getDescriptionByLocale description="${descriptions.previouslyUsed}"/></a>
-
-                        <!--     <a href="#" class="list-group-item"><spring:message code="head.previouslyUsed.solvent_equipment"/></a>
-
-                            <a href="#" class="list-group-item"><spring:message code="head.previouslyUsed.ecosolvent_oborudovnie"/></a> --> 
+                     <a href="<c:url value='/previous_use_equipments' />" class="list-group-item active">
+                     	<custom:getDescriptionByLocale description="${descriptions.previouslyUsed}"/></a>
 
                   </div>
                 </div>

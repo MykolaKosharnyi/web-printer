@@ -419,18 +419,7 @@
 				
 			<!-- Пункт меню 8 Бывшего употребления-->
 				<li><a href="<c:url value='/previous_use_equipments' />"><custom:getDescriptionByLocale description="${descriptions.previouslyUsed}"/></a>
-					<!--  <div class="head_menu_point_7">
-                    	<div class="head_menu_point_element">
-                        	<a href="#">
-                            <img src="/images/menu/previouslyUsed/${picturesInHeadMenu.previouslyUsedJSON.list_solvent_equipment[0]}" alt="" >
-                            <p><spring:message code="head.previouslyUsed.solvent_equipment"/></p></a>
-                        </div>
-                    	<div class="head_menu_point_element">
-                        	<a href="#">
-                            <img src="/images/menu/previouslyUsed/${picturesInHeadMenu.previouslyUsedJSON.list_ecosolvent_oborudovnie[0]}" alt="" >
-                            <p><spring:message code="head.previouslyUsed.ecosolvent_oborudovnie"/></p></a>
-                        </div>                                                                           
-					</div>	-->
+
 				</li>
 				
 			<!-- Пункт меню 9 ПО rip-->

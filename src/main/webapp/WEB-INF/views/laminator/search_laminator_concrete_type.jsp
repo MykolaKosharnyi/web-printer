@@ -28,21 +28,9 @@
 	<div id="search_product">
 	<c:url var="product_search" value="/laminators/search" ></c:url>
 	<form:form method="POST" commandName="search" action="${product_search}">
-		<div class="search_criteria">
-			<div class="block_title">
-				<i class="opened"></i>
-				<p>Цена</p>
-			</div>
-			<div class="check_boxes" style="display: block;">
-				<div class="text_output">
-					<p>$</p>
-					<form:input path="prise0" class="amount-prise0" value="${search.prise0}" />
-					<p>&nbsp;-&nbsp; $</p>
-					<form:input path="prise1" class="amount-prise1" value="${search.prise1}" />
-				</div>
-				<div class="slider-range-prise"></div>
-			</div>
-		</div>
+	
+		<jsp:include page="../search/price.jsp" />
+		
 		<div class="search_criteria" style="display: none;">
 			<div class="block_title">
 				<i></i>
