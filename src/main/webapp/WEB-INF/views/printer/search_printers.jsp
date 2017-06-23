@@ -66,23 +66,63 @@
 							</div>
 								<div class="slider-range-weightPrintMMRange"></div>
 						</div>
-					    <div>
-							<li><input type="checkbox" name="weightPrintMM" value="305" id="weightPrintMM_12"><label for="weightPrintMM_12">12"</label></input></li>
-							<li><input type="checkbox" name="weightPrintMM" value="457" id="weightPrintMM_18"><label for="weightPrintMM_18">18"</label></input></li>
-							<li><input type="checkbox" name="weightPrintMM" value="610" id="weightPrintMM_24"><label for="weightPrintMM_24">24"</label></input></li>
-							<li><input type="checkbox" name="weightPrintMM" value="914" id="weightPrintMM_36"><label for="weightPrintMM_36">36"</label></input></li>
-							<li><input type="checkbox" name="weightPrintMM" value="1070" id="weightPrintMM_42"><label for="weightPrintMM_42">42"</label></input></li>
-							<li><input type="checkbox" name="weightPrintMM" value="1524" id="weightPrintMM_60"><label for="weightPrintMM_60">60"</label></input></li>
-							<li><input type="checkbox" name="weightPrintMM" value="1550" id="weightPrintMM_61"><label for="weightPrintMM_61">61"</label></input></li>
-							<li><input type="checkbox" name="weightPrintMM" value="1600" id="weightPrintMM_63"><label for="weightPrintMM_63">63"</label></input></li>
-							<li><input type="checkbox" name="weightPrintMM" value="1800" id="weightPrintMM_71"><label for="weightPrintMM_71">71"</label></input></li>
-							<li><input type="checkbox" name="weightPrintMM" value="1900" id="weightPrintMM_75"><label for="weightPrintMM_75">75"</label></input></li>
-							<li><input type="checkbox" name="weightPrintMM" value="2500" id="weightPrintMM_98"><label for="weightPrintMM_98">98"</label></input></li>
-							<li><input type="checkbox" name="weightPrintMM" value="2540" id="weightPrintMM_100"><label for="weightPrintMM_100">100"</label></input></li>
-							<li><input type="checkbox" name="weightPrintMM" value="2600" id="weightPrintMM_102"><label for="weightPrintMM_102">102"</label></input></li>
-							<li><input type="checkbox" name="weightPrintMM" value="3200" id="weightPrintMM_126"><label for="weightPrintMM_126">126"</label></input></li>
-							<li><input type="checkbox" name="weightPrintMM" value="3300" id="weightPrintMM_130"><label for="weightPrintMM_130">130"</label></input></li>
-							
+					    					    <div>
+							<div class="weightPrint_inch">
+								<input type="checkbox" name="weightPrintMM" value="305" id="weightPrintMM_12"></input>
+								<label for="weightPrintMM_12">12"</label>
+							</div>
+							<div class="weightPrint_inch">
+								<input type="checkbox" name="weightPrintMM" value="457" id="weightPrintMM_18"></input>
+								<label for="weightPrintMM_18">18"</label>
+							</div>
+							<div class="weightPrint_inch">
+								<input type="checkbox" name="weightPrintMM" value="610" id="weightPrintMM_24"></input>
+								<label for="weightPrintMM_24">24"</label>
+							</div>
+							<div class="weightPrint_inch">
+								<input type="checkbox" name="weightPrintMM" value="914" id="weightPrintMM_36"></input>
+								<label for="weightPrintMM_36">36"</label>
+							</div>
+							<div class="weightPrint_inch">
+								<input type="checkbox" name="weightPrintMM" value="1070" id="weightPrintMM_42"></input>
+								<label for="weightPrintMM_42">42"</label>
+							</div>
+							<div class="weightPrint_inch">
+								<input type="checkbox" name="weightPrintMM" value="1524" id="weightPrintMM_60"></input>
+								<label for="weightPrintMM_60">60"</label>
+							</div>
+							<div class="weightPrint_inch">
+								<input type="checkbox" name="weightPrintMM" value="1550" id="weightPrintMM_61"></input>
+								<label for="weightPrintMM_61">61"</label>
+							</div>
+							<div class="weightPrint_inch">
+								<input type="checkbox" name="weightPrintMM" value="1600" id="weightPrintMM_63"></input>
+								<label for="weightPrintMM_63">63"</label>
+							</div>
+							<div class="weightPrint_inch">
+								<input type="checkbox" name="weightPrintMM" value="1800" id="weightPrintMM_71"></input>
+								<label for="weightPrintMM_71">71"</label>
+							</div>
+							<div class="weightPrint_inch">
+								<input type="checkbox" name="weightPrintMM" value="2500" id="weightPrintMM_98"></input>
+								<label for="weightPrintMM_98">98"</label>
+							</div>
+							<div class="weightPrint_inch">
+								<input type="checkbox" name="weightPrintMM" value="2540" id="weightPrintMM_100"></input>
+								<label for="weightPrintMM_100">100"</label>
+							</div>
+							<div class="weightPrint_inch">
+								<input type="checkbox" name="weightPrintMM" value="2600" id="weightPrintMM_102"></input>
+								<label for="weightPrintMM_102">102"</label>
+							</div>
+							<div class="weightPrint_inch">
+								<input type="checkbox" name="weightPrintMM" value="3200" id="weightPrintMM_126"></input>
+								<label for="weightPrintMM_126">126"</label>
+							</div>
+							<div class="weightPrint_inch">
+								<input type="checkbox" name="weightPrintMM" value="3300" id="weightPrintMM_130"></input>
+								<label for="weightPrintMM_130">130"</label>
+							</div>
 						</div>
 						<!--<div>
 							<li><input type="checkbox" name="weightPrintMM">A0</input></li>
@@ -206,8 +246,8 @@
 									<div class="outer_type_print_head">
 											
 										<input class="check_print_head" type="checkbox" name="typeOfPrintheadSeries" value="${value.series}"
-											id="${value.series}_${item.name}">
-										<label class="print_series" for="${value.series}_${item.name}">${value.series}</label></input>
+											id="${value.series}_${item.name}"/>
+										<label class="print_series" for="${value.series}_${item.name}">${value.series}</label>
 												
 											
 										<div class="inner_block_print_head" style="display: none; left:10px; position: relative;">
@@ -220,7 +260,8 @@
 								<c:if test="${value.getClass().simpleName == 'String'}">
 									<li>
 										<input type="checkbox" name="typeOfPrinthead" value="${value}"
-											id="${value}_${item.name}"><label for="${value}_${item.name}">${value}</label></input>
+											id="${value}_${item.name}"/>
+										<label for="${value}_${item.name}">${value}</label>
 									</li>
 								</c:if>
 		  					</c:forEach>
