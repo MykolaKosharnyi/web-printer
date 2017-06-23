@@ -9,10 +9,16 @@ import java.io.Writer;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import com.printmaster.nk.components.ResourceHashHolder;
 
 @Component
 public class ConstantService {
+	
+	@Autowired
+	ResourceHashHolder resourseHashHolder;
 	
 	private String pathToFile = "/var/www/localhost/products/constant.json";
 	
@@ -62,6 +68,9 @@ public class ConstantService {
 			out.close();
 		
 		} catch (IOException e) {}
+		
+		//update in ResourceHashHolder
+		resourseHashHolder.changeResource("constants", jsonFile);
 	}
 	
 	private JSONObject getJSONObject(){

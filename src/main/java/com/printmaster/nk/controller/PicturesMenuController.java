@@ -29,6 +29,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.printmaster.nk.beans.ComponentsForControllers;
+import com.printmaster.nk.components.ResourceHashHolder;
 
 @Controller
 public class PicturesMenuController {
@@ -41,6 +42,9 @@ public class PicturesMenuController {
 	
 	@Autowired
     ComponentsForControllers componets;
+	
+	@Autowired
+	ResourceHashHolder resourseHashHolder;
     
 	private class TypeProductInformation{
 		private String nameJsonObject;
@@ -345,6 +349,9 @@ public class PicturesMenuController {
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
+		
+		//update in ResourceHashHolder
+		resourseHashHolder.changeResource("picturesInHeadMenu", obj);
 	}
     
     @SuppressWarnings("unchecked")

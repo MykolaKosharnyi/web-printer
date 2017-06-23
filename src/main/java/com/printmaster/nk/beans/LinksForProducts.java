@@ -17,8 +17,10 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.printmaster.nk.components.ResourceHashHolder;
 import com.printmaster.nk.model.entity.Cutter;
 import com.printmaster.nk.model.entity.DigitalPrinter;
 import com.printmaster.nk.model.entity.Laminator;
@@ -32,8 +34,9 @@ import com.printmaster.nk.model.entity.UseWithProduct;
 
 @Component
 public class LinksForProducts {
-
-	private JSONObject obj = null;
+	
+	@Autowired
+	ResourceHashHolder resourseHashHolder;
 	
 	private String path = "/var/www/localhost" + File.separator + "links.json";
 	
@@ -161,8 +164,9 @@ public class LinksForProducts {
 		Map<String, JSONArray> subTypesProductWithLinks = generateSubTypesProductWithLinks(keyToJsonArray);
 
 		Iterator<? extends Product> it = products.iterator();
-		while (it.hasNext()) 
+		while (it.hasNext()){
 			moveProductToConctereSubType(subTypesProductWithLinks, it.next());
+		}
 
 		saveChanges(typeJsonProduct, createJSONObjectWithLinksForThisProduct(keyToJsonArray, subTypesProductWithLinks));		
 	}
@@ -318,9 +322,9 @@ public class LinksForProducts {
 	 */
 	@SuppressWarnings("unchecked")
 	private void saveChanges(String typeJsonObject, JSONObject productsJSON) {
-		getFileWithLinks();
+		JSONObject obj = getFileWithLinks();
 		obj.put(typeJsonObject, productsJSON);
-		writeToJSONFile();
+		writeToJSONFile(obj);
 	}
 	
 	/**
@@ -330,7 +334,7 @@ public class LinksForProducts {
 	 * @throws UnsupportedEncodingException
 	 * @throws IOException
 	 */
-	private void writeToJSONFile(){
+	private void writeToJSONFile(JSONObject obj){
 		try {
 			Writer out = new PrintWriter(path, "UTF-8");
 			out.write(obj.toJSONString());
@@ -341,6 +345,9 @@ public class LinksForProducts {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		//update in ResourceHashHolder
+		resourseHashHolder.changeResource("listLeftLinks", obj);
 
 	}
 
@@ -352,12 +359,13 @@ public class LinksForProducts {
 	 * @throws UnsupportedEncodingException
 	 * @throws FileNotFoundException
 	 */
-	private void getFileWithLinks() {
+	private JSONObject getFileWithLinks() {
+		JSONObject result = null;
 		try {
-			obj = (JSONObject)new JSONParser().parse(new InputStreamReader(new FileInputStream(path), "UTF-8"));
+			result = (JSONObject)new JSONParser().parse(new InputStreamReader(new FileInputStream(path), "UTF-8"));
 		} catch (IOException | ParseException e) {
 			e.printStackTrace();
 		}
+		return result;
 	}
-	
 }

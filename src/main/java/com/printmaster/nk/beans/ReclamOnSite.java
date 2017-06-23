@@ -16,33 +16,23 @@ import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ReclamOnSite {
-
-	private JSONObject obj = null;
-	
+public class ReclamOnSite {	
 	private String path = "/var/www/localhost" + File.separator + "left_reklam.json";
 	
 	@SuppressWarnings("unchecked")
 	public void addReklam(ReklamProduct reklamProduct){
 		JSONParser parser = new JSONParser();
 			try {
-				obj = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream(path), "UTF-8"));
 				
-				JSONArray jsonArray = null;
-				if( obj.get("reklam") != null ){
-					jsonArray = (JSONArray) obj.get("reklam");
-					obj.remove("reklam");
-				} else{
-					jsonArray = new JSONArray();
-				}
+				JSONArray jsonArray = (JSONArray)parser.parse(new InputStreamReader(new FileInputStream(path), "UTF-8"));
 				
 				@SuppressWarnings("rawtypes")
 				Iterator iter = jsonArray.iterator();
 				
 				while (iter.hasNext()){
 					JSONObject jsonObject = (JSONObject) iter.next();
-					if(jsonObject.get("partNumber").equals(reklamProduct.getPartNumber()) && 
-							jsonObject.get("nameProduct").equals(reklamProduct.getNameProduct())){
+					if(jsonObject.get("id").equals(reklamProduct.getId()) && 
+							jsonObject.get("type").equals(reklamProduct.getType())){
 						iter.remove();
 						break;
 					}
@@ -67,10 +57,9 @@ public class ReclamOnSite {
 				productJSON.put("priceProduct", reklamProduct.getPriceProduct());
 				
 				jsonArray.add(productJSON);
-				obj.put("reklam", jsonArray);
 				
 				Writer out = new PrintWriter(path, "UTF-8");
-				out.write(obj.toJSONString());
+				out.write(jsonArray.toJSONString());
 				out.flush();
 				out.close();
 				
@@ -83,32 +72,26 @@ public class ReclamOnSite {
 			}
 	}
 	
-	@SuppressWarnings("unchecked")
 	public void deleteReklam(ReklamProduct reklamProduct){
 		JSONParser parser = new JSONParser();
 		try {
-			obj = (JSONObject)parser.parse(new InputStreamReader(new FileInputStream(path), "UTF-8"));
 			
-			if( obj.get("reklam") != null ){
-				JSONArray jsonArray = (JSONArray) obj.get("reklam");
-				obj.remove("reklam");
+			JSONArray jsonArray = (JSONArray)parser.parse(new InputStreamReader(new FileInputStream(path), "UTF-8"));
 				
-				@SuppressWarnings("rawtypes")
-				Iterator iter = jsonArray.iterator();
+			@SuppressWarnings("rawtypes")
+			Iterator iter = jsonArray.iterator();
 				
-				while (iter.hasNext()){
-					JSONObject jsonObject = (JSONObject) iter.next();
-					if(jsonObject.get("partNumber").equals(reklamProduct.getPartNumber()) && 
-							jsonObject.get("nameProduct").equals(reklamProduct.getNameProduct())){
-						iter.remove();
-						break;
-					}
+			while (iter.hasNext()){
+				JSONObject jsonObject = (JSONObject) iter.next();
+				if(jsonObject.get("id").equals(reklamProduct.getId()) && 
+						jsonObject.get("type").equals(reklamProduct.getType())){
+					iter.remove();
+					break;
 				}
-				obj.put("reklam", jsonArray);
 			} 
 
 			Writer out = new PrintWriter(path, "UTF-8");
-			out.write(obj.toJSONString());
+			out.write(jsonArray.toJSONString());
 			out.flush();
 			out.close();
 			

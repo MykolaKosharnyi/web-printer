@@ -36,9 +36,10 @@ public class ConstController {
 				model.addAttribute("constants", constants);
 	            return "admin/constants";
 	        }
-		
+			
 			//action for saving new CONSTANTS
-			constantsService.saveConstants(constants);			
+			constantsService.saveConstants(constants);		
+			
 	   return "redirect:/admin/constants";
 	}
 

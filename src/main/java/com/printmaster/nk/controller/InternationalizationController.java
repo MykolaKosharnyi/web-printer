@@ -22,8 +22,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.printmaster.nk.components.ResourceHashHolder;
+
 @Controller
 public class InternationalizationController {
+	
+	@Autowired
+	ResourceHashHolder resourseHashHolder;
 	
 	@RequestMapping(value = "/admin/internationalizations", method = RequestMethod.GET)
 	public String internationalizations(Model model){
@@ -62,6 +67,7 @@ public class InternationalizationController {
 		
 		JSONObject object = getObject(subType);
 		changeObject(object, allRequestParams);
+		resourseHashHolder.changeResource(subType, object);
 		saveObject(object, subType);
 		
 	   return "redirect:/admin/internationalization/" + subType;
