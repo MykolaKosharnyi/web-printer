@@ -13,6 +13,7 @@
 <body>
 	<div id="product">
 		<a href="<c:url value='/admin/internationalization/descriptions_common' />">Общие надписи</a>
+		<a href="<c:url value='/admin/internationalization/descriptions_search_printer' />">Характеристики для поиска, принтеры</a>
 		<br>
 	</div>
 </body>

@@ -1,6 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib prefix = "custom" uri = "/WEB-INF/custom.tld"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
     <link rel="stylesheet" href="/css/user/search_printer.css">
@@ -11,13 +11,13 @@
 	
 	<div id="display_search">
 		<i class="opened"></i>
-		<p>Фильтр товаров</p>
+		<p><custom:getDescriptionByLocale description="${descriptions_search_printer.filter_items}"/></p>
 	</div>
 				<a style="margin-left:10px;" class="accept" href="javascript:void(0)" onclick="$('#search').submit();">
-					ПРИМЕНИТЬ
+					<custom:getDescriptionByLocale description="${descriptions_search_printer.apply}"/>
 				</a>
 				<a class="reset" href="<c:url value='/printers' />">
-					СБРОСИТЬ
+					<custom:getDescriptionByLocale description="${descriptions_search_printer.reset}"/>
 				</a>
 	<div id="search_product">
 	<c:url var="product_search" value="/printers/search" ></c:url>
@@ -28,7 +28,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Тип принтера</p>
+				<p><custom:getDescriptionByLocale description="${descriptions_search_printer.printer_type}"/></p>
 			</div>
 			<ul class="check_boxes">
 				<form:checkboxes items="${printer.type_printer}" path="typePrinter" element="li" />
@@ -37,7 +37,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Б/У оборудование</p>
+				<p><custom:getDescriptionByLocale description="${descriptions_search_printer.used_machinery}"/></p>
 			</div>
 			<ul class="check_boxes">
 				<form:checkboxes items="${printer.previously_used}" path="previouslyUsed" element="li" />
@@ -46,13 +46,13 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Ширина печати</p>
+				<p><custom:getDescriptionByLocale description="${descriptions_search_printer.printing_width}"/></p>
 			</div>
 			<div class="check_boxes">
 				<div id="tabs">
 					<ul>
-						<li>миллиметр</li>
-						<li>дюйм</li>
+						<li><custom:getDescriptionByLocale description="${descriptions_search_printer.millimeter}"/></li>
+						<li><custom:getDescriptionByLocale description="${descriptions_search_printer.inch}"/></li>
 						<!--<li>формат</li>-->
 					</ul>
 					<div>
@@ -66,7 +66,7 @@
 							</div>
 								<div class="slider-range-weightPrintMMRange"></div>
 						</div>
-					    					    <div>
+					    <div>
 							<div class="weightPrint_inch">
 								<input type="checkbox" name="weightPrintMM" value="305" id="weightPrintMM_12"></input>
 								<label for="weightPrintMM_12">12"</label>
@@ -141,7 +141,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Расширение печати</p>
+				<p><custom:getDescriptionByLocale description="${descriptions_search_printer.printing_extension}"/></p>
 			</div>
 			<ul class="check_boxes">
 				<form:checkboxes items="${printer.printing_extension}" path="printingExtension" element="li" />
@@ -150,7 +150,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Тип печати</p>
+				<p><custom:getDescriptionByLocale description="${descriptions_search_printer.type_print}"/></p>
 			</div>
 			<ul class="check_boxes">			
 				<form:checkboxes items="${printer.type_print}" path="typePrint" element="li" />
@@ -388,10 +388,10 @@
 		<jsp:include page="../search/general_characteristics.jsp" />
 
 			<a class="accept" href="javascript:void(0)" onclick="$('#search').submit();">
-				ПРИМЕНИТЬ
+				<custom:getDescriptionByLocale description="${descriptions_search_printer.apply}"/>
 			</a>
 			<a class="reset" href="<c:url value='/printers' />">
-				СБРОСИТЬ
+				<custom:getDescriptionByLocale description="${descriptions_search_printer.reset}"/>
 			</a>
 		</form:form>
 	</div>

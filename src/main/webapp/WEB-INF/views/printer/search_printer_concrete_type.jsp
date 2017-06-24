@@ -1,7 +1,7 @@
 <%@ page language="java" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix = "custom" uri = "/WEB-INF/custom.tld"%>
 
     <link rel="stylesheet" href="/css/user/search_printer.css">
     <link rel="stylesheet" href="/css/search.css">
@@ -11,36 +11,56 @@
 
 	<div id="display_search">
 		<i class="opened"></i>
-		<p>Фильтр товаров</p>
+		<p><custom:getDescriptionByLocale description="${descriptions_search_printer.filter_items}"/></p>
 	</div>
-				<a style="margin-left:10px;" class="accept" href="javascript:void(0)" onclick="$('#search').submit();">ПРИМЕНИТЬ</a>
+			<a style="margin-left:10px;" class="accept" href="javascript:void(0)" onclick="$('#search').submit();">
+				<custom:getDescriptionByLocale description="${descriptions_search_printer.apply}"/>
+			</a>
 				
 			<c:if test="${search.typePrinter[0].equals('Сольвентный')}">
-				<a class="reset" href="<c:url value='/printers/dissolving' />">СБРОСИТЬ</a>
+				<a class="reset" href="<c:url value='/printers/dissolving' />">
+					<custom:getDescriptionByLocale description="${descriptions_search_printer.reset}"/>
+				</a>
 			</c:if>
 			<c:if test="${search.typePrinter[0].equals('Экосольвентный')}">
-				<a class="reset" href="<c:url value='/printers/ecosolvent' />">СБРОСИТЬ</a>
+				<a class="reset" href="<c:url value='/printers/ecosolvent' />">
+					<custom:getDescriptionByLocale description="${descriptions_search_printer.reset}"/>
+				</a>
 			</c:if>
 			<c:if test="${search.typePrinter[0].equals('UV рулонный')}">
-				<a class="reset" href="<c:url value='/printers/UV_roll' />">СБРОСИТЬ</a>
+				<a class="reset" href="<c:url value='/printers/UV_roll' />">
+					<custom:getDescriptionByLocale description="${descriptions_search_printer.reset}"/>
+				</a>
 			</c:if>
 			<c:if test="${search.typePrinter[0].equals('UV плоскопечатный')}">
-				<a class="reset" href="<c:url value='/printers/UV_flatbed' />">СБРОСИТЬ</a>
+				<a class="reset" href="<c:url value='/printers/UV_flatbed' />">
+					<custom:getDescriptionByLocale description="${descriptions_search_printer.reset}"/>
+				</a>
 			</c:if>
 			<c:if test="${search.typePrinter[0].equals('Сублимационный')}">
-				<a class="reset" href="<c:url value='/printers/sublimation' />">СБРОСИТЬ</a>
+				<a class="reset" href="<c:url value='/printers/sublimation' />">
+					<custom:getDescriptionByLocale description="${descriptions_search_printer.reset}"/>
+				</a>
 			</c:if>
 			<c:if test="${search.typePrinter[0].equals('Текстильный')}">
-				<a class="reset" href="<c:url value='/printers/textile' />">СБРОСИТЬ</a>
+				<a class="reset" href="<c:url value='/printers/textile' />">
+					<custom:getDescriptionByLocale description="${descriptions_search_printer.reset}"/>
+				</a>
 			</c:if>
 			<c:if test="${search.typePrinter[0].equals('Водный/Пигментный')}">
-				<a class="reset" href="<c:url value='/printers/water_pigment' />">СБРОСИТЬ</a>
+				<a class="reset" href="<c:url value='/printers/water_pigment' />">
+					<custom:getDescriptionByLocale description="${descriptions_search_printer.reset}"/>
+				</a>
 			</c:if>
 			<c:if test="${search.typePrinter[0].equals('Цифровый')}">
-				<a class="reset" href="<c:url value='/printers/digital' />">СБРОСИТЬ</a>
+				<a class="reset" href="<c:url value='/printers/digital' />">
+					<custom:getDescriptionByLocale description="${descriptions_search_printer.reset}"/>
+				</a>
 			</c:if>
 			<c:if test="${search.typePrinter[0].equals('САПР/ГИС')}">
-				<a class="reset" href="<c:url value='/printers/SAPR-GIS' />">СБРОСИТЬ</a>
+				<a class="reset" href="<c:url value='/printers/SAPR-GIS' />">
+					<custom:getDescriptionByLocale description="${descriptions_search_printer.reset}"/>
+				</a>
 			</c:if>
 
 	<div id="search_product">
@@ -52,7 +72,7 @@
 		<div class="search_criteria" style="display: none;">
 				<div class="block_title">
 					<i></i>
-					<p>Тип принтера</p>
+					<p><custom:getDescriptionByLocale description="${descriptions_search_printer.printer_type}"/></p>
 				</div>
 				<ul class="check_boxes">
 					<form:checkboxes items="${printer.type_printer}" path="typePrinter" element="li" />
@@ -61,7 +81,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Б/У оборудование</p>
+				<p><custom:getDescriptionByLocale description="${descriptions_search_printer.used_machinery}"/></p>
 			</div>
 			<ul class="check_boxes">
 				<form:checkboxes items="${printer.previously_used}" path="previouslyUsed" element="li" />
@@ -70,13 +90,13 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Ширина печати</p>
+				<p><custom:getDescriptionByLocale description="${descriptions_search_printer.printing_width}"/></p>
 			</div>
 			<div class="check_boxes">
 				<div id="tabs">
 					<ul>
-						<li>миллиметр</li>
-						<li>дюйм</li>
+						<li><custom:getDescriptionByLocale description="${descriptions_search_printer.millimeter}"/></li>
+						<li><custom:getDescriptionByLocale description="${descriptions_search_printer.inch}"/></li>
 						<!--<li>формат</li>-->
 					</ul>
 					<div>
@@ -165,7 +185,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Расширение печати</p>
+				<p><custom:getDescriptionByLocale description="${descriptions_search_printer.printing_extension}"/></p>
 			</div>
 			<ul class="check_boxes">
 				<form:checkboxes items="${printer.printing_extension}" path="printingExtension" element="li" />
@@ -174,7 +194,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Тип печати</p>
+				<p><custom:getDescriptionByLocale description="${descriptions_search_printer.type_print}"/></p>
 			</div>
 			<ul class="check_boxes">			
 				<form:checkboxes items="${printer.type_print}" path="typePrint" element="li" />
@@ -411,34 +431,54 @@
 		
 		<jsp:include page="../search/general_characteristics.jsp" />
 
-				<a class="accept" href="javascript:void(0)" onclick="$('#search').submit();">ПРИМЕНИТЬ</a>
+				<a class="accept" href="javascript:void(0)" onclick="$('#search').submit();">
+					<custom:getDescriptionByLocale description="${descriptions_search_printer.apply}"/>
+				</a>
 				
 			<c:if test="${search.typePrinter[0].equals('Сольвентный')}">
-				<a class="reset" href="<c:url value='/printers/dissolving' />">СБРОСИТЬ</a>
+				<a class="reset" href="<c:url value='/printers/dissolving' />">
+					<custom:getDescriptionByLocale description="${descriptions_search_printer.reset}"/>
+				</a>
 			</c:if>
 			<c:if test="${search.typePrinter[0].equals('Экосольвентный')}">
-				<a class="reset" href="<c:url value='/printers/ecosolvent' />">СБРОСИТЬ</a>
+				<a class="reset" href="<c:url value='/printers/ecosolvent' />">
+					<custom:getDescriptionByLocale description="${descriptions_search_printer.reset}"/>
+				</a>
 			</c:if>
 			<c:if test="${search.typePrinter[0].equals('UV рулонный')}">
-				<a class="reset" href="<c:url value='/printers/UV_roll' />">СБРОСИТЬ</a>
+				<a class="reset" href="<c:url value='/printers/UV_roll' />">
+					<custom:getDescriptionByLocale description="${descriptions_search_printer.reset}"/>
+				</a>
 			</c:if>
 			<c:if test="${search.typePrinter[0].equals('UV плоскопечатный')}">
-				<a class="reset" href="<c:url value='/printers/UV_flatbed' />">СБРОСИТЬ</a>
+				<a class="reset" href="<c:url value='/printers/UV_flatbed' />">
+					<custom:getDescriptionByLocale description="${descriptions_search_printer.reset}"/>
+				</a>
 			</c:if>
 			<c:if test="${search.typePrinter[0].equals('Сублимационный')}">
-				<a class="reset" href="<c:url value='/printers/sublimation' />">СБРОСИТЬ</a>
+				<a class="reset" href="<c:url value='/printers/sublimation' />">
+					<custom:getDescriptionByLocale description="${descriptions_search_printer.reset}"/>
+				</a>
 			</c:if>
 			<c:if test="${search.typePrinter[0].equals('Текстильный')}">
-				<a class="reset" href="<c:url value='/printers/textile' />">СБРОСИТЬ</a>
+				<a class="reset" href="<c:url value='/printers/textile' />">
+					<custom:getDescriptionByLocale description="${descriptions_search_printer.reset}"/>
+				</a>
 			</c:if>
 			<c:if test="${search.typePrinter[0].equals('Водный/Пигментный')}">
-				<a class="reset" href="<c:url value='/printers/water_pigment' />">СБРОСИТЬ</a>
+				<a class="reset" href="<c:url value='/printers/water_pigment' />">
+					<custom:getDescriptionByLocale description="${descriptions_search_printer.reset}"/>
+				</a>
 			</c:if>
 			<c:if test="${search.typePrinter[0].equals('Цифровый')}">
-				<a class="reset" href="<c:url value='/printers/digital' />">СБРОСИТЬ</a>
+				<a class="reset" href="<c:url value='/printers/digital' />">
+					<custom:getDescriptionByLocale description="${descriptions_search_printer.reset}"/>
+				</a>
 			</c:if>
 			<c:if test="${search.typePrinter[0].equals('САПР/ГИС')}">
-				<a class="reset" href="<c:url value='/printers/SAPR-GIS' />">СБРОСИТЬ</a>
+				<a class="reset" href="<c:url value='/printers/SAPR-GIS' />">
+					<custom:getDescriptionByLocale description="${descriptions_search_printer.reset}"/>
+				</a>
 			</c:if>
 			
 		</form:form>

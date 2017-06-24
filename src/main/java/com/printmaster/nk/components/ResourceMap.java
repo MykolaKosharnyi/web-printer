@@ -2,6 +2,8 @@ package com.printmaster.nk.components;
 
 public enum ResourceMap {
 	DESCRIPTIONS("descriptions", "/var/www/localhost/products/descriptions_common.json"),
+	DESCRIPTIONS_SEARCH_PRINTER("descriptions_search_printer", 
+			"/var/www/localhost/products/descriptions_search_printer.json"),
 	CONSTANTS("constants", "/var/www/localhost/products/constant.json"),
 	PICTURES_IN_HEAD_MENU("picturesInHeadMenu", "/var/www/localhost/pictures_head_menu.json"),
 	LIST_LEFT_LINKS("listLeftLinks", "/var/www/localhost/links.json");
