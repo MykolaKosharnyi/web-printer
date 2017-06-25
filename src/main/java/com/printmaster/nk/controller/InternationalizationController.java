@@ -46,8 +46,13 @@ public class InternationalizationController {
 		Map<String, JSONObject> result = new TreeMap<String , JSONObject>(new Comparator<String>(){
 			@Override
 			public int compare(String o1, String o2) {
-				return ( (Long)((JSONObject) jsonObject.get(o1)).get("id"))
+				int resultOfComparation = ( (Long)((JSONObject) jsonObject.get(o1)).get("id"))
 						.compareTo( (Long)((JSONObject) jsonObject.get(o2)).get("id"));
+				
+				if(resultOfComparation==0){
+					return o1.compareTo(o2);
+				}
+				return resultOfComparation;
 			}
 		});
 			

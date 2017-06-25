@@ -159,7 +159,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Цветность</p>
+				<p><custom:getDescriptionByLocale description="${descriptions_search_printer.chromaticity}"/></p>
 			</div>
 			<ul class="check_boxes">			
 				<form:checkboxes items="${printer.chromaticity}" path="chromaticity" element="li" />
@@ -168,7 +168,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Совместимые чернила</p>
+				<p><custom:getDescriptionByLocale description="${descriptions_search_printer.compatible_ink}"/></p>
 			</div>
 			<ul class="check_boxes">
 				<form:checkboxes items="${printer.compatible_ink}" path="compatibleInk" element="li" />
@@ -177,7 +177,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Производитель оборудования</p>
+				<p><custom:getDescriptionByLocale description="${descriptions_search_printer.equipment_manufacturer}"/></p>
 			</div>
 			<ul class="check_boxes">
 				<form:checkboxes items="${printer.equipment_manufacturer}" path="equipmentManufacturer" element="li" />
@@ -186,13 +186,13 @@
 		<div class="block_search_criteria">
 			<div class="block_block_title">
 				<i></i>
-				<p>Печатающая головка</p>
+				<p><custom:getDescriptionByLocale description="${descriptions_search_printer.printhead}"/></p>
 			</div>
 			<div class="block_check_boxes">
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Производитель печатающей головки</p>
+						<p><custom:getDescriptionByLocale description="${descriptions_search_printer.manufacturer_printhead}"/></p>
 					</div>
 					<ul class="check_boxes">
 						<form:checkboxes items="${printer.manufacturer_printhead}" path="manufacturerPrinthead" element="li" />
@@ -201,7 +201,7 @@
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Тип капли</p>
+						<p><custom:getDescriptionByLocale description="${descriptions_search_printer.type_drops}"/></p>
 					</div>
 					<ul class="check_boxes">
 						<form:checkboxes items="${printer.type_drops}" path="typeDrops" element="li" />
@@ -210,7 +210,7 @@
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Размер капли</p>
+						<p><custom:getDescriptionByLocale description="${descriptions_search_printer.size_drops}"/></p>
 					</div>
 					<div class="check_boxes">
 						<form:checkboxes items="${printer.size_drops}" path="sizeDrops" element="li" />
@@ -228,7 +228,7 @@
 		<div class="block_search_criteria">
 			<div class="block_block_title">
 				<i></i>
-				<p>Тип печатающей головки</p>
+				<p><custom:getDescriptionByLocale description="${descriptions_search_printer.type_of_printhead}"/></p>
 			</div>
 			<ul class="block_check_boxes">
 				
@@ -275,13 +275,14 @@
 		<div class="block_search_criteria">
 			<div class="block_block_title">
 				<i></i>
-				<p>Скорость и разрешение печати</p>
+				<p><custom:getDescriptionByLocale description="${descriptions_search_printer.print_speed_and_resolution}"/></p>
 			</div>
 			<div class="block_check_boxes">
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Скорость печати, м.кв./ч.</p>
+						<p><custom:getDescriptionByLocale description="${descriptions_search_printer.speedPrint}"/>, 
+						<custom:getDescriptionByLocale description="${descriptions_search_printer.sq_m_hour}"/></p>
 					</div>
 					<div class="check_boxes">
 						<div class="text_output">
@@ -295,7 +296,7 @@
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Разрешение печати</p>
+						<p><custom:getDescriptionByLocale description="${descriptions_search_printer.print_resolution}"/></p>
 					</div>
 					<ul class="check_boxes">
 						<form:checkboxes items="${printer.print_resolution}" path="printResolution" element="li" />
@@ -306,13 +307,13 @@
 		<div class="block_search_criteria">
 			<div class="block_block_title">
 				<i></i>
-				<p>Материал</p>
+				<p><custom:getDescriptionByLocale description="${descriptions_search_printer.material}"/></p>
 			</div>
 			<div class="block_check_boxes">
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Подача метериала</p>
+						<p><custom:getDescriptionByLocale description="${descriptions_search_printer.feeds}"/></p>
 					</div>
 					<ul class="check_boxes">			
 						<form:checkboxes items="${printer.feeds}" path="feed" element="li" />
@@ -321,22 +322,22 @@
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Максимальная толщина носителя</p>
+						<p><custom:getDescriptionByLocale description="${descriptions_search_printer.maximumMediaThickness}"/></p>
 					</div>
 					<div class="check_boxes">
 						<div class="text_output">
 							<form:input path="maximumMediaThickness60_0" class="amount-maximum_media_thickness60_0" value="${search.maximumMediaThickness60_0}" />
-							<p>&nbsp;мм -&nbsp;</p>
+							<p>&nbsp;<custom:getDescriptionByLocale description="${descriptions_search_printer.mm}"/> -&nbsp;</p>
 							<form:input path="maximumMediaThickness60_1" class="amount-maximum_media_thickness60_1" value="${search.maximumMediaThickness60_1}" />
-							<p>&nbsp;мм</p>
+							<p>&nbsp;<custom:getDescriptionByLocale description="${descriptions_search_printer.mm}"/></p>
 						</div>
 						<div class="slider-range-maximum_media_thickness60"></div>
 						<br>
 						<div class="text_output">
 							<form:input path="maximumMediaThickness500_0" class="amount-maximum_media_thickness500_0" value="${search.maximumMediaThickness500_0}" />
-							<p>&nbsp;мм -&nbsp;</p>
+							<p>&nbsp;<custom:getDescriptionByLocale description="${descriptions_search_printer.mm}"/> -&nbsp;</p>
 							<form:input path="maximumMediaThickness500_1" class="amount-maximum_media_thickness500_1" value="${search.maximumMediaThickness500_1}" />
-							<p>&nbsp;мм</p>
+							<p>&nbsp;<custom:getDescriptionByLocale description="${descriptions_search_printer.mm}"/></p>
 						</div>
 						<div class="slider-range-maximum_media_thickness500"></div>
 					</div>
@@ -344,14 +345,14 @@
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Максимальный вес носителя</p>
+						<p><custom:getDescriptionByLocale description="${descriptions_search_printer.maximumWeightOfVehicle}"/></p>
 					</div>
 					<div class="check_boxes">
 						<div class="text_output">
 							<form:input path="maximumWeightOfVehicle0" class="amount-maximum_weight_of_vehicle0" value="${search.maximumWeightOfVehicle0}" />
-							<p>&nbsp;кг -&nbsp;</p>
+							<p>&nbsp;<custom:getDescriptionByLocale description="${descriptions_search_printer.kg}"/> -&nbsp;</p>
 							<form:input path="maximumWeightOfVehicle1" class="amount-maximum_weight_of_vehicle1" value="${search.maximumWeightOfVehicle1}" />
-							<p>&nbsp;кг</p>
+							<p>&nbsp;<custom:getDescriptionByLocale description="${descriptions_search_printer.kg}"/></p>
 						</div>
 						<div class="slider-range-maximum_weight_of_vehicle"></div>
 					</div>
@@ -361,13 +362,13 @@
 		<div class="block_search_criteria">
 			<div class="block_block_title">
 				<i></i>
-				<p>Характеристики ПО</p>
+				<p><custom:getDescriptionByLocale description="${descriptions_search_printer.software_features}"/></p>
 			</div>
 			<div class="block_check_boxes">
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Програмное обеспечение</p>
+						<p><custom:getDescriptionByLocale description="${descriptions_search_printer.rip}"/></p>
 					</div>
 					<ul class="check_boxes">
 						<form:checkboxes items="${printer.rip}" path="rip" element="li" />
@@ -376,7 +377,7 @@
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Интерфейс подключения</p>
+						<p><custom:getDescriptionByLocale description="${descriptions_search_printer.interface_connection}"/></p>
 					</div>
 					<ul class="check_boxes">
 						<form:checkboxes items="${printer.interface_connection}" path="interfaceConnection" element="li" />

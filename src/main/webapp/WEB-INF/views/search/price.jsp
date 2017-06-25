@@ -1,10 +1,11 @@
 <%@ page language="java" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix = "custom" uri = "/WEB-INF/custom.tld"%>
 
 		<div class="search_criteria">
 			<div class="block_title">
 				<i class="opened"></i>
-				<p>Цена</p>
+				<p><custom:getDescriptionByLocale description="${descriptions_search_printer.price}"/></p>
 			</div>
 			<div class="check_boxes" style="display: block;">
 				<div class="text_output">

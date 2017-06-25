@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix = "custom" uri = "/WEB-INF/custom.tld"%>
 <!DOCTYPE>
 <html lang="ru">
 <head>
@@ -356,7 +357,7 @@
                 <div id="name_product_head_description">${product.name}</div>
                 	
                 <c:if test="${!empty product.partNumber}">
-                	<div id="name_product_head_description">Код товара: ${product.partNumber}</div>
+                	<div id="name_product_head_description"><custom:getDescriptionByLocale description="${descriptions_search_printer.product_code}"/>: ${product.partNumber}</div>
 				</c:if>
 					
 					<div class="outer_table_in_head">
@@ -366,19 +367,24 @@
 						   <jsp:include page="../product_page/price.jsp" />                
 						   
 	                       <c:if test="${!empty product.typePrinter}">
-	   							<tr><td>Тип принтера:</td><td>${product.typePrinter}</td></tr>
+	   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.printer_type}"/>:</td><td>${product.typePrinter}</td></tr>
 						   </c:if>
 						   
 	                       <c:if test="${!empty product.equipmentModel}">
-	   							<tr><td>Модель:</td><td>${product.equipmentModel}</td></tr>
+	   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.model}"/>:</td><td>${product.equipmentModel}</td></tr>
 						   </c:if>
 						   
 	                       <c:if test="${product.inputFirstWeightPrintMM != 0}">
-	   							<tr><td>Ширина печати:</td><td>${product.inputFirstWeightPrintMM}<c:if test="${product.inputSecondWeightPrintMM!=0}"> x ${product.inputSecondWeightPrintMM}</c:if> мм</td></tr>
+	   							<tr>
+	   								<td><custom:getDescriptionByLocale description="${descriptions_search_printer.printing_width}"/>:</td>
+	   								<td>${product.inputFirstWeightPrintMM}
+	   								<c:if test="${product.inputSecondWeightPrintMM!=0}"> x ${product.inputSecondWeightPrintMM}</c:if> <custom:getDescriptionByLocale description="${descriptions_search_printer.mm}"/></td></tr>
 							</c:if>
 	                       
 	                       <c:if test="${(product.inputFirstWeightPrintMM == 0) && product.weightPrintMM > 0}">
-	   							<tr><td>Ширина печати:</td><td>${product.weightPrintMM} мм</td></tr>
+	   							<tr>
+	   								<td><custom:getDescriptionByLocale description="${descriptions_search_printer.printing_width}"/>:</td>
+	   								<td>${product.weightPrintMM} <custom:getDescriptionByLocale description="${descriptions_search_printer.mm}"/></td></tr>
 							</c:if>
 	                  </table>
                   </div>
@@ -412,35 +418,35 @@
 					<table>
                        
                        <c:if test="${!empty product.typePrinter}">
-   							<tr><td>Тип принтера:</td><td>${product.typePrinter}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.printer_type}"/>:</td><td>${product.typePrinter}</td></tr>
 					   </c:if>
                        
                        <c:if test="${!empty product.partNumber}">
-   							<tr><td>Код товара:</td><td>${product.partNumber}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.product_code}"/>:</td><td>${product.partNumber}</td></tr>
 					   </c:if>
                        
                        <c:if test="${!empty product.equipmentModel}">
-   							<tr><td>Модель:</td><td>${product.equipmentModel}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.model}"/>:</td><td>${product.equipmentModel}</td></tr>
 					   </c:if>
                        
                        <c:if test="${product.inputFirstWeightPrintMM != 0}">
-   							<tr><td>Ширина печати:</td><td>${product.inputFirstWeightPrintMM}<c:if test="${product.inputSecondWeightPrintMM!=0}"> x ${product.inputSecondWeightPrintMM}</c:if> мм</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.printing_width}"/>:</td><td>${product.inputFirstWeightPrintMM}<c:if test="${product.inputSecondWeightPrintMM!=0}"> x ${product.inputSecondWeightPrintMM}</c:if> <custom:getDescriptionByLocale description="${descriptions_search_printer.mm}"/></td></tr>
 					   </c:if>
                        
                        <c:if test="${(product.inputFirstWeightPrintMM == 0) && product.weightPrintMM > 0}">
-   							<tr><td>Ширина печати:</td><td>${product.weightPrintMM} мм</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.printing_width}"/>:</td><td>${product.weightPrintMM} <custom:getDescriptionByLocale description="${descriptions_search_printer.mm}"/></td></tr>
 					   </c:if>
 					   
 					   <c:if test="${!empty product.printingExtension}">
-   							<tr><td>Расширение печати:</td><td>${product.printingExtension} мм</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.printing_extension}"/>:</td><td>${product.printingExtension} <custom:getDescriptionByLocale description="${descriptions_search_printer.mm}"/></td></tr>
 					   </c:if>
                        
                        <c:if test="${!empty product.previouslyUsed}">
-   							<tr><td>Состояние оборудования:</td><td>${product.previouslyUsed}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.used_machinery}"/>:</td><td>${product.previouslyUsed}</td></tr>
 					   </c:if>
                        
                        <c:if test="${!empty product.typePrint}">
-   							<tr><td>Тип печати:</td><td>${product.typePrint}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.type_print}"/>:</td><td>${product.typePrint}</td></tr>
 						</c:if>
 						
 						<c:if test="${(product.lengthWaveUVlamp > 0) || (product.powerUVlamp > 0) || 
@@ -474,7 +480,7 @@
 						</c:if>
 						
                        <c:if test="${!empty product.feed}">
-   							<tr><td>Подача материала:</td><td>
+   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.feeds}"/>:</td><td>
 		                   		<c:forEach var="tp" items="${product.feed}" varStatus="status">  
 		    						${tp}<c:if test="${ ! status.last}" >, </c:if>  
 								</c:forEach>
@@ -482,7 +488,7 @@
 						</c:if>
 						
 						<c:if test="${!empty product.chromaticity}">
-   							<tr><td>Цветовая схема:</td><td>
+   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.chromaticity}"/>:</td><td>
 		                   		<c:forEach var="tp" items="${product.chromaticity}" varStatus="status">  
 		                   		
 		                   			<c:if test="${tp.equals('CMYK')}">
@@ -506,18 +512,18 @@
 						</c:if>
 
 						<c:if test="${!empty product.manufacturerPrinthead}">
-   							<tr><td>Производитель печатающей головки:</td><td>${product.manufacturerPrinthead}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.manufacturer_printhead}"/>:</td><td>${product.manufacturerPrinthead}</td></tr>
 						</c:if>
 
                        <c:if test="${!empty product.typeOfPrinthead}">
-   							<tr><td>Тип печатающей головки:</td><td>${product.typeOfPrinthead}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.type_of_printhead}"/>:</td><td>${product.typeOfPrinthead}</td></tr>
 						</c:if>
 						
 						<c:if test="${ (product.numberOfPrintheads > 0) || (product.onEachColorNumberOfPrintheads > 0) ||
 						       (product.whiteColorNumberOfPrintheads > 0) || (product.varnishNumberOfPrintheads > 0) || 
 						       (product.firstTypeNumberOfPrintheads > 0) || (product.secondTypeNumberOfPrintheads > 0) }">
    							<tr>
-   								<td>Количество печатающих головок:</td>
+   								<td><custom:getDescriptionByLocale description="${descriptions_search_printer.number_of_printheads}"/>:</td>
    								<td>
    									<c:if test="${product.numberOfPrintheads > 0}">
    										${product.numberOfPrintheads} шт
@@ -550,7 +556,7 @@
 						<c:if test="${ (product.averageConsumptionOfCMYKink > 0) || (product.averageConsumptionOfWhiteInk > 0) ||
 						       (product.averageDischarge1 > 0) || (product.averageDischarge2 > 0) || (product.averageDischarge3 > 0) }">
    							<tr>
-   								<td>Расход чернил:</td>
+   								<td><custom:getDescriptionByLocale description="${descriptions_search_printer.ink_consumption}"/>:</td>
    								<td>
    									<c:if test="${product.averageConsumptionOfCMYKink > 0}">
    										Средний расход чернил CMYK - ${product.averageConsumptionOfCMYKink} мл./м.кв.
@@ -576,7 +582,7 @@
 						</c:if>
                        
                        <c:if test="${!empty product.compatibleInk}">
-   							<tr><td>Совместимые чернила:</td><td>
+   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.compatible_ink}"/>:</td><td>
 	                   			<c:forEach var="tp" items="${product.compatibleInk}" varStatus="status">  
 	    							${tp}<c:if test="${ ! status.last}" >, </c:if>  
 								</c:forEach>                       
@@ -584,7 +590,7 @@
 						</c:if>
                        
                        <c:if test="${!empty product.typeDrops}">
-   							<tr><td>Тип капли:</td><td>
+   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.type_drops}"/>:</td><td>
 	                   			<c:forEach var="tp" items="${product.typeDrops}" varStatus="status">  
 	    							${tp}<c:if test="${ ! status.last}" >, </c:if>  
 								</c:forEach>                       
@@ -592,24 +598,24 @@
 						</c:if>
                        
                        <c:if test="${product.sizeDropStatic > 0}">
-   							<tr><td>Размер капли (постоянная):</td><td>${product.sizeDropStatic} pl</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.size_drops_constant}"/>:</td><td>${product.sizeDropStatic} pl</td></tr>
 						</c:if>
 						
 						<c:if test="${product.valueOfNewTypeDrop > 0}">
-   							<tr><td>Размер капли (product.nameOfNewTypeDrop):</td><td>${product.valueOfNewTypeDrop} pl</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.size_drops}"/> (product.nameOfNewTypeDrop):</td><td>${product.valueOfNewTypeDrop} pl</td></tr>
 						</c:if>
                        
                        <c:if test="${(product.sizeDropRangeFrom > 0) && (product.sizeDropRangeUntil > 0) &&
                        					(product.sizeDropRangeFrom < product.sizeDropRangeUntil)}">
-   								<tr><td>Размер капли:</td><td>
-	                   			Переменная от ${product.sizeDropRangeFrom} pl до ${product.sizeDropRangeUntil} pl                     
+   								<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.size_drops}"/>:</td><td>
+	                   			<custom:getDescriptionByLocale description="${descriptions_search_printer.size_drops_from}"/> ${product.sizeDropRangeFrom} pl <custom:getDescriptionByLocale description="${descriptions_search_printer.size_drops_to}"/> ${product.sizeDropRangeUntil} pl                     
                        			</td></tr>
 						</c:if>
 						
 						<c:if test="${(product.sizeDropRangeFrom < 0.001) || (product.sizeDropRangeUntil < 0.001) ||
                        					(product.sizeDropRangeFrom > product.sizeDropRangeUntil)}">
                        		<c:if test="${!empty product.sizeDrops}">
-   								<tr><td>Размер капли:</td><td>
+   								<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.size_drops}"/>:</td><td>
 	                   			<c:forEach var="tp" items="${product.sizeDrops}" varStatus="status">  
 	    								${tp} pl<c:if test="${ ! status.last}" >, </c:if>  
 									</c:forEach>                        
@@ -622,7 +628,7 @@
                       						(product.speedPrintHiQual > 0.001) || (product.speedPrint1 > 0.001) ||
                       						(product.speedPrint2 > 0.001) || (product.speedPrint3 > 0.001) ||
                       						(product.speedPrint4 > 0.001) || (product.speedPrint5 > 0.001)}">
-   							<tr><td>Скорость печати:</td>
+   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.speedPrint}"/>:</td>
    								<td>
    								
    								<c:if test="${product.speedPrintDraft > 0.001}">
@@ -678,11 +684,11 @@
 						</c:if>
                       
                       <c:if test="${product.inputFirstPrintResolution != 0 && product.inputSecondPrintResolution != 0}">
-   							<tr><td>Разрешение печати:</td><td>${product.inputFirstPrintResolution}x${product.inputSecondPrintResolution}dpi</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.print_resolution}"/>:</td><td>${product.inputFirstPrintResolution}x${product.inputSecondPrintResolution}dpi</td></tr>
 						</c:if>
                       
                       	<c:if test="${(product.inputFirstPrintResolution == 0 || product.inputSecondPrintResolution == 0) && !empty product.printResolution}">
-   							<tr><td>Разрешение печати:</td><td>
+   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.print_resolution}"/>:</td><td>
 	                   			<c:forEach var="tp" items="${product.printResolution}" varStatus="status">  
 	    							${tp}<c:if test="${ ! status.last}" >, </c:if>  
 								</c:forEach>                        
@@ -690,11 +696,11 @@
 						</c:if>
                       
                       	<c:if test="${!empty product.equipmentManufacturer}">
-   							<tr><td>Производитель оборудования:</td><td>${product.equipmentManufacturer}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.equipment_manufacturer}"/>:</td><td>${product.equipmentManufacturer}</td></tr>
 						</c:if>
                       
                       	<c:if test="${!empty product.interfaceConnection}">
-   							<tr><td>Интерфейс подключения:</td><td>
+   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.interface_connection}"/>:</td><td>
 	                   			<c:forEach var="tp" items="${product.interfaceConnection}" varStatus="status">  
 	    							${tp}<c:if test="${ ! status.last}" >, </c:if>  
 								</c:forEach>                       
@@ -702,15 +708,15 @@
 						</c:if>
                        
                        <c:if test="${product.maximumMediaThickness > 0}">
-   							<tr><td>Максимальная толщина носителя:</td><td>${product.maximumMediaThickness} мм</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.maximumMediaThickness}"/>:</td><td>${product.maximumMediaThickness} <custom:getDescriptionByLocale description="${descriptions_search_printer.mm}"/></td></tr>
 						</c:if>
                        
                        <c:if test="${product.maximumWeightOfVehicle > 0}">
-   							<tr><td>Максимальный вес носителя:</td><td>${product.maximumWeightOfVehicle} кг</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.maximumWeightOfVehicle}"/>:</td><td>${product.maximumWeightOfVehicle} <custom:getDescriptionByLocale description="${descriptions_search_printer.kg}"/></td></tr>
 						</c:if>
                        
                        <c:if test="${!empty product.rip}">
-   							<tr><td>Программное обеспечение:</td><td>
+   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.rip}"/>:</td><td>
 	                   			<c:forEach var="tp" items="${product.rip}" varStatus="status">  
 	    							${tp}<c:if test="${ ! status.last}" >, </c:if>  
 								</c:forEach>                        
@@ -718,27 +724,27 @@
 						</c:if>
                        
                        <c:if test="${product.averagePowerConsumption > 0}">
-   							<tr><td>Средняя потребляемая мощность:</td><td>${product.averagePowerConsumption} Вт</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.averagePowerConsumption}"/>:</td><td>${product.averagePowerConsumption} <custom:getDescriptionByLocale description="${descriptions_search_printer.w}"/></td></tr>
 						</c:if>
                        
                        <c:if test="${product.maxPowerConsumption > 0}">
-   							<tr><td>Максимальная потребляемая мощность:</td><td>${product.maxPowerConsumption} Вт</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.maxPowerConsumption}"/>:</td><td>${product.maxPowerConsumption} <custom:getDescriptionByLocale description="${descriptions_search_printer.w}"/></td></tr>
 						</c:if>
                        
                        <c:if test="${product.weight > 0}">
-   							<tr><td>Вес:</td><td>${product.weight} кг</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.weight}"/>:</td><td>${product.weight} <custom:getDescriptionByLocale description="${descriptions_search_printer.kg}"/></td></tr>
 						</c:if>
                        
                        <c:if test="${product.width > 0}">
-   							<tr><td>Ширина:</td><td>${product.width} мм</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.width}"/>:</td><td>${product.width} <custom:getDescriptionByLocale description="${descriptions_search_printer.mm}"/></td></tr>
 						</c:if>
                        
                        <c:if test="${product.depth > 0}">
-   							<tr><td>Глубина:</td><td>${product.depth} мм</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.depth}"/>:</td><td>${product.depth} <custom:getDescriptionByLocale description="${descriptions_search_printer.mm}"/></td></tr>
 						</c:if>
                        
                        <c:if test="${product.heigth > 0}">
-   							<tr><td>Высота:</td><td>${product.heigth} мм</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.height}"/>:</td><td>${product.heigth} <custom:getDescriptionByLocale description="${descriptions_search_printer.mm}"/></td></tr>
 						</c:if>
   
                   </table>
