@@ -63,14 +63,10 @@
                 </div>
             </div>
             <div id="tabs_product">
-                <ul id="sub_tabs_product">
-                    <li>Описание</li>
-                    <li>Технические характеристики</li>
-                    <li>Отзывы</li>
-                    <li>С этим товаром используется</li>
-                    <li>Уточнение описания</li>
-                    
-                </ul>
+            
+				<!-- import tabs like description, specification, reviews etc. -->
+				<jsp:include page="../product_page/tabs_product_item.jsp" />
+				
                 <div>
                     <!-- description on concrete language to this product -->
                     <jsp:include page="../product_page/description.jsp" />

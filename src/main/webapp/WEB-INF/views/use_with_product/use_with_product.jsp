@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix = "custom" uri = "/WEB-INF/custom.tld"%>
 <!DOCTYPE>
 <html lang="ru">
 <head>
@@ -50,9 +51,9 @@
 	</div>
             <div id="tabs_product">
                 <ul id="sub_tabs_product">
-                    <li>Описание</li>
-                    <li>Отзывы</li>
-                    <li>Уточнение описания</li>
+                    <li><custom:getDescriptionByLocale description="${descriptions.description}"/></li>
+                    <li><custom:getDescriptionByLocale description="${descriptions.reviews}"/></li>
+                    <li><custom:getDescriptionByLocale description="${descriptions.specification_refinement}"/></li>
                    
                 </ul>
                 <div>
