@@ -1,8 +1,9 @@
 <%@ page language="java" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix = "custom" uri = "/WEB-INF/custom.tld"%>
 
 <c:if test="${!empty product.availability && empty product.availabilitySpecialCase}">
-	<div class="commom_information"><em>Наличие:</em><p class="value_of_availability"
+	<div class="commom_information"><em><custom:getDescriptionByLocale description="${descriptions.availability}"/>:</em><p class="value_of_availability"
 		<c:choose>
 			<c:when test="${product.availability.equals('в наличии')}">style="background: #05f94c; border: 1px #7cc80f solid; width: 96px;"</c:when>
 			<c:when test="${product.availability.equals('нет в наличии')}">style="background: rgb(231, 231, 231); border: 1px solid rgb(180, 180, 180);"</c:when>
@@ -14,7 +15,7 @@
 </c:if>
                  
 <c:if test="${!empty product.availabilitySpecialCase}">
-	<div class="commom_information"><em>Наличие:</em><p style="padding-top: 10px;"> ${product.availabilitySpecialCase}</p></div>
+	<div class="commom_information"><em><custom:getDescriptionByLocale description="${descriptions.availability}"/>:</em><p style="padding-top: 10px;"> ${product.availabilitySpecialCase}</p></div>
 </c:if>
 
 
