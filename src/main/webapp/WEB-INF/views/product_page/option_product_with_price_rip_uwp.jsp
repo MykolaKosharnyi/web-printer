@@ -1,15 +1,16 @@
 <%@ page language="java" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix = "custom" uri = "/WEB-INF/custom.tld"%>
 
 <div class="option_product_with_price">
     	                     
   <table class="table table-hover table_price_option table-striped">
     <thead>
       <tr>
-        <th>Опции</th>
-        <th>Цена</th>
-        <th>Описание</th>
+        <th><custom:getDescriptionByLocale description="${descriptions.options}"/></th>
+        <th><custom:getDescriptionByLocale description="${descriptions.options_price}"/></th>
+        <th><custom:getDescriptionByLocale description="${descriptions.description}"/></th>
       </tr>
     </thead>
     <tbody>
@@ -17,7 +18,7 @@
       <c:if test="${product.optionInstallation > 0.01}">
 	      <tr class="block_product_price">
 	        <td><input class="add_price" type="checkbox" value="Инсталяция" id="optionInstallation_price">
-	        	<label class="add_price_title" for="optionInstallation_price">Инсталяция</label>
+	        	<label class="add_price_title" for="optionInstallation_price"><custom:getDescriptionByLocale description="${descriptions.installation}"/></label>
 	        </td>
 	        <td>
 				<div class="product_price">
@@ -77,7 +78,7 @@
 	<c:if test="${product.optionVAT > 0.01}">
 	      <tr class="block_product_price">
 	        <td><input class="add_price" type="checkbox" value="НДС" id="optionVAT_price">
-	        	<label class="add_price_title" for="optionVAT_price">НДС</label>
+	        	<label class="add_price_title" for="optionVAT_price"><custom:getDescriptionByLocale description="${descriptions.vat}"/></label>
 	        </td>
 	        <td>
 	        	<div class="product_price" style="display:none;">
@@ -97,7 +98,7 @@
 		<td colspan="3">
 			<div class="delivery_options">
 				<i class="fa fa-arrow-right"></i>
-				<p class="delivery_options_title">Доставка</p>
+				<p class="delivery_options_title"><custom:getDescriptionByLocale description="${descriptions.delivery}"/></p>
 			</div>
 			<div class="delivery_options_body">
 			
@@ -110,7 +111,9 @@
 						<c:if test="${ product.ukraineDeliveryPriceSize || product.ukraineDeliveryPriceWeight }">
 							<tr class="block_product_price">
 								<td><input class="add_price_delivery" type="radio" name="delivery" value="По Украине" id="ukraineDelivery_price">
-						        	<label class="add_price_delivery_title" for="ukraineDelivery_price">По Украине</label>
+						        	<label class="add_price_delivery_title" for="ukraineDelivery_price">
+						        		<custom:getDescriptionByLocale description="${descriptions.delivery_ukraine}"/>
+						        	</label>
 						        </td>
 						        <td>
 									<div class="product_price">
@@ -129,7 +132,7 @@
 				      	<c:if test="${ product.kyivDeliveryPriceSize || product.kyivDeliveryPriceWeight }">
 							<tr class="block_product_price">
 								<td><input class="add_price_delivery" type="radio" name="delivery" value="По Киеву" id="kyivDelivery_price">
-						        	<label class="add_price_delivery_title" for="kyivDelivery_price">По Киеву</label>
+						        	<label class="add_price_delivery_title" for="kyivDelivery_price"><custom:getDescriptionByLocale description="${descriptions.delivery_kiev}"/></label>
 						        </td>
 						        <td>		
 									<div class="product_price">
@@ -149,7 +152,8 @@
 						      <tr class="block_product_price">
 						        <td style="position: relative;">
 						        	<input class="add_price" style="position: absolute; top: 5px;" type="checkbox" value="Страхование груза международная перевозка" id="insuranceInternationalTransport_price">
-						        	<label class="add_price_title" style="margin-left:20px;" for="insuranceInternationalTransport_price">Страхование груза международная перевозка</label>
+						        	<label class="add_price_title" style="margin-left:20px;"
+						        	 for="insuranceInternationalTransport_price"><custom:getDescriptionByLocale description="${descriptions.delivery_insurance_international}"/></label>
 						        </td>
 						        <td>
 									<div class="product_price">
@@ -165,7 +169,8 @@
 						      <tr class="block_product_price">
 						        <td style="position: relative;">
 						        	<input class="add_price" style="position: absolute; top: 5px;" type="checkbox" value="Страхование груза по Украине" id="insuranceUkraineTransport_price">
-						        	<label class="add_price_title" style="margin-left:20px;" for="insuranceUkraineTransport_price">Страхование груза по Украине</label>
+						        	<label class="add_price_title" style="margin-left:20px;" 
+						        	for="insuranceUkraineTransport_price"><custom:getDescriptionByLocale description="${descriptions.delivery_insurance_ukraine}"/></label>
 						        </td>
 						        <td>
 									<div class="product_price">	
@@ -179,7 +184,7 @@
 						
 					</tbody>
 				</table>
-				<div class="delivery_notes"><p>*</p>Стоимость ориентировочная и может изменятся в зависимости от перевозчика.</div>
+				<div class="delivery_notes"><p>*</p><custom:getDescriptionByLocale description="${descriptions.delivery_notes}"/></div>
 			</div>
 			
 		</td>
@@ -196,16 +201,16 @@
 		<td colspan="3">
 			<div class="paint_options">
 				<i class="fa fa-arrow-right"></i>
-				<p class="paint_options_title">Краска</p>
+				<p class="paint_options_title"><custom:getDescriptionByLocale description="${descriptions.paint}"/></p>
 			</div>
 			<div class="paint_options_body">
 				<table class="table table-hover table_paint_options">
 					<thead>
 				      <tr>
-				        <th>Тип</th>
-				        <th>Цена за 1л</th>
-				        <th>Количество</th>
-				        <th>Общая стоимость</th>
+				        <th><custom:getDescriptionByLocale description="${descriptions.paint_type}"/></th>
+				        <th><custom:getDescriptionByLocale description="${descriptions.paint_price_1L}"/></th>
+				        <th><custom:getDescriptionByLocale description="${descriptions.paint_amount}"/></th>
+				        <th><custom:getDescriptionByLocale description="${descriptions.total_cost}"/></th>
 				      </tr>
 				    </thead>
 					<tbody>
@@ -680,7 +685,7 @@
 </c:if>
 
 	<tr class="output_result_of_option">
-		<td style="vertical-align: middle;">Общая стоимость:</td>
+		<td style="vertical-align: middle;"><custom:getDescriptionByLocale description="${descriptions.total_cost}"/>:</td>
         <td style="vertical-align: middle;">
         	<div class="total_price product_price">
 			   	<input name="price_value" value="${product.prise}" type="hidden">				
@@ -696,7 +701,8 @@
 
 		<tr>
 	        <td colspan="3">
-	        	<button class="btn btn-success" onclick="openModalProposalSuggestPrise('${type}', ${product.id}, '${product.name}', '${product.pathPictures.get(0)}')">Готовы купить за</button>
+	        	<button class="btn btn-success" onclick="openModalProposalSuggestPrise('${type}', ${product.id}, '${product.name}', '${product.pathPictures.get(0)}')">
+	        		<custom:getDescriptionByLocale description="${descriptions.ready_buy_for}"/></button>
 	        </td>
 		</tr>
 
