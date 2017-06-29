@@ -9,7 +9,7 @@
     <thead>
       <tr>
         <th><custom:getDescriptionByLocale description="${descriptions.options}"/></th>
-        <th><custom:getDescriptionByLocale description="${descriptions.price}"/></th>
+        <th><custom:getDescriptionByLocale description="${descriptions.options_price}"/></th>
         <th><custom:getDescriptionByLocale description="${descriptions.description}"/></th>
       </tr>
     </thead>
@@ -17,7 +17,7 @@
 		<c:if test="${product.optionRIP > 0.01}">
 	      <tr class="block_product_price">
 	        <td><input class="add_price" type="checkbox" value="Програмное обеспечение" id="optionRIP_price">
-	        	<label class="add_price_title" for="optionRIP_price">Програмное обеспечение</label>
+	        	<label class="add_price_title" for="optionRIP_price"><custom:getDescriptionByLocale description="${descriptions.options_software}"/></label>
 	        </td>
 	        <td>
 				<div class="product_price">
@@ -32,7 +32,7 @@
 		<c:if test="${product.optionSNCP > 0.01}">
 	      <tr class="block_product_price">
 	        <td><input class="add_price" type="checkbox" value="СНЧП" id="optionSNCP_price">
-	        	<label class="add_price_title" for="optionSNCP_price">СНЧП</label>
+	        	<label class="add_price_title" for="optionSNCP_price"><custom:getDescriptionByLocale description="${descriptions.options_CISS}"/></label>
 	        </td>
 	        <td>
 				<div class="product_price">
@@ -107,7 +107,7 @@
       <c:if test="${product.optionGuarantee > 0.01}">
 	      <tr class="block_product_price">
 	        <td><input class="add_price" type="checkbox" value="Гарантия" id="optionGuarantee_price">
-	        	<label class="add_price_title" for="optionGuarantee_price">Гарантия</label>
+	        	<label class="add_price_title" for="optionGuarantee_price"><custom:getDescriptionByLocale description="${descriptions.options_guarantee}"/></label>
 	        </td>
 	        <td>
 				<div class="product_price">

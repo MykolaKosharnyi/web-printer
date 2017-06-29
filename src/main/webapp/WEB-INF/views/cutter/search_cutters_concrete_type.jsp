@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix = "custom" uri = "/WEB-INF/custom.tld"%>
 
     <link rel="stylesheet" href="/css/user/search_cutter.css">
     <link rel="stylesheet" href="/css/search.css">
@@ -11,18 +12,26 @@
 
 	<div id="display_search">
 		<i class="opened"></i>
-		<p>Фильтр товаров</p>
+		<p><custom:getDescriptionByLocale description="${descriptions_search_printer.filter_items}"/></p>
 	</div>
-				<a style="margin-left:10px;" class="accept" href="javascript:void(0)" onclick="$('#search').submit();">ПРИМЕНИТЬ</a>
+				<a style="margin-left:10px;" class="accept" href="javascript:void(0)" onclick="$('#search').submit();">
+					<custom:getDescriptionByLocale description="${descriptions_search_printer.apply}"/>
+				</a>
 				
 			<c:if test="${search.typeCutter[0].equals('Для обработки дерева')}">
-				<a class="reset" href="<c:url value='/cutters/for_wood' />">СБРОСИТЬ</a>
+				<a class="reset" href="<c:url value='/cutters/for_wood' />">
+					<custom:getDescriptionByLocale description="${descriptions_search_printer.reset}"/>
+				</a>
 			</c:if>
 			<c:if test="${search.typeCutter[0].equals('Для обработки металла')}">
-				<a class="reset" href="<c:url value='/cutters/for_the_treatment_of_metal' />">СБРОСИТЬ</a>
+				<a class="reset" href="<c:url value='/cutters/for_the_treatment_of_metal' />">
+					<custom:getDescriptionByLocale description="${descriptions_search_printer.reset}"/>
+				</a>
 			</c:if>
 			<c:if test="${search.typeCutter[0].equals('Для обработки камня')}">
-				<a class="reset" href="<c:url value='/cutters/stone_processing' />">СБРОСИТЬ</a>
+				<a class="reset" href="<c:url value='/cutters/stone_processing' />">
+					<custom:getDescriptionByLocale description="${descriptions_search_printer.reset}"/>
+				</a>
 			</c:if>
 			
 	<div id="search_product">
@@ -219,16 +228,24 @@
 		
 		<jsp:include page="../search/general_characteristics.jsp" />
 		
-			<a class="accept" href="javascript:void(0)" onclick="$('#search').submit();">ПРИМЕНИТЬ</a>
+			<a class="accept" href="javascript:void(0)" onclick="$('#search').submit();">
+				<custom:getDescriptionByLocale description="${descriptions_search_printer.apply}"/>
+			</a>
 				
 			<c:if test="${search.typeCutter[0].equals('Для обработки дерева')}">
-				<a class="reset" href="<c:url value='/cutters/for_wood' />">СБРОСИТЬ</a>
+				<a class="reset" href="<c:url value='/cutters/for_wood' />">
+					<custom:getDescriptionByLocale description="${descriptions_search_printer.reset}"/>
+				</a>
 			</c:if>
 			<c:if test="${search.typeCutter[0].equals('Для обработки металла')}">
-				<a class="reset" href="<c:url value='/cutters/for_the_treatment_of_metal' />">СБРОСИТЬ</a>
+				<a class="reset" href="<c:url value='/cutters/for_the_treatment_of_metal' />">
+					<custom:getDescriptionByLocale description="${descriptions_search_printer.reset}"/>
+				</a>
 			</c:if>
 			<c:if test="${search.typeCutter[0].equals('Для обработки камня')}">
-				<a class="reset" href="<c:url value='/cutters/stone_processing' />">СБРОСИТЬ</a>
+				<a class="reset" href="<c:url value='/cutters/stone_processing' />">
+					<custom:getDescriptionByLocale description="${descriptions_search_printer.reset}"/>
+				</a>
 			</c:if>
 			
 		</form:form>

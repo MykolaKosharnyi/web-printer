@@ -41,9 +41,9 @@
 		<hr>
 			<h4>Изменение вывода производителей для принтеров</h4>
 	
-		<c:url var="change_equipment_manufacturer" value="/admin/printer/equipment_manufacturer"></c:url>
+		<c:url var="change_property" value="/admin/printer/equipment_manufacturer"></c:url>
 	
-		<form class="form-horizontal" style="padding: 0px 10px;" action="${change_equipment_manufacturer}" method="post">	
+		<form class="form-horizontal" style="padding: 0px 10px;" action="${change_property}" method="post">	
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 			<c:forEach items="${printer.equipment_manufacturer}" var="equipment">
 				<div class="checkbox">
