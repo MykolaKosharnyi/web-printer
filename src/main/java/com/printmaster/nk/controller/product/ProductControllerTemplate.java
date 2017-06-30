@@ -127,6 +127,8 @@ public abstract class ProductControllerTemplate <T extends HeadProduct, S extend
         
         model.addAttribute("comments", commentService.getAllForProduct(getTYPE(), id));
         model.addAttribute("addComment", new Comment());
+
+        componets.setJSONtoModelAttribute(model, getTYPE());
         
         return getTYPE();
     }

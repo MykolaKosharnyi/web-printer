@@ -149,6 +149,8 @@ public class PrinterController extends ProductControllerTemplate<Printer, Search
         model.addAttribute("comments", commentService.getAllForProduct(TYPE, id));
         model.addAttribute("addComment", new Comment());
         
+        componets.setJSONtoModelAttribute(model, getTYPE());
+        
         if(product.getIdUseWithProduct()!=null || product.getCompatibleInk()!=null){
 	        Set<UseWithProduct> useWithThisProduct = new LinkedHashSet<UseWithProduct>();
 	        

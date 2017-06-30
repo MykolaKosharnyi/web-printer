@@ -75,7 +75,7 @@
 					<p><custom:getDescriptionByLocale description="${descriptions_search_printer.printer_type}"/></p>
 				</div>
 				<ul class="check_boxes">
-					<form:checkboxes items="${printer.type_printer}" path="typePrinter" element="li" />
+					<custom:searchByLocale nameOfAttribyte="typePrinter" properties="${printer.type_printer}"/>
 				</ul>
 			</div>
 		<div class="search_criteria">
@@ -84,7 +84,7 @@
 				<p><custom:getDescriptionByLocale description="${descriptions_search_printer.used_machinery}"/></p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${printer.previously_used}" path="previouslyUsed" element="li" />
+				<custom:searchByLocale nameOfAttribyte="previouslyUsed" properties="${printer.previously_used}"/>
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -196,8 +196,8 @@
 				<i></i>
 				<p><custom:getDescriptionByLocale description="${descriptions_search_printer.type_print}"/></p>
 			</div>
-			<ul class="check_boxes">			
-				<form:checkboxes items="${printer.type_print}" path="typePrint" element="li" />
+			<ul class="check_boxes">	
+				<custom:searchByLocale nameOfAttribyte="typePrint" properties="${printer.type_print}"/>		
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -215,7 +215,7 @@
 				<p><custom:getDescriptionByLocale description="${descriptions_search_printer.compatible_ink}"/></p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${printer.compatible_ink}" path="compatibleInk" element="li" />
+				<custom:searchByLocale nameOfAttribyte="compatibleInk" properties="${printer.compatible_ink}"/>
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -248,7 +248,7 @@
 						<p><custom:getDescriptionByLocale description="${descriptions_search_printer.type_drops}"/></p>
 					</div>
 					<ul class="check_boxes">
-						<form:checkboxes items="${printer.type_drops}" path="typeDrops" element="li" />
+						<custom:searchByLocale nameOfAttribyte="typeDrops" properties="${printer.type_drops}"/>
 					</ul>
 				</div>
 				<div class="search_criteria">
@@ -360,7 +360,7 @@
 						<p><custom:getDescriptionByLocale description="${descriptions_search_printer.feeds}"/></p>
 					</div>
 					<ul class="check_boxes">			
-						<form:checkboxes items="${printer.feeds}" path="feed" element="li" />
+						<custom:searchByLocale nameOfAttribyte="feed" properties="${printer.feeds}"/>
 					</ul>
 				</div>
 				<div class="search_criteria">

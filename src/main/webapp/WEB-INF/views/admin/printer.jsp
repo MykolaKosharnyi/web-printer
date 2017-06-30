@@ -3,6 +3,7 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix = "custom" uri = "/WEB-INF/custom.tld"%>
 <%@page session="true"%>
 <!DOCTYPE>
 <html>
@@ -107,7 +108,7 @@
 						<form:errors path="typePrinter" cssClass="error"></form:errors>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${printer.type_printer}" path="typePrinter" element="li"/>
+						<custom:radio nameOfAttribyte="typePrinter" productValue="${product.typePrinter}" properties="${printer.type_printer}"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -187,7 +188,7 @@
 						<p>Состояние оборудования</p>
 					</div>
 					<ul class="check_boxes">					
-						<form:radiobuttons items="${printer.previously_used}" path="previouslyUsed" element="li"/>
+						<custom:radio nameOfAttribyte="previouslyUsed" productValue="${product.previouslyUsed}" properties="${printer.previously_used}"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -196,7 +197,7 @@
 						<p>Тип печати</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${printer.type_print}" path="typePrint" element="li"/>
+						<custom:radio nameOfAttribyte="typePrint" productValue="${product.typePrint}" properties="${printer.type_print}"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -250,7 +251,7 @@
 						<p>Подача метериала</p>
 					</div>
 					<ul class="check_boxes">					
-						<form:checkboxes items="${printer.feeds}" path="feed" element="li"/>
+						<custom:check nameOfAttribyte="feed" productValues="${product.feed}" properties="${printer.feeds}"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -412,7 +413,7 @@
 						<p>Совместимые чернила</p>
 					</div>
 					<ul class="check_boxes">
-						<form:checkboxes items="${printer.compatible_ink}" path="compatibleInk" element="li"/>
+						<custom:check nameOfAttribyte="compatibleInk" productValues="${product.compatibleInk}" properties="${printer.compatible_ink}"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -421,7 +422,7 @@
 						<p>Тип капли</p>
 					</div>
 					<ul class="check_boxes">				
-						<form:checkboxes items="${printer.type_drops}" path="typeDrops" element="li"/>
+						<custom:check nameOfAttribyte="typeDrops" productValues="${product.typeDrops}" properties="${printer.type_drops}"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -799,14 +800,14 @@
 						<p>Наличие (информация для пользователя)</p>
 					</div>
 					<div class="check_boxes">
-						<form:radiobuttons items="${printer.availability}" path="availability" element="li"/>
+						<custom:radio nameOfAttribyte="availability" productValue="${product.availability}" properties="${printer.availability}"/>
 						
 						<div class="text_output">
 							<form:input path="availabilitySpecialCase"/>
 						</div>
 					</div>
 				</div>
-				
+
 				<!-- import option characteristic -->
 				<jsp:include page="product/characteristic_option.jsp" />
 				

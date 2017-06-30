@@ -367,11 +367,13 @@
 						   <jsp:include page="../product_page/price.jsp" />                
 						   
 	                       <c:if test="${!empty product.typePrinter}">
-	   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.printer_type}"/>:</td><td>${product.typePrinter}</td></tr>
+	   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.printer_type}"/>:</td>
+	   							<td><custom:singleProperty productValue="${product.typePrinter}" properties="${printer.type_printer}"/></td></tr>
 						   </c:if>
 						   
 	                       <c:if test="${!empty product.equipmentModel}">
-	   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.model}"/>:</td><td>${product.equipmentModel}</td></tr>
+	   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.model}"/>:</td>
+	   							<td>${product.equipmentModel}</td></tr>
 						   </c:if>
 						   
 	                       <c:if test="${product.inputFirstWeightPrintMM != 0}">
@@ -415,35 +417,43 @@
 					<table>
                        
                        <c:if test="${!empty product.typePrinter}">
-   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.printer_type}"/>:</td><td>${product.typePrinter}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.printer_type}"/>:</td>
+   							<td><custom:singleProperty productValue="${product.typePrinter}" properties="${printer.type_printer}"/></td></tr>
 					   </c:if>
                        
                        <c:if test="${!empty product.partNumber}">
-   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.product_code}"/>:</td><td>${product.partNumber}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.product_code}"/>:</td>
+   							<td>${product.partNumber}</td></tr>
 					   </c:if>
                        
                        <c:if test="${!empty product.equipmentModel}">
-   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.model}"/>:</td><td>${product.equipmentModel}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.model}"/>:</td>
+   							<td>${product.equipmentModel}</td></tr>
 					   </c:if>
                        
                        <c:if test="${product.inputFirstWeightPrintMM != 0}">
-   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.printing_width}"/>:</td><td>${product.inputFirstWeightPrintMM}<c:if test="${product.inputSecondWeightPrintMM!=0}"> x ${product.inputSecondWeightPrintMM}</c:if> <custom:getDescriptionByLocale description="${descriptions_search_printer.mm}"/></td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.printing_width}"/>:</td>
+   							<td>${product.inputFirstWeightPrintMM}<c:if test="${product.inputSecondWeightPrintMM!=0}"> x ${product.inputSecondWeightPrintMM}</c:if> <custom:getDescriptionByLocale description="${descriptions_search_printer.mm}"/></td></tr>
 					   </c:if>
                        
                        <c:if test="${(product.inputFirstWeightPrintMM == 0) && product.weightPrintMM > 0}">
-   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.printing_width}"/>:</td><td>${product.weightPrintMM} <custom:getDescriptionByLocale description="${descriptions_search_printer.mm}"/></td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.printing_width}"/>:</td>
+   							<td>${product.weightPrintMM} <custom:getDescriptionByLocale description="${descriptions_search_printer.mm}"/></td></tr>
 					   </c:if>
 					   
 					   <c:if test="${!empty product.printingExtension}">
-   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.printing_extension}"/>:</td><td>${product.printingExtension} <custom:getDescriptionByLocale description="${descriptions_search_printer.mm}"/></td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.printing_extension}"/>:</td>
+   							<td>${product.printingExtension} <custom:getDescriptionByLocale description="${descriptions_search_printer.mm}"/></td></tr>
 					   </c:if>
                        
                        <c:if test="${!empty product.previouslyUsed}">
-   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.used_machinery}"/>:</td><td>${product.previouslyUsed}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.used_machinery}"/>:</td>
+   							<td><custom:singleProperty productValue="${product.previouslyUsed}" properties="${printer.previously_used}"/></td></tr>
 					   </c:if>
                        
                        <c:if test="${!empty product.typePrint}">
-   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.type_print}"/>:</td><td>${product.typePrint}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.type_print}"/>:</td>
+   							<td><custom:singleProperty productValue="${product.typePrint}" properties="${printer.type_print}"/></td></tr>
 						</c:if>
 						
 						<c:if test="${(product.lengthWaveUVlamp > 0) || (product.powerUVlamp > 0) || 
@@ -483,11 +493,8 @@
 						</c:if>
 						
                        <c:if test="${!empty product.feed}">
-   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.feeds}"/>:</td><td>
-		                   		<c:forEach var="tp" items="${product.feed}" varStatus="status">  
-		    						${tp}<c:if test="${ ! status.last}" >, </c:if>  
-								</c:forEach>
-                       		</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.feeds}"/>:</td>
+   							<td><custom:multipleProperty productValues="${product.feed}" properties="${printer.feeds}"/></td></tr>
 						</c:if>
 						
 						<c:if test="${!empty product.chromaticity}">
@@ -515,7 +522,8 @@
 						</c:if>
 
 						<c:if test="${!empty product.manufacturerPrinthead}">
-   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.manufacturer_printhead}"/>:</td><td>${product.manufacturerPrinthead}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.manufacturer_printhead}"/>:</td>
+   							<td>${product.manufacturerPrinthead}</td></tr>
 						</c:if>
 
                        <c:if test="${!empty product.typeOfPrinthead}">
@@ -585,18 +593,14 @@
 						</c:if>
                        
                        <c:if test="${!empty product.compatibleInk}">
-   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.compatible_ink}"/>:</td><td>
-	                   			<c:forEach var="tp" items="${product.compatibleInk}" varStatus="status">  
-	    							${tp}<c:if test="${ ! status.last}" >, </c:if>  
-								</c:forEach>                       
+   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.compatible_ink}"/>:</td>
+   							<td><custom:multipleProperty productValues="${product.compatibleInk}" properties="${printer.compatible_ink}"/>                    
                        		</td></tr>
 						</c:if>
                        
                        <c:if test="${!empty product.typeDrops}">
-   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.type_drops}"/>:</td><td>
-	                   			<c:forEach var="tp" items="${product.typeDrops}" varStatus="status">  
-	    							${tp}<c:if test="${ ! status.last}" >, </c:if>  
-								</c:forEach>                       
+   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.type_drops}"/>:</td>
+   							<td><custom:multipleProperty productValues="${product.typeDrops}" properties="${printer.type_drops}"/>                     
                        		</td></tr>
 						</c:if>
                        

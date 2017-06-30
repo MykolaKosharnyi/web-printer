@@ -17,4 +17,113 @@
 			<type>org.json.simple.JSONObject</type>
 		</attribute>
 	</tag>
+	
+	<tag>
+		<name>searchByLocale</name>
+		<tag-class>com.printmaster.nk.components.PropertySearchByLocale</tag-class>
+		<body-content>empty</body-content>
+	
+		<attribute>
+			<name>nameOfAttribyte</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		
+		<attribute>
+			<name>properties</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>org.json.simple.JSONArray</type>
+		</attribute>
+	</tag>
+	
+	<tag>
+		<name>radio</name>
+		<tag-class>com.printmaster.nk.custom_tags.AdminRadioTag</tag-class>
+		<body-content>empty</body-content>
+	
+		<attribute>
+			<name>nameOfAttribyte</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		
+		<attribute>
+			<name>productValue</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		
+		<attribute>
+			<name>properties</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>org.json.simple.JSONArray</type>
+		</attribute>
+	</tag>
+	
+	<tag>
+		<name>check</name>
+		<tag-class>com.printmaster.nk.custom_tags.AdminCheckboxTag</tag-class>
+		<body-content>empty</body-content>
+	
+		<attribute>
+			<name>nameOfAttribyte</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		
+		<attribute>
+			<name>productValues</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>org.json.simple.JSONArray</type>
+		</attribute>
+		
+		<attribute>
+			<name>properties</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>org.json.simple.JSONArray</type>
+		</attribute>
+	</tag>
+	
+	<tag>
+		<name>singleProperty</name>
+		<tag-class>com.printmaster.nk.custom_tags.SinglePropertyProductTag</tag-class>
+		<body-content>empty</body-content>
+	
+		<attribute>
+			<name>productValue</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		
+		<attribute>
+			<name>properties</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>org.json.simple.JSONArray</type>
+		</attribute>
+	</tag>
+	
+	<tag>
+		<name>multipleProperty</name>
+		<tag-class>com.printmaster.nk.custom_tags.MultiplePropertyProductTag</tag-class>
+		<body-content>empty</body-content>
+	
+		<attribute>
+			<name>productValues</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>org.json.simple.JSONArray</type>
+		</attribute>
+		
+		<attribute>
+			<name>properties</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>org.json.simple.JSONArray</type>
+		</attribute>
+	</tag>
 </taglib> 
