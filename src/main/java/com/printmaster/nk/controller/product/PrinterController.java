@@ -284,30 +284,49 @@ public class PrinterController extends ProductControllerTemplate<Printer, Search
     	showOnLeftSideTemplate(id, value);
     }
     
-    @RequestMapping(value = "/admin/"+ TYPE +"/equipment_manufacturer", method = RequestMethod.GET)
-	public String equipmentManufacturer(Model model) {
+    Map<String, ProductPropertiesHelper> properties = new HashMap<String, ProductPropertiesHelper>(){
+		private static final long serialVersionUID = 2611874319445410016L;
+	{
+		put("equipment_manufacturer", new ProductPropertiesHelper(
+				"Изменение вывода производителей для принтеров",
+				"Добавление нового производителя",
+				"Есть повторение с раннее введенным производителем!",
+				"Добавить производителя",
+				"Изменение вывода производителей для принтеров"));
+
+	}};
+    
+    
+    @RequestMapping(value = "/admin/"+ TYPE +"/properties/{property}", method = RequestMethod.GET)
+	public String pageEditProperties(Model model, @PathVariable("property") String property) {
     	componets.setJSONtoModelAttributeForChanging(model, TYPE);
-	    return "admin/"+ TYPE +"/equipment_manufacturer";
+    	model.addAttribute("property", property);
+    	model.addAttribute("type", TYPE);
+    	
+    	model.addAttribute("property_description", properties.get(property));
+	    return "admin/change_properties";
 	}
     
-    @RequestMapping(value = "/admin/"+ TYPE +"/equipment_manufacturer", method = RequestMethod.POST)
-	public String changeEquipmentManufacturer(@RequestParam(value = "equipment_manufacturer") List<String> manufacturers) {
-    	componets.showValueOfParameter(TYPE, "equipment_manufacturer", manufacturers);
-	    return "redirect:/admin/"+ TYPE +"/equipment_manufacturer";
+    @RequestMapping(value = "/admin/"+ TYPE +"/properties/{property}", method = RequestMethod.POST)
+	public String changeEquipmentManufacturer(@PathVariable("property") String propertyName,
+			@RequestParam(value = "properties") List<String> properties) {
+    	componets.showValueOfParameter(TYPE, propertyName, properties);
+	    return "redirect:/admin/"+ TYPE +"/properties/" + propertyName;
 	}
     
     @SuppressWarnings("unchecked")
-	@RequestMapping(value="/admin/"+ TYPE +"/check_name_manufacture", method = RequestMethod.POST,
+	@RequestMapping(value="/admin/"+ TYPE +"/properties/check_name_property/{property}", method = RequestMethod.POST,
     		produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.TEXT_PLAIN_VALUE)
-    public @ResponseBody JSONObject checkManufacture(@RequestBody String name) {
+    public @ResponseBody JSONObject checkNewPropertyValue(@RequestBody String name, @PathVariable("property") String propertyName) {
     	JSONObject result = new JSONObject();
-    	result.put("result", componets.isParameterRepeated(TYPE, "equipment_manufacturer", name));
+    	result.put("result", componets.isParameterRepeated(TYPE, propertyName, name));
     	return result;
     }
     
-    @RequestMapping(value = "/admin/"+ TYPE +"/add_equipment_manufacturer", method = RequestMethod.POST)
-	public String addEquipmentManufacturer(@RequestParam(value = "new_equipment") String manufacturer) {
-    	componets.setNewValueOfParameter(TYPE, "equipment_manufacturer", manufacturer);
-	    return "redirect:/admin/"+ TYPE +"/equipment_manufacturer";
+    @RequestMapping(value = "/admin/"+ TYPE +"/properties/add/{property}", method = RequestMethod.POST)
+	public String addProperty(@RequestParam(value = "new_property") String newProperty,
+			@PathVariable("property") String propertyName) {
+    	componets.setNewValueOfParameter(TYPE, propertyName, newProperty);
+	    return "redirect:/admin/"+ TYPE +"/properties/" + propertyName;
 	}
 }

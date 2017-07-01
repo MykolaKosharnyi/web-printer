@@ -14,7 +14,7 @@
 	<script src="<%=request.getContextPath()%>/resources/js/admin/add_change_printer.js"></script>
 
 	<title>
-		<spring:message text="Изменение вывода производителей для принтеров" />
+		<spring:message text="${property_description.title}" />
 	</title>
 
 </head>
@@ -22,34 +22,34 @@
 	<div id="product">
 		
 		<hr>
-		<h4>Добавление нового производителя</h4>
+		<h4>${property_description.headerAdd}</h4>
 			
-		<c:url var="add_equipment_manufacturer" value="/admin/printer/add_equipment_manufacturer"></c:url>
-		<form class="form-horizontal" style="padding: 0px 10px;" action="${add_equipment_manufacturer}" method="post">
+		<c:url var="add_property" value="/admin/${type}/properties/add/${property}"></c:url>
+		<form class="form-horizontal" style="padding: 0px 10px;" action="${add_property}" method="post">
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
 			<div class="form-group has-feedback">
-			  <input type="text" class="form-control" name="new_equipment" id="new_equipment">
+			  <input type="text" class="form-control" name="new_property" id="new_property">
 			  <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
 			  <p class="bg-success info_of_adding">Введенное значение удовлетворяет требованиям (нет повторения)!</p>
-			  <p class="bg-danger info_of_adding">Есть повторение с раннее введенным производителем!</p>
+			  <p class="bg-danger info_of_adding">${property_description.wrongMessage}</p>
 			</div>		
 
-			<button class="btn btn-default" disabled>Добавить производителя</button>
+			<button class="btn btn-default" disabled>${property_description.buttonAdd}</button>
 		</form>			
 		
 		<hr>
-			<h4>Изменение вывода производителей для принтеров</h4>
+			<h4>${property_description.headerChange}</h4>
 	
-		<c:url var="change_property" value="/admin/printer/equipment_manufacturer"></c:url>
+		<c:url var="change_property" value="/admin/${type}/properties/${property}"></c:url>
 	
 		<form class="form-horizontal" style="padding: 0px 10px;" action="${change_property}" method="post">	
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-			<c:forEach items="${printer.equipment_manufacturer}" var="equipment">
+			<c:forEach items="${product[property]}" var="p">
 				<div class="checkbox">
 					<label>
-						<input type="checkbox" <c:if test="${ equipment.show eq true }">checked</c:if>
-					       name="equipment_manufacturer" value="${ equipment.name }"> ${ equipment.name }
+						<input type="checkbox" <c:if test="${ p.show eq true }">checked</c:if>
+					       name="properties" value="${ p.name }"> ${ p.name }
 					</label>
 				</div>	
 			</c:forEach>
@@ -62,7 +62,7 @@
 	<script>
 	 
 	$(function() {
-		$("#new_equipment").keyup(function() {
+		$("#new_property").keyup(function() {
 
 			var ourElement = $(this);
 			var dataToSend = $(this).val();
@@ -70,7 +70,7 @@
 			if(dataToSend.trim()!=""){
 			$.ajax({
 				  type: 'post',
-				  url: "/admin/printer/check_name_manufacture",
+				  url: "/admin/${type}/properties/check_name_property/${property}",
 				  contentType: "text/plain; charset=utf-8",
 				  data: dataToSend,			        
 			        success: function (data) {

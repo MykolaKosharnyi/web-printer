@@ -200,8 +200,8 @@
         <put-attribute name="body" value="/WEB-INF/views/admin/printer.jsp" />  
     </definition>
     
-    <definition name="admin/printer/equipment_manufacturer" extends="admin_base">    
-        <put-attribute name="body" value="/WEB-INF/views/admin/change_charakteristic/printer_equipment_manufacturer.jsp" />  
+    <definition name="admin/change_properties" extends="admin_base">    
+        <put-attribute name="body" value="/WEB-INF/views/admin/change_charakteristic/change_properties.jsp" />  
     </definition>
     
     <definition name="admin/products" extends="admin_base">    

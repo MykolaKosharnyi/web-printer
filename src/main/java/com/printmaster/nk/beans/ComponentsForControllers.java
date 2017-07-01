@@ -237,16 +237,16 @@ public class ComponentsForControllers {
      */
     public void setJSONtoModelAttributeForChanging(Model model, String typeOfProduct){
     	if(typeOfProduct.equals("printer")){//separate for printers because they need to sort by equipment
-			model.addAttribute(typeOfProduct, jsonObjectParser(typeOfProduct));  
+			model.addAttribute("product", jsonObjectParser(typeOfProduct));  
 			
     	} else if(typeOfProduct.equals("rip")){// rip has JSONArray in his structure
-    		model.addAttribute(typeOfProduct , jsonArrayParser(typeOfProduct));		
+    		model.addAttribute("product" , jsonArrayParser(typeOfProduct));		
     		
     	} else if(typeOfProduct.equals("3d_printer")){//bad naming of attribute in 3d printers
-    		model.addAttribute("printer" , jsonObjectParser(typeOfProduct));  
+    		model.addAttribute("product" , jsonObjectParser(typeOfProduct));  
     		
     	} else {
-    		model.addAttribute(typeOfProduct , jsonObjectParser(typeOfProduct));   		
+    		model.addAttribute("product" , jsonObjectParser(typeOfProduct));   		
     	}
 	}
     

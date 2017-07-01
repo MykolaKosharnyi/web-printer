@@ -26,10 +26,11 @@
 		<a href="<c:url value='/admin/users' />" style="background: lightgreen;">Пользователи</a>
 	    <a href="<c:url value='/admin/all_sended_messages' />" style="background: lightpink;">Рассылки</a>	
 	    <a href="<c:url value='/admin/comments' />">Комментарии</a>
-	    <a href="<c:url value='/admin/pictures' />">Изменение изображений главного меню/домашней страницы</a>
-	    <a href="<c:url value='/admin/video_on_home_page' />">Видео на главной странице</a>
+	    <a href="<c:url value='/admin/internationalizations' />">Интернационализация</a>
 	    <a href="<c:url value='/admin/constants' />">КОНСТАНТЫ</a>    
+	    <a href="<c:url value='/admin/video_on_home_page' />">Видео на главной странице</a>
 	    <a href="<c:url value='/admin/user_proposals' />">Список присланных вопросов на уточнение</a> 
+		<a href="<c:url value='/admin/pictures' />">Изменение изображений главного меню/домашней страницы</a>
     </div>
 </div>
 </body>
