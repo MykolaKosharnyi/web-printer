@@ -16,7 +16,16 @@
 	<h3>${titleOfTable}</h3>
 	
 	<c:if test="${productType == 'printer'}">
-		<a href="<c:url value='/admin/${productType}/properties/equipment_manufacturer' />">Добавление/Изменение производителей принтеров</a>
+		<a href="<c:url value='/admin/${productType}/properties/equipment_manufacturer' />">Добавление/Изменение производителей принтеров</a><br>
+		<a href="<c:url value='/admin/${productType}/properties/rip' />">Добавление/Изменение программного обеспечения для принтеров</a><br>
+		<a href="<c:url value='/admin/${productType}/properties/manufacturer_printhead' />">Добавление/Изменение производителя печатающей головки для принтеров</a><br>
+		<a href="<c:url value='/admin/${productType}/properties/printing_extension' />">Добавление/Изменение расширения печати для принтеров</a><br>
+		<a href="<c:url value='/admin/${productType}/properties/weight_print_mm' />">Добавление/Изменение ширины печати для принтеров</a><br>
+		<a href="<c:url value='/admin/${productType}/properties/chromaticity' />">Добавление/Изменение цветовой схемы для принтеров</a><br>
+		<a href="<c:url value='/admin/${productType}/properties/size_drops' />">Добавление/Изменение размера капли для принтеров</a><br>
+		<a href="<c:url value='/admin/${productType}/properties/resolution' />">Добавление/Изменение разрешения в скорости печати для принтеров</a><br>
+		<a href="<c:url value='/admin/${productType}/properties/interface_connection' />">Добавление/Изменение интерфейса подключения для принтеров</a><br>
+		<a href="<c:url value='/admin/${productType}/properties/print_resolution' />">Добавление/Изменение разрешения печати для принтеров</a><br>
 	</c:if>
 	
 	<div style="right:0px;position: relative;">

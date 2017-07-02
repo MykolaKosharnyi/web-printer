@@ -217,7 +217,7 @@ public class ComponentsForControllers {
      */
     public void setJSONtoModelAttribute(Model model, String typeOfProduct){
     	if(typeOfProduct.equals("printer")){//separate for printers because they need to sort by equipment
-			model.addAttribute(typeOfProduct, sortEquipment(jsonObjectParser(typeOfProduct))); 
+			model.addAttribute(typeOfProduct, getShowedProperty(jsonObjectParser(typeOfProduct))); 
 			
     	} else if(typeOfProduct.equals("rip")){// rip has JSONArray in his structure
     		model.addAttribute(typeOfProduct , jsonArrayParser(typeOfProduct));		
@@ -236,14 +236,8 @@ public class ComponentsForControllers {
      * @param typeOfProduct
      */
     public void setJSONtoModelAttributeForChanging(Model model, String typeOfProduct){
-    	if(typeOfProduct.equals("printer")){//separate for printers because they need to sort by equipment
-			model.addAttribute("product", jsonObjectParser(typeOfProduct));  
-			
-    	} else if(typeOfProduct.equals("rip")){// rip has JSONArray in his structure
+    	 if(typeOfProduct.equals("rip")){// rip has JSONArray in his structure
     		model.addAttribute("product" , jsonArrayParser(typeOfProduct));		
-    		
-    	} else if(typeOfProduct.equals("3d_printer")){//bad naming of attribute in 3d printers
-    		model.addAttribute("product" , jsonObjectParser(typeOfProduct));  
     		
     	} else {
     		model.addAttribute("product" , jsonObjectParser(typeOfProduct));   		
@@ -398,21 +392,33 @@ public class ComponentsForControllers {
      * @return
      */
 	@SuppressWarnings("unchecked")
-	private JSONObject sortEquipment(JSONObject corectedJSONObject){
-		JSONArray arrayToSort = (JSONArray) corectedJSONObject.get("equipment_manufacturer");
-		JSONArray sortedArray = new JSONArray();
+	private JSONObject getShowedProperty(JSONObject corectedJSONObject){
+		Set<String> keys = corectedJSONObject.keySet();
 		
-		Iterator<JSONObject> iterator = arrayToSort.iterator();
-		while(iterator.hasNext()){
-			JSONObject current = iterator.next();
-			if( (boolean)current.get("show") ){
-				sortedArray.add(current.get("name"));
+		for(String key : keys){
+			if(!key.equals("type_of_printhead")){
+				JSONArray arrayToPick = (JSONArray) corectedJSONObject.get(key);
+				JSONArray showedArray = new JSONArray();
+				
+				Iterator<JSONObject> iterator = arrayToPick.iterator();
+				while(iterator.hasNext()){
+					JSONObject current = iterator.next();
+					
+					if(current.containsKey("name")){
+						if( (boolean)current.get("show") ){
+							showedArray.add(current.get("name"));
+						}	
+					} else if(current.containsKey("ru")){
+						if( (boolean)current.get("show") ){
+							showedArray.add(current);
+						}
+					}
+	
+				}			
+				corectedJSONObject.put(key, showedArray);
 			}
 		}
 
-		Collections.sort(sortedArray);
-		
-		corectedJSONObject.put("equipment_manufacturer", sortedArray);
 		return corectedJSONObject;
 	}
 	
