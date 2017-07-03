@@ -204,6 +204,11 @@
         <put-attribute name="body" value="/WEB-INF/views/admin/change_charakteristic/change_properties.jsp" />  
     </definition>
     
+    <definition name="admin/change_properties_I" extends="admin_base">    
+        <put-attribute name="body" 
+        value="/WEB-INF/views/admin/change_charakteristic/change_properties_internationalization.jsp" />  
+    </definition>
+    
     <definition name="admin/products" extends="admin_base">    
         <put-attribute name="body" value="/WEB-INF/views/admin/products.jsp" />  
     </definition>

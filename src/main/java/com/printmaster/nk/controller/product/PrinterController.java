@@ -371,7 +371,7 @@ public class PrinterController extends ProductControllerTemplate<Printer, Search
 	}
     
     @RequestMapping(value = "/admin/"+ TYPE +"/properties/{property}", method = RequestMethod.POST)
-	public String changeEquipmentManufacturer(@PathVariable("property") String propertyName,
+	public String saveCheckedProperties(@PathVariable("property") String propertyName,
 			@RequestParam(value = "properties") List<String> properties) {
     	componets.showValueOfParameter(TYPE, propertyName, properties);
 	    return "redirect:/admin/"+ TYPE +"/properties/" + propertyName;
@@ -391,5 +391,44 @@ public class PrinterController extends ProductControllerTemplate<Printer, Search
 			@PathVariable("property") String propertyName) {
     	componets.setNewValueOfParameter(TYPE, propertyName, newProperty);
 	    return "redirect:/admin/"+ TYPE +"/properties/" + propertyName;
+	}
+    
+    
+    /**
+     * 
+     * BLOCK FOR EDIT PROPERTIES INCLUDE INTERNATIONALIZATION TO THEM
+     * 
+     * **/
+    @RequestMapping(value = "/admin/"+ TYPE +"/properties_i/{property}", method = RequestMethod.GET)
+	public String pageEditPropertiesI(Model model, @PathVariable("property") String property) {
+    	componets.setJSONtoModelAttributeForChanging(model, TYPE);
+    	model.addAttribute("property", property);
+    	model.addAttribute("type", TYPE);
+    	
+    	model.addAttribute("property_description", properties.get(property));
+	    return "admin/change_properties_I";
+	}
+    
+    @RequestMapping(value = "/admin/"+ TYPE +"/properties_i/{property}", method = RequestMethod.POST)
+	public String saveCheckedPropertiesI(@PathVariable("property") String propertyName,
+			@RequestParam(value = "properties") List<String> properties) {
+    	componets.showValueOfParameter(TYPE, propertyName, properties);
+	    return "redirect:/admin/"+ TYPE +"/properties_i/" + propertyName;
+	}
+    
+    @SuppressWarnings("unchecked")
+	@RequestMapping(value="/admin/"+ TYPE +"/properties_i/check_name_property/{property}", method = RequestMethod.POST,
+    		produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.TEXT_PLAIN_VALUE)
+    public @ResponseBody JSONObject checkNewPropertyValueI(@RequestBody String name, @PathVariable("property") String propertyName) {
+    	JSONObject result = new JSONObject();
+    	result.put("result", componets.isParameterRepeatedI(TYPE, propertyName, name));
+    	return result;
+    }
+    
+    @RequestMapping(value = "/admin/"+ TYPE +"/properties_i/add/{property}", method = RequestMethod.POST)
+	public String addPropertyI(@RequestParam(value = "new_property") String newProperty,
+			@PathVariable("property") String propertyName) {
+    	componets.setNewValueOfParameterI(TYPE, propertyName, newProperty);
+	    return "redirect:/admin/"+ TYPE +"/properties_i/" + propertyName;
 	}
 }

@@ -290,6 +290,39 @@ public class ComponentsForControllers {
     	return isNoRepead;
     }
     
+    /**
+     * For properties which used in internationalization
+     * @param typeProduct
+     * @param nameParameter
+     * @param nameToCheck
+     * @return
+     */
+    public boolean isParameterRepeatedI(String typeProduct, String nameParameter, String nameToCheck){
+    	boolean isNoRepead = true;
+    	
+    	String check = nameToCheck.trim();
+    	
+    	if(typeProduct.equals("rip")){
+   		 jsonArrayParser(typeProduct);		
+   		
+	   	} else {
+	   		JSONObject jsonWithCharakteristic = jsonObjectParser(typeProduct);   
+	   		JSONArray arrayParameters = (JSONArray) jsonWithCharakteristic.get(nameParameter);
+	   		
+	   		@SuppressWarnings("unchecked")
+			Iterator<JSONObject> iterator = arrayParameters.iterator();
+			while(iterator.hasNext()){
+				JSONObject current = iterator.next();
+				if(current.get("ru").toString().equalsIgnoreCase(check)){
+					isNoRepead= false;
+					break;
+				}
+			}
+	   	}
+    	
+    	return isNoRepead;
+    }
+    
     public void showValueOfParameter(String typeProduct, String nameParameter, List<String> values){
 
     	if(typeProduct.equals("rip")){
@@ -310,6 +343,18 @@ public class ComponentsForControllers {
     	} else {
     		JSONObject jsonWithCharakteristic = jsonObjectParser(typeProduct);   
     		setNewParameters(jsonWithCharakteristic, nameParameter, value);
+    		saveObject(jsonWithCharakteristic, typeProduct);
+    	}
+    }
+    
+    public void setNewValueOfParameterI(String typeProduct, String nameParameter, String value){
+
+    	if(typeProduct.equals("rip")){
+    		 jsonArrayParser(typeProduct);		
+    		
+    	} else {
+    		JSONObject jsonWithCharakteristic = jsonObjectParser(typeProduct);   
+    		setNewParametersI(jsonWithCharakteristic, nameParameter, value);
     		saveObject(jsonWithCharakteristic, typeProduct);
     	}
     }
@@ -348,6 +393,27 @@ public class ComponentsForControllers {
 			@Override
 			public int compare(JSONObject o1, JSONObject o2) {
 				return ((String) o1.get("name")).toLowerCase().compareTo(((String) o2.get("name")).toLowerCase());
+			}
+		});
+		
+    	changedObject.put(nameParameter, arrayParameters);
+    	return changedObject;
+    }
+    
+    @SuppressWarnings("unchecked")
+	private JSONObject setNewParametersI(JSONObject changedObject, String nameParameter, String value){
+    	JSONArray arrayParameters = (JSONArray) changedObject.get(nameParameter);
+    	
+    	JSONObject newValue = new JSONObject();
+    	newValue.put("ru", value);
+    	newValue.put("en", value);
+    	newValue.put("show", true);
+    	arrayParameters.add(newValue);
+		
+		 Collections.sort(arrayParameters, new Comparator<JSONObject>(){
+			@Override
+			public int compare(JSONObject o1, JSONObject o2) {
+				return ((String) o1.get("ru")).toLowerCase().compareTo(((String) o2.get("ru")).toLowerCase());
 			}
 		});
 		
