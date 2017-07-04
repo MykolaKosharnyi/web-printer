@@ -16,6 +16,9 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 @Entity
 @Table(name="mail_message")
 public class MailSendingMessage implements Serializable{
@@ -34,7 +37,13 @@ public class MailSendingMessage implements Serializable{
 	
 	@ElementCollection(fetch = FetchType.EAGER)
 	@Column(name="subscription")
+	@Fetch(value = FetchMode.SUBSELECT)
 	private List<String> subscription = new ArrayList<String>();
+	
+	@ElementCollection(fetch = FetchType.EAGER)
+	@Column(name="scopeOfActivities")
+	@Fetch(value = FetchMode.SUBSELECT)
+	private List<String> scopeOfActivities = new ArrayList<String>();
 	
 	@Column(name="dateCreation")
 	@Temporal(TemporalType.TIMESTAMP)
@@ -83,6 +92,14 @@ public class MailSendingMessage implements Serializable{
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public List<String> getScopeOfActivities() {
+		return scopeOfActivities;
+	}
+
+	public void setScopeOfActivities(List<String> scopeOfActivities) {
+		this.scopeOfActivities = scopeOfActivities;
 	}
 
 	public String getTitle() {

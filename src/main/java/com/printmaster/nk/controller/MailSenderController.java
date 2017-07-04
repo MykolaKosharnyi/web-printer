@@ -109,6 +109,7 @@ public class MailSenderController {
 	private String putMessagePageParameters(Model model, MailSendingMessage mailMessage){
 		model.addAttribute("mailMessage", mailMessage);
 		model.addAttribute("listSubscription", listSubscription);
+		model.addAttribute("listScopeOfActivities", listScopeOfActivities);
 		model.addAttribute("listHeaderOption", mailSendingOptionService.messageOptionForHead());
 		model.addAttribute("listFooterOption", mailSendingOptionService.messageOptionForFooter());
 		return "admin/message";

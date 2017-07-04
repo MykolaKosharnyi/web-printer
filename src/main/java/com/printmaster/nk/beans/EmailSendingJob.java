@@ -38,7 +38,8 @@ public class EmailSendingJob{
 			int quantityOfPeopleWhoGetMessage = 0;
 			List<String> emailsListWhoNotGetMessage = new ArrayList<>();
 			
-			List<UserAddByAdmin> usersList = userAddByAdminService.getUserBySubscription(message.getSubscription());
+			List<UserAddByAdmin> usersList = userAddByAdminService.getUserBySubscription(message.getSubscription(), 
+					message.getScopeOfActivities());
 			for (UserAddByAdmin user : usersList) {	
 				try{
 					mailSendingComponent.observeRecipients(message, getConcatedEmails(user));

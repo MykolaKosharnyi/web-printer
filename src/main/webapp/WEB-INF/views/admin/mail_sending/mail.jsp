@@ -126,7 +126,14 @@
 						</div>
 					</c:forEach>
 				</div>
-			</c:if>		  
+			</c:if>		
+			
+			<div class="form-group">
+			<label style="display: block;">Сфера деятельности:</label>
+				<ul class="list_without_dots" style="list-style-type: none; padding: 0px;">
+					<form:checkboxes items="${listScopeOfActivities}" path="scopeOfActivities" element="li"/>
+				</ul>
+		  </div>  
 		  
 		  <div class="form-group">
 			<label style="display: block;">Подписчики:</label>

@@ -87,27 +87,32 @@ public class UserAddByAdminDAOImpl implements UserAddByAdminDAO{
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<UserAddByAdmin> getUserBySubscription(List<String> subscriptionTypes) {
+	public List<UserAddByAdmin> getUserBySubscription(List<String> subscriptionTypes, List<String> scopeOfActivities) {
 		Session session = this.sessionFactory.getCurrentSession();
-		StringBuilder subscriptionsBuffer = new StringBuilder();
-		
-		Iterator<String> iterator = subscriptionTypes.iterator();
-		while(iterator.hasNext()){
-			subscriptionsBuffer.append("'")
-			.append(iterator.next())
-			.append("'");
-			if(iterator.hasNext()){
-				subscriptionsBuffer.append(",");
-			}
-		}
 		
 		String query =	String.format("select distinct user from UserAddByAdmin user "+
 				"inner join user.subscription subscription "+
-				"where subscription in (%s)", subscriptionsBuffer.toString());
+				"where subscription in (%s) or scopeOfActivities in (%s)",
+				listToSqlString(subscriptionTypes), listToSqlString(scopeOfActivities));
 		
 		return session.createQuery(query).list();		
 	}
 
+	private String listToSqlString(List<String> list){
+		StringBuilder sqlListBuffer = new StringBuilder();
+		
+		Iterator<String> iterator = list.iterator();
+		while(iterator.hasNext()){
+			sqlListBuffer.append("'")
+			.append(iterator.next())
+			.append("'");
+			if(iterator.hasNext()){
+				sqlListBuffer.append(",");
+			}
+		}
+		return sqlListBuffer.toString();
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean isEmailAlreadyExist(String emailToCheck) {
