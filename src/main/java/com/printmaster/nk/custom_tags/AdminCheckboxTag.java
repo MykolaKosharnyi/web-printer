@@ -2,9 +2,7 @@ package com.printmaster.nk.custom_tags;
 
 import java.io.IOException;
 import java.io.StringWriter;
-import java.util.Arrays;
 import java.util.Iterator;
-import java.util.List;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
@@ -34,9 +32,7 @@ public class AdminCheckboxTag extends SimpleTagSupport {
 
 	@SuppressWarnings("rawtypes")
 	public void doTag() throws JspException, IOException {
-		
 		StringBuilder result = new StringBuilder();
-		List<String> listPV = Arrays.asList(productValues);
 
 		int counter = 1;
 		for (Iterator iterator = properties.iterator(); iterator.hasNext();) {
@@ -53,7 +49,7 @@ public class AdminCheckboxTag extends SimpleTagSupport {
 				.append(value)
 				.append("' type='checkbox'");
 			
-			if(listPV.contains(value)){
+			if(listContainValue(productValues, value)){
 				result.append(" checked='checked'");
 			}
 				
@@ -69,5 +65,21 @@ public class AdminCheckboxTag extends SimpleTagSupport {
 
 		JspWriter out = getJspContext().getOut();
 		out.println(result.toString());
+
 	}
+	
+	private boolean listContainValue(String[] list, String value){
+		boolean result = false;
+		if(list!=null){
+			for(int i=0; i < list.length;i++){
+				if(list[i].equals(value)){
+					result = true;
+					break;
+				}
+			}
+		}
+		
+		return result;
+	}
+
 }

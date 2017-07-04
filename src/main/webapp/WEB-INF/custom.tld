@@ -77,7 +77,7 @@
 			<name>productValues</name>
 			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>org.json.simple.JSONArray</type>
+			<type>java.lang.String[]</type>
 		</attribute>
 		
 		<attribute>
