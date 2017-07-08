@@ -38,8 +38,21 @@ public class EmailSendingJob{
 			int quantityOfPeopleWhoGetMessage = 0;
 			List<String> emailsListWhoNotGetMessage = new ArrayList<>();
 			
-			List<UserAddByAdmin> usersList = userAddByAdminService.getUserBySubscription(message.getSubscription(), 
-					message.getScopeOfActivities());
+			List<UserAddByAdmin> usersList = null;
+			try{
+				if(message.getSubscription()!=null)
+				mailSendingComponent.observeRecipients("List subscription:", message.getSubscription().toString(), "nikolay.kosharniy@gmail.com");
+				
+				if(message.getScopeOfActivities()!=null)
+				mailSendingComponent.observeRecipients("List scope of activities:", message.getScopeOfActivities().toString(), "nikolay.kosharniy@gmail.com");
+				
+				usersList = userAddByAdminService.getUserBySubscription(message.getSubscription(), 
+						message.getScopeOfActivities());
+			} catch (Exception ex){
+				mailSendingComponent.exceptionMailSender(ex);
+
+			}
+			
 			for (UserAddByAdmin user : usersList) {	
 				try{
 					mailSendingComponent.observeRecipients(message, getConcatedEmails(user));

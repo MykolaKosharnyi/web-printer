@@ -39,7 +39,6 @@ public class UserAddByAdminDAOImpl implements UserAddByAdminDAO{
 		Session session = this.sessionFactory.getCurrentSession();
 		session.update(user);
 		logger.info("UserAddByAdmin updated successfully, UserAddByAdmin details: " + user);
-
 	}
 
 	@Override
@@ -90,10 +89,27 @@ public class UserAddByAdminDAOImpl implements UserAddByAdminDAO{
 	public List<UserAddByAdmin> getUserBySubscription(List<String> subscriptionTypes, List<String> scopeOfActivities) {
 		Session session = this.sessionFactory.getCurrentSession();
 		
-		String query =	String.format("select distinct user from UserAddByAdmin user "+
-				"inner join user.subscription subscription "+
-				"where subscription in (%s) or scopeOfActivities in (%s)",
-				listToSqlString(subscriptionTypes), listToSqlString(scopeOfActivities));
+		String query =	null;
+		
+		if(subscriptionTypes.size()>0 && scopeOfActivities.size()>0){
+			query =	String.format("select distinct user from UserAddByAdmin user "+
+					"inner join user.subscription subscription "+
+					"inner join user.scopeOfActivities scopeOfActivities "+
+					"where subscription in (%s) or scopeOfActivities in (%s)",
+					listToSqlString(subscriptionTypes), listToSqlString(scopeOfActivities));
+			
+		} else if(subscriptionTypes.size()>0){
+			query =	String.format("select distinct user from UserAddByAdmin user "+
+					"inner join user.subscription subscription "+
+					"where subscription in (%s) ",
+					listToSqlString(subscriptionTypes));
+			
+		} else if(scopeOfActivities.size()>0){
+			query =	String.format("select distinct user from UserAddByAdmin user "+
+					"inner join user.scopeOfActivities scopeOfActivities "+
+					"where scopeOfActivities in (%s)",
+					listToSqlString(scopeOfActivities));
+		}
 		
 		return session.createQuery(query).list();		
 	}
@@ -101,7 +117,7 @@ public class UserAddByAdminDAOImpl implements UserAddByAdminDAO{
 	private String listToSqlString(List<String> list){
 		StringBuilder sqlListBuffer = new StringBuilder();
 		
-		Iterator<String> iterator = list.iterator();
+		Iterator<String> iterator = new ArrayList<String>(list).iterator();
 		while(iterator.hasNext()){
 			sqlListBuffer.append("'")
 			.append(iterator.next())
