@@ -50,12 +50,11 @@ public class EmailSendingJob{
 						message.getScopeOfActivities());
 			} catch (Exception ex){
 				mailSendingComponent.exceptionMailSender(ex);
-
 			}
 			
 			for (UserAddByAdmin user : usersList) {	
 				try{
-					mailSendingComponent.observeRecipients(message, getConcatedEmails(user));
+					mailSendingComponent.observeRecipients(message, getConcatedEmails(user), user.getId());
 					quantityOfPeopleWhoGetMessage++;
 				} catch (Exception ex){
 					mailSendingComponent.exceptionMailSender(ex);

@@ -16,6 +16,7 @@ import javax.mail.internet.MimeMessage;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Component;
@@ -35,6 +36,9 @@ public class MailSendingComponent {
 	
 	@Autowired
 	MailSendingOptionService mailSendingOptionService;
+	
+	@Value( "${magic.number}" )
+	private int magicNumber;
 	
 	private static final String EMAIL_PATTERN =
 			"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
@@ -71,12 +75,23 @@ public class MailSendingComponent {
 		}	
 	}
 	
-	public void observeRecipients(MailSendingMessage mailMessage, String concatenatedInStringRecipiets){
-		sendMessageTemplate(mailMessage.getTitle(), createMessageBody(mailMessage), concatenatedInStringRecipiets);		
+	public void observeRecipients(MailSendingMessage mailMessage, String concatenatedInStringRecipiets, long id){
+		sendMessageTemplate(mailMessage.getTitle(), addUnsubscriber( createMessageBody(mailMessage), id),
+				concatenatedInStringRecipiets);		
 	}
 	
 	public void observeRecipients(String subject, String messageBody, String concatenatedInStringRecipiets){
 		sendMessageTemplate(subject, messageBody, concatenatedInStringRecipiets);		
+	}
+	
+	private String addUnsubscriber(String messageBody, long id){
+		return messageBody.replace("../subscription/{id}", "http://e-machine.com.ua/subscription/" + encodeId(id));
+	}
+	
+	private String encodeId(Long id){
+        long xor = 0;
+        xor = Long.reverseBytes(id) ^ magicNumber;
+		return Long.toBinaryString(xor);
 	}
 	
 	private String createMessageBody(MailSendingMessage mailMessage){

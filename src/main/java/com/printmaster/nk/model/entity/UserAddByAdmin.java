@@ -2,6 +2,8 @@ package com.printmaster.nk.model.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Table;
 
 @Entity
@@ -15,10 +17,27 @@ public class UserAddByAdmin extends AbstractUser {
 	@Column(name="email3")
 	private String email3;
 	
+	@Column(length = 40, columnDefinition = "varchar(40) default 'NOT_CHANGED'")
+	@Enumerated(value = EnumType.STRING)
+	private StatusSubscription statusOfSubscription = StatusSubscription.NOT_CHANGED;
+	
+	public static enum StatusSubscription{
+		NOT_CHANGED/*Не изменялся*/, ADDED_SUBSCRIPTIONS/*Добавил подписки*/,
+		REMOVED_SOME_SUBSCRIPTIONS/*Удалил некоторые подписки*/, COMPLETELY_UNSUBSCRIBED/*Полностью отписался*/
+	}
+
 	public UserAddByAdmin(){}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+	
+	public StatusSubscription getStatusOfSubscription() {
+		return statusOfSubscription;
+	}
+
+	public void setStatusOfSubscription(StatusSubscription statusOfSubscription) {
+		this.statusOfSubscription = statusOfSubscription;
 	}
 
 	public String getEmail2() {

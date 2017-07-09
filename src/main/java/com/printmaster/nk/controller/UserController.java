@@ -2,6 +2,8 @@ package com.printmaster.nk.controller;
 
 import static com.printmaster.nk.controller.ConstUsedInContr.*;
 
+import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -9,6 +11,7 @@ import javax.validation.Valid;
 import org.apache.log4j.Logger;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -29,6 +32,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.printmaster.nk.beans.ComponentsForControllers;
 import com.printmaster.nk.model.entity.User;
 import com.printmaster.nk.model.entity.UserAddByAdmin;
+import com.printmaster.nk.model.entity.UserAddByAdmin.StatusSubscription;
 import com.printmaster.nk.model.service.SecurityService;
 import com.printmaster.nk.model.service.UserAddByAdminService;
 import com.printmaster.nk.model.service.UserService;
@@ -41,7 +45,7 @@ public class UserController {
 	
 	private static final String TYPE = "user";
 	private static final String CONCRETE_FOLDER = "users";
-
+	
 	@Autowired
     private UserService userService;
 	
@@ -56,10 +60,25 @@ public class UserController {
     
 	@Autowired
     ComponentsForControllers componets;
+	
+	@Value( "${magic.number}" )
+	private int magicNumber;
+	
+	private String encodeId(Long id){
+        long xor = 0;
+        xor = Long.reverseBytes(id) ^ magicNumber;
+		return Long.toBinaryString(xor);
+	}
+
+	private Long decodeId(String id){
+		long reversedEncodedId = new BigInteger(id, 2).longValue();		
+		return Long.reverseBytes(reversedEncodedId ^ magicNumber);
+	}
 
 	@RequestMapping(value = "/user", method = RequestMethod.GET)
-    public String user(Model model) {
-    	model.addAttribute("user", getUser());
+    public String user(Model model) throws UnsupportedEncodingException {
+		User user = getUser();
+    	model.addAttribute("user", user);
         return "user";
     }
 	
@@ -157,7 +176,7 @@ public class UserController {
 	@RequestMapping(value = "/user/subscription", method = RequestMethod.GET)
 	public String subscriptionGET(Model model) {
 		model.addAttribute("listSubscription", listSubscription);
-		model.addAttribute("user", getUser());
+		model.addAttribute("subscriptions", getUser().getSubscription());
 	    return "user/subscription";
 	}
 	
@@ -167,6 +186,40 @@ public class UserController {
 		User user = getUser();
 		user.setSubscription(subscriptionFromForm);
 		userService.updateUser(user);
+	}
+	
+	@RequestMapping(value = "/subscription/{id}", method = RequestMethod.GET)
+	public String unSubscriptionGET(Model model, @PathVariable("id") String id)
+			throws NumberFormatException, UnsupportedEncodingException {
+		model.addAttribute("listSubscription", listSubscription);
+		UserAddByAdmin user = userAddByAdminService.getUserById(decodeId(id));
+		model.addAttribute("subscriptions",  user.getSubscription());
+		model.addAttribute("userId", encodeId(user.getId()));
+	    return "user/subscription_user_add_by_admin";
+	}
+	
+	@RequestMapping(value = "/subscription/{id}", method = RequestMethod.POST,consumes=JSON_CONSUMES,
+    		headers = JSON_HEADERS)
+	public @ResponseBody void unSubscriptionPOST(@RequestBody List<String> subscriptionFromForm, @PathVariable("id") String id)
+			throws NumberFormatException, UnsupportedEncodingException {
+		UserAddByAdmin user = userAddByAdminService.getUserById(decodeId(id));
+		user.setStatusOfSubscription(setStatusOfSubscription(subscriptionFromForm.size(), user.getSubscription().size()));
+		user.setSubscription(subscriptionFromForm);
+		userAddByAdminService.updateUser(user);
+	}
+	
+	private StatusSubscription setStatusOfSubscription(int sizeForm, int sizeCurrent){		
+		StatusSubscription result = StatusSubscription.NOT_CHANGED;
+	
+		if(sizeForm==0){
+			result = StatusSubscription.COMPLETELY_UNSUBSCRIBED;
+		} else if(sizeForm>sizeCurrent){
+			result = StatusSubscription.ADDED_SUBSCRIPTIONS;
+		} else if(sizeForm<sizeCurrent){
+			result = StatusSubscription.REMOVED_SOME_SUBSCRIPTIONS;
+		}
+		
+		return result;
 	}
 	
 	@RequestMapping(value = "/"+ PATH_ADMIN +"/"+ TYPE +"s", method = RequestMethod.GET)

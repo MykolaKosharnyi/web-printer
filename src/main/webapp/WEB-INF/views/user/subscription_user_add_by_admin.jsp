@@ -22,7 +22,17 @@
 #user .checkbox label input[type=checkbox]{
 	margin-top: 4px;
 }
+
+#subscription_result_post{
+	display: none;
+	color: green;
+	margin: 20px;
+	font-size: 18px;
+	margin-bottom: 0px;
+}
 </style>
+
+<div id="subscription_result_post"></div>
 
 <table class="table table-hover" id="user">
 	<c:forEach var="subscr" items="${listSubscription}">
@@ -46,7 +56,7 @@
 
 	</c:forEach>
 </table>
-<div id="result_post"></div>
+
 	
 <script>
 
@@ -87,17 +97,18 @@ $("#user input[type=checkbox]").click(function() {
 	
 	$.ajax({
 		  type: 'POST',
-		  url: "/user/subscription",
+		  url: "/subscription/${userId}",
 		  data: JSON.stringify(result),
-		  contentType: "application/json; charset=utf-8",
-          dataType: "json"
-	})/*.done(function(data) {
-	   // alert( "success" );
-		//$("#result_post").text(data);
+		  contentType: "application/json; charset=utf-8"
+	}).done(function() {
+		$("#subscription_result_post").text("Ваши изменения были сохранены!").css("display","block").delay(2000).fadeOut("slow");
 	  })
-	  .fail(function() {
-	 //   alert( "error, when click on:" + cur );
-	  })*/;
+	  .fail(function(xhr, status, error) {
+		  //alert('Request Status: ' + xhr.status + ' Status Text: ' + xhr.statusText + ' ' + xhr.responseText);
+		  $("#subscription_result_post")
+		  	.text("К сожалению, Ваши изменения не были сохранены. Попробуйте изменить подписки немного позднее")
+		  	.css({"display":"block", "color":"red"}).delay(2000).fadeOut("slow");
+	  });
 	
 	});
 

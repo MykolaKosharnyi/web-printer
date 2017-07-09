@@ -50,6 +50,7 @@
 		
 			<c:if test="${!empty user.id}">
 				<input type="hidden" name="id" value="${user.id}">
+				<input type="hidden" name="statusOfSubscription" value="${user.statusOfSubscription}">
 				<input type="hidden" name="timeRegistration" 
 					value="<fmt:formatDate value="${user.timeRegistration}" pattern="dd/MM/yyyy hh:mm:ss" />">	
 			</c:if>

@@ -84,6 +84,7 @@
 				<th class="text-center">Телефон</th>
 				<th class="text-center">Почта</th>
 				<th class="text-center">Дата регистрации</th>
+				<th class="text-center">Статус подписок</th>
 				<th class="text-center">Удалить</th>
 			</tr>
 			
@@ -102,6 +103,19 @@
 					<td width="120px">
 						<fmt:formatDate type="date" dateStyle="long" timeStyle="short" value="${user.timeRegistration}" />
 					</td>
+
+					<c:if test="${user.statusOfSubscription.toString() eq 'NOT_CHANGED'}">						
+						<td><button type="button" class="btn btn-success">Не изменялся</button></td>
+					</c:if>
+					<c:if test="${user.statusOfSubscription.toString() eq 'ADDED_SUBSCRIPTIONS'}">						
+						<td><button type="button" class="btn btn-info">Добавил подписки</button></td>
+					</c:if>	
+					<c:if test="${user.statusOfSubscription.toString() eq 'REMOVED_SOME_SUBSCRIPTIONS'}">					
+						<td><button type="button" class="btn btn-warning">Удалил некоторые подписки</button></td>
+					</c:if>	
+					<c:if test="${user.statusOfSubscription.toString() eq 'COMPLETELY_UNSUBSCRIBED'}">						
+						<td><button type="button" class="btn btn-danger">Полностью отписался</button></td>
+					</c:if>		
 	           			           		
 					<td width="60px">						
 						<a href="<c:url value='/admin/user_add_by_admin/remove/${user.id}' />"><i class="fa fa-trash-o remove" aria-hidden="true"></i></a>
