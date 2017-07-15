@@ -29,10 +29,13 @@
 		<br>
 		<a href="<c:url value='/admin/${productType}/properties_i/compatible_ink' />">Добавление/Изменение совместимых чернил для принтеров</a><br>
 		<a href="<c:url value='/admin/${productType}/properties_i/feeds' />">Добавление/Изменение подачи метериала для принтеров</a><br>
-		
-		
-		
-		
+		<a href="<c:url value='/admin/${productType}/properties_i/type_drops' />">Добавление/Изменение типа капли для принтеров</a><br>
+		<a href="<c:url value='/admin/${productType}/properties_i/previously_used' />">Добавление/Изменение состояния оборудования для принтеров</a><br>
+		<a href="<c:url value='/admin/${productType}/properties_i/type_printer' />">Добавление/Изменение типа принтеров для принтеров</a><br>
+		<a href="<c:url value='/admin/${productType}/properties_i/type_print' />">Добавление/Изменение типа печати для принтеров</a><br>
+		<a href="<c:url value='/admin/${productType}/properties_i/delivery' />">Добавление/Изменение доставки для принтеров</a><br>
+		<a href="<c:url value='/admin/${productType}/properties_i/availability' />">Добавление/Изменение наличия для принтеров</a><br>
+	
 	</c:if>
 	
 	<div style="right:0px;position: relative;">
