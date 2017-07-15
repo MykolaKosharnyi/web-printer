@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib prefix = "custom" uri = "/WEB-INF/custom.tld"%>
 
 <div id="comments_block">
 
@@ -34,16 +35,14 @@
 			<input type="hidden" name="productId" value="${product.id}">
 			<input type="hidden" name="typeComment" value="COMMENT">
 		
-			<form:textarea path="message" class="form-control" rows="3" placeholder="Здесь Вы можете оставить свой отзыв..."/>
-			<a href="javascript:void(0)" class="btn btn-success" onclick="addUserComment();" style="margin: 10px;">Добавить комментарий</a>
+			<form:textarea path="message" class="form-control" rows="3" placeholder="..."/>
+			<a href="javascript:void(0)" class="btn btn-success" onclick="addUserComment();" style="margin: 10px;">
+				<custom:getDescriptionByLocale description="${d_comments.add_comment}"/></a>
 		</form:form>
 	</c:if>
 	<c:if test="${pageContext.request.userPrincipal.name == null}">
-		<p class="bg-info text-center" style="padding: 25px;">Чтобы оставить комментарий нужно <a href="<c:url value='/login' />">войти</a> в систему.</p>
+		<p class="bg-info text-center" style="padding: 25px;"><custom:getDescriptionByLocale description="${d_comments.leave_comment}"/> <a href="<c:url value='/login' />"><custom:getDescriptionByLocale description="${d_comments.come_in}"/></a> <custom:getDescriptionByLocale description="${d_comments.system}"/></p>
 	</c:if>
-	
-	
-	
 	
 </div>
 

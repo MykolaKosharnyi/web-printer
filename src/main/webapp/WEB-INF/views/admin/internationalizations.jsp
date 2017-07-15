@@ -12,9 +12,13 @@
 </head>
 <body>
 	<div id="product">
-		<a href="<c:url value='/admin/internationalization/descriptions_common' />">Общие надписи</a>
+		<a href="<c:url value='/admin/internationalization/common' />">Общие надписи</a>
 		<br>
-		<a href="<c:url value='/admin/internationalization/descriptions_search_printer' />">Характеристики для поиска, принтеры</a>
+		<a href="<c:url value='/admin/internationalization/inaccuracy_in_description' />">Неточность в описании</a>
+		<br>
+		<a href="<c:url value='/admin/internationalization/comments' />">Надписи в добавлениях комментариев</a>
+		<br>
+		<a href="<c:url value='/admin/internationalization/search_printer' />">Характеристики для поиска, принтеры</a>
 		<br>
 	</div>
 </body>

@@ -95,7 +95,7 @@ public class InternationalizationController {
 		JSONParser parser = new JSONParser();
 		try {
 			result = (JSONObject)parser
-					.parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/" + subType + ".json"), "UTF-8"));
+					.parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/descriptions/" + subType + ".json"), "UTF-8"));
 		} catch (IOException | ParseException e) {
 			e.printStackTrace();
 		}
@@ -104,7 +104,7 @@ public class InternationalizationController {
 	
 	private void saveObject(JSONObject jsonWithCharakteristic, String subType){
     	try {
-			Writer out = new PrintWriter("/var/www/localhost/products/" + subType + ".json", "UTF-8");
+			Writer out = new PrintWriter("/var/www/localhost/products/descriptions/" + subType + ".json", "UTF-8");
 			out.write(jsonWithCharakteristic.toJSONString());
 			out.flush();
 			out.close();

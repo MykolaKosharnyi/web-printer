@@ -26,6 +26,13 @@
 		<a href="<c:url value='/admin/${productType}/properties/resolution' />">Добавление/Изменение разрешения в скорости печати для принтеров</a><br>
 		<a href="<c:url value='/admin/${productType}/properties/interface_connection' />">Добавление/Изменение интерфейса подключения для принтеров</a><br>
 		<a href="<c:url value='/admin/${productType}/properties/print_resolution' />">Добавление/Изменение разрешения печати для принтеров</a><br>
+		<br>
+		<a href="<c:url value='/admin/${productType}/properties_i/compatible_ink' />">Добавление/Изменение совместимых чернил для принтеров</a><br>
+		<a href="<c:url value='/admin/${productType}/properties_i/feeds' />">Добавление/Изменение подачи метериала для принтеров</a><br>
+		
+		
+		
+		
 	</c:if>
 	
 	<div style="right:0px;position: relative;">

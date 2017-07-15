@@ -42,6 +42,11 @@ public class LinksAdvise {
 		for(ResourceMap map: ResourceMap.values()){
 			model.addAttribute(map.getName(), resourseHashHolder.getResource(map.getName()));
 		}		
+		/**
+		 * just be ready for changing in the future
+		 * */
+//		model.addAttribute(ResourceMap.DESCRIPTIONS.getName(), resourseHashHolder.getResource(ResourceMap.DESCRIPTIONS.getName()));
+
     }
 
 	@ModelAttribute

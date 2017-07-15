@@ -2,6 +2,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib prefix = "custom" uri = "/WEB-INF/custom.tld"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 
 <div id="comments_inaccuracy_block">
 
@@ -36,12 +38,14 @@
 			<input type="hidden" name="productId" value="${product.id}">
 			<input type="hidden" name="typeComment" value="INACCURACY_IN_DESCRIPTION">
 		
-			<form:textarea path="message" class="form-control" rows="3" placeholder="Здесь Вы можете оставить свой отзыв..."/>
-			<a href="javascript:void(0)" class="btn btn-success" onclick="addInaccuracyInDescription();" style="margin: 10px;">Добавить уточнение</a>
+			<form:textarea path="message" class="form-control" rows="3" placeholder="..."/>
+			<a href="javascript:void(0)" class="btn btn-success" onclick="addInaccuracyInDescription();" style="margin: 10px;">
+				<custom:getDescriptionByLocale description="${d_inaccuracy.add_update}"/>
+			</a>
 		</form:form>
 	</c:if>
 	<c:if test="${pageContext.request.userPrincipal.name == null}">
-		<p class="bg-info text-center" style="padding: 25px;">Чтобы оставить комментарий нужно <a href="<c:url value='/login' />">войти</a> в систему.</p>
+		<p class="bg-info text-center" style="padding: 25px;"><custom:getDescriptionByLocale description="${d_inaccuracy.leave_comment}"/> <a href="<c:url value='/login' />"><custom:getDescriptionByLocale description="${d_inaccuracy.come_in}"/></a> <custom:getDescriptionByLocale description="${d_inaccuracy.system}"/></p>
 	</c:if>
 	
 </div>
