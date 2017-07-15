@@ -85,7 +85,7 @@ public class MailSendingComponent {
 	}
 	
 	private String addUnsubscriber(String messageBody, long id){
-		return messageBody.replace("../subscription/{id}", "http://e-machine.com.ua/subscription/" + encodeId(id));
+		return messageBody.replace("/subscription/{id}", "/subscription/" + encodeId(id));
 	}
 	
 	private String encodeId(Long id){
