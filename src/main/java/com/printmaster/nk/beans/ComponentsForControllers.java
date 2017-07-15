@@ -23,6 +23,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.printmaster.nk.controller.product.PropertyInternationalization;
 import com.printmaster.nk.model.entity.Cutter;
 import com.printmaster.nk.model.entity.DigitalPrinter;
 import com.printmaster.nk.model.entity.HeadProduct;
@@ -335,6 +336,18 @@ public class ComponentsForControllers {
     	}
     }
     
+    public void showValueOfParameterI(String typeProduct, String nameParameter, List<PropertyInternationalization> values){
+
+    	if(typeProduct.equals("rip")){
+    		 jsonArrayParser(typeProduct);		
+    		
+    	} else {
+    		JSONObject jsonWithCharakteristic = jsonObjectParser(typeProduct);   
+    		setParametersToShowI(jsonWithCharakteristic, nameParameter, values);
+    		saveObject(jsonWithCharakteristic, typeProduct);
+    	}
+    }
+    
     public void setNewValueOfParameter(String typeProduct, String nameParameter, String value){
 
     	if(typeProduct.equals("rip")){
@@ -377,6 +390,24 @@ public class ComponentsForControllers {
 		});
 		
     	changedObject.put(nameParameter, arrayParameters);
+    	return changedObject;
+    }
+    
+    @SuppressWarnings("unchecked")
+	private JSONObject setParametersToShowI(JSONObject changedObject, String nameParameter, List<PropertyInternationalization> values){
+		
+		 Collections.sort(values, new Comparator<PropertyInternationalization>(){
+			@Override
+			public int compare(PropertyInternationalization o1, PropertyInternationalization o2) {
+				return ((String) o1.getRu()).toLowerCase().compareTo(((String) o2.getRu()).toLowerCase());
+			}
+		});
+		
+		 JSONArray changesProperties = new JSONArray();
+		 for(Iterator<PropertyInternationalization> iterator = values.iterator(); iterator.hasNext();){
+			 changesProperties.add(iterator.next().getJSONObject());
+		 }
+    	changedObject.put(nameParameter, changesProperties);
     	return changedObject;
     }
     

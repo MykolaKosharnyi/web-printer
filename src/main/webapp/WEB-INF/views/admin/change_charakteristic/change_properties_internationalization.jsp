@@ -40,48 +40,58 @@
 		
 		<hr>
 			<h4>${property_description.headerChange}</h4>
-	
-		<c:url var="change_property" value="/admin/${type}/properties_i/${property}"></c:url>
-	
-		<form class="form-horizontal" style="padding: 0px 10px;" action="${change_property}" method="post">	
-			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 			
-				<table class="table">
-					<c:forEach items="${product[property]}" var="p">					
-						<tr>
-							<td><input type="checkbox" <c:if test="${ p.show eq true }">checked</c:if> name="properties" value="${ p.name }"></td>
-							<td><label>${ p.ru }</label></td>
-							<td><input type="text" value="${ p.en }"/></td>
-						</tr>
-					
-					
-					
-						<div class="checkbox">
-							<label>
-								<input type="checkbox" <c:if test="${ p.show eq true }">checked</c:if>
-							       name="properties" value="${ p.name }"> ${ p.name }
-							</label>
-						</div>	
-					</c:forEach>
-				</table>
-				
-			<c:forEach items="${product[property]}" var="p">
-				<div class="checkbox">
-					<label>
-						<input type="checkbox" <c:if test="${ p.show eq true }">checked</c:if>
-					       name="properties" value="${ p.name }"> ${ p.name }
-					</label>
-				</div>	
-			</c:forEach>
-			
-			<button type="submit" class="btn btn-default" style="margin: 20px;">Сохранить</button>
-		</form>
+			<table class="table" id="save_changes_in_properties">
+				<c:forEach items="${product[property]}" var="p">					
+					<tr>
+						<td><input type="checkbox" <c:if test="${ p.show eq true }">checked</c:if> name="properties" value="${ p.ru }"></td>
+						<td><label>${ p.ru }</label></td>
+						<td><input type="text" value="${ p.en }"/></td>
+					</tr>	
+				</c:forEach>
+			</table>				
 
+		
+	<button id="submit_properties" onclick="clickOnGetProperties();" class="btn btn-default" style="margin: 20px;">Сохранить</button>
 	</div>
 	
 	<script>
-	 
-	$(function() {
+	
+	function getDataFromFormProperties(){
+		var result = [];
+		
+		$("table#save_changes_in_properties tr").each(function(){
+			var current = {};
+			current["show"] = $(this).find("td").find("input[type=checkbox]").prop("checked");
+			current["ru"] = $(this).find("td").find("input[type=checkbox]").val();
+			current["en"] = $(this).find("td").find("input[type=text]").val();	
+			result.push(current); 
+		});
+		
+		return JSON.stringify(result);
+	}
+	
+	
+	
+	function clickOnGetProperties(){
+		
+		$.ajax({
+			  type: 'post',
+			  url: "/admin/${type}/properties_i/${property}",
+			  contentType : 'application/json; charset=utf-8',
+			  data: getDataFromFormProperties()
+		      
+		}).done(function( data ){
+      		   	location.reload();
+			
+		}).error(function(xhr, status, error) {
+			  alert('Request Status: ' + xhr.status + ' Status Text: ' + xhr.statusText + ' ' + xhr.responseText);
+		  });
+		
+	};
+	
+$(function() {	
+	
 		$("#new_property").keyup(function() {
 
 			var ourElement = $(this);
