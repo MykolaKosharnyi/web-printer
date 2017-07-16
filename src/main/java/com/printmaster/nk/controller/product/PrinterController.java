@@ -71,6 +71,138 @@ public class PrinterController extends ProductControllerTemplate<Printer, Search
 		}
 	};
 	
+    private Map<String, ProductPropertiesHelper> properties = new HashMap<String, ProductPropertiesHelper>(){
+		private static final long serialVersionUID = 2611874319445410016L;
+	{
+		put("equipment_manufacturer", new ProductPropertiesHelper(
+				"Добавление/Изменение производителей для принтеров",
+				"Добавление нового производителя",
+				"Есть повторение с раннее введенным производителем!",
+				"Добавить производителя",
+				"Изменение вывода производителей для принтеров"));
+		
+		put("rip", new ProductPropertiesHelper(
+				"Добавление/Изменение программного обеспечения для принтеров",
+				"Добавление нового ПО",
+				"Есть повторение с раннее введенным ПО!",
+				"Добавить ПО",
+				"Изменение вывода ПО для принтеров"));
+		
+		put("manufacturer_printhead", new ProductPropertiesHelper(
+				"Добавление/Изменение производителей печатающей головки для принтеров",
+				"Добавление новых производителей печатающей головки",
+				"Есть повторение с раннее введенным производителем печатающей головки!",
+				"Добавить производителя печатающей головки",
+				"Изменение вывода производителей печатающей головки для принтеров"));
+		
+		put("printing_extension", new ProductPropertiesHelper(
+				"Добавление/Изменение расширения печати для принтеров",
+				"Добавление новых расширений печати",
+				"Есть повторение с раннее введенным расширением печати!",
+				"Добавить расширение печати",
+				"Изменение вывода раширений печати для принтеров"));
+		
+		put("weight_print_mm", new ProductPropertiesHelper(
+				"Добавление/Изменение ширины печати для принтеров",
+				"Добавление новой ширины печати",
+				"Есть повторение с раннее введенной шириной печати!",
+				"Добавить ширину печати",
+				"Изменение вывода ширины печати для принтеров"));
+		
+		put("chromaticity", new ProductPropertiesHelper(
+				"Добавление/Изменение цветовой схемы для принтеров",
+				"Добавление новой цветовой схемы",
+				"Есть повторение с раннее введенной цветовой схемой!",
+				"Добавить цветовую схему",
+				"Изменение вывода цветовой схемы для принтеров"));
+		
+		put("size_drops", new ProductPropertiesHelper(
+				"Добавление/Изменение размера капли для принтеров",
+				"Добавление нового размера капли",
+				"Есть повторение с раннее введенным размером капли!",
+				"Добавить размер капли",
+				"Изменение вывода размера капли для принтеров"));
+		
+		put("resolution", new ProductPropertiesHelper(
+				"Добавление/Изменение разрешения скорости печати для принтеров",
+				"Добавление нового разрешения скорости печати",
+				"Есть повторение с раннее введенным разрешением скорости печати!",
+				"Добавить разрешение скорости печати",
+				"Изменение вывода разрешения скорости печати для принтеров"));
+		
+		put("interface_connection", new ProductPropertiesHelper(
+				"Добавление/Изменение интерфейсов подключения для принтеров",
+				"Добавление нового интерфейса подключения",
+				"Есть повторение с раннее введенным интерфейсом подключения!",
+				"Добавить интерфейс подключения",
+				"Изменение вывода интерфейсов подключения для принтеров"));
+		
+		put("print_resolution", new ProductPropertiesHelper(
+				"Добавление/Изменение разрешения печати для принтеров",
+				"Добавление нового разрешения печати",
+				"Есть повторение с раннее введенным разрешением печати!",
+				"Добавить разрешение печати",
+				"Изменение вывода разрешения печати для принтеров"));
+		
+		
+		/**********************************************************************/
+		put("compatible_ink", new ProductPropertiesHelper(
+				"Добавление/Изменение cовместимых чернил для принтеров",
+				"Добавление новых совместимых чернил",
+				"Есть повторение с раннее введенными совместимыми чернилами!",
+				"Добавить чернила",
+				"Изменение вывода совместимых чернил для принтеров"));
+		
+		put("feeds", new ProductPropertiesHelper(
+				"Добавление/Изменение подачи материала для принтеров",
+				"Добавление новой подачи материала",
+				"Есть повторение с раннее введенной подачей материала!",
+				"Добавить подачу материала",
+				"Изменение вывода подачи материала для принтеров"));
+		
+		put("type_drops", new ProductPropertiesHelper(
+				"Добавление/Изменение типа капли для принтеров",
+				"Добавление нового типа капли",
+				"Есть повторение с раннее введенным типом капли!",
+				"Добавить тип капли",
+				"Изменение вывода типа капли для принтеров"));
+		
+		put("previously_used", new ProductPropertiesHelper(
+				"Добавление/Изменение состояния оборудования для принтеров",
+				"Добавление нового состояния оборудования",
+				"Есть повторение с раннее введенным состоянием оборудования!",
+				"Добавить состояние оборудования",
+				"Изменение вывода состояния оборудования для принтеров"));
+		
+		put("type_printer", new ProductPropertiesHelper(
+				"Добавление/Изменение типа принтеров для принтеров",
+				"Добавление нового типа принтеров",
+				"Есть повторение с раннее введенным типом принтеров!",
+				"Добавить тип принтеров",
+				"Изменение вывода типов принтеров для принтеров"));
+		
+		put("type_print", new ProductPropertiesHelper(
+				"Добавление/Изменение типа печати для принтеров",
+				"Добавление нового типа печати",
+				"Есть повторение с раннее введенным типом печати!",
+				"Добавить тип печати",
+				"Изменение вывода типов печати для принтеров"));
+		
+		put("delivery", new ProductPropertiesHelper(
+				"Добавление/Изменение доставки для принтеров",
+				"Добавление новой доставки",
+				"Есть повторение с раннее введенной доставкой!",
+				"Добавить доставку",
+				"Изменение вывода доставки для принтеров"));
+		
+		put("availability", new ProductPropertiesHelper(
+				"Добавление/Изменение наличия для принтеров",
+				"Добавление наличие",
+				"Есть повторение с раннее введенным наличием!",
+				"Добавить наличие",
+				"Изменение вывода наличия для принтеров"));
+	}};
+	
 	@Autowired(required=true)
     @Qualifier(value="printerService")
     public void setProductService(PrinterService ps){
@@ -97,7 +229,10 @@ public class PrinterController extends ProductControllerTemplate<Printer, Search
 		return parametersOnAdminProductsPage;
 	}
 	
-	
+	@Override
+	public Map<String, ProductPropertiesHelper> getPropertiesDescription() {
+		return properties;
+	}
 	
 	
 	
@@ -284,172 +419,28 @@ public class PrinterController extends ProductControllerTemplate<Printer, Search
     	showOnLeftSideTemplate(id, value);
     }
     
-    Map<String, ProductPropertiesHelper> properties = new HashMap<String, ProductPropertiesHelper>(){
-		private static final long serialVersionUID = 2611874319445410016L;
-	{
-		put("equipment_manufacturer", new ProductPropertiesHelper(
-				"Добавление/Изменение производителей для принтеров",
-				"Добавление нового производителя",
-				"Есть повторение с раннее введенным производителем!",
-				"Добавить производителя",
-				"Изменение вывода производителей для принтеров"));
-		
-		put("rip", new ProductPropertiesHelper(
-				"Добавление/Изменение программного обеспечения для принтеров",
-				"Добавление нового ПО",
-				"Есть повторение с раннее введенным ПО!",
-				"Добавить ПО",
-				"Изменение вывода ПО для принтеров"));
-		
-		put("manufacturer_printhead", new ProductPropertiesHelper(
-				"Добавление/Изменение производителей печатающей головки для принтеров",
-				"Добавление новых производителей печатающей головки",
-				"Есть повторение с раннее введенным производителем печатающей головки!",
-				"Добавить производителя печатающей головки",
-				"Изменение вывода производителей печатающей головки для принтеров"));
-		
-		put("printing_extension", new ProductPropertiesHelper(
-				"Добавление/Изменение расширения печати для принтеров",
-				"Добавление новых расширений печати",
-				"Есть повторение с раннее введенным расширением печати!",
-				"Добавить расширение печати",
-				"Изменение вывода раширений печати для принтеров"));
-		
-		put("weight_print_mm", new ProductPropertiesHelper(
-				"Добавление/Изменение ширины печати для принтеров",
-				"Добавление новой ширины печати",
-				"Есть повторение с раннее введенной шириной печати!",
-				"Добавить ширину печати",
-				"Изменение вывода ширины печати для принтеров"));
-		
-		put("chromaticity", new ProductPropertiesHelper(
-				"Добавление/Изменение цветовой схемы для принтеров",
-				"Добавление новой цветовой схемы",
-				"Есть повторение с раннее введенной цветовой схемой!",
-				"Добавить цветовую схему",
-				"Изменение вывода цветовой схемы для принтеров"));
-		
-		put("size_drops", new ProductPropertiesHelper(
-				"Добавление/Изменение размера капли для принтеров",
-				"Добавление нового размера капли",
-				"Есть повторение с раннее введенным размером капли!",
-				"Добавить размер капли",
-				"Изменение вывода размера капли для принтеров"));
-		
-		put("resolution", new ProductPropertiesHelper(
-				"Добавление/Изменение разрешения скорости печати для принтеров",
-				"Добавление нового разрешения скорости печати",
-				"Есть повторение с раннее введенным разрешением скорости печати!",
-				"Добавить разрешение скорости печати",
-				"Изменение вывода разрешения скорости печати для принтеров"));
-		
-		put("interface_connection", new ProductPropertiesHelper(
-				"Добавление/Изменение интерфейсов подключения для принтеров",
-				"Добавление нового интерфейса подключения",
-				"Есть повторение с раннее введенным интерфейсом подключения!",
-				"Добавить интерфейс подключения",
-				"Изменение вывода интерфейсов подключения для принтеров"));
-		
-		put("print_resolution", new ProductPropertiesHelper(
-				"Добавление/Изменение разрешения печати для принтеров",
-				"Добавление нового разрешения печати",
-				"Есть повторение с раннее введенным разрешением печати!",
-				"Добавить разрешение печати",
-				"Изменение вывода разрешения печати для принтеров"));
-		
-		
-		/**********************************************************************/
-		put("compatible_ink", new ProductPropertiesHelper(
-				"Добавление/Изменение cовместимых чернил для принтеров",
-				"Добавление новых совместимых чернил",
-				"Есть повторение с раннее введенными совместимыми чернилами!",
-				"Добавить чернила",
-				"Изменение вывода совместимых чернил для принтеров"));
-		
-		put("feeds", new ProductPropertiesHelper(
-				"Добавление/Изменение подачи материала для принтеров",
-				"Добавление новой подачи материала",
-				"Есть повторение с раннее введенной подачей материала!",
-				"Добавить подачу материала",
-				"Изменение вывода подачи материала для принтеров"));
-		
-		put("type_drops", new ProductPropertiesHelper(
-				"Добавление/Изменение типа капли для принтеров",
-				"Добавление нового типа капли",
-				"Есть повторение с раннее введенным типом капли!",
-				"Добавить тип капли",
-				"Изменение вывода типа капли для принтеров"));
-		
-		put("previously_used", new ProductPropertiesHelper(
-				"Добавление/Изменение состояния оборудования для принтеров",
-				"Добавление нового состояния оборудования",
-				"Есть повторение с раннее введенным состоянием оборудования!",
-				"Добавить состояние оборудования",
-				"Изменение вывода состояния оборудования для принтеров"));
-		
-		put("type_printer", new ProductPropertiesHelper(
-				"Добавление/Изменение типа принтеров для принтеров",
-				"Добавление нового типа принтеров",
-				"Есть повторение с раннее введенным типом принтеров!",
-				"Добавить тип принтеров",
-				"Изменение вывода типов принтеров для принтеров"));
-		
-		put("type_print", new ProductPropertiesHelper(
-				"Добавление/Изменение типа печати для принтеров",
-				"Добавление нового типа печати",
-				"Есть повторение с раннее введенным типом печати!",
-				"Добавить тип печати",
-				"Изменение вывода типов печати для принтеров"));
-		
-		put("delivery", new ProductPropertiesHelper(
-				"Добавление/Изменение доставки для принтеров",
-				"Добавление новой доставки",
-				"Есть повторение с раннее введенной доставкой!",
-				"Добавить доставку",
-				"Изменение вывода доставки для принтеров"));
-		
-		put("availability", new ProductPropertiesHelper(
-				"Добавление/Изменение наличия для принтеров",
-				"Добавление наличие",
-				"Есть повторение с раннее введенным наличием!",
-				"Добавить наличие",
-				"Изменение вывода наличия для принтеров"));
-	}};
-    
-    
     @RequestMapping(value = "/admin/"+ TYPE +"/properties/{property}", method = RequestMethod.GET)
 	public String pageEditProperties(Model model, @PathVariable("property") String property) {
-    	componets.setJSONtoModelAttributeForChanging(model, TYPE);
-    	model.addAttribute("property", property);
-    	model.addAttribute("type", TYPE);
-    	
-    	model.addAttribute("property_description", properties.get(property));
-	    return "admin/change_properties";
+    	return pageEditPropertiesTemplate(model,property);
 	}
     
     @RequestMapping(value = "/admin/"+ TYPE +"/properties/{property}", method = RequestMethod.POST)
 	public String saveCheckedProperties(@PathVariable("property") String propertyName,
 			@RequestParam(value = "properties") List<String> properties) {
-    	componets.showValueOfParameter(TYPE, propertyName, properties);
-	    return "redirect:/admin/"+ TYPE +"/properties/" + propertyName;
+	    return saveCheckedPropertiesTemplate(propertyName, properties);
 	}
     
-    @SuppressWarnings("unchecked")
 	@RequestMapping(value="/admin/"+ TYPE +"/properties/check_name_property/{property}", method = RequestMethod.POST,
     		produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.TEXT_PLAIN_VALUE)
     public @ResponseBody JSONObject checkNewPropertyValue(@RequestBody String name, @PathVariable("property") String propertyName) {
-    	JSONObject result = new JSONObject();
-    	result.put("result", componets.isParameterRepeated(TYPE, propertyName, name));
-    	return result;
+    	return checkNewPropertyValueTemplate(name, propertyName);
     }
     
     @RequestMapping(value = "/admin/"+ TYPE +"/properties/add/{property}", method = RequestMethod.POST)
 	public String addProperty(@RequestParam(value = "new_property") String newProperty,
 			@PathVariable("property") String propertyName) {
-    	componets.setNewValueOfParameter(TYPE, propertyName, newProperty);
-	    return "redirect:/admin/"+ TYPE +"/properties/" + propertyName;
+	    return addPropertyTemplate(newProperty, propertyName);
 	}
-    
     
     /**
      * 
@@ -458,34 +449,26 @@ public class PrinterController extends ProductControllerTemplate<Printer, Search
      * **/
     @RequestMapping(value = "/admin/"+ TYPE +"/properties_i/{property}", method = RequestMethod.GET)
 	public String pageEditPropertiesI(Model model, @PathVariable("property") String property) {
-    	componets.setJSONtoModelAttributeForChanging(model, TYPE);
-    	model.addAttribute("property", property);
-    	model.addAttribute("type", TYPE);
-    	
-    	model.addAttribute("property_description", properties.get(property));
-	    return "admin/change_properties_I";
+	    return pageEditPropertiesITemplate(model, property);
 	}
     
 	@RequestMapping(value = "/admin/"+ TYPE +"/properties_i/{property}", method = RequestMethod.POST,
     		produces="application/json; charset=utf-8")
 	public @ResponseBody void saveCheckedPropertiesI(@PathVariable("property") String propertyName,
 			@RequestBody List<PropertyInternationalization> properties) {
-    	componets.showValueOfParameterI(TYPE, propertyName, properties);
+		saveCheckedPropertiesITemplate(propertyName, properties);
 	}
     
-    @SuppressWarnings("unchecked")
 	@RequestMapping(value="/admin/"+ TYPE +"/properties_i/check_name_property/{property}", method = RequestMethod.POST,
     		produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.TEXT_PLAIN_VALUE)
     public @ResponseBody JSONObject checkNewPropertyValueI(@RequestBody String name, @PathVariable("property") String propertyName) {
-    	JSONObject result = new JSONObject();
-    	result.put("result", componets.isParameterRepeatedI(TYPE, propertyName, name));
-    	return result;
+    	return checkNewPropertyValueITemplate(name, propertyName);
     }
     
     @RequestMapping(value = "/admin/"+ TYPE +"/properties_i/add/{property}", method = RequestMethod.POST)
 	public String addPropertyI(@RequestParam(value = "new_property") String newProperty,
 			@PathVariable("property") String propertyName) {
-    	componets.setNewValueOfParameterI(TYPE, propertyName, newProperty);
-	    return "redirect:/admin/"+ TYPE +"/properties_i/" + propertyName;
+	    return addPropertyITemplate(newProperty, propertyName);
 	}
+
 }

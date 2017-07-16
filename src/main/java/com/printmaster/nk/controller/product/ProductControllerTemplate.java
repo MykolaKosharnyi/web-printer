@@ -54,6 +54,7 @@ public abstract class ProductControllerTemplate <T extends HeadProduct, S extend
 	public abstract ProductService<T,S> getProductService();
 	public abstract Map<String, String> getLinks();
 	public abstract Map<String, String> getParametersOnAdminProductsPage();
+	public abstract Map<String, ProductPropertiesHelper> getPropertiesDescription();
 	
 	@Autowired(required=true)
     @Qualifier(value="useWithProductService")
@@ -434,4 +435,63 @@ public abstract class ProductControllerTemplate <T extends HeadProduct, S extend
     	getProductService().updateProduct(product);	
     	componets.updateInLeftField(product, product.isShowOnSite() && product.isShowOnLeftSide(), getTYPE());
     }
+    
+    
+    /* Block for changing properties of product */
+	public String pageEditPropertiesTemplate(Model model, String property) {
+    	componets.setJSONtoModelAttributeForChanging(model, getTYPE());
+    	model.addAttribute("property", property);
+    	model.addAttribute("type", getTYPE());
+    	
+    	model.addAttribute("property_description", getPropertiesDescription().get(property));
+	    return "admin/change_properties";
+	}
+    
+	public String saveCheckedPropertiesTemplate(String propertyName, List<String> properties) {
+    	componets.showValueOfParameter(getTYPE(), propertyName, properties);
+	    return "redirect:/admin/"+ getTYPE() +"/properties/" + propertyName;
+	}
+    
+    @SuppressWarnings("unchecked")
+    public JSONObject checkNewPropertyValueTemplate(String name, String propertyName) {
+    	JSONObject result = new JSONObject();
+    	result.put("result", componets.isParameterRepeated(getTYPE(), propertyName, name));
+    	return result;
+    }
+    
+	public String addPropertyTemplate(String newProperty, String propertyName) {
+    	componets.setNewValueOfParameter(getTYPE(), propertyName, newProperty);
+	    return "redirect:/admin/"+ getTYPE() +"/properties/" + propertyName;
+	}
+    
+    /**
+     * 
+     * BLOCK FOR EDIT PROPERTIES INCLUDE INTERNATIONALIZATION TO THEM
+     * 
+     * **/
+	public String pageEditPropertiesITemplate(Model model, String property) {
+    	componets.setJSONtoModelAttributeForChanging(model, getTYPE());
+    	model.addAttribute("property", property);
+    	model.addAttribute("type", getTYPE());
+    	
+    	model.addAttribute("property_description", getPropertiesDescription().get(property));
+	    return "admin/change_properties_I";
+	}
+    
+	public  void saveCheckedPropertiesITemplate(String propertyName, List<PropertyInternationalization> properties) {
+    	componets.showValueOfParameterI(getTYPE(), propertyName, properties);
+	}
+    
+    @SuppressWarnings("unchecked")
+    public JSONObject checkNewPropertyValueITemplate(String name, String propertyName) {
+    	JSONObject result = new JSONObject();
+    	result.put("result", componets.isParameterRepeatedI(getTYPE(), propertyName, name));
+    	return result;
+    }
+    
+	public String addPropertyITemplate(String newProperty, String propertyName) {
+    	componets.setNewValueOfParameterI(getTYPE(), propertyName, newProperty);
+	    return "redirect:/admin/"+ getTYPE() +"/properties_i/" + propertyName;
+	}
+    
 }

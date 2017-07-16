@@ -12,6 +12,7 @@ import javax.validation.Valid;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -59,6 +61,8 @@ public class CutterController extends ProductControllerTemplate<Cutter, SearchCu
 		}
 	};
 	
+	private Map<String, ProductPropertiesHelper> properties = new HashMap<String, ProductPropertiesHelper>();
+	
     @Autowired(required=true)
     @Qualifier(value="cutterService")
     public void setProductService(CutterService ps){
@@ -83,6 +87,11 @@ public class CutterController extends ProductControllerTemplate<Cutter, SearchCu
 
 	public Map<String, String> getParametersOnAdminProductsPage() {
 		return parametersOnAdminProductsPage;
+	}
+	
+	@Override
+	public Map<String, ProductPropertiesHelper> getPropertiesDescription() {
+		return properties;
 	}
     
 	@RequestMapping(value = "/"+ TYPE +"s", method = RequestMethod.GET)	
@@ -216,5 +225,57 @@ public class CutterController extends ProductControllerTemplate<Cutter, SearchCu
     public @ResponseBody void showOnLeftSide(@PathVariable("id") long id, @RequestBody boolean value) {
     	showOnLeftSideTemplate(id, value);
     }
+
+    @RequestMapping(value = "/admin/"+ TYPE +"/properties/{property}", method = RequestMethod.GET)
+	public String pageEditProperties(Model model, @PathVariable("property") String property) {
+    	return pageEditPropertiesTemplate(model,property);
+	}
+    
+    @RequestMapping(value = "/admin/"+ TYPE +"/properties/{property}", method = RequestMethod.POST)
+	public String saveCheckedProperties(@PathVariable("property") String propertyName,
+			@RequestParam(value = "properties") List<String> properties) {
+	    return saveCheckedPropertiesTemplate(propertyName, properties);
+	}
+    
+	@RequestMapping(value="/admin/"+ TYPE +"/properties/check_name_property/{property}", method = RequestMethod.POST,
+    		produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.TEXT_PLAIN_VALUE)
+    public @ResponseBody JSONObject checkNewPropertyValue(@RequestBody String name, @PathVariable("property") String propertyName) {
+    	return checkNewPropertyValueTemplate(name, propertyName);
+    }
+    
+    @RequestMapping(value = "/admin/"+ TYPE +"/properties/add/{property}", method = RequestMethod.POST)
+	public String addProperty(@RequestParam(value = "new_property") String newProperty,
+			@PathVariable("property") String propertyName) {
+	    return addPropertyTemplate(newProperty, propertyName);
+	}
+    
+    /**
+     * 
+     * BLOCK FOR EDIT PROPERTIES INCLUDE INTERNATIONALIZATION TO THEM
+     * 
+     * **/
+    @RequestMapping(value = "/admin/"+ TYPE +"/properties_i/{property}", method = RequestMethod.GET)
+	public String pageEditPropertiesI(Model model, @PathVariable("property") String property) {
+	    return pageEditPropertiesITemplate(model, property);
+	}
+    
+	@RequestMapping(value = "/admin/"+ TYPE +"/properties_i/{property}", method = RequestMethod.POST,
+    		produces="application/json; charset=utf-8")
+	public @ResponseBody void saveCheckedPropertiesI(@PathVariable("property") String propertyName,
+			@RequestBody List<PropertyInternationalization> properties) {
+		saveCheckedPropertiesITemplate(propertyName, properties);
+	}
+    
+	@RequestMapping(value="/admin/"+ TYPE +"/properties_i/check_name_property/{property}", method = RequestMethod.POST,
+    		produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.TEXT_PLAIN_VALUE)
+    public @ResponseBody JSONObject checkNewPropertyValueI(@RequestBody String name, @PathVariable("property") String propertyName) {
+    	return checkNewPropertyValueITemplate(name, propertyName);
+    }
+    
+    @RequestMapping(value = "/admin/"+ TYPE +"/properties_i/add/{property}", method = RequestMethod.POST)
+	public String addPropertyI(@RequestParam(value = "new_property") String newProperty,
+			@PathVariable("property") String propertyName) {
+	    return addPropertyITemplate(newProperty, propertyName);
+	}
    
 }
