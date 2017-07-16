@@ -11,13 +11,13 @@
 	
 	<div id="display_search">
 		<i class="opened"></i>
-		<p><custom:getDescriptionByLocale description="${descriptions_search_printer.filter_items}"/></p>
+		<p><custom:getDescriptionByLocale description="${search_printer.filter_items}"/></p>
 	</div>
 		<a style="margin-left:10px;" class="accept" href="javascript:void(0)" onclick="$('#search').submit();">
-			<custom:getDescriptionByLocale description="${descriptions_search_printer.apply}"/>
+			<custom:getDescriptionByLocale description="${search_printer.apply}"/>
 		</a>
 		<a class="reset" href="<c:url value='/printers' />">
-			<custom:getDescriptionByLocale description="${descriptions_search_printer.reset}"/>
+			<custom:getDescriptionByLocale description="${search_printer.reset}"/>
 		</a>
 	<div id="search_product">
 	<c:url var="product_search" value="/printers/search" ></c:url>
@@ -28,7 +28,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p><custom:getDescriptionByLocale description="${descriptions_search_printer.printer_type}"/></p>
+				<p><custom:getDescriptionByLocale description="${search_printer.printer_type}"/></p>
 			</div>
 			<ul class="check_boxes">
 				<custom:searchByLocale nameOfAttribyte="typePrinter" properties="${printer.type_printer}"/>
@@ -37,7 +37,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p><custom:getDescriptionByLocale description="${descriptions_search_printer.used_machinery}"/></p>
+				<p><custom:getDescriptionByLocale description="${search_printer.used_machinery}"/></p>
 			</div>
 			<ul class="check_boxes">
 				<custom:searchByLocale nameOfAttribyte="previouslyUsed" properties="${printer.previously_used}"/>
@@ -46,13 +46,13 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p><custom:getDescriptionByLocale description="${descriptions_search_printer.printing_width}"/></p>
+				<p><custom:getDescriptionByLocale description="${search_printer.printing_width}"/></p>
 			</div>
 			<div class="check_boxes">
 				<div id="tabs">
 					<ul>
-						<li><custom:getDescriptionByLocale description="${descriptions_search_printer.millimeter}"/></li>
-						<li><custom:getDescriptionByLocale description="${descriptions_search_printer.inch}"/></li>
+						<li><custom:getDescriptionByLocale description="${search_printer.millimeter}"/></li>
+						<li><custom:getDescriptionByLocale description="${search_printer.inch}"/></li>
 						<!--<li>формат</li>-->
 					</ul>
 					<div>
@@ -141,7 +141,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p><custom:getDescriptionByLocale description="${descriptions_search_printer.printing_extension}"/></p>
+				<p><custom:getDescriptionByLocale description="${search_printer.printing_extension}"/></p>
 			</div>
 			<ul class="check_boxes">
 				<form:checkboxes items="${printer.printing_extension}" path="printingExtension" element="li" />
@@ -150,7 +150,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p><custom:getDescriptionByLocale description="${descriptions_search_printer.type_print}"/></p>
+				<p><custom:getDescriptionByLocale description="${search_printer.type_print}"/></p>
 			</div>
 			<ul class="check_boxes">			
 				<custom:searchByLocale nameOfAttribyte="typePrint" properties="${printer.type_print}"/>
@@ -159,7 +159,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p><custom:getDescriptionByLocale description="${descriptions_search_printer.chromaticity}"/></p>
+				<p><custom:getDescriptionByLocale description="${search_printer.chromaticity}"/></p>
 			</div>
 			<ul class="check_boxes">			
 				<form:checkboxes items="${printer.chromaticity}" path="chromaticity" element="li" />
@@ -168,7 +168,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p><custom:getDescriptionByLocale description="${descriptions_search_printer.compatible_ink}"/></p>
+				<p><custom:getDescriptionByLocale description="${search_printer.compatible_ink}"/></p>
 			</div>
 			<ul class="check_boxes">
 				<custom:searchByLocale nameOfAttribyte="compatibleInk" properties="${printer.compatible_ink}"/>
@@ -177,7 +177,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p><custom:getDescriptionByLocale description="${descriptions_search_printer.equipment_manufacturer}"/></p>
+				<p><custom:getDescriptionByLocale description="${search_printer.equipment_manufacturer}"/></p>
 			</div>
 			<ul class="check_boxes">
 				<form:checkboxes items="${printer.equipment_manufacturer}" path="equipmentManufacturer" element="li" />
@@ -186,13 +186,13 @@
 		<div class="block_search_criteria">
 			<div class="block_block_title">
 				<i></i>
-				<p><custom:getDescriptionByLocale description="${descriptions_search_printer.printhead}"/></p>
+				<p><custom:getDescriptionByLocale description="${search_printer.printhead}"/></p>
 			</div>
 			<div class="block_check_boxes">
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p><custom:getDescriptionByLocale description="${descriptions_search_printer.manufacturer_printhead}"/></p>
+						<p><custom:getDescriptionByLocale description="${search_printer.manufacturer_printhead}"/></p>
 					</div>
 					<ul class="check_boxes">
 						<form:checkboxes items="${printer.manufacturer_printhead}" path="manufacturerPrinthead" element="li" />
@@ -201,7 +201,7 @@
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p><custom:getDescriptionByLocale description="${descriptions_search_printer.type_drops}"/></p>
+						<p><custom:getDescriptionByLocale description="${search_printer.type_drops}"/></p>
 					</div>
 					<ul class="check_boxes">
 						<custom:searchByLocale nameOfAttribyte="typeDrops" properties="${printer.type_drops}"/>
@@ -210,7 +210,7 @@
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p><custom:getDescriptionByLocale description="${descriptions_search_printer.size_drops}"/></p>
+						<p><custom:getDescriptionByLocale description="${search_printer.size_drops}"/></p>
 					</div>
 					<div class="check_boxes">
 						<form:checkboxes items="${printer.size_drops}" path="sizeDrops" element="li" />
@@ -228,7 +228,7 @@
 		<div class="block_search_criteria">
 			<div class="block_block_title">
 				<i></i>
-				<p><custom:getDescriptionByLocale description="${descriptions_search_printer.type_of_printhead}"/></p>
+				<p><custom:getDescriptionByLocale description="${search_printer.type_of_printhead}"/></p>
 			</div>
 			<ul class="block_check_boxes">
 				
@@ -275,14 +275,14 @@
 		<div class="block_search_criteria">
 			<div class="block_block_title">
 				<i></i>
-				<p><custom:getDescriptionByLocale description="${descriptions_search_printer.print_speed_and_resolution}"/></p>
+				<p><custom:getDescriptionByLocale description="${search_printer.print_speed_and_resolution}"/></p>
 			</div>
 			<div class="block_check_boxes">
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p><custom:getDescriptionByLocale description="${descriptions_search_printer.speedPrint}"/>, 
-						<custom:getDescriptionByLocale description="${descriptions_search_printer.sq_m_hour}"/></p>
+						<p><custom:getDescriptionByLocale description="${search_printer.speedPrint}"/>, 
+						<custom:getDescriptionByLocale description="${search_printer.sq_m_hour}"/></p>
 					</div>
 					<div class="check_boxes">
 						<div class="text_output">
@@ -296,7 +296,7 @@
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p><custom:getDescriptionByLocale description="${descriptions_search_printer.print_resolution}"/></p>
+						<p><custom:getDescriptionByLocale description="${search_printer.print_resolution}"/></p>
 					</div>
 					<ul class="check_boxes">
 						<form:checkboxes items="${printer.print_resolution}" path="printResolution" element="li" />
@@ -307,13 +307,13 @@
 		<div class="block_search_criteria">
 			<div class="block_block_title">
 				<i></i>
-				<p><custom:getDescriptionByLocale description="${descriptions_search_printer.material}"/></p>
+				<p><custom:getDescriptionByLocale description="${search_printer.material}"/></p>
 			</div>
 			<div class="block_check_boxes">
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p><custom:getDescriptionByLocale description="${descriptions_search_printer.feeds}"/></p>
+						<p><custom:getDescriptionByLocale description="${search_printer.feeds}"/></p>
 					</div>
 					<ul class="check_boxes">	
 						<custom:searchByLocale nameOfAttribyte="feed" properties="${printer.feeds}"/>		
@@ -322,22 +322,22 @@
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p><custom:getDescriptionByLocale description="${descriptions_search_printer.maximumMediaThickness}"/></p>
+						<p><custom:getDescriptionByLocale description="${search_printer.maximumMediaThickness}"/></p>
 					</div>
 					<div class="check_boxes">
 						<div class="text_output">
 							<form:input path="maximumMediaThickness60_0" class="amount-maximum_media_thickness60_0" value="${search.maximumMediaThickness60_0}" />
-							<p>&nbsp;<custom:getDescriptionByLocale description="${descriptions_search_printer.mm}"/> -&nbsp;</p>
+							<p>&nbsp;<custom:getDescriptionByLocale description="${search_printer.mm}"/> -&nbsp;</p>
 							<form:input path="maximumMediaThickness60_1" class="amount-maximum_media_thickness60_1" value="${search.maximumMediaThickness60_1}" />
-							<p>&nbsp;<custom:getDescriptionByLocale description="${descriptions_search_printer.mm}"/></p>
+							<p>&nbsp;<custom:getDescriptionByLocale description="${search_printer.mm}"/></p>
 						</div>
 						<div class="slider-range-maximum_media_thickness60"></div>
 						<br>
 						<div class="text_output">
 							<form:input path="maximumMediaThickness500_0" class="amount-maximum_media_thickness500_0" value="${search.maximumMediaThickness500_0}" />
-							<p>&nbsp;<custom:getDescriptionByLocale description="${descriptions_search_printer.mm}"/> -&nbsp;</p>
+							<p>&nbsp;<custom:getDescriptionByLocale description="${search_printer.mm}"/> -&nbsp;</p>
 							<form:input path="maximumMediaThickness500_1" class="amount-maximum_media_thickness500_1" value="${search.maximumMediaThickness500_1}" />
-							<p>&nbsp;<custom:getDescriptionByLocale description="${descriptions_search_printer.mm}"/></p>
+							<p>&nbsp;<custom:getDescriptionByLocale description="${search_printer.mm}"/></p>
 						</div>
 						<div class="slider-range-maximum_media_thickness500"></div>
 					</div>
@@ -345,14 +345,14 @@
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p><custom:getDescriptionByLocale description="${descriptions_search_printer.maximumWeightOfVehicle}"/></p>
+						<p><custom:getDescriptionByLocale description="${search_printer.maximumWeightOfVehicle}"/></p>
 					</div>
 					<div class="check_boxes">
 						<div class="text_output">
 							<form:input path="maximumWeightOfVehicle0" class="amount-maximum_weight_of_vehicle0" value="${search.maximumWeightOfVehicle0}" />
-							<p>&nbsp;<custom:getDescriptionByLocale description="${descriptions_search_printer.kg}"/> -&nbsp;</p>
+							<p>&nbsp;<custom:getDescriptionByLocale description="${search_printer.kg}"/> -&nbsp;</p>
 							<form:input path="maximumWeightOfVehicle1" class="amount-maximum_weight_of_vehicle1" value="${search.maximumWeightOfVehicle1}" />
-							<p>&nbsp;<custom:getDescriptionByLocale description="${descriptions_search_printer.kg}"/></p>
+							<p>&nbsp;<custom:getDescriptionByLocale description="${search_printer.kg}"/></p>
 						</div>
 						<div class="slider-range-maximum_weight_of_vehicle"></div>
 					</div>
@@ -362,13 +362,13 @@
 		<div class="block_search_criteria">
 			<div class="block_block_title">
 				<i></i>
-				<p><custom:getDescriptionByLocale description="${descriptions_search_printer.software_features}"/></p>
+				<p><custom:getDescriptionByLocale description="${search_printer.software_features}"/></p>
 			</div>
 			<div class="block_check_boxes">
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p><custom:getDescriptionByLocale description="${descriptions_search_printer.rip}"/></p>
+						<p><custom:getDescriptionByLocale description="${search_printer.rip}"/></p>
 					</div>
 					<ul class="check_boxes">
 						<form:checkboxes items="${printer.rip}" path="rip" element="li" />
@@ -377,7 +377,7 @@
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p><custom:getDescriptionByLocale description="${descriptions_search_printer.interface_connection}"/></p>
+						<p><custom:getDescriptionByLocale description="${search_printer.interface_connection}"/></p>
 					</div>
 					<ul class="check_boxes">
 						<form:checkboxes items="${printer.interface_connection}" path="interfaceConnection" element="li" />
@@ -389,10 +389,10 @@
 		<jsp:include page="../search/general_characteristics.jsp" />
 
 			<a class="accept" href="javascript:void(0)" onclick="$('#search').submit();">
-				<custom:getDescriptionByLocale description="${descriptions_search_printer.apply}"/>
+				<custom:getDescriptionByLocale description="${search_printer.apply}"/>
 			</a>
 			<a class="reset" href="<c:url value='/printers' />">
-				<custom:getDescriptionByLocale description="${descriptions_search_printer.reset}"/>
+				<custom:getDescriptionByLocale description="${search_printer.reset}"/>
 			</a>
 		</form:form>
 	</div>

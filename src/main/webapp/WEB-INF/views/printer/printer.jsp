@@ -357,7 +357,7 @@
                 <div id="name_product_head_description">${product.name}</div>
                 	
                 <c:if test="${!empty product.partNumber}">
-                	<div id="name_product_head_description"><custom:getDescriptionByLocale description="${descriptions_search_printer.product_code}"/>: ${product.partNumber}</div>
+                	<div id="name_product_head_description"><custom:getDescriptionByLocale description="${search_printer.product_code}"/>: ${product.partNumber}</div>
 				</c:if>
 					
 					<div class="outer_table_in_head">
@@ -367,26 +367,26 @@
 						   <jsp:include page="../product_page/price.jsp" />                
 						   
 	                       <c:if test="${!empty product.typePrinter}">
-	   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.printer_type}"/>:</td>
+	   							<tr><td><custom:getDescriptionByLocale description="${search_printer.printer_type}"/>:</td>
 	   							<td><custom:singleProperty productValue="${product.typePrinter}" properties="${printer.type_printer}"/></td></tr>
 						   </c:if>
 						   
 	                       <c:if test="${!empty product.equipmentModel}">
-	   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.model}"/>:</td>
+	   							<tr><td><custom:getDescriptionByLocale description="${search_printer.model}"/>:</td>
 	   							<td>${product.equipmentModel}</td></tr>
 						   </c:if>
 						   
 	                       <c:if test="${product.inputFirstWeightPrintMM != 0}">
 	   							<tr>
-	   								<td><custom:getDescriptionByLocale description="${descriptions_search_printer.printing_width}"/>:</td>
+	   								<td><custom:getDescriptionByLocale description="${search_printer.printing_width}"/>:</td>
 	   								<td>${product.inputFirstWeightPrintMM}
-	   								<c:if test="${product.inputSecondWeightPrintMM!=0}"> x ${product.inputSecondWeightPrintMM}</c:if> <custom:getDescriptionByLocale description="${descriptions_search_printer.mm}"/></td></tr>
+	   								<c:if test="${product.inputSecondWeightPrintMM!=0}"> x ${product.inputSecondWeightPrintMM}</c:if> <custom:getDescriptionByLocale description="${search_printer.mm}"/></td></tr>
 							</c:if>
 	                       
 	                       <c:if test="${(product.inputFirstWeightPrintMM == 0) && product.weightPrintMM > 0}">
 	   							<tr>
-	   								<td><custom:getDescriptionByLocale description="${descriptions_search_printer.printing_width}"/>:</td>
-	   								<td>${product.weightPrintMM} <custom:getDescriptionByLocale description="${descriptions_search_printer.mm}"/></td>
+	   								<td><custom:getDescriptionByLocale description="${search_printer.printing_width}"/>:</td>
+	   								<td>${product.weightPrintMM} <custom:getDescriptionByLocale description="${search_printer.mm}"/></td>
 	   							</tr>
 							</c:if>
 	                  </table>
@@ -417,75 +417,75 @@
 					<table>
                        
                        <c:if test="${!empty product.typePrinter}">
-   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.printer_type}"/>:</td>
+   							<tr><td><custom:getDescriptionByLocale description="${search_printer.printer_type}"/>:</td>
    							<td><custom:singleProperty productValue="${product.typePrinter}" properties="${printer.type_printer}"/></td></tr>
 					   </c:if>
                        
                        <c:if test="${!empty product.partNumber}">
-   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.product_code}"/>:</td>
+   							<tr><td><custom:getDescriptionByLocale description="${search_printer.product_code}"/>:</td>
    							<td>${product.partNumber}</td></tr>
 					   </c:if>
                        
                        <c:if test="${!empty product.equipmentModel}">
-   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.model}"/>:</td>
+   							<tr><td><custom:getDescriptionByLocale description="${search_printer.model}"/>:</td>
    							<td>${product.equipmentModel}</td></tr>
 					   </c:if>
                        
                        <c:if test="${product.inputFirstWeightPrintMM != 0}">
-   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.printing_width}"/>:</td>
-   							<td>${product.inputFirstWeightPrintMM}<c:if test="${product.inputSecondWeightPrintMM!=0}"> x ${product.inputSecondWeightPrintMM}</c:if> <custom:getDescriptionByLocale description="${descriptions_search_printer.mm}"/></td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_printer.printing_width}"/>:</td>
+   							<td>${product.inputFirstWeightPrintMM}<c:if test="${product.inputSecondWeightPrintMM!=0}"> x ${product.inputSecondWeightPrintMM}</c:if> <custom:getDescriptionByLocale description="${search_printer.mm}"/></td></tr>
 					   </c:if>
                        
                        <c:if test="${(product.inputFirstWeightPrintMM == 0) && product.weightPrintMM > 0}">
-   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.printing_width}"/>:</td>
-   							<td>${product.weightPrintMM} <custom:getDescriptionByLocale description="${descriptions_search_printer.mm}"/></td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_printer.printing_width}"/>:</td>
+   							<td>${product.weightPrintMM} <custom:getDescriptionByLocale description="${search_printer.mm}"/></td></tr>
 					   </c:if>
 					   
 					   <c:if test="${!empty product.printingExtension}">
-   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.printing_extension}"/>:</td>
-   							<td>${product.printingExtension} <custom:getDescriptionByLocale description="${descriptions_search_printer.mm}"/></td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_printer.printing_extension}"/>:</td>
+   							<td>${product.printingExtension} <custom:getDescriptionByLocale description="${search_printer.mm}"/></td></tr>
 					   </c:if>
                        
                        <c:if test="${!empty product.previouslyUsed}">
-   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.used_machinery}"/>:</td>
+   							<tr><td><custom:getDescriptionByLocale description="${search_printer.used_machinery}"/>:</td>
    							<td><custom:singleProperty productValue="${product.previouslyUsed}" properties="${printer.previously_used}"/></td></tr>
 					   </c:if>
                        
                        <c:if test="${!empty product.typePrint}">
-   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.type_print}"/>:</td>
+   							<tr><td><custom:getDescriptionByLocale description="${search_printer.type_print}"/>:</td>
    							<td><custom:singleProperty productValue="${product.typePrint}" properties="${printer.type_print}"/></td></tr>
 						</c:if>
 						
 						<c:if test="${(product.lengthWaveUVlamp > 0) || (product.powerUVlamp > 0) || 
                       					(product.lengthWaveLEDmodule > 0) || (product.powerLEDmodule > 0) }">
-   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.UV_block}"/>:</td>
+   							<tr><td><custom:getDescriptionByLocale description="${search_printer.UV_block}"/>:</td>
    								<td>
    								
    								<c:if test="${(product.lengthWaveUVlamp > 0) || (product.powerUVlamp > 0)}">
-   									<custom:getDescriptionByLocale description="${descriptions_search_printer.UV_block_lamp}"/>:
+   									<custom:getDescriptionByLocale description="${search_printer.UV_block_lamp}"/>:
    									<br/>
    									<c:if test="${product.lengthWaveUVlamp > 0}">
-   										<custom:getDescriptionByLocale description="${descriptions_search_printer.UV_block_wave_length}"/> ${product.lengthWaveUVlamp} <custom:getDescriptionByLocale description="${descriptions_search_printer.nm}"/>;</c:if>
+   										<custom:getDescriptionByLocale description="${search_printer.UV_block_wave_length}"/> ${product.lengthWaveUVlamp} <custom:getDescriptionByLocale description="${search_printer.nm}"/>;</c:if>
    									<br/>
    									<c:if test="${product.powerUVlamp > 0}">
-   										<custom:getDescriptionByLocale description="${descriptions_search_printer.UV_block_UV_radiation}"/> ${product.powerUVlamp} <custom:getDescriptionByLocale description="${descriptions_search_printer.w}"/>;</c:if>
+   										<custom:getDescriptionByLocale description="${search_printer.UV_block_UV_radiation}"/> ${product.powerUVlamp} <custom:getDescriptionByLocale description="${search_printer.w}"/>;</c:if>
    									<br/>
    									<c:if test="${product.quantityUVlamp > 0}">
-   										<custom:getDescriptionByLocale description="${descriptions_search_printer.UV_block_quantity}"/> ${product.quantityUVlamp} <custom:getDescriptionByLocale description="${descriptions_search_printer.pc}"/>;</c:if>
+   										<custom:getDescriptionByLocale description="${search_printer.UV_block_quantity}"/> ${product.quantityUVlamp} <custom:getDescriptionByLocale description="${search_printer.pc}"/>;</c:if>
    									<br/>
 								</c:if>
 								
 								<c:if test="${(product.lengthWaveLEDmodule > 0) || (product.powerLEDmodule > 0)}">
-   									<custom:getDescriptionByLocale description="${descriptions_search_printer.UV_block_LED_module}"/>:
+   									<custom:getDescriptionByLocale description="${search_printer.UV_block_LED_module}"/>:
    									<br/>
    									<c:if test="${product.lengthWaveLEDmodule > 0}">
-   										<custom:getDescriptionByLocale description="${descriptions_search_printer.UV_block_wave_length}"/> ${product.lengthWaveLEDmodule} <custom:getDescriptionByLocale description="${descriptions_search_printer.nm}"/>;</c:if>
+   										<custom:getDescriptionByLocale description="${search_printer.UV_block_wave_length}"/> ${product.lengthWaveLEDmodule} <custom:getDescriptionByLocale description="${search_printer.nm}"/>;</c:if>
    									<br/>
    									<c:if test="${product.powerLEDmodule > 0}">
-   										<custom:getDescriptionByLocale description="${descriptions_search_printer.UV_block_UV_radiation}"/> ${product.powerLEDmodule} <custom:getDescriptionByLocale description="${descriptions_search_printer.w}"/>;</c:if>
+   										<custom:getDescriptionByLocale description="${search_printer.UV_block_UV_radiation}"/> ${product.powerLEDmodule} <custom:getDescriptionByLocale description="${search_printer.w}"/>;</c:if>
    									<br/>
    									<c:if test="${product.quantityLEDmodule > 0}">
-   										<custom:getDescriptionByLocale description="${descriptions_search_printer.UV_block_quantity}"/> ${product.quantityLEDmodule} <custom:getDescriptionByLocale description="${descriptions_search_printer.pc}"/>;</c:if>
+   										<custom:getDescriptionByLocale description="${search_printer.UV_block_quantity}"/> ${product.quantityLEDmodule} <custom:getDescriptionByLocale description="${search_printer.pc}"/>;</c:if>
 								</c:if>
    							
    								</td>
@@ -493,12 +493,12 @@
 						</c:if>
 						
                        <c:if test="${!empty product.feed}">
-   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.feeds}"/>:</td>
+   							<tr><td><custom:getDescriptionByLocale description="${search_printer.feeds}"/>:</td>
    							<td><custom:multipleProperty productValues="${product.feed}" properties="${printer.feeds}"/></td></tr>
 						</c:if>
 						
 						<c:if test="${!empty product.chromaticity}">
-   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.chromaticity}"/>:</td><td>
+   							<tr><td><custom:getDescriptionByLocale description="${search_printer.chromaticity}"/>:</td><td>
 		                   		<c:forEach var="tp" items="${product.chromaticity}" varStatus="status">  
 		                   		
 		                   			<c:if test="${tp.equals('CMYK')}">
@@ -522,42 +522,42 @@
 						</c:if>
 
 						<c:if test="${!empty product.manufacturerPrinthead}">
-   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.manufacturer_printhead}"/>:</td>
+   							<tr><td><custom:getDescriptionByLocale description="${search_printer.manufacturer_printhead}"/>:</td>
    							<td>${product.manufacturerPrinthead}</td></tr>
 						</c:if>
 
                        <c:if test="${!empty product.typeOfPrinthead}">
-   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.type_of_printhead}"/>:</td><td>${product.typeOfPrinthead}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_printer.type_of_printhead}"/>:</td><td>${product.typeOfPrinthead}</td></tr>
 						</c:if>
 						
 						<c:if test="${ (product.numberOfPrintheads > 0) || (product.onEachColorNumberOfPrintheads > 0) ||
 						       (product.whiteColorNumberOfPrintheads > 0) || (product.varnishNumberOfPrintheads > 0) || 
 						       (product.firstTypeNumberOfPrintheads > 0) || (product.secondTypeNumberOfPrintheads > 0) }">
    							<tr>
-   								<td><custom:getDescriptionByLocale description="${descriptions_search_printer.number_of_printheads}"/>:</td>
+   								<td><custom:getDescriptionByLocale description="${search_printer.number_of_printheads}"/>:</td>
    								<td>
    									<c:if test="${product.numberOfPrintheads > 0}">
-   										${product.numberOfPrintheads} <custom:getDescriptionByLocale description="${descriptions_search_printer.pc}"/>
+   										${product.numberOfPrintheads} <custom:getDescriptionByLocale description="${search_printer.pc}"/>
 										<br/>
 									</c:if>
 									<c:if test="${product.onEachColorNumberOfPrintheads > 0}">
-   										<custom:getDescriptionByLocale description="${descriptions_search_printer.number_of_printheads_each_color}"/> - ${product.onEachColorNumberOfPrintheads} <custom:getDescriptionByLocale description="${descriptions_search_printer.pc}"/>
+   										<custom:getDescriptionByLocale description="${search_printer.number_of_printheads_each_color}"/> - ${product.onEachColorNumberOfPrintheads} <custom:getDescriptionByLocale description="${search_printer.pc}"/>
 										<br/>
 									</c:if>
 									<c:if test="${product.whiteColorNumberOfPrintheads > 0}">
-   										<custom:getDescriptionByLocale description="${descriptions_search_printer.number_of_printheads_white_color}"/> - ${product.whiteColorNumberOfPrintheads} <custom:getDescriptionByLocale description="${descriptions_search_printer.pc}"/>
+   										<custom:getDescriptionByLocale description="${search_printer.number_of_printheads_white_color}"/> - ${product.whiteColorNumberOfPrintheads} <custom:getDescriptionByLocale description="${search_printer.pc}"/>
 										<br/>
 									</c:if>
 									<c:if test="${product.varnishNumberOfPrintheads > 0}">
-   										<custom:getDescriptionByLocale description="${descriptions_search_printer.number_of_printheads_lacquer}"/> - ${product.varnishNumberOfPrintheads} <custom:getDescriptionByLocale description="${descriptions_search_printer.pc}"/>
+   										<custom:getDescriptionByLocale description="${search_printer.number_of_printheads_lacquer}"/> - ${product.varnishNumberOfPrintheads} <custom:getDescriptionByLocale description="${search_printer.pc}"/>
 										<br/>
 									</c:if>
 									<c:if test="${product.firstTypeNumberOfPrintheads > 0}">
-   										${product.firstEmptyNameTypeNumberOfPrintheads} - ${product.firstTypeNumberOfPrintheads} <custom:getDescriptionByLocale description="${descriptions_search_printer.pc}"/>
+   										${product.firstEmptyNameTypeNumberOfPrintheads} - ${product.firstTypeNumberOfPrintheads} <custom:getDescriptionByLocale description="${search_printer.pc}"/>
 										<br/>
 									</c:if>
 									<c:if test="${product.secondTypeNumberOfPrintheads > 0}">
-   										${product.secondEmptyNameTypeNumberOfPrintheads} - ${product.secondTypeNumberOfPrintheads} <custom:getDescriptionByLocale description="${descriptions_search_printer.pc}"/>
+   										${product.secondEmptyNameTypeNumberOfPrintheads} - ${product.secondTypeNumberOfPrintheads} <custom:getDescriptionByLocale description="${search_printer.pc}"/>
 										<br/>
 									</c:if>
    								</td>
@@ -567,62 +567,62 @@
 						<c:if test="${ (product.averageConsumptionOfCMYKink > 0) || (product.averageConsumptionOfWhiteInk > 0) ||
 						       (product.averageDischarge1 > 0) || (product.averageDischarge2 > 0) || (product.averageDischarge3 > 0) }">
    							<tr>
-   								<td><custom:getDescriptionByLocale description="${descriptions_search_printer.ink_consumption}"/>:</td>
+   								<td><custom:getDescriptionByLocale description="${search_printer.ink_consumption}"/>:</td>
    								<td>
    									<c:if test="${product.averageConsumptionOfCMYKink > 0}">
-   										<custom:getDescriptionByLocale description="${descriptions_search_printer.ink_consumption_average_CMYK}"/> - ${product.averageConsumptionOfCMYKink} <custom:getDescriptionByLocale description="${descriptions_search_printer.ml_sq_m}"/>
+   										<custom:getDescriptionByLocale description="${search_printer.ink_consumption_average_CMYK}"/> - ${product.averageConsumptionOfCMYKink} <custom:getDescriptionByLocale description="${search_printer.ml_sq_m}"/>
 										<br/>
 									</c:if>
 									<c:if test="${product.averageConsumptionOfWhiteInk > 0}">
-   										<custom:getDescriptionByLocale description="${descriptions_search_printer.ink_consumption_average_white}"/> - ${product.averageConsumptionOfWhiteInk} <custom:getDescriptionByLocale description="${descriptions_search_printer.ml_sq_m}"/>
+   										<custom:getDescriptionByLocale description="${search_printer.ink_consumption_average_white}"/> - ${product.averageConsumptionOfWhiteInk} <custom:getDescriptionByLocale description="${search_printer.ml_sq_m}"/>
 										<br/>
 									</c:if>
 									<c:if test="${product.averageDischarge1 > 0}">
-   										<custom:getDescriptionByLocale description="${descriptions_search_printer.ink_consumption_average_consumption}"/> ${product.nameOfAverageDischarge1} - ${product.averageDischarge1} <custom:getDescriptionByLocale description="${descriptions_search_printer.ml_sq_m}"/>
+   										<custom:getDescriptionByLocale description="${search_printer.ink_consumption_average_consumption}"/> ${product.nameOfAverageDischarge1} - ${product.averageDischarge1} <custom:getDescriptionByLocale description="${search_printer.ml_sq_m}"/>
 										<br/>
 									</c:if>
 									<c:if test="${product.averageDischarge2 > 0}">
-   										<custom:getDescriptionByLocale description="${descriptions_search_printer.ink_consumption_average_consumption}"/> ${product.nameOfAverageDischarge2} - ${product.averageDischarge2} <custom:getDescriptionByLocale description="${descriptions_search_printer.ml_sq_m}"/>
+   										<custom:getDescriptionByLocale description="${search_printer.ink_consumption_average_consumption}"/> ${product.nameOfAverageDischarge2} - ${product.averageDischarge2} <custom:getDescriptionByLocale description="${search_printer.ml_sq_m}"/>
 										<br/>
 									</c:if>
 									<c:if test="${product.averageDischarge3 > 0}">
-   										<custom:getDescriptionByLocale description="${descriptions_search_printer.ink_consumption_average_consumption}"/> ${product.nameOfAverageDischarge3} - ${product.averageDischarge3} <custom:getDescriptionByLocale description="${descriptions_search_printer.ml_sq_m}"/>
+   										<custom:getDescriptionByLocale description="${search_printer.ink_consumption_average_consumption}"/> ${product.nameOfAverageDischarge3} - ${product.averageDischarge3} <custom:getDescriptionByLocale description="${search_printer.ml_sq_m}"/>
 									</c:if>
    								</td>
    							</tr>
 						</c:if>
                        
                        <c:if test="${!empty product.compatibleInk}">
-   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.compatible_ink}"/>:</td>
+   							<tr><td><custom:getDescriptionByLocale description="${search_printer.compatible_ink}"/>:</td>
    							<td><custom:multipleProperty productValues="${product.compatibleInk}" properties="${printer.compatible_ink}"/>                    
                        		</td></tr>
 						</c:if>
                        
                        <c:if test="${!empty product.typeDrops}">
-   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.type_drops}"/>:</td>
+   							<tr><td><custom:getDescriptionByLocale description="${search_printer.type_drops}"/>:</td>
    							<td><custom:multipleProperty productValues="${product.typeDrops}" properties="${printer.type_drops}"/>                     
                        		</td></tr>
 						</c:if>
                        
                        <c:if test="${product.sizeDropStatic > 0}">
-   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.size_drops_constant}"/>:</td><td>${product.sizeDropStatic} pl</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_printer.size_drops_constant}"/>:</td><td>${product.sizeDropStatic} pl</td></tr>
 						</c:if>
 						
 						<c:if test="${product.valueOfNewTypeDrop > 0}">
-   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.size_drops}"/> (product.nameOfNewTypeDrop):</td><td>${product.valueOfNewTypeDrop} pl</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_printer.size_drops}"/> (product.nameOfNewTypeDrop):</td><td>${product.valueOfNewTypeDrop} pl</td></tr>
 						</c:if>
                        
                        <c:if test="${(product.sizeDropRangeFrom > 0) && (product.sizeDropRangeUntil > 0) &&
                        					(product.sizeDropRangeFrom < product.sizeDropRangeUntil)}">
-   								<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.size_drops}"/>:</td><td>
-	                   			<custom:getDescriptionByLocale description="${descriptions_search_printer.size_drops_from}"/> ${product.sizeDropRangeFrom} pl <custom:getDescriptionByLocale description="${descriptions_search_printer.size_drops_to}"/> ${product.sizeDropRangeUntil} pl                     
+   								<tr><td><custom:getDescriptionByLocale description="${search_printer.size_drops}"/>:</td><td>
+	                   			<custom:getDescriptionByLocale description="${search_printer.size_drops_from}"/> ${product.sizeDropRangeFrom} pl <custom:getDescriptionByLocale description="${search_printer.size_drops_to}"/> ${product.sizeDropRangeUntil} pl                     
                        			</td></tr>
 						</c:if>
 						
 						<c:if test="${(product.sizeDropRangeFrom < 0.001) || (product.sizeDropRangeUntil < 0.001) ||
                        					(product.sizeDropRangeFrom > product.sizeDropRangeUntil)}">
                        		<c:if test="${!empty product.sizeDrops}">
-   								<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.size_drops}"/>:</td><td>
+   								<tr><td><custom:getDescriptionByLocale description="${search_printer.size_drops}"/>:</td><td>
 	                   			<c:forEach var="tp" items="${product.sizeDrops}" varStatus="status">  
 	    								${tp} pl<c:if test="${ ! status.last}" >, </c:if>  
 									</c:forEach>                        
@@ -635,67 +635,67 @@
                       						(product.speedPrintHiQual > 0.001) || (product.speedPrint1 > 0.001) ||
                       						(product.speedPrint2 > 0.001) || (product.speedPrint3 > 0.001) ||
                       						(product.speedPrint4 > 0.001) || (product.speedPrint5 > 0.001)}">
-   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.speedPrint}"/>:</td>
+   							<tr><td><custom:getDescriptionByLocale description="${search_printer.speedPrint}"/>:</td>
    								<td>
    								
    								<c:if test="${product.speedPrintDraft > 0.001}">
-   									Draft Speed:<c:if test="${product.speedPrintDraftPass > 0}"> ${product.speedPrintDraftPass} pass</c:if><c:if test="${product.speedPrintDraftResolution!='None'}"> ${product.speedPrintDraftResolution} dpi -</c:if> ${product.speedPrintDraft} <custom:getDescriptionByLocale description="${descriptions_search_printer.sq_m_hour}"/>
+   									Draft Speed:<c:if test="${product.speedPrintDraftPass > 0}"> ${product.speedPrintDraftPass} pass</c:if><c:if test="${product.speedPrintDraftResolution!='None'}"> ${product.speedPrintDraftResolution} dpi -</c:if> ${product.speedPrintDraft} <custom:getDescriptionByLocale description="${search_printer.sq_m_hour}"/>
    									<br/>
 								</c:if>
    							
    								<c:if test="${product.speedPrintFast > 0.001}">
-   									Fast Speed:<c:if test="${product.speedPrintFastPass > 0}"> ${product.speedPrintFastPass} pass</c:if><c:if test="${product.speedPrintFastResolution!='None'}"> ${product.speedPrintFastResolution} dpi -</c:if> ${product.speedPrintFast} <custom:getDescriptionByLocale description="${descriptions_search_printer.sq_m_hour}"/>
+   									Fast Speed:<c:if test="${product.speedPrintFastPass > 0}"> ${product.speedPrintFastPass} pass</c:if><c:if test="${product.speedPrintFastResolution!='None'}"> ${product.speedPrintFastResolution} dpi -</c:if> ${product.speedPrintFast} <custom:getDescriptionByLocale description="${search_printer.sq_m_hour}"/>
    									<br/>
 								</c:if>
 								
 								<c:if test="${product.speedPrintNormal > 0.001}">
-   									Normal Speed:<c:if test="${product.speedPrintNormalPass > 0}"> ${product.speedPrintNormalPass} pass</c:if><c:if test="${product.speedPrintNormalResolution!='None'}"> ${product.speedPrintNormalResolution} dpi -</c:if> ${product.speedPrintNormal} <custom:getDescriptionByLocale description="${descriptions_search_printer.sq_m_hour}"/>
+   									Normal Speed:<c:if test="${product.speedPrintNormalPass > 0}"> ${product.speedPrintNormalPass} pass</c:if><c:if test="${product.speedPrintNormalResolution!='None'}"> ${product.speedPrintNormalResolution} dpi -</c:if> ${product.speedPrintNormal} <custom:getDescriptionByLocale description="${search_printer.sq_m_hour}"/>
    									<br/>
 								</c:if>
 								
 								<c:if test="${product.speedPrintQuality > 0.001}">
-   									Quality Speed:<c:if test="${product.speedPrintQualityPass > 0}"> ${product.speedPrintQualityPass} pass</c:if><c:if test="${product.speedPrintQualityResolution!='None'}"> ${product.speedPrintQualityResolution} dpi -</c:if> ${product.speedPrintQuality} <custom:getDescriptionByLocale description="${descriptions_search_printer.sq_m_hour}"/>
+   									Quality Speed:<c:if test="${product.speedPrintQualityPass > 0}"> ${product.speedPrintQualityPass} pass</c:if><c:if test="${product.speedPrintQualityResolution!='None'}"> ${product.speedPrintQualityResolution} dpi -</c:if> ${product.speedPrintQuality} <custom:getDescriptionByLocale description="${search_printer.sq_m_hour}"/>
    									<br/>
 								</c:if>
 								
 								<c:if test="${product.speedPrintHiQual > 0.001}">
-   									Hi-Quality Speed:<c:if test="${product.speedPrintHiqualPass > 0}"> ${product.speedPrintHiqualPass} pass</c:if><c:if test="${product.speedPrintHiqualResolution!='None'}"> ${product.speedPrintHiqualResolution} dpi -</c:if> ${product.speedPrintHiQual} <custom:getDescriptionByLocale description="${descriptions_search_printer.sq_m_hour}"/>
+   									Hi-Quality Speed:<c:if test="${product.speedPrintHiqualPass > 0}"> ${product.speedPrintHiqualPass} pass</c:if><c:if test="${product.speedPrintHiqualResolution!='None'}"> ${product.speedPrintHiqualResolution} dpi -</c:if> ${product.speedPrintHiQual} <custom:getDescriptionByLocale description="${search_printer.sq_m_hour}"/>
 									<br/>
 								</c:if>
 								
 								<c:if test="${product.speedPrint1 > 0.001}">
-   									<c:if test="${product.speedPrintPass1 > 0}">${product.speedPrintPass1} pass </c:if><c:if test="${product.speedPrintResolution1!='None'}"> ${product.speedPrintResolution1} dpi -</c:if> ${product.speedPrint1} <custom:getDescriptionByLocale description="${descriptions_search_printer.sq_m_hour}"/>
+   									<c:if test="${product.speedPrintPass1 > 0}">${product.speedPrintPass1} pass </c:if><c:if test="${product.speedPrintResolution1!='None'}"> ${product.speedPrintResolution1} dpi -</c:if> ${product.speedPrint1} <custom:getDescriptionByLocale description="${search_printer.sq_m_hour}"/>
 									<br/>
 								</c:if>
 								
 								<c:if test="${product.speedPrint2 > 0.001}">
-   									<c:if test="${product.speedPrintPass2 > 0}">${product.speedPrintPass2} pass </c:if><c:if test="${product.speedPrintResolution2!='None'}"> ${product.speedPrintResolution2} dpi -</c:if> ${product.speedPrint2} <custom:getDescriptionByLocale description="${descriptions_search_printer.sq_m_hour}"/>
+   									<c:if test="${product.speedPrintPass2 > 0}">${product.speedPrintPass2} pass </c:if><c:if test="${product.speedPrintResolution2!='None'}"> ${product.speedPrintResolution2} dpi -</c:if> ${product.speedPrint2} <custom:getDescriptionByLocale description="${search_printer.sq_m_hour}"/>
 									<br/>
 								</c:if>
 								
 								<c:if test="${product.speedPrint3 > 0.001}">
-   									<c:if test="${product.speedPrintPass3 > 0}">${product.speedPrintPass3} pass </c:if><c:if test="${product.speedPrintResolution3!='None'}"> ${product.speedPrintResolution3} dpi -</c:if> ${product.speedPrint3} <custom:getDescriptionByLocale description="${descriptions_search_printer.sq_m_hour}"/>
+   									<c:if test="${product.speedPrintPass3 > 0}">${product.speedPrintPass3} pass </c:if><c:if test="${product.speedPrintResolution3!='None'}"> ${product.speedPrintResolution3} dpi -</c:if> ${product.speedPrint3} <custom:getDescriptionByLocale description="${search_printer.sq_m_hour}"/>
 									<br/>
 								</c:if>
 								
 								<c:if test="${product.speedPrint4 > 0.001}">
-   									<c:if test="${product.speedPrintPass4 > 0}">${product.speedPrintPass4} pass </c:if><c:if test="${product.speedPrintResolution4!='None'}"> ${product.speedPrintResolution4} dpi -</c:if> ${product.speedPrint4} <custom:getDescriptionByLocale description="${descriptions_search_printer.sq_m_hour}"/>
+   									<c:if test="${product.speedPrintPass4 > 0}">${product.speedPrintPass4} pass </c:if><c:if test="${product.speedPrintResolution4!='None'}"> ${product.speedPrintResolution4} dpi -</c:if> ${product.speedPrint4} <custom:getDescriptionByLocale description="${search_printer.sq_m_hour}"/>
 									<br/>
 								</c:if>
 								
 								<c:if test="${product.speedPrint5 > 0.001}">
-   									<c:if test="${product.speedPrintPass5 > 0}">${product.speedPrintPass5} pass </c:if><c:if test="${product.speedPrintResolution5!='None'}"> ${product.speedPrintResolution5} dpi -</c:if> ${product.speedPrint5} <custom:getDescriptionByLocale description="${descriptions_search_printer.sq_m_hour}"/>
+   									<c:if test="${product.speedPrintPass5 > 0}">${product.speedPrintPass5} pass </c:if><c:if test="${product.speedPrintResolution5!='None'}"> ${product.speedPrintResolution5} dpi -</c:if> ${product.speedPrint5} <custom:getDescriptionByLocale description="${search_printer.sq_m_hour}"/>
 								</c:if>
    								</td>
    							</tr>
 						</c:if>
                       
                       <c:if test="${product.inputFirstPrintResolution != 0 && product.inputSecondPrintResolution != 0}">
-   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.print_resolution}"/>:</td><td>${product.inputFirstPrintResolution}x${product.inputSecondPrintResolution}dpi</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_printer.print_resolution}"/>:</td><td>${product.inputFirstPrintResolution}x${product.inputSecondPrintResolution}dpi</td></tr>
 						</c:if>
                       
                       	<c:if test="${(product.inputFirstPrintResolution == 0 || product.inputSecondPrintResolution == 0) && !empty product.printResolution}">
-   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.print_resolution}"/>:</td><td>
+   							<tr><td><custom:getDescriptionByLocale description="${search_printer.print_resolution}"/>:</td><td>
 	                   			<c:forEach var="tp" items="${product.printResolution}" varStatus="status">  
 	    							${tp}<c:if test="${ ! status.last}" >, </c:if>  
 								</c:forEach>                        
@@ -703,11 +703,11 @@
 						</c:if>
                       
                       	<c:if test="${!empty product.equipmentManufacturer}">
-   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.equipment_manufacturer}"/>:</td><td>${product.equipmentManufacturer}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_printer.equipment_manufacturer}"/>:</td><td>${product.equipmentManufacturer}</td></tr>
 						</c:if>
                       
                       	<c:if test="${!empty product.interfaceConnection}">
-   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.interface_connection}"/>:</td><td>
+   							<tr><td><custom:getDescriptionByLocale description="${search_printer.interface_connection}"/>:</td><td>
 	                   			<c:forEach var="tp" items="${product.interfaceConnection}" varStatus="status">  
 	    							${tp}<c:if test="${ ! status.last}" >, </c:if>  
 								</c:forEach>                       
@@ -715,15 +715,15 @@
 						</c:if>
                        
                        <c:if test="${product.maximumMediaThickness > 0}">
-   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.maximumMediaThickness}"/>:</td><td>${product.maximumMediaThickness} <custom:getDescriptionByLocale description="${descriptions_search_printer.mm}"/></td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_printer.maximumMediaThickness}"/>:</td><td>${product.maximumMediaThickness} <custom:getDescriptionByLocale description="${search_printer.mm}"/></td></tr>
 						</c:if>
                        
                        <c:if test="${product.maximumWeightOfVehicle > 0}">
-   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.maximumWeightOfVehicle}"/>:</td><td>${product.maximumWeightOfVehicle} <custom:getDescriptionByLocale description="${descriptions_search_printer.kg}"/></td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_printer.maximumWeightOfVehicle}"/>:</td><td>${product.maximumWeightOfVehicle} <custom:getDescriptionByLocale description="${search_printer.kg}"/></td></tr>
 						</c:if>
                        
                        <c:if test="${!empty product.rip}">
-   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.rip}"/>:</td><td>
+   							<tr><td><custom:getDescriptionByLocale description="${search_printer.rip}"/>:</td><td>
 	                   			<c:forEach var="tp" items="${product.rip}" varStatus="status">  
 	    							${tp}<c:if test="${ ! status.last}" >, </c:if>  
 								</c:forEach>                        
@@ -731,27 +731,27 @@
 						</c:if>
                        
                        <c:if test="${product.averagePowerConsumption > 0}">
-   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.averagePowerConsumption}"/>:</td><td>${product.averagePowerConsumption} <custom:getDescriptionByLocale description="${descriptions_search_printer.w}"/></td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_printer.averagePowerConsumption}"/>:</td><td>${product.averagePowerConsumption} <custom:getDescriptionByLocale description="${search_printer.w}"/></td></tr>
 						</c:if>
                        
                        <c:if test="${product.maxPowerConsumption > 0}">
-   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.maxPowerConsumption}"/>:</td><td>${product.maxPowerConsumption} <custom:getDescriptionByLocale description="${descriptions_search_printer.w}"/></td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_printer.maxPowerConsumption}"/>:</td><td>${product.maxPowerConsumption} <custom:getDescriptionByLocale description="${search_printer.w}"/></td></tr>
 						</c:if>
                        
                        <c:if test="${product.weight > 0}">
-   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.weight}"/>:</td><td>${product.weight} <custom:getDescriptionByLocale description="${descriptions_search_printer.kg}"/></td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_printer.weight}"/>:</td><td>${product.weight} <custom:getDescriptionByLocale description="${search_printer.kg}"/></td></tr>
 						</c:if>
                        
                        <c:if test="${product.width > 0}">
-   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.width}"/>:</td><td>${product.width} <custom:getDescriptionByLocale description="${descriptions_search_printer.mm}"/></td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_printer.width}"/>:</td><td>${product.width} <custom:getDescriptionByLocale description="${search_printer.mm}"/></td></tr>
 						</c:if>
                        
                        <c:if test="${product.depth > 0}">
-   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.depth}"/>:</td><td>${product.depth} <custom:getDescriptionByLocale description="${descriptions_search_printer.mm}"/></td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_printer.depth}"/>:</td><td>${product.depth} <custom:getDescriptionByLocale description="${search_printer.mm}"/></td></tr>
 						</c:if>
                        
                        <c:if test="${product.heigth > 0}">
-   							<tr><td><custom:getDescriptionByLocale description="${descriptions_search_printer.height}"/>:</td><td>${product.heigth} <custom:getDescriptionByLocale description="${descriptions_search_printer.mm}"/></td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_printer.height}"/>:</td><td>${product.heigth} <custom:getDescriptionByLocale description="${search_printer.mm}"/></td></tr>
 						</c:if>
   
                   </table>
