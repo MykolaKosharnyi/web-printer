@@ -12,25 +12,25 @@
 
 	<div id="display_search">
 		<i class="opened"></i>
-		<p><custom:getDescriptionByLocale description="${descriptions_search_printer.filter_items}"/></p>
+		<p><custom:getDescriptionByLocale description="${d_search.filter_items}"/></p>
 	</div>
 				<a style="margin-left:10px;" class="accept" href="javascript:void(0)" onclick="$('#search').submit();">
-					<custom:getDescriptionByLocale description="${descriptions_search_printer.apply}"/>
+					<custom:getDescriptionByLocale description="${d_search.apply}"/>
 				</a>
 				
 			<c:if test="${search.typeCutter[0].equals('Для обработки дерева')}">
 				<a class="reset" href="<c:url value='/cutters/for_wood' />">
-					<custom:getDescriptionByLocale description="${descriptions_search_printer.reset}"/>
+					<custom:getDescriptionByLocale description="${d_search.reset}"/>
 				</a>
 			</c:if>
 			<c:if test="${search.typeCutter[0].equals('Для обработки металла')}">
 				<a class="reset" href="<c:url value='/cutters/for_the_treatment_of_metal' />">
-					<custom:getDescriptionByLocale description="${descriptions_search_printer.reset}"/>
+					<custom:getDescriptionByLocale description="${d_search.reset}"/>
 				</a>
 			</c:if>
 			<c:if test="${search.typeCutter[0].equals('Для обработки камня')}">
 				<a class="reset" href="<c:url value='/cutters/stone_processing' />">
-					<custom:getDescriptionByLocale description="${descriptions_search_printer.reset}"/>
+					<custom:getDescriptionByLocale description="${d_search.reset}"/>
 				</a>
 			</c:if>
 			
@@ -229,22 +229,22 @@
 		<jsp:include page="../search/general_characteristics.jsp" />
 		
 			<a class="accept" href="javascript:void(0)" onclick="$('#search').submit();">
-				<custom:getDescriptionByLocale description="${descriptions_search_printer.apply}"/>
+				<custom:getDescriptionByLocale description="${d_search.apply}"/>
 			</a>
 				
 			<c:if test="${search.typeCutter[0].equals('Для обработки дерева')}">
 				<a class="reset" href="<c:url value='/cutters/for_wood' />">
-					<custom:getDescriptionByLocale description="${descriptions_search_printer.reset}"/>
+					<custom:getDescriptionByLocale description="${d_search.reset}"/>
 				</a>
 			</c:if>
 			<c:if test="${search.typeCutter[0].equals('Для обработки металла')}">
 				<a class="reset" href="<c:url value='/cutters/for_the_treatment_of_metal' />">
-					<custom:getDescriptionByLocale description="${descriptions_search_printer.reset}"/>
+					<custom:getDescriptionByLocale description="${d_search.reset}"/>
 				</a>
 			</c:if>
 			<c:if test="${search.typeCutter[0].equals('Для обработки камня')}">
 				<a class="reset" href="<c:url value='/cutters/stone_processing' />">
-					<custom:getDescriptionByLocale description="${descriptions_search_printer.reset}"/>
+					<custom:getDescriptionByLocale description="${d_search.reset}"/>
 				</a>
 			</c:if>
 			

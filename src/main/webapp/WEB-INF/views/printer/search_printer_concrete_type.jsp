@@ -11,55 +11,55 @@
 
 	<div id="display_search">
 		<i class="opened"></i>
-		<p><custom:getDescriptionByLocale description="${search_printer.filter_items}"/></p>
+		<p><custom:getDescriptionByLocale description="${d_search.filter_items}"/></p>
 	</div>
 			<a style="margin-left:10px;" class="accept" href="javascript:void(0)" onclick="$('#search').submit();">
-				<custom:getDescriptionByLocale description="${search_printer.apply}"/>
+				<custom:getDescriptionByLocale description="${d_search.apply}"/>
 			</a>
 				
 			<c:if test="${search.typePrinter[0].equals('Сольвентный')}">
 				<a class="reset" href="<c:url value='/printers/dissolving' />">
-					<custom:getDescriptionByLocale description="${search_printer.reset}"/>
+					<custom:getDescriptionByLocale description="${d_search.reset}"/>
 				</a>
 			</c:if>
 			<c:if test="${search.typePrinter[0].equals('Экосольвентный')}">
 				<a class="reset" href="<c:url value='/printers/ecosolvent' />">
-					<custom:getDescriptionByLocale description="${search_printer.reset}"/>
+					<custom:getDescriptionByLocale description="${d_search.reset}"/>
 				</a>
 			</c:if>
 			<c:if test="${search.typePrinter[0].equals('UV рулонный')}">
 				<a class="reset" href="<c:url value='/printers/UV_roll' />">
-					<custom:getDescriptionByLocale description="${search_printer.reset}"/>
+					<custom:getDescriptionByLocale description="${d_search.reset}"/>
 				</a>
 			</c:if>
 			<c:if test="${search.typePrinter[0].equals('UV плоскопечатный')}">
 				<a class="reset" href="<c:url value='/printers/UV_flatbed' />">
-					<custom:getDescriptionByLocale description="${search_printer.reset}"/>
+					<custom:getDescriptionByLocale description="${d_search.reset}"/>
 				</a>
 			</c:if>
 			<c:if test="${search.typePrinter[0].equals('Сублимационный')}">
 				<a class="reset" href="<c:url value='/printers/sublimation' />">
-					<custom:getDescriptionByLocale description="${search_printer.reset}"/>
+					<custom:getDescriptionByLocale description="${d_search.reset}"/>
 				</a>
 			</c:if>
 			<c:if test="${search.typePrinter[0].equals('Текстильный')}">
 				<a class="reset" href="<c:url value='/printers/textile' />">
-					<custom:getDescriptionByLocale description="${search_printer.reset}"/>
+					<custom:getDescriptionByLocale description="${d_search.reset}"/>
 				</a>
 			</c:if>
 			<c:if test="${search.typePrinter[0].equals('Водный/Пигментный')}">
 				<a class="reset" href="<c:url value='/printers/water_pigment' />">
-					<custom:getDescriptionByLocale description="${search_printer.reset}"/>
+					<custom:getDescriptionByLocale description="${d_search.reset}"/>
 				</a>
 			</c:if>
 			<c:if test="${search.typePrinter[0].equals('Цифровый')}">
 				<a class="reset" href="<c:url value='/printers/digital' />">
-					<custom:getDescriptionByLocale description="${search_printer.reset}"/>
+					<custom:getDescriptionByLocale description="${d_search.reset}"/>
 				</a>
 			</c:if>
 			<c:if test="${search.typePrinter[0].equals('САПР/ГИС')}">
 				<a class="reset" href="<c:url value='/printers/SAPR-GIS' />">
-					<custom:getDescriptionByLocale description="${search_printer.reset}"/>
+					<custom:getDescriptionByLocale description="${d_search.reset}"/>
 				</a>
 			</c:if>
 
@@ -95,8 +95,8 @@
 			<div class="check_boxes">
 				<div id="tabs">
 					<ul>
-						<li><custom:getDescriptionByLocale description="${search_printer.millimeter}"/></li>
-						<li><custom:getDescriptionByLocale description="${search_printer.inch}"/></li>
+						<li><custom:getDescriptionByLocale description="${d_search.millimeter}"/></li>
+						<li><custom:getDescriptionByLocale description="${d_search.inch}"/></li>
 						<!--<li>формат</li>-->
 					</ul>
 					<div>
@@ -326,7 +326,7 @@
 					<div class="block_title">
 						<i></i>
 						<p><custom:getDescriptionByLocale description="${search_printer.speedPrint}"/>, 
-						<custom:getDescriptionByLocale description="${search_printer.sq_m_hour}"/></p>
+						<custom:getDescriptionByLocale description="${d_search.sq_m_hour}"/></p>
 					</div>
 					<div class="check_boxes">
 						<div class="text_output">
@@ -371,17 +371,17 @@
 					<div class="check_boxes">
 						<div class="text_output">
 							<form:input path="maximumMediaThickness60_0" class="amount-maximum_media_thickness60_0" value="${search.maximumMediaThickness60_0}" />
-							<p>&nbsp;<custom:getDescriptionByLocale description="${search_printer.mm}"/> -&nbsp;</p>
+							<p>&nbsp;<custom:getDescriptionByLocale description="${d_search.mm}"/> -&nbsp;</p>
 							<form:input path="maximumMediaThickness60_1" class="amount-maximum_media_thickness60_1" value="${search.maximumMediaThickness60_1}" />
-							<p>&nbsp;<custom:getDescriptionByLocale description="${search_printer.mm}"/></p>
+							<p>&nbsp;<custom:getDescriptionByLocale description="${d_search.mm}"/></p>
 						</div>
 						<div class="slider-range-maximum_media_thickness60"></div>
 						<br>
 						<div class="text_output">
 							<form:input path="maximumMediaThickness500_0" class="amount-maximum_media_thickness500_0" value="${search.maximumMediaThickness500_0}" />
-							<p>&nbsp;<custom:getDescriptionByLocale description="${search_printer.mm}"/> -&nbsp;</p>
+							<p>&nbsp;<custom:getDescriptionByLocale description="${d_search.mm}"/> -&nbsp;</p>
 							<form:input path="maximumMediaThickness500_1" class="amount-maximum_media_thickness500_1" value="${search.maximumMediaThickness500_1}" />
-							<p>&nbsp;<custom:getDescriptionByLocale description="${search_printer.mm}"/></p>
+							<p>&nbsp;<custom:getDescriptionByLocale description="${d_search.mm}"/></p>
 						</div>
 						<div class="slider-range-maximum_media_thickness500"></div>
 					</div>
@@ -394,9 +394,9 @@
 					<div class="check_boxes">
 						<div class="text_output">
 							<form:input path="maximumWeightOfVehicle0" class="amount-maximum_weight_of_vehicle0" value="${search.maximumWeightOfVehicle0}" />
-							<p>&nbsp;<custom:getDescriptionByLocale description="${search_printer.kg}"/> -&nbsp;</p>
+							<p>&nbsp;<custom:getDescriptionByLocale description="${d_search.kg}"/> -&nbsp;</p>
 							<form:input path="maximumWeightOfVehicle1" class="amount-maximum_weight_of_vehicle1" value="${search.maximumWeightOfVehicle1}" />
-							<p>&nbsp;<custom:getDescriptionByLocale description="${search_printer.kg}"/></p>
+							<p>&nbsp;<custom:getDescriptionByLocale description="${d_search.kg}"/></p>
 						</div>
 						<div class="slider-range-maximum_weight_of_vehicle"></div>
 					</div>
@@ -433,52 +433,52 @@
 		<jsp:include page="../search/general_characteristics.jsp" />
 
 				<a class="accept" href="javascript:void(0)" onclick="$('#search').submit();">
-					<custom:getDescriptionByLocale description="${search_printer.apply}"/>
+					<custom:getDescriptionByLocale description="${d_search.apply}"/>
 				</a>
 				
 			<c:if test="${search.typePrinter[0].equals('Сольвентный')}">
 				<a class="reset" href="<c:url value='/printers/dissolving' />">
-					<custom:getDescriptionByLocale description="${search_printer.reset}"/>
+					<custom:getDescriptionByLocale description="${d_search.reset}"/>
 				</a>
 			</c:if>
 			<c:if test="${search.typePrinter[0].equals('Экосольвентный')}">
 				<a class="reset" href="<c:url value='/printers/ecosolvent' />">
-					<custom:getDescriptionByLocale description="${search_printer.reset}"/>
+					<custom:getDescriptionByLocale description="${d_search.reset}"/>
 				</a>
 			</c:if>
 			<c:if test="${search.typePrinter[0].equals('UV рулонный')}">
 				<a class="reset" href="<c:url value='/printers/UV_roll' />">
-					<custom:getDescriptionByLocale description="${search_printer.reset}"/>
+					<custom:getDescriptionByLocale description="${d_search.reset}"/>
 				</a>
 			</c:if>
 			<c:if test="${search.typePrinter[0].equals('UV плоскопечатный')}">
 				<a class="reset" href="<c:url value='/printers/UV_flatbed' />">
-					<custom:getDescriptionByLocale description="${search_printer.reset}"/>
+					<custom:getDescriptionByLocale description="${d_search.reset}"/>
 				</a>
 			</c:if>
 			<c:if test="${search.typePrinter[0].equals('Сублимационный')}">
 				<a class="reset" href="<c:url value='/printers/sublimation' />">
-					<custom:getDescriptionByLocale description="${search_printer.reset}"/>
+					<custom:getDescriptionByLocale description="${d_search.reset}"/>
 				</a>
 			</c:if>
 			<c:if test="${search.typePrinter[0].equals('Текстильный')}">
 				<a class="reset" href="<c:url value='/printers/textile' />">
-					<custom:getDescriptionByLocale description="${search_printer.reset}"/>
+					<custom:getDescriptionByLocale description="${d_search.reset}"/>
 				</a>
 			</c:if>
 			<c:if test="${search.typePrinter[0].equals('Водный/Пигментный')}">
 				<a class="reset" href="<c:url value='/printers/water_pigment' />">
-					<custom:getDescriptionByLocale description="${search_printer.reset}"/>
+					<custom:getDescriptionByLocale description="${d_search.reset}"/>
 				</a>
 			</c:if>
 			<c:if test="${search.typePrinter[0].equals('Цифровый')}">
 				<a class="reset" href="<c:url value='/printers/digital' />">
-					<custom:getDescriptionByLocale description="${search_printer.reset}"/>
+					<custom:getDescriptionByLocale description="${d_search.reset}"/>
 				</a>
 			</c:if>
 			<c:if test="${search.typePrinter[0].equals('САПР/ГИС')}">
 				<a class="reset" href="<c:url value='/printers/SAPR-GIS' />">
-					<custom:getDescriptionByLocale description="${search_printer.reset}"/>
+					<custom:getDescriptionByLocale description="${d_search.reset}"/>
 				</a>
 			</c:if>
 			

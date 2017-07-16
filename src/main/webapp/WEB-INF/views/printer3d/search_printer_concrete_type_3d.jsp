@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix = "custom" uri = "/WEB-INF/custom.tld"%>
 
     <link rel="stylesheet" href="/css/user/search_printer_3d.css">
     <link rel="stylesheet" href="/css/search.css">
@@ -11,11 +12,10 @@
 
 	<div id="display_search">
 		<i class="opened"></i>
-		<p>Фильтр товаров</p>
+		<p><custom:getDescriptionByLocale description="${search_printer.filter_items}"/></p>
 	</div>
 			<a style="margin-left:10px;" class="accept" href="javascript:void(0)" onclick="$('#search').submit();">
-				ПРИМЕНИТЬ
-				<!--<img src="/images/Accept.gif" alt="" />-->
+				<custom:getDescriptionByLocale description="${search_printer.apply}"/>
 			</a>
 				
 			<c:if test="${search.typePrinter3D[0].equals('Экструдные FDM')}">
@@ -318,8 +318,7 @@
 		<jsp:include page="../search/general_characteristics.jsp" />
 		
 			<a class="accept" href="javascript:void(0)" onclick="$('#search').submit();">
-				ПРИМЕНИТЬ
-				<!--<img src="/images/Accept.gif" alt="" />-->
+				<custom:getDescriptionByLocale description="${search_printer.apply}"/>
 			</a>
 			
 			<c:if test="${search.typePrinter3D[0].equals('Экструдные FDM')}">

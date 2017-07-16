@@ -5,7 +5,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i class="opened"></i>
-				<p><custom:getDescriptionByLocale description="${search_printer.price}"/></p>
+				<p><custom:getDescriptionByLocale description="${d_search.price}"/></p>
 			</div>
 			<div class="check_boxes" style="display: block;">
 				<div class="text_output">

@@ -18,6 +18,8 @@
 		<br>
 		<a href="<c:url value='/admin/internationalization/comments' />">Надписи в добавлениях комментариев</a>
 		<br>
+		<a href="<c:url value='/admin/internationalization/search' />">Общие характеристики для поиска/сокращенные физические величины</a>
+		<br>
 		<a href="<c:url value='/admin/internationalization/search_printer' />">Характеристики для поиска, принтеры</a>
 		<br>
 	</div>

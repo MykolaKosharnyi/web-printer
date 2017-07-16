@@ -9,9 +9,10 @@ public enum ResourceMap {
 	INACCURACY_IN_DESCRIPTION("d_inaccuracy","/var/www/localhost/products/descriptions/inaccuracy_in_description.json"),
 	COMMENTS("d_comments","/var/www/localhost/products/descriptions/comments.json"),
 	
+	DESCRIPTIONS_SEARCH_COMMON("d_search", "/var/www/localhost/products/descriptions/search.json"),
 	DESCRIPTIONS_SEARCH_PRINTER("search_printer", "/var/www/localhost/products/descriptions/search_printer.json");
 	
-
+	
 	private String name;
 	private String path;
 	

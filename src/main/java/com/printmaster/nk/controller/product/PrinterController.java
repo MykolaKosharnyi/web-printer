@@ -245,7 +245,7 @@ public class PrinterController extends ProductControllerTemplate<Printer, Search
 	private Logger logger = Logger.getLogger(this.getClass());
     
     @Autowired
-    ComponentsForControllers componets;
+    private ComponentsForControllers componets;
 
     @Autowired
 	private CommentService commentService;
