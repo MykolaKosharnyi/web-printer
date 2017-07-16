@@ -12,14 +12,14 @@
 
 	<div id="display_search">
 		<i class="opened"></i>
-		<p><custom:getDescriptionByLocale description="${search_printer.filter_items}"/></p>
+		<p><custom:getDescriptionByLocale description="${d_search.filter_items}"/></p>
 	</div>
-				<a style="margin-left:10px;" class="accept" href="javascript:void(0)" onclick="$('#search').submit();">
-					<custom:getDescriptionByLocale description="${search_printer.apply}"/>
-				</a>
-				<a class="reset" href="<c:url value='/3d_printers' />">
-					СБРОСИТЬ
-				</a>
+		<a style="margin-left:10px;" class="accept" href="javascript:void(0)" onclick="$('#search').submit();">
+			<custom:getDescriptionByLocale description="${d_search.apply}"/>
+		</a>
+		<a class="reset" href="<c:url value='/3d_printers' />">
+			<custom:getDescriptionByLocale description="${d_search.reset}"/>
+		</a>
 	<div id="search_product">
 	<form:form method="POST" commandName="search" action="/3d_printers/search">
 	
@@ -297,10 +297,10 @@
 		<jsp:include page="../search/general_characteristics.jsp" />
 		
 			<a class="accept" href="javascript:void(0)" onclick="$('#search').submit();">
-				<custom:getDescriptionByLocale description="${search_printer.apply}"/>
+				<custom:getDescriptionByLocale description="${d_search.apply}"/>
 			</a>
 			<a class="reset" href="<c:url value='/3d_printers' />">
-				СБРОСИТЬ
+				<custom:getDescriptionByLocale description="${d_search.reset}"/>
 			</a>
 		</form:form>
 	</div>

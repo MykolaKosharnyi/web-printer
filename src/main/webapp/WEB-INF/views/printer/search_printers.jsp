@@ -388,11 +388,11 @@
 		
 		<jsp:include page="../search/general_characteristics.jsp" />
 
-			<a class="accept" href="javascript:void(0)" onclick="$('#search').submit();">
-				<custom:getDescriptionByLocale description="${d_search.apply}"/>
-			</a>
-			<a class="reset" href="<c:url value='/printers' />">
-				<custom:getDescriptionByLocale description="${d_search.reset}"/>
-			</a>
-		</form:form>
-	</div>
+		<a class="accept" href="javascript:void(0)" onclick="$('#search').submit();">
+			<custom:getDescriptionByLocale description="${d_search.apply}"/>
+		</a>
+		<a class="reset" href="<c:url value='/printers' />">
+			<custom:getDescriptionByLocale description="${d_search.reset}"/>
+		</a>
+	</form:form>
+</div>

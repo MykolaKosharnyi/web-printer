@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix = "custom" uri = "/WEB-INF/custom.tld"%>
 
     <link rel="stylesheet" href="/css/user/search_digital_printer.css">
     <link rel="stylesheet" href="/css/search.css">
@@ -11,20 +12,26 @@
 	
 	<div id="display_search">
 		<i class="opened"></i>
-		<p>Фильтр товаров</p>
+		<p><custom:getDescriptionByLocale description="${d_search.filter_items}"/></p>
 	</div>
 				<a style="margin-left:10px;" class="accept" href="javascript:void(0)" onclick="$('#search').submit();">
-					ПРИМЕНИТЬ
+					<custom:getDescriptionByLocale description="${d_search.apply}"/>
 				</a>
 		
 				<c:if test="${search.typePrinter[0].equals('Полноцветное лазерное оборудование')}">
-					<a class="reset" href="<c:url value='/digital_printers/full_color_laser_printers' />">СБРОСИТЬ</a>
+					<a class="reset" href="<c:url value='/digital_printers/full_color_laser_printers' />">
+						<custom:getDescriptionByLocale description="${d_search.reset}"/>
+					</a>
 				</c:if>
 				<c:if test="${search.typePrinter[0].equals('Монохромное лазерное оборудование')}">
-					<a class="reset" href="<c:url value='/digital_printers/monochrome_laser_printers' />">СБРОСИТЬ</a>
+					<a class="reset" href="<c:url value='/digital_printers/monochrome_laser_printers' />">
+						<custom:getDescriptionByLocale description="${d_search.reset}"/>
+					</a>
 				</c:if>
 				<c:if test="${search.typePrinter[0].equals('Полноцветное струйное оборудование')}">
-					<a class="reset" href="<c:url value='/digital_printers/full-color_inkjet_printers' />">СБРОСИТЬ</a>
+					<a class="reset" href="<c:url value='/digital_printers/full-color_inkjet_printers' />">
+						<custom:getDescriptionByLocale description="${d_search.reset}"/>
+					</a>
 				</c:if>
 				
 	<div id="search_product">
@@ -823,17 +830,23 @@
 		</div>
 			
 			<a class="accept" href="javascript:void(0)" onclick="$('#search').submit();">
-				ПРИМЕНИТЬ
+				<custom:getDescriptionByLocale description="${d_search.apply}"/>
 			</a>
 			
 				<c:if test="${search.typePrinter[0].equals('Полноцветное лазерное оборудование')}">
-					<a class="reset" href="<c:url value='/digital_printers/full_color_laser_printers' />">СБРОСИТЬ</a>
+					<a class="reset" href="<c:url value='/digital_printers/full_color_laser_printers' />">
+						<custom:getDescriptionByLocale description="${d_search.reset}"/>
+					</a>
 				</c:if>
 				<c:if test="${search.typePrinter[0].equals('Монохромное лазерное оборудование')}">
-					<a class="reset" href="<c:url value='/digital_printers/monochrome_laser_printers' />">СБРОСИТЬ</a>
+					<a class="reset" href="<c:url value='/digital_printers/monochrome_laser_printers' />">
+						<custom:getDescriptionByLocale description="${d_search.reset}"/>
+					</a>
 				</c:if>
 				<c:if test="${search.typePrinter[0].equals('Полноцветное струйное оборудование')}">
-					<a class="reset" href="<c:url value='/digital_printers/full-color_inkjet_printers' />">СБРОСИТЬ</a>
+					<a class="reset" href="<c:url value='/digital_printers/full-color_inkjet_printers' />">
+						<custom:getDescriptionByLocale description="${d_search.reset}"/>
+					</a>
 				</c:if>
 				
 		</form:form>

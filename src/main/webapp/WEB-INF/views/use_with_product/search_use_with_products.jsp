@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix = "custom" uri = "/WEB-INF/custom.tld"%>
 
     <link rel="stylesheet" href="/css/user/search_cutter.css">
     <link rel="stylesheet" href="/css/search.css">
@@ -10,21 +11,21 @@
 	
 	<div id="display_search">
 		<i class="opened"></i>
-		<p>Фильтр товаров</p>
+		<p><custom:getDescriptionByLocale description="${d_search.filter_items}"/></p>
 	</div>
-				<a style="margin-left:10px;" class="accept" href="javascript:void(0)" onclick="$('#search').submit();">
-					ПРИМЕНИТЬ
-				</a>
-				<a class="reset" href="<c:url value='/use_with_products' />">
-					СБРОСИТЬ
-				</a>
+	<a style="margin-left:10px;" class="accept" href="javascript:void(0)" onclick="$('#search').submit();">
+		<custom:getDescriptionByLocale description="${d_search.apply}"/>
+	</a>
+	<a class="reset" href="<c:url value='/use_with_products' />">
+		<custom:getDescriptionByLocale description="${d_search.reset}"/>
+	</a>
 <div id="search_product">
 	<c:url var="product_search" value="/use_with_products/search" ></c:url>
 	<form:form method="POST" commandName="search" action="${product_search}">
 		<div class="search_criteria">
 			<div class="block_title">
 				<i class="opened"></i>
-				<p>Цена</p>
+				<p><custom:getDescriptionByLocale description="${d_search.price}"/></p>
 			</div>
 			<div class="check_boxes" style="display: block;">
 				<div class="text_output">
@@ -46,7 +47,11 @@
 			</ul>
 		</div>
 		
-			<a class="accept" href="javascript:void(0)" onclick="$('#search').submit();">ПРИМЕНИТЬ</a>
-			<a class="reset" href="<c:url value='/use_with_products' />">СБРОСИТЬ</a>
+		<a class="accept" href="javascript:void(0)" onclick="$('#search').submit();">
+			<custom:getDescriptionByLocale description="${d_search.apply}"/>
+		</a>
+		<a class="reset" href="<c:url value='/use_with_products' />">
+			<custom:getDescriptionByLocale description="${d_search.reset}"/>
+		</a>
 	</form:form>
 </div>

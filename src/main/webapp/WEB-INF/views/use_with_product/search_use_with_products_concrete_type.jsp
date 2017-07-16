@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix = "custom" uri = "/WEB-INF/custom.tld"%>
 
     <link rel="stylesheet" href="/css/user/search_cutter.css">
     <link rel="stylesheet" href="/css/search.css">
@@ -10,24 +11,36 @@
 
 	<div id="display_search">
 		<i class="opened"></i>
-		<p>Фильтр товаров</p>
+		<p><custom:getDescriptionByLocale description="${d_search.filter_items}"/></p>
 	</div>
-				<a style="margin-left:10px;" class="accept" href="javascript:void(0)" onclick="$('#search').submit();">ПРИМЕНИТЬ</a>
+			<a style="margin-left:10px;" class="accept" href="javascript:void(0)" onclick="$('#search').submit();">
+				<custom:getDescriptionByLocale description="${d_search.apply}"/>
+			</a>
 				
 			<c:if test="${search.typeProduct[0].equals('Чернила для струйной печати')}">
-				<a class="reset" href="<c:url value='/use_with_products/ink_for_inkjet' />">СБРОСИТЬ</a>
+				<a class="reset" href="<c:url value='/use_with_products/ink_for_inkjet' />">
+					<custom:getDescriptionByLocale description="${d_search.reset}"/>
+				</a>
 			</c:if>
 			<c:if test="${search.typeProduct[0].equals('Расходные материалы для цифрового оборудования')}">
-				<a class="reset" href="<c:url value='/use_with_products/consumables_for_digital_equipment' />">СБРОСИТЬ</a>
+				<a class="reset" href="<c:url value='/use_with_products/consumables_for_digital_equipment' />">
+					<custom:getDescriptionByLocale description="${d_search.reset}"/>
+				</a>
 			</c:if>
 			<c:if test="${search.typeProduct[0].equals('Расходные материалы для 3D оборудования')}">
-				<a class="reset" href="<c:url value='/use_with_products/consumables_for_3D_equipment' />">СБРОСИТЬ</a>
+				<a class="reset" href="<c:url value='/use_with_products/consumables_for_3D_equipment' />">
+					<custom:getDescriptionByLocale description="${d_search.reset}"/>
+				</a>
 			</c:if>
 			<c:if test="${search.typeProduct[0].equals('Товары для обслуживания')}">
-				<a class="reset" href="<c:url value='/use_with_products/products_for_maintenance' />">СБРОСИТЬ</a>
+				<a class="reset" href="<c:url value='/use_with_products/products_for_maintenance' />">
+					<custom:getDescriptionByLocale description="${d_search.reset}"/>
+				</a>
 			</c:if>
 			<c:if test="${search.typeProduct[0].equals('Запчасти и комплектующие')}">
-				<a class="reset" href="<c:url value='/use_with_products/parts_and_accessories' />">СБРОСИТЬ</a>
+				<a class="reset" href="<c:url value='/use_with_products/parts_and_accessories' />">
+					<custom:getDescriptionByLocale description="${d_search.reset}"/>
+				</a>
 			</c:if>
 			
 	<div id="search_product">
@@ -36,7 +49,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i class="opened"></i>
-				<p>Цена</p>
+				<p><custom:getDescriptionByLocale description="${d_search.price}"/></p>
 			</div>
 			<div class="check_boxes" style="display: block;">
 				<div class="text_output">
@@ -58,22 +71,34 @@
 			</ul>
 		</div>
 		
-			<a class="accept" href="javascript:void(0)" onclick="$('#search').submit();">ПРИМЕНИТЬ</a>
+			<a class="accept" href="javascript:void(0)" onclick="$('#search').submit();">
+				<custom:getDescriptionByLocale description="${d_search.apply}"/>
+			</a>
 				
 			<c:if test="${search.typeProduct[0].equals('Чернила для струйной печати')}">
-				<a class="reset" href="<c:url value='/use_with_products/ink_for_inkjet' />">СБРОСИТЬ</a>
+				<a class="reset" href="<c:url value='/use_with_products/ink_for_inkjet' />">
+					<custom:getDescriptionByLocale description="${d_search.reset}"/>
+				</a>
 			</c:if>
 			<c:if test="${search.typeProduct[0].equals('Расходные материалы для цифрового оборудования')}">
-				<a class="reset" href="<c:url value='/use_with_products/consumables_for_digital_equipment' />">СБРОСИТЬ</a>
+				<a class="reset" href="<c:url value='/use_with_products/consumables_for_digital_equipment' />">
+					<custom:getDescriptionByLocale description="${d_search.reset}"/>
+				</a>
 			</c:if>
 			<c:if test="${search.typeProduct[0].equals('Расходные материалы для 3D оборудования')}">
-				<a class="reset" href="<c:url value='/use_with_products/consumables_for_3D_equipment' />">СБРОСИТЬ</a>
+				<a class="reset" href="<c:url value='/use_with_products/consumables_for_3D_equipment' />">
+					<custom:getDescriptionByLocale description="${d_search.reset}"/>
+				</a>
 			</c:if>
 			<c:if test="${search.typeProduct[0].equals('Товары для обслуживания')}">
-				<a class="reset" href="<c:url value='/use_with_products/products_for_maintenance' />">СБРОСИТЬ</a>
+				<a class="reset" href="<c:url value='/use_with_products/products_for_maintenance' />">
+					<custom:getDescriptionByLocale description="${d_search.reset}"/>
+				</a>
 			</c:if>
 			<c:if test="${search.typeProduct[0].equals('Запчасти и комплектующие')}">
-				<a class="reset" href="<c:url value='/use_with_products/parts_and_accessories' />">СБРОСИТЬ</a>
+				<a class="reset" href="<c:url value='/use_with_products/parts_and_accessories' />">
+					<custom:getDescriptionByLocale description="${d_search.reset}"/>
+				</a>
 			</c:if>
 			
 		</form:form>

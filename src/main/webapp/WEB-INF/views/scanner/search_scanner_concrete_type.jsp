@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix = "custom" uri = "/WEB-INF/custom.tld"%>
 
     <link rel="stylesheet" href="/css/user/search_scanner.css">
     <link rel="stylesheet" href="/css/search.css">
@@ -11,17 +12,23 @@
 
 	<div id="display_search">
 		<i class="opened"></i>
-		<p>Фильтр товаров</p>
+		<p><custom:getDescriptionByLocale description="${d_search.filter_items}"/></p>
 	</div>
-			<a style="margin-left:10px;" class="accept" href="javascript:void(0)" onclick="$('#search').submit();">ПРИМЕНИТЬ</a>
+		<a style="margin-left:10px;" class="accept" href="javascript:void(0)" onclick="$('#search').submit();">
+			<custom:getDescriptionByLocale description="${d_search.apply}"/>
+		</a>
 				
-			<c:if test="${search.typeProduct[0].equals('Широкоформатные сканеры')}">
-				<a class="reset" href="<c:url value='/scanners/large_format_scanners' />">СБРОСИТЬ</a>
-			</c:if>
+		<c:if test="${search.typeProduct[0].equals('Широкоформатные сканеры')}">
+			<a class="reset" href="<c:url value='/scanners/large_format_scanners' />">
+				<custom:getDescriptionByLocale description="${d_search.reset}"/>
+			</a>
+		</c:if>
 			
-			<c:if test="${search.typeProduct[0].equals('3D Сканеры')}">
-				<a class="reset" href="<c:url value='/scanners/3d_scanners' />">СБРОСИТЬ</a>
-			</c:if>
+		<c:if test="${search.typeProduct[0].equals('3D Сканеры')}">
+			<a class="reset" href="<c:url value='/scanners/3d_scanners' />">
+				<custom:getDescriptionByLocale description="${d_search.reset}"/>
+			</a>
+		</c:if>
 			
 	<div id="search_product">
 	<c:url var="product_search" value="/scanners/search" ></c:url>
@@ -270,14 +277,20 @@
 		
 		<jsp:include page="../search/general_characteristics.jsp" />
 		
-			<a class="accept" href="javascript:void(0)" onclick="$('#search').submit();">ПРИМЕНИТЬ</a>
+			<a class="accept" href="javascript:void(0)" onclick="$('#search').submit();">
+				<custom:getDescriptionByLocale description="${d_search.apply}"/>
+			</a>
 				
 			<c:if test="${search.typeProduct[0].equals('Широкоформатные сканеры')}">
-				<a class="reset" href="<c:url value='/scanners/large_format_scanners' />">СБРОСИТЬ</a>
+				<a class="reset" href="<c:url value='/scanners/large_format_scanners' />">
+					<custom:getDescriptionByLocale description="${d_search.reset}"/>
+				</a>
 			</c:if>
 			
 			<c:if test="${search.typeProduct[0].equals('3D Сканеры')}">
-				<a class="reset" href="<c:url value='/scanners/3d_scanners' />">СБРОСИТЬ</a>
+				<a class="reset" href="<c:url value='/scanners/3d_scanners' />">
+					<custom:getDescriptionByLocale description="${d_search.reset}"/>
+				</a>
 			</c:if>
 			
 		</form:form>

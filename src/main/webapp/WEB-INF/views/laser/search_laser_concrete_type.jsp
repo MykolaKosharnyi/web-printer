@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix = "custom" uri = "/WEB-INF/custom.tld"%>
 
     <link rel="stylesheet" href="/css/user/search_laser.css">
     <link rel="stylesheet" href="/css/search.css">
@@ -11,27 +12,41 @@
 
 	<div id="display_search">
 		<i class="opened"></i>
-		<p>Фильтр товаров</p>
+		<p><custom:getDescriptionByLocale description="${d_search.filter_items}"/></p>
 	</div>
-				<a style="margin-left:10px;" class="accept" href="javascript:void(0)" onclick="$('#search').submit();">ПРИМЕНИТЬ</a>
+			<a style="margin-left:10px;" class="accept" href="javascript:void(0)" onclick="$('#search').submit();">
+				<custom:getDescriptionByLocale description="${d_search.apply}"/>
+			</a>
 				
 			<c:if test="${search.typeLaser[0].equals('Газовые лазеры СО2')}">
-				<a class="reset" href="<c:url value='/laser/CO2_gas_lasers' />">СБРОСИТЬ</a>
+				<a class="reset" href="<c:url value='/laser/CO2_gas_lasers' />">
+					<custom:getDescriptionByLocale description="${d_search.reset}"/>
+				</a>
 			</c:if>
 			<c:if test="${search.typeLaser[0].equals('Твердотельные лазеры')}">
-				<a class="reset" href="<c:url value='/laser/solid_state_lasers' />">СБРОСИТЬ</a>
+				<a class="reset" href="<c:url value='/laser/solid_state_lasers' />">
+					<custom:getDescriptionByLocale description="${d_search.reset}"/>
+				</a>
 			</c:if>
 			<c:if test="${search.typeLaser[0].equals('Для обработки метала')}">
-				<a class="reset" href="<c:url value='/laser/for_the_treatment_of_metal' />">СБРОСИТЬ</a>
+				<a class="reset" href="<c:url value='/laser/for_the_treatment_of_metal' />">
+					<custom:getDescriptionByLocale description="${d_search.reset}"/>
+				</a>
 			</c:if>
 			<c:if test="${search.typeLaser[0].equals('С диодной накачкой')}">
-				<a class="reset" href="<c:url value='/laser/diode_pumped' />">СБРОСИТЬ</a>
+				<a class="reset" href="<c:url value='/laser/diode_pumped' />">
+					<custom:getDescriptionByLocale description="${d_search.reset}"/>
+				</a>
 			</c:if>
 			<c:if test="${search.typeLaser[0].equals('Оптоволоконные лазеры')}">
-				<a class="reset" href="<c:url value='/laser/fiber_lasers' />">СБРОСИТЬ</a>
+				<a class="reset" href="<c:url value='/laser/fiber_lasers' />">
+					<custom:getDescriptionByLocale description="${d_search.reset}"/>
+				</a>
 			</c:if>
 			<c:if test="${search.typeLaser[0].equals('Плазменные лазеры')}">
-				<a class="reset" href="<c:url value='/laser/plasma_lasers' />">СБРОСИТЬ</a>
+				<a class="reset" href="<c:url value='/laser/plasma_lasers' />">
+					<custom:getDescriptionByLocale description="${d_search.reset}"/>
+				</a>
 			</c:if>
 			
 	<div id="search_product">
@@ -359,25 +374,39 @@
 		
 		<jsp:include page="../search/general_characteristics.jsp" />
 		
-				<a class="accept" href="javascript:void(0)" onclick="$('#search').submit();">ПРИМЕНИТЬ</a>
+			<a class="accept" href="javascript:void(0)" onclick="$('#search').submit();">
+				<custom:getDescriptionByLocale description="${d_search.apply}"/>
+			</a>
 				
 			<c:if test="${search.typeLaser[0].equals('Газовые лазеры СО2')}">
-				<a class="reset" href="<c:url value='/laser/CO2_gas_lasers' />">СБРОСИТЬ</a>
+				<a class="reset" href="<c:url value='/laser/CO2_gas_lasers' />">
+					<custom:getDescriptionByLocale description="${d_search.reset}"/>
+				</a>
 			</c:if>
 			<c:if test="${search.typeLaser[0].equals('Твердотельные лазеры')}">
-				<a class="reset" href="<c:url value='/laser/solid_state_lasers' />">СБРОСИТЬ</a>
+				<a class="reset" href="<c:url value='/laser/solid_state_lasers' />">
+					<custom:getDescriptionByLocale description="${d_search.reset}"/>
+				</a>
 			</c:if>
 			<c:if test="${search.typeLaser[0].equals('Для обработки метала')}">
-				<a class="reset" href="<c:url value='/laser/for_the_treatment_of_metal' />">СБРОСИТЬ</a>
+				<a class="reset" href="<c:url value='/laser/for_the_treatment_of_metal' />">
+					<custom:getDescriptionByLocale description="${d_search.reset}"/>
+				</a>
 			</c:if>
 			<c:if test="${search.typeLaser[0].equals('С диодной накачкой')}">
-				<a class="reset" href="<c:url value='/laser/diode_pumped' />">СБРОСИТЬ</a>
+				<a class="reset" href="<c:url value='/laser/diode_pumped' />">
+					<custom:getDescriptionByLocale description="${d_search.reset}"/>
+				</a>
 			</c:if>
 			<c:if test="${search.typeLaser[0].equals('Оптоволоконные лазеры')}">
-				<a class="reset" href="<c:url value='/laser/fiber_lasers' />">СБРОСИТЬ</a>
+				<a class="reset" href="<c:url value='/laser/fiber_lasers' />">
+					<custom:getDescriptionByLocale description="${d_search.reset}"/>
+				</a>
 			</c:if>
 			<c:if test="${search.typeLaser[0].equals('Плазменные лазеры')}">
-				<a class="reset" href="<c:url value='/laser/plasma_lasers' />">СБРОСИТЬ</a>
+				<a class="reset" href="<c:url value='/laser/plasma_lasers' />">
+					<custom:getDescriptionByLocale description="${d_search.reset}"/>
+				</a>
 			</c:if>
 			
 		</form:form>

@@ -12,32 +12,46 @@
 
 	<div id="display_search">
 		<i class="opened"></i>
-		<p><custom:getDescriptionByLocale description="${search_printer.filter_items}"/></p>
+		<p><custom:getDescriptionByLocale description="${d_search.filter_items}"/></p>
 	</div>
 			<a style="margin-left:10px;" class="accept" href="javascript:void(0)" onclick="$('#search').submit();">
-				<custom:getDescriptionByLocale description="${search_printer.apply}"/>
+				<custom:getDescriptionByLocale description="${d_search.apply}"/>
 			</a>
 				
 			<c:if test="${search.typePrinter3D[0].equals('Экструдные FDM')}">
-				<a class="reset" href="<c:url value='/3d_printers/FDM-extruder' />">СБРОСИТЬ</a>
+				<a class="reset" href="<c:url value='/3d_printers/FDM-extruder' />">
+					<custom:getDescriptionByLocale description="${d_search.reset}"/>
+				</a>
 			</c:if>
 			<c:if test="${search.typePrinter3D[0].equals('Фото печать Polyjet')}">
-				<a class="reset" href="<c:url value='/3d_printers/photo_printing_polyjet' />">СБРОСИТЬ</a>
+				<a class="reset" href="<c:url value='/3d_printers/photo_printing_polyjet' />">
+					<custom:getDescriptionByLocale description="${d_search.reset}"/>
+				</a>
 			</c:if>
 			<c:if test="${search.typePrinter3D[0].equals('Лазерного спекания LENS')}">
-				<a class="reset" href="<c:url value='/3d_printers/laser_sintering_LENS' />">СБРОСИТЬ</a>
+				<a class="reset" href="<c:url value='/3d_printers/laser_sintering_LENS' />">
+					<custom:getDescriptionByLocale description="${d_search.reset}"/>
+				</a>
 			</c:if>
 			<c:if test="${search.typePrinter3D[0].equals('Ламинация LOM')}">
-				<a class="reset" href="<c:url value='/3d_printers/lamination_LOM' />">СБРОСИТЬ</a>
+				<a class="reset" href="<c:url value='/3d_printers/lamination_LOM' />">
+					<custom:getDescriptionByLocale description="${d_search.reset}"/>
+				</a>
 			</c:if>
 			<c:if test="${search.typePrinter3D[0].equals('Стереолитография SL')}">
-				<a class="reset" href="<c:url value='/3d_printers/stereolithography_SL' />">СБРОСИТЬ</a>
+				<a class="reset" href="<c:url value='/3d_printers/stereolithography_SL' />">
+					<custom:getDescriptionByLocale description="${d_search.reset}"/>
+				</a>
 			</c:if>
 			<c:if test="${search.typePrinter3D[0].equals('Лазерное спекание LS')}">
-				<a class="reset" href="<c:url value='/3d_printers/laser_sintering_LS' />">СБРОСИТЬ</a>
+				<a class="reset" href="<c:url value='/3d_printers/laser_sintering_LS' />">
+					<custom:getDescriptionByLocale description="${d_search.reset}"/>
+				</a>
 			</c:if>
 			<c:if test="${search.typePrinter3D[0].equals('Порошкового склеивания 3DP')}">
-				<a class="reset" href="<c:url value='/3d_printers/powder_bonding_3DP' />">СБРОСИТЬ</a>
+				<a class="reset" href="<c:url value='/3d_printers/powder_bonding_3DP' />">
+					<custom:getDescriptionByLocale description="${d_search.reset}"/>
+				</a>
 			</c:if>
 			
 	<div id="search_product">
@@ -318,29 +332,43 @@
 		<jsp:include page="../search/general_characteristics.jsp" />
 		
 			<a class="accept" href="javascript:void(0)" onclick="$('#search').submit();">
-				<custom:getDescriptionByLocale description="${search_printer.apply}"/>
+				<custom:getDescriptionByLocale description="${d_search.apply}"/>
 			</a>
 			
 			<c:if test="${search.typePrinter3D[0].equals('Экструдные FDM')}">
-				<a class="reset" href="<c:url value='/3d_printers/FDM-extruder' />">СБРОСИТЬ</a>
+				<a class="reset" href="<c:url value='/3d_printers/FDM-extruder' />">
+					<custom:getDescriptionByLocale description="${d_search.reset}"/>
+				</a>
 			</c:if>
 			<c:if test="${search.typePrinter3D[0].equals('Фото печать Polyjet')}">
-				<a class="reset" href="<c:url value='/3d_printers/photo_printing_polyjet' />">СБРОСИТЬ</a>
+				<a class="reset" href="<c:url value='/3d_printers/photo_printing_polyjet' />">
+					<custom:getDescriptionByLocale description="${d_search.reset}"/>
+				</a>
 			</c:if>
 			<c:if test="${search.typePrinter3D[0].equals('Лазерного спекания LENS')}">
-				<a class="reset" href="<c:url value='/3d_printers/laser_sintering_LENS' />">СБРОСИТЬ</a>
+				<a class="reset" href="<c:url value='/3d_printers/laser_sintering_LENS' />">
+					<custom:getDescriptionByLocale description="${d_search.reset}"/>
+				</a>
 			</c:if>
 			<c:if test="${search.typePrinter3D[0].equals('Ламинация LOM')}">
-				<a class="reset" href="<c:url value='/3d_printers/lamination_LOM' />">СБРОСИТЬ</a>
+				<a class="reset" href="<c:url value='/3d_printers/lamination_LOM' />">
+					<custom:getDescriptionByLocale description="${d_search.reset}"/>
+				</a>
 			</c:if>
 			<c:if test="${search.typePrinter3D[0].equals('Стереолитография SL')}">
-				<a class="reset" href="<c:url value='/3d_printers/stereolithography_SL' />">СБРОСИТЬ</a>
+				<a class="reset" href="<c:url value='/3d_printers/stereolithography_SL' />">
+					<custom:getDescriptionByLocale description="${d_search.reset}"/>
+				</a>
 			</c:if>
 			<c:if test="${search.typePrinter3D[0].equals('Лазерное спекание LS')}">
-				<a class="reset" href="<c:url value='/3d_printers/laser_sintering_LS' />">СБРОСИТЬ</a>
+				<a class="reset" href="<c:url value='/3d_printers/laser_sintering_LS' />">
+					<custom:getDescriptionByLocale description="${d_search.reset}"/>
+				</a>
 			</c:if>
 			<c:if test="${search.typePrinter3D[0].equals('Порошкового склеивания 3DP')}">
-				<a class="reset" href="<c:url value='/3d_printers/powder_bonding_3DP' />">СБРОСИТЬ</a>
+				<a class="reset" href="<c:url value='/3d_printers/powder_bonding_3DP' />">
+					<custom:getDescriptionByLocale description="${d_search.reset}"/>
+				</a>
 			</c:if>
 			
 		</form:form>
