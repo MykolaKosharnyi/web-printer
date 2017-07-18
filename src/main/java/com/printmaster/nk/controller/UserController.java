@@ -192,8 +192,10 @@ public class UserController {
 	public String unSubscriptionGET(Model model, @PathVariable("id") String id)
 			throws NumberFormatException, UnsupportedEncodingException {
 		model.addAttribute("listSubscription", listSubscription);
+		model.addAttribute("listScopeOfActivities", listScopeOfActivities);
 		UserAddByAdmin user = userAddByAdminService.getUserById(decodeId(id));
 		model.addAttribute("subscriptions",  user.getSubscription());
+		model.addAttribute("u_listScopeOfActivities",  user.getScopeOfActivities());
 		model.addAttribute("userId", encodeId(user.getId()));
 	    return "user/subscription_user_add_by_admin";
 	}
@@ -203,15 +205,25 @@ public class UserController {
 	public @ResponseBody void unSubscriptionPOST(@RequestBody List<String> subscriptionFromForm, @PathVariable("id") String id)
 			throws NumberFormatException, UnsupportedEncodingException {
 		UserAddByAdmin user = userAddByAdminService.getUserById(decodeId(id));
-		user.setStatusOfSubscription(setStatusOfSubscription(subscriptionFromForm.size(), user.getSubscription().size()));
+		user.setStatusOfSubscription(setStatusOfSubscriptionC(subscriptionFromForm.size(), user.getSubscription().size(), user.getScopeOfActivities().size()));
 		user.setSubscription(subscriptionFromForm);
 		userAddByAdminService.updateUser(user);
 	}
 	
-	private StatusSubscription setStatusOfSubscription(int sizeForm, int sizeCurrent){		
+	@RequestMapping(value = "/scope_activities/{id}", method = RequestMethod.POST,consumes=JSON_CONSUMES,
+    		headers = JSON_HEADERS)
+	public @ResponseBody void unSubscriptionSAPOST(@RequestBody List<String> scopeOfActivitiesFromForm, @PathVariable("id") String id)
+			throws NumberFormatException, UnsupportedEncodingException {
+		UserAddByAdmin user = userAddByAdminService.getUserById(decodeId(id));
+		user.setStatusOfSubscription(setStatusOfSubscriptionC(scopeOfActivitiesFromForm.size(), user.getScopeOfActivities().size(),user.getSubscription().size()));
+		user.setScopeOfActivities(scopeOfActivitiesFromForm);
+		userAddByAdminService.updateUser(user);
+	}
+
+	private StatusSubscription setStatusOfSubscriptionC(int sizeForm, int sizeCurrent, int sizeCheckedProperty){		
 		StatusSubscription result = StatusSubscription.NOT_CHANGED;
 	
-		if(sizeForm==0){
+		if(sizeForm==0 && sizeCheckedProperty==0){
 			result = StatusSubscription.COMPLETELY_UNSUBSCRIBED;
 		} else if(sizeForm>sizeCurrent){
 			result = StatusSubscription.ADDED_SUBSCRIPTIONS;
