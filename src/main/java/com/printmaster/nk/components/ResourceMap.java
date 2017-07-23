@@ -10,7 +10,8 @@ public enum ResourceMap {
 	COMMENTS("d_comments","/var/www/localhost/products/descriptions/comments.json"),
 	
 	DESCRIPTIONS_SEARCH_COMMON("d_search", "/var/www/localhost/products/descriptions/search.json"),
-	DESCRIPTIONS_SEARCH_PRINTER("search_printer", "/var/www/localhost/products/descriptions/search_printer.json");
+	DESCRIPTIONS_SEARCH_PRINTER("search_printer", "/var/www/localhost/products/descriptions/search_printer.json"),
+	DESCRIPTIONS_SEARCH_3D_PRINTER("search_3d_printer", "/var/www/localhost/products/descriptions/search_3d_printer.json");
 	
 	
 	private String name;

@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix = "custom" uri = "/WEB-INF/custom.tld"%>
 <!DOCTYPE>
 <html lang="ru">
 <head>
@@ -27,7 +28,7 @@
 				<div id="name_product_head_description">${product.name}</div>
 				
 				<c:if test="${!empty product.partNumber}">
-   					<div id="name_product_head_description">Код товара: ${product.partNumber}</div>
+   					<div id="name_product_head_description"><custom:getDescriptionByLocale description="${search_3d_printer.product_code}"/>: ${product.partNumber}</div>
 				</c:if>
 					
 				<table id="table_in_head">
@@ -38,19 +39,19 @@
 
 					<c:if test="${!empty product.typePrinter3D}">
 						<tr>
-							<td>Тип принтера:</td>
+							<td><custom:getDescriptionByLocale description="${search_3d_printer.printer_type}"/>:</td>
 							<td>${product.typePrinter3D}</td>
 						</tr>
 					</c:if>
 					
 					<c:if test="${!empty product.equipmentModel}">
-   							<tr><td>Модель:</td><td>${product.equipmentModel}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_3d_printer.model}"/>:</td><td>${product.equipmentModel}</td></tr>
 					</c:if>
 					
 					 <c:if test="${product.sizePrintableAreaX > 0 || product.sizePrintableAreaY > 0 || product.sizePrintableAreaZ > 0}">
-   							<tr><td>Размер запечатываемой области:</td><td>${product.sizePrintableAreaX}
+   							<tr><td><custom:getDescriptionByLocale description="${search_3d_printer.size_area_printed}"/>:</td><td>${product.sizePrintableAreaX}
    							<c:if test="${product.sizePrintableAreaY > 0}" > x ${product.sizePrintableAreaY}</c:if>
-   							<c:if test="${product.sizePrintableAreaZ > 0}" > x ${product.sizePrintableAreaZ}</c:if> мм</td></tr>
+   							<c:if test="${product.sizePrintableAreaZ > 0}" > x ${product.sizePrintableAreaZ}</c:if> <custom:getDescriptionByLocale description="${d_search.mm}"/></td></tr>
 					</c:if>
 
 				</table>
@@ -78,59 +79,59 @@
 					<table>
                        
                        <c:if test="${!empty product.typePrinter3D}">
-   							<tr><td>Тип принтера:</td><td>${product.typePrinter3D}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_3d_printer.printer_type}"/>:</td><td>${product.typePrinter3D}</td></tr>
 						</c:if>
                        
                        <c:if test="${!empty product.partNumber}">
-   							<tr><td>Код товара:</td><td>${product.partNumber}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_3d_printer.product_code}"/>:</td><td>${product.partNumber}</td></tr>
 						</c:if>
                        
                        <c:if test="${product.sizePrintableAreaX > 0}">
-   							<tr><td>Размер запечатываемой области по оси Х:</td><td>${product.sizePrintableAreaX} мм</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_3d_printer.size_area_printed}"/> <custom:getDescriptionByLocale description="${search_3d_printer.size_area_printed_x}"/>:</td><td>${product.sizePrintableAreaX} <custom:getDescriptionByLocale description="${d_search.mm}"/></td></tr>
 						</c:if>
 						
 						<c:if test="${product.sizePrintableAreaY > 0}">
-   							<tr><td>Размер запечатываемой области по оси Y:</td><td>${product.sizePrintableAreaY} мм</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_3d_printer.size_area_printed}"/> <custom:getDescriptionByLocale description="${search_3d_printer.size_area_printed_y}"/>:</td><td>${product.sizePrintableAreaY} <custom:getDescriptionByLocale description="${d_search.mm}"/></td></tr>
 						</c:if>
                        
                        	<c:if test="${product.sizePrintableAreaZ > 0}">
-   							<tr><td>Размер запечатываемой области по оси Z:</td><td>${product.sizePrintableAreaZ} мм</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_3d_printer.size_area_printed}"/> <custom:getDescriptionByLocale description="${search_3d_printer.size_area_printed_z}"/>:</td><td>${product.sizePrintableAreaZ} <custom:getDescriptionByLocale description="${d_search.mm}"/></td></tr>
 						</c:if>
 						
 						<c:if test="${!empty product.typeExtruder}">
-   							<tr><td>Тип Экструдера:</td><td>${product.typeExtruder}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_3d_printer.type_extruder}"/>:</td><td>${product.typeExtruder}</td></tr>
 						</c:if>	
 						
 						<c:if test="${product.extruderNumber > 0}">
-   							<tr><td>Количество экструдеров:</td><td>${product.extruderNumber}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_3d_printer.number_extruders}"/>:</td><td>${product.extruderNumber}</td></tr>
 						</c:if>
 						
 						<c:if test="${product.speedOfMovingThePrintHead > 0}">
-   							<tr><td>Скорость перемещения печатной головки:</td><td>${product.speedOfMovingThePrintHead} мм/с</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_3d_printer.print_head_speed}"/>:</td><td>${product.speedOfMovingThePrintHead} <custom:getDescriptionByLocale description="${d_search.mm_s}"/></td></tr>
 						</c:if>
 						
 						<c:if test="${product.positioningAccuracyOfThePrintHead > 0}">
-   							<tr><td>Точность позиционирования печатной головки:</td><td>${product.positioningAccuracyOfThePrintHead} мкм</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_3d_printer.printhead_positioning_accuracy}"/>:</td><td>${product.positioningAccuracyOfThePrintHead} <custom:getDescriptionByLocale description="${d_search.mkm}"/></td></tr>
 						</c:if>
 						
 						<c:if test="${!empty product.airflowModels}">
-   							<tr><td>Обдув модели:</td><td>${product.airflowModels}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_3d_printer.blowing_model}"/>:</td><td>${product.airflowModels}</td></tr>
 						</c:if>	
 						
 						<c:if test="${product.numberOfFansForBlowingModels > 0}">
-   							<tr><td>Кол-во вентиляторов для обдува модели:</td><td>${product.numberOfFansForBlowingModels}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_3d_printer.number_fans_blowing_model}"/>:</td><td>${product.numberOfFansForBlowingModels}</td></tr>
 						</c:if>
                        
                        <c:if test="${!empty product.previouslyUsed}">
-   							<tr><td>Состояние оборудования:</td><td>${product.previouslyUsed}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_3d_printer.сondition_equipment}"/>:</td><td>${product.previouslyUsed}</td></tr>
 						</c:if>
 						
 						<c:if test="${!empty product.printTechnology}">
-   							<tr><td>Технология печати:</td><td>${product.printTechnology}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_3d_printer.printing_technology}"/>:</td><td>${product.printTechnology}</td></tr>
 						</c:if>
                        
 						<c:if test="${!empty product.chromaticity}">
-   							<tr><td>Цветовая схема:</td><td>
+   							<tr><td><custom:getDescriptionByLocale description="${search_3d_printer.color}"/>:</td><td>
 		                   		<c:forEach var="tp" items="${product.chromaticity}" varStatus="status">  
 		    						${tp}<c:if test="${ ! status.last}" >, </c:if> 
 								</c:forEach>
@@ -138,19 +139,19 @@
 						</c:if>
 						
                        <c:if test="${!empty product.typeOfPrinthead}">
-   							<tr><td>Тип печатающей головки:</td><td>${product.typeOfPrinthead}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_3d_printer.print_head_type}"/>:</td><td>${product.typeOfPrinthead}</td></tr>
 						</c:if>						
 						
                        <c:if test="${product.meltingPointOfThePrintingMaterial > 0}">
-   							<tr><td>Температура плавления печатного материала:</td><td>${product.meltingPointOfThePrintingMaterial}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_3d_printer.melting_point_printed_matter}"/>:</td><td>${product.meltingPointOfThePrintingMaterial} C</td></tr>
 						</c:if>							
 						
                       	<c:if test="${!empty product.equipmentManufacturer}">
-   							<tr><td>Производитель оборудования:</td><td>${product.equipmentManufacturer}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_3d_printer.equipment_manufacturer}"/>:</td><td>${product.equipmentManufacturer}</td></tr>
 						</c:if>						
 					
 						<c:if test="${!empty product.media}">
-   							<tr><td>Материал для печати:</td><td>
+   							<tr><td><custom:getDescriptionByLocale description="${search_3d_printer.material_printing}"/>:</td><td>
 		                   		<c:forEach var="tp" items="${product.media}" varStatus="status">  
 		    						${tp}<c:if test="${ ! status.last}" >, </c:if>
 								</c:forEach>
@@ -158,19 +159,19 @@
 						</c:if>					
 					
                       	<c:if test="${product.sizeExtruder > 0}">
-   							<tr><td>Размер эктрудера:</td><td>${product.sizeExtruder} мм</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_3d_printer.extruder_size}"/>:</td><td>${product.sizeExtruder} <custom:getDescriptionByLocale description="${d_search.mm}"/></td></tr>
 						</c:if>						
 					
                       	<c:if test="${product.speedPrint > 0}">
-   							<tr><td>Скорость печати:</td><td>${product.speedPrint} м.кв./ч.</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_3d_printer.print_speed}"/>:</td><td>${product.speedPrint} м.кв./ч.</td></tr>
 						</c:if>					
 					
                       	<c:if test="${product.thicknessOfThePrintingLayer > 0}">
-   							<tr><td>Толщина слоя печати:</td><td>${product.thicknessOfThePrintingLayer}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_3d_printer.thickness_printing_layer}"/>:</td><td>${product.thicknessOfThePrintingLayer}</td></tr>
 						</c:if>						
 					
                       	<c:if test="${!empty product.interfaceConnection}">
-   							<tr><td>Интерфейс подключения:</td><td>
+   							<tr><td><custom:getDescriptionByLocale description="${search_3d_printer.interface_connection}"/>:</td><td>
 	                   			<c:forEach var="tp" items="${product.interfaceConnection}" varStatus="status">  
 	    							${tp}<c:if test="${ ! status.last}" >, </c:if>  
 								</c:forEach>                       
@@ -178,7 +179,7 @@
 						</c:if>					
 					
                       	<c:if test="${!empty product.typesOfFiles}">
-   							<tr><td>Тыпы файлов:</td><td>
+   							<tr><td><custom:getDescriptionByLocale description="${search_3d_printer.file_types}"/>:</td><td>
 	                   			<c:forEach var="tp" items="${product.typesOfFiles}" varStatus="status">  
 	    							${tp}<c:if test="${ ! status.last}" >, </c:if>  
 								</c:forEach>                       
@@ -186,7 +187,7 @@
 						</c:if>						
 					
                        <c:if test="${!empty product.rip}">
-   							<tr><td>Программное обеспечение:</td><td>
+   							<tr><td><custom:getDescriptionByLocale description="${search_3d_printer.software}"/>:</td><td>
 	                   			<c:forEach var="tp" items="${product.rip}" varStatus="status">  
 	    							${tp}<c:if test="${ ! status.last}" >, </c:if>  
 								</c:forEach>                        
@@ -194,31 +195,31 @@
 						</c:if>					
 					
                       	<c:if test="${product.maximumWeightOfThePrintedModel > 0}">
-   							<tr><td>Максимальная масса распечатываемой модели:</td><td>${product.maximumWeightOfThePrintedModel}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_3d_printer.maximum_mass_model_printed}"/>:</td><td>${product.maximumWeightOfThePrintedModel}</td></tr>
 						</c:if>						
 
 						<c:if test="${product.averagePowerConsumption > 0}">
-   							<tr><td>Средняя потребляемая мощность:</td><td>${product.averagePowerConsumption} Вт</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${d_search.averagePowerConsumption}"/>:</td><td>${product.averagePowerConsumption} <custom:getDescriptionByLocale description="${d_search.w}"/></td></tr>
 						</c:if>
 
                        <c:if test="${product.maxPowerConsumption > 0}">
-   							<tr><td>Максимальная потребляемая мощность:</td><td>${product.maxPowerConsumption} Вт</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${d_search.maxPowerConsumption}"/>:</td><td>${product.maxPowerConsumption} <custom:getDescriptionByLocale description="${d_search.w}"/></td></tr>
 						</c:if>
 					
 						<c:if test="${product.weight > 0}">
-   							<tr><td>Вес:</td><td>${product.weight} кг</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${d_search.weight}"/>:</td><td>${product.weight} <custom:getDescriptionByLocale description="${d_search.kg}"/></td></tr>
 						</c:if>
                        
                        <c:if test="${product.width > 0}">
-   							<tr><td>Ширина:</td><td>${product.width} мм</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${d_search.width}"/>:</td><td>${product.width} <custom:getDescriptionByLocale description="${d_search.mm}"/></td></tr>
 						</c:if>
                        
                         <c:if test="${product.depth > 0}">
-   							<tr><td>Глубина:</td><td>${product.depth} мм</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${d_search.depth}"/>:</td><td>${product.depth} <custom:getDescriptionByLocale description="${d_search.mm}"/></td></tr>
 						</c:if>
                        
                        <c:if test="${product.heigth > 0}">
-   							<tr><td>Высота:</td><td>${product.heigth} мм</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${d_search.height}"/>:</td><td>${product.heigth} <custom:getDescriptionByLocale description="${d_search.mm}"/></td></tr>
 						</c:if>
                           					
                   </table>
