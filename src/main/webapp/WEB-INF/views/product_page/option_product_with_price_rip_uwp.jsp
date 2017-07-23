@@ -14,184 +14,8 @@
       </tr>
     </thead>
     <tbody>
-
-      <c:if test="${product.optionInstallation > 0.01}">
-	      <tr class="block_product_price">
-	        <td><input class="add_price" type="checkbox" value="Инсталяция" id="optionInstallation_price">
-	        	<label class="add_price_title" for="optionInstallation_price"><custom:getDescriptionByLocale description="${descriptions.installation}"/></label>
-	        </td>
-	        <td>
-				<div class="product_price">
-					<input name="price_value" value="${product.optionInstallation}" type="hidden">				
-			   		<div></div>
-				</div>
-			</td>
-	        <td>${product.descriptionOptionInstallation}</td>
-	      </tr>
-      </c:if>
-
-      <c:if test="${product.priceAddedOption > 0.01 && (product.nameAddedOption!=null && product.nameAddedOption!='')}">
-	      <tr class="block_product_price">
-	        <td><input class="add_price" type="checkbox" value="${product.nameAddedOption}" id="priceAddedOption_price">
-	        	<label class="add_price_title" for="priceAddedOption_price">${product.nameAddedOption}</label>
-	        </td>
-	        <td>
-				<div class="product_price">
-					<input name="price_value" value="${product.priceAddedOption}" type="hidden">				
-			   		<div></div>
-				</div>
-			</td>
-	        <td>${product.descriptionOptionAddedOption}</td>
-	      </tr>
-      </c:if>      
-
-      <c:if test="${product.priceAddedOption2 > 0.01 && (product.nameAddedOption2!=null && product.nameAddedOption2!='')}">
-	      <tr class="block_product_price">
-	        <td><input class="add_price" type="checkbox" value="${product.nameAddedOption2}" id="priceAddedOption2_price">
-	        	<label class="add_price_title" for="priceAddedOption2_price">${product.nameAddedOption2}</label>
-	        </td>
-	        <td>
-				<div class="product_price">
-					<input name="price_value" value="${product.priceAddedOption2}" type="hidden">				
-			   		<div></div>	
-				</div>
-			</td>
-	        <td>${product.descriptionOptionAddedOption2}</td>
-	      </tr>
-      </c:if>  
-      
-      <c:if test="${product.priceAddedOption3 > 0.01 && (product.nameAddedOption3!=null && product.nameAddedOption3!='')}">
-	      <tr class="block_product_price">
-	        <td><input class="add_price" type="checkbox" value="${product.nameAddedOption3}" id="priceAddedOption3_price">
-	        	<label class="add_price_title" for="priceAddedOption3_price">${product.nameAddedOption3}</label>
-	        </td>
-	        <td>
-				<div class="product_price">
-					<input name="price_value" value="${product.priceAddedOption3}" type="hidden">				
-			   		<div></div>
-				</div>
-			</td>
-	        <td>${product.descriptionOptionAddedOption3}</td>
-	      </tr>
-      </c:if>       
-
-	<c:if test="${product.optionVAT > 0.01}">
-	      <tr class="block_product_price">
-	        <td><input class="add_price" type="checkbox" value="НДС" id="optionVAT_price">
-	        	<label class="add_price_title" for="optionVAT_price"><custom:getDescriptionByLocale description="${descriptions.vat}"/></label>
-	        </td>
-	        <td>
-	        	<div class="product_price" style="display:none;">
-			   		<input name="price_value" value="${product.optionVAT}" type="hidden">				
-			   		<div></div>
-				</div>
-	        </td>
-	        <td>${product.descriptionOptionVAT}</td>
-	      </tr>
-	</c:if>
-	
-	<c:if test="${ product.ukraineDeliveryPriceSize || product.ukraineDeliveryPriceWeight ||
-				((type == 'use_with_product') && product.insuranceInternationalTransport) ||
-				((type == 'use_with_product') && product.insuranceUkraineTransport) ||	
-			       product.kyivDeliveryPriceSize || product.kyivDeliveryPriceWeight }">	
-	<tr class="delivery">
-		<td colspan="3">
-			<div class="delivery_options">
-				<i class="fa fa-arrow-right"></i>
-				<p class="delivery_options_title"><custom:getDescriptionByLocale description="${descriptions.delivery}"/></p>
-			</div>
-			<div class="delivery_options_body">
-			
-				<input type="hidden" name="delivery_radio_name" class="delivery_radio_name" value="">
-				<input type="hidden" name="delivery_radio_value" class="delivery_radio_value" value="0">
-				
-				<table class="table table-hover table_delivery_options">
-					<tbody>
-
-						<c:if test="${ product.ukraineDeliveryPriceSize || product.ukraineDeliveryPriceWeight }">
-							<tr class="block_product_price">
-								<td><input class="add_price_delivery" type="radio" name="delivery" value="По Украине" id="ukraineDelivery_price">
-						        	<label class="add_price_delivery_title" for="ukraineDelivery_price">
-						        		<custom:getDescriptionByLocale description="${descriptions.delivery_ukraine}"/>
-						        	</label>
-						        </td>
-						        <td>
-									<div class="product_price">
-										<input name="price_value" value="${
-											(product.ukraineDeliveryPriceSize ? product.deliveryWidth * product.deliveryHeight * 
-												product.deliveryDepth * constants.price_ukraine_size : 0) + 
-												(product.ukraineDeliveryPriceWeight ? product.deliveryWeight * constants.price_ukraine_weight : 0)
-											}" type="hidden">				
-								   		<div></div>
-									</div>
-								</td>
-								<td>${product.ukraineDeliveryDescription}</td>
-							</tr>
-				      	</c:if>
-				      	
-				      	<c:if test="${ product.kyivDeliveryPriceSize || product.kyivDeliveryPriceWeight }">
-							<tr class="block_product_price">
-								<td><input class="add_price_delivery" type="radio" name="delivery" value="По Киеву" id="kyivDelivery_price">
-						        	<label class="add_price_delivery_title" for="kyivDelivery_price"><custom:getDescriptionByLocale description="${descriptions.delivery_kiev}"/></label>
-						        </td>
-						        <td>		
-									<div class="product_price">
-										<input name="price_value" value="${
-											(product.kyivDeliveryPriceSize ? product.deliveryWidth * product.deliveryHeight * 
-												product.deliveryDepth * constants.price_kyiv_size : 0) + 
-												(product.kyivDeliveryPriceWeight ? product.deliveryWeight * constants.price_kyiv_weight : 0)
-											}" type="hidden">				
-								   		<div></div>
-									</div>
-								</td>
-								<td>${product.kyivDeliveryDescription}</td>
-							</tr>
-				      	</c:if>
-				      	
-				      		<c:if test="${ (type == 'use_with_product') && product.insuranceInternationalTransport }">
-						      <tr class="block_product_price">
-						        <td style="position: relative;">
-						        	<input class="add_price" style="position: absolute; top: 5px;" type="checkbox" value="Страхование груза международная перевозка" id="insuranceInternationalTransport_price">
-						        	<label class="add_price_title" style="margin-left:20px;"
-						        	 for="insuranceInternationalTransport_price"><custom:getDescriptionByLocale description="${descriptions.delivery_insurance_international}"/></label>
-						        </td>
-						        <td>
-									<div class="product_price">
-										<input name="price_value" value="${product.prise * constants.percent_insurance_international / 100}" type="hidden">				
-								   		<div></div>
-									</div>
-								</td>
-						        <td>${product.descriptionInsuranceInternationalTransport}</td>
-						      </tr>
-					    </c:if>
-					    
-					    <c:if test="${ (type == 'use_with_product') && product.insuranceUkraineTransport }">
-						      <tr class="block_product_price">
-						        <td style="position: relative;">
-						        	<input class="add_price" style="position: absolute; top: 5px;" type="checkbox" value="Страхование груза по Украине" id="insuranceUkraineTransport_price">
-						        	<label class="add_price_title" style="margin-left:20px;" 
-						        	for="insuranceUkraineTransport_price"><custom:getDescriptionByLocale description="${descriptions.delivery_insurance_ukraine}"/></label>
-						        </td>
-						        <td>
-									<div class="product_price">	
-										<input name="price_value" value="${product.prise * constants.percent_insurance_ukraine / 100}" type="hidden">				
-								   		<div></div>
-									</div>
-								</td>
-						        <td>${product.descriptionInsuranceUkraineTransport}</td>
-						      </tr>
-					    </c:if>
-						
-					</tbody>
-				</table>
-				<div class="delivery_notes"><p>*</p><custom:getDescriptionByLocale description="${descriptions.delivery_notes}"/></div>
-			</div>
-			
-		</td>
-	</tr>
-</c:if>
-
-<c:if test="${ (type == 'use_with_product') && (product.typeProduct=='Чернила для струйной печати') && ((product.cyanPaint > 0) || (product.magentaPaint > 0) || (product.yellowPaint > 0) ||
+    
+    <c:if test="${ (type == 'use_with_product') && (product.typeProduct=='Чернила для струйной печати') && ((product.cyanPaint > 0) || (product.magentaPaint > 0) || (product.yellowPaint > 0) ||
 		       (product.blackPaint > 0) || (product.lightCyanPaint > 0) || (product.lightMagentaPaint > 0) || (product.solventPaint > 0) ||
 		       (product.matteBlackPaint > 0) || (product.grayPaint > 0) || (product.orangePaint > 0) || (product.greenPaint > 0) ||
 		       ((product.variant1Paint > 0) && (product.variant1NamePaint !=null) && (product.variant1NamePaint!='')) ||
@@ -200,7 +24,7 @@
 	<tr class=paint>
 		<td colspan="3">
 			<div class="paint_options">
-				<i class="fa fa-arrow-right"></i>
+				<i class="fa fa-arrow-down"></i>
 				<p class="paint_options_title"><custom:getDescriptionByLocale description="${descriptions.paint}"/></p>
 			</div>
 			<div class="paint_options_body">
@@ -678,6 +502,182 @@
 
 					</tbody>
 				</table>
+			</div>
+			
+		</td>
+	</tr>
+</c:if>
+
+      <c:if test="${product.optionInstallation > 0.01}">
+	      <tr class="block_product_price">
+	        <td><input class="add_price" type="checkbox" value="Инсталяция" id="optionInstallation_price">
+	        	<label class="add_price_title" for="optionInstallation_price"><custom:getDescriptionByLocale description="${descriptions.installation}"/></label>
+	        </td>
+	        <td>
+				<div class="product_price">
+					<input name="price_value" value="${product.optionInstallation}" type="hidden">				
+			   		<div></div>
+				</div>
+			</td>
+	        <td>${product.descriptionOptionInstallation}</td>
+	      </tr>
+      </c:if>
+
+      <c:if test="${product.priceAddedOption > 0.01 && (product.nameAddedOption!=null && product.nameAddedOption!='')}">
+	      <tr class="block_product_price">
+	        <td><input class="add_price" type="checkbox" value="${product.nameAddedOption}" id="priceAddedOption_price">
+	        	<label class="add_price_title" for="priceAddedOption_price">${product.nameAddedOption}</label>
+	        </td>
+	        <td>
+				<div class="product_price">
+					<input name="price_value" value="${product.priceAddedOption}" type="hidden">				
+			   		<div></div>
+				</div>
+			</td>
+	        <td>${product.descriptionOptionAddedOption}</td>
+	      </tr>
+      </c:if>      
+
+      <c:if test="${product.priceAddedOption2 > 0.01 && (product.nameAddedOption2!=null && product.nameAddedOption2!='')}">
+	      <tr class="block_product_price">
+	        <td><input class="add_price" type="checkbox" value="${product.nameAddedOption2}" id="priceAddedOption2_price">
+	        	<label class="add_price_title" for="priceAddedOption2_price">${product.nameAddedOption2}</label>
+	        </td>
+	        <td>
+				<div class="product_price">
+					<input name="price_value" value="${product.priceAddedOption2}" type="hidden">				
+			   		<div></div>	
+				</div>
+			</td>
+	        <td>${product.descriptionOptionAddedOption2}</td>
+	      </tr>
+      </c:if>  
+      
+      <c:if test="${product.priceAddedOption3 > 0.01 && (product.nameAddedOption3!=null && product.nameAddedOption3!='')}">
+	      <tr class="block_product_price">
+	        <td><input class="add_price" type="checkbox" value="${product.nameAddedOption3}" id="priceAddedOption3_price">
+	        	<label class="add_price_title" for="priceAddedOption3_price">${product.nameAddedOption3}</label>
+	        </td>
+	        <td>
+				<div class="product_price">
+					<input name="price_value" value="${product.priceAddedOption3}" type="hidden">				
+			   		<div></div>
+				</div>
+			</td>
+	        <td>${product.descriptionOptionAddedOption3}</td>
+	      </tr>
+      </c:if>       
+
+	<c:if test="${product.optionVAT > 0.01}">
+	      <tr class="block_product_price">
+	        <td><input class="add_price" type="checkbox" value="НДС" id="optionVAT_price">
+	        	<label class="add_price_title" for="optionVAT_price"><custom:getDescriptionByLocale description="${descriptions.vat}"/></label>
+	        </td>
+	        <td>
+	        	<div class="product_price" style="display:none;">
+			   		<input name="price_value" value="${product.optionVAT}" type="hidden">				
+			   		<div></div>
+				</div>
+	        </td>
+	        <td>${product.descriptionOptionVAT}</td>
+	      </tr>
+	</c:if>
+	
+	<c:if test="${ product.ukraineDeliveryPriceSize || product.ukraineDeliveryPriceWeight ||
+				((type == 'use_with_product') && product.insuranceInternationalTransport) ||
+				((type == 'use_with_product') && product.insuranceUkraineTransport) ||	
+			       product.kyivDeliveryPriceSize || product.kyivDeliveryPriceWeight }">	
+	<tr class="delivery">
+		<td colspan="3">
+			<div class="delivery_options">
+				<i class="fa fa-arrow-right"></i>
+				<p class="delivery_options_title"><custom:getDescriptionByLocale description="${descriptions.delivery}"/></p>
+			</div>
+			<div class="delivery_options_body">
+			
+				<input type="hidden" name="delivery_radio_name" class="delivery_radio_name" value="">
+				<input type="hidden" name="delivery_radio_value" class="delivery_radio_value" value="0">
+				
+				<table class="table table-hover table_delivery_options">
+					<tbody>
+
+						<c:if test="${ product.ukraineDeliveryPriceSize || product.ukraineDeliveryPriceWeight }">
+							<tr class="block_product_price">
+								<td><input class="add_price_delivery" type="radio" name="delivery" value="По Украине" id="ukraineDelivery_price">
+						        	<label class="add_price_delivery_title" for="ukraineDelivery_price">
+						        		<custom:getDescriptionByLocale description="${descriptions.delivery_ukraine}"/>
+						        	</label>
+						        </td>
+						        <td>
+									<div class="product_price">
+										<input name="price_value" value="${
+											(product.ukraineDeliveryPriceSize ? product.deliveryWidth * product.deliveryHeight * 
+												product.deliveryDepth * constants.price_ukraine_size : 0) + 
+												(product.ukraineDeliveryPriceWeight ? product.deliveryWeight * constants.price_ukraine_weight : 0)
+											}" type="hidden">				
+								   		<div></div>
+									</div>
+								</td>
+								<td>${product.ukraineDeliveryDescription}</td>
+							</tr>
+				      	</c:if>
+				      	
+				      	<c:if test="${ product.kyivDeliveryPriceSize || product.kyivDeliveryPriceWeight }">
+							<tr class="block_product_price">
+								<td><input class="add_price_delivery" type="radio" name="delivery" value="По Киеву" id="kyivDelivery_price">
+						        	<label class="add_price_delivery_title" for="kyivDelivery_price"><custom:getDescriptionByLocale description="${descriptions.delivery_kiev}"/></label>
+						        </td>
+						        <td>		
+									<div class="product_price">
+										<input name="price_value" value="${
+											(product.kyivDeliveryPriceSize ? product.deliveryWidth * product.deliveryHeight * 
+												product.deliveryDepth * constants.price_kyiv_size : 0) + 
+												(product.kyivDeliveryPriceWeight ? product.deliveryWeight * constants.price_kyiv_weight : 0)
+											}" type="hidden">				
+								   		<div></div>
+									</div>
+								</td>
+								<td>${product.kyivDeliveryDescription}</td>
+							</tr>
+				      	</c:if>
+				      	
+				      		<c:if test="${ (type == 'use_with_product') && product.insuranceInternationalTransport }">
+						      <tr class="block_product_price">
+						        <td style="position: relative;">
+						        	<input class="add_price" style="position: absolute; top: 5px;" type="checkbox" value="Страхование груза международная перевозка" id="insuranceInternationalTransport_price">
+						        	<label class="add_price_title" style="margin-left:20px;"
+						        	 for="insuranceInternationalTransport_price"><custom:getDescriptionByLocale description="${descriptions.delivery_insurance_international}"/></label>
+						        </td>
+						        <td>
+									<div class="product_price">
+										<input name="price_value" value="${product.prise * constants.percent_insurance_international / 100}" type="hidden">				
+								   		<div></div>
+									</div>
+								</td>
+						        <td>${product.descriptionInsuranceInternationalTransport}</td>
+						      </tr>
+					    </c:if>
+					    
+					    <c:if test="${ (type == 'use_with_product') && product.insuranceUkraineTransport }">
+						      <tr class="block_product_price">
+						        <td style="position: relative;">
+						        	<input class="add_price" style="position: absolute; top: 5px;" type="checkbox" value="Страхование груза по Украине" id="insuranceUkraineTransport_price">
+						        	<label class="add_price_title" style="margin-left:20px;" 
+						        	for="insuranceUkraineTransport_price"><custom:getDescriptionByLocale description="${descriptions.delivery_insurance_ukraine}"/></label>
+						        </td>
+						        <td>
+									<div class="product_price">	
+										<input name="price_value" value="${product.prise * constants.percent_insurance_ukraine / 100}" type="hidden">				
+								   		<div></div>
+									</div>
+								</td>
+						        <td>${product.descriptionInsuranceUkraineTransport}</td>
+						      </tr>
+					    </c:if>
+						
+					</tbody>
+				</table>
+				<div class="delivery_notes"><p>*</p><custom:getDescriptionByLocale description="${descriptions.delivery_notes}"/></div>
 			</div>
 			
 		</td>
