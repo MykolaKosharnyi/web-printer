@@ -94,7 +94,7 @@
 						<div class="radio" style="<c:if test="${mailMessage.headerOption==0 && status.first}">background: #006080;</c:if>
 						<c:if test="${mailMessage.headerOption!=0 && mailMessage.headerOption==headerOption.id}">background: #006080;</c:if> padding: 10px; border-radius: 10px;">
 							<label> <input type="radio" class="radio_mail_option"
-								name=headerOption value="${headerOption.id}"
+								name="headerOption" value="${headerOption.id}"
 								style="padding: 5px; border-radius: 10px;" <c:if test="${mailMessage.headerOption==0 && status.first}">checked</c:if>
 						<c:if test="${mailMessage.headerOption!=0 && mailMessage.headerOption==headerOption.id}">checked</c:if>>
 								<div style="background: white; display: block; padding: 10px; border-radius: 10px;">${headerOption.text}</div>

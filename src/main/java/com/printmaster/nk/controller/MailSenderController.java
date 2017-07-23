@@ -71,7 +71,7 @@ public class MailSenderController {
 	@RequestMapping(value = "/admin/message/get_black_version_of_letter", method = RequestMethod.POST,
 			consumes = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody void sendBlackVersion(@RequestBody MailSendingMessage mailMessage) {
-		mailMessage.setTitle(mailMessage.getTitle() + LABEL_CHECK_MAIL);
+		mailMessage.setTitle(mailMessage.getTitle() + LABEL_CHECK_MAIL + "(id=" + mailMessage.getId() + ")");
 		
 		try{
 			mailSendingComponent.observeRecipients(mailMessage,
