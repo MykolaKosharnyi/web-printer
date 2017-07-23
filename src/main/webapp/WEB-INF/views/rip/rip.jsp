@@ -28,7 +28,7 @@
                 	<div id="name_product_head_description">${product.name}</div>
                 	
                 	<c:if test="${!empty product.partNumber}">
-   						<div id="name_product_head_description">Код товара: ${product.partNumber}</div>
+   						<div id="name_product_head_description"><custom:getDescriptionByLocale description="${d_search.product_code}"/>: ${product.partNumber}</div>
 					</c:if>
                 	
                     <table id="table_in_head">
@@ -68,7 +68,7 @@
 					   </c:if>
                        
                        <c:if test="${!empty product.partNumber}">
-   							<tr><td>Код товара:</td><td>${product.partNumber}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${d_search.product_code}"/>:</td><td>${product.partNumber}</td></tr>
 					   </c:if>
                        
                         <c:if test="${!empty product.softwareMaker}">

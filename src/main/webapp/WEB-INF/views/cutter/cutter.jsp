@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix = "custom" uri = "/WEB-INF/custom.tld"%>
 <!DOCTYPE>
 <html lang="ru">
 <head>
@@ -28,7 +29,7 @@
                 	<div id="name_product_head_description">${product.name}</div>
                 	
                 	<c:if test="${!empty product.partNumber}">
-   						<div id="name_product_head_description">Код товара: ${product.partNumber}</div>
+   						<div id="name_product_head_description"><custom:getDescriptionByLocale description="${d_search.product_code}"/>: ${product.partNumber}</div>
 					</c:if>
                 	
                     <table id="table_in_head">
@@ -42,7 +43,7 @@
 					   </c:if>
 					   
 					   <c:if test="${!empty product.equipmentModel}">
-   							<tr><td>Модель:</td><td>${product.equipmentModel}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${d_search.model}"/>:</td><td>${product.equipmentModel}</td></tr>
 						</c:if>
 						
 						<c:if test="${product.sizeWorkAreaX > 0 || product.sizeWorkAreaY > 0 || product.sizeWorkAreaZ > 0}">
@@ -80,11 +81,11 @@
 						</c:if>
                        
                        <c:if test="${!empty product.partNumber}">
-   							<tr><td>Код товара:</td><td>${product.partNumber}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${d_search.product_code}"/>:</td><td>${product.partNumber}</td></tr>
 						</c:if>
 						
 						<c:if test="${!empty product.previouslyUsed}">
-   							<tr><td>Состояние оборудования:</td><td>${product.previouslyUsed}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${d_search.сondition_equipment}"/>:</td><td>${product.previouslyUsed}</td></tr>
 						</c:if>
 						
                        <c:if test="${product.sizeWorkAreaX > 0}">

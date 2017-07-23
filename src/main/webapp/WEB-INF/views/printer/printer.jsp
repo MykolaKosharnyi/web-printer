@@ -357,7 +357,7 @@
                 <div id="name_product_head_description">${product.name}</div>
                 	
                 <c:if test="${!empty product.partNumber}">
-                	<div id="name_product_head_description"><custom:getDescriptionByLocale description="${search_printer.product_code}"/>: ${product.partNumber}</div>
+                	<div id="name_product_head_description"><custom:getDescriptionByLocale description="${d_search.product_code}"/>: ${product.partNumber}</div>
 				</c:if>
 					
 					<div class="outer_table_in_head">
@@ -372,7 +372,7 @@
 						   </c:if>
 						   
 	                       <c:if test="${!empty product.equipmentModel}">
-	   							<tr><td><custom:getDescriptionByLocale description="${search_printer.model}"/>:</td>
+	   							<tr><td><custom:getDescriptionByLocale description="${d_search.model}"/>:</td>
 	   							<td>${product.equipmentModel}</td></tr>
 						   </c:if>
 						   
@@ -422,12 +422,12 @@
 					   </c:if>
                        
                        <c:if test="${!empty product.partNumber}">
-   							<tr><td><custom:getDescriptionByLocale description="${search_printer.product_code}"/>:</td>
+   							<tr><td><custom:getDescriptionByLocale description="${d_search.product_code}"/>:</td>
    							<td>${product.partNumber}</td></tr>
 					   </c:if>
                        
                        <c:if test="${!empty product.equipmentModel}">
-   							<tr><td><custom:getDescriptionByLocale description="${search_printer.model}"/>:</td>
+   							<tr><td><custom:getDescriptionByLocale description="${d_search.model}"/>:</td>
    							<td>${product.equipmentModel}</td></tr>
 					   </c:if>
                        
@@ -447,7 +447,7 @@
 					   </c:if>
                        
                        <c:if test="${!empty product.previouslyUsed}">
-   							<tr><td><custom:getDescriptionByLocale description="${search_printer.used_machinery}"/>:</td>
+   							<tr><td><custom:getDescriptionByLocale description="${d_search.сondition_equipment}"/>:</td>
    							<td><custom:singleProperty productValue="${product.previouslyUsed}" properties="${printer.previously_used}"/></td></tr>
 					   </c:if>
                        

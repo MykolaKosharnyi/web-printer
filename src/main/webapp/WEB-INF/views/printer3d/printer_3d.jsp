@@ -28,7 +28,7 @@
 				<div id="name_product_head_description">${product.name}</div>
 				
 				<c:if test="${!empty product.partNumber}">
-   					<div id="name_product_head_description"><custom:getDescriptionByLocale description="${search_3d_printer.product_code}"/>: ${product.partNumber}</div>
+   					<div id="name_product_head_description"><custom:getDescriptionByLocale description="${d_search.product_code}"/>: ${product.partNumber}</div>
 				</c:if>
 					
 				<table id="table_in_head">
@@ -45,7 +45,7 @@
 					</c:if>
 					
 					<c:if test="${!empty product.equipmentModel}">
-   							<tr><td><custom:getDescriptionByLocale description="${search_3d_printer.model}"/>:</td><td>${product.equipmentModel}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${d_search.model}"/>:</td><td>${product.equipmentModel}</td></tr>
 					</c:if>
 					
 					 <c:if test="${product.sizePrintableAreaX > 0 || product.sizePrintableAreaY > 0 || product.sizePrintableAreaZ > 0}">
@@ -83,7 +83,7 @@
 						</c:if>
                        
                        <c:if test="${!empty product.partNumber}">
-   							<tr><td><custom:getDescriptionByLocale description="${search_3d_printer.product_code}"/>:</td><td>${product.partNumber}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${d_search.product_code}"/>:</td><td>${product.partNumber}</td></tr>
 						</c:if>
                        
                        <c:if test="${product.sizePrintableAreaX > 0}">
@@ -123,7 +123,7 @@
 						</c:if>
                        
                        <c:if test="${!empty product.previouslyUsed}">
-   							<tr><td><custom:getDescriptionByLocale description="${search_3d_printer.сondition_equipment}"/>:</td><td>${product.previouslyUsed}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${d_search.сondition_equipment}"/>:</td><td>${product.previouslyUsed}</td></tr>
 						</c:if>
 						
 						<c:if test="${!empty product.printTechnology}">

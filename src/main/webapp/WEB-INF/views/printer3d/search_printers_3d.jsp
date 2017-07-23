@@ -37,7 +37,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p><custom:getDescriptionByLocale description="${search_3d_printer.сondition_equipment}"/></p>
+				<p><custom:getDescriptionByLocale description="${d_search.сondition_equipment}"/></p>
 			</div>
 			<ul class="check_boxes">
 				<form:checkboxes items="${printer.previously_used}" path="previouslyUsed" element="li" />

@@ -24,6 +24,8 @@
 			<br>
 			<a href="<c:url value='/admin/internationalization/search_3d_printer' />">Характеристики для поиска, 3D принтеры</a>
 			<br>
+			<a href="<c:url value='/admin/internationalization/search_d_printer' />">Характеристики для поиска, цифровое оборудование</a>
+			<br>
 		</div>
 	</body>
 </html>

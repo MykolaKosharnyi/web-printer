@@ -43,7 +43,7 @@
 		<div class="search_criteria" style="display: none;">
 			<div class="block_title">
 				<i></i>
-				<p>Тип принтера</p>
+				<p><custom:getDescriptionByLocale description="${search_d_printer.printer_type}"/></p>
 			</div>
 			<ul class="check_boxes">
 				<form:checkboxes items="${digital_printer.type_printer}" path="typePrinter" element="li" />
@@ -52,7 +52,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Б/У оборудование</p>
+				<p><custom:getDescriptionByLocale description="${d_search.сondition_equipment}"/></p>
 			</div>
 			<ul class="check_boxes">
 				<form:checkboxes items="${digital_printer.previously_used}" path="previouslyUsed" element="li" />
@@ -61,7 +61,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Устройство</p>
+				<p><custom:getDescriptionByLocale description="${search_d_printer.device}"/></p>
 			</div>
 			<ul class="check_boxes">
 				<form:checkboxes items="${digital_printer.device}" path="device" element="li" />
@@ -70,7 +70,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Тип печати</p>
+				<p><custom:getDescriptionByLocale description="${search_d_printer.print_type}"/></p>
 			</div>
 			<ul class="check_boxes">
 				<form:checkboxes items="${digital_printer.type_of_printing}" path="typeOfPrinting" element="li" />
@@ -79,7 +79,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Технология печати</p>
+				<p><custom:getDescriptionByLocale description="${search_d_printer.printing_technology}"/></p>
 			</div>
 			<ul class="check_boxes">
 				<form:checkboxes items="${digital_printer.print_technology}" path="printTechnology" element="li" />
@@ -88,7 +88,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Размещение</p>
+				<p><custom:getDescriptionByLocale description="${search_d_printer.accommodation}"/></p>
 			</div>
 			<ul class="check_boxes">
 				<form:checkboxes items="${digital_printer.accommodation}" path="accommodation" element="li" />
@@ -97,7 +97,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Область применения</p>
+				<p><custom:getDescriptionByLocale description="${search_d_printer.application_area}"/></p>
 			</div>
 			<ul class="check_boxes">
 				<form:checkboxes items="${digital_printer.application_area}" path="applicationArea" element="li" />
@@ -106,7 +106,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Количество страниц в месяц</p>
+				<p><custom:getDescriptionByLocale description="${search_d_printer.number_pages_per_month}"/></p>
 			</div>
 			<div class="check_boxes">
 				<div class="text_output">
@@ -120,7 +120,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Максимальный формат</p>
+				<p><custom:getDescriptionByLocale description="${search_d_printer.maximum_format}"/></p>
 			</div>
 			<ul class="check_boxes">
 				<form:checkboxes items="${digital_printer.maximum_format}" path="maximumFormat" element="li" />
@@ -130,13 +130,13 @@
 		<div class="block_search_criteria">
 			<div class="block_block_title">
 				<i></i>
-				<p>Характеристики печати</p>
+				<p><custom:getDescriptionByLocale description="${search_d_printer.print_specifications}"/></p>
 			</div>
 			<div class="block_check_boxes">
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Автоматическая двусторонняя печать</p>
+						<p><custom:getDescriptionByLocale description="${search_d_printer.automatic_2_sided_printing}"/></p>
 					</div>
 					<ul class="check_boxes">
 						<form:checkboxes items="${digital_printer.yn}" path="automaticTwoSidedPrinting" element="li" />
@@ -146,14 +146,14 @@
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Время разогрева</p>
+						<p><custom:getDescriptionByLocale description="${search_d_printer.warm_up_time}"/></p>
 					</div>
 					<div class="check_boxes">
 						<div class="text_output">
 							<form:input path="warmUpTime0" class="amount-warmUpTime0" value="${search.warmUpTime0}" />
-							<p>&nbsp;c&nbsp;-&nbsp;</p>
+							<p>&nbsp;<custom:getDescriptionByLocale description="${d_search.s}"/>&nbsp;-&nbsp;</p>
 							<form:input path="warmUpTime1" class="amount-warmUpTime1" value="${search.warmUpTime1}" />
-							<p>&nbsp;с</p>
+							<p>&nbsp;<custom:getDescriptionByLocale description="${d_search.s}"/></p>
 						</div>
 						<div class="slider-range-warmUpTime"></div>
 					</div>
@@ -161,7 +161,7 @@
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Скорость печати для ч/б печати, стр/мин</p>
+						<p><custom:getDescriptionByLocale description="${search_d_printer.print_speed_b_w_printing}"/>, <custom:getDescriptionByLocale description="${d_search.page_min}"/></p>
 					</div>
 					<div class="check_boxes">
 						<div class="text_output">
@@ -175,7 +175,7 @@
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Скорость печати для цветной печати, стр/мин</p>
+						<p><custom:getDescriptionByLocale description="${search_d_printer.print_speed_color_printing}"/>, <custom:getDescriptionByLocale description="${d_search.page_min}"/></p>
 					</div>
 					<div class="check_boxes">
 						<div class="text_output">
@@ -189,7 +189,7 @@
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Скорость копирования для ч/б печати, стр/мин</p>
+						<p><custom:getDescriptionByLocale description="${search_d_printer.copy_speed_b_w_printing}"/>, <custom:getDescriptionByLocale description="${d_search.page_min}"/></p>
 					</div>
 					<div class="check_boxes">
 						<div class="text_output">
@@ -203,7 +203,7 @@
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Скорость копирования для цветной печати, стр/мин</p>
+						<p><custom:getDescriptionByLocale description="${search_d_printer.copy_speed_color_printing}"/>, <custom:getDescriptionByLocale description="${d_search.page_min}"/></p>
 					</div>
 					<div class="check_boxes">
 						<div class="text_output">
@@ -217,7 +217,7 @@
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Время выхода первого отпечатка color</p>
+						<p><custom:getDescriptionByLocale description="${search_d_printer.time_first_fingerprint_output}"/> color</p>
 					</div>
 					<div class="check_boxes">
 						<div class="text_output">
@@ -232,7 +232,7 @@
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Время выхода первого отпечатка BW</p>
+						<p><custom:getDescriptionByLocale description="${search_d_printer.time_first_fingerprint_output}"/> BW</p>
 					</div>
 					<div class="check_boxes">
 						<div class="text_output">
@@ -250,13 +250,13 @@
 		<div class="block_search_criteria">
 			<div class="block_block_title">
 				<i></i>
-				<p>Характеристики сканера</p>
+				<p><custom:getDescriptionByLocale description="${search_d_printer.characteristics_scanner}"/></p>
 			</div>
 			<div class="block_check_boxes">
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Тип сканера</p>
+						<p><custom:getDescriptionByLocale description="${search_d_printer.scanner_type}"/></p>
 					</div>
 					<ul class="check_boxes">
 						<form:checkboxes items="${digital_printer.scanner_type}" path="scannerType" element="li" />
@@ -265,7 +265,7 @@
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Максимальный формат оригинала</p>
+						<p><custom:getDescriptionByLocale description="${search_d_printer.maximum_original_size}"/></p>
 					</div>
 					<ul class="check_boxes">
 						<form:checkboxes items="${digital_printer.maximum_format}" path="theMaximumSizeOfTheOriginal" element="li" />
@@ -274,7 +274,7 @@
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Разрешение сканера</p>
+						<p><custom:getDescriptionByLocale description="${search_d_printer.scanner_resolution}"/></p>
 					</div>
 					<ul class="check_boxes">
 						<form:checkboxes items="${digital_printer.scanner_resolution}" path="scannerResolution" element="li" />
@@ -283,7 +283,7 @@
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Скорость сканирования (цветн.), из./мин</p>
+						<p><custom:getDescriptionByLocale description="${search_d_printer.scanning_speed_color}"/>, <custom:getDescriptionByLocale description="${d_search.images_min}"/></p>
 					</div>
 					<div class="check_boxes">
 						<div class="text_output">
@@ -297,7 +297,7 @@
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Скорость сканирования (ч/б), из./мин</p>
+						<p><custom:getDescriptionByLocale description="${search_d_printer.scanning_speed_b_w}"/>, <custom:getDescriptionByLocale description="${d_search.images_min}"/></p>
 					</div>
 					<div class="check_boxes">
 						<div class="text_output">
@@ -311,7 +311,7 @@
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Отправка изображения по e-mail</p>
+						<p><custom:getDescriptionByLocale description="${search_d_printer.sending_images_e_mail}"/></p>
 					</div>
 					<ul class="check_boxes">
 						<form:checkboxes items="${digital_printer.yn}" path="sendingImagesByEmail" element="li" />
@@ -324,13 +324,13 @@
 		<div class="block_search_criteria">
 			<div class="block_block_title">
 				<i></i>
-				<p>Характеристики копира</p>
+				<p><custom:getDescriptionByLocale description="${search_d_printer.characteristics_copier}"/></p>
 			</div>
 			<div class="block_check_boxes">
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Максимальное разрешение копира (ч/б)</p>
+						<p><custom:getDescriptionByLocale description="${search_d_printer.maximum_resolution_copier_b_w}"/></p>
 					</div>
 					<ul class="check_boxes">
 						<form:checkboxes items="${digital_printer.maximum_resolution_copier_bw}" path="maximumResolutionCopierBW" element="li" />
@@ -339,14 +339,14 @@
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Время выхода первой копии</p>
+						<p><custom:getDescriptionByLocale description="${search_d_printer.time_first_copy}"/></p>
 					</div>
 					<div class="check_boxes">
 						<div class="text_output">
 							<form:input path="firstCopyOutTime0" class="amount-firstCopyOutTime0" value="${search.firstCopyOutTime0}" />
-							<p>&nbsp;с&nbsp;-&nbsp;</p>
+							<p>&nbsp;<custom:getDescriptionByLocale description="${d_search.s}"/>&nbsp;-&nbsp;</p>
 							<form:input path="firstCopyOutTime1" class="amount-firstCopyOutTime1" value="${search.firstCopyOutTime1}" />
-							<p>&nbsp;с</p>
+							<p>&nbsp;<custom:getDescriptionByLocale description="${d_search.s}"/></p>
 						</div>
 						<div class="slider-range-firstCopyOutTime"></div>
 					</div>
@@ -354,7 +354,7 @@
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Изменение масштаба</p>
+						<p><custom:getDescriptionByLocale description="${search_d_printer.zoom_in}"/></p>
 					</div>
 					<div class="check_boxes">
 						<div class="text_output">
@@ -369,7 +369,7 @@
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Шаг масштабирования</p>
+						<p><custom:getDescriptionByLocale description="${search_d_printer.zoom_step}"/></p>
 					</div>
 					<div class="check_boxes">
 						<div class="text_output">
@@ -384,7 +384,7 @@
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Максимальное количество копий за цикл</p>
+						<p><custom:getDescriptionByLocale description="${search_d_printer.maximum_number_copies_per_cycle}"/></p>
 					</div>
 					<div class="check_boxes">
 						<div class="text_output">
@@ -401,13 +401,13 @@
 		<div class="block_search_criteria">
 			<div class="block_block_title">
 				<i></i>
-				<p>Подача материала</p>
+				<p><custom:getDescriptionByLocale description="${search_d_printer.submission_material}"/></p>
 			</div>
 			<div class="block_check_boxes">
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Подача бумаги (стандартная), лист.</p>
+						<p><custom:getDescriptionByLocale description="${search_d_printer.paper_feed_standard}"/>, <custom:getDescriptionByLocale description="${d_search.sheets}"/></p>
 					</div>
 					<div class="check_boxes">
 						<div class="text_output">
@@ -421,7 +421,7 @@
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Подача бумаги (максимальная), лист.</p>
+						<p><custom:getDescriptionByLocale description="${search_d_printer.paper_feed_maximum}"/>, <custom:getDescriptionByLocale description="${d_search.sheets}"/></p>
 					</div>
 					<div class="check_boxes">
 						<div class="text_output">
@@ -435,7 +435,7 @@
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Вывод бумаги (стандартная), лист.</p>
+						<p><custom:getDescriptionByLocale description="${search_d_printer.paper_output_standard}"/>, <custom:getDescriptionByLocale description="${d_search.sheets}"/></p>
 					</div>
 					<div class="check_boxes">
 						<div class="text_output">
@@ -449,7 +449,7 @@
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Вывод бумаги (максимальная), лист.</p>
+						<p><custom:getDescriptionByLocale description="${search_d_printer.paper_output_maximum}"/>, <custom:getDescriptionByLocale description="${d_search.sheets}"/></p>
 					</div>
 					<div class="check_boxes">
 						<div class="text_output">
@@ -463,7 +463,7 @@
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Емкость лотка ручной подачи, лист.</p>
+						<p><custom:getDescriptionByLocale description="${search_d_printer.capacity_bypass_tray}"/>, <custom:getDescriptionByLocale description="${d_search.sheets}"/></p>
 					</div>
 					<div class="check_boxes">
 						<div class="text_output">
@@ -477,7 +477,7 @@
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Электронная сортировка</p>
+						<p><custom:getDescriptionByLocale description="${search_d_printer.electronic_sorting}"/></p>
 					</div>
 					<ul class="check_boxes">
 						<form:checkboxes items="${digital_printer.yn}" path="electronicSorting" element="li" />
@@ -486,7 +486,7 @@
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Степлер</p>
+						<p><custom:getDescriptionByLocale description="${search_d_printer.stapler}"/></p>
 					</div>
 					<ul class="check_boxes">
 						<form:checkboxes items="${digital_printer.yn}" path="stapler" element="li" />
@@ -495,14 +495,14 @@
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Плотность бумаги</p>
+						<p><custom:getDescriptionByLocale description="${search_d_printer.paper_density}"/></p>
 					</div>
 					<div class="check_boxes">
 						<div class="text_output">
 							<form:input path="paperDensity0" class="amount-paperDensity0" value="${search.paperDensity0}" />
-							<p>&nbsp;г/м2&nbsp;-&nbsp;</p>
+							<p>&nbsp;<custom:getDescriptionByLocale description="${d_search.g_m2}"/>&nbsp;-&nbsp;</p>
 							<form:input path="paperDensity1" class="amount-paperDensity1" value="${search.paperDensity1}" />
-							<p>&nbsp;г/м2</p>
+							<p>&nbsp;<custom:getDescriptionByLocale description="${d_search.g_m2}"/></p>
 						</div>
 						<div class="slider-range-paperDensity"></div>
 					</div>
@@ -513,13 +513,13 @@
 		<div class="block_search_criteria">
 			<div class="block_block_title">
 				<i></i>
-				<p>Расходные материалы</p>
+				<p><custom:getDescriptionByLocale description="${search_d_printer.consumables}"/></p>
 			</div>
 			<div class="block_check_boxes">
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Ресурс девелопера, с</p>
+						<p><custom:getDescriptionByLocale description="${search_d_printer.resource_developer}"/>, <custom:getDescriptionByLocale description="${d_search.pages}"/></p>
 					</div>
 					<div class="check_boxes">
 						<div class="text_output">
@@ -533,7 +533,7 @@
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Ресурс фотобарабана, стр.</p>
+						<p><custom:getDescriptionByLocale description="${search_d_printer.resource_photoconductor_drum}"/>, <custom:getDescriptionByLocale description="${d_search.pages}"/></p>
 					</div>
 					<div class="check_boxes">
 						<div class="text_output">
@@ -547,7 +547,7 @@
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Ресурс ч/б картриджа/тонера, стр.</p>
+						<p><custom:getDescriptionByLocale description="${search_d_printer.resource_b_w_cartridge_toner}"/>, <custom:getDescriptionByLocale description="${d_search.pages}"/></p>
 					</div>
 					<div class="check_boxes">
 						<div class="text_output">
@@ -561,14 +561,14 @@
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Количество картриджей</p>
+						<p><custom:getDescriptionByLocale description="${search_d_printer.number_cartridges}"/></p>
 					</div>
 					<div class="check_boxes">
 						<div class="text_output">
 							<form:input path="numberOfCartridges0" class="amount-numberOfCartridges0" value="${search.numberOfCartridges0}" />
-							<p>&nbsp;с&nbsp;-&nbsp;</p>
+							<p>&nbsp;<custom:getDescriptionByLocale description="${d_search.pc}"/>&nbsp;-&nbsp;</p>
 							<form:input path="numberOfCartridges1" class="amount-numberOfCartridges1" value="${search.numberOfCartridges1}" />
-							<p>&nbsp;с</p>
+							<p>&nbsp;<custom:getDescriptionByLocale description="${d_search.pc}"/></p>
 						</div>
 						<div class="slider-range-numberOfCartridges"></div>
 					</div>
@@ -579,7 +579,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Печать на</p>
+				<p><custom:getDescriptionByLocale description="${search_d_printer.printing_on}"/></p>
 			</div>
 			<ul class="check_boxes">
 				<form:checkboxes items="${digital_printer.printing_on}" path="printingOn" element="li" />
@@ -589,7 +589,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Интерфейсы</p>
+				<p><custom:getDescriptionByLocale description="${search_d_printer.interfaces}"/></p>
 			</div>
 			<ul class="check_boxes">
 				<form:checkboxes items="${digital_printer.interfaces}" path="interfaces" element="li" />
@@ -599,13 +599,13 @@
 		<div class="block_search_criteria">
 			<div class="block_block_title">
 				<i></i>
-				<p>Програмное обеспечение</p>
+				<p><custom:getDescriptionByLocale description="${search_d_printer.software}"/></p>
 			</div>
 			<div class="block_check_boxes">
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Поддержка ОС</p>
+						<p><custom:getDescriptionByLocale description="${search_d_printer.os_support}"/></p>
 					</div>
 					<ul class="check_boxes">
 						<form:checkboxes items="${digital_printer.os_support}" path="oSSupport" element="li" />
@@ -614,7 +614,7 @@
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Прямая печать</p>
+						<p><custom:getDescriptionByLocale description="${search_d_printer.direct_printing}"/></p>
 					</div>
 					<ul class="check_boxes">
 						<form:checkboxes items="${digital_printer.yn}" path="directPrinting" element="li" />
@@ -623,7 +623,7 @@
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Веб-интерфейс</p>
+						<p><custom:getDescriptionByLocale description="${search_d_printer.web_interface}"/></p>
 					</div>
 					<ul class="check_boxes">
 						<form:checkboxes items="${digital_printer.yn}" path="webInterface" element="li" />
@@ -632,7 +632,7 @@
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Поддержка PostScript</p>
+						<p><custom:getDescriptionByLocale description="${search_d_printer.post_script_support}"/></p>
 					</div>
 					<ul class="check_boxes">
 						<form:checkboxes items="${digital_printer.yn}" path="supportPostScript" element="li" />
@@ -641,7 +641,7 @@
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Поддержка</p>
+						<p><custom:getDescriptionByLocale description="${search_d_printer.support}"/></p>
 					</div>
 					<ul class="check_boxes">
 						<form:checkboxes items="${digital_printer.support}" path="support" element="li" />
@@ -650,7 +650,7 @@
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Количество установленных шрифтов PostScript</p>
+						<p><custom:getDescriptionByLocale description="${search_d_printer.number_installed_PostScript_fonts}"/></p>
 					</div>
 					<div class="check_boxes">
 						<div class="text_output">
@@ -664,7 +664,7 @@
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Количество установленных шрифтов PCL</p>
+						<p><custom:getDescriptionByLocale description="${search_d_printer.number_installed_PCL_fonts}"/></p>
 					</div>
 					<div class="check_boxes">
 						<div class="text_output">
@@ -681,13 +681,13 @@
 		<div class="block_search_criteria">
 			<div class="block_block_title">
 				<i></i>
-				<p>Общие характеристики</p>
+				<p><custom:getDescriptionByLocale description="${d_search.general_characteristics}"/></p>
 			</div>
 			<div class="block_check_boxes">
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Объем памяти, Мб</p>
+						<p><custom:getDescriptionByLocale description="${search_d_printer.memory}"/>, <custom:getDescriptionByLocale description="${d_search.MB}"/></p>
 					</div>
 					<div class="check_boxes">
 						<div class="text_output">
@@ -701,7 +701,7 @@
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Емкость жесткого диска, Гб</p>
+						<p><custom:getDescriptionByLocale description="${search_d_printer.hard_drive_capacity}"/>, <custom:getDescriptionByLocale description="${d_search.GB}"/></p>
 					</div>
 					<div class="check_boxes">
 						<div class="text_output">
@@ -716,7 +716,7 @@
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Отображение информации</p>
+						<p><custom:getDescriptionByLocale description="${search_d_printer.displaying_information}"/></p>
 					</div>
 					<ul class="check_boxes">
 						<form:checkboxes items="${digital_printer.display_information}" path="displayInformation" element="li" />
@@ -725,7 +725,7 @@
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Диагональ дисплея, дюйм</p>
+						<p><custom:getDescriptionByLocale description="${search_d_printer.diagonal_display}"/>, <custom:getDescriptionByLocale description="${d_search.inch}"/></p>
 					</div>
 					<div class="check_boxes">
 						<div class="text_output">
@@ -739,59 +739,59 @@
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Средняя потребляемая мощность</p>
+						<p><custom:getDescriptionByLocale description="${d_search.averagePowerConsumption}"/></p>
 					</div>
 					<div class="check_boxes">
 						<div class="text_output">
 							<form:input path="averagePowerConsumption0" class="amount-averagePowerConsumption0" value="${search.averagePowerConsumption0}" />
-							<p>&nbsp;Вт -&nbsp;</p>
+							<p>&nbsp;<custom:getDescriptionByLocale description="${d_search.w}"/> -&nbsp;</p>
 							<form:input path="averagePowerConsumption1" class="amount-averagePowerConsumption1" value="${search.averagePowerConsumption1}" />
-							<p>&nbsp;Вт</p>
+							<p>&nbsp;<custom:getDescriptionByLocale description="${d_search.w}"/></p>
 						</div>
-							<div class="slider-range-averagePowerConsumption"></div>
+						<div class="slider-range-averagePowerConsumption"></div>
 					</div>
 				</div>
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Максимальная потребляемая мощность</p>
+						<p><custom:getDescriptionByLocale description="${d_search.maxPowerConsumption}"/></p>
 					</div>
 					<div class="check_boxes">
 						<div class="text_output">
-							<form:input path="maxPowerConsumption0" class="amount-maxPowerConsumption0" value="${search.maxPowerConsumption0}" />
-							<p>&nbsp;Вт -&nbsp;</p>
-							<form:input path="maxPowerConsumption1" class="amount-maxPowerConsumption1" value="${search.maxPowerConsumption1}" />
-							<p>&nbsp;Вт</p>
+							<form:input path="maxPowerConsumption0" class="amount-max_power_consumption0" value="${search.maxPowerConsumption0}" />
+							<p>&nbsp;<custom:getDescriptionByLocale description="${d_search.w}"/> -&nbsp;</p>
+							<form:input path="maxPowerConsumption1" class="amount-max_power_consumption1" value="${search.maxPowerConsumption1}" />
+							<p>&nbsp;<custom:getDescriptionByLocale description="${d_search.w}"/></p>
 						</div>
-							<div class="slider-range-maxPowerConsumption"></div>
+						<div class="slider-range-max_power_consumption"></div>
 					</div>
 				</div>
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Вес</p>
+						<p><custom:getDescriptionByLocale description="${d_search.weight}"/></p>
 					</div>
 					<div class="check_boxes">
 						<div class="text_output">
 							<form:input path="weight0" class="amount-weight0" value="${search.weight0}" />
-							<p>&nbsp;кг -&nbsp;</p>
+							<p>&nbsp;<custom:getDescriptionByLocale description="${d_search.kg}"/> -&nbsp;</p>
 							<form:input path="weight1" class="amount-weight1" value="${search.weight1}" />
-							<p>&nbsp;кг</p>
+							<p>&nbsp;<custom:getDescriptionByLocale description="${d_search.kg}"/></p>
 						</div>
-							<div class="slider-range-weight"></div>
+						<div class="slider-range-weight"></div>
 					</div>
 				</div>
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Ширина</p>
+						<p><custom:getDescriptionByLocale description="${d_search.width}"/></p>
 					</div>
 					<div class="check_boxes">
 						<div class="text_output">
 							<form:input path="width0" class="amount-width0" value="${search.width0}" />
-							<p>&nbsp;мм -&nbsp;</p>
+							<p>&nbsp;<custom:getDescriptionByLocale description="${d_search.mm}"/> -&nbsp;</p>
 							<form:input path="width1" class="amount-width1" value="${search.width1}" />
-							<p>&nbsp;мм</p>
+							<p>&nbsp;<custom:getDescriptionByLocale description="${d_search.mm}"/></p>
 						</div>
 						<div class="slider-range-width"></div>
 					</div>
@@ -799,31 +799,31 @@
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Глубина</p>
+						<p><custom:getDescriptionByLocale description="${d_search.height}"/></p>
 					</div>
 					<div class="check_boxes">
 						<div class="text_output">
-							<form:input path="depth0" class="amount-depth0" value="${search.depth0}" />
-							<p>&nbsp;мм -&nbsp;</p>
-							<form:input path="depth1" class="amount-depth1" value="${search.depth1}" />
-							<p>&nbsp;мм</p>
+							<form:input path="heigth0" class="amount-heigth0" value="${search.heigth0}" />
+							<p>&nbsp;<custom:getDescriptionByLocale description="${d_search.mm}"/> -&nbsp;</p>
+							<form:input path="heigth1" class="amount-heigth1" value="${search.heigth1}" />
+							<p>&nbsp;<custom:getDescriptionByLocale description="${d_search.mm}"/></p>
 						</div>
-							<div class="slider-range-depth"></div>
+						<div class="slider-range-heigth"></div>
 					</div>
 				</div>
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Высота</p>
+						<p><custom:getDescriptionByLocale description="${d_search.depth}"/></p>
 					</div>
 					<div class="check_boxes">
 						<div class="text_output">
-							<form:input path="heigth0" class="amount-heigth0" value="${search.heigth0}" />
-							<p>&nbsp;мм -&nbsp;</p>
-							<form:input path="heigth1" class="amount-heigth1" value="${search.heigth1}" />
-							<p>&nbsp;мм</p>
+							<form:input path="depth0" class="amount-depth0" value="${search.depth0}" />
+							<p>&nbsp;<custom:getDescriptionByLocale description="${d_search.mm}"/> -&nbsp;</p>
+							<form:input path="depth1" class="amount-depth1" value="${search.depth1}" />
+							<p>&nbsp;<custom:getDescriptionByLocale description="${d_search.mm}"/></p>
 						</div>
-							<div class="slider-range-heigth"></div>
+						<div class="slider-range-depth"></div>
 					</div>
 				</div>
 			</div>

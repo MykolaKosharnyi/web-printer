@@ -37,7 +37,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p><custom:getDescriptionByLocale description="${search_printer.used_machinery}"/></p>
+				<p><custom:getDescriptionByLocale description="${d_search.сondition_equipment}"/></p>
 			</div>
 			<ul class="check_boxes">
 				<custom:searchByLocale nameOfAttribyte="previouslyUsed" properties="${printer.previously_used}"/>
