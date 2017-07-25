@@ -29,7 +29,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Тип ламинатора</p>
+				<p><custom:getDescriptionByLocale description="${search_laminator.type_laminator}"/></p>
 			</div>
 			<ul class="check_boxes">
 				<form:checkboxes items="${laminator.type_product}" path="typeProduct" element="li" />
@@ -38,13 +38,13 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Ширина ламинирования</p>
+				<p><custom:getDescriptionByLocale description="${search_laminator.width_lamination}"/></p>
 			</div>
 			<div class="check_boxes">
 				<div id="tabs">
 					<ul>
-						<li>миллиметр</li>
-						<li>дюйм</li>
+						<li><custom:getDescriptionByLocale description="${d_search.millimeter}"/></li>
+						<li><custom:getDescriptionByLocale description="${d_search.inch}"/></li>
 						<!--<li>формат</li>-->
 					</ul>
 					<div>
@@ -135,7 +135,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Подача</p>
+				<p><custom:getDescriptionByLocale description="${search_laminator.innings}"/></p>
 			</div>
 			<ul class="check_boxes">
 				<form:checkboxes items="${laminator.innings}" path="innings" element="li" />
@@ -144,7 +144,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Количество валов</p>
+				<p><custom:getDescriptionByLocale description="${search_laminator.number_shafts}"/></p>
 			</div>
 			<div class="check_boxes">
 				<div class="text_output">
@@ -158,7 +158,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Диаметр вала, мм</p>
+				<p><custom:getDescriptionByLocale description="${search_laminator.shaft_diameter}"/>, <custom:getDescriptionByLocale description="${d_search.mm}"/></p>
 			</div>
 			<div class="check_boxes">
 				<div class="text_output">
@@ -172,7 +172,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Толщина пленки, мкм</p>
+				<p><custom:getDescriptionByLocale description="${search_laminator.film_thickness}"/>, <custom:getDescriptionByLocale description="${d_search.mkm}"/></p>
 			</div>
 			<div class="check_boxes">
 				<div class="text_output">
@@ -186,7 +186,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Время разогрева, мин</p>
+				<p><custom:getDescriptionByLocale description="${search_laminator.warm_up_time}"/>, <custom:getDescriptionByLocale description="${d_search.minutes}"/></p>
 			</div>
 			<div class="check_boxes">
 				<div class="text_output">
@@ -200,7 +200,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Температура ламинации, С</p>
+				<p><custom:getDescriptionByLocale description="${search_laminator.lamination_temperature}"/>, С</p>
 			</div>
 			<div class="check_boxes">
 				<div class="text_output">
@@ -214,7 +214,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Скорость ламинирования, мм/с</p>
+				<p><custom:getDescriptionByLocale description="${search_laminator.laminating_speed}"/>, <custom:getDescriptionByLocale description="${d_search.mm_s}"/></p>
 			</div>
 			<div class="check_boxes">
 				<div class="text_output">
@@ -228,7 +228,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Производитель оборудования</p>
+				<p><custom:getDescriptionByLocale description="${search_laminator.equipment_manufacturer}"/></p>
 			</div>
 			<ul class="check_boxes">
 				<form:checkboxes items="${laminator.equipment_manufacturer}" path="equipmentManufacturer" element="li" />

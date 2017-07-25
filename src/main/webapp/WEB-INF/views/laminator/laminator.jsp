@@ -40,7 +40,7 @@
 					   <jsp:include page="../product_page/price.jsp" /> 
 					   
                        <c:if test="${!empty product.typeProduct}">
-   							<tr><td>Тип ламинатора:</td><td>${product.typeProduct}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_laminator.type_laminator}"/>:</td><td>${product.typeProduct}</td></tr>
 					   </c:if>
 					   
 					   <c:if test="${!empty product.equipmentModel}">
@@ -48,11 +48,11 @@
 						</c:if>
 						
 						<c:if test="${product.inputFirstWeightPrintMM != 0}">
-   							<tr><td>Зона ламинации:</td><td>${product.inputFirstWeightPrintMM}<c:if test="${product.inputSecondWeightPrintMM!=0}">x${product.inputSecondWeightPrintMM}</c:if> мм</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_laminator.lamination_area}"/>:</td><td>${product.inputFirstWeightPrintMM}<c:if test="${product.inputSecondWeightPrintMM!=0}">x${product.inputSecondWeightPrintMM}</c:if> <custom:getDescriptionByLocale description="${d_search.mm}"/></td></tr>
 						</c:if>
                        
                        <c:if test="${(product.inputFirstWeightPrintMM == 0) && product.laminatingWidth > 0}">
-   							<tr><td>Ширина ламинирования:</td><td>${product.laminatingWidth} мм</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_laminator.width_lamination}"/>:</td><td>${product.laminatingWidth} <custom:getDescriptionByLocale description="${d_search.mm}"/></td></tr>
 						</c:if>
 		
                   </table>
@@ -80,7 +80,7 @@
 					<table>
                        
                        <c:if test="${!empty product.typeProduct}">
-   							<tr><td>Тип ламинатора:</td><td>${product.typeProduct}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_laminator.type_laminator}"/>:</td><td>${product.typeProduct}</td></tr>
 						</c:if>
                        
                        <c:if test="${!empty product.partNumber}">
@@ -88,11 +88,11 @@
 						</c:if>
 
                        <c:if test="${product.inputFirstWeightPrintMM != 0}">
-   							<tr><td>Зона ламинации:</td><td>${product.inputFirstWeightPrintMM}<c:if test="${product.inputSecondWeightPrintMM!=0}">x${product.inputSecondWeightPrintMM}</c:if> мм</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_laminator.lamination_area}"/>:</td><td>${product.inputFirstWeightPrintMM}<c:if test="${product.inputSecondWeightPrintMM!=0}">x${product.inputSecondWeightPrintMM}</c:if> <custom:getDescriptionByLocale description="${d_search.mm}"/></td></tr>
 						</c:if>
                        
                        <c:if test="${(product.inputFirstWeightPrintMM == 0) && product.laminatingWidth > 0}">
-   							<tr><td>Ширина ламинирования:</td><td>${product.laminatingWidth} мм</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_laminator.width_lamination}"/>:</td><td>${product.laminatingWidth} <custom:getDescriptionByLocale description="${d_search.mm}"/></td></tr>
 						</c:if>
                        
                        <c:if test="${!empty product.previouslyUsed}">
@@ -100,60 +100,60 @@
 						</c:if>
                        
                        <c:if test="${!empty product.innings}">
-   							<tr><td>Подача:</td><td>${product.innings}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_laminator.innings}"/>:</td><td>${product.innings}</td></tr>
 						</c:if>
                        
                        <c:if test="${product.numberOfShafts  > 0}">
-   							<tr><td>Количество валов:</td><td>${product.numberOfShafts}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_laminator.number_shafts}"/>:</td><td>${product.numberOfShafts}</td></tr>
 						</c:if>
 
 						<c:if test="${product.shaftDiameter  > 0}">
-   							<tr><td>Диаметр вала:</td><td>${product.shaftDiameter}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_laminator.shaft_diameter}"/>:</td><td>${product.shaftDiameter} <custom:getDescriptionByLocale description="${d_search.mm}"/></td></tr>
 						</c:if>
 						
 						<c:if test="${product.filmThickness  > 0}">
-   							<tr><td>Толщина пленки:</td><td>${product.filmThickness}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_laminator.film_thickness}"/>:</td><td>${product.filmThickness} <custom:getDescriptionByLocale description="${d_search.mkm}"/></td></tr>
 						</c:if>
 						
 						<c:if test="${product.warmUpTime  > 0}">
-   							<tr><td>Время разогрева:</td><td>${product.warmUpTime}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_laminator.warm_up_time}"/>:</td><td>${product.warmUpTime} <custom:getDescriptionByLocale description="${d_search.minutes}"/></td></tr>
 						</c:if>
 						
 						<c:if test="${product.laminationTemperature  > 0}">
-   							<tr><td>Температура ламинации:</td><td>${product.laminationTemperature}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_laminator.lamination_temperature}"/>:</td><td>${product.laminationTemperature} С</td></tr>
 						</c:if>
 						
 						<c:if test="${product.laminatingSpeed  > 0}">
-   							<tr><td>Скорость ламинирования:</td><td>${product.laminatingSpeed}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_laminator.laminating_speed}"/>:</td><td>${product.laminatingSpeed} <custom:getDescriptionByLocale description="${d_search.mm_s}"/></td></tr>
 						</c:if>
 						
 						
 						<c:if test="${!empty product.equipmentManufacturer}">
-   							<tr><td>Производитель оборудования:</td><td>${product.equipmentManufacturer}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_laminator.equipment_manufacturer}"/>:</td><td>${product.equipmentManufacturer}</td></tr>
 						</c:if>
                        
                        <c:if test="${product.averagePowerConsumption > 0}">
-   							<tr><td>Средняя потребляемая мощность:</td><td>${product.averagePowerConsumption} Вт</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${d_search.averagePowerConsumption}"/>:</td><td>${product.averagePowerConsumption} <custom:getDescriptionByLocale description="${d_search.w}"/></td></tr>
 						</c:if>
                        
                        <c:if test="${product.maxPowerConsumption > 0}">
-   							<tr><td>Максимальная потребляемая мощность:</td><td>${product.maxPowerConsumption} Вт</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${d_search.maxPowerConsumption}"/>:</td><td>${product.maxPowerConsumption} <custom:getDescriptionByLocale description="${d_search.w}"/></td></tr>
 						</c:if>
                        
                        <c:if test="${product.weight > 0}">
-   							<tr><td>Вес:</td><td>${product.weight} кг</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${d_search.weight}"/>:</td><td>${product.weight} <custom:getDescriptionByLocale description="${d_search.kg}"/></td></tr>
 						</c:if>
                        
                        <c:if test="${product.width > 0}">
-   							<tr><td>Ширина:</td><td>${product.width} мм</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${d_search.width}"/>:</td><td>${product.width} <custom:getDescriptionByLocale description="${d_search.mm}"/></td></tr>
 						</c:if>
                        
                        <c:if test="${product.depth > 0}">
-   							<tr><td>Глубина:</td><td>${product.depth} мм</td></tr>
-						</c:if> 
+   							<tr><td><custom:getDescriptionByLocale description="${d_search.depth}"/>:</td><td>${product.depth} <custom:getDescriptionByLocale description="${d_search.mm}"/></td></tr>
+						</c:if>
                        
                        <c:if test="${product.heigth > 0}">
-   							<tr><td>Высота:</td><td>${product.heigth} мм</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${d_search.height}"/>:</td><td>${product.heigth} <custom:getDescriptionByLocale description="${d_search.mm}"/></td></tr>
 						</c:if>
  
                   </table>
