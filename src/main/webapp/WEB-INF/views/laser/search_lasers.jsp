@@ -29,7 +29,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Тип лазерa</p>
+				<p><custom:getDescriptionByLocale description="${search_laser.type_laser}"/></p>
 			</div>
 			<ul class="check_boxes">
 				<form:checkboxes items="${laser.type_laser}" path="typeLaser" element="li" />
@@ -47,33 +47,33 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Размер рабочей области</p>
+				<p><custom:getDescriptionByLocale description="${search_laser.size_working_area}"/></p>
 			</div>
 			<div class="check_boxes">
-				<p style="float: none; margin: 10px auto 0px;"> По оси Х:</p>
+				<p style="float: none; margin: 10px auto 0px;"> <custom:getDescriptionByLocale description="${search_laser.size_working_area_x}"/>:</p>
 				<div class="text_output">
 					<form:input path="sizeWorkAreaX0" class="amount-sizeWorkAreaX0" value="${search.sizeWorkAreaX0}"/>
-					<p >&nbsp;мм -&nbsp;</p>
+					<p >&nbsp;<custom:getDescriptionByLocale description="${d_search.mm}"/> -&nbsp;</p>
 					<form:input path="sizeWorkAreaX1" class="amount-sizeWorkAreaX1" value="${search.sizeWorkAreaX1}" />
-					<p>&nbsp;мм</p>
+					<p>&nbsp;<custom:getDescriptionByLocale description="${d_search.mm}"/></p>
 				</div>
 					<div class="slider-range-sizeWorkAreaX"></div>
 
-				<p style="float: none; margin: 10px auto 0px;"> По оси Y:</p>
+				<p style="float: none; margin: 10px auto 0px;"> <custom:getDescriptionByLocale description="${search_laser.size_working_area_x}"/>:</p>
 				<div class="text_output">
 					<form:input path="sizeWorkAreaY0" class="amount-sizeWorkAreaY0" value="${search.sizeWorkAreaY0}" />
-					<p>&nbsp;мм -&nbsp;</p>
+					<p>&nbsp;<custom:getDescriptionByLocale description="${d_search.mm}"/> -&nbsp;</p>
 					<form:input path="sizeWorkAreaY1" class="amount-sizeWorkAreaY1" value="${search.sizeWorkAreaY1}" />
-					<p>&nbsp;мм</p>
+					<p>&nbsp;<custom:getDescriptionByLocale description="${d_search.mm}"/></p>
 				</div>
 					<div class="slider-range-sizeWorkAreaY"></div>
 
-				<p style="float: none; margin: 10px auto 0px;"> По оси Z:</p>
+				<p style="float: none; margin: 10px auto 0px;"> <custom:getDescriptionByLocale description="${search_laser.size_working_area_x}"/>:</p>
 				<div class="text_output">
 					<form:input path="sizeWorkAreaZ0" class="amount-sizeWorkAreaZ0" value="${search.sizeWorkAreaZ0}" />
-					<p>&nbsp;мм -&nbsp;</p>
+					<p>&nbsp;<custom:getDescriptionByLocale description="${d_search.mm}"/> -&nbsp;</p>
 					<form:input path="sizeWorkAreaZ1" class="amount-sizeWorkAreaZ1" value="${search.sizeWorkAreaZ1}" />
-					<p>&nbsp;мм</p>
+					<p>&nbsp;<custom:getDescriptionByLocale description="${d_search.mm}"/></p>
 				</div>
 					<div class="slider-range-sizeWorkAreaZ"></div>
 			</div>
@@ -81,7 +81,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Тип охлаждения</p>
+				<p><custom:getDescriptionByLocale description="${search_laser.type_cooling}"/></p>
 			</div>
 			<ul class="check_boxes">
 				<form:checkboxes items="${laser.type_of_cooling}" path="typeOfCooling" element="li" />
@@ -90,7 +90,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Цветоделение</p>
+				<p><custom:getDescriptionByLocale description="${search_laser.color_separation}"/></p>
 			</div>
 			<ul class="check_boxes">
 				<form:checkboxes items="${laser.color_separation}" path="colorSeparation" element="li" />
@@ -99,7 +99,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Тип выводимого изображения</p>
+				<p><custom:getDescriptionByLocale description="${search_laser.type_output_image}"/></p>
 			</div>
 			<ul class="check_boxes">
 				<form:checkboxes items="${laser.type_the_displayed_image}" path="typeTheDisplayedImage" element="li" />
@@ -108,7 +108,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Максимальное разрешение, DPI</p>
+				<p><custom:getDescriptionByLocale description="${search_laser.maximum_resolution}"/>, DPI</p>
 			</div>
 			<div class="check_boxes">
 				<div class="text_output">
@@ -122,7 +122,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Регулировка мощности лазера, %</p>
+				<p><custom:getDescriptionByLocale description="${search_laser.laser_power_adjustment}"/>, %</p>
 			</div>
 			<div class="check_boxes">
 				<div class="text_output">
@@ -136,14 +136,14 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Мощность лазера</p>
+				<p><custom:getDescriptionByLocale description="${search_laser.laser_power}"/></p>
 			</div>
 			<div class="check_boxes">
 				<div class="text_output">
 					<form:input path="powerOfLaser0" class="amount-powerOfLaser0" value="${search.powerOfLaser0}" />
-					<p>&nbsp;Вт -&nbsp;</p>
+					<p>&nbsp;<custom:getDescriptionByLocale description="${d_search.w}"/> -&nbsp;</p>
 					<form:input path="powerOfLaser1" class="amount-powerOfLaser1" value="${search.powerOfLaser1}" />
-					<p>&nbsp;Вт</p>
+					<p>&nbsp;<custom:getDescriptionByLocale description="${d_search.w}"/></p>
 				</div>
 				<div class="slider-range-powerOfLaser"></div>
 			</div>
@@ -151,7 +151,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Длинна волны лазера, nm</p>
+				<p><custom:getDescriptionByLocale description="${search_laser.laser_wave_length}"/>, nm</p>
 			</div>
 			<div class="check_boxes">
 				<div class="text_output">
@@ -165,7 +165,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Импульс лазера, Hz</p>
+				<p><custom:getDescriptionByLocale description="${search_laser.laser_pulse}"/>, Hz</p>
 			</div>
 			<div class="check_boxes">
 				<div class="text_output">
@@ -179,7 +179,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Диаметр лазера, мм</p>
+				<p><custom:getDescriptionByLocale description="${search_laser.diameter_laser}"/>, <custom:getDescriptionByLocale description="${d_search.mm}"/></p>
 			</div>
 			<div class="check_boxes">
 				<div class="text_output">
@@ -193,7 +193,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Глубина гравировки, мм</p>
+				<p><custom:getDescriptionByLocale description="${search_laser.engraving_depth}"/>, <custom:getDescriptionByLocale description="${d_search.mm}"/></p>
 			</div>
 			<div class="check_boxes">
 				<div class="text_output">
@@ -207,7 +207,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Ресурс лазера, часов</p>
+				<p><custom:getDescriptionByLocale description="${search_laser.laser_resource}"/>, <custom:getDescriptionByLocale description="${d_search.hours}"/></p>
 			</div>
 			<div class="check_boxes">
 				<div class="text_output">
@@ -221,7 +221,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Целевое назначение</p>
+				<p><custom:getDescriptionByLocale description="${search_laser.special_purpose}"/></p>
 			</div>
 			<ul class="check_boxes">
 				<form:checkboxes items="${laser.special_purpose}" path="specialPurpose" element="li" />
@@ -230,7 +230,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Тип двигателей</p>
+				<p><custom:getDescriptionByLocale description="${search_laser.type_engine}"/></p>
 			</div>
 			<ul class="check_boxes">
 				<form:checkboxes items="${laser.type_engine}" path="typeEngine" element="li" />
@@ -239,7 +239,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Механическое разрешение, мкм/шаг</p>
+				<p><custom:getDescriptionByLocale description="${search_laser.mechanical_resolution}"/>, <custom:getDescriptionByLocale description="${d_search.mm_step}"/></p>
 			</div>
 			<div class="check_boxes">
 				<div class="text_output">
@@ -253,7 +253,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Программное разрешение, мкм/шаг</p>
+				<p><custom:getDescriptionByLocale description="${search_laser.software_permission}"/>, <custom:getDescriptionByLocale description="${d_search.mm_step}"/></p>
 			</div>
 			<div class="check_boxes">
 				<div class="text_output">
@@ -267,7 +267,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Минимальная толщина реза, мкм</p>
+				<p><custom:getDescriptionByLocale description="${search_laser.minimum_thickness_cut}"/>, <custom:getDescriptionByLocale description="${d_search.mkm}"/></p>
 			</div>
 			<div class="check_boxes">
 				<div class="text_output">
@@ -281,7 +281,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Скорость гравировки, мм/мин</p>
+				<p><custom:getDescriptionByLocale description="${search_laser.engraving_speed}"/>, <custom:getDescriptionByLocale description="${d_search.mm_min}"/></p>
 			</div>
 			<div class="check_boxes">
 				<div class="text_output">
@@ -295,7 +295,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Скорость резки, мм/мин</p>
+				<p><custom:getDescriptionByLocale description="${search_laser.cutting_speed}"/>, <custom:getDescriptionByLocale description="${d_search.mm_min}"/></p>
 			</div>
 			<div class="check_boxes">
 				<div class="text_output">
@@ -309,7 +309,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Интерфейс подключения</p>
+				<p><custom:getDescriptionByLocale description="${search_laser.interface_connection}"/></p>
 			</div>
 			<ul class="check_boxes">
 				<form:checkboxes items="${laser.connection_interface}" path="connectionInterface" element="li" />
@@ -318,7 +318,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Типы файлов</p>
+				<p><custom:getDescriptionByLocale description="${search_laser.file_types}"/></p>
 			</div>
 			<ul class="check_boxes">
 				<form:checkboxes items="${laser.file_types}" path="fileTypes" element="li" />
@@ -327,7 +327,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Програмное обеспечение</p>
+				<p><custom:getDescriptionByLocale description="${search_laser.software}"/></p>
 			</div>
 			<ul class="check_boxes">
 				<form:checkboxes items="${laser.software}" path="software" element="li" />
@@ -336,7 +336,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Производитель оборудования</p>
+				<p><custom:getDescriptionByLocale description="${search_laser.equipment_manufacturer}"/></p>
 			</div>
 			<ul class="check_boxes">
 				<form:checkboxes items="${laser.equipment_manufacturer}" path="equipmentManufacturer" element="li" />

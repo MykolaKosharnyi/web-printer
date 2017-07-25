@@ -38,7 +38,7 @@
 					   <jsp:include page="../product_page/price.jsp" /> 
 					   
                        <c:if test="${!empty product.typeLaser}">
-   							<tr><td>Тип лазера:</td><td>${product.typeLaser}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_laser.type_laser}"/>:</td><td>${product.typeLaser}</td></tr>
 					   </c:if>
 					   
 					   <c:if test="${!empty product.equipmentModel}">
@@ -46,9 +46,9 @@
 						</c:if>
 						
 						<c:if test="${product.sizeWorkAreaX > 0 || product.sizeWorkAreaY > 0 || product.sizeWorkAreaZ > 0}">
-   							<tr><td>Размер рабочей области:</td><td>${product.sizeWorkAreaX}
+   							<tr><td><custom:getDescriptionByLocale description="${search_laser.size_working_area}"/>:</td><td>${product.sizeWorkAreaX}
    							<c:if test="${product.sizeWorkAreaY > 0}" > x ${product.sizeWorkAreaY}</c:if>
-   							<c:if test="${product.sizeWorkAreaZ > 0}" > x ${product.sizeWorkAreaZ}</c:if> мм</td></tr>
+   							<c:if test="${product.sizeWorkAreaZ > 0}" > x ${product.sizeWorkAreaZ}</c:if> <custom:getDescriptionByLocale description="${d_search.mm}"/></td></tr>
 					</c:if>
 					   
                   </table>
@@ -76,7 +76,7 @@
 					<table>
                        
                        <c:if test="${!empty product.typeLaser}">
-   							<tr><td>Тип лазера:</td><td>${product.typeLaser}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_laser.type_laser}"/>:</td><td>${product.typeLaser}</td></tr>
 						</c:if>
                        
                        <c:if test="${!empty product.partNumber}">
@@ -88,27 +88,27 @@
 						</c:if>
 						
                        <c:if test="${product.sizeWorkAreaX > 0}">
-   							<tr><td>Размер рабочей области по оси Х:</td><td>${product.sizeWorkAreaX} мм</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_laser.size_working_area}"/> <custom:getDescriptionByLocale description="${search_laser.size_working_area_x}"/>:</td><td>${product.sizeWorkAreaX} <custom:getDescriptionByLocale description="${d_search.mm}"/></td></tr>
 						</c:if>
 						
                        <c:if test="${product.sizeWorkAreaY > 0}">
-   							<tr><td>Размер рабочей области по оси Y:</td><td>${product.sizeWorkAreaY} мм</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_laser.size_working_area}"/> <custom:getDescriptionByLocale description="${search_laser.size_working_area_x}"/>:</td><td>${product.sizeWorkAreaY} <custom:getDescriptionByLocale description="${d_search.mm}"/></td></tr>
 						</c:if>
                        
                        <c:if test="${product.sizeWorkAreaZ > 0}">
-   							<tr><td>Размер рабочей области по оси Z:</td><td>${product.sizeWorkAreaZ} мм</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_laser.size_working_area}"/> <custom:getDescriptionByLocale description="${search_laser.size_working_area_x}"/>:</td><td>${product.sizeWorkAreaZ} <custom:getDescriptionByLocale description="${d_search.mm}"/></td></tr>
 						</c:if>
                        
                        <c:if test="${!empty product.typeOfCooling}">
-   							<tr><td>Тип охлаждения:</td><td>${product.typeOfCooling}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_laser.type_cooling}"/>:</td><td>${product.typeOfCooling}</td></tr>
 						</c:if>
                        
                        <c:if test="${!empty product.colorSeparation}">
-   							<tr><td>Цветоделение:</td><td>${product.colorSeparation}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_laser.color_separation}"/>:</td><td>${product.colorSeparation}</td></tr>
 						</c:if>
 						
 						<c:if test="${!empty product.typeTheDisplayedImage}">
-   							<tr><td>Тип выводимого изображения:</td><td>
+   							<tr><td><custom:getDescriptionByLocale description="${search_laser.type_output_image}"/>:</td><td>
 		                   		<c:forEach var="tp" items="${product.typeTheDisplayedImage}" varStatus="status">  
 		    						${tp}<c:if test="${ ! status.last}" >, </c:if>  
 								</c:forEach>
@@ -116,24 +116,24 @@
 						</c:if>
 						
 						<c:if test="${product.firstPartTheMinimumCharacterSize > 0 && product.secondPartTheMinimumCharacterSize > 0}">
-   							<tr><td>Минимальный размер символа:</td><td>${product.firstPartTheMinimumCharacterSize}x${product.secondPartTheMinimumCharacterSize} мм</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_laser.minimum_character_size}"/>:</td><td>${product.firstPartTheMinimumCharacterSize}x${product.secondPartTheMinimumCharacterSize} <custom:getDescriptionByLocale description="${d_search.mm}"/></td></tr>
 						</c:if>
                        
                        <c:if test="${product.maximumResolution > 0}">
-   							<tr><td>Максимальное разрешение:</td><td>${product.maximumResolution} DPI</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_laser.maximum_resolution}"/>:</td><td>${product.maximumResolution} DPI</td></tr>
 						</c:if>
 						
 						<c:if test="${product.maximumPositioningAccuracy > 0}">
-   							<tr><td>Предельная точность позиционирования:</td><td>${product.maximumPositioningAccuracy} мм</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_laser.limiting_positioning_accuracy}"/>:</td><td>${product.maximumPositioningAccuracy} <custom:getDescriptionByLocale description="${d_search.mm}"/></td></tr>
 						</c:if>
 						
 						<c:if test="${product.firstPartAdjustingTheLaserPower > 0 && product.secondPartAdjustingTheLaserPower > 0}">
-   							<tr><td>Регулировка мощности лазера:</td><td>${product.firstPartAdjustingTheLaserPower} - ${product.secondPartAdjustingTheLaserPower}%</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_laser.laser_power_adjustment}"/>:</td><td>${product.firstPartAdjustingTheLaserPower} - ${product.secondPartAdjustingTheLaserPower}%</td></tr>
 						</c:if>
 						
 						<c:if test="${!empty product.specialPurpose || !empty product.specialPurpose1 ||
 									 !empty product.specialPurpose2 || !empty product.specialPurpose3}">
-   							<tr><td>Целевое назначение:</td><td>
+   							<tr><td><custom:getDescriptionByLocale description="${search_laser.special_purpose}"/>:</td><td>
 		                   		<c:forEach var="tp" items="${product.specialPurpose}">  
 		    						${tp}; 
 		    						<br/>
@@ -156,63 +156,63 @@
 						</c:if>
 
 						<c:if test="${product.laserWavelength > 0}">
-   							<tr><td>Длинна волны лазера:</td><td>${product.laserWavelength} nm</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_laser.laser_wave_length}"/>:</td><td>${product.laserWavelength} nm</td></tr>
 						</c:if>
 						
 						<c:if test="${product.laserPulse0 > 0 && product.laserPulse1 > 0}">
-   							<tr><td>Импульс лазера:</td><td>${product.laserPulse0}-${product.laserPulse1} Hz</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_laser.laser_pulse}"/>:</td><td>${product.laserPulse0}-${product.laserPulse1} Hz</td></tr>
 						</c:if>
 						
 						<c:if test="${product.theDiameterOfTheLaser > 0}">
-   							<tr><td>Диаметр лазера:</td><td>${product.theDiameterOfTheLaser} мм</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_laser.diameter_laser}"/>:</td><td>${product.theDiameterOfTheLaser} <custom:getDescriptionByLocale description="${d_search.mm}"/></td></tr>
 						</c:if>
 						
 						<c:if test="${product.engravingDepth > 0}">
-   							<tr><td>Глубина гравировки:</td><td>${product.engravingDepth} мм</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_laser.engraving_depth}"/>:</td><td>${product.engravingDepth} <custom:getDescriptionByLocale description="${d_search.mm}"/></td></tr>
 						</c:if>
 						
 						<c:if test="${product.laserSource > 0}">
-   							<tr><td>Ресурс лазера:</td><td>${product.laserSource} часов</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_laser.laser_resource}"/>:</td><td>${product.laserSource} <custom:getDescriptionByLocale description="${d_search.hours}"/></td></tr>
 						</c:if>
                        
                        <c:if test="${product.numberOfHeads > 0}">
-   							<tr><td>Количество головок:</td><td>${product.numberOfHeads} шт</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_laser.number_heads}"/>:</td><td>${product.numberOfHeads} <custom:getDescriptionByLocale description="${d_search.pc}"/></td></tr>
 						</c:if>
 						
 						<c:if test="${product.positioningSpeed > 0}">
-   							<tr><td>Скорость позиционирования:</td><td>${product.positioningSpeed} м/мин</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_laser.positioning_speed}"/>:</td><td>${product.positioningSpeed} <custom:getDescriptionByLocale description="${d_search.m_min}"/></td></tr>
 						</c:if>
                        
                        <c:if test="${product.powerOfLaser > 0}">
-   							<tr><td>Мощность лазера:</td><td>${product.powerOfLaser} Вт</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_laser.laser_power}"/>:</td><td>${product.powerOfLaser} <custom:getDescriptionByLocale description="${d_search.w}"/></td></tr>
 						</c:if>
                        
                        <c:if test="${!empty product.typeEngine}">
-   							<tr><td>Тип двигателя:</td><td>${product.typeEngine}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_laser.type_engine}"/>:</td><td>${product.typeEngine}</td></tr>
 						</c:if>
                        
                        <c:if test="${product.mechanicalResolution > 0}">
-   							<tr><td>Механическое разрешение:</td><td>${product.mechanicalResolution} мм/шаг</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_laser.mechanical_resolution}"/>:</td><td>${product.mechanicalResolution} <custom:getDescriptionByLocale description="${d_search.mm_step}"/></td></tr>
 						</c:if>
                        
                        <c:if test="${product.softwareResolution > 0}">
-   							<tr><td>Программное разрешение:</td><td>${product.softwareResolution} мм/шаг</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_laser.software_permission}"/>:</td><td>${product.softwareResolution} <custom:getDescriptionByLocale description="${d_search.mm_step}"/></td></tr>
 						</c:if>
                        
                        <c:if test="${product.minimumThicknessOfCut > 0}">
-   							<tr><td>Минимальная толщина реза:</td><td>${product.minimumThicknessOfCut} мм</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_laser.minimum_thickness_cut}"/>:</td><td>${product.minimumThicknessOfCut} <custom:getDescriptionByLocale description="${d_search.mkm}"/></td></tr>
 						</c:if>
                        
                        <c:if test="${product.engravingSpeed > 0}">
-   							<tr><td>Скорость гравировки:</td><td>${product.engravingSpeed} мм/мин</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_laser.engraving_speed}"/>:</td><td>${product.engravingSpeed} <custom:getDescriptionByLocale description="${d_search.mm_min}"/></td></tr>
 						</c:if>
                        
                        <c:if test="${product.cuttingSpeed > 0}">
-   							<tr><td>Скорость резки:</td><td>${product.cuttingSpeed} мм/мин</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_laser.cutting_speed}"/>:</td><td>${product.cuttingSpeed} <custom:getDescriptionByLocale description="${d_search.mm_min}"/></td></tr>
 						</c:if>
                        
                         <c:if test="${!empty product.connectionInterface}">
-   							<tr><td>Интерфейс подключения:</td><td>
+   							<tr><td><custom:getDescriptionByLocale description="${search_laser.interface_connection}"/>:</td><td>
 		                   		<c:forEach var="tp" items="${product.connectionInterface}" varStatus="status">  
 		    						${tp}<c:if test="${ ! status.last}" >, </c:if>  
 								</c:forEach>
@@ -220,7 +220,7 @@
 						</c:if>
                        
                        <c:if test="${!empty product.fileTypes}">
-   							<tr><td>Типы файлов:</td><td>
+   							<tr><td><custom:getDescriptionByLocale description="${search_laser.file_types}"/>:</td><td>
 		                   		<c:forEach var="tp" items="${product.fileTypes}" varStatus="status">  
 		    						${tp}<c:if test="${ ! status.last}" >, </c:if>  
 								</c:forEach>
@@ -228,7 +228,7 @@
 						</c:if>
 						
 						<c:if test="${!empty product.software}">
-   							<tr><td>Програмное обеспечение:</td><td>
+   							<tr><td><custom:getDescriptionByLocale description="${search_laser.software}"/>:</td><td>
 		                   		<c:forEach var="tp" items="${product.software}" varStatus="status">  
 		    						${tp}<c:if test="${ ! status.last}" >, </c:if>  
 								</c:forEach>
@@ -236,31 +236,31 @@
 						</c:if>
                        
                        <c:if test="${!empty product.equipmentManufacturer}">
-   							<tr><td>Производитель оборудования:</td><td>${product.equipmentManufacturer}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_laser.equipment_manufacturer}"/>:</td><td>${product.equipmentManufacturer}</td></tr>
 						</c:if>
                        
                        <c:if test="${product.averagePowerConsumption > 0}">
-   							<tr><td>Средняя потребляемая мощность:</td><td>${product.averagePowerConsumption} Вт</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${d_search.averagePowerConsumption}"/>:</td><td>${product.averagePowerConsumption} <custom:getDescriptionByLocale description="${d_search.w}"/></td></tr>
 						</c:if>
                        
                        <c:if test="${product.maxPowerConsumption > 0}">
-   							<tr><td>Максимальная потребляемая мощность:</td><td>${product.maxPowerConsumption} Вт</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${d_search.maxPowerConsumption}"/>:</td><td>${product.maxPowerConsumption} <custom:getDescriptionByLocale description="${d_search.w}"/></td></tr>
 						</c:if>
                        
                        <c:if test="${product.weight > 0}">
-   							<tr><td>Вес:</td><td>${product.weight} кг</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${d_search.weight}"/>:</td><td>${product.weight} <custom:getDescriptionByLocale description="${d_search.kg}"/></td></tr>
 						</c:if>
                        
                        <c:if test="${product.width > 0}">
-   							<tr><td>Ширина:</td><td>${product.width} мм</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${d_search.width}"/>:</td><td>${product.width} <custom:getDescriptionByLocale description="${d_search.mm}"/></td></tr>
 						</c:if>
-						
-						<c:if test="${product.depth > 0}">
-   							<tr><td>Глубина:</td><td>${product.depth} мм</td></tr>
+                       
+                       <c:if test="${product.depth > 0}">
+   							<tr><td><custom:getDescriptionByLocale description="${d_search.depth}"/>:</td><td>${product.depth} <custom:getDescriptionByLocale description="${d_search.mm}"/></td></tr>
 						</c:if>
                        
                        <c:if test="${product.heigth > 0}">
-   							<tr><td>Высота:</td><td>${product.heigth} мм</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${d_search.height}"/>:</td><td>${product.heigth} <custom:getDescriptionByLocale description="${d_search.mm}"/></td></tr>
 						</c:if>
                            
                   </table>
