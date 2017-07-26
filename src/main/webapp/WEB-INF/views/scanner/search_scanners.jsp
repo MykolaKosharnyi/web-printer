@@ -14,12 +14,12 @@
 		<i class="opened"></i>
 		<p><custom:getDescriptionByLocale description="${d_search.filter_items}"/></p>
 	</div>
-				<a style="margin-left:10px;" class="accept" href="javascript:void(0)" onclick="$('#search').submit();">
-					<custom:getDescriptionByLocale description="${d_search.apply}"/>
-				</a>
-				<a class="reset" href="<c:url value='/scanners' />">
-					<custom:getDescriptionByLocale description="${d_search.reset}"/>
-				</a>
+	<a style="margin-left:10px;" class="accept" href="javascript:void(0)" onclick="$('#search').submit();">
+		<custom:getDescriptionByLocale description="${d_search.apply}"/>
+	</a>
+	<a class="reset" href="<c:url value='/scanners' />">
+		<custom:getDescriptionByLocale description="${d_search.reset}"/>
+	</a>
 	<div id="search_product">
 	<c:url var="product_search" value="/scanners/search" ></c:url>
 	<form:form method="POST" commandName="search" action="${product_search}">
@@ -29,7 +29,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Тип сканера</p>
+				<p><custom:getDescriptionByLocale description="${search_scanner.scanner_type}"/></p>
 			</div>
 			<ul class="check_boxes">
 				<form:checkboxes items="${scanner.type_product}" path="typeProduct" element="li" />
@@ -38,13 +38,13 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Ширина сканирования</p>
+				<p><custom:getDescriptionByLocale description="${search_scanner.scan_width}"/></p>
 			</div>
 			<div class="check_boxes">
 				<div id="tabs">
 					<ul>
-						<li>миллиметр</li>
-						<li>дюйм</li>
+						<li><custom:getDescriptionByLocale description="${d_search.millimeter}"/></li>
+						<li><custom:getDescriptionByLocale description="${d_search.inch}"/></li>
 						<!--<li>формат</li>-->
 					</ul>
 					<div>
@@ -135,7 +135,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Подача</p>
+				<p><custom:getDescriptionByLocale description="${search_scanner.innings}"/></p>
 			</div>
 			<ul class="check_boxes">
 				<form:checkboxes items="${scanner.innings}" path="innings" element="li" />
@@ -144,7 +144,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Цветность</p>
+				<p><custom:getDescriptionByLocale description="${search_scanner.color}"/></p>
 			</div>
 			<ul class="check_boxes">
 				<form:checkboxes items="${scanner.chromaticity}" path="chromaticity" element="li" />
@@ -153,7 +153,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Сканирующий элемент</p>
+				<p><custom:getDescriptionByLocale description="${search_scanner.scanning_element}"/></p>
 			</div>
 			<ul class="check_boxes">
 				<form:checkboxes items="${scanner.scanning_element}" path="scanningElement" element="li" />
@@ -162,7 +162,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Источник света</p>
+				<p><custom:getDescriptionByLocale description="${search_scanner.light_source}"/></p>
 			</div>
 			<ul class="check_boxes">
 				<form:checkboxes items="${scanner.light_source}" path="lightSource" element="li" />
@@ -171,7 +171,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Разрядность цветного сканирования</p>
+				<p><custom:getDescriptionByLocale description="${search_scanner.color_scanning_resolution}"/></p>
 			</div>
 			<ul class="check_boxes">
 				<form:checkboxes items="${scanner.bit_color_scanning}" path="bitColorScanning" element="li" />
@@ -180,7 +180,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Разрядность сканирования с оттенками серого</p>
+				<p><custom:getDescriptionByLocale description="${search_scanner.scan_depth_with_grayscale}"/></p>
 			</div>
 			<ul class="check_boxes">
 				<form:checkboxes items="${scanner.bit_scanning_grayscale}" path="bitScanningGrayscale" element="li" />
@@ -189,7 +189,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Программное разрешение, dpi</p>
+				<p><custom:getDescriptionByLocale description="${search_scanner.software_permission}"/>, dpi</p>
 			</div>
 			<div class="check_boxes">
 				<div class="text_output">
@@ -203,7 +203,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Скорость сканирования, м.кв./ч.</p>
+				<p><custom:getDescriptionByLocale description="${search_scanner.scanning_speed}"/>, <custom:getDescriptionByLocale description="${d_search.sq_m_hour}"/></p>
 			</div>
 			<div class="check_boxes">
 				<div class="text_output">
@@ -217,7 +217,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Оптическое разрешение</p>
+				<p><custom:getDescriptionByLocale description="${search_scanner.optical_resolution}"/></p>
 			</div>
 			<ul class="check_boxes">
 				<form:checkboxes items="${scanner.optical_resolution}" path="opticalResolution" element="li" />
@@ -226,7 +226,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Интерфейс подключения</p>
+				<p><custom:getDescriptionByLocale description="${search_scanner.interface_connection}"/></p>
 			</div>
 			<ul class="check_boxes">
 				<form:checkboxes items="${scanner.connection_interface}" path="connectionInterface" element="li" />
@@ -235,7 +235,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Максимальная толщина  носителя, мм</p>
+				<p><custom:getDescriptionByLocale description="${search_scanner.maximum_carrier_thickness}"/>, <custom:getDescriptionByLocale description="${d_search.mm}"/></p>
 			</div>
 			<div class="check_boxes">
 				<div class="text_output">
@@ -249,7 +249,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Програмное обеспечение</p>
+				<p><custom:getDescriptionByLocale description="${search_scanner.software}"/></p>
 			</div>
 			<ul class="check_boxes">
 				<form:checkboxes items="${scanner.software}" path="software" element="li" />
@@ -258,7 +258,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Производитель оборудования</p>
+				<p><custom:getDescriptionByLocale description="${search_scanner.equipment_manufacturer}"/></p>
 			</div>
 			<ul class="check_boxes">
 				<form:checkboxes items="${scanner.equipment_manufacturer}" path="equipmentManufacturer" element="li" />

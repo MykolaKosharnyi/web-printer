@@ -38,7 +38,7 @@
 					   <jsp:include page="../product_page/price.jsp" /> 
 					   
                        <c:if test="${!empty product.typeProduct}">
-   							<tr><td>Тип сканера:</td><td>${product.typeProduct}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_scanner.scanner_type}"/>:</td><td>${product.typeProduct}</td></tr>
 					   </c:if>
 					   
 					   <c:if test="${!empty product.equipmentModel}">
@@ -46,11 +46,11 @@
 					   </c:if>
 					   
 					   <c:if test="${product.inputFirstWeightPrintMM != 0}">
-   							<tr><td>Ширина сканируемой области:</td><td>${product.inputFirstWeightPrintMM}<c:if test="${product.inputSecondWeightPrintMM!=0}">x${product.inputSecondWeightPrintMM}</c:if> мм</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_scanner.scan_width}"/>:</td><td>${product.inputFirstWeightPrintMM}<c:if test="${product.inputSecondWeightPrintMM!=0}">x${product.inputSecondWeightPrintMM}</c:if> <custom:getDescriptionByLocale description="${d_search.mm}"/></td></tr>
 					   </c:if>
                        
                        <c:if test="${(product.inputFirstWeightPrintMM == 0) && product.scanningWidth > 0}">
-   							<tr><td>Ширина сканирования:</td><td>${product.scanningWidth} мм</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_scanner.scan_width}"/>:</td><td>${product.scanningWidth} <custom:getDescriptionByLocale description="${d_search.mm}"/></td></tr>
 					  </c:if>
                   </table>
                   
@@ -77,7 +77,7 @@
 					<table>
                        
                        <c:if test="${!empty product.typeProduct}">
-   							<tr><td>Тип сканера:</td><td>${product.typeProduct}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_scanner.scanner_type}"/>:</td><td>${product.typeProduct}</td></tr>
 					   </c:if>
                        
                        <c:if test="${!empty product.partNumber}">
@@ -85,11 +85,11 @@
 						</c:if>
 
                        <c:if test="${product.inputFirstWeightPrintMM != 0}">
-   							<tr><td>Ширина сканируемой области:</td><td>${product.inputFirstWeightPrintMM}<c:if test="${product.inputSecondWeightPrintMM!=0}">x${product.inputSecondWeightPrintMM}</c:if> мм</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_scanner.scan_width}"/>:</td><td>${product.inputFirstWeightPrintMM}<c:if test="${product.inputSecondWeightPrintMM!=0}">x${product.inputSecondWeightPrintMM}</c:if> <custom:getDescriptionByLocale description="${d_search.mm}"/></td></tr>
 						</c:if>
                        
                        <c:if test="${(product.inputFirstWeightPrintMM == 0) && product.scanningWidth > 0}">
-   							<tr><td>Ширина сканирования:</td><td>${product.scanningWidth} мм</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_scanner.scan_width}"/>:</td><td>${product.scanningWidth} <custom:getDescriptionByLocale description="${d_search.mm}"/></td></tr>
 						</c:if>
                        
                        <c:if test="${!empty product.previouslyUsed}">
@@ -97,43 +97,43 @@
 					   </c:if>
                        
                        <c:if test="${!empty product.innings}">
-   							<tr><td>Подача:</td><td>${product.innings}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_scanner.innings}"/>:</td><td>${product.innings}</td></tr>
 					   </c:if>
                        
                        <c:if test="${!empty product.chromaticity}">
-   							<tr><td>Цветность:</td><td>${product.chromaticity}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_scanner.color}"/>:</td><td>${product.chromaticity}</td></tr>
 					   </c:if>
                        
                        <c:if test="${!empty product.scanningElement}">
-   							<tr><td>Сканирующий элемент:</td><td>${product.scanningElement}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_scanner.scanning_element}"/>:</td><td>${product.scanningElement}</td></tr>
 					   </c:if>
                        
                        <c:if test="${!empty product.lightSource}">
-   							<tr><td>Источник света:</td><td>${product.lightSource}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_scanner.light_source}"/>:</td><td>${product.lightSource}</td></tr>
 					   </c:if>
                        
                        <c:if test="${!empty product.bitColorScanning}">
-   							<tr><td>Разрядность цветного сканирования:</td><td>${product.bitColorScanning}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_scanner.color_scanning_resolution}"/>:</td><td>${product.bitColorScanning}</td></tr>
 					   </c:if>
 					   
 					   <c:if test="${!empty product.bitScanningGrayscale}">
-   							<tr><td>Разрядность сканирования с оттенками серого:</td><td>${product.bitScanningGrayscale}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_scanner.scan_depth_with_grayscale}"/>:</td><td>${product.bitScanningGrayscale}</td></tr>
 					   </c:if>
 					   
 					   <c:if test="${product.softwareResolution  > 0}">
-   							<tr><td>Программное разрешение:</td><td>${product.softwareResolution} dpi</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_scanner.software_permission}"/>:</td><td>${product.softwareResolution} dpi</td></tr>
 					   </c:if>
                        
                        <c:if test="${product.scanSpeed  > 0}">
-   							<tr><td>Скорость сканирования:</td><td>${product.scanSpeed} м.кв./ч.</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_scanner.scanning_speed}"/>:</td><td>${product.scanSpeed} <custom:getDescriptionByLocale description="${d_search.sq_m_hour}"/></td></tr>
 					   </c:if>
                        
                        <c:if test="${!empty product.opticalResolution}">
-   							<tr><td>Оптическое разрешение:</td><td>${product.opticalResolution}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_scanner.optical_resolution}"/>:</td><td>${product.opticalResolution}</td></tr>
 					   </c:if>
                        
                        <c:if test="${!empty product.connectionInterface}">
-   							<tr><td>Интерфейс подключения:</td><td>
+   							<tr><td><custom:getDescriptionByLocale description="${search_scanner.interface_connection}"/>:</td><td>
 	                   			<c:forEach var="tp" items="${product.connectionInterface}" varStatus="status">  
 	    							${tp}<c:if test="${ ! status.last}" >, </c:if>  
 								</c:forEach>                       
@@ -141,11 +141,11 @@
 					   </c:if>
                        
                        <c:if test="${product.theMaximumThicknessOfTheCarrier  > 0}">
-   							<tr><td>Максимальная толщина  носителя:</td><td>${product.theMaximumThicknessOfTheCarrier} мм</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_scanner.maximum_carrier_thickness}"/>:</td><td>${product.theMaximumThicknessOfTheCarrier} <custom:getDescriptionByLocale description="${d_search.mm}"/></td></tr>
 					   </c:if>
                        
                       <c:if test="${!empty product.software}">
-   							<tr><td>П/О:</td><td>
+   							<tr><td><custom:getDescriptionByLocale description="${search_scanner.software}"/>:</td><td>
 	                   			<c:forEach var="tp" items="${product.software}" varStatus="status">  
 	    							${tp}<c:if test="${ ! status.last}" >, </c:if>  
 								</c:forEach>                       
@@ -153,32 +153,32 @@
 					  </c:if> 	
 						
 					   <c:if test="${!empty product.equipmentManufacturer}">
-   							<tr><td>Производитель оборудования:</td><td>${product.equipmentManufacturer}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_scanner.equipment_manufacturer}"/>:</td><td>${product.equipmentManufacturer}</td></tr>
 					   </c:if>
                        
                        <c:if test="${product.averagePowerConsumption > 0}">
-   							<tr><td>Средняя потребляемая мощность:</td><td>${product.averagePowerConsumption} Вт</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${d_search.averagePowerConsumption}"/>:</td><td>${product.averagePowerConsumption} <custom:getDescriptionByLocale description="${d_search.w}"/></td></tr>
 						</c:if>
                        
                        <c:if test="${product.maxPowerConsumption > 0}">
-   							<tr><td>Максимальная потребляемая мощность:</td><td>${product.maxPowerConsumption} Вт</td></tr>
-					   </c:if>
+   							<tr><td><custom:getDescriptionByLocale description="${d_search.maxPowerConsumption}"/>:</td><td>${product.maxPowerConsumption} <custom:getDescriptionByLocale description="${d_search.w}"/></td></tr>
+						</c:if>
                        
                        <c:if test="${product.weight > 0}">
-   							<tr><td>Вес:</td><td>${product.weight} кг</td></tr>
-					   </c:if>
+   							<tr><td><custom:getDescriptionByLocale description="${d_search.weight}"/>:</td><td>${product.weight} <custom:getDescriptionByLocale description="${d_search.kg}"/></td></tr>
+						</c:if>
                        
                        <c:if test="${product.width > 0}">
-   							<tr><td>Ширина:</td><td>${product.width} мм</td></tr>
-					   </c:if>
-					   
-					   <c:if test="${product.depth > 0}">
-   							<tr><td>Глубина:</td><td>${product.depth} мм</td></tr>
-					   </c:if>
+   							<tr><td><custom:getDescriptionByLocale description="${d_search.width}"/>:</td><td>${product.width} <custom:getDescriptionByLocale description="${d_search.mm}"/></td></tr>
+						</c:if>
+                       
+                       <c:if test="${product.depth > 0}">
+   							<tr><td><custom:getDescriptionByLocale description="${d_search.depth}"/>:</td><td>${product.depth} <custom:getDescriptionByLocale description="${d_search.mm}"/></td></tr>
+						</c:if>
                        
                        <c:if test="${product.heigth > 0}">
-   							<tr><td>Высота:</td><td>${product.heigth} мм</td></tr>
-					   </c:if>
+   							<tr><td><custom:getDescriptionByLocale description="${d_search.height}"/>:</td><td>${product.heigth} <custom:getDescriptionByLocale description="${d_search.mm}"/></td></tr>
+						</c:if>
                           
                   </table>
                   </div>
