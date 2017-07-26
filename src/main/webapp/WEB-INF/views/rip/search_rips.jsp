@@ -34,7 +34,7 @@
 				</input>
 
 			<div class="block_title_check" style="display: none;">
-				<i></i><p>Производитель ПО:</p>
+				<i></i><p><custom:getDescriptionByLocale description="${search_rip.software_manufacturer}"/>:</p>
 			</div>
 				
 				<ul class="block_check_boxes">
@@ -47,7 +47,7 @@
 
 				<div class="search_criteria_check">
 					<div class="block_title_check_check" style="display: none;">
-						<i></i><p>Класс ПО:</p>
+						<i></i><p><custom:getDescriptionByLocale description="${search_rip.software_class}"/>:</p>
 					</div>
 						
 					<ul class="check_boxes">

@@ -38,7 +38,7 @@
 					   <jsp:include page="../product_page/price.jsp" /> 
 					   
                        <c:if test="${!empty product.typeEquipment}">
-   							<tr><td>Тип ПО:</td><td>${product.typeEquipment}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_rip.software_type}"/>:</td><td>${product.typeEquipment}</td></tr>
 					   </c:if>
 					   
                   </table>
@@ -64,7 +64,7 @@
 					<table>
                        
                        <c:if test="${!empty product.typeEquipment}">
-   							<tr><td>Тип ПО:</td><td>${product.typeEquipment}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_rip.software_type}"/>:</td><td>${product.typeEquipment}</td></tr>
 					   </c:if>
                        
                        <c:if test="${!empty product.partNumber}">
@@ -72,15 +72,15 @@
 					   </c:if>
                        
                         <c:if test="${!empty product.softwareMaker}">
-   							<tr><td>Производитель ПО:</td><td>${product.softwareMaker}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_rip.software_manufacturer}"/>:</td><td>${product.softwareMaker}</td></tr>
 						</c:if>   
 						
 						<c:if test="${!empty product.softwareClass}">
-   							<tr><td>Класс ПО:</td><td>${product.softwareClass}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_rip.software_class}"/>:</td><td>${product.softwareClass}</td></tr>
 						</c:if> 
 						
 						<c:if test="${!empty product.softwareVersion}">
-   							<tr><td>Версия ПО:</td><td>${product.softwareVersion}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_rip.software_version}"/>:</td><td>${product.softwareVersion}</td></tr>
 						</c:if> 
                   </table>
                   </div>
