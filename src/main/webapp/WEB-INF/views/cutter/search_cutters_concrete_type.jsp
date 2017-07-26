@@ -14,9 +14,9 @@
 		<i class="opened"></i>
 		<p><custom:getDescriptionByLocale description="${d_search.filter_items}"/></p>
 	</div>
-				<a style="margin-left:10px;" class="accept" href="javascript:void(0)" onclick="$('#search').submit();">
-					<custom:getDescriptionByLocale description="${d_search.apply}"/>
-				</a>
+			<a style="margin-left:10px;" class="accept" href="javascript:void(0)" onclick="$('#search').submit();">
+				<custom:getDescriptionByLocale description="${d_search.apply}"/>
+			</a>
 				
 			<c:if test="${search.typeCutter[0].equals('Для обработки дерева')}">
 				<a class="reset" href="<c:url value='/cutters/for_wood' />">
@@ -43,7 +43,7 @@
 		<div class="search_criteria" style="display: none;">
 			<div class="block_title">
 				<i></i>
-				<p>Тип гравера/фрезера</p>
+				<p><custom:getDescriptionByLocale description="${search_cutter.type_engraver_router}"/></p>
 			</div>
 			<ul class="check_boxes">
 				<form:checkboxes items="${cutter.type_cutter}" path="typeCutter" element="li" />
@@ -61,33 +61,33 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Размер рабочей области</p>
+				<p><custom:getDescriptionByLocale description="${search_cutter.size_working_area}"/></p>
 			</div>
 			<div class="check_boxes">
-				<p style="float: none; margin: 10px auto 0px;"> По оси Х:</p>
+				<p style="float: none; margin: 10px auto 0px;"> <custom:getDescriptionByLocale description="${search_cutter.size_working_area_x}"/>:</p>
 				<div class="text_output">
 					<form:input path="sizeWorkAreaX0" class="amount-sizeWorkAreaX0" value="${search.sizeWorkAreaX0}"/>
-					<p >&nbsp;мм -&nbsp;</p>
+					<p >&nbsp;<custom:getDescriptionByLocale description="${d_search.mm}"/> -&nbsp;</p>
 					<form:input path="sizeWorkAreaX1" class="amount-sizeWorkAreaX1" value="${search.sizeWorkAreaX1}" />
-					<p>&nbsp;мм</p>
+					<p>&nbsp;<custom:getDescriptionByLocale description="${d_search.mm}"/></p>
 				</div>
 					<div class="slider-range-sizeWorkAreaX"></div>
 
-				<p style="float: none; margin: 10px auto 0px;"> По оси Y:</p>
+				<p style="float: none; margin: 10px auto 0px;"> <custom:getDescriptionByLocale description="${search_cutter.size_working_area_y}"/>:</p>
 				<div class="text_output">
 					<form:input path="sizeWorkAreaY0" class="amount-sizeWorkAreaY0" value="${search.sizeWorkAreaY0}" />
-					<p>&nbsp;мм -&nbsp;</p>
+					<p>&nbsp;<custom:getDescriptionByLocale description="${d_search.mm}"/> -&nbsp;</p>
 					<form:input path="sizeWorkAreaY1" class="amount-sizeWorkAreaY1" value="${search.sizeWorkAreaY1}" />
-					<p>&nbsp;мм</p>
+					<p>&nbsp;<custom:getDescriptionByLocale description="${d_search.mm}"/></p>
 				</div>
 					<div class="slider-range-sizeWorkAreaY"></div>
 
-				<p style="float: none; margin: 10px auto 0px;"> По оси Z:</p>
+				<p style="float: none; margin: 10px auto 0px;"> <custom:getDescriptionByLocale description="${search_cutter.size_working_area_z}"/>:</p>
 				<div class="text_output">
 					<form:input path="sizeWorkAreaZ0" class="amount-sizeWorkAreaZ0" value="${search.sizeWorkAreaZ0}" />
-					<p>&nbsp;мм -&nbsp;</p>
+					<p>&nbsp;<custom:getDescriptionByLocale description="${d_search.mm}"/> -&nbsp;</p>
 					<form:input path="sizeWorkAreaZ1" class="amount-sizeWorkAreaZ1" value="${search.sizeWorkAreaZ1}" />
-					<p>&nbsp;мм</p>
+					<p>&nbsp;<custom:getDescriptionByLocale description="${d_search.mm}"/></p>
 				</div>
 					<div class="slider-range-sizeWorkAreaZ"></div>
 			</div>
@@ -95,7 +95,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Тип двигателей</p>
+				<p><custom:getDescriptionByLocale description="${search_cutter.type_engine}"/></p>
 			</div>
 			<ul class="check_boxes">
 				<form:checkboxes items="${cutter.type_engine}" path="typeEngine" element="li" />
@@ -104,7 +104,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Тип гравировки</p>
+				<p><custom:getDescriptionByLocale description="${search_cutter.engraving_type}"/></p>
 			</div>
 			<ul class="check_boxes">
 				<form:checkboxes items="${cutter.engraving_style}" path="engravingStyle" element="li" />
@@ -113,7 +113,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Тип охлаждения</p>
+				<p><custom:getDescriptionByLocale description="${search_cutter.type_cooling}"/></p>
 			</div>
 			<ul class="check_boxes">
 				<form:checkboxes items="${cutter.type_of_cooling}" path="typeOfCooling" element="li" />
@@ -122,7 +122,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Механическое разрешение, мкм/шаг</p>
+				<p><custom:getDescriptionByLocale description="${search_cutter.mechanical_resolution}"/>, <custom:getDescriptionByLocale description="${d_search.mm_step}"/></p>
 			</div>
 			<div class="check_boxes">
 				<div class="text_output">
@@ -136,7 +136,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Программное разрешение, мкм/шаг</p>
+				<p><custom:getDescriptionByLocale description="${search_cutter.software_permission}"/>, <custom:getDescriptionByLocale description="${d_search.mm_step}"/></p>
 			</div>
 			<div class="check_boxes">
 				<div class="text_output">
@@ -150,7 +150,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Частота вращения шпинделя, об/мин</p>
+				<p><custom:getDescriptionByLocale description="${search_cutter.rotational_speed_spindle}"/>, <custom:getDescriptionByLocale description="${d_search.rpm}"/></p>
 			</div>
 			<div class="check_boxes">
 				<div class="text_output">
@@ -164,7 +164,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Скорость обработки(XY), мм/с</p>
+				<p><custom:getDescriptionByLocale description="${search_cutter.processing_speed_XY}"/>, <custom:getDescriptionByLocale description="${d_search.mm_s}"/></p>
 			</div>
 			<div class="check_boxes">
 				<div class="text_output">
@@ -178,7 +178,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Скорость обработки(Z), мм/с</p>
+				<p><custom:getDescriptionByLocale description="${search_cutter.processing_speed_Z}"/>, <custom:getDescriptionByLocale description="${d_search.mm_s}"/></p>
 			</div>
 			<div class="check_boxes">
 				<div class="text_output">
@@ -192,7 +192,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Крепление инструмента</p>
+				<p><custom:getDescriptionByLocale description="${search_cutter.tool_holder}"/></p>
 			</div>
 			<ul class="check_boxes">
 				<form:checkboxes items="${cutter.mounting_tool}" path="mountingTool" element="li" />
@@ -201,7 +201,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Интерфейс подключения</p>
+				<p><custom:getDescriptionByLocale description="${search_cutter.interface_connection}"/></p>
 			</div>
 			<ul class="check_boxes">
 				<form:checkboxes items="${cutter.connection_interface}" path="connectionInterface" element="li" />
@@ -210,7 +210,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Програмное обеспечение</p>
+				<p><custom:getDescriptionByLocale description="${search_cutter.software}"/></p>
 			</div>
 			<ul class="check_boxes">
 				<form:checkboxes items="${cutter.software}" path="software" element="li" />
@@ -219,7 +219,7 @@
 		<div class="search_criteria">
 			<div class="block_title">
 				<i></i>
-				<p>Производитель оборудования</p>
+				<p><custom:getDescriptionByLocale description="${search_cutter.equipment_manufacturer}"/></p>
 			</div>
 			<ul class="check_boxes">
 				<form:checkboxes items="${cutter.equipment_manufacturer}" path="equipmentManufacturer" element="li" />

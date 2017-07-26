@@ -39,7 +39,7 @@
 					   <jsp:include page="../product_page/price.jsp" /> 
 					   
                        <c:if test="${!empty product.typeCutter}">
-   							<tr><td>Тип фрезера:</td><td>${product.typeCutter}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_cutter.type_engraver_router}"/>:</td><td>${product.typeCutter}</td></tr>
 					   </c:if>
 					   
 					   <c:if test="${!empty product.equipmentModel}">
@@ -47,9 +47,9 @@
 						</c:if>
 						
 						<c:if test="${product.sizeWorkAreaX > 0 || product.sizeWorkAreaY > 0 || product.sizeWorkAreaZ > 0}">
-   							<tr><td>Размер рабочей области:</td><td>${product.sizeWorkAreaX}
+   							<tr><td><custom:getDescriptionByLocale description="${search_cutter.size_working_area}"/>:</td><td>${product.sizeWorkAreaX}
    							<c:if test="${product.sizeWorkAreaY > 0}" > x ${product.sizeWorkAreaY}</c:if>
-   							<c:if test="${product.sizeWorkAreaZ > 0}" > x ${product.sizeWorkAreaZ}</c:if> мм</td></tr>
+   							<c:if test="${product.sizeWorkAreaZ > 0}" > x ${product.sizeWorkAreaZ}</c:if> <custom:getDescriptionByLocale description="${d_search.mm}"/></td></tr>
 						</c:if>
 					   
                   </table>
@@ -77,7 +77,7 @@
 					<table>
                        
                        <c:if test="${!empty product.typeCutter}">
-   							<tr><td>Тип фрезера:</td><td>${product.typeCutter}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_cutter.type_engraver_router}"/>:</td><td>${product.typeCutter}</td></tr>
 						</c:if>
                        
                        <c:if test="${!empty product.partNumber}">
@@ -89,63 +89,63 @@
 						</c:if>
 						
                        <c:if test="${product.sizeWorkAreaX > 0}">
-   							<tr><td>Размер рабочей области по оси Х:</td><td>${product.sizeWorkAreaX} мм</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_cutter.size_working_area}"/> <custom:getDescriptionByLocale description="${search_cutter.size_working_area_x}"/>:</td><td>${product.sizeWorkAreaX} <custom:getDescriptionByLocale description="${d_search.mm}"/></td></tr>
 						</c:if>
 						
                        <c:if test="${product.sizeWorkAreaY > 0}">
-   							<tr><td>Размер рабочей области по оси Y:</td><td>${product.sizeWorkAreaY} мм</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_cutter.size_working_area}"/> <custom:getDescriptionByLocale description="${search_cutter.size_working_area_y}"/>:</td><td>${product.sizeWorkAreaY} <custom:getDescriptionByLocale description="${d_search.mm}"/></td></tr>
 						</c:if>
                        
                        <c:if test="${product.sizeWorkAreaZ > 0}">
-   							<tr><td>Размер рабочей области по оси Z:</td><td>${product.sizeWorkAreaZ} мм</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_cutter.size_working_area}"/> <custom:getDescriptionByLocale description="${search_cutter.size_working_area_z}"/>:</td><td>${product.sizeWorkAreaZ} <custom:getDescriptionByLocale description="${d_search.mm}"/></td></tr>
 						</c:if>
                        
                        <c:if test="${!empty product.typeOfCooling}">
-   							<tr><td>Тип охлаждения:</td><td>${product.typeOfCooling}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_cutter.type_cooling}"/>:</td><td>${product.typeOfCooling}</td></tr>
 						</c:if>
 						
 						<c:if test="${product.numberOfSpindles > 0}">
-   							<tr><td>Количество шпинделей:</td><td>${product.numberOfSpindles} шт</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_cutter.number_spindles}"/>:</td><td>${product.numberOfSpindles} <custom:getDescriptionByLocale description="${d_search.pc}"/></td></tr>
 						</c:if>
 						
 						<c:if test="${product.positioningSpeed > 0}">
-   							<tr><td>Скорость позиционирования:</td><td>${product.positioningSpeed} м/мин</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_cutter.positioning_speed}"/>:</td><td>${product.positioningSpeed} <custom:getDescriptionByLocale description="${d_search.m_min}"/></td></tr>
 						</c:if>
                        
                        <c:if test="${!empty product.typeEngine}">
-   							<tr><td>Тип двигателя:</td><td>${product.typeEngine}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_cutter.type_engine}"/>:</td><td>${product.typeEngine}</td></tr>
 						</c:if>
 						
 						<c:if test="${!empty product.engravingStyle}">
-   							<tr><td>Тип гравировки:</td><td>${product.engravingStyle}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_cutter.engraving_type}"/>:</td><td>${product.engravingStyle}</td></tr>
 						</c:if>
                        
                        <c:if test="${product.mechanicalResolution > 0}">
-   							<tr><td>Механическое разрешение:</td><td>${product.mechanicalResolution} мм/шаг</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_cutter.mechanical_resolution}"/>:</td><td>${product.mechanicalResolution} <custom:getDescriptionByLocale description="${d_search.mm_step}"/></td></tr>
 						</c:if>
 						
 						<c:if test="${product.softwareResolution > 0}">
-   							<tr><td>Программное разрешение:</td><td>${product.softwareResolution} мм/шаг</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_cutter.software_permission}"/>:</td><td>${product.softwareResolution} <custom:getDescriptionByLocale description="${d_search.mm_step}"/></td></tr>
 						</c:if>
 						
 						<c:if test="${product.frequencySpindle > 0}">
-   							<tr><td>Частота вращения шпинделя:</td><td>${product.frequencySpindle} об/мин</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_cutter.rotational_speed_spindle}"/>:</td><td>${product.frequencySpindle} <custom:getDescriptionByLocale description="${d_search.rpm}"/></td></tr>
 						</c:if>
 						
 						<c:if test="${product.processingSpeedXY > 0}">
-   							<tr><td>Скорость обработки(XY):</td><td>${product.processingSpeedXY} мм/с</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_cutter.processing_speed_XY}"/>:</td><td>${product.processingSpeedXY} <custom:getDescriptionByLocale description="${d_search.mm_s}"/></td></tr>
 						</c:if>
 						
 						<c:if test="${product.processingSpeedZ > 0}">
-   							<tr><td>Скорость обработки(Z):</td><td>${product.processingSpeedZ} мм/с</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_cutter.processing_speed_Z}"/>:</td><td>${product.processingSpeedZ} <custom:getDescriptionByLocale description="${d_search.mm_s}"/></td></tr>
 						</c:if>
 						
 						<c:if test="${!empty product.mountingTool}">
-   							<tr><td>Крепление инструмента:</td><td>${product.mountingTool}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_cutter.tool_holder}"/>:</td><td>${product.mountingTool}</td></tr>
 						</c:if>
 
                         <c:if test="${!empty product.connectionInterface}">
-   							<tr><td>Интерфейс подключения:</td><td>
+   							<tr><td><custom:getDescriptionByLocale description="${search_cutter.interface_connection}"/>:</td><td>
 		                   		<c:forEach var="tp" items="${product.connectionInterface}" varStatus="status">  
 		    						${tp}<c:if test="${ ! status.last}" >, </c:if>  
 								</c:forEach>
@@ -153,7 +153,7 @@
 						</c:if>
 						
 						<c:if test="${!empty product.software}">
-   							<tr><td>Програмное обеспечение:</td><td>
+   							<tr><td><custom:getDescriptionByLocale description="${search_cutter.software}"/>:</td><td>
 		                   		<c:forEach var="tp" items="${product.software}" varStatus="status">  
 		    						${tp}<c:if test="${ ! status.last}" >, </c:if>  
 								</c:forEach>
@@ -161,31 +161,31 @@
 						</c:if>
 
                        <c:if test="${!empty product.equipmentManufacturer}">
-   							<tr><td>Производитель оборудования:</td><td>${product.equipmentManufacturer}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_cutter.equipment_manufacturer}"/>:</td><td>${product.equipmentManufacturer}</td></tr>
 						</c:if>
                        
                        <c:if test="${product.averagePowerConsumption > 0}">
-   							<tr><td>Средняя потребляемая мощность:</td><td>${product.averagePowerConsumption} Вт</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${d_search.averagePowerConsumption}"/>:</td><td>${product.averagePowerConsumption} <custom:getDescriptionByLocale description="${d_search.w}"/></td></tr>
 						</c:if>
                        
                        <c:if test="${product.maxPowerConsumption > 0}">
-   							<tr><td>Максимальная потребляемая мощность:</td><td>${product.maxPowerConsumption} Вт</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${d_search.maxPowerConsumption}"/>:</td><td>${product.maxPowerConsumption} <custom:getDescriptionByLocale description="${d_search.w}"/></td></tr>
 						</c:if>
                        
                        <c:if test="${product.weight > 0}">
-   							<tr><td>Вес:</td><td>${product.weight} кг</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${d_search.weight}"/>:</td><td>${product.weight} <custom:getDescriptionByLocale description="${d_search.kg}"/></td></tr>
 						</c:if>
                        
                        <c:if test="${product.width > 0}">
-   							<tr><td>Ширина:</td><td>${product.width} мм</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${d_search.width}"/>:</td><td>${product.width} <custom:getDescriptionByLocale description="${d_search.mm}"/></td></tr>
 						</c:if>
-						
-						<c:if test="${product.depth > 0}">
-   							<tr><td>Глубина:</td><td>${product.depth} мм</td></tr>
-						</c:if> 
+                       
+                       <c:if test="${product.depth > 0}">
+   							<tr><td><custom:getDescriptionByLocale description="${d_search.depth}"/>:</td><td>${product.depth} <custom:getDescriptionByLocale description="${d_search.mm}"/></td></tr>
+						</c:if>
                        
                        <c:if test="${product.heigth > 0}">
-   							<tr><td>Высота:</td><td>${product.heigth} мм</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${d_search.height}"/>:</td><td>${product.heigth} <custom:getDescriptionByLocale description="${d_search.mm}"/></td></tr>
 						</c:if>
 
                   </table>
