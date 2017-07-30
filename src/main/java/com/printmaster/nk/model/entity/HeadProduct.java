@@ -56,9 +56,6 @@ public abstract class HeadProduct extends Product implements Serializable{
 	@Column(name="timeSharesText", columnDefinition="TEXT")
 	protected String timeSharesText;
 	
-	@Column(name="delivery")
-	protected String delivery;
-	
 	@Column(name="guarantee")
 	protected String guarantee;
 	
@@ -397,14 +394,6 @@ public abstract class HeadProduct extends Product implements Serializable{
 
 	public void setTimeSharesText(String timeSharesText) {
 		this.timeSharesText = timeSharesText;
-	}
-
-	public String getDelivery() {
-		return delivery;
-	}
-
-	public void setDelivery(String delivery) {
-		this.delivery = delivery;
 	}
 
 	public String getGuarantee() {
@@ -791,7 +780,6 @@ public abstract class HeadProduct extends Product implements Serializable{
 		result = prime * result + ((availability == null) ? 0 : availability.hashCode());
 		result = prime * result + ((availabilitySpecialCase == null) ? 0 : availabilitySpecialCase.hashCode());
 		result = prime * result + averagePowerConsumption;
-		result = prime * result + ((delivery == null) ? 0 : delivery.hashCode());
 		result = prime * result + depth;
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((descriptionEng == null) ? 0 : descriptionEng.hashCode());
@@ -870,11 +858,6 @@ public abstract class HeadProduct extends Product implements Serializable{
 		} else if (!availabilitySpecialCase.equals(other.availabilitySpecialCase))
 			return false;
 		if (averagePowerConsumption != other.averagePowerConsumption)
-			return false;
-		if (delivery == null) {
-			if (other.delivery != null)
-				return false;
-		} else if (!delivery.equals(other.delivery))
 			return false;
 		if (depth != other.depth)
 			return false;
@@ -1040,7 +1023,7 @@ public abstract class HeadProduct extends Product implements Serializable{
 				+ ", weight=" + weight + ", width=" + width + ", heigth=" + heigth + ", depth=" + depth
 				+ ", maxPowerConsumption=" + maxPowerConsumption + ", description=" + description + ", descriptionEng="
 				+ descriptionEng + ", timeShares="
-				+ timeShares + ", delivery=" + delivery + ", guarantee=" + guarantee + ", availability=" + availability
+				+ timeShares + ", guarantee=" + guarantee + ", availability=" + availability
 				+ ", showOnSite=" + showOnSite + ", showOnHomePage=" + showOnHomePage + ", showOnLeftSide="
 				+ showOnLeftSide + ", serviceInformation=" + serviceInformation + "]";
 	}

@@ -188,13 +188,6 @@ public class PrinterController extends ProductControllerTemplate<Printer, Search
 				"Добавить тип печати",
 				"Изменение вывода типов печати для принтеров"));
 		
-		put("delivery", new ProductPropertiesHelper(
-				"Добавление/Изменение доставки для принтеров",
-				"Добавление новой доставки",
-				"Есть повторение с раннее введенной доставкой!",
-				"Добавить доставку",
-				"Изменение вывода доставки для принтеров"));
-		
 		put("availability", new ProductPropertiesHelper(
 				"Добавление/Изменение наличия для принтеров",
 				"Добавление наличие",
