@@ -40,7 +40,7 @@
 					<c:if test="${!empty product.typePrinter3D}">
 						<tr>
 							<td><custom:getDescriptionByLocale description="${search_3d_printer.printer_type}"/>:</td>
-							<td>${product.typePrinter3D}</td>
+							<td><custom:singleProperty productValue="${product.typePrinter3D}" properties="${printer.type_printer_3d}"/></td>
 						</tr>
 					</c:if>
 					
@@ -79,7 +79,8 @@
 					<table>
                        
                        <c:if test="${!empty product.typePrinter3D}">
-   							<tr><td><custom:getDescriptionByLocale description="${search_3d_printer.printer_type}"/>:</td><td>${product.typePrinter3D}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_3d_printer.printer_type}"/>:</td>
+   							<td><custom:singleProperty productValue="${product.typePrinter3D}" properties="${printer.type_printer_3d}"/></td></tr>
 						</c:if>
                        
                        <c:if test="${!empty product.partNumber}">
@@ -99,7 +100,9 @@
 						</c:if>
 						
 						<c:if test="${!empty product.typeExtruder}">
-   							<tr><td><custom:getDescriptionByLocale description="${search_3d_printer.type_extruder}"/>:</td><td>${product.typeExtruder}</td></tr>
+   							<tr>
+   								<td><custom:getDescriptionByLocale description="${search_3d_printer.type_extruder}"/>:</td>
+   								<td><custom:singleProperty productValue="${product.typeExtruder}" properties="${printer.type_extruder}"/></td></tr>
 						</c:if>	
 						
 						<c:if test="${product.extruderNumber > 0}">
@@ -115,7 +118,9 @@
 						</c:if>
 						
 						<c:if test="${!empty product.airflowModels}">
-   							<tr><td><custom:getDescriptionByLocale description="${search_3d_printer.blowing_model}"/>:</td><td>${product.airflowModels}</td></tr>
+   							<tr>
+   								<td><custom:getDescriptionByLocale description="${search_3d_printer.blowing_model}"/>:</td>
+   								<td><custom:singleProperty productValue="${product.airflowModels}" properties="${printer.airflow_models}"/></td></tr>
 						</c:if>	
 						
 						<c:if test="${product.numberOfFansForBlowingModels > 0}">
@@ -123,7 +128,8 @@
 						</c:if>
                        
                        <c:if test="${!empty product.previouslyUsed}">
-   							<tr><td><custom:getDescriptionByLocale description="${d_search.сondition_equipment}"/>:</td><td>${product.previouslyUsed}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${d_search.сondition_equipment}"/>:</td> 							
+   							<td><custom:singleProperty productValue="${product.previouslyUsed}" properties="${printer.previously_used}"/></td></tr>
 						</c:if>
 						
 						<c:if test="${!empty product.printTechnology}">
@@ -131,15 +137,16 @@
 						</c:if>
                        
 						<c:if test="${!empty product.chromaticity}">
-   							<tr><td><custom:getDescriptionByLocale description="${search_3d_printer.color}"/>:</td><td>
-		                   		<c:forEach var="tp" items="${product.chromaticity}" varStatus="status">  
-		    						${tp}<c:if test="${ ! status.last}" >, </c:if> 
-								</c:forEach>
-                       		</td></tr>
+   							<tr>
+   								<td><custom:getDescriptionByLocale description="${search_3d_printer.color}"/>:</td>
+   								<td><custom:multipleProperty productValues="${product.chromaticity}" properties="${printer.chromaticity}"/></td>
+                       		</tr>
 						</c:if>
 						
                        <c:if test="${!empty product.typeOfPrinthead}">
-   							<tr><td><custom:getDescriptionByLocale description="${search_3d_printer.print_head_type}"/>:</td><td>${product.typeOfPrinthead}</td></tr>
+   							<tr>
+   								<td><custom:getDescriptionByLocale description="${search_3d_printer.print_head_type}"/>:</td>
+   								<td><custom:singleProperty productValue="${product.typeOfPrinthead}" properties="${printer.type_of_printhead}"/></td></tr>
 						</c:if>						
 						
                        <c:if test="${product.meltingPointOfThePrintingMaterial > 0}">
@@ -151,11 +158,9 @@
 						</c:if>						
 					
 						<c:if test="${!empty product.media}">
-   							<tr><td><custom:getDescriptionByLocale description="${search_3d_printer.material_printing}"/>:</td><td>
-		                   		<c:forEach var="tp" items="${product.media}" varStatus="status">  
-		    						${tp}<c:if test="${ ! status.last}" >, </c:if>
-								</c:forEach>
-                       		</td></tr>
+   							<tr>
+   								<td><custom:getDescriptionByLocale description="${search_3d_printer.material_printing}"/>:</td>
+   								<td><custom:multipleProperty productValues="${product.media}" properties="${printer.media}"/></td></tr>
 						</c:if>					
 					
                       	<c:if test="${product.sizeExtruder > 0}">
@@ -187,11 +192,14 @@
 						</c:if>						
 					
                        <c:if test="${!empty product.rip}">
-   							<tr><td><custom:getDescriptionByLocale description="${search_3d_printer.software}"/>:</td><td>
-	                   			<c:forEach var="tp" items="${product.rip}" varStatus="status">  
-	    							${tp}<c:if test="${ ! status.last}" >, </c:if>  
-								</c:forEach>                        
-                       		</td></tr>
+   							<tr>
+   								<td><custom:getDescriptionByLocale description="${search_3d_printer.software}"/>:</td>
+   								<td>
+   									<c:forEach var="tp" items="${product.rip}" varStatus="status">  
+	    								${tp}<c:if test="${ ! status.last}" >, </c:if>  
+									</c:forEach>
+   								</td>
+                       		</tr>
 						</c:if>					
 					
                       	<c:if test="${product.maximumWeightOfThePrintedModel > 0}">

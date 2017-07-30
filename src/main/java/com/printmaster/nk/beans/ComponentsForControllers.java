@@ -224,7 +224,7 @@ public class ComponentsForControllers {
     		model.addAttribute(typeOfProduct , jsonArrayParser(typeOfProduct));		
     		
     	} else if(typeOfProduct.equals("3d_printer")){//bad naming of attribute in 3d printers
-    		model.addAttribute("printer" , jsonObjectParser(typeOfProduct));  
+    		model.addAttribute("printer" , getShowedProperty(jsonObjectParser(typeOfProduct)));  
     		
     	} else {
     		model.addAttribute(typeOfProduct , jsonObjectParser(typeOfProduct));   		
@@ -509,7 +509,7 @@ public class ComponentsForControllers {
 						if( (boolean)current.get("show") ){
 							showedArray.add(current);
 						}
-					}
+					} 
 	
 				}			
 				corectedJSONObject.put(key, showedArray);

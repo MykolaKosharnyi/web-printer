@@ -38,6 +38,26 @@
 	
 	</c:if>
 	
+	<c:if test="${productType == '3d_printer'}">
+		
+		<a href="<c:url value='/admin/${productType}/properties/print_technology' />">Добавление/Изменение технологии печати 3Д принтеров</a><br>
+		<a href="<c:url value='/admin/${productType}/properties/equipment_manufacturer' />">Добавление/Изменение производителя оборудования 3Д принтеров</a><br>
+		<a href="<c:url value='/admin/${productType}/properties/interface_connection' />">Добавление/Изменение интерфейсов подключения 3Д принтеров</a><br>
+		<a href="<c:url value='/admin/${productType}/properties/types_of_files' />">Добавление/Изменение типов файлов 3Д принтеров</a><br>
+		<a href="<c:url value='/admin/${productType}/properties/rip' />">Добавление/Изменение программного обеспечения 3Д принтеров</a><br>		
+		<a href="<c:url value='/admin/${productType}/properties/extruder_number' />">Добавление/Изменение колличество экструдеров 3Д принтеров</a><br>		
+		<br>		
+		<a href="<c:url value='/admin/${productType}/properties_i/type_printer_3d' />">Добавление/Изменение типов 3Д принтеров</a><br>
+		<a href="<c:url value='/admin/${productType}/properties_i/previously_used' />">Добавление/Изменение состояния оборудования для 3D принтеров</a><br>
+		<a href="<c:url value='/admin/${productType}/properties_i/chromaticity' />">Добавление/Изменение цветовой схемы 3Д принтеров</a><br>
+		<a href="<c:url value='/admin/${productType}/properties_i/type_of_printhead' />">Добавление/Изменение типа печатающей головки 3Д принтеров</a><br>
+		<a href="<c:url value='/admin/${productType}/properties_i/media' />">Добавление/Изменение материала для печати 3Д принтеров</a><br>
+		<a href="<c:url value='/admin/${productType}/properties_i/type_extruder' />">Добавление/Изменение типа экструдера 3Д принтеров</a><br>
+		<a href="<c:url value='/admin/${productType}/properties_i/airflow_models' />">Добавление/Изменение обдува модели 3Д принтеров</a><br>
+		<a href="<c:url value='/admin/${productType}/properties_i/availability' />">Добавление/Изменение наличия для 3D принтеров</a><br>
+
+	</c:if>
+	
 	<div style="right:0px;position: relative;">
 		Сортировка 
 		<select id="sorting_parameter">

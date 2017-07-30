@@ -3,6 +3,7 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix = "custom" uri = "/WEB-INF/custom.tld"%>
 <%@page session="true"%>
 <!DOCTYPE>
 <html>
@@ -111,7 +112,7 @@
 						<form:errors path="typePrinter3D" cssClass="error"></form:errors>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${printer.type_printer_3d}" path="typePrinter3D" element="li"/>
+						<custom:radio nameOfAttribyte="typePrinter3D" productValue="${product.typePrinter3D}" properties="${printer.type_printer_3d}"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -199,7 +200,7 @@
 						<p>Состояние оборудования</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${printer.previously_used}" path="previouslyUsed" element="li" />
+						<custom:radio nameOfAttribyte="previouslyUsed" productValue="${product.previouslyUsed}" properties="${printer.previously_used}"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -208,7 +209,7 @@
 						<p>Цветовая схема</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${printer.chromaticity}" path="chromaticity" element="li" />
+						<custom:check nameOfAttribyte="chromaticity" productValues="${product.chromaticity}" properties="${printer.chromaticity}"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -217,7 +218,7 @@
 						<p>Тип печатающей головки</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${printer.type_of_printhead}" path="typeOfPrinthead" element="li" />
+						<custom:radio nameOfAttribyte="typeOfPrinthead" productValue="${product.typeOfPrinthead}" properties="${printer.type_of_printhead}"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -240,7 +241,7 @@
 						<p>Материал для печати</p>
 					</div>
 					<ul class="check_boxes">
-						<form:checkboxes items="${printer.media}" path="media" element="li"/>
+						<custom:check nameOfAttribyte="media" productValues="${product.media}" properties="${printer.media}"/>
 					</ul>
 				</div> 
 				<div class="characteristic">
@@ -263,7 +264,7 @@
 						<p>Тип Экструдера</p>
 					</div>
 					<div class="check_boxes">
-						<form:radiobuttons items="${printer.type_extruder}" path="typeExtruder" element="li"/>
+						<custom:radio nameOfAttribyte="typeExtruder" productValue="${product.typeExtruder}" properties="${printer.type_extruder}"/>
 					</div>
 				</div>	
 				<div class="characteristic">
@@ -304,7 +305,7 @@
 						<p>Обдув модели</p>
 					</div>
 					<div class="check_boxes">
-						<form:radiobuttons items="${printer.airflow_models}" path="airflowModels" element="li"/>
+						<custom:radio nameOfAttribyte="airflowModels" productValue="${product.airflowModels}" properties="${printer.airflow_models}"/>
 					</div>
 				</div>
 				<div class="characteristic">
@@ -357,7 +358,7 @@
 				<div class="characteristic">
 					<div class="block_title">
 						<i></i>
-						<p>Тыпы файлов</p>
+						<p>Типы файлов</p>
 					</div>
 					<ul class="check_boxes">
 						<form:checkboxes items="${printer.types_of_files}" path="typesOfFiles" element="li" />
@@ -495,7 +496,7 @@
 						<p>Наличие (информация для пользователя)</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${printer.availability}" path="availability" element="li"/>
+						<custom:radio nameOfAttribyte="availability" productValue="${product.availability}" properties="${printer.availability}"/>
 						
 						<div class="text_output">
 							<form:input path="availabilitySpecialCase"/>

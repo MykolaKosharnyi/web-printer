@@ -31,7 +31,7 @@
 				<p><custom:getDescriptionByLocale description="${search_3d_printer.printer_type}"/></p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${printer.type_printer_3d}" path="typePrinter3D" element="li" />
+				<custom:searchByLocale nameOfAttribyte="typePrinter3D" properties="${printer.type_printer_3d}"/>
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -40,7 +40,7 @@
 				<p><custom:getDescriptionByLocale description="${d_search.сondition_equipment}"/></p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${printer.previously_used}" path="previouslyUsed" element="li" />
+				<custom:searchByLocale nameOfAttribyte="previouslyUsed" properties="${printer.previously_used}"/>
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -83,7 +83,7 @@
 				<p><custom:getDescriptionByLocale description="${search_3d_printer.type_extruder}"/></p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${printer.type_extruder}" path="typeExtruder" element="li" />
+				<custom:searchByLocale nameOfAttribyte="typeExtruder" properties="${printer.type_extruder}"/>
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -129,7 +129,7 @@
 				<p><custom:getDescriptionByLocale description="${search_3d_printer.blowing_model}"/></p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${printer.airflow_models}" path="airflowModels" element="li" />
+				<custom:searchByLocale nameOfAttribyte="airflowModels" properties="${printer.airflow_models}"/>
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -161,7 +161,7 @@
 				<p><custom:getDescriptionByLocale description="${search_3d_printer.color}"/></p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${printer.chromaticity}" path="chromaticity" element="li" />
+				<custom:searchByLocale nameOfAttribyte="chromaticity" properties="${printer.chromaticity}"/>
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -170,7 +170,7 @@
 				<p><custom:getDescriptionByLocale description="${search_3d_printer.print_head_type}"/></p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${printer.type_of_printhead}" path="typeOfPrinthead" element="li" />
+				<custom:searchByLocale nameOfAttribyte="typeOfPrinthead" properties="${printer.type_of_printhead}"/>
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -194,7 +194,7 @@
 				<p><custom:getDescriptionByLocale description="${search_3d_printer.material_printing}"/></p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${printer.media}" path="media" element="li" />
+				<custom:searchByLocale nameOfAttribyte="media" properties="${printer.media}"/>
 			</ul>
 		</div> 
 		<div class="search_criteria">
