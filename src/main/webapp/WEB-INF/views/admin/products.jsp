@@ -58,6 +58,28 @@
 
 	</c:if>
 	
+	<c:if test="${productType == 'digital_printer'}">
+		<a href="<c:url value='/admin/${productType}/properties/interfaces' />">Добавление/Изменение интерфейсов подключения для цифрового оборудования</a><br>
+		<a href="<c:url value='/admin/${productType}/properties/maximum_format' />">Добавление/Изменение максимального формата для цифрового оборудования</a><br>
+		<a href="<c:url value='/admin/${productType}/properties/scanner_resolution' />">Добавление/Изменение разрешения сканера для цифрового оборудования</a><br>
+		<a href="<c:url value='/admin/${productType}/properties/maximum_resolution_copier_bw' />">Добавление/Изменение разрешения копира для цифрового оборудования</a><br>
+		<a href="<c:url value='/admin/${productType}/properties/support' />">Добавление/Изменение поддержки для цифрового оборудования</a><br>
+		<a href="<c:url value='/admin/${productType}/properties/os_support' />">Добавление/Изменение поддержки ОС для цифрового оборудования</a><br>
+		<br>		
+		<a href="<c:url value='/admin/${productType}/properties_i/availability' />">Добавление/Изменение наличия для цифрового оборудования</a><br>
+		<a href="<c:url value='/admin/${productType}/properties_i/previously_used' />">Добавление/Изменение состояния оборудования для цифрового оборудования</a><br>
+		<a href="<c:url value='/admin/${productType}/properties_i/type_printer' />">Добавление/Изменение типа цифрового оборудования</a><br>
+		<a href="<c:url value='/admin/${productType}/properties_i/device' />">Добавление/Изменение устройств для цифрового оборудования</a><br>
+		<a href="<c:url value='/admin/${productType}/properties_i/type_of_printing' />">Добавление/Изменение типа печати для цифрового оборудования</a><br>
+		<a href="<c:url value='/admin/${productType}/properties_i/print_technology' />">Добавление/Изменение технологии печати для цифрового оборудования</a><br>
+		<a href="<c:url value='/admin/${productType}/properties_i/accommodation' />">Добавление/Изменение размещения для цифрового оборудования</a><br>
+		<a href="<c:url value='/admin/${productType}/properties_i/application_area' />">Добавление/Изменение области применения для цифрового оборудования</a><br>
+		<a href="<c:url value='/admin/${productType}/properties_i/yn' />">Добавление/Изменение есть/нет для цифрового оборудования</a><br>
+		<a href="<c:url value='/admin/${productType}/properties_i/scanner_type' />">Добавление/Изменение типа сканера для цифрового оборудования</a><br>
+		<a href="<c:url value='/admin/${productType}/properties_i/printing_on' />">Добавление/Изменение 'печати на' для цифрового оборудования</a><br>
+		<a href="<c:url value='/admin/${productType}/properties_i/display_information' />">Добавление/Изменение отображения информации для цифрового оборудования</a><br>
+	</c:if>
+	
 	<div style="right:0px;position: relative;">
 		Сортировка 
 		<select id="sorting_parameter">

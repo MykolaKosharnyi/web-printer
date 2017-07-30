@@ -40,7 +40,9 @@
 					   <jsp:include page="../product_page/price.jsp" /> 
 					   
                        <c:if test="${!empty product.typePrinter}">
-   							<tr><td><custom:getDescriptionByLocale description="${search_d_printer.printer_type}"/>:</td><td>${product.typePrinter}</td></tr>
+   							<tr>
+   								<td><custom:getDescriptionByLocale description="${search_d_printer.printer_type}"/>:</td>
+   								<td><custom:singleProperty productValue="${product.typePrinter}" properties="${digital_printer.type_printer}"/></td></tr>
 					   </c:if>
 					   
 					   <c:if test="${!empty product.equipmentModel}">
@@ -71,7 +73,9 @@
 					<table>
                        
                        <c:if test="${!empty product.typePrinter}">
-   							<tr><td><custom:getDescriptionByLocale description="${search_d_printer.printer_type}"/>:</td><td>${product.typePrinter}</td></tr>
+   							<tr>
+   								<td><custom:getDescriptionByLocale description="${search_d_printer.printer_type}"/>:</td>
+   								<td><custom:singleProperty productValue="${product.typePrinter}" properties="${digital_printer.type_printer}"/></td></tr>
 						</c:if>
                        
                        <c:if test="${!empty product.partNumber}">
@@ -79,31 +83,47 @@
 						</c:if>
 						
 						<c:if test="${!empty product.previouslyUsed}">
-   							<tr><td><custom:getDescriptionByLocale description="${d_search.сondition_equipment}"/>:</td><td>${product.previouslyUsed}</td></tr>
+   							<tr>
+   								<td><custom:getDescriptionByLocale description="${d_search.сondition_equipment}"/>:</td>
+   								<td><custom:singleProperty productValue="${product.previouslyUsed}" properties="${digital_printer.previously_used}"/></td>
+   							</tr>
 						</c:if>
 						
 						<c:if test="${!empty product.equipmentManufacturer}">
-   							<tr><td>Производитель оборудования:</td><td>${product.equipmentManufacturer}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_d_printer.equipment_manufacturer}"/>:</td><td>${product.equipmentManufacturer}</td></tr>
 						</c:if>
 						
 						<c:if test="${!empty product.device}">
-   							<tr><td><custom:getDescriptionByLocale description="${search_d_printer.device}"/>:</td><td>${product.device}</td></tr>
+   							<tr>
+   								<td><custom:getDescriptionByLocale description="${search_d_printer.device}"/>:</td>
+   								<td><custom:singleProperty productValue="${product.device}" properties="${digital_printer.device}"/></td>
+   							</tr>
 						</c:if>
                        
                        <c:if test="${!empty product.typeOfPrinting}">
-   							<tr><td><custom:getDescriptionByLocale description="${search_d_printer.print_type}"/>:</td><td>${product.typeOfPrinting}</td></tr>
+   							<tr>
+   								<td><custom:getDescriptionByLocale description="${search_d_printer.print_type}"/>:</td>
+   								<td><custom:singleProperty productValue="${product.typeOfPrinting}" properties="${digital_printer.type_of_printing}"/></td>
+   							</tr>
 						</c:if>
                        
                        <c:if test="${!empty product.printTechnology}">
-   							<tr><td><custom:getDescriptionByLocale description="${search_d_printer.printing_technology}"/>:</td><td>${product.printTechnology}</td></tr>
+   							<tr>
+   								<td><custom:getDescriptionByLocale description="${search_d_printer.printing_technology}"/>:</td>
+   								<td><custom:singleProperty productValue="${product.printTechnology}" properties="${digital_printer.print_technology}"/></td>
+   							</tr>
 						</c:if>
                        
                        <c:if test="${!empty product.accommodation}">
-   							<tr><td><custom:getDescriptionByLocale description="${search_d_printer.accommodation}"/>:</td><td>${product.accommodation}</td></tr>
+   							<tr>
+   								<td><custom:getDescriptionByLocale description="${search_d_printer.accommodation}"/>:</td>
+   								<td><custom:singleProperty productValue="${product.accommodation}" properties="${digital_printer.accommodation}"/></td></tr>
 						</c:if>
                        
                        <c:if test="${!empty product.applicationArea}">
-   							<tr><td><custom:getDescriptionByLocale description="${search_d_printer.application_area}"/>:</td><td>${product.applicationArea}</td></tr>
+   							<tr>
+   								<td><custom:getDescriptionByLocale description="${search_d_printer.application_area}"/>:</td>
+   								<td><custom:singleProperty productValue="${product.applicationArea}" properties="${digital_printer.application_area}"/></td></tr>
 						</c:if>
                        
                        <c:if test="${(product.speedPrintBWA4 != 0) || (product.speedPrintBWA3 != 0) || 
@@ -251,15 +271,17 @@
 						</c:if>
                        
                        <c:if test="${!empty product.automaticTwoSidedPrinting}">
-   							<tr><td><custom:getDescriptionByLocale description="${search_d_printer.automatic_2_sided_printing}"/>:</td><td>${product.automaticTwoSidedPrinting}</td></tr>
+   							<tr>
+   								<td><custom:getDescriptionByLocale description="${search_d_printer.automatic_2_sided_printing}"/>:</td>
+   								<td><custom:singleProperty productValue="${product.automaticTwoSidedPrinting}" properties="${digital_printer.yn}"/></td></tr>
 						</c:if>
                        
                        <c:if test="${!empty product.theMaximumResolutionForColorPrinting && product.theMaximumResolutionForColorPrinting!=''}">
-   							<tr><td>Максимальное разрешение для цветной печати(0000x0000):</td><td>${product.theMaximumResolutionForColorPrinting}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_d_printer.maximum_resolution_for_color_printing}"/>(0000x0000):</td><td>${product.theMaximumResolutionForColorPrinting}</td></tr>
 						</c:if>
                        
                        <c:if test="${!empty product.theMaximumResolutionForBWPrinting && product.theMaximumResolutionForBWPrinting!=''}">
-   							<tr><td>Максимальное разрешение для ч/б печати(0000x0000):</td><td>${product.theMaximumResolutionForBWPrinting}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_d_printer.maximum_resolution_for_b_w_printing}"/>(0000x0000):</td><td>${product.theMaximumResolutionForBWPrinting}</td></tr>
 						</c:if>
                        
                        <c:if test="${product.warmUpTime > 0}">
@@ -275,11 +297,10 @@
 						</c:if>
 						
 						<c:if test="${!empty product.scannerType}">
-   							<tr><td><custom:getDescriptionByLocale description="${search_d_printer.scanner_type}"/>:</td><td>
-	                   			<c:forEach var="tp" items="${product.scannerType}" varStatus="status">  
-	    							${tp}<c:if test="${ ! status.last}" >, </c:if>  
-								</c:forEach>                       
-                       		</td></tr>
+   							<tr>
+   								<td><custom:getDescriptionByLocale description="${search_d_printer.scanner_type}"/>:</td>
+   								<td><custom:multipleProperty productValues="${product.scannerType}" properties="${digital_printer.scanner_type}"/></td>
+   							</tr>
 						</c:if>
                        
                        <c:if test="${!empty product.theMaximumSizeOfTheOriginal}">
@@ -287,7 +308,7 @@
 						</c:if>
                        
                        <c:if test="${!empty product.maximumScanSize}">
-   							<tr><td>Максимальный размер сканирования:</td><td>${product.maximumScanSize}</td></tr>
+   							<tr><td><custom:getDescriptionByLocale description="${search_d_printer.maximum_scan_size}"/>:</td><td>${product.maximumScanSize}</td></tr>
 						</c:if>
                        
                        <c:if test="${!empty product.scannerResolution}">
@@ -303,7 +324,9 @@
 						</c:if>
                        
                        <c:if test="${!empty product.sendingImagesByEmail}">
-   							<tr><td><custom:getDescriptionByLocale description="${search_d_printer.sending_images_e_mail}"/>:</td><td>${product.sendingImagesByEmail}</td></tr>
+   							<tr>
+   								<td><custom:getDescriptionByLocale description="${search_d_printer.sending_images_e_mail}"/>:</td>
+   								<td><custom:singleProperty productValue="${product.sendingImagesByEmail}" properties="${digital_printer.yn}"/></td></tr>
 						</c:if>
                        
                        <c:if test="${!empty product.maximumResolutionCopierBW}">
@@ -347,11 +370,15 @@
 						</c:if>
                        
                        <c:if test="${!empty product.electronicSorting}">
-   							<tr><td><custom:getDescriptionByLocale description="${search_d_printer.electronic_sorting}"/>:</td><td>${product.electronicSorting}</td></tr>
+   							<tr>
+   								<td><custom:getDescriptionByLocale description="${search_d_printer.electronic_sorting}"/>:</td>
+   								<td><custom:singleProperty productValue="${product.electronicSorting}" properties="${digital_printer.yn}"/></td></tr>
 						</c:if>
                        
                        <c:if test="${!empty product.stapler}">
-   							<tr><td><custom:getDescriptionByLocale description="${search_d_printer.stapler}"/>:</td><td>${product.stapler}</td></tr>
+   							<tr>
+   								<td><custom:getDescriptionByLocale description="${search_d_printer.stapler}"/>:</td>
+   								<td><custom:singleProperty productValue="${product.stapler}" properties="${digital_printer.yn}"/></td></tr>
 						</c:if>
                        
                        <c:if test="${product.paperDensity > 0}">
@@ -359,11 +386,10 @@
 						</c:if>
                                             
                        <c:if test="${!empty product.printingOn}">
-   							<tr><td><custom:getDescriptionByLocale description="${search_d_printer.printing_on}"/>:</td><td>
-	                   			<c:forEach var="tp" items="${product.printingOn}" varStatus="status">  
-	    							${tp}<c:if test="${ ! status.last}" >, </c:if>  
-								</c:forEach>                       
-                       		</td></tr>
+   							<tr>
+   								<td><custom:getDescriptionByLocale description="${search_d_printer.printing_on}"/>:</td>
+   								<td><custom:multipleProperty productValues="${product.printingOn}" properties="${digital_printer.printing_on}"/></td>
+   							</tr>
 						</c:if>
                        
                        <c:if test="${product.resourceDeveloper > 0}">
@@ -399,15 +425,21 @@
 						</c:if> 
                        
 						<c:if test="${!empty product.directPrinting}">
-   							<tr><td><custom:getDescriptionByLocale description="${search_d_printer.direct_printing}"/>:</td><td>${product.directPrinting}</td></tr>
+   							<tr>
+   								<td><custom:getDescriptionByLocale description="${search_d_printer.direct_printing}"/>:</td>
+   								<td><custom:singleProperty productValue="${product.directPrinting}" properties="${digital_printer.yn}"/></td></tr>
 						</c:if>
 
 						<c:if test="${!empty product.webInterface}">
-   							<tr><td><custom:getDescriptionByLocale description="${search_d_printer.web_interface}"/>:</td><td>${product.webInterface}</td></tr>
+   							<tr>
+   								<td><custom:getDescriptionByLocale description="${search_d_printer.web_interface}"/>:</td>
+   								<td><custom:singleProperty productValue="${product.webInterface}" properties="${digital_printer.yn}"/></td></tr>
 						</c:if>
 
 						<c:if test="${!empty product.supportPostScript}">
-   							<tr><td><custom:getDescriptionByLocale description="${search_d_printer.post_script_support}"/>:</td><td>${product.supportPostScript}</td></tr>
+   							<tr>
+   								<td><custom:getDescriptionByLocale description="${search_d_printer.post_script_support}"/>:</td>
+   								<td><custom:singleProperty productValue="${product.supportPostScript}" properties="${digital_printer.yn}"/></td></tr>
 						</c:if>
 
 						<c:if test="${!empty product.support}">
@@ -435,7 +467,9 @@
 						</c:if> 
 
 						<c:if test="${!empty product.displayInformation}">
-   							<tr><td><custom:getDescriptionByLocale description="${search_d_printer.displaying_information}"/>:</td><td>${product.displayInformation}</td></tr>
+   							<tr>
+   								<td><custom:getDescriptionByLocale description="${search_d_printer.displaying_information}"/>:</td>
+   								<td><custom:singleProperty productValue="${product.displayInformation}" properties="${digital_printer.display_information}"/></td></tr>
 						</c:if>
 
 						<c:if test="${product.displaySize > 0}">

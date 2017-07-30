@@ -64,9 +64,6 @@ public class Printer3DController extends ProductControllerTemplate<Printer3D, Se
 	private Map<String, ProductPropertiesHelper> properties = new HashMap<String, ProductPropertiesHelper>(){
 		private static final long serialVersionUID = -4222153587167260117L;
 		{
-			
-			
-			/**********************************************************************/
 			put("type_printer_3d", new ProductPropertiesHelper(
 					"Добавление/Изменение типа 3Д принтеров",
 					"Добавление нового типа 3Д принтеров",

@@ -226,7 +226,10 @@ public class ComponentsForControllers {
     	} else if(typeOfProduct.equals("3d_printer")){//bad naming of attribute in 3d printers
     		model.addAttribute("printer" , getShowedProperty(jsonObjectParser(typeOfProduct)));  
     		
-    	} else {
+    	} else if(typeOfProduct.equals("digital_printer")){
+    		model.addAttribute(typeOfProduct , getShowedProperty(jsonObjectParser(typeOfProduct)));  
+    		
+    	}else {
     		model.addAttribute(typeOfProduct , jsonObjectParser(typeOfProduct));   		
     	}
 	}

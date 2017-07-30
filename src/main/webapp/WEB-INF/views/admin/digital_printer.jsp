@@ -3,6 +3,7 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="custom" uri="/WEB-INF/custom.tld"%>
 <%@page session="true"%>
 <!DOCTYPE>
 <html>
@@ -107,7 +108,7 @@
 						<form:errors path="typePrinter" cssClass="error"></form:errors>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${digital_printer.type_printer}" path="typePrinter" element="li"/>
+						<custom:radio nameOfAttribyte="typePrinter" productValue="${product.typePrinter}" properties="${digital_printer.type_printer}"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -126,7 +127,7 @@
 						<p>Состояние оборудования</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${digital_printer.previously_used}" path="previouslyUsed" element="li"/>
+						<custom:radio nameOfAttribyte="previouslyUsed" productValue="${product.previouslyUsed}" properties="${digital_printer.previously_used}"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -161,7 +162,7 @@
 						<p>Устройство</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${digital_printer.device}" path="device" element="li"/>
+						<custom:radio nameOfAttribyte="device" productValue="${product.device}" properties="${digital_printer.device}"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -170,7 +171,7 @@
 						<p>Тип печати</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${digital_printer.type_of_printing}" path="typeOfPrinting" element="li"/>
+						<custom:radio nameOfAttribyte="typeOfPrinting" productValue="${product.typeOfPrinting}" properties="${digital_printer.type_of_printing}"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -179,7 +180,7 @@
 						<p>Технология печати</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${digital_printer.print_technology}" path="printTechnology" element="li"/>
+						<custom:radio nameOfAttribyte="printTechnology" productValue="${product.printTechnology}" properties="${digital_printer.print_technology}"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -188,7 +189,7 @@
 						<p>Размещение</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${digital_printer.accommodation}" path="accommodation" element="li"/>
+						<custom:radio nameOfAttribyte="accommodation" productValue="${product.accommodation}" properties="${digital_printer.accommodation}"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -197,7 +198,7 @@
 						<p>Область применения</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${digital_printer.application_area}" path="applicationArea" element="li"/>
+						<custom:radio nameOfAttribyte="applicationArea" productValue="${product.applicationArea}" properties="${digital_printer.application_area}"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -225,7 +226,7 @@
 						<p>Автоматическая двусторонняя печать</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${digital_printer.yn}" path="automaticTwoSidedPrinting" element="li"/>
+						<custom:radio nameOfAttribyte="automaticTwoSidedPrinting" productValue="${product.automaticTwoSidedPrinting}" properties="${digital_printer.yn}"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -284,7 +285,7 @@
 						<p>Тип сканера</p>
 					</div>
 					<ul class="check_boxes">
-						<form:checkboxes items="${digital_printer.scanner_type}" path="scannerType" element="li"/>
+						<custom:check nameOfAttribyte="scannerType" productValues="${product.scannerType}" properties="${digital_printer.scanner_type}"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -341,7 +342,7 @@
 						<p>Отправка изображения по e-mail</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${digital_printer.yn}" path="sendingImagesByEmail" element="li"/>
+						<custom:radio nameOfAttribyte="sendingImagesByEmail" productValue="${product.sendingImagesByEmail}" properties="${digital_printer.yn}"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -645,7 +646,7 @@
 						<p>Электронная сортировка</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${digital_printer.yn}" path="electronicSorting" element="li"/>
+						<custom:radio nameOfAttribyte="electronicSorting" productValue="${product.electronicSorting}" properties="${digital_printer.yn}"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -654,7 +655,7 @@
 						<p>Степлер</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${digital_printer.yn}" path="stapler" element="li"/>
+						<custom:radio nameOfAttribyte="stapler" productValue="${product.stapler}" properties="${digital_printer.yn}"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -673,7 +674,7 @@
 						<p>Печать на</p>
 					</div>
 					<ul class="check_boxes">
-						<form:checkboxes items="${digital_printer.printing_on}" path="printingOn" element="li"/>
+						<custom:check nameOfAttribyte="printingOn" productValues="${product.printingOn}" properties="${digital_printer.printing_on}"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -751,7 +752,7 @@
 						<p>Прямая печать</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${digital_printer.yn}" path="directPrinting" element="li"/>
+						<custom:radio nameOfAttribyte="directPrinting" productValue="${product.directPrinting}" properties="${digital_printer.yn}"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -760,7 +761,7 @@
 						<p>Веб-интерфейс</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${digital_printer.yn}" path="webInterface" element="li"/>
+						<custom:radio nameOfAttribyte="webInterface" productValue="${product.webInterface}" properties="${digital_printer.yn}"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -769,7 +770,7 @@
 						<p>Поддержка PostScript</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${digital_printer.yn}" path="supportPostScript" element="li"/>
+						<custom:radio nameOfAttribyte="supportPostScript" productValue="${product.supportPostScript}" properties="${digital_printer.yn}"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -816,7 +817,7 @@
 						<p>Отображение информации</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${digital_printer.display_information}" path="displayInformation" element="li"/>
+						<custom:radio nameOfAttribyte="displayInformation" productValue="${product.displayInformation}" properties="${digital_printer.display_information}"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -928,7 +929,7 @@
 						<p>Наличие (информация для пользователя)</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${digital_printer.availability}" path="availability" element="li"/>
+						<custom:radio nameOfAttribyte="availability" productValue="${product.availability}" properties="${digital_printer.availability}"/>
 						<div class="text_output">
 							<form:input path="availabilitySpecialCase"/>
 						</div>

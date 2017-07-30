@@ -32,7 +32,7 @@
 				<p><custom:getDescriptionByLocale description="${search_d_printer.printer_type}"/></p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${digital_printer.type_printer}" path="typePrinter" element="li" />
+				<custom:searchByLocale nameOfAttribyte="typePrinter" properties="${digital_printer.type_printer}"/>
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -41,7 +41,7 @@
 				<p><custom:getDescriptionByLocale description="${d_search.сondition_equipment}"/></p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${digital_printer.previously_used}" path="previouslyUsed" element="li" />
+				<custom:searchByLocale nameOfAttribyte="previouslyUsed" properties="${digital_printer.previously_used}"/>
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -50,7 +50,7 @@
 				<p><custom:getDescriptionByLocale description="${search_d_printer.device}"/></p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${digital_printer.device}" path="device" element="li" />
+				<custom:searchByLocale nameOfAttribyte="device" properties="${digital_printer.device}"/>
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -59,7 +59,7 @@
 				<p><custom:getDescriptionByLocale description="${search_d_printer.print_type}"/></p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${digital_printer.type_of_printing}" path="typeOfPrinting" element="li" />
+				<custom:searchByLocale nameOfAttribyte="typeOfPrinting" properties="${digital_printer.type_of_printing}"/>
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -68,7 +68,7 @@
 				<p><custom:getDescriptionByLocale description="${search_d_printer.printing_technology}"/></p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${digital_printer.print_technology}" path="printTechnology" element="li" />
+				<custom:searchByLocale nameOfAttribyte="printTechnology" properties="${digital_printer.print_technology}"/>
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -77,7 +77,7 @@
 				<p><custom:getDescriptionByLocale description="${search_d_printer.accommodation}"/></p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${digital_printer.accommodation}" path="accommodation" element="li" />
+				<custom:searchByLocale nameOfAttribyte="accommodation" properties="${digital_printer.accommodation}"/>
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -86,7 +86,7 @@
 				<p><custom:getDescriptionByLocale description="${search_d_printer.application_area}"/></p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${digital_printer.application_area}" path="applicationArea" element="li" />
+				<custom:searchByLocale nameOfAttribyte="applicationArea" properties="${digital_printer.application_area}"/>
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -125,7 +125,7 @@
 						<p><custom:getDescriptionByLocale description="${search_d_printer.automatic_2_sided_printing}"/></p>
 					</div>
 					<ul class="check_boxes">
-						<form:checkboxes items="${digital_printer.yn}" path="automaticTwoSidedPrinting" element="li" />
+						<custom:searchByLocale nameOfAttribyte="automaticTwoSidedPrinting" properties="${digital_printer.yn}"/>
 					</ul>
 				</div>
 		
@@ -245,7 +245,7 @@
 						<p><custom:getDescriptionByLocale description="${search_d_printer.scanner_type}"/></p>
 					</div>
 					<ul class="check_boxes">
-						<form:checkboxes items="${digital_printer.scanner_type}" path="scannerType" element="li" />
+						<custom:searchByLocale nameOfAttribyte="scannerType" properties="${digital_printer.scanner_type}"/>
 					</ul>
 				</div>
 				<div class="search_criteria">
@@ -300,7 +300,7 @@
 						<p><custom:getDescriptionByLocale description="${search_d_printer.sending_images_e_mail}"/></p>
 					</div>
 					<ul class="check_boxes">
-						<form:checkboxes items="${digital_printer.yn}" path="sendingImagesByEmail" element="li" />
+						<custom:searchByLocale nameOfAttribyte="sendingImagesByEmail" properties="${digital_printer.yn}"/>
 					</ul>
 				</div>
 			</div>
@@ -466,7 +466,7 @@
 						<p><custom:getDescriptionByLocale description="${search_d_printer.electronic_sorting}"/></p>
 					</div>
 					<ul class="check_boxes">
-						<form:checkboxes items="${digital_printer.yn}" path="electronicSorting" element="li" />
+						<custom:searchByLocale nameOfAttribyte="electronicSorting" properties="${digital_printer.yn}"/>
 					</ul>
 				</div>
 				<div class="search_criteria">
@@ -475,7 +475,7 @@
 						<p><custom:getDescriptionByLocale description="${search_d_printer.stapler}"/></p>
 					</div>
 					<ul class="check_boxes">
-						<form:checkboxes items="${digital_printer.yn}" path="stapler" element="li" />
+						<custom:searchByLocale nameOfAttribyte="stapler" properties="${digital_printer.yn}"/>
 					</ul>
 				</div>
 				<div class="search_criteria">
@@ -568,7 +568,7 @@
 				<p><custom:getDescriptionByLocale description="${search_d_printer.printing_on}"/></p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${digital_printer.printing_on}" path="printingOn" element="li" />
+				<custom:searchByLocale nameOfAttribyte="printingOn" properties="${digital_printer.printing_on}"/>
 			</ul>
 		</div>
 		
@@ -603,7 +603,7 @@
 						<p><custom:getDescriptionByLocale description="${search_d_printer.direct_printing}"/></p>
 					</div>
 					<ul class="check_boxes">
-						<form:checkboxes items="${digital_printer.yn}" path="directPrinting" element="li" />
+						<custom:searchByLocale nameOfAttribyte="directPrinting" properties="${digital_printer.yn}"/>
 					</ul>
 				</div>
 				<div class="search_criteria">
@@ -612,7 +612,7 @@
 						<p><custom:getDescriptionByLocale description="${search_d_printer.web_interface}"/></p>
 					</div>
 					<ul class="check_boxes">
-						<form:checkboxes items="${digital_printer.yn}" path="webInterface" element="li" />
+						<custom:searchByLocale nameOfAttribyte="webInterface" properties="${digital_printer.yn}"/>
 					</ul>
 				</div>
 				<div class="search_criteria">
@@ -621,7 +621,7 @@
 						<p><custom:getDescriptionByLocale description="${search_d_printer.post_script_support}"/></p>
 					</div>
 					<ul class="check_boxes">
-						<form:checkboxes items="${digital_printer.yn}" path="supportPostScript" element="li" />
+						<custom:searchByLocale nameOfAttribyte="supportPostScript" properties="${digital_printer.yn}"/>
 					</ul>
 				</div>
 				<div class="search_criteria">
@@ -705,7 +705,7 @@
 						<p><custom:getDescriptionByLocale description="${search_d_printer.displaying_information}"/></p>
 					</div>
 					<ul class="check_boxes">
-						<form:checkboxes items="${digital_printer.display_information}" path="displayInformation" element="li" />
+						<custom:searchByLocale nameOfAttribyte="displayInformation" properties="${digital_printer.display_information}"/>
 					</ul>
 				</div>
 				<div class="search_criteria">
