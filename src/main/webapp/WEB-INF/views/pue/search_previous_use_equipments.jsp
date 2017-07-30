@@ -29,14 +29,14 @@
 			<div class="block_block_title">
 				
 				<input class="input_pue" type="checkbox" name="type" value="printer" id="printer_98">
-					<p class="p_pue" for="printer_98">Принтер</p>
+					<p class="p_pue" for="printer_98"><custom:getDescriptionByLocale description="${descriptions.printers}"/></p>
 				</input>
 			</div>
 			<ul class="block_check_boxes">
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Тип принтера</p>
+						<p><custom:getDescriptionByLocale description="${search_pue.printer_type}"/></p>
 					</div>
 					<ul class="check_boxes">
 						<form:checkboxes items="${typePrinter}" path="typePrinter" element="li" />
@@ -45,7 +45,7 @@
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Производитель</p>
+						<p><custom:getDescriptionByLocale description="${search_pue.manufacturer}"/></p>
 					</div>
 					<ul class="check_boxes">
 						<form:checkboxes items="${printerEquipment}" path="printerEquipment" element="li" />
@@ -57,14 +57,14 @@
 		<div class="block_search_criteria">
 			<div class="block_block_title">
 				<input class="input_pue" type="checkbox" name="type" value="3d_printer" id="3d_printer_98">
-					<p class="p_pue" for="3d_printer_98">3D Принтер</p>
+					<p class="p_pue" for="3d_printer_98"><custom:getDescriptionByLocale description="${descriptions.printers_3d}"/></p>
 				</input>
 			</div>
 			<ul class="block_check_boxes">
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Тип принтера</p>
+						<p><custom:getDescriptionByLocale description="${search_pue.printer_type}"/></p>
 					</div>
 					<ul class="check_boxes">
 						<form:checkboxes items="${type3dPrinter}" path="type3dPrinter" element="li" />
@@ -73,7 +73,7 @@
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Производитель</p>
+						<p><custom:getDescriptionByLocale description="${search_pue.manufacturer}"/></p>
 					</div>
 					<ul class="check_boxes">
 						<form:checkboxes items="${d3PrinterEquipment}" path="d3PrinterEquipment" element="li" />
@@ -85,14 +85,14 @@
 		<div class="block_search_criteria">
 			<div class="block_block_title">
 				<input class="input_pue" type="checkbox" name="type" value="digital_printer" id="digital_printer_98">
-					<p class="p_pue" for="digital_printer_98">Цыфровое оборудование</p>
+					<p class="p_pue" for="digital_printer_98"><custom:getDescriptionByLocale description="${descriptions.digital_printers}"/></p>
 				</input>
 			</div>
 			<ul class="block_check_boxes">
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Тип оборудования</p>
+						<p><custom:getDescriptionByLocale description="${search_pue.type_equipment}"/></p>
 					</div>
 					<ul class="check_boxes">
 						<form:checkboxes items="${typeDigitalPrinter}" path="typeDigitalPrinter" element="li" />
@@ -101,7 +101,7 @@
 				<!--  <div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Производитель</p>
+						<p><custom:getDescriptionByLocale description="${search_pue.manufacturer}"/></p>
 					</div>
 					<ul class="check_boxes">
 						<form:checkboxes items="${d3PrinterEquipment}" path="d3PrinterEquipment" element="li" />
@@ -113,14 +113,14 @@
 		<div class="block_search_criteria">
 			<div class="block_block_title">
 				<input class="input_pue" type="checkbox" name="type" value="laminator" id="laminator_98">
-					<p class="p_pue" for="laminator_98">Ламинатор</p>
+					<p class="p_pue" for="laminator_98"><custom:getDescriptionByLocale description="${descriptions.laminators}"/></p>
 				</input>
 			</div>
 			<ul class="block_check_boxes">
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Тип ламинатора</p>
+						<p><custom:getDescriptionByLocale description="${search_pue.type_laminator}"/></p>
 					</div>
 					<ul class="check_boxes">
 						<form:checkboxes items="${typeLaminator}" path="typeLaminator" element="li" />
@@ -129,7 +129,7 @@
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Производитель</p>
+						<p><custom:getDescriptionByLocale description="${search_pue.manufacturer}"/></p>
 					</div>
 					<ul class="check_boxes">
 						<form:checkboxes items="${laminatorEquipment}" path="laminatorEquipment" element="li" />
@@ -141,14 +141,14 @@
 		<div class="block_search_criteria">
 			<div class="block_block_title">
 				<input class="input_pue" type="checkbox" name="type" value="laser" id="laser_98">
-					<p class="p_pue" for="laser_98">Лазер</p>
+					<p class="p_pue" for="laser_98"><custom:getDescriptionByLocale description="${descriptions.lasers}"/></p>
 				</input>
 			</div>
 			<ul class="block_check_boxes">
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Тип лазера</p>
+						<p><custom:getDescriptionByLocale description="${search_pue.laser_type}"/></p>
 					</div>
 					<ul class="check_boxes">
 						<form:checkboxes items="${typeLaser}" path="typeLaser" element="li" />
@@ -157,7 +157,7 @@
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Производитель</p>
+						<p><custom:getDescriptionByLocale description="${search_pue.manufacturer}"/></p>
 					</div>
 					<ul class="check_boxes">
 						<form:checkboxes items="${laserEquipment}" path="laserEquipment" element="li" />
@@ -169,14 +169,14 @@
 		<div class="block_search_criteria">
 			<div class="block_block_title">
 				<input class="input_pue" type="checkbox" name="type" value="cutter" id="cutter_98">
-					<p class="p_pue" for="cutter_98">Фрезер/Гравер</p>
+					<p class="p_pue" for="cutter_98"><custom:getDescriptionByLocale description="${descriptions.cutters}"/></p>
 				</input>
 			</div>
 			<ul class="block_check_boxes">
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Тип фрезера/гравера</p>
+						<p><custom:getDescriptionByLocale description="${search_pue.type_router_engraver}"/></p>
 					</div>
 					<ul class="check_boxes">
 						<form:checkboxes items="${typeCutter}" path="typeCutter" element="li" />
@@ -185,7 +185,7 @@
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Производитель</p>
+						<p><custom:getDescriptionByLocale description="${search_pue.manufacturer}"/></p>
 					</div>
 					<ul class="check_boxes">
 						<form:checkboxes items="${cutterEquipment}" path="cutterEquipment" element="li" />
@@ -197,14 +197,14 @@
 		<div class="block_search_criteria">
 			<div class="block_block_title">
 				<input class="input_pue" type="checkbox" name="type" value="scanner" id="scanner_98">
-					<p class="p_pue" for="scanner_98">Сканер</p>
+					<p class="p_pue" for="scanner_98"><custom:getDescriptionByLocale description="${descriptions.scanners}"/></p>
 				</input>
 			</div>
 			<ul class="block_check_boxes">
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Тип сканера</p>
+						<p><custom:getDescriptionByLocale description="${search_pue.scanner_type}"/></p>
 					</div>
 					<ul class="check_boxes">
 						<form:checkboxes items="${typeScanner}" path="typeScanner" element="li" />
@@ -213,7 +213,7 @@
 				<div class="search_criteria">
 					<div class="block_title">
 						<i></i>
-						<p>Производитель</p>
+						<p><custom:getDescriptionByLocale description="${search_pue.manufacturer}"/></p>
 					</div>
 					<ul class="check_boxes">
 						<form:checkboxes items="${scannerEquipment}" path="scannerEquipment" element="li" />

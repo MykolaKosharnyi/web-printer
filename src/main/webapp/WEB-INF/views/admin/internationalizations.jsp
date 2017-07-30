@@ -26,6 +26,18 @@
 			<br>
 			<a href="<c:url value='/admin/internationalization/search_d_printer' />">Характеристики для поиска, цифровое оборудование</a>
 			<br>
+			<a href="<c:url value='/admin/internationalization/search_laminator' />">Характеристики для поиска, ламинаторы</a>
+			<br>
+			<a href="<c:url value='/admin/internationalization/search_laser' />">Характеристики для поиска, лазеры</a>
+			<br>
+			<a href="<c:url value='/admin/internationalization/search_cutter' />">Характеристики для поиска, граверы/фрезеры</a>
+			<br>
+			<a href="<c:url value='/admin/internationalization/search_scanner' />">Характеристики для поиска, сканнеры</a>
+			<br>
+			<a href="<c:url value='/admin/internationalization/search_pue' />">Характеристики для поиска, б/у оборудование</a>
+			<br>
+			<a href="<c:url value='/admin/internationalization/search_rip' />">Характеристики для поиска, программное обеспечение</a>
+			<br>
 		</div>
 	</body>
 </html>
