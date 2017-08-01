@@ -40,7 +40,9 @@
 					   <jsp:include page="../product_page/price.jsp" /> 
 					   
                        <c:if test="${!empty product.typeProduct}">
-   							<tr><td><custom:getDescriptionByLocale description="${search_laminator.type_laminator}"/>:</td><td>${product.typeProduct}</td></tr>
+   							<tr>
+   								<td><custom:getDescriptionByLocale description="${search_laminator.type_laminator}"/>:</td>
+   								<td><custom:singleProperty productValue="${product.typeProduct}" properties="${laminator.type_product}"/></td></tr>
 					   </c:if>
 					   
 					   <c:if test="${!empty product.equipmentModel}">
@@ -80,7 +82,9 @@
 					<table>
                        
                        <c:if test="${!empty product.typeProduct}">
-   							<tr><td><custom:getDescriptionByLocale description="${search_laminator.type_laminator}"/>:</td><td>${product.typeProduct}</td></tr>
+   							<tr>
+   								<td><custom:getDescriptionByLocale description="${search_laminator.type_laminator}"/>:</td>
+   								<td><custom:singleProperty productValue="${product.typeProduct}" properties="${laminator.type_product}"/></td></tr>
 						</c:if>
                        
                        <c:if test="${!empty product.partNumber}">
@@ -96,11 +100,15 @@
 						</c:if>
                        
                        <c:if test="${!empty product.previouslyUsed}">
-   							<tr><td><custom:getDescriptionByLocale description="${d_search.сondition_equipment}"/>:</td><td>${product.previouslyUsed}</td></tr>
+   							<tr>
+   								<td><custom:getDescriptionByLocale description="${d_search.сondition_equipment}"/>:</td>
+   								<td><custom:singleProperty productValue="${product.previouslyUsed}" properties="${laminator.previously_used}"/></td></tr>
 						</c:if>
                        
                        <c:if test="${!empty product.innings}">
-   							<tr><td><custom:getDescriptionByLocale description="${search_laminator.innings}"/>:</td><td>${product.innings}</td></tr>
+   							<tr>
+   								<td><custom:getDescriptionByLocale description="${search_laminator.innings}"/>:</td>
+   								<td><custom:singleProperty productValue="${product.innings}" properties="${laminator.innings}"/></td></tr>
 						</c:if>
                        
                        <c:if test="${product.numberOfShafts  > 0}">

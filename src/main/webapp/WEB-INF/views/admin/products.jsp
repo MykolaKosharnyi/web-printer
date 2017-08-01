@@ -80,6 +80,16 @@
 		<a href="<c:url value='/admin/${productType}/properties_i/display_information' />">Добавление/Изменение отображения информации для цифрового оборудования</a><br>
 	</c:if>
 	
+	<c:if test="${productType == 'laminator'}">
+		<a href="<c:url value='/admin/${productType}/properties/laminating_width' />">Добавление/Изменение ширины ламинирования</a><br>
+		<a href="<c:url value='/admin/${productType}/properties/equipment_manufacturer' />">Добавление/Изменение производителя оборудования для ламинаторов</a><br>		
+		<br>		
+		<a href="<c:url value='/admin/${productType}/properties_i/availability' />">Добавление/Изменение наличия для ламинаторов</a><br>
+		<a href="<c:url value='/admin/${productType}/properties_i/previously_used' />">Добавление/Изменение состояния оборудования для ламинаторов</a><br>
+		<a href="<c:url value='/admin/${productType}/properties_i/type_product' />">Добавление/Изменение типа для ламинаторов</a><br>
+		<a href="<c:url value='/admin/${productType}/properties_i/innings' />">Добавление/Изменение подачи для ламинаторов</a><br>
+	</c:if>
+	
 	<div style="right:0px;position: relative;">
 		Сортировка 
 		<select id="sorting_parameter">

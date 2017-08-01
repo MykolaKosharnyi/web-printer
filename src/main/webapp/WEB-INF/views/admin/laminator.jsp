@@ -3,6 +3,7 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix = "custom" uri = "/WEB-INF/custom.tld"%>
 <%@page session="true"%>
 <!DOCTYPE>
 <html>
@@ -107,7 +108,7 @@
 						<form:errors path="typeProduct" cssClass="error"></form:errors>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${laminator.type_product}" path="typeProduct" element="li"/>
+						<custom:radio nameOfAttribyte="typeProduct" productValue="${product.typeProduct}" properties="${laminator.type_product}"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -179,7 +180,7 @@
 						<p>Состояние оборудования</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${laminator.previously_used}" path="previouslyUsed" element="li"/>
+						<custom:radio nameOfAttribyte="previouslyUsed" productValue="${product.previouslyUsed}" properties="${laminator.previously_used}"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -188,7 +189,7 @@
 						<p>Подача</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${laminator.innings}" path="innings" element="li"/>
+						<custom:radio nameOfAttribyte="innings" productValue="${product.innings}" properties="${laminator.innings}"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -363,7 +364,7 @@
 						<p>Наличие (информация для пользователя)</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${laminator.availability}" path="availability" element="li"/>
+						<custom:radio nameOfAttribyte="availability" productValue="${product.availability}" properties="${laminator.availability}"/>
 						<div class="text_output">
 							<form:input path="availabilitySpecialCase"/>
 						</div>

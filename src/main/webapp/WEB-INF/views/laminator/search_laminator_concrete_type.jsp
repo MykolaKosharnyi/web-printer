@@ -46,7 +46,7 @@
 				<p><custom:getDescriptionByLocale description="${search_laminator.type_laminator}"/></p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${laminator.type_product}" path="typeProduct" element="li" />
+				<custom:searchByLocale nameOfAttribyte="typeProduct" properties="${laminator.type_product}"/>
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -143,7 +143,7 @@
 				<p><custom:getDescriptionByLocale description="${d_search.сondition_equipment}"/></p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${laminator.previously_used}" path="previouslyUsed" element="li" />
+				<custom:searchByLocale nameOfAttribyte="previouslyUsed" properties="${laminator.previously_used}"/>
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -152,7 +152,7 @@
 				<p><custom:getDescriptionByLocale description="${search_laminator.innings}"/></p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${laminator.innings}" path="innings" element="li" />
+				<custom:searchByLocale nameOfAttribyte="innings" properties="${laminator.innings}"/>
 			</ul>
 		</div>
 		<div class="search_criteria">

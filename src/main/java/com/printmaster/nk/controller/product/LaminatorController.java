@@ -58,7 +58,54 @@ public class LaminatorController extends ProductControllerTemplate<Laminator, Se
 	    put(ATTRIBUTE_ADD_PRODUCT, "Добавить ламинатор");
 	}};
 
-    private Map<String, ProductPropertiesHelper> properties = new HashMap<String, ProductPropertiesHelper>();
+    private Map<String, ProductPropertiesHelper> properties = new HashMap<String, ProductPropertiesHelper>(){
+		private static final long serialVersionUID = -5527391356245730067L;
+		{
+			put("availability", new ProductPropertiesHelper(
+					"Добавление/Изменение наличия для ламинаторов",
+					"Добавление наличие",
+					"Есть повторение с раннее введенным наличием!",
+					"Добавить наличие",
+					"Изменение вывода наличия для ламинаторов"));
+			
+			put("previously_used", new ProductPropertiesHelper(
+					"Добавление/Изменение состояний оборудования для ламинаторов",
+					"Добавление состояние оборудования",
+					"Есть повторение с раннее введенным состоянием оборудования!",
+					"Добавить состояние оборудования",
+					"Изменение вывода состояния оборудования для ламинаторов"));
+			
+			put("type_product", new ProductPropertiesHelper(
+					"Добавление/Изменение тип для ламинаторов",
+					"Добавление типа",
+					"Есть повторение с раннее введенным типом ламинаторов!",
+					"Добавить тип ламинатора",
+					"Изменение вывода типов ламинаторов"));
+			
+			put("innings", new ProductPropertiesHelper(
+					"Добавление/Изменение подачи для ламинаторов",
+					"Добавление подачи",
+					"Есть повторение с раннее введенной поачей ламинаторов!",
+					"Добавить подачу",
+					"Изменение вывода подачи ламинаторов"));
+			
+			
+			put("laminating_width", new ProductPropertiesHelper(
+					"Добавление/Изменение ширины ламинирования",
+					"Добавление ширины ламинирования",
+					"Есть повторение с раннее введенной шириной ламинированя!",
+					"Добавить ширину ламинирования",
+					"Изменение вывода ширины ламинирования"));
+			
+			put("equipment_manufacturer", new ProductPropertiesHelper(
+					"Добавление/Изменение производителя оборудования для ламинаторов",
+					"Добавление производителя для ламинаторов",
+					"Есть повторение с раннее введенным производителем!",
+					"Добавить производителя",
+					"Изменение вывода производителя оборудования для ламинаторов"));
+			
+    	}
+    };
 	
     @Autowired(required=true)
     @Qualifier(value="laminatorService")
