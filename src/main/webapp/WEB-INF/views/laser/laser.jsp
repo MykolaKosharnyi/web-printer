@@ -38,7 +38,10 @@
 					   <jsp:include page="../product_page/price.jsp" /> 
 					   
                        <c:if test="${!empty product.typeLaser}">
-   							<tr><td><custom:getDescriptionByLocale description="${search_laser.type_laser}"/>:</td><td>${product.typeLaser}</td></tr>
+   							<tr>
+   								<td><custom:getDescriptionByLocale description="${search_laser.type_laser}"/>:</td>
+   								<td><custom:singleProperty productValue="${product.typeLaser}" properties="${laser.type_laser}"/></td>
+   							</tr>
 					   </c:if>
 					   
 					   <c:if test="${!empty product.equipmentModel}">
@@ -76,7 +79,9 @@
 					<table>
                        
                        <c:if test="${!empty product.typeLaser}">
-   							<tr><td><custom:getDescriptionByLocale description="${search_laser.type_laser}"/>:</td><td>${product.typeLaser}</td></tr>
+   							<tr>
+   								<td><custom:getDescriptionByLocale description="${search_laser.type_laser}"/>:</td>
+   								<td><custom:singleProperty productValue="${product.typeLaser}" properties="${laser.type_laser}"/></td></tr>
 						</c:if>
                        
                        <c:if test="${!empty product.partNumber}">
@@ -84,7 +89,9 @@
 						</c:if>
 						
 						<c:if test="${!empty product.previouslyUsed}">
-   							<tr><td><custom:getDescriptionByLocale description="${d_search.сondition_equipment}"/>:</td><td>${product.previouslyUsed}</td></tr>
+   							<tr>
+   								<td><custom:getDescriptionByLocale description="${d_search.сondition_equipment}"/>:</td>
+   								<td><custom:singleProperty productValue="${product.previouslyUsed}" properties="${laser.previously_used}"/></td></tr>
 						</c:if>
 						
                        <c:if test="${product.sizeWorkAreaX > 0}">
@@ -100,19 +107,23 @@
 						</c:if>
                        
                        <c:if test="${!empty product.typeOfCooling}">
-   							<tr><td><custom:getDescriptionByLocale description="${search_laser.type_cooling}"/>:</td><td>${product.typeOfCooling}</td></tr>
+   							<tr>
+   								<td><custom:getDescriptionByLocale description="${search_laser.type_cooling}"/>:</td>
+   								<td><custom:singleProperty productValue="${product.typeOfCooling}" properties="${laser.type_of_cooling}"/></td></tr>
 						</c:if>
                        
                        <c:if test="${!empty product.colorSeparation}">
-   							<tr><td><custom:getDescriptionByLocale description="${search_laser.color_separation}"/>:</td><td>${product.colorSeparation}</td></tr>
+   							<tr>
+   								<td><custom:getDescriptionByLocale description="${search_laser.color_separation}"/>:</td>
+   								<td><custom:singleProperty productValue="${product.colorSeparation}" properties="${laser.color_separation}"/></td>
+   							</tr>
 						</c:if>
 						
 						<c:if test="${!empty product.typeTheDisplayedImage}">
-   							<tr><td><custom:getDescriptionByLocale description="${search_laser.type_output_image}"/>:</td><td>
-		                   		<c:forEach var="tp" items="${product.typeTheDisplayedImage}" varStatus="status">  
-		    						${tp}<c:if test="${ ! status.last}" >, </c:if>  
-								</c:forEach>
-                       		</td></tr>
+   							<tr>
+   								<td><custom:getDescriptionByLocale description="${search_laser.type_output_image}"/>:</td>
+   								<td><custom:multipleProperty productValues="${product.typeTheDisplayedImage}" properties="${laser.type_the_displayed_image}"/></td>
+   							</tr>
 						</c:if>
 						
 						<c:if test="${product.firstPartTheMinimumCharacterSize > 0 && product.secondPartTheMinimumCharacterSize > 0}">
@@ -133,11 +144,9 @@
 						
 						<c:if test="${!empty product.specialPurpose || !empty product.specialPurpose1 ||
 									 !empty product.specialPurpose2 || !empty product.specialPurpose3}">
-   							<tr><td><custom:getDescriptionByLocale description="${search_laser.special_purpose}"/>:</td><td>
-		                   		<c:forEach var="tp" items="${product.specialPurpose}">  
-		    						${tp}; 
-		    						<br/>
-								</c:forEach>
+   							<tr>
+   								<td><custom:getDescriptionByLocale description="${search_laser.special_purpose}"/>:</td>
+   								<td><custom:multipleProperty productValues="${product.specialPurpose}" properties="${laser.special_purpose}"/>
 								
 								<c:if test="${!empty product.specialPurpose1}">
    									${product.specialPurpose1};
@@ -188,7 +197,9 @@
 						</c:if>
                        
                        <c:if test="${!empty product.typeEngine}">
-   							<tr><td><custom:getDescriptionByLocale description="${search_laser.type_engine}"/>:</td><td>${product.typeEngine}</td></tr>
+   							<tr>
+   								<td><custom:getDescriptionByLocale description="${search_laser.type_engine}"/>:</td>
+   								<td><custom:singleProperty productValue="${product.typeEngine}" properties="${laser.type_engine}"/></td></tr>
 						</c:if>
                        
                        <c:if test="${product.mechanicalResolution > 0}">

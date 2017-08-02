@@ -90,6 +90,22 @@
 		<a href="<c:url value='/admin/${productType}/properties_i/innings' />">Добавление/Изменение подачи для ламинаторов</a><br>
 	</c:if>
 	
+	<c:if test="${productType == 'laser'}">
+		<a href="<c:url value='/admin/${productType}/properties/equipment_manufacturer' />">Добавление/Изменение производителей для лазеров</a><br>
+		<a href="<c:url value='/admin/${productType}/properties/connection_interface' />">Добавление/Изменение интерфейса подключения для лазеров</a><br>
+		<a href="<c:url value='/admin/${productType}/properties/file_types' />">Добавление/Изменение типов файлов для лазеров</a><br>
+		<a href="<c:url value='/admin/${productType}/properties/software' />">Добавление/Изменение програмного обеспечения для лазеров</a><br>		
+		<br>		
+		<a href="<c:url value='/admin/${productType}/properties_i/availability' />">Добавление/Изменение наличия для лазеров</a><br>
+		<a href="<c:url value='/admin/${productType}/properties_i/previously_used' />">Добавление/Изменение состояния оборудования для лазеров</a><br>
+		<a href="<c:url value='/admin/${productType}/properties_i/type_of_cooling' />">Добавление/Изменение типа охлаждения для лазеров</a><br>
+		<a href="<c:url value='/admin/${productType}/properties_i/type_engine' />">Добавление/Изменение типа двигателей для лазеров</a><br>
+		<a href="<c:url value='/admin/${productType}/properties_i/type_laser' />">Добавление/Изменение типа лазеров</a><br>
+		<a href="<c:url value='/admin/${productType}/properties_i/color_separation' />">Добавление/Изменение цветоделения для лазеров</a><br>
+		<a href="<c:url value='/admin/${productType}/properties_i/special_purpose' />">Добавление/Изменение целевое назначение для лазеров</a><br>
+		<a href="<c:url value='/admin/${productType}/properties_i/type_the_displayed_image' />">Добавление/Изменение типа выводимого изображения для лазеров</a><br>
+	</c:if>
+	
 	<div style="right:0px;position: relative;">
 		Сортировка 
 		<select id="sorting_parameter">

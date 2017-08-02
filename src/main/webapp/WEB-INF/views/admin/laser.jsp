@@ -3,6 +3,7 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix = "custom" uri = "/WEB-INF/custom.tld"%>
 <%@page session="true"%>
 <!DOCTYPE>
 <html>
@@ -107,7 +108,7 @@
 						<form:errors path="typeLaser" cssClass="error"></form:errors>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${laser.type_laser}" path="typeLaser" element="li"/>
+						<custom:radio nameOfAttribyte="typeLaser" productValue="${product.typeLaser}" properties="${laser.type_laser}"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -126,7 +127,7 @@
 						<p>Состояние оборудования</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${laser.previously_used}" path="previouslyUsed" element="li"/>
+						<custom:radio nameOfAttribyte="previouslyUsed" productValue="${product.previouslyUsed}" properties="${laser.previously_used}"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -200,7 +201,7 @@
 						<p>Тип охлаждения</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${laser.type_of_cooling}" path="typeOfCooling" element="li"/>
+						<custom:radio nameOfAttribyte="typeOfCooling" productValue="${product.typeOfCooling}" properties="${laser.type_of_cooling}"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -229,7 +230,7 @@
 						<p>Цветоделение</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${laser.color_separation}" path="colorSeparation" element="li"/>
+						<custom:radio nameOfAttribyte="colorSeparation" productValue="${product.colorSeparation}" properties="${laser.color_separation}"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -238,7 +239,7 @@
 						<p>Тип выводимого изображения</p>
 					</div>
 					<ul class="check_boxes">
-						<form:checkboxes items="${laser.type_the_displayed_image}" path="typeTheDisplayedImage" element="li"/>
+						<custom:check nameOfAttribyte="feed" productValues="${product.typeTheDisplayedImage}" properties="${laser.type_the_displayed_image}"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -321,7 +322,7 @@
 						<p>Целевое назначение (для выбора с уже заданных)</p>
 					</div>
 					<ul class="check_boxes">
-						<form:checkboxes items="${laser.special_purpose}" path="specialPurpose" element="li"/>
+						<custom:check nameOfAttribyte="specialPurpose" productValues="${product.specialPurpose}" properties="${laser.special_purpose}"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -392,7 +393,7 @@
 						<p>Тип двигателей</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${laser.type_engine}" path="typeEngine" element="li"/>
+						<custom:radio nameOfAttribyte="typeEngine" productValue="${product.typeEngine}" properties="${laser.type_engine}"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -581,7 +582,7 @@
 						<p>Наличие (информация для пользователя)</p>
 					</div>
 					<div class="check_boxes">
-						<form:radiobuttons items="${laser.availability}" path="availability" element="li"/>
+						<custom:radio nameOfAttribyte="availability" productValue="${product.availability}" properties="${laser.availability}"/>
 						<div class="text_output">
 							<form:input path="availabilitySpecialCase"/>
 						</div>

@@ -61,7 +61,7 @@
 				<p><custom:getDescriptionByLocale description="${search_laser.type_laser}"/></p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${laser.type_laser}" path="typeLaser" element="li" />
+				<custom:searchByLocale nameOfAttribyte="typeLaser" properties="${laser.type_laser}"/>
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -70,7 +70,7 @@
 				<p><custom:getDescriptionByLocale description="${d_search.сondition_equipment}"/></p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${laser.previously_used}" path="previouslyUsed" element="li" />
+				<custom:searchByLocale nameOfAttribyte="previouslyUsed" properties="${laser.previously_used}"/>
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -113,7 +113,7 @@
 				<p><custom:getDescriptionByLocale description="${search_laser.type_cooling}"/></p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${laser.type_of_cooling}" path="typeOfCooling" element="li" />
+				<custom:searchByLocale nameOfAttribyte="typeOfCooling" properties="${laser.type_of_cooling}"/>
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -122,7 +122,7 @@
 				<p><custom:getDescriptionByLocale description="${search_laser.color_separation}"/></p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${laser.color_separation}" path="colorSeparation" element="li" />
+				<custom:searchByLocale nameOfAttribyte="colorSeparation" properties="${laser.color_separation}"/>
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -131,7 +131,7 @@
 				<p><custom:getDescriptionByLocale description="${search_laser.type_output_image}"/></p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${laser.type_the_displayed_image}" path="typeTheDisplayedImage" element="li" />
+				<custom:searchByLocale nameOfAttribyte="typeTheDisplayedImage" properties="${laser.type_the_displayed_image}"/>
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -253,7 +253,7 @@
 				<p><custom:getDescriptionByLocale description="${search_laser.special_purpose}"/></p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${laser.special_purpose}" path="specialPurpose" element="li" />
+				<custom:searchByLocale nameOfAttribyte="specialPurpose" properties="${laser.special_purpose}"/>
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -262,7 +262,7 @@
 				<p><custom:getDescriptionByLocale description="${search_laser.type_engine}"/></p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${laser.type_engine}" path="typeEngine" element="li" />
+				<custom:searchByLocale nameOfAttribyte="typeEngine" properties="${laser.type_engine}"/>
 			</ul>
 		</div>
 		<div class="search_criteria">
