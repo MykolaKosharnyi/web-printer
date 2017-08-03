@@ -179,8 +179,12 @@ public class ComponentsForControllers {
 		curObj.put("rightSharesLinkColorText", currentProduct.getRightSharesLinkColorText());
 		curObj.put("rightSharesLinkColorFone", currentProduct.getRightSharesLinkColorFone());
 		
+		curObj.put("pathLeftPictureAction", currentProduct.getPathLeftPictureAction());
+		curObj.put("pathRightPictureAction", currentProduct.getPathRightPictureAction());
+		
 		curObj.put("prise", currentProduct.getPrise());
 		curObj.put("name", currentProduct.getName());
+		curObj.put("engNameProduct", currentProduct.getEngNameProduct());
 		curObj.put("pathPictures", currentProduct.getPathPictures());
 		
 	}

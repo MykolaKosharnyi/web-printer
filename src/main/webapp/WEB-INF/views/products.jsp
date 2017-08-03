@@ -17,7 +17,7 @@
 						</c:choose>	
 						
 						" onmouseover="" class="link" href="<c:url value='/${product.type}/${product.id}' />">	
-								<div class="outer_a_img"><img src="/images/${product.type}s/${product.id}/${product.pathPictures.get(0)}" alt=""></div>
+						<div class="outer_a_img"><img src="/images/${product.type}s/${product.id}/${product.pathPictures.get(0)}" alt=""></div>
 					</a>
 		
 					<div class="name_price_cart_block">
@@ -109,19 +109,29 @@
 						
 					</div>	
 		
-					<c:if test="${!empty product.leftSharesLink}">
+					<c:if test="${!empty product.leftSharesLink &&  empty product.pathLeftPictureAction}">
 						<div class="ribbon-search-wrapper-left" style="color:${product.leftSharesLinkColorText}; background:${product.leftSharesLinkColorFone};">
 							<div class="ribbon-search-left">
 								${product.leftSharesLink}
 							</div>
 						</div>
+					</c:if>					
+					<c:if test="${!empty product.pathLeftPictureAction}">
+						<div class="ribbon-search-picture-left">
+							<img src="${product.pathLeftPictureAction}">
+						</div>
 					</c:if>
-					
-					<c:if test="${!empty product.rightSharesLink}">
+
+					<c:if test="${!empty product.rightSharesLink && empty product.pathRightPictureAction}">
 						<div class="ribbon-search-wrapper-right" style="color:${product.rightSharesLinkColorText}; background:${product.rightSharesLinkColorFone};">
 							<div class="ribbon-search-right">
 								${product.rightSharesLink}
 							</div>
+						</div>
+					</c:if>					
+					<c:if test="${!empty product.pathRightPictureAction}">
+						<div class="ribbon-search-picture-right">
+							<img src="${product.pathRightPictureAction}">
 						</div>
 					</c:if>
 					
@@ -235,21 +245,33 @@
 						</c:if>	
 				</div>	
 	
-				<c:if test="${!empty product.leftSharesLink}">
-					<div class="ribbon-search-wrapper-left" style="color:${product.leftSharesLinkColorText}; background:${product.leftSharesLinkColorFone};">
-						<div class="ribbon-search-left">
-							${product.leftSharesLink}
+					<c:if test="${!empty product.leftSharesLink &&  empty product.pathLeftPictureAction}">
+						<div class="ribbon-search-wrapper-left" style="color:${product.leftSharesLinkColorText}; background:${product.leftSharesLinkColorFone};">
+							<div class="ribbon-search-left">
+								${product.leftSharesLink}
+							</div>
 						</div>
-					</div>
-				</c:if>
-				
-				<c:if test="${!empty product.rightSharesLink}">
-					<div class="ribbon-search-wrapper-right" style="color:${product.rightSharesLinkColorText}; background:${product.rightSharesLinkColorFone};">
-						<div class="ribbon-search-right">
-							${product.rightSharesLink}
+					</c:if>
+					
+					<c:if test="${!empty product.pathLeftPictureAction}">
+						<div class="ribbon-search-picture-left">
+							<img src="${product.pathLeftPictureAction}">
 						</div>
-					</div>
-				</c:if>
+					</c:if>
+
+					<c:if test="${!empty product.rightSharesLink && empty product.pathRightPictureAction}">
+						<div class="ribbon-search-wrapper-right" style="color:${product.rightSharesLinkColorText}; background:${product.rightSharesLinkColorFone};">
+							<div class="ribbon-search-right">
+								${product.rightSharesLink}
+							</div>
+						</div>
+					</c:if>
+					
+					<c:if test="${!empty product.pathRightPictureAction}">
+						<div class="ribbon-search-picture-right">
+							<img src="${product.pathRightPictureAction}">
+						</div>
+					</c:if>
 			</div>
 		</div>
 		</c:if>
@@ -494,23 +516,35 @@ $(document).ready(function() {
 								)
     		}
 			
-									//add inner name_price_cart_block 
-									innterDiv.append(name_price_cart_block);				
+			//add inner name_price_cart_block 
+			innterDiv.append(name_price_cart_block);				
 
-	                				if(product.leftSharesLink!=null && product.leftSharesLink!=""){
-	                					innterDiv.append($('<div/>').addClass("ribbon-search-wrapper-left")
-	                								.css( "color", product.leftSharesLinkColorText )
-												    .css( "background", product.leftSharesLinkColorFone )
-	                								.append($('<div/>').addClass("ribbon-search-left").text(product.leftSharesLink)))
-	                				}
+	        if(product.leftSharesLink!=null && product.leftSharesLink!="" &&
+	        	(product.pathLeftPictureAction==null || product.pathLeftPictureAction=="")){
+	            	innterDiv.append($('<div/>').addClass("ribbon-search-wrapper-left")
+	                	.css( "color", product.leftSharesLinkColorText )
+							.css( "background", product.leftSharesLinkColorFone )
+	                		.append($('<div/>').addClass("ribbon-search-left").text(product.leftSharesLink)))
+	        	}
+	                				
+	        if(product.pathLeftPictureAction!=null && product.pathLeftPictureAction!=""){
+	        	innterDiv.append($('<div/>').addClass("ribbon-search-picture-left")
+	            	.append($('<img/>').attr("src",product.pathLeftPictureAction)))
+	        	}
 	                	        	
-	                	        	if(product.rightSharesLink!=null && product.rightSharesLink!=""){
-	                	        		innterDiv.append($('<div/>').addClass("ribbon-search-wrapper-right")
-	                	        					.css( "color", product.rightSharesLinkColorText )
-												    .css( "background", product.rightSharesLinkColorFone )
-	                								.append($('<div/>').addClass("ribbon-search-right").text(product.rightSharesLink)))
-	                				}
+	        if(product.rightSharesLink!=null && product.rightSharesLink!="" &&
+	        	(product.pathRightPictureAction==null || product.pathRightPictureAction=="")){
+	            	innterDiv.append($('<div/>').addClass("ribbon-search-wrapper-right")
+	                	.css( "color", product.rightSharesLinkColorText )
+						.css( "background", product.rightSharesLinkColorFone )
+	                	.append($('<div/>').addClass("ribbon-search-right").text(product.rightSharesLink)))
+	         }
 	                	        	
+	         if(product.pathRightPictureAction!=null && product.pathRightPictureAction!=""){
+	         	innterDiv.append($('<div/>').addClass("ribbon-search-picture-right")
+	            	.append($('<img/>').attr("src",product.pathRightPictureAction)))
+	         }
+       	
 	            outerDiv.append(innterDiv);   	        	
 	                				
 	            if(product.top){

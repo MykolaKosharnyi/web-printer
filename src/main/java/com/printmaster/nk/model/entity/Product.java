@@ -81,6 +81,15 @@ public abstract class Product implements Serializable{
 	@Column(name="dateLastChanging")
 	private Date dateLastChanging;
 	
+	@Column(name="pathLeftPictureAction")
+	private String pathLeftPictureAction;
+	
+	@Column(name="pathRightPictureAction")
+	private String pathRightPictureAction;
+	
+	@Column(name="engNameProduct")
+	private String engNameProduct;
+	
 	public Product(){}
 
 	public Long getId() {
@@ -89,6 +98,30 @@ public abstract class Product implements Serializable{
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getPathLeftPictureAction() {
+		return pathLeftPictureAction;
+	}
+
+	public void setPathLeftPictureAction(String pathLeftPictureAction) {
+		this.pathLeftPictureAction = pathLeftPictureAction;
+	}
+
+	public String getPathRightPictureAction() {
+		return pathRightPictureAction;
+	}
+
+	public void setPathRightPictureAction(String pathRightPictureAction) {
+		this.pathRightPictureAction = pathRightPictureAction;
+	}
+
+	public String getEngNameProduct() {
+		return engNameProduct;
+	}
+
+	public void setEngNameProduct(String engNameProduct) {
+		this.engNameProduct = engNameProduct;
 	}
 
 	public Date getDateLastChanging() {

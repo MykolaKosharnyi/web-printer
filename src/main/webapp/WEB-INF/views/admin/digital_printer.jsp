@@ -130,29 +130,10 @@
 						<custom:radio nameOfAttribyte="previouslyUsed" productValue="${product.previouslyUsed}" properties="${digital_printer.previously_used}"/>
 					</ul>
 				</div>
-				<div class="characteristic">
-					<div class="block_title">
-						<i></i>
-						<p>Акции. Ярлык слева(цвет текста/фона)</p>
-					</div>
-					<div class="check_boxes">
-						<form:input path="leftSharesLink" style="width: 100px;"/>
-						<input type="color" name="leftSharesLinkColorText" value="${product.leftSharesLinkColorText}"/>
-						<input type="color" name="leftSharesLinkColorFone" value="${product.leftSharesLinkColorFone}"/>
-					</div>
-				</div>
-				<div class="characteristic">
-					<div class="block_title">
-						<i></i>
-						<p>Акции. Ярлык справа(цвет текста/фона)</p>
-					</div>
-					<div class="check_boxes">
-						<form:input path="rightSharesLink" style="width: 100px;"/>
-						<input type="color" name="rightSharesLinkColorText" value="${product.rightSharesLinkColorText}"/>
-						<input type="color" name="rightSharesLinkColorFone" value="${product.rightSharesLinkColorFone}"/>
-					</div>
-				</div>
 				
+				<!-- import actions -->
+				<jsp:include page="product/actions.jsp" />
+			
 				<!-- import time shares action -->
 				<jsp:include page="product/time_shares.jsp" />
 				
