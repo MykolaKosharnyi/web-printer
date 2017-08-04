@@ -3,6 +3,7 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix = "custom" uri = "/WEB-INF/custom.tld"%>
 <%@page session="true"%>
 <!DOCTYPE>
 <html>
@@ -107,7 +108,7 @@
 						<form:errors path="typeCutter" cssClass="error"></form:errors>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${cutter.type_cutter}" path="typeCutter" element="li"/>
+						<custom:radio nameOfAttribyte="typeCutter" productValue="${product.typeCutter}" properties="${cutter.type_cutter}"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -126,7 +127,7 @@
 						<p>Состояние оборудования</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${cutter.previously_used}" path="previouslyUsed" element="li"/>
+						<custom:radio nameOfAttribyte="previouslyUsed" productValue="${product.previouslyUsed}" properties="${cutter.previously_used}"/>
 					</ul>
 				</div>
 				
@@ -171,7 +172,7 @@
 						<p>Тип гравировки</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${cutter.engraving_style}" path="engravingStyle" element="li"/>
+						<custom:radio nameOfAttribyte="engravingStyle" productValue="${product.engravingStyle}" properties="${cutter.engraving_style}"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -180,7 +181,7 @@
 						<p>Тип охлаждения</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${cutter.type_of_cooling}" path="typeOfCooling" element="li"/>
+						<custom:radio nameOfAttribyte="typeOfCooling" productValue="${product.typeOfCooling}" properties="${cutter.type_of_cooling}"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -209,7 +210,7 @@
 						<p>Тип двигателей</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${cutter.type_engine}" path="typeEngine" element="li"/>
+						<custom:radio nameOfAttribyte="typeEngine" productValue="${product.typeEngine}" properties="${cutter.type_engine}"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -272,7 +273,7 @@
 						<p>Крепление инструмента</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${cutter.mounting_tool}" path="mountingTool" element="li"/>
+						<custom:radio nameOfAttribyte="mountingTool" productValue="${product.mountingTool}" properties="${cutter.mounting_tool}"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -402,7 +403,7 @@
 						<p>Наличие (информация для пользователя)</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${cutter.availability}" path="availability" element="li"/>
+						<custom:radio nameOfAttribyte="availability" productValue="${product.availability}" properties="${cutter.availability}"/>
 						<div class="text_output">
 							<form:input path="availabilitySpecialCase"/>
 						</div>

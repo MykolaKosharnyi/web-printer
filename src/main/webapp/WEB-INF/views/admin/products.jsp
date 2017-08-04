@@ -106,6 +106,22 @@
 		<a href="<c:url value='/admin/${productType}/properties_i/type_the_displayed_image' />">Добавление/Изменение типа выводимого изображения для лазеров</a><br>
 	</c:if>
 	
+	<c:if test="${productType == 'cutter'}">
+		<a href="<c:url value='/admin/${productType}/properties/equipment_manufacturer' />">Добавление/Изменение производителей оборудования для лазеров</a><br>
+		<a href="<c:url value='/admin/${productType}/properties/connection_interface' />">Добавление/Изменение интерфейсов подключения для лазеров</a><br>
+		<a href="<c:url value='/admin/${productType}/properties/software' />">Добавление/Изменение програмного обеспечения для лазеров</a><br>
+		<br>		
+		<a href="<c:url value='/admin/${productType}/properties_i/availability' />">Добавление/Изменение наличия для фрезеров</a><br>
+		<a href="<c:url value='/admin/${productType}/properties_i/previously_used' />">Добавление/Изменение состояния оборудования для фрезеров</a><br>
+		<a href="<c:url value='/admin/${productType}/properties_i/type_of_cooling' />">Добавление/Изменение типа охлаждений для фрезеров</a><br>
+		<a href="<c:url value='/admin/${productType}/properties_i/type_cutter' />">Добавление/Изменение типа фрезеров</a><br>
+		<a href="<c:url value='/admin/${productType}/properties_i/engraving_style' />">Добавление/Изменение типа гравировки</a><br>
+		<a href="<c:url value='/admin/${productType}/properties_i/type_engine' />">Добавление/Изменение типа двигателей</a><br>
+		<a href="<c:url value='/admin/${productType}/properties_i/mounting_tool' />">Добавление/Изменение креплений инструментов</a><br>
+	</c:if>
+	
+	availability
+	
 	<div style="right:0px;position: relative;">
 		Сортировка 
 		<select id="sorting_parameter">

@@ -239,6 +239,9 @@ public class ComponentsForControllers {
     	} else if(typeOfProduct.equals("laser")){
     		model.addAttribute(typeOfProduct , getShowedProperty(jsonObjectParser(typeOfProduct)));  
     		
+    	} else if(typeOfProduct.equals("cutter")){
+    		model.addAttribute(typeOfProduct , getShowedProperty(jsonObjectParser(typeOfProduct)));  
+    		
     	} else {
     		model.addAttribute(typeOfProduct , jsonObjectParser(typeOfProduct));   		
     	}

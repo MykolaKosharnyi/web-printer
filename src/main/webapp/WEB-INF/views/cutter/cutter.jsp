@@ -39,7 +39,10 @@
 					   <jsp:include page="../product_page/price.jsp" /> 
 					   
                        <c:if test="${!empty product.typeCutter}">
-   							<tr><td><custom:getDescriptionByLocale description="${search_cutter.type_engraver_router}"/>:</td><td>${product.typeCutter}</td></tr>
+   							<tr>
+   								<td><custom:getDescriptionByLocale description="${search_cutter.type_engraver_router}"/>:</td>
+   								<td><custom:singleProperty productValue="${product.typeCutter}" properties="${cutter.type_cutter}"/></td>
+   							</tr>
 					   </c:if>
 					   
 					   <c:if test="${!empty product.equipmentModel}">
@@ -77,7 +80,10 @@
 					<table>
                        
                        <c:if test="${!empty product.typeCutter}">
-   							<tr><td><custom:getDescriptionByLocale description="${search_cutter.type_engraver_router}"/>:</td><td>${product.typeCutter}</td></tr>
+   							<tr>
+   								<td><custom:getDescriptionByLocale description="${search_cutter.type_engraver_router}"/>:</td>
+   								<td><custom:singleProperty productValue="${product.typeCutter}" properties="${cutter.type_cutter}"/></td>
+   							</tr>
 						</c:if>
                        
                        <c:if test="${!empty product.partNumber}">
@@ -85,7 +91,9 @@
 						</c:if>
 						
 						<c:if test="${!empty product.previouslyUsed}">
-   							<tr><td><custom:getDescriptionByLocale description="${d_search.сondition_equipment}"/>:</td><td>${product.previouslyUsed}</td></tr>
+   							<tr>
+   								<td><custom:getDescriptionByLocale description="${d_search.сondition_equipment}"/>:</td>
+   								<td><custom:singleProperty productValue="${product.previouslyUsed}" properties="${cutter.previously_used}"/></td></tr>
 						</c:if>
 						
                        <c:if test="${product.sizeWorkAreaX > 0}">
@@ -101,7 +109,10 @@
 						</c:if>
                        
                        <c:if test="${!empty product.typeOfCooling}">
-   							<tr><td><custom:getDescriptionByLocale description="${search_cutter.type_cooling}"/>:</td><td>${product.typeOfCooling}</td></tr>
+   							<tr>
+   								<td><custom:getDescriptionByLocale description="${search_cutter.type_cooling}"/>:</td>
+   								<td><custom:singleProperty productValue="${product.typeOfCooling}" properties="${cutter.type_of_cooling}"/></td>
+   							</tr>
 						</c:if>
 						
 						<c:if test="${product.numberOfSpindles > 0}">
@@ -113,11 +124,17 @@
 						</c:if>
                        
                        <c:if test="${!empty product.typeEngine}">
-   							<tr><td><custom:getDescriptionByLocale description="${search_cutter.type_engine}"/>:</td><td>${product.typeEngine}</td></tr>
+   							<tr>
+   								<td><custom:getDescriptionByLocale description="${search_cutter.type_engine}"/>:</td>
+   								<td><custom:singleProperty productValue="${product.typeEngine}" properties="${cutter.type_engine}"/></td>
+   							</tr>
 						</c:if>
 						
 						<c:if test="${!empty product.engravingStyle}">
-   							<tr><td><custom:getDescriptionByLocale description="${search_cutter.engraving_type}"/>:</td><td>${product.engravingStyle}</td></tr>
+   							<tr>
+   								<td><custom:getDescriptionByLocale description="${search_cutter.engraving_type}"/>:</td>
+   								<td><custom:singleProperty productValue="${product.engravingStyle}" properties="${cutter.engraving_style}"/></td>
+   							</tr>
 						</c:if>
                        
                        <c:if test="${product.mechanicalResolution > 0}">
@@ -141,7 +158,10 @@
 						</c:if>
 						
 						<c:if test="${!empty product.mountingTool}">
-   							<tr><td><custom:getDescriptionByLocale description="${search_cutter.tool_holder}"/>:</td><td>${product.mountingTool}</td></tr>
+   							<tr>
+   								<td><custom:getDescriptionByLocale description="${search_cutter.tool_holder}"/>:</td>
+   								<td><custom:singleProperty productValue="${product.mountingTool}" properties="${cutter.mounting_tool}"/></td>
+   							</tr>
 						</c:if>
 
                         <c:if test="${!empty product.connectionInterface}">

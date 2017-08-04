@@ -46,7 +46,7 @@
 				<p><custom:getDescriptionByLocale description="${search_cutter.type_engraver_router}"/></p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${cutter.type_cutter}" path="typeCutter" element="li" />
+				<custom:searchByLocale nameOfAttribyte="typeCutter" properties="${cutter.type_cutter}"/>
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -55,7 +55,7 @@
 				<p><custom:getDescriptionByLocale description="${d_search.сondition_equipment}"/></p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${cutter.previously_used}" path="previouslyUsed" element="li" />
+				<custom:searchByLocale nameOfAttribyte="previouslyUsed" properties="${cutter.previously_used}"/>
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -98,7 +98,7 @@
 				<p><custom:getDescriptionByLocale description="${search_cutter.type_engine}"/></p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${cutter.type_engine}" path="typeEngine" element="li" />
+				<custom:searchByLocale nameOfAttribyte="typeEngine" properties="${cutter.type_engine}"/>
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -107,7 +107,7 @@
 				<p><custom:getDescriptionByLocale description="${search_cutter.engraving_type}"/></p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${cutter.engraving_style}" path="engravingStyle" element="li" />
+				<custom:searchByLocale nameOfAttribyte="engravingStyle" properties="${cutter.engraving_style}"/>
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -116,7 +116,7 @@
 				<p><custom:getDescriptionByLocale description="${search_cutter.type_cooling}"/></p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${cutter.type_of_cooling}" path="typeOfCooling" element="li" />
+				<custom:searchByLocale nameOfAttribyte="typeOfCooling" properties="${cutter.type_of_cooling}"/>
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -195,7 +195,7 @@
 				<p><custom:getDescriptionByLocale description="${search_cutter.tool_holder}"/></p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${cutter.mounting_tool}" path="mountingTool" element="li" />
+				<custom:searchByLocale nameOfAttribyte="mountingTool" properties="${cutter.mounting_tool}"/>
 			</ul>
 		</div>
 		<div class="search_criteria">
