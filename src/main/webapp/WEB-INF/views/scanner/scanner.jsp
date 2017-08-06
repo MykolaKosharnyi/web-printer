@@ -38,7 +38,10 @@
 					   <jsp:include page="../product_page/price.jsp" /> 
 					   
                        <c:if test="${!empty product.typeProduct}">
-   							<tr><td><custom:getDescriptionByLocale description="${search_scanner.scanner_type}"/>:</td><td>${product.typeProduct}</td></tr>
+   							<tr>
+   								<td><custom:getDescriptionByLocale description="${search_scanner.scanner_type}"/>:</td>
+   								<td><custom:singleProperty productValue="${product.typeProduct}" properties="${scanner.type_product}"/></td>
+   							</tr>
 					   </c:if>
 					   
 					   <c:if test="${!empty product.equipmentModel}">
@@ -77,7 +80,9 @@
 					<table>
                        
                        <c:if test="${!empty product.typeProduct}">
-   							<tr><td><custom:getDescriptionByLocale description="${search_scanner.scanner_type}"/>:</td><td>${product.typeProduct}</td></tr>
+   							<tr>
+   								<td><custom:getDescriptionByLocale description="${search_scanner.scanner_type}"/>:</td>
+   								<td><custom:singleProperty productValue="${product.typeProduct}" properties="${scanner.type_product}"/></td></tr>
 					   </c:if>
                        
                        <c:if test="${!empty product.partNumber}">
@@ -93,15 +98,24 @@
 						</c:if>
                        
                        <c:if test="${!empty product.previouslyUsed}">
-   							<tr><td><custom:getDescriptionByLocale description="${d_search.сondition_equipment}"/>:</td><td>${product.previouslyUsed}</td></tr>
+   							<tr>
+   								<td><custom:getDescriptionByLocale description="${d_search.сondition_equipment}"/>:</td>
+   								<td><custom:singleProperty productValue="${product.previouslyUsed}" properties="${scanner.previously_used}"/></td>
+   							</tr>
 					   </c:if>
                        
                        <c:if test="${!empty product.innings}">
-   							<tr><td><custom:getDescriptionByLocale description="${search_scanner.innings}"/>:</td><td>${product.innings}</td></tr>
+   							<tr>
+   								<td><custom:getDescriptionByLocale description="${search_scanner.innings}"/>:</td>
+   								<td><custom:singleProperty productValue="${product.innings}" properties="${scanner.innings}"/></td>
+   							</tr>
 					   </c:if>
                        
                        <c:if test="${!empty product.chromaticity}">
-   							<tr><td><custom:getDescriptionByLocale description="${search_scanner.color}"/>:</td><td>${product.chromaticity}</td></tr>
+   							<tr>
+   								<td><custom:getDescriptionByLocale description="${search_scanner.color}"/>:</td>
+   								<td><custom:singleProperty productValue="${product.chromaticity}" properties="${scanner.chromaticity}"/></td>
+   							</tr>
 					   </c:if>
                        
                        <c:if test="${!empty product.scanningElement}">
@@ -109,15 +123,23 @@
 					   </c:if>
                        
                        <c:if test="${!empty product.lightSource}">
-   							<tr><td><custom:getDescriptionByLocale description="${search_scanner.light_source}"/>:</td><td>${product.lightSource}</td></tr>
+   							<tr>
+   								<td><custom:getDescriptionByLocale description="${search_scanner.light_source}"/>:</td>
+   								<td><custom:singleProperty productValue="${product.lightSource}" properties="${scanner.light_source}"/></td></tr>
 					   </c:if>
                        
                        <c:if test="${!empty product.bitColorScanning}">
-   							<tr><td><custom:getDescriptionByLocale description="${search_scanner.color_scanning_resolution}"/>:</td><td>${product.bitColorScanning}</td></tr>
+   							<tr>
+   								<td><custom:getDescriptionByLocale description="${search_scanner.color_scanning_resolution}"/>:</td>
+   								<td><custom:singleProperty productValue="${product.bitColorScanning}" properties="${scanner.bit_color_scanning}"/></td>
+   							</tr>
 					   </c:if>
 					   
 					   <c:if test="${!empty product.bitScanningGrayscale}">
-   							<tr><td><custom:getDescriptionByLocale description="${search_scanner.scan_depth_with_grayscale}"/>:</td><td>${product.bitScanningGrayscale}</td></tr>
+   							<tr>
+   								<td><custom:getDescriptionByLocale description="${search_scanner.scan_depth_with_grayscale}"/>:</td>
+   								<td><custom:singleProperty productValue="${product.bitScanningGrayscale}" properties="${scanner.bit_scanning_grayscale}"/></td>
+   							</tr>
 					   </c:if>
 					   
 					   <c:if test="${product.softwareResolution  > 0}">

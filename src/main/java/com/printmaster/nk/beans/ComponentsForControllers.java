@@ -242,6 +242,9 @@ public class ComponentsForControllers {
     	} else if(typeOfProduct.equals("cutter")){
     		model.addAttribute(typeOfProduct , getShowedProperty(jsonObjectParser(typeOfProduct)));  
     		
+    	} else if(typeOfProduct.equals("scanner")){
+    		model.addAttribute(typeOfProduct , getShowedProperty(jsonObjectParser(typeOfProduct)));  
+    		
     	} else {
     		model.addAttribute(typeOfProduct , jsonObjectParser(typeOfProduct));   		
     	}

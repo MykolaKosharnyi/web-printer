@@ -42,7 +42,7 @@
 				<p><custom:getDescriptionByLocale description="${search_scanner.scanner_type}"/></p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${scanner.type_product}" path="typeProduct" element="li" />
+				<custom:searchByLocale nameOfAttribyte="typeProduct" properties="${scanner.type_product}"/>
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -139,7 +139,7 @@
 				<p><custom:getDescriptionByLocale description="${d_search.сondition_equipment}"/></p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${scanner.previously_used}" path="previouslyUsed" element="li" />
+				<custom:searchByLocale nameOfAttribyte="previouslyUsed" properties="${scanner.previously_used}"/>
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -148,7 +148,7 @@
 				<p><custom:getDescriptionByLocale description="${search_scanner.innings}"/></p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${scanner.innings}" path="innings" element="li" />
+				<custom:searchByLocale nameOfAttribyte="innings" properties="${scanner.innings}"/>
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -157,7 +157,7 @@
 				<p><custom:getDescriptionByLocale description="${search_scanner.color}"/></p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${scanner.chromaticity}" path="chromaticity" element="li" />
+				<custom:searchByLocale nameOfAttribyte="chromaticity" properties="${scanner.chromaticity}"/>
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -175,7 +175,7 @@
 				<p><custom:getDescriptionByLocale description="${search_scanner.light_source}"/></p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${scanner.light_source}" path="lightSource" element="li" />
+				<custom:searchByLocale nameOfAttribyte="lightSource" properties="${scanner.light_source}"/>
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -184,7 +184,7 @@
 				<p><custom:getDescriptionByLocale description="${search_scanner.color_scanning_resolution}"/></p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${scanner.bit_color_scanning}" path="bitColorScanning" element="li" />
+				<custom:searchByLocale nameOfAttribyte="bitColorScanning" properties="${scanner.bit_color_scanning}"/>
 			</ul>
 		</div>
 		<div class="search_criteria">
@@ -193,7 +193,7 @@
 				<p><custom:getDescriptionByLocale description="${search_scanner.scan_depth_with_grayscale}"/></p>
 			</div>
 			<ul class="check_boxes">
-				<form:checkboxes items="${scanner.bit_scanning_grayscale}" path="bitScanningGrayscale" element="li" />
+				<custom:searchByLocale nameOfAttribyte="bitScanningGrayscale" properties="${scanner.bit_scanning_grayscale}"/>
 			</ul>
 		</div>
 		<div class="search_criteria">

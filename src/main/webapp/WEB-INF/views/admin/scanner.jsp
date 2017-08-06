@@ -3,6 +3,7 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix = "custom" uri = "/WEB-INF/custom.tld"%>
 <%@page session="true"%>
 <!DOCTYPE>
 <html>
@@ -106,7 +107,7 @@
 						<form:errors path="typeProduct" cssClass="error"></form:errors>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${scanner.type_product}" path="typeProduct" element="li"/>
+						<custom:radio nameOfAttribyte="typeProduct" productValue="${product.typeProduct}" properties="${scanner.type_product}"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -132,7 +133,7 @@
 						<p>Состояние оборудования</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${scanner.previously_used}" path="previouslyUsed" element="li"/>
+						<custom:radio nameOfAttribyte="previouslyUsed" productValue="${product.previouslyUsed}" properties="${scanner.previously_used}"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -167,7 +168,7 @@
 						<p>Подача</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${scanner.innings}" path="innings" element="li"/>
+						<custom:radio nameOfAttribyte="innings" productValue="${product.innings}" properties="${scanner.innings}"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -176,7 +177,7 @@
 						<p>Цветность</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${scanner.chromaticity}" path="chromaticity" element="li"/>
+						<custom:radio nameOfAttribyte="chromaticity" productValue="${product.chromaticity}" properties="${scanner.chromaticity}"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -194,7 +195,7 @@
 						<p>Источник света</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${scanner.light_source}" path="lightSource" element="li"/>
+						<custom:radio nameOfAttribyte="lightSource" productValue="${product.lightSource}" properties="${scanner.light_source}"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -203,7 +204,7 @@
 						<p>Разрядность цветного сканирования</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${scanner.bit_color_scanning}" path="bitColorScanning" element="li"/>
+						<custom:radio nameOfAttribyte="bitColorScanning" productValue="${product.bitColorScanning}" properties="${scanner.bit_color_scanning}"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -212,7 +213,7 @@
 						<p>Разрядность сканирования с оттенками серого</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${scanner.bit_scanning_grayscale}" path="bitScanningGrayscale" element="li"/>
+						<custom:radio nameOfAttribyte="bitScanningGrayscale" productValue="${product.bitScanningGrayscale}" properties="${scanner.bit_scanning_grayscale}"/>
 					</ul>
 				</div>
 				<div class="characteristic">
@@ -385,7 +386,7 @@
 						<p>Наличие (информация для пользователя)</p>
 					</div>
 					<ul class="check_boxes">
-						<form:radiobuttons items="${scanner.availability}" path="availability" element="li"/>
+						<custom:radio nameOfAttribyte="availability" productValue="${product.availability}" properties="${scanner.availability}"/>
 						<div class="text_output">
 							<form:input path="availabilitySpecialCase"/>
 						</div>

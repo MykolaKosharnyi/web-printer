@@ -120,7 +120,23 @@
 		<a href="<c:url value='/admin/${productType}/properties_i/mounting_tool' />">Добавление/Изменение креплений инструментов</a><br>
 	</c:if>
 	
-	availability
+	<c:if test="${productType == 'scanner'}">
+		<a href="<c:url value='/admin/${productType}/properties/scanning_width' />">Добавление/Изменение ширины сканирования для сканеров</a><br>
+		<a href="<c:url value='/admin/${productType}/properties/scanning_element' />">Добавление/Изменение сканирующих елементов для сканеров</a><br>
+		<a href="<c:url value='/admin/${productType}/properties/optical_resolution' />">Добавление/Изменение оптического разрешения для сканеров</a><br>
+		<a href="<c:url value='/admin/${productType}/properties/equipment_manufacturer' />">Добавление/Изменение производителей оборудования для сканеров</a><br>
+		<a href="<c:url value='/admin/${productType}/properties/connection_interface' />">Добавление/Изменение интерфейсов подключения для сканеров</a><br>
+		<a href="<c:url value='/admin/${productType}/properties/software' />">Добавление/Изменение програмного обеспечения для сканеров</a><br>
+		<br>		
+		<a href="<c:url value='/admin/${productType}/properties_i/availability' />">Добавление/Изменение наличия для сканеров</a><br>
+		<a href="<c:url value='/admin/${productType}/properties_i/previously_used' />">Добавление/Изменение состояния оборудования для сканеров</a><br>
+		<a href="<c:url value='/admin/${productType}/properties_i/type_product' />">Добавление/Изменение типов сканеров</a><br>
+		<a href="<c:url value='/admin/${productType}/properties_i/innings' />">Добавление/Изменение подачи для сканеров</a><br>
+		<a href="<c:url value='/admin/${productType}/properties_i/chromaticity' />">Добавление/Изменение цветности для сканеров</a><br>
+		<a href="<c:url value='/admin/${productType}/properties_i/light_source' />">Добавление/Изменение источника света для сканеров</a><br>
+		<a href="<c:url value='/admin/${productType}/properties_i/bit_color_scanning' />">Добавление/Изменение разрядности цветного сканирования для сканеров</a><br>
+		<a href="<c:url value='/admin/${productType}/properties_i/bit_scanning_grayscale' />">Добавление/Изменение разрядности сканирования c оттенком серого для сканеров</a><br>
+	</c:if>
 	
 	<div style="right:0px;position: relative;">
 		Сортировка 
