@@ -250,6 +250,10 @@ public class ComponentsForControllers {
     	}
 	}
     
+    public JSONArray getParametersFromConcreteJSONProduct(String typeOfProduct, String property){
+    	return (JSONArray) (getShowedProperty(jsonObjectParser(typeOfProduct)).get(property));
+	}
+    
     /**
      * This method for getting JSON's of products characteristic for change them
      * @param model

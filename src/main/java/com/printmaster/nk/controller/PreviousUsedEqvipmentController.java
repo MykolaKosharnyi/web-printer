@@ -1,8 +1,6 @@
 package com.printmaster.nk.controller;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.json.simple.JSONObject;
@@ -18,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.printmaster.nk.beans.ComponentsForControllers;
 import com.printmaster.nk.model.entity.search.SearchPUE;
 import com.printmaster.nk.model.service.PreviousUsedEqvipmentService;
 
@@ -25,6 +24,9 @@ import com.printmaster.nk.model.service.PreviousUsedEqvipmentService;
 public class PreviousUsedEqvipmentController {
 	
 	private Logger logger = Logger.getLogger(PreviousUsedEqvipmentController.class);
+	
+	@Autowired
+    private ComponentsForControllers componets;
 	
 	 private PreviousUsedEqvipmentService pueService;
 	    
@@ -41,6 +43,26 @@ public class PreviousUsedEqvipmentController {
         search.setPrise0(0);
         search.setPrise1(100000);
         model.addAttribute("listProducts", pueService.listProduct(search)); 
+        
+        model.addAttribute("typePrinter", componets.getParametersFromConcreteJSONProduct("printer", "type_printer"));
+    	model.addAttribute("printerEquipment", componets.getParametersFromConcreteJSONProduct("printer", "equipment_manufacturer"));
+    	
+    	model.addAttribute("type3dPrinter", componets.getParametersFromConcreteJSONProduct("3d_printer", "type_printer_3d"));
+    	model.addAttribute("d3PrinterEquipment", componets.getParametersFromConcreteJSONProduct("3d_printer", "equipment_manufacturer"));
+    	
+    	model.addAttribute("typeDigitalPrinter", componets.getParametersFromConcreteJSONProduct("digital_printer", "type_printer"));
+    	
+    	model.addAttribute("typeLaminator", componets.getParametersFromConcreteJSONProduct("laminator", "type_product"));
+    	model.addAttribute("laminatorEquipment", componets.getParametersFromConcreteJSONProduct("laminator", "equipment_manufacturer"));
+    	
+    	model.addAttribute("typeLaser", componets.getParametersFromConcreteJSONProduct("laser", "type_laser"));
+    	model.addAttribute("laserEquipment", componets.getParametersFromConcreteJSONProduct("laser", "equipment_manufacturer"));
+    	
+    	model.addAttribute("typeCutter", componets.getParametersFromConcreteJSONProduct("cutter", "type_cutter"));
+    	model.addAttribute("cutterEquipment", componets.getParametersFromConcreteJSONProduct("cutter", "equipment_manufacturer"));
+    	
+    	model.addAttribute("typeScanner", componets.getParametersFromConcreteJSONProduct("scanner", "type_product"));
+    	model.addAttribute("scannerEquipment", componets.getParametersFromConcreteJSONProduct("scanner", "equipment_manufacturer"));
    
         model.addAttribute("search", search);
         logger.info("On '../previously used equipment' page.");
@@ -48,7 +70,7 @@ public class PreviousUsedEqvipmentController {
     }
 
     @RequestMapping(value="/previous_use_equipments/search",method=RequestMethod.POST, produces = "application/json; charset=utf-8")
-    public @ResponseBody ArrayList<JSONObject> showSearchProduct(@ModelAttribute(value="search") SearchPUE search, BindingResult result ){
+    public @ResponseBody ArrayList<JSONObject> showSearchProduct(@ModelAttribute(value="search") SearchPUE search, BindingResult result){
     	logger.info("On the /previous_use_equipments/search page.");
     	return pueService.listSearchProduct(search);
     }
@@ -208,155 +230,5 @@ public class PreviousUsedEqvipmentController {
     	}
     }
 
-	
-	@ModelAttribute("typePrinter")
-	public Map<String, String> typePrinter(){
-		Map<String, String> m = new LinkedHashMap<String, String>();
-		m.put("Сольвентный", "Сольвентный");
-		m.put("Экосольвентный", "Экосольвентный");
-		m.put("UV рулонный", "UV рулонный");
-		
-		m.put("UV плоскопечатный", "UV плоскопечатный");
-		m.put("Сублимационный", "Сублимационный");
-		m.put("Текстильный", "Текстильный");
-
-		m.put("Водный/Пигментный", "Водный/Пигментный");
-		m.put("САПР/ГИС", "САПР/ГИС");
-		return m;
-	}
-	
-	@ModelAttribute("printerEquipment")
-	public Map<String, String> printerEquipment(){
-		Map<String, String> m = new LinkedHashMap<String, String>();
-		m.put("Epson", "Epson");
-		m.put("Mimaki", "Mimaki");
-		m.put("Roland", "Roland");
-		m.put("HP", "HP");
-		m.put("OCE", "OCE");
-		m.put("Agfa", "Agfa");
-		m.put("LIYU", "LIYU");
-		m.put("Infinity", "Infinity");
-		m.put("Gonzeng", "Gonzeng");
-		m.put("Jong Ye", "Jong Ye");
-		m.put("Brother", "Brother");
-		m.put("Yueda", "Yueda");
-		m.put("AZON", "AZON");
-		m.put("Big Color", "Big Color");
-		return m;
-	}
-	
-	@ModelAttribute("type3dPrinter")
-	public Map<String, String> type3dPrinter(){
-		Map<String, String> m = new LinkedHashMap<String, String>();
-		m.put("Экструдные FDM", "Экструдные FDM");
-		m.put("Фото печать Polyjet", "Фото печать Polyjet");
-		m.put("Лазерного спекания LENS", "Лазерного спекания LENS");
-		m.put("Ламинация LOM", "Ламинация LOM");
-		m.put("Стереолитография SL", "Стереолитография SL");
-		m.put("Лазерное спекание LS", "Лазерное спекание LS");
-		m.put("Порошкового склеивания 3DP", "Порошкового склеивания 3DP");
-		return m;
-	}
-	
-	@ModelAttribute("d3PrinterEquipment")
-	public Map<String, String> d3PrinterEquipment(){
-		Map<String, String> m = new LinkedHashMap<String, String>();
-		m.put("MakerBot", "MakerBot");
-		m.put("3D Systems", "3D Systems");
-		m.put("XYZ printing", "XYZ printing");
-		m.put("PrintBox3D", "PrintBox3D");
-		m.put("ProJet Accelerator Software", "ProJet Accelerator Software");
-		m.put("3DTouch", "3DTouch");
-		return m;
-	}
-	
-	@ModelAttribute("typeDigitalPrinter")
-	public Map<String, String> typeDigitalPrinter(){
-		Map<String, String> m = new LinkedHashMap<String, String>();
-		m.put("Полноцветное лазерное оборудование", "Полноцветное лазерное оборудование");
-		m.put("Монохромное лазерное оборудование", "Монохромное лазерное оборудование");
-		m.put("Полноцветное струйное оборудование", "Полноцветное струйное оборудование");
-		return m;
-	}
-	
-	@ModelAttribute("typeLaminator")
-	public Map<String, String> typeLaminator(){
-		Map<String, String> m = new LinkedHashMap<String, String>();
-		m.put("Горячего ламинирования", "Горячего ламинирования");
-		m.put("Холодного ламинирования", "Холодного ламинирования");
-		m.put("Жидкостные", "Жидкостные");
-		return m;
-	}
-	
-	@ModelAttribute("laminatorEquipment")
-	public Map<String, String> laminatorEquipment(){
-		Map<String, String> m = new LinkedHashMap<String, String>();
-		m.put("Kala", "Kala");
-		m.put("Royal Sovereign", "Royal Sovereign");
-		m.put("GMP", "GMP");
-		m.put("Champion", "Champion");
-		m.put("Aurora", "Aurora");
-		m.put("GBC", "GBC");
-		m.put("HF FGK", "HF FGK");
-		m.put("Yingkai", "Yingkai");
-		return m;
-	}
-	
-	@ModelAttribute("typeLaser")
-	public Map<String, String> typeLaser(){
-		Map<String, String> m = new LinkedHashMap<String, String>();
-		m.put("Газовые лазеры СО2", "Газовые лазеры СО2");
-		m.put("Твердотельные лазеры", "Твердотельные лазеры");
-		m.put("Для обработки метала", "Для обработки метала");
-		m.put("С диодной накачкой", "С диодной накачкой");
-		m.put("Оптоволоконные лазеры", "Оптоволоконные лазеры");
-		m.put("Плазменные лазеры", "Плазменные лазеры");
-		return m;
-	}
-	
-	@ModelAttribute("laserEquipment")
-	public Map<String, String> laserEquipment(){
-		Map<String, String> m = new LinkedHashMap<String, String>();
-		m.put("Tander Jet", "Tander Jet");
-		m.put("JHF", "JHF");
-		m.put("Bodor", "Bodor");
-		m.put("Chanxan", "Chanxan");
-		return m;
-	}
-	
-	@ModelAttribute("typeCutter")
-	public Map<String, String> typeCutter(){
-		Map<String, String> m = new LinkedHashMap<String, String>();
-		m.put("Для обработки дерева", "Для обработки дерева");
-		m.put("Для обработки металла", "Для обработки металла");
-		m.put("Для обработки камня", "Для обработки камня");
-		return m;
-	}
-	
-	@ModelAttribute("cutterEquipment")
-	public Map<String, String> cutterEquipment(){
-		Map<String, String> m = new LinkedHashMap<String, String>();
-		m.put("Esco Grafics", "Esco Grafics");
-		m.put("JHF", "JHF");
-		m.put("Agfa", "Agfa");
-		m.put("Hongda boke", "Hongda boke");
-		return m;
-	}
-	
-	@ModelAttribute("typeScanner")
-	public Map<String, String> typeScanner(){
-		Map<String, String> m = new LinkedHashMap<String, String>();
-		m.put("Широкоформатные сканеры", "Широкоформатные сканеры");
-		m.put("3D Сканеры", "3D Сканеры");
-		return m;
-	}
-	
-	@ModelAttribute("scannerEquipment")
-	public Map<String, String> scannerEquipment(){
-		Map<String, String> m = new LinkedHashMap<String, String>();
-		m.put("Contex", "Contex");
-		m.put("Vidar", "Vidar");
-		return m;
-	}
 }
 
