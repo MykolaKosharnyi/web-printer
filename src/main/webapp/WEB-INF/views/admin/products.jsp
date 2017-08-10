@@ -151,77 +151,74 @@
   		</select>
   	</div>
 	<c:if test="${!empty listProducts}">
-		<table class="tg">
+		<table class="tg" style="width: 933px;">
 			<tr>
-				<th style="width:40px;">ID</th>
-				<th style="width:120px;">${nameProduct}</th>
+				<th style="width: 24px ! important;min-width: 24px; max-width: 24px;" class="text-center">ID</th>
+				<th style="width: 128px ! important;min-width: 128px; max-width: 128px;" class="text-center">Имя принтера</th>
 				<c:if test="${productType != 'use_with_product' && productType != 'rip'}">
-					<th style="width:200px;">Производитель</th>
-				</c:if>	 
-				<th style="width:200px;">Изображение</th>
-				<th style="width:100px;">Цена</th>
-				<th style="width:60px;">Топ</th>
-				<th style="width:60px;">Показ. на сайте</th>
-				<th style="width:60px;">Показ. на гл. меню</th>
-				<th style="width:60px;">Показ. в левом блоке</th>
-				<th style="width:60px;">Копировать товар</th>
-				<th style="width:60px;">Удалить</th>
+					<th style="width: 100px ! important;min-width: 100px;max-width: 100px;" class="text-center">Производитель</th>
+				</c:if>	 	 
+				<th style="width: 180px ! important;min-width: 180px;max-width: 180px;" class="text-center">Изображение</th>
+				<th style="width: 100px ! important;min-width: 100px;max-width: 100px;" class="text-center">Цена</th>
+				<th style="width: 24px ! important;" class="text-center">Топ</th>
+				<th style="width: 42px ! important;" class="text-center">Показ. на сайте</th>
+				<th style="width: 42px ! important;" class="text-center">Показ. на гл. меню</th>
+				<th style="width: 42px ! important;" class="text-center">Показ. в левом блоке</th>
+				<th style="width:60px !important;" class="text-center">Копировать товар</th>
+				<th style="width: 54px ! important;" class="text-center">Удалить</th>
 			</tr>
 			
 			<!-- fixed header -->
-			<tr class="fixed_header" 
-			style="position: fixed;
-    			top: 0px;
-    			width:899px;
-    			display:none;
-    			background-color:white;">
-				<th style="width:35px;">ID</th>
-				<th style="width:130px;">${nameProduct}</th>
+			<tr class="fixed_header" style="position: fixed; top: 0px; width: 933px; background-color: white; display: none;margin-left: -1px;">
+				<th style="width: 24px ! important;min-width: 24px; max-width: 24px;" class="text-center">ID</th>
+				<th style="width: 128px ! important;min-width: 128px;max-width: 128px;" class="text-center">Имя принтера</th>
 				<c:if test="${productType != 'use_with_product' && productType != 'rip'}">
-					<th style="width:200px;">Производитель</th>
-				</c:if>	
-				<th style="width:214px;">Изображение</th>
-				<th style="width:101px;">Цена</th>
-				<th style="width:53px;">Топ</th>
-				<th style="width:56px;">Показ. на сайте</th>
-				<th style="width:57px;">Показ. на гл. меню</th>
-				<th style="width:56px;">Показ. в левом блоке</th>
-				<th style="width:60px;">Копировать товар</th>
-				<th style="width:59px;">Удалить</th>
+					<th style="width: 100px ! important;min-width: 100px;max-width: 100px;" class="text-center">Производитель</th>
+				</c:if>	 	 
+				<th style="width: 180px ! important;min-width: 180px;max-width: 180px;" class="text-center">Изображение</th>
+				<th style="width: 100px ! important;min-width: 100px;max-width: 100px;" class="text-center">Цена</th>
+				<th style="width: 24px ! important;" class="text-center">Топ</th>
+				<th style="width: 42px ! important;" class="text-center">Показ. на сайте</th>
+				<th style="width: 42px ! important;" class="text-center">Показ. на гл. меню</th>
+				<th style="width: 42px ! important;" class="text-center">Показ. в левом блоке</th>
+				<th style="width:60px !important;" class="text-center">Копировать товар</th>
+				<th style="width: 53px ! important;" class="text-center">Удалить</th>
 			</tr>
 			
 			<c:forEach items="${listProducts}" var="product">
 				<tr id="${product.id}" class="output_pruduct">
-					<td width="40px">${product.id}</td>
-					<td width="120px"><a href="<c:url value='/admin/${productType}/edit/${product.id}' />">${product.name}</a></td>
+					<td style="width: 24px ! important;min-width: 24px; max-width: 24px;">${product.id}</td>
+					<td style="width: 128px ! important;min-width: 128px;max-width: 128px;"><a href="<c:url value='/admin/${productType}/edit/${product.id}' />">${product.name}</a></td>
 					<c:if test="${productType != 'use_with_product' && productType != 'rip'}">
-						<td width="40px">${product.equipmentManufacturer}</td>
+						<td style="width: 100px ! important;min-width: 100px;max-width: 100px;">${product.equipmentManufacturer}</td>
 					</c:if>	
-					<td width="200px">
-						<a href="<c:url value='/admin/${productType}/edit/${product.id}' />">
-							<img src="/images/${productType}s/${product.id}/${product.pathPictures.get(0)}" alt="">
+					<td style="width: 180px ! important;min-width: 180px;max-width: 180px;">
+						<a style="width:180px;min-width: 180px;max-width: 180px;" href="<c:url value='/admin/${productType}/edit/${product.id}' />">
+							<img style="width:width:180px;min-width: 180px;max-width: 180px;" src="/images/${productType}s/${product.id}/${product.pathPictures.get(0)}" alt="">
 						</a>
 					</td>
-					<td width="100px">
+					<td style="width: 100px ! important;min-width: 100px;max-width: 100px;">
 						<c:if test="${product.prise > 0}">
 							$<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${product.prise}" />
 						</c:if>				
 	           		</td>
 	           		
-	           		<td width="60px"><input type="checkbox" name="top" <c:if test="${product.top}">checked</c:if> 
-						onclick="setTop('${productType}', ${product.id}, this);"/></td>
+	           		<td style="width: 24px ! important;">
+	           			<input type="checkbox" name="top" <c:if test="${product.top}">checked</c:if> 
+						onclick="setTop('${productType}', ${product.id}, this);"/>
+					</td>
 	           				
-					<td width="60px"><input type="checkbox" name="showOnSite" <c:if test="${product.showOnSite}">checked</c:if> 
+					<td style="width: 42px ! important;"><input type="checkbox" name="showOnSite" <c:if test="${product.showOnSite}">checked</c:if> 
 						onclick="setShowOnSite('${productType}', ${product.id}, this);"/></td>
 							
-					<td width="60px"><input type="checkbox" name="showOnHomePage" <c:if test="${product.showOnHomePage}">checked</c:if>
+					<td style="width: 42px ! important;"><input type="checkbox" name="showOnHomePage" <c:if test="${product.showOnHomePage}">checked</c:if>
 						onclick="setShowOnHomePage('${productType}', ${product.id}, this);"/></td>
 							
-					<td width="60px"><input type="checkbox" name="showOnLeftSide" <c:if test="${product.showOnLeftSide}">checked</c:if>
+					<td style="width: 42px ! important;"><input type="checkbox" name="showOnLeftSide" <c:if test="${product.showOnLeftSide}">checked</c:if>
 						onclick="setShowOnLeftSide('${productType}', ${product.id}, this);"/></td>
 					
-					<td width="60px"><a href="<c:url value='/admin/${productType}/copy/${product.id}' />"><i class="fa fa-clone clone" aria-hidden="true"></i></a></td>		
-					<td width="60px"><a href="<c:url value='/admin/${productType}/remove/${product.id}' />"><i class="fa fa-trash-o remove" aria-hidden="true"></i></a></td>
+					<td style="width:60px !important;"><a href="<c:url value='/admin/${productType}/copy/${product.id}' />"><i class="fa fa-clone clone" aria-hidden="true"></i></a></td>		
+					<td style="width: 53px ! important;"><a href="<c:url value='/admin/${productType}/remove/${product.id}' />"><i class="fa fa-trash-o remove" aria-hidden="true"></i></a></td>
 				</tr>
 			</c:forEach>
 		</table>
