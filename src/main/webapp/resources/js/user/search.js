@@ -93,7 +93,7 @@ $( function(){
     $(".block_search_criteria .block_block_title").click(function(){
         var check = $(this).parent('.block_search_criteria').find(".block_check_boxes");
         var check_point = $(this).find("i").first();
-var description = $(this).find("p").first();
+var description = $(this).find("p, label").first();
         if (check.css('display') == 'none') {
             check.slideDown();
             description.css('color', '#006080');

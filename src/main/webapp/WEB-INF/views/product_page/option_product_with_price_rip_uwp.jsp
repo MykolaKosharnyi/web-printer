@@ -685,7 +685,7 @@
 </c:if>
 
 	<tr class="output_result_of_option">
-		<td style="vertical-align: middle;"><custom:getDescriptionByLocale description="${descriptions.total_cost}"/>:</td>
+		<td style="vertical-align: middle; min-width: 100px;"><custom:getDescriptionByLocale description="${descriptions.total_cost}"/>:</td>
         <td style="vertical-align: middle;">
         	<div class="total_price product_price">
 			   	<input name="price_value" value="${product.prise}" type="hidden">				

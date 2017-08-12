@@ -277,11 +277,17 @@
 						</c:if>
                        
                        <c:if test="${!empty product.theMaximumResolutionForColorPrinting && product.theMaximumResolutionForColorPrinting!=''}">
-   							<tr><td><custom:getDescriptionByLocale description="${search_d_printer.maximum_resolution_for_color_printing}"/>(0000x0000):</td><td>${product.theMaximumResolutionForColorPrinting}</td></tr>
+   							<tr>
+   								<td><custom:getDescriptionByLocale description="${search_d_printer.maximum_resolution_for_color_printing}"/>(0000x0000):</td>
+   								<td>${product.theMaximumResolutionForColorPrinting}</td>
+   							</tr>
 						</c:if>
                        
                        <c:if test="${!empty product.theMaximumResolutionForBWPrinting && product.theMaximumResolutionForBWPrinting!=''}">
-   							<tr><td><custom:getDescriptionByLocale description="${search_d_printer.maximum_resolution_for_b_w_printing}"/>(0000x0000):</td><td>${product.theMaximumResolutionForBWPrinting}</td></tr>
+   							<tr>
+   								<td><custom:getDescriptionByLocale description="${search_d_printer.maximum_resolution_for_b_w_printing}"/>(0000x0000):</td>
+   								<td>${product.theMaximumResolutionForBWPrinting}</td>
+   							</tr>
 						</c:if>
                        
                        <c:if test="${product.warmUpTime > 0}">
