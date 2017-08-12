@@ -17,16 +17,16 @@
 	<c:if test="${!empty listProducts}">
 		<table class="tg">
 			<tr>
-				<th width="40">ID</th>
-				<th width="120">Имя товара</th>
-				<th width="200">Изображение</th>
-				<th width="60">Тип продукта</th>
-				<th width="100">Цена</th>
-				<th width="60">Показ. на сайте</th>
-				<th width="60">Показ. на гл. меню</th>
-				<th width="60">Показ. в левом блоке</th>
-				<th width="60">Редактировать</th>
-				<th width="60">Удалить</th>
+				<th style="min-width: 31px; max-width: 31px;" class="text-center">ID</th>
+				<th style="min-width: 128px; max-width: 128px;" class="text-center">Имя товара</th>
+				<th style="min-width: 221px; max-width: 221px;" class="text-center">Изображение</th>
+				<th style="min-width: 60px; max-width: 60px;" class="text-center">Тип продукта</th>
+				<th style="min-width: 96px; max-width: 96px;" class="text-center">Цена</th>
+				<th style="width: 53px;" class="text-center">Показ. на сайте</th>
+				<th style="width: 55px;" class="text-center">Показ. на гл. меню</th>
+				<th style="width: 54px;" class="text-center">Показ. в левом блоке</th>
+				<th width="60" class="text-center">Редактировать</th>
+				<th style="width: 58px;" class="text-center">Удалить</th>
 			</tr>
 			
 			<!-- fixed header -->
@@ -35,30 +35,31 @@
     			top: 0px;
     			width:899px;
     			display:none;
+    			margin-left: -1px;
     			background-color:white;">
-				<th style="width: 31px;">ID</th>
-				<th style="width: 128px;">Имя товара</th>
-				<th style="width: 221px;">Изображение</th>
-				<th style="width: 60px;">Тип продукта</th>
-				<th style="width: 96px;">Цена</th>
-				<th style="width: 53px;">Показ. на сайте</th>
-				<th style="width: 55px;">Показ. на гл. меню</th>
-				<th style="width: 54px;">Показ. в левом блоке</th>
-				<th width="60">Редактировать</th>
-				<th style="width: 58px;">Удалить</th>
+				<th style="min-width: 31px; max-width: 31px;" class="text-center">ID</th>
+				<th style="min-width: 128px; max-width: 128px;" class="text-center">Имя товара</th>
+				<th style="min-width: 221px; max-width: 221px;" class="text-center">Изображение</th>
+				<th style="min-width: 60px; max-width: 60px;" class="text-center">Тип продукта</th>
+				<th style="min-width: 96px; max-width: 96px;" class="text-center">Цена</th>
+				<th style="width: 53px;" class="text-center">Показ. на сайте</th>
+				<th style="width: 55px;" class="text-center">Показ. на гл. меню</th>
+				<th style="width: 54px;" class="text-center">Показ. в левом блоке</th>
+				<th width="60" class="text-center">Редактировать</th>
+				<th style="width: 58px;" class="text-center">Удалить</th>
 			</tr>
 			
 			<c:forEach items="${listProducts}" var="product">
 				<tr id="${product.id}">
-					<td>${product.id}</td>
-					<td><a href="<c:url value='/admin/${product.type}/edit/${product.id}' />">${product.name}</a></td>
-					<td>
-						<a href="<c:url value='/admin/${product.type}/edit/${product.id}' />">
-							<img src="/images/${product.type}s/${product.id}/${product.pathPictures.get(0)}" alt="">
+					<td style="min-width: 31px; max-width: 31px;">${product.id}</td>
+					<td style="min-width: 128px; max-width: 128px;"><a href="<c:url value='/admin/${product.type}/edit/${product.id}' />">${product.name}</a></td>
+					<td style="min-width: 221px; max-width: 221px;">
+						<a style="min-width: 221px; max-width: 221px;" href="<c:url value='/admin/${product.type}/edit/${product.id}' />">
+							<img style="min-width: 221px; max-width: 221px;" src="/images/${product.type}s/${product.id}/${product.pathPictures.get(0)}" alt="">
 						</a>
 					</td>
-					<td>${product.type}</td>
-					<td>$<fmt:formatNumber type="number" 
+					<td style="min-width: 60px; max-width: 60px;">${product.type}</td>
+					<td style="min-width: 96px; max-width: 96px;">$<fmt:formatNumber type="number" 
            				maxFractionDigits="2" minFractionDigits="2" value="${product.prise}" /></td>
            				
 					<td><input type="checkbox" name="showOnSite" <c:if test="${product.showOnSite}">checked</c:if> 
