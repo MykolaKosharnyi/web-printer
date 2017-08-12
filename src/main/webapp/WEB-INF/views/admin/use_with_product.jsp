@@ -14,16 +14,16 @@
     <link rel="stylesheet" href="/css/admin/add_change_printer.css">
 	<script src="<%=request.getContextPath()%>/resources/js/admin/add_change_printer.js"></script>
 
-<c:if test="${empty product.id}">
-	<title>
-		<spring:message text="Добавление нового товара" />
-	</title>
-</c:if>
-<c:if test="${!empty product.id}">
-	<title>
-		<spring:message text="Изменение" />
-	</title>
-</c:if>
+	<c:if test="${empty product.id}">
+		<title>
+			<spring:message text="Добавление нового товара" />
+		</title>
+	</c:if>
+	<c:if test="${!empty product.id}">
+		<title>
+			<spring:message text="Изменение" />
+		</title>
+	</c:if>
 </head>
 <body>
 	
@@ -76,6 +76,16 @@
 					</div>
 					<div class="check_boxes">
 						<form:input path="name"/>
+					</div>
+				</div>
+				<div class="characteristic">
+					<div class="block_title">
+						<i></i>
+						<p>Название товара(ENGLISH)</p>
+						<form:errors path="engNameProduct" cssClass="error"></form:errors>
+					</div>
+					<div class="check_boxes">
+						<form:input path="engNameProduct"/>
 					</div>
 				</div>
 				<div class="characteristic">

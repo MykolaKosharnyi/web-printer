@@ -527,12 +527,22 @@
                                   
                                   <div class="name_price_cart_block">
                                                
-                                      <a href="<c:url value='/${product.type}/${product.id}' />" class="slide-title">${product.name}</a>         
+                                      <a href="<c:url value='/${product.type}/${product.id}' />" class="slide-title">
+										<c:choose>   
+									         <c:when test = "${localeCode == 'en' && !empty product.engNameProduct}">
+									            ${product.engNameProduct}
+									         </c:when>
+									         
+									         <c:otherwise>
+									            ${product.name}
+									         </c:otherwise>
+										</c:choose>
+									</a>         
                                                                     
-	                                  <div class="product_price"><span style="float: left;">Цена:&nbsp;</span> 
+	                                  <div class="product_price"><span style="float: left;"><custom:getDescriptionByLocale description="${descriptions.price}"/></span> 
 										<input type="hidden" name="price_value" value="${product.prise}">
 							       		<c:if test="${product.prise < 0.1}"><a 
-							       		href="javascript:openModalProposalPrise('${product.type}', ${product.id}, '${product.name}', '${product.pathPictures.get(0)}')">уточняйте</a></c:if>
+							       		href="javascript:openModalProposalPrise('${product.type}', ${product.id}, '${product.name}', '${product.pathPictures.get(0)}')"><custom:getDescriptionByLocale description="${descriptions.specify}"/></a></c:if>
 										<c:if test="${!(product.prise < 0.1)}">					
 						   					<div></div>
 										</c:if>

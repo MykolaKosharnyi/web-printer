@@ -81,6 +81,16 @@
 				<div class="characteristic">
 					<div class="block_title">
 						<i></i>
+						<p>Название товара(ENGLISH)</p>
+						<form:errors path="engNameProduct" cssClass="error"></form:errors>
+					</div>
+					<div class="check_boxes">
+						<form:input path="engNameProduct"/>
+					</div>
+				</div>
+				<div class="characteristic">
+					<div class="block_title">
+						<i></i>
 						<p>Код товара</p>
 						<form:errors path="partNumber" cssClass="error"></form:errors>
 					</div>

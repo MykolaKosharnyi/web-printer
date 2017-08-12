@@ -9,7 +9,17 @@
     <link rel="stylesheet" href="/css/product.css"/>
 	
 	<script src="<%=request.getContextPath()%>/resources/js/user/product.js"></script>
-	<title>${product.name}</title>
+	<title>
+		<c:choose>   
+	         <c:when test = "${localeCode == 'en' && !empty product.engNameProduct}">
+	            ${product.engNameProduct}
+	         </c:when>
+	         
+	         <c:otherwise>
+	            ${product.name}
+	         </c:otherwise>
+		</c:choose>
+	</title>
 </head>
 <body>   
          <div class="product">
@@ -27,7 +37,17 @@
                 <!-- inport timer -->
 				<jsp:include page="../product_page/clock.jsp" />    				
 				
-                	<div id="name_product_head_description">${product.name}</div>
+    <div id="name_product_head_description">
+		<c:choose>   
+	         <c:when test = "${localeCode == 'en' && !empty product.engNameProduct}">
+	            ${product.engNameProduct}
+	         </c:when>
+	         
+	         <c:otherwise>
+	            ${product.name}
+	         </c:otherwise>
+		</c:choose>
+	</div>
                 	
                 	<c:if test="${!empty product.partNumber}">
    						<div id="name_product_head_description"><custom:getDescriptionByLocale description="${d_search.product_code}"/>: ${product.partNumber}</div>

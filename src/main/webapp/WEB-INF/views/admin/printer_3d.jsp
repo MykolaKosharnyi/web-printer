@@ -16,16 +16,16 @@
     <link rel="stylesheet" href="/css/admin/add_change_3d_printer.css">
 	<script src="<%=request.getContextPath()%>/resources/js/admin/add_change_3d_printer.js"></script>
 
-<c:if test="${empty product.id}">
-	<title>
-		<spring:message text="Добавление нового 3D принтера" />
-	</title>
-</c:if>
-<c:if test="${!empty product.id}">
-	<title>
-		<spring:message text="Изменение 3D принтера" />
-	</title>
-</c:if>
+	<c:if test="${empty product.id}">
+		<title>
+			<spring:message text="Добавление нового 3D принтера" />
+		</title>
+	</c:if>
+	<c:if test="${!empty product.id}">
+		<title>
+			<spring:message text="Изменение 3D принтера" />
+		</title>
+	</c:if>
 </head>
 <body>
 	
@@ -78,6 +78,16 @@
 					</div>
 					<div class="check_boxes">
 						<form:input path="name"/>
+					</div>
+				</div>
+				<div class="characteristic">
+					<div class="block_title">
+						<i></i>
+						<p>Название товара(ENGLISH)</p>
+						<form:errors path="engNameProduct" cssClass="error"></form:errors>
+					</div>
+					<div class="check_boxes">
+						<form:input path="engNameProduct"/>
 					</div>
 				</div>
 				<div class="characteristic">

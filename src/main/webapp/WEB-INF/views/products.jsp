@@ -21,7 +21,17 @@
 					</a>
 		
 					<div class="name_price_cart_block">
-						<a href="<c:url value='/${product.type}/${product.id}' />" class="products_title">${product.name}</a>
+						<a href="<c:url value='/${product.type}/${product.id}' />" class="products_title">				
+							<c:choose>   
+						         <c:when test = "${localeCode == 'en' && !empty product.engNameProduct}">
+						            ${product.engNameProduct}
+						         </c:when>
+						         
+						         <c:otherwise>
+						            ${product.name}
+						         </c:otherwise>
+							</c:choose>	
+						</a>
 						<div class="product_price"><span style="float: left; margin-right: 5px;"><custom:getDescriptionByLocale description="${descriptions.price}"/></span> 
 							<input type="hidden" name="price_value" value="${product.prise}">
 				       		<c:if test="${product.prise < 0.1}"><a href="javascript:openModalProposalPrise('${product.type}', ${product.id}, '${product.name}', '${product.pathPictures.get(0)}')">
@@ -158,7 +168,17 @@
 				</a>
 	
 				<div class="name_price_cart_block">
-					<a href="<c:url value='/${product.type}/${product.id}' />" class="products_title">${product.name}</a>
+					<a href="<c:url value='/${product.type}/${product.id}' />" class="products_title">
+							<c:choose>   
+						         <c:when test = "${localeCode == 'en' && !empty product.engNameProduct}">
+						            ${product.engNameProduct}
+						         </c:when>
+						         
+						         <c:otherwise>
+						            ${product.name}
+						         </c:otherwise>
+							</c:choose>
+					</a>
 					<div class="product_price"><span style="float: left; margin-right: 5px;"><custom:getDescriptionByLocale description="${descriptions.price}"/></span> 
 						<input type="hidden" name="price_value" value="${product.prise}">
 			       		<c:if test="${product.prise < 0.1}"><a href="javascript:openModalProposalPrise('${product.type}', ${product.id}, '${product.name}', '${product.pathPictures.get(0)}')">
@@ -344,7 +364,7 @@ $(function(){
 	});
 });
 
-/*----  Для вывода товара при поиске  -----*/        
+/*----  Для вывода товара при поиске  -----*/ 
 $(document).ready(function() {
 	
 	$('#search').ajaxForm( {
@@ -354,6 +374,7 @@ $(document).ready(function() {
 			$("#top_result_of_search").html('');
 			
             $(products).each(function(i, product) {
+            	var locale = "${localeCode}";
             	var outerDiv = $('<div/>').addClass("products");
             	var innterDiv = $('<div/>').addClass('inner_div_product');
 
@@ -363,7 +384,7 @@ $(document).ready(function() {
 							"margin-right": "5px"
 						}));
 				if(product.prise < 0.1){
-					slidePrice.append($('<a/>').attr("href","javascript:openModalProposalPrise('" + product.type +"', " + product.id +", '" + product.name +"', '" + product.pathPictures[0] +"')").text(getDescriptionByLocale("specify")));
+					slidePrice.append($('<a/>').attr("href","javascript:openModalProposalPrise('" + product.type + "', " + product.id + ", '" + product.name + "', '" + product.pathPictures[0] + "')").text(getDescriptionByLocale("specify")));
 				} else {
 					slidePrice.append($('<input/>').attr("type", "hidden").val(product.prise));
 					slidePrice.append($('<div/>').text(checkPrise(product.prise)));
@@ -374,7 +395,9 @@ $(document).ready(function() {
             								 .attr("href", "/" + product.type + "/" + product.id)
             								 .append($('<div/>').addClass("outer_a_img").append($('<img/>').attr("src", "/images/" + product.type + "s/" + product.id + "/" + product.pathPictures[0]))))
             				.append($('<div/>').addClass("name_price_cart_block")
-	                				.append($('<a/>').attr("href", "/" + product.type + "/" + product.id).addClass("products_title").text(product.name))
+	                				.append($('<a/>').attr("href", "/" + product.type + "/" + product.id).addClass("products_title")
+	                						.text((localeCode == 'en') ? product.engNameProduct : product.name)
+	                						)
 	    	                		.append(slidePrice)
 	    	                		.append($('<i/>').addClass("fa fa-cart-plus add_to_cart").click(function(){
         			                			addToCart(product.type, product.id, product.name, product.prise+'', product.pathPictures[0]);

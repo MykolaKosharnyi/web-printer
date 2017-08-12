@@ -25,5 +25,15 @@
 			</c:when>
 		</c:choose>
 	<span><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span>
-	<p>${product.name}</p>
+	<p>
+		<c:choose>   
+	         <c:when test = "${localeCode == 'en' && !empty product.engNameProduct}">
+	            ${product.engNameProduct}
+	         </c:when>
+	         
+	         <c:otherwise>
+	            ${product.name}
+	         </c:otherwise>
+		</c:choose>
+	</p>
 </div>
