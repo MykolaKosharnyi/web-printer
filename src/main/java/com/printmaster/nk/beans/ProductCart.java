@@ -2,18 +2,63 @@ package com.printmaster.nk.beans;
 
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import com.printmaster.nk.model.entity.Option;
 
+@Entity
+@Table(name="product_cart")
 public class ProductCart {
 	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="id")
+	private Long id;
+	
+	@Column(name="type_product")
 	private String typeProduct;	
+	
+	@Column(name="id_product")
 	private Long idProduct;
+	
+	@Column(name="name")
 	private String name;
+	
+	@Column(name="price")
 	private double price;
+	
+	@Column(name="coefficient_price_online")
+	private double coefficientPriceOnline;
+	
+	@Column(name="price_with_option_and_deivery")
 	private double priceWithOptionAndDeivery;
+	
+	@Column(name="picture_path")
 	private String picturePath;
+	
+	@ElementCollection(fetch = FetchType.EAGER)
+	@Column(name="options")
+	@Fetch(value = FetchMode.SUBSELECT)
 	private List<Option> options;
+	
+	@ElementCollection(fetch = FetchType.EAGER)
+	@Column(name="deliveries")
+	@Fetch(value = FetchMode.SUBSELECT)
 	private List<Delivery> deliveries;
+	
+	@ElementCollection(fetch = FetchType.EAGER)
+	@Column(name="paints")
+	@Fetch(value = FetchMode.SUBSELECT)
 	private List<Paint> paints;
 
 	public double getPriceWithOptionAndDeivery() {
@@ -93,6 +138,21 @@ public class ProductCart {
 	}
 	public void setOptions(List<Option> options) {
 		this.options = options;
+	}
+	public double getCoefficientPriceOnline() {
+		return coefficientPriceOnline;
+	}
+	public void setCoefficientPriceOnline(double coefficientPriceOnline) {
+		this.coefficientPriceOnline = coefficientPriceOnline;
+	}
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public void setPriceWithOptionAndDeivery(double priceWithOptionAndDeivery) {
+		this.priceWithOptionAndDeivery = priceWithOptionAndDeivery;
 	}
 
 	@Override

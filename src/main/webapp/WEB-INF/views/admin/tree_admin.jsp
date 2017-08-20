@@ -1042,11 +1042,14 @@
     <!-- Пошли подпункты ПО -->
      
       
-    
-   
-      
+
     </ul>
   </li>
+  
+ <li class="Node IsRoot ExpandLeaf">
+	<div class="Expand"></div>
+	<div class="Content"><a href="<c:url value='/admin/orders' />">ИСТОРИЯ ПОКУПОК (на этапе разработки)</a></div>
+</li>
   
 <li class="Node IsRoot ExpandLeaf">
 	<div class="Expand"></div>

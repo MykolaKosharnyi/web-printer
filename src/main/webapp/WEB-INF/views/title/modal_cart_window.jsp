@@ -13,6 +13,10 @@
             <div class="modal-body" style="padding: 5px 5px 0px 5px;">
                 <div id="cart">
 <c:if test="${!empty cart.contents}">
+	<c:if test="${!empty cart.contents}">
+    	<input type="checkbox" id="button_set_price_online">
+    	<label for="button_set_price_online">показать цену при кокупке онлайн</label>               
+    </c:if>	
 	<form action="cart/pleaceOrder" method="post">
 	<table class="table table-hover table-striped table-bordered table_option">
 		<thead>
@@ -202,7 +206,8 @@
 				</c:if>
 				
                 <button type="button" class="btn btn-default" data-dismiss="modal">Продолжить просмотр товара</button>
-                <c:if test="${!empty cart.contents}">
+                <c:if test="${!empty cart.contents}">                	
+                	<button type="button" class="btn btn-info">Купить онлайн</button>
                 	<button type="button" class="btn btn-primary"><spring:message code="cart.ownpage.placeorder"/></button>
                 </c:if>	
             </div>

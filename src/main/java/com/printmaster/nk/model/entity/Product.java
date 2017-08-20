@@ -35,6 +35,9 @@ public abstract class Product implements Serializable{
 	@Column(name="prise")
 	protected double prise; 
 	
+	@Column(name="buyOnlineCoefficient")
+	protected double buyOnlineCoefficient;
+	
 	@Column(nullable = false, columnDefinition = "bit default 1")
 	protected boolean showOnSite = true;
 	
@@ -98,6 +101,14 @@ public abstract class Product implements Serializable{
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public double getBuyOnlineCoefficient() {
+		return buyOnlineCoefficient;
+	}
+
+	public void setBuyOnlineCoefficient(double buyOnlineCoefficient) {
+		this.buyOnlineCoefficient = buyOnlineCoefficient;
 	}
 
 	public String getPathLeftPictureAction() {

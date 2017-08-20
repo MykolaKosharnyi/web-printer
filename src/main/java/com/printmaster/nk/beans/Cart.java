@@ -1,10 +1,26 @@
 package com.printmaster.nk.beans;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
@@ -12,6 +28,8 @@ import org.springframework.web.context.WebApplicationContext;
 import com.printmaster.nk.beans.ProductCart;
 import com.printmaster.nk.model.entity.Option;
 
+@Entity
+@Table(name="order")
 @Component
 @Scope(value=WebApplicationContext.SCOPE_SESSION,
 		proxyMode = ScopedProxyMode.TARGET_CLASS)
@@ -19,7 +37,30 @@ public class Cart implements Serializable{
 
 	private static final long serialVersionUID = 3085887569799299321L;
 	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="id")
+	private Long id;
+	
+	@ElementCollection(fetch = FetchType.EAGER)
+	@Column(name="contents")
+	@Fetch(value = FetchMode.SUBSELECT)
 	private Map<ProductCart, Integer> contents = new LinkedHashMap<ProductCart, Integer>();
+	
+	@Column(name="id_user")
+	private long idUser;
+	
+	@Column(name="date_creation")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dateCreation = new Date();
+	
+	@Column(length = 40, columnDefinition = "varchar(40) default 'CREATING'")
+	@Enumerated(value = EnumType.STRING)
+	private StatusOfOrdering status = StatusOfOrdering.CREATING;
+	
+	public static enum StatusOfOrdering{
+		CREATING, CREATED, WAITING, CANCELED, MANAGER_PROCESSING, ON_WAY, ORDER_COMPLETED, ORDER_DELIVERED
+	}
 	
 	public Map<ProductCart, Integer> getContents(){
 		return contents;

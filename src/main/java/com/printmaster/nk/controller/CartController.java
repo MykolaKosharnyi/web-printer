@@ -621,4 +621,10 @@ public class CartController {
 		
 		return "redirect:/cart";
 	}
+	
+	@RequestMapping(value = "/admin/orders", method = RequestMethod.GET)
+	public String adminAllOrders(){
+
+		return "/admin/orders";
+	}
 }
