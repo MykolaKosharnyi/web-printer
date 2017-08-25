@@ -98,19 +98,9 @@
 						<form:input path="partNumber" />
 					</div>
 				</div>
-				<div class="characteristic">
-					<div class="block_title">
-						<i></i>
-						<p>Цена</p>
-						<form:errors path="prise" cssClass="error"></form:errors>
-					</div>
-					<ul class="check_boxes">
-						<div class="text_output">
-							<p>$</p><form:input path="prise" class="amount-prise" value="${product.prise}"/>
-						</div>
-							<div class="slider-range-prise"></div>
-					</ul>
-				</div>
+				
+				<jsp:include page="product/price.jsp" />
+				
 				<div class="characteristic">
 					<div class="block_title">
 						<i></i>

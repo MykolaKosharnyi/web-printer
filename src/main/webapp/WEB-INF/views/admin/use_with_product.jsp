@@ -100,19 +100,7 @@
 				</div>
 				
    			    <c:if test="${product.typeProduct!='Чернила для струйной печати'}">
-   					<div class="characteristic">
-						<div class="block_title">
-							<i></i>
-							<p>Цена</p>
-							<form:errors path="prise" cssClass="error"></form:errors>
-						</div>
-						<div class="check_boxes">
-							<div class="text_output">
-								<p>$</p><form:input path="prise" class="amount-prise" value="${product.prise}"/>
-							</div>
-								<div class="slider-range-prise"></div>
-						</div>
-					</div>
+   					<jsp:include page="product/price.jsp" />
 				</c:if>  		
 				
 				<div class="characteristic type_product_uwp">

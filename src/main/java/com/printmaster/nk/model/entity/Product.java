@@ -35,7 +35,7 @@ public abstract class Product implements Serializable{
 	@Column(name="prise")
 	protected double prise; 
 	
-	@Column(name="buyOnlineCoefficient")
+	@Column(name="buyOnlineCoefficient", columnDefinition="Decimal(10,2) default '0.90'")
 	protected double buyOnlineCoefficient;
 	
 	@Column(nullable = false, columnDefinition = "bit default 1")

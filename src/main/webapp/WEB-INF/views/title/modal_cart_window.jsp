@@ -14,8 +14,8 @@
                 <div id="cart">
 <c:if test="${!empty cart.contents}">
 	<c:if test="${!empty cart.contents}">
-    	<input type="checkbox" id="button_set_price_online">
-    	<label for="button_set_price_online">показать цену при кокупке онлайн</label>               
+    	<input type="checkbox" id="button_set_price_online" style="top: 3px; position: relative;">
+    	<label style="color: lightseagreen;" for="button_set_price_online">показать цену при кокупке онлайн</label>               
     </c:if>	
 	<form action="cart/pleaceOrder" method="post">
 	<table class="table table-hover table-striped table-bordered table_option">
