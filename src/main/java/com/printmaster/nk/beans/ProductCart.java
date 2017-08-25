@@ -16,8 +16,8 @@ import org.hibernate.annotations.FetchMode;
 
 import com.printmaster.nk.model.entity.Option;
 
-@Entity
-@Table(name="product_cart")
+/*@Entity
+@Table(name="product_cart")*/
 public class ProductCart {
 	
 	@Id

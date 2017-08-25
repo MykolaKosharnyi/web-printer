@@ -28,8 +28,8 @@ import org.springframework.web.context.WebApplicationContext;
 import com.printmaster.nk.beans.ProductCart;
 import com.printmaster.nk.model.entity.Option;
 
-@Entity
-@Table(name="order")
+/*@Entity
+@Table(name="order")*/
 @Component
 @Scope(value=WebApplicationContext.SCOPE_SESSION,
 		proxyMode = ScopedProxyMode.TARGET_CLASS)

@@ -130,6 +130,14 @@ public abstract class HeadProduct extends Product implements Serializable{
 			@Size(max = 100)
 			@Column(name="descriptionAddedOption3")
 			protected String descriptionOptionAddedOption3;
+			
+			// Расширенная гарантия на печатную голову и элементы чернильного тракта (только для принтеров)
+			@Column(name="optionWarrantyPrintHeadInk", columnDefinition="Decimal(10,2) default '0.00'")
+			private double optionWarrantyPrintHeadInk;
+			
+			@Size(max = 100)
+			@Column(name="descriptionWarrantyPrintHeadInk")
+			private String descriptionWarrantyPrintHeadInk;
 	
 	//Option for delivery	
 	@Column(name="deliveryWidth", columnDefinition="Decimal(10,2) default '0.00'")
@@ -244,6 +252,22 @@ public abstract class HeadProduct extends Product implements Serializable{
 
 	public abstract String getTypeProduct();
 	
+	public double getOptionWarrantyPrintHeadInk() {
+		return optionWarrantyPrintHeadInk;
+	}
+
+	public void setOptionWarrantyPrintHeadInk(double optionWarrantyPrintHeadInk) {
+		this.optionWarrantyPrintHeadInk = optionWarrantyPrintHeadInk;
+	}
+
+	public String getDescriptionWarrantyPrintHeadInk() {
+		return descriptionWarrantyPrintHeadInk;
+	}
+
+	public void setDescriptionWarrantyPrintHeadInk(String descriptionWarrantyPrintHeadInk) {
+		this.descriptionWarrantyPrintHeadInk = descriptionWarrantyPrintHeadInk;
+	}
+
 	public String getAirDeliveryDescription() {
 		return airDeliveryDescription;
 	}

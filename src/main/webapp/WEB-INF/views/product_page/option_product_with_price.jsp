@@ -14,6 +14,21 @@
       </tr>
     </thead>
     <tbody>
+    	<c:if test="${type=='printer' && product.optionWarrantyPrintHeadInk > 0.01}">
+	      <tr class="block_product_price">
+	        <td><input class="add_price" type="checkbox" value="Расширенная гарантия на печатную голову и элементы чернильного тракта" id="optionWarrantyPrintHeadInk_price">
+	        	<label class="add_price_title" for="optionWarrantyPrintHeadInk_price"><custom:getDescriptionByLocale description="${descriptions.options_warranty_print_head_ink}"/></label>
+	        </td>
+	        <td>
+				<div class="product_price">
+					<input name="price_value" value="${product.optionWarrantyPrintHeadInk}" type="hidden">				
+			   		<div></div>
+				</div>
+			</td>
+	        <td>${product.descriptionWarrantyPrintHeadInk}</td>
+	      </tr>
+		</c:if>
+    
 		<c:if test="${product.optionRIP > 0.01}">
 	      <tr class="block_product_price">
 	        <td><input class="add_price" type="checkbox" value="Програмное обеспечение" id="optionRIP_price">

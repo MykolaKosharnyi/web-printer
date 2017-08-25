@@ -3,7 +3,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page session="true"%>
-			<div class="product_option">
+			<div class="product_option">					
 					<div class="block_title">
 						<i class="opened"></i>
 						<p>Опции (с заданием цены и описания за дополнительную услугу)</p>
@@ -13,6 +13,16 @@
 						<form:errors path="priceAddedOption" cssClass="error"></form:errors>
 					</div>
 					<ul class="check_boxes" style="display: block;">
+						<c:if test="${type == 'printer'}">
+							<div class="text_output" style="height: 135px;">
+								<p class="option_name">Расширенная гарантия на печатную голову и элементы чернильного тракта:&nbsp;</p>
+								<form:input path="optionWarrantyPrintHeadInk" class="option"/>
+								<form:errors path="optionWarrantyPrintHeadInk" cssClass="error"></form:errors>
+								<form:input path="descriptionWarrantyPrintHeadInk" class="option_description"/>
+								<form:errors path="descriptionWarrantyPrintHeadInk" cssClass="error"></form:errors>
+							</div>
+							<hr>
+						</c:if>
 						<div class="text_output">
 							<p class="option_name">Програмное об.:&nbsp;</p>
 							<form:input path="optionRIP" class="option"/>
