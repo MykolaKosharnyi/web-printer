@@ -44,7 +44,7 @@
         <beans:property name="hibernateProperties">
             <beans:props>
                 <beans:prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</beans:prop>
-                <beans:prop key="hibernate.show_sql">true</beans:prop>
+                <!--<beans:prop key="hibernate.show_sql">true</beans:prop>-->
                 <beans:prop key="hibernate.connection.Charset">UTF-8</beans:prop>
   				<beans:prop key="hibernate.connection.CharacterEncoding">UTF-8</beans:prop>
   				<beans:prop key="hibernate.connection.Useunicode">true</beans:prop>

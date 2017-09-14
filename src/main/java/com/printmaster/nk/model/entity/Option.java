@@ -69,7 +69,11 @@ public class Option{
 			return false;
 		return true;
 	}
+	
+	@Override
+	public String toString() {
+		return "[name=" + name + ", price=" + price + ", description=" + description + ", checked=" + checked
+				+ "]";
+	}
 
-	
-	
 }

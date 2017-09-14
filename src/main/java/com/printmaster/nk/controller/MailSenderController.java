@@ -1,5 +1,6 @@
 package com.printmaster.nk.controller;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -35,16 +36,20 @@ public class MailSenderController {
 	@Autowired
 	MailSendingOptionService mailSendingOptionService;
 	
+	private Logger logger =  Logger.getLogger(this.getClass().getName());
+	
 	public final static String LABEL_CHECK_MAIL = " (черновой вариант)";
 
 	@RequestMapping(value = "/admin/all_sended_messages", method = RequestMethod.GET)
 	public String getAllSendedMessages(Model model){			
 		model.addAttribute("allMessages", mailSendingService.getAll());
+		logger.info("/admin/all_sended_messages");
 	    return "admin/all_sended_messages";
 	}
 	
 	@RequestMapping(value = "/admin/message/new", method = RequestMethod.GET)
 	public String getCreateNewMessage(Model model){
+		logger.info("/admin/message/new");
 		return putMessagePageParameters(model, new MailSendingMessage());
 	}
 	
@@ -55,6 +60,8 @@ public class MailSenderController {
 			return putMessagePageParameters(model, mailMessage);
 		}		
 		mailSendingService.save(mailMessage);
+		
+		logger.info("/"+ PATH_ADMIN +"/message/"+ PATH_CREATE);
 		return "redirect:/admin/all_sended_messages";
 	}
 	
@@ -65,6 +72,8 @@ public class MailSenderController {
 		    return putMessagePageParameters(model, mailMessage);
 		}		
 		mailSendingService.update(mailMessage);
+		
+		logger.info("/"+ PATH_ADMIN +"/message/"+ PATH_UPDATE);
 		return "redirect:/admin/all_sended_messages";
 	}
 	
@@ -78,17 +87,21 @@ public class MailSenderController {
 					mailSendingComponent.getRecipients(RecipientNotification.NOTIFICATION_MAIL_UPDATING.getTypeNotification()));
 		} catch(Exception ex){
 			mailSendingComponent.exceptionMailSender(ex);
+			logger.error("ERROR while sending BLACK VERSION OF LETTER!", ex);
 		}
+		logger.info("BLACK VERSION OF LETTER WAS SENDED successfully!");
 	}
 
 	@RequestMapping(value = "/admin/message/{id}", method = RequestMethod.GET)
 	public String getCreateNewMessage(@PathVariable("id") long id, Model model) {
+		logger.info("/admin/message/" + id);
 	    return putMessagePageParameters(model, mailSendingService.getById(id));
 	}
 	
 	@RequestMapping(value = "/admin/message/deny/{id}", method = RequestMethod.GET)
 	public String denyMessage(@PathVariable("id") long id, Model model) {
 		mailSendingService.denyMassage(id);
+		logger.info("Message was DENIED with id=" + id);
 		return "redirect:/admin/all_sended_messages";
 	}
 	
@@ -97,12 +110,14 @@ public class MailSenderController {
 		MailSendingMessage result = mailSendingService.copyMassage(id);
 		result.setId(0l);
 		result.setStatus(null);
+		logger.info("Message was COPIED with id=" + id);
 		return putMessagePageParameters(model, result);
 	}
 	
 	@RequestMapping(value = "/admin/message/remove/{id}", method = RequestMethod.GET)
 	public String removeMessage(@PathVariable("id") long id, Model model) {
 		mailSendingService.delete(id);
+		logger.info("Message was REMOVED with id=" + id);
 		return "redirect:/admin/all_sended_messages";
 	}
 	
@@ -119,12 +134,14 @@ public class MailSenderController {
 	@RequestMapping(value = "/admin/message/options", method = RequestMethod.GET)
 	public String allOptions(Model model) {
 		model.addAttribute("options", mailSendingOptionService.allMessageOption());
+		logger.info("/admin/message/options");
 		return "admin/message/options";
 	}
 	
 	@RequestMapping(value = "/admin/message/option/new", method = RequestMethod.GET)
 	public String createNewMailOption(Model model) {
 		model.addAttribute("option", new MailSendingMessageOption());
+		logger.info("/admin/message/option/new");
 		return "admin/message/option";
 	}
 	
@@ -136,12 +153,14 @@ public class MailSenderController {
 		    return "admin/message/option";
 		}		
 		mailSendingOptionService.createSendingOption(mailSendingMessageOption);
+		logger.info("/admin/message/option/new");
 		return "redirect:/admin/message/options";
 	}
 	
 	@RequestMapping(value = "/admin/message/option/{id}", method = RequestMethod.GET)
 	public String getMailOption(@PathVariable("id") int id, Model model) {
 		model.addAttribute("option", mailSendingOptionService.getById(id));
+		logger.info("/admin/message/option/" + id);
 		return "admin/message/option";
 	}
 	
@@ -150,15 +169,19 @@ public class MailSenderController {
 			BindingResult result, Model model) {
 		if (result.hasErrors()){
 			model.addAttribute("option", mailSendingMessageOption);
+			logger.error("Errors while saving message option!");
 		    return "admin/message/option";
 		}
 		mailSendingOptionService.updateSendingOption(mailSendingMessageOption);
+		
+		logger.info("Message option was saved successfully!");
 		return "redirect:/admin/message/options";
 	}
 	
 	@RequestMapping(value = "/admin/message/option/remove/{id}", method = RequestMethod.GET)
 	public String removeMailOption(@PathVariable("id") int id, Model model) {
 		mailSendingOptionService.removeMessageOption(id);
+		logger.info("Message option was deleted successfully! id=" + id);
 		return "redirect:/admin/message/options";
 	}
 	
@@ -166,6 +189,7 @@ public class MailSenderController {
 			method = RequestMethod.POST,consumes=JSON_CONSUMES,headers = JSON_HEADERS)
     public @ResponseBody void setShowOnMailLetter(@PathVariable("id") int id, @RequestBody boolean value) {
 		mailSendingOptionService.setShowing(id, value);
+		logger.info("/admin/message/option/showOnMailLetter/" + id);
     }
 
 }

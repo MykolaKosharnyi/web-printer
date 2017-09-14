@@ -75,5 +75,10 @@ public class Paint {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "[checked=" + checked + ", name=" + name + ", price=" + price + ", quantity=" + quantity + "]";
+	}
 	
 }

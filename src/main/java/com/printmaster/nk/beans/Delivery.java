@@ -86,5 +86,11 @@ public class Delivery {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "[checked=" + checked + ", name=" + name + ", priceSize=" + priceSize + ", priceWeight="
+				+ priceWeight + ", description=" + description + "]";
+	}
 	
 }

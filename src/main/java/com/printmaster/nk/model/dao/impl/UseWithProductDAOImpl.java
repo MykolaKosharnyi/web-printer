@@ -304,8 +304,10 @@ public class UseWithProductDAOImpl implements UseWithProductDAO{
 			cr.add(Restrictions.eq("showOnSite", true));
 			
 			Set<UseWithProduct> result = new LinkedHashSet<UseWithProduct>(cr.list());
+			
+			logger.info("UseWithProduct List:");
 	        for(UseWithProduct c : result){
-	            logger.info("UseWithProduct List::" + c);
+	            logger.info(c);
 	        }
 	        return result;
 		}
@@ -319,8 +321,10 @@ public class UseWithProductDAOImpl implements UseWithProductDAO{
 			cr.add(Restrictions.eq("showOnHomePage", true));
 			
 			Set<UseWithProduct> result = new LinkedHashSet<UseWithProduct>(cr.list());
+			
+			logger.info("UseWithProduct list:");
 	        for(UseWithProduct c : result){
-	            logger.info("UseWithProduct list::" + c);
+	            logger.info(c);
 	        }
 	        return result;
 		}

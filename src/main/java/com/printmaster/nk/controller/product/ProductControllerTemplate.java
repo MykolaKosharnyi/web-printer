@@ -28,7 +28,7 @@ public abstract class ProductControllerTemplate <T extends HeadProduct, S extend
 	
 	private Class<T> product;	
 	private Class<S> searchCriteries;
-	private Logger logger =  Logger.getLogger(ProductControllerTemplate.class);
+	private Logger logger =  Logger.getLogger(this.getClass().getName());
 	
 	@Autowired
 	private LinksForProducts linksForProduct;
@@ -80,7 +80,7 @@ public abstract class ProductControllerTemplate <T extends HeadProduct, S extend
 		}
 
         componets.setJSONtoModelAttribute(model, getTYPE());
-        logger.info(String.format("On '../%s' page.", getCONCRETE_FOLDER()));
+        logger.info(String.format("/%s", getCONCRETE_FOLDER()));
         return getTYPE() + "s";
     }
 	
@@ -95,7 +95,7 @@ public abstract class ProductControllerTemplate <T extends HeadProduct, S extend
    
         if(getLinks().containsKey(subType)){
         	currentType = getLinks().get(subType);
-        	logger.info(String.format("On the /%s/%s page.", getCONCRETE_FOLDER(), subType));
+        	logger.info(String.format("/%s/%s", getCONCRETE_FOLDER(), subType));
         } else {
         	return "redirect:/";
         }
@@ -113,12 +113,12 @@ public abstract class ProductControllerTemplate <T extends HeadProduct, S extend
     }
 
     public ArrayList<JSONObject> showSearchProductsTemplate(S search, BindingResult result){
-    	logger.info(String.format("Go to the /%s/%s page.", getTYPE(), PATH_SEARCH));
+    	logger.info(String.format("/%s/%s", getTYPE(), PATH_SEARCH));
     	return componets.makeLightWeightCollectionOfProduct(getProductService().listSearchProducts(search));
     }
 	
     public String showConcreteProductTemplate(long id, Model model){
-    	logger.info(String.format("On /%s/%d page.", getTYPE(), id));
+    	logger.info(String.format("/%s/%d", getTYPE(), id));
         
         T product = getProductService().getProductById(id);
         model.addAttribute(ATTRIBUTE_PRODUCT, product);
@@ -137,7 +137,7 @@ public abstract class ProductControllerTemplate <T extends HeadProduct, S extend
     public String adminListProductsTemplate(Model model){
 		model.addAttribute(ATTRIBUTE_TITLE_OF_TABLE, getParametersOnAdminProductsPage().get(ATTRIBUTE_TITLE_OF_TABLE));
         model.addAttribute(ATTRIBUTE_LIST_PRODUCTS, getProductService().listProducts("id"));
-        logger.info(String.format("/%s/%s page.", PATH_ADMIN, getCONCRETE_FOLDER()));
+        logger.info(String.format("/%s/%s", PATH_ADMIN, getCONCRETE_FOLDER()));
         
         model.addAttribute(ATTRIBUTE_PRODUCT_TYPE, getTYPE());
 		model.addAttribute(ATTRIBUTE_NAME_PRODUCT, getParametersOnAdminProductsPage().get(ATTRIBUTE_NAME_PRODUCT));
@@ -160,12 +160,12 @@ public abstract class ProductControllerTemplate <T extends HeadProduct, S extend
         	model.addAttribute(ATTRIBUTE_PRODUCT_SUB_TYPE, type);
         	model.addAttribute(ATTRIBUTE_TITLE_OF_TABLE, getParametersOnAdminProductsPage().get(ATTRIBUTE_TITLE_OF_TABLE) + " " + getLinks().get(type).toLowerCase());
             model.addAttribute(ATTRIBUTE_LIST_PRODUCTS, listResult);
-            logger.info(String.format("On /%s/%s/%s page.", PATH_ADMIN, getCONCRETE_FOLDER(), type));
+            logger.info(String.format("/%s/%s/%s", PATH_ADMIN, getCONCRETE_FOLDER(), type));
         } else {
         	model.addAttribute(ATTRIBUTE_PRODUCT_SUB_TYPE, "none");
     		model.addAttribute(ATTRIBUTE_TITLE_OF_TABLE, getParametersOnAdminProductsPage().get(ATTRIBUTE_TITLE_OF_TABLE));
             model.addAttribute(ATTRIBUTE_LIST_PRODUCTS, getProductService().listProducts("id"));
-            logger.info(String.format("On /%s/%s page.", PATH_ADMIN, getCONCRETE_FOLDER()));
+            logger.info(String.format("/%s/%s", PATH_ADMIN, getCONCRETE_FOLDER()));
         }
         
         model.addAttribute(ATTRIBUTE_PRODUCT_TYPE, getTYPE());
@@ -194,7 +194,7 @@ public abstract class ProductControllerTemplate <T extends HeadProduct, S extend
 	
 	public String addNewProductTemplate(Model model) {
 		files.clear();
-		logger.info(String.format("/%s/%s/%s page.", PATH_ADMIN, PATH_NEW, getTYPE()));
+		logger.info(String.format("/%s/%s/%s", PATH_ADMIN, PATH_NEW, getTYPE()));
 		try {
 			model.addAttribute(ATTRIBUTE_PRODUCT, product.newInstance());
 		} catch (InstantiationException | IllegalAccessException e) {
@@ -211,7 +211,7 @@ public abstract class ProductControllerTemplate <T extends HeadProduct, S extend
 	
 	public String copyProductTemplate(long id, Model model) {
 		files.clear();
-		logger.info(String.format("/%s/%s/%s/%d page.", PATH_ADMIN, getTYPE(), PATH_COPY, id));
+		logger.info(String.format("/%s/%s/%s/%d", PATH_ADMIN, getTYPE(), PATH_COPY, id));
 		
 		logger.info(String.format("Copy all characteristic of %s.", getTYPE()));
 		T product = getProductService().getProductById(id);
@@ -421,12 +421,25 @@ public abstract class ProductControllerTemplate <T extends HeadProduct, S extend
     	T product = getProductService().getProductById(id);
     	product.setTop(value);
     	getProductService().updateProduct(product);
+    	
+    	if(value){
+    		logger.info(String.format("Set show IN TOP %s with id=%d", getTYPE(), id));
+    	} else {
+    		logger.info(String.format("Set DOESN'T show  IN TOP %s with id=%d", getTYPE(), id));
+    	}
     }
     
     public void showOnHomePageTemplate(long id, boolean value) {
     	T product = getProductService().getProductById(id);
     	product.setShowOnHomePage(value);
     	getProductService().updateProduct(product);
+    	
+    	if(value){
+    		logger.info(String.format("Set show ON HOME PAGE %s with id=%d", getTYPE(), id));
+    	} else {
+    		logger.info(String.format("Set DOESN'T show ON HOME PAGE %s with id=%d", getTYPE(), id));
+    	}
+    	
     }
     
     public void showOnLeftSideTemplate(long id, boolean value) {
@@ -434,6 +447,12 @@ public abstract class ProductControllerTemplate <T extends HeadProduct, S extend
     	product.setShowOnLeftSide(value);
     	getProductService().updateProduct(product);	
     	componets.updateInLeftField(product, product.isShowOnSite() && product.isShowOnLeftSide(), getTYPE());
+    	
+    	if(value){
+    		logger.info(String.format("Set show ON LEFT SIDE %s with id=%d", getTYPE(), id));
+    	} else {
+    		logger.info(String.format("Set DOESN'T show ON LEFT SIDE %s with id=%d", getTYPE(), id));
+    	}
     }
     
     
@@ -441,9 +460,10 @@ public abstract class ProductControllerTemplate <T extends HeadProduct, S extend
 	public String pageEditPropertiesTemplate(Model model, String property) {
     	componets.setJSONtoModelAttributeForChanging(model, getTYPE());
     	model.addAttribute("property", property);
-    	model.addAttribute("type", getTYPE());
-    	
+    	model.addAttribute("type", getTYPE());    	
     	model.addAttribute("property_description", getPropertiesDescription().get(property));
+    	
+    	logger.info(String.format("Edit properties"));
 	    return "admin/change_properties";
 	}
     

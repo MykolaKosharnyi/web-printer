@@ -51,9 +51,7 @@ public class LinksAdvise {
 
 	@ModelAttribute
     public void addReklam(Model model) {
-		logger.info("Add reklam.");
-		JSONParser parser = new JSONParser();
-	
+		JSONParser parser = new JSONParser();	
 		try {
 			JSONArray reklam = (JSONArray)parser.parse(new InputStreamReader(new FileInputStream("/var/www/localhost/left_reklam.json"), "UTF-8"));
 				
@@ -61,7 +59,7 @@ public class LinksAdvise {
 			Collections.reverse(reklam);
 			model.addAttribute("reklam", reklam);
 		} catch (IOException | ParseException e) {
-			e.printStackTrace();
+			logger.error("Error, while add to request parameters reklam: ", e);		
 		}
     }
 	

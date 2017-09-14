@@ -88,7 +88,7 @@ public class UseWithProductController {
         search.setPrise1(100000);
    
         model.addAttribute(ATTRIBUTE_SEARCH, search);
-        logger.info(String.format("On '../%s' page.", CONCRETE_FOLDER));
+        logger.info(String.format("/%s", CONCRETE_FOLDER));
         
         componets.setJSONtoModelAttribute(model, TYPE);
         
@@ -102,7 +102,7 @@ public class UseWithProductController {
    
         if(links.containsKey(subType)){
         	currentType = links.get(subType);
-        	logger.info(String.format("On the /%s/%s page.", CONCRETE_FOLDER, subType));
+        	logger.info(String.format("/%s/%s", CONCRETE_FOLDER, subType));
         } else {
         	return "redirect:/";
         }
@@ -121,13 +121,13 @@ public class UseWithProductController {
     
     @RequestMapping(value="/"+ TYPE +"s/"+ PATH_SEARCH, method=RequestMethod.POST, produces=JSON_PRODUCES)
     public @ResponseBody ArrayList<JSONObject> showSearchProducts(@ModelAttribute(value="search") SearchUseWithProducts search, BindingResult result ){
-    	logger.info(String.format("Go to the /%s/%s page.", TYPE, PATH_SEARCH));
+    	logger.info(String.format("/%s/%s", TYPE, PATH_SEARCH));
     	return componets.makeLightWeightCollectionOfProduct(useWithProductService.listSearchProducts(search));
     }
 
     @RequestMapping("/"+ TYPE +"/{id}")
     public String showProduct(@PathVariable("id") long id, Model model){
-    	logger.info(String.format("On /%s/%d page.", TYPE, id));
+    	logger.info(String.format("/%s/%d", TYPE, id));
         
     	UseWithProduct product = useWithProductService.getProductById(id);
         model.addAttribute(ATTRIBUTE_PRODUCT, product);
@@ -142,7 +142,7 @@ public class UseWithProductController {
     public String listProducts(Model model) {
 		model.addAttribute(ATTRIBUTE_TITLE_OF_TABLE, parametersOnAdminProductsPage.get(ATTRIBUTE_TITLE_OF_TABLE));
         model.addAttribute(ATTRIBUTE_LIST_PRODUCTS, useWithProductService.listProducts("id"));
-        logger.info(String.format("/%s/%s page.", PATH_ADMIN, CONCRETE_FOLDER));
+        logger.info(String.format("/%s/%s", PATH_ADMIN, CONCRETE_FOLDER));
         
         model.addAttribute(ATTRIBUTE_PRODUCT_TYPE, TYPE);
 		model.addAttribute(ATTRIBUTE_NAME_PRODUCT, parametersOnAdminProductsPage.get(ATTRIBUTE_NAME_PRODUCT));
@@ -166,12 +166,12 @@ public class UseWithProductController {
         	model.addAttribute(ATTRIBUTE_PRODUCT_SUB_TYPE, type);
         	model.addAttribute(ATTRIBUTE_TITLE_OF_TABLE, links.get(type));
             model.addAttribute(ATTRIBUTE_LIST_PRODUCTS, listResult);
-            logger.info(String.format("On /%s/%s/%s page.", PATH_ADMIN, CONCRETE_FOLDER, type));
+            logger.info(String.format("/%s/%s/%s", PATH_ADMIN, CONCRETE_FOLDER, type));
         } else {
         	model.addAttribute(ATTRIBUTE_PRODUCT_SUB_TYPE, "none");
     		model.addAttribute(ATTRIBUTE_TITLE_OF_TABLE, parametersOnAdminProductsPage.get(ATTRIBUTE_TITLE_OF_TABLE));
             model.addAttribute(ATTRIBUTE_LIST_PRODUCTS, useWithProductService.listProducts("id"));
-            logger.info(String.format("On /%s/%s page.", PATH_ADMIN, CONCRETE_FOLDER));
+            logger.info(String.format("/%s/%s", PATH_ADMIN, CONCRETE_FOLDER));
         }
         
         model.addAttribute(ATTRIBUTE_PRODUCT_TYPE, TYPE);
@@ -204,7 +204,7 @@ public class UseWithProductController {
 	@RequestMapping(value = "/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_NEW, method = RequestMethod.GET)
 	public String addNewProduct(Model model) {
 		files.clear();
-		logger.info(String.format("/%s/%s/%s page.", PATH_ADMIN, PATH_NEW, TYPE));
+		logger.info(String.format("/%s/%s/%s", PATH_ADMIN, PATH_NEW, TYPE));
 		model.addAttribute(ATTRIBUTE_PRODUCT, new UseWithProduct());
 		
 		componets.setJSONtoModelAttribute(model, TYPE);
@@ -217,7 +217,7 @@ public class UseWithProductController {
 	@RequestMapping(value = "/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_COPY +"/{id}", method = RequestMethod.GET)
 	public String copyProduct(@PathVariable("id") long id, Model model) {
 		files.clear();
-		logger.info(String.format("/%s/%s/%s/%d page.", PATH_ADMIN, TYPE, PATH_COPY, id));
+		logger.info(String.format("/%s/%s/%s/%d", PATH_ADMIN, TYPE, PATH_COPY, id));
 		
 		logger.info(String.format("Copy all characteristic of %s.", TYPE));
 		UseWithProduct product = useWithProductService.getProductById(id);

@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @Controller
 public class AdminController {
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	private final Logger logger = LoggerFactory.getLogger(this.getClass().getName());
 
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public String admin(Model model) {
-		logger.info("On admin page");
+		logger.info("/admin");
 		return "admin";
 	}
 }
