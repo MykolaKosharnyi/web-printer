@@ -99,8 +99,8 @@ public class CartController {
 		productCart.setPaints(addPaint(typeProduct, productId, checkedOption.getMapOfPaint()));
 		
 		cart.addProduct(productCart , 1);
-		logger.debug("Adding product to cart " + productCart );
-		//return "redirect:" + referedForm;
+		
+		logger.debug("Added product to cart " + productCart );
 		return productCart;
 	}
 	

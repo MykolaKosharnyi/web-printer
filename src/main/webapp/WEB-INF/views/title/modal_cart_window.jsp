@@ -52,7 +52,8 @@
 									</td>
 									<td>
 										<div class="product_price">
-											<input name="price_value" value="${option.price}" type="hidden">				
+											<input name="price_value notBuyOnline" value="${option.price}" type="hidden">	
+											<input name="price_value buyOnline" value="${option.price * item.key.buyOnlineCoefficient}" type="hidden">		
 										   	<div></div>
 									    </div>
 									</td>
@@ -105,7 +106,9 @@
 								</td>
 								<td>
 									<div class="product_price">
-										<input name="price_value" value="${delivery.priceSize + delivery.priceWeight}" type="hidden">				
+										<input name="price_value notBuyOnline" value="${delivery.priceSize + delivery.priceWeight}" type="hidden">	
+										<input name="price_value buyOnline"
+										 value="${(delivery.priceSize + delivery.priceWeight) * item.key.buyOnlineCoefficient}" type="hidden">			
 										<div></div>
 									</div>
 								</td>
@@ -145,7 +148,8 @@
 								</td>
 								<td>
 									<div class="product_price">
-										<input name="price_value" value="${paint.quantity*paint.price}" type="hidden">				
+										<input name="price_value notBuyOnline" value="${paint.quantity*paint.price}" type="hidden">	
+										<input name="price_value buyOnline" value="${paint.quantity*paint.price*item.key.buyOnlineCoefficient}" type="hidden">				
 										<div></div>
 									</div>
 								</td>
@@ -174,7 +178,8 @@
 
 			</td>
 			<td class="price product_price">
-				<input name="price_value" value="${item.key.getPriceWithOptionAndDeivery() * item.value }" type="hidden">				
+				<input name="price_value notBuyOnline" value="${item.key.getPriceWithOptionAndDeivery() * item.value }" type="hidden">	
+				<input name="buyOnline" value="${item.key.getPriceWithOptionAndDeivery() * item.key.buyOnlineCoefficient * item.value }" type="hidden">			
 			   	<div></div>
 			</td>
 			<td class="delte_item"><i class="fa fa-trash-o" aria-hidden="true"></i></td>

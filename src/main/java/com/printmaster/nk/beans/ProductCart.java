@@ -192,4 +192,12 @@ public class ProductCart {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "ProductCart [typeProduct=" + typeProduct + ", idProduct=" + idProduct + ", name=" + name
+				+ ", price=" + price + ", coefficientPriceOnline=" + coefficientPriceOnline
+				+ ", priceWithOptionAndDeivery=" + priceWithOptionAndDeivery + ", picturePath=" + picturePath
+				+ ", options=" + options.toString() + ", deliveries=" + deliveries.toString() + ", paints=" + paints.toString() + "]";
+	}
+
 }
