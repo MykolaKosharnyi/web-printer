@@ -12,7 +12,7 @@ $(document).ready(function() {
 			
 		//save current price
 		$('#cart input.delivery_radio_value').val(new Number($(this).parent('td').parent('tr')
-				.find('td .product_price input[type=hidden].' + checkedOnlineCheckbox() ? "buyOnline":"notBuyOnline").val()));
+				.find('td .product_price input.' + (checkedOnlineCheckbox() ? "buyOnline":"notBuyOnline") + ":hidden").val()));
 		
 	});
 	
@@ -81,7 +81,7 @@ function createTRInTableForProduct(product){
 				)
 		  .append($('<td/>').addClass('price product_price')
 				  			.append($('<input/>').addClass('notBuyOnline').attr("type", "hidden").val(product.priceWithOptionAndDeivery))
-				  			.append($('<input/>').addClass('buyOnline').attr("type", "hidden").val(product.priceWithOptionAndDeivery))
+				  			.append($('<input/>').addClass('buyOnline').attr("type", "hidden").val(product.priceWithOptionAndDeivery * product.buyOnlineCoefficient))
 							.append($('<div/>')
 									.text(checkPrise(checkedOnlineCheckbox() ? 
 											(product.priceWithOptionAndDeivery * product.buyOnlineCoefficient) : product.priceWithOptionAndDeivery ))))
@@ -269,6 +269,21 @@ function createTRInTableForProduct(product){
 	
 	function addProductAfterAJAXcall(product){
 		if($("#cart form table.table_option").length == 0){
+			$("#cart").prepend($('<label/>')
+						  .attr("for","button_set_price_online")
+						  .css({
+								"color":"lightseagreen"
+							})
+						  .text("показать цену при кокупке онлайн")
+						).prepend($('<input/>')
+								.attr("type", "checkbox")
+								.attr("id","button_set_price_online")
+								.css({
+									"top":"3px",
+									"position":"relative"
+								})
+							);				
+			
 			var headTable = $('<table/>').addClass('table table-hover table-striped table-bordered table_option')
 				.append($('<thead/>').append($("<tr/>")
 						.append($('<th/>').text('Изображение'))
@@ -281,6 +296,7 @@ function createTRInTableForProduct(product){
 			$("#cart form").empty().append(headTable);//add table
 			$("#cart form table.table_option tbody").first().append(createTRInTableForProduct(product));//add new product to cart
 			//Add button to take everything from cart
+			$('.modal-content .modal-footer').append($('<button/>').addClass('btn btn-info').attr("type", "button").html('Купить онлайн'));
 			$('.modal-content .modal-footer').append($('<button/>').addClass('btn btn-primary').attr("type", "button").html('Оформить заказ'));
 			//add total cart price
 			$('.modal-content .modal-footer').prepend($('<div/>').attr("id", "div_total_price")
@@ -462,7 +478,7 @@ $(document).on("keydown", '#cart input.quantity', function(e){
 			// value wich will be added or substraction from all price for the product
 			var addPrice = new Number($(this).parent('td').parent('tr.block_product_price').find('td .product_price input[type=hidden]').val());
 			
-	        if ($(this).prop( "checked" )) {
+	        if ( $(this).prop("checked") ) {
 	        	/* check if it not checked VAT option; because for VAT option different way to calculate price */
 	        	if($(this).val()!="НДС"){
 	        		var result_val = calculatePriceIncludingVAT(price_with_quantity_and_option, addPrice, quantity_numb, valueVAT, true);
@@ -480,7 +496,7 @@ $(document).on("keydown", '#cart input.quantity', function(e){
 	        	/* set new price for all products */
 				totalPrice();
 	        	
-	        }else{
+	        } else {
 	        	/* check if it not checked VAT option; because for VAT option different way to calculate price */
 	        	if($(this).val()!="НДС"){
 	        		var result_val = calculatePriceIncludingVAT(price_with_quantity_and_option, addPrice, quantity_numb, valueVAT, false);
@@ -915,6 +931,10 @@ $(document).on("keydown", '#cart input.quantity', function(e){
 				
 	    });
 		
+		$(document).on("click", '#cart input#button_set_price_online', function(){
+			totalPrice();
+		});
+		
 		function totalPrice(){
 			var total_price_block = $('#div_total_price .product_price' );
 			var all_price = allPrice();
@@ -932,11 +952,11 @@ $(document).on("keydown", '#cart input.quantity', function(e){
 			var total_price = new Number(0);
 			
 			if(checkedOnlineCheckbox()){
-				$('#cart td.price input[type=hidden].buyOnline').each(function(){
+				$('#cart td.price input.buyOnline:hidden').each(function(){
 					total_price += new Number($(this).val());
 				});	
 			} else {
-				$('#cart td.price input[type=hidden].notBuyOnline').each(function(){
+				$('#cart td.price input.notBuyOnline:hidden').each(function(){
 					total_price += new Number($(this).val());
 				});	
 			}
@@ -951,7 +971,7 @@ $(document).on("keydown", '#cart input.quantity', function(e){
 		$(document).on("click", '#cart td.delte_item i', function(){
 			
 			var typeProduct = $(this).parent('td').parent('tr').find('td input.type').val();
-			var idProduct = $(this).parent('td').parent('tr').find('td  input.id').val();
+			var idProduct = $(this).parent('td').parent('tr').find('td input.id').val();
 
 			/* first of all sent request on server to delete this item from buffer */
 			$.ajax({
@@ -977,6 +997,10 @@ $(document).on("keydown", '#cart input.quantity', function(e){
 					//Delete button to take everything from cart
 					$('.modal-content .modal-footer button.btn-primary').remove();
 					$('.modal-content .modal-footer #div_total_price').remove();
+					
+					$('#cart input#button_set_price_online').remove();
+					$("#cart label[for='button_set_price_online']").remove();
+					$('.modal-content .modal-footer button.btn-info').remove();
 				}
 				
 				
@@ -1004,37 +1028,24 @@ $(document).on("keydown", '#cart input.quantity', function(e){
 		}
 	
 	/* for opening delivery option on product page */
-	$(document).on("click", '#cart .delivery_options', function(){
-		var icon = $(this).find('i');
-		var body = $(this).parent('tbody').find('.delivery_options_body');		
-		
-		if(icon.hasClass( 'fa-arrow-right' )){
-			icon.removeClass('fa fa-arrow-right').addClass('fa fa-arrow-down');
-			body.each(function(i){	
-				$(this).show(i*500);
-			});
-		} else {
-			icon.removeClass('fa fa-arrow-down').addClass('fa fa-arrow-right');
-			body.each(function(i){	
-				$(this).hide(i*100);
-			});
-		}
-	});
+	$(document).on("click", '#cart .delivery_options', arrow_animation_cart_paintAndDelivery($(this), "delivery_options_body"));
 	
 	/* for opening paint option on product page */
-	$(document).on("click", '#cart .paint_options', function(){
-		var icon = $(this).find('i');
-		var body = $(this).parent('tbody').find('.paint_options_body');		
-		
-		if(icon.hasClass( 'fa-arrow-right' )){
-			icon.removeClass('fa fa-arrow-right').addClass('fa fa-arrow-down');
-			body.each(function(i){	
-				$(this).show(i*500);
-			});
-		} else {
-			icon.removeClass('fa fa-arrow-down').addClass('fa fa-arrow-right');
-			body.each(function(i){	
-				$(this).hide(i*100);
-			});
-		}
-	});	
+	$(document).on("click", '#cart .paint_options', arrow_animation_cart_paintAndDelivery($(this), "paint_options_body"));	
+	
+	 function arrow_animation_cart_paintAndDelivery(eventObj,typeOptionClass){
+		 var icon = eventObj.find('i');
+			var body = eventObj.parent('tbody').find('.' + typeOptionClass);		
+			
+			if(icon.hasClass( 'fa-arrow-right' )){
+				icon.removeClass('fa fa-arrow-right').addClass('fa fa-arrow-down');
+				body.each(function(i){	
+					eventObj.show(i*500);
+				});
+			} else {
+				icon.removeClass('fa fa-arrow-down').addClass('fa fa-arrow-right');
+				body.each(function(i){	
+					eventObj.hide(i*100);
+				});
+			}
+	}

@@ -97,11 +97,45 @@ public class CartController {
 		productCart.setOptions(addOption(typeProduct, productId, checkedOption.getArrayOfCheckedOption()));
 		productCart.setDeliveries(addDelivery(typeProduct, productId, checkedOption.getCheckedDelivery()));
 		productCart.setPaints(addPaint(typeProduct, productId, checkedOption.getMapOfPaint()));
+		productCart.setCoefficientPriceOnline( getCurrentCoefficientPriceOnline(typeProduct, productId) );
 		
 		cart.addProduct(productCart , 1);
 		
 		logger.debug("Added product to cart " + productCart );
 		return productCart;
+	}
+	
+	private double getCurrentCoefficientPriceOnline(String productType, long productId){
+		if(productType.equals("printer")){
+			return printerService.getProductById(productId).getBuyOnlineCoefficient();
+			
+		} else if(productType.equals("3d_printer")){
+			return printer3DService.getProductById(productId).getBuyOnlineCoefficient();
+			
+		} else if(productType.equals("digital_printer")){
+			return digitalPrinterService.getProductById(productId).getBuyOnlineCoefficient();
+			
+		} else if(productType.equals("laminator")){
+			return laminatorService.getProductById(productId).getBuyOnlineCoefficient();
+			
+		} else if(productType.equals("laser")){
+			return laserService.getProductById(productId).getBuyOnlineCoefficient();
+			
+		} else if(productType.equals("cutter")){
+			return cutterService.getProductById(productId).getBuyOnlineCoefficient();
+			
+		} else if(productType.equals("scanner")){
+			return scannerService.getProductById(productId).getBuyOnlineCoefficient();
+			
+		} else if(productType.equals("use_with_product")){
+			return useWithProductService.getProductById(productId).getBuyOnlineCoefficient();
+			
+		} else if(productType.equals("rip")){
+			return ripService.getProductById(productId).getBuyOnlineCoefficient();
+		} else {
+			return 0;
+		}
+		
 	}
 	
 	private ArrayList<Option> addOption(String productType, long productId, List<String> checkedOption){

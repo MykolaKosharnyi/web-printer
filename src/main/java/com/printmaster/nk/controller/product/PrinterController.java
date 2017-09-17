@@ -269,7 +269,7 @@ public class PrinterController extends ProductControllerTemplate<Printer, Search
 	
     @RequestMapping("/"+ TYPE +"/{id}")
     public String showProduct(@PathVariable("id") long id, Model model){
-    	logger.info(String.format("On /%s/%d page.", TYPE, id));
+    	logger.info(String.format("/%s/%d", TYPE, id));
         
         Printer product = productService.getProductById(id);
         model.addAttribute("product", product);
