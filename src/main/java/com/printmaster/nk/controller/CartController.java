@@ -97,7 +97,7 @@ public class CartController {
 		productCart.setOptions(addOption(typeProduct, productId, checkedOption.getArrayOfCheckedOption()));
 		productCart.setDeliveries(addDelivery(typeProduct, productId, checkedOption.getCheckedDelivery()));
 		productCart.setPaints(addPaint(typeProduct, productId, checkedOption.getMapOfPaint()));
-		productCart.setCoefficientPriceOnline( getCurrentCoefficientPriceOnline(typeProduct, productId) );
+		productCart.setBuyOnlineCoefficient( getCurrentCoefficientPriceOnline(typeProduct, productId) );
 		
 		cart.addProduct(productCart , 1);
 		

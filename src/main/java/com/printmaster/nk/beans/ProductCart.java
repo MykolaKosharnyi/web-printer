@@ -37,8 +37,8 @@ public class ProductCart {
 	@Column(name="price")
 	private double price;
 	
-	@Column(name="coefficient_price_online")
-	private double coefficientPriceOnline;
+	@Column(name="buy_online_coefficient")
+	private double buyOnlineCoefficient;
 	
 	@Column(name="price_with_option_and_deivery")
 	private double priceWithOptionAndDeivery;
@@ -139,12 +139,13 @@ public class ProductCart {
 	public void setOptions(List<Option> options) {
 		this.options = options;
 	}
-	public double getCoefficientPriceOnline() {
-		return coefficientPriceOnline;
+	public double getBuyOnlineCoefficient() {
+		return buyOnlineCoefficient;
 	}
-	public void setCoefficientPriceOnline(double coefficientPriceOnline) {
-		this.coefficientPriceOnline = coefficientPriceOnline;
+	public void setBuyOnlineCoefficient(double buyOnlineCoefficient) {
+		this.buyOnlineCoefficient = buyOnlineCoefficient;
 	}
+
 	public Long getId() {
 		return id;
 	}
@@ -195,7 +196,7 @@ public class ProductCart {
 	@Override
 	public String toString() {
 		return "ProductCart [typeProduct=" + typeProduct + ", idProduct=" + idProduct + ", name=" + name
-				+ ", price=" + price + ", coefficientPriceOnline=" + coefficientPriceOnline
+				+ ", price=" + price + ", buyOnlineCoefficient=" + buyOnlineCoefficient
 				+ ", priceWithOptionAndDeivery=" + priceWithOptionAndDeivery + ", picturePath=" + picturePath
 				+ ", options=" + options.toString() + ", deliveries=" + deliveries.toString() + ", paints=" + paints.toString() + "]";
 	}
