@@ -101,6 +101,27 @@
     </div>
 </div>
 
+<!-- Google Code for &#1054;&#1090;&#1095;&#1077;&#1090; &#1087;&#1086; &#1089;&#1072;&#1081;&#1090;&#1091; E-Machine Conversion Page -->
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 959055246;
+var google_conversion_language = "en";
+var google_conversion_format = "3";
+var google_conversion_color = "ffffff";
+var google_conversion_label = "GUltCKWhpHUQjouoyQM";
+var google_conversion_value = 0.10;
+var google_conversion_currency = "UAH";
+var google_remarketing_only = false;
+/* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/959055246/?value=0.10&amp;currency_code=UAH&amp;label=GUltCKWhpHUQjouoyQM&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+
 <!--[if lt IE 9]>
 	<script src="libs/html5shiv/es5-shim.min.js"></script>
 	<script src="libs/html5shiv/html5shiv.min.js"></script>
