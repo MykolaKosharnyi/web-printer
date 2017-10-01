@@ -475,6 +475,42 @@ public class UseWithProductController {
     	UseWithProduct product = useWithProductService.getProductById(id);
     	product.setShowOnLeftSide(value);
     	useWithProductService.updateProduct(product);	
+    	product.setPrise(getPriceForLeftSideBlock(product));
+    	
     	componets.updateInLeftField(product, product.isShowOnSite() && product.isShowOnLeftSide(), TYPE);
+    }
+    
+    private double getPriceForLeftSideBlock(UseWithProduct product){    	
+    	if(product.getCyanPaint() > 0){
+    		return product.getCyanPaint();
+    	} else if(product.getMagentaPaint() > 0){
+    		return product.getMagentaPaint();
+    	} else if(product.getYellowPaint() > 0){
+    		return product.getYellowPaint();
+    	} else if(product.getBlackPaint() > 0){
+    		return product.getBlackPaint();
+    	} else if(product.getLightCyanPaint() > 0){
+    		return product.getLightCyanPaint();
+    	} else if(product.getLightMagentaPaint() > 0){
+    		return product.getLightMagentaPaint();
+    	} else if(product.getSolventPaint() > 0){
+    		return product.getSolventPaint();
+    	} else if(product.getMatteBlackPaint() > 0){
+    		return product.getMatteBlackPaint();
+    	} else if(product.getGrayPaint() > 0){
+    		return product.getGrayPaint();
+    	} else if(product.getOrangePaint() > 0){
+    		return product.getOrangePaint();
+    	} else if(product.getGreenPaint() > 0){
+    		return product.getGreenPaint();
+    	} else if(product.getVariant1Paint() > 0){
+    		return product.getVariant1Paint();
+    	} else if(product.getVariant2Paint() > 0){
+    		return product.getVariant2Paint();
+    	} else if(product.getVariant3Paint() > 0){
+    		return product.getVariant3Paint();
+    	} else {
+    		return 0;
+    	}
     }
 }
