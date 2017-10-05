@@ -53,23 +53,138 @@ public class SearchPrinters extends SearchGeneric implements Serializable{
 
 	@Override
 	public String toString() {
-		return "SearchPrinters [typePrinter="
-				+ Arrays.toString(typePrinter) + ", weightPrintMM=" + Arrays.toString(weightPrintMM)
-				+ ", previouslyUsed=" + Arrays.toString(previouslyUsed) + ", typePrint=" + Arrays.toString(typePrint)
-				+ ", feed=" + Arrays.toString(feed) + ", chromaticity=" + Arrays.toString(chromaticity)
-				+ ", manufacturerPrinthead=" + Arrays.toString(manufacturerPrinthead) + ", typeOfPrinthead="
-				+ Arrays.toString(typeOfPrinthead) + ", compatibleInk=" + Arrays.toString(compatibleInk)
-				+ ", typeDrops=" + Arrays.toString(typeDrops) + ", sizeDrops=" + Arrays.toString(sizeDrops)
-				+ ", speedPrint0=" + speedPrint0 + ", speedPrint1=" + speedPrint1 + ", printResolution="
-				+ Arrays.toString(printResolution) + ", equipmentManufacturer=" + Arrays.toString(equipmentManufacturer)
-				+ ", interfaceConnection=" + Arrays.toString(interfaceConnection) + ", maximumMediaThickness60_0="
-				+ maximumMediaThickness60_0 + ", maximumMediaThickness60_1=" + maximumMediaThickness60_1
-				+ ", maximumMediaThickness500_0=" + maximumMediaThickness500_0 + ", maximumMediaThickness500_1="
-				+ maximumMediaThickness500_1 + ", maximumWeightOfVehicle0=" + maximumWeightOfVehicle0
-				+ ", maximumWeightOfVehicle1=" + maximumWeightOfVehicle1 + ", rip=" + Arrays.toString(rip)
-				+ ", maxPowerConsumption0=" + maxPowerConsumption0 + ", maxPowerConsumption1=" + maxPowerConsumption1
-				+ ", weight0=" + weight0 + ", weight1=" + weight1 + ", width0=" + width0 + ", width1=" + width1
-				+ ", heigth0=" + heigth0 + ", heigth1=" + heigth1 + ", depth0=" + depth0 + ", depth1=" + depth1 + "]";
+		StringBuilder result = new StringBuilder();
+		result.append("SearchPrinters details:");
+		
+		if(typePrinter!=null && typePrinter.length > 0){
+			result.append(" typePrinter=" + Arrays.toString(typePrinter));
+		}
+		
+		if(weightPrintMM!=null && weightPrintMM.length > 0){
+			result.append(" weightPrintMM=" + Arrays.toString(weightPrintMM));
+		}
+		
+		if(previouslyUsed!=null && previouslyUsed.length > 0){
+			result.append(" previouslyUsed=" + Arrays.toString(previouslyUsed));
+		}
+		
+		if(typePrint!=null && typePrint.length > 0){
+			result.append(" typePrint=" + Arrays.toString(typePrint));
+		}
+		
+		if(feed!=null && feed.length > 0){
+			result.append(" feed=" + Arrays.toString(feed));
+		}
+		
+		if(chromaticity!=null && chromaticity.length > 0){
+			result.append(" chromaticity=" + Arrays.toString(chromaticity));
+		}
+		
+		if(manufacturerPrinthead!=null && manufacturerPrinthead.length > 0){
+			result.append(" manufacturerPrinthead=" + Arrays.toString(manufacturerPrinthead));
+		}
+		
+		if(typeOfPrinthead!=null && typeOfPrinthead.length > 0){
+			result.append(" typeOfPrinthead=" + Arrays.toString(typeOfPrinthead));
+		}
+		
+		if(compatibleInk!=null && compatibleInk.length > 0){
+			result.append(" compatibleInk=" + Arrays.toString(compatibleInk));
+		}
+		
+		if(typeDrops!=null && typeDrops.length > 0){
+			result.append(" typeDrops=" + Arrays.toString(typeDrops));
+		}
+		
+		if(sizeDrops!=null && sizeDrops.length > 0){
+			result.append(" sizeDrops=" + Arrays.toString(sizeDrops));
+		}
+		
+		if(speedPrint0 > 0){
+			result.append(" speedPrint0=" + speedPrint0);
+		}
+		
+		if(speedPrint1 > 0){
+			result.append(" speedPrint1=" + speedPrint1);
+		}
+		
+		if(printResolution!=null && printResolution.length > 0){
+			result.append(" printResolution=" + Arrays.toString(printResolution));
+		}		
+		
+		if(equipmentManufacturer!=null && equipmentManufacturer.length > 0){
+			result.append(" equipmentManufacturer=" + Arrays.toString(equipmentManufacturer));
+		}
+		
+		if(interfaceConnection!=null && interfaceConnection.length > 0){
+			result.append(" interfaceConnection=" + Arrays.toString(interfaceConnection));
+		}
+		
+		if(maximumMediaThickness60_0 > 0){
+			result.append(" maximumMediaThickness60_0=" + maximumMediaThickness60_0);
+		}
+		
+		if(maximumMediaThickness60_1 > 0){
+			result.append(" maximumMediaThickness60_1=" + maximumMediaThickness60_1);
+		}
+		
+		if(maximumMediaThickness500_0 > 0){
+			result.append(" maximumMediaThickness500_0=" + maximumMediaThickness500_0);
+		}
+		
+		if(maximumMediaThickness500_1 > 0){
+			result.append(" maximumMediaThickness500_1=" + maximumMediaThickness500_1);
+		}
+		
+		if(maximumWeightOfVehicle0 > 0){
+			result.append(" maximumWeightOfVehicle0=" + maximumWeightOfVehicle0);
+		}
+		
+		if(maximumWeightOfVehicle1 > 0){
+			result.append(" maximumWeightOfVehicle1=" + maximumWeightOfVehicle1);
+		}
+		
+		if(rip!=null && rip.length > 0){
+			result.append(" rip=" + Arrays.toString(rip));
+		}
+		
+		if(maxPowerConsumption0 > 0){
+			result.append(" maxPowerConsumption0=" + maxPowerConsumption0);
+		}
+		
+		if(maxPowerConsumption1 > 0){
+			result.append(" maxPowerConsumption1=" + maxPowerConsumption1);
+		}
+		
+		if(weight0 > 0){
+			result.append(" weight0=" + weight0);
+		}
+		
+		if(width0 > 0){
+			result.append(" width0=" + width0);
+		}
+		
+		if(width1 > 0){
+			result.append(" width1=" + width1);
+		}
+		
+		if(heigth0 > 0){
+			result.append(" heigth0=" + heigth0);
+		}
+		
+		if(heigth1 > 0){
+			result.append(" heigth1=" + heigth1);
+		}
+		
+		if(depth0 > 0){
+			result.append(" depth0=" + depth0);
+		}
+		
+		if(depth1 > 0){
+			result.append(" depth1=" + depth1);
+		}
+
+		return result.toString();
 	}
 	
 	public String[] getPrintingExtension() {

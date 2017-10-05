@@ -264,7 +264,7 @@ public class PrinterController extends ProductControllerTemplate<Printer, Search
 	
 	@RequestMapping(value="/"+ TYPE +"s/"+ PATH_SEARCH, method=RequestMethod.POST, produces=JSON_PRODUCES)
     public @ResponseBody ArrayList<JSONObject> showSearchProducts(@ModelAttribute(value="search") SearchPrinters search, BindingResult result ){
-    	return showSearchProductsTemplate(search, result);
+		return showSearchProductsTemplate(search, result);
     }
 	
     @RequestMapping("/"+ TYPE +"/{id}")

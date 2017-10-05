@@ -7,10 +7,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.Junction;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
@@ -25,6 +28,8 @@ import com.printmaster.nk.model.entity.search.SearchPrinters;
 
 @Repository
 public class PrinterDAOImpl extends ProductDaoTemplate<Printer, SearchPrinters> {
+	
+	private Logger logger = Logger.getLogger(this.getClass());
      
     public PrinterDAOImpl() {
 		super(Printer.class);
@@ -33,6 +38,7 @@ public class PrinterDAOImpl extends ProductDaoTemplate<Printer, SearchPrinters> 
     @SuppressWarnings("unchecked")
 	@Override
 	public Set<Printer> listSearchByPhrase(String phrase) {
+    	logger.info("Search by phrase in PRINTER: " + phrase);
 		Session session = getSessionFactory().getCurrentSession();
 		Criteria cr = session.createCriteria(Printer.class);
 		
@@ -46,13 +52,17 @@ public class PrinterDAOImpl extends ProductDaoTemplate<Printer, SearchPrinters> 
 		searchByPhraseGroup.add(Restrictions.like("equipmentManufacturer", phrase, MatchMode.ANYWHERE));
 		searchByPhraseGroup.add(Restrictions.like("description", phrase, MatchMode.ANYWHERE));
 		cr.add(searchByPhraseGroup);
+		cr.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 		
+		logger.info("result of search:");
+		logger.info(getIdFromArray(cr.list()));		
 		return new HashSet<Printer>(cr.list());
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public Set<Printer> listSearchProducts(SearchPrinters searchPrinters) {
+		
 		Session session = getSessionFactory().getCurrentSession();
 		Criteria cr = session.createCriteria(Printer.class);
 		
@@ -352,6 +362,8 @@ public class PrinterDAOImpl extends ProductDaoTemplate<Printer, SearchPrinters> 
 				itPrinters.remove();
 		}
 		
+		logger.info("result of search:");
+		logger.info(getIdFromArray(result));
         return result;
 	}
 	
@@ -411,4 +423,27 @@ public class PrinterDAOImpl extends ProductDaoTemplate<Printer, SearchPrinters> 
 		return printHeadArray;
 	}
  
+	private String getIdFromArray(List<Printer> list){
+    	StringBuilder result = new StringBuilder();
+    	result.append("Printer list[");
+    	
+    	for(Printer current:list){
+    		result.append(" " + current.getId());
+    	}
+    	
+    	result.append(" ]");
+    	return result.toString();
+    }
+	
+	private String getIdFromArray(HashSet<Printer> list){
+    	StringBuilder result = new StringBuilder();
+    	result.append("Printer list[");
+    	
+    	for(Printer current:list){
+    		result.append(" " + current.getId());
+    	}
+    	
+    	result.append(" ]");
+    	return result.toString();
+    }
 }

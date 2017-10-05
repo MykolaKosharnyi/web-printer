@@ -114,7 +114,17 @@ public abstract class ProductControllerTemplate <T extends HeadProduct, S extend
 
     public ArrayList<JSONObject> showSearchProductsTemplate(S search, BindingResult result){
     	logger.info(String.format("/%s/%s", getTYPE(), PATH_SEARCH));
-    	return componets.makeLightWeightCollectionOfProduct(getProductService().listSearchProducts(search));
+    	
+    	ArrayList<JSONObject> resultSearch = new ArrayList<JSONObject>();
+    	
+    	try{
+    		logger.info(search);
+    		resultSearch = componets.makeLightWeightCollectionOfProduct(getProductService().listSearchProducts(search));
+    	} catch(Exception ex){
+    		logger.error(ex);
+    	}
+    	
+    	return resultSearch;
     }
 	
     public String showConcreteProductTemplate(long id, Model model){
