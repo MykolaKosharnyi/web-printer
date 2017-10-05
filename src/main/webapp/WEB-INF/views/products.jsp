@@ -23,7 +23,7 @@
 					<div class="name_price_cart_block">
 						<a href="<c:url value='/${product.type}/${product.id}' />" class="products_title">				
 							<c:choose>   
-						         <c:when test = "${localeCode == 'en' && !empty product.engNameProduct}">
+						         <c:when test = "${locale == 'en' && !empty product.engNameProduct}">
 						            ${product.engNameProduct}
 						         </c:when>
 						         
@@ -170,7 +170,7 @@
 				<div class="name_price_cart_block">
 					<a href="<c:url value='/${product.type}/${product.id}' />" class="products_title">
 							<c:choose>   
-						         <c:when test = "${localeCode == 'en' && !empty product.engNameProduct}">
+						         <c:when test = "${locale == 'en' && !empty product.engNameProduct}">
 						            ${product.engNameProduct}
 						         </c:when>
 						         
@@ -396,7 +396,7 @@ $(document).ready(function() {
             								 .append($('<div/>').addClass("outer_a_img").append($('<img/>').attr("src", "/images/" + product.type + "s/" + product.id + "/" + product.pathPictures[0]))))
             				.append($('<div/>').addClass("name_price_cart_block")
 	                				.append($('<a/>').attr("href", "/" + product.type + "/" + product.id).addClass("products_title")
-	                						.text((localeCode == 'en') ? product.engNameProduct : product.name)
+	                						.text((locale == 'en') ? (product.engNameProduct!=null && product.engNameProduct!='' ? product.engNameProduct: product.name) : product.name)
 	                						)
 	    	                		.append(slidePrice)
 	    	                		.append($('<i/>').addClass("fa fa-cart-plus add_to_cart").click(function(){
