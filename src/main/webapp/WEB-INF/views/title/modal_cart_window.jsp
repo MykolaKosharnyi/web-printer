@@ -37,7 +37,7 @@
 			<td style="max-width: 235px;"><a style="color:black;" href="<c:url value='/${item.key.typeProduct}/${item.key.idProduct}' />">${item.key.name }</a></td>
 			<td style="padding: 0px; width:390px;" class="option_product_car">
 				
-				<table class="table table-hover" style="width:inherit;">
+				<table class="table table-hover options_table" style="width:inherit;">
 				
 					<c:forEach items="${item.key.options}" var="option">
 						<c:if test="${option.price > 0.01}">

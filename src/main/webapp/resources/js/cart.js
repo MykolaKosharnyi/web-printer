@@ -12,8 +12,7 @@ $(document).ready(function() {
 			
 		//save current price
 		$('#cart input.delivery_radio_value').val(new Number($(this).parent('td').parent('tr')
-				.find('td .product_price input.price_value:hidden').val()));
-		
+				.find("td .product_price input[type='hidden'][name='price_value']").val()));
 	});
 	
 	//setQuantityInCart();
@@ -21,7 +20,7 @@ $(document).ready(function() {
 });
 
 function createTRInTableForProduct(product){
-	var headTr = $('<tr/>');
+	var headTr = $('<tr/>').addClass('content_cart_item');
 	var tableOptionDeliveryPaint = $('<table/>').addClass('table table-hover').css( "width", "inherit" );
 	
 	$(productOptions(product.options, product.typeProduct, product.idProduct, product.buyOnlineCoefficient)).each(function(i, option){
@@ -80,8 +79,8 @@ function createTRInTableForProduct(product){
 					.append($('<span/>').addClass('inc_value').append($('<i/>').addClass('fa fa-plus').attr("aria-hidden", true)))
 				)
 		  .append($('<td/>').addClass('price product_price')
-				  			.append($('<input/>').addClass('price_value').attr("type", "hidden").val(product.priceWithOptionAndDeivery))
-				  			.append($('<input/>').addClass('buyOnlineCoefficient').attr("type", "hidden").val(product.buyOnlineCoefficient))
+				  			.append($('<input/>').attr("name", "price_value").attr("type", "hidden").val(product.priceWithOptionAndDeivery))
+				  			.append($('<input/>').attr("name", "buyOnlineCoefficient").attr("type", "hidden").val(product.buyOnlineCoefficient))
 							.append($('<div/>')
 									.text(checkPrise(checkedOnlineCheckbox() ? 
 											(product.priceWithOptionAndDeivery * product.buyOnlineCoefficient) : product.priceWithOptionAndDeivery ))))
@@ -114,7 +113,7 @@ function createTRInTableForProduct(product){
 									.text(option.name)))
 					  .append($('<td/>')
 							  .append($('<div/>').addClass("product_price")
-									  .append($('<input/>').addClass('price_value').attr("type", "hidden").val(option.price))
+									  .append($('<input/>').attr("name", "price_value").attr("type", "hidden").val(option.price))
 									  .append($('<div/>').text(checkPrise(checkedOnlineCheckbox() ? (option.price * buyOnlineCoefficient) : option.price)))
 									  ));
 					
@@ -175,7 +174,7 @@ function createTRInTableForProduct(product){
 									.text(delivery.name)))
 					  .append($('<td/>')
 							.append(('<div/>').addClass("product_price")								
-									  .append($('<input/>').addClass('price_value').attr("type", "hidden").val(delivery.priceSize + delivery.priceWeight))
+									  .append($('<input/>').attr("name", "price_value").attr("type", "hidden").val(delivery.priceSize + delivery.priceWeight))
 									  .append($('<div/>')
 											  .text(checkPrise( checkedOnlineCheckbox()?
 													  (delivery.priceSize + delivery.priceWeight)*buyOnlineCoefficient:
@@ -216,7 +215,7 @@ function createTRInTableForProduct(product){
 							.append($('<span/>').addClass('inc_value_paint').append($('<i/>').addClass('fa fa-plus').attr("aria-hidden", true))))
 					  .append($('<td/>')
 							.append($('<div/>').addClass("product_price")
-									  .append($('<input/>').addClass('price_value').attr("type", "hidden").val(paint.quantity * paint.price))
+									  .append($('<input/>').attr("name", "price_value").attr("type", "hidden").val(paint.quantity * paint.price))
 									  .append($('<div/>').text(checkPrise(checkedOnlineCheckbox()?
 											  paint.quantity*paint.price*buyOnlineCoefficient:
 												  paint.quantity*paint.price)))
@@ -242,12 +241,12 @@ function createTRInTableForProduct(product){
 			//set new price of this product
 			var price = quantity.parent('td').parent('tr').find('td.price');	
 			
-			var price_n = new Number(price.find('input.price_value:hidden').val());			
-			price.find('input.price_value:hidden').val( price_n/quantity_numb * (quantity_numb + 1) );			
+			var price_n = new Number(price.find("input[type='hidden'][name='price_value']").val());			
+			price.find("input[type='hidden'][name='price_value']").val( price_n/quantity_numb * (quantity_numb + 1) );			
 			
 			price.find('div').text(checkPrise( checkedOnlineCheckbox() ? 
-					(price.find('input.price_value:hidden').val() * price.find('input.buyOnlineCoefficient:hidden').val()): 
-					price.find('input.price_value:hidden').val() ));
+					(price.find("input[type='hidden'][name='price_value']").val() * price.find("input[type='hidden'][name='buyOnlineCoefficient']").val()): 
+					price.find("input[type='hidden'][name='price_value']").val() ));
 			
 			//set new quantity of this product
 			quantity.val(quantity_numb + 1);
@@ -445,31 +444,38 @@ $(document).on("keydown", '#cart input.quantity', function(e){
 		function getRequiredForCartOption(eventElement){
 			var result = {};
 			
+			console.log("IN required for cart option METHOD!!!");
 			// component with contain price including quantity and option for product in price
-			var price_element = eventElement.parent('td').parent('tr.block_product_price').parent('tbody').parent('table')
-				.parent('td.option_product_car').parent('tr').find('td.price');
+			var price_element = eventElement.parent('td').parent('tr.block_product_price').parent('tbody').parent('table.options_table')
+				.parent('td.option_product_car').parent('tr.content_cart_item').find('td.price');
 			result["price_element"]=price_element;
+			console.log("price_element=" + price_element);
 			
 			// price with quantity and option
-			var price_with_quantity_and_option = new Number(price_element.find('input.price_value:hidden').val());
+			var price_with_quantity_and_option = new Number(price_element.find("input[type='hidden'][name='price_value']").val());
 			result["price_with_quantity_and_option"]=price_with_quantity_and_option;
-			
-			var onlineCoefficient = new Number(price_element.find('input.buyOnlineCoefficient:hidden').val());
+			console.log("price_with_quantity_and_option=" + price_with_quantity_and_option);		
+					
+			var onlineCoefficient = new Number(price_element.find("input[type='hidden'][name='buyOnlineCoefficient']").val());
 			result["onlineCoefficient"]=onlineCoefficient;
+			console.log("onlineCoefficient=" + onlineCoefficient);
 			
 			// quantity of this product
 			var quantity_numb = new Number(eventElement.parent('td').parent('tr.block_product_price').parent('tbody').parent('table')
 					.parent('td.option_product_car').parent('tr').find('td input.quantity').val());
 			result["quantity_numb"]=quantity_numb;
+			console.log("quantity_numb=" + quantity_numb);
 			
 			// TYPE and ID of this product to send AJAX request for changing option product on sever
 			var type = eventElement.parent('td').parent('tr.block_product_price').parent('tbody').parent('table').parent('td.option_product_car')
 				.parent('tr').find('td input.type').val();
 			result["type"]=type;
+			console.log("type=" + type);
 			
 			var id = eventElement.parent('td').parent('tr.block_product_price').parent('tbody').parent('table').parent('td.option_product_car')
 				.parent('tr').find('td input.id').val();
 			result["id"]=id;
+			console.log("id=" + id);
 			
 			// VAT coefficient
 			var valueVAT = $('input#НДС_' + type + "_" + id ).prop( "checked" ) ?
@@ -477,14 +483,18 @@ $(document).on("keydown", '#cart input.quantity', function(e){
 							.find('td .product_price input[type=hidden]').val()) : new Number(1);
 					
 			result["valueVAT"]=valueVAT;
+			console.log("valueVAT=" + valueVAT);
 			
 			// for changing style outer block if option checked
 	        var change_style = eventElement.parent('td').parent('.block_product_price');
 	        result["change_style"]=change_style;
+	        console.log("change_style=" + change_style);
 	        
 	        // value which will be added or subtraction from all price for the product
-			var addPrice = new Number(eventElement.parent('td').parent('tr.block_product_price').find('td .product_price input.price_value:hidden').val());
+			var addPrice = new Number(eventElement.parent('td').parent('tr.block_product_price')
+					.find("td div.product_price input[type='hidden'][name='price_value']").val());
 			result["addPrice"]=addPrice;
+			console.log("addPrice=" + addPrice);
 			
 			return result;
 		}
@@ -507,10 +517,10 @@ $(document).on("keydown", '#cart input.quantity', function(e){
 	        	/* check if it not checked VAT option; because for VAT option different way to calculate price */
 	        	if($(this).val()!="НДС"){
 	        		var result_val = calculatePriceIncludingVAT(price_with_quantity_and_option, addPrice, quantity_numb, valueVAT, true);
-	        		price_element.find('input.price_value:hidden').val( result_val );
+	        		price_element.find("input[type='hidden'][name='price_value']").val( result_val );
 	            	price_element.find('div').text(checkPrise( checkedOnlineCheckbox() ? (result_val * onlineCoefficient): result_val ));
 	        	} else {
-	        		price_element.find('input.price_value:hidden').val( price_with_quantity_and_option * addPrice );
+	        		price_element.find("input[type='hidden'][name='price_value']").val( price_with_quantity_and_option * addPrice );
 	        		price_element.find('div').text(checkPrise( checkedOnlineCheckbox() ? (price_with_quantity_and_option * addPrice * onlineCoefficient):
 	        			price_with_quantity_and_option * addPrice ));
 	        	}
@@ -526,10 +536,10 @@ $(document).on("keydown", '#cart input.quantity', function(e){
 	        	/* check if it not checked VAT option; because for VAT option different way to calculate price */
 	        	if($(this).val()!="НДС"){
 	        		var result_val = calculatePriceIncludingVAT(price_with_quantity_and_option, addPrice, quantity_numb, valueVAT, false);
-	        		price_element.find('input.price_value:hidden').val( result_val );
+	        		price_element.find("input[type='hidden'][name='price_value']").val( result_val );
 	            	price_element.find('div').text(checkPrise( checkedOnlineCheckbox() ? (result_val * onlineCoefficient): result_val ));
 	        	} else {
-	        		price_element.find('input.price_value:hidden').val( price_with_quantity_and_option / addPrice );
+	        		price_element.find("input[type='hidden'][name='price_value']").val( price_with_quantity_and_option / addPrice );
 	        		price_element.find('div').text(checkPrise( checkedOnlineCheckbox() ? (price_with_quantity_and_option / addPrice * onlineCoefficient):
 	        			price_with_quantity_and_option / addPrice ));
 	        	}
@@ -585,7 +595,7 @@ $(document).on("keydown", '#cart input.quantity', function(e){
 	            	//first sub old checked radio value and than add new checked radio value	  
 	            	var pre_result = calculatePriceIncludingVAT(price_with_quantity_and_option,new Number(deliveryValueContainer.val()),quantity_numb,valueVAT,false);
 	            	var result_finish = calculatePriceIncludingVAT(pre_result, addPrice, quantity_numb, valueVAT, true);
-	            	price_element.find('input.price_value:hidden').val(result_finish);
+	            	price_element.find("input[type='hidden'][name='price_value']").val(result_finish);
 	            	price_element.find('div').text(checkPrise( checkedOnlineCheckbox() ? (result_finish * onlineCoefficient):
 	            		result_finish ));
 
@@ -600,7 +610,7 @@ $(document).on("keydown", '#cart input.quantity', function(e){
 	            	
 	            } else {
 	            	var result_val = calculatePriceIncludingVAT(price_with_quantity_and_option, addPrice, quantity_numb, valueVAT, false);
-	            	price_element.find('input.price_value:hidden').val( result_val );
+	            	price_element.find("input[type='hidden'][name='price_value']").val( result_val );
 	            	price_element.find('div').text(checkPrise( checkedOnlineCheckbox() ? (result_val * onlineCoefficient):
 	            		result_val ));
 
@@ -647,7 +657,7 @@ $(document).on("keydown", '#cart input.quantity', function(e){
 			
 	        if ($(this).prop( "checked" )) {
 	        	var val_result = calculatePriceIncludingVAT(price_with_quantity_and_option, addPrice, quantity_numb, valueVAT, true);
-	        	price_element.find('input.price_value:hidden').val( val_result );
+	        	price_element.find("input[type='hidden'][name='price_value']").val( val_result );
 	            price_element.find('div').text(checkPrise( checkedOnlineCheckbox() ? (val_result * onlineCoefficient):
 	            	val_result ));
 
@@ -661,7 +671,7 @@ $(document).on("keydown", '#cart input.quantity', function(e){
 	        	
 	        }else{
 	        	var val_result = calculatePriceIncludingVAT(price_with_quantity_and_option, addPrice, quantity_numb, valueVAT, false);
-	        	price_element.find('input.price_value:hidden').val( val_result );
+	        	price_element.find("input[type='hidden'][name='price_value']").val( val_result );
 	        	price_element.find('div').text(checkPrise( checkedOnlineCheckbox() ? (val_result * onlineCoefficient):
 	            	val_result ));
 
@@ -730,7 +740,7 @@ $(document).on("keydown", '#cart input.quantity', function(e){
 			var price_with_quantity =  $(this).parent('td').parent('tr').find('td.price');
 			var price = $(this).parent('td').parent('tr').find('td.price').find('input').val();
 			var quantity_numb = new Number(quantity_element_val);
-			var onlineCoefficient = new Number(price_with_quantity.find('input.buyOnlineCoefficient:hidden').val());
+			var onlineCoefficient = new Number(price_with_quantity.find("input[type='hidden'][name='buyOnlineCoefficient']").val());
 			
 			var type = $(this).parent('td').find('input.type').val();
 			var id = $(this).parent('td').find('input.id').val();
@@ -748,9 +758,9 @@ $(document).on("keydown", '#cart input.quantity', function(e){
 			} else {
 				$(this).parent('td').find('input.quantity').val(quantity_numb-1);
 
-				var price_n = new Number(price_with_quantity.find('input.price_value:hidden').val());
+				var price_n = new Number(price_with_quantity.find("input[type='hidden'][name='price_value']").val());
 				
-				price_with_quantity.find('input.price_value:hidden').val( price_n/quantity_numb * (quantity_numb - 1) );
+				price_with_quantity.find("input[type='hidden'][name='price_value']").val( price_n/quantity_numb * (quantity_numb - 1) );
 				price_with_quantity.find('div').text(checkPrise( checkedOnlineCheckbox() ? (price_n/quantity_numb * (quantity_numb - 1) * onlineCoefficient):
 					(price_n/quantity_numb * (quantity_numb - 1)) ));	
 				
@@ -773,7 +783,7 @@ $(document).on("keydown", '#cart input.quantity', function(e){
 
 			var price_with_quantity = $(this).parent('td').parent('tr').find('td.price');
 			var price = $(this).parent('td').parent('tr').find('td.price').find('input').val();
-			var onlineCoefficient = new Number(price_with_quantity.find('input.buyOnlineCoefficient:hidden').val());
+			var onlineCoefficient = new Number(price_with_quantity.find("input[type='hidden'][name='buyOnlineCoefficient']").val());
 			
 			if(quantity_numb==1){
 				var dec_v = $(this).parent('td').find('.dec_value');
@@ -788,8 +798,8 @@ $(document).on("keydown", '#cart input.quantity', function(e){
 
             $(this).parent('td').find('input.quantity').val(quantity_numb+1);
 			
-			var price_n = new Number(price_with_quantity.find('input.price_value:hidden').val());
-			price_with_quantity.find('input.price_value:hidden').val( price_n/quantity_numb * (quantity_numb + 1) );
+			var price_n = new Number(price_with_quantity.find("input[type='hidden'][name='price_value']").val());
+			price_with_quantity.find("input[type='hidden'][name='price_value']").val( price_n/quantity_numb * (quantity_numb + 1) );
 			price_with_quantity.find('div').text(checkPrise( checkedOnlineCheckbox() ? (price_n/quantity_numb * (quantity_numb + 1) * onlineCoefficient):
 				(price_n/quantity_numb * (quantity_numb + 1)) ));
 			
@@ -842,11 +852,11 @@ $(document).on("keydown", '#cart input.quantity', function(e){
 				
 				quantity_node.val(quantity-1);
 				
-				var oldPrice = new Number( paint_price_node.find('input.price_value:hidden').val() );
+				var oldPrice = new Number( paint_price_node.find("input[type='hidden'][name='price_value']").val() );
 				var newPaintPrice = new Number( oldPrice/quantity * (quantity-1) );
 				
 				//set new value in 
-				paint_price_node.find('input.price_value:hidden').val( newPaintPrice )
+				paint_price_node.find("input[type='hidden'][name='price_value']").val( newPaintPrice )
 				paint_price_node.find('div').text(checkPrise( newPaintPrice ));
 				
 				/* set new price for all products */
@@ -859,12 +869,12 @@ $(document).on("keydown", '#cart input.quantity', function(e){
 					//product for this product with all checked options
 					var price_product_node = $(this).parent('td').parent('tr.block_product_price').parent('tbody').parent('table')
 						.parent('td.option_product_car').parent('tr').find('td.price');
-					var onlineCoefficient = new Number(price_product_node.find('input.buyOnlineCoefficient:hidden').val());
+					var onlineCoefficient = new Number(price_product_node.find("input[type='hidden'][name='buyOnlineCoefficient']").val());
 					
 					//set new value to product
-					var new_value = calculatePriceIncludingVAT(new Number(price_product_node.find('input.price_value:hidden').val()),
+					var new_value = calculatePriceIncludingVAT(new Number(price_product_node.find("input[type='hidden'][name='price_value']").val()),
 							oldPrice - newPaintPrice, quantity_product, valueVAT, false);
-					price_product_node.find('input.price_value:hidden').val( new_value );
+					price_product_node.find("input[type='hidden'][name='price_value']").val( new_value );
 					price_product_node.find('div').text(checkPrise( checkedOnlineCheckbox() ? (new_value * onlineCoefficient): new_value ));
 					
 					/* set new total price including all products price */
@@ -908,11 +918,11 @@ $(document).on("keydown", '#cart input.quantity', function(e){
 					
 				quantity_node.val(quantity+1);
 				
-				var oldPrice = new Number( paint_price_node.find('input.price_value:hidden').val() );
+				var oldPrice = new Number( paint_price_node.find("input[type='hidden'][name='price_value']").val() );
 				var newPaintPrice = new Number( oldPrice/quantity * (quantity+1) );
 				
 				//set new value in 
-				paint_price_node.find('input.price_value:hidden').val(newPaintPrice);
+				paint_price_node.find("input[type='hidden'][name='price_value']").val(newPaintPrice);
 				paint_price_node.find('div').text(checkPrise(newPaintPrice));
 				
 				/* set new price for all products */
@@ -925,12 +935,12 @@ $(document).on("keydown", '#cart input.quantity', function(e){
 					//product for this product with all checked options
 					var price_product_node = $(this).parent('td').parent('tr.block_product_price').parent('tbody').parent('table')
 						.parent('td.option_product_car').parent('tr').find('td.price');
-					var onlineCoefficient = new Number(price_product_node.find('input.buyOnlineCoefficient:hidden').val());
+					var onlineCoefficient = new Number(price_product_node.find("input[type='hidden'][name='buyOnlineCoefficient']").val());
 					
 					//set new value to product
-					var new_value = calculatePriceIncludingVAT(new Number(price_product_node.find('input.price_value:hidden').val()),
+					var new_value = calculatePriceIncludingVAT(new Number(price_product_node.find("input[type='hidden'][name='price_value']").val()),
 							newPaintPrice-oldPrice, quantity_product, valueVAT, true);
-					price_product_node.find('input.price_value:hidden').val( new_value )
+					price_product_node.find("input[type='hidden'][name='price_value']").val( new_value )
 					price_product_node.find('div').text(checkPrise( checkedOnlineCheckbox() ? (new_value * onlineCoefficient): new_value ));
 					
 					/* set new total price including all products price */
@@ -940,17 +950,26 @@ $(document).on("keydown", '#cart input.quantity', function(e){
 	    });
 		
 		$(document).on("click", '#cart input#button_set_price_online', function(){
+			var chekedOnline = checkedOnlineCheckbox();
 			$('#cart table.table_option tr.content_cart_item').each(function(){
-				var onlineCoefficient = new Number($(this).find('td.price input.buyOnlineCoefficient:hidden').val());
-				
-				if($(this).prop( "checked" )){
-					$(this).find('td.product_price').each(function(){
-						$(this).find('div').text(checkPrise( new Number($(this).find('input.price_value').val() * onlineCoefficient) ));
-					});	
+								
+				if(chekedOnline){
+					var onlineCoefficient = new Number($(this).find("td.product_price input[type='hidden'][name='buyOnlineCoefficient']").val());
+					var productPrice = $(this).find('td.price');
+					productPrice.find('div').text(checkPrise( new Number(productPrice.find("input[name='price_value']").val() * onlineCoefficient) ));
+					
+					$(this).find('td.option_product_car table.options_table tr.block_product_price td div.product_price').each(function(){						
+						$(this).find('div').text(checkPrise( new Number($(this).find("input[name='price_value']").val() * onlineCoefficient) ));
+					});						
+					
 				} else {
-					$(this).find('td.product_price').each(function(){
-						$(this).find('div').text(checkPrise( new Number($(this).find('input.price_value').val()) ));
-					});	
+					var productPrice = $(this).find('td.price');
+					productPrice.find('div').text(checkPrise( new Number(productPrice.find("input[name='price_value']").val()) ));
+					
+					$(this).find('td.option_product_car table.options_table tr.block_product_price td div.product_price').each(function(){						
+						$(this).find('div').text(checkPrise( new Number($(this).find("input[name='price_value']").val()) ));
+					});
+
 				}
 			});
 			totalPrice();
@@ -973,12 +992,14 @@ $(document).on("keydown", '#cart input.quantity', function(e){
 			var total_price = new Number(0);
 			
 			if(checkedOnlineCheckbox()){
-				$('#cart td.price input.price_value:hidden').each(function(){
-					var coefficient = $(this).parent('tr.product_price').find('input.buyOnlineCoefficient:hidden').val();
+				
+				$("#cart td.price input[type='hidden'][name='price_value']").each(function(){
+					var coefficient = $(this).parent('td.product_price').find("input[type='hidden'][name='buyOnlineCoefficient']").val();
 					total_price += new Number($(this).val() * coefficient);
 				});	
 			} else {
-				$('#cart td.price input.price_value:hidden').each(function(){
+				
+				$("#cart td.price input[type='hidden'][name='price_value']").each(function(){
 					total_price += new Number($(this).val());
 				});
 			}
