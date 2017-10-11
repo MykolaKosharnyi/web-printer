@@ -109,6 +109,9 @@ public abstract class Product implements Serializable{
 
 	public void setBuyOnlineCoefficient(double buyOnlineCoefficient) {
 		this.buyOnlineCoefficient = buyOnlineCoefficient;
+		if(buyOnlineCoefficient==0){
+			this.buyOnlineCoefficient = 1;
+		}
 	}
 
 	public String getPathLeftPictureAction() {

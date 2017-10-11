@@ -22,7 +22,7 @@
 	</div>
 	<div class="check_boxes">
 		<div class="text_output">
-			<form:input path="buyOnlineCoefficient" class="amount-prise" value="${product.buyOnlineCoefficient}"/>
+			<form:input path="buyOnlineCoefficient" value="${product.buyOnlineCoefficient}"/>
 		</div>			
 	</div>
 </div>
