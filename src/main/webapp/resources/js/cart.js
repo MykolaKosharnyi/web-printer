@@ -21,7 +21,7 @@ $(document).ready(function() {
 
 function createTRInTableForProduct(product){
 	var headTr = $('<tr/>').addClass('content_cart_item');
-	var tableOptionDeliveryPaint = $('<table/>').addClass('table table-hover').css( "width", "inherit" );
+	var tableOptionDeliveryPaint = $('<table/>').addClass('table table-hover options_table').css( "width", "inherit" );
 	
 	$(productOptions(product.options, product.typeProduct, product.idProduct, product.buyOnlineCoefficient)).each(function(i, option){
 		tableOptionDeliveryPaint.append(option);
@@ -137,7 +137,7 @@ function createTRInTableForProduct(product){
 								.text(option.name)))
 				  .append($('<td/>').css('display','none')
 						  .append($('<div/>').addClass("product_price")
-								  .append($('<input/>').attr("type", "hidden").val(option.price))
+								  .append($('<input/>').attr("type", "hidden").attr("name", "price_value").val(option.price))
 								  .append($('<div/>').text(checkPrise(option.price)))
 								  ));
 				}
