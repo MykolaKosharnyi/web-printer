@@ -186,7 +186,6 @@ public class ComponentsForControllers {
 		curObj.put("name", currentProduct.getName());
 		curObj.put("engNameProduct", currentProduct.getEngNameProduct());
 		curObj.put("pathPictures", currentProduct.getPathPictures());
-		
 	}
 		
     public void updateInLeftField(Product product, boolean isShow, String typeProduct){

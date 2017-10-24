@@ -425,6 +425,7 @@ public abstract class ProductControllerTemplate <T extends HeadProduct, S extend
     	
     	componets.updateInLeftField(product, product.isShowOnSite() && product.isShowOnLeftSide() , getTYPE());
     	linksForProduct.createLinks(getProductService().listShowOnSite());
+    	logger.info(String.format("Show on site %s with id=%d", getTYPE(), id));
     }
     
     public void setTopTemplate(long id, boolean value) {
@@ -479,6 +480,7 @@ public abstract class ProductControllerTemplate <T extends HeadProduct, S extend
     
 	public String saveCheckedPropertiesTemplate(String propertyName, List<String> properties) {
     	componets.showValueOfParameter(getTYPE(), propertyName, properties);
+    	logger.info("Save checked properties");
 	    return "redirect:/admin/"+ getTYPE() +"/properties/" + propertyName;
 	}
     
@@ -486,11 +488,13 @@ public abstract class ProductControllerTemplate <T extends HeadProduct, S extend
     public JSONObject checkNewPropertyValueTemplate(String name, String propertyName) {
     	JSONObject result = new JSONObject();
     	result.put("result", componets.isParameterRepeated(getTYPE(), propertyName, name));
+    	logger.info("Check new property value");
     	return result;
     }
     
 	public String addPropertyTemplate(String newProperty, String propertyName) {
     	componets.setNewValueOfParameter(getTYPE(), propertyName, newProperty);
+    	logger.info("Add property");
 	    return "redirect:/admin/"+ getTYPE() +"/properties/" + propertyName;
 	}
     
@@ -505,22 +509,26 @@ public abstract class ProductControllerTemplate <T extends HeadProduct, S extend
     	model.addAttribute("type", getTYPE());
     	
     	model.addAttribute("property_description", getPropertiesDescription().get(property));
+    	logger.info("Page edit properties Internationalization");
 	    return "admin/change_properties_I";
 	}
     
-	public  void saveCheckedPropertiesITemplate(String propertyName, List<PropertyInternationalization> properties) {
+	public void saveCheckedPropertiesITemplate(String propertyName, List<PropertyInternationalization> properties) {
     	componets.showValueOfParameterI(getTYPE(), propertyName, properties);
+    	logger.info("Save checked properties Internationalization");
 	}
     
     @SuppressWarnings("unchecked")
     public JSONObject checkNewPropertyValueITemplate(String name, String propertyName) {
     	JSONObject result = new JSONObject();
     	result.put("result", componets.isParameterRepeatedI(getTYPE(), propertyName, name));
+    	logger.info("Check new property values Internationalization");
     	return result;
     }
     
 	public String addPropertyITemplate(String newProperty, String propertyName) {
     	componets.setNewValueOfParameterI(getTYPE(), propertyName, newProperty);
+    	logger.info("Add property Internationalization");
 	    return "redirect:/admin/"+ getTYPE() +"/properties_i/" + propertyName;
 	}
     

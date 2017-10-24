@@ -39,10 +39,10 @@ import com.printmaster.nk.model.service.UseWithProductService;
 @Controller
 public class CartController {
 
-	private static final Logger logger = Logger.getLogger(CartController.class);
+	private Logger logger = Logger.getLogger(this.getClass());
 	
 	@Autowired
-	Cart cart;
+	private Cart cart;
 	
 	@Autowired
 	private ConstantService constants;
@@ -79,29 +79,33 @@ public class CartController {
 	@RequestMapping(value = "/cart/add/{typeProduct}/{productId}/{productName}", method = RequestMethod.POST, 
             produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody ProductCart addToCart(
-			@PathVariable("typeProduct") String typeProduct,
-			@PathVariable("productId") long productId,
-			@PathVariable("productName") String productName,
-			@RequestBody Shopping checkedOption){
+			@PathVariable("typeProduct") String typeProduct, @PathVariable("productId") long productId,
+			@PathVariable("productName") String productName, @RequestBody Shopping checkedOption){
 
-		//get current version of constants
-		currentConstants = constants.getConstants();
-		
+		logger.debug("Before ADD product to cart ");
 		ProductCart productCart = new ProductCart();
-		productCart.setTypeProduct(typeProduct);
-		productCart.setIdProduct(productId);
-		productCart.setName(productName);
-		productCart.setPrice(checkedOption.getPrice());
-		productCart.setPicturePath("images/" + typeProduct + "s/" + productId + "/" + checkedOption.getPathToPicture());
-		//add option with price
-		productCart.setOptions(addOption(typeProduct, productId, checkedOption.getArrayOfCheckedOption()));
-		productCart.setDeliveries(addDelivery(typeProduct, productId, checkedOption.getCheckedDelivery()));
-		productCart.setPaints(addPaint(typeProduct, productId, checkedOption.getMapOfPaint()));
-		productCart.setBuyOnlineCoefficient( getCurrentCoefficientPriceOnline(typeProduct, productId) );
 		
-		cart.addProduct(productCart , 1);
-		
-		logger.debug("Added product to cart " + productCart );
+		try{	
+			//get current version of constants
+			currentConstants = constants.getConstants();
+			
+			productCart.setTypeProduct(typeProduct);
+			productCart.setIdProduct(productId);
+			productCart.setName(productName);
+			productCart.setPrice(checkedOption.getPrice());
+			productCart.setPicturePath("images/" + typeProduct + "s/" + productId + "/" + checkedOption.getPathToPicture());
+			//add option with price
+			productCart.setOptions(addOption(typeProduct, productId, checkedOption.getArrayOfCheckedOption()));
+			productCart.setDeliveries(addDelivery(typeProduct, productId, checkedOption.getCheckedDelivery()));
+			productCart.setPaints(addPaint(typeProduct, productId, checkedOption.getMapOfPaint()));
+			productCart.setBuyOnlineCoefficient( getCurrentCoefficientPriceOnline(typeProduct, productId) );
+			
+			cart.addProduct(productCart , 1);
+			logger.debug("Added product to cart ");
+			//logger.debug("Added product to cart " + productCart );
+		} catch(Exception ex){
+			logger.error("Error while adding new item to cart!", ex);
+		}
 		return productCart;
 	}
 	

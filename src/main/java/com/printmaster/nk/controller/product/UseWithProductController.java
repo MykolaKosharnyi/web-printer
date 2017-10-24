@@ -480,7 +480,7 @@ public class UseWithProductController {
     	componets.updateInLeftField(product, product.isShowOnSite() && product.isShowOnLeftSide(), TYPE);
     }
     
-    private double getPriceForLeftSideBlock(UseWithProduct product){    	
+    private double getPriceForLeftSideBlock(UseWithProduct product){
     	if(product.getCyanPaint() > 0){
     		return product.getCyanPaint();
     	} else if(product.getMagentaPaint() > 0){
