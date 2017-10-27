@@ -42,6 +42,9 @@ public class Cart implements Serializable{
 	@Column(name="id")
 	private Long id;
 	
+	@Column(nullable = false, columnDefinition = "bit default 0")
+	private boolean buyOnline;
+	
 	@ElementCollection(fetch = FetchType.EAGER)
 	@Column(name="contents")
 	@Fetch(value = FetchMode.SUBSELECT)
@@ -96,6 +99,46 @@ public class Cart implements Serializable{
 		contents.put(product, quantity);
 	}
 	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public long getIdUser() {
+		return idUser;
+	}
+
+	public void setIdUser(long idUser) {
+		this.idUser = idUser;
+	}
+
+	public Date getDateCreation() {
+		return dateCreation;
+	}
+
+	public void setDateCreation(Date dateCreation) {
+		this.dateCreation = dateCreation;
+	}
+
+	public StatusOfOrdering getStatus() {
+		return status;
+	}
+
+	public void setStatus(StatusOfOrdering status) {
+		this.status = status;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public void setContents(Map<ProductCart, Integer> contents) {
+		this.contents = contents;
+	}
+
 	public void changeOptionProduct(ProductCart product, String optionName, boolean stateOfOption){
 		int quantity = contents.get(product);
 		contents.remove(product);
@@ -163,5 +206,13 @@ public class Cart implements Serializable{
 		}
 		return quantity;
 	}
-	
+
+	public boolean isBuyOnline() {
+		return buyOnline;
+	}
+
+	public void setBuyOnline(boolean buyOnline) {
+		this.buyOnline = buyOnline;
+	}
+
 }
