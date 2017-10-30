@@ -31,12 +31,14 @@ import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFFont;
 
+import com.printmaster.nk.model.entity.Option;
+
 public class ExcelCartOrder {
 	private static Logger log = Logger.getLogger(ExcelCartOrder.class);
 	
 	public static File createExcelFile(Cart cartOrder) throws FileNotFoundException, IOException {
 		
-		log.info("Start create excel file for user: id=" + cartOrder.getIdUser() + ", time creation =" + cartOrder.getDateCreation() );
+		log.info("Start create excel file for user: id = " + cartOrder.getIdUser() + ", time creation = " + cartOrder.getDateCreation() );
 
 		Workbook workbook = new SXSSFWorkbook(100); 
 
@@ -101,7 +103,7 @@ public class ExcelCartOrder {
 		cellIndex = 0;
 		rowname = createRow(sheet, rowNameIndex++);
 		createCell(rowname, cellIndex++, aligmentCellStyle).setCellValue("Время заказа:");
-		createCell(rowname, cellIndex++, borderAndWrapStyle).setCellValue(cartOrder.getDateCreation());
+		createCell(rowname, cellIndex++, borderAndWrapStyle).setCellValue(new SimpleDateFormat("HH:mm dd.MM.yyyy").format(cartOrder.getDateCreation()));
 		
 		cellIndex = 0;
 		rowname = createRow(sheet, rowNameIndex++);
@@ -115,11 +117,11 @@ public class ExcelCartOrder {
 		
 		cellIndex = 0;
 		rowname = createRow(sheet, rowNameIndex++);
-		createCell(rowname, cellIndex++, aligmentCellStyle).setCellValue("Общая сумма заказа(в долларах):");
-		createCell(rowname, cellIndex++, borderAndWrapStyle).setCellValue(cartOrder.getTotalCost());
+		createCell(rowname, cellIndex++, aligmentCellStyle).setCellValue("Общая сумма заказа:");
+		createCell(rowname, cellIndex++, borderAndWrapStyle).setCellValue(priceFormatter(cartOrder.getTotalCost()));
 		
 		sheet.autoSizeColumn(0);
-
+		sheet.autoSizeColumn(1);
 
 	}
 	
@@ -127,7 +129,7 @@ public class ExcelCartOrder {
 		int productSheetIndex = 1;
 		for (Map.Entry<ProductCart, Integer> entry : cartOrder.getContents().entrySet()) {
 			ProductCart product = entry.getKey();
-			Sheet sheet = workbook.createSheet(productSheetIndex++ + product.getName());
+			Sheet sheet = workbook.createSheet(productSheetIndex++ + ". " + product.getName());
 			
 			//create part of product information
 			int rowNameIndex = 0;
@@ -143,7 +145,7 @@ public class ExcelCartOrder {
 			createCell(rowname, cellIndex++, aligmentCellStyle).setCellValue("Цена за единицу с опциями");
 			createCell(rowname, cellIndex++, aligmentCellStyle).setCellValue("Цена за единицу с опциями умноженная на количество");
 			
-			for ( int ii = 0; ii < cellIndex; ii++ )
+			for( int ii = 0; ii < cellIndex; ii++ )
 				sheet.autoSizeColumn(ii);
 			
 			CellStyle borderAndWrapStyle = borderAndWrapStyle(sheet);
@@ -153,12 +155,90 @@ public class ExcelCartOrder {
 			insertImage(sheet, "/home/nikolay/Pictures/star.png");
 			createCell(rowname, cellIndex++, borderAndWrapStyle).setCellValue(product.getName());
 			createCell(rowname, cellIndex++, borderAndWrapStyle).setCellValue(entry.getValue());
-			createCell(rowname, cellIndex++, borderAndWrapStyle).setCellValue(product.getPrice());
-			createCell(rowname, cellIndex++, borderAndWrapStyle).setCellValue(product.getPriceWithOptionAndDeivery());
-			createCell(rowname, cellIndex++, borderAndWrapStyle).setCellValue(product.getPriceWithOptionAndDeivery() * entry.getValue());
+			createCell(rowname, cellIndex++, borderAndWrapStyle).setCellValue(priceFormatter(product.getPrice()));
+			createCell(rowname, cellIndex++, borderAndWrapStyle).setCellValue(priceFormatter(product.getPriceWithOptionAndDeivery()));
+			createCell(rowname, cellIndex++, borderAndWrapStyle).setCellValue(priceFormatter(product.getPriceWithOptionAndDeivery() * entry.getValue()));
+			
+			
+			CellStyle descriptionTableCellStyle = descriptionTableCellStyle(workbook);
+			if(product.getOptions()!=null && product.getOptions().size()>0){
+				//for OPTION table
+				rowNameIndex+=4;
+				cellIndex = 0;
+				rowname = createRow(sheet, rowNameIndex);
+				createCell(rowname, cellIndex++, descriptionTableCellStyle).setCellValue("Опции");
+				
+				cellIndex = 0;			
+				rowname = createRow(sheet, ++rowNameIndex);
+				createCell(rowname, cellIndex++, aligmentCellStyle).setCellValue("Название");
+				createCell(rowname, cellIndex++, aligmentCellStyle).setCellValue("Цена");			
+							
+				for(Option option : product.getOptions()){
+					cellIndex = 0;
+					rowname = createRow(sheet, ++rowNameIndex);
+					createCell(rowname, cellIndex++, borderAndWrapStyle).setCellValue(option.getName());
+					createCell(rowname, cellIndex++, borderAndWrapStyle).setCellValue(priceFormatter(option.getPrice()));
+				}
+			}			
+
+			//for DELIVERY table
+			if(product.getDeliveries()!=null && product.getDeliveries().size()>0){
+				rowNameIndex+=4;
+				cellIndex = 0;
+				rowname = createRow(sheet, rowNameIndex);
+				createCell(rowname, cellIndex++, descriptionTableCellStyle).setCellValue("Доставка");
+				
+				cellIndex = 0;			
+				rowname = createRow(sheet, ++rowNameIndex);
+				createCell(rowname, cellIndex++, aligmentCellStyle).setCellValue("Название");
+				createCell(rowname, cellIndex++, aligmentCellStyle).setCellValue("Цена");			
+							
+				for(Delivery delivery : product.getDeliveries()){
+					cellIndex = 0;
+					rowname = createRow(sheet, ++rowNameIndex);
+					createCell(rowname, cellIndex++, borderAndWrapStyle).setCellValue(delivery.getName());
+					createCell(rowname, cellIndex++, borderAndWrapStyle).setCellValue(priceFormatter(delivery.getPriceSize() + delivery.getPriceWeight()));
+				}
+			}
+			
+			//for Paint table
+			if(product.getPaints()!=null && product.getPaints().size()>0){
+				rowNameIndex+=4;
+				cellIndex = 0;
+				rowname = createRow(sheet, rowNameIndex);
+				createCell(rowname, cellIndex++, descriptionTableCellStyle).setCellValue("Краска");
+				
+				cellIndex = 0;			
+				rowname = createRow(sheet, ++rowNameIndex);
+				createCell(rowname, cellIndex++, aligmentCellStyle).setCellValue("Название");
+				createCell(rowname, cellIndex++, aligmentCellStyle).setCellValue("Количество");	
+				createCell(rowname, cellIndex++, aligmentCellStyle).setCellValue("Цена за 1л");			
+				createCell(rowname, cellIndex++, aligmentCellStyle).setCellValue("Всего");	
+							
+				for(Paint paint : product.getPaints()){
+					cellIndex = 0;
+					rowname = createRow(sheet, ++rowNameIndex);
+					createCell(rowname, cellIndex++, borderAndWrapStyle).setCellValue(paint.getName());
+					createCell(rowname, cellIndex++, borderAndWrapStyle).setCellValue(paint.getQuantity());
+					createCell(rowname, cellIndex++, borderAndWrapStyle).setCellValue(priceFormatter(paint.getPrice()));
+					createCell(rowname, cellIndex++, borderAndWrapStyle).setCellValue(priceFormatter(paint.getQuantity() * paint.getPrice()));		
+				}
+			}
 
 			
 		}
+	}
+	
+	private static String priceFormatter(double price){
+		StringBuilder result = new StringBuilder();
+		double oneDollar=27d;
+		result
+		.append("$")
+		.append(price)
+		.append(" / ")
+		.append(price * oneDollar)
+		.append(" грн.");
+		return result.toString();
 	}
 
 	private static CellStyle aligmentStyle(Workbook workbook) {
@@ -185,8 +265,28 @@ public class ExcelCartOrder {
 
 		allCellBorder(style);
 		style.setWrapText(true);
-		((XSSFCellStyle)style).setVerticalAlignment(VerticalAlignment.TOP);
-
+		//((XSSFCellStyle)style).setVerticalAlignment(VerticalAlignment.TOP);
+		style.setAlignment(XSSFCellStyle.ALIGN_CENTER);
+		style.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);
+		
+		return style;
+	}
+	
+	private static CellStyle descriptionTableCellStyle(Workbook workbook) {
+		CellStyle style = workbook.createCellStyle();
+		
+		style.setWrapText(true);
+		style.setAlignment(XSSFCellStyle.ALIGN_CENTER);
+		style.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);
+		
+		XSSFFont font= (XSSFFont) workbook.createFont();
+        font.setFontHeightInPoints((short)14);
+        font.setFontName("Arial");
+        font.setColor(IndexedColors.BRIGHT_GREEN.getIndex());
+        font.setBold(true);
+        font.setItalic(true);
+        style.setFont(font);
+		
 		return style;
 	}
 
