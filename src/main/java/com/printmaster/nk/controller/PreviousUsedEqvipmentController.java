@@ -65,23 +65,23 @@ public class PreviousUsedEqvipmentController {
     	model.addAttribute("scannerEquipment", componets.getParametersFromConcreteJSONProduct("scanner", "equipment_manufacturer"));
    
         model.addAttribute("search", search);
-        logger.info("On '../previously used equipment' page.");
+        logger.info("/previously_used_equipment");
         return "previous_use_equipments";
     }
 
     @RequestMapping(value="/previous_use_equipments/search",method=RequestMethod.POST, produces = "application/json; charset=utf-8")
     public @ResponseBody ArrayList<JSONObject> showSearchProduct(@ModelAttribute(value="search") SearchPUE search, BindingResult result){
-    	logger.info("On the /previous_use_equipments/search page.");
+    	logger.info("/previous_use_equipments/SEARCH");
     	return pueService.listSearchProduct(search);
     }
     
     @RequestMapping(value = "/admin/previous_use_equipments", method = RequestMethod.GET)	
     public String listPrinters(Model model) {
         model.addAttribute("listProducts", pueService.listAllProduct());
-        logger.info("/admin/previous_use_equipments page.");
+        logger.info("/admin/previous_use_equipments");
         return "admin/previous_use_equipments";
     }
-    
+
     @RequestMapping(value = "/admin/previous_use_equipments/{type}", method = RequestMethod.GET)	
     public String listConcreteTypePrinters(@PathVariable("type") String type, Model model) {
         
@@ -101,7 +101,7 @@ public class PreviousUsedEqvipmentController {
     		model.addAttribute("nameProduct", "Имя принтера");
             model.addAttribute("title", "Принтеры");
             model.addAttribute("addProduct", "Добавить принтер");
-            logger.info("On /admin/previous_use_equipments/printers page.");
+            logger.info("/admin/previous_use_equipments/printers");
             
             return "admin/products";
     		
@@ -121,7 +121,7 @@ public class PreviousUsedEqvipmentController {
     		model.addAttribute("nameProduct", "Имя принтера");
             model.addAttribute("title", "Принтеры");
             model.addAttribute("addProduct", "Добавить принтер");
-            logger.info("On /admin/previous_use_equipments/3d_printers page.");
+            logger.info("/admin/previous_use_equipments/3d_printers");
             
             return "admin/products";
             
@@ -141,7 +141,7 @@ public class PreviousUsedEqvipmentController {
     		model.addAttribute("nameProduct", "Имя товара");
             model.addAttribute("title", "Цыфровое оборудование");
             model.addAttribute("addProduct", "Добавить цыфровое оборудование");
-            logger.info("On /admin/previous_use_equipments/digital_printers page.");
+            logger.info("/admin/previous_use_equipments/digital_printers");
             
             return "admin/products";
              		
@@ -161,7 +161,7 @@ public class PreviousUsedEqvipmentController {
     		model.addAttribute("nameProduct", "Имя ламинатора");
             model.addAttribute("title", "Б/У ламинаторы");
             model.addAttribute("addProduct", "Добавить ламинатор");
-            logger.info("On /admin/previous_use_equipments/laminators page.");
+            logger.info("/admin/previous_use_equipments/laminators");
             
             return "admin/products";
     		
@@ -181,7 +181,7 @@ public class PreviousUsedEqvipmentController {
     		model.addAttribute("nameProduct", "Имя лазера");
             model.addAttribute("title", "Б/У лазеры");
             model.addAttribute("addProduct", "Добавить лазер");
-            logger.info("On /admin/previous_use_equipments/lasers page.");
+            logger.info("/admin/previous_use_equipments/lasers");
             
             return "admin/products";
     		
@@ -201,7 +201,7 @@ public class PreviousUsedEqvipmentController {
     		model.addAttribute("nameProduct", "Имя гравера/фрезера");
             model.addAttribute("title", "Б/У гравер/фрезер");
             model.addAttribute("addProduct", "Добавить гравер/фрезер");
-            logger.info("On /admin/previous_use_equipments/cutters page.");
+            logger.info("/admin/previous_use_equipments/cutters");
             
             return "admin/products";
     		
@@ -221,7 +221,7 @@ public class PreviousUsedEqvipmentController {
     		model.addAttribute("nameProduct", "Имя сканера");
             model.addAttribute("title", "Б/У сканера");
             model.addAttribute("addProduct", "Добавить сканер");
-            logger.info("On /admin/previous_use_equipments/scanners page.");
+            logger.info("/admin/previous_use_equipments/scanners");
             
             return "admin/products";
     		

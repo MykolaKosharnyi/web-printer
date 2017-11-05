@@ -85,19 +85,19 @@ public class RipController {
         componets.setJSONtoModelAttribute(model, "rip");
         
         model.addAttribute("search", search);
-        logger.info("On '../rips' page.");
+        logger.info("/rips");
         return "rips";
     }
 
     @RequestMapping(value="/rips/search",method=RequestMethod.POST, produces = "application/json; charset=utf-8")
     public @ResponseBody ArrayList<JSONObject> showSearchRips(@ModelAttribute(value="search") SearchRips search, BindingResult result ){
-    	logger.info("On the /rip/search page.");
+    	logger.info("/rip/search");
     	return componets.makeLightWeightCollectionOfProduct(ripService.listSearchProducts(search));
     }
 	
     @RequestMapping("/rip/{id}")
     public String showRip(@PathVariable("id") long id, Model model){
-    	logger.info("/rip/" + id + " page.");
+    	logger.info("/rip/" + id);
         model.addAttribute("product", ripService.getProductById(id));
         model.addAttribute("type", "rip");
         model.addAttribute("comments", commentService.getAllForProduct(TYPE, id));
@@ -114,7 +114,7 @@ public class RipController {
         model.addAttribute("title", "ПО");
         model.addAttribute("addProduct", "Добавить новое ПО");
         model.addAttribute("productSubType", "none");
-        logger.info("/admin/rips page.");
+        logger.info("/admin/rips");
         return "admin/products";
     }
 	
@@ -135,7 +135,7 @@ public class RipController {
 	@RequestMapping(value = "/admin/rip/new", method = RequestMethod.GET)
 	public String addNewRip(Model model) throws UnsupportedEncodingException, FileNotFoundException, IOException, ParseException {
 		files.clear();
-		logger.info("/admin/rip/new page.");
+		logger.info("/admin/rip/new");
 		model.addAttribute("product", new Rip());
 		model.addAttribute("type", "rip");
 		model.addAttribute("productId", 0);
@@ -148,7 +148,7 @@ public class RipController {
 	@RequestMapping(value = "/admin/rip/copy/{id}", method = RequestMethod.GET)
 	public String copyProduct(@PathVariable("id") long id, Model model) {
 		files.clear();
-		logger.info("/admin/rip/copy/" + id + " page.");
+		logger.info("/admin/rip/copy/" + id);
 		
 		 logger.info("Copy all characteristic of rip.");
 		 Rip rip = ripService.getProductById(id);
@@ -179,7 +179,7 @@ public class RipController {
 	        }
 		
             long id = ripService.addProduct(product);
-            logger.info("Create new RIP! With id=" + id);
+            logger.info("CREATE new RIP! With id=" + id);
 
             //create folder and add to her new pictures
             product.getPathPictures().addAll(componets.createFolderAndWriteToItPictures(DIRECTORY, CONCRETE_FOLDER, id, files));
@@ -193,7 +193,7 @@ public class RipController {
 		  if (product.isShowOnSite() && product.isShowOnLeftSide())
 			  componets.updateInLeftField(product, true, TYPE);
 	    	
-		  logger.info("Update links to the products in left menu!");
+		  logger.info("UPDATE links to the products in left menu!");
 	   return "redirect:/admin/rips";
 	}
 	
@@ -209,7 +209,7 @@ public class RipController {
 	        }
 		
             long id = ripService.addProduct(product);
-            logger.info("Create new rip! With id=" + id);
+            logger.info("CREATE new rip! With id=" + id);
   
             //create folder and add to her new pictures
             product.getPathPictures().addAll(componets.createFolderAndWriteToItPictures(DIRECTORY, CONCRETE_FOLDER, id, files));
@@ -222,7 +222,7 @@ public class RipController {
 		  if (product.isShowOnSite() && product.isShowOnLeftSide()){
 			  componets.updateInLeftField(product, true, TYPE);
 	    	}
-		  logger.info("Update links to the products in left menu!");
+		  logger.info("UPDATE links to the products in left menu!");
 	   return "redirect:/admin/rip/edit/" + id;
 	}
 	
@@ -263,7 +263,7 @@ public class RipController {
 			componets.updateInLeftField(product, true, TYPE);
 	    }
 		  
-		logger.info("Update links to the products in left menu!");
+		logger.info("UPDATE links to the products in left menu!");
 
 		return "redirect:/admin/rip/edit/" + product.getId();
 	}
@@ -295,13 +295,13 @@ public class RipController {
 			  componets.updateInLeftField(product, true, TYPE);
 	    	}
 		  
-		  logger.info("Update links to the products in left menu!");
+		  logger.info("UPDATE links to the products in left menu!");
 	   return "redirect:/admin/rips";
 	}
 	
     @RequestMapping(value="/admin/rip/upload_pictures", method = RequestMethod.POST)
     public @ResponseBody String uploadPictures(MultipartHttpServletRequest request) {
-    	logger.info("upload new picture");
+    	logger.info("UPLOAD new picture");
         
          Iterator<String> itr =  request.getFileNames();
          MultipartFile mpf = null;
@@ -317,12 +317,12 @@ public class RipController {
 
              try {
                 fileMeta.setBytes(mpf.getBytes());
-                logger.info("WRITED new picture to the FILEMETA.");
+                logger.info("WRITTEN new picture to the FILEMETA.");
             } catch (IOException e) {
-                logger.error("WRITTING picture to the FILEMETA has a problem: ",e);
+                logger.error("WRITING picture to the FILEMETA has a problem: ",e);
             }
              
-             logger.info("pictute added to the FILEMETA successful - " + fileMeta.getFileName());
+             logger.info("pictute ADDED to the FILEMETA successful - " + fileMeta.getFileName());
              files.add(fileMeta);
          }  
          return fileName;
@@ -340,7 +340,7 @@ public class RipController {
     
     @RequestMapping(value="/admin/rip/upload_pictures_update/{id}", method = RequestMethod.POST)
     public @ResponseBody String uploadPicturesUpdate(MultipartHttpServletRequest request, @PathVariable("id") long id) {
-    	logger.info("upload new picture");
+    	logger.info("UPLOAD new picture");
         
          Iterator<String> itr =  request.getFileNames();
          MultipartFile mpf = null;
@@ -354,7 +354,7 @@ public class RipController {
  				FileCopyUtils.copy(mpf.getBytes(), new FileOutputStream(DIRECTORY + File.separator + CONCRETE_FOLDER
 	    				+ File.separator + id + File.separator + fileName));
  			} catch (IOException e) {
- 				logger.error("Don't write picture to the folder", e);
+ 				logger.error("CAN'T write picture to the folder", e);
  			} 
         	 
  			Rip product = ripService.getProductById(id);
@@ -367,7 +367,7 @@ public class RipController {
     @RequestMapping(value="/admin/rip/change_order_pictures_update/{id}", method = RequestMethod.POST,consumes="application/json",
     		headers = "content-type=application/x-www-form-urlencoded")
     public @ResponseBody void changeOrderPicturesUpdate(@RequestBody List<String> selectedIds, @PathVariable("id") long id) {
-    	logger.info("change order of pictures in changed rip product");
+    	logger.info("CHANGE order of pictures in changed rip product");
     	
     	Rip product = ripService.getProductById(id);
     	product.getPathPictures().clear();
@@ -385,7 +385,7 @@ public class RipController {
     	try {
     		FileUtils.forceDelete(new File(DIRECTORY + File.separator + CONCRETE_FOLDER+ File.separator + id + File.separator + name));
 		} catch (IOException e) {
-			logger.error("Can't delete picture from the folder", e);
+			logger.error("CAN'T DELETE picture from the folder", e);
 		} 
     	
     	if(product.getPathPictures().size()==0){
@@ -394,7 +394,7 @@ public class RipController {
 				FileCopyUtils.copy(Files.readAllBytes(fi.toPath()), new FileOutputStream(
 						DIRECTORY + File.separator + CONCRETE_FOLDER + File.separator + product.getId() + File.separator + "default.jpg"));
 			} catch (IOException e) {
-				logger.error("Can't update path of the default picture to rip with id=" + product.getId(), e);
+				logger.error("CAN'T UPDATE path of the default picture to rip with id=" + product.getId(), e);
 			}
 			product.getPathPictures().add("default.jpg");
     	}
@@ -406,11 +406,11 @@ public class RipController {
     
     @RequestMapping("/admin/rip/remove/{id}")
     public String removeRip(@PathVariable("id") long id){
-    		logger.info("Start deleting rip from database, id=" + id);
+    		logger.info("BEGIN DELETING rip from database, id=" + id);
     		try {
     			FileUtils.deleteDirectory(new File(DIRECTORY + File.separator + 
 						CONCRETE_FOLDER + File.separator + id));
-    			logger.info("deleted all pictures and pictures directory of this rip");
+    			logger.info("DELETED all pictures and pictures directory of this rip");
 			} catch (IOException e) {
 				logger.error("Deleting all pictures from this rip has a problem: ", e);
 			}

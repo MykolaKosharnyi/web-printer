@@ -209,7 +209,7 @@
                 <button type="button" class="btn btn-default" data-dismiss="modal">Продолжить просмотр товара</button>
                 <c:if test="${!empty cart.contents}">                	
                 	<button type="button" class="btn btn-info">Купить онлайн</button>
-                	<button type="button" class="btn btn-primary"><spring:message code="cart.ownpage.placeorder"/></button>
+                	<button type="button" class="btn btn-primary" onclick="takeOrderInCart();"><spring:message code="cart.ownpage.placeorder"/></button>
                 </c:if>	
             </div>
         </div>
@@ -218,3 +218,7 @@
     <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
+
+<div class="alert alert-success" id="take_order_alert" role="alert">
+  <label>Ваш заказ принято, в скором времени наш менеджер с Вами свяжется!</label>
+</div>

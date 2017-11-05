@@ -1,10 +1,12 @@
 package com.printmaster.nk.controller;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -20,6 +22,7 @@ import com.printmaster.nk.beans.Cart;
 import com.printmaster.nk.beans.ConstantService;
 import com.printmaster.nk.beans.Constants;
 import com.printmaster.nk.beans.Delivery;
+import com.printmaster.nk.beans.ExcelCartOrder;
 import com.printmaster.nk.beans.Paint;
 import com.printmaster.nk.beans.ProductCart;
 import com.printmaster.nk.model.entity.HeadProduct;
@@ -645,20 +648,35 @@ public class CartController {
 		}
 	}
 	
-	@RequestMapping(value = "/cart/placeOrder", method = RequestMethod.POST)
-	public String placeOrder(/*HttpSession session*/RedirectAttributes redirectAttributes){
-		if (cart.getContents().isEmpty()){
-			redirectAttributes.addFlashAttribute("cartMessage", "Cart empty. Please add products to the cart.");
-			return "redirect:/cart";
-		} else {
-			//Customer loggedInUser = (Customer) session.getAttribute("loggedInUser");
-			//purchaseService.savePurchase(cart.getContents(), loggedInUser);
-			redirectAttributes.addFlashAttribute("cartMessage", "Order placed. Total cost: " + cart.getTotalCost());
-			cart.clearCart();
+//	@RequestMapping(value = "/cart/placeOrder", method = RequestMethod.POST)
+//	public String placeOrder(/*HttpSession session*/RedirectAttributes redirectAttributes){
+//		if (cart.getContents().isEmpty()){
+//			redirectAttributes.addFlashAttribute("cartMessage", "Cart empty. Please add products to the cart.");
+//			return "redirect:/cart";
+//		} else {
+//			//Customer loggedInUser = (Customer) session.getAttribute("loggedInUser");
+//			//purchaseService.savePurchase(cart.getContents(), loggedInUser);
+//			redirectAttributes.addFlashAttribute("cartMessage", "Order placed. Total cost: " + cart.getTotalCost());
+//			cart.clearCart();
+//		}
+//		
+//		return "redirect:/cart";
+//	}
+	
+	@RequestMapping(value="/cart/takeOrder", method = RequestMethod.POST)
+    public @ResponseBody void checkNewPropertyValueI(@RequestBody String name) {
+		try{
+			//before set price for one dollar
+			ExcelCartOrder.setPriceForOneDollar(currentConstants.getDollarInGrivna());
+		//	File excel = 
+					ExcelCartOrder.createExcelFile(cart);
+		} catch(Exception ex){
+			logger.error("Can't create excel file order!", ex);
 		}
 		
-		return "redirect:/cart";
-	}
+		//clean all items in cart
+		cart.clearCart();
+    }
 	
 	@RequestMapping(value = "/admin/orders", method = RequestMethod.GET)
 	public String adminAllOrders(){

@@ -37,10 +37,11 @@ public class Cart implements Serializable{
 
 	private static final long serialVersionUID = 3085887569799299321L;
 	
+	//TODO hardcode need to change of getting ID form DATABASE
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="id")
-	private Long id;
+	private long id = 1;
 	
 	@Column(nullable = false, columnDefinition = "bit default 0")
 	private boolean buyOnline;
@@ -50,8 +51,9 @@ public class Cart implements Serializable{
 	@Fetch(value = FetchMode.SUBSELECT)
 	private Map<ProductCart, Integer> contents = new LinkedHashMap<ProductCart, Integer>();
 	
+	//TODO hardcode need to change of getting idUser form session
 	@Column(name="id_user")
-	private long idUser;
+	private long idUser = 1;
 	
 	@Column(name="date_creation")
 	@Temporal(TemporalType.TIMESTAMP)
