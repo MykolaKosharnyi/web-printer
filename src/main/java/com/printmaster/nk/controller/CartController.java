@@ -25,6 +25,8 @@ import com.printmaster.nk.beans.Delivery;
 import com.printmaster.nk.beans.ExcelCartOrder;
 import com.printmaster.nk.beans.Paint;
 import com.printmaster.nk.beans.ProductCart;
+import com.printmaster.nk.components.MailSendingComponent;
+import com.printmaster.nk.components.RecipientNotification;
 import com.printmaster.nk.model.entity.HeadProduct;
 import com.printmaster.nk.model.entity.Option;
 import com.printmaster.nk.model.entity.Rip;
@@ -76,6 +78,9 @@ public class CartController {
 	
 	@Autowired
 	private UseWithProductService useWithProductService;
+	
+	@Autowired
+	private MailSendingComponent mailSendingComponent;
 	
 	private Constants currentConstants;
 	
@@ -664,12 +669,13 @@ public class CartController {
 //	}
 	
 	@RequestMapping(value="/cart/takeOrder", method = RequestMethod.POST)
-    public @ResponseBody void checkNewPropertyValueI(@RequestBody String name) {
+    public @ResponseBody void checkNewPropertyValueI() {
 		try{
 			//before set price for one dollar
 			ExcelCartOrder.setPriceForOneDollar(currentConstants.getDollarInGrivna());
-		//	File excel = 
-					ExcelCartOrder.createExcelFile(cart);
+			File excelOrder = ExcelCartOrder.createExcelFile(cart);
+			mailSendingComponent.sendExcelOrderFromCart(
+					mailSendingComponent.getRecipients(RecipientNotification.NOTIFICATION_CART_ORDER.getTypeNotification()), excelOrder);
 		} catch(Exception ex){
 			logger.error("Can't create excel file order!", ex);
 		}

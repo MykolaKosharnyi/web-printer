@@ -208,7 +208,7 @@
 				
                 <button type="button" class="btn btn-default" data-dismiss="modal">Продолжить просмотр товара</button>
                 <c:if test="${!empty cart.contents}">                	
-                	<button type="button" class="btn btn-info">Купить онлайн</button>
+                	<button type="button" class="btn btn-info" onclick="takeOrderInCart();">Купить онлайн</button>
                 	<button type="button" class="btn btn-primary" onclick="takeOrderInCart();"><spring:message code="cart.ownpage.placeorder"/></button>
                 </c:if>	
             </div>

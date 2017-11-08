@@ -287,11 +287,16 @@ function createTRInTableForProduct(product){
 			$("#cart form").empty().append(headTable);//add table
 			$("#cart form table.table_option tbody").first().append(createTRInTableForProduct(product));//add new product to cart
 			//Add button to take everything from cart
-			$('#myModal .modal-content .modal-footer').append($('<button/>').addClass('btn btn-info').attr("type", "button").html('Купить онлайн'));
+			$('#myModal .modal-content .modal-footer').append($('<button/>').addClass('btn btn-info')
+					.click(function(){
+						takeOrderInCart();
+					})
+					.attr("type", "button").html('Купить онлайн'));
 			$('#myModal .modal-content .modal-footer').append($('<button/>').addClass('btn btn-primary')
 					.click(function(){
 						takeOrderInCart();
-					}).attr("type", "button").html('Оформить заказ'));
+					})
+					.attr("type", "button").html('Оформить заказ'));
 			//add total cart price
 			$('#myModal .modal-content .modal-footer').prepend($('<div/>').attr("id", "div_total_price")
 					.append($('<span/>').css('float','left').text('Общая стоимость: '))
@@ -1072,13 +1077,8 @@ $(document).on("keydown", '#cart input.quantity', function(e){
 				  type: 'POST',
 				  url: "/cart/takeOrder",
 				  contentType: "application/json; charset=utf-8",
-	              dataType: "json",
-				  error: function(xhr, status, error) {
-					  alert('Request Status: ' + xhr.status + ' Status Text: ' + xhr.statusText + ' ' + xhr.responseText);
-				  }
-			}).done(function(){				
-				
-				
+	              dataType: "json"
+			});
 				/* delete on user side. Deleting without refreshing page */
 				$('#cart td.delte_item i').each(function(){					
 					$(this).parent('td').parent('tr').hide('slow', function(){ 
@@ -1103,7 +1103,7 @@ $(document).on("keydown", '#cart input.quantity', function(e){
 					});
 				});
 				
-			});
+			
 		}
 		
 		function changeQuantityPaintProductInCart(typeProduct, idProduct, namePaint, quantity){

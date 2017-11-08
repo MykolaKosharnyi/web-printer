@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
@@ -34,6 +35,7 @@ public class ExcelCartOrder {
 	private static Logger log = Logger.getLogger(ExcelCartOrder.class);
 	
 	private static final String PATH_ROOT_PICTURES = "/var/www/localhost";
+	public static final String PATH_EXCEL_ORDERS = "/var/www/localhost/products/excel_reports";
 	private static double priceForOneDollar;
 	
 	public static double getPriceForOneDollar() {
@@ -54,7 +56,7 @@ public class ExcelCartOrder {
 		
 		if ( fileName.contains("{id_order}") ){
 			//TODO need to take from database
-			fileName = fileName.replaceAll("\\{id_order\\}", "\u2116" + String.valueOf(cartOrder.getId()));
+			fileName = fileName.replaceAll("\\{id_order\\}", String.valueOf(cartOrder.getId()) + ":");
 		}
 			
 		
@@ -66,7 +68,7 @@ public class ExcelCartOrder {
 		createSheetForProducts(workbook, cartOrder);
 
 		
-		File fileFolder = new File("/var/www/localhost/products/excel_reports" + File.separator + cartOrder.getIdUser());
+		File fileFolder = new File(PATH_EXCEL_ORDERS + File.separator + cartOrder.getIdUser());
 		
 		if ( !fileFolder.exists() )
 			fileFolder.mkdirs();
@@ -178,9 +180,15 @@ public class ExcelCartOrder {
 			createCell(rowname, cellIndex++, borderAndWrapStyle).setCellValue(priceFormatter(product.getPriceWithOptionAndDeivery()));
 			createCell(rowname, cellIndex++, borderAndWrapStyle).setCellValue(priceFormatter(product.getPriceWithOptionAndDeivery() * entry.getValue()));
 			
-			
 			CellStyle descriptionTableCellStyle = descriptionTableCellStyle(workbook);
-			if(product.getOptions()!=null && product.getOptions().size()>0){
+			
+			//little info block
+			log.info("Option size: " + product.getOptions().size() + " items.");
+			for(Option option : product.getOptions()){
+				log.info("Option: " + option);
+			}
+			
+			if(checkOption(product.getOptions())){
 				//for OPTION table
 				rowNameIndex+=4;
 				cellIndex = 0;
@@ -204,7 +212,7 @@ public class ExcelCartOrder {
 			}			
 
 			//for DELIVERY table
-			if(product.getDeliveries()!=null && product.getDeliveries().size()>0){
+			if(checkDelivery(product.getDeliveries())){
 				rowNameIndex+=4;
 				cellIndex = 0;
 				rowname = createRow(sheet, rowNameIndex);
@@ -226,7 +234,7 @@ public class ExcelCartOrder {
 			}
 			
 			//for Paint table
-			if(product.getPaints()!=null && product.getPaints().size()>0){
+			if(checkPaint(product.getPaints())){
 				rowNameIndex+=4;
 				cellIndex = 0;
 				rowname = createRow(sheet, rowNameIndex);
@@ -256,6 +264,39 @@ public class ExcelCartOrder {
 			sheet.autoSizeColumn(2);
 			sheet.autoSizeColumn(3);
 		}
+	}
+	
+	private static boolean checkOption(List<Option> options){
+		if(options!=null && options.size()>0){
+			for(Option option :options){
+				if(option.isChecked()){
+					return true;
+				}	
+			}
+		}		
+		return false;
+	}
+	
+	private static boolean checkDelivery(List<Delivery> deliveries){
+		if(deliveries!=null && deliveries.size()>0){
+			for(Delivery delivery :deliveries){
+				if(delivery.isChecked()){
+					return true;
+				}	
+			}
+		}		
+		return false;
+	}
+	
+	private static boolean checkPaint(List<Paint> paints){
+		if(paints!=null && paints.size()>0){
+			for(Paint paint :paints){
+				if(paint.isChecked()){
+					return true;
+				}	
+			}
+		}		
+		return false;
 	}
 	
 	private static String priceFormatter(double price){
@@ -387,8 +428,8 @@ public class ExcelCartOrder {
 		try {
 			new AddDimensionedImage().addImageToSheet("A2", sheet, sheet.createDrawingPatriarch(),
 			        new File(pathToImage).toURI().toURL(), 
-			        35,
-			        35,
+			        30,
+			        30,
 			        AddDimensionedImage.EXPAND_ROW_AND_COLUMN);
 		} catch(FileNotFoundException fnfEx) {
             log.warn("Caught an: " + fnfEx.getClass().getName());

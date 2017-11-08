@@ -1,18 +1,29 @@
 package com.printmaster.nk.components;
 
+import java.io.File;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
 import javax.mail.Address;
+import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
+import javax.mail.internet.MimeUtility;
 
+import org.apache.log4j.Logger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +38,8 @@ import com.printmaster.nk.model.service.MailSendingOptionService;
 
 @Component
 public class MailSendingComponent {
+	
+	private Logger log = Logger.getLogger(this.getClass());
 	
 	@Autowired
     ComponentsForControllers componets;
@@ -129,6 +142,44 @@ public class MailSendingComponent {
 			exceptionMailSender(e);
 		}
 		mailSender.send(msg);
+	}
+	
+	public void sendExcelOrderFromCart(JSONArray recipientsFromJSON, File order){
+		@SuppressWarnings("unchecked")
+		Iterator<String> iterator = recipientsFromJSON.iterator();
+		
+		while(iterator.hasNext()){
+			MimeMessage msg = mailSender.createMimeMessage();
+
+			try {
+				Address adresFrom = new InternetAddress(HOST_EMAIL, "e-machine.com.ua");		        
+			    msg.setFrom(adresFrom);
+			    msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(iterator.next()));
+			    msg.setSubject("Оформлено замовлення", "UTF-8");	
+			    
+			    //Add attachments 
+			    MimeMultipart multipart = new MimeMultipart("related");
+				BodyPart messageBodyPart = new MimeBodyPart();
+				messageBodyPart.setContent("У вкладенні до цього листа Ви знайдете оформлений звіт на покупку товару(Пароль:1111).", "text/html; charset=utf-8");
+				multipart.addBodyPart(messageBodyPart);
+
+				messageBodyPart = new MimeBodyPart();
+				DataSource attachReportDS = new FileDataSource(order);			
+				messageBodyPart.setDataHandler(new DataHandler(attachReportDS));
+				messageBodyPart.setFileName(MimeUtility.encodeWord("Order_" + new SimpleDateFormat("HH:mm_dd:MM:yyyy").format(new Date())));
+
+				multipart.addBodyPart(messageBodyPart);
+
+				msg.setContent(multipart);
+			    
+				log.info("Order was sended to manager successfully!");
+			} catch (UnsupportedEncodingException | MessagingException e) {
+				exceptionMailSender(e);
+			} catch (Exception e){
+				exceptionMailSender(e);
+			}
+			mailSender.send(msg);
+		}
 	}
 	
 	private String createWrapperForBodyMessage(String messageBody){
