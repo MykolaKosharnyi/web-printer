@@ -31,8 +31,8 @@ import org.apache.poi.xssf.usermodel.XSSFFont;
 
 import com.printmaster.nk.model.entity.Option;
 
-public class ExcelCartOrder {
-	private static Logger log = Logger.getLogger(ExcelCartOrder.class);
+public class OrderExcel {
+	private static Logger log = Logger.getLogger(OrderExcel.class);
 	
 	private static final String PATH_ROOT_PICTURES = "/var/www/localhost";
 	public static final String PATH_EXCEL_ORDERS = "/var/www/localhost/products/excel_reports";

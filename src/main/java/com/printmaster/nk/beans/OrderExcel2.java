@@ -22,8 +22,8 @@ import org.apache.poi.xssf.usermodel.XSSFFont;
 
 import com.printmaster.nk.model.entity.Option;
 
-public class ExcelCartOrder2 {
-	private static Logger log = Logger.getLogger(ExcelCartOrder2.class);
+public class OrderExcel2 {
+	private static Logger log = Logger.getLogger(OrderExcel2.class);
 	
 	public static final String PATH_EXCEL_ORDERS = "/home/nikolay/Documents";
 	private static double priceForOneDollar;
@@ -87,51 +87,12 @@ public class ExcelCartOrder2 {
 	
 	private static void createOrderSheet(Workbook workbook, Cart cartOrder) {
 		Sheet sheet = workbook.createSheet("Заказ");
-		sheet.addMergedRegion(new CellRangeAddress(1,1,4,1));
-		
-		int rowNameIndex = 4;
-		int cellIndex = 0;
-		Row rowname = createRow(sheet, rowNameIndex);
+	
+		Row rowname = createRow(sheet, 1);
+		CellStyle middleBorderAndWrapStyle = middleBorderAndWrapStyle(sheet);
+		createCell(rowname, 1, middleBorderAndWrapStyle).setCellValue("Увага! Оплата цього рахунку означає погодження з умовами поставки товарів. Повідомлення про оплату є обов'язковим, в іншому випадку не гарантується наявність товарів на складі. Товар відпускається за фактом надходження коштів на п/р Постачальника, самовивозом, за наявності довіреності та паспорта.");
+		sheet.addMergedRegion(new CellRangeAddress(1,4,1,10));
 
-		CellStyle aligmentCellStyle = aligmentStyle(workbook);
-		CellStyle borderAndWrapStyle = borderAndWrapStyle(sheet);
-		
-		rowname = createRow(sheet, rowNameIndex++);
-		createCell(rowname, cellIndex++, aligmentCellStyle).setCellValue("Номер заказа:");
-		createCell(rowname, cellIndex++, borderAndWrapStyle).setCellValue(cartOrder.getId());
-		
-		cellIndex = 0;
-		rowname = createRow(sheet, rowNameIndex++);
-		createCell(rowname, cellIndex++, aligmentCellStyle).setCellValue("Id пользователя:");
-		createCell(rowname, cellIndex++, borderAndWrapStyle).setCellValue(cartOrder.getIdUser());
-		
-		cellIndex = 0;
-		rowname = createRow(sheet, rowNameIndex++);
-		createCell(rowname, cellIndex++, aligmentCellStyle).setCellValue("Время заказа:");
-		createCell(rowname, cellIndex++, borderAndWrapStyle).setCellValue(new SimpleDateFormat("HH:mm dd.MM.yyyy").format(cartOrder.getDateCreation()));
-		
-		cellIndex = 0;
-		rowname = createRow(sheet, rowNameIndex++);
-		createCell(rowname, cellIndex++, aligmentCellStyle).setCellValue("Статус заказа:");
-		createCell(rowname, cellIndex++, borderAndWrapStyle).setCellValue(cartOrder.getStatus().toString());
-		
-		cellIndex = 0;
-		rowname = createRow(sheet, rowNameIndex++);
-		createCell(rowname, cellIndex++, aligmentCellStyle).setCellValue("Оформлена как онлайн:");
-		createCell(rowname, cellIndex++, borderAndWrapStyle).setCellValue(cartOrder.isBuyOnline()? "Да":"Нет");
-		
-		cellIndex = 0;
-		rowname = createRow(sheet, rowNameIndex++);
-		createCell(rowname, cellIndex++, aligmentCellStyle).setCellValue("Цена за 1 доллар:");
-		createCell(rowname, cellIndex++, borderAndWrapStyle).setCellValue(priceForOneDollar + " грн.");
-		
-		cellIndex = 0;
-		rowname = createRow(sheet, rowNameIndex++);
-		createCell(rowname, cellIndex++, aligmentCellStyle).setCellValue("Общая сумма заказа:");
-		createCell(rowname, cellIndex++, borderAndWrapStyle).setCellValue(priceFormatter(cartOrder.getTotalCost()));
-		
-		sheet.autoSizeColumn(0);
-		sheet.autoSizeColumn(1);
 
 	}
 
@@ -365,6 +326,20 @@ public class ExcelCartOrder2 {
         font.setItalic(false);
         
         style.setFont(font);
+		return style;
+	}
+	
+	private static CellStyle middleBorderAndWrapStyle(Sheet sheet) {
+		CellStyle style = sheet.getWorkbook().createCellStyle();
+		style.setBorderBottom(XSSFCellStyle.BORDER_MEDIUM);
+		style.setBorderLeft(XSSFCellStyle.BORDER_MEDIUM);
+		style.setBorderRight(XSSFCellStyle.BORDER_MEDIUM);
+		style.setBorderTop(XSSFCellStyle.BORDER_MEDIUM);
+		style.setWrapText(true);
+		//((XSSFCellStyle)style).setVerticalAlignment(VerticalAlignment.TOP);
+		style.setAlignment(XSSFCellStyle.ALIGN_CENTER);
+		style.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);
+		
 		return style;
 	}
 
