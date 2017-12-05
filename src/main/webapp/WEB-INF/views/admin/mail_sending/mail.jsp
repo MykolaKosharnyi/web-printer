@@ -69,9 +69,10 @@
 			  		 mailMessage.status.toString() eq 'MODIFICATION_PROCESS'}">
 			  			<button type="submit" class="btn btn-primary">Изменить</button>
 			  		</c:if>
+			  		<a class="btn btn-success" href="javascript:void(0)" onclick="getBlackVersion();">Получить черновой вариант письма</a>
 			  	</c:if>
+			  	<a href="<c:url value='/admin/all_sended_messages' />" class="btn btn-primary" style="color:white;">Перейти на главную страницу рассылок</a>	
 			  	
-			  	<a class="btn btn-success" href="javascript:void(0)" onclick="getBlackVersion();">Получить черновой вариант письма</a>
 		  </div>
 		
 			<c:if test="${!empty mailMessage.id && mailMessage.id!=0}">
@@ -186,10 +187,13 @@
 			<c:if test="${!empty mailMessage.id && mailMessage.id!=0}">
 				<c:if test="${mailMessage.status.toString() eq 'WAITING' ||
 			  		 mailMessage.status.toString() eq 'MODIFICATION_PROCESS'}">
-			  			<button type="submit" class="btn btn-primary">Изменить</button>
+			  			<button type="submit" class="btn btn-primary">Изменить</button>			 
 			  	</c:if>
+			  	<a class="btn btn-success" href="javascript:void(0)" onclick="getBlackVersion();">Получить черновой вариант письма</a>
 			</c:if>
-			<a class="btn btn-success" href="javascript:void(0)" onclick="getBlackVersion();">Получить черновой вариант письма</a>
+			
+			<a href="<c:url value='/admin/all_sended_messages' />" class="btn btn-primary" style="color:white;">Перейти на главную страницу рассылок</a>
+			
 		  </div>
 
 		</form:form>
