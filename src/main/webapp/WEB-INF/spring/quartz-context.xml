@@ -9,11 +9,11 @@
         <beans:property name="targetMethod" value="loadCurrency" />
     </beans:bean>
  
-    <!-- Run the job every 2 hours with initial delay of 30 seconds -->
+    <!-- Run the job every 30 minutes with initial delay of 30 seconds -->
     <beans:bean id="currencyTrigger"  class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
         <beans:property name="jobDetail" ref="currencyJob" />
         <beans:property name="startDelay" value="#{1000*30}" />
-        <beans:property name="repeatInterval" value="#{1000*60*60*2}" />
+        <beans:property name="repeatInterval" value="#{1000*60*30}" />
     </beans:bean>
     
     <beans:bean id="mailSendingJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">

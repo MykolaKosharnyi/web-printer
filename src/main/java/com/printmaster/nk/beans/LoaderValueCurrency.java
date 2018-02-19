@@ -7,6 +7,7 @@ import java.io.PrintWriter;
 import java.io.Writer;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -20,6 +21,7 @@ import com.printmaster.nk.controller.CurrencyInfo;
 
 @Component("loaderValueCurrency")
 public class LoaderValueCurrency {
+	private static Logger log = Logger.getLogger(LoaderValueCurrency.class);
 	
 	public void loadCurrency(){
 		double dollar = 0;
@@ -36,11 +38,15 @@ public class LoaderValueCurrency {
 			for(CurrencyInfo curency : infoResponse.getBody()){
 				if(curency.getCcy().equals("USD")){
 					dollar = curency.getSale();
+					log.info("Current currentsy of USD: " + dollar);
 				} else if(curency.getCcy().equals("EUR")){
 					euro = curency.getSale();
+					log.info("Current currentsy of EUR: " + euro);
 				}
 			}
-		} catch(Exception ex){}
+		} catch(Exception ex){
+			log.error("Error while loading currentsy from PRIVATE BANK API",ex);
+		}
 		
 		saveNewConstants(dollar, euro);
 	}
@@ -67,6 +73,8 @@ public class LoaderValueCurrency {
 		out.flush();
 		out.close();
 		
-		} catch (IOException | ParseException e) {}
+		} catch (IOException | ParseException e) {
+			log.error("Error while saving new constans (currentsy constants)",e);
+		}
 	}
 }
