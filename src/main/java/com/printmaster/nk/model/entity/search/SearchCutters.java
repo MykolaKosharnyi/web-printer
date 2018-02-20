@@ -1,6 +1,7 @@
 package com.printmaster.nk.model.entity.search;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 public class SearchCutters extends SearchGeneric implements Serializable{
 
@@ -350,6 +351,162 @@ private static final long serialVersionUID = 6702501013538481082L;
 	@Override
 	public void setTypeProduct(String[] typeProduct) {
 		setTypeCutter(typeProduct);
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder result = new StringBuilder();
+		result.append("SEARCH CUTTER details:");
+		
+		if(typeCutter!=null && typeCutter.length > 0){
+			result.append(" typeCutter=" + Arrays.toString(typeCutter));
+		}
+		
+		if(previouslyUsed!=null && previouslyUsed.length > 0){
+			result.append(" previouslyUsed=" + Arrays.toString(previouslyUsed));
+		}
+		
+		if(typeOfCooling!=null && typeOfCooling.length > 0){
+			result.append(" typeOfCooling=" + Arrays.toString(typeOfCooling));
+		}
+		
+		if(sizeWorkAreaX0 > 0){
+			result.append(" sizeWorkAreaX0=" + sizeWorkAreaX0);
+		}
+		
+		if(sizeWorkAreaX1 > 0){
+			result.append(" sizeWorkAreaX1=" + sizeWorkAreaX1);
+		}
+		
+		if(sizeWorkAreaY0 > 0){
+			result.append(" sizeWorkAreaY0=" + sizeWorkAreaY0);
+		}
+		
+		if(sizeWorkAreaY1 > 0){
+			result.append(" sizeWorkAreaY1=" + sizeWorkAreaY1);
+		}
+		
+		if(sizeWorkAreaZ0 > 0){
+			result.append(" sizeWorkAreaZ0=" + sizeWorkAreaZ0);
+		}
+		
+		if(sizeWorkAreaZ1 > 0){
+			result.append(" sizeWorkAreaZ1=" + sizeWorkAreaZ1);
+		}
+		
+		if(engravingStyle!=null && engravingStyle.length > 0){
+			result.append(" engravingStyle=" + Arrays.toString(engravingStyle));
+		}
+		
+		if(typeEngine!=null && typeEngine.length > 0){
+			result.append(" typeEngine=" + Arrays.toString(typeEngine));
+		}
+		
+		if(mechanicalResolution0 > 0){
+			result.append(" mechanicalResolution0=" + mechanicalResolution0);
+		}
+		
+		if(mechanicalResolution1 > 0){
+			result.append(" mechanicalResolution1=" + mechanicalResolution1);
+		}
+		
+		if(softwareResolution0 > 0){
+			result.append(" softwareResolution0=" + softwareResolution0);
+		}
+		
+		if(softwareResolution1 > 0){
+			result.append(" softwareResolution1=" + softwareResolution1);
+		}
+		
+		if(frequencySpindle0 > 0){
+			result.append(" frequencySpindle0=" + frequencySpindle0);
+		}
+		
+		if(frequencySpindle1 > 0){
+			result.append(" frequencySpindle1=" + frequencySpindle1);
+		}
+		
+		if(processingSpeedXY0 > 0){
+			result.append(" processingSpeedXY0=" + processingSpeedXY0);
+		}
+		
+		if(processingSpeedXY1 > 0){
+			result.append(" processingSpeedXY1=" + processingSpeedXY1);
+		}
+		
+		if(processingSpeedZ0 > 0){
+			result.append(" processingSpeedZ0=" + processingSpeedZ0);
+		}
+		
+		if(processingSpeedZ1 > 0){
+			result.append(" processingSpeedZ1=" + processingSpeedZ1);
+		}
+		
+		if(mountingTool!=null && mountingTool.length > 0){
+			result.append(" mountingTool=" + Arrays.toString(mountingTool));
+		}
+		
+		if(connectionInterface!=null && connectionInterface.length > 0){
+			result.append(" connectionInterface=" + Arrays.toString(connectionInterface));
+		}
+		
+		if(software!=null && software.length > 0){
+			result.append(" software=" + Arrays.toString(software));
+		}
+		
+		if(equipmentManufacturer!=null && equipmentManufacturer.length > 0){
+			result.append(" equipmentManufacturer=" + Arrays.toString(equipmentManufacturer));
+		}
+		
+		if(averagePowerConsumption0 > 0){
+			result.append(" averagePowerConsumption0=" + averagePowerConsumption0);
+		}
+		
+		if(averagePowerConsumption1 > 0){
+			result.append(" averagePowerConsumption1=" + averagePowerConsumption1);
+		}
+		
+		if(maxPowerConsumption0 > 0){
+			result.append(" maxPowerConsumption0=" + maxPowerConsumption0);
+		}
+		
+		if(maxPowerConsumption1 > 0){
+			result.append(" maxPowerConsumption1=" + maxPowerConsumption1);
+		}
+		
+		if(weight0 > 0){
+			result.append(" weight0=" + weight0);
+		}
+		
+		if(weight1 > 0){
+			result.append(" weight1=" + weight1);
+		}
+		
+		if(width0 > 0){
+			result.append(" width0=" + width0);
+		}
+		
+		if(width1 > 0){
+			result.append(" width1=" + width1);
+		}
+		
+		if(heigth0 > 0){
+			result.append(" heigth0=" + heigth0);
+		}
+		
+		if(heigth1 > 0){
+			result.append(" heigth1=" + heigth1);
+		}
+		
+		if(depth0 > 0){
+			result.append(" depth0=" + depth0);
+		}
+		
+		if(depth1 > 0){
+			result.append(" depth1=" + depth1);
+		}
+		
+		return result.toString();
 	}
 	
 }

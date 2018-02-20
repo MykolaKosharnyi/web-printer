@@ -54,7 +54,7 @@ public class SearchPrinters extends SearchGeneric implements Serializable{
 	@Override
 	public String toString() {
 		StringBuilder result = new StringBuilder();
-		result.append("SearchPrinters details:");
+		result.append("SEARCH PRINTER details:");
 		
 		if(typePrinter!=null && typePrinter.length > 0){
 			result.append(" typePrinter=" + Arrays.toString(typePrinter));

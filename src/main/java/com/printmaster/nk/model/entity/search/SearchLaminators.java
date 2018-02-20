@@ -1,6 +1,7 @@
 package com.printmaster.nk.model.entity.search;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 public class SearchLaminators extends SearchGeneric implements Serializable{
 
@@ -268,6 +269,130 @@ private static final long serialVersionUID = 6702501013538481082L;
 
 	public void setDepth1(int depth1) {
 		this.depth1 = depth1;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder result = new StringBuilder();
+		result.append("SEARCH LAMINATOR details:");
+		
+		if(typeProduct!=null && typeProduct.length > 0){
+			result.append(" typeProduct=" + Arrays.toString(typeProduct));
+		}
+		
+		if(previouslyUsed!=null && previouslyUsed.length > 0){
+			result.append(" previouslyUsed=" + Arrays.toString(previouslyUsed));
+		}
+		
+		if(laminatingWidth!=null && laminatingWidth.length > 0){
+			result.append(" laminatingWidth=" + Arrays.toString(laminatingWidth));
+		}
+		
+		if(innings!=null && innings.length > 0){
+			result.append(" innings=" + Arrays.toString(innings));
+		}
+		
+		if(numberOfShafts0 > 0){
+			result.append(" numberOfShafts0=" + numberOfShafts0);
+		}
+		
+		if(numberOfShafts1 > 0){
+			result.append(" numberOfShafts1=" + numberOfShafts1);
+		}
+		
+		if(shaftDiameter0 > 0){
+			result.append(" shaftDiameter0=" + shaftDiameter0);
+		}
+		
+		if(shaftDiameter1 > 0){
+			result.append(" shaftDiameter1=" + shaftDiameter1);
+		}
+		
+		if(filmThickness0 > 0){
+			result.append(" filmThickness0=" + filmThickness0);
+		}
+		
+		if(filmThickness1 > 0){
+			result.append(" filmThickness1=" + filmThickness1);
+		}
+		
+		if(warmUpTime0 > 0){
+			result.append(" warmUpTime0=" + warmUpTime0);
+		}
+		
+		if(warmUpTime1 > 0){
+			result.append(" warmUpTime1=" + warmUpTime1);
+		}
+		
+		if(laminationTemperature0 > 0){
+			result.append(" laminationTemperature0=" + laminationTemperature0);
+		}
+		
+		if(laminationTemperature1 > 0){
+			result.append(" laminationTemperature1=" + laminationTemperature1);
+		}
+		
+		if(laminatingSpeed0 > 0){
+			result.append(" laminatingSpeed0=" + laminatingSpeed0);
+		}
+		
+		if(laminatingSpeed1 > 0){
+			result.append(" laminatingSpeed1=" + laminatingSpeed1);
+		}
+		
+		if(equipmentManufacturer!=null && equipmentManufacturer.length > 0){
+			result.append(" equipmentManufacturer=" + Arrays.toString(equipmentManufacturer));
+		}
+		
+		if(averagePowerConsumption0 > 0){
+			result.append(" averagePowerConsumption0=" + averagePowerConsumption0);
+		}
+		
+		if(averagePowerConsumption1 > 0){
+			result.append(" averagePowerConsumption1=" + averagePowerConsumption1);
+		}
+		
+		if(maxPowerConsumption0 > 0){
+			result.append(" maxPowerConsumption0=" + maxPowerConsumption0);
+		}
+		
+		if(maxPowerConsumption1 > 0){
+			result.append(" maxPowerConsumption1=" + maxPowerConsumption1);
+		}
+		
+		if(weight0 > 0){
+			result.append(" weight0=" + weight0);
+		}
+		
+		if(weight1 > 0){
+			result.append(" weight1=" + weight1);
+		}
+		
+		if(width0 > 0){
+			result.append(" width0=" + width0);
+		}
+		
+		if(width1 > 0){
+			result.append(" width1=" + width1);
+		}
+		
+		if(heigth0 > 0){
+			result.append(" heigth0=" + heigth0);
+		}
+		
+		if(heigth1 > 0){
+			result.append(" heigth1=" + heigth1);
+		}
+		
+		if(depth0 > 0){
+			result.append(" depth0=" + depth0);
+		}
+		
+		if(depth1 > 0){
+			result.append(" depth1=" + depth1);
+		}
+		
+		return result.toString();
 	}
 
 }

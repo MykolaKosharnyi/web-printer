@@ -1,6 +1,7 @@
 package com.printmaster.nk.model.entity.search;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 public class SearchDigitalPrinters extends SearchGeneric implements Serializable{
 	private static final long serialVersionUID = 6702501013538481082L;
@@ -738,6 +739,406 @@ public class SearchDigitalPrinters extends SearchGeneric implements Serializable
 	@Override
 	public void setTypeProduct(String[] typeProduct) {
 		setTypePrinter(typeProduct);
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder result = new StringBuilder();
+		result.append("SEARCH DIGITAL PRINTER details:");
+		
+		if(typePrinter!=null && typePrinter.length > 0){
+			result.append(" typePrinter=" + Arrays.toString(typePrinter));
+		}
+		
+		if(previouslyUsed!=null && previouslyUsed.length > 0){
+			result.append(" previouslyUsed=" + Arrays.toString(previouslyUsed));
+		}
+		
+		if(equipmentManufacturer!=null && equipmentManufacturer.length > 0){
+			result.append(" equipmentManufacturer=" + Arrays.toString(equipmentManufacturer));
+		}
+		
+		if(device!=null && device.length > 0){
+			result.append(" device=" + Arrays.toString(device));
+		}
+		
+		if(typeOfPrinting!=null && typeOfPrinting.length > 0){
+			result.append(" typeOfPrinting=" + Arrays.toString(typeOfPrinting));
+		}
+		
+		if(printTechnology!=null && printTechnology.length > 0){
+			result.append(" printTechnology=" + Arrays.toString(printTechnology));
+		}
+		
+		if(accommodation!=null && accommodation.length > 0){
+			result.append(" accommodation=" + Arrays.toString(accommodation));
+		}
+		
+		if(applicationArea!=null && applicationArea.length > 0){
+			result.append(" applicationArea=" + Arrays.toString(applicationArea));
+		}
+		
+		if(numberOfPagesPerMonth0 > 0){
+			result.append(" numberOfPagesPerMonth0=" + numberOfPagesPerMonth0);
+		}
+		
+		if(numberOfPagesPerMonth1 > 0){
+			result.append(" numberOfPagesPerMonth1=" + numberOfPagesPerMonth1);
+		}
+		
+		if(maximumFormat!=null && maximumFormat.length > 0){
+			result.append(" maximumFormat=" + Arrays.toString(maximumFormat));
+		}
+		
+		if(automaticTwoSidedPrinting!=null && automaticTwoSidedPrinting.length > 0){
+			result.append(" automaticTwoSidedPrinting=" + Arrays.toString(automaticTwoSidedPrinting));
+		}
+		
+		if(theMaximumResolutionForColorPrinting!=null && theMaximumResolutionForColorPrinting.length > 0){
+			result.append(" theMaximumResolutionForColorPrinting=" + Arrays.toString(theMaximumResolutionForColorPrinting));
+		}
+		
+		if(theMaximumResolutionForBWPrinting!=null && theMaximumResolutionForBWPrinting.length > 0){
+			result.append(" theMaximumResolutionForBWPrinting=" + Arrays.toString(theMaximumResolutionForBWPrinting));
+		}
+		
+		if(speedPrintBW0 > 0){
+			result.append(" speedPrintBW0=" + speedPrintBW0);
+		}
+		
+		if(speedPrintBW1 > 0){
+			result.append(" speedPrintBW1=" + speedPrintBW1);
+		}
+		
+		if(speedPrintColor0 > 0){
+			result.append(" speedPrintColor0=" + speedPrintColor0);
+		}
+		
+		if(speedPrintColor1 > 0){
+			result.append(" speedPrintColor1=" + speedPrintColor1);
+		}
+		
+		if(speedCopyBW0 > 0){
+			result.append(" speedCopyBW0=" + speedCopyBW0);
+		}
+		
+		if(speedCopyBW1 > 0){
+			result.append(" speedCopyBW1=" + speedCopyBW1);
+		}
+		
+		if(speedCopyColor0 > 0){
+			result.append(" speedCopyColor0=" + speedCopyColor0);
+		}
+		
+		if(speedCopyColor1 > 0){
+			result.append(" speedCopyColor1=" + speedCopyColor1);
+		}
+		
+		if(warmUpTime0 > 0){
+			result.append(" warmUpTime0=" + warmUpTime0);
+		}
+		
+		if(warmUpTime1 > 0){
+			result.append(" warmUpTime1=" + warmUpTime1);
+		}
+		
+		if(firstPrintColor0 > 0){
+			result.append(" firstPrintColor0=" + firstPrintColor0);
+		}
+		
+		if(firstPrintColor1 > 0){
+			result.append(" firstPrintColor1=" + firstPrintColor1);
+		}		
+		
+		if(firstPrintBW0 > 0){
+			result.append(" firstPrintBW0=" + firstPrintBW0);
+		}
+		
+		if(firstPrintBW1 > 0){
+			result.append(" firstPrintBW1=" + firstPrintBW1);
+		}
+		
+		if(scannerType!=null && scannerType.length > 0){
+			result.append(" scannerType=" + Arrays.toString(scannerType));
+		}
+		
+		if(theMaximumSizeOfTheOriginal!=null && theMaximumSizeOfTheOriginal.length > 0){
+			result.append(" theMaximumSizeOfTheOriginal=" + Arrays.toString(theMaximumSizeOfTheOriginal));
+		}
+		
+		if(maximumScanSize!=null && maximumScanSize.length > 0){
+			result.append(" maximumScanSize=" + Arrays.toString(maximumScanSize));
+		}
+		
+		if(scannerResolution!=null && scannerResolution.length > 0){
+			result.append(" scannerResolution=" + Arrays.toString(scannerResolution));
+		}
+		
+		if(scanSpeedColor0 > 0){
+			result.append(" scanSpeedColor0=" + scanSpeedColor0);
+		}
+		
+		if(scanSpeedColor1 > 0){
+			result.append(" scanSpeedColor1=" + scanSpeedColor1);
+		}
+		
+		if(scanSpeedBW0 > 0){
+			result.append(" scanSpeedBW0=" + scanSpeedBW0);
+		}
+		
+		if(scanSpeedBW1 > 0){
+			result.append(" scanSpeedBW1=" + scanSpeedBW1);
+		}
+		
+		if(sendingImagesByEmail!=null && sendingImagesByEmail.length > 0){
+			result.append(" sendingImagesByEmail=" + Arrays.toString(sendingImagesByEmail));
+		}
+		
+		if(maximumResolutionCopierBW!=null && maximumResolutionCopierBW.length > 0){
+			result.append(" maximumResolutionCopierBW=" + Arrays.toString(maximumResolutionCopierBW));
+		}
+		
+		if(firstCopyOutTime0 > 0){
+			result.append(" firstCopyOutTime0=" + firstCopyOutTime0);
+		}
+		
+		if(firstCopyOutTime1 > 0){
+			result.append(" firstCopyOutTime1=" + firstCopyOutTime1);
+		}
+		
+		if(zooming0 > 0){
+			result.append(" zooming0=" + zooming0);
+		}
+		
+		if(zooming1 > 0){
+			result.append(" zooming1=" + zooming1);
+		}
+		
+		if(stepZoom0 > 0){
+			result.append(" stepZoom0=" + stepZoom0);
+		}
+		
+		if(stepZoom1 > 0){
+			result.append(" stepZoom1=" + stepZoom1);
+		}
+		
+		if(theMaximumNumberOfCopiesPerCycle0 > 0){
+			result.append(" theMaximumNumberOfCopiesPerCycle0=" + theMaximumNumberOfCopiesPerCycle0);
+		}
+		
+		if(theMaximumNumberOfCopiesPerCycle1 > 0){
+			result.append(" theMaximumNumberOfCopiesPerCycle1=" + theMaximumNumberOfCopiesPerCycle1);
+		}
+		
+		if(paperFeedStandart0 > 0){
+			result.append(" paperFeedStandart0=" + paperFeedStandart0);
+		}
+		
+		if(paperFeedStandart1 > 0){
+			result.append(" paperFeedStandart1=" + paperFeedStandart1);
+		}
+		
+		if(paperFeedMax0 > 0){
+			result.append(" paperFeedMax0=" + paperFeedMax0);
+		}
+		
+		if(paperFeedMax1 > 0){
+			result.append(" paperFeedMax1=" + paperFeedMax1);
+		}
+		
+		if(paperOutputStandart0 > 0){
+			result.append(" paperOutputStandart0=" + paperOutputStandart0);
+		}
+		
+		if(paperOutputStandart1 > 0){
+			result.append(" paperOutputStandart1=" + paperOutputStandart1);
+		}
+		
+		if(paperOutputMax0 > 0){
+			result.append(" paperOutputMax0=" + paperOutputMax0);
+		}
+		
+		if(paperOutputMax1 > 0){
+			result.append(" paperOutputMax1=" + paperOutputMax1);
+		}
+		
+		if(theCapacityOfTheBypassTray0 > 0){
+			result.append(" theCapacityOfTheBypassTray0=" + theCapacityOfTheBypassTray0);
+		}
+		
+		if(theCapacityOfTheBypassTray1 > 0){
+			result.append(" theCapacityOfTheBypassTray1=" + theCapacityOfTheBypassTray1);
+		}
+		
+		if(electronicSorting!=null && electronicSorting.length > 0){
+			result.append(" electronicSorting=" + Arrays.toString(electronicSorting));
+		}
+		
+		if(stapler!=null && stapler.length > 0){
+			result.append(" stapler=" + Arrays.toString(stapler));
+		}
+		
+		if(paperDensity0 > 0){
+			result.append(" paperDensity0=" + paperDensity0);
+		}
+		
+		if(paperDensity1 > 0){
+			result.append(" paperDensity1=" + paperDensity1);
+		}
+		
+		if(printingOn!=null && printingOn.length > 0){
+			result.append(" printingOn=" + Arrays.toString(printingOn));
+		}
+		
+		if(resourceDeveloper0 > 0){
+			result.append(" resourceDeveloper0=" + resourceDeveloper0);
+		}
+		
+		if(resourceDeveloper1 > 0){
+			result.append(" resourceDeveloper1=" + resourceDeveloper1);
+		}
+		
+		if(resourceDrum0 > 0){
+			result.append(" resourceDrum0=" + resourceDrum0);
+		}
+		
+		if(resourceDrum1 > 0){
+			result.append(" resourceDrum1=" + resourceDrum1);
+		}
+		
+		if(resourceBWCartridgeToner0 > 0){
+			result.append(" resourceBWCartridgeToner0=" + resourceBWCartridgeToner0);
+		}
+		
+		if(resourceBWCartridgeToner1 > 0){
+			result.append(" resourceBWCartridgeToner1=" + resourceBWCartridgeToner1);
+		}
+		
+		if(numberOfCartridges0 > 0){
+			result.append(" numberOfCartridges0=" + numberOfCartridges0);
+		}
+		
+		if(numberOfCartridges1 > 0){
+			result.append(" numberOfCartridges1=" + numberOfCartridges1);
+		}
+		
+		if(memory0 > 0){
+			result.append(" memory0=" + memory0);
+		}
+		
+		if(memory1 > 0){
+			result.append(" memory1=" + memory1);
+		}
+		
+		if(hardDriveCapacity0 > 0){
+			result.append(" hardDriveCapacity0=" + hardDriveCapacity0);
+		}
+		
+		if(hardDriveCapacity1 > 0){
+			result.append(" hardDriveCapacity1=" + hardDriveCapacity1);
+		}
+		
+		if(interfaces!=null && interfaces.length > 0){
+			result.append(" interfaces=" + Arrays.toString(interfaces));
+		}
+		
+		if(directPrinting!=null && directPrinting.length > 0){
+			result.append(" directPrinting=" + Arrays.toString(directPrinting));
+		}
+		
+		if(webInterface!=null && webInterface.length > 0){
+			result.append(" webInterface=" + Arrays.toString(webInterface));
+		}
+		
+		if(supportPostScript!=null && supportPostScript.length > 0){
+			result.append(" supportPostScript=" + Arrays.toString(supportPostScript));
+		}
+		
+		if(support!=null && support.length > 0){
+			result.append(" support=" + Arrays.toString(support));
+		}
+		
+		if(theNumberOfInstalledPostScriptFonts0 > 0){
+			result.append(" theNumberOfInstalledPostScriptFonts0=" + theNumberOfInstalledPostScriptFonts0);
+		}
+		
+		if(theNumberOfInstalledPostScriptFonts1 > 0){
+			result.append(" theNumberOfInstalledPostScriptFonts1=" + theNumberOfInstalledPostScriptFonts1);
+		}
+		
+		if(theNumberOfInstalledPCLFonts0 > 0){
+			result.append(" theNumberOfInstalledPCLFonts0=" + theNumberOfInstalledPCLFonts0);
+		}
+		
+		if(theNumberOfInstalledPCLFonts1 > 0){
+			result.append(" theNumberOfInstalledPCLFonts1=" + theNumberOfInstalledPCLFonts1);
+		}
+		
+		if(oSSupport!=null && oSSupport.length > 0){
+			result.append(" oSSupport=" + Arrays.toString(oSSupport));
+		}
+		
+		if(displayInformation!=null && displayInformation.length > 0){
+			result.append(" displayInformation=" + Arrays.toString(displayInformation));
+		}
+		
+		if(displaySize0 > 0){
+			result.append(" displaySize0=" + displaySize0);
+		}
+		
+		if(displaySize1 > 0){
+			result.append(" displaySize1=" + displaySize1);
+		}
+		
+		if(averagePowerConsumption0 > 0){
+			result.append(" averagePowerConsumption0=" + averagePowerConsumption0);
+		}
+		
+		if(averagePowerConsumption1 > 0){
+			result.append(" averagePowerConsumption1=" + averagePowerConsumption1);
+		}
+		
+		if(maxPowerConsumption0 > 0){
+			result.append(" maxPowerConsumption0=" + maxPowerConsumption0);
+		}
+		
+		if(maxPowerConsumption1 > 0){
+			result.append(" maxPowerConsumption1=" + maxPowerConsumption1);
+		}
+		
+		if(weight0 > 0){
+			result.append(" weight0=" + weight0);
+		}
+		
+		if(weight1 > 0){
+			result.append(" weight1=" + weight1);
+		}
+		
+		if(width0 > 0){
+			result.append(" width0=" + width0);
+		}
+		
+		if(width1 > 0){
+			result.append(" width1=" + width1);
+		}
+		
+		if(heigth0 > 0){
+			result.append(" heigth0=" + heigth0);
+		}
+		
+		if(heigth1 > 0){
+			result.append(" heigth1=" + heigth1);
+		}
+		
+		if(depth0 > 0){
+			result.append(" depth0=" + depth0);
+		}
+		
+		if(depth1 > 0){
+			result.append(" depth1=" + depth1);
+		}
+		
+		return result.toString();
 	}
 	
 }

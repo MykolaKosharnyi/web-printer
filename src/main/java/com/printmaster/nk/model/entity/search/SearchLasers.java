@@ -1,6 +1,7 @@
 package com.printmaster.nk.model.entity.search;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 public class SearchLasers extends SearchGeneric implements Serializable{
 
@@ -512,6 +513,235 @@ public class SearchLasers extends SearchGeneric implements Serializable{
 	@Override
 	public void setTypeProduct(String[] typeProduct) {
 		setTypeLaser(typeProduct);
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder result = new StringBuilder();
+		result.append("SEARCH LASERS details:");
+		
+		if(typeLaser!=null && typeLaser.length > 0){
+			result.append(" typeLaser=" + Arrays.toString(typeLaser));
+		}
+		
+		if(typeOfCooling!=null && typeOfCooling.length > 0){
+			result.append(" typeOfCooling=" + Arrays.toString(typeOfCooling));
+		}
+		
+		if(sizeWorkAreaX0 > 0){
+			result.append(" sizeWorkAreaX0=" + sizeWorkAreaX0);
+		}
+		
+		if(sizeWorkAreaX1 > 0){
+			result.append(" sizeWorkAreaX1=" + sizeWorkAreaX1);
+		}
+		
+		if(sizeWorkAreaY0 > 0){
+			result.append(" sizeWorkAreaY0=" + sizeWorkAreaY0);
+		}
+		
+		if(sizeWorkAreaY1 > 0){
+			result.append(" sizeWorkAreaY1=" + sizeWorkAreaY1);
+		}
+		
+		if(sizeWorkAreaZ0 > 0){
+			result.append(" sizeWorkAreaZ0=" + sizeWorkAreaZ0);
+		}
+		
+		if(sizeWorkAreaZ1 > 0){
+			result.append(" sizeWorkAreaZ1=" + sizeWorkAreaZ1);
+		}
+		
+		if(previouslyUsed!=null && previouslyUsed.length > 0){
+			result.append(" previouslyUsed=" + Arrays.toString(previouslyUsed));
+		}
+		
+		if(powerOfLaser0 > 0){
+			result.append(" powerOfLaser0=" + powerOfLaser0);
+		}
+		
+		if(powerOfLaser1 > 0){
+			result.append(" powerOfLaser1=" + powerOfLaser1);
+		}
+		
+		if(typeEngine!=null && typeEngine.length > 0){
+			result.append(" typeEngine=" + Arrays.toString(typeEngine));
+		}
+		
+		if(mechanicalResolution0 > 0){
+			result.append(" mechanicalResolution0=" + mechanicalResolution0);
+		}
+		
+		if(mechanicalResolution1 > 0){
+			result.append(" mechanicalResolution1=" + mechanicalResolution1);
+		}
+		
+		if(softwareResolution0 > 0){
+			result.append(" softwareResolution0=" + softwareResolution0);
+		}
+		
+		if(softwareResolution1 > 0){
+			result.append(" softwareResolution1=" + softwareResolution1);
+		}
+		
+		if(minimumThicknessOfCut0 > 0){
+			result.append(" minimumThicknessOfCut0=" + minimumThicknessOfCut0);
+		}
+		
+		if(minimumThicknessOfCut1 > 0){
+			result.append(" minimumThicknessOfCut1=" + minimumThicknessOfCut1);
+		}
+		
+		if(engravingSpeed0 > 0){
+			result.append(" engravingSpeed0=" + engravingSpeed0);
+		}
+		
+		if(engravingSpeed1 > 0){
+			result.append(" engravingSpeed1=" + engravingSpeed1);
+		}
+		
+		
+		if(cuttingSpeed0 > 0){
+			result.append(" cuttingSpeed0=" + cuttingSpeed0);
+		}
+		
+		if(cuttingSpeed1 > 0){
+			result.append(" cuttingSpeed1=" + cuttingSpeed1);
+		}
+		
+		if(connectionInterface!=null && connectionInterface.length > 0){
+			result.append(" connectionInterface=" + Arrays.toString(connectionInterface));
+		}
+		
+		if(fileTypes!=null && fileTypes.length > 0){
+			result.append(" fileTypes=" + Arrays.toString(fileTypes));
+		}
+		
+		if(software!=null && software.length > 0){
+			result.append(" software=" + Arrays.toString(software));
+		}
+		
+		if(equipmentManufacturer!=null && equipmentManufacturer.length > 0){
+			result.append(" equipmentManufacturer=" + Arrays.toString(equipmentManufacturer));
+		}
+		
+		if(colorSeparation!=null && colorSeparation.length > 0){
+			result.append(" colorSeparation=" + Arrays.toString(colorSeparation));
+		}
+		
+		if(averagePowerConsumption0 > 0){
+			result.append(" averagePowerConsumption0=" + averagePowerConsumption0);
+		}
+		
+		if(averagePowerConsumption1 > 0){
+			result.append(" averagePowerConsumption1=" + averagePowerConsumption1);
+		}
+		
+		if(maxPowerConsumption0 > 0){
+			result.append(" maxPowerConsumption0=" + maxPowerConsumption0);
+		}
+		
+		if(maxPowerConsumption1 > 0){
+			result.append(" maxPowerConsumption1=" + maxPowerConsumption1);
+		}
+		
+		if(weight0 > 0){
+			result.append(" weight0=" + weight0);
+		}
+		
+		if(weight1 > 0){
+			result.append(" weight1=" + weight1);
+		}
+		
+		if(width0 > 0){
+			result.append(" width0=" + width0);
+		}
+		
+		if(width1 > 0){
+			result.append(" width1=" + width1);
+		}
+		
+		if(heigth0 > 0){
+			result.append(" heigth0=" + heigth0);
+		}
+		
+		if(heigth1 > 0){
+			result.append(" heigth1=" + heigth1);
+		}
+		
+		if(depth0 > 0){
+			result.append(" depth0=" + depth0);
+		}
+		
+		if(depth1 > 0){
+			result.append(" depth1=" + depth1);
+		}
+		
+		if(typeTheDisplayedImage!=null && typeTheDisplayedImage.length > 0){
+			result.append(" typeTheDisplayedImage=" + Arrays.toString(typeTheDisplayedImage));
+		}
+		
+		if(maximumResolution0 > 0){
+			result.append(" maximumResolution0=" + maximumResolution0);
+		}
+		
+		if(maximumResolution1 > 0){
+			result.append(" maximumResolution1=" + maximumResolution1);
+		}
+		
+		if(firstPartAdjustingTheLaserPower > 0){
+			result.append(" firstPartAdjustingTheLaserPower=" + firstPartAdjustingTheLaserPower);
+		}
+		
+		if(secondPartAdjustingTheLaserPower > 0){
+			result.append(" secondPartAdjustingTheLaserPower=" + secondPartAdjustingTheLaserPower);
+		}
+		
+		if(laserWavelength0 > 0){
+			result.append(" laserWavelength0=" + laserWavelength0);
+		}
+		
+		if(laserWavelength1 > 0){
+			result.append(" laserWavelength1=" + laserWavelength1);
+		}
+		
+		if(laserPulse0 > 0){
+			result.append(" laserPulse0=" + laserPulse0);
+		}
+		
+		if(laserPulse1 > 0){
+			result.append(" laserPulse1=" + laserPulse1);
+		}
+		
+		if(theDiameterOfTheLaser0 > 0){
+			result.append(" theDiameterOfTheLaser0=" + theDiameterOfTheLaser0);
+		}
+		
+		if(theDiameterOfTheLaser1 > 0){
+			result.append(" theDiameterOfTheLaser1=" + theDiameterOfTheLaser1);
+		}
+		
+		if(engravingDepth0 > 0){
+			result.append(" engravingDepth0=" + engravingDepth0);
+		}
+		
+		if(engravingDepth1 > 0){
+			result.append(" engravingDepth1=" + engravingDepth1);
+		}
+		
+		if(laserSource0 > 0){
+			result.append(" laserSource0=" + laserSource0);
+		}
+		
+		if(laserSource1 > 0){
+			result.append(" laserSource1=" + laserSource1);
+		}
+		
+		if(specialPurpose!=null && specialPurpose.length > 0){
+			result.append(" specialPurpose=" + Arrays.toString(specialPurpose));
+		}
+		
+		return  result.toString();
 	}
 
 }

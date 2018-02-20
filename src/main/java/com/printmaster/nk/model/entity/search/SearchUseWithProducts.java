@@ -1,6 +1,7 @@
 package com.printmaster.nk.model.entity.search;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 public class SearchUseWithProducts extends SearchGeneric implements Serializable{
 
@@ -15,6 +16,18 @@ public class SearchUseWithProducts extends SearchGeneric implements Serializable
 
 	public void setTypeProduct(String[] typeProduct) {
 		this.typeProduct = typeProduct;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder result = new StringBuilder();
+		result.append("SEARCH USE WITH PRODUCT details:");
+		
+		if(typeProduct!=null && typeProduct.length > 0){
+			result.append(" typeProduct=" + Arrays.toString(typeProduct));
+		}
+		
+		return result.toString();
 	}
 
 }

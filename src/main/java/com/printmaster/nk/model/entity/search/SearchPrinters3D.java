@@ -1,6 +1,7 @@
 package com.printmaster.nk.model.entity.search;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 public class SearchPrinters3D extends SearchGeneric implements Serializable {
 	
@@ -456,6 +457,202 @@ public class SearchPrinters3D extends SearchGeneric implements Serializable {
 	@Override
 	public void setTypeProduct(String[] typeProduct) {
 		setTypePrinter3D(typeProduct);
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder result = new StringBuilder();
+		result.append("SEARCH PRINTER 3D details:");
+		
+		if(typePrinter3D!=null && typePrinter3D.length > 0){
+			result.append(" typePrinter3D=" + Arrays.toString(typePrinter3D));
+		}
+		
+		if(sizePrintableAreaX0 > 0){
+			result.append(" sizePrintableAreaX0=" + sizePrintableAreaX0);
+		}
+		
+		if(sizePrintableAreaX1 > 0){
+			result.append(" sizePrintableAreaX1=" + sizePrintableAreaX1);
+		}
+		
+		if(sizePrintableAreaY0 > 0){
+			result.append(" sizePrintableAreaY0=" + sizePrintableAreaY0);
+		}
+		
+		if(sizePrintableAreaY1 > 0){
+			result.append(" sizePrintableAreaY1=" + sizePrintableAreaY1);
+		}
+		
+		if(sizePrintableAreaZ0 > 0){
+			result.append(" sizePrintableAreaZ0=" + sizePrintableAreaZ0);
+		}
+		
+		if(sizePrintableAreaZ1 > 0){
+			result.append(" sizePrintableAreaZ1=" + sizePrintableAreaZ1);
+		}
+		
+		if(printTechnology!=null && printTechnology.length > 0){
+			result.append(" printTechnology=" + Arrays.toString(printTechnology));
+		}
+		
+		if(previouslyUsed!=null && previouslyUsed.length > 0){
+			result.append(" previouslyUsed=" + Arrays.toString(previouslyUsed));
+		}
+		
+		if(chromaticity!=null && chromaticity.length > 0){
+			result.append(" chromaticity=" + Arrays.toString(chromaticity));
+		}
+		
+		if(typeOfPrinthead!=null && typeOfPrinthead.length > 0){
+			result.append(" typeOfPrinthead=" + Arrays.toString(typeOfPrinthead));
+		}
+		
+		if(meltingPointOfThePrintingMaterial0 > 0){
+			result.append(" meltingPointOfThePrintingMaterial0=" + meltingPointOfThePrintingMaterial0);
+		}
+		
+		if(meltingPointOfThePrintingMaterial1 > 0){
+			result.append(" meltingPointOfThePrintingMaterial1=" + meltingPointOfThePrintingMaterial1);
+		}
+		
+		if(media!=null && media.length > 0){
+			result.append(" media=" + Arrays.toString(media));
+		}
+		
+		if(sizeExtruder0 > 0){
+			result.append(" sizeExtruder0=" + sizeExtruder0);
+		}
+		
+		if(sizeExtruder1 > 0){
+			result.append(" sizeExtruder1=" + sizeExtruder1);
+		}
+		
+		if(speedPrint0 > 0){
+			result.append(" speedPrint0=" + speedPrint0);
+		}
+		
+		if(speedPrint1 > 0){
+			result.append(" speedPrint1=" + speedPrint1);
+		}
+		
+		if(thicknessOfThePrintingLayer0 > 0){
+			result.append(" thicknessOfThePrintingLayer0=" + thicknessOfThePrintingLayer0);
+		}
+		
+		if(thicknessOfThePrintingLayer1 > 0){
+			result.append(" thicknessOfThePrintingLayer1=" + thicknessOfThePrintingLayer1);
+		}
+		
+		if(interfaceConnection!=null && interfaceConnection.length > 0){
+			result.append(" interfaceConnection=" + Arrays.toString(interfaceConnection));
+		}
+		
+		if(typesOfFiles!=null && typesOfFiles.length > 0){
+			result.append(" typesOfFiles=" + Arrays.toString(typesOfFiles));
+		}
+		
+		if(rip!=null && rip.length > 0){
+			result.append(" rip=" + Arrays.toString(rip));
+		}
+		
+		if(maximumWeightOfThePrintedModel0 > 0){
+			result.append(" maximumWeightOfThePrintedModel0=" + maximumWeightOfThePrintedModel0);
+		}
+		
+		if(maximumWeightOfThePrintedModel1 > 0){
+			result.append(" maximumWeightOfThePrintedModel1=" + maximumWeightOfThePrintedModel1);
+		}
+		
+		if(equipmentManufacturer!=null && equipmentManufacturer.length > 0){
+			result.append(" equipmentManufacturer=" + Arrays.toString(equipmentManufacturer));
+		}
+		
+		if(averagePowerConsumption0 > 0){
+			result.append(" averagePowerConsumption0=" + averagePowerConsumption0);
+		}
+		
+		if(averagePowerConsumption1 > 0){
+			result.append(" averagePowerConsumption1=" + averagePowerConsumption1);
+		}
+		
+		if(maxPowerConsumption0 > 0){
+			result.append(" maxPowerConsumption0=" + maxPowerConsumption0);
+		}
+		
+		if(maxPowerConsumption1 > 0){
+			result.append(" maxPowerConsumption1=" + maxPowerConsumption1);
+		}
+		
+		if(weight0 > 0){
+			result.append(" weight0=" + weight0);
+		}
+		
+		if(weight1 > 0){
+			result.append(" weight1=" + weight1);
+		}
+		
+		if(width0 > 0){
+			result.append(" width0=" + width0);
+		}
+		
+		if(width1 > 0){
+			result.append(" width1=" + width1);
+		}
+		
+		if(heigth0 > 0){
+			result.append(" heigth0=" + heigth0);
+		}
+		
+		if(heigth1 > 0){
+			result.append(" heigth1=" + heigth1);
+		}
+		
+		if(depth0 > 0){
+			result.append(" depth0=" + depth0);
+		}
+		
+		if(depth1 > 0){
+			result.append(" depth1=" + depth1);
+		}
+		
+		if(typeExtruder!=null && typeExtruder.length > 0){
+			result.append(" typeExtruder=" + Arrays.toString(typeExtruder));
+		}
+		
+		if(extruderNumber!=null && extruderNumber.length > 0){
+			result.append(" extruderNumber=" + Arrays.toString(extruderNumber));
+		}
+		
+		if(speedOfMovingThePrintHead0 > 0){
+			result.append(" speedOfMovingThePrintHead0=" + speedOfMovingThePrintHead0);
+		}
+		
+		if(speedOfMovingThePrintHead1 > 0){
+			result.append(" speedOfMovingThePrintHead1=" + speedOfMovingThePrintHead1);
+		}
+		
+		if(positioningAccuracyOfThePrintHead0 > 0){
+			result.append(" positioningAccuracyOfThePrintHead0=" + positioningAccuracyOfThePrintHead0);
+		}
+		
+		if(positioningAccuracyOfThePrintHead1 > 0){
+			result.append(" positioningAccuracyOfThePrintHead1=" + positioningAccuracyOfThePrintHead1);
+		}
+		
+		if(airflowModels!=null && airflowModels.length > 0){
+			result.append(" airflowModels=" + Arrays.toString(airflowModels));
+		}
+		
+		if(numberOfFansForBlowingModels0 > 0){
+			result.append(" numberOfFansForBlowingModels0=" + numberOfFansForBlowingModels0);
+		}
+		
+		if(numberOfFansForBlowingModels1 > 0){
+			result.append(" numberOfFansForBlowingModels1=" + numberOfFansForBlowingModels1);
+		}
+		
+		return result.toString();
 	}
 
 }
