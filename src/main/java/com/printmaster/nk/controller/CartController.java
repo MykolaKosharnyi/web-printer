@@ -22,7 +22,7 @@ import com.printmaster.nk.beans.Cart;
 import com.printmaster.nk.beans.ConstantService;
 import com.printmaster.nk.beans.Constants;
 import com.printmaster.nk.beans.Delivery;
-import com.printmaster.nk.beans.ExcelCartOrder;
+import com.printmaster.nk.beans.OrderExcel;
 import com.printmaster.nk.beans.Paint;
 import com.printmaster.nk.beans.ProductCart;
 import com.printmaster.nk.components.MailSendingComponent;
@@ -672,8 +672,8 @@ public class CartController {
     public @ResponseBody void checkNewPropertyValueI() {
 		try{
 			//before set price for one dollar
-			ExcelCartOrder.setPriceForOneDollar(currentConstants.getDollarInGrivna());
-			File excelOrder = ExcelCartOrder.createExcelFile(cart);
+			OrderExcel.setPriceForOneDollar(currentConstants.getDollarInGrivna());
+			File excelOrder = OrderExcel.createExcelFile(cart);
 			mailSendingComponent.sendExcelOrderFromCart(
 					mailSendingComponent.getRecipients(RecipientNotification.NOTIFICATION_CART_ORDER.getTypeNotification()), excelOrder);
 		} catch(Exception ex){

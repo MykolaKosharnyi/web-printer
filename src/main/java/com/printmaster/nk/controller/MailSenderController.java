@@ -57,6 +57,7 @@ public class MailSenderController {
 	public String createMessage(@ModelAttribute("mailMessage") @Valid MailSendingMessage mailMessage,
 			BindingResult result, Model model){
 		if (result.hasErrors()){
+			logger.error("Error while create new MESSAGE!");
 			return putMessagePageParameters(model, mailMessage);
 		}		
 		mailSendingService.save(mailMessage);
@@ -69,6 +70,7 @@ public class MailSenderController {
 	public String updateMessage(@ModelAttribute("mailMessage") @Valid MailSendingMessage mailMessage,
 			BindingResult result, Model model){
 		if (result.hasErrors()){
+			logger.error("Error while UPDATE MESSAGE!");
 		    return putMessagePageParameters(model, mailMessage);
 		}		
 		mailSendingService.update(mailMessage);
