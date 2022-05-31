@@ -3,7 +3,7 @@
 	<div class="col-md-12">
 		<div class="row">
 			<div class="text">
-				<i class="fa fa-copyright"></i> All rights reserved 2016-2017.
+				<i class="fa fa-copyright"></i> All rights reserved 2016-2022.
 			</div>
 		</div>	
 	</div>
