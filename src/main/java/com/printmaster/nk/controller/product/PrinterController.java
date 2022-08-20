@@ -11,7 +11,7 @@ import java.util.Set;
 
 import javax.validation.Valid;
 
-import org.apache.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -36,6 +36,7 @@ import com.printmaster.nk.model.entity.search.SearchPrinters;
 import com.printmaster.nk.model.service.CommentService;
 import com.printmaster.nk.model.service.PrinterService;
 
+@Slf4j
 @Controller
 public class PrinterController extends ProductControllerTemplate<Printer, SearchPrinters>{
 	
@@ -235,8 +236,7 @@ public class PrinterController extends ProductControllerTemplate<Printer, Search
 	
 	
 	
-	private Logger logger = Logger.getLogger(this.getClass());
-    
+
     @Autowired
     private ComponentsForControllers componets;
 
@@ -269,7 +269,7 @@ public class PrinterController extends ProductControllerTemplate<Printer, Search
 	
     @RequestMapping("/"+ TYPE +"/{id}")
     public String showProduct(@PathVariable("id") long id, Model model){
-    	logger.info(String.format("/%s/%d", TYPE, id));
+    	log.info(String.format("/%s/%d", TYPE, id));
         
         Printer product = productService.getProductById(id);
         model.addAttribute("product", product);

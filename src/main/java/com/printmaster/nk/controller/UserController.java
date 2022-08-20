@@ -8,7 +8,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import org.apache.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -38,11 +38,9 @@ import com.printmaster.nk.model.service.UserAddByAdminService;
 import com.printmaster.nk.model.service.UserService;
 import com.printmaster.nk.validator.UserValidator;
 
+@Slf4j
 @Controller
 public class UserController {
-	
-	private Logger logger = Logger.getLogger(UserController.class);
-	
 	private static final String TYPE = "user";
 	private static final String CONCRETE_FOLDER = "users";
 	
@@ -243,11 +241,11 @@ public class UserController {
 	
 	@RequestMapping("/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_REMOVE +"/{id}")
     public String removeUser(@PathVariable("id") long id){
-    	logger.info(String.format("Start deleting %s from database, id=%d", TYPE, id));
+    	log.info(String.format("Start deleting %s from database, id=%d", TYPE, id));
     	
     	componets.removeAllPricturesOfConcreteProduct(DIRECTORY, CONCRETE_FOLDER, id);
     		
-    	logger.info(String.format("DELETE %s with id=%d from database", TYPE, id));
+    	log.info(String.format("DELETE %s with id=%d from database", TYPE, id));
     	userService.removeUser(id);
     		
         return "redirect:/"+ PATH_ADMIN + "/" + TYPE + "s";

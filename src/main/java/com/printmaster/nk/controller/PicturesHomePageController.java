@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,18 +23,16 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.printmaster.nk.beans.ComponentsForControllers;
 
+@Slf4j
 @Controller
 public class PicturesHomePageController {
-
-	private Logger logger = Logger.getLogger(PicturesHomePageController.class);
-	
-    private static final String DIRECTORY = "/var/www/localhost/images";
+	private static final String DIRECTORY = "/var/www/localhost/images";
     private static final String CONCRETE_FOLDER = "home";
 	private static final String NAME_JSON_FILE = "home";
 	
     @RequestMapping(value="/admin/pictures", method=RequestMethod.GET)
 	public ModelAndView addNewPrinter() {
-		logger.info("/admin/pictures page.");
+		log.info("/admin/pictures page.");
 	    return new ModelAndView("admin/pictures");
 	}
     
@@ -146,7 +144,7 @@ public class PicturesHomePageController {
 	 * */
 	@RequestMapping(value = "/admin/pictures/big_animation_reklam", method = RequestMethod.GET)
 		public ModelAndView showBigReklamAnimation(Model model) {
-		logger.info("/admin/pictures/big_animation_reklam page.");
+		log.info("/admin/pictures/big_animation_reklam page.");
 
 		JSONObject home = (JSONObject) getJsonPicturesLinksContainer().get("homeJSON");
 
@@ -167,7 +165,7 @@ public class PicturesHomePageController {
 	@RequestMapping(value="/admin/pictures/central_reklam/upload_pictures", method = RequestMethod.POST)
     	public @ResponseBody String uploadPictureCentralReklam(MultipartHttpServletRequest request) {
     	
-    	logger.info("upload new picture to central reklam on home page"); 	
+    	log.info("upload new picture to central reklam on home page");
 
         String fileName = componets.uploadPicture(request, DIRECTORY, "home", "big_reklam");
 
@@ -200,7 +198,7 @@ public class PicturesHomePageController {
 	@RequestMapping(value = "/admin/pictures/central_reklam/change_order_pictures", method = RequestMethod.POST, consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
 		public @ResponseBody void changeOrderPicturesCentralReklam(@RequestBody List<String> selectedIds) {
 
-		logger.info("change order pictures in central rekalam");
+		log.info("change order pictures in central rekalam");
 
 		JSONObject obj = getJsonPicturesLinksContainer();
 		JSONObject homeJSON = (JSONObject) obj.get("homeJSON");
@@ -220,7 +218,7 @@ public class PicturesHomePageController {
 		public @ResponseBody void removePicturesCentralReklam(@PathVariable("name_picture") String name) {
 
 		String namePicture = name.replace(":", ".");
-		logger.info("delete picture in home page, from central big reklam");
+		log.info("delete picture in home page, from central big reklam");
 		
 		componets.removePicture(namePicture, DIRECTORY, "home", "big_reklam"); 
 
@@ -300,7 +298,7 @@ public class PicturesHomePageController {
 	public @ResponseBody String uploadPicturesRightOFBigReclam(MultipartHttpServletRequest request,
 			@PathVariable("position") String position) {
 
-		logger.info("upload new picture to the right of big reklam on home page");
+		log.info("upload new picture to the right of big reklam on home page");
 
 		String fileName = componets.uploadPicture(request, DIRECTORY, CONCRETE_FOLDER, "right_of_reklam" + File.separator + position);
 
@@ -337,7 +335,7 @@ public class PicturesHomePageController {
 	public @ResponseBody void changeOrderPicturesRightOfBigReclam(@RequestBody List<String> selectedIds,
 			@PathVariable("position") String position) {
 
-		logger.info("change order pictures in left of reklam");
+		log.info("change order pictures in left of reklam");
 
 		JSONObject obj = getJsonPicturesLinksContainer();
 		JSONObject homeJSON = (JSONObject) obj.get("homeJSON");
@@ -370,7 +368,7 @@ public class PicturesHomePageController {
 			@PathVariable("position") String position) {
 
 		String namePicture = name.replace(":", ".");
-		logger.info("delete picture in menu, from: right_of_reklam, in subType: " + position);
+		log.info("delete picture in menu, from: right_of_reklam, in subType: " + position);
 
 		componets.removePicture(namePicture, DIRECTORY, CONCRETE_FOLDER, "right_of_reklam" + File.separator + position);
 
@@ -442,7 +440,7 @@ public class PicturesHomePageController {
 	public @ResponseBody String uploadPicturesToHomeProductsBlock(MultipartHttpServletRequest request,
 			@PathVariable("typeProduct") String typeProduct) {
 
-		logger.info("upload new picture to products block on home page");
+		log.info("upload new picture to products block on home page");
 
 		String fileName = componets.uploadPicture(request, DIRECTORY, CONCRETE_FOLDER, "product_block" + File.separator + typeProduct);
 
@@ -471,7 +469,7 @@ public class PicturesHomePageController {
 	public @ResponseBody void changeOrderPicturesHomeProductsBlock(@RequestBody List<String> selectedIds,
 			@PathVariable("typeProduct") String typeProduct) {
 
-		logger.info("change order pictures in central rekalam");
+		log.info("change order pictures in central rekalam");
 
 		JSONObject obj = getJsonPicturesLinksContainer();
 		JSONObject homeJSON = (JSONObject) obj.get("homeJSON");
@@ -498,7 +496,7 @@ public class PicturesHomePageController {
 			@PathVariable("typeProduct") String typeProduct) {
 
 		String namePicture = name.replace(":", ".");
-		logger.info("delete picture in home page, from product block");
+		log.info("delete picture in home page, from product block");
 
 		componets.removePicture(namePicture, DIRECTORY, CONCRETE_FOLDER,
 				"product_block" + File.separator + typeProduct);
@@ -652,7 +650,7 @@ public class PicturesHomePageController {
 	public @ResponseBody String uploadPicturesOnThreeBigPictures(MultipartHttpServletRequest request,
 			@PathVariable("inTopOfTypeProduct") String inTopOfTypeProduct, @PathVariable("position") String position) {
 
-		logger.info("upload new picture to the one of thee big pictures on home page");
+		log.info("upload new picture to the one of thee big pictures on home page");
 
 		String fileName = componets.uploadPicture(request, DIRECTORY, CONCRETE_FOLDER,
 				"three_big_pictures" + File.separator + inTopOfTypeProduct + File.separator + position);
@@ -692,7 +690,7 @@ public class PicturesHomePageController {
 	public @ResponseBody void changeOrderPicturesHomeThreeBigPictures(@RequestBody List<String> selectedIds,
 			@PathVariable("inTopOfTypeProduct") String inTopOfTypeProduct, @PathVariable("position") String position) {
 
-		logger.info("change order pictures in three big pictures, home");
+		log.info("change order pictures in three big pictures, home");
 
 		JSONObject obj = getJsonPicturesLinksContainer();
 		JSONObject homeJSON = (obj.get("homeJSON") != null) ? (JSONObject) obj.get("homeJSON") : new JSONObject();
@@ -728,7 +726,7 @@ public class PicturesHomePageController {
 			@PathVariable("inTopOfTypeProduct") String inTopOfTypeProduct, @PathVariable("position") String position) {
 
 		String namePicture = name.replace(":", ".");
-		logger.info("delete picture in home, from: 'three big pictures', in top of type product: " + inTopOfTypeProduct);
+		log.info("delete picture in home, from: 'three big pictures', in top of type product: " + inTopOfTypeProduct);
 
 		componets.removePicture(namePicture, DIRECTORY, CONCRETE_FOLDER,
 				"three_big_pictures" + File.separator + inTopOfTypeProduct + File.separator + position);
@@ -826,7 +824,7 @@ public class PicturesHomePageController {
 	public @ResponseBody String uploadPicturesOnTwoNarrowPictures(MultipartHttpServletRequest request,
 			@PathVariable("inTopOfTypeProduct") String inTopOfTypeProduct, @PathVariable("position") String position) {
 
-		logger.info("upload new picture to the one of two narrows pictures on home page");
+		log.info("upload new picture to the one of two narrows pictures on home page");
 
 		String fileName = componets.uploadPicture(request, DIRECTORY, CONCRETE_FOLDER,
 				"two_narrow_pictures" + File.separator + inTopOfTypeProduct + File.separator + position);
@@ -866,7 +864,7 @@ public class PicturesHomePageController {
 	public @ResponseBody void changeOrderPicturesHomeTwoNarrowPictures(@RequestBody List<String> selectedIds,
 			@PathVariable("inTopOfTypeProduct") String inTopOfTypeProduct, @PathVariable("position") String position) {
 
-		logger.info("change order pictures in two narrow pictures, home");
+		log.info("change order pictures in two narrow pictures, home");
 
 		JSONObject obj = getJsonPicturesLinksContainer();
 		JSONObject homeJSON = (obj.get("homeJSON") != null) ? (JSONObject) obj.get("homeJSON") : new JSONObject();
@@ -902,7 +900,7 @@ public class PicturesHomePageController {
 			@PathVariable("inTopOfTypeProduct") String inTopOfTypeProduct, @PathVariable("position") String position) {
 
 		String namePicture = name.replace(":", ".");
-		logger.info(
+		log.info(
 				"delete picture in home, from: 'two narrow pictures', in top of type product: " + inTopOfTypeProduct);
 
 		componets.removePicture(namePicture, DIRECTORY, CONCRETE_FOLDER,

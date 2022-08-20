@@ -8,23 +8,24 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
-import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFFont;
 
 import com.printmaster.nk.model.entity.Option;
 
+@Slf4j
 public class OrderExcel2 {
-	private static Logger log = Logger.getLogger(OrderExcel2.class);
-	
 	public static final String PATH_EXCEL_ORDERS = "/home/nikolay/Documents";
 	private static double priceForOneDollar;
 	
@@ -314,9 +315,9 @@ public class OrderExcel2 {
 		CellStyle style = workbook.createCellStyle();
 
 		allCellBorder(style);
-		style.setAlignment(XSSFCellStyle.ALIGN_CENTER);
+		style.setAlignment(HorizontalAlignment.CENTER);
 		style.setWrapText(true);
-		style.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);
+		style.setVerticalAlignment(VerticalAlignment.CENTER);
         
         XSSFFont font= (XSSFFont) workbook.createFont();
         font.setFontHeightInPoints((short)10);
@@ -331,14 +332,14 @@ public class OrderExcel2 {
 	
 	private static CellStyle middleBorderAndWrapStyle(Sheet sheet) {
 		CellStyle style = sheet.getWorkbook().createCellStyle();
-		style.setBorderBottom(XSSFCellStyle.BORDER_MEDIUM);
-		style.setBorderLeft(XSSFCellStyle.BORDER_MEDIUM);
-		style.setBorderRight(XSSFCellStyle.BORDER_MEDIUM);
-		style.setBorderTop(XSSFCellStyle.BORDER_MEDIUM);
+		style.setBorderBottom(BorderStyle.MEDIUM);
+		style.setBorderLeft(BorderStyle.MEDIUM);
+		style.setBorderRight(BorderStyle.MEDIUM);
+		style.setBorderTop(BorderStyle.MEDIUM);
 		style.setWrapText(true);
 		//((XSSFCellStyle)style).setVerticalAlignment(VerticalAlignment.TOP);
-		style.setAlignment(XSSFCellStyle.ALIGN_CENTER);
-		style.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);
+		style.setAlignment(HorizontalAlignment.CENTER);
+		style.setVerticalAlignment(VerticalAlignment.CENTER);
 		
 		return style;
 	}
@@ -349,8 +350,8 @@ public class OrderExcel2 {
 		allCellBorder(style);
 		style.setWrapText(true);
 		//((XSSFCellStyle)style).setVerticalAlignment(VerticalAlignment.TOP);
-		style.setAlignment(XSSFCellStyle.ALIGN_CENTER);
-		style.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);
+		style.setAlignment(HorizontalAlignment.CENTER);
+		style.setVerticalAlignment(VerticalAlignment.CENTER);
 		
 		return style;
 	}
@@ -359,8 +360,8 @@ public class OrderExcel2 {
 		CellStyle style = workbook.createCellStyle();
 		
 		style.setWrapText(true);
-		style.setAlignment(XSSFCellStyle.ALIGN_CENTER);
-		style.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);
+		style.setAlignment(HorizontalAlignment.CENTER);
+		style.setVerticalAlignment(VerticalAlignment.CENTER);
 		
 		XSSFFont font= (XSSFFont) workbook.createFont();
         font.setFontHeightInPoints((short)14);
@@ -378,10 +379,10 @@ public class OrderExcel2 {
 	}
 
 	private static CellStyle allCellBorder(CellStyle style) {
-		style.setBorderBottom(XSSFCellStyle.BORDER_THIN);
-		style.setBorderLeft(XSSFCellStyle.BORDER_THIN);
-		style.setBorderRight(XSSFCellStyle.BORDER_THIN);
-		style.setBorderTop(XSSFCellStyle.BORDER_THIN);
+		style.setBorderBottom(BorderStyle.THIN);
+		style.setBorderLeft(BorderStyle.THIN);
+		style.setBorderRight(BorderStyle.THIN);
+		style.setBorderTop(BorderStyle.THIN);
 
 		return style;
 	} 

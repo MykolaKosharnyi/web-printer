@@ -9,10 +9,9 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
+import com.mysql.cj.jdbc.AbandonedConnectionCleanupThread;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.mysql.jdbc.AbandonedConnectionCleanupThread;
 
 @WebListener // register it as you wish 
 public class ContainerContextClosedHandler implements ServletContextListener { 
@@ -38,9 +37,8 @@ public class ContainerContextClosedHandler implements ServletContextListener {
             }
         }
         try {
-            AbandonedConnectionCleanupThread.shutdown();
-        }
-        catch (InterruptedException e) {
+            AbandonedConnectionCleanupThread.checkedShutdown();
+        } catch (Exception e) {
             logger.warn("SEVERE problem cleaning up: " + e.getMessage());
             e.printStackTrace();
         }

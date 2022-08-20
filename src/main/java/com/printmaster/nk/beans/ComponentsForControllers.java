@@ -13,12 +13,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -36,16 +36,13 @@ import com.printmaster.nk.model.entity.Rip;
 import com.printmaster.nk.model.entity.Scanner;
 import com.printmaster.nk.model.entity.UseWithProduct;
 
+@Slf4j
+@RequiredArgsConstructor
+
 @Component
 public class ComponentsForControllers {
-
-	private Logger logger = Logger.getLogger(ComponentsForControllers.class);
-	
-	@Autowired
-	public ReclamOnSite reklam;
-	
-	@Autowired
-	public PicturesManipulator picturesManipulator;
+	public final ReclamOnSite reklam;
+	public final PicturesManipulator picturesManipulator;
 	
 	/**
 	 * This method made every product more lightweight(without some characteristic),
@@ -272,7 +269,7 @@ public class ComponentsForControllers {
 			return (JSONObject)new JSONParser()
 					.parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/" + typeOfProduct + ".json"), "UTF-8"));
 		} catch (IOException | ParseException e) {
-			logger.error("Error in read " + typeOfProduct + ".json file", e);
+			log.error("Error in read " + typeOfProduct + ".json file", e);
 			throw new RuntimeException(e);
 		}
     }
@@ -282,7 +279,7 @@ public class ComponentsForControllers {
 			return (JSONArray)new JSONParser()
 					.parse(new InputStreamReader(new FileInputStream("/var/www/localhost/products/" + typeOfProduct + ".json"), "UTF-8"));
 		} catch (IOException | ParseException e) {
-			logger.error("Error in read " + typeOfProduct + ".json file", e);
+			log.error("Error in read " + typeOfProduct + ".json file", e);
 			throw new RuntimeException(e);
 		}
     }
@@ -475,7 +472,7 @@ public class ComponentsForControllers {
     }
     
     /**
-     * @param obj input JSONObject which we wrote to file in concrete directory.
+     * input JSONObject which we wrote to file in concrete directory.
      */
     public void saveObject(JSONObject jsonWithCharakteristic, String typeProduct){
     	try {

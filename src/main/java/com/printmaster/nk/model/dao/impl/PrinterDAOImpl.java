@@ -10,7 +10,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.CriteriaSpecification;
@@ -26,11 +26,9 @@ import org.springframework.stereotype.Repository;
 import com.printmaster.nk.model.entity.Printer;
 import com.printmaster.nk.model.entity.search.SearchPrinters;
 
+@Slf4j
 @Repository
 public class PrinterDAOImpl extends ProductDaoTemplate<Printer, SearchPrinters> {
-	
-	private Logger logger = Logger.getLogger(this.getClass());
-     
     public PrinterDAOImpl() {
 		super(Printer.class);
 	}
@@ -38,7 +36,7 @@ public class PrinterDAOImpl extends ProductDaoTemplate<Printer, SearchPrinters> 
     @SuppressWarnings("unchecked")
 	@Override
 	public Set<Printer> listSearchByPhrase(String phrase) {
-    	logger.info("Search by phrase in PRINTER: " + phrase);
+    	log.info("Search by phrase in PRINTER: " + phrase);
 		Session session = getSessionFactory().getCurrentSession();
 		Criteria cr = session.createCriteria(Printer.class);
 		
@@ -54,8 +52,8 @@ public class PrinterDAOImpl extends ProductDaoTemplate<Printer, SearchPrinters> 
 		cr.add(searchByPhraseGroup);
 		cr.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 		
-		logger.info("result of search:");
-		logger.info(getIdFromArray(cr.list()));		
+		log.info("result of search:");
+		log.info(getIdFromArray(cr.list()));
 		return new HashSet<Printer>(cr.list());
 	}
 
@@ -362,8 +360,8 @@ public class PrinterDAOImpl extends ProductDaoTemplate<Printer, SearchPrinters> 
 				itPrinters.remove();
 		}
 		
-		logger.info("result of search:");
-		logger.info(getIdFromArray(result));
+		log.info("result of search:");
+		log.info(getIdFromArray(result));
         return result;
 	}
 	

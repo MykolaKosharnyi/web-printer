@@ -2,7 +2,8 @@ package com.printmaster.nk.controller;
 
 import java.util.ArrayList;
 
-import org.apache.log4j.Logger;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -20,21 +21,20 @@ import com.printmaster.nk.beans.ComponentsForControllers;
 import com.printmaster.nk.model.entity.search.SearchPUE;
 import com.printmaster.nk.model.service.PreviousUsedEqvipmentService;
 
+@Slf4j
+@RequiredArgsConstructor
+
 @Controller
 public class PreviousUsedEqvipmentController {
-	
-	private Logger logger = Logger.getLogger(PreviousUsedEqvipmentController.class);
-	
-	@Autowired
-    private ComponentsForControllers componets;
-	
-	 private PreviousUsedEqvipmentService pueService;
+
+    private final  ComponentsForControllers componets;
+	private PreviousUsedEqvipmentService pueService;
 	    
-	    @Autowired(required=true)
-	    @Qualifier(value="pueService")
-	    public void setPrinterService(PreviousUsedEqvipmentService ps){
-	        this.pueService = ps;
-	    }
+	@Autowired
+	@Qualifier(value="pueService")
+	public void setPrinterService(PreviousUsedEqvipmentService ps){
+		this.pueService = ps;
+	}
  
 	@RequestMapping(value = "/previous_use_equipments", method = RequestMethod.GET)	
     public String allProduct(Model model) {
@@ -65,20 +65,20 @@ public class PreviousUsedEqvipmentController {
     	model.addAttribute("scannerEquipment", componets.getParametersFromConcreteJSONProduct("scanner", "equipment_manufacturer"));
    
         model.addAttribute("search", search);
-        logger.info("/previously_used_equipment");
+        log.info("/previously_used_equipment");
         return "previous_use_equipments";
     }
 
     @RequestMapping(value="/previous_use_equipments/search",method=RequestMethod.POST, produces = "application/json; charset=utf-8")
     public @ResponseBody ArrayList<JSONObject> showSearchProduct(@ModelAttribute(value="search") SearchPUE search, BindingResult result){
-    	logger.info("/previous_use_equipments/SEARCH");
+    	log.info("/previous_use_equipments/SEARCH");
     	return pueService.listSearchProduct(search);
     }
     
     @RequestMapping(value = "/admin/previous_use_equipments", method = RequestMethod.GET)	
     public String listPrinters(Model model) {
         model.addAttribute("listProducts", pueService.listAllProduct());
-        logger.info("/admin/previous_use_equipments");
+        log.info("/admin/previous_use_equipments");
         return "admin/previous_use_equipments";
     }
 
@@ -101,7 +101,7 @@ public class PreviousUsedEqvipmentController {
     		model.addAttribute("nameProduct", "Имя принтера");
             model.addAttribute("title", "Принтеры");
             model.addAttribute("addProduct", "Добавить принтер");
-            logger.info("/admin/previous_use_equipments/printers");
+            log.info("/admin/previous_use_equipments/printers");
             
             return "admin/products";
     		
@@ -121,7 +121,7 @@ public class PreviousUsedEqvipmentController {
     		model.addAttribute("nameProduct", "Имя принтера");
             model.addAttribute("title", "Принтеры");
             model.addAttribute("addProduct", "Добавить принтер");
-            logger.info("/admin/previous_use_equipments/3d_printers");
+            log.info("/admin/previous_use_equipments/3d_printers");
             
             return "admin/products";
             
@@ -141,7 +141,7 @@ public class PreviousUsedEqvipmentController {
     		model.addAttribute("nameProduct", "Имя товара");
             model.addAttribute("title", "Цыфровое оборудование");
             model.addAttribute("addProduct", "Добавить цыфровое оборудование");
-            logger.info("/admin/previous_use_equipments/digital_printers");
+            log.info("/admin/previous_use_equipments/digital_printers");
             
             return "admin/products";
              		
@@ -161,7 +161,7 @@ public class PreviousUsedEqvipmentController {
     		model.addAttribute("nameProduct", "Имя ламинатора");
             model.addAttribute("title", "Б/У ламинаторы");
             model.addAttribute("addProduct", "Добавить ламинатор");
-            logger.info("/admin/previous_use_equipments/laminators");
+            log.info("/admin/previous_use_equipments/laminators");
             
             return "admin/products";
     		
@@ -181,7 +181,7 @@ public class PreviousUsedEqvipmentController {
     		model.addAttribute("nameProduct", "Имя лазера");
             model.addAttribute("title", "Б/У лазеры");
             model.addAttribute("addProduct", "Добавить лазер");
-            logger.info("/admin/previous_use_equipments/lasers");
+            log.info("/admin/previous_use_equipments/lasers");
             
             return "admin/products";
     		
@@ -201,7 +201,7 @@ public class PreviousUsedEqvipmentController {
     		model.addAttribute("nameProduct", "Имя гравера/фрезера");
             model.addAttribute("title", "Б/У гравер/фрезер");
             model.addAttribute("addProduct", "Добавить гравер/фрезер");
-            logger.info("/admin/previous_use_equipments/cutters");
+            log.info("/admin/previous_use_equipments/cutters");
             
             return "admin/products";
     		
@@ -221,7 +221,7 @@ public class PreviousUsedEqvipmentController {
     		model.addAttribute("nameProduct", "Имя сканера");
             model.addAttribute("title", "Б/У сканера");
             model.addAttribute("addProduct", "Добавить сканер");
-            logger.info("/admin/previous_use_equipments/scanners");
+            log.info("/admin/previous_use_equipments/scanners");
             
             return "admin/products";
     		

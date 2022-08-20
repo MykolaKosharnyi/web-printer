@@ -11,19 +11,23 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.poifs.crypt.EncryptionInfo;
 import org.apache.poi.poifs.crypt.EncryptionMode;
 import org.apache.poi.poifs.crypt.Encryptor;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
+import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
@@ -31,8 +35,8 @@ import org.apache.poi.xssf.usermodel.XSSFFont;
 
 import com.printmaster.nk.model.entity.Option;
 
+@Slf4j
 public class OrderExcel {
-	private static Logger log = Logger.getLogger(OrderExcel.class);
 	
 	private static final String PATH_ROOT_PICTURES = "/var/www/localhost";
 	public static final String PATH_EXCEL_ORDERS = "/var/www/localhost/products/excel_reports";
@@ -314,9 +318,9 @@ public class OrderExcel {
 		CellStyle style = workbook.createCellStyle();
 
 		allCellBorder(style);
-		style.setAlignment(XSSFCellStyle.ALIGN_CENTER);
+		style.setAlignment(HorizontalAlignment.CENTER);
 		style.setWrapText(true);
-		style.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);
+		style.setVerticalAlignment(VerticalAlignment.CENTER);
         
         XSSFFont font= (XSSFFont) workbook.createFont();
         font.setFontHeightInPoints((short)10);
@@ -335,8 +339,8 @@ public class OrderExcel {
 		allCellBorder(style);
 		style.setWrapText(true);
 		//((XSSFCellStyle)style).setVerticalAlignment(VerticalAlignment.TOP);
-		style.setAlignment(XSSFCellStyle.ALIGN_CENTER);
-		style.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);
+		style.setAlignment(HorizontalAlignment.CENTER);
+		style.setVerticalAlignment(VerticalAlignment.CENTER);
 		
 		return style;
 	}
@@ -345,8 +349,8 @@ public class OrderExcel {
 		CellStyle style = workbook.createCellStyle();
 		
 		style.setWrapText(true);
-		style.setAlignment(XSSFCellStyle.ALIGN_CENTER);
-		style.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);
+		style.setAlignment(HorizontalAlignment.CENTER);
+		style.setVerticalAlignment(VerticalAlignment.CENTER);
 		
 		XSSFFont font= (XSSFFont) workbook.createFont();
         font.setFontHeightInPoints((short)14);
@@ -364,10 +368,10 @@ public class OrderExcel {
 	}
 
 	private static CellStyle allCellBorder(CellStyle style) {
-		style.setBorderBottom(XSSFCellStyle.BORDER_THIN);
-		style.setBorderLeft(XSSFCellStyle.BORDER_THIN);
-		style.setBorderRight(XSSFCellStyle.BORDER_THIN);
-		style.setBorderTop(XSSFCellStyle.BORDER_THIN);
+		style.setBorderBottom(BorderStyle.THIN);
+		style.setBorderLeft(BorderStyle.THIN);
+		style.setBorderRight(BorderStyle.THIN);
+		style.setBorderTop(BorderStyle.THIN);
 
 		return style;
 	}
@@ -379,7 +383,7 @@ public class OrderExcel {
 		else { 
 			POIFSFileSystem fs = new POIFSFileSystem(); 
 
-			EncryptionInfo info = new EncryptionInfo(fs, EncryptionMode.agile);
+			EncryptionInfo info = new EncryptionInfo(fs);
 			Encryptor enc = info.getEncryptor(); 
 			enc.confirmPassword(password); 
 
@@ -399,7 +403,7 @@ public class OrderExcel {
 				//os.close();
 			} 
 			catch (Exception e) { 
-				log.warn(new IllegalStateException("Error writing encrypted Excel document", e)); 
+				log.warn("Error writing encrypted Excel document", ExceptionUtils.getStackTrace(e));
 			} 
 			finally { 
 				IOUtils.closeQuietly(baos); 
@@ -431,17 +435,18 @@ public class OrderExcel {
 			        30,
 			        30,
 			        AddDimensionedImage.EXPAND_ROW_AND_COLUMN);
+
 		} catch(FileNotFoundException fnfEx) {
             log.warn("Caught an: " + fnfEx.getClass().getName());
             log.warn("Message: " + fnfEx.getMessage());
             log.warn("Stacktrace follows...........");
-            log.warn(fnfEx);
-        }
-        catch(IOException ioEx) {
+            log.warn(ExceptionUtils.getStackTrace(fnfEx));
+
+        } catch(IOException ioEx) {
         	log.warn("Caught an: " + ioEx.getClass().getName());
         	log.warn("Message: " + ioEx.getMessage());
         	log.warn("Stacktrace follows...........");
-        	log.warn(ioEx);
+        	log.warn(ExceptionUtils.getStackTrace(ioEx));
         }
 	}
 }

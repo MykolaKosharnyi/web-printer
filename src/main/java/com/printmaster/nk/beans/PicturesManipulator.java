@@ -9,8 +9,8 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
-import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,10 +22,11 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
  * @author Mykola Kosharny
  * 
  */
+
+@Slf4j
+
 @Component
 public class PicturesManipulator {
-	
-	private Logger logger = Logger.getLogger(PicturesManipulator.class);
 	private final static String NAME_DEFAULT_PICTURE = "default.jpg";
 	
 	public void copyPicturesToBuffer(List<String> pictures, String directory, String concreteFolder, long id, PicturesContainer files) {
@@ -37,9 +38,9 @@ public class PicturesManipulator {
 			try {
 				File fi = new File(directory + File.separator + concreteFolder + File.separator + id + File.separator + path);
 				fm.setBytes(Files.readAllBytes(fi.toPath()));
-				logger.info(String.format("Load pictures from %s folder, with id=%d to the FILEMETA.", directory, id));
+				log.info(String.format("Load pictures from %s folder, with id=%d to the FILEMETA.", directory, id));
 			} catch (IOException e) {
-				logger.error(String.format("Can't load pistures from %s folder, with id=%d to the FILEMETA", directory, id),e);
+				log.error(String.format("Can't load pistures from %s folder, with id=%d to the FILEMETA", directory, id),e);
 			}
 			files.add(fm);
 		}
@@ -47,9 +48,9 @@ public class PicturesManipulator {
 	
 	public void createDirectoryForPictures(String directory, String concreteFolder, long id) {
 		if(new File(directory + File.separator + concreteFolder + File.separator + id).mkdir()){
-        	logger.info(String.format("Create new folder for %s with id=%d.", concreteFolder, id));        	
+        	log.info(String.format("Create new folder for %s with id=%d.", concreteFolder, id));
         } else {
-        	logger.error(String.format("Don't create new %s folder!", concreteFolder));
+        	log.error(String.format("Don't create new %s folder!", concreteFolder));
         }
 	}
 	
@@ -66,9 +67,9 @@ public class PicturesManipulator {
 							directory + File.separator + concreteFolder
 		    				+ File.separator + id + File.separator + fm.getFileName()));
 					pictures.add(fm.getFileName());
-					logger.info(String.format("Add path of the pictures to %s with id=%d", directory, id));      
+					log.info(String.format("Add path of the pictures to %s with id=%d", directory, id));
 				} catch (IOException e) {
-					logger.error(String.format("Can't add paths of the pictures to %s with id=%d", directory, id), e);
+					log.error(String.format("Can't add paths of the pictures to %s with id=%d", directory, id), e);
 				}
 			}
 		} else {
@@ -84,17 +85,17 @@ public class PicturesManipulator {
 		try {
 			FileCopyUtils.copy(Files.readAllBytes(fi.toPath()), new FileOutputStream(
 					directory + File.separator + concreteFolder + File.separator + id + File.separator + NAME_DEFAULT_PICTURE));
-			logger.info(String.format("User didn't add any picture to the %s with id=%d, so picture of the product will has name '%s' ",
+			log.info(String.format("User didn't add any picture to the %s with id=%d, so picture of the product will has name '%s' ",
 					directory, id, NAME_DEFAULT_PICTURE));		
 		} catch (IOException e) {
-			logger.error(String.format("Can't load the default picture to %s folder, with id = %d", concreteFolder, id), e);
+			log.error(String.format("Can't load the default picture to %s folder, with id = %d", concreteFolder, id), e);
 		}
 		
 		return NAME_DEFAULT_PICTURE;
     }
 	
     public void changeOrderPictures(String type, List<String> selectedIds, PicturesContainer files){
-    	logger.info(String.format("change order of pictures in %s section, in FILEMETA", type));    
+    	log.info(String.format("change order of pictures in %s section, in FILEMETA", type));
     	for(int i = 0; i < selectedIds.size(); i++){
     		for(int k = 0; k < files.size() ; k++){
         		if(files.get(k).getFileName().equals(selectedIds.get(i))){
@@ -114,11 +115,11 @@ public class PicturesManipulator {
     			break;
     		}
     	}
-		logger.info(String.format("remove picture with name '%s' from FILEMETA, in %s section", namePicture, type));  
+		log.info(String.format("remove picture with name '%s' from FILEMETA, in %s section", namePicture, type));
     }
 	
 	public String uploadPictureOnCreationProduct(MultipartHttpServletRequest request, PicturesContainer files){
-    	logger.info("upload new picture");
+    	log.info("upload new picture");
         
         Iterator<String> itr =  request.getFileNames();
         MultipartFile mpf = null;
@@ -134,12 +135,12 @@ public class PicturesManipulator {
 
             try {
                fileMeta.setBytes(mpf.getBytes());
-               logger.info("WRITED new picture to the FILEMETA.");
+               log.info("WRITED new picture to the FILEMETA.");
            } catch (IOException e) {
-               logger.error("WRITTING picture to the FILEMETA has a problem: ",e);
+               log.error("WRITTING picture to the FILEMETA has a problem: ",e);
            }
             
-            logger.info(String.format("pictute added to the FILEMETA successful - %s", fileMeta.getFileName()));  
+            log.info(String.format("pictute added to the FILEMETA successful - %s", fileMeta.getFileName()));
             files.add(fileMeta);
         }  
     	return fileName;
@@ -150,7 +151,7 @@ public class PicturesManipulator {
 	}
 	
 	public String uploadPicture(MultipartHttpServletRequest request, String directory, String concreteFolder, String subject) {
-		logger.info("upload new picture");
+		log.info("upload new picture");
 
 		Iterator<String> itr = request.getFileNames();
 		MultipartFile mpf = null;
@@ -164,7 +165,7 @@ public class PicturesManipulator {
 				FileCopyUtils.copy(mpf.getBytes(), new FileOutputStream(directory + File.separator + concreteFolder
 						+ File.separator + subject + File.separator + fileName));
 			} catch (IOException e) {
-				logger.error("Don't write picture to the folder", e);
+				log.error("Don't write picture to the folder", e);
 			}
 
 		}
@@ -179,7 +180,7 @@ public class PicturesManipulator {
     	try {
     		FileUtils.forceDelete(new File(directory + File.separator + concreteFolder + File.separator + subjectFolder + File.separator + name));
 		} catch (IOException e) {
-			logger.error(String.format("Can't delete picture from %s folder, in concrete = %d, with name = %s", concreteFolder, subjectFolder, name), e);
+			log.error(String.format("Can't delete picture from %s folder, in concrete = %d, with name = %s", concreteFolder, subjectFolder, name), e);
 		} 
     }
 	
@@ -187,9 +188,9 @@ public class PicturesManipulator {
     	try {
     		FileUtils.deleteDirectory(new File(directory + File.separator + 
     				concreteFolder + File.separator + id));
-    		logger.info(String.format("deleted all pictures from %s folder, with id = %d", concreteFolder, id));
+    		log.info(String.format("deleted all pictures from %s folder, with id = %d", concreteFolder, id));
 		} catch (IOException e) {
-			logger.error(String.format("Deleting all pictures from %s folder, with id = %d, has a problem: ", concreteFolder, id), e);
+			log.error(String.format("Deleting all pictures from %s folder, with id = %d, has a problem: ", concreteFolder, id), e);
 		}
     }
 

@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
- 
-import org.apache.log4j.Logger;
+
 import org.springframework.security.authentication.AuthenticationProvider;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -23,11 +23,10 @@ import com.printmaster.nk.model.entity.User;
  * exist in the database and if the username and password are not the same.
  * Otherwise, throw a {@link BadCredentialsException}
  */
+
+@Slf4j
 @Component
-public class CustomAuthenticationProvider implements AuthenticationProvider {
-	 
-	 protected static Logger logger = Logger.getLogger(CustomAuthenticationProvider.class);
-	 
+public class CustomAuthenticationProvider implements AuthenticationProvider  {
 	 /**
 	  * Our custom DAO layer
 	  */
@@ -41,32 +40,32 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 	
-		  logger.debug("Performing custom authentication");
+		  log.debug("Performing custom authentication");
 		  
 		   // Retrieve user details from database
 		  User user = userService.findByEmail(authentication.getName());
 		  
 		  if( user == null ){
-			  logger.error("User does not exists!");
+			  log.error("User does not exists!");
 			  throw new BadCredentialsException("User does not exists!");
 		  }
 			    
 		  // Compare passwords
 		  // Make sure to encode the password first before comparing
 		  if (  passwordEncoder.matches((CharSequence) authentication.getCredentials(), user.getPassword()) == false ) {
-		   logger.error("Wrong password!");
+		   log.error("Wrong password!");
 		   throw new BadCredentialsException("Wrong password!");
 		  }
 	
 		  // Here's the main logic of this custom authentication manager
 		  // Username and password must be the same to authenticate
 		  if (authentication.getName().equals(authentication.getCredentials()) == true) {
-		   logger.debug("Entered username and password are the same!");
+		   log.debug("Entered username and password are the same!");
 		   throw new BadCredentialsException("Entered username and password are the same!");
 		    
 		  } else {
 		    
-		   logger.debug("User details are good and ready to go");
+		   log.debug("User details are good and ready to go");
 		   return new UsernamePasswordAuthenticationToken(
 				   authentication.getName(), 
 				   authentication.getCredentials(), 

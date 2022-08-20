@@ -9,7 +9,7 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
-import org.apache.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -33,6 +33,7 @@ import com.printmaster.nk.model.entity.search.SearchUseWithProducts;
 import com.printmaster.nk.model.service.CommentService;
 import com.printmaster.nk.model.service.UseWithProductService;
 
+@Slf4j
 @Controller
 public class UseWithProductController {
 	
@@ -54,9 +55,7 @@ public class UseWithProductController {
 	    put(ATTRIBUTE_TITLE, "Используется с товаром");
 	    put(ATTRIBUTE_ADD_PRODUCT, "Добавить товар");
 	}};
-	
-	private Logger logger = Logger.getLogger(UseWithProductController.class);
-	
+
 	private static final String TYPE = USE_WITH_PRODUCT;
 	private final static String CONCRETE_FOLDER = USE_WITH_PRODUCT + "s";
 	
@@ -88,7 +87,7 @@ public class UseWithProductController {
         search.setPrise1(100000);
    
         model.addAttribute(ATTRIBUTE_SEARCH, search);
-        logger.info(String.format("/%s", CONCRETE_FOLDER));
+        log.info(String.format("/%s", CONCRETE_FOLDER));
         
         componets.setJSONtoModelAttribute(model, TYPE);
         
@@ -102,7 +101,7 @@ public class UseWithProductController {
    
         if(links.containsKey(subType)){
         	currentType = links.get(subType);
-        	logger.info(String.format("/%s/%s", CONCRETE_FOLDER, subType));
+        	log.info(String.format("/%s/%s", CONCRETE_FOLDER, subType));
         } else {
         	return "redirect:/";
         }
@@ -121,13 +120,13 @@ public class UseWithProductController {
     
     @RequestMapping(value="/"+ TYPE +"s/"+ PATH_SEARCH, method=RequestMethod.POST, produces=JSON_PRODUCES)
     public @ResponseBody ArrayList<JSONObject> showSearchProducts(@ModelAttribute(value="search") SearchUseWithProducts search, BindingResult result ){
-    	logger.info(String.format("/%s/%s", TYPE, PATH_SEARCH));
+    	log.info(String.format("/%s/%s", TYPE, PATH_SEARCH));
     	return componets.makeLightWeightCollectionOfProduct(useWithProductService.listSearchProducts(search));
     }
 
     @RequestMapping("/"+ TYPE +"/{id}")
     public String showProduct(@PathVariable("id") long id, Model model){
-    	logger.info(String.format("/%s/%d", TYPE, id));
+    	log.info(String.format("/%s/%d", TYPE, id));
         
     	UseWithProduct product = useWithProductService.getProductById(id);
         model.addAttribute(ATTRIBUTE_PRODUCT, product);
@@ -142,7 +141,7 @@ public class UseWithProductController {
     public String listProducts(Model model) {
 		model.addAttribute(ATTRIBUTE_TITLE_OF_TABLE, parametersOnAdminProductsPage.get(ATTRIBUTE_TITLE_OF_TABLE));
         model.addAttribute(ATTRIBUTE_LIST_PRODUCTS, useWithProductService.listProducts("id"));
-        logger.info(String.format("/%s/%s", PATH_ADMIN, CONCRETE_FOLDER));
+        log.info(String.format("/%s/%s", PATH_ADMIN, CONCRETE_FOLDER));
         
         model.addAttribute(ATTRIBUTE_PRODUCT_TYPE, TYPE);
 		model.addAttribute(ATTRIBUTE_NAME_PRODUCT, parametersOnAdminProductsPage.get(ATTRIBUTE_NAME_PRODUCT));
@@ -166,12 +165,12 @@ public class UseWithProductController {
         	model.addAttribute(ATTRIBUTE_PRODUCT_SUB_TYPE, type);
         	model.addAttribute(ATTRIBUTE_TITLE_OF_TABLE, links.get(type));
             model.addAttribute(ATTRIBUTE_LIST_PRODUCTS, listResult);
-            logger.info(String.format("/%s/%s/%s", PATH_ADMIN, CONCRETE_FOLDER, type));
+            log.info(String.format("/%s/%s/%s", PATH_ADMIN, CONCRETE_FOLDER, type));
         } else {
         	model.addAttribute(ATTRIBUTE_PRODUCT_SUB_TYPE, "none");
     		model.addAttribute(ATTRIBUTE_TITLE_OF_TABLE, parametersOnAdminProductsPage.get(ATTRIBUTE_TITLE_OF_TABLE));
             model.addAttribute(ATTRIBUTE_LIST_PRODUCTS, useWithProductService.listProducts("id"));
-            logger.info(String.format("/%s/%s", PATH_ADMIN, CONCRETE_FOLDER));
+            log.info(String.format("/%s/%s", PATH_ADMIN, CONCRETE_FOLDER));
         }
         
         model.addAttribute(ATTRIBUTE_PRODUCT_TYPE, TYPE);
@@ -204,7 +203,7 @@ public class UseWithProductController {
 	@RequestMapping(value = "/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_NEW, method = RequestMethod.GET)
 	public String addNewProduct(Model model) {
 		files.clear();
-		logger.info(String.format("/%s/%s/%s", PATH_ADMIN, PATH_NEW, TYPE));
+		log.info(String.format("/%s/%s/%s", PATH_ADMIN, PATH_NEW, TYPE));
 		model.addAttribute(ATTRIBUTE_PRODUCT, new UseWithProduct());
 		
 		componets.setJSONtoModelAttribute(model, TYPE);
@@ -217,9 +216,9 @@ public class UseWithProductController {
 	@RequestMapping(value = "/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_COPY +"/{id}", method = RequestMethod.GET)
 	public String copyProduct(@PathVariable("id") long id, Model model) {
 		files.clear();
-		logger.info(String.format("/%s/%s/%s/%d", PATH_ADMIN, TYPE, PATH_COPY, id));
+		log.info(String.format("/%s/%s/%s/%d", PATH_ADMIN, TYPE, PATH_COPY, id));
 		
-		logger.info(String.format("Copy all characteristic of %s.", TYPE));
+		log.info(String.format("Copy all characteristic of %s.", TYPE));
 		UseWithProduct product = useWithProductService.getProductById(id);
 		
 		 /* copy pictures to buffer */
@@ -242,7 +241,7 @@ public class UseWithProductController {
 		if (result.hasErrors()) return adminFormHasError(product, model);
 
 		long id = useWithProductService.addProduct(product);
-		logger.info(String.format("Create new %s! With id=%d", TYPE, id));
+		log.info(String.format("Create new %s! With id=%d", TYPE, id));
 
 		// create folder and add to her new pictures
 		product.getPathPictures()
@@ -261,7 +260,7 @@ public class UseWithProductController {
 		if (product.isShowOnSite() && product.isShowOnLeftSide())
 			componets.updateInLeftField(product, true, TYPE);
 
-		logger.info("Update links to the products in left menu!");
+		log.info("Update links to the products in left menu!");
 		return "redirect:/" + PATH_ADMIN + "/"+ TYPE +"s";
 	}
 
@@ -272,7 +271,7 @@ public class UseWithProductController {
 		if (result.hasErrors()) return adminFormHasError(product, model);
 
 		long id = useWithProductService.addProduct(product);
-		logger.info(String.format("Create new %s! With id=%d", TYPE, id));
+		log.info(String.format("Create new %s! With id=%d", TYPE, id));
 
 		// create folder and add to her new pictures
 		product.getPathPictures().addAll(componets.createFolderAndWriteToItPictures(DIRECTORY, CONCRETE_FOLDER, id, files));
@@ -290,14 +289,14 @@ public class UseWithProductController {
 		if (product.isShowOnSite() && product.isShowOnLeftSide())
 			componets.updateInLeftField(product, true, TYPE);
 
-		logger.info("Update links to the products in left menu!");
+		log.info("Update links to the products in left menu!");
 		return "redirect:/" + PATH_ADMIN + "/" + TYPE + "/"+ PATH_EDIT +"/" + id;
 	}
 	
     @RequestMapping("/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_EDIT +"/{id}")
     public String editProduct(@PathVariable("id") long id, Model model){
     	
-    	logger.info(String.format("Begin editing %s with id=%d", TYPE, id));
+    	log.info(String.format("Begin editing %s with id=%d", TYPE, id));
     	UseWithProduct undateProduct = useWithProductService.getProductById(id);
     	
         model.addAttribute(ATTRIBUTE_PRODUCT, undateProduct);
@@ -313,7 +312,7 @@ public class UseWithProductController {
 		
 		if (result.hasErrors()) return adminFormHasError(product, model);
 		
-		logger.info(String.format("%s UPDATE with save, id=%d", TYPE, product.getId()));
+		log.info(String.format("%s UPDATE with save, id=%d", TYPE, product.getId()));
 		
 		List<String> pathPictures = useWithProductService.getProductById(product.getId()).getPathPictures();
 		product.setPathPictures(pathPictures);
@@ -323,14 +322,14 @@ public class UseWithProductController {
         	product.setPrise(0);
         
 		useWithProductService.updateProduct(product);
-        logger.info(String.format("%s with id=%d was UDPATED", TYPE, product.getId()));
+        log.info(String.format("%s with id=%d was UDPATED", TYPE, product.getId()));
 		  
 		linksForProduct.createLinks(useWithProductService.listShowOnSite());
 	
 		if (product.isShowOnSite() && product.isShowOnLeftSide())
 	    	componets.updateInLeftField(product, true, TYPE);
 		  
-		logger.info("Update links to the products in left menu!");
+		log.info("Update links to the products in left menu!");
 		return "redirect:/" + PATH_ADMIN + "/" + TYPE + "/"+ PATH_EDIT +"/" + product.getId();
 	}
 	
@@ -341,7 +340,7 @@ public class UseWithProductController {
 		
 		if (result.hasErrors()) return adminFormHasError(product, model);
 
-		logger.info(String.format("%s UPDATE id=%d", TYPE, product.getId()));
+		log.info(String.format("%s UPDATE id=%d", TYPE, product.getId()));
 		List<String> pathPictures = useWithProductService.getProductById(product.getId()).getPathPictures();
 		product.setPathPictures(pathPictures);
 		
@@ -350,7 +349,7 @@ public class UseWithProductController {
         	product.setPrise(0);
 
 		useWithProductService.updateProduct(product);
-		logger.info(String.format("%s with id=%d was UDPATED", TYPE, product.getId()));
+		log.info(String.format("%s with id=%d was UDPATED", TYPE, product.getId()));
 
 		files.clear();
 
@@ -359,7 +358,7 @@ public class UseWithProductController {
 		if (product.isShowOnSite() && product.isShowOnLeftSide())
 			componets.updateInLeftField(product, true, TYPE);
 
-		logger.info("Update links to the products in left menu!");
+		log.info("Update links to the products in left menu!");
 		return "redirect:/" + PATH_ADMIN +"/"+ TYPE + "s";
 	}
 	
@@ -401,7 +400,7 @@ public class UseWithProductController {
     @RequestMapping(value="/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_CHANGE_ORDER_PICTURES_UPDATE +"/{id}", method = RequestMethod.POST,consumes=JSON_CONSUMES,
     		headers = JSON_HEADERS)
     public @ResponseBody void changeOrderPicturesUpdate(@RequestBody List<String> selectedIds, @PathVariable("id") long id) {
-    	logger.info(String.format("change order of pictures in changed %s product", TYPE));
+    	log.info(String.format("change order of pictures in changed %s product", TYPE));
     	
     	UseWithProduct product = useWithProductService.getProductById(id);
     	product.getPathPictures().clear();
@@ -424,21 +423,21 @@ public class UseWithProductController {
 			product.getPathPictures().add(nameOfDefaultPicture);
     	}
     	
-    	logger.info(String.format("Remove pictore with name = %s from changed %s product", name, TYPE));
+    	log.info(String.format("Remove pictore with name = %s from changed %s product", name, TYPE));
 
     	useWithProductService.updateProduct(product);
     }
     
     @RequestMapping("/"+ PATH_ADMIN +"/"+ TYPE +"/"+ PATH_REMOVE +"/{id}")
     public String removeProduct(@PathVariable("id") long id){
-    	logger.info(String.format("Start deleting %s from database, id=%d", TYPE, id));
+    	log.info(String.format("Start deleting %s from database, id=%d", TYPE, id));
     	
     	componets.removeAllPricturesOfConcreteProduct(DIRECTORY, CONCRETE_FOLDER, id);
     		
-    	logger.info("Update links to the products in left menu!");
+    	log.info("Update links to the products in left menu!");
     	componets.updateInLeftField(useWithProductService.getProductById(id), false, TYPE);
     		
-    	logger.info(String.format("DELETE %s with id=%d from database", TYPE, id));
+    	log.info(String.format("DELETE %s with id=%d from database", TYPE, id));
     	useWithProductService.removeProduct(id);
         
     	linksForProduct.createLinks(useWithProductService.listShowOnSite());

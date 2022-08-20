@@ -2,17 +2,15 @@ package com.printmaster.nk.model.dao.impl;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import com.printmaster.nk.model.dao.RoleDAO;
 import com.printmaster.nk.model.entity.Role;
 
-public class RoleDAOImpl implements RoleDAO{
-
-private Logger logger = Logger.getLogger(RoleDAOImpl.class);
-    
+@Slf4j
+public class RoleDAOImpl implements RoleDAO {
     private SessionFactory sessionFactory;
     
     public void setSessionFactory(SessionFactory sf){
@@ -23,7 +21,7 @@ private Logger logger = Logger.getLogger(RoleDAOImpl.class);
 	public long saveRole(Role role) {
 		Session session = this.sessionFactory.getCurrentSession();
         long id = (Long) session.save(role);
-        logger.info("Role saved successfully, Role details: " + role);
+        log.info("Role saved successfully, Role details: " + role);
         return id;
 	}
 
@@ -31,7 +29,7 @@ private Logger logger = Logger.getLogger(RoleDAOImpl.class);
 	public void updateRole(Role role) {
 		Session session = this.sessionFactory.getCurrentSession();
         session.update(role);
-        logger.info("Role updated successfully, Role details: " + role);
+        log.info("Role updated successfully, Role details: " + role);
 	}
 
 	@Override
@@ -40,7 +38,7 @@ private Logger logger = Logger.getLogger(RoleDAOImpl.class);
         @SuppressWarnings("unchecked")
 		List<Role> roleList = session.createQuery("from Role").list();
         for(Role role : roleList){
-            logger.info("Role List::" + role);
+            log.info("Role List::" + role);
         }
         return roleList;
 	}
@@ -49,7 +47,7 @@ private Logger logger = Logger.getLogger(RoleDAOImpl.class);
 	public Role getRoleById(long id) {
 		Session session = this.sessionFactory.getCurrentSession();      
         Role role = (Role) session.load(Role.class, new Long(id));
-        logger.info("Role loaded successfully, Role details=" + role);
+        log.info("Role loaded successfully, Role details=" + role);
         return role;
 	}
 
@@ -60,7 +58,7 @@ private Logger logger = Logger.getLogger(RoleDAOImpl.class);
         if(null != role){
             session.delete(role);
         }
-        logger.info("Role deleted successfully, Role details=" + role);	
+        log.info("Role deleted successfully, Role details=" + role);
 	}
 
 }

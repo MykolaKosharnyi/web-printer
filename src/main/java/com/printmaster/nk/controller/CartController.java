@@ -5,8 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
-import org.json.simple.JSONObject;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.printmaster.nk.beans.Cart;
 import com.printmaster.nk.beans.ConstantService;
@@ -41,11 +39,9 @@ import com.printmaster.nk.model.service.RipService;
 import com.printmaster.nk.model.service.ScannerService;
 import com.printmaster.nk.model.service.UseWithProductService;
 
+@Slf4j
 @Controller
 public class CartController {
-
-	private Logger logger = Logger.getLogger(this.getClass());
-	
 	@Autowired
 	private Cart cart;
 	
@@ -90,7 +86,7 @@ public class CartController {
 			@PathVariable("typeProduct") String typeProduct, @PathVariable("productId") long productId,
 			@PathVariable("productName") String productName, @RequestBody Shopping checkedOption){
 
-		logger.debug("Before ADD product to cart ");
+		log.debug("Before ADD product to cart ");
 		ProductCart productCart = new ProductCart();
 		
 		try{	
@@ -109,10 +105,10 @@ public class CartController {
 			productCart.setBuyOnlineCoefficient( getCurrentCoefficientPriceOnline(typeProduct, productId) );
 			
 			cart.addProduct(productCart , 1);
-			logger.debug("Added product to cart ");
+			log.debug("Added product to cart ");
 			//logger.debug("Added product to cart " + productCart );
 		} catch(Exception ex){
-			logger.error("Error while adding new item to cart!", ex);
+			log.error("Error while adding new item to cart!", ex);
 		}
 		return productCart;
 	}
@@ -557,7 +553,7 @@ public class CartController {
 			ProductCart key = entry.getKey();
 			if (key.getTypeProduct().equals(typeProduct) && key.getIdProduct()==productId){
 				cart.removeProduct(key);
-				logger.debug("Remove product from cart " + key );
+				log.debug("Remove product from cart " + key );
 				break;
 			}
 		}
@@ -575,7 +571,7 @@ public class CartController {
 			ProductCart key = entry.getKey();
 			if (key.getTypeProduct().equals(typeProduct) && key.getIdProduct()==productId){
 				cart.changeQuantityProduct(key , quantity);
-				logger.debug("Change quantity product in cart " + key );
+				log.debug("Change quantity product in cart " + key );
 				break;
 			}
 		}
@@ -593,7 +589,7 @@ public class CartController {
 			ProductCart key = entry.getKey();
 			if (key.getTypeProduct().equals(typeProduct) && key.getIdProduct()==productId){
 				cart.changeQuantityPaintProduct(key, typePaint, quantity);
-				logger.debug("Change quantity paint product in cart " + key );
+				log.debug("Change quantity paint product in cart " + key );
 				break;
 			}
 		}
@@ -611,7 +607,7 @@ public class CartController {
 			ProductCart key = entry.getKey();
 			if (key.getTypeProduct().equals(typeProduct) && key.getIdProduct()==productId){
 				cart.changeOptionProduct(key, optionName, stateOption);
-				logger.debug("Change option product in cart " + key );
+				log.debug("Change option product in cart " + key );
 				break;
 			}
 		}
@@ -629,7 +625,7 @@ public class CartController {
 			ProductCart key = entry.getKey();
 			if (key.getTypeProduct().equals(typeProduct) && key.getIdProduct()==productId){
 				cart.changeDeliveryProduct(key, deliveryName, stateOption);
-				logger.debug("Change delivery product in cart " + key );
+				log.debug("Change delivery product in cart " + key );
 				break;
 			}
 		}
@@ -647,7 +643,7 @@ public class CartController {
 			ProductCart key = entry.getKey();
 			if (key.getTypeProduct().equals(typeProduct) && key.getIdProduct()==productId){
 				cart.changePaintProduct(key, paintName, stateOption);
-				logger.debug("Change paint product in cart " + key );
+				log.debug("Change paint product in cart " + key );
 				break;
 			}
 		}
@@ -677,7 +673,7 @@ public class CartController {
 			mailSendingComponent.sendExcelOrderFromCart(
 					mailSendingComponent.getRecipients(RecipientNotification.NOTIFICATION_CART_ORDER.getTypeNotification()), excelOrder);
 		} catch(Exception ex){
-			logger.error("Can't create excel file order!", ex);
+			log.error("Can't create excel file order!", ex);
 		}
 		
 		//clean all items in cart

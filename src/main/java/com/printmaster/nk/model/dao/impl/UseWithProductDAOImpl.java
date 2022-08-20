@@ -1,13 +1,12 @@
 package com.printmaster.nk.model.dao.impl;
 
-import java.lang.invoke.MethodHandles;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -28,11 +27,10 @@ import com.printmaster.nk.model.entity.Scanner;
 import com.printmaster.nk.model.entity.UseWithProduct;
 import com.printmaster.nk.model.entity.search.SearchUseWithProducts;
 
+@Slf4j
 @Repository
 public class UseWithProductDAOImpl implements UseWithProductDAO{
 
-	 private Logger logger = Logger.getLogger(MethodHandles.lookup().lookupClass());
-	 
 	    private SessionFactory sessionFactory;
 	     
 	    public void setSessionFactory(SessionFactory sf){
@@ -43,7 +41,7 @@ public class UseWithProductDAOImpl implements UseWithProductDAO{
 	    public long addProduct(UseWithProduct c) {
 	        Session session = this.sessionFactory.getCurrentSession();
 	        long id = (Long) session.save(c);
-	        logger.info("SAVE UseWithProduct, id=" + id);
+	        log.info("SAVE UseWithProduct, id=" + id);
 	        return id;
 	    }
 	 
@@ -57,7 +55,7 @@ public class UseWithProductDAOImpl implements UseWithProductDAO{
 			cr.add(Restrictions.like("name", phrase, MatchMode.ANYWHERE));
 			
 			Set<UseWithProduct> result = new HashSet<UseWithProduct>(cr.list());
-			logger.info(getIdFromArray(result));
+			log.info(getIdFromArray(result));
 			return result;
 		}
 	    	
@@ -65,7 +63,7 @@ public class UseWithProductDAOImpl implements UseWithProductDAO{
 	    public void updateProduct(UseWithProduct c) {
 	        Session session = this.sessionFactory.getCurrentSession();
 	        session.update(c);
-	        logger.info("UPDATE UseWithProduct, id=" + c.getId());
+	        log.info("UPDATE UseWithProduct, id=" + c.getId());
 	    }
 	 
 	    @SuppressWarnings({ "unchecked", "rawtypes" })
@@ -81,7 +79,7 @@ public class UseWithProductDAOImpl implements UseWithProductDAO{
 			}
 	        	        
 			Set<UseWithProduct> useWithProductList = new LinkedHashSet(cr.list());
-			logger.info(getIdFromArray(useWithProductList));
+			log.info(getIdFromArray(useWithProductList));
 	        return useWithProductList;
 	    }
 
@@ -89,7 +87,7 @@ public class UseWithProductDAOImpl implements UseWithProductDAO{
 	    public UseWithProduct getProductById(long id) {
 	        Session session = this.sessionFactory.getCurrentSession();      
 	        UseWithProduct c = (UseWithProduct) session.load(UseWithProduct.class, new Long(id));
-	        logger.info("LOAD UseWithProduct, id=" + id);
+	        log.info("LOAD UseWithProduct, id=" + id);
 	        return c;
 	    }
 	 
@@ -271,7 +269,7 @@ public class UseWithProductDAOImpl implements UseWithProductDAO{
 	        }
 	        
 	        
-	        logger.info("DELETE UseWithProduct, id=" + id);
+	        log.info("DELETE UseWithProduct, id=" + id);
 	    }
 
 		@SuppressWarnings("unchecked")
@@ -295,7 +293,7 @@ public class UseWithProductDAOImpl implements UseWithProductDAO{
 			cr.add(Restrictions.eq("showOnSite", true));
 						
 			Set<UseWithProduct> result = new LinkedHashSet<UseWithProduct>(cr.list());	
-			logger.info(getIdFromArray(result));
+			log.info(getIdFromArray(result));
 	        return result;
 		}
 
@@ -308,7 +306,7 @@ public class UseWithProductDAOImpl implements UseWithProductDAO{
 			
 			Set<UseWithProduct> result = new LinkedHashSet<UseWithProduct>(cr.list());
 			
-			logger.info(getIdFromArray(result));
+			log.info(getIdFromArray(result));
 	        return result;
 		}
 
@@ -322,7 +320,7 @@ public class UseWithProductDAOImpl implements UseWithProductDAO{
 			
 			Set<UseWithProduct> result = new LinkedHashSet<UseWithProduct>(cr.list());
 			
-			logger.info(getIdFromArray(result));
+			log.info(getIdFromArray(result));
 	        return result;
 		}
 
@@ -340,7 +338,7 @@ public class UseWithProductDAOImpl implements UseWithProductDAO{
 			cr.add(Restrictions.in("id", list));
 			
 			Set<UseWithProduct> result = new LinkedHashSet<UseWithProduct>(cr.list());
-			logger.info(getIdFromArray(result));
+			log.info(getIdFromArray(result));
 			return result;
 		}
 	
@@ -362,10 +360,10 @@ public class UseWithProductDAOImpl implements UseWithProductDAO{
 				cr.add(searchForTypeInk);
 				
 				Set<UseWithProduct> result = new LinkedHashSet<UseWithProduct>(cr.list());
-				logger.info(getIdFromArray(result));
+				log.info(getIdFromArray(result));
 				return result;
 			} else {
-				logger.info("UseWithProduct list is empty!");
+				log.info("UseWithProduct list is empty!");
 				return new LinkedHashSet<UseWithProduct>();
 			}
 			

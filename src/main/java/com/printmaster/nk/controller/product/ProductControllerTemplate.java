@@ -6,8 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.json.simple.JSONObject;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.ui.Model;
@@ -28,7 +30,8 @@ public abstract class ProductControllerTemplate <T extends HeadProduct, S extend
 	
 	private Class<T> product;	
 	private Class<S> searchCriteries;
-	private Logger logger =  Logger.getLogger(this.getClass().getName());
+
+	private Logger logger = LoggerFactory.getLogger(this.getClass().getName());
 	
 	@Autowired
 	private LinksForProducts linksForProduct;
@@ -118,10 +121,10 @@ public abstract class ProductControllerTemplate <T extends HeadProduct, S extend
     	ArrayList<JSONObject> resultSearch = new ArrayList<JSONObject>();
     	
     	try{
-    		logger.info(search);
+    		logger.info(search.toString());
     		resultSearch = componets.makeLightWeightCollectionOfProduct(getProductService().listSearchProducts(search));
     	} catch(Exception ex){
-    		logger.error(ex);
+    		logger.error(ExceptionUtils.getStackTrace(ex));
     	}
     	
     	return resultSearch;

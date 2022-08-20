@@ -30,6 +30,19 @@
 		<artifactId>spring-boot-starter-web</artifactId>
 	</dependency>
 
+	<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security -->
+	<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-security</artifactId>
+	</dependency>
+
+	<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-mail -->
+	<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-mail</artifactId>
+	</dependency>
+
+
 	<dependency>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-actuator</artifactId>
@@ -124,6 +137,13 @@
 		<groupId>org.apache.commons</groupId>
 		<artifactId>commons-lang3</artifactId>
 		<version>3.0</version>
+	</dependency>
+
+	<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-validator -->
+	<dependency>
+		<groupId>org.hibernate</groupId>
+		<artifactId>hibernate-validator</artifactId>
+		<version>7.0.5.Final</version>
 	</dependency>
 
 
@@ -228,25 +248,19 @@
 	<dependency>
 		<groupId>org.apache.poi</groupId>
 		<artifactId>poi</artifactId>
-		<version>3.17</version>
+		<version>5.2.2</version>
 	</dependency>
 
 	<dependency>
 		<groupId>org.apache.poi</groupId>
 		<artifactId>poi-ooxml</artifactId>
-		<version>3.10-FINAL</version>
+		<version>5.2.2</version>
 	</dependency>
 
 	<dependency>
 		<groupId>com.itextpdf</groupId>
 		<artifactId>itextpdf</artifactId>
-		<version>5.5.10</version>
-	</dependency>
-
-	<dependency>
-		<groupId>javax.mail</groupId>
-		<artifactId>mail</artifactId>
-		<version>1.4.7</version>
+		<version>5.5.13.3</version>
 	</dependency>
 
 	<dependency>

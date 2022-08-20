@@ -23,10 +23,10 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.internet.MimeUtility;
 
-import org.apache.log4j.Logger;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
@@ -36,19 +36,14 @@ import com.printmaster.nk.beans.ComponentsForControllers;
 import com.printmaster.nk.model.entity.MailSendingMessage;
 import com.printmaster.nk.model.service.MailSendingOptionService;
 
+@Slf4j
+@RequiredArgsConstructor
+
 @Component
 public class MailSendingComponent {
-	
-	private Logger log = Logger.getLogger(this.getClass());
-	
-	@Autowired
-    ComponentsForControllers componets;
-	
-	@Autowired
-    private JavaMailSenderImpl mailSender;
-	
-	@Autowired
-	MailSendingOptionService mailSendingOptionService;
+    private final ComponentsForControllers componets;
+    private final JavaMailSenderImpl mailSender;
+	private final MailSendingOptionService mailSendingOptionService;
 	
 	@Value( "${magic.number}" )
 	private int magicNumber;

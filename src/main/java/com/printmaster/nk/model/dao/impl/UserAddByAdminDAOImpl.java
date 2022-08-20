@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -15,11 +15,9 @@ import org.springframework.stereotype.Repository;
 import com.printmaster.nk.model.dao.UserAddByAdminDAO;
 import com.printmaster.nk.model.entity.UserAddByAdmin;
 
+@Slf4j
 @Repository
 public class UserAddByAdminDAOImpl implements UserAddByAdminDAO{
-
-	private Logger logger = Logger.getLogger(UserAddByAdminDAOImpl.class);
-
 	private SessionFactory sessionFactory;
 
 	public void setSessionFactory(SessionFactory sf) {
@@ -30,7 +28,7 @@ public class UserAddByAdminDAOImpl implements UserAddByAdminDAO{
 	public long save(UserAddByAdmin user) {
 		Session session = this.sessionFactory.getCurrentSession();
 		long id = (Long) session.save(user);
-		logger.info("UserAddByAdmin saved successfully, UserAddByAdmin details: " + user);
+		log.info("UserAddByAdmin saved successfully, UserAddByAdmin details: " + user);
 		return id;
 	}
 
@@ -38,7 +36,7 @@ public class UserAddByAdminDAOImpl implements UserAddByAdminDAO{
 	public void updateUser(UserAddByAdmin user) {
 		Session session = this.sessionFactory.getCurrentSession();
 		session.update(user);
-		logger.info("UserAddByAdmin updated successfully, UserAddByAdmin details: " + user);
+		log.info("UserAddByAdmin updated successfully, UserAddByAdmin details: " + user);
 	}
 
 	@Override
@@ -53,7 +51,7 @@ public class UserAddByAdminDAOImpl implements UserAddByAdminDAO{
 	public UserAddByAdmin getUserById(long id) {
 		Session session = this.sessionFactory.getCurrentSession();
 		UserAddByAdmin user = (UserAddByAdmin) session.load(UserAddByAdmin.class, new Long(id));
-		logger.info("UserAddByAdmin loaded successfully, UserAddByAdmin details=" + user);
+		log.info("UserAddByAdmin loaded successfully, UserAddByAdmin details=" + user);
 		return user;
 	}
 
@@ -64,7 +62,7 @@ public class UserAddByAdminDAOImpl implements UserAddByAdminDAO{
 		if (null != user) {
 			session.delete(user);
 		}
-		logger.info("UserAddByAdmin deleted successfully, UserAddByAdmin details=" + user);
+		log.info("UserAddByAdmin deleted successfully, UserAddByAdmin details=" + user);
 	}
 
 	@SuppressWarnings("unchecked")

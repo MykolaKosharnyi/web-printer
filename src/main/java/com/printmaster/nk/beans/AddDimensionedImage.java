@@ -15,8 +15,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellReference;
 import org.apache.poi.util.IOUtils;
-	
-	
+
 	/**
 39	 * Demonstrates how to add an image to a worksheet and set that images size
 40	 * to a specific number of millimetres irrespective of the width of the columns
@@ -357,7 +356,7 @@ import org.apache.poi.util.IOUtils;
 	        // image as the size of the row/column is adjusted. This could easilly
 	        // become another parameter passed to the method. Please read the note
 	        // above regarding the behaviour of image resizing.
-	        anchor.setAnchorType(ClientAnchor.MOVE_AND_RESIZE);
+	        anchor.setAnchorType(ClientAnchor.AnchorType.MOVE_AND_RESIZE);
 	
 	        // Now, add the picture to the workbook. Note that unlike the similar
 	        // method in the HSSF Examples section, the image type is checked. First,

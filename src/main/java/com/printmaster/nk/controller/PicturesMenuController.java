@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -31,11 +31,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.printmaster.nk.beans.ComponentsForControllers;
 import com.printmaster.nk.components.ResourceHashHolder;
 
+@Slf4j
 @Controller
 public class PicturesMenuController {
-	
-	private Logger logger = Logger.getLogger(PicturesMenuController.class);
-	
 	private final static String DIRECTORY = "/var/www/localhost/images";	
 	private final static String CONCRETE_FOLDER = "menu";
 	private final static String PATH_TO_JSON_FILE = "/var/www/localhost" + File.separator + "pictures_head_menu.json";
@@ -299,7 +297,7 @@ public class PicturesMenuController {
     		@PathVariable("typeProduct") String typeProduct,
     		@PathVariable("subTypeProduct") String subTypeProduct) {
 
-		logger.info("upload new picture to the menu");
+		log.info("upload new picture to the menu");
 
 		String fileName = componets.uploadPicture(request, DIRECTORY, CONCRETE_FOLDER, typeProduct);
 
@@ -364,7 +362,7 @@ public class PicturesMenuController {
     		@PathVariable("typeProduct") String typeProduct,
     		@PathVariable("subTypeProduct") String subTypeProduct) {
     	
-    	logger.info("change order pictures in menu"); 	
+    	log.info("change order pictures in menu");
     	
     	JSONObject obj = getJsonPicturesLinksContainer();
 
@@ -403,7 +401,7 @@ public class PicturesMenuController {
     		@PathVariable("subTypeProduct") String subTypeProduct) {
 
     	String namePicture = name.replace(":", ".");
-    	logger.info(String.format("delete picture in menu, from: %s , in subType: %s", typeProduct, subTypeProduct)); 	
+    	log.info(String.format("delete picture in menu, from: %s , in subType: %s", typeProduct, subTypeProduct));
     	
     	componets.removePicture(namePicture, DIRECTORY, CONCRETE_FOLDER, typeProduct); 
     	

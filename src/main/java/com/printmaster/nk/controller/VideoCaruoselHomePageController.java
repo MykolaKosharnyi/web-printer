@@ -5,7 +5,7 @@ import static com.printmaster.nk.controller.ConstUsedInContr.*;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +19,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.printmaster.nk.beans.ComponentsForControllers;
 
+@Slf4j
 @Controller
 public class VideoCaruoselHomePageController {
-
-	private Logger logger = Logger.getLogger(VideoCaruoselHomePageController.class);
-	
 	private static final String NAME_JSON_FILE = "home";
 	private static final String LIST_VIDEO = "listVideo"; 
 	private static final String PATH_PARAMETER = "path";
@@ -53,7 +51,7 @@ public class VideoCaruoselHomePageController {
 		arrayOfVideo.add(video);
 
 		saveJsonArray(arrayOfVideo);
-		logger.info("upload new video.");
+		log.info("upload new video.");
 		return "rlxjuG9YHkM";
     }
     
@@ -72,7 +70,7 @@ public class VideoCaruoselHomePageController {
 		}
 
 		saveJsonArray(sortedArrayOfVideo);
-		logger.info("change order of video");
+		log.info("change order of video");
     }
     
     @SuppressWarnings("rawtypes")
@@ -104,7 +102,7 @@ public class VideoCaruoselHomePageController {
     		}
     	}
 		saveJsonArray(arrayOfVideo);
-		logger.info("remove video from home page carousel"); 
+		log.info("remove video from home page carousel");
     }
 	
 	private JSONArray getJsonArrayOfVideo(){

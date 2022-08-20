@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -15,9 +15,8 @@ import com.printmaster.nk.model.dao.MailSendingDAO;
 import com.printmaster.nk.model.entity.MailSendingMessage;
 import com.printmaster.nk.model.entity.MailSendingMessage.StatusOfSending;
 
+@Slf4j
 public class MailSendingDAOImpl implements MailSendingDAO {
-	
-	private Logger logger = Logger.getLogger(MailSendingDAOImpl.class);
 	 
     private SessionFactory sessionFactory;
      
@@ -30,7 +29,7 @@ public class MailSendingDAOImpl implements MailSendingDAO {
 		Session session = this.sessionFactory.getCurrentSession();
 		mailMessage.setStatus(StatusOfSending.WAITING);
         long id = (Long) session.save(mailMessage);
-        logger.info("MailSendindMessage saved successfully, details = " + mailMessage);
+        log.info("MailSendindMessage saved successfully, details = " + mailMessage);
         return id;
 	}
 
@@ -38,7 +37,7 @@ public class MailSendingDAOImpl implements MailSendingDAO {
 	public MailSendingMessage getById(long id) {
 		Session session = this.sessionFactory.getCurrentSession();      
 		MailSendingMessage msm = (MailSendingMessage) session.load(MailSendingMessage.class, new Long(id));
-        logger.info("MailSendindMessage loaded successfully, details = " + msm);
+        log.info("MailSendindMessage loaded successfully, details = " + msm);
         return msm;
 	}
 
@@ -57,7 +56,7 @@ public class MailSendingDAOImpl implements MailSendingDAO {
 		Session session = this.sessionFactory.getCurrentSession();
 		mailMessage.setDateLastChanging(new Date());
         session.update(mailMessage);
-        logger.info("MailSendingMessage updated successfully, details = " + mailMessage);
+        log.info("MailSendingMessage updated successfully, details = " + mailMessage);
 	}
 
 	@Override
@@ -67,7 +66,7 @@ public class MailSendingDAOImpl implements MailSendingDAO {
         if(null != msm){
             session.delete(msm);
         }
-        logger.info("MailSendingMessage deleted successfully, details = " + msm);
+        log.info("MailSendingMessage deleted successfully, details = " + msm);
 	}
 
 

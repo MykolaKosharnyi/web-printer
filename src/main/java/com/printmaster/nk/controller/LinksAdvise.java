@@ -7,7 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
 
-import org.apache.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -22,10 +22,9 @@ import com.printmaster.nk.beans.Cart;
 import com.printmaster.nk.components.ResourceHashHolder;
 import com.printmaster.nk.components.ResourceMap;
 
+@Slf4j
 @ControllerAdvice
 public class LinksAdvise {
-	private Logger logger = Logger.getLogger(LinksAdvise.class);
-
 	@Autowired
 	Cart cart;
 	
@@ -59,7 +58,7 @@ public class LinksAdvise {
 			Collections.reverse(reklam);
 			model.addAttribute("reklam", reklam);
 		} catch (IOException | ParseException e) {
-			logger.error("Error, while add to request parameters reklam: ", e);		
+			log.error("Error, while add to request parameters reklam: ", e);
 		}
     }
 	

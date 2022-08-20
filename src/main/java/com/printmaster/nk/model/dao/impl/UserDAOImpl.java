@@ -3,7 +3,7 @@ package com.printmaster.nk.model.dao.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -13,11 +13,9 @@ import org.springframework.stereotype.Repository;
 import com.printmaster.nk.model.dao.UserDAO;
 import com.printmaster.nk.model.entity.User;
 
+@Slf4j
 @Repository
 public class UserDAOImpl implements UserDAO{
-
-	private Logger logger = Logger.getLogger(UserDAOImpl.class);
-    
     private SessionFactory sessionFactory;
      
     public void setSessionFactory(SessionFactory sf){
@@ -28,7 +26,7 @@ public class UserDAOImpl implements UserDAO{
 	public long save(User user) {
         Session session = this.sessionFactory.getCurrentSession();
         long id = (Long) session.save(user);
-        logger.info("User saved successfully, User details: " + user);
+        log.info("User saved successfully, User details: " + user);
         return id;
 	}
     
@@ -36,7 +34,7 @@ public class UserDAOImpl implements UserDAO{
 	public void updateUser(User user) {
 		Session session = this.sessionFactory.getCurrentSession();
         session.update(user);
-        logger.info("User updated successfully, User details: " + user);
+        log.info("User updated successfully, User details: " + user);
 		
 	}
 
@@ -46,7 +44,7 @@ public class UserDAOImpl implements UserDAO{
         @SuppressWarnings("unchecked")
 		List<User> userList = session.createQuery("from User").list();
         for(User user : userList){
-            logger.info("User List::" + user);
+            log.info("User List::" + user);
         }
         return userList;
 	}
@@ -55,7 +53,7 @@ public class UserDAOImpl implements UserDAO{
 	public User getUserById(long id) {
         Session session = this.sessionFactory.getCurrentSession();      
         User user = (User) session.load(User.class, new Long(id));
-        logger.info("User loaded successfully, User details=" + user);
+        log.info("User loaded successfully, User details=" + user);
         return user;
 	}
 
@@ -66,7 +64,7 @@ public class UserDAOImpl implements UserDAO{
         if(null != user){
             session.delete(user);
         }
-        logger.info("User deleted successfully, User details=" + user);	
+        log.info("User deleted successfully, User details=" + user);
 	}
 	
 	@SuppressWarnings("unchecked")

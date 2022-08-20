@@ -7,7 +7,7 @@ import java.io.PrintWriter;
 import java.io.Writer;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -19,10 +19,9 @@ import org.springframework.web.client.RestTemplate;
 
 import com.printmaster.nk.controller.CurrencyInfo;
 
+@Slf4j
 @Component("loaderValueCurrency")
 public class LoaderValueCurrency {
-	private static Logger log = Logger.getLogger(LoaderValueCurrency.class);
-	
 	public void loadCurrency(){
 		double dollar = 0;
 		double euro = 0;
