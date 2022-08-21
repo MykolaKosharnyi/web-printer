@@ -1,0 +1,27 @@
+spring:
+  profiles:
+    active: @activatedProperties@
+  devtools:
+    restart:
+      enabled: true
+      livereload:
+        enabled: true
+
+logging:
+  config: 'classpath:config/logback-spring.xml'
+  level:
+    root: INFO
+    org.springframework.web: INFO
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: [ "health", "prometheus" ]
+
+endpoints:
+  prometheus:
+    enabled: true
+
+server:
+  port: 8082

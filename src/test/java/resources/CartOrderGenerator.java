@@ -6,12 +6,12 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.printmaster.nk.beans.Cart;
-import com.printmaster.nk.beans.Delivery;
-import com.printmaster.nk.beans.Paint;
-import com.printmaster.nk.beans.ProductCart;
-import com.printmaster.nk.beans.Cart.StatusOfOrdering;
-import com.printmaster.nk.model.entity.Option;
+import com.mykoshar.shop.api.beans.Cart;
+import com.mykoshar.shop.api.beans.Delivery;
+import com.mykoshar.shop.api.beans.Paint;
+import com.mykoshar.shop.api.beans.ProductCart;
+import com.mykoshar.shop.api.beans.Cart.StatusOfOrdering;
+import com.mykoshar.shop.api.model.entity.Option;
 
 public class CartOrderGenerator {
 	public static Cart generate(){

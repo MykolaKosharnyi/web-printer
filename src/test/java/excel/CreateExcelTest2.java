@@ -2,7 +2,7 @@ package excel;
 
 import java.io.IOException;
 
-import com.printmaster.nk.beans.OrderExcel2;
+import com.mykoshar.shop.api.beans.OrderExcel2;
 
 import resources.CartOrderGenerator;
 

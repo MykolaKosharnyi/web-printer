@@ -7,7 +7,7 @@
 
 	<tag>
 		<name>getDescriptionByLocale</name>
-		<tag-class>com.printmaster.nk.components.DescriptionByLocaleTag</tag-class>
+		<tag-class>com.mykoshar.shop.api.components.DescriptionByLocaleTag</tag-class>
 		<body-content>empty</body-content>
 		
 		<attribute>
@@ -20,7 +20,7 @@
 	
 	<tag>
 		<name>searchByLocale</name>
-		<tag-class>com.printmaster.nk.components.PropertySearchByLocale</tag-class>
+		<tag-class>com.mykoshar.shop.api.components.PropertySearchByLocale</tag-class>
 		<body-content>empty</body-content>
 	
 		<attribute>
@@ -39,7 +39,7 @@
 	
 	<tag>
 		<name>radio</name>
-		<tag-class>com.printmaster.nk.custom_tags.AdminRadioTag</tag-class>
+		<tag-class>com.mykoshar.shop.api.custom_tags.AdminRadioTag</tag-class>
 		<body-content>empty</body-content>
 	
 		<attribute>
@@ -64,7 +64,7 @@
 	
 	<tag>
 		<name>check</name>
-		<tag-class>com.printmaster.nk.custom_tags.AdminCheckboxTag</tag-class>
+		<tag-class>com.mykoshar.shop.api.custom_tags.AdminCheckboxTag</tag-class>
 		<body-content>empty</body-content>
 	
 		<attribute>
@@ -90,7 +90,7 @@
 	
 	<tag>
 		<name>singleProperty</name>
-		<tag-class>com.printmaster.nk.custom_tags.SinglePropertyProductTag</tag-class>
+		<tag-class>com.mykoshar.shop.api.custom_tags.SinglePropertyProductTag</tag-class>
 		<body-content>empty</body-content>
 	
 		<attribute>
@@ -109,7 +109,7 @@
 	
 	<tag>
 		<name>multipleProperty</name>
-		<tag-class>com.printmaster.nk.custom_tags.MultiplePropertyProductTag</tag-class>
+		<tag-class>com.mykoshar.shop.api.custom_tags.MultiplePropertyProductTag</tag-class>
 		<body-content>empty</body-content>
 	
 		<attribute>

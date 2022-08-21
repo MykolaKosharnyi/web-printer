@@ -1,0 +1,106 @@
+package com.mykoshar.shop.api.model.service.impl;
+
+import java.util.Date;
+import java.util.List;
+
+import com.mykoshar.shop.api.model.dao.CommentDAO;
+import com.mykoshar.shop.api.model.entity.Comment;
+import com.mykoshar.shop.api.model.entity.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.mykoshar.shop.api.model.service.CommentService;
+import com.mykoshar.shop.api.model.service.UserService;
+
+@Service
+public class CommentServiceImpl implements CommentService{
+	
+	private CommentDAO commentDAO;
+	
+	@Autowired
+    private UserService userService;
+
+	public void setCommentDAO(CommentDAO commentDAO) {
+		this.commentDAO = commentDAO;
+	}
+
+	@Override
+	@Transactional
+	public void add(Comment comment) {
+		
+		User userLivedComment = getUser();
+		comment.setDateWriting(new Date());
+		comment.setUserId( userLivedComment.getId() );
+		comment.setPathUserPicture(userLivedComment.getNameUserPicture());
+		comment.setNameUser(userLivedComment.getFirstName());
+		comment.setSecondName(userLivedComment.getLastname());
+		comment.setId( commentDAO.add(comment) );
+	}
+	
+	private User getUser(){
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    	
+    	String username = null;
+    	if (principal instanceof UserDetails) {
+    		username = ((UserDetails)principal).getUsername();
+    	} else {
+    		username = (String) principal;
+    	}
+    	return userService.findByEmail(username);
+	}
+
+	@Override
+	@Transactional
+	public void edit(Comment comment) {
+		commentDAO.edit(comment);
+	}
+
+	@Override
+	@Transactional
+	public boolean delete(long id) {
+		
+		if(checkCommentBelongCurrentUser(id)){
+			commentDAO.delete(id);
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
+	
+	private boolean checkCommentBelongCurrentUser(long id){
+		Comment comment = commentDAO.findById(id);
+		if(getUser().getRole().equals("ROLE_ADMIN")){
+			return true;
+		}
+		return new Long(comment.getUserId()).equals(new Long(getUser().getId()));
+	}
+
+	@Override
+	@Transactional
+	public List<Comment> getAllComments() {
+		return commentDAO.getAllComments();
+	}
+
+	@Override
+	@Transactional
+	public List<Comment> getAllForProduct(String type, long id) {
+		return commentDAO.getAllForProduct(type, id);
+	}
+
+	@Override
+	@Transactional
+	public List<Comment> getAllForUser(long id) {
+		return commentDAO.getAllForUser(id);
+	}
+
+	@Override
+	@Transactional
+	public Comment findById(long id) {
+		return commentDAO.findById(id);
+	}
+
+}

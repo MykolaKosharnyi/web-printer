@@ -22,22 +22,22 @@
         <beans:property name="dataSource" ref="dataSource" />
         <beans:property name="annotatedClasses">
             <beans:list>
-                <beans:value>com.printmaster.nk.model.entity.Printer</beans:value>
-                <beans:value>com.printmaster.nk.model.entity.Printer3D</beans:value>
-                <beans:value>com.printmaster.nk.model.entity.DigitalPrinter</beans:value>
-                <beans:value>com.printmaster.nk.model.entity.Laser</beans:value>
-                <beans:value>com.printmaster.nk.model.entity.Cutter</beans:value>
-                <beans:value>com.printmaster.nk.model.entity.Laminator</beans:value>
-                <beans:value>com.printmaster.nk.model.entity.Scanner</beans:value>
-                <beans:value>com.printmaster.nk.model.entity.Rip</beans:value>
-                <beans:value>com.printmaster.nk.model.entity.UseWithProduct</beans:value>
-				<beans:value>com.printmaster.nk.model.entity.User</beans:value>
-				<beans:value>com.printmaster.nk.model.entity.UserAddByAdmin</beans:value>
-                <beans:value>com.printmaster.nk.model.entity.Role</beans:value>
-                <beans:value>com.printmaster.nk.model.entity.Comment</beans:value>
-                <beans:value>com.printmaster.nk.model.entity.MailSendingMessage</beans:value>    
-                <beans:value>com.printmaster.nk.model.entity.MailSendingMessageOption</beans:value>  
-                <beans:value>com.printmaster.nk.model.entity.UserProposal</beans:value>         
+                <beans:value>com.mykoshar.shop.api.model.entity.Printer</beans:value>
+                <beans:value>com.mykoshar.shop.api.model.entity.Printer3D</beans:value>
+                <beans:value>com.mykoshar.shop.api.model.entity.DigitalPrinter</beans:value>
+                <beans:value>com.mykoshar.shop.api.model.entity.Laser</beans:value>
+                <beans:value>com.mykoshar.shop.api.model.entity.Cutter</beans:value>
+                <beans:value>com.mykoshar.shop.api.model.entity.Laminator</beans:value>
+                <beans:value>com.mykoshar.shop.api.model.entity.Scanner</beans:value>
+                <beans:value>com.mykoshar.shop.api.model.entity.Rip</beans:value>
+                <beans:value>com.mykoshar.shop.api.model.entity.UseWithProduct</beans:value>
+				<beans:value>com.mykoshar.shop.api.model.entity.User</beans:value>
+				<beans:value>com.mykoshar.shop.api.model.entity.UserAddByAdmin</beans:value>
+                <beans:value>com.mykoshar.shop.api.model.entity.Role</beans:value>
+                <beans:value>com.mykoshar.shop.api.model.entity.Comment</beans:value>
+                <beans:value>com.mykoshar.shop.api.model.entity.MailSendingMessage</beans:value>
+                <beans:value>com.mykoshar.shop.api.model.entity.MailSendingMessageOption</beans:value>
+                <beans:value>com.mykoshar.shop.api.model.entity.UserProposal</beans:value>
                 
             </beans:list>
         </beans:property>
@@ -54,122 +54,122 @@
         </beans:property>
     </beans:bean>
 
-	<beans:bean id="userDAO" class="com.printmaster.nk.model.dao.impl.UserDAOImpl">
+	<beans:bean id="userDAO" class="com.mykoshar.shop.api.model.dao.impl.UserDAOImpl">
         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
     </beans:bean>
-    <beans:bean id="userService" class="com.printmaster.nk.model.service.impl.UserServiceImpl">
+    <beans:bean id="userService" class="com.mykoshar.shop.api.model.service.impl.UserServiceImpl">
         <beans:property name="userDAO" ref="userDAO"></beans:property>
     </beans:bean>
     
-    <beans:bean id="userAddByAdminDAO" class="com.printmaster.nk.model.dao.impl.UserAddByAdminDAOImpl">
+    <beans:bean id="userAddByAdminDAO" class="com.mykoshar.shop.api.model.dao.impl.UserAddByAdminDAOImpl">
         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
     </beans:bean>
-    <beans:bean id="userAddByAdminService" class="com.printmaster.nk.model.service.impl.UserAddByAdminServiceImpl">
+    <beans:bean id="userAddByAdminService" class="com.mykoshar.shop.api.model.service.impl.UserAddByAdminServiceImpl">
         <beans:property name="userAddByAdminDAO" ref="userAddByAdminDAO"></beans:property>
     </beans:bean>
     
-    <beans:bean id="roleDAO" class="com.printmaster.nk.model.dao.impl.RoleDAOImpl">
+    <beans:bean id="roleDAO" class="com.mykoshar.shop.api.model.dao.impl.RoleDAOImpl">
         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
     </beans:bean>
-    <beans:bean id="roleService" class="com.printmaster.nk.model.service.impl.RoleServiceImpl">
+    <beans:bean id="roleService" class="com.mykoshar.shop.api.model.service.impl.RoleServiceImpl">
         <beans:property name="roleDAO" ref="roleDAO"></beans:property>
     </beans:bean>
     
-    <beans:bean id="printerDAO" class="com.printmaster.nk.model.dao.impl.PrinterDAOImpl">
+    <beans:bean id="printerDAO" class="com.mykoshar.shop.api.model.dao.impl.PrinterDAOImpl">
         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
     </beans:bean>
-    <beans:bean id="printerService" class="com.printmaster.nk.model.service.impl.PrinterServiceImpl">
+    <beans:bean id="printerService" class="com.mykoshar.shop.api.model.service.impl.PrinterServiceImpl">
         <beans:property name="productDAO" ref="printerDAO"></beans:property>
     </beans:bean>
     
-    <beans:bean id="printer3dDAO" class="com.printmaster.nk.model.dao.impl.Printer3dDAOImpl">
+    <beans:bean id="printer3dDAO" class="com.mykoshar.shop.api.model.dao.impl.Printer3dDAOImpl">
         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
     </beans:bean>
-    <beans:bean id="printer3DService" class="com.printmaster.nk.model.service.impl.Printer3DServiceImpl">
+    <beans:bean id="printer3DService" class="com.mykoshar.shop.api.model.service.impl.Printer3DServiceImpl">
         <beans:property name="productDAO" ref="printer3dDAO"></beans:property>
     </beans:bean>
     
-    <beans:bean id="digitalPrinterDAO" class="com.printmaster.nk.model.dao.impl.DigitalPrinterDAOImpl">
+    <beans:bean id="digitalPrinterDAO" class="com.mykoshar.shop.api.model.dao.impl.DigitalPrinterDAOImpl">
         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
     </beans:bean>
-    <beans:bean id="digitalPrinterService" class="com.printmaster.nk.model.service.impl.DigitalPrinterServiceImpl">
+    <beans:bean id="digitalPrinterService" class="com.mykoshar.shop.api.model.service.impl.DigitalPrinterServiceImpl">
         <beans:property name="productDAO" ref="digitalPrinterDAO"></beans:property>
     </beans:bean>
     
-    <beans:bean id="laserDAO" class="com.printmaster.nk.model.dao.impl.LaserDAOImpl">
+    <beans:bean id="laserDAO" class="com.mykoshar.shop.api.model.dao.impl.LaserDAOImpl">
         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
     </beans:bean>
-    <beans:bean id="laserService" class="com.printmaster.nk.model.service.impl.LaserServiceImpl">
+    <beans:bean id="laserService" class="com.mykoshar.shop.api.model.service.impl.LaserServiceImpl">
         <beans:property name="productDAO" ref="laserDAO"></beans:property>
     </beans:bean>
     
-    <beans:bean id="cutterDAO" class="com.printmaster.nk.model.dao.impl.CutterDAOImpl">
+    <beans:bean id="cutterDAO" class="com.mykoshar.shop.api.model.dao.impl.CutterDAOImpl">
         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
     </beans:bean>
-    <beans:bean id="cutterService" class="com.printmaster.nk.model.service.impl.CutterServiceImpl">
+    <beans:bean id="cutterService" class="com.mykoshar.shop.api.model.service.impl.CutterServiceImpl">
         <beans:property name="productDAO" ref="cutterDAO"></beans:property>
     </beans:bean>
     
-    <beans:bean id="laminatorDAO" class="com.printmaster.nk.model.dao.impl.LaminatorDAOImpl">
+    <beans:bean id="laminatorDAO" class="com.mykoshar.shop.api.model.dao.impl.LaminatorDAOImpl">
         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
     </beans:bean>
-    <beans:bean id="laminatorService" class="com.printmaster.nk.model.service.impl.LaminatorServiceImpl">
+    <beans:bean id="laminatorService" class="com.mykoshar.shop.api.model.service.impl.LaminatorServiceImpl">
         <beans:property name="productDAO" ref="laminatorDAO"></beans:property>
     </beans:bean>
     
-    <beans:bean id="scannerDAO" class="com.printmaster.nk.model.dao.impl.ScannerDAOImpl">
+    <beans:bean id="scannerDAO" class="com.mykoshar.shop.api.model.dao.impl.ScannerDAOImpl">
         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
     </beans:bean>
-    <beans:bean id="scannerService" class="com.printmaster.nk.model.service.impl.ScannerServiceImpl">
+    <beans:bean id="scannerService" class="com.mykoshar.shop.api.model.service.impl.ScannerServiceImpl">
         <beans:property name="productDAO" ref="scannerDAO"></beans:property>
     </beans:bean>
     
-    <beans:bean id="pueDAO" class="com.printmaster.nk.model.dao.impl.PreviousUsedEqvipmentDAOImpl">
+    <beans:bean id="pueDAO" class="com.mykoshar.shop.api.model.dao.impl.PreviousUsedEqvipmentDAOImpl">
         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" /> 
     </beans:bean>
-    <beans:bean id="pueService" class="com.printmaster.nk.model.service.impl.PreviousUsedEqvipmentServiceImpl">
+    <beans:bean id="pueService" class="com.mykoshar.shop.api.model.service.impl.PreviousUsedEqvipmentServiceImpl">
         <beans:property name="productDAO" ref="pueDAO"></beans:property>
     </beans:bean>
     
-    <beans:bean id="ripDAO" class="com.printmaster.nk.model.dao.impl.RipDAOImpl">
+    <beans:bean id="ripDAO" class="com.mykoshar.shop.api.model.dao.impl.RipDAOImpl">
         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
     </beans:bean>
-    <beans:bean id="ripService" class="com.printmaster.nk.model.service.impl.RipServiceImpl">
+    <beans:bean id="ripService" class="com.mykoshar.shop.api.model.service.impl.RipServiceImpl">
         <beans:property name="productDAO" ref="ripDAO"></beans:property>
     </beans:bean>
     
-    <beans:bean id="uwpDAO" class="com.printmaster.nk.model.dao.impl.UseWithProductDAOImpl">
+    <beans:bean id="uwpDAO" class="com.mykoshar.shop.api.model.dao.impl.UseWithProductDAOImpl">
         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
     </beans:bean>
-    <beans:bean id="useWithProductService" class="com.printmaster.nk.model.service.impl.UseWithProductServiceImpl">
+    <beans:bean id="useWithProductService" class="com.mykoshar.shop.api.model.service.impl.UseWithProductServiceImpl">
         <beans:property name="productDAO" ref="uwpDAO"></beans:property>
     </beans:bean>
     
-    <beans:bean id="mailSendingDAO" class="com.printmaster.nk.model.dao.impl.MailSendingDAOImpl">
+    <beans:bean id="mailSendingDAO" class="com.mykoshar.shop.api.model.dao.impl.MailSendingDAOImpl">
         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
     </beans:bean>
-    <beans:bean id="mailSendingService" class="com.printmaster.nk.model.service.impl.MailSendingServiceImpl">
+    <beans:bean id="mailSendingService" class="com.mykoshar.shop.api.model.service.impl.MailSendingServiceImpl">
         <beans:property name="mailSendingDAO" ref="mailSendingDAO"></beans:property>
     </beans:bean>
     
-    <beans:bean id="mailSendingOptionDAO" class="com.printmaster.nk.model.dao.impl.MailSendingOptionDAOImpl">
+    <beans:bean id="mailSendingOptionDAO" class="com.mykoshar.shop.api.model.dao.impl.MailSendingOptionDAOImpl">
         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
     </beans:bean>
-    <beans:bean id="mailSendingOptionService" class="com.printmaster.nk.model.service.impl.MailSendingOptionServiceImpl">
+    <beans:bean id="mailSendingOptionService" class="com.mykoshar.shop.api.model.service.impl.MailSendingOptionServiceImpl">
         <beans:property name="mailSendingOptionDAO" ref="mailSendingOptionDAO"></beans:property>
     </beans:bean>
     
-    <beans:bean id="commentDAO" class="com.printmaster.nk.model.dao.impl.CommentDAOImpl">
+    <beans:bean id="commentDAO" class="com.mykoshar.shop.api.model.dao.impl.CommentDAOImpl">
         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
     </beans:bean>
-    <beans:bean id="commentService" class="com.printmaster.nk.model.service.impl.CommentServiceImpl">
+    <beans:bean id="commentService" class="com.mykoshar.shop.api.model.service.impl.CommentServiceImpl">
         <beans:property name="commentDAO" ref="commentDAO"></beans:property>
     </beans:bean>
     
-    <beans:bean id="userProposalDAO" class="com.printmaster.nk.model.dao.impl.UserProposalDAOImpl">
+    <beans:bean id="userProposalDAO" class="com.mykoshar.shop.api.model.dao.impl.UserProposalDAOImpl">
         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
     </beans:bean>
-    <beans:bean id="userProposalService" class="com.printmaster.nk.model.service.impl.UserProposalServiceImpl">
+    <beans:bean id="userProposalService" class="com.mykoshar.shop.api.model.service.impl.UserProposalServiceImpl">
         <beans:property name="userProposalDAO" ref="userProposalDAO"></beans:property>
     </beans:bean>
  

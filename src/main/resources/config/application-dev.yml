@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    db-ocmp:
+      url: jdbc:h2:mem:ussdrcb
+      username: online-shop
+      password: password
+      driver-class-name: org.h2.Driver
+  h2:
+    console:
+      enabled: true
+#  sql:
+#    init:
+#      mode: always
+#      schema-locations: 'classpath:sql/schema/schema.sql'
+#      data-locations: 'classpath:sql/data/*.sql'

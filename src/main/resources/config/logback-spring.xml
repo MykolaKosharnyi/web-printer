@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration scan="true">
+
+    <property name="DEV_HOME" value="log"/>
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <charset>utf-8</charset>
+            <Pattern>[%d][%-5level][%-25logger{0}][%X{cid}]:%msg%n</Pattern>
+        </encoder>
+    </appender>
+
+    <appender name="basicAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${DEV_HOME}/server/server.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${DEV_HOME}/server/server-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxHistory>45</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <charset>utf-8</charset>
+            <Pattern>[%d][%-5level][%-10logger{0}][%X{cid}]:%msg%n</Pattern>
+        </encoder>
+    </appender>
+
+    <!--***************************************************************************************************************-->
+
+    <logger name="ch.qos.logback" level="INFO"/>
+    <logger name="org.springframework" level="INFO"/>
+    <logger name="org.springframework.web" level="INFO"/>
+    <logger name="com.sun.xml" level="INFO"/>
+    <logger name="org.apache" level="INFO"/>
+    <logger name="javax" level="INFO"/>
+    <logger name="sun.net.www" level="INFO"/>
+    <logger name="com.sun.metro.assembler" level="INFO"/>
+    <logger name="org.hibernate.SQL" level="INFO"/>
+    <logger name="org.hibernate.type" level="INFO"/>
+    <logger name="com.zaxxer.hikari" level="INFO"/>
+    <logger name="net.kyivstar.ocmp" level="INFO"/>
+
+    <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
+        <resetJUL>true</resetJUL>
+    </contextListener>
+
+    <springProfile name="dev">
+        <root level="INFO">
+            <appender-ref ref="CONSOLE"/>
+            <appender-ref ref="basicAppender"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="prod,stage,test">
+        <root level="INFO">
+            <appender-ref ref="basicAppender"/>
+        </root>
+    </springProfile>
+
+</configuration>
